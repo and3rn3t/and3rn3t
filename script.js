@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadGitHubStats();
     loadGitHubActivity();
     loadGitHubBadges();
+    loadPinnedRepos();
+    loadTopicsCloud();
+    loadGitHubGists();
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -698,4 +701,136 @@ function loadGitHubBadges() {
             </div>
         </div>
     `).join('');
+}
+
+// Load pinned repositories
+async function loadPinnedRepos() {
+    const pinnedRepos = document.getElementById('pinned-repos');
+    
+    try {
+        // Fetch all repos and sort by stars to simulate pinned repos
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
+        const repos = await reposResponse.json();
+        
+        // Get top starred repositories that are not forks
+        const topRepos = repos
+            .filter(repo => !repo.fork)
+            .sort((a, b) => b.stargazers_count - a.stargazers_count)
+            .slice(0, 6);
+        
+        if (topRepos.length === 0) {
+            pinnedRepos.innerHTML = '<p class="no-activity">No pinned repositories to display.</p>';
+            return;
+        }
+        
+        pinnedRepos.innerHTML = topRepos.map(repo => `
+            <div class="pinned-repo-card">
+                <div class="pinned-repo-header">
+                    <i class="fas fa-book"></i>
+                    <a href="${repo.html_url}" target="_blank" class="pinned-repo-name">${repo.name}</a>
+                </div>
+                <p class="pinned-repo-desc">${repo.description || 'No description available'}</p>
+                <div class="pinned-repo-footer">
+                    <div class="pinned-repo-stats">
+                        ${repo.language ? `<span class="repo-language"><span class="language-dot"></span>${repo.language}</span>` : ''}
+                        <span class="repo-stat"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                        <span class="repo-stat"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+    } catch (error) {
+        console.error('Error loading pinned repos:', error);
+        pinnedRepos.innerHTML = '<p class="error-message">Unable to load pinned repositories.</p>';
+    }
+}
+
+// Load topics cloud
+async function loadTopicsCloud() {
+    const topicsCloud = document.getElementById('topics-cloud');
+    
+    try {
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?per_page=100');
+        const repos = await reposResponse.json();
+        
+        // Collect all topics
+        const topicsCount = {};
+        repos.forEach(repo => {
+            if (repo.topics && repo.topics.length > 0) {
+                repo.topics.forEach(topic => {
+                    topicsCount[topic] = (topicsCount[topic] || 0) + 1;
+                });
+            }
+        });
+        
+        // Sort by frequency
+        const sortedTopics = Object.entries(topicsCount)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 20);
+        
+        if (sortedTopics.length === 0) {
+            topicsCloud.innerHTML = '<p class="no-activity">No topics to display.</p>';
+            return;
+        }
+        
+        // Calculate size based on frequency
+        const maxCount = sortedTopics[0][1];
+        
+        topicsCloud.innerHTML = `
+            <div class="topics-list">
+                ${sortedTopics.map(([topic, count]) => {
+                    const size = Math.max(0.8, Math.min(2, count / maxCount * 2));
+                    return `<span class="topic-tag" style="font-size: ${size}rem">${topic} (${count})</span>`;
+                }).join('')}
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error loading topics:', error);
+        topicsCloud.innerHTML = '<p class="error-message">Unable to load topics.</p>';
+    }
+}
+
+// Load GitHub Gists
+async function loadGitHubGists() {
+    const gistsGrid = document.getElementById('gists-grid');
+    
+    try {
+        const gistsResponse = await fetch('https://api.github.com/users/and3rn3t/gists?per_page=6');
+        const gists = await gistsResponse.json();
+        
+        if (gists.length === 0) {
+            gistsGrid.innerHTML = '<p class="no-activity">No public gists to display.</p>';
+            return;
+        }
+        
+        gistsGrid.innerHTML = gists.map(gist => {
+            const files = Object.values(gist.files);
+            const firstFile = files[0];
+            const fileCount = files.length;
+            const createdDate = new Date(gist.created_at).toLocaleDateString();
+            
+            return `
+                <div class="gist-card">
+                    <div class="gist-header">
+                        <i class="fas fa-code"></i>
+                        <a href="${gist.html_url}" target="_blank" class="gist-title">
+                            ${firstFile.filename}
+                        </a>
+                    </div>
+                    <p class="gist-description">${gist.description || 'No description provided'}</p>
+                    <div class="gist-footer">
+                        <span class="gist-language">${firstFile.language || 'Text'}</span>
+                        ${fileCount > 1 ? `<span class="gist-files">${fileCount} files</span>` : ''}
+                        <span class="gist-date">${createdDate}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+    } catch (error) {
+        console.error('Error loading gists:', error);
+        gistsGrid.innerHTML = '<p class="error-message">Unable to load gists.</p>';
+    }
 }

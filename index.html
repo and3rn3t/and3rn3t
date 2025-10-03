@@ -214,6 +214,18 @@
     <section class="projects" id="projects">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- Pinned Repositories -->
+            <div class="pinned-repos-section">
+                <h3 class="subsection-title">📌 Pinned Repositories</h3>
+                <div class="pinned-repos" id="pinned-repos">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading pinned repositories...</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="projects-grid" id="projects-grid">
                 <!-- Projects will be loaded dynamically via JavaScript -->
                 <div class="loading">
@@ -221,6 +233,18 @@
                     <p>Loading projects...</p>
                 </div>
             </div>
+            
+            <!-- Topics Cloud -->
+            <div class="topics-section">
+                <h3 class="subsection-title">🏷️ Repository Topics</h3>
+                <div class="topics-cloud" id="topics-cloud">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading topics...</p>
+                    </div>
+                </div>
+            </div>
+            
             <div class="projects-cta">
                 <a href="https://github.com/and3rn3t" target="_blank" class="btn btn-outline">
                     View All Projects on GitHub
@@ -238,6 +262,53 @@
                 <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i>
                     <p>Loading recent activity...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Gists Section -->
+    <section class="gists-section" id="gists">
+        <div class="container">
+            <h2 class="section-title">📝 Latest Code Snippets (Gists)</h2>
+            <div class="gists-grid" id="gists-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading gists...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Insights Section -->
+    <section class="github-insights" id="insights">
+        <div class="container">
+            <h2 class="section-title">📊 Developer Insights</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3>Commit Activity</h3>
+                    <div id="commit-chart">
+                        <img src="https://github-readme-activity-graph.vercel.app/graph?username=and3rn3t&theme=react-dark&hide_border=true&area=true" alt="Commit Activity Graph" />
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <h3>Most Productive Time</h3>
+                    <div id="productive-time">
+                        <img src="https://github-readme-stats.vercel.app/api/wakatime?username=and3rn3t&theme=radical&hide_border=true" alt="Coding Time Stats" />
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Metrics -->
+            <div class="additional-metrics">
+                <h3 class="subsection-title">🎯 Quick Stats</h3>
+                <div class="metrics-badges">
+                    <img src="https://img.shields.io/github/followers/and3rn3t?label=Followers&style=for-the-badge&logo=github" alt="GitHub Followers" />
+                    <img src="https://img.shields.io/github/stars/and3rn3t?label=Total%20Stars&style=for-the-badge&logo=github" alt="GitHub Stars" />
+                    <img src="https://img.shields.io/badge/Focus-Full%20Stack%20Development-blueviolet?style=for-the-badge" alt="Focus Area" />
+                    <img src="https://img.shields.io/badge/Learning-React%20%7C%20Python%20%7C%20PostgreSQL-informational?style=for-the-badge" alt="Currently Learning" />
+                    <img src="https://img.shields.io/badge/Open%20For-Collaboration-success?style=for-the-badge" alt="Open for Collaboration" />
+                    <img src="https://img.shields.io/badge/Status-Active%20Developer-brightgreen?style=for-the-badge" alt="Status" />
                 </div>
             </div>
         </div>
