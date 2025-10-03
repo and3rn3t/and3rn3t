@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load GitHub repositories
     loadGitHubProjects();
+    loadGitHubStats();
+    loadGitHubActivity();
+    loadGitHubBadges();
+    loadPinnedRepos();
+    loadTopicsCloud();
+    loadGitHubGists();
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -398,3 +404,433 @@ function handleContactForm() {
 
 // Initialize contact handling
 document.addEventListener('DOMContentLoaded', handleContactForm);
+
+// GitHub Stats Integration
+async function loadGitHubStats() {
+    const statsGrid = document.getElementById('stats-grid');
+    const contributionGraph = document.getElementById('contribution-graph');
+    const languageStats = document.getElementById('language-stats');
+    
+    try {
+        // Fetch user data
+        const userResponse = await fetch('https://api.github.com/users/and3rn3t');
+        const userData = await userResponse.json();
+        
+        // Fetch repositories for additional stats
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?per_page=100');
+        const repos = await reposResponse.json();
+        
+        // Calculate total stars and forks
+        const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+        const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
+        
+        // Display stats
+        statsGrid.innerHTML = `
+            <div class="stat-card">
+                <i class="fas fa-code-branch"></i>
+                <div class="stat-content">
+                    <h3>${userData.public_repos}</h3>
+                    <p>Public Repositories</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-content">
+                    <h3>${userData.followers}</h3>
+                    <p>Followers</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-friends"></i>
+                <div class="stat-content">
+                    <h3>${userData.following}</h3>
+                    <p>Following</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-content">
+                    <h3>${totalStars}</h3>
+                    <p>Total Stars</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-code-branch"></i>
+                <div class="stat-content">
+                    <h3>${totalForks}</h3>
+                    <p>Total Forks</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-download"></i>
+                <div class="stat-content">
+                    <h3>${userData.public_gists}</h3>
+                    <p>Public Gists</p>
+                </div>
+            </div>
+        `;
+        
+        // Load language statistics
+        loadLanguageStats(repos);
+        
+        // Load contribution graph (using GitHub readme stats API)
+        contributionGraph.innerHTML = `
+            <div class="contribution-widget">
+                <img src="https://ghchart.rshah.org/f5576c/and3rn3t" alt="GitHub Contribution Graph" />
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error loading GitHub stats:', error);
+        statsGrid.innerHTML = '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
+        contributionGraph.innerHTML = '';
+        languageStats.innerHTML = '';
+    }
+}
+
+// Load language statistics
+function loadLanguageStats(repos) {
+    const languageStats = document.getElementById('language-stats');
+    
+    // Count languages across all repos
+    const languages = {};
+    repos.forEach(repo => {
+        if (repo.language) {
+            languages[repo.language] = (languages[repo.language] || 0) + 1;
+        }
+    });
+    
+    // Sort by count
+    const sortedLanguages = Object.entries(languages)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8);
+    
+    const total = sortedLanguages.reduce((sum, [, count]) => sum + count, 0);
+    
+    // Language colors
+    const languageColors = {
+        'JavaScript': '#f1e05a',
+        'Python': '#3572A5',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'TypeScript': '#2b7489',
+        'Java': '#b07219',
+        'Go': '#00ADD8',
+        'Ruby': '#701516',
+        'PHP': '#4F5D95',
+        'C++': '#f34b7d',
+        'C': '#555555',
+        'Shell': '#89e051',
+        'C#': '#178600',
+        'Swift': '#ffac45',
+        'Kotlin': '#F18E33',
+        'Rust': '#dea584'
+    };
+    
+    languageStats.innerHTML = `
+        <div class="language-bars">
+            ${sortedLanguages.map(([language, count]) => {
+                const percentage = ((count / total) * 100).toFixed(1);
+                const color = languageColors[language] || '#8b949e';
+                return `
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-name">
+                                <span class="language-dot" style="background-color: ${color}"></span>
+                                ${language}
+                            </span>
+                            <span class="language-percentage">${percentage}%</span>
+                        </div>
+                        <div class="language-bar">
+                            <div class="language-bar-fill" style="width: ${percentage}%; background-color: ${color}"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
+// Load recent GitHub activity
+async function loadGitHubActivity() {
+    const activityFeed = document.getElementById('activity-feed');
+    
+    try {
+        // Fetch recent events
+        const eventsResponse = await fetch('https://api.github.com/users/and3rn3t/events/public?per_page=10');
+        const events = await eventsResponse.json();
+        
+        if (events.length === 0) {
+            activityFeed.innerHTML = '<p class="no-activity">No recent activity to display.</p>';
+            return;
+        }
+        
+        // Display activity items
+        const activityItems = events.slice(0, 8).map(event => {
+            const date = new Date(event.created_at);
+            const timeAgo = getTimeAgo(date);
+            
+            let icon = 'fa-code';
+            let action = '';
+            let details = '';
+            
+            switch(event.type) {
+                case 'PushEvent':
+                    icon = 'fa-code-commit';
+                    const commits = event.payload.commits?.length || 0;
+                    action = `Pushed ${commits} commit${commits !== 1 ? 's' : ''} to`;
+                    details = event.repo.name;
+                    break;
+                case 'CreateEvent':
+                    icon = 'fa-plus-circle';
+                    action = `Created ${event.payload.ref_type}`;
+                    details = event.repo.name;
+                    break;
+                case 'WatchEvent':
+                    icon = 'fa-star';
+                    action = 'Starred';
+                    details = event.repo.name;
+                    break;
+                case 'ForkEvent':
+                    icon = 'fa-code-branch';
+                    action = 'Forked';
+                    details = event.repo.name;
+                    break;
+                case 'IssuesEvent':
+                    icon = 'fa-circle-dot';
+                    action = `${event.payload.action} issue in`;
+                    details = event.repo.name;
+                    break;
+                case 'PullRequestEvent':
+                    icon = 'fa-code-pull-request';
+                    action = `${event.payload.action} pull request in`;
+                    details = event.repo.name;
+                    break;
+                default:
+                    icon = 'fa-circle';
+                    action = event.type.replace('Event', '');
+                    details = event.repo.name;
+            }
+            
+            return `
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas ${icon}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p class="activity-action">${action} <strong>${details}</strong></p>
+                        <span class="activity-time">${timeAgo}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        activityFeed.innerHTML = `<div class="activity-list">${activityItems}</div>`;
+        
+    } catch (error) {
+        console.error('Error loading GitHub activity:', error);
+        activityFeed.innerHTML = '<p class="error-message">Unable to load recent activity.</p>';
+    }
+}
+
+// Helper function to calculate time ago
+function getTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    
+    const intervals = {
+        year: 31536000,
+        month: 2592000,
+        week: 604800,
+        day: 86400,
+        hour: 3600,
+        minute: 60
+    };
+    
+    for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+        const interval = Math.floor(seconds / secondsInUnit);
+        if (interval >= 1) {
+            return `${interval} ${unit}${interval !== 1 ? 's' : ''} ago`;
+        }
+    }
+    
+    return 'just now';
+}
+
+// Load GitHub profile badges
+function loadGitHubBadges() {
+    const badgesGrid = document.getElementById('badges-grid');
+    
+    const badges = [
+        {
+            name: 'Profile Views',
+            url: 'https://komarev.com/ghpvc/?username=and3rn3t&style=for-the-badge&color=blueviolet',
+            alt: 'Profile views counter'
+        },
+        {
+            name: 'GitHub Stats',
+            url: 'https://github-readme-stats.vercel.app/api?username=and3rn3t&show_icons=true&theme=radical&hide_border=true',
+            alt: 'GitHub stats card'
+        },
+        {
+            name: 'Top Languages',
+            url: 'https://github-readme-stats.vercel.app/api/top-langs/?username=and3rn3t&layout=compact&theme=radical&hide_border=true',
+            alt: 'Top languages card'
+        },
+        {
+            name: 'GitHub Streak',
+            url: 'https://github-readme-streak-stats.herokuapp.com/?user=and3rn3t&theme=radical&hide_border=true',
+            alt: 'GitHub streak stats'
+        },
+        {
+            name: 'Contribution Graph',
+            url: 'https://github-readme-activity-graph.vercel.app/graph?username=and3rn3t&theme=react-dark&hide_border=true',
+            alt: 'Activity graph'
+        },
+        {
+            name: 'GitHub Trophies',
+            url: 'https://github-profile-trophy.vercel.app/?username=and3rn3t&theme=radical&no-frame=true&no-bg=false&margin-w=4',
+            alt: 'GitHub trophies'
+        }
+    ];
+    
+    badgesGrid.innerHTML = badges.map(badge => `
+        <div class="badge-card">
+            <h3 class="badge-title">${badge.name}</h3>
+            <div class="badge-image">
+                <img src="${badge.url}" alt="${badge.alt}" loading="lazy" />
+            </div>
+        </div>
+    `).join('');
+}
+
+// Load pinned repositories
+async function loadPinnedRepos() {
+    const pinnedRepos = document.getElementById('pinned-repos');
+    
+    try {
+        // Fetch all repos and sort by stars to simulate pinned repos
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
+        const repos = await reposResponse.json();
+        
+        // Get top starred repositories that are not forks
+        const topRepos = repos
+            .filter(repo => !repo.fork)
+            .sort((a, b) => b.stargazers_count - a.stargazers_count)
+            .slice(0, 6);
+        
+        if (topRepos.length === 0) {
+            pinnedRepos.innerHTML = '<p class="no-activity">No pinned repositories to display.</p>';
+            return;
+        }
+        
+        pinnedRepos.innerHTML = topRepos.map(repo => `
+            <div class="pinned-repo-card">
+                <div class="pinned-repo-header">
+                    <i class="fas fa-book"></i>
+                    <a href="${repo.html_url}" target="_blank" class="pinned-repo-name">${repo.name}</a>
+                </div>
+                <p class="pinned-repo-desc">${repo.description || 'No description available'}</p>
+                <div class="pinned-repo-footer">
+                    <div class="pinned-repo-stats">
+                        ${repo.language ? `<span class="repo-language"><span class="language-dot"></span>${repo.language}</span>` : ''}
+                        <span class="repo-stat"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                        <span class="repo-stat"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+    } catch (error) {
+        console.error('Error loading pinned repos:', error);
+        pinnedRepos.innerHTML = '<p class="error-message">Unable to load pinned repositories.</p>';
+    }
+}
+
+// Load topics cloud
+async function loadTopicsCloud() {
+    const topicsCloud = document.getElementById('topics-cloud');
+    
+    try {
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?per_page=100');
+        const repos = await reposResponse.json();
+        
+        // Collect all topics
+        const topicsCount = {};
+        repos.forEach(repo => {
+            if (repo.topics && repo.topics.length > 0) {
+                repo.topics.forEach(topic => {
+                    topicsCount[topic] = (topicsCount[topic] || 0) + 1;
+                });
+            }
+        });
+        
+        // Sort by frequency
+        const sortedTopics = Object.entries(topicsCount)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 20);
+        
+        if (sortedTopics.length === 0) {
+            topicsCloud.innerHTML = '<p class="no-activity">No topics to display.</p>';
+            return;
+        }
+        
+        // Calculate size based on frequency
+        const maxCount = sortedTopics[0][1];
+        
+        topicsCloud.innerHTML = `
+            <div class="topics-list">
+                ${sortedTopics.map(([topic, count]) => {
+                    const size = Math.max(0.8, Math.min(2, count / maxCount * 2));
+                    return `<span class="topic-tag" style="font-size: ${size}rem">${topic} (${count})</span>`;
+                }).join('')}
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error loading topics:', error);
+        topicsCloud.innerHTML = '<p class="error-message">Unable to load topics.</p>';
+    }
+}
+
+// Load GitHub Gists
+async function loadGitHubGists() {
+    const gistsGrid = document.getElementById('gists-grid');
+    
+    try {
+        const gistsResponse = await fetch('https://api.github.com/users/and3rn3t/gists?per_page=6');
+        const gists = await gistsResponse.json();
+        
+        if (gists.length === 0) {
+            gistsGrid.innerHTML = '<p class="no-activity">No public gists to display.</p>';
+            return;
+        }
+        
+        gistsGrid.innerHTML = gists.map(gist => {
+            const files = Object.values(gist.files);
+            const firstFile = files[0];
+            const fileCount = files.length;
+            const createdDate = new Date(gist.created_at).toLocaleDateString();
+            
+            return `
+                <div class="gist-card">
+                    <div class="gist-header">
+                        <i class="fas fa-code"></i>
+                        <a href="${gist.html_url}" target="_blank" class="gist-title">
+                            ${firstFile.filename}
+                        </a>
+                    </div>
+                    <p class="gist-description">${gist.description || 'No description provided'}</p>
+                    <div class="gist-footer">
+                        <span class="gist-language">${firstFile.language || 'Text'}</span>
+                        ${fileCount > 1 ? `<span class="gist-files">${fileCount} files</span>` : ''}
+                        <span class="gist-date">${createdDate}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+    } catch (error) {
+        console.error('Error loading gists:', error);
+        gistsGrid.innerHTML = '<p class="error-message">Unable to load gists.</p>';
+    }
+}
