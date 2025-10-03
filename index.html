@@ -34,6 +34,9 @@
                     <a href="#about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#github-stats" class="nav-link">GitHub Stats</a>
+                </li>
+                <li class="nav-item">
                     <a href="#projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
@@ -171,6 +174,42 @@
         </div>
     </section>
 
+    <!-- GitHub Stats Section -->
+    <section class="github-stats" id="github-stats">
+        <div class="container">
+            <h2 class="section-title">GitHub Statistics</h2>
+            <div class="stats-grid" id="stats-grid">
+                <!-- GitHub stats will be loaded dynamically -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading stats...</p>
+                </div>
+            </div>
+            
+            <!-- GitHub Contribution Graph -->
+            <div class="contribution-section">
+                <h3 class="subsection-title">Contribution Activity</h3>
+                <div class="contribution-graph" id="contribution-graph">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading contributions...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Stats -->
+            <div class="language-stats-section">
+                <h3 class="subsection-title">Most Used Languages</h3>
+                <div class="language-stats" id="language-stats">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading language stats...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section class="projects" id="projects">
         <div class="container">
@@ -187,6 +226,29 @@
                     View All Projects on GitHub
                     <i class="fab fa-github"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Activity Section -->
+    <section class="recent-activity" id="recent-activity">
+        <div class="container">
+            <h2 class="section-title">Recent GitHub Activity</h2>
+            <div class="activity-feed" id="activity-feed">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading recent activity...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Achievements Section -->
+    <section class="achievements" id="achievements">
+        <div class="container">
+            <h2 class="section-title">GitHub Profile Badges</h2>
+            <div class="badges-grid" id="badges-grid">
+                <!-- Badges will be loaded dynamically -->
             </div>
         </div>
     </section>
