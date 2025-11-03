@@ -2775,7 +2775,7 @@ class GitHubAnalyticsDashboard {
         if (typeof Chart === 'undefined') {
             console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#4A90E2';
+            ctx.fillStyle = '#8b4513';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#fff';
             ctx.font = '16px Arial';
@@ -2785,8 +2785,8 @@ class GitHubAnalyticsDashboard {
         }
 
         const isDark = document.body.classList.contains('dark-theme');
-        const textColor = isDark ? '#e2e8f0' : '#334155';
-        const gridColor = isDark ? '#334155' : '#e2e8f0';
+        const textColor = isDark ? '#f4e6d3' : '#2d1810';
+        const gridColor = isDark ? '#3e2723' : '#d7c4b8';
 
         new Chart(canvas.getContext('2d'), {
             type: 'bar',
@@ -2795,8 +2795,8 @@ class GitHubAnalyticsDashboard {
                 datasets: [{
                     label: data.label || 'Data',
                     data: data.values || [0],
-                    backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#6366f1'],
-                    borderColor: isDark ? '#1e293b' : '#ffffff',
+                    backgroundColor: ['#8b4513', '#ff6b35', '#800020', '#ff8c42', '#a0522d', '#d2b48c'],
+                    borderColor: isDark ? '#2d1810' : '#ffffff',
                     borderWidth: 1
                 }]
             },
@@ -2827,7 +2827,7 @@ class GitHubAnalyticsDashboard {
         if (typeof Chart === 'undefined') {
             console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#8b5cf6';
+            ctx.fillStyle = '#ff6b35';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#fff';
             ctx.font = '16px Arial';
@@ -2837,7 +2837,7 @@ class GitHubAnalyticsDashboard {
         }
 
         const isDark = document.body.classList.contains('dark-theme');
-        const textColor = isDark ? '#e2e8f0' : '#334155';
+        const textColor = isDark ? '#f4e6d3' : '#2d1810';
 
         new Chart(canvas.getContext('2d'), {
             type: 'doughnut',
@@ -2846,10 +2846,10 @@ class GitHubAnalyticsDashboard {
                 datasets: [{
                     data: data.values || [100],
                     backgroundColor: [
-                        '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', 
-                        '#ef4444', '#6366f1', '#ec4899', '#14b8a6'
+                        '#8b4513', '#ff6b35', '#800020', '#ff8c42', 
+                        '#a0522d', '#d2b48c', '#654321', '#bc9a6a'
                     ],
-                    borderColor: isDark ? '#1e293b' : '#ffffff',
+                    borderColor: isDark ? '#2d1810' : '#ffffff',
                     borderWidth: 2
                 }]
             },
@@ -2874,7 +2874,7 @@ class GitHubAnalyticsDashboard {
         if (typeof Chart === 'undefined') {
             console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#10b981';
+            ctx.fillStyle = '#ff6b35';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#fff';
             ctx.font = '16px Arial';
@@ -2884,8 +2884,8 @@ class GitHubAnalyticsDashboard {
         }
 
         const isDark = document.body.classList.contains('dark-theme');
-        const textColor = isDark ? '#e2e8f0' : '#334155';
-        const gridColor = isDark ? '#334155' : '#e2e8f0';
+        const textColor = isDark ? '#f4e6d3' : '#2d1810';
+        const gridColor = isDark ? '#3e2723' : '#d7c4b8';
 
         new Chart(canvas.getContext('2d'), {
             type: 'line',
@@ -2894,12 +2894,12 @@ class GitHubAnalyticsDashboard {
                 datasets: [{
                     label: data.label || 'Trend',
                     data: data.values || [0],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderColor: '#ff6b35',
+                    backgroundColor: 'rgba(255, 107, 53, 0.1)',
                     borderWidth: 2,
                     fill: false,
                     tension: 0.4,
-                    pointBackgroundColor: '#3b82f6',
+                    pointBackgroundColor: '#ff6b35',
                     pointBorderColor: '#ffffff',
                     pointBorderWidth: 2,
                     pointRadius: 4
@@ -2932,7 +2932,7 @@ class GitHubAnalyticsDashboard {
         if (typeof Chart === 'undefined') {
             console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#f59e0b';
+            ctx.fillStyle = '#800020';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#fff';
             ctx.font = '16px Arial';
@@ -2942,8 +2942,8 @@ class GitHubAnalyticsDashboard {
         }
 
         const isDark = document.body.classList.contains('dark-theme');
-        const textColor = isDark ? '#e2e8f0' : '#334155';
-        const gridColor = isDark ? '#334155' : '#e2e8f0';
+        const textColor = isDark ? '#f4e6d3' : '#2d1810';
+        const gridColor = isDark ? '#3e2723' : '#d7c4b8';
 
         new Chart(canvas.getContext('2d'), {
             type: 'line',
@@ -2952,12 +2952,12 @@ class GitHubAnalyticsDashboard {
                 datasets: [{
                     label: data.label || 'Area Data',
                     data: data.values || [0],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderColor: '#800020',
+                    backgroundColor: 'rgba(128, 0, 32, 0.2)',
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4,
-                    pointBackgroundColor: '#8b5cf6',
+                    pointBackgroundColor: '#800020',
                     pointBorderColor: '#ffffff',
                     pointBorderWidth: 2,
                     pointRadius: 4
