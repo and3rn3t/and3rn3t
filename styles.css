@@ -1831,3 +1831,387 @@ body.dark-theme .top-project-highlights {
         justify-content: center;
     }
 }
+
+/* Resume download button */
+.resume-download {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.resume-download:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Skills Matrix */
+.skills-matrix {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.skills-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.skill-matrix-item {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.skill-matrix-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.skill-matrix-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.skill-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.skill-level-label {
+    padding: 4px 10px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.skill-experience {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Project filters */
+.project-filters {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 25px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background: var(--gradient-primary);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Visit counter */
+.visit-count {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+}
+
+/* Enhanced loading states */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+.loading i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.loading p {
+    font-size: 1rem;
+}
+
+/* Error states */
+.error-message,
+.no-activity {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Print styles enhancements */
+@media print {
+    @page {
+        margin: 1cm;
+    }
+    
+    .theme-toggle,
+    .back-to-top,
+    .filter-buttons,
+    .scroll-indicator,
+    .hero-buttons,
+    .hero-social,
+    .navbar,
+    footer,
+    .loading,
+    .project-links,
+    .contact-methods {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .hero {
+        padding: 2rem 0 !important;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    section {
+        page-break-inside: avoid;
+        padding: 1rem 0 !important;
+    }
+    
+    .section-title {
+        font-size: 1.5rem !important;
+        border-bottom: 2px solid black;
+        padding-bottom: 0.5rem;
+    }
+    
+    .project-card,
+    .stat-card,
+    .skill-matrix-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        margin-bottom: 1rem;
+    }
+    
+    a {
+        text-decoration: none;
+        color: black !important;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8rem;
+        color: #666;
+    }
+}
+
+/* Dark theme adjustments for new features */
+body.dark-theme .skill-matrix-item,
+body.dark-theme .filter-btn {
+    background: rgba(30, 41, 59, 0.8);
+}
+
+body.dark-theme .filter-btn.active {
+    background: var(--gradient-primary);
+}
+
+body.dark-theme .visit-count {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+/* Accessibility - Focus visible improvements */
+.filter-btn:focus-visible,
+.back-to-top:focus-visible,
+.theme-toggle:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* Animation for elements entering viewport */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+/* Skeleton loading states */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-primary) 50%, var(--bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Responsive adjustments for new features */
+@media (max-width: 768px) {
+    .skills-matrix-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-buttons {
+        gap: 0.5rem;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .back-to-top {
+        bottom: 80px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .project-card,
+    .stat-card,
+    .skill-matrix-item {
+        border: 2px solid currentColor;
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus trap for modals (if added in future) */
+.modal-open {
+    overflow: hidden;
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 1.5rem; }
+.p-4 { padding: 2rem; }

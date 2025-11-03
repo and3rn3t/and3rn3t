@@ -1130,3 +1130,210 @@ async function loadTopStarredProjects() {
 document.addEventListener('DOMContentLoaded', function() {
     loadTopStarredProjects();
 });
+
+// Resume/CV Download functionality
+function generateResume() {
+    window.print();
+}
+
+// Add resume download button to contact section
+document.addEventListener('DOMContentLoaded', function() {
+    const contactSection = document.querySelector('#contact .contact-methods');
+    if (contactSection) {
+        const resumeButton = document.createElement('button');
+        resumeButton.className = 'contact-method resume-download';
+        resumeButton.innerHTML = '<i class="fas fa-file-pdf"></i><span>Download Resume</span>';
+        resumeButton.addEventListener('click', generateResume);
+        contactSection.appendChild(resumeButton);
+    }
+});
+
+// Add skills matrix visualization
+async function loadSkillsMatrix() {
+    try {
+        const projectsDataResponse = await fetch('projects-data.json');
+        const projectsData = await projectsDataResponse.json();
+        
+        if (!projectsData.skills) return;
+        
+        const skillsSection = document.querySelector('#skills .skills-grid');
+        if (!skillsSection) return;
+        
+        // Add a skills matrix section after the basic skills
+        const skillsMatrix = document.createElement('div');
+        skillsMatrix.className = 'skills-matrix';
+        skillsMatrix.innerHTML = `
+            <h3 class="subsection-title">Proficiency Levels</h3>
+            <div class="skills-matrix-grid">
+                ${Object.entries(projectsData.skills.languages).map(([lang, data]) => `
+                    <div class="skill-matrix-item">
+                        <div class="skill-matrix-header">
+                            <span class="skill-name">${lang}</span>
+                            <span class="skill-level-label">${data.level}</span>
+                        </div>
+                        <div class="skill-level-indicator">
+                            <div class="skill-level-bar">
+                                <div class="skill-level-fill" style="width: ${getLevelPercentage(data.level)}%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-experience">${data.years} years experience</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        skillsSection.parentElement.appendChild(skillsMatrix);
+    } catch (error) {
+        console.error('Error loading skills matrix:', error);
+    }
+}
+
+function getLevelPercentage(level) {
+    const levels = {
+        'Beginner': 25,
+        'Intermediate': 50,
+        'Advanced': 85,
+        'Expert': 100
+    };
+    return levels[level] || 50;
+}
+
+// Initialize skills matrix
+document.addEventListener('DOMContentLoaded', loadSkillsMatrix);
+
+// Add project filter functionality
+function initProjectFilters() {
+    const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid) return;
+    
+    // Create filter buttons
+    const projectsSection = document.querySelector('#projects');
+    if (!projectsSection) return;
+    
+    const filterContainer = document.createElement('div');
+    filterContainer.className = 'project-filters';
+    filterContainer.innerHTML = `
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="health">Health</button>
+            <button class="filter-btn" data-filter="iot">IoT</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+        </div>
+    `;
+    
+    // Insert before projects grid
+    projectsGrid.parentElement.insertBefore(filterContainer, projectsGrid);
+    
+    // Add filter functionality
+    const filterButtons = filterContainer.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button
+            filterButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter projects
+            const filter = this.dataset.filter;
+            const projectCards = projectsGrid.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const category = card.querySelector('.project-category');
+                    const categoryText = category?.textContent.toLowerCase() || '';
+                    
+                    if (categoryText.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+}
+
+// Add back to top button
+function initBackToTop() {
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    backToTopBtn.setAttribute('aria-label', 'Back to top');
+    document.body.appendChild(backToTopBtn);
+    
+    // Show/hide on scroll
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top on click
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+    
+    // Initialize filters after projects load
+    setTimeout(initProjectFilters, 2000);
+});
+
+// Add visitor counter (privacy-friendly, localStorage based)
+function updateVisitorCount() {
+    const visitCountElement = document.querySelector('.visit-count');
+    if (!visitCountElement) return;
+    
+    let visits = parseInt(localStorage.getItem('visitCount') || '0');
+    visits++;
+    localStorage.setItem('visitCount', visits.toString());
+    
+    visitCountElement.textContent = `Visit #${visits}`;
+}
+
+// Add GitHub contribution calendar
+async function loadContributionCalendar() {
+    const calendarContainer = document.getElementById('contribution-graph');
+    if (!calendarContainer) return;
+    
+    // Use the existing contribution graph implementation
+    // This is already handled in the existing code
+}
+
+// Performance monitoring
+if ('PerformanceObserver' in window) {
+    const perfObserver = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+            if (entry.entryType === 'largest-contentful-paint') {
+                console.log('LCP:', entry.renderTime || entry.loadTime);
+            }
+        }
+    });
+    
+    try {
+        perfObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+    } catch (e) {
+        console.log('Performance monitoring not supported');
+    }
+}
+
+// Service Worker registration for PWA support (future enhancement)
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', function() {
+        // Uncomment when service worker is ready
+        // navigator.serviceWorker.register('/sw.js');
+    });
+}
+
+console.log('Portfolio enhancements loaded successfully! 🚀');
+console.log('Press "T" to toggle theme');
+console.log('Press Ctrl/Cmd + P to print resume');
