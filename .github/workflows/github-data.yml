@@ -1,0 +1,66 @@
+name: Update GitHub Data
+
+on:
+  schedule:
+    # Run every 2 hours for fresh data
+    - cron: "0 */2 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  fetch-github-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Fetch GitHub Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
+        run: |
+          # Fetch user data
+          echo "Fetching GitHub user data..."
+          USER_DATA=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/users/and3rn3t")
+          
+          # Fetch repositories
+          echo "Fetching repositories..."
+          REPOS_DATA=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100")
+          
+          # Fetch recent activity (events)
+          echo "Fetching recent activity..."
+          EVENTS_DATA=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/users/and3rn3t/events/public?per_page=30")
+          
+          # Create comprehensive GitHub data JSON
+          cat > github-data.json << EOF
+          {
+            "user": $USER_DATA,
+            "repositories": $REPOS_DATA,
+            "events": $EVENTS_DATA,
+            "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "rateLimitRemaining": "Enhanced with token"
+          }
+          EOF
+          
+      - name: Commit and push GitHub data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Only commit if there are changes
+          if ! git diff --quiet github-data.json; then
+            git add github-data.json
+            git commit -m "Update GitHub data - $(date -u +"%Y-%m-%d %H:%M UTC")" || exit 0
+            git push
+          else
+            echo "No changes to GitHub data"
+          fi

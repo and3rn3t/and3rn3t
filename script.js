@@ -12,6 +12,24 @@ class GitHubAPIManager {
         };
         this.requestQueue = [];
         this.isProcessingQueue = false;
+        this.cachedData = null;
+    }
+
+    // Load pre-fetched GitHub data from workflow
+    async loadCachedGitHubData() {
+        if (this.cachedData) return this.cachedData;
+        
+        try {
+            const response = await fetch('github-data.json');
+            if (response.ok) {
+                this.cachedData = await response.json();
+                console.log('✅ Using pre-fetched GitHub data from:', this.cachedData.lastUpdated);
+                return this.cachedData;
+            }
+        } catch (error) {
+            console.log('ℹ️ Pre-fetched data not available, using direct API:', error.message);
+        }
+        return null;
     }
 
     // Cache management with TTL (Time To Live)
@@ -135,11 +153,51 @@ class GitHubAPIManager {
 
     // Convenience methods for common endpoints
     async getUserData() {
+        // Try cached data first
+        const cachedData = await this.loadCachedGitHubData();
+        if (cachedData && cachedData.user) {
+            return cachedData.user;
+        }
+        
+        // Fall back to direct API
         return this.fetchGitHubData(`/users/${this.username}`, {}, 600000); // 10 min cache
     }
 
     async getRepositories(sort = 'stars', per_page = 100) {
+        // Try cached data first
+        const cachedData = await this.loadCachedGitHubData();
+        if (cachedData && cachedData.repositories) {
+            let repos = cachedData.repositories;
+            
+            // Apply client-side sorting if needed
+            if (sort === 'stars') {
+                repos = repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+            } else if (sort === 'updated') {
+                repos = repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+            }
+            
+            // Apply limit
+            return repos.slice(0, per_page);
+        }
+        
+        // Fall back to direct API
         return this.fetchGitHubData(`/users/${this.username}/repos`, { sort, per_page });
+    }
+
+    async getRecentActivity(per_page = 30) {
+        // Try cached data first
+        const cachedData = await this.loadCachedGitHubData();
+        if (cachedData && cachedData.events) {
+            return cachedData.events.slice(0, per_page);
+        }
+        
+        // Fall back to direct API (may be limited for public events)
+        try {
+            return await this.fetchGitHubData(`/users/${this.username}/events/public`, { per_page });
+        } catch (error) {
+            console.warn('Recent activity not available:', error.message);
+            return [];
+        }
     }
 
     async getUserEvents(per_page = 30) {
@@ -666,8 +724,14 @@ async function loadGitHubProjects() {
             console.warn('Project data file not found, using API data only:', error.message);
         }
         
-        // Get repositories using the optimized API manager
+        // Get repositories using the optimized API manager (now with token-enhanced data)
         const repos = await githubAPI.getRepositories('stars', 100);
+        
+        console.log('📊 Repository data:', { 
+            count: repos.length, 
+            usingEnhancedData: !!githubAPI.cachedData,
+            source: githubAPI.cachedData ? 'Pre-fetched with token' : 'Direct API (limited)'
+        });
         
         // Filter out fork repositories and archived, then sort by stars
         const featuredRepos = repos
@@ -1122,7 +1186,11 @@ async function loadGitHubStats() {
             githubAPI.getRepositories('updated', 100)
         ]);
         
-        console.log('✅ GitHub data received:', { user: userData.login, repoCount: repos.length });
+        console.log('✅ GitHub data received:', { 
+            user: userData.login, 
+            repoCount: repos.length,
+            usingCache: !!githubAPI.cachedData 
+        });
         
         // Calculate total stars and forks
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
