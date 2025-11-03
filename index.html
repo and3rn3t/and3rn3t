@@ -49,12 +49,114 @@
     }
     </script>
     <title>Matthew Anderson | Full-Stack Developer</title>
+    
+    <!-- Performance Optimizations -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Critical Resource Preloads -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//api.github.com">
+    <link rel="dns-prefetch" href="//github-readme-stats.vercel.app">
+    <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    <!-- Preconnect for critical third-party domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://api.github.com">
+    
+    <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
+    <style>
+        /* Critical CSS for initial page load */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6; 
+            color: #1e293b; 
+            background: #ffffff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        body.loaded { opacity: 1; }
+        .navbar { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px);
+            z-index: 1000; 
+            padding: 1rem 0;
+        }
+        .hero { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            padding-top: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1rem; 
+        }
+        /* Loading spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Performance optimization classes */
+        .loading-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading-shimmer 2s infinite;
+            border-radius: 8px;
+            min-height: 40px;
+        }
+        .performance-chart.loaded {
+            animation: fade-in 0.3s ease;
+        }
+        .metric-badge {
+            transition: transform 0.2s ease;
+            border-radius: 4px;
+        }
+        .metric-badge:hover {
+            transform: scale(1.05);
+        }
+        @keyframes loading-shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    
+    <!-- Load main stylesheet after critical CSS -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- Font loading optimization -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Font Awesome with async loading -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></noscript>
 </head>
 <body>
     <!-- Navigation -->
@@ -107,13 +209,13 @@
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
                 <div class="hero-social">
-                    <a href="https://github.com/and3rn3t" target="_blank" class="social-link">
+                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener" class="social-link" title="GitHub Profile">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" class="social-link">
+                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener" class="social-link" title="LinkedIn Profile">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="mailto:contact@matthewanderson.dev" class="social-link">
+                    <a href="mailto:contact@matthewanderson.dev" class="social-link" title="Send Email">
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
@@ -297,7 +399,7 @@
             </div>
             
             <div class="projects-cta">
-                <a href="https://github.com/and3rn3t" target="_blank" class="btn btn-outline">
+                <a href="https://github.com/and3rn3t" target="_blank" rel="noopener" class="btn btn-outline">
                     View All Projects on GitHub
                     <i class="fab fa-github"></i>
                 </a>
@@ -339,13 +441,23 @@
                 <div class="insight-card">
                     <h3>Commit Activity</h3>
                     <div id="commit-chart">
-                        <img src="https://github-readme-activity-graph.vercel.app/graph?username=and3rn3t&theme=react-dark&hide_border=true&area=true" alt="Commit Activity Graph" />
+                        <img data-src="https://github-readme-activity-graph.vercel.app/graph?username=and3rn3t&theme=react-dark&hide_border=true&area=true" 
+                             alt="Commit Activity Graph" 
+                             loading="lazy"
+                             width="800" 
+                             height="400"
+                             class="performance-chart loading-placeholder" />
                     </div>
                 </div>
                 <div class="insight-card">
                     <h3>Most Productive Time</h3>
                     <div id="productive-time">
-                        <img src="https://github-readme-stats.vercel.app/api/wakatime?username=and3rn3t&theme=radical&hide_border=true" alt="Coding Time Stats" />
+                        <img data-src="https://github-readme-stats.vercel.app/api/wakatime?username=and3rn3t&theme=radical&hide_border=true" 
+                             alt="Coding Time Stats" 
+                             loading="lazy"
+                             width="400" 
+                             height="200"
+                             class="performance-chart loading-placeholder" />
                     </div>
                 </div>
             </div>
@@ -354,12 +466,30 @@
             <div class="additional-metrics">
                 <h3 class="subsection-title">🎯 Quick Stats</h3>
                 <div class="metrics-badges">
-                    <img src="https://img.shields.io/github/followers/and3rn3t?label=Followers&style=for-the-badge&logo=github" alt="GitHub Followers" />
-                    <img src="https://img.shields.io/github/stars/and3rn3t?label=Total%20Stars&style=for-the-badge&logo=github" alt="GitHub Stars" />
-                    <img src="https://img.shields.io/badge/Focus-Full%20Stack%20Development-blueviolet?style=for-the-badge" alt="Focus Area" />
-                    <img src="https://img.shields.io/badge/Learning-React%20%7C%20Python%20%7C%20PostgreSQL-informational?style=for-the-badge" alt="Currently Learning" />
-                    <img src="https://img.shields.io/badge/Open%20For-Collaboration-success?style=for-the-badge" alt="Open for Collaboration" />
-                    <img src="https://img.shields.io/badge/Status-Active%20Developer-brightgreen?style=for-the-badge" alt="Status" />
+                    <img data-src="https://img.shields.io/github/followers/and3rn3t?label=Followers&style=for-the-badge&logo=github" 
+                         alt="GitHub Followers" 
+                         loading="lazy"
+                         class="metric-badge" />
+                    <img data-src="https://img.shields.io/github/stars/and3rn3t?label=Total%20Stars&style=for-the-badge&logo=github" 
+                         alt="GitHub Stars" 
+                         loading="lazy"
+                         class="metric-badge" />
+                    <img data-src="https://img.shields.io/badge/Focus-Full%20Stack%20Development-blueviolet?style=for-the-badge" 
+                         alt="Focus Area" 
+                         loading="lazy"
+                         class="metric-badge" />
+                    <img data-src="https://img.shields.io/badge/Learning-React%20%7C%20Python%20%7C%20PostgreSQL-informational?style=for-the-badge" 
+                         alt="Currently Learning" 
+                         loading="lazy"
+                         class="metric-badge" />
+                    <img data-src="https://img.shields.io/badge/Open%20For-Collaboration-success?style=for-the-badge" 
+                         alt="Open for Collaboration" 
+                         loading="lazy"
+                         class="metric-badge" />
+                    <img data-src="https://img.shields.io/badge/Status-Active%20Developer-brightgreen?style=for-the-badge" 
+                         alt="Status" 
+                         loading="lazy"
+                         class="metric-badge" />
                 </div>
             </div>
         </div>
@@ -389,11 +519,11 @@
                         <i class="fas fa-envelope"></i>
                         <span>contact@matthewanderson.dev</span>
                     </a>
-                    <a href="https://github.com/and3rn3t" target="_blank" class="contact-method">
+                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener" class="contact-method">
                         <i class="fab fa-github"></i>
                         <span>@and3rn3t</span>
                     </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" class="contact-method">
+                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener" class="contact-method">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
@@ -414,6 +544,76 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <script src="script.js"></script>
+    <!-- Performance optimized script loading -->
+    <script>
+        // Inline critical JavaScript for immediate execution
+        (function() {
+            // Track page load performance
+            const pageLoadStart = performance.now();
+            
+            // Show page when fonts are loaded
+            if (document.fonts) {
+                document.fonts.ready.then(() => {
+                    document.body.classList.add('fonts-loaded');
+                });
+            }
+            
+            // Critical performance metrics
+            window.addEventListener('load', () => {
+                const loadTime = performance.now() - pageLoadStart;
+                console.log(`⚡ Page loaded in ${loadTime.toFixed(2)}ms`);
+                
+                // Report to analytics if available
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'page_load_time', {
+                        event_category: 'Performance',
+                        event_label: 'Load Time',
+                        value: Math.round(loadTime)
+                    });
+                }
+            });
+            
+            // Preload critical resources on interaction
+            let preloadTriggered = false;
+            const preloadCritical = () => {
+                if (preloadTriggered) return;
+                preloadTriggered = true;
+                
+                // Preload GitHub API endpoints
+                const endpoints = [
+                    'https://api.github.com/users/and3rn3t',
+                    'https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100'
+                ];
+                
+                for (const url of endpoints) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = url;
+                    document.head.appendChild(link);
+                }
+            };
+            
+            // Trigger preload on first interaction
+            for (const event of ['mousedown', 'touchstart', 'keydown']) {
+                document.addEventListener(event, preloadCritical, { once: true, passive: true });
+            }
+            
+            // Fallback preload after 3 seconds
+            setTimeout(preloadCritical, 3000);
+        })();
+    </script>
+    
+    <!-- Main application script with async loading -->
+    <script src="script.js" async></script>
+    
+    <!-- Service Worker registration (for future PWA implementation) -->
+    <script>
+        if ('serviceWorker' in navigator && location.protocol === 'https:') {
+            window.addEventListener('load', () => {
+                // Will be implemented in PWA phase
+                console.log('🔧 Service Worker registration ready for PWA implementation');
+            });
+        }
+    </script>
 </body>
 </html>

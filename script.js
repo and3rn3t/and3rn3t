@@ -1,3 +1,573 @@
+// GitHub API Manager with caching and rate limiting
+class GitHubAPIManager {
+    baseUrl = 'https://api.github.com';
+    username = 'and3rn3t';
+    
+    constructor() {
+        this.cache = new Map();
+        this.rateLimitInfo = {
+            remaining: 60,
+            reset: Date.now() + 3600000,
+            limit: 60
+        };
+        this.requestQueue = [];
+        this.isProcessingQueue = false;
+    }
+
+    // Cache management with TTL (Time To Live)
+    getCacheKey(endpoint, params = {}) {
+        return `${endpoint}:${JSON.stringify(params)}`;
+    }
+
+    setCache(key, data, ttl = 300000) { // 5 minutes default TTL
+        const expiry = Date.now() + ttl;
+        this.cache.set(key, { data, expiry });
+    }
+
+    getCache(key) {
+        const cached = this.cache.get(key);
+        if (cached && cached.expiry > Date.now()) {
+            return cached.data;
+        }
+        if (cached) {
+            this.cache.delete(key); // Remove expired cache
+        }
+        return null;
+    }
+
+    // Rate limit handling
+    updateRateLimit(headers) {
+        this.rateLimitInfo.remaining = Number.parseInt(headers.get('X-RateLimit-Remaining') || '60', 10);
+        this.rateLimitInfo.limit = Number.parseInt(headers.get('X-RateLimit-Limit') || '60', 10);
+        this.rateLimitInfo.reset = Number.parseInt(headers.get('X-RateLimit-Reset') || '0', 10) * 1000;
+    }
+
+    async waitForRateLimit() {
+        if (this.rateLimitInfo.remaining <= 1) {
+            const waitTime = Math.max(0, this.rateLimitInfo.reset - Date.now());
+            if (waitTime > 0) {
+                console.warn(`Rate limit exceeded. Waiting ${Math.ceil(waitTime / 1000)} seconds...`);
+                await new Promise(resolve => setTimeout(resolve, waitTime));
+            }
+        }
+    }
+
+    // Enhanced fetch with retry logic and exponential backoff
+    async fetchWithRetry(url, options = {}, maxRetries = 3) {
+        for (let attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                await this.waitForRateLimit();
+                
+                const response = await fetch(url, {
+                    ...options,
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        ...options.headers
+                    }
+                });
+
+                // Update rate limit info
+                this.updateRateLimit(response.headers);
+
+                if (response.ok) {
+                    return response;
+                }
+
+                // Handle specific HTTP errors
+                if (response.status === 403) {
+                    const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
+                    if (rateLimitRemaining === '0') {
+                        throw new Error('GitHub API rate limit exceeded');
+                    }
+                }
+
+                if (response.status === 404) {
+                    throw new Error('Resource not found');
+                }
+
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+
+            } catch (error) {
+                console.warn(`Attempt ${attempt}/${maxRetries} failed:`, error.message);
+                
+                if (attempt === maxRetries) {
+                    throw error;
+                }
+
+                // Exponential backoff: 1s, 2s, 4s
+                const delay = Math.pow(2, attempt - 1) * 1000;
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+    }
+
+    // Main API method with caching
+    async fetchGitHubData(endpoint, params = {}, ttl = 300000) {
+        const cacheKey = this.getCacheKey(endpoint, params);
+        
+        // Check cache first
+        const cachedData = this.getCache(cacheKey);
+        if (cachedData) {
+            console.log(`Cache hit for ${endpoint}`);
+            return cachedData;
+        }
+
+        // Build URL with parameters
+        const url = new URL(`${this.baseUrl}${endpoint}`);
+        for (const [key, value] of Object.entries(params)) {
+            url.searchParams.append(key, value);
+        }
+
+        try {
+            const response = await this.fetchWithRetry(url.toString());
+            const data = await response.json();
+            
+            // Cache the result
+            this.setCache(cacheKey, data, ttl);
+            console.log(`Cached data for ${endpoint}`);
+            
+            return data;
+        } catch (error) {
+            console.error(`Failed to fetch ${endpoint}:`, error);
+            throw error;
+        }
+    }
+
+    // Convenience methods for common endpoints
+    async getUserData() {
+        return this.fetchGitHubData(`/users/${this.username}`, {}, 600000); // 10 min cache
+    }
+
+    async getRepositories(sort = 'stars', per_page = 100) {
+        return this.fetchGitHubData(`/users/${this.username}/repos`, { sort, per_page });
+    }
+
+    async getUserEvents(per_page = 30) {
+        return this.fetchGitHubData(`/users/${this.username}/events`, { per_page }, 180000); // 3 min cache
+    }
+
+    async getGists() {
+        return this.fetchGitHubData(`/users/${this.username}/gists`, {}, 300000);
+    }
+
+    // Get rate limit status
+    getRateLimitStatus() {
+        return {
+            ...this.rateLimitInfo,
+            percentage: (this.rateLimitInfo.remaining / this.rateLimitInfo.limit) * 100
+        };
+    }
+}
+
+// Initialize GitHub API manager
+const githubAPI = new GitHubAPIManager();
+
+// API Status and debugging utilities
+function displayAPIStatus() {
+    const status = githubAPI.getRateLimitStatus();
+    console.log('GitHub API Status:', {
+        remaining: status.remaining,
+        limit: status.limit,
+        resetTime: new Date(status.reset).toLocaleTimeString(),
+        percentage: `${status.percentage.toFixed(1)}%`,
+        cacheEntries: githubAPI.cache.size
+    });
+    
+    // Add visual indicator if rate limit is low
+    if (status.percentage < 20) {
+        console.warn('⚠️ GitHub API rate limit is running low!');
+    }
+}
+
+// Enhanced error handler for API failures
+function handleAPIError(error, context = 'API request') {
+    console.error(`${context} failed:`, error);
+    
+    const errorMessages = {
+        'GitHub API rate limit exceeded': 'Rate limit reached. Data will refresh automatically when limit resets.',
+        'Resource not found': 'Some data could not be found. This is normal for newer accounts.',
+        'Failed to fetch': 'Network connection issue. Please check your internet connection.'
+    };
+    
+    const userMessage = errorMessages[error.message] || 'Unable to load some GitHub data. Showing cached or fallback content.';
+    
+    // Could show user-friendly error in UI
+    console.info('User message:', userMessage);
+    
+    return userMessage;
+}
+
+// Cache management utilities
+function clearExpiredCache() {
+    const now = Date.now();
+    let removedCount = 0;
+    
+    for (const [key, value] of githubAPI.cache.entries()) {
+        if (value.expiry < now) {
+            githubAPI.cache.delete(key);
+            removedCount++;
+        }
+    }
+    
+    if (removedCount > 0) {
+        console.log(`🧹 Cleared ${removedCount} expired cache entries`);
+    }
+}
+
+// Preload critical GitHub data
+async function preloadCriticalData() {
+    try {
+        console.log('🚀 Preloading critical GitHub data...');
+        
+        // Preload user data (long cache)
+        await githubAPI.getUserData();
+        
+        // Preload repositories (medium cache)  
+        await githubAPI.getRepositories('stars', 100);
+        
+        console.log('✅ Critical data preloaded successfully');
+    } catch (error) {
+        console.warn('⚠️ Failed to preload some data:', error.message);
+    }
+}
+
+// Debounced function to prevent too many consecutive API calls
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Manual refresh function for user-initiated updates
+const refreshGitHubData = debounce(async function() {
+    console.log('🔄 Manually refreshing GitHub data...');
+    
+    // Clear relevant cache entries to force fresh data
+    for (const [key] of githubAPI.cache.entries()) {
+        if (key.includes('/users/and3rn3t')) {
+            githubAPI.cache.delete(key);
+        }
+    }
+    
+    // Show refresh indicator
+    const refreshButtons = document.querySelectorAll('.refresh-btn');
+    for (const btn of refreshButtons) {
+        btn.classList.add('refreshing');
+        btn.disabled = true;
+    }
+    
+    try {
+        await loadAllGitHubData();
+        console.log('✅ Manual refresh completed');
+        
+        // Show success feedback
+        for (const btn of refreshButtons) {
+            btn.classList.add('success');
+            setTimeout(() => btn.classList.remove('success'), 2000);
+        }
+        
+    } catch (error) {
+        handleAPIError(error, 'Manual refresh');
+        
+        // Show error feedback
+        for (const btn of refreshButtons) {
+            btn.classList.add('error');
+            setTimeout(() => btn.classList.remove('error'), 3000);
+        }
+    } finally {
+        // Reset buttons
+        setTimeout(() => {
+            for (const btn of refreshButtons) {
+                btn.classList.remove('refreshing');
+                btn.disabled = false;
+            }
+        }, 1000);
+    }
+}, 5000); // Prevent spam refreshing
+
+// Advanced Performance Optimization Manager
+class PerformanceOptimizer {
+    constructor() {
+        this.imageFormats = this.detectImageSupport();
+        this.intersectionObserver = null;
+        this.performanceMetrics = {
+            loadStart: performance.now(),
+            firstContentfulPaint: null,
+            largestContentfulPaint: null,
+            cumulativeLayoutShift: 0
+        };
+        this.init();
+    }
+
+    // Detect modern image format support
+    detectImageSupport() {
+        const formats = {
+            webp: false,
+            avif: false
+        };
+
+        // Test WebP support
+        const webpCanvas = document.createElement('canvas');
+        webpCanvas.width = 1;
+        webpCanvas.height = 1;
+        formats.webp = webpCanvas.toDataURL('image/webp').startsWith('data:image/webp');
+
+        // Test AVIF support (more complex detection needed)
+        formats.avif = 'createImageBitmap' in globalThis && 
+                      typeof globalThis.createImageBitmap === 'function';
+
+        console.log('🖼️ Image format support:', formats);
+        return formats;
+    }
+
+    // Optimize image sources based on browser support
+    optimizeImageSource(originalSrc) {
+        // For GitHub-generated images, we can't change format, but we can optimize loading
+        if (originalSrc.includes('github.com') || 
+            originalSrc.includes('vercel.app') || 
+            originalSrc.includes('herokuapp.com') ||
+            originalSrc.includes('shields.io')) {
+            return originalSrc;
+        }
+
+        // For custom images, we would serve different formats
+        // This is a placeholder for when you add custom images
+        const baseSrc = originalSrc.split('.').slice(0, -1).join('.');
+
+        if (this.imageFormats.avif && !originalSrc.includes('svg')) {
+            return `${baseSrc}.avif`;
+        } else if (this.imageFormats.webp && !originalSrc.includes('svg')) {
+            return `${baseSrc}.webp`;
+        }
+
+        return originalSrc;
+    }
+
+    // Enhanced lazy loading with intersection observer
+    initAdvancedLazyLoading() {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            for (const entry of entries) {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    this.loadImageWithFallback(img);
+                    observer.unobserve(img);
+                }
+            }
+        }, {
+            rootMargin: '50px 0px', // Load images 50px before they come into view
+            threshold: 0.01
+        });
+
+        // Observe all images with lazy loading
+        const lazyImages = document.querySelectorAll('img[loading="lazy"], img[data-src]');
+        for (const img of lazyImages) {
+            imageObserver.observe(img);
+        }
+
+        return imageObserver;
+    }
+
+    // Load image with format fallback chain
+    async loadImageWithFallback(img) {
+        const originalSrc = img.dataset.src || img.src;
+        const optimizedSrc = this.optimizeImageSource(originalSrc);
+
+        try {
+            // Test if optimized image loads
+            await this.preloadImage(optimizedSrc);
+            img.src = optimizedSrc;
+            img.classList.add('loaded');
+        } catch (error) {
+            console.warn(`Failed to load optimized image: ${optimizedSrc}, falling back to original`);
+            try {
+                await this.preloadImage(originalSrc);
+                img.src = originalSrc;
+                img.classList.add('loaded');
+            } catch (fallbackError) {
+                console.error(`Failed to load image: ${originalSrc}`, fallbackError);
+                img.classList.add('error');
+            }
+        }
+    }
+
+    // Preload image with promise
+    preloadImage(src) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = src;
+        });
+    }
+
+    // Critical resource preloading
+    preloadCriticalResources() {
+        const criticalResources = [
+            { href: 'styles.css', as: 'style' },
+            { href: 'script.js', as: 'script' },
+            { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', as: 'style' }
+        ];
+
+        for (const resource of criticalResources) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = resource.href;
+            link.as = resource.as;
+            if (resource.crossorigin) link.crossOrigin = resource.crossorigin;
+            document.head.appendChild(link);
+        }
+    }
+
+    // Measure Core Web Vitals
+    measureWebVitals() {
+        // Largest Contentful Paint (LCP)
+        if ('PerformanceObserver' in globalThis) {
+            const lcpObserver = new PerformanceObserver((entryList) => {
+                for (const entry of entryList.getEntries()) {
+                    this.performanceMetrics.largestContentfulPaint = entry.renderTime || entry.loadTime;
+                }
+            });
+            
+            try {
+                lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+            } catch (error) {
+                console.warn('LCP measurement not supported:', error);
+            }
+
+            // First Contentful Paint (FCP)
+            const fcpObserver = new PerformanceObserver((entryList) => {
+                for (const entry of entryList.getEntries()) {
+                    if (entry.name === 'first-contentful-paint') {
+                        this.performanceMetrics.firstContentfulPaint = entry.startTime;
+                    }
+                }
+            });
+
+            try {
+                fcpObserver.observe({ entryTypes: ['paint'] });
+            } catch (error) {
+                console.warn('FCP measurement not supported:', error);
+            }
+
+            // Cumulative Layout Shift (CLS)
+            const clsObserver = new PerformanceObserver((entryList) => {
+                for (const entry of entryList.getEntries()) {
+                    if (!entry.hadRecentInput) {
+                        this.performanceMetrics.cumulativeLayoutShift += entry.value;
+                    }
+                }
+            });
+
+            try {
+                clsObserver.observe({ entryTypes: ['layout-shift'] });
+            } catch (error) {
+                console.warn('CLS measurement not supported:', error);
+            }
+        }
+
+        // Log performance metrics after page load
+        globalThis.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadTime = performance.now() - this.performanceMetrics.loadStart;
+                console.log('🚀 Performance Metrics:', {
+                    totalLoadTime: `${loadTime.toFixed(2)}ms`,
+                    firstContentfulPaint: this.performanceMetrics.firstContentfulPaint ? 
+                        `${this.performanceMetrics.firstContentfulPaint.toFixed(2)}ms` : 'Not measured',
+                    largestContentfulPaint: this.performanceMetrics.largestContentfulPaint ? 
+                        `${this.performanceMetrics.largestContentfulPaint.toFixed(2)}ms` : 'Not measured',
+                    cumulativeLayoutShift: this.performanceMetrics.cumulativeLayoutShift.toFixed(4)
+                });
+
+                // Performance scoring
+                this.scorePerformance();
+            }, 1000);
+        });
+    }
+
+    // Score performance based on Core Web Vitals thresholds
+    scorePerformance() {
+        const scores = {
+            lcp: this.scoreLCP(this.performanceMetrics.largestContentfulPaint),
+            fcp: this.scoreFCP(this.performanceMetrics.firstContentfulPaint),
+            cls: this.scoreCLS(this.performanceMetrics.cumulativeLayoutShift)
+        };
+
+        const overallScore = Object.values(scores).reduce((sum, score) => sum + score, 0) / 3;
+        
+        console.log('📊 Performance Score:', {
+            individual: scores,
+            overall: `${(overallScore * 100).toFixed(1)}%`,
+            grade: this.getPerformanceGrade(overallScore)
+        });
+    }
+
+    scoreLCP(lcp) {
+        if (!lcp) return 0;
+        if (lcp <= 2500) return 1; // Good
+        if (lcp <= 4000) return 0.5; // Needs improvement
+        return 0; // Poor
+    }
+
+    scoreFCP(fcp) {
+        if (!fcp) return 0;
+        if (fcp <= 1800) return 1; // Good
+        if (fcp <= 3000) return 0.5; // Needs improvement
+        return 0; // Poor
+    }
+
+    scoreCLS(cls) {
+        if (cls <= 0.1) return 1; // Good
+        if (cls <= 0.25) return 0.5; // Needs improvement
+        return 0; // Poor
+    }
+
+    getPerformanceGrade(score) {
+        if (score >= 0.9) return 'A+ (Excellent)';
+        if (score >= 0.75) return 'A (Good)';
+        if (score >= 0.5) return 'B (Fair)';
+        if (score >= 0.25) return 'C (Needs Improvement)';
+        return 'D (Poor)';
+    }
+
+    // Optimize font loading
+    optimizeFontLoading() {
+        // Use font-display: swap for better performance
+        const fontFaces = document.querySelectorAll('link[href*="fonts.googleapis.com"]');
+        for (const fontFace of fontFaces) {
+            if (!fontFace.href.includes('display=swap')) {
+                fontFace.href = fontFace.href.replace(/display=[^&]*/, 'display=swap');
+                if (!fontFace.href.includes('display=')) {
+                    fontFace.href += fontFace.href.includes('?') ? '&display=swap' : '?display=swap';
+                }
+            }
+        }
+    }
+
+    // Initialize all performance optimizations
+    init() {
+        this.measureWebVitals();
+        this.optimizeFontLoading();
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.intersectionObserver = this.initAdvancedLazyLoading();
+            });
+        } else {
+            this.intersectionObserver = this.initAdvancedLazyLoading();
+        }
+    }
+}
+
+// Initialize performance optimizer
+const performanceOptimizer = new PerformanceOptimizer();
+
 // Smooth scrolling and navigation
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
@@ -11,12 +581,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
+    for (const link of navLinks) {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
             navMenu.classList.remove('active');
         });
-    });
+    }
 
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
@@ -29,28 +599,29 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    for (const anchor of document.querySelectorAll('a[href^="#"]')) {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const offsetTop = target.offsetTop - 70; // Account for fixed navbar
-                window.scrollTo({
+                globalThis.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
             }
         });
-    });
+    }
 
-    // Load GitHub repositories
-    loadGitHubProjects();
-    loadGitHubStats();
-    loadGitHubActivity();
-    loadGitHubBadges();
-    loadPinnedRepos();
-    loadTopicsCloud();
-    loadGitHubGists();
+    // Initialize API optimizations
+    preloadCriticalData();
+    
+    // Set up periodic cache cleanup (every 10 minutes)
+    setInterval(clearExpiredCache, 10 * 60 * 1000);
+    
+    // Load all GitHub data with optimized coordination
+    loadAllGitHubData();
+    loadGitHubBadges(); // This uses external services, so keep separate
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -59,22 +630,22 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
+        for (const entry of entries) {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
             }
-        });
+        }
     }, observerOptions);
 
     // Observe elements for animation
     const animateElements = document.querySelectorAll('.highlight-item, .skill-category, .project-card');
-    animateElements.forEach(el => {
+    for (const el of animateElements) {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
-    });
+    }
 });
 
 // GitHub API integration
@@ -87,17 +658,12 @@ async function loadGitHubProjects() {
         try {
             const projectsDataResponse = await fetch('projects-data.json');
             projectsData = await projectsDataResponse.json();
-        } catch (e) {
-            console.log('Project data file not found, using API data only');
+        } catch (error) {
+            console.warn('Project data file not found, using API data only:', error.message);
         }
         
-        // First, try to get user info
-        const userResponse = await fetch('https://api.github.com/users/and3rn3t');
-        const userData = await userResponse.json();
-        
-        // Get repositories sorted by stars to show top projects
-        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
-        const repos = await reposResponse.json();
+        // Get repositories using the optimized API manager
+        const repos = await githubAPI.getRepositories('stars', 100);
         
         // Filter out fork repositories and archived, then sort by stars
         const featuredRepos = repos
@@ -115,19 +681,36 @@ async function loadGitHubProjects() {
         projectsGrid.innerHTML = '';
         
         // Create project cards with enhanced data
-        featuredRepos.forEach(repo => {
+        for (const repo of featuredRepos) {
             const projectMeta = projectsData?.projects?.find(p => p.name === repo.name);
             const projectCard = createProjectCard(repo, projectMeta);
             projectsGrid.appendChild(projectCard);
-        });
+        }
         
         // Animate project cards after loading
         animateProjectCards();
         
     } catch (error) {
-        console.error('Error loading GitHub repositories:', error);
+        handleAPIError(error, 'Loading GitHub projects');
         showDemoProjects(projectsGrid);
+        displayAPIStatus(); // Show current API status for debugging
     }
+}
+
+function createProjectDetails(longDescription, metadata) {
+    const highlightsList = metadata?.highlights ? `
+        <ul class="project-highlights">
+            ${metadata.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+        </ul>
+    ` : '';
+    
+    return `
+        <details class="project-long-description">
+            <summary>Learn more about this project...</summary>
+            <p>${longDescription}</p>
+            ${highlightsList}
+        </details>
+    `;
 }
 
 function createProjectCard(repo, metadata) {
@@ -147,25 +730,12 @@ function createProjectCard(repo, metadata) {
     // Format dates
     const updatedDate = new Date(repo.updated_at).toLocaleDateString();
     
-    // Determine if we have enough stars to show it prominently
-    const isTopProject = repo.stargazers_count > 0;
-    
     card.innerHTML = `
         <div class="project-header">
             ${category ? `<span class="project-category">${category}</span>` : ''}
             <h3 class="project-title">${displayName}</h3>
             <p class="project-description">${description}</p>
-            ${longDescription ? `
-                <details class="project-long-description">
-                    <summary>Learn more about this project...</summary>
-                    <p>${longDescription}</p>
-                    ${metadata?.highlights ? `
-                        <ul class="project-highlights">
-                            ${metadata.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
-                        </ul>
-                    ` : ''}
-                </details>
-            ` : ''}
+            ${longDescription ? createProjectDetails(longDescription, metadata) : ''}
             
             <div class="project-stats">
                 <div class="project-stat" title="Stars">
@@ -191,7 +761,7 @@ function createProjectCard(repo, metadata) {
                 ${repo.topics ? repo.topics.slice(0, 3).map(topic => 
                     `<span class="language-tag">${topic}</span>`
                 ).join('') : ''}
-                ${status ? `<span class="status-badge ${status.toLowerCase().replace(/\s+/g, '-')}">${status}</span>` : ''}
+                ${status ? `<span class="status-badge ${status.toLowerCase().replaceAll(/\s+/g, '-')}">${status}</span>` : ''}
             </div>
         </div>
         
@@ -256,7 +826,7 @@ function showDemoProjects(container) {
     
     container.innerHTML = '';
     
-    demoProjects.forEach(project => {
+    for (const project of demoProjects) {
         const card = document.createElement('div');
         card.className = 'project-card';
         
@@ -308,7 +878,7 @@ function showDemoProjects(container) {
         `;
         
         container.appendChild(card);
-    });
+    }
 }
 
 // Enhanced scroll animations
@@ -316,18 +886,18 @@ function initScrollAnimations() {
     const animationElements = document.querySelectorAll('.hero-content, .about-text, .skills-grid');
     
     const animationObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        for (const entry of entries) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
             }
-        });
+        }
     }, {
         threshold: 0.1
     });
     
-    animationElements.forEach(el => {
+    for (const el of animationElements) {
         animationObserver.observe(el);
-    });
+    }
 }
 
 // Typing effect for hero section
@@ -376,30 +946,92 @@ function initTypingEffect() {
     setTimeout(typeEffect, 1000);
 }
 
-// Enhanced project loading with error handling
+// Enhanced project loading with intelligent retry and exponential backoff
 function enhancedProjectLoad() {
-    const projectsGrid = document.getElementById('projects-grid');
-    
-    // Add retry functionality
     let retryCount = 0;
     const maxRetries = 3;
+    const baseDelay = 1000; // Start with 1 second
     
     async function loadWithRetry() {
         try {
+            // Show API status before making requests
+            displayAPIStatus();
+            
             await loadGitHubProjects();
+            
+            // Reset retry count on success
+            if (retryCount > 0) {
+                console.log('✅ Successfully loaded projects after retry');
+                retryCount = 0;
+            }
+            
         } catch (error) {
+            handleAPIError(error, 'Enhanced project loading');
             retryCount++;
+            
             if (retryCount < maxRetries) {
-                console.log(`Retry ${retryCount} for loading projects...`);
-                setTimeout(loadWithRetry, 2000 * retryCount);
+                // Exponential backoff: 1s, 2s, 4s, 8s...
+                const delay = baseDelay * Math.pow(2, retryCount - 1);
+                console.log(`🔄 Retry ${retryCount}/${maxRetries} in ${delay/1000} seconds...`);
+                
+                // Add jitter to prevent thundering herd
+                const jitteredDelay = delay + Math.random() * 1000;
+                
+                setTimeout(loadWithRetry, jitteredDelay);
             } else {
-                console.error('Failed to load projects after multiple attempts');
-                showDemoProjects(projectsGrid);
+                console.error('❌ Failed to load projects after all retries');
+                showDemoProjects(document.getElementById('projects-grid'));
+                
+                // Show final API status for debugging
+                displayAPIStatus();
             }
         }
     }
     
     loadWithRetry();
+}
+
+// Parallel loading of all GitHub data with coordination
+async function loadAllGitHubData() {
+    const loadingIndicators = {
+        projects: document.querySelector('.projects-loading'),
+        stats: document.querySelector('.stats-loading'), 
+        activity: document.querySelector('.activity-loading')
+    };
+    
+    // Show loading states
+    for (const indicator of Object.values(loadingIndicators)) {
+        if (indicator) indicator.style.display = 'block';
+    }
+    
+    try {
+        // Load core data in parallel with smart coordination
+        const results = await Promise.allSettled([
+            loadGitHubProjects(),
+            loadGitHubStats(),
+            loadGitHubActivity(),
+            loadPinnedRepos(),
+            loadTopicsCloud(),
+            loadGitHubGists()
+        ]);
+        
+        // Check results and log any failures
+        const failed = results.filter(result => result.status === 'rejected');
+        if (failed.length > 0) {
+            console.warn(`${failed.length} GitHub data requests failed:`, failed);
+        }
+        
+        console.log(`✅ Loaded ${results.length - failed.length}/${results.length} GitHub data sections`);
+        displayAPIStatus();
+        
+    } catch (error) {
+        handleAPIError(error, 'Loading all GitHub data');
+    } finally {
+        // Hide loading indicators
+        for (const indicator of Object.values(loadingIndicators)) {
+            if (indicator) indicator.style.display = 'none';
+        }
+    }
 }
 
 // Initialize enhanced features when DOM is loaded
@@ -409,7 +1041,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add some interactive features
     const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach(item => {
+    for (const item of skillItems) {
         item.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-3px) scale(1.05)';
         });
@@ -417,17 +1049,17 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
-    });
+    }
     
     // Add parallax effect to hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
+    globalThis.addEventListener('scroll', function() {
+        const scrolled = globalThis.pageYOffset;
         const parallaxElements = document.querySelectorAll('.hero');
         
-        parallaxElements.forEach(element => {
+        for (const element of parallaxElements) {
             const speed = 0.5;
             element.style.transform = `translateY(${scrolled * speed}px)`;
-        });
+        }
     });
 });
 
@@ -435,12 +1067,12 @@ document.addEventListener('DOMContentLoaded', function() {
 function handleContactForm() {
     const contactMethods = document.querySelectorAll('.contact-method');
     
-    contactMethods.forEach(method => {
+    for (const method of contactMethods) {
         method.addEventListener('click', function(e) {
             // Add click tracking or analytics here if needed
             console.log('Contact method clicked:', this.href);
         });
-    });
+    }
 }
 
 // Initialize contact handling
@@ -453,13 +1085,11 @@ async function loadGitHubStats() {
     const languageStats = document.getElementById('language-stats');
     
     try {
-        // Fetch user data
-        const userResponse = await fetch('https://api.github.com/users/and3rn3t');
-        const userData = await userResponse.json();
-        
-        // Fetch repositories for additional stats
-        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?per_page=100');
-        const repos = await reposResponse.json();
+        // Fetch user data and repositories using optimized API
+        const [userData, repos] = await Promise.all([
+            githubAPI.getUserData(),
+            githubAPI.getRepositories('updated', 100)
+        ]);
         
         // Calculate total stars and forks
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
@@ -535,11 +1165,11 @@ function loadLanguageStats(repos) {
     
     // Count languages across all repos
     const languages = {};
-    repos.forEach(repo => {
+    for (const repo of repos) {
         if (repo.language) {
             languages[repo.language] = (languages[repo.language] || 0) + 1;
         }
-    });
+    }
     
     // Sort by count
     const sortedLanguages = Object.entries(languages)
@@ -597,9 +1227,8 @@ async function loadGitHubActivity() {
     const activityFeed = document.getElementById('activity-feed');
     
     try {
-        // Fetch recent events
-        const eventsResponse = await fetch('https://api.github.com/users/and3rn3t/events/public?per_page=10');
-        const events = await eventsResponse.json();
+        // Fetch recent events using optimized API
+        const events = await githubAPI.getUserEvents(10);
         
         if (events.length === 0) {
             activityFeed.innerHTML = '<p class="no-activity">No recent activity to display.</p>';
@@ -611,17 +1240,18 @@ async function loadGitHubActivity() {
             const date = new Date(event.created_at);
             const timeAgo = getTimeAgo(date);
             
-            let icon = 'fa-code';
             let action = '';
             let details = '';
+            let icon;
             
             switch(event.type) {
-                case 'PushEvent':
+                case 'PushEvent': {
                     icon = 'fa-code-commit';
                     const commits = event.payload.commits?.length || 0;
-                    action = `Pushed ${commits} commit${commits !== 1 ? 's' : ''} to`;
+                    action = `Pushed ${commits} commit${commits === 1 ? '' : 's'} to`;
                     details = event.repo.name;
                     break;
+                }
                 case 'CreateEvent':
                     icon = 'fa-plus-circle';
                     action = `Created ${event.payload.ref_type}`;
@@ -676,7 +1306,7 @@ async function loadGitHubActivity() {
 
 // Helper function to calculate time ago
 function getTimeAgo(date) {
-    const seconds = Math.floor((new Date() - date) / 1000);
+    const seconds = Math.floor((Date.now() - date) / 1000);
     
     const intervals = {
         year: 31536000,
@@ -690,7 +1320,7 @@ function getTimeAgo(date) {
     for (const [unit, secondsInUnit] of Object.entries(intervals)) {
         const interval = Math.floor(seconds / secondsInUnit);
         if (interval >= 1) {
-            return `${interval} ${unit}${interval !== 1 ? 's' : ''} ago`;
+            return `${interval} ${unit}${interval === 1 ? '' : 's'} ago`;
         }
     }
     
@@ -698,8 +1328,13 @@ function getTimeAgo(date) {
 }
 
 // Load GitHub profile badges
+// Optimized GitHub badges loading with performance considerations
 function loadGitHubBadges() {
     const badgesGrid = document.getElementById('badges-grid');
+    if (!badgesGrid) return;
+    
+    // Add loading state
+    badgesGrid.innerHTML = '<div class="loading-spinner"></div>';
     
     const badges = [
         {
@@ -734,14 +1369,33 @@ function loadGitHubBadges() {
         }
     ];
     
-    badgesGrid.innerHTML = badges.map(badge => `
-        <div class="badge-card">
+    // Load badges with intersection observer for better performance
+    const loadBadgeWithObserver = (badge, container) => {
+        const badgeElement = document.createElement('div');
+        badgeElement.className = 'badge-card';
+        badgeElement.innerHTML = `
             <h3 class="badge-title">${badge.name}</h3>
             <div class="badge-image">
-                <img src="${badge.url}" alt="${badge.alt}" loading="lazy" />
+                <img data-src="${badge.url}" 
+                     alt="${badge.alt}" 
+                     loading="lazy"
+                     class="badge-img loading-placeholder" 
+                     width="400" 
+                     height="200" />
             </div>
-        </div>
-    `).join('');
+        `;
+        container.appendChild(badgeElement);
+        
+        // Use performance optimizer to load image
+        const img = badgeElement.querySelector('img');
+        performanceOptimizer.intersectionObserver.observe(img);
+    };
+    
+    // Clear loading state and add badges
+    badgesGrid.innerHTML = '';
+    for (const badge of badges) {
+        loadBadgeWithObserver(badge, badgesGrid);
+    }
 }
 
 // Load pinned repositories
@@ -750,8 +1404,7 @@ async function loadPinnedRepos() {
     
     try {
         // Fetch all repos and sort by stars to simulate pinned repos
-        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
-        const repos = await reposResponse.json();
+        const repos = await githubAPI.getRepositories('stars', 100);
         
         // Get top starred repositories that are not forks
         const topRepos = repos
@@ -792,18 +1445,17 @@ async function loadTopicsCloud() {
     const topicsCloud = document.getElementById('topics-cloud');
     
     try {
-        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?per_page=100');
-        const repos = await reposResponse.json();
+        const repos = await githubAPI.getRepositories('updated', 100);
         
         // Collect all topics
         const topicsCount = {};
-        repos.forEach(repo => {
+        for (const repo of repos) {
             if (repo.topics && repo.topics.length > 0) {
-                repo.topics.forEach(topic => {
+                for (const topic of repo.topics) {
                     topicsCount[topic] = (topicsCount[topic] || 0) + 1;
-                });
+                }
             }
-        });
+        }
         
         // Sort by frequency
         const sortedTopics = Object.entries(topicsCount)
@@ -838,8 +1490,7 @@ async function loadGitHubGists() {
     const gistsGrid = document.getElementById('gists-grid');
     
     try {
-        const gistsResponse = await fetch('https://api.github.com/users/and3rn3t/gists?per_page=6');
-        const gists = await gistsResponse.json();
+        const gists = await githubAPI.getGists();
         
         if (gists.length === 0) {
             gistsGrid.innerHTML = '<p class="no-activity">No public gists to display.</p>';
@@ -905,10 +1556,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // Add stagger animation to project cards
 function animateProjectCards() {
     const cards = document.querySelectorAll('.project-card');
-    cards.forEach((card, index) => {
+    let index = 0;
+    for (const card of cards) {
         card.style.animationDelay = `${index * 0.1}s`;
         card.classList.add('fade-in-up');
-    });
+        index++;
+    }
 }
 
 // Enhanced keyboard navigation
@@ -923,55 +1576,223 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Add print functionality (Ctrl/Cmd + P for resume-style print)
-window.addEventListener('beforeprint', function() {
+globalThis.addEventListener('beforeprint', function() {
     document.body.classList.add('printing');
 });
 
-window.addEventListener('afterprint', function() {
+globalThis.addEventListener('afterprint', function() {
     document.body.classList.remove('printing');
 });
 
-// Performance optimization: Lazy load images
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    observer.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
+// Enhanced performance utilities
+function addLoadingClasses() {
+    document.body.classList.add('loaded');
+    console.log('✅ Page loaded, removing loading state');
+}
+
+// Initialize critical loading optimizations
+function initCriticalOptimizations() {
+    // Remove loading state when page is ready
+    if (document.readyState === 'complete') {
+        addLoadingClasses();
+    } else {
+        globalThis.addEventListener('load', addLoadingClasses);
+    }
+
+    // Optimize third-party script loading
+    optimizeThirdPartyScripts();
+}
+
+// Optimize third-party script loading
+function optimizeThirdPartyScripts() {
+    // Defer non-critical scripts until interaction
+    const deferredScripts = [
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css'
+    ];
+
+    // Load scripts on first user interaction
+    const loadDeferredScripts = () => {
+        for (const scriptSrc of deferredScripts) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = scriptSrc;
+            document.head.appendChild(link);
+        }
+    };
+
+    // Load on first interaction
+    for (const event of ['mousedown', 'touchstart', 'keydown', 'scroll']) {
+        document.addEventListener(event, loadDeferredScripts, { once: true, passive: true });
     }
 }
 
-// Call on page load
-document.addEventListener('DOMContentLoaded', lazyLoadImages);
+    // Initialize critical optimizations immediately
+initCriticalOptimizations();
 
-// Add smooth scroll behavior for all internal links
+// Performance Budget Monitor
+class PerformanceBudget {
+    constructor() {
+        this.budgets = {
+            loadTime: 3000, // 3 seconds
+            firstContentfulPaint: 1800, // 1.8 seconds
+            largestContentfulPaint: 2500, // 2.5 seconds
+            cumulativeLayoutShift: 0.1,
+            totalBlockingTime: 300, // 300ms
+            firstInputDelay: 100 // 100ms
+        };
+        this.violations = [];
+        this.init();
+    }
+
+    checkBudget(metric, value) {
+        const budget = this.budgets[metric];
+        if (!budget) return true;
+
+        const isWithinBudget = value <= budget;
+        if (!isWithinBudget) {
+            this.violations.push({
+                metric,
+                value,
+                budget,
+                overage: value - budget,
+                timestamp: Date.now()
+            });
+            console.warn(`⚠️ Performance Budget Violation: ${metric}`, {
+                actual: value,
+                budget: budget,
+                overage: `+${(value - budget).toFixed(2)}${metric.includes('Time') || metric.includes('Paint') ? 'ms' : ''}`
+            });
+        }
+        return isWithinBudget;
+    }
+
+    generateReport() {
+        const report = {
+            totalViolations: this.violations.length,
+            violations: this.violations,
+            recommendations: this.getRecommendations()
+        };
+        
+        console.log('📊 Performance Budget Report:', report);
+        return report;
+    }
+
+    getRecommendations() {
+        const recommendations = [];
+        
+        if (this.violations.some(v => v.metric === 'loadTime')) {
+            recommendations.push('Consider implementing code splitting and lazy loading');
+        }
+        if (this.violations.some(v => v.metric === 'firstContentfulPaint')) {
+            recommendations.push('Optimize critical rendering path and inline critical CSS');
+        }
+        if (this.violations.some(v => v.metric === 'largestContentfulPaint')) {
+            recommendations.push('Optimize images and defer non-critical resources');
+        }
+        if (this.violations.some(v => v.metric === 'cumulativeLayoutShift')) {
+            recommendations.push('Add size attributes to images and reserve space for dynamic content');
+        }
+        
+        return recommendations;
+    }
+
+    init() {
+        // Monitor performance metrics
+        globalThis.addEventListener('load', () => {
+            setTimeout(() => {
+                // Check load time
+                const navigation = performance.getEntriesByType('navigation')[0];
+                if (navigation) {
+                    this.checkBudget('loadTime', navigation.loadEventEnd - navigation.loadEventStart);
+                }
+
+                // Generate final report
+                setTimeout(() => this.generateReport(), 2000);
+            }, 1000);
+        });
+    }
+}
+
+// Resource Loading Optimizer  
+class ResourceOptimizer {
+    constructor() {
+        this.criticalResources = [
+            'styles.css',
+            'script.js',
+            'https://fonts.googleapis.com/css2'
+        ];
+        this.init();
+    }
+
+    // Implement resource loading strategies
+    optimizeResourceLoading() {
+        // Implement intelligent resource loading
+        this.preloadCriticalResources();
+        this.deferNonCriticalResources();
+        this.optimizeImageLoading();
+    }
+
+    preloadCriticalResources() {
+        for (const resource of this.criticalResources) {
+            if (document.querySelector(`link[href*="${resource}"]`)) continue;
+            
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = resource;
+            link.as = resource.endsWith('.css') ? 'style' : 'script';
+            document.head.appendChild(link);
+        }
+    }
+
+    deferNonCriticalResources() {
+        // Defer third-party analytics, social widgets, etc.
+        const deferredScripts = document.querySelectorAll('script[data-defer]');
+        for (const script of deferredScripts) {
+            const newScript = document.createElement('script');
+            newScript.src = script.dataset.src;
+            newScript.defer = true;
+            document.head.appendChild(newScript);
+        }
+    }
+
+    optimizeImageLoading() {
+        // Add loading="lazy" to images below the fold
+        const images = document.querySelectorAll('img:not([loading])');
+        for (const img of images) {
+            const rect = img.getBoundingClientRect();
+            if (rect.top > window.innerHeight) {
+                img.loading = 'lazy';
+            }
+        }
+    }
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.optimizeResourceLoading());
+        } else {
+            this.optimizeResourceLoading();
+        }
+    }
+}
+
+// Initialize performance monitoring
+const performanceBudget = new PerformanceBudget();
+const resourceOptimizer = new ResourceOptimizer();// Add smooth scroll behavior for all internal links
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    for (const anchor of document.querySelectorAll('a[href^="#"]')) {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const navHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = target.offsetTop - navHeight;
-                window.scrollTo({
+                globalThis.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
             }
         });
-    });
+    }
 });
 
 // Add analytics event tracking (placeholder for future integration)
@@ -1000,13 +1821,12 @@ async function loadTopStarredProjects() {
         try {
             const projectsDataResponse = await fetch('projects-data.json');
             projectsData = await projectsDataResponse.json();
-        } catch (e) {
-            console.log('Project data file not found');
+        } catch (error) {
+            console.warn('Project data file not found:', error.message);
         }
         
         // Get repositories sorted by stars
-        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
-        const repos = await reposResponse.json();
+        const repos = await githubAPI.getRepositories('stars', 100);
         
         // Get top 3 starred non-fork, non-archived repositories
         const topRepos = repos
@@ -1129,7 +1949,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Resume/CV Download functionality
 function generateResume() {
-    window.print();
+    globalThis.print();
 }
 
 // Add resume download button to contact section
@@ -1223,17 +2043,19 @@ function initProjectFilters() {
     
     // Add filter functionality
     const filterButtons = filterContainer.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => {
+    for (const btn of filterButtons) {
         btn.addEventListener('click', function() {
             // Update active button
-            filterButtons.forEach(b => b.classList.remove('active'));
+            for (const b of filterButtons) {
+                b.classList.remove('active');
+            }
             this.classList.add('active');
             
             // Filter projects
             const filter = this.dataset.filter;
             const projectCards = projectsGrid.querySelectorAll('.project-card');
             
-            projectCards.forEach(card => {
+            for (const card of projectCards) {
                 if (filter === 'all') {
                     card.style.display = 'block';
                 } else {
@@ -1246,9 +2068,9 @@ function initProjectFilters() {
                         card.style.display = 'none';
                     }
                 }
-            });
+            }
         });
-    });
+    }
 }
 
 // Add back to top button
@@ -1310,7 +2132,7 @@ function updateVisitorCount() {
     const visitCountElement = document.querySelector('.visit-count');
     if (!visitCountElement) return;
     
-    let visits = parseInt(localStorage.getItem('visitCount') || '0', 10);
+    let visits = Number.parseInt(localStorage.getItem('visitCount') || '0', 10);
     visits++;
     localStorage.setItem('visitCount', visits.toString());
     
@@ -1327,7 +2149,7 @@ async function loadContributionCalendar() {
 }
 
 // Performance monitoring
-if ('PerformanceObserver' in window) {
+if ('PerformanceObserver' in globalThis) {
     const perfObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
             if (entry.entryType === 'largest-contentful-paint') {
@@ -1338,8 +2160,8 @@ if ('PerformanceObserver' in window) {
     
     try {
         perfObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-    } catch (e) {
-        console.log('Performance monitoring not supported');
+    } catch (error) {
+        console.warn('Performance monitoring not supported:', error.message);
     }
 }
 
