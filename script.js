@@ -2310,7 +2310,6 @@ class GitHubAnalyticsDashboard {
         const endDate = year === new Date().getFullYear() ? new Date() : new Date(year, 11, 31);
         
         // Generate daily contribution data
-        const endDate = new Date(today);
         for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
             const dayOfWeek = d.getDay();
             const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
