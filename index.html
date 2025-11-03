@@ -177,6 +177,9 @@
                     <a href="#projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#analytics" class="nav-link">Analytics</a>
+                </li>
+                <li class="nav-item">
                     <a href="#skills" class="nav-link">Skills</a>
                 </li>
                 <li class="nav-item">
@@ -352,6 +355,81 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             
+            <!-- Enhanced Search and Filter Controls -->
+            <div class="projects-controls">
+                <div class="search-filter-row">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="project-search" placeholder="Search projects... (Ctrl+K to focus)" 
+                               class="search-input" aria-label="Search projects">
+                        <button id="clear-search" class="clear-search" aria-label="Clear search" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="category-filter" class="filter-label">Category:</label>
+                            <select id="category-filter" class="filter-select" aria-label="Filter by category">
+                                <option value="">All Categories</option>
+                                <!-- Categories populated dynamically -->
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="technology-filter" class="filter-label">Technology:</label>
+                            <select id="technology-filter" class="filter-select" aria-label="Filter by technology">
+                                <option value="">All Technologies</option>
+                                <!-- Technologies populated dynamically -->
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="status-filter" class="filter-label">Status:</label>
+                            <select id="status-filter" class="filter-select" aria-label="Filter by status">
+                                <option value="">All Status</option>
+                                <option value="Active Development">Active Development</option>
+                                <option value="Stable">Stable</option>
+                                <option value="Experimental">Experimental</option>
+                                <option value="New Project">New Project</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sort-view-row">
+                    <div class="sort-controls">
+                        <label for="sort-select" class="sort-label">Sort by:</label>
+                        <select id="sort-select" class="sort-select" aria-label="Sort projects">
+                            <option value="name">Project Name</option>
+                            <option value="category">Category</option>
+                            <option value="stars">GitHub Stars</option>
+                            <option value="updated">Last Updated</option>
+                            <option value="created">Date Created</option>
+                        </select>
+                        <button id="sort-direction" class="sort-direction" aria-label="Toggle sort direction" title="Toggle sort direction">
+                            <i class="fas fa-sort-alpha-down"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="view-controls">
+                        <button id="grid-view" class="view-btn active" aria-label="Grid view" title="Grid view">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button id="list-view" class="view-btn" aria-label="List view" title="List view">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="results-info">
+                        <span id="results-count">0 projects</span>
+                        <button id="reset-filters" class="reset-btn" title="Reset all filters">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Top Starred Projects Highlight -->
             <div class="top-projects-highlight">
                 <h3 class="subsection-title">⭐ Top Starred Projects</h3>
@@ -403,6 +481,215 @@
                     View All Projects on GitHub
                     <i class="fab fa-github"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced GitHub Analytics Dashboard -->
+    <section class="analytics-dashboard" id="analytics">
+        <div class="container">
+            <h2 class="section-title">Development Analytics</h2>
+            <p class="section-intro">
+                Comprehensive insights into development patterns, contribution trends, and coding activity across repositories.
+            </p>
+            
+            <!-- Analytics Navigation -->
+            <div class="analytics-nav">
+                <button class="analytics-tab active" data-tab="overview" aria-label="Overview analytics">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Overview</span>
+                </button>
+                <button class="analytics-tab" data-tab="contributions" aria-label="Contribution analytics">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Contributions</span>
+                </button>
+                <button class="analytics-tab" data-tab="languages" aria-label="Language analytics">
+                    <i class="fas fa-code"></i>
+                    <span>Languages</span>
+                </button>
+                <button class="analytics-tab" data-tab="activity" aria-label="Activity analytics">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Activity</span>
+                </button>
+            </div>
+            
+            <!-- Analytics Content Panels -->
+            <div class="analytics-content">
+                
+                <!-- Overview Panel -->
+                <div class="analytics-panel active" id="overview-panel">
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-pie"></i> Repository Overview</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="overview-stats" id="overview-stats">
+                                    <div class="loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <p>Loading overview data...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-star"></i> Top Repositories</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="top-repos-chart" id="top-repos-chart">
+                                    <div class="loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <p>Loading repository data...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contributions Panel -->
+                <div class="analytics-panel" id="contributions-panel">
+                    <div class="analytics-card full-width">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-alt"></i> Contribution Heatmap</h3>
+                            <div class="card-controls">
+                                <select id="heatmap-year" class="year-selector">
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="heatmap-container" id="contribution-heatmap">
+                                <div class="loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading contribution data...</p>
+                                </div>
+                            </div>
+                            <div class="heatmap-legend">
+                                <span class="legend-label">Less</span>
+                                <div class="legend-colors">
+                                    <div class="legend-color" data-level="0"></div>
+                                    <div class="legend-color" data-level="1"></div>
+                                    <div class="legend-color" data-level="2"></div>
+                                    <div class="legend-color" data-level="3"></div>
+                                    <div class="legend-color" data-level="4"></div>
+                                </div>
+                                <span class="legend-label">More</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-bar"></i> Monthly Contributions</h3>
+                            </div>
+                            <div class="card-content">
+                                <canvas id="monthly-contributions-chart" class="chart-canvas"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-clock"></i> Contribution Stats</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="contribution-stats" id="contribution-stats">
+                                    <div class="loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <p>Calculating stats...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Languages Panel -->
+                <div class="analytics-panel" id="languages-panel">
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-pie"></i> Language Distribution</h3>
+                            </div>
+                            <div class="card-content">
+                                <canvas id="language-pie-chart" class="chart-canvas"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-trending-up"></i> Language Trends</h3>
+                            </div>
+                            <div class="card-content">
+                                <canvas id="language-trends-chart" class="chart-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card full-width">
+                        <div class="card-header">
+                            <h3><i class="fas fa-code"></i> Language Statistics</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="language-stats" id="language-stats">
+                                <div class="loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading language data...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Activity Panel -->
+                <div class="analytics-panel" id="activity-panel">
+                    <div class="analytics-card full-width">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Code Frequency</h3>
+                            <div class="card-controls">
+                                <select id="frequency-period" class="period-selector">
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="quarterly">Quarterly</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <canvas id="code-frequency-chart" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-git-alt"></i> Commit Patterns</h3>
+                            </div>
+                            <div class="card-content">
+                                <canvas id="commit-patterns-chart" class="chart-canvas"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-clock"></i> Daily Activity</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="activity-heatmap" id="daily-activity">
+                                    <div class="loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <p>Loading activity data...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>

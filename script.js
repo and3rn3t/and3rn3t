@@ -680,12 +680,25 @@ async function loadGitHubProjects() {
         // Clear loading state
         projectsGrid.innerHTML = '';
         
-        // Create project cards with enhanced data
-        for (const repo of featuredRepos) {
-            const projectMeta = projectsData?.projects?.find(p => p.name === repo.name);
-            const projectCard = createProjectCard(repo, projectMeta);
-            projectsGrid.appendChild(projectCard);
+        // Initialize search filter system with project data
+        try {
+            await projectSearchFilter.loadProjectData();
+            projectSearchFilter.updateWithGitHubData(featuredRepos);
+        } catch (error) {
+            console.warn('Search filter initialization failed:', error);
         }
+        
+        // Create project cards with enhanced data
+        const projectCards = featuredRepos.map(repo => {
+            const projectMeta = projectsData?.projects?.find(p => p.name === repo.name);
+            return { repo, projectMeta, card: createProjectCard(repo, projectMeta) };
+        });
+        
+        // Store original project cards for filtering
+        projectSearchFilter.originalCards = projectCards;
+        
+        // Render initial projects
+        renderFilteredProjects(projectCards);
         
         // Animate project cards after loading
         animateProjectCards();
@@ -1005,6 +1018,16 @@ async function loadAllGitHubData() {
     }
     
     try {
+        // Initialize search filter system early
+        await projectSearchFilter.loadProjectData().catch(error => {
+            console.warn('Project search filter initialization failed:', error);
+        });
+        
+        // Initialize analytics dashboard
+        analytics.initialize().catch(error => {
+            console.warn('Analytics dashboard initialization failed:', error);
+        });
+        
         // Load core data in parallel with smart coordination
         const results = await Promise.allSettled([
             loadGitHubProjects(),
@@ -1628,6 +1651,1221 @@ function optimizeThirdPartyScripts() {
 
     // Initialize critical optimizations immediately
 initCriticalOptimizations();
+
+// Enhanced Project Search and Filter System
+class ProjectSearchFilter {
+    constructor() {
+        this.projects = [];
+        this.filteredProjects = [];
+        this.categories = [];
+        this.technologies = [];
+        this.currentFilters = {
+            search: '',
+            category: '',
+            technology: '',
+            status: ''
+        };
+        this.sortConfig = {
+            field: 'name',
+            direction: 'asc'
+        };
+        this.viewMode = 'grid';
+        this.searchTimeout = null;
+        
+        this.initializeElements();
+        this.bindEvents();
+    }
+
+    initializeElements() {
+        this.elements = {
+            searchInput: document.getElementById('project-search'),
+            clearSearch: document.getElementById('clear-search'),
+            categoryFilter: document.getElementById('category-filter'),
+            technologyFilter: document.getElementById('technology-filter'),
+            statusFilter: document.getElementById('status-filter'),
+            sortSelect: document.getElementById('sort-select'),
+            sortDirection: document.getElementById('sort-direction'),
+            gridView: document.getElementById('grid-view'),
+            listView: document.getElementById('list-view'),
+            resetFilters: document.getElementById('reset-filters'),
+            resultsCount: document.getElementById('results-count'),
+            projectsGrid: document.getElementById('projects-grid')
+        };
+    }
+
+    bindEvents() {
+        // Search input with debouncing
+        if (this.elements.searchInput) {
+            this.elements.searchInput.addEventListener('input', (e) => {
+                clearTimeout(this.searchTimeout);
+                this.searchTimeout = setTimeout(() => {
+                    this.handleSearchInput(e.target.value);
+                }, 300);
+            });
+            
+            // Keyboard shortcuts
+            this.elements.searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    this.clearSearch();
+                }
+            });
+        }
+
+        // Clear search
+        if (this.elements.clearSearch) {
+            this.elements.clearSearch.addEventListener('click', () => {
+                this.clearSearch();
+            });
+        }
+
+        // Filter controls
+        if (this.elements.categoryFilter) {
+            this.elements.categoryFilter.addEventListener('change', (e) => {
+                this.currentFilters.category = e.target.value;
+                this.applyFiltersAndSort();
+            });
+        }
+
+        if (this.elements.technologyFilter) {
+            this.elements.technologyFilter.addEventListener('change', (e) => {
+                this.currentFilters.technology = e.target.value;
+                this.applyFiltersAndSort();
+            });
+        }
+
+        if (this.elements.statusFilter) {
+            this.elements.statusFilter.addEventListener('change', (e) => {
+                this.currentFilters.status = e.target.value;
+                this.applyFiltersAndSort();
+            });
+        }
+
+        // Sort controls
+        if (this.elements.sortSelect) {
+            this.elements.sortSelect.addEventListener('change', (e) => {
+                this.sortConfig.field = e.target.value;
+                this.applyFiltersAndSort();
+            });
+        }
+
+        if (this.elements.sortDirection) {
+            this.elements.sortDirection.addEventListener('click', () => {
+                this.toggleSortDirection();
+            });
+        }
+
+        // View controls
+        if (this.elements.gridView) {
+            this.elements.gridView.addEventListener('click', () => {
+                this.setViewMode('grid');
+            });
+        }
+
+        if (this.elements.listView) {
+            this.elements.listView.addEventListener('click', () => {
+                this.setViewMode('list');
+            });
+        }
+
+        // Reset filters
+        if (this.elements.resetFilters) {
+            this.elements.resetFilters.addEventListener('click', () => {
+                this.resetAllFilters();
+            });
+        }
+        
+        // Global keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Focus search with Ctrl/Cmd + K
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                this.elements.searchInput?.focus();
+            }
+            
+            // Reset filters with Ctrl/Cmd + R (when search is focused)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'r' && 
+                document.activeElement === this.elements.searchInput) {
+                e.preventDefault();
+                this.resetAllFilters();
+            }
+        });
+    }
+
+    async loadProjectData() {
+        try {
+            const response = await fetch('./projects-data.json');
+            const data = await response.json();
+            
+            this.projects = data.projects || [];
+            this.categories = data.categories || [];
+            
+            // Extract unique technologies
+            this.technologies = [...new Set(
+                this.projects.flatMap(project => project.technologies || [])
+            )].sort((a, b) => a.localeCompare(b));
+
+            this.populateFilterOptions();
+            this.filteredProjects = [...this.projects];
+            this.updateResultsCount();
+            
+        } catch (error) {
+            console.error('Failed to load project data:', error);
+            // Fallback to empty arrays
+            this.projects = [];
+            this.categories = [];
+            this.technologies = [];
+            this.filteredProjects = [];
+        }
+    }
+
+    populateFilterOptions() {
+        // Populate category filter
+        if (this.elements.categoryFilter) {
+            for (const category of this.categories) {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                this.elements.categoryFilter.appendChild(option);
+            }
+        }
+
+        // Populate technology filter
+        if (this.elements.technologyFilter) {
+            for (const tech of this.technologies) {
+                const option = document.createElement('option');
+                option.value = tech;
+                option.textContent = tech;
+                this.elements.technologyFilter.appendChild(option);
+            }
+        }
+    }
+
+    handleSearchInput(searchTerm) {
+        this.currentFilters.search = searchTerm.toLowerCase();
+        
+        // Show/hide clear button
+        if (this.elements.clearSearch) {
+            this.elements.clearSearch.style.display = searchTerm ? 'block' : 'none';
+        }
+
+        this.applyFiltersAndSort();
+    }
+
+    clearSearch() {
+        if (this.elements.searchInput) {
+            this.elements.searchInput.value = '';
+        }
+        if (this.elements.clearSearch) {
+            this.elements.clearSearch.style.display = 'none';
+        }
+        this.currentFilters.search = '';
+        this.applyFiltersAndSort();
+    }
+
+    applyFiltersAndSort() {
+        // Apply filters
+        this.filteredProjects = this.projects.filter(project => {
+            // Search filter
+            if (this.currentFilters.search) {
+                const searchFields = [
+                    project.name,
+                    project.displayName,
+                    project.description,
+                    project.longDescription,
+                    ...(project.technologies || []),
+                    project.category
+                ].join(' ').toLowerCase();
+
+                if (!searchFields.includes(this.currentFilters.search)) {
+                    return false;
+                }
+            }
+
+            // Category filter
+            if (this.currentFilters.category && project.category !== this.currentFilters.category) {
+                return false;
+            }
+
+            // Technology filter
+            if (this.currentFilters.technology) {
+                const projectTech = project.technologies || [];
+                if (!projectTech.includes(this.currentFilters.technology)) {
+                    return false;
+                }
+            }
+
+            // Status filter
+            if (this.currentFilters.status && project.status !== this.currentFilters.status) {
+                return false;
+            }
+
+            return true;
+        });
+
+        // Apply sorting
+        this.sortProjects();
+        
+        // Update display
+        this.updateResultsCount();
+        this.renderProjects();
+    }
+
+    sortProjects() {
+        this.filteredProjects.sort((a, b) => {
+            let aVal, bVal;
+
+            switch (this.sortConfig.field) {
+                case 'name':
+                    aVal = a.displayName || a.name;
+                    bVal = b.displayName || b.name;
+                    break;
+                case 'category':
+                    aVal = a.category || '';
+                    bVal = b.category || '';
+                    break;
+                case 'stars':
+                    aVal = a.githubData?.stars || 0;
+                    bVal = b.githubData?.stars || 0;
+                    break;
+                case 'updated':
+                    aVal = a.githubData?.updated || new Date(0);
+                    bVal = b.githubData?.updated || new Date(0);
+                    break;
+                case 'created':
+                    aVal = a.githubData?.created || new Date(0);
+                    bVal = b.githubData?.created || new Date(0);
+                    break;
+                default:
+                    aVal = a.name;
+                    bVal = b.name;
+            }
+
+            if (typeof aVal === 'string') {
+                aVal = aVal.toLowerCase();
+                bVal = bVal.toLowerCase();
+            }
+
+            let comparison = 0;
+            if (aVal < bVal) comparison = -1;
+            else if (aVal > bVal) comparison = 1;
+
+            return this.sortConfig.direction === 'asc' ? comparison : -comparison;
+        });
+    }
+
+    toggleSortDirection() {
+        this.sortConfig.direction = this.sortConfig.direction === 'asc' ? 'desc' : 'asc';
+        
+        if (this.elements.sortDirection) {
+            this.elements.sortDirection.classList.toggle('desc', this.sortConfig.direction === 'desc');
+            
+            const icon = this.elements.sortDirection.querySelector('i');
+            if (icon) {
+                icon.className = this.sortConfig.direction === 'asc' 
+                    ? 'fas fa-sort-alpha-down' 
+                    : 'fas fa-sort-alpha-up';
+            }
+        }
+
+        this.applyFiltersAndSort();
+    }
+
+    setViewMode(mode) {
+        this.viewMode = mode;
+
+        // Update button states
+        if (this.elements.gridView && this.elements.listView) {
+            this.elements.gridView.classList.toggle('active', mode === 'grid');
+            this.elements.listView.classList.toggle('active', mode === 'list');
+        }
+
+        // Update grid class
+        if (this.elements.projectsGrid) {
+            this.elements.projectsGrid.classList.toggle('list-view', mode === 'list');
+        }
+    }
+
+    resetAllFilters() {
+        // Reset filter values
+        this.currentFilters = {
+            search: '',
+            category: '',
+            technology: '',
+            status: ''
+        };
+
+        // Reset form elements
+        if (this.elements.searchInput) this.elements.searchInput.value = '';
+        if (this.elements.clearSearch) this.elements.clearSearch.style.display = 'none';
+        if (this.elements.categoryFilter) this.elements.categoryFilter.value = '';
+        if (this.elements.technologyFilter) this.elements.technologyFilter.value = '';
+        if (this.elements.statusFilter) this.elements.statusFilter.value = '';
+
+        // Reset sort to default
+        this.sortConfig = { field: 'name', direction: 'asc' };
+        if (this.elements.sortSelect) this.elements.sortSelect.value = 'name';
+        if (this.elements.sortDirection) {
+            this.elements.sortDirection.classList.remove('desc');
+            const icon = this.elements.sortDirection.querySelector('i');
+            if (icon) icon.className = 'fas fa-sort-alpha-down';
+        }
+
+        this.applyFiltersAndSort();
+    }
+
+    updateResultsCount() {
+        if (this.elements.resultsCount) {
+            const count = this.filteredProjects.length;
+            const projectWord = count === 1 ? 'project' : 'projects';
+            this.elements.resultsCount.textContent = `${count} ${projectWord}`;
+        }
+    }
+
+    renderProjects() {
+        if (!this.elements.projectsGrid) return;
+
+        if (this.filteredProjects.length === 0) {
+            this.renderNoResults();
+            return;
+        }
+
+        // For now, trigger the existing project rendering
+        // This will be enhanced when we integrate with the existing project display logic
+        const event = new CustomEvent('projectsFiltered', {
+            detail: { projects: this.filteredProjects, viewMode: this.viewMode }
+        });
+        document.dispatchEvent(event);
+    }
+
+    renderNoResults() {
+        if (!this.elements.projectsGrid) return;
+
+        this.elements.projectsGrid.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>No projects found</h3>
+                <p>Try adjusting your search criteria or filters.</p>
+            </div>
+        `;
+    }
+
+    // Integration method for existing project loading
+    updateWithGitHubData(githubProjects) {
+        // Enhance projects with GitHub data for sorting
+        if (githubProjects && Array.isArray(githubProjects)) {
+            for (const project of this.projects) {
+                const githubMatch = githubProjects.find(gh => 
+                    gh.name === project.name || gh.name === project.github_repo?.split('/')[1]
+                );
+                
+                if (githubMatch) {
+                    project.githubData = {
+                        stars: githubMatch.stargazers_count || 0,
+                        forks: githubMatch.forks_count || 0,
+                        updated: new Date(githubMatch.updated_at),
+                        created: new Date(githubMatch.created_at),
+                        language: githubMatch.language
+                    };
+                }
+            }
+            
+            // Re-apply current filters and sorting
+            this.applyFiltersAndSort();
+        }
+    }
+}
+
+// Initialize search and filter system
+const projectSearchFilter = new ProjectSearchFilter();
+
+// Advanced GitHub Analytics Dashboard
+class GitHubAnalyticsDashboard {
+    currentTab = 'overview';
+    
+    constructor() {
+        this.chartInstances = new Map();
+        this.analyticsData = {
+            overview: null,
+            contributions: null,
+            languages: null,
+            activity: null
+        };
+        
+        this.initializeElements();
+        this.bindEvents();
+    }
+
+    initializeElements() {
+        this.elements = {
+            tabs: document.querySelectorAll('.analytics-tab'),
+            panels: document.querySelectorAll('.analytics-panel'),
+            heatmapYear: document.getElementById('heatmap-year'),
+            frequencyPeriod: document.getElementById('frequency-period'),
+            
+            // Content containers
+            overviewStats: document.getElementById('overview-stats'),
+            topReposChart: document.getElementById('top-repos-chart'),
+            contributionHeatmap: document.getElementById('contribution-heatmap'),
+            contributionStats: document.getElementById('contribution-stats'),
+            languageStats: document.getElementById('language-stats'),
+            dailyActivity: document.getElementById('daily-activity'),
+            
+            // Canvas elements for charts
+            monthlyContributionsChart: document.getElementById('monthly-contributions-chart'),
+            languagePieChart: document.getElementById('language-pie-chart'),
+            languageTrendsChart: document.getElementById('language-trends-chart'),
+            codeFrequencyChart: document.getElementById('code-frequency-chart'),
+            commitPatternsChart: document.getElementById('commit-patterns-chart')
+        };
+    }
+
+    bindEvents() {
+        // Tab switching
+        for (const tab of this.elements.tabs) {
+            tab.addEventListener('click', () => {
+                this.switchTab(tab.dataset.tab);
+            });
+        }
+
+        // Year selector for contributions
+        if (this.elements.heatmapYear) {
+            this.elements.heatmapYear.addEventListener('change', (e) => {
+                this.updateContributionHeatmap(Number.parseInt(e.target.value, 10));
+            });
+        }
+
+        // Period selector for code frequency
+        if (this.elements.frequencyPeriod) {
+            this.elements.frequencyPeriod.addEventListener('change', (e) => {
+                this.updateCodeFrequencyChart(e.target.value);
+            });
+        }
+    }
+
+    switchTab(tabName) {
+        // Update active tab
+        for (const tab of this.elements.tabs) {
+            tab.classList.toggle('active', tab.dataset.tab === tabName);
+        }
+
+        // Update active panel
+        for (const panel of this.elements.panels) {
+            panel.classList.toggle('active', panel.id === `${tabName}-panel`);
+        }
+
+        this.currentTab = tabName;
+
+        // Load data for the selected tab if not already loaded
+        this.loadTabData(tabName);
+    }
+
+    async loadTabData(tabName) {
+        try {
+            switch (tabName) {
+                case 'overview':
+                    if (!this.analyticsData.overview) {
+                        await this.loadOverviewData();
+                    }
+                    break;
+                case 'contributions':
+                    if (!this.analyticsData.contributions) {
+                        await this.loadContributionData();
+                    }
+                    break;
+                case 'languages':
+                    if (!this.analyticsData.languages) {
+                        await this.loadLanguageData();
+                    }
+                    break;
+                case 'activity':
+                    if (!this.analyticsData.activity) {
+                        await this.loadActivityData();
+                    }
+                    break;
+            }
+        } catch (error) {
+            console.error(`Failed to load ${tabName} data:`, error);
+            this.showErrorState(tabName);
+        }
+    }
+
+    async loadOverviewData() {
+        console.log('📊 Loading overview analytics data...');
+        
+        try {
+            // Get repository data from GitHub API
+            const repos = await githubAPI.getRepositories('updated', 100);
+            const user = await githubAPI.getUserInfo();
+
+            // Calculate overview statistics
+            const stats = this.calculateOverviewStats(repos, user);
+            this.analyticsData.overview = stats;
+
+            // Render overview data
+            this.renderOverviewStats(stats);
+            this.renderTopRepositoriesChart(repos.slice(0, 10));
+
+        } catch (error) {
+            console.error('Failed to load overview data:', error);
+            throw error;
+        }
+    }
+
+    calculateOverviewStats(repos, user) {
+        const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+        const totalForks = repos.reduce((sum, repo) => sum + (repo.forks_count || 0), 0);
+        const languages = new Set(repos.map(repo => repo.language).filter(Boolean));
+        const publicRepos = repos.filter(repo => !repo.private).length;
+
+        return {
+            totalRepos: publicRepos,
+            totalStars,
+            totalForks,
+            languages: languages.size,
+            followers: user.followers || 0,
+            following: user.following || 0,
+            publicGists: user.public_gists || 0,
+            createdAt: user.created_at
+        };
+    }
+
+    renderOverviewStats(stats) {
+        if (!this.elements.overviewStats) return;
+
+        const joinedDate = new Date(stats.createdAt);
+        const yearsOnGitHub = new Date().getFullYear() - joinedDate.getFullYear();
+
+        this.elements.overviewStats.innerHTML = `
+            <div class="stat-item">
+                <span class="stat-value">${stats.totalRepos}</span>
+                <span class="stat-label">Public Repos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${stats.totalStars}</span>
+                <span class="stat-label">Total Stars</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${stats.totalForks}</span>
+                <span class="stat-label">Total Forks</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${stats.languages}</span>
+                <span class="stat-label">Languages</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${stats.followers}</span>
+                <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">${yearsOnGitHub}+</span>
+                <span class="stat-label">Years on GitHub</span>
+            </div>
+        `;
+    }
+
+    renderTopRepositoriesChart(repos) {
+        if (!this.elements.topReposChart) return;
+
+        const maxStars = Math.max(...repos.map(repo => repo.stargazers_count || 0));
+
+        this.elements.topReposChart.innerHTML = repos.map(repo => {
+            const stars = repo.stargazers_count || 0;
+            const width = maxStars > 0 ? (stars / maxStars) * 100 : 0;
+
+            return `
+                <div class="repo-bar">
+                    <div class="repo-name">${repo.name}</div>
+                    <div class="repo-bar-container">
+                        <div class="repo-bar-fill" style="width: ${width}%">
+                            <span class="repo-stars">${stars} ⭐</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    async loadContributionData() {
+        console.log('📈 Loading contribution analytics data...');
+        
+        try {
+            // Generate mock contribution data (in a real app, this would come from GitHub's GraphQL API)
+            const contributionData = this.generateMockContributionData();
+            this.analyticsData.contributions = contributionData;
+
+            // Render contribution visualizations
+            this.renderContributionHeatmap(contributionData);
+            this.renderContributionStats(contributionData);
+            this.renderMonthlyContributionsChart(contributionData);
+
+        } catch (error) {
+            console.error('Failed to load contribution data:', error);
+            throw error;
+        }
+    }
+
+    generateMockContributionData(year = 2025) {
+        const data = [];
+        const startDate = new Date(year, 0, 1);
+        const endDate = year === new Date().getFullYear() ? new Date() : new Date(year, 11, 31);
+        
+        // Generate daily contribution data
+        const endDate = new Date(today);
+        for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+            const dayOfWeek = d.getDay();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+            
+            // More likely to contribute on weekdays
+            const baseChance = isWeekend ? 0.3 : 0.7;
+            const hasContribution = Math.random() < baseChance;
+            
+            let contributions = 0;
+            if (hasContribution) {
+                // Random number of contributions (0-15)
+                contributions = Math.floor(Math.random() * 15) + 1;
+            }
+
+            data.push({
+                date: new Date(d),
+                contributions,
+                level: this.getContributionLevel(contributions)
+            });
+        }
+
+        return data;
+    }
+
+    getContributionLevel(contributions) {
+        if (contributions === 0) return 0;
+        if (contributions <= 3) return 1;
+        if (contributions <= 7) return 2;
+        if (contributions <= 12) return 3;
+        return 4;
+    }
+
+    renderContributionHeatmap(data) {
+        if (!this.elements.contributionHeatmap) return;
+
+        // Create heatmap grid
+        const heatmapHTML = data.map(day => {
+            const dateStr = day.date.toISOString().split('T')[0];
+            return `
+                <div class="heatmap-day" 
+                     data-level="${day.level}"
+                     data-date="${dateStr}"
+                     title="${day.contributions} contributions on ${dateStr}">
+                </div>
+            `;
+        }).join('');
+
+        this.elements.contributionHeatmap.innerHTML = `
+            <div class="contribution-heatmap">
+                ${heatmapHTML}
+            </div>
+        `;
+    }
+
+    renderContributionStats(data) {
+        if (!this.elements.contributionStats) return;
+
+        const totalContributions = data.reduce((sum, day) => sum + day.contributions, 0);
+        const activeDays = data.filter(day => day.contributions > 0).length;
+        const maxStreak = this.calculateMaxStreak(data);
+        const currentStreak = this.calculateCurrentStreak(data);
+
+        this.elements.contributionStats.innerHTML = `
+            <div class="contrib-stat">
+                <div class="value">${totalContributions}</div>
+                <div class="label">Total Contributions</div>
+            </div>
+            <div class="contrib-stat">
+                <div class="value">${activeDays}</div>
+                <div class="label">Active Days</div>
+            </div>
+            <div class="contrib-stat">
+                <div class="value">${maxStreak}</div>
+                <div class="label">Longest Streak</div>
+            </div>
+            <div class="contrib-stat">
+                <div class="value">${currentStreak}</div>
+                <div class="label">Current Streak</div>
+            </div>
+        `;
+    }
+
+    calculateMaxStreak(data) {
+        let maxStreak = 0;
+        let currentStreak = 0;
+
+        for (const day of data) {
+            if (day.contributions > 0) {
+                currentStreak++;
+                maxStreak = Math.max(maxStreak, currentStreak);
+            } else {
+                currentStreak = 0;
+            }
+        }
+
+        return maxStreak;
+    }
+
+    calculateCurrentStreak(data) {
+        let streak = 0;
+        
+        // Count backwards from today
+        for (let i = data.length - 1; i >= 0; i--) {
+            if (data[i].contributions > 0) {
+                streak++;
+            } else {
+                break;
+            }
+        }
+
+        return streak;
+    }
+
+    renderMonthlyContributionsChart(data) {
+        const canvas = this.elements.monthlyContributionsChart;
+        if (!canvas) return;
+
+        // Destroy existing chart if it exists
+        if (this.chartInstances.has('monthlyContributions')) {
+            this.chartInstances.get('monthlyContributions').destroy();
+        }
+
+        // Group data by month
+        const monthlyData = this.groupContributionsByMonth(data);
+        
+        // Create chart using Chart.js (placeholder for now)
+        this.createBarChart(canvas, 'monthlyContributions', monthlyData);
+    }
+
+    groupContributionsByMonth(data) {
+        const months = {};
+        
+        for (const day of data) {
+            const monthKey = `${day.date.getFullYear()}-${day.date.getMonth()}`;
+            if (!months[monthKey]) {
+                months[monthKey] = 0;
+            }
+            months[monthKey] += day.contributions;
+        }
+
+        return Object.entries(months).map(([key, value]) => {
+            const [year, month] = key.split('-');
+            return {
+                label: new Date(year, month).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                value
+            };
+        });
+    }
+
+    async loadLanguageData() {
+        console.log('💻 Loading language analytics data...');
+        
+        try {
+            const repos = await githubAPI.getRepositories('updated', 100);
+            const languageData = this.analyzeLanguageUsage(repos);
+            this.analyticsData.languages = languageData;
+
+            this.renderLanguageStats(languageData);
+            this.renderLanguagePieChart(languageData);
+            this.renderLanguageTrendsChart(languageData);
+
+        } catch (error) {
+            console.error('Failed to load language data:', error);
+            throw error;
+        }
+    }
+
+    analyzeLanguageUsage(repos) {
+        const languages = {};
+        let totalSize = 0;
+
+        // Aggregate language usage
+        for (const repo of repos) {
+            if (repo.language) {
+                const size = repo.size || 1;
+                languages[repo.language] = (languages[repo.language] || 0) + size;
+                totalSize += size;
+            }
+        }
+
+        // Convert to array with percentages
+        const languageArray = Object.entries(languages)
+            .map(([name, size]) => ({
+                name,
+                size,
+                percentage: ((size / totalSize) * 100).toFixed(1),
+                color: this.getLanguageColor(name),
+                repos: repos.filter(repo => repo.language === name).length
+            }))
+            .sort((a, b) => b.size - a.size);
+
+        return languageArray;
+    }
+
+    getLanguageColor(language) {
+        const colors = {
+            'JavaScript': '#f7df1e',
+            'TypeScript': '#3178c6',
+            'Python': '#3776ab',
+            'Java': '#ed8b00',
+            'C++': '#00599c',
+            'C#': '#239120',
+            'Go': '#00add8',
+            'Rust': '#000000',
+            'Swift': '#fa7343',
+            'Kotlin': '#7f52ff',
+            'PHP': '#777bb4',
+            'Ruby': '#cc342d',
+            'HTML': '#e34f26',
+            'CSS': '#1572b6',
+            'Shell': '#89e051'
+        };
+
+        return colors[language] || '#6b7280';
+    }
+
+    renderLanguageStats(languages) {
+        if (!this.elements.languageStats) return;
+
+        const maxSize = Math.max(...languages.map(lang => lang.size));
+
+        this.elements.languageStats.innerHTML = languages.slice(0, 10).map(lang => {
+            const width = (lang.size / maxSize) * 100;
+
+            return `
+                <div class="language-item">
+                    <div class="language-color" style="background-color: ${lang.color}"></div>
+                    <div class="language-name">${lang.name}</div>
+                    <div class="language-bar">
+                        <div class="language-bar-fill" style="width: ${width}%"></div>
+                    </div>
+                    <div class="language-percentage">${lang.percentage}%</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    renderLanguagePieChart(languages) {
+        const canvas = this.elements.languagePieChart;
+        if (!canvas) return;
+
+        if (this.chartInstances.has('languagePie')) {
+            this.chartInstances.get('languagePie').destroy();
+        }
+
+        this.createPieChart(canvas, 'languagePie', languages.slice(0, 8));
+    }
+
+    renderLanguageTrendsChart(languages) {
+        const canvas = this.elements.languageTrendsChart;
+        if (!canvas) return;
+
+        if (this.chartInstances.has('languageTrends')) {
+            this.chartInstances.get('languageTrends').destroy();
+        }
+
+        // Generate mock trend data
+        const trendData = this.generateLanguageTrendData(languages.slice(0, 5));
+        this.createLineChart(canvas, 'languageTrends', trendData);
+    }
+
+    generateLanguageTrendData(languages) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
+        
+        return languages.map(lang => ({
+            label: lang.name,
+            color: lang.color,
+            data: months.map(() => Math.floor(Math.random() * 100))
+        }));
+    }
+
+    async loadActivityData() {
+        console.log('⚡ Loading activity analytics data...');
+        
+        try {
+            // Generate mock activity data
+            const activityData = this.generateActivityData();
+            this.analyticsData.activity = activityData;
+
+            this.renderCodeFrequencyChart(activityData.codeFrequency);
+            this.renderCommitPatternsChart(activityData.commitPatterns);
+            this.renderDailyActivity(activityData.dailyActivity);
+
+        } catch (error) {
+            console.error('Failed to load activity data:', error);
+            throw error;
+        }
+    }
+
+    generateActivityData() {
+        return {
+            codeFrequency: this.generateCodeFrequencyData(),
+            commitPatterns: this.generateCommitPatternData(),
+            dailyActivity: this.generateDailyActivityData()
+        };
+    }
+
+    generateCodeFrequencyData() {
+        const weeks = 52;
+        const data = [];
+
+        for (let i = 0; i < weeks; i++) {
+            data.push({
+                week: `Week ${i + 1}`,
+                additions: Math.floor(Math.random() * 500) + 50,
+                deletions: Math.floor(Math.random() * 200) + 10
+            });
+        }
+
+        return data;
+    }
+
+    generateCommitPatternData() {
+        const hours = Array.from({ length: 24 }, (_, i) => ({
+            hour: i,
+            commits: Math.floor(Math.random() * 20) + (i >= 9 && i <= 17 ? 20 : 5)
+        }));
+
+        return hours;
+    }
+
+    generateDailyActivityData() {
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const hours = Array.from({ length: 24 }, (_, i) => i);
+        const activity = [];
+
+        for (const day of days) {
+            for (const hour of hours) {
+                const isWorkHour = hour >= 9 && hour <= 17;
+                const isWeekday = !['Sun', 'Sat'].includes(day);
+                const intensity = Math.floor(Math.random() * 5);
+                
+                activity.push({
+                    day,
+                    hour,
+                    intensity: isWorkHour && isWeekday ? Math.min(intensity + 2, 4) : intensity
+                });
+            }
+        }
+
+        return activity;
+    }
+
+    renderCodeFrequencyChart(data) {
+        const canvas = this.elements.codeFrequencyChart;
+        if (!canvas) return;
+
+        if (this.chartInstances.has('codeFrequency')) {
+            this.chartInstances.get('codeFrequency').destroy();
+        }
+
+        this.createAreaChart(canvas, 'codeFrequency', data);
+    }
+
+    renderCommitPatternsChart(data) {
+        const canvas = this.elements.commitPatternsChart;
+        if (!canvas) return;
+
+        if (this.chartInstances.has('commitPatterns')) {
+            this.chartInstances.get('commitPatterns').destroy();
+        }
+
+        this.createBarChart(canvas, 'commitPatterns', data);
+    }
+
+    renderDailyActivity(data) {
+        if (!this.elements.dailyActivity) return;
+
+        const grid = data.map(item => 
+            `<div class="activity-hour" 
+                  data-intensity="${item.intensity}"
+                  title="${item.day} ${item.hour}:00 - ${item.intensity} commits">
+             </div>`
+        ).join('');
+
+        this.elements.dailyActivity.innerHTML = `
+            <div class="activity-heatmap">
+                ${grid}
+            </div>
+        `;
+    }
+
+    // Chart creation methods (placeholders for Chart.js integration)
+    createBarChart(canvas, id, data) {
+        // Placeholder: In a real implementation, this would use Chart.js
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#4A90E2';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Chart Placeholder', canvas.width / 2, canvas.height / 2);
+    }
+
+    createPieChart(canvas, id, data) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#4A90E2';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Pie Chart Placeholder', canvas.width / 2, canvas.height / 2);
+    }
+
+    createLineChart(canvas, id, data) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#4A90E2';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Line Chart Placeholder', canvas.width / 2, canvas.height / 2);
+    }
+
+    createAreaChart(canvas, id, data) {
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#4A90E2';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#fff';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Area Chart Placeholder', canvas.width / 2, canvas.height / 2);
+    }
+
+    showErrorState(tabName) {
+        const panel = document.getElementById(`${tabName}-panel`);
+        if (panel) {
+            const cards = panel.querySelectorAll('.analytics-card .card-content');
+            for (const card of cards) {
+                card.innerHTML = `
+                    <div class="error-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Failed to load ${tabName} data</p>
+                        <button onclick="analytics.loadTabData('${tabName}')" class="retry-btn">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    updateContributionHeatmap(year) {
+        // Regenerate contribution data for the selected year
+        const contributionData = this.generateMockContributionData(year);
+        this.renderContributionHeatmap(contributionData);
+        this.renderContributionStats(contributionData);
+    }
+
+    updateCodeFrequencyChart(period) {
+        // Update the code frequency chart based on the selected period
+        if (this.analyticsData.activity) {
+            const data = this.processCodeFrequencyByPeriod(this.analyticsData.activity.codeFrequency, period);
+            this.renderCodeFrequencyChart(data);
+        }
+    }
+
+    processCodeFrequencyByPeriod(data, period) {
+        // Group data by the selected period (weekly, monthly, quarterly)
+        switch (period) {
+            case 'monthly':
+                return this.groupDataByMonth(data);
+            case 'quarterly':
+                return this.groupDataByQuarter(data);
+            default:
+                return data; // weekly is default
+        }
+    }
+
+    groupDataByMonth(data) {
+        // Group weekly data into months
+        const months = {};
+        data.forEach((week, index) => {
+            const monthIndex = Math.floor(index / 4);
+            if (!months[monthIndex]) {
+                months[monthIndex] = { additions: 0, deletions: 0 };
+            }
+            months[monthIndex].additions += week.additions;
+            months[monthIndex].deletions += week.deletions;
+        });
+
+        return Object.entries(months).map(([index, values]) => ({
+            period: `Month ${Number.parseInt(index, 10) + 1}`,
+            ...values
+        }));
+    }
+
+    groupDataByQuarter(data) {
+        // Group weekly data into quarters
+        const quarters = {};
+        data.forEach((week, index) => {
+            const quarterIndex = Math.floor(index / 13);
+            if (!quarters[quarterIndex]) {
+                quarters[quarterIndex] = { additions: 0, deletions: 0 };
+            }
+            quarters[quarterIndex].additions += week.additions;
+            quarters[quarterIndex].deletions += week.deletions;
+        });
+
+        return Object.entries(quarters).map(([index, values]) => ({
+            period: `Q${Number.parseInt(index, 10) + 1}`,
+            ...values
+        }));
+    }
+
+    async initialize() {
+        console.log('🚀 Initializing GitHub Analytics Dashboard...');
+        
+        // Load initial tab data
+        await this.loadTabData(this.currentTab);
+    }
+}
+
+// Initialize analytics dashboard
+const analytics = new GitHubAnalyticsDashboard();
+
+// Project rendering functions
+function renderFilteredProjects(projectCards) {
+    const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid) return;
+
+    projectsGrid.innerHTML = '';
+    
+    for (const { card } of projectCards) {
+        projectsGrid.appendChild(card);
+    }
+}
+
+// Listen for filtered projects events
+document.addEventListener('projectsFiltered', (event) => {
+    const { projects, viewMode } = event.detail;
+    const projectsGrid = document.getElementById('projects-grid');
+    
+    if (!projectsGrid || !projectSearchFilter?.originalCards) return;
+
+    // Filter original cards based on filtered projects
+    const filteredCards = projectSearchFilter.originalCards.filter(({ repo, projectMeta }) => {
+        return projects.some(project => {
+            return project.name === repo.name || 
+                   project.name === (projectMeta?.name) ||
+                   project.github_repo?.endsWith(`/${repo.name}`);
+        });
+    });
+
+    // Update view mode
+    projectsGrid.classList.toggle('list-view', viewMode === 'list');
+    
+    // Render filtered cards
+    renderFilteredProjects(filteredCards);
+    
+    // Re-animate if needed
+    if (filteredCards.length > 0) {
+        setTimeout(() => animateProjectCards(), 100);
+    }
+});
 
 // Performance Budget Monitor
 class PerformanceBudget {
