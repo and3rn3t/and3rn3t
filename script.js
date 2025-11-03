@@ -121,6 +121,9 @@ async function loadGitHubProjects() {
             projectsGrid.appendChild(projectCard);
         });
         
+        // Animate project cards after loading
+        animateProjectCards();
+        
     } catch (error) {
         console.error('Error loading GitHub repositories:', error);
         showDemoProjects(projectsGrid);
@@ -908,13 +911,6 @@ function animateProjectCards() {
     });
 }
 
-// Call after projects are loaded
-const originalLoadGitHubProjects = loadGitHubProjects;
-loadGitHubProjects = async function() {
-    await originalLoadGitHubProjects();
-    animateProjectCards();
-};
-
 // Enhanced keyboard navigation
 document.addEventListener('keydown', function(e) {
     // Press 'T' to toggle theme
@@ -1281,11 +1277,32 @@ function initBackToTop() {
     });
 }
 
+// Initialize project filters when projects are loaded
+function initProjectFiltersWhenReady() {
+    const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid) return;
+    
+    // Use MutationObserver to detect when projects are loaded
+    const observer = new MutationObserver((mutations) => {
+        const hasProjects = projectsGrid.querySelectorAll('.project-card').length > 0;
+        if (hasProjects) {
+            initProjectFilters();
+            observer.disconnect();
+        }
+    });
+    
+    observer.observe(projectsGrid, { childList: true, subtree: true });
+    
+    // Fallback timeout in case observer doesn't work
+    setTimeout(() => {
+        observer.disconnect();
+        initProjectFilters();
+    }, 5000);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     initBackToTop();
-    
-    // Initialize filters after projects load
-    setTimeout(initProjectFilters, 2000);
+    initProjectFiltersWhenReady();
 });
 
 // Add visitor counter (privacy-friendly, localStorage based)
@@ -1293,7 +1310,7 @@ function updateVisitorCount() {
     const visitCountElement = document.querySelector('.visit-count');
     if (!visitCountElement) return;
     
-    let visits = parseInt(localStorage.getItem('visitCount') || '0');
+    let visits = parseInt(localStorage.getItem('visitCount') || '0', 10);
     visits++;
     localStorage.setItem('visitCount', visits.toString());
     
