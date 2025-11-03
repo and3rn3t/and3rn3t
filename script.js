@@ -1630,18 +1630,35 @@ async function loadGitHubGists() {
 // Theme Toggle Functionality
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
+    
+    if (!themeToggle) {
+        console.error('❌ Theme toggle button not found! Looking for #theme-toggle');
+        return;
+    }
+    
     const icon = themeToggle.querySelector('i');
+    if (!icon) {
+        console.error('❌ Theme toggle icon not found! Looking for i element inside theme toggle');
+        return;
+    }
     
     // Check for saved theme preference or default to light mode
     const currentTheme = localStorage.getItem('theme') || 'light';
     document.body.classList.toggle('dark-theme', currentTheme === 'dark');
     updateThemeIcon(icon, currentTheme);
     
+    console.log('✅ Theme toggle initialized. Current theme:', currentTheme);
+    
     themeToggle.addEventListener('click', function() {
+        console.log('🎨 Theme toggle clicked');
         const isDark = document.body.classList.toggle('dark-theme');
         const theme = isDark ? 'dark' : 'light';
         localStorage.setItem('theme', theme);
         updateThemeIcon(icon, theme);
+        console.log('🎨 Theme changed to:', theme);
+        
+        // Trigger custom event for other components to listen to
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
     });
 }
 
@@ -1649,10 +1666,31 @@ function updateThemeIcon(icon, theme) {
     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
 
+// Initialize theme toggle with retry mechanism
+function attemptThemeToggleInit(attempts = 0) {
+    const maxAttempts = 10;
+    
+    if (attempts >= maxAttempts) {
+        console.error('❌ Failed to initialize theme toggle after', maxAttempts, 'attempts');
+        return;
+    }
+    
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        initThemeToggle();
+    } else {
+        console.log('⏳ Theme toggle not ready, retrying... (attempt', attempts + 1, ')');
+        setTimeout(() => attemptThemeToggleInit(attempts + 1), 100);
+    }
+}
+
 // Initialize theme toggle
 document.addEventListener('DOMContentLoaded', function() {
-    initThemeToggle();
+    attemptThemeToggleInit();
 });
+
+// Also try immediate initialization
+attemptThemeToggleInit();
 
 // Add stagger animation to project cards
 function animateProjectCards() {
@@ -3684,19 +3722,26 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
     });
 }
 
-// Force hero background color to prevent any override issues
+// Force hero background color to prevent any override issues (theme-aware)
 function forceHeroBackground() {
     const heroElement = document.querySelector('.hero, #home, section.hero');
     if (heroElement) {
-        heroElement.style.setProperty('background', 'linear-gradient(135deg, #8b4513 0%, #800020 100%)', 'important');
-        heroElement.style.setProperty('background-image', 'linear-gradient(135deg, #8b4513 0%, #800020 100%)', 'important');
-        console.log('✅ Hero background forced to brown/maroon gradient');
+        // Use CSS variable for theme-aware gradient
+        heroElement.style.setProperty('background', 'var(--gradient-primary)', 'important');
+        heroElement.style.setProperty('background-image', 'var(--gradient-primary)', 'important');
+        console.log('✅ Hero background forced to theme-aware brown/maroon gradient');
     }
 }
 
 // Apply hero background immediately and after DOM loads
 forceHeroBackground();
 document.addEventListener('DOMContentLoaded', forceHeroBackground);
+
+// Listen for theme changes and reapply hero background
+document.addEventListener('themeChanged', function(e) {
+    console.log('🎨 Theme changed event received, updating hero background for theme:', e.detail.theme);
+    forceHeroBackground();
+});
 
 console.log('Portfolio enhancements loaded successfully! 🚀');
 console.log('Press "T" to toggle theme');
