@@ -620,6 +620,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(clearExpiredCache, 10 * 60 * 1000);
     
     // Load all GitHub data with optimized coordination
+    console.log('🚀 Starting GitHub data load...');
     loadAllGitHubData();
     loadGitHubBadges(); // This uses external services, so keep separate
 
@@ -650,7 +651,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // GitHub API integration
 async function loadGitHubProjects() {
+    console.log('📁 Loading GitHub projects...');
     const projectsGrid = document.getElementById('projects-grid');
+    
+    console.log('Projects grid found:', !!projectsGrid);
     
     try {
         // Load project metadata
@@ -1103,16 +1107,22 @@ document.addEventListener('DOMContentLoaded', handleContactForm);
 
 // GitHub Stats Integration
 async function loadGitHubStats() {
+    console.log('📊 Loading GitHub stats...');
     const statsGrid = document.getElementById('stats-grid');
     const contributionGraph = document.getElementById('contribution-graph');
-    const languageStats = document.getElementById('language-stats');
+    const languageStats = document.getElementById('main-language-stats');
+    
+    console.log('Elements found:', { statsGrid: !!statsGrid, contributionGraph: !!contributionGraph, languageStats: !!languageStats });
     
     try {
         // Fetch user data and repositories using optimized API
+        console.log('🔄 Fetching GitHub API data...');
         const [userData, repos] = await Promise.all([
             githubAPI.getUserData(),
             githubAPI.getRepositories('updated', 100)
         ]);
+        
+        console.log('✅ GitHub data received:', { user: userData.login, repoCount: repos.length });
         
         // Calculate total stars and forks
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
