@@ -58,11 +58,15 @@
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflare.com/beacon.min.js' data-cf-beacon='{"token": "CLOUDFLARE_TOKEN_PLACEHOLDER"}'></script>
+    
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//api.github.com">
     <link rel="dns-prefetch" href="//github-readme-stats.vercel.app">
     <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//static.cloudflare.com">
     
     <!-- Preconnect for critical third-party domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -362,7 +366,7 @@
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" id="project-search" placeholder="Search projects... (Ctrl+K to focus)" 
                                class="search-input" aria-label="Search projects">
-                        <button id="clear-search" class="clear-search" aria-label="Clear search" style="display: none;">
+                        <button id="clear-search" class="clear-search hidden" aria-label="Clear search">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -370,7 +374,7 @@
                     <div class="filter-controls">
                         <div class="filter-group">
                             <label for="category-filter" class="filter-label">Category:</label>
-                            <select id="category-filter" class="filter-select" aria-label="Filter by category">
+                            <select id="category-filter" class="filter-select" aria-label="Filter by category" title="Filter projects by category">
                                 <option value="">All Categories</option>
                                 <!-- Categories populated dynamically -->
                             </select>
@@ -378,7 +382,7 @@
                         
                         <div class="filter-group">
                             <label for="technology-filter" class="filter-label">Technology:</label>
-                            <select id="technology-filter" class="filter-select" aria-label="Filter by technology">
+                            <select id="technology-filter" class="filter-select" aria-label="Filter by technology" title="Filter projects by technology">
                                 <option value="">All Technologies</option>
                                 <!-- Technologies populated dynamically -->
                             </select>
@@ -386,7 +390,7 @@
                         
                         <div class="filter-group">
                             <label for="status-filter" class="filter-label">Status:</label>
-                            <select id="status-filter" class="filter-select" aria-label="Filter by status">
+                            <select id="status-filter" class="filter-select" aria-label="Filter by status" title="Filter projects by development status">
                                 <option value="">All Status</option>
                                 <option value="Active Development">Active Development</option>
                                 <option value="Stable">Stable</option>
@@ -400,7 +404,7 @@
                 <div class="sort-view-row">
                     <div class="sort-controls">
                         <label for="sort-select" class="sort-label">Sort by:</label>
-                        <select id="sort-select" class="sort-select" aria-label="Sort projects">
+                        <select id="sort-select" class="sort-select" aria-label="Sort projects" title="Sort projects by different criteria">
                             <option value="name">Project Name</option>
                             <option value="category">Category</option>
                             <option value="stars">GitHub Stars</option>
@@ -555,7 +559,7 @@
                         <div class="card-header">
                             <h3><i class="fas fa-calendar-alt"></i> Contribution Heatmap</h3>
                             <div class="card-controls">
-                                <select id="heatmap-year" class="year-selector">
+                                <select id="heatmap-year" class="year-selector" title="Select year for contribution heatmap">
                                     <option value="2025">2025</option>
                                     <option value="2024">2024</option>
                                     <option value="2023">2023</option>
@@ -652,7 +656,7 @@
                         <div class="card-header">
                             <h3><i class="fas fa-chart-line"></i> Code Frequency</h3>
                             <div class="card-controls">
-                                <select id="frequency-period" class="period-selector">
+                                <select id="frequency-period" class="period-selector" title="Select time period for code frequency analysis">
                                     <option value="weekly">Weekly</option>
                                     <option value="monthly">Monthly</option>
                                     <option value="quarterly">Quarterly</option>
@@ -889,6 +893,9 @@
             setTimeout(preloadCritical, 3000);
         })();
     </script>
+    
+    <!-- Chart.js for data visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     
     <!-- Main application script with async loading -->
     <script src="script.js" async></script>

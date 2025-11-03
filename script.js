@@ -1923,7 +1923,7 @@ class ProjectSearchFilter {
         
         // Show/hide clear button
         if (this.elements.clearSearch) {
-            this.elements.clearSearch.style.display = searchTerm ? 'block' : 'none';
+            this.elements.clearSearch.classList.toggle('hidden', !searchTerm);
         }
 
         this.applyFiltersAndSort();
@@ -1934,7 +1934,7 @@ class ProjectSearchFilter {
             this.elements.searchInput.value = '';
         }
         if (this.elements.clearSearch) {
-            this.elements.clearSearch.style.display = 'none';
+            this.elements.clearSearch.classList.add('hidden');
         }
         this.currentFilters.search = '';
         this.applyFiltersAndSort();
@@ -2074,7 +2074,7 @@ class ProjectSearchFilter {
 
         // Reset form elements
         if (this.elements.searchInput) this.elements.searchInput.value = '';
-        if (this.elements.clearSearch) this.elements.clearSearch.style.display = 'none';
+        if (this.elements.clearSearch) this.elements.clearSearch.classList.add('hidden');
         if (this.elements.categoryFilter) this.elements.categoryFilter.value = '';
         if (this.elements.technologyFilter) this.elements.technologyFilter.value = '';
         if (this.elements.statusFilter) this.elements.statusFilter.value = '';
@@ -2770,46 +2770,220 @@ class GitHubAnalyticsDashboard {
         `;
     }
 
-    // Chart creation methods (placeholders for Chart.js integration)
+    // Chart creation methods using Chart.js
     createBarChart(canvas, id, data) {
-        // Placeholder: In a real implementation, this would use Chart.js
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#4A90E2';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fff';
-        ctx.font = '16px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Chart Placeholder', canvas.width / 2, canvas.height / 2);
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js not loaded, showing placeholder');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#4A90E2';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Chart.js Loading...', canvas.width / 2, canvas.height / 2);
+            return;
+        }
+
+        const isDark = document.body.classList.contains('dark-theme');
+        const textColor = isDark ? '#e2e8f0' : '#334155';
+        const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+        new Chart(canvas.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: data.labels || ['No Data'],
+                datasets: [{
+                    label: data.label || 'Data',
+                    data: data.values || [0],
+                    backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#6366f1'],
+                    borderColor: isDark ? '#1e293b' : '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: textColor }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: textColor },
+                        grid: { color: gridColor }
+                    },
+                    x: {
+                        ticks: { color: textColor },
+                        grid: { color: gridColor }
+                    }
+                }
+            }
+        });
     }
 
     createPieChart(canvas, id, data) {
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#4A90E2';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fff';
-        ctx.font = '16px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Pie Chart Placeholder', canvas.width / 2, canvas.height / 2);
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js not loaded, showing placeholder');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#8b5cf6';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Chart.js Loading...', canvas.width / 2, canvas.height / 2);
+            return;
+        }
+
+        const isDark = document.body.classList.contains('dark-theme');
+        const textColor = isDark ? '#e2e8f0' : '#334155';
+
+        new Chart(canvas.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: data.labels || ['No Data'],
+                datasets: [{
+                    data: data.values || [100],
+                    backgroundColor: [
+                        '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', 
+                        '#ef4444', '#6366f1', '#ec4899', '#14b8a6'
+                    ],
+                    borderColor: isDark ? '#1e293b' : '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { 
+                            color: textColor,
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
     }
 
     createLineChart(canvas, id, data) {
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#4A90E2';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fff';
-        ctx.font = '16px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Line Chart Placeholder', canvas.width / 2, canvas.height / 2);
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js not loaded, showing placeholder');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#10b981';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Chart.js Loading...', canvas.width / 2, canvas.height / 2);
+            return;
+        }
+
+        const isDark = document.body.classList.contains('dark-theme');
+        const textColor = isDark ? '#e2e8f0' : '#334155';
+        const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+        new Chart(canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: data.labels || ['No Data'],
+                datasets: [{
+                    label: data.label || 'Trend',
+                    data: data.values || [0],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4,
+                    pointBackgroundColor: '#3b82f6',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: textColor }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: textColor },
+                        grid: { color: gridColor }
+                    },
+                    x: {
+                        ticks: { color: textColor },
+                        grid: { color: gridColor }
+                    }
+                }
+            }
+        });
     }
 
     createAreaChart(canvas, id, data) {
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#4A90E2';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fff';
-        ctx.font = '16px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Area Chart Placeholder', canvas.width / 2, canvas.height / 2);
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js not loaded, showing placeholder');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Chart.js Loading...', canvas.width / 2, canvas.height / 2);
+            return;
+        }
+
+        const isDark = document.body.classList.contains('dark-theme');
+        const textColor = isDark ? '#e2e8f0' : '#334155';
+        const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+        new Chart(canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: data.labels || ['No Data'],
+                datasets: [{
+                    label: data.label || 'Area Data',
+                    data: data.values || [0],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#8b5cf6',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: textColor }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: textColor },
+                        grid: { color: gridColor }
+                    },
+                    x: {
+                        ticks: { color: textColor },
+                        grid: { color: gridColor }
+                    }
+                }
+            }
+        });
     }
 
     showErrorState(tabName) {
@@ -3110,10 +3284,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Add analytics event tracking (placeholder for future integration)
-function trackEvent(category, action, label) {
-    // This can be integrated with Google Analytics, Plausible, or other analytics services
-    console.log('Event tracked:', { category, action, label });
+// Analytics event tracking with Cloudflare Web Analytics support
+function trackEvent(category, action, label, value) {
+    // Cloudflare Web Analytics automatic tracking
+    // Manual events can be tracked if needed in the future
+    
+    // Console logging for development
+    console.log('📊 Event tracked:', { category, action, label, value });
+    
+    // Send custom event data if Cloudflare beacon is available
+    if (typeof globalThis.cf_observer !== 'undefined') {
+        // Custom events would go here when Cloudflare adds support
+        console.log('🌐 Cloudflare analytics active');
+    }
+    
+    // Track performance events
+    if (category === 'Performance' && globalThis.performance) {
+        const perfData = {
+            category,
+            action,
+            label,
+            timestamp: Date.now(),
+            userAgent: navigator.userAgent,
+            url: globalThis.location.href
+        };
+        console.log('⚡ Performance event:', perfData);
+    }
 }
 
 // Track project card clicks
