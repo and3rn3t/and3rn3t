@@ -140,12 +140,15 @@ body {
 }
 
 /* Hero Section */
-.hero {
+.hero,
+section.hero,
+#home.hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: var(--gradient-primary);
-    color: #fef7ed;
+    background: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
+    background-image: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
+    color: #fef7ed !important;
     position: relative;
     overflow: hidden;
 }

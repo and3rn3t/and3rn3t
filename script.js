@@ -3684,6 +3684,20 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
     });
 }
 
+// Force hero background color to prevent any override issues
+function forceHeroBackground() {
+    const heroElement = document.querySelector('.hero, #home, section.hero');
+    if (heroElement) {
+        heroElement.style.setProperty('background', 'linear-gradient(135deg, #8b4513 0%, #800020 100%)', 'important');
+        heroElement.style.setProperty('background-image', 'linear-gradient(135deg, #8b4513 0%, #800020 100%)', 'important');
+        console.log('✅ Hero background forced to brown/maroon gradient');
+    }
+}
+
+// Apply hero background immediately and after DOM loads
+forceHeroBackground();
+document.addEventListener('DOMContentLoaded', forceHeroBackground);
+
 console.log('Portfolio enhancements loaded successfully! 🚀');
 console.log('Press "T" to toggle theme');
 console.log('Press Ctrl/Cmd + P to print resume');
