@@ -69,7 +69,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                                 <path fill-rule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"/>
                             </svg>
-                            1709 Commits
+                            1712 Commits
                         </div>
                         <div class="field">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -225,9 +225,9 @@
                         <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
                     </mask>
                     <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>
-                    <rect mask="url(#languages-bar)" x="0" y="0" width="244.5628704441628" height="8" fill="#f1e05a"/>
-                    <rect mask="url(#languages-bar)" x="244.5628704441628" y="0" width="123.75485034164696" height="8" fill="#663399"/>
-                    <rect mask="url(#languages-bar)" x="368.31772078580974" y="0" width="91.68227921419022" height="8" fill="#e34c26"/>
+                    <rect mask="url(#languages-bar)" x="0" y="0" width="244.58843461861767" height="8" fill="#f1e05a"/>
+                    <rect mask="url(#languages-bar)" x="244.58843461861767" y="0" width="123.7677864450629" height="8" fill="#663399"/>
+                    <rect mask="url(#languages-bar)" x="368.35622106368055" y="0" width="91.6437789363194" height="8" fill="#e34c26"/>
                 </svg>
                 <div class="field center horizontal-wrap fill-width">
                     <div class="field center no-wrap language">
@@ -2305,7 +2305,7 @@
             </section>
             <footer>
                 <span>These metrics do not include all private contributions</span>
-                <span>Last updated 3 Nov 2025, 17:35:02 (timezone America/New_York) with lowlighter/metrics@3.34.0</span>
+                <span>Last updated 3 Nov 2025, 17:39:10 (timezone America/New_York) with lowlighter/metrics@3.34.0</span>
             </footer>
         </div>
         <div xmlns="http://www.w3.org/1999/xhtml" id="metrics-end"></div>
