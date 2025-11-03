@@ -6,10 +6,45 @@
 
 ## 🎯 Featured Portfolio Website
 
-Check out my interactive portfolio with comprehensive GitHub statistics and project showcase:
-🔗 [https://and3rn3t.github.io/and3rn3t/](https://and3rn3t.github.io/and3rn3t/)
+Check out my **interactive portfolio** with comprehensive GitHub statistics and detailed project showcase:
 
-## 📊 GitHub Statistics
+### 🔗 **[View My Portfolio →](https://and3rn3t.github.io/and3rn3t/)**
+
+**Features:**
+- 📊 Real-time GitHub statistics and insights
+- 🌟 Top starred projects with detailed descriptions
+- 🎨 Dark/Light theme toggle
+- 📱 Fully responsive design
+- 🔍 SEO optimized for better discoverability
+- ⚡ Fast, modern, and accessible
+
+---
+
+## 🚀 Featured Projects
+
+### ⭐ [Health Analytics Platform](https://github.com/and3rn3t/health)
+> Advanced health tracking using Apple HealthKit and iPhone LiDAR sensors for gait analysis
+> 
+> **Tech:** TypeScript, HealthKit, LiDAR, ML | **Stars:** 4
+
+### 📱 [HealthKit Bridge](https://github.com/and3rn3t/HealthKitBridge)
+> Native iOS app bridging HealthKit data to web applications
+> 
+> **Tech:** Swift, HealthKit, iOS | **Stars:** 3
+
+### 🏠 [Home Automation Hub](https://github.com/and3rn3t/homehub)
+> Centralized IoT control center for smart home devices
+> 
+> **Tech:** TypeScript, IoT, WebSockets, React | **Stars:** 1
+
+### 🌤️ [Weather App](https://github.com/and3rn3t/weather)
+> Cross-platform weather application with native mobile integration
+> 
+> **Tech:** TypeScript, Capacitor, Android, iOS | **Stars:** 1
+
+[**→ View All Projects**](https://and3rn3t.github.io/and3rn3t/#projects)
+
+---
 
 <div align="center">
 
@@ -84,5 +119,21 @@ Check out my interactive portfolio with comprehensive GitHub statistics and proj
 ### 💡 "Code is like humor. When you have to explain it, it's bad." – Cory House
 
 ![Snake animation](https://github.com/and3rn3t/and3rn3t/blob/output/github-contribution-grid-snake.svg)
+
+</div>
+
+## 📊 GitHub Statistics
+
+<div align="center">
+
+![Profile Views](https://komarev.com/ghpvc/?username=and3rn3t&style=for-the-badge&color=blueviolet)
+
+</div>
+
+<div align="center">
+  
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=and3rn3t&show_icons=true&theme=radical&hide_border=true&count_private=true)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=and3rn3t&layout=compact&theme=radical&hide_border=true)
 
 </div>
