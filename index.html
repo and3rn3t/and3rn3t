@@ -3,16 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Matthew Anderson (@and3rn3t) - Full-Stack Developer specializing in modern web technologies, home automation, and innovative solutions.">
-    <meta name="keywords" content="Matthew Anderson, Full-Stack Developer, React, Python, PostgreSQL, Web Development, IoT, Home Automation">
+    <meta name="description" content="Matthew Anderson (@and3rn3t) - Full-Stack Developer specializing in modern web technologies, home automation, and innovative solutions. Expert in TypeScript, Python, Swift, React, IoT, and more.">
+    <meta name="keywords" content="Matthew Anderson, Full-Stack Developer, React, Python, PostgreSQL, Web Development, IoT, Home Automation, TypeScript, Swift, Health Technology, Game Development, Cybersecurity">
     <meta name="author" content="Matthew Anderson">
-    <meta property="og:title" content="Matthew Anderson | Full-Stack Developer">
-    <meta property="og:description" content="Full-Stack Developer specializing in modern web technologies, home automation, and innovative solutions.">
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://and3rn3t.github.io/and3rn3t/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Matthew Anderson | Full-Stack Developer">
-    <meta name="twitter:description" content="Full-Stack Developer specializing in modern web technologies, home automation, and innovative solutions.">
+    <meta property="og:title" content="Matthew Anderson | Full-Stack Developer Portfolio">
+    <meta property="og:description" content="Explore my portfolio of innovative projects including health analytics, IoT automation, mobile apps, and more. Specializing in TypeScript, Python, Swift, and modern web technologies.">
+    <meta property="og:image" content="https://and3rn3t.github.io/and3rn3t/github-metrics.svg">
+    <meta property="og:site_name" content="Matthew Anderson Portfolio">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://and3rn3t.github.io/and3rn3t/">
+    <meta name="twitter:title" content="Matthew Anderson | Full-Stack Developer Portfolio">
+    <meta name="twitter:description" content="Explore my portfolio of innovative projects including health analytics, IoT automation, mobile apps, and more.">
+    <meta name="twitter:image" content="https://and3rn3t.github.io/and3rn3t/github-metrics.svg">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://and3rn3t.github.io/and3rn3t/">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Matthew Anderson",
+      "url": "https://and3rn3t.github.io/and3rn3t/",
+      "sameAs": [
+        "https://github.com/and3rn3t",
+        "https://linkedin.com/in/matthew-anderson"
+      ],
+      "jobTitle": "Full-Stack Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Independent"
+      },
+      "knowsAbout": ["TypeScript", "Python", "Swift", "React", "IoT", "Home Automation", "Health Technology", "Web Development", "Mobile Development"],
+      "description": "Full-Stack Developer specializing in modern web technologies, home automation, health technology, and innovative solutions."
+    }
+    </script>
     <title>Matthew Anderson | Full-Stack Developer</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
@@ -215,6 +250,22 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             
+            <!-- Top Starred Projects Highlight -->
+            <div class="top-projects-highlight">
+                <h3 class="subsection-title">⭐ Top Starred Projects</h3>
+                <p class="section-intro">
+                    These are my most popular projects on GitHub, showcasing innovative solutions in health technology, 
+                    IoT automation, mobile development, and more. Each project demonstrates practical applications of 
+                    modern technologies and best practices in software development.
+                </p>
+                <div class="top-projects-stats" id="top-projects-stats">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading top projects statistics...</p>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Pinned Repositories -->
             <div class="pinned-repos-section">
                 <h3 class="subsection-title">📌 Pinned Repositories</h3>
@@ -357,6 +408,11 @@
             <p>&copy; 2024 Matthew Anderson. Built with passion and modern web technologies.</p>
         </div>
     </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>

@@ -82,18 +82,28 @@ async function loadGitHubProjects() {
     const projectsGrid = document.getElementById('projects-grid');
     
     try {
+        // Load project metadata
+        let projectsData = null;
+        try {
+            const projectsDataResponse = await fetch('projects-data.json');
+            projectsData = await projectsDataResponse.json();
+        } catch (e) {
+            console.log('Project data file not found, using API data only');
+        }
+        
         // First, try to get user info
         const userResponse = await fetch('https://api.github.com/users/and3rn3t');
         const userData = await userResponse.json();
         
-        // Get repositories
-        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=updated&per_page=6');
+        // Get repositories sorted by stars to show top projects
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
         const repos = await reposResponse.json();
         
-        // Filter out fork repositories and select the most interesting ones
+        // Filter out fork repositories and archived, then sort by stars
         const featuredRepos = repos
-            .filter(repo => !repo.fork && repo.description)
-            .slice(0, 6);
+            .filter(repo => !repo.fork && !repo.archived)
+            .sort((a, b) => b.stargazers_count - a.stargazers_count)
+            .slice(0, 9);
         
         if (featuredRepos.length === 0) {
             // If no repositories found, show demo projects
@@ -104,9 +114,10 @@ async function loadGitHubProjects() {
         // Clear loading state
         projectsGrid.innerHTML = '';
         
-        // Create project cards
+        // Create project cards with enhanced data
         featuredRepos.forEach(repo => {
-            const projectCard = createProjectCard(repo);
+            const projectMeta = projectsData?.projects?.find(p => p.name === repo.name);
+            const projectCard = createProjectCard(repo, projectMeta);
             projectsGrid.appendChild(projectCard);
         });
         
@@ -116,9 +127,16 @@ async function loadGitHubProjects() {
     }
 }
 
-function createProjectCard(repo) {
+function createProjectCard(repo, metadata) {
     const card = document.createElement('div');
     card.className = 'project-card';
+    
+    // Use metadata if available, otherwise fall back to repo data
+    const displayName = metadata?.displayName || repo.name;
+    const description = metadata?.description || repo.description || 'A coding project showcasing development skills.';
+    const longDescription = metadata?.longDescription;
+    const category = metadata?.category;
+    const status = metadata?.status;
     
     // Get primary language or default
     const language = repo.language || 'Code';
@@ -126,31 +144,51 @@ function createProjectCard(repo) {
     // Format dates
     const updatedDate = new Date(repo.updated_at).toLocaleDateString();
     
+    // Determine if we have enough stars to show it prominently
+    const isTopProject = repo.stargazers_count > 0;
+    
     card.innerHTML = `
         <div class="project-header">
-            <h3 class="project-title">${repo.name}</h3>
-            <p class="project-description">${repo.description || 'A coding project showcasing development skills.'}</p>
+            ${category ? `<span class="project-category">${category}</span>` : ''}
+            <h3 class="project-title">${displayName}</h3>
+            <p class="project-description">${description}</p>
+            ${longDescription ? `
+                <details class="project-long-description">
+                    <summary>Learn more about this project...</summary>
+                    <p>${longDescription}</p>
+                    ${metadata?.highlights ? `
+                        <ul class="project-highlights">
+                            ${metadata.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                </details>
+            ` : ''}
             
             <div class="project-stats">
-                <div class="project-stat">
+                <div class="project-stat" title="Stars">
                     <i class="fas fa-star"></i>
                     <span>${repo.stargazers_count}</span>
                 </div>
-                <div class="project-stat">
+                <div class="project-stat" title="Forks">
                     <i class="fas fa-code-branch"></i>
                     <span>${repo.forks_count}</span>
                 </div>
-                <div class="project-stat">
+                <div class="project-stat" title="Open Issues">
+                    <i class="fas fa-circle-dot"></i>
+                    <span>${repo.open_issues_count}</span>
+                </div>
+                <div class="project-stat" title="Last Updated">
                     <i class="fas fa-calendar"></i>
                     <span>${updatedDate}</span>
                 </div>
             </div>
             
             <div class="project-languages">
-                <span class="language-tag">${language}</span>
+                <span class="language-tag primary">${language}</span>
                 ${repo.topics ? repo.topics.slice(0, 3).map(topic => 
                     `<span class="language-tag">${topic}</span>`
                 ).join('') : ''}
+                ${status ? `<span class="status-badge ${status.toLowerCase().replace(/\s+/g, '-')}">${status}</span>` : ''}
             </div>
         </div>
         
@@ -167,7 +205,7 @@ function createProjectCard(repo) {
             ` : `
                 <a href="${repo.html_url}/blob/main/README.md" target="_blank" class="project-link secondary">
                     <i class="fas fa-file-alt"></i>
-                    Read More
+                    Documentation
                 </a>
             `}
         </div>
@@ -834,3 +872,261 @@ async function loadGitHubGists() {
         gistsGrid.innerHTML = '<p class="error-message">Unable to load gists.</p>';
     }
 }
+// Theme Toggle Functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const icon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.body.classList.toggle('dark-theme', currentTheme === 'dark');
+    updateThemeIcon(icon, currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const isDark = document.body.classList.toggle('dark-theme');
+        const theme = isDark ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
+        updateThemeIcon(icon, theme);
+    });
+}
+
+function updateThemeIcon(icon, theme) {
+    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+// Initialize theme toggle
+document.addEventListener('DOMContentLoaded', function() {
+    initThemeToggle();
+});
+
+// Add stagger animation to project cards
+function animateProjectCards() {
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('fade-in-up');
+    });
+}
+
+// Call after projects are loaded
+const originalLoadGitHubProjects = loadGitHubProjects;
+loadGitHubProjects = async function() {
+    await originalLoadGitHubProjects();
+    animateProjectCards();
+};
+
+// Enhanced keyboard navigation
+document.addEventListener('keydown', function(e) {
+    // Press 'T' to toggle theme
+    if (e.key === 't' || e.key === 'T') {
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+            themeToggle.click();
+        }
+    }
+});
+
+// Add print functionality (Ctrl/Cmd + P for resume-style print)
+window.addEventListener('beforeprint', function() {
+    document.body.classList.add('printing');
+});
+
+window.addEventListener('afterprint', function() {
+    document.body.classList.remove('printing');
+});
+
+// Performance optimization: Lazy load images
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    }
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', lazyLoadImages);
+
+// Add smooth scroll behavior for all internal links
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
+// Add analytics event tracking (placeholder for future integration)
+function trackEvent(category, action, label) {
+    // This can be integrated with Google Analytics, Plausible, or other analytics services
+    console.log('Event tracked:', { category, action, label });
+}
+
+// Track project card clicks
+document.addEventListener('click', function(e) {
+    const projectLink = e.target.closest('.project-link');
+    if (projectLink) {
+        const projectCard = projectLink.closest('.project-card');
+        const projectTitle = projectCard?.querySelector('.project-title')?.textContent;
+        trackEvent('Project', 'Click', projectTitle);
+    }
+});
+
+// Load Top Starred Projects with detailed stats
+async function loadTopStarredProjects() {
+    const topProjectsStats = document.getElementById('top-projects-stats');
+    
+    try {
+        // Load project metadata
+        let projectsData = null;
+        try {
+            const projectsDataResponse = await fetch('projects-data.json');
+            projectsData = await projectsDataResponse.json();
+        } catch (e) {
+            console.log('Project data file not found');
+        }
+        
+        // Get repositories sorted by stars
+        const reposResponse = await fetch('https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100');
+        const repos = await reposResponse.json();
+        
+        // Get top 3 starred non-fork, non-archived repositories
+        const topRepos = repos
+            .filter(repo => !repo.fork && !repo.archived && repo.stargazers_count > 0)
+            .sort((a, b) => b.stargazers_count - a.stargazers_count)
+            .slice(0, 3);
+        
+        if (topRepos.length === 0) {
+            topProjectsStats.innerHTML = '<p class="no-activity">No starred projects to highlight yet.</p>';
+            return;
+        }
+        
+        // Calculate total stats
+        const totalStars = topRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+        const totalForks = topRepos.reduce((sum, repo) => sum + repo.forks_count, 0);
+        
+        topProjectsStats.innerHTML = `
+            <div class="top-projects-summary">
+                <div class="summary-stat">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <h4>${totalStars}</h4>
+                        <p>Total Stars</p>
+                    </div>
+                </div>
+                <div class="summary-stat">
+                    <i class="fas fa-code-branch"></i>
+                    <div class="stat-info">
+                        <h4>${totalForks}</h4>
+                        <p>Total Forks</p>
+                    </div>
+                </div>
+                <div class="summary-stat">
+                    <i class="fas fa-trophy"></i>
+                    <div class="stat-info">
+                        <h4>${topRepos.length}</h4>
+                        <p>Top Projects</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="top-projects-list">
+                ${topRepos.map((repo, index) => {
+                    const projectMeta = projectsData?.projects?.find(p => p.name === repo.name);
+                    const displayName = projectMeta?.displayName || repo.name;
+                    const description = projectMeta?.longDescription || repo.description || 'No description available';
+                    const category = projectMeta?.category || 'Development';
+                    const technologies = projectMeta?.technologies || [repo.language].filter(Boolean);
+                    
+                    return `
+                        <div class="top-project-card">
+                            <div class="rank-badge">#${index + 1}</div>
+                            <div class="top-project-content">
+                                <div class="top-project-header">
+                                    <span class="project-category-badge">${category}</span>
+                                    <h4 class="top-project-title">
+                                        <a href="${repo.html_url}" target="_blank">${displayName}</a>
+                                    </h4>
+                                </div>
+                                <p class="top-project-description">${description}</p>
+                                
+                                ${projectMeta?.highlights ? `
+                                    <div class="top-project-highlights">
+                                        <strong>Key Features:</strong>
+                                        <ul>
+                                            ${projectMeta.highlights.slice(0, 3).map(h => `<li>${h}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                ` : ''}
+                                
+                                <div class="top-project-tech">
+                                    <strong>Technologies:</strong>
+                                    ${technologies.slice(0, 5).map(tech => 
+                                        `<span class="tech-badge">${tech}</span>`
+                                    ).join('')}
+                                </div>
+                                
+                                <div class="top-project-stats">
+                                    <span class="stat-badge">
+                                        <i class="fas fa-star"></i> ${repo.stargazers_count} stars
+                                    </span>
+                                    <span class="stat-badge">
+                                        <i class="fas fa-code-branch"></i> ${repo.forks_count} forks
+                                    </span>
+                                    <span class="stat-badge">
+                                        <i class="fas fa-circle-dot"></i> ${repo.open_issues_count} issues
+                                    </span>
+                                    <span class="stat-badge">
+                                        <i class="fas fa-clock"></i> Updated ${new Date(repo.updated_at).toLocaleDateString()}
+                                    </span>
+                                </div>
+                                
+                                <div class="top-project-links">
+                                    <a href="${repo.html_url}" target="_blank" class="btn btn-primary btn-sm">
+                                        <i class="fab fa-github"></i> View Repository
+                                    </a>
+                                    ${repo.homepage ? `
+                                        <a href="${repo.homepage}" target="_blank" class="btn btn-secondary btn-sm">
+                                            <i class="fas fa-external-link-alt"></i> Live Demo
+                                        </a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Error loading top starred projects:', error);
+        topProjectsStats.innerHTML = '<p class="error-message">Unable to load top projects at this time.</p>';
+    }
+}
+
+// Update the DOMContentLoaded event to include top projects
+document.addEventListener('DOMContentLoaded', function() {
+    loadTopStarredProjects();
+});
