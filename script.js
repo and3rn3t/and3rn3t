@@ -13,6 +13,38 @@ class GitHubAPIManager {
         this.requestQueue = [];
         this.isProcessingQueue = false;
         this.cachedData = null;
+        this.maxRetries = 3;
+        this.baseDelay = 1000; // 1 second base delay
+    }
+
+    // Enhanced retry logic with exponential backoff
+    async executeWithRetry(operation, maxRetries = this.maxRetries) {
+        let lastError;
+        
+        for (let attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                return await operation();
+            } catch (error) {
+                lastError = error;
+                
+                // Don't retry for certain error types
+                if (error.message.includes('404') || error.message.includes('403')) {
+                    throw error;
+                }
+                
+                if (attempt === maxRetries) {
+                    console.error(`Operation failed after ${maxRetries} attempts:`, error.message);
+                    throw error;
+                }
+                
+                // Exponential backoff with jitter
+                const delay = this.baseDelay * Math.pow(2, attempt - 1) + Math.random() * 1000;
+                console.warn(`Attempt ${attempt} failed, retrying in ${Math.round(delay)}ms:`, error.message);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+        
+        throw lastError;
     }
 
     // Load pre-fetched GitHub data from workflow
@@ -119,14 +151,14 @@ class GitHubAPIManager {
         }
     }
 
-    // Main API method with caching
+    // Main API method with caching and enhanced retry
     async fetchGitHubData(endpoint, params = {}, ttl = 300000) {
         const cacheKey = this.getCacheKey(endpoint, params);
         
         // Check cache first
         const cachedData = this.getCache(cacheKey);
         if (cachedData) {
-            console.log(`Cache hit for ${endpoint}`);
+            console.log(`✅ Cache hit for ${endpoint}`);
             return cachedData;
         }
 
@@ -136,19 +168,17 @@ class GitHubAPIManager {
             url.searchParams.append(key, value);
         }
 
-        try {
+        return await this.executeWithRetry(async () => {
+            console.log(`🌐 Fetching ${endpoint}...`);
             const response = await this.fetchWithRetry(url.toString());
             const data = await response.json();
             
             // Cache the result
             this.setCache(cacheKey, data, ttl);
-            console.log(`Cached data for ${endpoint}`);
+            console.log(`💾 Cached data for ${endpoint}`);
             
             return data;
-        } catch (error) {
-            console.error(`Failed to fetch ${endpoint}:`, error);
-            throw error;
-        }
+        });
     }
 
     // Convenience methods for common endpoints
@@ -256,60 +286,88 @@ function handleAPIError(error, context = 'API request') {
     return userMessage;
 }
 
-// Global loading progress indicator
-function showGlobalLoadingProgress() {
-    let progressBar = document.getElementById('global-loading-progress');
-    if (!progressBar) {
-        progressBar = document.createElement('div');
-        progressBar.id = 'global-loading-progress';
-        progressBar.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
-            background-size: 200% 100%;
-            animation: loading-gradient 2s ease-in-out infinite;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        `;
-        
-        // Add the animation keyframes if not already present
-        if (!document.querySelector('#loading-keyframes')) {
-            const style = document.createElement('style');
-            style.id = 'loading-keyframes';
-            style.textContent = `
-                @keyframes loading-gradient {
-                    0% { background-position: 200% 0; }
-                    100% { background-position: -200% 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        document.body.appendChild(progressBar);
-    }
+// Enhanced global loading progress indicator with task tracking
+const loadingManager = {
+    activeTasks: new Set(),
+    progressBar: null,
     
-    // Show the progress bar
-    setTimeout(() => {
-        if (progressBar) {
-            progressBar.style.opacity = '1';
+    addTask(taskName) {
+        this.activeTasks.add(taskName);
+        this.showProgress();
+        console.log(`📊 Loading task started: ${taskName} (${this.activeTasks.size} active)`);
+    },
+    
+    removeTask(taskName) {
+        this.activeTasks.delete(taskName);
+        console.log(`✅ Loading task completed: ${taskName} (${this.activeTasks.size} remaining)`);
+        
+        if (this.activeTasks.size === 0) {
+            this.hideProgress();
         }
-    }, 100);
+    },
+    
+    showProgress() {
+        if (!this.progressBar) {
+            this.progressBar = document.createElement('div');
+            this.progressBar.id = 'global-loading-progress';
+            this.progressBar.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+                background-size: 200% 100%;
+                animation: loading-gradient 2s ease-in-out infinite;
+                z-index: 9999;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            
+            // Add the animation keyframes if not already present
+            if (!document.querySelector('#loading-keyframes')) {
+                const style = document.createElement('style');
+                style.id = 'loading-keyframes';
+                style.textContent = `
+                    @keyframes loading-gradient {
+                        0% { background-position: 200% 0; }
+                        100% { background-position: -200% 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(this.progressBar);
+        }
+        
+        // Show the progress bar
+        setTimeout(() => {
+            if (this.progressBar) {
+                this.progressBar.style.opacity = '1';
+            }
+        }, 100);
+    },
+    
+    hideProgress() {
+        if (this.progressBar) {
+            this.progressBar.style.opacity = '0';
+            setTimeout(() => {
+                if (this.progressBar && this.progressBar.parentNode) {
+                    this.progressBar.parentNode.removeChild(this.progressBar);
+                    this.progressBar = null;
+                }
+            }, 300);
+        }
+    }
+};
+
+// Legacy functions for backwards compatibility
+function showGlobalLoadingProgress() {
+    loadingManager.addTask('global');
 }
 
 function hideGlobalLoadingProgress() {
-    const progressBar = document.getElementById('global-loading-progress');
-    if (progressBar) {
-        progressBar.style.opacity = '0';
-        setTimeout(() => {
-            if (progressBar.parentNode) {
-                progressBar.parentNode.removeChild(progressBar);
-            }
-        }, 300);
-    }
+    loadingManager.removeTask('global');
 }
 
 // Show error notification to user
