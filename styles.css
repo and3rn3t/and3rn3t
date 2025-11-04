@@ -46,6 +46,15 @@ body {
     padding: 0 1rem;
 }
 
+/* Force hide modals by default */
+.global-search-modal:not(.visible),
+.keyboard-help:not(.visible) {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 /* Utility Classes */
 .hidden {
     display: none !important;
@@ -264,15 +273,17 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
 }
 
 .keyboard-help.visible {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all;
 }
 
 .keyboard-help-content {
@@ -3829,16 +3840,18 @@ body.dark-theme .keyboard-help-close:hover {
     align-items: flex-start;
     justify-content: center;
     z-index: 10001;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
     padding-top: 10vh;
 }
 
 .global-search-modal.visible {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all;
 }
 
 .global-search-content {
