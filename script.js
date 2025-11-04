@@ -9543,10 +9543,6 @@ class BlogManager {
             e.preventDefault();
             e.stopPropagation(); // Prevent double-triggering
         });
-                    title: post.title
-                });
-            }
-        });
         
         return card;
     }
