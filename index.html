@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Matthew Anderson (@and3rn3t) - Full-Stack Developer specializing in modern web technologies, home automation, and innovative solutions. Expert in TypeScript, Python, Swift, React, IoT, and more.">
     <meta name="keywords" content="Matthew Anderson, Full-Stack Developer, React, Python, PostgreSQL, Web Development, IoT, Home Automation, TypeScript, Swift, Health Technology, Game Development, Cybersecurity">
     <meta name="author" content="Matthew Anderson">
@@ -59,7 +59,20 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     
     <!-- Cloudflare Web Analytics -->
-    <script defer src='https://static.cloudflare.com/beacon.min.js' data-cf-beacon='{"token": "CLOUDFLARE_TOKEN_PLACEHOLDER"}'></script>
+    <script defer src='https://static.cloudflare.com/beacon.min.js' data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'></script>
+    
+    <!-- Enhanced Analytics Configuration -->
+    <script>
+        // Analytics configuration
+        window.portfolioAnalytics = {
+            cloudflareEnabled: true,
+            customEventsEnabled: true,
+            performanceMonitoring: true,
+            userBehaviorTracking: true,
+            sessionId: null,
+            userId: null
+        };
+    </script>
     
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//api.github.com">
@@ -213,30 +226,30 @@
     <nav class="navbar" id="navbar" aria-label="Main navigation">
         <div class="nav-container">
             <a href="#home" class="nav-logo">@and3rn3t</a>
-            <ul class="nav-menu" id="nav-menu">
+            <ul class="nav-menu nav-links" id="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link touch-target">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
+                    <a href="#about" class="nav-link touch-target">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#github-stats" class="nav-link">GitHub Stats</a>
+                    <a href="#github-stats" class="nav-link touch-target">GitHub Stats</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#projects" class="nav-link touch-target">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#analytics" class="nav-link">Analytics</a>
+                    <a href="#analytics" class="nav-link touch-target">Analytics</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#skills" class="nav-link touch-target">Skills</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#contact" class="nav-link touch-target">Contact</a>
                 </li>
             </ul>
-            <div class="nav-toggle" id="mobile-menu">
+            <div class="nav-toggle hamburger" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -674,11 +687,16 @@
                 </div>
             </div>
 
-            <div class="projects-grid" id="projects-grid">
-                <!-- Projects will be loaded dynamically via JavaScript -->
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading projects...</p>
+            <div class="project-gallery">
+                <div class="projects-grid project-cards-container gpu-layer" id="projects-grid">
+                    <!-- Projects will be loaded dynamically via JavaScript -->
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading projects...</p>
+                    </div>
+                </div>
+                <div class="swipe-hint" style="display: none;">
+                    <span>👈 Swipe to explore projects 👉</span>
                 </div>
             </div>
             
@@ -908,6 +926,17 @@
                 </div>
                 
             </div>
+            
+            <!-- Analytics Export -->
+            <div class="analytics-export">
+                <button class="export-button" onclick="portfolioAnalytics.exportData()" 
+                        title="Export analytics data for this session">
+                    Export Session Data
+                </button>
+                <div class="cf-analytics-status">
+                    Cloudflare Analytics Active
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1025,6 +1054,7 @@
                         <div class="form-group">
                             <label for="name">Name *</label>
                             <input type="text" id="name" name="name" required 
+                                   class="form-input"
                                    placeholder="Your full name" 
                                    aria-describedby="name-error"
                                    autocomplete="name"
@@ -1035,6 +1065,7 @@
                         <div class="form-group">
                             <label for="email">Email *</label>
                             <input type="email" id="email" name="email" required 
+                                   class="form-input"
                                    placeholder="your.email@example.com"
                                    aria-describedby="email-error"
                                    autocomplete="email"
@@ -1046,6 +1077,7 @@
                     <div class="form-group">
                         <label for="subject">Subject *</label>
                         <input type="text" id="subject" name="subject" required 
+                               class="form-input"
                                placeholder="What would you like to discuss?"
                                aria-describedby="subject-error"
                                minlength="3" maxlength="200">
@@ -1055,6 +1087,7 @@
                     <div class="form-group">
                         <label for="message">Message *</label>
                         <textarea id="message" name="message" rows="6" required 
+                                  class="form-textarea"
                                   placeholder="Tell me about your project, idea, or how we can work together..."
                                   aria-describedby="message-error"
                                   minlength="10" maxlength="5000"></textarea>
@@ -1067,7 +1100,7 @@
                     <!-- reCAPTCHA container -->
                     <div class="recaptcha-container" id="recaptcha-container"></div>
                     
-                    <button type="submit" class="btn btn-primary" id="submit-button" 
+                    <button type="submit" class="btn btn-primary submit-button" id="submit-button" 
                             aria-describedby="form-status">
                         <span class="submit-text">Send Message</span>
                         <i class="fas fa-paper-plane submit-icon"></i>
@@ -1080,15 +1113,15 @@
                 </form>
                 
                 <div class="contact-methods">
-                    <a href="mailto:contact@matthewanderson.dev" class="contact-method">
+                    <a href="mailto:contact@matthewanderson.dev" class="contact-method touch-target">
                         <i class="fas fa-envelope"></i>
                         <span>contact@matthewanderson.dev</span>
                     </a>
-                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="contact-method">
+                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="contact-method touch-target">
                         <i class="fab fa-github"></i>
                         <span>@and3rn3t</span>
                     </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener noreferrer" class="contact-method">
+                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener noreferrer" class="contact-method touch-target">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>

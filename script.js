@@ -2924,11 +2924,48 @@ function animateProjectCards() {
 
 // Enhanced keyboard navigation
 document.addEventListener('keydown', function(e) {
+    // Only trigger shortcuts when not typing in input fields
+    const isTyping = document.activeElement.tagName === 'INPUT' || 
+                     document.activeElement.tagName === 'TEXTAREA' ||
+                     document.activeElement.isContentEditable;
+    
+    if (isTyping) return;
+    
     // Press 'T' to toggle theme
     if (e.key === 't' || e.key === 'T') {
         const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        if (themeToggle) {
             themeToggle.click();
+        }
+    }
+    
+    // Press 'A' to jump to analytics section
+    if (e.key === 'a' || e.key === 'A') {
+        const analyticsSection = document.getElementById('analytics');
+        if (analyticsSection) {
+            analyticsSection.scrollIntoView({ behavior: 'smooth' });
+            if (globalThis.portfolioAnalytics) {
+                globalThis.portfolioAnalytics.trackEvent('keyboard_shortcut_analytics');
+            }
+        }
+    }
+    
+    // Press 'E' to export analytics data
+    if (e.key === 'e' || e.key === 'E') {
+        if (globalThis.portfolioAnalytics) {
+            globalThis.portfolioAnalytics.exportData();
+            globalThis.portfolioAnalytics.trackEvent('keyboard_shortcut_export');
+        }
+    }
+    
+    // Press 'D' to toggle analytics dashboard visibility
+    if (e.key === 'd' || e.key === 'D') {
+        const analyticsMetrics = document.querySelector('.live-analytics-metrics');
+        if (analyticsMetrics) {
+            analyticsMetrics.style.display = analyticsMetrics.style.display === 'none' ? 'grid' : 'none';
+            if (globalThis.portfolioAnalytics) {
+                globalThis.portfolioAnalytics.trackEvent('keyboard_shortcut_toggle_dashboard');
+            }
         }
     }
 });
@@ -5314,10 +5351,907 @@ document.addEventListener('themeChanged', function(e) {
     forceHeroBackground();
 });
 
+// Advanced Mobile Optimization System
+class MobileOptimizationSystem {
+    constructor() {
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.touchEndX = 0;
+        this.touchEndY = 0;
+        this.isScrolling = false;
+        this.swipeThreshold = 50;
+        this.pullToRefreshThreshold = 100;
+        this.isPullToRefreshEnabled = false;
+        
+        this.init();
+    }
+    
+    init() {
+        this.detectMobile();
+        this.setupTouchGestures();
+        this.setupSwipeNavigation();
+        this.enhanceMobileNavigation();
+        this.setupPullToRefresh();
+        this.optimizeTouchTargets();
+        this.setupMobileScrolling();
+    }
+    
+    detectMobile() {
+        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        this.isTouch = 'ontouchstart' in globalThis || navigator.maxTouchPoints > 0;
+        
+        if (this.isMobile || this.isTouch) {
+            document.body.classList.add('mobile-device', 'touch-device');
+        }
+    }
+    
+    setupTouchGestures() {
+        // Add touch feedback to interactive elements
+        const touchElements = document.querySelectorAll('.btn, .project-card, .skill-category, .nav-links a');
+        
+        touchElements.forEach(element => {
+            element.classList.add('touch-feedback');
+            
+            element.addEventListener('touchstart', (e) => {
+                element.classList.add('touched');
+                this.handleTouchStart(e);
+            }, { passive: true });
+            
+            element.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    element.classList.remove('touched');
+                }, 300);
+                this.handleTouchEnd();
+            }, { passive: true });
+            
+            element.addEventListener('touchmove', (e) => {
+                this.handleTouchMove(e);
+            }, { passive: true });
+        });
+    }
+    
+    handleTouchStart(e) {
+        const touch = e.touches[0];
+        this.touchStartX = touch.clientX;
+        this.touchStartY = touch.clientY;
+        this.isScrolling = false;
+    }
+    
+    handleTouchMove(e) {
+        if (!this.touchStartX || !this.touchStartY) return;
+        
+        const touch = e.touches[0];
+        const deltaX = Math.abs(touch.clientX - this.touchStartX);
+        const deltaY = Math.abs(touch.clientY - this.touchStartY);
+        
+        // Determine if user is scrolling vertically
+        if (deltaY > deltaX) {
+            this.isScrolling = true;
+        }
+    }
+    
+    handleTouchEnd() {
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.isScrolling = false;
+    }
+    
+    setupSwipeNavigation() {
+        const projectsContainer = document.querySelector('.projects-grid');
+        if (!projectsContainer) return;
+        
+        let currentIndex = 0;
+        const projects = projectsContainer.querySelectorAll('.project-card');
+        
+        // Add swipe indicators for mobile
+        if (this.isMobile && projects.length > 1) {
+            this.createSwipeIndicators(projectsContainer, projects.length);
+        }
+        
+        projectsContainer.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            this.touchStartX = touch.clientX;
+        }, { passive: true });
+        
+        projectsContainer.addEventListener('touchend', (e) => {
+            const touch = e.changedTouches[0];
+            this.touchEndX = touch.clientX;
+            
+            const swipeDistance = this.touchStartX - this.touchEndX;
+            
+            if (Math.abs(swipeDistance) > this.swipeThreshold && !this.isScrolling) {
+                if (swipeDistance > 0 && currentIndex < projects.length - 1) {
+                    // Swipe left - next project
+                    currentIndex++;
+                    this.scrollToProject(projectsContainer, currentIndex);
+                } else if (swipeDistance < 0 && currentIndex > 0) {
+                    // Swipe right - previous project
+                    currentIndex--;
+                    this.scrollToProject(projectsContainer, currentIndex);
+                }
+                
+                this.updateSwipeIndicators(currentIndex);
+                this.showGestureFeedback(swipeDistance > 0 ? 'Next Project' : 'Previous Project');
+            }
+        }, { passive: true });
+    }
+    
+    createSwipeIndicators(container, count) {
+        const indicators = document.createElement('div');
+        indicators.className = 'swipe-indicators';
+        
+        for (let i = 0; i < count; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = 'swipe-indicator';
+            if (i === 0) indicator.classList.add('active');
+            
+            indicator.addEventListener('click', () => {
+                this.scrollToProject(container, i);
+                this.updateSwipeIndicators(i);
+            });
+            
+            indicators.appendChild(indicator);
+        }
+        
+        container.parentNode.insertBefore(indicators, container.nextSibling);
+    }
+    
+    updateSwipeIndicators(activeIndex) {
+        const indicators = document.querySelectorAll('.swipe-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === activeIndex);
+        });
+    }
+    
+    scrollToProject(container, index) {
+        const project = container.children[index];
+        if (project) {
+            project.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        }
+    }
+    
+    enhanceMobileNavigation() {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (!hamburger || !navLinks) return;
+        
+        // Create mobile menu overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'mobile-menu-overlay';
+        document.body.appendChild(overlay);
+        
+        // Enhanced hamburger functionality
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            overlay.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Close menu when clicking nav link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+    
+    setupPullToRefresh() {
+        if (!this.isMobile) return;
+        
+        let startY = 0;
+        let pullDistance = 0;
+        let isPulling = false;
+        
+        // Create pull-to-refresh indicator
+        const pullIndicator = document.createElement('div');
+        pullIndicator.className = 'pull-to-refresh';
+        pullIndicator.innerHTML = '<span class="icon">↻</span> Pull to refresh';
+        document.body.insertBefore(pullIndicator, document.body.firstChild);
+        
+        document.addEventListener('touchstart', (e) => {
+            if (globalThis.scrollY === 0) {
+                startY = e.touches[0].clientY;
+                isPulling = true;
+            }
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (!isPulling) return;
+            
+            pullDistance = e.touches[0].clientY - startY;
+            
+            if (pullDistance > 0) {
+                pullIndicator.style.transform = `translateX(-50%) translateY(${Math.min(pullDistance / 2, 60)}px)`;
+                pullIndicator.classList.toggle('visible', pullDistance > 50);
+            }
+        }, { passive: true });
+        
+        document.addEventListener('touchend', () => {
+            if (isPulling && pullDistance > this.pullToRefreshThreshold) {
+                this.performRefresh();
+            }
+            
+            pullIndicator.style.transform = 'translateX(-50%)';
+            pullIndicator.classList.remove('visible');
+            isPulling = false;
+            pullDistance = 0;
+        }, { passive: true });
+    }
+    
+    performRefresh() {
+        this.showGestureFeedback('Refreshing content...');
+        
+        // Reload GitHub data
+        if (typeof loadGitHubProfile === 'function') {
+            loadGitHubProfile();
+        }
+        if (typeof loadRepositories === 'function') {
+            loadRepositories();
+        }
+        if (typeof loadGitHubStats === 'function') {
+            loadGitHubStats();
+        }
+        
+        setTimeout(() => {
+            this.showGestureFeedback('Content refreshed!');
+        }, 1500);
+    }
+    
+    optimizeTouchTargets() {
+        // Enhance touch targets for small elements
+        const smallElements = document.querySelectorAll('.skill-tag, .tech-tag, .social-icon');
+        
+        smallElements.forEach(element => {
+            element.classList.add('touch-target');
+            
+            // Add visual feedback for touches
+            element.addEventListener('touchstart', () => {
+                element.style.transform = 'scale(0.95)';
+            }, { passive: true });
+            
+            element.addEventListener('touchend', () => {
+                element.style.transform = '';
+            }, { passive: true });
+        });
+        
+        // Make buttons more touch-friendly
+        const buttons = document.querySelectorAll('.btn, .cta-button');
+        buttons.forEach(button => {
+            button.classList.add('btn-touch');
+        });
+    }
+    
+    setupMobileScrolling() {
+        // Smooth scroll behavior for mobile
+        if (this.isMobile) {
+            document.documentElement.style.scrollBehavior = 'smooth';
+        }
+        
+        // Optimize scroll performance
+        let ticking = false;
+        
+        const updateScrollPosition = () => {
+            // Update scroll-based animations
+            if (typeof updateScrollProgress === 'function') {
+                updateScrollProgress();
+            }
+            ticking = false;
+        };
+        
+        globalThis.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollPosition);
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+    
+    showGestureFeedback(message) {
+        let feedback = document.querySelector('.gesture-feedback');
+        
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.className = 'gesture-feedback';
+            document.body.appendChild(feedback);
+        }
+        
+        feedback.textContent = message;
+        feedback.classList.add('show');
+        
+        setTimeout(() => {
+            feedback.classList.remove('show');
+        }, 2000);
+    }
+    
+    // Enhanced haptic feedback (if supported)
+    triggerHaptic(intensity = 'medium') {
+        if ('vibrate' in navigator) {
+            const patterns = {
+                light: [10],
+                medium: [20],
+                heavy: [30]
+            };
+            navigator.vibrate(patterns[intensity] || patterns.medium);
+        }
+    }
+    
+    // Performance monitoring for mobile
+    monitorMobilePerformance() {
+        if ('performance' in globalThis) {
+            const navigation = performance.getEntriesByType('navigation')[0];
+            if (navigation) {
+                console.log('Mobile Load Performance:', {
+                    'DOM Content Loaded': navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
+                    'Load Complete': navigation.loadEventEnd - navigation.loadEventStart,
+                    'First Paint': performance.getEntriesByName('first-paint')[0]?.startTime || 'Not available'
+                });
+            }
+        }
+    }
+}
+
+// Advanced Portfolio Analytics System
+class PortfolioAnalyticsSystem {
+    constructor() {
+        this.sessionId = this.generateSessionId();
+        this.userId = this.getUserId();
+        this.startTime = Date.now();
+        this.events = [];
+        this.performanceMetrics = {};
+        this.userBehavior = {
+            scrollDepth: 0,
+            timeOnSections: {},
+            interactions: 0,
+            currentSection: 'hero'
+        };
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupPerformanceMonitoring();
+        this.setupUserBehaviorTracking();
+        this.setupCustomEventTracking();
+        this.setupScrollAnalytics();
+        this.setupEngagementMetrics();
+        this.setupErrorTracking();
+        this.createAnalyticsDashboard();
+        
+        // Initialize session
+        this.trackEvent('session_start', {
+            sessionId: this.sessionId,
+            userId: this.userId,
+            timestamp: this.startTime,
+            userAgent: navigator.userAgent,
+            viewport: `${globalThis.innerWidth}x${globalThis.innerHeight}`,
+            referrer: document.referrer || 'direct'
+        });
+    }
+    
+    generateSessionId() {
+        return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    getUserId() {
+        let userId = localStorage.getItem('portfolio_user_id');
+        if (!userId) {
+            userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('portfolio_user_id', userId);
+        }
+        return userId;
+    }
+    
+    setupPerformanceMonitoring() {
+        // Core Web Vitals monitoring
+        if ('PerformanceObserver' in globalThis) {
+            // Largest Contentful Paint
+            new PerformanceObserver((list) => {
+                const entries = list.getEntries();
+                const lastEntry = entries[entries.length - 1];
+                this.performanceMetrics.lcp = lastEntry.startTime;
+                this.trackEvent('performance_lcp', { value: lastEntry.startTime });
+            }).observe({ entryTypes: ['largest-contentful-paint'] });
+            
+            // First Input Delay
+            new PerformanceObserver((list) => {
+                const entries = list.getEntries();
+                entries.forEach((entry) => {
+                    this.performanceMetrics.fid = entry.processingStart - entry.startTime;
+                    this.trackEvent('performance_fid', { value: entry.processingStart - entry.startTime });
+                });
+            }).observe({ entryTypes: ['first-input'] });
+            
+            // Cumulative Layout Shift
+            let clsValue = 0;
+            new PerformanceObserver((list) => {
+                const entries = list.getEntries();
+                entries.forEach((entry) => {
+                    if (!entry.hadRecentInput) {
+                        clsValue += entry.value;
+                    }
+                });
+                this.performanceMetrics.cls = clsValue;
+                this.trackEvent('performance_cls', { value: clsValue });
+            }).observe({ entryTypes: ['layout-shift'] });
+        }
+        
+        // Navigation timing
+        globalThis.addEventListener('load', () => {
+            setTimeout(() => {
+                const navigation = performance.getEntriesByType('navigation')[0];
+                if (navigation) {
+                    this.performanceMetrics.loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+                    this.performanceMetrics.domContentLoaded = navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart;
+                    this.performanceMetrics.ttfb = navigation.responseStart - navigation.requestStart;
+                    
+                    this.trackEvent('performance_navigation', {
+                        loadTime: this.performanceMetrics.loadTime,
+                        domContentLoaded: this.performanceMetrics.domContentLoaded,
+                        ttfb: this.performanceMetrics.ttfb
+                    });
+                }
+            }, 100);
+        });
+    }
+    
+    setupUserBehaviorTracking() {
+        // Scroll depth tracking
+        let maxScrollDepth = 0;
+        const updateScrollDepth = () => {
+            const scrollPercent = (globalThis.scrollY / (document.body.scrollHeight - globalThis.innerHeight)) * 100;
+            if (scrollPercent > maxScrollDepth) {
+                maxScrollDepth = scrollPercent;
+                this.userBehavior.scrollDepth = maxScrollDepth;
+                
+                // Track milestone scroll depths
+                if (maxScrollDepth > 25 && !this.scrollMilestones?.milestone25) {
+                    this.scrollMilestones = { ...this.scrollMilestones, milestone25: true };
+                    this.trackEvent('scroll_depth_25');
+                }
+                if (maxScrollDepth > 50 && !this.scrollMilestones?.milestone50) {
+                    this.scrollMilestones = { ...this.scrollMilestones, milestone50: true };
+                    this.trackEvent('scroll_depth_50');
+                }
+                if (maxScrollDepth > 75 && !this.scrollMilestones?.milestone75) {
+                    this.scrollMilestones = { ...this.scrollMilestones, milestone75: true };
+                    this.trackEvent('scroll_depth_75');
+                }
+                if (maxScrollDepth > 90 && !this.scrollMilestones?.milestone90) {
+                    this.scrollMilestones = { ...this.scrollMilestones, milestone90: true };
+                    this.trackEvent('scroll_depth_90');
+                }
+            }
+        };
+        
+        let scrollTimeout;
+        globalThis.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(updateScrollDepth, 100);
+        }, { passive: true });
+        
+        // Section timing
+        const observeSection = (sectionId) => {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const now = Date.now();
+                        this.userBehavior.currentSection = sectionId;
+                        this.sectionStartTime = now;
+                        this.trackEvent('section_view', { section: sectionId, timestamp: now });
+                    } else if (this.sectionStartTime) {
+                        const timeSpent = Date.now() - this.sectionStartTime;
+                        this.userBehavior.timeOnSections[sectionId] = 
+                            (this.userBehavior.timeOnSections[sectionId] || 0) + timeSpent;
+                        this.trackEvent('section_time', { section: sectionId, duration: timeSpent });
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(section);
+        };
+        
+        // Observe all sections
+        ['hero', 'about', 'github-stats', 'projects', 'analytics', 'skills', 'contact'].forEach(observeSection);
+    }
+    
+    setupCustomEventTracking() {
+        // Project interactions
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.project-card')) {
+                const projectCard = e.target.closest('.project-card');
+                const projectName = projectCard.querySelector('h3')?.textContent || 'unknown';
+                this.trackEvent('project_click', { project: projectName });
+                this.userBehavior.interactions++;
+            }
+            
+            // Navigation clicks
+            if (e.target.closest('.nav-link')) {
+                const navLink = e.target.closest('.nav-link');
+                const section = navLink.getAttribute('href')?.substring(1) || 'unknown';
+                this.trackEvent('navigation_click', { section });
+            }
+            
+            // Contact form interactions
+            if (e.target.closest('#contact-form')) {
+                this.trackEvent('contact_form_interaction');
+            }
+            
+            // Theme toggle
+            if (e.target.closest('.theme-toggle')) {
+                this.trackEvent('theme_toggle');
+            }
+            
+            // Search interactions
+            if (e.target.closest('.search-trigger') || e.target.closest('#global-search-input')) {
+                this.trackEvent('search_interaction');
+            }
+        });
+        
+        // Form submission tracking
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', () => {
+                this.trackEvent('contact_form_submit');
+            });
+        }
+        
+        // GitHub link clicks
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href*="github.com"]');
+            if (link) {
+                this.trackEvent('github_link_click', { 
+                    url: link.href,
+                    text: link.textContent?.trim() || 'unknown'
+                });
+            }
+        });
+    }
+    
+    setupScrollAnalytics() {
+        // Reading time estimation
+        const estimateReadingTime = () => {
+            const text = document.body.innerText;
+            const words = text.split(/\s+/).length;
+            const readingSpeed = 200; // words per minute
+            return Math.ceil(words / readingSpeed);
+        };
+        
+        this.estimatedReadingTime = estimateReadingTime();
+        this.trackEvent('content_analysis', { 
+            estimatedReadingTime: this.estimatedReadingTime,
+            wordCount: document.body.innerText.split(/\s+/).length
+        });
+    }
+    
+    setupEngagementMetrics() {
+        // Time on page
+        let startTime = Date.now();
+        let isActive = true;
+        
+        const trackTimeOnPage = () => {
+            if (isActive) {
+                const timeSpent = Date.now() - startTime;
+                this.trackEvent('time_on_page', { duration: timeSpent });
+            }
+        };
+        
+        // Track page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isActive = false;
+                trackTimeOnPage();
+            } else {
+                isActive = true;
+                startTime = Date.now();
+            }
+        });
+        
+        // Track before page unload
+        globalThis.addEventListener('beforeunload', trackTimeOnPage);
+        
+        // Engagement score calculation
+        setInterval(() => {
+            const timeSpent = Date.now() - this.startTime;
+            const engagementScore = this.calculateEngagementScore(timeSpent);
+            this.trackEvent('engagement_score', { score: engagementScore });
+        }, 30000); // Every 30 seconds
+    }
+    
+    calculateEngagementScore(timeSpent) {
+        let score = 0;
+        
+        // Time-based scoring (max 40 points)
+        score += Math.min(timeSpent / 1000 / 60 * 10, 40); // 10 points per minute, max 40
+        
+        // Interaction-based scoring (max 30 points)
+        score += Math.min(this.userBehavior.interactions * 2, 30); // 2 points per interaction, max 30
+        
+        // Scroll depth scoring (max 20 points)
+        score += (this.userBehavior.scrollDepth / 100) * 20;
+        
+        // Section diversity scoring (max 10 points)
+        const sectionsVisited = Object.keys(this.userBehavior.timeOnSections).length;
+        score += Math.min(sectionsVisited * 1.43, 10); // 1.43 points per section, max 10
+        
+        return Math.round(score);
+    }
+    
+    setupErrorTracking() {
+        globalThis.addEventListener('error', (event) => {
+            this.trackEvent('javascript_error', {
+                message: event.message,
+                filename: event.filename,
+                lineno: event.lineno,
+                colno: event.colno
+            });
+        });
+        
+        globalThis.addEventListener('unhandledrejection', (event) => {
+            this.trackEvent('promise_rejection', {
+                reason: event.reason?.toString() || 'unknown'
+            });
+        });
+    }
+    
+    trackEvent(eventName, data = {}) {
+        const event = {
+            name: eventName,
+            timestamp: Date.now(),
+            sessionId: this.sessionId,
+            userId: this.userId,
+            data: data
+        };
+        
+        this.events.push(event);
+        
+        // Send to console in development
+        if (globalThis.location.hostname === 'localhost' || globalThis.location.hostname === '127.0.0.1') {
+            console.log(`📊 Analytics Event: ${eventName}`, data);
+        }
+        
+        // Send to Cloudflare Analytics (if available and configured)
+        if (globalThis.cf && globalThis.cf.beacon) {
+            globalThis.cf.beacon.track(eventName, data);
+        }
+        
+        // Store locally for analytics dashboard
+        this.updateAnalyticsDashboard(event);
+    }
+    
+    createAnalyticsDashboard() {
+        // Real-time analytics display (if analytics section exists)
+        const analyticsSection = document.getElementById('analytics');
+        if (!analyticsSection) return;
+        
+        // Create real-time metrics display
+        const metricsContainer = document.createElement('div');
+        metricsContainer.className = 'live-analytics-metrics';
+        metricsContainer.innerHTML = `
+            <div class="metric-card">
+                <h4>Session Analytics</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Session ID:</span>
+                    <span class="metric-value" id="session-id">${this.sessionId}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time on Site:</span>
+                    <span class="metric-value" id="time-on-site">0:00</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Scroll Depth:</span>
+                    <span class="metric-value" id="scroll-depth">0%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Interactions:</span>
+                    <span class="metric-value" id="interaction-count">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Engagement Score:</span>
+                    <span class="metric-value" id="engagement-score">0</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <h4>Performance Metrics</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Page Load:</span>
+                    <span class="metric-value" id="page-load">Measuring...</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">LCP:</span>
+                    <span class="metric-value" id="lcp-metric">Measuring...</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">FID:</span>
+                    <span class="metric-value" id="fid-metric">Measuring...</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">CLS:</span>
+                    <span class="metric-value" id="cls-metric">Measuring...</span>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <h4>Recent Events</h4>
+                <div class="events-log" id="events-log">
+                    <div class="event-item">Analytics system initialized</div>
+                </div>
+            </div>
+        `;
+        
+        // Insert at the beginning of analytics section
+        analyticsSection.insertBefore(metricsContainer, analyticsSection.firstChild);
+        
+        // Start real-time updates
+        this.startDashboardUpdates();
+    }
+    
+    startDashboardUpdates() {
+        setInterval(() => {
+            this.updateDashboardMetrics();
+        }, 1000);
+    }
+    
+    updateDashboardMetrics() {
+        const timeOnSite = document.getElementById('time-on-site');
+        const scrollDepth = document.getElementById('scroll-depth');
+        const interactionCount = document.getElementById('interaction-count');
+        const engagementScore = document.getElementById('engagement-score');
+        
+        if (timeOnSite) {
+            const elapsed = Date.now() - this.startTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            timeOnSite.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        if (scrollDepth) {
+            scrollDepth.textContent = `${Math.round(this.userBehavior.scrollDepth)}%`;
+        }
+        
+        if (interactionCount) {
+            interactionCount.textContent = this.userBehavior.interactions.toString();
+        }
+        
+        if (engagementScore) {
+            const score = this.calculateEngagementScore(Date.now() - this.startTime);
+            engagementScore.textContent = score.toString();
+        }
+        
+        // Update performance metrics
+        if (this.performanceMetrics.loadTime) {
+            const pageLoad = document.getElementById('page-load');
+            if (pageLoad) pageLoad.textContent = `${Math.round(this.performanceMetrics.loadTime)}ms`;
+        }
+        
+        if (this.performanceMetrics.lcp) {
+            const lcpMetric = document.getElementById('lcp-metric');
+            if (lcpMetric) {
+                const lcp = Math.round(this.performanceMetrics.lcp);
+                lcpMetric.textContent = `${lcp}ms`;
+                
+                // Add performance status styling
+                lcpMetric.className = 'metric-value';
+                if (lcp > 4000) lcpMetric.classList.add('error');
+                else if (lcp > 2500) lcpMetric.classList.add('warning');
+            }
+        }
+        
+        if (this.performanceMetrics.fid !== undefined) {
+            const fidMetric = document.getElementById('fid-metric');
+            if (fidMetric) {
+                const fid = Math.round(this.performanceMetrics.fid);
+                fidMetric.textContent = `${fid}ms`;
+                
+                fidMetric.className = 'metric-value';
+                if (fid > 300) fidMetric.classList.add('error');
+                else if (fid > 100) fidMetric.classList.add('warning');
+            }
+        }
+        
+        if (this.performanceMetrics.cls !== undefined) {
+            const clsMetric = document.getElementById('cls-metric');
+            if (clsMetric) {
+                const cls = this.performanceMetrics.cls;
+                clsMetric.textContent = cls.toFixed(3);
+                
+                clsMetric.className = 'metric-value';
+                if (cls > 0.25) clsMetric.classList.add('error');
+                else if (cls > 0.1) clsMetric.classList.add('warning');
+            }
+        }
+    }
+    
+    updateAnalyticsDashboard(event) {
+        const eventsLog = document.getElementById('events-log');
+        if (eventsLog && this.events.length <= 50) { // Limit to last 50 events
+            const eventItem = document.createElement('div');
+            eventItem.className = 'event-item';
+            eventItem.innerHTML = `
+                <span class="event-time">${new Date(event.timestamp).toLocaleTimeString()}</span>
+                <span class="event-name">${event.name}</span>
+                ${Object.keys(event.data).length > 0 ? `<span class="event-data">${JSON.stringify(event.data)}</span>` : ''}
+            `;
+            eventsLog.insertBefore(eventItem, eventsLog.firstChild);
+            
+            // Remove old events
+            while (eventsLog.children.length > 10) {
+                eventsLog.removeChild(eventsLog.lastChild);
+            }
+        }
+    }
+    
+    // Public API for manual event tracking
+    track(eventName, data = {}) {
+        this.trackEvent(eventName, data);
+    }
+    
+    // Get analytics summary
+    getSummary() {
+        return {
+            sessionId: this.sessionId,
+            userId: this.userId,
+            timeOnSite: Date.now() - this.startTime,
+            events: this.events,
+            performance: this.performanceMetrics,
+            userBehavior: this.userBehavior,
+            engagementScore: this.calculateEngagementScore(Date.now() - this.startTime)
+        };
+    }
+    
+    // Export analytics data
+    exportData() {
+        const summary = this.getSummary();
+        const blob = new Blob([JSON.stringify(summary, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `portfolio-analytics-${this.sessionId}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+}
+
 // Initialize Visual Animation System
 const visualAnimations = new VisualAnimationSystem();
+
+// Initialize Mobile Optimization System
+const mobileOptimization = new MobileOptimizationSystem();
+
+// Initialize Portfolio Analytics System
+const portfolioAnalytics = new PortfolioAnalyticsSystem();
+
+// Make analytics available globally for debugging
+globalThis.portfolioAnalytics = portfolioAnalytics;
 
 console.log('Portfolio enhancements loaded successfully! 🚀');
 console.log('Press "T" to toggle theme');
 console.log('Press Ctrl/Cmd + P to print resume');
 console.log('Visual animations initialized! ✨');
+console.log('Mobile optimizations active! 📱');
+console.log('Analytics system tracking user behavior! 📊');
+console.log('Access analytics data with: portfolioAnalytics.getSummary()');
