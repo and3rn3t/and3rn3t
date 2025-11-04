@@ -8633,58 +8633,79 @@ class ErrorTracker {
     }
     
     setupConsoleErrorTracking() {
+        // Store original console.error
+        this.originalConsoleError = console.error;
+        
         // Wrap console.error to track console errors
-        const originalError = console.error;
+        const originalError = this.originalConsoleError;
         console.error = (...args) => {
-            const error = {
-                type: 'console_error',
-                message: args.map(arg => String(arg)).join(' '),
-                arguments: args,
-                timestamp: Date.now(),
-                url: window.location.href,
-                stack: new Error().stack
-            };
-            
-            this.trackError(error, false); // Don't show notification for console errors
+            // Only track if not already in tracking (prevent recursion)
+            if (!this._isTracking) {
+                const error = {
+                    type: 'console_error',
+                    message: args.map(arg => String(arg)).join(' '),
+                    arguments: args,
+                    timestamp: Date.now(),
+                    url: window.location.href,
+                    stack: new Error().stack
+                };
+                
+                this.trackError(error, false); // Don't show notification for console errors
+            }
             
             originalError.apply(console, args);
         };
     }
     
     trackError(error, showNotification = true) {
-        // Add to errors array
-        this.errors.push(error);
+        // Prevent recursion
+        if (this._isTracking) return;
+        this._isTracking = true;
         
-        // Limit array size
-        if (this.errors.length > this.maxErrors) {
-            this.errors = this.errors.slice(-this.maxErrors);
+        try {
+            // Add to errors array
+            this.errors.push(error);
+            
+            // Limit array size
+            if (this.errors.length > this.maxErrors) {
+                this.errors = this.errors.slice(-this.maxErrors);
+            }
+            
+            // Count error occurrences
+            const errorKey = `${error.type}:${error.message}`;
+            const count = (this.errorCounts.get(errorKey) || 0) + 1;
+            this.errorCounts.set(errorKey, count);
+            
+            // Log error using original console.error to prevent recursion
+            if (this.originalConsoleError) {
+                this.originalConsoleError.call(console, `[ErrorTracker] ${error.type}:`, error.message);
+            }
+        
+            // Report to analytics
+            if (globalThis.enhancedAnalytics) {
+                globalThis.enhancedAnalytics.trackEvent('error_occurred', {
+                    type: error.type,
+                    message: error.message,
+                    count
+                });
+            }
+            
+            // Show user-friendly notification (only for first occurrence)
+            if (showNotification && count === 1 && !this.reportedErrors.has(errorKey)) {
+                this.reportedErrors.add(errorKey);
+                this.showErrorNotification(error);
+            }
+            
+            // Store in localStorage for debugging
+            this.saveErrorLog();
+        } catch (trackingError) {
+            // If error tracking fails, log to original console
+            if (this.originalConsoleError) {
+                this.originalConsoleError.call(console, '[ErrorTracker] Failed to track error:', trackingError);
+            }
+        } finally {
+            this._isTracking = false;
         }
-        
-        // Count error occurrences
-        const errorKey = `${error.type}:${error.message}`;
-        const count = (this.errorCounts.get(errorKey) || 0) + 1;
-        this.errorCounts.set(errorKey, count);
-        
-        // Log error
-        console.error(`[ErrorTracker] ${error.type}:`, error.message);
-        
-        // Report to analytics
-        if (globalThis.enhancedAnalytics) {
-            globalThis.enhancedAnalytics.trackEvent('error_occurred', {
-                type: error.type,
-                message: error.message,
-                count
-            });
-        }
-        
-        // Show user-friendly notification (only for first occurrence)
-        if (showNotification && count === 1 && !this.reportedErrors.has(errorKey)) {
-            this.reportedErrors.add(errorKey);
-            this.showErrorNotification(error);
-        }
-        
-        // Store in localStorage for debugging
-        this.saveErrorLog();
     }
     
     showErrorNotification(error) {

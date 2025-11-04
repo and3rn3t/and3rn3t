@@ -1,9 +1,9 @@
 // Service Worker for Matthew Anderson's Portfolio
-// Version: 1.0.0
+// Version: 1.1.0
 
-const CACHE_NAME = 'portfolio-v1.0.0';
-const RUNTIME_CACHE = 'portfolio-runtime-v1';
-const API_CACHE = 'portfolio-api-v1';
+const CACHE_NAME = 'portfolio-v1.1.0';
+const RUNTIME_CACHE = 'portfolio-runtime-v1.1';
+const API_CACHE = 'portfolio-api-v1.1';
 
 // Assets to cache immediately on install
 const PRECACHE_ASSETS = [
@@ -77,6 +77,20 @@ self.addEventListener('fetch', (event) => {
 
     // Skip chrome-extension and other non-http(s) requests
     if (!url.protocol.startsWith('http')) {
+        return;
+    }
+
+    // Skip external analytics (Cloudflare, Google Analytics, etc.)
+    const externalAnalytics = [
+        'cloudflareinsights.com',
+        'cloudflare.com/beacon',
+        'google-analytics.com',
+        'googletagmanager.com',
+        'analytics.google.com'
+    ];
+    
+    if (externalAnalytics.some(domain => url.hostname.includes(domain))) {
+        // Let browser handle these directly, no caching
         return;
     }
 
@@ -159,16 +173,26 @@ async function staleWhileRevalidateStrategy(request, cacheName) {
     
     const fetchPromise = fetch(request)
         .then((networkResponse) => {
-            if (networkResponse.ok) {
+            if (networkResponse && networkResponse.ok) {
                 cache.put(request, networkResponse.clone());
             }
             return networkResponse;
         })
         .catch((error) => {
             console.log('[Service Worker] Network request failed:', error);
+            return null; // Return null instead of undefined
         });
     
-    return cachedResponse || fetchPromise || getOfflineFallback(request);
+    // Return cached response immediately if available
+    if (cachedResponse) {
+        // Update cache in background
+        fetchPromise.catch(() => {}); // Silently fail background update
+        return cachedResponse;
+    }
+    
+    // Wait for network response or return fallback
+    const networkResponse = await fetchPromise;
+    return networkResponse || getOfflineFallback(request);
 }
 
 // Get offline fallback page
