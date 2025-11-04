@@ -9828,9 +9828,9 @@ class BlogManager {
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
         script.setAttribute('data-repo', 'and3rn3t/and3rn3t');
-        script.setAttribute('data-repo-id', 'YOUR_REPO_ID'); // Replace with actual repo ID
+        script.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnkzOTA3NzE2NjY='); // Replace with actual repo ID
         script.setAttribute('data-category', 'Blog Comments');
-        script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID'); // Replace with actual category ID
+        script.setAttribute('data-category-id', 'DIC_kwDOF0qz0s4CxcKr'); // Replace with actual category ID
         script.setAttribute('data-mapping', 'pathname');
         script.setAttribute('data-strict', '0');
         script.setAttribute('data-reactions-enabled', '1');

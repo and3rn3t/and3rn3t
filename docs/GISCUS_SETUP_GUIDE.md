@@ -79,9 +79,9 @@ With your actual IDs from step 4.
 
 ```javascript
 'data-repo': 'and3rn3t/and3rn3t'           // Your repository
-'data-repo-id': 'YOUR_REPO_ID'              // Get from giscus.app
+'data-repo-id': 'MDEwOlJlcG9zaXRvcnkzOTA3NzE2NjY='              // Get from giscus.app
 'data-category': 'Blog Comments'            // Discussion category name
-'data-category-id': 'YOUR_CATEGORY_ID'      // Get from giscus.app
+'data-category-id': 'DIC_kwDOF0qz0s4CxcKr'      // Get from giscus.app
 'data-mapping': 'pathname'                  // Map by URL pathname
 'data-strict': '0'                          // Create discussion if missing
 'data-reactions-enabled': '1'               // Enable reactions
