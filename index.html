@@ -222,6 +222,59 @@
         </div>
     </nav>
 
+    <!-- Global Search Modal -->
+    <div class="global-search-modal" id="global-search-modal">
+        <div class="global-search-content">
+            <div class="global-search-header">
+                <div class="global-search-input-container">
+                    <i class="fas fa-search global-search-icon"></i>
+                    <input type="text" id="global-search-input" 
+                           placeholder="Search entire portfolio... (Ctrl+K)"
+                           class="global-search-input"
+                           autocomplete="off"
+                           spellcheck="false">
+                    <button class="global-search-close" id="global-search-close" 
+                            aria-label="Close global search" title="Close search (Esc)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-categories">
+                    <button class="search-category active" data-category="all">
+                        <i class="fas fa-globe"></i> All
+                    </button>
+                    <button class="search-category" data-category="projects">
+                        <i class="fas fa-code"></i> Projects
+                    </button>
+                    <button class="search-category" data-category="skills">
+                        <i class="fas fa-cogs"></i> Skills
+                    </button>
+                    <button class="search-category" data-category="content">
+                        <i class="fas fa-file-alt"></i> Content
+                    </button>
+                </div>
+            </div>
+            <div class="global-search-results" id="global-search-results">
+                <div class="search-results-empty" id="search-results-empty">
+                    <i class="fas fa-search-plus"></i>
+                    <h3>Search Your Portfolio</h3>
+                    <p>Find projects, skills, technologies, and content across the entire portfolio.</p>
+                    <div class="search-tips">
+                        <div class="search-tip">
+                            <kbd>↑</kbd><kbd>↓</kbd> Navigate results
+                        </div>
+                        <div class="search-tip">
+                            <kbd>Enter</kbd> Open result
+                        </div>
+                        <div class="search-tip">
+                            <kbd>Esc</kbd> Close search
+                        </div>
+                    </div>
+                </div>
+                <div class="search-results-content" id="search-results-content"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Keyboard Shortcuts Help -->
     <div class="keyboard-help" id="keyboard-help">
         <div class="keyboard-help-content">
@@ -507,10 +560,59 @@
                         <button id="reset-filters" class="reset-btn" title="Reset all filters">
                             <i class="fas fa-undo"></i> Reset
                         </button>
+                        <button id="save-search" class="save-search-btn hidden" title="Save current search">
+                            <i class="fas fa-bookmark"></i> Save
+                        </button>
                     </div>
                 </div>
             </div>
             
+            <!-- Advanced Search Results -->
+            <div class="search-results-summary hidden" id="search-results-summary">
+                <div class="search-summary-content">
+                    <h3 class="search-summary-title">
+                        <i class="fas fa-search"></i>
+                        Search Results
+                    </h3>
+                    <div class="search-summary-stats">
+                        <span class="search-query" id="search-query-display"></span>
+                        <div class="search-metrics">
+                            <span class="metric">
+                                <i class="fas fa-project-diagram"></i>
+                                <span id="filtered-count">0</span> projects found
+                            </span>
+                            <span class="metric">
+                                <i class="fas fa-tags"></i>
+                                <span id="tech-count">0</span> technologies
+                            </span>
+                            <span class="metric">
+                                <i class="fas fa-star"></i>
+                                <span id="total-stars">0</span> total stars
+                            </span>
+                        </div>
+                    </div>
+                    <div class="search-suggestions" id="search-suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Saved Searches -->
+            <div class="saved-searches hidden" id="saved-searches">
+                <h4 class="saved-searches-title">
+                    <i class="fas fa-bookmark"></i>
+                    Saved Searches
+                </h4>
+                <div class="saved-searches-list" id="saved-searches-list"></div>
+            </div>
+
+            <!-- Related Projects -->
+            <div class="related-projects hidden" id="related-projects">
+                <h4 class="related-title">
+                    <i class="fas fa-link"></i>
+                    Related Projects
+                </h4>
+                <div class="related-projects-list" id="related-projects-list"></div>
+            </div>
+
             <!-- Top Starred Projects Highlight -->
             <div class="top-projects-highlight">
                 <h3 class="subsection-title">⭐ Top Starred Projects</h3>

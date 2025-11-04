@@ -1088,9 +1088,522 @@ class EnhancedNavigation {
     }
 }
 
+// Advanced Content Discovery System
+class ContentDiscoverySystem {
+    constructor() {
+        this.globalSearchModal = document.getElementById('global-search-modal');
+        this.globalSearchInput = document.getElementById('global-search-input');
+        this.globalSearchClose = document.getElementById('global-search-close');
+        this.globalSearchResults = document.getElementById('global-search-results');
+        this.searchResultsContent = document.getElementById('search-results-content');
+        this.searchResultsEmpty = document.getElementById('search-results-empty');
+        this.searchCategories = document.querySelectorAll('.search-category');
+        
+        this.currentCategory = 'all';
+        this.searchTimeout = null;
+        this.selectedResultIndex = -1;
+        this.searchResults = [];
+        this.searchIndex = {};
+        
+        // Enhanced project search elements
+        this.searchResultsSummary = document.getElementById('search-results-summary');
+        this.savedSearches = document.getElementById('saved-searches');
+        this.relatedProjects = document.getElementById('related-projects');
+        this.saveSearchBtn = document.getElementById('save-search');
+        
+        this.init();
+    }
+    
+    init() {
+        this.buildSearchIndex();
+        this.bindGlobalSearchEvents();
+        this.bindProjectSearchEnhancements();
+        this.loadSavedSearches();
+        
+        // Global keyboard shortcut for search
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                this.openGlobalSearch();
+            }
+        });
+    }
+    
+    buildSearchIndex() {
+        this.searchIndex = {
+            projects: [],
+            skills: [],
+            content: [],
+            technologies: new Set(),
+            categories: new Set()
+        };
+        
+        // Index projects (will be populated when GitHub data loads)
+        this.indexProjects();
+        
+        // Index skills
+        this.indexSkills();
+        
+        // Index general content
+        this.indexContent();
+    }
+    
+    indexProjects() {
+        // This will be called after project data is loaded
+        // For now, create placeholder structure
+        const projectElements = document.querySelectorAll('.project-card');
+        projectElements.forEach(card => {
+            const title = card.querySelector('h3, .project-title')?.textContent || '';
+            const description = card.querySelector('p, .project-description')?.textContent || '';
+            const tech = card.querySelector('.tech-stack')?.textContent || '';
+            
+            if (title) {
+                this.searchIndex.projects.push({
+                    title,
+                    description,
+                    technologies: tech.split(',').map(t => t.trim()),
+                    element: card,
+                    type: 'project',
+                    url: card.querySelector('a')?.href || '#projects'
+                });
+            }
+        });
+    }
+    
+    indexSkills() {
+        const skillElements = document.querySelectorAll('.skill-item, .skill-category h3');
+        skillElements.forEach(skill => {
+            const text = skill.textContent.trim();
+            if (text) {
+                this.searchIndex.skills.push({
+                    title: text,
+                    description: `${text} skill and expertise`,
+                    type: 'skill',
+                    element: skill,
+                    url: '#skills'
+                });
+            }
+        });
+    }
+    
+    indexContent() {
+        // Index section headings and important content
+        const headings = document.querySelectorAll('h1, h2, h3, .section-title');
+        headings.forEach(heading => {
+            const text = heading.textContent.trim();
+            const section = heading.closest('section');
+            const sectionId = section?.id || '';
+            
+            if (text && sectionId) {
+                this.searchIndex.content.push({
+                    title: text,
+                    description: `Navigate to ${text} section`,
+                    type: 'content',
+                    element: heading,
+                    url: `#${sectionId}`
+                });
+            }
+        });
+    }
+    
+    bindGlobalSearchEvents() {
+        if (!this.globalSearchInput) return;
+        
+        // Search input
+        this.globalSearchInput.addEventListener('input', (e) => {
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout = setTimeout(() => {
+                this.performGlobalSearch(e.target.value);
+            }, 200);
+        });
+        
+        // Keyboard navigation
+        this.globalSearchInput.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    this.navigateResults(1);
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    this.navigateResults(-1);
+                    break;
+                case 'Enter':
+                    e.preventDefault();
+                    this.selectResult();
+                    break;
+                case 'Escape':
+                    this.closeGlobalSearch();
+                    break;
+            }
+        });
+        
+        // Category filters
+        this.searchCategories.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.searchCategories.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.currentCategory = e.target.dataset.category;
+                this.performGlobalSearch(this.globalSearchInput.value);
+            });
+        });
+        
+        // Close button
+        if (this.globalSearchClose) {
+            this.globalSearchClose.addEventListener('click', () => {
+                this.closeGlobalSearch();
+            });
+        }
+        
+        // Close on overlay click
+        this.globalSearchModal.addEventListener('click', (e) => {
+            if (e.target === this.globalSearchModal) {
+                this.closeGlobalSearch();
+            }
+        });
+    }
+    
+    bindProjectSearchEnhancements() {
+        const projectSearch = document.getElementById('project-search');
+        if (projectSearch && this.saveSearchBtn) {
+            // Show/hide save button based on search activity
+            projectSearch.addEventListener('input', (e) => {
+                const hasQuery = e.target.value.trim().length > 0;
+                this.saveSearchBtn.classList.toggle('hidden', !hasQuery);
+                
+                if (hasQuery) {
+                    this.showSearchSummary(e.target.value);
+                    this.showRelatedProjects(e.target.value);
+                } else {
+                    this.hideEnhancedResults();
+                }
+            });
+            
+            // Save search functionality
+            this.saveSearchBtn.addEventListener('click', () => {
+                this.saveCurrentSearch();
+            });
+        }
+    }
+    
+    openGlobalSearch() {
+        this.globalSearchModal.classList.add('visible');
+        this.globalSearchInput.focus();
+        
+        // Track analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'global_search_opened', {
+                event_category: 'search'
+            });
+        }
+    }
+    
+    closeGlobalSearch() {
+        this.globalSearchModal.classList.remove('visible');
+        this.globalSearchInput.value = '';
+        this.clearSearchResults();
+        this.selectedResultIndex = -1;
+    }
+    
+    performGlobalSearch(query) {
+        if (!query.trim()) {
+            this.clearSearchResults();
+            return;
+        }
+        
+        const results = this.searchAllContent(query, this.currentCategory);
+        this.displayGlobalSearchResults(results);
+        
+        // Track search analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'search', {
+                search_term: query,
+                search_category: this.currentCategory
+            });
+        }
+    }
+    
+    searchAllContent(query, category = 'all') {
+        const queryLower = query.toLowerCase();
+        const results = [];
+        
+        // Define search sources based on category
+        const searchSources = {
+            all: ['projects', 'skills', 'content'],
+            projects: ['projects'],
+            skills: ['skills'],
+            content: ['content']
+        };
+        
+        const sources = searchSources[category] || searchSources.all;
+        
+        sources.forEach(source => {
+            this.searchIndex[source].forEach(item => {
+                const titleMatch = item.title.toLowerCase().includes(queryLower);
+                const descMatch = item.description.toLowerCase().includes(queryLower);
+                const techMatch = item.technologies?.some(tech => 
+                    tech.toLowerCase().includes(queryLower)
+                ) || false;
+                
+                if (titleMatch || descMatch || techMatch) {
+                    const relevance = this.calculateRelevance(item, queryLower);
+                    results.push({ ...item, relevance });
+                }
+            });
+        });
+        
+        return results.sort((a, b) => b.relevance - a.relevance).slice(0, 10);
+    }
+    
+    calculateRelevance(item, query) {
+        let score = 0;
+        const title = item.title.toLowerCase();
+        const description = item.description.toLowerCase();
+        
+        // Exact title match
+        if (title === query) score += 100;
+        // Title starts with query
+        else if (title.startsWith(query)) score += 80;
+        // Title contains query
+        else if (title.includes(query)) score += 60;
+        
+        // Description matches
+        if (description.includes(query)) score += 30;
+        
+        // Technology matches
+        if (item.technologies?.some(tech => tech.toLowerCase().includes(query))) {
+            score += 40;
+        }
+        
+        // Boost certain types
+        if (item.type === 'project') score += 20;
+        if (item.type === 'skill') score += 10;
+        
+        return score;
+    }
+    
+    displayGlobalSearchResults(results) {
+        this.searchResults = results;
+        this.selectedResultIndex = -1;
+        
+        if (results.length === 0) {
+            this.searchResultsContent.style.display = 'none';
+            this.searchResultsEmpty.style.display = 'block';
+            return;
+        }
+        
+        this.searchResultsEmpty.style.display = 'none';
+        this.searchResultsContent.style.display = 'block';
+        
+        const html = results.map((result, index) => `
+            <div class="search-result-item" data-index="${index}" data-url="${result.url}">
+                <div class="search-result-icon">
+                    <i class="fas ${this.getResultIcon(result.type)}"></i>
+                </div>
+                <div class="search-result-content">
+                    <div class="search-result-title">${result.title}</div>
+                    <div class="search-result-description">${result.description}</div>
+                    <div class="search-result-meta">
+                        <span class="search-result-category">${result.type}</span>
+                        ${result.technologies ? `<span>• ${result.technologies.slice(0, 3).join(', ')}</span>` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        this.searchResultsContent.innerHTML = html;
+        
+        // Bind click events
+        this.searchResultsContent.querySelectorAll('.search-result-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const url = item.dataset.url;
+                this.navigateToResult(url);
+            });
+        });
+    }
+    
+    getResultIcon(type) {
+        const icons = {
+            project: 'fa-code',
+            skill: 'fa-cogs',
+            content: 'fa-file-alt'
+        };
+        return icons[type] || 'fa-search';
+    }
+    
+    navigateResults(direction) {
+        if (this.searchResults.length === 0) return;
+        
+        // Remove previous highlight
+        const previous = this.searchResultsContent.querySelector('.highlighted');
+        if (previous) previous.classList.remove('highlighted');
+        
+        // Update index
+        this.selectedResultIndex += direction;
+        if (this.selectedResultIndex < 0) this.selectedResultIndex = this.searchResults.length - 1;
+        if (this.selectedResultIndex >= this.searchResults.length) this.selectedResultIndex = 0;
+        
+        // Highlight new result
+        const current = this.searchResultsContent.querySelector(`[data-index="${this.selectedResultIndex}"]`);
+        if (current) {
+            current.classList.add('highlighted');
+            current.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+    }
+    
+    selectResult() {
+        if (this.selectedResultIndex >= 0 && this.searchResults[this.selectedResultIndex]) {
+            const result = this.searchResults[this.selectedResultIndex];
+            this.navigateToResult(result.url);
+        }
+    }
+    
+    navigateToResult(url) {
+        this.closeGlobalSearch();
+        
+        if (url.startsWith('#')) {
+            // Internal navigation
+            const target = document.querySelector(url);
+            if (target) {
+                const offsetTop = target.offsetTop - 70;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            // External navigation
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+    }
+    
+    clearSearchResults() {
+        this.searchResultsContent.innerHTML = '';
+        this.searchResultsContent.style.display = 'none';
+        this.searchResultsEmpty.style.display = 'block';
+    }
+    
+    showSearchSummary(query) {
+        // Implementation for project search summary
+        if (this.searchResultsSummary) {
+            this.searchResultsSummary.classList.remove('hidden');
+            // Update summary content based on current filters and results
+        }
+    }
+    
+    showRelatedProjects(query) {
+        // Implementation for related projects
+        if (this.relatedProjects) {
+            this.relatedProjects.classList.remove('hidden');
+            // Show projects related to current search
+        }
+    }
+    
+    hideEnhancedResults() {
+        this.searchResultsSummary?.classList.add('hidden');
+        this.relatedProjects?.classList.add('hidden');
+    }
+    
+    saveCurrentSearch() {
+        const projectSearch = document.getElementById('project-search');
+        if (!projectSearch?.value.trim()) return;
+        
+        const search = {
+            query: projectSearch.value,
+            timestamp: Date.now(),
+            filters: {
+                category: document.getElementById('category-filter')?.value || '',
+                technology: document.getElementById('technology-filter')?.value || '',
+                status: document.getElementById('status-filter')?.value || ''
+            }
+        };
+        
+        let savedSearches = JSON.parse(localStorage.getItem('portfolio_saved_searches') || '[]');
+        
+        // Avoid duplicates
+        if (!savedSearches.some(s => s.query === search.query)) {
+            savedSearches.unshift(search);
+            savedSearches = savedSearches.slice(0, 10); // Keep only 10 most recent
+            localStorage.setItem('portfolio_saved_searches', JSON.stringify(savedSearches));
+            this.loadSavedSearches();
+        }
+    }
+    
+    loadSavedSearches() {
+        const savedSearches = JSON.parse(localStorage.getItem('portfolio_saved_searches') || '[]');
+        if (savedSearches.length > 0 && this.savedSearches) {
+            this.savedSearches.classList.remove('hidden');
+            // Render saved searches
+            const list = this.savedSearches.querySelector('#saved-searches-list');
+            if (list) {
+                list.innerHTML = savedSearches.map(search => `
+                    <div class="saved-search-item" data-search='${JSON.stringify(search)}'>
+                        ${search.query}
+                    </div>
+                `).join('');
+                
+                // Bind click events
+                list.querySelectorAll('.saved-search-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const search = JSON.parse(item.dataset.search);
+                        this.applySavedSearch(search);
+                    });
+                });
+            }
+        }
+    }
+    
+    applySavedSearch(search) {
+        const projectSearch = document.getElementById('project-search');
+        if (projectSearch) {
+            projectSearch.value = search.query;
+            projectSearch.dispatchEvent(new Event('input'));
+        }
+        
+        // Apply filters
+        Object.entries(search.filters).forEach(([key, value]) => {
+            const element = document.getElementById(`${key}-filter`);
+            if (element && value) {
+                element.value = value;
+                element.dispatchEvent(new Event('change'));
+            }
+        });
+    }
+    
+    // Method to be called after GitHub projects load to reindex
+    reindexProjects(projectsData) {
+        this.searchIndex.projects = [];
+        
+        projectsData.forEach(project => {
+            this.searchIndex.projects.push({
+                title: project.displayName || project.name,
+                description: project.description || project.longDescription || '',
+                technologies: project.technologies || project.topics || [],
+                type: 'project',
+                url: project.html_url || project.homepage || '#projects',
+                stars: project.stargazers_count || 0,
+                category: project.category || 'Other'
+            });
+            
+            // Add to technology and category sets
+            if (project.technologies) {
+                project.technologies.forEach(tech => this.searchIndex.technologies.add(tech));
+            }
+            if (project.category) {
+                this.searchIndex.categories.add(project.category);
+            }
+        });
+    }
+}
+
 // Initialize enhanced navigation
 function initializeEnhancedNavigation() {
     new EnhancedNavigation();
+}
+
+// Initialize content discovery system
+function initializeContentDiscovery() {
+    new ContentDiscoverySystem();
 }
 
 // Smooth scrolling and navigation
@@ -1140,6 +1653,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize enhanced navigation features
     initializeEnhancedNavigation();
+
+    // Initialize content discovery system
+    initializeContentDiscovery();
 
     // Initialize API optimizations
     preloadCriticalData();
