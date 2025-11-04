@@ -679,7 +679,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load all GitHub data with optimized coordination
     console.log('🚀 Starting GitHub data load...');
-    loadAllGitHubData();
+    console.log('🔧 DEBUG: About to call loadAllGitHubData()');
+    loadAllGitHubData().catch(error => {
+        console.error('❌ Failed to load GitHub data:', error);
+    });
     loadGitHubBadges(); // This uses external services, so keep separate
 
     // Intersection Observer for animations
@@ -1074,6 +1077,8 @@ function enhancedProjectLoad() {
 
 // Parallel loading of all GitHub data with coordination
 async function loadAllGitHubData() {
+    console.log('🎯 loadAllGitHubData() function started');
+    
     const loadingIndicators = {
         projects: document.querySelector('.projects-loading'),
         stats: document.querySelector('.stats-loading'), 
@@ -1097,6 +1102,7 @@ async function loadAllGitHubData() {
         });
         
         // Load core data in parallel with smart coordination
+        console.log('🔄 Starting Promise.allSettled with loadGitHubStats...');
         const results = await Promise.allSettled([
             loadGitHubProjects(),
             loadGitHubStats(),
@@ -1108,8 +1114,24 @@ async function loadAllGitHubData() {
         
         // Check results and log any failures
         const failed = results.filter(result => result.status === 'rejected');
+        const successful = results.filter(result => result.status === 'fulfilled');
+        
+        console.log('📊 Promise.allSettled results:', {
+            total: results.length,
+            successful: successful.length,
+            failed: failed.length,
+            results: results.map((r, i) => ({
+                index: i,
+                status: r.status,
+                error: r.status === 'rejected' ? r.reason?.message : undefined
+            }))
+        });
+        
         if (failed.length > 0) {
             console.warn(`${failed.length} GitHub data requests failed:`, failed);
+            for (const failure of failed) {
+                console.error('Failed function details:', failure.reason);
+            }
         }
         
         console.log(`✅ Loaded ${results.length - failed.length}/${results.length} GitHub data sections`);
@@ -1176,7 +1198,19 @@ async function loadGitHubStats() {
     const contributionGraph = document.getElementById('contribution-graph');
     const languageStats = document.getElementById('main-language-stats');
     
-    console.log('Elements found:', { statsGrid: !!statsGrid, contributionGraph: !!contributionGraph, languageStats: !!languageStats });
+    console.log('DOM Elements found:', { 
+        statsGrid: !!statsGrid, 
+        contributionGraph: !!contributionGraph, 
+        languageStats: !!languageStats,
+        statsGridId: statsGrid?.id,
+        contributionGraphId: contributionGraph?.id,
+        languageStatsId: languageStats?.id
+    });
+    
+    if (!statsGrid) {
+        console.error('❌ stats-grid element not found in DOM');
+        return;
+    }
     
     try {
         // Fetch user data and repositories using optimized API
@@ -1187,17 +1221,22 @@ async function loadGitHubStats() {
         ]);
         
         console.log('✅ GitHub data received:', { 
-            user: userData.login, 
-            repoCount: repos.length,
-            usingCache: !!githubAPI.cachedData 
+            user: userData?.login, 
+            userDataKeys: Object.keys(userData || {}),
+            repoCount: repos?.length,
+            usingCache: !!githubAPI.cachedData,
+            userData: userData,
+            firstRepo: repos?.[0]?.name
         });
         
         // Calculate total stars and forks
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
         const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
         
+        console.log('📈 Calculated stats:', { totalStars, totalForks });
+        
         // Display stats
-        statsGrid.innerHTML = `
+        const statsHTML = `
             <div class="stat-card">
                 <i class="fas fa-code-branch"></i>
                 <div class="stat-content">
@@ -1242,6 +1281,9 @@ async function loadGitHubStats() {
             </div>
         `;
         
+        console.log('🎨 Setting stats HTML to statsGrid element:', statsHTML.substring(0, 100) + '...');
+        statsGrid.innerHTML = statsHTML;
+        
         // Load language statistics
         loadLanguageStats(repos);
         
@@ -1253,16 +1295,24 @@ async function loadGitHubStats() {
         `;
         
     } catch (error) {
-        console.error('Error loading GitHub stats:', error);
-        statsGrid.innerHTML = '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
-        contributionGraph.innerHTML = '';
-        languageStats.innerHTML = '';
+        console.error('❌ Error loading GitHub stats:', error);
+        console.error('Error stack:', error.stack);
+        if (statsGrid) {
+            statsGrid.innerHTML = '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
+        }
+        if (contributionGraph) {
+            contributionGraph.innerHTML = '';
+        }
+        if (languageStats) {
+            languageStats.innerHTML = '';
+        }
     }
 }
 
 // Load language statistics
 function loadLanguageStats(repos) {
-    const languageStats = document.getElementById('language-stats');
+    const languageStats = document.getElementById('main-language-stats');
+    console.log('🏷️ Loading language stats for element:', languageStats?.id, 'with', repos?.length, 'repos');
     
     // Count languages across all repos
     const languages = {};
@@ -1298,6 +1348,13 @@ function loadLanguageStats(repos) {
         'Kotlin': '#F18E33',
         'Rust': '#dea584'
     };
+    
+    console.log('📊 Language stats computed:', { sortedLanguages, total, languageStatsElement: !!languageStats });
+    
+    if (!languageStats) {
+        console.error('❌ main-language-stats element not found');
+        return;
+    }
     
     languageStats.innerHTML = `
         <div class="language-bars">
