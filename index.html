@@ -170,6 +170,11 @@
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -204,6 +209,71 @@
             </div>
         </div>
     </nav>
+
+    <!-- Floating Table of Contents -->
+    <nav class="floating-toc" id="floating-toc" aria-label="Table of Contents">
+        <button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc-content">
+            <i class="fas fa-list"></i>
+            <span class="sr-only">Toggle Table of Contents</span>
+        </button>
+        <div class="toc-content" id="toc-content">
+            <h3 class="toc-title">Quick Navigation</h3>
+            <ul class="toc-links"></ul>
+        </div>
+    </nav>
+
+    <!-- Keyboard Shortcuts Help -->
+    <div class="keyboard-help" id="keyboard-help">
+        <div class="keyboard-help-content">
+            <h3>⌨️ Keyboard Shortcuts</h3>
+            <div class="shortcut-grid">
+                <div class="shortcut-item">
+                    <kbd>?</kbd>
+                    <span>Show/hide this help</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>T</kbd>
+                    <span>Toggle theme</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>Ctrl</kbd> + <kbd>P</kbd>
+                    <span>Print resume</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>J</kbd>
+                    <span>Scroll down</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>K</kbd>
+                    <span>Scroll up</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>G</kbd> + <kbd>H</kbd>
+                    <span>Go to home</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>G</kbd> + <kbd>A</kbd>
+                    <span>Go to about</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>G</kbd> + <kbd>P</kbd>
+                    <span>Go to projects</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>G</kbd> + <kbd>C</kbd>
+                    <span>Go to contact</span>
+                </div>
+                <div class="shortcut-item">
+                    <kbd>Esc</kbd>
+                    <span>Close dialogs</span>
+                </div>
+            </div>
+            <button class="keyboard-help-close" id="keyboard-help-close">
+                <i class="fas fa-times"></i>
+                <span class="sr-only">Close help</span>
+            </button>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">

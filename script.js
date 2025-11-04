@@ -820,6 +820,279 @@ class PerformanceOptimizer {
 // Initialize performance optimizer
 const performanceOptimizer = new PerformanceOptimizer();
 
+// Enhanced Navigation System
+class EnhancedNavigation {
+    constructor() {
+        this.scrollProgress = document.getElementById('scroll-progress-bar');
+        this.floatingToc = document.getElementById('floating-toc');
+        this.tocToggle = document.getElementById('toc-toggle');
+        this.tocContent = document.getElementById('toc-content');
+        this.tocLinks = document.querySelector('.toc-links');
+        this.keyboardHelp = document.getElementById('keyboard-help');
+        
+        this.keySequence = '';
+        this.keyTimeout = null;
+        this.sections = [];
+        
+        this.init();
+    }
+    
+    init() {
+        this.initScrollProgress();
+        this.initFloatingToc();
+        this.initKeyboardShortcuts();
+        this.initSectionTracking();
+        
+        // Show floating TOC after user scrolls past hero
+        window.addEventListener('scroll', () => {
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+            if (window.scrollY > heroHeight * 0.5) {
+                this.floatingToc.classList.add('visible');
+            } else {
+                this.floatingToc.classList.remove('visible');
+            }
+        });
+    }
+    
+    initScrollProgress() {
+        if (!this.scrollProgress) return;
+        
+        const updateProgress = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            
+            this.scrollProgress.style.width = `${Math.min(progress, 100)}%`;
+        };
+        
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress(); // Initial call
+    }
+    
+    initFloatingToc() {
+        if (!this.tocToggle || !this.tocContent || !this.tocLinks) return;
+        
+        // Populate TOC with navigation items
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            const text = link.textContent;
+            
+            if (href.startsWith('#')) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = href;
+                a.textContent = text;
+                a.addEventListener('click', this.handleTocClick.bind(this));
+                li.appendChild(a);
+                this.tocLinks.appendChild(li);
+            }
+        });
+        
+        // Toggle TOC
+        this.tocToggle.addEventListener('click', () => {
+            const isExpanded = this.tocToggle.getAttribute('aria-expanded') === 'true';
+            this.tocToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Close TOC when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.floatingToc.contains(e.target)) {
+                this.tocToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+    
+    handleTocClick(e) {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 70;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+            
+            // Close TOC after navigation
+            this.tocToggle.setAttribute('aria-expanded', 'false');
+        }
+    }
+    
+    initSectionTracking() {
+        // Track which section is currently in view
+        const sections = document.querySelectorAll('section[id]');
+        this.sections = Array.from(sections);
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.id;
+                const tocLink = this.tocLinks.querySelector(`a[href="#${id}"]`);
+                
+                if (entry.isIntersecting) {
+                    // Remove active class from all TOC links
+                    this.tocLinks.querySelectorAll('a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    // Add active class to current section
+                    if (tocLink) {
+                        tocLink.classList.add('active');
+                    }
+                }
+            });
+        }, {
+            rootMargin: '-20% 0px -80% 0px'
+        });
+        
+        this.sections.forEach(section => observer.observe(section));
+    }
+    
+    initKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Handle escape key
+            if (e.key === 'Escape') {
+                this.closeAllDialogs();
+                return;
+            }
+            
+            // Ignore shortcuts when typing in inputs
+            if (e.target.matches('input, textarea, select, [contenteditable]')) {
+                return;
+            }
+            
+            // Handle single key shortcuts
+            switch (e.key.toLowerCase()) {
+                case '?':
+                    e.preventDefault();
+                    this.toggleKeyboardHelp();
+                    break;
+                case 't':
+                    e.preventDefault();
+                    this.toggleTheme();
+                    break;
+                case 'j':
+                    e.preventDefault();
+                    this.scrollDown();
+                    break;
+                case 'k':
+                    e.preventDefault();
+                    this.scrollUp();
+                    break;
+                default:
+                    this.handleKeySequence(e.key.toLowerCase());
+            }
+            
+            // Handle Ctrl/Cmd combinations
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+        
+        // Initialize keyboard help close button
+        const closeButton = document.getElementById('keyboard-help-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                this.toggleKeyboardHelp();
+            });
+        }
+    }
+    
+    handleKeySequence(key) {
+        // Clear previous timeout
+        if (this.keyTimeout) {
+            clearTimeout(this.keyTimeout);
+        }
+        
+        // Add key to sequence
+        this.keySequence += key;
+        
+        // Check for Go-to shortcuts (g + letter)
+        if (this.keySequence.length === 2 && this.keySequence.startsWith('g')) {
+            const shortcut = this.keySequence;
+            this.keySequence = ''; // Reset
+            
+            switch (shortcut) {
+                case 'gh':
+                    this.goToSection('#home');
+                    break;
+                case 'ga':
+                    this.goToSection('#about');
+                    break;
+                case 'gp':
+                    this.goToSection('#projects');
+                    break;
+                case 'gc':
+                    this.goToSection('#contact');
+                    break;
+                case 'gs':
+                    this.goToSection('#skills');
+                    break;
+            }
+            return;
+        }
+        
+        // Reset sequence after 2 seconds
+        this.keyTimeout = setTimeout(() => {
+            this.keySequence = '';
+        }, 2000);
+        
+        // Reset if sequence gets too long
+        if (this.keySequence.length > 2) {
+            this.keySequence = '';
+        }
+    }
+    
+    goToSection(selector) {
+        const target = document.querySelector(selector);
+        if (target) {
+            const offsetTop = target.offsetTop - 70;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        
+        // Dispatch theme change event
+        document.dispatchEvent(new CustomEvent('themeChanged', {
+            detail: { theme: isDark ? 'dark' : 'light' }
+        }));
+    }
+    
+    toggleKeyboardHelp() {
+        this.keyboardHelp.classList.toggle('visible');
+    }
+    
+    scrollDown() {
+        window.scrollBy({
+            top: window.innerHeight * 0.8,
+            behavior: 'smooth'
+        });
+    }
+    
+    scrollUp() {
+        window.scrollBy({
+            top: -window.innerHeight * 0.8,
+            behavior: 'smooth'
+        });
+    }
+    
+    closeAllDialogs() {
+        this.keyboardHelp.classList.remove('visible');
+        this.tocToggle.setAttribute('aria-expanded', 'false');
+    }
+}
+
+// Initialize enhanced navigation
+function initializeEnhancedNavigation() {
+    new EnhancedNavigation();
+}
+
 // Smooth scrolling and navigation
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
@@ -864,6 +1137,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Initialize enhanced navigation features
+    initializeEnhancedNavigation();
 
     // Initialize API optimizations
     preloadCriticalData();

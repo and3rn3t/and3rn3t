@@ -139,6 +139,228 @@ body {
     border-radius: 2px;
 }
 
+/* Scroll Progress Indicator */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(139, 69, 19, 0.1);
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    width: 0%;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 10px rgba(139, 69, 19, 0.3);
+}
+
+/* Floating Table of Contents */
+.floating-toc {
+    position: fixed;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.floating-toc.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.toc-toggle {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.toc-toggle:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+.toc-content {
+    position: absolute;
+    right: 60px;
+    top: 0;
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    min-width: 200px;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-color);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+}
+
+.toc-toggle[aria-expanded="true"] + .toc-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.toc-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.toc-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-links li {
+    margin-bottom: 0.5rem;
+}
+
+.toc-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.25rem 0;
+}
+
+.toc-links a:hover,
+.toc-links a.active {
+    color: var(--primary-color);
+}
+
+/* Keyboard Shortcuts Help */
+.keyboard-help {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.keyboard-help.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.keyboard-help-content {
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--shadow-xl);
+}
+
+.keyboard-help-content h3 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--bg-secondary);
+}
+
+.shortcut-item kbd {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-family: monospace;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 24px;
+    text-align: center;
+}
+
+.shortcut-item span {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.keyboard-help-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.keyboard-help-close:hover {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+/* Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Hero Section */
 .hero,
 section.hero,
@@ -3488,6 +3710,111 @@ canvas {
     .chart-canvas {
         max-height: 200px;
     }
+}
+
+/* Enhanced Navigation Mobile Styles */
+@media (max-width: 768px) {
+    .floating-toc {
+        right: 1rem;
+        bottom: 2rem;
+        top: auto;
+        transform: none;
+    }
+    
+    .toc-content {
+        right: 0;
+        bottom: 60px;
+        top: auto;
+        max-width: 280px;
+        width: calc(100vw - 2rem);
+    }
+    
+    .keyboard-help-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .shortcut-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .shortcut-item {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-progress {
+        height: 3px;
+    }
+    
+    .toc-toggle {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+    
+    .toc-content {
+        width: calc(100vw - 1rem);
+        right: -0.5rem;
+    }
+    
+    .keyboard-help-content {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .shortcut-item kbd {
+        font-size: 0.6875rem;
+        padding: 0.1875rem 0.375rem;
+    }
+}
+
+/* Dark Theme Support for Enhanced Navigation */
+body.dark-theme .scroll-progress {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .toc-content,
+body.dark-theme .keyboard-help-content {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+body.dark-theme .toc-title {
+    color: #f9fafb;
+}
+
+body.dark-theme .toc-links a {
+    color: #d1d5db;
+}
+
+body.dark-theme .toc-links a:hover,
+body.dark-theme .toc-links a.active {
+    color: var(--accent-color);
+}
+
+body.dark-theme .shortcut-item {
+    background: #374151;
+}
+
+body.dark-theme .shortcut-item kbd {
+    background: #f9fafb;
+    color: #1f2937;
+}
+
+body.dark-theme .shortcut-item span {
+    color: #d1d5db;
+}
+
+body.dark-theme .keyboard-help-close {
+    color: #d1d5db;
+}
+
+body.dark-theme .keyboard-help-close:hover {
+    color: #f9fafb;
+    background: #374151;
 }
 
 /* Utility classes */
