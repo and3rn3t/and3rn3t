@@ -9518,16 +9518,31 @@ class BlogManager {
             </a>
         `;
         
-        // Add click handler
-        const readMoreLink = card.querySelector('.read-more');
-        readMoreLink.addEventListener('click', (e) => {
+        // Add click handler to the entire card
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // Don't trigger if clicking on a tag or other interactive element
+            if (e.target.classList.contains('post-tag')) return;
+            
             e.preventDefault();
+            console.log(`[Blog] Opening post: ${post.slug}`);
             this.renderSinglePost(post.slug);
             
             // Track with analytics
             if (globalThis.enhancedAnalytics) {
                 globalThis.enhancedAnalytics.trackEvent('blog_post_view', {
                     slug: post.slug,
+                    title: post.title
+                });
+            }
+        });
+        
+        // Also add click handler to the link specifically
+        const readMoreLink = card.querySelector('.read-more');
+        readMoreLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent double-triggering
+        });
                     title: post.title
                 });
             }
@@ -10077,18 +10092,28 @@ let blogManager;
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', async () => {
+        console.log('[Blog] DOM loaded, initializing blog manager...');
         blogManager = new BlogManager();
         await blogManager.init();
         globalThis.blogManager = blogManager;
         
         // Load blog posts into the grid
         const blogPostsContainer = document.getElementById('blog-posts');
-        if (blogPostsContainer && blogManager.postsLoaded) {
-            blogManager.renderPostList(blogPostsContainer);
+        if (blogPostsContainer) {
+            console.log('[Blog] Blog posts container found');
+            if (blogManager.postsLoaded) {
+                console.log(`[Blog] Rendering ${blogManager.posts.length} posts`);
+                blogManager.renderPostList(blogPostsContainer);
+            } else {
+                console.warn('[Blog] Posts not loaded yet');
+            }
+        } else {
+            console.error('[Blog] Blog posts container not found!');
         }
         
         // Setup filter buttons
         const filterButtons = document.querySelectorAll('.blog-filters .filter-btn');
+        console.log(`[Blog] Found ${filterButtons.length} filter buttons`);
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 // Update active state
@@ -10098,24 +10123,35 @@ if (document.readyState === 'loading') {
                 // Filter posts
                 const category = btn.dataset.category;
                 const options = category === 'all' ? {} : { category };
+                console.log(`[Blog] Filtering by category: ${category}`);
                 blogManager.renderPostList(blogPostsContainer, options);
             });
         });
     });
 } else {
     (async () => {
+        console.log('[Blog] DOM already loaded, initializing blog manager...');
         blogManager = new BlogManager();
         await blogManager.init();
         globalThis.blogManager = blogManager;
         
         // Load blog posts into the grid
         const blogPostsContainer = document.getElementById('blog-posts');
-        if (blogPostsContainer && blogManager.postsLoaded) {
-            blogManager.renderPostList(blogPostsContainer);
+        if (blogPostsContainer) {
+            console.log('[Blog] Blog posts container found');
+            if (blogManager.postsLoaded) {
+                console.log(`[Blog] Rendering ${blogManager.posts.length} posts`);
+                blogManager.renderPostList(blogPostsContainer);
+            } else {
+                console.warn('[Blog] Posts not loaded yet');
+            }
+        } else {
+            console.error('[Blog] Blog posts container not found!');
         }
         
         // Setup filter buttons
         const filterButtons = document.querySelectorAll('.blog-filters .filter-btn');
+        console.log(`[Blog] Found ${filterButtons.length} filter buttons`);
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 // Update active state
@@ -10125,9 +10161,22 @@ if (document.readyState === 'loading') {
                 // Filter posts
                 const category = btn.dataset.category;
                 const options = category === 'all' ? {} : { category };
+                console.log(`[Blog] Filtering by category: ${category}`);
                 blogManager.renderPostList(blogPostsContainer, options);
             });
         });
     })();
 }
+
+// Add global test function
+globalThis.testBlogPost = function(slug) {
+    if (!blogManager) {
+        console.error('[Blog] Blog manager not initialized');
+        return;
+    }
+    console.log(`[Blog] Testing post: ${slug || 'welcome-to-my-blog'}`);
+    blogManager.renderSinglePost(slug || 'welcome-to-my-blog');
+};
+
+console.log('[Blog] Tip: You can test blog posts with: testBlogPost("welcome-to-my-blog")');
 
