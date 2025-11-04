@@ -2612,8 +2612,8 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-04T04:46:51Z",
-    "pushed_at": "2025-11-04T04:46:47Z",
+    "updated_at": "2025-11-04T06:24:02Z",
+    "pushed_at": "2025-11-04T06:24:00Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
@@ -2657,6 +2657,130 @@
   }
 ],
   "events": [
+  {
+    "id": "5684937340",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:24:01Z"
+  },
+  {
+    "id": "5684937018",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27976560155,
+      "ref": "refs/heads/main",
+      "head": "4dafefeac36cc8a61833e2a2f52a2d5bbbe0198d",
+      "before": "eaeac2d4d550c30fec8dc066854b067e17cb9045"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:23:59Z"
+  },
+  {
+    "id": "4442628282",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 18,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/18",
+        "id": 2975182363,
+        "number": 18,
+        "head": {
+          "ref": "claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+          "sha": "fd441b0040aff8c0bd07de65a386e0908d2a53e1",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "eaeac2d4d550c30fec8dc066854b067e17cb9045",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:23:48Z"
+  },
+  {
+    "id": "5684915589",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:22:43Z"
+  },
   {
     "id": "5683431866",
     "type": "DeleteEvent",
@@ -3412,112 +3536,8 @@
     },
     "public": true,
     "created_at": "2025-11-04T01:09:56Z"
-  },
-  {
-    "id": "5680174585",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971790761,
-      "ref": "refs/heads/main",
-      "head": "ac53e6e7f1b57b1a93762aa82638f4a5f5515949",
-      "before": "01f006eef0baf601dddf8002c86ebbbf85522f13"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:44:25Z"
-  },
-  {
-    "id": "5680127583",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971743727,
-      "ref": "refs/heads/main",
-      "head": "2a1ba613c969ee0e99c0d55dc8f7f1c1bd187b89",
-      "before": "28da5536db2f4f53c4e12752b5d3bca7dfb427f9"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:40:53Z"
-  },
-  {
-    "id": "5679980121",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971596005,
-      "ref": "refs/heads/main",
-      "head": "30c94ed36ac8b26f0ff31100d197caa1b01ed033",
-      "before": "d53d5e3bc4f6a822f0c2b3bb06464058cb8a884a"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:29:36Z"
-  },
-  {
-    "id": "5679784851",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971400298,
-      "ref": "refs/heads/main",
-      "head": "c2ff0a139cdabdec5e90dbb1958a9b55337c072f",
-      "before": "215ba0b4ad186bf64cb5237f1527add4af95858c"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:14:36Z"
   }
 ],
-  "lastUpdated": "2025-11-04T06:08:39Z",
+  "lastUpdated": "2025-11-04T06:24:07Z",
   "rateLimitRemaining": "Enhanced with token"
 }
