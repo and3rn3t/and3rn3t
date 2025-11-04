@@ -2612,8 +2612,8 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-04T16:18:54Z",
-    "pushed_at": "2025-11-04T16:18:51Z",
+    "updated_at": "2025-11-04T16:34:31Z",
+    "pushed_at": "2025-11-04T16:34:28Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
@@ -2657,6 +2657,32 @@
   }
 ],
   "events": [
+  {
+    "id": "5699737823",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27991443304,
+      "ref": "refs/heads/main",
+      "head": "eec61cd05aa95b64ad8e44fa7412d37249d88938",
+      "before": "24d6cf58754802bbebe815ba11f5e8c487084599"
+    },
+    "public": true,
+    "created_at": "2025-11-04T16:34:28Z"
+  },
   {
     "id": "5699336257",
     "type": "PushEvent",
@@ -2984,6 +3010,31 @@
     "created_at": "2025-11-04T15:13:48Z"
   },
   {
+    "id": "5685041433",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:29:59Z"
+  },
+  {
     "id": "5685041372",
     "type": "PushEvent",
     "actor": {
@@ -3008,31 +3059,6 @@
     },
     "public": true,
     "created_at": "2025-11-04T06:29:58Z"
-  },
-  {
-    "id": "5685041433",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "ref": "claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-04T06:29:59Z"
   },
   {
     "id": "4442709187",
@@ -3529,54 +3555,8 @@
     },
     "public": true,
     "created_at": "2025-11-04T04:23:19Z"
-  },
-  {
-    "id": "4440967693",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "action": "opened",
-      "number": 15,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/15",
-        "id": 2974965425,
-        "number": 15,
-        "head": {
-          "ref": "claude/audit-design-consistency-011CUnCPTCcgQmo6VaS8cWRQ",
-          "sha": "b2d2ce77cf61178bbc65f59ebb95bb0e84448cde",
-          "repo": {
-            "id": 390771666,
-            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-            "name": "and3rn3t"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "6f0a33fb8f0ae7ab910ba6c07726583e31cb0fe9",
-          "repo": {
-            "id": 390771666,
-            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-            "name": "and3rn3t"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2025-11-04T04:23:03Z"
   }
 ],
-  "lastUpdated": "2025-11-04T16:18:59Z",
+  "lastUpdated": "2025-11-04T16:34:35Z",
   "rateLimitRemaining": "Enhanced with token"
 }
