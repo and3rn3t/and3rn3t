@@ -2839,63 +2839,216 @@ async function loadGitHubGists() {
         gistsGrid.innerHTML = '<p class="error-message">Unable to load gists.</p>';
     }
 }
-// Theme Toggle Functionality
-function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    if (!themeToggle) {
-        return;
-    }
-    
-    const icon = themeToggle.querySelector('i');
-    if (!icon) {
-        return;
-    }
-    
-    // Check for saved theme preference or default to light mode
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    document.body.classList.toggle('dark-theme', currentTheme === 'dark');
-    updateThemeIcon(icon, currentTheme);
-    
-    
-    themeToggle.addEventListener('click', function() {
-        const isDark = document.body.classList.toggle('dark-theme');
-        const theme = isDark ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
-        updateThemeIcon(icon, theme);
+
+// ========================================
+// ADVANCED THEME MANAGER
+// ========================================
+
+class ThemeManager {
+    constructor() {
+        this.themes = ['light', 'dark', 'high-contrast', 'colorblind', 'solarized'];
+        this.currentTheme = this.getInitialTheme();
+        this.followSystem = localStorage.getItem('followSystemTheme') === 'true';
         
-        // Trigger custom event for other components to listen to
-        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
-    });
-}
-
-function updateThemeIcon(icon, theme) {
-    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-}
-
-// Initialize theme toggle with retry mechanism
-function attemptThemeToggleInit(attempts = 0) {
-    const maxAttempts = 10;
-    
-    if (attempts >= maxAttempts) {
-        return;
+        this.initializeElements();
+        this.applyTheme(this.currentTheme, false);
+        this.setupEventListeners();
+        this.setupSystemThemeListener();
     }
     
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        initThemeToggle();
-    } else {
-        setTimeout(() => attemptThemeToggleInit(attempts + 1), 100);
+    initializeElements() {
+        this.toggle = document.getElementById('theme-toggle');
+        this.menu = document.getElementById('theme-picker-menu');
+        this.closeBtn = document.getElementById('theme-picker-close');
+        this.options = document.querySelectorAll('.theme-option');
+        this.systemCheckbox = document.getElementById('follow-system-theme');
+        
+        if (this.systemCheckbox) {
+            this.systemCheckbox.checked = this.followSystem;
+        }
+    }
+    
+    getInitialTheme() {
+        // Check if user wants to follow system preference
+        if (localStorage.getItem('followSystemTheme') === 'true') {
+            return this.getSystemTheme();
+        }
+        
+        // Otherwise use saved preference or default to light
+        return localStorage.getItem('theme') || 'light';
+    }
+    
+    getSystemTheme() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        }
+        return 'light';
+    }
+    
+    setupEventListeners() {
+        // Toggle button opens/closes menu
+        if (this.toggle) {
+            this.toggle.addEventListener('click', () => {
+                this.toggleMenu();
+            });
+        }
+        
+        // Close button
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => {
+                this.closeMenu();
+            });
+        }
+        
+        // Theme options
+        this.options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                const theme = e.currentTarget.dataset.theme;
+                this.applyTheme(theme);
+                this.closeMenu();
+            });
+        });
+        
+        // System preference checkbox
+        if (this.systemCheckbox) {
+            this.systemCheckbox.addEventListener('change', (e) => {
+                this.followSystem = e.target.checked;
+                localStorage.setItem('followSystemTheme', this.followSystem);
+                
+                if (this.followSystem) {
+                    this.applyTheme(this.getSystemTheme());
+                }
+            });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.theme-picker-container')) {
+                this.closeMenu();
+            }
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger if typing in input
+            const isTyping = document.activeElement.tagName === 'INPUT' || 
+                           document.activeElement.tagName === 'TEXTAREA';
+            
+            if (isTyping) return;
+            
+            // Press 'T' to toggle theme menu
+            if (e.key === 't' || e.key === 'T') {
+                e.preventDefault();
+                this.toggleMenu();
+            }
+            
+            // Press 'Escape' to close menu
+            if (e.key === 'Escape' && this.menu?.classList.contains('active')) {
+                this.closeMenu();
+            }
+        });
+    }
+    
+    setupSystemThemeListener() {
+        if (!window.matchMedia) return;
+        
+        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkModeQuery.addEventListener('change', (e) => {
+            if (this.followSystem) {
+                const theme = e.matches ? 'dark' : 'light';
+                this.applyTheme(theme, false);
+            }
+        });
+    }
+    
+    toggleMenu() {
+        if (this.menu) {
+            this.menu.classList.toggle('active');
+        }
+    }
+    
+    closeMenu() {
+        if (this.menu) {
+            this.menu.classList.remove('active');
+        }
+    }
+    
+    applyTheme(theme, savePreference = true) {
+        // Remove all theme classes
+        document.body.classList.remove(
+            'dark-theme',
+            'high-contrast-theme',
+            'colorblind-theme',
+            'solarized-theme'
+        );
+        
+        // Apply new theme class (except for light which is default)
+        if (theme !== 'light') {
+            document.body.classList.add(`${theme}-theme`);
+        }
+        
+        this.currentTheme = theme;
+        
+        // Save preference
+        if (savePreference) {
+            localStorage.setItem('theme', theme);
+        }
+        
+        // Update active state on options
+        this.options.forEach(option => {
+            if (option.dataset.theme === theme) {
+                option.classList.add('active');
+            } else {
+                option.classList.remove('active');
+            }
+        });
+        
+        // Trigger custom event for other components
+        document.dispatchEvent(new CustomEvent('themeChanged', { 
+            detail: { theme, followSystem: this.followSystem } 
+        }));
+        
+        // Update meta theme-color
+        this.updateMetaThemeColor(theme);
+    }
+    
+    updateMetaThemeColor(theme) {
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+            metaTheme = document.createElement('meta');
+            metaTheme.name = 'theme-color';
+            document.head.appendChild(metaTheme);
+        }
+        
+        const colors = {
+            'light': '#fefefe',
+            'dark': '#1a0e0a',
+            'high-contrast': '#ffffff',
+            'colorblind': '#fefefe',
+            'solarized': '#fdf6e3'
+        };
+        
+        metaTheme.content = colors[theme] || colors.light;
     }
 }
 
-// Initialize theme toggle
-document.addEventListener('DOMContentLoaded', function() {
-    attemptThemeToggleInit();
-});
+// Initialize theme manager
+let themeManager;
 
-// Also try immediate initialization
-attemptThemeToggleInit();
+function initThemeManager() {
+    try {
+        themeManager = new ThemeManager();
+    } catch (error) {
+        console.error('Failed to initialize theme manager:', error);
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeManager);
+} else {
+    initThemeManager();
+}
 
 // Add stagger animation to project cards
 function animateProjectCards() {
@@ -3037,14 +3190,8 @@ class ProjectSearchFilter {
         this.elements = {
             searchInput: document.getElementById('project-search'),
             clearSearch: document.getElementById('clear-search'),
-            categoryFilter: document.getElementById('category-filter'),
-            technologyFilter: document.getElementById('technology-filter'),
-            statusFilter: document.getElementById('status-filter'),
-            sortSelect: document.getElementById('sort-select'),
-            sortDirection: document.getElementById('sort-direction'),
-            gridView: document.getElementById('grid-view'),
-            listView: document.getElementById('list-view'),
-            resetFilters: document.getElementById('reset-filters'),
+            categoryFilters: document.querySelectorAll('#category-filters .filter-btn'),
+            sortSelect: document.getElementById('project-sort'),
             resultsCount: document.getElementById('results-count'),
             projectsGrid: document.getElementById('projects-grid')
         };
@@ -3075,25 +3222,19 @@ class ProjectSearchFilter {
             });
         }
 
-        // Filter controls
-        if (this.elements.categoryFilter) {
-            this.elements.categoryFilter.addEventListener('change', (e) => {
-                this.currentFilters.category = e.target.value;
-                this.applyFiltersAndSort();
-            });
-        }
-
-        if (this.elements.technologyFilter) {
-            this.elements.technologyFilter.addEventListener('change', (e) => {
-                this.currentFilters.technology = e.target.value;
-                this.applyFiltersAndSort();
-            });
-        }
-
-        if (this.elements.statusFilter) {
-            this.elements.statusFilter.addEventListener('change', (e) => {
-                this.currentFilters.status = e.target.value;
-                this.applyFiltersAndSort();
+        // Category filter buttons
+        if (this.elements.categoryFilters) {
+            this.elements.categoryFilters.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Remove active class from all buttons
+                    this.elements.categoryFilters.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    e.currentTarget.classList.add('active');
+                    
+                    // Set filter
+                    this.currentFilters.category = e.currentTarget.dataset.filter;
+                    this.applyFiltersAndSort();
+                });
             });
         }
 
@@ -3102,32 +3243,6 @@ class ProjectSearchFilter {
             this.elements.sortSelect.addEventListener('change', (e) => {
                 this.sortConfig.field = e.target.value;
                 this.applyFiltersAndSort();
-            });
-        }
-
-        if (this.elements.sortDirection) {
-            this.elements.sortDirection.addEventListener('click', () => {
-                this.toggleSortDirection();
-            });
-        }
-
-        // View controls
-        if (this.elements.gridView) {
-            this.elements.gridView.addEventListener('click', () => {
-                this.setViewMode('grid');
-            });
-        }
-
-        if (this.elements.listView) {
-            this.elements.listView.addEventListener('click', () => {
-                this.setViewMode('list');
-            });
-        }
-
-        // Reset filters
-        if (this.elements.resetFilters) {
-            this.elements.resetFilters.addEventListener('click', () => {
-                this.resetAllFilters();
             });
         }
         
@@ -3147,7 +3262,6 @@ class ProjectSearchFilter {
             }
         });
     }
-
     async loadProjectData() {
         try {
             const response = await fetch('./projects-data.json');
@@ -3201,7 +3315,7 @@ class ProjectSearchFilter {
         
         // Show/hide clear button
         if (this.elements.clearSearch) {
-            this.elements.clearSearch.classList.toggle('hidden', !searchTerm);
+            this.elements.clearSearch.style.display = searchTerm ? 'block' : 'none';
         }
 
         this.applyFiltersAndSort();
@@ -3212,13 +3326,20 @@ class ProjectSearchFilter {
             this.elements.searchInput.value = '';
         }
         if (this.elements.clearSearch) {
-            this.elements.clearSearch.classList.add('hidden');
+            this.elements.clearSearch.style.display = 'none';
         }
         this.currentFilters.search = '';
         this.applyFiltersAndSort();
     }
 
     applyFiltersAndSort() {
+        // If we have original cards from GitHub, filter those
+        if (this.originalCards && this.originalCards.length > 0) {
+            this.filterGitHubProjects();
+            return;
+        }
+        
+        // Otherwise filter from projects data
         // Apply filters
         this.filteredProjects = this.projects.filter(project => {
             // Search filter
@@ -3238,21 +3359,14 @@ class ProjectSearchFilter {
             }
 
             // Category filter
-            if (this.currentFilters.category && project.category !== this.currentFilters.category) {
-                return false;
-            }
-
-            // Technology filter
-            if (this.currentFilters.technology) {
-                const projectTech = project.technologies || [];
-                if (!projectTech.includes(this.currentFilters.technology)) {
+            if (this.currentFilters.category && this.currentFilters.category !== 'all') {
+                const projectCategory = (project.category || '').toLowerCase();
+                const filterCategory = this.currentFilters.category.toLowerCase();
+                
+                // Check if category matches or is part of category name
+                if (!projectCategory.includes(filterCategory)) {
                     return false;
                 }
-            }
-
-            // Status filter
-            if (this.currentFilters.status && project.status !== this.currentFilters.status) {
-                return false;
             }
 
             return true;
@@ -3264,6 +3378,102 @@ class ProjectSearchFilter {
         // Update display
         this.updateResultsCount();
         this.renderProjects();
+    }
+    
+    filterGitHubProjects() {
+        if (!this.originalCards) return;
+        
+        const projectsGrid = document.getElementById('projects-grid');
+        if (!projectsGrid) return;
+        
+        // Filter and sort the project cards
+        let filteredCards = this.originalCards.filter(({ repo, projectMeta }) => {
+            // Search filter
+            if (this.currentFilters.search) {
+                const searchFields = [
+                    repo.name,
+                    repo.description || '',
+                    projectMeta?.displayName || '',
+                    projectMeta?.description || '',
+                    projectMeta?.longDescription || '',
+                    ...(repo.topics || []),
+                    ...(projectMeta?.technologies || []),
+                    projectMeta?.category || ''
+                ].join(' ').toLowerCase();
+
+                if (!searchFields.includes(this.currentFilters.search)) {
+                    return false;
+                }
+            }
+
+            // Category filter
+            if (this.currentFilters.category && this.currentFilters.category !== 'all') {
+                const projectCategory = (projectMeta?.category || repo.name || '').toLowerCase();
+                const repoTopics = (repo.topics || []).join(' ').toLowerCase();
+                const filterCategory = this.currentFilters.category.toLowerCase();
+                
+                // Check category, topics, or repo name
+                const matchesCategory = projectCategory.includes(filterCategory) || 
+                                       repoTopics.includes(filterCategory) ||
+                                       repo.name.toLowerCase().includes(filterCategory);
+                
+                if (!matchesCategory) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+        
+        // Sort the filtered cards
+        filteredCards = this.sortGitHubProjects(filteredCards);
+        
+        // Update the DOM
+        projectsGrid.innerHTML = '';
+        filteredCards.forEach(({ card }) => {
+            // Add animation class
+            card.classList.add('filtered-in');
+            projectsGrid.appendChild(card);
+        });
+        
+        // Update results count
+        const resultsCount = document.getElementById('results-count');
+        if (resultsCount) {
+            const count = filteredCards.length;
+            const projectWord = count === 1 ? 'project' : 'projects';
+            resultsCount.textContent = `Showing ${count} ${projectWord}`;
+        }
+    }
+    
+    sortGitHubProjects(cards) {
+        return cards.sort((a, b) => {
+            let aVal, bVal;
+
+            switch (this.sortConfig.field) {
+                case 'stars':
+                    aVal = a.repo.stargazers_count || 0;
+                    bVal = b.repo.stargazers_count || 0;
+                    return bVal - aVal; // Descending for stars
+                    
+                case 'recent':
+                    aVal = new Date(a.repo.updated_at || 0);
+                    bVal = new Date(b.repo.updated_at || 0);
+                    return bVal - aVal; // Most recent first
+                    
+                case 'name':
+                    aVal = (a.projectMeta?.displayName || a.repo.name).toLowerCase();
+                    bVal = (b.projectMeta?.displayName || b.repo.name).toLowerCase();
+                    return aVal.localeCompare(bVal);
+                    
+                case 'name-desc':
+                    aVal = (a.projectMeta?.displayName || a.repo.name).toLowerCase();
+                    bVal = (b.projectMeta?.displayName || b.repo.name).toLowerCase();
+                    return bVal.localeCompare(aVal);
+                    
+                default:
+                    return 0;
+            }
+        });
     }
 
     sortProjects() {
@@ -3345,25 +3555,33 @@ class ProjectSearchFilter {
         // Reset filter values
         this.currentFilters = {
             search: '',
-            category: '',
+            category: 'all',
             technology: '',
             status: ''
         };
 
-        // Reset form elements
-        if (this.elements.searchInput) this.elements.searchInput.value = '';
-        if (this.elements.clearSearch) this.elements.clearSearch.classList.add('hidden');
-        if (this.elements.categoryFilter) this.elements.categoryFilter.value = '';
-        if (this.elements.technologyFilter) this.elements.technologyFilter.value = '';
-        if (this.elements.statusFilter) this.elements.statusFilter.value = '';
+        // Reset search input
+        if (this.elements.searchInput) {
+            this.elements.searchInput.value = '';
+        }
+        if (this.elements.clearSearch) {
+            this.elements.clearSearch.style.display = 'none';
+        }
+        
+        // Reset category filter buttons
+        if (this.elements.categoryFilters) {
+            this.elements.categoryFilters.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === 'all') {
+                    btn.classList.add('active');
+                }
+            });
+        }
 
         // Reset sort to default
-        this.sortConfig = { field: 'name', direction: 'asc' };
-        if (this.elements.sortSelect) this.elements.sortSelect.value = 'name';
-        if (this.elements.sortDirection) {
-            this.elements.sortDirection.classList.remove('desc');
-            const icon = this.elements.sortDirection.querySelector('i');
-            if (icon) icon.className = 'fas fa-sort-alpha-down';
+        this.sortConfig = { field: 'stars', direction: 'desc' };
+        if (this.elements.sortSelect) {
+            this.elements.sortSelect.value = 'stars';
         }
 
         this.applyFiltersAndSort();
