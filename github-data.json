@@ -2612,8 +2612,8 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-04T15:16:56Z",
-    "pushed_at": "2025-11-04T15:16:54Z",
+    "updated_at": "2025-11-04T15:29:20Z",
+    "pushed_at": "2025-11-04T15:29:17Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
@@ -2657,6 +2657,130 @@
   }
 ],
   "events": [
+  {
+    "id": "5698017724",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:29:18Z"
+  },
+  {
+    "id": "5698017277",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27989708148,
+      "ref": "refs/heads/main",
+      "head": "6b53876206efbf15ff85fa1757e8353a672360d1",
+      "before": "0c425b9e2a293b3df0297ac7234759b9498ee58f"
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:29:17Z"
+  },
+  {
+    "id": "4455412842",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 21,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/21",
+        "id": 2977065756,
+        "number": 21,
+        "head": {
+          "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+          "sha": "622e81e90f176b07aa12acac60706747c7cf523e",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "0c425b9e2a293b3df0297ac7234759b9498ee58f",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:29:02Z"
+  },
+  {
+    "id": "5697951069",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:26:53Z"
+  },
   {
     "id": "5697675455",
     "type": "DeleteEvent",
@@ -3451,133 +3575,8 @@
     },
     "public": true,
     "created_at": "2025-11-04T04:10:39Z"
-  },
-  {
-    "id": "5682970093",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27974590340,
-      "ref": "refs/heads/claude/fix-errors-and-warnings-011CUnBYqoHotc3gvm98qfdD",
-      "head": "78e508e6740e40abb8ea6d4aadc5caec7ebf1c55",
-      "before": "f64b73f0d6d8bf9b30a0d850fb57189ce92c0c5d"
-    },
-    "public": true,
-    "created_at": "2025-11-04T04:10:29Z"
-  },
-  {
-    "id": "4440850524",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "action": "opened",
-      "number": 14,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/14",
-        "id": 2974949810,
-        "number": 14,
-        "head": {
-          "ref": "claude/fix-errors-and-warnings-011CUnBYqoHotc3gvm98qfdD",
-          "sha": "78e508e6740e40abb8ea6d4aadc5caec7ebf1c55",
-          "repo": {
-            "id": 390771666,
-            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-            "name": "and3rn3t"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "50c41c9f412ab66dc02b20f08c823d0879975481",
-          "repo": {
-            "id": 390771666,
-            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-            "name": "and3rn3t"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2025-11-04T04:10:19Z"
-  },
-  {
-    "id": "5682953531",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "ref": "claude/fix-errors-and-warnings-011CUnBYqoHotc3gvm98qfdD",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/claude/fix-errors-and-warnings-011CUnBYqoHotc3gvm98qfdD",
-      "master_branch": "main",
-      "description": "Config files for my GitHub profile.",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-04T04:09:13Z"
-  },
-  {
-    "id": "5681959297",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27973578049,
-      "ref": "refs/heads/main",
-      "head": "7f7922fbb66666d2e6003ebbb20cc927e6d72f39",
-      "before": "49eb3dad498a5c59f455e11b5bc12a16871bf4fb"
-    },
-    "public": true,
-    "created_at": "2025-11-04T02:55:08Z"
   }
 ],
-  "lastUpdated": "2025-11-04T15:17:02Z",
+  "lastUpdated": "2025-11-04T15:29:25Z",
   "rateLimitRemaining": "Enhanced with token"
 }
