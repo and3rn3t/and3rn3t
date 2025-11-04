@@ -243,6 +243,7 @@ const githubAPI = new GitHubAPIManager();
 // API Status and debugging utilities
 function displayAPIStatus() {
     const status = githubAPI.getRateLimitStatus();
+    console.log({
         remaining: status.remaining,
         limit: status.limit,
         resetTime: new Date(status.reset).toLocaleTimeString(),
@@ -252,6 +253,7 @@ function displayAPIStatus() {
     
     // Add visual indicator if rate limit is low
     if (status.percentage < 20) {
+        console.warn('GitHub API rate limit is low!');
     }
 }
 
@@ -699,6 +701,7 @@ class PerformanceOptimizer {
         globalThis.addEventListener('load', () => {
             setTimeout(() => {
                 const loadTime = performance.now() - this.performanceMetrics.loadStart;
+                console.log({
                     totalLoadTime: `${loadTime.toFixed(2)}ms`,
                     firstContentfulPaint: this.performanceMetrics.firstContentfulPaint ? 
                         `${this.performanceMetrics.firstContentfulPaint.toFixed(2)}ms` : 'Not measured',
@@ -723,6 +726,7 @@ class PerformanceOptimizer {
 
         const overallScore = Object.values(scores).reduce((sum, score) => sum + score, 0) / 3;
         
+        console.log({
             individual: scores,
             overall: `${(overallScore * 100).toFixed(1)}%`,
             grade: this.getPerformanceGrade(overallScore)
@@ -1899,6 +1903,7 @@ async function loadGitHubProjects() {
         // Get repositories using the optimized API manager (now with token-enhanced data)
         const repos = await githubAPI.getRepositories('stars', 100);
         
+        console.log({
             count: repos.length, 
             usingEnhancedData: !!githubAPI.cachedData,
             source: githubAPI.cachedData ? 'Pre-fetched with token' : 'Direct API (limited)'
@@ -4383,6 +4388,7 @@ class PerformanceBudget {
                 overage: value - budget,
                 timestamp: Date.now()
             });
+            console.warn({
                 actual: value,
                 budget: budget,
                 overage: `+${(value - budget).toFixed(2)}${metric.includes('Time') || metric.includes('Paint') ? 'ms' : ''}`
@@ -5620,6 +5626,7 @@ class MobileOptimizationSystem {
         if ('performance' in globalThis) {
             const navigation = performance.getEntriesByType('navigation')[0];
             if (navigation) {
+                console.log({
                     'DOM Content Loaded': navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
                     'Load Complete': navigation.loadEventEnd - navigation.loadEventStart,
                     'First Paint': performance.getEntriesByName('first-paint')[0]?.startTime || 'Not available'

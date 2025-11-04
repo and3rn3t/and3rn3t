@@ -58,14 +58,14 @@
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     
-    <!-- Cloudflare Web Analytics -->
-    <script defer src='https://static.cloudflare.com/beacon.min.js' data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'></script>
+    <!-- Cloudflare Web Analytics - Temporarily disabled due to DNS issues -->
+    <!-- <script defer src='https://static.cloudflare.com/beacon.min.js' data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'></script> -->
     
     <!-- Enhanced Analytics Configuration -->
     <script>
         // Analytics configuration
         window.portfolioAnalytics = {
-            cloudflareEnabled: true,
+            cloudflareEnabled: false,
             customEventsEnabled: true,
             performanceMonitoring: true,
             userBehaviorTracking: true,
@@ -167,68 +167,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-<<<<<<< HEAD
-        
-        /* CRITICAL MODAL OVERRIDE - FORCE HIDE IMMEDIATELY */
-        div#global-search-modal,
-        div.global-search-modal,
-        div#keyboard-help,
-        div.keyboard-help {
-            display: none !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-            z-index: -9999 !important;
-            position: absolute !important;
-            left: -9999px !important;
-            top: -9999px !important;
-            width: 0 !important;
-            height: 0 !important;
-            overflow: hidden !important;
-        }
-        
-        /* DEBUG: FORCE ALL SECTIONS VISIBILITY */
-        .hero, .hero-content, .hero-title, .hero-subtitle, .hero-description, 
-        .stats-grid, .github-stats, section.hero, .about, .skills, 
-        .about-content, .about-text, .skills-grid, .skill-category {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: none !important;
-            position: relative !important;
-            z-index: auto !important;
-        }
-        
-        /* DEBUG: FORCE COLORS TO BE VISIBLE */
-        .hero-title, .hero-subtitle, .hero-description {
-            color: white !important;
-            background: rgba(0,0,0,0.5) !important;
-            padding: 10px !important;
-        }
-        
-        .stats-grid {
-            background: rgba(255,255,255,0.1) !important;
-            border: 2px solid red !important;
-            min-height: 200px !important;
-        }
-        
-        /* DEBUG: MAKE ABOUT AND SKILLS SECTIONS VISIBLE */
-        .about, .skills {
-            background: rgba(0,255,0,0.2) !important;
-            border: 3px solid lime !important;
-            min-height: 300px !important;
-            padding: 20px !important;
-            margin: 20px 0 !important;
-        }
-        
-        .about-text, .skills-grid, .skill-category {
-            color: black !important;
-            background: rgba(255,255,255,0.9) !important;
-            padding: 15px !important;
-            margin: 10px 0 !important;
-        }
-=======
->>>>>>> 2508442246c3f1c4ab507598515ddcde397a8158
     </style>
     
     <!-- Load main stylesheet after critical CSS -->
@@ -482,128 +420,6 @@
         </div>
     </section>
 
-<<<<<<< HEAD
-    <!-- About Section -->
-    <div style="background: red; color: white; padding: 50px; font-size: 24px; text-align: center;">
-        🚨 ABOUT SECTION TEST - IF YOU SEE THIS, THE SECTION EXISTS 🚨
-    </div>
-    <section class="about animate-on-scroll" id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm a passionate full-stack developer with a love for technology, home automation, 
-                        and general gadgetry. My journey in software development is driven by curiosity 
-                        and a desire to create meaningful, innovative solutions.
-                    </p>
-                    <p>
-                        Currently expanding my expertise in modern web development technologies, 
-                        I enjoy working with both frontend and backend systems to build comprehensive, 
-                        user-focused applications.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-code"></i>
-                            <h3>Clean Code</h3>
-                            <p>Writing maintainable, scalable, and efficient code</p>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-home"></i>
-                            <h3>IoT & Automation</h3>
-                            <p>Passionate about smart home technologies and automation</p>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <h3>Innovation</h3>
-                            <p>Always exploring new technologies and creative solutions</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <div style="background: blue; color: yellow; padding: 50px; font-size: 24px; text-align: center;">
-        🚨 SKILLS SECTION TEST - IF YOU SEE THIS, THE SECTION EXISTS 🚨
-    </div>
-    <section class="skills" id="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">HTML5</span>
-                        <span class="skill-item">CSS3</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">Responsive Design</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">PostgreSQL</span>
-                        <span class="skill-item">REST APIs</span>
-                        <span class="skill-item">Database Design</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Git</span>
-                        <span class="skill-item">Docker</span>
-                        <span class="skill-item">Linux</span>
-                        <span class="skill-item">IoT</span>
-                        <span class="skill-item">Home Automation</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GitHub Stats Section -->
-    <section class="github-stats" id="github-stats">
-        <div class="container">
-            <h2 class="section-title">GitHub Statistics</h2>
-            <div class="stats-grid" id="stats-grid">
-                <!-- GitHub stats will be loaded dynamically -->
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading stats...</p>
-                </div>
-            </div>
-            
-            <!-- GitHub Contribution Graph -->
-            <div class="contribution-section">
-                <h3 class="subsection-title">Contribution Activity</h3>
-                <div class="contribution-graph" id="contribution-graph">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading contributions...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Language Stats -->
-            <div class="language-stats-section">
-                <h3 class="subsection-title">Most Used Languages</h3>
-                <div class="language-stats" id="main-language-stats">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading language stats...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-=======
->>>>>>> 2508442246c3f1c4ab507598515ddcde397a8158
     <!-- Projects Section -->
     <section class="projects animate-on-scroll" id="projects">
         <div class="container">
