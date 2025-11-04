@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Portfolio Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .hero { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Matthew Anderson</h1>
+        <p>Full-Stack Developer</p>
+        <p id="status">Loading...</p>
+    </div>
+
+    <script>
+        console.log('Script starting...');
+        
+        // Minimal version of the problematic function
+        function displayAPIStatus() {
+            console.log({
+                message: 'API status check',
+                timestamp: new Date().toLocaleTimeString(),
+                test: 'success'
+            });
+        }
+        
+        // Test the function
+        displayAPIStatus();
+        
+        document.getElementById('status').textContent = 'JavaScript loaded successfully!';
+        console.log('Script completed successfully');
+    </script>
+</body>
+</html>

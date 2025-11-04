@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Portfolio - No Cache</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f0f0f0; 
+        }
+        .test { 
+            background: white; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Test - No Cloudflare</h1>
+    <div class="test">
+        <h2>JavaScript Test</h2>
+        <p id="js-status">JavaScript not loaded</p>
+    </div>
+    
+    <div class="test">
+        <h2>API Test</h2>
+        <p id="api-status">API not tested</p>
+    </div>
+
+    <script>
+        // Simple test script to verify basic functionality
+        console.log('Test script loaded successfully');
+        
+        document.getElementById('js-status').textContent = 'JavaScript loaded successfully!';
+        document.getElementById('js-status').style.color = 'green';
+        
+        // Test basic API functionality
+        async function testAPI() {
+            try {
+                const response = await fetch('https://api.github.com/users/and3rn3t');
+                const data = await response.json();
+                document.getElementById('api-status').textContent = `API working! User: ${data.name || data.login}`;
+                document.getElementById('api-status').style.color = 'green';
+                console.log('GitHub API test successful:', data);
+            } catch (error) {
+                document.getElementById('api-status').textContent = `API Error: ${error.message}`;
+                document.getElementById('api-status').style.color = 'red';
+                console.error('GitHub API test failed:', error);
+            }
+        }
+        
+        // Run API test
+        testAPI();
+    </script>
+</body>
+</html>

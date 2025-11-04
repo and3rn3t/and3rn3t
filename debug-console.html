@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Console</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #000; color: #00ff00; }
+        .log { margin: 5px 0; padding: 5px; background: rgba(0,255,0,0.1); }
+        .error { background: rgba(255,0,0,0.3); color: #ff6666; }
+        .info { background: rgba(0,0,255,0.3); color: #6666ff; }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Debug Console</h1>
+    <div id="console-output"></div>
+    
+    <script>
+        const output = document.getElementById('console-output');
+        
+        function addLog(message, type = 'log') {
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.textContent = new Date().toLocaleTimeString() + ' - ' + message;
+            output.appendChild(div);
+        }
+        
+        // Override console methods
+        const originalConsole = {
+            log: console.log,
+            error: console.error,
+            warn: console.warn
+        };
+        
+        console.log = function(...args) {
+            addLog(args.join(' '), 'log');
+            originalConsole.log.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            addLog(args.join(' '), 'error');
+            originalConsole.error.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+            addLog(args.join(' '), 'warn');
+            originalConsole.warn.apply(console, args);
+        };
+        
+        // Capture window errors
+        window.addEventListener('error', function(e) {
+            addLog(`ERROR: ${e.message} at ${e.filename}:${e.lineno}:${e.colno}`, 'error');
+        });
+        
+        // Monitor script loading
+        addLog('Debug console loaded', 'info');
+        
+        // Check for existing scripts
+        document.querySelectorAll('script').forEach((script, index) => {
+            if (script.src) {
+                addLog(`External script ${index}: ${script.src}`, 'info');
+            }
+        });
+        
+        // Monitor new script additions
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.tagName === 'SCRIPT' && node.src) {
+                        addLog(`New script loaded: ${node.src}`, 'info');
+                    }
+                });
+            });
+        });
+        
+        observer.observe(document.head, { childList: true, subtree: true });
+        observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+</body>
+</html>
