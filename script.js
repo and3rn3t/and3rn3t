@@ -33,13 +33,11 @@ class GitHubAPIManager {
                 }
                 
                 if (attempt === maxRetries) {
-                    console.error(`Operation failed after ${maxRetries} attempts:`, error.message);
                     throw error;
                 }
                 
                 // Exponential backoff with jitter
                 const delay = this.baseDelay * Math.pow(2, attempt - 1) + Math.random() * 1000;
-                console.warn(`Attempt ${attempt} failed, retrying in ${Math.round(delay)}ms:`, error.message);
                 await new Promise(resolve => setTimeout(resolve, delay));
             }
         }
@@ -55,11 +53,10 @@ class GitHubAPIManager {
             const response = await fetch('github-data.json');
             if (response.ok) {
                 this.cachedData = await response.json();
-                console.log('✅ Using pre-fetched GitHub data from:', this.cachedData.lastUpdated);
                 return this.cachedData;
             }
         } catch (error) {
-            console.log('ℹ️ Pre-fetched data not available, using direct API:', error.message);
+            // Pre-fetched data not available, using direct API
         }
         return null;
     }
@@ -96,7 +93,6 @@ class GitHubAPIManager {
         if (this.rateLimitInfo.remaining <= 1) {
             const waitTime = Math.max(0, this.rateLimitInfo.reset - Date.now());
             if (waitTime > 0) {
-                console.warn(`Rate limit exceeded. Waiting ${Math.ceil(waitTime / 1000)} seconds...`);
                 await new Promise(resolve => setTimeout(resolve, waitTime));
             }
         }
@@ -138,8 +134,6 @@ class GitHubAPIManager {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
 
             } catch (error) {
-                console.warn(`Attempt ${attempt}/${maxRetries} failed:`, error.message);
-                
                 if (attempt === maxRetries) {
                     throw error;
                 }
@@ -158,7 +152,6 @@ class GitHubAPIManager {
         // Check cache first
         const cachedData = this.getCache(cacheKey);
         if (cachedData) {
-            console.log(`✅ Cache hit for ${endpoint}`);
             return cachedData;
         }
 
@@ -169,14 +162,12 @@ class GitHubAPIManager {
         }
 
         return await this.executeWithRetry(async () => {
-            console.log(`🌐 Fetching ${endpoint}...`);
             const response = await this.fetchWithRetry(url.toString());
             const data = await response.json();
-            
+
             // Cache the result
             this.setCache(cacheKey, data, ttl);
-            console.log(`💾 Cached data for ${endpoint}`);
-            
+
             return data;
         });
     }
@@ -225,7 +216,6 @@ class GitHubAPIManager {
         try {
             return await this.fetchGitHubData(`/users/${this.username}/events/public`, { per_page });
         } catch (error) {
-            console.warn('Recent activity not available:', error.message);
             return [];
         }
     }
@@ -253,7 +243,6 @@ const githubAPI = new GitHubAPIManager();
 // API Status and debugging utilities
 function displayAPIStatus() {
     const status = githubAPI.getRateLimitStatus();
-    console.log('GitHub API Status:', {
         remaining: status.remaining,
         limit: status.limit,
         resetTime: new Date(status.reset).toLocaleTimeString(),
@@ -263,13 +252,11 @@ function displayAPIStatus() {
     
     // Add visual indicator if rate limit is low
     if (status.percentage < 20) {
-        console.warn('⚠️ GitHub API rate limit is running low!');
     }
 }
 
 // Enhanced error handler for API failures with user feedback
 function handleAPIError(error, context = 'API request') {
-    console.error(`${context} failed:`, error);
     
     const errorMessages = {
         'GitHub API rate limit exceeded': 'Rate limit reached. Data will refresh automatically when limit resets.',
@@ -281,7 +268,6 @@ function handleAPIError(error, context = 'API request') {
     
     // Show user-friendly error notification
     showErrorNotification(userMessage, context);
-    console.info('User message:', userMessage);
     
     return userMessage;
 }
@@ -294,12 +280,10 @@ const loadingManager = {
     addTask(taskName) {
         this.activeTasks.add(taskName);
         this.showProgress();
-        console.log(`📊 Loading task started: ${taskName} (${this.activeTasks.size} active)`);
     },
     
     removeTask(taskName) {
         this.activeTasks.delete(taskName);
-        console.log(`✅ Loading task completed: ${taskName} (${this.activeTasks.size} remaining)`);
         
         if (this.activeTasks.size === 0) {
             this.hideProgress();
@@ -460,7 +444,6 @@ function clearExpiredCache() {
     }
     
     if (removedCount > 0) {
-        console.log(`🧹 Cleared ${removedCount} cache entries (${cacheStats.expiredEntries} expired, ${removedCount - cacheStats.expiredEntries} for memory management)`);
     }
     
     return { removedCount, ...cacheStats };
@@ -469,7 +452,6 @@ function clearExpiredCache() {
 // Preload critical GitHub data
 async function preloadCriticalData() {
     try {
-        console.log('🚀 Preloading critical GitHub data...');
         
         // Preload user data (long cache)
         await githubAPI.getUserData();
@@ -477,9 +459,7 @@ async function preloadCriticalData() {
         // Preload repositories (medium cache)  
         await githubAPI.getRepositories('stars', 100);
         
-        console.log('✅ Critical data preloaded successfully');
     } catch (error) {
-        console.warn('⚠️ Failed to preload some data:', error.message);
     }
 }
 
@@ -498,7 +478,6 @@ function debounce(func, wait) {
 
 // Manual refresh function for user-initiated updates
 const refreshGitHubData = debounce(async function() {
-    console.log('🔄 Manually refreshing GitHub data...');
     
     // Clear relevant cache entries to force fresh data
     for (const [key] of githubAPI.cache.entries()) {
@@ -516,7 +495,6 @@ const refreshGitHubData = debounce(async function() {
     
     try {
         await loadAllGitHubData();
-        console.log('✅ Manual refresh completed');
         
         // Show success feedback
         for (const btn of refreshButtons) {
@@ -574,7 +552,6 @@ class PerformanceOptimizer {
         formats.avif = 'createImageBitmap' in globalThis && 
                       typeof globalThis.createImageBitmap === 'function';
 
-        console.log('🖼️ Image format support:', formats);
         return formats;
     }
 
@@ -636,13 +613,11 @@ class PerformanceOptimizer {
             img.src = optimizedSrc;
             img.classList.add('loaded');
         } catch (error) {
-            console.warn(`Failed to load optimized image: ${optimizedSrc}, falling back to original`);
             try {
                 await this.preloadImage(originalSrc);
                 img.src = originalSrc;
                 img.classList.add('loaded');
             } catch (fallbackError) {
-                console.error(`Failed to load image: ${originalSrc}`, fallbackError);
                 img.classList.add('error');
             }
         }
@@ -689,7 +664,6 @@ class PerformanceOptimizer {
             try {
                 lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
             } catch (error) {
-                console.warn('LCP measurement not supported:', error);
             }
 
             // First Contentful Paint (FCP)
@@ -704,7 +678,6 @@ class PerformanceOptimizer {
             try {
                 fcpObserver.observe({ entryTypes: ['paint'] });
             } catch (error) {
-                console.warn('FCP measurement not supported:', error);
             }
 
             // Cumulative Layout Shift (CLS)
@@ -719,7 +692,6 @@ class PerformanceOptimizer {
             try {
                 clsObserver.observe({ entryTypes: ['layout-shift'] });
             } catch (error) {
-                console.warn('CLS measurement not supported:', error);
             }
         }
 
@@ -727,7 +699,6 @@ class PerformanceOptimizer {
         globalThis.addEventListener('load', () => {
             setTimeout(() => {
                 const loadTime = performance.now() - this.performanceMetrics.loadStart;
-                console.log('🚀 Performance Metrics:', {
                     totalLoadTime: `${loadTime.toFixed(2)}ms`,
                     firstContentfulPaint: this.performanceMetrics.firstContentfulPaint ? 
                         `${this.performanceMetrics.firstContentfulPaint.toFixed(2)}ms` : 'Not measured',
@@ -752,7 +723,6 @@ class PerformanceOptimizer {
 
         const overallScore = Object.values(scores).reduce((sum, score) => sum + score, 0) / 3;
         
-        console.log('📊 Performance Score:', {
             individual: scores,
             overall: `${(overallScore * 100).toFixed(1)}%`,
             grade: this.getPerformanceGrade(overallScore)
@@ -1110,7 +1080,8 @@ class ContentDiscoverySystem {
         this.savedSearches = document.getElementById('saved-searches');
         this.relatedProjects = document.getElementById('related-projects');
         this.saveSearchBtn = document.getElementById('save-search');
-        
+        this.projectSearch = document.getElementById('project-search');
+
         this.init();
     }
     
@@ -1268,10 +1239,9 @@ class ContentDiscoverySystem {
     }
     
     bindProjectSearchEnhancements() {
-        const projectSearch = document.getElementById('project-search');
-        if (projectSearch && this.saveSearchBtn) {
+        if (this.projectSearch && this.saveSearchBtn) {
             // Show/hide save button based on search activity
-            projectSearch.addEventListener('input', (e) => {
+            this.projectSearch.addEventListener('input', (e) => {
                 const hasQuery = e.target.value.trim().length > 0;
                 this.saveSearchBtn.classList.toggle('hidden', !hasQuery);
                 
@@ -1550,7 +1520,6 @@ class VisualAnimationSystem {
             const observer = new PerformanceObserver((list) => {
                 for (const entry of list.getEntries()) {
                     if (entry.entryType === 'paint' && entry.name === 'first-contentful-paint') {
-                        console.log(`First Contentful Paint: ${entry.startTime}ms`);
                     }
                 }
             });
@@ -1727,11 +1696,10 @@ class VisualAnimationSystem {
     }
     
     saveCurrentSearch() {
-        const projectSearch = document.getElementById('project-search');
-        if (!projectSearch?.value.trim()) return;
-        
+        if (!this.projectSearch?.value.trim()) return;
+
         const search = {
-            query: projectSearch.value,
+            query: this.projectSearch.value,
             timestamp: Date.now(),
             filters: {
                 category: document.getElementById('category-filter')?.value || '',
@@ -1776,10 +1744,9 @@ class VisualAnimationSystem {
     }
     
     applySavedSearch(search) {
-        const projectSearch = document.getElementById('project-search');
-        if (projectSearch) {
-            projectSearch.value = search.query;
-            projectSearch.dispatchEvent(new Event('input'));
+        if (this.projectSearch) {
+            this.projectSearch.value = search.query;
+            this.projectSearch.dispatchEvent(new Event('input'));
         }
         
         // Apply filters
@@ -1887,7 +1854,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load all GitHub data with optimized coordination
     loadAllGitHubData().catch(error => {
-        console.error('Failed to load GitHub data:', error);
     });
     loadGitHubBadges(); // This uses external services, so keep separate
 
@@ -1918,10 +1884,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // GitHub API integration
 async function loadGitHubProjects() {
-    console.log('📁 Loading GitHub projects...');
     const projectsGrid = document.getElementById('projects-grid');
     
-    console.log('Projects grid found:', !!projectsGrid);
     
     try {
         // Load project metadata
@@ -1930,13 +1894,11 @@ async function loadGitHubProjects() {
             const projectsDataResponse = await fetch('projects-data.json');
             projectsData = await projectsDataResponse.json();
         } catch (error) {
-            console.warn('Project data file not found, using API data only:', error.message);
         }
         
         // Get repositories using the optimized API manager (now with token-enhanced data)
         const repos = await githubAPI.getRepositories('stars', 100);
         
-        console.log('📊 Repository data:', { 
             count: repos.length, 
             usingEnhancedData: !!githubAPI.cachedData,
             source: githubAPI.cachedData ? 'Pre-fetched with token' : 'Direct API (limited)'
@@ -1962,7 +1924,6 @@ async function loadGitHubProjects() {
             await projectSearchFilter.loadProjectData();
             projectSearchFilter.updateWithGitHubData(featuredRepos);
         } catch (error) {
-            console.warn('Search filter initialization failed:', error);
         }
         
         // Create project cards with enhanced data
@@ -2173,8 +2134,8 @@ function showDemoProjects(container) {
 
 // Enhanced scroll animations
 function initScrollAnimations() {
-    const animationElements = document.querySelectorAll('.hero-content, .about-text, .skills-grid');
-    
+    const animationElements = document.querySelectorAll('.hero-content, .about-text, .skills-grid, .animate-on-scroll');
+
     const animationObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
             if (entry.isIntersecting) {
@@ -2184,8 +2145,22 @@ function initScrollAnimations() {
     }, {
         threshold: 0.1
     });
-    
+
     for (const el of animationElements) {
+        // Check if element is already in viewport on page load
+        const rect = el.getBoundingClientRect();
+        const isInViewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+
+        // If element is in viewport, animate it immediately
+        if (isInViewport || rect.top < window.innerHeight) {
+            el.classList.add('animate-in');
+        }
+
         animationObserver.observe(el);
     }
 }
@@ -2251,7 +2226,6 @@ function enhancedProjectLoad() {
             
             // Reset retry count on success
             if (retryCount > 0) {
-                console.log('✅ Successfully loaded projects after retry');
                 retryCount = 0;
             }
             
@@ -2262,14 +2236,12 @@ function enhancedProjectLoad() {
             if (retryCount < maxRetries) {
                 // Exponential backoff: 1s, 2s, 4s, 8s...
                 const delay = baseDelay * Math.pow(2, retryCount - 1);
-                console.log(`🔄 Retry ${retryCount}/${maxRetries} in ${delay/1000} seconds...`);
                 
                 // Add jitter to prevent thundering herd
                 const jitteredDelay = delay + Math.random() * 1000;
                 
                 setTimeout(loadWithRetry, jitteredDelay);
             } else {
-                console.error('❌ Failed to load projects after all retries');
                 showDemoProjects(document.getElementById('projects-grid'));
                 
                 // Show final API status for debugging
@@ -2300,12 +2272,10 @@ async function loadAllGitHubData() {
     try {
         // Initialize search filter system early
         await projectSearchFilter.loadProjectData().catch(error => {
-            console.warn('Project search filter initialization failed:', error);
         });
         
         // Initialize analytics dashboard
         analytics.initialize().catch(error => {
-            console.warn('Analytics dashboard initialization failed:', error);
         });
         
         // Load core data in parallel with smart coordination
@@ -2321,10 +2291,8 @@ async function loadAllGitHubData() {
         // Check results and log any failures
         const failed = results.filter(result => result.status === 'rejected');
         if (failed.length > 0) {
-            console.warn(`${failed.length} GitHub data requests failed:`, failed);
         }
         
-        console.log(`✅ Loaded ${results.length - failed.length}/${results.length} GitHub data sections`);
         displayAPIStatus();
         
     } catch (error) {
@@ -2376,7 +2344,6 @@ function handleContactForm() {
     for (const method of contactMethods) {
         method.addEventListener('click', function(e) {
             // Add click tracking or analytics here if needed
-            console.log('Contact method clicked:', this.href);
         });
     }
 }
@@ -2391,7 +2358,6 @@ async function loadGitHubStats() {
     const languageStats = document.getElementById('main-language-stats');
     
     if (!statsGrid) {
-        console.error('stats-grid element not found in DOM');
         return;
     }
     
@@ -2455,7 +2421,7 @@ async function loadGitHubStats() {
         statsGrid.innerHTML = statsHTML;
         
         // Load language statistics
-        loadLanguageStats(repos);
+        loadLanguageStats(repos, languageStats);
         
         // Load contribution graph (using GitHub readme stats API)
         contributionGraph.innerHTML = `
@@ -2465,7 +2431,6 @@ async function loadGitHubStats() {
         `;
         
     } catch (error) {
-        console.error('Error loading GitHub stats:', error);
         if (statsGrid) {
             statsGrid.innerHTML = '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
         }
@@ -2479,9 +2444,11 @@ async function loadGitHubStats() {
 }
 
 // Load language statistics
-function loadLanguageStats(repos) {
-    const languageStats = document.getElementById('main-language-stats');
-    
+function loadLanguageStats(repos, languageStats = null) {
+    if (!languageStats) {
+        languageStats = document.getElementById('main-language-stats');
+    }
+
     // Count languages across all repos
     const languages = {};
     for (const repo of repos) {
@@ -2518,7 +2485,6 @@ function loadLanguageStats(repos) {
     };
     
     if (!languageStats) {
-        console.error('main-language-stats element not found');
         return;
     }
     
@@ -2623,7 +2589,6 @@ async function loadGitHubActivity() {
         activityFeed.innerHTML = `<div class="activity-list">${activityItems}</div>`;
         
     } catch (error) {
-        console.error('Error loading GitHub activity:', error);
         activityFeed.innerHTML = '<p class="error-message">Unable to load recent activity.</p>';
     }
 }
@@ -2759,7 +2724,6 @@ async function loadPinnedRepos() {
         `).join('');
         
     } catch (error) {
-        console.error('Error loading pinned repos:', error);
         pinnedRepos.innerHTML = '<p class="error-message">Unable to load pinned repositories.</p>';
     }
 }
@@ -2804,7 +2768,6 @@ async function loadTopicsCloud() {
         `;
         
     } catch (error) {
-        console.error('Error loading topics:', error);
         topicsCloud.innerHTML = '<p class="error-message">Unable to load topics.</p>';
     }
 }
@@ -2846,7 +2809,6 @@ async function loadGitHubGists() {
         }).join('');
         
     } catch (error) {
-        console.error('Error loading gists:', error);
         gistsGrid.innerHTML = '<p class="error-message">Unable to load gists.</p>';
     }
 }
@@ -2855,13 +2817,11 @@ function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
     
     if (!themeToggle) {
-        console.error('❌ Theme toggle button not found! Looking for #theme-toggle');
         return;
     }
     
     const icon = themeToggle.querySelector('i');
     if (!icon) {
-        console.error('❌ Theme toggle icon not found! Looking for i element inside theme toggle');
         return;
     }
     
@@ -2870,15 +2830,12 @@ function initThemeToggle() {
     document.body.classList.toggle('dark-theme', currentTheme === 'dark');
     updateThemeIcon(icon, currentTheme);
     
-    console.log('✅ Theme toggle initialized. Current theme:', currentTheme);
     
     themeToggle.addEventListener('click', function() {
-        console.log('🎨 Theme toggle clicked');
         const isDark = document.body.classList.toggle('dark-theme');
         const theme = isDark ? 'dark' : 'light';
         localStorage.setItem('theme', theme);
         updateThemeIcon(icon, theme);
-        console.log('🎨 Theme changed to:', theme);
         
         // Trigger custom event for other components to listen to
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
@@ -2894,7 +2851,6 @@ function attemptThemeToggleInit(attempts = 0) {
     const maxAttempts = 10;
     
     if (attempts >= maxAttempts) {
-        console.error('❌ Failed to initialize theme toggle after', maxAttempts, 'attempts');
         return;
     }
     
@@ -2902,7 +2858,6 @@ function attemptThemeToggleInit(attempts = 0) {
     if (themeToggle) {
         initThemeToggle();
     } else {
-        console.log('⏳ Theme toggle not ready, retrying... (attempt', attempts + 1, ')');
         setTimeout(() => attemptThemeToggleInit(attempts + 1), 100);
     }
 }
@@ -2986,7 +2941,6 @@ globalThis.addEventListener('afterprint', function() {
 // Enhanced performance utilities
 function addLoadingClasses() {
     document.body.classList.add('loaded');
-    console.log('✅ Page loaded, removing loading state');
 }
 
 // Initialize critical loading optimizations
@@ -3185,7 +3139,6 @@ class ProjectSearchFilter {
             this.updateResultsCount();
             
         } catch (error) {
-            console.error('Failed to load project data:', error);
             // Fallback to empty arrays
             this.projects = [];
             this.categories = [];
@@ -3560,13 +3513,11 @@ class GitHubAnalyticsDashboard {
                     break;
             }
         } catch (error) {
-            console.error(`Failed to load ${tabName} data:`, error);
             this.showErrorState(tabName);
         }
     }
 
     async loadOverviewData() {
-        console.log('📊 Loading overview analytics data...');
         
         try {
             // Get repository data from GitHub API
@@ -3582,7 +3533,6 @@ class GitHubAnalyticsDashboard {
             this.renderTopRepositoriesChart(repos.slice(0, 10));
 
         } catch (error) {
-            console.error('Failed to load overview data:', error);
             throw error;
         }
     }
@@ -3662,7 +3612,6 @@ class GitHubAnalyticsDashboard {
     }
 
     async loadContributionData() {
-        console.log('📈 Loading contribution analytics data...');
         
         try {
             // Generate mock contribution data (in a real app, this would come from GitHub's GraphQL API)
@@ -3675,7 +3624,6 @@ class GitHubAnalyticsDashboard {
             this.renderMonthlyContributionsChart(contributionData);
 
         } catch (error) {
-            console.error('Failed to load contribution data:', error);
             throw error;
         }
     }
@@ -3836,7 +3784,6 @@ class GitHubAnalyticsDashboard {
     }
 
     async loadLanguageData() {
-        console.log('💻 Loading language analytics data...');
         
         try {
             const repos = await githubAPI.getRepositories('updated', 100);
@@ -3848,7 +3795,6 @@ class GitHubAnalyticsDashboard {
             this.renderLanguageTrendsChart(languageData);
 
         } catch (error) {
-            console.error('Failed to load language data:', error);
             throw error;
         }
     }
@@ -3958,7 +3904,6 @@ class GitHubAnalyticsDashboard {
     }
 
     async loadActivityData() {
-        console.log('⚡ Loading activity analytics data...');
         
         try {
             // Generate mock activity data
@@ -3970,7 +3915,6 @@ class GitHubAnalyticsDashboard {
             this.renderDailyActivity(activityData.dailyActivity);
 
         } catch (error) {
-            console.error('Failed to load activity data:', error);
             throw error;
         }
     }
@@ -4071,7 +4015,6 @@ class GitHubAnalyticsDashboard {
     // Chart creation methods using Chart.js
     createBarChart(canvas, id, data) {
         if (typeof Chart === 'undefined') {
-            console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#8b4513';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -4123,7 +4066,6 @@ class GitHubAnalyticsDashboard {
 
     createPieChart(canvas, id, data) {
         if (typeof Chart === 'undefined') {
-            console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#ff6b35';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -4170,7 +4112,6 @@ class GitHubAnalyticsDashboard {
 
     createLineChart(canvas, id, data) {
         if (typeof Chart === 'undefined') {
-            console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#ff6b35';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -4228,7 +4169,6 @@ class GitHubAnalyticsDashboard {
 
     createAreaChart(canvas, id, data) {
         if (typeof Chart === 'undefined') {
-            console.warn('Chart.js not loaded, showing placeholder');
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#800020';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -4366,7 +4306,6 @@ class GitHubAnalyticsDashboard {
     }
 
     async initialize() {
-        console.log('🚀 Initializing GitHub Analytics Dashboard...');
         
         // Load initial tab data
         await this.loadTabData(this.currentTab);
@@ -4444,7 +4383,6 @@ class PerformanceBudget {
                 overage: value - budget,
                 timestamp: Date.now()
             });
-            console.warn(`⚠️ Performance Budget Violation: ${metric}`, {
                 actual: value,
                 budget: budget,
                 overage: `+${(value - budget).toFixed(2)}${metric.includes('Time') || metric.includes('Paint') ? 'ms' : ''}`
@@ -4460,7 +4398,6 @@ class PerformanceBudget {
             recommendations: this.getRecommendations()
         };
         
-        console.log('📊 Performance Budget Report:', report);
         return report;
     }
 
@@ -4588,12 +4525,10 @@ function trackEvent(category, action, label, value) {
     // Manual events can be tracked if needed in the future
     
     // Console logging for development
-    console.log('📊 Event tracked:', { category, action, label, value });
     
     // Send custom event data if Cloudflare beacon is available
     if (typeof globalThis.cf_observer !== 'undefined') {
         // Custom events would go here when Cloudflare adds support
-        console.log('🌐 Cloudflare analytics active');
     }
     
     // Track performance events
@@ -4606,7 +4541,6 @@ function trackEvent(category, action, label, value) {
             userAgent: navigator.userAgent,
             url: globalThis.location.href
         };
-        console.log('⚡ Performance event:', perfData);
     }
 }
 
@@ -4631,7 +4565,6 @@ async function loadTopStarredProjects() {
             const projectsDataResponse = await fetch('projects-data.json');
             projectsData = await projectsDataResponse.json();
         } catch (error) {
-            console.warn('Project data file not found:', error.message);
         }
         
         // Get repositories sorted by stars
@@ -4746,7 +4679,6 @@ async function loadTopStarredProjects() {
         `;
         
     } catch (error) {
-        console.error('Error loading top starred projects:', error);
         topProjectsStats.innerHTML = '<p class="error-message">Unable to load top projects at this time.</p>';
     }
 }
@@ -4809,7 +4741,6 @@ async function loadSkillsMatrix() {
         
         skillsSection.parentElement.appendChild(skillsMatrix);
     } catch (error) {
-        console.error('Error loading skills matrix:', error);
     }
 }
 
@@ -4962,7 +4893,6 @@ if ('PerformanceObserver' in globalThis) {
     const perfObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
             if (entry.entryType === 'largest-contentful-paint') {
-                console.log('LCP:', entry.renderTime || entry.loadTime);
             }
         }
     });
@@ -4970,7 +4900,6 @@ if ('PerformanceObserver' in globalThis) {
     try {
         perfObserver.observe({ entryTypes: ['largest-contentful-paint'] });
     } catch (error) {
-        console.warn('Performance monitoring not supported:', error.message);
     }
 }
 
@@ -4989,7 +4918,6 @@ function backupGitHubStatsLoader() {
     if (statsGrid && statsGrid.innerHTML.includes('Loading stats...')) {
         // Main loader hasn't populated yet, use backup
         loadGitHubStats().catch(error => {
-            console.error('Backup GitHub stats loader failed:', error);
             if (statsGrid) {
                 statsGrid.innerHTML = '<div style="color: #ff6b35; padding: 20px;">Unable to load GitHub statistics</div>';
             }
@@ -5048,13 +4976,11 @@ class ContactFormManager {
 
     async initializeRecaptcha() {
         if (!this.config.enableRecaptcha) {
-            console.log('ℹ️ reCAPTCHA disabled or not loaded');
             return;
         }
         
         // Wait for reCAPTCHA to be ready
         if (typeof grecaptcha === 'undefined') {
-            console.log('⏳ Waiting for reCAPTCHA to load...');
             setTimeout(() => this.initializeRecaptcha(), 500);
             return;
         }
@@ -5072,13 +4998,10 @@ class ContactFormManager {
                 theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
                 callback: () => {
                     this.isRecaptchaReady = true;
-                    console.log('✅ reCAPTCHA verified');
                 }
             });
             
-            console.log('✅ reCAPTCHA initialized');
         } catch (error) {
-            console.warn('⚠️ reCAPTCHA initialization failed:', error.message);
             this.config.enableRecaptcha = false;
         }
     }
@@ -5087,7 +5010,6 @@ class ContactFormManager {
         if (!this.config.enableAnalytics) return;
         
         // Track with console for now - integrate with your analytics service
-        console.log(`📊 Form Analytics: ${eventName}${fieldName ? ` - ${fieldName}` : ''}`);
         
         // Example: Google Analytics 4 tracking
         if (typeof gtag !== 'undefined') {
@@ -5122,7 +5044,6 @@ class ContactFormManager {
         try {
             await this.submitWithRetry();
         } catch (error) {
-            console.error('Form submission failed after retries:', error);
             this.showStatus(
                 'There was a problem sending your message. Please try again or contact me directly at contact@matthewanderson.dev',
                 'error'
@@ -5176,7 +5097,6 @@ class ContactFormManager {
             }
             
         } catch (error) {
-            console.warn(`Submission attempt ${attempt}/${maxAttempts} failed:`, error.message);
             
             // Don't retry for certain errors
             if (error.message.includes('403') || error.message.includes('Invalid email')) {
@@ -5319,7 +5239,6 @@ class ContactFormManager {
             const isDark = document.body.classList.contains('dark-theme');
             // Note: reCAPTCHA theme can't be changed after initialization
             // This is a placeholder for future enhancement
-            console.log(`📱 Theme changed: ${isDark ? 'dark' : 'light'} (reCAPTCHA theme update needed)`);
         }
     }
 }
@@ -5341,7 +5260,6 @@ function forceHeroBackground() {
         // Use CSS variable for theme-aware gradient
         heroElement.style.setProperty('background', 'var(--gradient-primary)', 'important');
         heroElement.style.setProperty('background-image', 'var(--gradient-primary)', 'important');
-        console.log('✅ Hero background forced to theme-aware brown/maroon gradient');
     }
 }
 
@@ -5351,7 +5269,6 @@ document.addEventListener('DOMContentLoaded', forceHeroBackground);
 
 // Listen for theme changes and reapply hero background
 document.addEventListener('themeChanged', function(e) {
-    console.log('🎨 Theme changed event received, updating hero background for theme:', e.detail.theme);
     forceHeroBackground();
 });
 
@@ -5703,7 +5620,6 @@ class MobileOptimizationSystem {
         if ('performance' in globalThis) {
             const navigation = performance.getEntriesByType('navigation')[0];
             if (navigation) {
-                console.log('Mobile Load Performance:', {
                     'DOM Content Loaded': navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
                     'Load Complete': navigation.loadEventEnd - navigation.loadEventStart,
                     'First Paint': performance.getEntriesByName('first-paint')[0]?.startTime || 'Not available'
@@ -6032,7 +5948,6 @@ class PortfolioAnalyticsSystem {
         
         // Send to console in development
         if (globalThis.location.hostname === 'localhost' || globalThis.location.hostname === '127.0.0.1') {
-            console.log(`📊 Analytics Event: ${eventName}`, data);
         }
         
         // Send to Cloudflare Analytics (if available and configured)
@@ -6240,6 +6155,388 @@ class PortfolioAnalyticsSystem {
     }
 }
 
+// Enhanced Mobile Navigation Handler
+class EnhancedMobileNavigation {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupHamburgerMenu();
+        this.setupMobileMenuAnimation();
+        this.handleOrientationChange();
+        this.setupTouchFeedback();
+    }
+
+    setupHamburgerMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (!mobileMenu || !navMenu) return;
+
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleMenu();
+        });
+
+        // Close menu when clicking on nav links
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMenu();
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(e.target) &&
+                !mobileMenu.contains(e.target)) {
+                this.closeMenu();
+            }
+        });
+    }
+
+    toggleMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const body = document.body;
+
+        const isActive = navMenu.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+
+        if (isActive) {
+            body.classList.add('nav-open');
+            body.style.overflow = 'hidden';
+        } else {
+            body.classList.remove('nav-open');
+            body.style.overflow = '';
+        }
+    }
+
+    closeMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const body = document.body;
+
+        navMenu.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        body.classList.remove('nav-open');
+        body.style.overflow = '';
+    }
+
+    setupMobileMenuAnimation() {
+        const navMenu = document.getElementById('nav-menu');
+        if (!navMenu) return;
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    const isActive = navMenu.classList.contains('active');
+                    if (isActive) {
+                        this.animateMenuItems();
+                    }
+                }
+            });
+        });
+
+        observer.observe(navMenu, { attributes: true });
+    }
+
+    animateMenuItems() {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                item.style.transition = 'all 0.3s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, index * 50);
+        });
+    }
+
+    handleOrientationChange() {
+        let previousOrientation = window.orientation;
+
+        window.addEventListener('orientationchange', () => {
+            const currentOrientation = window.orientation;
+            if (currentOrientation !== previousOrientation) {
+                this.closeMenu();
+                previousOrientation = currentOrientation;
+
+                // Recalculate viewport height
+                setTimeout(() => {
+                    this.updateViewportHeight();
+                }, 200);
+            }
+        });
+    }
+
+    updateViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    setupTouchFeedback() {
+        const touchTargets = document.querySelectorAll('.btn, .nav-link, .project-link, .contact-method, .skill-item, .topic-tag');
+
+        touchTargets.forEach(target => {
+            target.addEventListener('touchstart', function() {
+                this.style.transition = 'transform 0.1s ease';
+            }, { passive: true });
+        });
+    }
+}
+
+// Enhanced Touch Gesture Handler
+class TouchGestureHandler {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.setupDoubleTapToTop();
+        this.setupSwipeGestures();
+        this.preventZoom();
+        this.optimizeScrolling();
+    }
+
+    setupDoubleTapToTop() {
+        let lastTap = 0;
+        const navbar = document.querySelector('.navbar');
+
+        if (navbar) {
+            navbar.addEventListener('touchend', (e) => {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+
+                if (tapLength < 500 && tapLength > 0) {
+                    // Double tap detected
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+
+                lastTap = currentTime;
+            }, { passive: true });
+        }
+    }
+
+    setupSwipeGestures() {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            this.handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+        }, { passive: true });
+    }
+
+    handleSwipe(startX, startY, endX, endY) {
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        const threshold = 50;
+
+        // Only handle horizontal swipes that are more horizontal than vertical
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+            // Swipe logic can be added here for specific components
+        }
+    }
+
+    preventZoom() {
+        // Prevent double-tap zoom on buttons and interactive elements
+        const preventZoomElements = document.querySelectorAll('.btn, button, a');
+
+        preventZoomElements.forEach(element => {
+            element.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                element.click();
+            });
+        });
+    }
+
+    optimizeScrolling() {
+        // Add momentum scrolling for iOS
+        const scrollContainers = document.querySelectorAll('.nav-menu, .global-search-results, .analytics-nav, .contribution-graph, .topics-cloud');
+
+        scrollContainers.forEach(container => {
+            container.style.webkitOverflowScrolling = 'touch';
+        });
+    }
+}
+
+// Mobile Performance Monitor
+class MobilePerformanceMonitor {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.monitorViewport();
+        this.lazyLoadImages();
+        this.optimizeAnimations();
+        this.monitorNetworkStatus();
+    }
+
+    monitorViewport() {
+        // Update viewport height for mobile browsers with dynamic toolbars
+        const updateVH = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+
+        updateVH();
+        window.addEventListener('resize', updateVH);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(updateVH, 100);
+        });
+    }
+
+    lazyLoadImages() {
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.getAttribute('data-src');
+                        if (src) {
+                            img.src = src;
+                            img.removeAttribute('data-src');
+                            img.classList.remove('loading-placeholder');
+                            img.classList.add('loaded');
+                            imageObserver.unobserve(img);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '50px'
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    }
+
+    optimizeAnimations() {
+        // Reduce motion if user prefers
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReducedMotion) {
+            document.documentElement.style.setProperty('--transition-base', '0.01ms');
+            document.documentElement.style.setProperty('--transition-fast', '0.01ms');
+            document.documentElement.style.setProperty('--transition-slow', '0.01ms');
+        }
+    }
+
+    monitorNetworkStatus() {
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            const effectiveType = connection.effectiveType;
+
+            // Adjust quality based on connection
+            if (effectiveType === 'slow-2g' || effectiveType === '2g') {
+                // Load lower quality resources
+                document.body.classList.add('slow-connection');
+            }
+
+            connection.addEventListener('change', () => {
+                const newType = connection.effectiveType;
+                if (newType === 'slow-2g' || newType === '2g') {
+                    document.body.classList.add('slow-connection');
+                } else {
+                    document.body.classList.remove('slow-connection');
+                }
+            });
+        }
+    }
+}
+
+// Mobile Form Enhancement
+class MobileFormEnhancement {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.enhanceInputs();
+        this.setupKeyboardHandling();
+        this.addAutoComplete();
+    }
+
+    enhanceInputs() {
+        // Add appropriate input types and attributes for mobile
+        const emailInputs = document.querySelectorAll('input[type="email"]');
+        emailInputs.forEach(input => {
+            input.setAttribute('autocomplete', 'email');
+            input.setAttribute('autocapitalize', 'off');
+            input.setAttribute('autocorrect', 'off');
+        });
+
+        const nameInputs = document.querySelectorAll('input[name="name"]');
+        nameInputs.forEach(input => {
+            input.setAttribute('autocomplete', 'name');
+            input.setAttribute('autocapitalize', 'words');
+        });
+
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
+            textarea.setAttribute('autocapitalize', 'sentences');
+        });
+    }
+
+    setupKeyboardHandling() {
+        // Scroll to input when keyboard appears
+        const inputs = document.querySelectorAll('input, textarea');
+
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                setTimeout(() => {
+                    input.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 300);
+            });
+        });
+    }
+
+    addAutoComplete() {
+        // Add better autocomplete attributes
+        const subjectInput = document.getElementById('subject');
+        if (subjectInput) {
+            subjectInput.setAttribute('autocomplete', 'off');
+        }
+
+        const messageInput = document.getElementById('message');
+        if (messageInput) {
+            messageInput.setAttribute('autocomplete', 'off');
+        }
+    }
+}
+
+// Initialize all mobile enhancements
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const enhancedMobileNav = new EnhancedMobileNavigation();
+        const touchGestureHandler = new TouchGestureHandler();
+        const mobilePerformanceMonitor = new MobilePerformanceMonitor();
+        const mobileFormEnhancement = new MobileFormEnhancement();
+
+        // Add mobile-optimized class to body
+        document.body.classList.add('mobile-optimized');
+    });
+}
+
 // Initialize Visual Animation System
 const visualAnimations = new VisualAnimationSystem();
 
@@ -6252,10 +6549,3 @@ const portfolioAnalytics = new PortfolioAnalyticsSystem();
 // Make analytics available globally for debugging
 globalThis.portfolioAnalytics = portfolioAnalytics;
 
-console.log('Portfolio enhancements loaded successfully! 🚀');
-console.log('Press "T" to toggle theme');
-console.log('Press Ctrl/Cmd + P to print resume');
-console.log('Visual animations initialized! ✨');
-console.log('Mobile optimizations active! 📱');
-console.log('Analytics system tracking user behavior! 📊');
-console.log('Access analytics data with: portfolioAnalytics.getSummary()');

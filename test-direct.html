@@ -66,7 +66,6 @@
             div.className = 'debug';
             div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
             log.appendChild(div);
-            console.log(message);
         }
 
         // Copy the exact GitHubAPIManager and loadGitHubStats from the main script
@@ -193,7 +192,6 @@
                 
             } catch (error) {
                 debugLog('❌ Error loading GitHub stats: ' + error.message);
-                console.error(error);
                 if (statsGrid) {
                     statsGrid.innerHTML = '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
                 }

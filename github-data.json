@@ -1018,7 +1018,7 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/homehub/deployments",
     "created_at": "2025-08-29T22:05:27Z",
     "updated_at": "2025-10-30T14:20:47Z",
-    "pushed_at": "2025-11-03T21:34:19Z",
+    "pushed_at": "2025-11-04T08:56:26Z",
     "git_url": "git://github.com/and3rn3t/homehub.git",
     "ssh_url": "git@github.com:and3rn3t/homehub.git",
     "clone_url": "https://github.com/and3rn3t/homehub.git",
@@ -2612,14 +2612,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-04T02:49:58Z",
-    "pushed_at": "2025-11-04T02:49:55Z",
+    "updated_at": "2025-11-04T15:29:20Z",
+    "pushed_at": "2025-11-04T15:29:17Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1079,
+    "size": 719,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2658,709 +2658,7 @@
 ],
   "events": [
   {
-    "id": "5681894275",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27973512941,
-      "ref": "refs/heads/main",
-      "head": "11e678c2bd739a4e0afb7e77b71ac2727538f0d5",
-      "before": "5a02f985e99757e4fd5a3322ce113b2f81aeb08f"
-    },
-    "public": true,
-    "created_at": "2025-11-04T02:49:55Z"
-  },
-  {
-    "id": "5681764325",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27973382863,
-      "ref": "refs/heads/main",
-      "head": "f2f6053f2d3a86aa9e6a2d3726f256ab0a5cfb0f",
-      "before": "3369863240d6188638f863b3820d0e5f61f8ad0c"
-    },
-    "public": true,
-    "created_at": "2025-11-04T02:41:03Z"
-  },
-  {
-    "id": "5681641859",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27973260235,
-      "ref": "refs/heads/main",
-      "head": "e19d7e00fde2506c0acecfc57ffee3f81f469c32",
-      "before": "8ea78c70a577288be0bc16d8b568b10f3d045fd3"
-    },
-    "public": true,
-    "created_at": "2025-11-04T02:31:26Z"
-  },
-  {
-    "id": "5681399636",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27973017551,
-      "ref": "refs/heads/main",
-      "head": "93e6d2a4e7579ef05b29af5989843d7ce0e1af36",
-      "before": "d1324119081ddb7a526a4faf8ffa53b9030de94f"
-    },
-    "public": true,
-    "created_at": "2025-11-04T02:13:33Z"
-  },
-  {
-    "id": "5680917996",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27972535207,
-      "ref": "refs/heads/main",
-      "head": "39a5a2b3ceb2516fa8c111f8d718cd21fe75d4b8",
-      "before": "7261dbc98320d1a91913a975caa98458b7407dd9"
-    },
-    "public": true,
-    "created_at": "2025-11-04T01:38:35Z"
-  },
-  {
-    "id": "5680796134",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27972413152,
-      "ref": "refs/heads/main",
-      "head": "6c16d506e2d6c7ab17060953cf244bdccdb63e05",
-      "before": "506838544d5b72e720769e491174925c26654ffa"
-    },
-    "public": true,
-    "created_at": "2025-11-04T01:29:06Z"
-  },
-  {
-    "id": "5680710506",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27972327389,
-      "ref": "refs/heads/main",
-      "head": "b55ca4608071cac1ea060b183c9be1078b128b7f",
-      "before": "aaebeec311de84e5263ad12e8f067a692fe95bcf"
-    },
-    "public": true,
-    "created_at": "2025-11-04T01:22:36Z"
-  },
-  {
-    "id": "5680533858",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27972150411,
-      "ref": "refs/heads/main",
-      "head": "3b248228461cc02eea2a49d7a665d5bea3585255",
-      "before": "30a4a2fac50968b2091d90122aecb40e4bc25215"
-    },
-    "public": true,
-    "created_at": "2025-11-04T01:09:56Z"
-  },
-  {
-    "id": "5680174585",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971790761,
-      "ref": "refs/heads/main",
-      "head": "ac53e6e7f1b57b1a93762aa82638f4a5f5515949",
-      "before": "01f006eef0baf601dddf8002c86ebbbf85522f13"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:44:25Z"
-  },
-  {
-    "id": "5680127583",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971743727,
-      "ref": "refs/heads/main",
-      "head": "2a1ba613c969ee0e99c0d55dc8f7f1c1bd187b89",
-      "before": "28da5536db2f4f53c4e12752b5d3bca7dfb427f9"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:40:53Z"
-  },
-  {
-    "id": "5679980121",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971596005,
-      "ref": "refs/heads/main",
-      "head": "30c94ed36ac8b26f0ff31100d197caa1b01ed033",
-      "before": "d53d5e3bc4f6a822f0c2b3bb06464058cb8a884a"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:29:36Z"
-  },
-  {
-    "id": "5679784851",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27971400298,
-      "ref": "refs/heads/main",
-      "head": "c2ff0a139cdabdec5e90dbb1958a9b55337c072f",
-      "before": "215ba0b4ad186bf64cb5237f1527add4af95858c"
-    },
-    "public": true,
-    "created_at": "2025-11-04T00:14:36Z"
-  },
-  {
-    "id": "5679322785",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970937455,
-      "ref": "refs/heads/main",
-      "head": "07d8046c1e0650ecf9ae2c530c13d4a220988c89",
-      "before": "10806abc325ab0b2cb05c958f7d26640697d26e3"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:39:14Z"
-  },
-  {
-    "id": "5679288559",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970903197,
-      "ref": "refs/heads/main",
-      "head": "5da49f3f1a063484a7436f9721b95b86cb4d3497",
-      "before": "1e8683c7b832d0b55e92f23c84411fc0f2caea01"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:36:36Z"
-  },
-  {
-    "id": "5679246269",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970860803,
-      "ref": "refs/heads/main",
-      "head": "5300850ff62564bdb12caacf82a2a4d714671d31",
-      "before": "572bb834b7b38b3ada25e091a09cbf4f7a7bb875"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:33:30Z"
-  },
-  {
-    "id": "5679140843",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970755274,
-      "ref": "refs/heads/main",
-      "head": "a3109e934b90a88f788b6a3c5f624061f42ba89c",
-      "before": "a53916723a5e8d504a2485064fd288694c0f3b46"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:26:00Z"
-  },
-  {
-    "id": "5679037288",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970651564,
-      "ref": "refs/heads/main",
-      "head": "32dde8ed541927753de990086782c5a9a67693c2",
-      "before": "0c0178e918c16dce9369816f35e577a9ca24a18e"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:18:29Z"
-  },
-  {
-    "id": "5678915024",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970529147,
-      "ref": "refs/heads/main",
-      "head": "4e77b79031964991183400330e045591d3404a7d",
-      "before": "6a3b3ab19e118fa459d9ffbcd37918992658589e"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:09:59Z"
-  },
-  {
-    "id": "5678905183",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970519279,
-      "ref": "refs/heads/main",
-      "head": "6a3b3ab19e118fa459d9ffbcd37918992658589e",
-      "before": "195c692e13e18d5a9d3a519b37452984a4cb57b2"
-    },
-    "public": true,
-    "created_at": "2025-11-03T23:09:19Z"
-  },
-  {
-    "id": "5678737417",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970351209,
-      "ref": "refs/heads/main",
-      "head": "a0a297db186dd839a964fb629c77438c23d45e8f",
-      "before": "8108c4801481fb9bd292d87ec975c3d6c9244c26"
-    },
-    "public": true,
-    "created_at": "2025-11-03T22:59:14Z"
-  },
-  {
-    "id": "5678594327",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970208079,
-      "ref": "refs/heads/main",
-      "head": "2b9a008c37342feb8b5e14e23d6e15a6d9b6a681",
-      "before": "cef89d3c6706ce974f79a93cd8442fc4e4546f93"
-    },
-    "public": true,
-    "created_at": "2025-11-03T22:49:20Z"
-  },
-  {
-    "id": "5678546047",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970159790,
-      "ref": "refs/heads/main",
-      "head": "f6bdb9f6e818fab3c0fa029fc89e77cf2fe0cf0b",
-      "before": "248f292e12272700a1c61b985d8a495f9ade338c"
-    },
-    "public": true,
-    "created_at": "2025-11-03T22:46:11Z"
-  },
-  {
-    "id": "5678419639",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27970033145,
-      "ref": "refs/heads/main",
-      "head": "b4e3acaeec70256897f5b3acd64b7780f1398246",
-      "before": "4c6a83636894a646f42966d73df055af95108707"
-    },
-    "public": true,
-    "created_at": "2025-11-03T22:38:22Z"
-  },
-  {
-    "id": "5678353134",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27969966548,
-      "ref": "refs/heads/main",
-      "head": "5dfa81a0e14963065ff8872f228bdcdd669cadff",
-      "before": "31474c4da026535681dc449d42affc0f756fdff6"
-    },
-    "public": true,
-    "created_at": "2025-11-03T22:34:16Z"
-  },
-  {
-    "id": "5678115506",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27969728585,
-      "ref": "refs/heads/main",
-      "head": "f3e27518c7a798d18be7a52bbad7efb7701da4c4",
-      "before": "355a33b7342fa88cbc9ffcc0c046f4564a701a37"
-    },
-    "public": true,
-    "created_at": "2025-11-03T22:21:04Z"
-  },
-  {
-    "id": "5677711476",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27969323926,
-      "ref": "refs/heads/main",
-      "head": "acc7cd17b02980997b962bbb246122c11e926077",
-      "before": "abac0321cd6e1de3fe1f926c9ba6e771b679c2db"
-    },
-    "public": true,
-    "created_at": "2025-11-03T21:58:17Z"
-  },
-  {
-    "id": "5677400024",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27969011960,
-      "ref": "refs/heads/main",
-      "head": "c50eb326dbca4feb68659726c24450f17ed655f3",
-      "before": "90ff356d1ab685c0ede548b9c0b3536498afefb4"
-    },
-    "public": true,
-    "created_at": "2025-11-03T21:40:39Z"
-  },
-  {
-    "id": "5676504661",
+    "id": "5698017724",
     "type": "DeleteEvent",
     "actor": {
       "id": 87380976,
@@ -3376,16 +2674,16 @@
       "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
     },
     "payload": {
-      "ref": "renovate/crazy-max-ghaction-github-pages-4.x",
+      "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
       "ref_type": "branch",
-      "full_ref": "refs/heads/renovate/crazy-max-ghaction-github-pages-4.x",
+      "full_ref": "refs/heads/claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
       "pusher_type": "user"
     },
     "public": true,
-    "created_at": "2025-11-03T20:55:24Z"
+    "created_at": "2025-11-04T15:29:18Z"
   },
   {
-    "id": "5676504420",
+    "id": "5698017277",
     "type": "PushEvent",
     "actor": {
       "id": 87380976,
@@ -3402,16 +2700,114 @@
     },
     "payload": {
       "repository_id": 390771666,
-      "push_id": 27968114961,
+      "push_id": 27989708148,
       "ref": "refs/heads/main",
-      "head": "14d5766506a5eaeaa740393415b3b39255fd2887",
-      "before": "7e6828281192625edc500c09c83151135498e1ed"
+      "head": "6b53876206efbf15ff85fa1757e8353a672360d1",
+      "before": "0c425b9e2a293b3df0297ac7234759b9498ee58f"
     },
     "public": true,
-    "created_at": "2025-11-03T20:55:23Z"
+    "created_at": "2025-11-04T15:29:17Z"
   },
   {
-    "id": "5676500825",
+    "id": "4455412842",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 21,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/21",
+        "id": 2977065756,
+        "number": 21,
+        "head": {
+          "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+          "sha": "622e81e90f176b07aa12acac60706747c7cf523e",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "0c425b9e2a293b3df0297ac7234759b9498ee58f",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:29:02Z"
+  },
+  {
+    "id": "5697951069",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:26:53Z"
+  },
+  {
+    "id": "5697675455",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:16:54Z"
+  },
+  {
+    "id": "5697675146",
     "type": "PushEvent",
     "actor": {
       "id": 87380976,
@@ -3428,15 +2824,759 @@
     },
     "payload": {
       "repository_id": 390771666,
-      "push_id": 27968111252,
-      "ref": "refs/heads/renovate/crazy-max-ghaction-github-pages-4.x",
-      "head": "3e7f38a3ce0759d9334a068d32cfaf8aeeca4294",
-      "before": "8ad3f0471c5e3e90c220522fcb61ddfdf7db1c7d"
+      "push_id": 27989363382,
+      "ref": "refs/heads/main",
+      "head": "102aa8903378621a68627f5ab006602f0637c2a9",
+      "before": "d6d43e64e3ec6a03b937b067985353602958accc"
     },
     "public": true,
-    "created_at": "2025-11-03T20:55:12Z"
+    "created_at": "2025-11-04T15:16:53Z"
+  },
+  {
+    "id": "4455051429",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 20,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/20",
+        "id": 2977019695,
+        "number": 20,
+        "head": {
+          "ref": "claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
+          "sha": "3629a3be0900f5d2bb5e5dbd2ebacb32cf841bf4",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "d6d43e64e3ec6a03b937b067985353602958accc",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:15:43Z"
+  },
+  {
+    "id": "5697590572",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T15:13:48Z"
+  },
+  {
+    "id": "5685041372",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27976664564,
+      "ref": "refs/heads/main",
+      "head": "bf1168c92018496b16e9a3faf7b2906dcab3ce02",
+      "before": "e5f9f5b8133a03c2e3b7a641909ac382c86b670e"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:29:58Z"
+  },
+  {
+    "id": "5685041433",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:29:59Z"
+  },
+  {
+    "id": "4442709187",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 19,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/19",
+        "id": 2975193380,
+        "number": 19,
+        "head": {
+          "ref": "claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+          "sha": "3d763b83ddbc0a0b7b0b750373ec677a6a84ebbf",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "e5f9f5b8133a03c2e3b7a641909ac382c86b670e",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:29:46Z"
+  },
+  {
+    "id": "5685023422",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:28:57Z"
+  },
+  {
+    "id": "5684937340",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:24:01Z"
+  },
+  {
+    "id": "5684937018",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27976560155,
+      "ref": "refs/heads/main",
+      "head": "4dafefeac36cc8a61833e2a2f52a2d5bbbe0198d",
+      "before": "eaeac2d4d550c30fec8dc066854b067e17cb9045"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:23:59Z"
+  },
+  {
+    "id": "4442628282",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 18,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/18",
+        "id": 2975182363,
+        "number": 18,
+        "head": {
+          "ref": "claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+          "sha": "fd441b0040aff8c0bd07de65a386e0908d2a53e1",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "eaeac2d4d550c30fec8dc066854b067e17cb9045",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:23:48Z"
+  },
+  {
+    "id": "5684915589",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/redesign-main-page-layout-011CUnN895gyLSr5StoFvVKk",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T06:22:43Z"
+  },
+  {
+    "id": "5683431866",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/mobile-optimization-overhaul-011CUnEE6GFdSjjnHd7crsCD",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/mobile-optimization-overhaul-011CUnEE6GFdSjjnHd7crsCD",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:45:47Z"
+  },
+  {
+    "id": "5683431642",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27975052638,
+      "ref": "refs/heads/main",
+      "head": "75d50dddfc6a5ad6c1993105b23feec56100ceda",
+      "before": "eeb734919a63e73c46f1a405d0e77e0a6ee8c7b2"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:45:46Z"
+  },
+  {
+    "id": "4441277969",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 17,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/17",
+        "id": 2975003573,
+        "number": 17,
+        "head": {
+          "ref": "claude/mobile-optimization-overhaul-011CUnEE6GFdSjjnHd7crsCD",
+          "sha": "0907f2496c9b150fdafcf5a41724c7d297a27aba",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "eeb734919a63e73c46f1a405d0e77e0a6ee8c7b2",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:45:28Z"
+  },
+  {
+    "id": "5683396129",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/mobile-optimization-overhaul-011CUnEE6GFdSjjnHd7crsCD",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/mobile-optimization-overhaul-011CUnEE6GFdSjjnHd7crsCD",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:43:01Z"
+  },
+  {
+    "id": "5683287110",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-hidden-sections-011CUnDPLCHhXL7su9vQJJWM",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-hidden-sections-011CUnDPLCHhXL7su9vQJJWM",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:34:35Z"
+  },
+  {
+    "id": "5683286762",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27974907485,
+      "ref": "refs/heads/main",
+      "head": "b3959d44aaf1ef53e7d808f1b65ffac3aff329dc",
+      "before": "375845098cc74a1e395d799dcb6bd1b2e129b38f"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:34:34Z"
+  },
+  {
+    "id": "4441096675",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 16,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/16",
+        "id": 2974982123,
+        "number": 16,
+        "head": {
+          "ref": "claude/fix-hidden-sections-011CUnDPLCHhXL7su9vQJJWM",
+          "sha": "4c1309877e28c49a25e8db80601851ef52ed3af0",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "375845098cc74a1e395d799dcb6bd1b2e129b38f",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:34:22Z"
+  },
+  {
+    "id": "5683268933",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-hidden-sections-011CUnDPLCHhXL7su9vQJJWM",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-hidden-sections-011CUnDPLCHhXL7su9vQJJWM",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:33:11Z"
+  },
+  {
+    "id": "5683139682",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/audit-design-consistency-011CUnCPTCcgQmo6VaS8cWRQ",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/audit-design-consistency-011CUnCPTCcgQmo6VaS8cWRQ",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:23:20Z"
+  },
+  {
+    "id": "5683139452",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27974759942,
+      "ref": "refs/heads/main",
+      "head": "9949b9d83a296da1e7332952bc8f549f800413da",
+      "before": "6f0a33fb8f0ae7ab910ba6c07726583e31cb0fe9"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:23:19Z"
+  },
+  {
+    "id": "4440967693",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 15,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/15",
+        "id": 2974965425,
+        "number": 15,
+        "head": {
+          "ref": "claude/audit-design-consistency-011CUnCPTCcgQmo6VaS8cWRQ",
+          "sha": "b2d2ce77cf61178bbc65f59ebb95bb0e84448cde",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "6f0a33fb8f0ae7ab910ba6c07726583e31cb0fe9",
+          "repo": {
+            "id": 390771666,
+            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+            "name": "and3rn3t"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:23:03Z"
+  },
+  {
+    "id": "5683106680",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/audit-design-consistency-011CUnCPTCcgQmo6VaS8cWRQ",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/audit-design-consistency-011CUnCPTCcgQmo6VaS8cWRQ",
+      "master_branch": "main",
+      "description": "Config files for my GitHub profile.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:20:49Z"
+  },
+  {
+    "id": "5682972553",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "ref": "claude/fix-errors-and-warnings-011CUnBYqoHotc3gvm98qfdD",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/fix-errors-and-warnings-011CUnBYqoHotc3gvm98qfdD",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:10:40Z"
+  },
+  {
+    "id": "5682972425",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27974592633,
+      "ref": "refs/heads/main",
+      "head": "4b5edd24c1664243c45be1d542ef3c9cd361f3be",
+      "before": "50c41c9f412ab66dc02b20f08c823d0879975481"
+    },
+    "public": true,
+    "created_at": "2025-11-04T04:10:39Z"
   }
 ],
-  "lastUpdated": "2025-11-04T02:50:03Z",
+  "lastUpdated": "2025-11-04T15:29:25Z",
   "rateLimitRemaining": "Enhanced with token"
 }

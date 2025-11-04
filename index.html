@@ -167,6 +167,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+<<<<<<< HEAD
         
         /* CRITICAL MODAL OVERRIDE - FORCE HIDE IMMEDIATELY */
         div#global-search-modal,
@@ -226,6 +227,8 @@
             padding: 15px !important;
             margin: 10px 0 !important;
         }
+=======
+>>>>>>> 2508442246c3f1c4ab507598515ddcde397a8158
     </style>
     
     <!-- Load main stylesheet after critical CSS -->
@@ -292,19 +295,19 @@
                     <a href="#home" class="nav-link touch-target">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link touch-target">About</a>
+                    <a href="#projects" class="nav-link touch-target">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link touch-target">Skills</a>
                 </li>
                 <li class="nav-item">
                     <a href="#github-stats" class="nav-link touch-target">GitHub Stats</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#projects" class="nav-link touch-target">Projects</a>
+                    <a href="#about" class="nav-link touch-target">About</a>
                 </li>
                 <li class="nav-item">
                     <a href="#analytics" class="nav-link touch-target">Analytics</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link touch-target">Skills</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link touch-target">Contact</a>
@@ -331,7 +334,7 @@
     </nav>
 
     <!-- Global Search Modal -->
-    <div class="global-search-modal" id="global-search-modal" style="display: none !important; opacity: 0 !important; visibility: hidden !important; transform: translateY(-100vh) !important;">
+    <div class="global-search-modal" id="global-search-modal">
         <div class="global-search-content">
             <div class="global-search-header">
                 <div class="global-search-input-container">
@@ -381,10 +384,10 @@
                 <div class="search-results-content" id="search-results-content"></div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Keyboard Shortcuts Help -->
-    <div class="keyboard-help" id="keyboard-help" style="display: none !important; opacity: 0 !important; visibility: hidden !important; transform: translateY(-100vh) !important;">
+    <div class="keyboard-help" id="keyboard-help">
         <div class="keyboard-help-content">
             <h3>⌨️ Keyboard Shortcuts</h3>
             <div class="shortcut-grid">
@@ -437,7 +440,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero animate-on-scroll" id="home">
+    <section class="hero" id="home">
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -479,6 +482,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     <!-- About Section -->
     <div style="background: red; color: white; padding: 50px; font-size: 24px; text-align: center;">
         🚨 ABOUT SECTION TEST - IF YOU SEE THIS, THE SECTION EXISTS 🚨
@@ -598,6 +602,8 @@
         </div>
     </section>
 
+=======
+>>>>>>> 2508442246c3f1c4ab507598515ddcde397a8158
     <!-- Projects Section -->
     <section class="projects animate-on-scroll" id="projects">
         <div class="container">
@@ -610,7 +616,7 @@
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" id="project-search" placeholder="Search projects... (Ctrl+K to focus)" 
                                class="search-input" aria-label="Search projects">
-                        <button id="clear-search" class="clear-search hidden" aria-label="Clear search">
+                        <button id="clear-search" class="clear-search" aria-label="Clear search">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -674,7 +680,7 @@
                         <button id="reset-filters" class="reset-btn" title="Reset all filters">
                             <i class="fas fa-undo"></i> Reset
                         </button>
-                        <button id="save-search" class="save-search-btn hidden" title="Save current search">
+                        <button id="save-search" class="save-search-btn" title="Save current search">
                             <i class="fas fa-bookmark"></i> Save
                         </button>
                     </div>
@@ -682,7 +688,7 @@
             </div>
             
             <!-- Advanced Search Results -->
-            <div class="search-results-summary hidden" id="search-results-summary">
+            <div class="search-results-summary" id="search-results-summary">
                 <div class="search-summary-content">
                     <h3 class="search-summary-title">
                         <i class="fas fa-search"></i>
@@ -710,7 +716,7 @@
             </div>
 
             <!-- Saved Searches -->
-            <div class="saved-searches hidden" id="saved-searches">
+            <div class="saved-searches" id="saved-searches">
                 <h4 class="saved-searches-title">
                     <i class="fas fa-bookmark"></i>
                     Saved Searches
@@ -719,7 +725,7 @@
             </div>
 
             <!-- Related Projects -->
-            <div class="related-projects hidden" id="related-projects">
+            <div class="related-projects" id="related-projects">
                 <h4 class="related-title">
                     <i class="fas fa-link"></i>
                     Related Projects
@@ -787,8 +793,121 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
+    <section class="skills animate-on-scroll" id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">HTML5</span>
+                        <span class="skill-item">CSS3</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">React</span>
+                        <span class="skill-item">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">REST APIs</span>
+                        <span class="skill-item">Database Design</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Git</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">Linux</span>
+                        <span class="skill-item">IoT</span>
+                        <span class="skill-item">Home Automation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Stats Section -->
+    <section class="github-stats animate-on-scroll" id="github-stats">
+        <div class="container">
+            <h2 class="section-title">GitHub Statistics</h2>
+            <div class="stats-grid" id="stats-grid">
+                <!-- GitHub stats will be loaded dynamically -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading stats...</p>
+                </div>
+            </div>
+
+            <!-- GitHub Contribution Graph -->
+            <div class="contribution-section">
+                <h3 class="subsection-title">Contribution Activity</h3>
+                <div class="contribution-graph" id="contribution-graph">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading contributions...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Stats -->
+            <div class="language-stats-section">
+                <h3 class="subsection-title">Most Used Languages</h3>
+                <div class="language-stats" id="main-language-stats">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading language stats...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about animate-on-scroll" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate full-stack developer with a love for technology, home automation,
+                        and general gadgetry. My journey in software development is driven by curiosity
+                        and a desire to create meaningful, innovative solutions.
+                    </p>
+                    <p>
+                        Currently expanding my expertise in modern web development technologies,
+                        I enjoy working with both frontend and backend systems to build comprehensive,
+                        user-focused applications.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-code"></i>
+                            <h3>Clean Code</h3>
+                            <p>Writing maintainable, scalable, and efficient code</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-home"></i>
+                            <h3>IoT & Automation</h3>
+                            <p>Passionate about smart home technologies and automation</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Innovation</h3>
+                            <p>Always exploring new technologies and creative solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Advanced GitHub Analytics Dashboard -->
-    <section class="analytics-dashboard" id="analytics">
+    <section class="analytics-dashboard animate-on-scroll" id="analytics">
         <div class="container">
             <h2 class="section-title">Development Analytics</h2>
             <p class="section-intro">
@@ -1008,7 +1127,7 @@
     </section>
 
     <!-- Recent Activity Section -->
-    <section class="recent-activity" id="recent-activity">
+    <section class="recent-activity animate-on-scroll" id="recent-activity">
         <div class="container">
             <h2 class="section-title">Recent GitHub Activity</h2>
             <div class="activity-feed" id="activity-feed">
@@ -1021,7 +1140,7 @@
     </section>
 
     <!-- GitHub Gists Section -->
-    <section class="gists-section" id="gists">
+    <section class="gists-section animate-on-scroll" id="gists">
         <div class="container">
             <h2 class="section-title">📝 Latest Code Snippets (Gists)</h2>
             <div class="gists-grid" id="gists-grid">
@@ -1034,7 +1153,7 @@
     </section>
 
     <!-- GitHub Insights Section -->
-    <section class="github-insights" id="insights">
+    <section class="github-insights animate-on-scroll" id="insights">
         <div class="container">
             <h2 class="section-title">📊 Developer Insights</h2>
             <div class="insights-grid">
@@ -1096,7 +1215,7 @@
     </section>
 
     <!-- GitHub Achievements Section -->
-    <section class="achievements" id="achievements">
+    <section class="achievements animate-on-scroll" id="achievements">
         <div class="container">
             <h2 class="section-title">GitHub Profile Badges</h2>
             <div class="badges-grid" id="badges-grid">
@@ -1106,7 +1225,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section class="contact animate-on-scroll" id="contact">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
             <div class="contact-content">
@@ -1226,7 +1345,6 @@
             // Critical performance metrics
             window.addEventListener('load', () => {
                 const loadTime = performance.now() - pageLoadStart;
-                console.log(`⚡ Page loaded in ${loadTime.toFixed(2)}ms`);
                 
                 // Report to analytics if available
                 if (typeof gtag !== 'undefined') {
@@ -1279,7 +1397,6 @@
         if ('serviceWorker' in navigator && location.protocol === 'https:') {
             window.addEventListener('load', () => {
                 // Will be implemented in PWA phase
-                console.log('🔧 Service Worker registration ready for PWA implementation');
             });
         }
     </script>
