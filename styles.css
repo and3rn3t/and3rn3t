@@ -7757,3 +7757,219 @@ body.dark-theme .event-item {
         }
     }
 }
+
+/* ============================================================================
+   PWA Install & Update Notifications
+   ============================================================================ */
+
+/* Base notification/banner styles */
+.update-notification,
+.install-banner {
+    position: fixed;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    border: 2px solid var(--primary-color);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    z-index: 10000;
+    transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    backdrop-filter: blur(10px);
+}
+
+.update-notification.show,
+.install-banner.show {
+    bottom: 24px;
+}
+
+/* Content layout */
+.update-content,
+.install-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Icons */
+.update-icon,
+.install-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Text content */
+.update-text,
+.install-text {
+    flex: 1;
+}
+
+.update-text strong,
+.install-text strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.update-text p,
+.install-text p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Action buttons */
+.update-button,
+.install-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.update-button:hover,
+.install-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.update-button:active,
+.install-button:active {
+    transform: translateY(0);
+}
+
+/* Dismiss buttons */
+.update-dismiss,
+.install-dismiss {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.update-dismiss:hover,
+.install-dismiss:hover {
+    background: var(--bg-secondary);
+    border-color: var(--text-secondary);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .update-notification,
+    .install-banner {
+        width: 95%;
+        padding: 16px;
+    }
+    
+    .update-content,
+    .install-content {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .update-icon,
+    .install-icon {
+        font-size: 1.5rem;
+    }
+    
+    .update-text,
+    .install-text {
+        flex-basis: 100%;
+    }
+    
+    .update-button,
+    .install-button,
+    .update-dismiss,
+    .install-dismiss {
+        flex: 1;
+        padding: 8px 12px;
+        font-size: 0.813rem;
+    }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .update-notification,
+[data-theme="dark"] .install-banner {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+}
+
+/* High contrast theme */
+[data-theme="high-contrast"] .update-notification,
+[data-theme="high-contrast"] .install-banner {
+    border-width: 3px;
+    border-color: var(--accent-color);
+}
+
+[data-theme="high-contrast"] .update-button,
+[data-theme="high-contrast"] .install-button {
+    font-weight: 700;
+    border: 2px solid white;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .update-notification,
+    .install-banner {
+        transition: bottom 0.2s ease;
+    }
+    
+    .update-icon,
+    .install-icon {
+        animation: none;
+    }
+    
+    .update-button:hover,
+    .install-button:hover {
+        transform: none;
+    }
+}
+
+/* PWA display mode detection */
+@media (display-mode: standalone) {
+    /* Hide install banner when already installed */
+    .install-banner {
+        display: none !important;
+    }
+    
+    /* Adjust navigation for standalone mode */
+    .navbar {
+        padding-top: max(1rem, env(safe-area-inset-top));
+    }
+}
+
+/* iOS Safari specific adjustments */
+@supports (-webkit-touch-callout: none) {
+    .update-notification,
+    .install-banner {
+        bottom: max(24px, env(safe-area-inset-bottom));
+    }
+    
+    .update-notification.show,
+    .install-banner.show {
+        bottom: max(24px, calc(env(safe-area-inset-bottom) + 24px));
+    }
+}

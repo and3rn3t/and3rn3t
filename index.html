@@ -7,6 +7,40 @@
     <meta name="keywords" content="Matthew Anderson, Full-Stack Developer, React, Python, PostgreSQL, Web Development, IoT, Home Automation, TypeScript, Swift, Health Technology, Game Development, Cybersecurity">
     <meta name="author" content="Matthew Anderson">
     
+    <!-- PWA Meta Tags -->
+    <meta name="application-name" content="Matthew Anderson Portfolio">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="M. Anderson">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/icons/icon-72x72.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.svg">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.svg">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-128x128.svg">
+    <link rel="apple-touch-icon" href="/icons/icon-180x180.svg">
+    
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-iphone5-640x1136.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-iphone6-750x1334.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" href="/icons/splash-iphone6plus-1242x2208.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="/icons/splash-iphonex-1125x2436.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="/icons/splash-iphonexsmax-1242x2688.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-iphonexr-828x1792.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-ipadpro10-1536x2048.svg">
+    <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-ipadpro12-2048x2732.svg">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://andernet.dev/">
@@ -23,35 +57,158 @@
     <meta name="twitter:image" content="https://andernet.dev/github-metrics.svg">
     
     <!-- Additional SEO -->
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="General">
+    <meta name="distribution" content="Global">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="all">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="format-detection" content="telephone=no">
     <link rel="canonical" href="https://andernet.dev/">
+    <link rel="alternate" hreflang="en" href="https://andernet.dev/">
     
-    <!-- Structured Data for SEO -->
+    <!-- Structured Data for SEO - Enhanced -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Matthew Anderson",
-      "url": "https://andernet.dev/",
-      "sameAs": [
-        "https://github.com/and3rn3t",
-        "https://linkedin.com/in/matthew-anderson"
-      ],
-      "jobTitle": "Full-Stack Developer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Independent"
-      },
-      "knowsAbout": ["TypeScript", "Python", "Swift", "React", "IoT", "Home Automation", "Health Technology", "Web Development", "Mobile Development"],
-      "description": "Full-Stack Developer specializing in modern web technologies, home automation, health technology, and innovative solutions."
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://andernet.dev/#person",
+          "name": "Matthew Anderson",
+          "alternateName": "and3rn3t",
+          "url": "https://andernet.dev/",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://andernet.dev/icons/icon-512x512.svg",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://github.com/and3rn3t",
+            "https://linkedin.com/in/matthew-anderson"
+          ],
+          "jobTitle": "Full-Stack Developer",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Independent"
+          },
+          "knowsAbout": [
+            {
+              "@type": "Thing",
+              "name": "TypeScript",
+              "description": "Programming language for web development"
+            },
+            {
+              "@type": "Thing",
+              "name": "Python",
+              "description": "Programming language for automation and data science"
+            },
+            {
+              "@type": "Thing",
+              "name": "Swift",
+              "description": "Programming language for iOS development"
+            },
+            {
+              "@type": "Thing",
+              "name": "React",
+              "description": "JavaScript library for building user interfaces"
+            },
+            {
+              "@type": "Thing",
+              "name": "IoT",
+              "description": "Internet of Things and smart home automation"
+            },
+            {
+              "@type": "Thing",
+              "name": "Home Automation",
+              "description": "Smart home systems and automation"
+            },
+            {
+              "@type": "Thing",
+              "name": "Health Technology",
+              "description": "Healthcare analytics and monitoring systems"
+            }
+          ],
+          "description": "Full-Stack Developer specializing in modern web technologies, home automation, health technology, and innovative solutions.",
+          "knowsLanguage": ["en-US"],
+          "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Software Developer",
+            "occupationalCategory": "15-1252.00",
+            "skills": "TypeScript, Python, Swift, React, Node.js, PostgreSQL, IoT, Home Automation"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://andernet.dev/#website",
+          "url": "https://andernet.dev/",
+          "name": "Matthew Anderson Portfolio",
+          "description": "Portfolio showcasing full-stack development projects, GitHub statistics, and professional experience",
+          "publisher": {
+            "@id": "https://andernet.dev/#person"
+          },
+          "inLanguage": "en-US",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://andernet.dev/#projects?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://andernet.dev/#webpage",
+          "url": "https://andernet.dev/",
+          "name": "Matthew Anderson | Full-Stack Developer Portfolio",
+          "description": "Explore my portfolio of innovative projects including health analytics, IoT automation, mobile apps, and more.",
+          "isPartOf": {
+            "@id": "https://andernet.dev/#website"
+          },
+          "about": {
+            "@id": "https://andernet.dev/#person"
+          },
+          "datePublished": "2023-01-01T00:00:00+00:00",
+          "dateModified": "2025-11-04T00:00:00+00:00",
+          "breadcrumb": {
+            "@id": "https://andernet.dev/#breadcrumb"
+          },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://andernet.dev/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@id": "https://andernet.dev/",
+                "name": "Home"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://andernet.dev/#profilepage",
+          "url": "https://andernet.dev/",
+          "name": "Matthew Anderson - Developer Profile",
+          "isPartOf": {
+            "@id": "https://andernet.dev/#website"
+          },
+          "about": {
+            "@id": "https://andernet.dev/#person"
+          },
+          "description": "Professional portfolio and project showcase",
+          "inLanguage": "en-US"
+        }
+      ]
     }
     </script>
     <title>Matthew Anderson | Full-Stack Developer</title>
-    
-    <!-- Performance Optimizations -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <!-- Critical Resource Preloads -->
     <link rel="preload" href="styles.css" as="style">
@@ -1327,7 +1484,7 @@
             <i class="fas fa-palette"></i>
         </button>
         
-        <div class="theme-picker-menu" id="theme-picker-menu" role="menu" aria-label="Theme selection">
+        <div class="theme-picker-menu" id="theme-picker-menu" aria-label="Theme selection">
             <div class="theme-picker-header">
                 <h3>Choose Theme</h3>
                 <button class="theme-picker-close" id="theme-picker-close" aria-label="Close theme picker">
@@ -1335,7 +1492,7 @@
                 </button>
             </div>
             
-            <div class="theme-options">
+            <div class="theme-options" role="menu">
                 <button class="theme-option" data-theme="light" role="menuitem">
                     <div class="theme-preview light-preview">
                         <div class="preview-bar"></div>
@@ -1343,7 +1500,7 @@
                     </div>
                     <span class="theme-name">☀️ Light</span>
                     <span class="theme-description">Default bright theme</span>
-                </button>
+                </>
                 
                 <button class="theme-option" data-theme="dark" role="menuitem">
                     <div class="theme-preview dark-preview">

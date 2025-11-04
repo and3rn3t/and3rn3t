@@ -1,4 +1,41 @@
+# Robots.txt for Matthew Anderson's Portfolio
+# Last updated: November 4, 2025
+
+# Allow all search engines
 User-agent: *
 Allow: /
 
-Sitemap: https://and3rn3t.github.io/and3rn3t/sitemap.xml
+# Block access to testing directory
+Disallow: /testing/
+
+# Block access to documentation
+Disallow: /docs/
+
+# Block access to scripts (crawlers don't need these)
+Disallow: /*.js$
+Disallow: /*.json$
+
+# Block access to manifest and service worker
+Disallow: /sw.js
+Disallow: /manifest.json
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://andernet.dev/sitemap.xml
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: TwitterBot
+Allow: /

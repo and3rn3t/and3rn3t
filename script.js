@@ -3171,13 +3171,13 @@ class ProjectSearchFilter {
         this.technologies = [];
         this.currentFilters = {
             search: '',
-            category: '',
+            category: 'all',
             technology: '',
             status: ''
         };
         this.sortConfig = {
-            field: 'name',
-            direction: 'asc'
+            field: 'stars',
+            direction: 'desc'
         };
         this.viewMode = 'grid';
         this.searchTimeout = null;
@@ -3381,7 +3381,10 @@ class ProjectSearchFilter {
     }
     
     filterGitHubProjects() {
-        if (!this.originalCards) return;
+        // Guard: Don't filter if no cards are loaded yet
+        if (!this.originalCards || this.originalCards.length === 0) {
+            return;
+        }
         
         const projectsGrid = document.getElementById('projects-grid');
         if (!projectsGrid) return;
@@ -6837,4 +6840,2386 @@ setInterval(updateCloudflareStatus, 1000);
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(updateCloudflareStatus, 2000);
 });
+
+// ============================================================================
+// PWA Service Worker Registration
+// ============================================================================
+
+// Register service worker for PWA functionality
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+        try {
+            const registration = await navigator.serviceWorker.register('/sw.js', {
+                scope: '/'
+            });
+            
+            console.log('[PWA] Service Worker registered successfully:', registration.scope);
+            
+            // Handle updates
+            registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // New service worker available
+                        showUpdateNotification();
+                    }
+                });
+            });
+            
+            // Check for updates periodically
+            setInterval(() => {
+                registration.update();
+            }, 60 * 60 * 1000); // Check every hour
+            
+        } catch (error) {
+            console.error('[PWA] Service Worker registration failed:', error);
+        }
+    });
+    
+    // Handle controller change (new service worker activated)
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('[PWA] New service worker activated');
+    });
+    
+    // Listen for messages from service worker
+    navigator.serviceWorker.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'CACHE_UPDATED') {
+            console.log('[PWA] Cache updated:', event.data.url);
+        }
+    });
+}
+
+// Show update notification when new version available
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.className = 'update-notification';
+    notification.innerHTML = `
+        <div class="update-content">
+            <div class="update-icon">🔄</div>
+            <div class="update-text">
+                <strong>Update Available</strong>
+                <p>A new version of the portfolio is ready</p>
+            </div>
+            <button class="update-button" onclick="updateServiceWorker()">Update Now</button>
+            <button class="update-dismiss" onclick="this.closest('.update-notification').remove()">Later</button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    // Auto-show with animation
+    setTimeout(() => notification.classList.add('show'), 100);
+}
+
+// Update service worker and reload
+globalThis.updateServiceWorker = async function() {
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (registration && registration.waiting) {
+        // Tell the waiting service worker to skip waiting
+        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        
+        // Reload the page when the new service worker takes control
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            window.location.reload();
+        });
+    }
+};
+
+// ============================================================================
+// Touch Gesture Manager
+// ============================================================================
+
+class TouchGestureManager {
+    constructor() {
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.touchEndX = 0;
+        this.touchEndY = 0;
+        this.minSwipeDistance = 50;
+        this.pullToRefreshThreshold = 80;
+        this.isPulling = false;
+        this.currentProjectIndex = 0;
+        
+        this.init();
+    }
+    
+    init() {
+        // Only enable on touch devices
+        if (!('ontouchstart' in window)) {
+            return;
+        }
+        
+        this.setupSwipeNavigation();
+        this.setupPullToRefresh();
+        this.ensureMinimumTouchTargets();
+        
+        console.log('[Touch] Gesture manager initialized');
+    }
+    
+    setupSwipeNavigation() {
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (!projectsGrid) return;
+        
+        let touchStartTime;
+        
+        projectsGrid.addEventListener('touchstart', (e) => {
+            // Ignore multi-touch
+            if (e.touches.length !== 1) return;
+            
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+        }, { passive: true });
+        
+        projectsGrid.addEventListener('touchend', (e) => {
+            if (e.changedTouches.length !== 1) return;
+            
+            this.touchEndX = e.changedTouches[0].clientX;
+            this.touchEndY = e.changedTouches[0].clientY;
+            
+            const touchDuration = Date.now() - touchStartTime;
+            
+            // Require quick swipe (less than 300ms)
+            if (touchDuration > 300) return;
+            
+            this.handleSwipe(projectsGrid);
+        }, { passive: true });
+    }
+    
+    handleSwipe(projectsGrid) {
+        const deltaX = this.touchEndX - this.touchStartX;
+        const deltaY = this.touchEndY - this.touchStartY;
+        
+        // Check if horizontal swipe (more horizontal than vertical)
+        if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+        
+        // Check minimum distance
+        if (Math.abs(deltaX) < this.minSwipeDistance) return;
+        
+        const projects = Array.from(projectsGrid.querySelectorAll('.project-card'));
+        if (projects.length === 0) return;
+        
+        // Swipe left - next project
+        if (deltaX < 0 && this.currentProjectIndex < projects.length - 1) {
+            this.currentProjectIndex++;
+            this.scrollToProject(projects[this.currentProjectIndex]);
+            this.showSwipeIndicator('left');
+        }
+        // Swipe right - previous project
+        else if (deltaX > 0 && this.currentProjectIndex > 0) {
+            this.currentProjectIndex--;
+            this.scrollToProject(projects[this.currentProjectIndex]);
+            this.showSwipeIndicator('right');
+        }
+    }
+    
+    scrollToProject(projectCard) {
+        projectCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+        
+        // Highlight effect
+        projectCard.style.transform = 'scale(1.02)';
+        projectCard.style.boxShadow = '0 8px 30px rgba(102, 126, 234, 0.3)';
+        
+        setTimeout(() => {
+            projectCard.style.transform = '';
+            projectCard.style.boxShadow = '';
+        }, 300);
+    }
+    
+    showSwipeIndicator(direction) {
+        const indicator = document.createElement('div');
+        indicator.className = 'swipe-indicator';
+        indicator.innerHTML = direction === 'left' ? '→' : '←';
+        indicator.style.cssText = `
+            position: fixed;
+            ${direction === 'left' ? 'right: 20px' : 'left: 20px'};
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0;
+            animation: swipeIndicatorFade 0.5s ease-out;
+            pointer-events: none;
+            z-index: 9999;
+        `;
+        
+        document.body.appendChild(indicator);
+        
+        setTimeout(() => indicator.remove(), 500);
+    }
+    
+    setupPullToRefresh() {
+        let pullDistance = 0;
+        let startY = 0;
+        let pullIndicator = null;
+        
+        // Create pull indicator
+        const createPullIndicator = () => {
+            if (pullIndicator) return pullIndicator;
+            
+            pullIndicator = document.createElement('div');
+            pullIndicator.className = 'pull-to-refresh-indicator';
+            pullIndicator.innerHTML = `
+                <div class="pull-spinner">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 2 L12 6 M12 2 L15 5 M12 2 L9 5" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                <div class="pull-text">Pull to refresh</div>
+            `;
+            pullIndicator.style.cssText = `
+                position: fixed;
+                top: -100px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                padding: 16px;
+                background: var(--bg-primary);
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transition: top 0.3s ease;
+                z-index: 9998;
+                color: var(--text-primary);
+            `;
+            
+            document.body.appendChild(pullIndicator);
+            return pullIndicator;
+        };
+        
+        document.addEventListener('touchstart', (e) => {
+            // Only at top of page
+            if (window.scrollY > 0) return;
+            
+            startY = e.touches[0].clientY;
+            this.isPulling = true;
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (!this.isPulling || window.scrollY > 0) return;
+            
+            const currentY = e.touches[0].clientY;
+            pullDistance = Math.max(0, currentY - startY);
+            
+            // Show indicator when pulling
+            if (pullDistance > 10) {
+                const indicator = createPullIndicator();
+                const progress = Math.min(pullDistance / this.pullToRefreshThreshold, 1);
+                
+                indicator.style.top = `${Math.min(pullDistance - 60, 20)}px`;
+                
+                const spinner = indicator.querySelector('.pull-spinner svg');
+                spinner.style.transform = `rotate(${progress * 360}deg)`;
+                
+                const text = indicator.querySelector('.pull-text');
+                text.textContent = pullDistance >= this.pullToRefreshThreshold 
+                    ? 'Release to refresh' 
+                    : 'Pull to refresh';
+                
+                if (pullDistance >= this.pullToRefreshThreshold) {
+                    indicator.style.color = 'var(--primary-color)';
+                }
+            }
+        }, { passive: true });
+        
+        document.addEventListener('touchend', async (e) => {
+            if (!this.isPulling) return;
+            
+            this.isPulling = false;
+            
+            if (pullDistance >= this.pullToRefreshThreshold && pullIndicator) {
+                // Trigger refresh
+                pullIndicator.querySelector('.pull-text').textContent = 'Refreshing...';
+                pullIndicator.querySelector('.pull-spinner svg').style.animation = 'spin 1s linear infinite';
+                
+                await this.refreshContent();
+                
+                // Hide indicator
+                pullIndicator.style.top = '-100px';
+                setTimeout(() => {
+                    if (pullIndicator && pullIndicator.parentNode) {
+                        pullIndicator.remove();
+                        pullIndicator = null;
+                    }
+                }, 300);
+            } else if (pullIndicator) {
+                // Reset indicator
+                pullIndicator.style.top = '-100px';
+                setTimeout(() => {
+                    if (pullIndicator && pullIndicator.parentNode) {
+                        pullIndicator.remove();
+                        pullIndicator = null;
+                    }
+                }, 300);
+            }
+            
+            pullDistance = 0;
+        }, { passive: true });
+    }
+    
+    async refreshContent() {
+        // Refresh GitHub data
+        try {
+            const projectsGrid = document.querySelector('.projects-grid');
+            if (projectsGrid && globalThis.loadGitHubProjects) {
+                await globalThis.loadGitHubProjects();
+            }
+            
+            // Show success message
+            this.showToast('Content refreshed!');
+        } catch (error) {
+            console.error('[Touch] Refresh failed:', error);
+            this.showToast('Refresh failed. Please try again.');
+        }
+    }
+    
+    showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'refresh-toast';
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            transition: transform 0.3s ease;
+        `;
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        }, 10);
+        
+        setTimeout(() => {
+            toast.style.transform = 'translateX(-50%) translateY(100px)';
+            setTimeout(() => toast.remove(), 300);
+        }, 2000);
+    }
+    
+    ensureMinimumTouchTargets() {
+        // Ensure all interactive elements meet 44x44px minimum
+        const selectors = [
+            'button',
+            'a',
+            '.nav-link',
+            '.theme-toggle',
+            '.project-card',
+            '.skill-category',
+            '.contact-method',
+            'input[type="submit"]',
+            'input[type="button"]',
+            '.filter-btn',
+            '.sort-select'
+        ];
+        
+        selectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(element => {
+                const computedStyle = window.getComputedStyle(element);
+                const width = parseFloat(computedStyle.width);
+                const height = parseFloat(computedStyle.height);
+                
+                // If element is too small, add padding
+                if (width < 44 || height < 44) {
+                    const paddingNeeded = {
+                        horizontal: Math.max(0, (44 - width) / 2),
+                        vertical: Math.max(0, (44 - height) / 2)
+                    };
+                    
+                    if (paddingNeeded.horizontal > 0 || paddingNeeded.vertical > 0) {
+                        element.style.minWidth = '44px';
+                        element.style.minHeight = '44px';
+                        element.style.display = 'inline-flex';
+                        element.style.alignItems = 'center';
+                        element.style.justifyContent = 'center';
+                    }
+                }
+            });
+        });
+        
+        console.log('[Touch] Minimum touch target sizes enforced');
+    }
+}
+
+// Add swipe indicator animation to styles
+if (!document.getElementById('swipe-animation-styles')) {
+    const style = document.createElement('style');
+    style.id = 'swipe-animation-styles';
+    style.textContent = `
+        @keyframes swipeIndicatorFade {
+            0% { opacity: 0; transform: translateY(-50%) scale(0.8); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1); }
+            100% { opacity: 0; transform: translateY(-50%) scale(0.8); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .pull-spinner {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pull-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize touch gestures when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        globalThis.touchGestureManager = new TouchGestureManager();
+    });
+} else {
+    globalThis.touchGestureManager = new TouchGestureManager();
+}
+
+// ============================================================================
+// Mobile Performance Optimizer
+// ============================================================================
+
+class MobilePerformanceOptimizer {
+    constructor() {
+        this.lazyLoadObserver = null;
+        this.performanceObserver = null;
+        this.isMobile = this.detectMobile();
+        this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        this.init();
+    }
+    
+    detectMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               window.innerWidth <= 768;
+    }
+    
+    init() {
+        console.log('[Performance] Initializing mobile optimizations...');
+        
+        this.setupLazyLoading();
+        this.optimizeAnimations();
+        this.setupVirtualScrolling();
+        this.optimizeImages();
+        this.deferNonCriticalCSS();
+        this.setupPerformanceMonitoring();
+        
+        // Optimize on resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.isMobile = this.detectMobile();
+                this.optimizeAnimations();
+            }, 250);
+        }, { passive: true });
+        
+        console.log('[Performance] Mobile optimizations initialized');
+    }
+    
+    setupLazyLoading() {
+        // Intersection Observer for lazy loading
+        const observerOptions = {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0.01
+        };
+        
+        this.lazyLoadObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    // Lazy load images
+                    if (element.tagName === 'IMG') {
+                        if (element.dataset.src) {
+                            element.src = element.dataset.src;
+                            element.removeAttribute('data-src');
+                        }
+                        if (element.dataset.srcset) {
+                            element.srcset = element.dataset.srcset;
+                            element.removeAttribute('data-srcset');
+                        }
+                    }
+                    
+                    // Lazy load background images
+                    if (element.dataset.bgImage) {
+                        element.style.backgroundImage = `url(${element.dataset.bgImage})`;
+                        element.removeAttribute('data-bg-image');
+                    }
+                    
+                    // Lazy load iframes
+                    if (element.tagName === 'IFRAME' && element.dataset.src) {
+                        element.src = element.dataset.src;
+                        element.removeAttribute('data-src');
+                    }
+                    
+                    element.classList.add('loaded');
+                    this.lazyLoadObserver.unobserve(element);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all lazy-loadable elements
+        this.observeLazyElements();
+        
+        // Re-observe when new content is added
+        const mutationObserver = new MutationObserver(() => {
+            this.observeLazyElements();
+        });
+        
+        mutationObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+    
+    observeLazyElements() {
+        // Images with data-src
+        document.querySelectorAll('img[data-src]:not(.loaded)').forEach(img => {
+            this.lazyLoadObserver.observe(img);
+        });
+        
+        // Elements with background images
+        document.querySelectorAll('[data-bg-image]:not(.loaded)').forEach(el => {
+            this.lazyLoadObserver.observe(el);
+        });
+        
+        // Iframes
+        document.querySelectorAll('iframe[data-src]:not(.loaded)').forEach(iframe => {
+            this.lazyLoadObserver.observe(iframe);
+        });
+    }
+    
+    optimizeAnimations() {
+        if (this.isReducedMotion) {
+            // Disable animations for users who prefer reduced motion
+            document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+            document.documentElement.style.setProperty('--transition-duration', '0.01ms');
+            return;
+        }
+        
+        if (this.isMobile) {
+            // Reduce animation complexity on mobile
+            document.documentElement.style.setProperty('--animation-duration', '200ms');
+            document.documentElement.style.setProperty('--transition-duration', '200ms');
+            
+            // Use transform and opacity only for animations
+            const style = document.createElement('style');
+            style.id = 'mobile-animation-optimizations';
+            style.textContent = `
+                @media (max-width: 768px) {
+                    * {
+                        /* Force GPU acceleration for animations */
+                        will-change: auto !important;
+                    }
+                    
+                    .project-card:hover,
+                    .skill-category:hover,
+                    .highlight-item:hover {
+                        /* Only use transform and opacity for 60fps */
+                        will-change: transform, opacity;
+                    }
+                    
+                    /* Reduce blur effects on mobile */
+                    .project-card,
+                    .theme-picker-container,
+                    .global-search-overlay {
+                        backdrop-filter: none;
+                        -webkit-backdrop-filter: none;
+                    }
+                    
+                    /* Simplify shadows */
+                    .project-card,
+                    .skill-category,
+                    .highlight-item {
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+                    }
+                }
+            `;
+            
+            if (!document.getElementById('mobile-animation-optimizations')) {
+                document.head.appendChild(style);
+            }
+        }
+    }
+    
+    setupVirtualScrolling() {
+        const projectsGrid = document.querySelector('.projects-grid');
+        if (!projectsGrid) return;
+        
+        // Only enable virtual scrolling if many projects
+        const observer = new MutationObserver(() => {
+            const projectCards = projectsGrid.querySelectorAll('.project-card');
+            
+            if (projectCards.length > 20 && this.isMobile) {
+                this.enableVirtualScrolling(projectsGrid, projectCards);
+                observer.disconnect();
+            }
+        });
+        
+        observer.observe(projectsGrid, {
+            childList: true
+        });
+    }
+    
+    enableVirtualScrolling(container, items) {
+        console.log('[Performance] Enabling virtual scrolling for', items.length, 'items');
+        
+        const itemHeight = 400; // Approximate project card height
+        const bufferSize = 3; // Render 3 items above and below viewport
+        
+        let scrollTop = 0;
+        let viewportHeight = window.innerHeight;
+        
+        const updateVisibleItems = () => {
+            const scrollTop = window.scrollY;
+            const containerTop = container.getBoundingClientRect().top + scrollTop;
+            
+            const startIndex = Math.max(0, Math.floor((scrollTop - containerTop) / itemHeight) - bufferSize);
+            const endIndex = Math.min(
+                items.length,
+                Math.ceil((scrollTop - containerTop + viewportHeight) / itemHeight) + bufferSize
+            );
+            
+            items.forEach((item, index) => {
+                if (index >= startIndex && index <= endIndex) {
+                    item.style.display = '';
+                    item.classList.add('visible');
+                } else {
+                    item.style.display = 'none';
+                    item.classList.remove('visible');
+                }
+            });
+        };
+        
+        // Throttled scroll handler
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) return;
+            
+            scrollTimeout = setTimeout(() => {
+                updateVisibleItems();
+                scrollTimeout = null;
+            }, 16); // ~60fps
+        }, { passive: true });
+        
+        // Initial update
+        updateVisibleItems();
+        
+        // Update on resize
+        window.addEventListener('resize', () => {
+            viewportHeight = window.innerHeight;
+            updateVisibleItems();
+        }, { passive: true });
+    }
+    
+    optimizeImages() {
+        // Convert images to use lazy loading
+        document.querySelectorAll('img:not([data-src]):not([loading])').forEach(img => {
+            // Skip if already loaded or in viewport
+            const rect = img.getBoundingClientRect();
+            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (!isInViewport && !img.complete) {
+                img.loading = 'lazy';
+            }
+        });
+        
+        // Add responsive image sizing
+        document.querySelectorAll('img:not([srcset])').forEach(img => {
+            if (img.src && !img.dataset.noResponsive) {
+                // Add size hints for browser optimization
+                if (!img.sizes && img.width) {
+                    img.sizes = `(max-width: 768px) ${Math.min(img.width, window.innerWidth)}px, ${img.width}px`;
+                }
+            }
+        });
+        
+        console.log('[Performance] Image optimization applied');
+    }
+    
+    deferNonCriticalCSS() {
+        // Load non-critical CSS asynchronously
+        const deferredStyles = [
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+        ];
+        
+        deferredStyles.forEach(href => {
+            const link = document.querySelector(`link[href="${href}"]`);
+            if (link && link.rel === 'stylesheet') {
+                const newLink = document.createElement('link');
+                newLink.rel = 'stylesheet';
+                newLink.href = href;
+                newLink.media = 'print';
+                newLink.onload = function() {
+                    this.media = 'all';
+                };
+                
+                link.parentNode.replaceChild(newLink, link);
+            }
+        });
+    }
+    
+    setupPerformanceMonitoring() {
+        // Monitor long tasks
+        if ('PerformanceObserver' in window) {
+            try {
+                this.performanceObserver = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.duration > 50) {
+                            console.warn('[Performance] Long task detected:', entry.duration.toFixed(2), 'ms');
+                        }
+                    }
+                });
+                
+                this.performanceObserver.observe({ entryTypes: ['longtask'] });
+            } catch (e) {
+                // Long task observer not supported
+            }
+        }
+        
+        // Log performance metrics
+        if (window.performance && window.performance.timing) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = window.performance.timing;
+                    const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                    const connectTime = perfData.responseEnd - perfData.requestStart;
+                    const renderTime = perfData.domComplete - perfData.domLoading;
+                    
+                    console.log('[Performance] Page Load Metrics:', {
+                        pageLoadTime: `${pageLoadTime}ms`,
+                        connectTime: `${connectTime}ms`,
+                        renderTime: `${renderTime}ms`
+                    });
+                    
+                    // Track with analytics
+                    if (globalThis.portfolioAnalytics) {
+                        globalThis.portfolioAnalytics.trackEvent('performance_metrics', {
+                            pageLoadTime,
+                            connectTime,
+                            renderTime,
+                            isMobile: this.isMobile
+                        });
+                    }
+                }, 0);
+            });
+        }
+    }
+    
+    // Debounce utility for performance
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Throttle utility for performance
+    throttle(func, limit) {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+}
+
+// Initialize mobile performance optimizer
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        globalThis.mobilePerformanceOptimizer = new MobilePerformanceOptimizer();
+    });
+} else {
+    globalThis.mobilePerformanceOptimizer = new MobilePerformanceOptimizer();
+}
+
+// ============================================================================
+// Enhanced Analytics System
+// ============================================================================
+
+class EnhancedAnalytics {
+    constructor() {
+        this.sessionId = this.generateSessionId();
+        this.sessionStartTime = Date.now();
+        this.pageViews = 0;
+        this.events = [];
+        this.userJourney = [];
+        this.performanceMetrics = {};
+        this.conversionGoals = new Map();
+        this.heatmapData = [];
+        this.scrollDepth = 0;
+        this.maxScrollDepth = 0;
+        
+        this.init();
+    }
+    
+    init() {
+        console.log('[Analytics] Enhanced analytics system initializing...');
+        
+        this.setupPageViewTracking();
+        this.setupUserBehaviorTracking();
+        this.setupConversionTracking();
+        this.setupScrollDepthTracking();
+        this.setupEngagementTracking();
+        this.setupHeatmapTracking();
+        this.loadSessionData();
+        
+        // Track initial page view
+        this.trackPageView(window.location.pathname);
+        
+        console.log('[Analytics] Enhanced analytics initialized');
+        console.log('[Analytics] Session ID:', this.sessionId);
+    }
+    
+    generateSessionId() {
+        return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    }
+    
+    setupPageViewTracking() {
+        // Track page views and navigation
+        let lastPath = window.location.pathname;
+        
+        // SPA navigation detection
+        const observer = new MutationObserver(() => {
+            const currentPath = window.location.pathname;
+            if (currentPath !== lastPath) {
+                this.trackPageView(currentPath);
+                lastPath = currentPath;
+            }
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        // Handle popstate for back/forward navigation
+        window.addEventListener('popstate', () => {
+            this.trackPageView(window.location.pathname);
+        });
+    }
+    
+    trackPageView(path) {
+        this.pageViews++;
+        
+        const pageView = {
+            type: 'pageview',
+            path,
+            timestamp: Date.now(),
+            referrer: document.referrer,
+            title: document.title,
+            sessionId: this.sessionId,
+            pageNumber: this.pageViews
+        };
+        
+        this.events.push(pageView);
+        this.userJourney.push({
+            action: 'page_view',
+            path,
+            timestamp: Date.now()
+        });
+        
+        // Track with existing analytics
+        if (globalThis.portfolioAnalytics) {
+            globalThis.portfolioAnalytics.trackEvent('page_view', {
+                path,
+                pageNumber: this.pageViews
+            });
+        }
+        
+        console.log('[Analytics] Page view tracked:', path);
+        this.saveSessionData();
+    }
+    
+    setupUserBehaviorTracking() {
+        // Track clicks
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            const elementInfo = this.getElementInfo(target);
+            
+            this.trackEvent('click', {
+                element: elementInfo,
+                x: e.clientX,
+                y: e.clientY,
+                timestamp: Date.now()
+            });
+            
+            // Track specific actions
+            if (target.tagName === 'A') {
+                this.trackEvent('link_click', {
+                    href: target.href,
+                    text: target.textContent.trim().substring(0, 100)
+                });
+            }
+            
+            if (target.closest('.project-card')) {
+                const projectCard = target.closest('.project-card');
+                const projectName = projectCard.querySelector('h3')?.textContent || 'Unknown';
+                this.trackEvent('project_interaction', {
+                    projectName,
+                    action: 'click'
+                });
+            }
+            
+            if (target.closest('button[type="submit"]')) {
+                this.trackConversionGoal('form_submission_attempt');
+            }
+        }, { passive: true });
+        
+        // Track form interactions
+        document.addEventListener('focus', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                this.trackEvent('form_field_focus', {
+                    fieldName: e.target.name || e.target.id,
+                    fieldType: e.target.type
+                });
+            }
+        }, { passive: true, capture: true });
+        
+        // Track time on page before leaving
+        window.addEventListener('beforeunload', () => {
+            this.trackSessionEnd();
+        });
+    }
+    
+    setupConversionTracking() {
+        // Define conversion goals
+        this.conversionGoals.set('github_profile_click', {
+            name: 'GitHub Profile Visit',
+            description: 'User clicks GitHub profile link',
+            value: 1
+        });
+        
+        this.conversionGoals.set('project_view', {
+            name: 'Project Viewed',
+            description: 'User views a project',
+            value: 0.5
+        });
+        
+        this.conversionGoals.set('contact_form_submit', {
+            name: 'Contact Form Submission',
+            description: 'User submits contact form',
+            value: 5
+        });
+        
+        this.conversionGoals.set('external_project_click', {
+            name: 'External Project Link',
+            description: 'User clicks to view project on GitHub',
+            value: 2
+        });
+        
+        // Track GitHub profile clicks
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href*="github.com/and3rn3t"]');
+            if (link) {
+                this.trackConversionGoal('github_profile_click');
+            }
+            
+            const projectLink = e.target.closest('.project-card a[href*="github.com"]');
+            if (projectLink) {
+                this.trackConversionGoal('external_project_click');
+            }
+        }, { passive: true });
+    }
+    
+    trackConversionGoal(goalId, metadata = {}) {
+        const goal = this.conversionGoals.get(goalId);
+        if (!goal) return;
+        
+        const conversion = {
+            type: 'conversion',
+            goalId,
+            goalName: goal.name,
+            value: goal.value,
+            metadata,
+            timestamp: Date.now(),
+            sessionId: this.sessionId
+        };
+        
+        this.events.push(conversion);
+        this.userJourney.push({
+            action: 'conversion',
+            goal: goalId,
+            timestamp: Date.now()
+        });
+        
+        console.log('[Analytics] Conversion tracked:', goalId, goal.name);
+        
+        if (globalThis.portfolioAnalytics) {
+            globalThis.portfolioAnalytics.trackEvent('conversion', {
+                goal: goalId,
+                value: goal.value
+            });
+        }
+        
+        this.saveSessionData();
+    }
+    
+    setupScrollDepthTracking() {
+        let scrollTimeout;
+        const scrollMilestones = [25, 50, 75, 90, 100];
+        const reachedMilestones = new Set();
+        
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            
+            scrollTimeout = setTimeout(() => {
+                const scrollPercentage = this.calculateScrollPercentage();
+                
+                if (scrollPercentage > this.maxScrollDepth) {
+                    this.maxScrollDepth = scrollPercentage;
+                }
+                
+                // Track milestones
+                scrollMilestones.forEach(milestone => {
+                    if (scrollPercentage >= milestone && !reachedMilestones.has(milestone)) {
+                        reachedMilestones.add(milestone);
+                        this.trackEvent('scroll_depth', {
+                            milestone,
+                            percentage: scrollPercentage
+                        });
+                    }
+                });
+            }, 100);
+        }, { passive: true });
+    }
+    
+    calculateScrollPercentage() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const trackLength = documentHeight - windowHeight;
+        
+        return Math.round((scrollTop / trackLength) * 100);
+    }
+    
+    setupEngagementTracking() {
+        let engagementScore = 0;
+        let lastActivityTime = Date.now();
+        let isActive = true;
+        
+        // Track user activity
+        const activityEvents = ['mousedown', 'keydown', 'scroll', 'touchstart'];
+        
+        activityEvents.forEach(eventType => {
+            document.addEventListener(eventType, () => {
+                lastActivityTime = Date.now();
+                if (!isActive) {
+                    isActive = true;
+                    this.trackEvent('user_returned', {
+                        awayDuration: Date.now() - lastActivityTime
+                    });
+                }
+                engagementScore++;
+            }, { passive: true });
+        });
+        
+        // Check for inactivity
+        setInterval(() => {
+            const inactiveTime = Date.now() - lastActivityTime;
+            if (inactiveTime > 30000 && isActive) { // 30 seconds
+                isActive = false;
+                this.trackEvent('user_idle', {
+                    lastActivity: lastActivityTime,
+                    engagementScore
+                });
+            }
+        }, 10000);
+        
+        // Track visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.trackEvent('tab_hidden', {
+                    timeOnPage: Date.now() - this.sessionStartTime
+                });
+            } else {
+                this.trackEvent('tab_visible', {
+                    timeOnPage: Date.now() - this.sessionStartTime
+                });
+            }
+        });
+    }
+    
+    setupHeatmapTracking() {
+        // Track clicks for heatmap visualization
+        document.addEventListener('click', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            this.heatmapData.push({
+                x,
+                y,
+                timestamp: Date.now(),
+                page: window.location.pathname
+            });
+            
+            // Limit heatmap data size
+            if (this.heatmapData.length > 1000) {
+                this.heatmapData = this.heatmapData.slice(-1000);
+            }
+        }, { passive: true });
+    }
+    
+    getElementInfo(element) {
+        return {
+            tagName: element.tagName,
+            id: element.id || null,
+            className: element.className || null,
+            text: element.textContent?.trim().substring(0, 50) || null,
+            href: element.href || null
+        };
+    }
+    
+    trackEvent(eventName, data = {}) {
+        const event = {
+            type: 'event',
+            name: eventName,
+            data,
+            timestamp: Date.now(),
+            sessionId: this.sessionId,
+            path: window.location.pathname
+        };
+        
+        this.events.push(event);
+        
+        // Limit events array size
+        if (this.events.length > 500) {
+            this.events = this.events.slice(-500);
+        }
+        
+        // Track with existing analytics
+        if (globalThis.portfolioAnalytics && eventName !== 'click') {
+            globalThis.portfolioAnalytics.trackEvent(eventName, data);
+        }
+    }
+    
+    trackSessionEnd() {
+        const sessionDuration = Date.now() - this.sessionStartTime;
+        
+        const sessionSummary = {
+            type: 'session_end',
+            sessionId: this.sessionId,
+            duration: sessionDuration,
+            pageViews: this.pageViews,
+            eventsCount: this.events.length,
+            maxScrollDepth: this.maxScrollDepth,
+            userJourney: this.userJourney,
+            timestamp: Date.now()
+        };
+        
+        this.events.push(sessionSummary);
+        
+        console.log('[Analytics] Session ended:', {
+            duration: `${(sessionDuration / 1000).toFixed(1)}s`,
+            pageViews: this.pageViews,
+            events: this.events.length,
+            maxScroll: `${this.maxScrollDepth}%`
+        });
+        
+        this.saveSessionData();
+    }
+    
+    saveSessionData() {
+        try {
+            const data = {
+                sessionId: this.sessionId,
+                startTime: this.sessionStartTime,
+                pageViews: this.pageViews,
+                events: this.events.slice(-100), // Keep last 100 events
+                userJourney: this.userJourney.slice(-50),
+                maxScrollDepth: this.maxScrollDepth
+            };
+            
+            localStorage.setItem('analytics_session', JSON.stringify(data));
+        } catch (error) {
+            console.warn('[Analytics] Failed to save session data:', error);
+        }
+    }
+    
+    loadSessionData() {
+        try {
+            const data = localStorage.getItem('analytics_session');
+            if (data) {
+                const parsed = JSON.parse(data);
+                
+                // Check if session is still valid (within 30 minutes)
+                const sessionAge = Date.now() - parsed.startTime;
+                if (sessionAge < 30 * 60 * 1000) {
+                    this.sessionId = parsed.sessionId;
+                    this.sessionStartTime = parsed.startTime;
+                    this.pageViews = parsed.pageViews || 0;
+                    this.events = parsed.events || [];
+                    this.userJourney = parsed.userJourney || [];
+                    this.maxScrollDepth = parsed.maxScrollDepth || 0;
+                    
+                    console.log('[Analytics] Session restored:', this.sessionId);
+                } else {
+                    localStorage.removeItem('analytics_session');
+                }
+            }
+        } catch (error) {
+            console.warn('[Analytics] Failed to load session data:', error);
+        }
+    }
+    
+    // Public API
+    getSessionSummary() {
+        return {
+            sessionId: this.sessionId,
+            duration: Date.now() - this.sessionStartTime,
+            pageViews: this.pageViews,
+            eventsCount: this.events.length,
+            maxScrollDepth: this.maxScrollDepth,
+            conversions: this.events.filter(e => e.type === 'conversion').length
+        };
+    }
+    
+    getHeatmapData() {
+        return this.heatmapData;
+    }
+    
+    exportAnalytics() {
+        return {
+            session: this.getSessionSummary(),
+            events: this.events,
+            userJourney: this.userJourney,
+            heatmap: this.heatmapData,
+            timestamp: Date.now()
+        };
+    }
+}
+
+// Initialize enhanced analytics
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        globalThis.enhancedAnalytics = new EnhancedAnalytics();
+    });
+} else {
+    globalThis.enhancedAnalytics = new EnhancedAnalytics();
+}
+
+// ============================================================================
+// Performance Monitoring System (RUM - Real User Monitoring)
+// ============================================================================
+
+class PerformanceMonitor {
+    constructor() {
+        this.metrics = {
+            webVitals: {},
+            navigation: {},
+            resources: [],
+            longTasks: [],
+            memoryUsage: []
+        };
+        this.thresholds = {
+            lcp: { good: 2500, needsImprovement: 4000 },
+            fid: { good: 100, needsImprovement: 300 },
+            cls: { good: 0.1, needsImprovement: 0.25 },
+            ttfb: { good: 800, needsImprovement: 1800 },
+            fcp: { good: 1800, needsImprovement: 3000 }
+        };
+        
+        this.init();
+    }
+    
+    init() {
+        console.log('[Performance] Monitoring system initializing...');
+        
+        this.trackWebVitals();
+        this.trackNavigationTiming();
+        this.trackResourceTiming();
+        this.trackLongTasks();
+        this.trackMemoryUsage();
+        this.setupPerformanceObserver();
+        
+        console.log('[Performance] Monitoring system initialized');
+    }
+    
+    trackWebVitals() {
+        // Largest Contentful Paint (LCP)
+        this.observeLCP();
+        
+        // First Input Delay (FID)
+        this.observeFID();
+        
+        // Cumulative Layout Shift (CLS)
+        this.observeCLS();
+        
+        // First Contentful Paint (FCP)
+        this.observeFCP();
+        
+        // Time to First Byte (TTFB)
+        this.observeTTFB();
+    }
+    
+    observeLCP() {
+        try {
+            const observer = new PerformanceObserver((entryList) => {
+                const entries = entryList.getEntries();
+                const lastEntry = entries[entries.length - 1];
+                
+                const lcp = lastEntry.renderTime || lastEntry.loadTime;
+                this.metrics.webVitals.lcp = lcp;
+                
+                const rating = this.getRating('lcp', lcp);
+                console.log(`[Performance] LCP: ${lcp.toFixed(0)}ms (${rating})`);
+                
+                this.reportMetric('lcp', lcp, rating);
+            });
+            
+            observer.observe({ type: 'largest-contentful-paint', buffered: true });
+        } catch (error) {
+            console.warn('[Performance] LCP not supported');
+        }
+    }
+    
+    observeFID() {
+        try {
+            const observer = new PerformanceObserver((entryList) => {
+                const entries = entryList.getEntries();
+                entries.forEach(entry => {
+                    const fid = entry.processingStart - entry.startTime;
+                    this.metrics.webVitals.fid = fid;
+                    
+                    const rating = this.getRating('fid', fid);
+                    console.log(`[Performance] FID: ${fid.toFixed(0)}ms (${rating})`);
+                    
+                    this.reportMetric('fid', fid, rating);
+                });
+            });
+            
+            observer.observe({ type: 'first-input', buffered: true });
+        } catch (error) {
+            console.warn('[Performance] FID not supported');
+        }
+    }
+    
+    observeCLS() {
+        try {
+            let clsValue = 0;
+            let clsEntries = [];
+            
+            const observer = new PerformanceObserver((entryList) => {
+                for (const entry of entryList.getEntries()) {
+                    if (!entry.hadRecentInput) {
+                        clsValue += entry.value;
+                        clsEntries.push(entry);
+                    }
+                }
+                
+                this.metrics.webVitals.cls = clsValue;
+                
+                const rating = this.getRating('cls', clsValue);
+                console.log(`[Performance] CLS: ${clsValue.toFixed(3)} (${rating})`);
+                
+                this.reportMetric('cls', clsValue, rating);
+            });
+            
+            observer.observe({ type: 'layout-shift', buffered: true });
+        } catch (error) {
+            console.warn('[Performance] CLS not supported');
+        }
+    }
+    
+    observeFCP() {
+        try {
+            const observer = new PerformanceObserver((entryList) => {
+                const entries = entryList.getEntries();
+                entries.forEach(entry => {
+                    if (entry.name === 'first-contentful-paint') {
+                        const fcp = entry.startTime;
+                        this.metrics.webVitals.fcp = fcp;
+                        
+                        const rating = this.getRating('fcp', fcp);
+                        console.log(`[Performance] FCP: ${fcp.toFixed(0)}ms (${rating})`);
+                        
+                        this.reportMetric('fcp', fcp, rating);
+                    }
+                });
+            });
+            
+            observer.observe({ type: 'paint', buffered: true });
+        } catch (error) {
+            console.warn('[Performance] FCP not supported');
+        }
+    }
+    
+    observeTTFB() {
+        window.addEventListener('load', () => {
+            const navTiming = performance.getEntriesByType('navigation')[0];
+            if (navTiming) {
+                const ttfb = navTiming.responseStart - navTiming.requestStart;
+                this.metrics.webVitals.ttfb = ttfb;
+                
+                const rating = this.getRating('ttfb', ttfb);
+                console.log(`[Performance] TTFB: ${ttfb.toFixed(0)}ms (${rating})`);
+                
+                this.reportMetric('ttfb', ttfb, rating);
+            }
+        });
+    }
+    
+    trackNavigationTiming() {
+        window.addEventListener('load', () => {
+            const navTiming = performance.getEntriesByType('navigation')[0];
+            if (!navTiming) return;
+            
+            this.metrics.navigation = {
+                dnsLookup: navTiming.domainLookupEnd - navTiming.domainLookupStart,
+                tcpConnection: navTiming.connectEnd - navTiming.connectStart,
+                tlsNegotiation: navTiming.secureConnectionStart > 0 
+                    ? navTiming.connectEnd - navTiming.secureConnectionStart 
+                    : 0,
+                timeToFirstByte: navTiming.responseStart - navTiming.requestStart,
+                downloadTime: navTiming.responseEnd - navTiming.responseStart,
+                domInteractive: navTiming.domInteractive,
+                domComplete: navTiming.domComplete,
+                loadComplete: navTiming.loadEventEnd,
+                totalLoadTime: navTiming.loadEventEnd - navTiming.fetchStart
+            };
+            
+            console.log('[Performance] Navigation Timing:', {
+                DNS: `${this.metrics.navigation.dnsLookup.toFixed(0)}ms`,
+                TCP: `${this.metrics.navigation.tcpConnection.toFixed(0)}ms`,
+                TTFB: `${this.metrics.navigation.timeToFirstByte.toFixed(0)}ms`,
+                Download: `${this.metrics.navigation.downloadTime.toFixed(0)}ms`,
+                Total: `${this.metrics.navigation.totalLoadTime.toFixed(0)}ms`
+            });
+            
+            this.reportNavigationMetrics();
+        });
+    }
+    
+    trackResourceTiming() {
+        const processResources = () => {
+            const resources = performance.getEntriesByType('resource');
+            
+            this.metrics.resources = resources.map(resource => ({
+                name: resource.name,
+                type: this.getResourceType(resource),
+                duration: resource.duration,
+                size: resource.transferSize || 0,
+                cached: resource.transferSize === 0 && resource.decodedBodySize > 0
+            }));
+            
+            // Analyze resources
+            const analysis = this.analyzeResources();
+            console.log('[Performance] Resource Analysis:', analysis);
+        };
+        
+        window.addEventListener('load', () => {
+            setTimeout(processResources, 1000);
+        });
+    }
+    
+    getResourceType(resource) {
+        const name = resource.name.toLowerCase();
+        if (name.includes('.css')) return 'css';
+        if (name.includes('.js')) return 'js';
+        if (name.match(/\.(jpg|jpeg|png|gif|webp|svg|ico)/)) return 'image';
+        if (name.match(/\.(woff|woff2|ttf|otf)/)) return 'font';
+        return 'other';
+    }
+    
+    analyzeResources() {
+        const byType = {};
+        let totalSize = 0;
+        let cachedSize = 0;
+        
+        this.metrics.resources.forEach(resource => {
+            if (!byType[resource.type]) {
+                byType[resource.type] = { count: 0, size: 0, duration: 0 };
+            }
+            
+            byType[resource.type].count++;
+            byType[resource.type].size += resource.size;
+            byType[resource.type].duration += resource.duration;
+            
+            totalSize += resource.size;
+            if (resource.cached) {
+                cachedSize += resource.size;
+            }
+        });
+        
+        return {
+            totalResources: this.metrics.resources.length,
+            totalSize: `${(totalSize / 1024).toFixed(2)} KB`,
+            cachedSize: `${(cachedSize / 1024).toFixed(2)} KB`,
+            cacheHitRate: `${((cachedSize / totalSize) * 100).toFixed(1)}%`,
+            byType
+        };
+    }
+    
+    trackLongTasks() {
+        try {
+            const observer = new PerformanceObserver((entryList) => {
+                for (const entry of entryList.getEntries()) {
+                    this.metrics.longTasks.push({
+                        duration: entry.duration,
+                        startTime: entry.startTime,
+                        timestamp: Date.now()
+                    });
+                    
+                    console.warn(`[Performance] Long task detected: ${entry.duration.toFixed(0)}ms`);
+                    
+                    // Report long task
+                    if (globalThis.enhancedAnalytics) {
+                        globalThis.enhancedAnalytics.trackEvent('long_task', {
+                            duration: entry.duration,
+                            startTime: entry.startTime
+                        });
+                    }
+                }
+            });
+            
+            observer.observe({ type: 'longtask', buffered: true });
+        } catch (error) {
+            console.warn('[Performance] Long task observer not supported');
+        }
+    }
+    
+    trackMemoryUsage() {
+        if (!performance.memory) return;
+        
+        const sampleMemory = () => {
+            const memory = {
+                used: performance.memory.usedJSHeapSize,
+                total: performance.memory.totalJSHeapSize,
+                limit: performance.memory.jsHeapSizeLimit,
+                timestamp: Date.now()
+            };
+            
+            this.metrics.memoryUsage.push(memory);
+            
+            // Keep only last 100 samples
+            if (this.metrics.memoryUsage.length > 100) {
+                this.metrics.memoryUsage = this.metrics.memoryUsage.slice(-100);
+            }
+            
+            // Warn if memory usage is high
+            const usagePercent = (memory.used / memory.limit) * 100;
+            if (usagePercent > 90) {
+                console.warn(`[Performance] High memory usage: ${usagePercent.toFixed(1)}%`);
+            }
+        };
+        
+        // Sample every 10 seconds
+        setInterval(sampleMemory, 10000);
+        sampleMemory(); // Initial sample
+    }
+    
+    setupPerformanceObserver() {
+        try {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    // Handle different entry types
+                    if (entry.entryType === 'measure') {
+                        console.log(`[Performance] Custom measure: ${entry.name} = ${entry.duration.toFixed(2)}ms`);
+                    }
+                }
+            });
+            
+            observer.observe({ entryTypes: ['measure', 'mark'] });
+        } catch (error) {
+            console.warn('[Performance] Performance observer setup failed');
+        }
+    }
+    
+    getRating(metric, value) {
+        const threshold = this.thresholds[metric];
+        if (!threshold) return 'unknown';
+        
+        if (value <= threshold.good) return 'good';
+        if (value <= threshold.needsImprovement) return 'needs-improvement';
+        return 'poor';
+    }
+    
+    reportMetric(name, value, rating) {
+        if (globalThis.enhancedAnalytics) {
+            globalThis.enhancedAnalytics.trackEvent('web_vital', {
+                metric: name,
+                value,
+                rating
+            });
+        }
+        
+        // Store in performance metrics
+        this.metrics.webVitals[name] = value;
+        this.metrics.webVitals[`${name}_rating`] = rating;
+    }
+    
+    reportNavigationMetrics() {
+        if (globalThis.enhancedAnalytics) {
+            globalThis.enhancedAnalytics.trackEvent('navigation_timing', this.metrics.navigation);
+        }
+    }
+    
+    // Public API
+    getMetrics() {
+        return {
+            webVitals: this.metrics.webVitals,
+            navigation: this.metrics.navigation,
+            resourceCount: this.metrics.resources.length,
+            longTaskCount: this.metrics.longTasks.length,
+            memoryUsage: this.getAverageMemoryUsage()
+        };
+    }
+    
+    getAverageMemoryUsage() {
+        if (this.metrics.memoryUsage.length === 0) return null;
+        
+        const avg = this.metrics.memoryUsage.reduce((sum, m) => sum + m.used, 0) / this.metrics.memoryUsage.length;
+        return {
+            average: avg,
+            current: this.metrics.memoryUsage[this.metrics.memoryUsage.length - 1]?.used || 0
+        };
+    }
+    
+    generateReport() {
+        const report = {
+            timestamp: Date.now(),
+            webVitals: this.metrics.webVitals,
+            navigation: this.metrics.navigation,
+            resources: this.analyzeResources(),
+            longTasks: {
+                count: this.metrics.longTasks.length,
+                averageDuration: this.metrics.longTasks.reduce((sum, t) => sum + t.duration, 0) / this.metrics.longTasks.length || 0
+            },
+            memory: this.getAverageMemoryUsage(),
+            score: this.calculatePerformanceScore()
+        };
+        
+        console.log('[Performance] Report generated:', report);
+        return report;
+    }
+    
+    calculatePerformanceScore() {
+        const vitals = this.metrics.webVitals;
+        let score = 100;
+        
+        // Deduct points based on ratings
+        if (vitals.lcp_rating === 'needs-improvement') score -= 10;
+        if (vitals.lcp_rating === 'poor') score -= 20;
+        
+        if (vitals.fid_rating === 'needs-improvement') score -= 10;
+        if (vitals.fid_rating === 'poor') score -= 20;
+        
+        if (vitals.cls_rating === 'needs-improvement') score -= 10;
+        if (vitals.cls_rating === 'poor') score -= 20;
+        
+        // Deduct for long tasks
+        score -= Math.min(this.metrics.longTasks.length * 2, 20);
+        
+        return Math.max(0, score);
+    }
+}
+
+// Initialize performance monitor
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        globalThis.performanceMonitor = new PerformanceMonitor();
+    });
+} else {
+    globalThis.performanceMonitor = new PerformanceMonitor();
+}
+
+// ============================================================================
+// Error Tracking & Reporting System
+// ============================================================================
+
+class ErrorTracker {
+    constructor() {
+        this.errors = [];
+        this.errorCounts = new Map();
+        this.maxErrors = 100;
+        this.reportedErrors = new Set();
+        
+        this.init();
+    }
+    
+    init() {
+        console.log('[ErrorTracker] Initializing error tracking...');
+        
+        this.setupGlobalErrorHandler();
+        this.setupUnhandledRejectionHandler();
+        this.setupResourceErrorHandler();
+        this.setupConsoleErrorTracking();
+        
+        console.log('[ErrorTracker] Error tracking initialized');
+    }
+    
+    setupGlobalErrorHandler() {
+        window.addEventListener('error', (event) => {
+            const error = {
+                type: 'javascript_error',
+                message: event.message,
+                filename: event.filename,
+                lineno: event.lineno,
+                colno: event.colno,
+                error: event.error,
+                stack: event.error?.stack,
+                timestamp: Date.now(),
+                userAgent: navigator.userAgent,
+                url: window.location.href
+            };
+            
+            this.trackError(error);
+        });
+    }
+    
+    setupUnhandledRejectionHandler() {
+        window.addEventListener('unhandledrejection', (event) => {
+            const error = {
+                type: 'unhandled_promise_rejection',
+                message: event.reason?.message || String(event.reason),
+                reason: event.reason,
+                stack: event.reason?.stack,
+                promise: event.promise,
+                timestamp: Date.now(),
+                userAgent: navigator.userAgent,
+                url: window.location.href
+            };
+            
+            this.trackError(error);
+        });
+    }
+    
+    setupResourceErrorHandler() {
+        window.addEventListener('error', (event) => {
+            if (event.target !== window) {
+                const target = event.target;
+                const error = {
+                    type: 'resource_load_error',
+                    resourceType: target.tagName?.toLowerCase() || 'unknown',
+                    src: target.src || target.href,
+                    timestamp: Date.now(),
+                    url: window.location.href
+                };
+                
+                this.trackError(error);
+            }
+        }, true); // Use capture phase
+    }
+    
+    setupConsoleErrorTracking() {
+        // Wrap console.error to track console errors
+        const originalError = console.error;
+        console.error = (...args) => {
+            const error = {
+                type: 'console_error',
+                message: args.map(arg => String(arg)).join(' '),
+                arguments: args,
+                timestamp: Date.now(),
+                url: window.location.href,
+                stack: new Error().stack
+            };
+            
+            this.trackError(error, false); // Don't show notification for console errors
+            
+            originalError.apply(console, args);
+        };
+    }
+    
+    trackError(error, showNotification = true) {
+        // Add to errors array
+        this.errors.push(error);
+        
+        // Limit array size
+        if (this.errors.length > this.maxErrors) {
+            this.errors = this.errors.slice(-this.maxErrors);
+        }
+        
+        // Count error occurrences
+        const errorKey = `${error.type}:${error.message}`;
+        const count = (this.errorCounts.get(errorKey) || 0) + 1;
+        this.errorCounts.set(errorKey, count);
+        
+        // Log error
+        console.error(`[ErrorTracker] ${error.type}:`, error.message);
+        
+        // Report to analytics
+        if (globalThis.enhancedAnalytics) {
+            globalThis.enhancedAnalytics.trackEvent('error_occurred', {
+                type: error.type,
+                message: error.message,
+                count
+            });
+        }
+        
+        // Show user-friendly notification (only for first occurrence)
+        if (showNotification && count === 1 && !this.reportedErrors.has(errorKey)) {
+            this.reportedErrors.add(errorKey);
+            this.showErrorNotification(error);
+        }
+        
+        // Store in localStorage for debugging
+        this.saveErrorLog();
+    }
+    
+    showErrorNotification(error) {
+        // Only show for critical errors
+        if (error.type === 'resource_load_error') return;
+        
+        const notification = document.createElement('div');
+        notification.className = 'error-notification';
+        notification.innerHTML = `
+            <div class="error-notification-content">
+                <div class="error-icon">⚠️</div>
+                <div class="error-text">
+                    <strong>Something went wrong</strong>
+                    <p>We're working on fixing this issue. You can continue using the site.</p>
+                </div>
+                <button class="error-dismiss" onclick="this.closest('.error-notification').remove()">✕</button>
+            </div>
+        `;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fee;
+            border: 2px solid #fcc;
+            border-radius: 12px;
+            padding: 16px;
+            max-width: 500px;
+            width: 90%;
+            z-index: 10001;
+            transition: top 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.top = '24px';
+        }, 100);
+        
+        // Auto-dismiss after 10 seconds
+        setTimeout(() => {
+            notification.style.top = '-100px';
+            setTimeout(() => notification.remove(), 300);
+        }, 10000);
+    }
+    
+    saveErrorLog() {
+        try {
+            const errorLog = {
+                errors: this.errors.slice(-20), // Keep last 20 errors
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem('error_log', JSON.stringify(errorLog));
+        } catch (error) {
+            console.warn('[ErrorTracker] Failed to save error log:', error);
+        }
+    }
+    
+    // Public API
+    getErrors() {
+        return this.errors;
+    }
+    
+    getErrorSummary() {
+        const byType = {};
+        this.errors.forEach(error => {
+            byType[error.type] = (byType[error.type] || 0) + 1;
+        });
+        
+        return {
+            totalErrors: this.errors.length,
+            byType,
+            topErrors: Array.from(this.errorCounts.entries())
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5)
+                .map(([error, count]) => ({ error, count }))
+        };
+    }
+    
+    clearErrors() {
+        this.errors = [];
+        this.errorCounts.clear();
+        this.reportedErrors.clear();
+        localStorage.removeItem('error_log');
+        console.log('[ErrorTracker] Error log cleared');
+    }
+    
+    exportErrors() {
+        return {
+            errors: this.errors,
+            summary: this.getErrorSummary(),
+            timestamp: Date.now()
+        };
+    }
+}
+
+// Initialize error tracker
+globalThis.errorTracker = new ErrorTracker();
+
+// ============================================================================
+// A/B Testing Framework
+// ============================================================================
+
+class ABTestingFramework {
+    constructor() {
+        this.tests = new Map();
+        this.userVariants = new Map();
+        this.results = new Map();
+        this.userId = this.getUserId();
+        
+        this.init();
+    }
+    
+    init() {
+        console.log('[ABTest] Initializing A/B testing framework...');
+        
+        this.loadUserVariants();
+        this.setupDefaultTests();
+        
+        console.log('[ABTest] Framework initialized, User ID:', this.userId);
+    }
+    
+    getUserId() {
+        let userId = localStorage.getItem('ab_test_user_id');
+        if (!userId) {
+            userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+            localStorage.setItem('ab_test_user_id', userId);
+        }
+        return userId;
+    }
+    
+    setupDefaultTests() {
+        // Example: Test CTA button colors
+        this.createTest('cta_button_color', {
+            name: 'CTA Button Color',
+            description: 'Test different button colors for conversion',
+            variants: [
+                { id: 'control', name: 'Blue Button', weight: 50 },
+                { id: 'variant_a', name: 'Green Button', weight: 50 }
+            ],
+            conversionGoal: 'contact_form_submit'
+        });
+        
+        // Example: Test project card layout
+        this.createTest('project_card_layout', {
+            name: 'Project Card Layout',
+            description: 'Test compact vs detailed project cards',
+            variants: [
+                { id: 'control', name: 'Standard Layout', weight: 50 },
+                { id: 'variant_a', name: 'Compact Layout', weight: 50 }
+            ],
+            conversionGoal: 'project_interaction'
+        });
+    }
+    
+    createTest(testId, config) {
+        this.tests.set(testId, {
+            ...config,
+            startTime: Date.now(),
+            active: true
+        });
+        
+        console.log(`[ABTest] Test created: ${config.name}`);
+    }
+    
+    assignVariant(testId) {
+        // Check if user already has a variant
+        if (this.userVariants.has(testId)) {
+            return this.userVariants.get(testId);
+        }
+        
+        const test = this.tests.get(testId);
+        if (!test || !test.active) return null;
+        
+        // Assign variant based on weights
+        const random = Math.random() * 100;
+        let cumulative = 0;
+        
+        for (const variant of test.variants) {
+            cumulative += variant.weight;
+            if (random <= cumulative) {
+                this.userVariants.set(testId, variant.id);
+                this.saveUserVariants();
+                
+                console.log(`[ABTest] User assigned to ${test.name}: ${variant.name}`);
+                
+                // Track assignment
+                if (globalThis.enhancedAnalytics) {
+                    globalThis.enhancedAnalytics.trackEvent('ab_test_assigned', {
+                        testId,
+                        variantId: variant.id,
+                        testName: test.name
+                    });
+                }
+                
+                return variant.id;
+            }
+        }
+        
+        return test.variants[0].id; // Fallback to control
+    }
+    
+    getVariant(testId) {
+        return this.userVariants.get(testId) || this.assignVariant(testId);
+    }
+    
+    trackConversion(testId, metadata = {}) {
+        const variantId = this.userVariants.get(testId);
+        if (!variantId) return;
+        
+        const test = this.tests.get(testId);
+        if (!test) return;
+        
+        // Initialize results for this test if needed
+        if (!this.results.has(testId)) {
+            this.results.set(testId, new Map());
+        }
+        
+        const testResults = this.results.get(testId);
+        
+        // Initialize variant results if needed
+        if (!testResults.has(variantId)) {
+            testResults.set(variantId, {
+                impressions: 0,
+                conversions: 0,
+                conversionRate: 0
+            });
+        }
+        
+        // Update conversion count
+        const variantResults = testResults.get(variantId);
+        variantResults.conversions++;
+        variantResults.conversionRate = (variantResults.conversions / variantResults.impressions) * 100;
+        
+        console.log(`[ABTest] Conversion tracked for ${test.name}, variant: ${variantId}`);
+        console.log(`[ABTest] Conversion rate: ${variantResults.conversionRate.toFixed(2)}%`);
+        
+        // Track with analytics
+        if (globalThis.enhancedAnalytics) {
+            globalThis.enhancedAnalytics.trackEvent('ab_test_conversion', {
+                testId,
+                variantId,
+                testName: test.name,
+                ...metadata
+            });
+        }
+        
+        this.saveResults();
+        
+        // Check for statistical significance
+        if (variantResults.impressions >= 100) {
+            this.calculateSignificance(testId);
+        }
+    }
+    
+    trackImpression(testId) {
+        const variantId = this.userVariants.get(testId);
+        if (!variantId) return;
+        
+        // Initialize results
+        if (!this.results.has(testId)) {
+            this.results.set(testId, new Map());
+        }
+        
+        const testResults = this.results.get(testId);
+        
+        if (!testResults.has(variantId)) {
+            testResults.set(variantId, {
+                impressions: 0,
+                conversions: 0,
+                conversionRate: 0
+            });
+        }
+        
+        // Update impression count
+        const variantResults = testResults.get(variantId);
+        variantResults.impressions++;
+        
+        this.saveResults();
+    }
+    
+    calculateSignificance(testId) {
+        const testResults = this.results.get(testId);
+        if (!testResults || testResults.size < 2) return;
+        
+        const variants = Array.from(testResults.entries());
+        if (variants.length !== 2) return; // Only support 2-variant tests for now
+        
+        const [control, variant] = variants;
+        const [controlId, controlData] = control;
+        const [variantId, variantData] = variant;
+        
+        // Calculate z-score for statistical significance
+        const p1 = controlData.conversions / controlData.impressions;
+        const p2 = variantData.conversions / variantData.impressions;
+        const p = (controlData.conversions + variantData.conversions) / 
+                  (controlData.impressions + variantData.impressions);
+        
+        const se = Math.sqrt(p * (1 - p) * (1/controlData.impressions + 1/variantData.impressions));
+        const zScore = (p2 - p1) / se;
+        
+        // Z-score > 1.96 means 95% confidence
+        const isSignificant = Math.abs(zScore) > 1.96;
+        const confidence = this.getConfidenceLevel(Math.abs(zScore));
+        
+        const winner = p2 > p1 ? variantId : controlId;
+        const lift = ((Math.max(p1, p2) - Math.min(p1, p2)) / Math.min(p1, p2)) * 100;
+        
+        console.log(`[ABTest] Statistical analysis for ${testId}:`);
+        console.log(`  Control: ${(p1 * 100).toFixed(2)}% (${controlData.conversions}/${controlData.impressions})`);
+        console.log(`  Variant: ${(p2 * 100).toFixed(2)}% (${variantData.conversions}/${variantData.impressions})`);
+        console.log(`  Z-Score: ${zScore.toFixed(2)}`);
+        console.log(`  Significant: ${isSignificant} (${confidence}% confidence)`);
+        console.log(`  Winner: ${winner}, Lift: ${lift.toFixed(2)}%`);
+        
+        return {
+            testId,
+            control: { id: controlId, ...controlData, conversionRate: p1 * 100 },
+            variant: { id: variantId, ...variantData, conversionRate: p2 * 100 },
+            zScore,
+            isSignificant,
+            confidence,
+            winner,
+            lift
+        };
+    }
+    
+    getConfidenceLevel(zScore) {
+        if (zScore >= 2.576) return 99;
+        if (zScore >= 1.96) return 95;
+        if (zScore >= 1.645) return 90;
+        return 80;
+    }
+    
+    applyVariant(testId, callback) {
+        const variantId = this.getVariant(testId);
+        this.trackImpression(testId);
+        
+        if (callback && typeof callback === 'function') {
+            callback(variantId);
+        }
+        
+        return variantId;
+    }
+    
+    endTest(testId) {
+        const test = this.tests.get(testId);
+        if (!test) return;
+        
+        test.active = false;
+        test.endTime = Date.now();
+        
+        const results = this.calculateSignificance(testId);
+        
+        console.log(`[ABTest] Test ended: ${test.name}`);
+        if (results) {
+            console.log(`[ABTest] Winner: ${results.winner} with ${results.lift.toFixed(2)}% lift`);
+        }
+        
+        return results;
+    }
+    
+    saveUserVariants() {
+        try {
+            const data = {
+                userId: this.userId,
+                variants: Array.from(this.userVariants.entries()),
+                timestamp: Date.now()
+            };
+            localStorage.setItem('ab_test_variants', JSON.stringify(data));
+        } catch (error) {
+            console.warn('[ABTest] Failed to save user variants:', error);
+        }
+    }
+    
+    loadUserVariants() {
+        try {
+            const data = localStorage.getItem('ab_test_variants');
+            if (data) {
+                const parsed = JSON.parse(data);
+                this.userVariants = new Map(parsed.variants);
+                console.log('[ABTest] Loaded user variants:', this.userVariants);
+            }
+        } catch (error) {
+            console.warn('[ABTest] Failed to load user variants:', error);
+        }
+    }
+    
+    saveResults() {
+        try {
+            const resultsArray = Array.from(this.results.entries()).map(([testId, variants]) => {
+                return [testId, Array.from(variants.entries())];
+            });
+            
+            localStorage.setItem('ab_test_results', JSON.stringify(resultsArray));
+        } catch (error) {
+            console.warn('[ABTest] Failed to save results:', error);
+        }
+    }
+    
+    // Public API
+    getTestResults(testId) {
+        if (testId) {
+            return this.results.get(testId);
+        }
+        return this.results;
+    }
+    
+    getAllTests() {
+        return Array.from(this.tests.entries()).map(([id, test]) => ({
+            id,
+            ...test,
+            results: this.results.get(id)
+        }));
+    }
+    
+    exportData() {
+        return {
+            userId: this.userId,
+            tests: Array.from(this.tests.entries()),
+            userVariants: Array.from(this.userVariants.entries()),
+            results: Array.from(this.results.entries()),
+            timestamp: Date.now()
+        };
+    }
+}
+
+// Initialize A/B testing framework
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        globalThis.abTestingFramework = new ABTestingFramework();
+    });
+} else {
+    globalThis.abTestingFramework = new ABTestingFramework();
+}
+
+// PWA install prompt
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    
+    // Show custom install button/banner
+    showInstallPromotion();
+});
+
+
+function showInstallPromotion() {
+    const installBanner = document.createElement('div');
+    installBanner.className = 'install-banner';
+    installBanner.innerHTML = `
+        <div class="install-content">
+            <div class="install-icon">📱</div>
+            <div class="install-text">
+                <strong>Install Portfolio App</strong>
+                <p>Add to your home screen for quick access</p>
+            </div>
+            <button class="install-button" onclick="installPWA()">Install</button>
+            <button class="install-dismiss" onclick="this.closest('.install-banner').remove()">✕</button>
+        </div>
+    `;
+    document.body.appendChild(installBanner);
+    
+    // Auto-show with animation
+    setTimeout(() => installBanner.classList.add('show'), 100);
+    
+    // Store in localStorage to avoid showing repeatedly
+    localStorage.setItem('installPromptShown', Date.now().toString());
+}
+
+// Install PWA
+globalThis.installPWA = async function() {
+    if (!deferredPrompt) {
+        console.log('[PWA] Install prompt not available');
+        return;
+    }
+    
+    // Show the install prompt
+    deferredPrompt.prompt();
+    
+    // Wait for the user's response
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`[PWA] User response to install prompt: ${outcome}`);
+    
+    // Clear the deferred prompt
+    deferredPrompt = null;
+    
+    // Remove install banner
+    const banner = document.querySelector('.install-banner');
+    if (banner) {
+        banner.remove();
+    }
+};
+
+// Track app install
+window.addEventListener('appinstalled', () => {
+    console.log('[PWA] App installed successfully');
+    
+    // Track with analytics
+    if (globalThis.portfolioAnalytics) {
+        globalThis.portfolioAnalytics.trackEvent('pwa_install', {
+            platform: navigator.platform,
+            userAgent: navigator.userAgent
+        });
+    }
+    
+    // Hide install promotion
+    const banner = document.querySelector('.install-banner');
+    if (banner) {
+        banner.remove();
+    }
+});
+
+// Detect if running as PWA
+function isPWA() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true ||
+           document.referrer.includes('android-app://');
+}
+
+// Track PWA usage
+if (isPWA()) {
+    console.log('[PWA] Running as installed app');
+    
+    if (globalThis.portfolioAnalytics) {
+        globalThis.portfolioAnalytics.trackEvent('pwa_launch', {
+            displayMode: 'standalone'
+        });
+    }
+}
 
