@@ -106,7 +106,6 @@
         }
 
         function testCloudflareBeacon() {
-            console.log('🔍 Testing Cloudflare Beacon...');
             
             // Check if Cloudflare beacon is loaded
             if (typeof window.__cfBeacon !== 'undefined') {
@@ -136,7 +135,6 @@
         }
 
         function testNetworkRequests() {
-            console.log('🌐 Testing Network Requests...');
             
             // This is informational - user needs to check Network tab manually
             logResult('Network Requests', 'warning', 'Check browser Network tab for requests to:', {
@@ -150,7 +148,6 @@
         }
 
         function testCustomEvents() {
-            console.log('📊 Testing Custom Events...');
             
             // Simulate some custom events if analytics system exists
             if (typeof window.portfolioAnalytics !== 'undefined') {

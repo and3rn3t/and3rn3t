@@ -34,7 +34,6 @@
             logDiv.className = `debug ${type}`;
             logDiv.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
             debugDiv.appendChild(logDiv);
-            console.log(message);
         }
 
         // Test GitHub data loading
@@ -102,7 +101,6 @@
                 }
             } catch (error) {
                 log(`❌ Error testing GitHub API: ${error.message}`, 'error');
-                console.error(error);
             }
         }
 

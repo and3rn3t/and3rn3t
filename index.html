@@ -1179,7 +1179,6 @@
             // Critical performance metrics
             window.addEventListener('load', () => {
                 const loadTime = performance.now() - pageLoadStart;
-                console.log(`⚡ Page loaded in ${loadTime.toFixed(2)}ms`);
                 
                 // Report to analytics if available
                 if (typeof gtag !== 'undefined') {
@@ -1232,7 +1231,6 @@
         if ('serviceWorker' in navigator && location.protocol === 'https:') {
             window.addEventListener('load', () => {
                 // Will be implemented in PWA phase
-                console.log('🔧 Service Worker registration ready for PWA implementation');
             });
         }
     </script>
