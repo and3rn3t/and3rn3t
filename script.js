@@ -2134,7 +2134,7 @@ function showDemoProjects(container) {
 
 // Enhanced scroll animations
 function initScrollAnimations() {
-    const animationElements = document.querySelectorAll('.hero-content, .about-text, .skills-grid');
+    const animationElements = document.querySelectorAll('.hero-content, .about-text, .skills-grid, .animate-on-scroll');
     
     const animationObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
