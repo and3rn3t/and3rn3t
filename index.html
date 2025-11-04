@@ -165,6 +165,9 @@
     <!-- Font Awesome with async loading -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></noscript>
+    
+    <!-- reCAPTCHA v3 for enhanced form security -->
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -815,41 +818,59 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="Your full name">
-                            <span class="error-message" id="name-error"></span>
+                            <input type="text" id="name" name="name" required 
+                                   placeholder="Your full name" 
+                                   aria-describedby="name-error"
+                                   autocomplete="name"
+                                   minlength="2" maxlength="100">
+                            <span class="error-message" id="name-error" role="alert" aria-live="polite"></span>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                            <span class="error-message" id="email-error"></span>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="your.email@example.com"
+                                   aria-describedby="email-error"
+                                   autocomplete="email"
+                                   maxlength="254">
+                            <span class="error-message" id="email-error" role="alert" aria-live="polite"></span>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="subject">Subject *</label>
-                        <input type="text" id="subject" name="subject" required placeholder="What would you like to discuss?">
-                        <span class="error-message" id="subject-error"></span>
+                        <input type="text" id="subject" name="subject" required 
+                               placeholder="What would you like to discuss?"
+                               aria-describedby="subject-error"
+                               minlength="3" maxlength="200">
+                        <span class="error-message" id="subject-error" role="alert" aria-live="polite"></span>
                     </div>
                     
                     <div class="form-group">
                         <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project, idea, or how we can work together..."></textarea>
-                        <span class="error-message" id="message-error"></span>
+                        <textarea id="message" name="message" rows="6" required 
+                                  placeholder="Tell me about your project, idea, or how we can work together..."
+                                  aria-describedby="message-error"
+                                  minlength="10" maxlength="5000"></textarea>
+                        <span class="error-message" id="message-error" role="alert" aria-live="polite"></span>
                     </div>
                     
                     <!-- Honeypot for spam protection -->
-                    <input type="text" name="_gotcha" style="display: none;">
+                    <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true">
                     
-                    <button type="submit" class="btn btn-primary" id="submit-button">
+                    <!-- reCAPTCHA container -->
+                    <div class="recaptcha-container" id="recaptcha-container"></div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submit-button" 
+                            aria-describedby="form-status">
                         <span class="submit-text">Send Message</span>
                         <i class="fas fa-paper-plane submit-icon"></i>
-                        <div class="loading-spinner" style="display: none;">
+                        <div class="loading-spinner">
                             <i class="fas fa-spinner fa-spin"></i>
                         </div>
                     </button>
                     
-                    <div class="form-status" id="form-status" style="display: none;"></div>
+                    <output class="form-status" id="form-status" aria-live="polite"></output>
                 </form>
                 
                 <div class="contact-methods">

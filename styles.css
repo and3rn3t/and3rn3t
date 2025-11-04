@@ -1574,6 +1574,26 @@ section {
     transform: translate(-50%, -50%);
 }
 
+/* Enhanced form security and accessibility */
+.honeypot {
+    display: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+}
+
+.loading-spinner {
+    display: none;
+}
+
+.recaptcha-container {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
 .form-status {
     margin-top: 1.5rem;
     padding: 1.25rem;

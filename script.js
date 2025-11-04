@@ -3949,15 +3949,27 @@ function backupGitHubStatsLoader() {
 // Backup loader runs after main system has had time to load
 setTimeout(backupGitHubStatsLoader, 2000);
 
-// Contact Form Functionality
+// Enhanced Contact Form Functionality with reCAPTCHA and Analytics
 class ContactFormManager {
     constructor() {
         this.form = document.getElementById('contact-form');
         this.submitButton = document.getElementById('submit-button');
         this.formStatus = document.getElementById('form-status');
+        this.recaptchaContainer = document.getElementById('recaptcha-container');
+        this.recaptchaWidgetId = null;
+        this.isRecaptchaReady = false;
+        
+        // Configuration
+        this.config = {
+            maxRetries: 3,
+            retryDelay: 1000,
+            enableAnalytics: true,
+            enableRecaptcha: typeof grecaptcha !== 'undefined'
+        };
         
         if (this.form) {
             this.initializeForm();
+            this.initializeRecaptcha();
         }
     }
     
@@ -3970,7 +3982,69 @@ class ContactFormManager {
         inputs.forEach(input => {
             input.addEventListener('blur', () => this.validateField(input));
             input.addEventListener('input', () => this.clearFieldError(input));
+            
+            // Track form interactions for analytics
+            if (this.config.enableAnalytics) {
+                input.addEventListener('focus', () => this.trackEvent('form_field_focus', input.name));
+            }
         });
+        
+        // Track form starts
+        if (this.config.enableAnalytics) {
+            this.trackEvent('form_view');
+        }
+    }
+
+    async initializeRecaptcha() {
+        if (!this.config.enableRecaptcha) {
+            console.log('ℹ️ reCAPTCHA disabled or not loaded');
+            return;
+        }
+        
+        // Wait for reCAPTCHA to be ready
+        if (typeof grecaptcha === 'undefined') {
+            console.log('⏳ Waiting for reCAPTCHA to load...');
+            setTimeout(() => this.initializeRecaptcha(), 500);
+            return;
+        }
+        
+        try {
+            await new Promise(resolve => {
+                grecaptcha.ready(resolve);
+            });
+            
+            // For demo purposes - you'll need to replace with your actual site key
+            const siteKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // Test key
+            
+            this.recaptchaWidgetId = grecaptcha.render(this.recaptchaContainer, {
+                sitekey: siteKey,
+                theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
+                callback: () => {
+                    this.isRecaptchaReady = true;
+                    console.log('✅ reCAPTCHA verified');
+                }
+            });
+            
+            console.log('✅ reCAPTCHA initialized');
+        } catch (error) {
+            console.warn('⚠️ reCAPTCHA initialization failed:', error.message);
+            this.config.enableRecaptcha = false;
+        }
+    }
+
+    trackEvent(eventName, fieldName = null) {
+        if (!this.config.enableAnalytics) return;
+        
+        // Track with console for now - integrate with your analytics service
+        console.log(`📊 Form Analytics: ${eventName}${fieldName ? ` - ${fieldName}` : ''}`);
+        
+        // Example: Google Analytics 4 tracking
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventName, {
+                form_name: 'contact_form',
+                field_name: fieldName
+            });
+        }
     }
     
     async handleSubmit(event) {
@@ -3979,15 +4053,48 @@ class ContactFormManager {
         // Validate all fields
         if (!this.validateForm()) {
             this.showStatus('Please correct the errors above.', 'error');
+            this.trackEvent('form_validation_failed');
+            return;
+        }
+        
+        // Check reCAPTCHA if enabled
+        if (this.config.enableRecaptcha && !this.isRecaptchaReady) {
+            this.showStatus('Please complete the security verification.', 'error');
             return;
         }
         
         // Show loading state
         this.setLoadingState(true);
         this.showStatus('Sending message...', 'info');
+        this.trackEvent('form_submit_started');
+        
+        try {
+            await this.submitWithRetry();
+        } catch (error) {
+            console.error('Form submission failed after retries:', error);
+            this.showStatus(
+                'There was a problem sending your message. Please try again or contact me directly at contact@matthewanderson.dev',
+                'error'
+            );
+            this.trackEvent('form_submit_failed');
+        } finally {
+            this.setLoadingState(false);
+        }
+    }
+
+    async submitWithRetry(attempt = 1) {
+        const maxAttempts = this.config.maxRetries;
         
         try {
             const formData = new FormData(this.form);
+            
+            // Add reCAPTCHA token if available
+            if (this.config.enableRecaptcha && this.recaptchaWidgetId !== null) {
+                const recaptchaResponse = grecaptcha.getResponse(this.recaptchaWidgetId);
+                if (recaptchaResponse) {
+                    formData.append('g-recaptcha-response', recaptchaResponse);
+                }
+            }
             
             // Submit to Formspree
             const response = await fetch(this.form.action, {
@@ -3999,17 +4106,42 @@ class ContactFormManager {
             });
             
             if (response.ok) {
-                this.showStatus('Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.showStatus('✅ Message sent successfully! I\'ll get back to you soon.', 'success');
                 this.form.reset();
+                this.trackEvent('form_submit_success');
+                
+                // Reset reCAPTCHA if enabled
+                if (this.config.enableRecaptcha && this.recaptchaWidgetId !== null) {
+                    grecaptcha.reset(this.recaptchaWidgetId);
+                    this.isRecaptchaReady = false;
+                }
+                
+                return; // Success - no retry needed
             } else {
-                throw new Error('Network response was not ok');
+                // Parse error details from Formspree
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.error || `Server error: ${response.status}`;
+                throw new Error(errorMessage);
             }
             
         } catch (error) {
-            console.error('Form submission error:', error);
-            this.showStatus('There was a problem sending your message. Please try again or contact me directly.', 'error');
-        } finally {
-            this.setLoadingState(false);
+            console.warn(`Submission attempt ${attempt}/${maxAttempts} failed:`, error.message);
+            
+            // Don't retry for certain errors
+            if (error.message.includes('403') || error.message.includes('Invalid email')) {
+                throw error; // Permanent error
+            }
+            
+            // Retry if attempts remaining
+            if (attempt < maxAttempts) {
+                const delay = this.config.retryDelay * Math.pow(2, attempt - 1); // Exponential backoff
+                this.showStatus(`Retrying... (${attempt}/${maxAttempts})`, 'info');
+                
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return this.submitWithRetry(attempt + 1);
+            }
+            
+            throw error; // All attempts exhausted
         }
     }
     
@@ -4032,19 +4164,40 @@ class ContactFormManager {
         const fieldName = field.name;
         let errorMessage = '';
         
+        // Skip honeypot field
+        if (fieldName === '_gotcha') return true;
+        
         // Required field validation
         if (!value) {
             errorMessage = `${this.getFieldLabel(fieldName)} is required.`;
         } else if (fieldName === 'email') {
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Enhanced email validation
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(value)) {
-                errorMessage = 'Please enter a valid email address.';
+                errorMessage = 'Please enter a valid email address (e.g., user@example.com).';
+            } else if (value.length > 254) {
+                errorMessage = 'Email address is too long.';
             }
-        } else if (fieldName === 'name' && value.length < 2) {
-            errorMessage = 'Name must be at least 2 characters long.';
-        } else if (fieldName === 'message' && value.length < 10) {
-            errorMessage = 'Message must be at least 10 characters long.';
+        } else if (fieldName === 'name') {
+            if (value.length < 2) {
+                errorMessage = 'Name must be at least 2 characters long.';
+            } else if (value.length > 100) {
+                errorMessage = 'Name is too long (max 100 characters).';
+            } else if (!/^[a-zA-Z\s\-'.]+$/.test(value)) {
+                errorMessage = 'Name can only contain letters, spaces, hyphens, and apostrophes.';
+            }
+        } else if (fieldName === 'subject') {
+            if (value.length < 3) {
+                errorMessage = 'Subject must be at least 3 characters long.';
+            } else if (value.length > 200) {
+                errorMessage = 'Subject is too long (max 200 characters).';
+            }
+        } else if (fieldName === 'message') {
+            if (value.length < 10) {
+                errorMessage = 'Message must be at least 10 characters long.';
+            } else if (value.length > 5000) {
+                errorMessage = 'Message is too long (max 5000 characters).';
+            }
         }
         
         this.showFieldError(field, errorMessage);
@@ -4098,18 +4251,36 @@ class ContactFormManager {
         this.formStatus.className = `form-status ${type}`;
         this.formStatus.style.display = 'block';
         
-        // Auto-hide success messages
-        if (type === 'success') {
+        // Announce to screen readers
+        this.formStatus.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+        
+        // Auto-hide success and info messages
+        if (type === 'success' || type === 'info') {
             setTimeout(() => {
                 this.formStatus.style.display = 'none';
-            }, 5000);
+            }, type === 'success' ? 8000 : 5000);
+        }
+    }
+
+    // Update reCAPTCHA theme when page theme changes
+    updateRecaptchaTheme() {
+        if (this.config.enableRecaptcha && this.recaptchaWidgetId !== null) {
+            const isDark = document.body.classList.contains('dark-theme');
+            // Note: reCAPTCHA theme can't be changed after initialization
+            // This is a placeholder for future enhancement
+            console.log(`📱 Theme changed: ${isDark ? 'dark' : 'light'} (reCAPTCHA theme update needed)`);
         }
     }
 }
 
 // Initialize contact form when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new ContactFormManager();
+    const contactForm = new ContactFormManager();
+    
+    // Listen for theme changes to update reCAPTCHA
+    document.addEventListener('themeChanged', () => {
+        contactForm.updateRecaptchaTheme();
+    });
 });
 
 // Force hero background color to prevent any override issues (theme-aware)
