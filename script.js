@@ -628,6 +628,8 @@ const performanceOptimizer = new PerformanceOptimizer();
 
 // Smooth scrolling and navigation
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔥 MAIN DOMContentLoaded event fired - GitHub loading should start here!');
+    
     // Mobile menu toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
@@ -672,18 +674,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize API optimizations
-    preloadCriticalData();
+    console.log('🔧 About to call preloadCriticalData...');
+    try {
+        preloadCriticalData();
+        console.log('✅ preloadCriticalData completed without error');
+    } catch (error) {
+        console.error('❌ preloadCriticalData failed:', error);
+    }
     
     // Set up periodic cache cleanup (every 10 minutes)
+    console.log('🔧 Setting up cache cleanup interval...');
     setInterval(clearExpiredCache, 10 * 60 * 1000);
     
     // Load all GitHub data with optimized coordination
     console.log('🚀 Starting GitHub data load...');
     console.log('🔧 DEBUG: About to call loadAllGitHubData()');
-    loadAllGitHubData().catch(error => {
-        console.error('❌ Failed to load GitHub data:', error);
+    
+    // Add immediate DOM check
+    const statsGrid = document.getElementById('stats-grid');
+    const mainLanguageStats = document.getElementById('main-language-stats');
+    const contributionGraph = document.getElementById('contribution-graph');
+    
+    console.log('🔧 DEBUG: GitHub stats DOM elements check:', {
+        statsGrid: !!statsGrid,
+        mainLanguageStats: !!mainLanguageStats, 
+        contributionGraph: !!contributionGraph,
+        statsGridId: statsGrid?.id,
+        allElements: document.querySelectorAll('#stats-grid, #main-language-stats, #contribution-graph').length
     });
-    loadGitHubBadges(); // This uses external services, so keep separate
+    
+    // Wrap GitHub loading in additional error handling
+    try {
+        console.log('🚀 Calling loadAllGitHubData with try-catch wrapper...');
+        loadAllGitHubData().catch(error => {
+            console.error('❌ Failed to load GitHub data (Promise catch):', error);
+        });
+    } catch (syncError) {
+        console.error('❌ Synchronous error calling loadAllGitHubData:', syncError);
+    }
+    
+    try {
+        console.log('🏷️ Loading GitHub badges...');
+        loadGitHubBadges(); // This uses external services, so keep separate
+    } catch (badgeError) {
+        console.error('❌ Error loading GitHub badges:', badgeError);
+    }
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -3778,6 +3813,35 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
         // navigator.serviceWorker.register('/sw.js');
     });
 }
+
+// Separate, isolated GitHub stats loader to ensure it runs
+function isolatedGitHubStatsLoader() {
+    console.log('🔥 ISOLATED GitHub stats loader starting...');
+    
+    // Simple DOM check
+    const statsGrid = document.getElementById('stats-grid');
+    console.log('🔧 ISOLATED: Stats grid found:', !!statsGrid);
+    
+    if (statsGrid) {
+        // Add a simple loading message
+        statsGrid.innerHTML = '<div style="color: white; padding: 20px;">🔄 Loading GitHub statistics...</div>';
+        
+        // Call the main loading function
+        loadGitHubStats().then(() => {
+            console.log('✅ ISOLATED: GitHub stats loaded successfully');
+        }).catch(error => {
+            console.error('❌ ISOLATED: GitHub stats failed:', error);
+            statsGrid.innerHTML = '<div style="color: #ff6b35; padding: 20px;">❌ Failed to load GitHub statistics</div>';
+        });
+    } else {
+        console.error('❌ ISOLATED: stats-grid element not found');
+    }
+}
+
+// Run isolated loader on multiple events to ensure it executes
+document.addEventListener('DOMContentLoaded', isolatedGitHubStatsLoader);
+globalThis.addEventListener('load', isolatedGitHubStatsLoader);
+setTimeout(isolatedGitHubStatsLoader, 1000); // Fallback after 1 second
 
 // Force hero background color to prevent any override issues (theme-aware)
 function forceHeroBackground() {
