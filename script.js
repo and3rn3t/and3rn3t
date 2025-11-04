@@ -1118,7 +1118,11 @@ class ContentDiscoverySystem {
         this.buildSearchIndex();
         this.bindGlobalSearchEvents();
         this.bindProjectSearchEnhancements();
-        this.loadSavedSearches();
+        
+        // Load saved searches if method exists
+        if (typeof this.loadSavedSearches === 'function') {
+            this.loadSavedSearches();
+        }
         
         // Global keyboard shortcut for search
         document.addEventListener('keydown', (e) => {
