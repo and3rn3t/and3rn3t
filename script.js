@@ -2135,7 +2135,7 @@ function showDemoProjects(container) {
 // Enhanced scroll animations
 function initScrollAnimations() {
     const animationElements = document.querySelectorAll('.hero-content, .about-text, .skills-grid, .animate-on-scroll');
-    
+
     const animationObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
             if (entry.isIntersecting) {
@@ -2145,8 +2145,22 @@ function initScrollAnimations() {
     }, {
         threshold: 0.1
     });
-    
+
     for (const el of animationElements) {
+        // Check if element is already in viewport on page load
+        const rect = el.getBoundingClientRect();
+        const isInViewport = (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+
+        // If element is in viewport, animate it immediately
+        if (isInViewport || rect.top < window.innerHeight) {
+            el.classList.add('animate-in');
+        }
+
         animationObserver.observe(el);
     }
 }
