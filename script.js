@@ -9541,11 +9541,10 @@ class BlogManager {
         
         // Add click handler to the entire card
         card.style.cursor = 'pointer';
-        card.addEventListener('click', (e) => {
-            // Don't trigger if clicking on a tag or other interactive element
-            if (e.target.classList.contains('post-tag')) return;
-            
+        
+        const openPost = (e) => {
             e.preventDefault();
+            e.stopPropagation();
             console.log(`[Blog] Opening post: ${post.slug}`);
             this.renderSinglePost(post.slug);
             
@@ -9556,14 +9555,17 @@ class BlogManager {
                     title: post.title
                 });
             }
+        };
+        
+        card.addEventListener('click', (e) => {
+            // Don't trigger if clicking on a tag or other interactive element
+            if (e.target.classList.contains('post-tag')) return;
+            openPost(e);
         });
         
         // Also add click handler to the link specifically
         const readMoreLink = card.querySelector('.read-more');
-        readMoreLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation(); // Prevent double-triggering
-        });
+        readMoreLink.addEventListener('click', openPost);
         
         return card;
     }
@@ -9583,15 +9585,27 @@ class BlogManager {
         
         this.currentPost = post;
         
-        // Find or create blog container
+        // Hide blog list section
+        const blogListSection = document.getElementById('blog');
+        if (blogListSection) {
+            blogListSection.style.display = 'none';
+        }
+        
+        // Find or create blog post container
         let blogSection = document.getElementById('blog-post');
         
         if (!blogSection) {
             blogSection = document.createElement('section');
             blogSection.id = 'blog-post';
             blogSection.className = 'blog-post-section';
-            document.querySelector('main').appendChild(blogSection);
+            const main = document.querySelector('main');
+            if (main) {
+                main.appendChild(blogSection);
+            }
         }
+        
+        // Show blog post section
+        blogSection.style.display = 'block';
         
         // Scroll to blog section
         blogSection.scrollIntoView({ behavior: 'smooth' });
@@ -9888,26 +9902,29 @@ class BlogManager {
      * Show post list view
      */
     showPostList() {
+        // Hide single post section
         const blogSection = document.getElementById('blog-post');
         if (blogSection) {
-            blogSection.innerHTML = '';
+            blogSection.style.display = 'none';
+        }
+        
+        // Show blog list section
+        const blogListSection = document.getElementById('blog');
+        if (blogListSection) {
+            blogListSection.style.display = 'block';
+            blogListSection.scrollIntoView({ behavior: 'smooth' });
         }
         
         // Reset SEO metadata
         this.resetSEOMetadata();
         
-        // Navigate to blog section
-        const blogListSection = document.getElementById('blog');
-        if (blogListSection) {
-            blogListSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        
         // Update URL
         if (window.history && window.history.pushState) {
-            window.history.pushState({}, 'Blog', '/');
+            window.history.pushState({}, 'Blog', '/#blog');
         }
         
         this.currentPost = null;
+        console.log('[Blog] Returned to post list');
     }
     
     /**
