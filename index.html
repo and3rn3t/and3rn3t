@@ -113,15 +113,19 @@
         .hero,
         section.hero,
         #home.hero { 
-            min-height: 100vh; 
+            height: 100vh !important; 
+            max-height: 100vh !important;
             display: flex; 
             align-items: center; 
             padding-top: 80px;
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
             background: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
             background-image: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
             position: relative;
             z-index: 1;
             color: white !important;
+            overflow: hidden !important;
         }
         .hero-title, .hero-subtitle, .hero-description {
             color: white !important;
@@ -140,6 +144,9 @@
             background: #f8fafc !important;
             padding: 80px 0 !important;
             min-height: 400px !important;
+            position: relative !important;
+            z-index: 2 !important;
+            margin-top: 0 !important;
         }
         .section-title, .subsection-title {
             color: #1e293b !important;
@@ -149,6 +156,52 @@
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+        }
+        /* Fix section spacing and overlap */
+        section:not(.hero) {
+            clear: both !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+        /* Ensure proper spacing between hero and projects */
+        .hero + .projects,
+        .hero + #projects {
+            margin-top: 0 !important;
+            padding-top: 40px !important;
+        }
+        /* Prevent any transform that might cause overlap */
+        .hero.animate-on-scroll,
+        .hero .animate-on-scroll {
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        /* Ensure animations don't cause layout issues */
+        .animate-on-scroll {
+            position: relative !important;
+        }
+        
+        /* Comprehensive overlap prevention */
+        html, body {
+            scroll-behavior: smooth !important;
+            overflow-x: hidden !important;
+        }
+        
+        /* Force proper section stacking */
+        main, .main-content {
+            display: block !important;
+            position: relative !important;
+            z-index: 5 !important;
+        }
+        
+        /* Ensure all content sections are above hero */
+        section.projects,
+        section.skills,
+        section.about,
+        section.contact {
+            background: white !important;
+            position: relative !important;
+            z-index: 10 !important;
+            border-top: 1px solid transparent !important;
         }
         .project-card {
             display: block !important;
