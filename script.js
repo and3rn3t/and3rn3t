@@ -628,8 +628,6 @@ const performanceOptimizer = new PerformanceOptimizer();
 
 // Smooth scrolling and navigation
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥 MAIN DOMContentLoaded event fired - GitHub loading should start here!');
-    
     // Mobile menu toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
@@ -674,51 +672,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize API optimizations
-    console.log('🔧 About to call preloadCriticalData...');
-    try {
-        preloadCriticalData();
-        console.log('✅ preloadCriticalData completed without error');
-    } catch (error) {
-        console.error('❌ preloadCriticalData failed:', error);
-    }
+    preloadCriticalData();
     
     // Set up periodic cache cleanup (every 10 minutes)
-    console.log('🔧 Setting up cache cleanup interval...');
     setInterval(clearExpiredCache, 10 * 60 * 1000);
     
     // Load all GitHub data with optimized coordination
-    console.log('🚀 Starting GitHub data load...');
-    console.log('🔧 DEBUG: About to call loadAllGitHubData()');
-    
-    // Add immediate DOM check
-    const statsGrid = document.getElementById('stats-grid');
-    const mainLanguageStats = document.getElementById('main-language-stats');
-    const contributionGraph = document.getElementById('contribution-graph');
-    
-    console.log('🔧 DEBUG: GitHub stats DOM elements check:', {
-        statsGrid: !!statsGrid,
-        mainLanguageStats: !!mainLanguageStats, 
-        contributionGraph: !!contributionGraph,
-        statsGridId: statsGrid?.id,
-        allElements: document.querySelectorAll('#stats-grid, #main-language-stats, #contribution-graph').length
+    loadAllGitHubData().catch(error => {
+        console.error('Failed to load GitHub data:', error);
     });
-    
-    // Wrap GitHub loading in additional error handling
-    try {
-        console.log('🚀 Calling loadAllGitHubData with try-catch wrapper...');
-        loadAllGitHubData().catch(error => {
-            console.error('❌ Failed to load GitHub data (Promise catch):', error);
-        });
-    } catch (syncError) {
-        console.error('❌ Synchronous error calling loadAllGitHubData:', syncError);
-    }
-    
-    try {
-        console.log('🏷️ Loading GitHub badges...');
-        loadGitHubBadges(); // This uses external services, so keep separate
-    } catch (badgeError) {
-        console.error('❌ Error loading GitHub badges:', badgeError);
-    }
+    loadGitHubBadges(); // This uses external services, so keep separate
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -1112,8 +1075,6 @@ function enhancedProjectLoad() {
 
 // Parallel loading of all GitHub data with coordination
 async function loadAllGitHubData() {
-    console.log('🎯 loadAllGitHubData() function started');
-    
     const loadingIndicators = {
         projects: document.querySelector('.projects-loading'),
         stats: document.querySelector('.stats-loading'), 
@@ -1137,7 +1098,6 @@ async function loadAllGitHubData() {
         });
         
         // Load core data in parallel with smart coordination
-        console.log('🔄 Starting Promise.allSettled with loadGitHubStats...');
         const results = await Promise.allSettled([
             loadGitHubProjects(),
             loadGitHubStats(),
@@ -1149,24 +1109,8 @@ async function loadAllGitHubData() {
         
         // Check results and log any failures
         const failed = results.filter(result => result.status === 'rejected');
-        const successful = results.filter(result => result.status === 'fulfilled');
-        
-        console.log('📊 Promise.allSettled results:', {
-            total: results.length,
-            successful: successful.length,
-            failed: failed.length,
-            results: results.map((r, i) => ({
-                index: i,
-                status: r.status,
-                error: r.status === 'rejected' ? r.reason?.message : undefined
-            }))
-        });
-        
         if (failed.length > 0) {
             console.warn(`${failed.length} GitHub data requests failed:`, failed);
-            for (const failure of failed) {
-                console.error('Failed function details:', failure.reason);
-            }
         }
         
         console.log(`✅ Loaded ${results.length - failed.length}/${results.length} GitHub data sections`);
@@ -1228,47 +1172,25 @@ document.addEventListener('DOMContentLoaded', handleContactForm);
 
 // GitHub Stats Integration
 async function loadGitHubStats() {
-    console.log('📊 Loading GitHub stats...');
     const statsGrid = document.getElementById('stats-grid');
     const contributionGraph = document.getElementById('contribution-graph');
     const languageStats = document.getElementById('main-language-stats');
     
-    console.log('DOM Elements found:', { 
-        statsGrid: !!statsGrid, 
-        contributionGraph: !!contributionGraph, 
-        languageStats: !!languageStats,
-        statsGridId: statsGrid?.id,
-        contributionGraphId: contributionGraph?.id,
-        languageStatsId: languageStats?.id
-    });
-    
     if (!statsGrid) {
-        console.error('❌ stats-grid element not found in DOM');
+        console.error('stats-grid element not found in DOM');
         return;
     }
     
     try {
         // Fetch user data and repositories using optimized API
-        console.log('🔄 Fetching GitHub API data...');
         const [userData, repos] = await Promise.all([
             githubAPI.getUserData(),
             githubAPI.getRepositories('updated', 100)
         ]);
         
-        console.log('✅ GitHub data received:', { 
-            user: userData?.login, 
-            userDataKeys: Object.keys(userData || {}),
-            repoCount: repos?.length,
-            usingCache: !!githubAPI.cachedData,
-            userData: userData,
-            firstRepo: repos?.[0]?.name
-        });
-        
         // Calculate total stars and forks
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
         const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
-        
-        console.log('📈 Calculated stats:', { totalStars, totalForks });
         
         // Display stats
         const statsHTML = `
@@ -1316,7 +1238,6 @@ async function loadGitHubStats() {
             </div>
         `;
         
-        console.log('🎨 Setting stats HTML to statsGrid element:', statsHTML.substring(0, 100) + '...');
         statsGrid.innerHTML = statsHTML;
         
         // Load language statistics
@@ -1330,8 +1251,7 @@ async function loadGitHubStats() {
         `;
         
     } catch (error) {
-        console.error('❌ Error loading GitHub stats:', error);
-        console.error('Error stack:', error.stack);
+        console.error('Error loading GitHub stats:', error);
         if (statsGrid) {
             statsGrid.innerHTML = '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
         }
@@ -1347,7 +1267,6 @@ async function loadGitHubStats() {
 // Load language statistics
 function loadLanguageStats(repos) {
     const languageStats = document.getElementById('main-language-stats');
-    console.log('🏷️ Loading language stats for element:', languageStats?.id, 'with', repos?.length, 'repos');
     
     // Count languages across all repos
     const languages = {};
@@ -1384,10 +1303,8 @@ function loadLanguageStats(repos) {
         'Rust': '#dea584'
     };
     
-    console.log('📊 Language stats computed:', { sortedLanguages, total, languageStatsElement: !!languageStats });
-    
     if (!languageStats) {
-        console.error('❌ main-language-stats element not found');
+        console.error('main-language-stats element not found');
         return;
     }
     
@@ -3814,34 +3731,23 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
     });
 }
 
-// Separate, isolated GitHub stats loader to ensure it runs
-function isolatedGitHubStatsLoader() {
-    console.log('🔥 ISOLATED GitHub stats loader starting...');
-    
-    // Simple DOM check
+// Backup GitHub stats loader to ensure reliable loading
+function backupGitHubStatsLoader() {
     const statsGrid = document.getElementById('stats-grid');
-    console.log('🔧 ISOLATED: Stats grid found:', !!statsGrid);
     
-    if (statsGrid) {
-        // Add a simple loading message
-        statsGrid.innerHTML = '<div style="color: white; padding: 20px;">🔄 Loading GitHub statistics...</div>';
-        
-        // Call the main loading function
-        loadGitHubStats().then(() => {
-            console.log('✅ ISOLATED: GitHub stats loaded successfully');
-        }).catch(error => {
-            console.error('❌ ISOLATED: GitHub stats failed:', error);
-            statsGrid.innerHTML = '<div style="color: #ff6b35; padding: 20px;">❌ Failed to load GitHub statistics</div>';
+    if (statsGrid && statsGrid.innerHTML.includes('Loading stats...')) {
+        // Main loader hasn't populated yet, use backup
+        loadGitHubStats().catch(error => {
+            console.error('Backup GitHub stats loader failed:', error);
+            if (statsGrid) {
+                statsGrid.innerHTML = '<div style="color: #ff6b35; padding: 20px;">Unable to load GitHub statistics</div>';
+            }
         });
-    } else {
-        console.error('❌ ISOLATED: stats-grid element not found');
     }
 }
 
-// Run isolated loader on multiple events to ensure it executes
-document.addEventListener('DOMContentLoaded', isolatedGitHubStatsLoader);
-globalThis.addEventListener('load', isolatedGitHubStatsLoader);
-setTimeout(isolatedGitHubStatsLoader, 1000); // Fallback after 1 second
+// Backup loader runs after main system has had time to load
+setTimeout(backupGitHubStatsLoader, 2000);
 
 // Force hero background color to prevent any override issues (theme-aware)
 function forceHeroBackground() {
