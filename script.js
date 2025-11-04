@@ -1858,6 +1858,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load all GitHub data with optimized coordination
     loadAllGitHubData().catch(error => {
+        console.error('Failed to load GitHub data, showing demo projects:', error);
+        // Fallback: show demo projects if GitHub data fails to load
+        setTimeout(() => {
+            const projectsGrid = document.getElementById('projects-grid');
+            if (projectsGrid && (!projectsGrid.children.length || projectsGrid.children.length === 1)) {
+                console.log('Loading demo projects as fallback');
+                showDemoProjects(projectsGrid);
+            }
+        }, 2000);
     });
     loadGitHubBadges(); // This uses external services, so keep separate
 
@@ -2317,6 +2326,19 @@ async function loadAllGitHubData() {
 document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initTypingEffect();
+    
+    // Immediate fallback for projects section
+    setTimeout(() => {
+        const projectsGrid = document.getElementById('projects-grid');
+        if (projectsGrid) {
+            const hasContent = projectsGrid.children.length > 0 && 
+                            !projectsGrid.querySelector('.loading');
+            if (!hasContent) {
+                console.log('Projects grid empty, loading demo projects immediately');
+                showDemoProjects(projectsGrid);
+            }
+        }
+    }, 3000); // Give 3 seconds for GitHub data to load
     
     // Add some interactive features
     const skillItems = document.querySelectorAll('.skill-item');
