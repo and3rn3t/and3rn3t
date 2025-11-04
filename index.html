@@ -168,6 +168,40 @@
     
     <!-- reCAPTCHA v3 for enhanced form security -->
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+    
+    <!-- Visual Enhancement Utilities -->
+    <style>
+        /* Critical animation styles for immediate loading */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-animation {
+            animation-delay: var(--animation-delay, 0ms);
+        }
+    </style>
 </head>
 <body>
     <!-- Scroll Progress Indicator -->
@@ -176,7 +210,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
         <div class="nav-container">
             <a href="#home" class="nav-logo">@and3rn3t</a>
             <ul class="nav-menu" id="nav-menu">
@@ -329,7 +363,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero animate-on-scroll" id="home">
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -372,7 +406,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section class="about animate-on-scroll" id="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
@@ -485,7 +519,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="projects" id="projects">
+    <section class="projects animate-on-scroll" id="projects">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             

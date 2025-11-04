@@ -1354,6 +1354,224 @@ class ContentDiscoverySystem {
         
         return results.sort((a, b) => b.relevance - a.relevance).slice(0, 10);
     }
+}
+
+// Enhanced Visual Animation System
+class VisualAnimationSystem {
+    constructor() {
+        this.observers = new Map();
+        this.particles = [];
+        this.isInitialized = false;
+        
+        this.init();
+    }
+    
+    init() {
+        if (this.isInitialized) return;
+        
+        this.setupScrollAnimations();
+        this.setupParticleSystem();
+        this.setupMicroInteractions();
+        this.enhanceExistingElements();
+        
+        this.isInitialized = true;
+    }
+    
+    setupScrollAnimations() {
+        // Enhanced Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '-10% 0px -10% 0px',
+            threshold: [0, 0.1, 0.3, 0.5]
+        };
+        
+        this.scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, index * 100); // Staggered animation
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements with animation classes
+        const animateElements = document.querySelectorAll(
+            '.reveal-on-scroll, .slide-in-left, .slide-in-right, .scale-in, .stagger-item'
+        );
+        
+        animateElements.forEach(el => {
+            this.scrollObserver.observe(el);
+        });
+    }
+    
+    setupParticleSystem() {
+        // Create particles container if it doesn't exist
+        let particlesContainer = document.querySelector('.particles-container');
+        if (!particlesContainer) {
+            particlesContainer = document.createElement('div');
+            particlesContainer.className = 'particles-container';
+            document.querySelector('#hero')?.appendChild(particlesContainer);
+        }
+        
+        // Create particles
+        for (let i = 0; i < 50; i++) {
+            this.createParticle(particlesContainer);
+        }
+    }
+    
+    createParticle(container) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random starting position and animation duration
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        
+        container.appendChild(particle);
+        
+        // Remove and recreate particle after animation
+        particle.addEventListener('animationiteration', () => {
+            particle.style.left = Math.random() * 100 + '%';
+        });
+        
+        return particle;
+    }
+    
+    setupMicroInteractions() {
+        // Enhanced button interactions
+        const buttons = document.querySelectorAll('.btn, .cta-button, .search-button');
+        buttons.forEach(btn => {
+            btn.classList.add('btn-enhanced');
+            
+            btn.addEventListener('mouseenter', (e) => {
+                e.target.style.setProperty('--mouse-x', e.clientX - e.target.offsetLeft + 'px');
+                e.target.style.setProperty('--mouse-y', e.clientY - e.target.offsetTop + 'px');
+            });
+        });
+        
+        // Enhanced card hover effects
+        const cards = document.querySelectorAll('.project-card, .skill-category');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                this.createHoverRipple(e);
+            });
+        });
+    }
+    
+    createHoverRipple(e) {
+        const card = e.currentTarget;
+        const ripple = document.createElement('div');
+        
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            width: 100px;
+            height: 100px;
+            left: ${e.clientX - card.offsetLeft - 50}px;
+            top: ${e.clientY - card.offsetTop - 50}px;
+            animation: ripple 0.6s ease-out;
+            pointer-events: none;
+            z-index: 1;
+        `;
+        
+        card.style.position = 'relative';
+        card.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    }
+    
+    enhanceExistingElements() {
+        // Add loading states to GitHub API calls
+        const githubElements = document.querySelectorAll('.github-stats, .repository-stats');
+        githubElements.forEach(el => {
+            this.addLoadingState(el);
+        });
+        
+        // Enhance existing stats cards
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach((card, index) => {
+            card.classList.add('reveal-on-scroll');
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+        
+        // Add focus management
+        this.setupFocusManagement();
+    }
+    
+    addLoadingState(element) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    element.classList.add('loaded');
+                    observer.disconnect();
+                }
+            });
+        });
+        
+        observer.observe(element, { childList: true, subtree: true });
+    }
+    
+    setupFocusManagement() {
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+        
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+        
+        // Add focus rings to interactive elements
+        const focusableElements = document.querySelectorAll(
+            'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        focusableElements.forEach(el => {
+            if (!el.classList.contains('focus-ring')) {
+                el.classList.add('focus-ring');
+            }
+        });
+    }
+    
+    // Performance monitoring
+    monitorPerformance() {
+        if ('performance' in globalThis && 'observer' in globalThis.PerformanceObserver) {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (entry.entryType === 'paint' && entry.name === 'first-contentful-paint') {
+                        console.log(`First Contentful Paint: ${entry.startTime}ms`);
+                    }
+                }
+            });
+            
+            observer.observe({ entryTypes: ['paint'] });
+        }
+    }
+    
+    // Cleanup method
+    destroy() {
+        if (this.scrollObserver) {
+            this.scrollObserver.disconnect();
+        }
+        
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers.clear();
+        
+        // Remove particles
+        const particlesContainer = document.querySelector('.particles-container');
+        if (particlesContainer) {
+            particlesContainer.remove();
+        }
+        
+        this.isInitialized = false;
+    }
     
     calculateRelevance(item, query) {
         let score = 0;
@@ -5096,6 +5314,10 @@ document.addEventListener('themeChanged', function(e) {
     forceHeroBackground();
 });
 
+// Initialize Visual Animation System
+const visualAnimations = new VisualAnimationSystem();
+
 console.log('Portfolio enhancements loaded successfully! 🚀');
 console.log('Press "T" to toggle theme');
 console.log('Press Ctrl/Cmd + P to print resume');
+console.log('Visual animations initialized! ✨');
