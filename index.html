@@ -167,6 +167,24 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* CRITICAL MODAL OVERRIDE - FORCE HIDE IMMEDIATELY */
+        #global-search-modal,
+        .global-search-modal,
+        #keyboard-help,
+        .keyboard-help {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            z-index: -9999 !important;
+            position: absolute !important;
+            left: -9999px !important;
+            top: -9999px !important;
+            width: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+        }
     </style>
     
     <!-- Load main stylesheet after critical CSS -->
@@ -272,7 +290,7 @@
     </nav>
 
     <!-- Global Search Modal -->
-    <div class="global-search-modal" id="global-search-modal">
+    <div class="global-search-modal" id="global-search-modal" style="display: none !important; opacity: 0 !important; visibility: hidden !important; transform: translateY(-100vh) !important;">
         <div class="global-search-content">
             <div class="global-search-header">
                 <div class="global-search-input-container">
@@ -322,10 +340,10 @@
                 <div class="search-results-content" id="search-results-content"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Keyboard Shortcuts Help -->
-    <div class="keyboard-help" id="keyboard-help">
+    <div class="keyboard-help" id="keyboard-help" style="display: none !important; opacity: 0 !important; visibility: hidden !important; transform: translateY(-100vh) !important;">
         <div class="keyboard-help-content">
             <h3>⌨️ Keyboard Shortcuts</h3>
             <div class="shortcut-grid">

@@ -46,13 +46,17 @@ body {
     padding: 0 1rem;
 }
 
-/* Force hide modals by default */
+/* Force hide modals by default - Critical Override */
+#global-search-modal:not(.visible),
 .global-search-modal:not(.visible),
+#keyboard-help:not(.visible),
 .keyboard-help:not(.visible) {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    transform: translateY(-100vh) !important;
+    z-index: -1 !important;
 }
 
 /* Utility Classes */
