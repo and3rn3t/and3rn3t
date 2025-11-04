@@ -2612,8 +2612,8 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-04T21:31:37Z",
-    "pushed_at": "2025-11-04T21:31:33Z",
+    "updated_at": "2025-11-04T21:43:52Z",
+    "pushed_at": "2025-11-04T21:43:49Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
@@ -2628,12 +2628,12 @@
     "has_downloads": true,
     "has_wiki": false,
     "has_pages": true,
-    "has_discussions": false,
+    "has_discussions": true,
     "forks_count": 1,
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 6,
+    "open_issues_count": 8,
     "license": null,
     "allow_forking": true,
     "is_template": false,
@@ -2644,7 +2644,7 @@
     ],
     "visibility": "public",
     "forks": 1,
-    "open_issues": 6,
+    "open_issues": 8,
     "watchers": 0,
     "default_branch": "main",
     "permissions": {
@@ -2657,6 +2657,122 @@
   }
 ],
   "events": [
+  {
+    "id": "5706373143",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "repository_id": 390771666,
+      "push_id": 27998130132,
+      "ref": "refs/heads/main",
+      "head": "ff4bbd077a88f2c59ea5a072aef2080942f3950b",
+      "before": "0659959c8df62bd95d47e8b83e98a84865787e05"
+    },
+    "public": true,
+    "created_at": "2025-11-04T21:43:49Z"
+  },
+  {
+    "id": "4462781883",
+    "type": "DiscussionEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 390771666,
+      "name": "and3rn3t/and3rn3t",
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+    },
+    "payload": {
+      "action": "created",
+      "discussion": {
+        "repository_url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+        "category": {
+          "id": 46514853,
+          "node_id": "DIC_kwDOF0qz0s4CxcKl",
+          "repository_id": 390771666,
+          "emoji": ":mega:",
+          "name": "Announcements",
+          "description": "Updates from maintainers",
+          "created_at": "2025-11-04T15:35:03.000-06:00",
+          "updated_at": "2025-11-04T15:35:03.000-06:00",
+          "slug": "announcements",
+          "is_answerable": false
+        },
+        "answer_html_url": null,
+        "answer_chosen_at": null,
+        "answer_chosen_by": null,
+        "html_url": "https://github.com/and3rn3t/and3rn3t/discussions/24",
+        "id": 9106329,
+        "node_id": "D_kwDOF0qz0s4AivOZ",
+        "number": 24,
+        "title": "Welcome to and3rn3t Discussions!",
+        "user": {
+          "login": "and3rn3t",
+          "id": 87380976,
+          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/and3rn3t",
+          "html_url": "https://github.com/and3rn3t",
+          "followers_url": "https://api.github.com/users/and3rn3t/followers",
+          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+          "repos_url": "https://api.github.com/users/and3rn3t/repos",
+          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+
+        ],
+        "state": "open",
+        "state_reason": null,
+        "locked": false,
+        "comments": 0,
+        "created_at": "2025-11-04T21:35:40Z",
+        "updated_at": "2025-11-04T21:35:41Z",
+        "active_lock_reason": null,
+        "body": "<!--\r\n    ✏️ Optional: Customize the content below to let your community know what you intend to use Discussions for.\r\n-->\r\n## 👋 Welcome!\r\n  We’re using Discussions as a place to connect with other members of our community. We hope that you:\r\n  * Ask questions you’re wondering about.\r\n  * Share ideas.\r\n  * Engage with other community members.\r\n  * Welcome others and are open-minded. Remember that this is a community we\r\n  build together 💪.\r\n\r\n  To get started, comment below with an introduction of yourself and tell us about what you do with this community.\r\n\r\n<!--\r\n  For the maintainers, here are some tips 💡 for getting started with Discussions. We'll leave these in Markdown comments for now, but feel free to take out the comments for all maintainers to see.\r\n\r\n  📢 **Announce to your community** that Discussions is available! Go ahead and send that tweet, post, or link it from the website to drive traffic here.\r\n\r\n  🔗 If you use issue templates, **link any relevant issue templates** such as questions and community conversations to Discussions. Declutter your issues by driving community content to where they belong in Discussions. If you need help, here's a [link to the documentation](https://docs.github.com/github/building-a-strong-community/configuring-issue-templates-for-your-repository#configuring-the-template-chooser).\r\n\r\n  ➡️ You can **convert issues to discussions** either individually or bulk by labels. Looking at you, issues labeled “question” or “discussion”.\r\n-->\r\n",
+        "reactions": {
+          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/discussions/24/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/and3rn3t/and3rn3t/discussions/24/timeline"
+      }
+    },
+    "public": true,
+    "created_at": "2025-11-04T21:35:40Z"
+  },
   {
     "id": "5706152253",
     "type": "PushEvent",
@@ -3521,60 +3637,8 @@
     },
     "public": true,
     "created_at": "2025-11-04T15:15:43Z"
-  },
-  {
-    "id": "5697590572",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "ref": "claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/claude/fix-section-visibility-011CUo4U1N46as1ybBWhwCUE",
-      "master_branch": "main",
-      "description": "Config files for my GitHub profile.",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-04T15:13:48Z"
-  },
-  {
-    "id": "5685041433",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "ref": "claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/claude/fix-projects-visibility-011CUnNYuQcAqKAUKfjVsF9d",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-04T06:29:59Z"
   }
 ],
-  "lastUpdated": "2025-11-04T21:31:43Z",
+  "lastUpdated": "2025-11-04T21:43:59Z",
   "rateLimitRemaining": "Enhanced with token"
 }
