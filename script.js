@@ -2031,17 +2031,17 @@ function createProjectCard(repo, metadata) {
         </div>
         
         <div class="project-links">
-            <a href="${repo.html_url}" target="_blank" class="project-link">
+            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">
                 <i class="fab fa-github"></i>
                 View Code
             </a>
             ${repo.homepage ? `
-                <a href="${repo.homepage}" target="_blank" class="project-link secondary">
+                <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="project-link secondary">
                     <i class="fas fa-external-link-alt"></i>
                     Live Demo
                 </a>
             ` : `
-                <a href="${repo.html_url}/blob/main/README.md" target="_blank" class="project-link secondary">
+                <a href="${repo.html_url}/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
                     <i class="fas fa-file-alt"></i>
                     Documentation
                 </a>
@@ -2124,17 +2124,17 @@ function showDemoProjects(container) {
             </div>
             
             <div class="project-links">
-                <a href="${project.github}" target="_blank" class="project-link">
+                <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="project-link">
                     <i class="fab fa-github"></i>
                     View Code
                 </a>
                 ${project.demo ? `
-                    <a href="${project.demo}" target="_blank" class="project-link secondary">
+                    <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="project-link secondary">
                         <i class="fas fa-external-link-alt"></i>
                         Live Demo
                     </a>
                 ` : `
-                    <a href="${project.github}" target="_blank" class="project-link secondary">
+                    <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="project-link secondary">
                         <i class="fas fa-file-alt"></i>
                         Learn More
                     </a>
@@ -2737,7 +2737,7 @@ async function loadPinnedRepos() {
             <div class="pinned-repo-card">
                 <div class="pinned-repo-header">
                     <i class="fas fa-book"></i>
-                    <a href="${repo.html_url}" target="_blank" class="pinned-repo-name">${repo.name}</a>
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="pinned-repo-name">${repo.name}</a>
                 </div>
                 <p class="pinned-repo-desc">${repo.description || 'No description available'}</p>
                 <div class="pinned-repo-footer">
@@ -2821,7 +2821,7 @@ async function loadGitHubGists() {
                 <div class="gist-card">
                     <div class="gist-header">
                         <i class="fas fa-code"></i>
-                        <a href="${gist.html_url}" target="_blank" class="gist-title">
+                        <a href="${gist.html_url}" target="_blank" rel="noopener noreferrer" class="gist-title">
                             ${firstFile.filename}
                         </a>
                     </div>
@@ -4653,7 +4653,7 @@ async function loadTopStarredProjects() {
                                 <div class="top-project-header">
                                     <span class="project-category-badge">${category}</span>
                                     <h4 class="top-project-title">
-                                        <a href="${repo.html_url}" target="_blank">${displayName}</a>
+                                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${displayName}</a>
                                     </h4>
                                 </div>
                                 <p class="top-project-description">${description}</p>
@@ -4690,11 +4690,11 @@ async function loadTopStarredProjects() {
                                 </div>
                                 
                                 <div class="top-project-links">
-                                    <a href="${repo.html_url}" target="_blank" class="btn btn-primary btn-sm">
+                                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
                                         <i class="fab fa-github"></i> View Repository
                                     </a>
                                     ${repo.homepage ? `
-                                        <a href="${repo.homepage}" target="_blank" class="btn btn-secondary btn-sm">
+                                        <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
                                             <i class="fas fa-external-link-alt"></i> Live Demo
                                         </a>
                                     ` : ''}
@@ -6577,4 +6577,46 @@ const portfolioAnalytics = new PortfolioAnalyticsSystem();
 
 // Make analytics available globally for debugging
 globalThis.portfolioAnalytics = portfolioAnalytics;
+
+// Cloudflare Analytics Status Updater
+function updateCloudflareStatus() {
+    const statusElement = document.getElementById('cf-analytics-status');
+    if (!statusElement) return;
+    
+    const indicator = statusElement.querySelector('.status-indicator');
+    const text = statusElement.querySelector('.status-text');
+    
+    if (!indicator || !text) return;
+    
+    // Clear all status classes
+    statusElement.classList.remove('status-active', 'status-inactive', 'status-loading');
+    
+    if (globalThis.portfolioAnalytics && globalThis.portfolioAnalytics.cloudflareLoaded) {
+        indicator.className = 'status-indicator active';
+        indicator.textContent = '●';
+        text.textContent = 'Cloudflare Analytics Active';
+        statusElement.title = 'Cloudflare Web Analytics is successfully tracking visits';
+        statusElement.classList.add('status-active');
+    } else if (globalThis.portfolioAnalytics && globalThis.portfolioAnalytics.cloudflareAttempted) {
+        indicator.className = 'status-indicator inactive';
+        indicator.textContent = '●';
+        text.textContent = 'Cloudflare Analytics Unavailable';
+        statusElement.title = 'Using local analytics only - Cloudflare service unavailable';
+        statusElement.classList.add('status-inactive');
+    } else {
+        indicator.className = 'status-indicator loading';
+        indicator.textContent = '●';
+        text.textContent = 'Cloudflare Analytics Loading...';
+        statusElement.title = 'Attempting to connect to Cloudflare Web Analytics';
+        statusElement.classList.add('status-loading');
+    }
+}
+
+// Check Cloudflare status periodically
+setInterval(updateCloudflareStatus, 1000);
+
+// Initial status check after page load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(updateCloudflareStatus, 2000);
+});
 

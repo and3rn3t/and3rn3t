@@ -5540,28 +5540,81 @@ body.dark-theme .event-item {
 .cf-analytics-status {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-size: var(--font-size-xs);
-    color: var(--text-secondary);
     margin-top: 10px;
-    padding: 6px 10px;
-    background: rgba(var(--success-color-rgb), 0.1);
+    padding: 8px 12px;
     border-radius: var(--radius-base);
-    border: 1px solid rgba(var(--success-color-rgb), 0.2);
+    border: 1px solid;
+    cursor: help;
+    transition: all 0.3s ease;
 }
 
-.cf-analytics-status::before {
-    content: '☁️';
+.cf-analytics-status .status-indicator {
+    font-size: 10px;
+    transition: color 0.3s ease;
 }
 
-.cf-analytics-status.error {
+.cf-analytics-status .status-indicator.loading {
+    color: var(--warning-color);
+    animation: pulse 2s infinite;
+}
+
+.cf-analytics-status .status-indicator.active {
+    color: var(--success-color);
+}
+
+.cf-analytics-status .status-indicator.inactive {
+    color: var(--error-color);
+}
+
+.cf-analytics-status .status-text {
+    font-weight: 500;
+}
+
+/* Status-specific styling with fallbacks */
+.cf-analytics-status.status-active {
+    background: rgba(var(--success-color-rgb), 0.1);
+    border-color: rgba(var(--success-color-rgb), 0.2);
+    color: var(--success-color);
+}
+
+.cf-analytics-status.status-inactive {
     background: rgba(var(--error-color-rgb), 0.1);
     border-color: rgba(var(--error-color-rgb), 0.2);
     color: var(--error-color);
 }
 
-.cf-analytics-status.error::before {
-    content: '⚠️';
+.cf-analytics-status.status-loading {
+    background: rgba(var(--warning-color-rgb), 0.1);
+    border-color: rgba(var(--warning-color-rgb), 0.2);
+    color: var(--warning-color);
+}
+
+/* Modern browser support with :has() selector */
+@supports selector(:has(*)) {
+    .cf-analytics-status:has(.status-indicator.active) {
+        background: rgba(var(--success-color-rgb), 0.1);
+        border-color: rgba(var(--success-color-rgb), 0.2);
+        color: var(--success-color);
+    }
+
+    .cf-analytics-status:has(.status-indicator.inactive) {
+        background: rgba(var(--error-color-rgb), 0.1);
+        border-color: rgba(var(--error-color-rgb), 0.2);
+        color: var(--error-color);
+    }
+
+    .cf-analytics-status:has(.status-indicator.loading) {
+        background: rgba(var(--warning-color-rgb), 0.1);
+        border-color: rgba(var(--warning-color-rgb), 0.2);
+        color: var(--warning-color);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 /* ============================================

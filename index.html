@@ -58,20 +58,55 @@
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     
-    <!-- Cloudflare Web Analytics - Temporarily disabled due to DNS issues -->
-    <!-- <script defer src='https://static.cloudflare.com/beacon.min.js' data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'></script> -->
-    
-    <!-- Enhanced Analytics Configuration -->
+    <!-- Cloudflare Web Analytics with Error Handling -->
     <script>
-        // Analytics configuration
+        // Enhanced Analytics Configuration with Cloudflare Fallback
         window.portfolioAnalytics = {
             cloudflareEnabled: false,
             customEventsEnabled: true,
             performanceMonitoring: true,
             userBehaviorTracking: true,
             sessionId: null,
-            userId: null
+            userId: null,
+            cloudflareAttempted: false,
+            cloudflareLoaded: false
         };
+
+        // Attempt to load Cloudflare Analytics with error handling
+        function loadCloudflareAnalytics() {
+            if (window.portfolioAnalytics.cloudflareAttempted) return;
+            
+            window.portfolioAnalytics.cloudflareAttempted = true;
+            
+            const script = document.createElement('script');
+            script.defer = true;
+            script.src = 'https://static.cloudflare.com/beacon.min.js';
+            script.setAttribute('data-cf-beacon', '{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}');
+            
+            script.onload = function() {
+                window.portfolioAnalytics.cloudflareEnabled = true;
+                window.portfolioAnalytics.cloudflareLoaded = true;
+                console.log('Cloudflare Analytics loaded successfully');
+            };
+            
+            script.onerror = function() {
+                console.warn('Cloudflare Analytics failed to load - continuing without external analytics');
+                window.portfolioAnalytics.cloudflareEnabled = false;
+                window.portfolioAnalytics.cloudflareLoaded = false;
+            };
+            
+            // Set timeout for loading
+            setTimeout(() => {
+                if (!window.portfolioAnalytics.cloudflareLoaded) {
+                    console.warn('Cloudflare Analytics load timeout - continuing without external analytics');
+                }
+            }, 5000);
+            
+            document.head.appendChild(script);
+        }
+
+        // Try to load Cloudflare Analytics after a short delay
+        setTimeout(loadCloudflareAnalytics, 500);
     </script>
     
     <!-- DNS prefetch for external resources -->
@@ -1026,8 +1061,9 @@
                         title="Export analytics data for this session">
                     Export Session Data
                 </button>
-                <div class="cf-analytics-status">
-                    Cloudflare Analytics Active
+                <div class="cf-analytics-status" id="cf-analytics-status">
+                    <span class="status-indicator loading">●</span>
+                    <span class="status-text">Cloudflare Analytics Loading...</span>
                 </div>
             </div>
         </div>
