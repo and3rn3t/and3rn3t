@@ -20,6 +20,9 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
     
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml">
+    
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="/icons/icon-72x72.svg">
@@ -526,6 +529,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="#about" class="nav-link touch-target">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#blog" class="nav-link touch-target">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a href="#analytics" class="nav-link touch-target">Analytics</a>
@@ -1364,6 +1370,31 @@
                          alt="Status" 
                          loading="lazy"
                          class="metric-badge" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog animate-on-scroll" id="blog">
+        <div class="container">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <p class="section-description">
+                Thoughts, tutorials, and insights on software development, web technologies, and my journey as a developer.
+            </p>
+            
+            <div class="blog-filters">
+                <button class="filter-btn active" data-category="all">All Posts</button>
+                <button class="filter-btn" data-category="tutorial">Tutorials</button>
+                <button class="filter-btn" data-category="general">General</button>
+                <button class="filter-btn" data-category="showcase">Showcases</button>
+            </div>
+            
+            <div class="blog-posts-grid" id="blog-posts">
+                <!-- Blog posts will be loaded dynamically -->
+                <div class="loading-posts">
+                    <div class="spinner"></div>
+                    <p>Loading posts...</p>
                 </div>
             </div>
         </div>

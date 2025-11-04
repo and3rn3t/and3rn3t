@@ -9223,3 +9223,911 @@ if (isPWA()) {
     }
 }
 
+// ============================================================================
+// Blog Management System (GitHub-based CMS)
+// ============================================================================
+
+class BlogManager {
+    constructor() {
+        this.posts = [];
+        this.currentPost = null;
+        this.postsLoaded = false;
+        this.postsDirectory = '/blog/posts/';
+        this.cache = new Map();
+        
+        console.log('[Blog] BlogManager initializing...');
+    }
+    
+    /**
+     * Initialize the blog system
+     */
+    async init() {
+        try {
+            console.log('[Blog] Loading blog posts...');
+            await this.loadPosts();
+            this.setupEventListeners();
+            this.checkRouting();
+            console.log('[Blog] BlogManager initialized successfully');
+        } catch (error) {
+            console.error('[Blog] Initialization error:', error);
+        }
+    }
+    
+    /**
+     * Load all blog posts from the posts directory
+     */
+    async loadPosts() {
+        try {
+            // In a real implementation, you would fetch from GitHub API or have a posts index
+            // For now, we'll use a hardcoded list of posts
+            const postFiles = [
+                'welcome-to-my-blog.md',
+                'building-modern-pwa.md'
+            ];
+            
+            const loadPromises = postFiles.map(file => this.loadPost(file));
+            const results = await Promise.allSettled(loadPromises);
+            
+            this.posts = results
+                .filter(result => result.status === 'fulfilled')
+                .map(result => result.value)
+                .filter(post => post !== null)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            this.postsLoaded = true;
+            console.log(`[Blog] Loaded ${this.posts.length} posts`);
+            
+            return this.posts;
+        } catch (error) {
+            console.error('[Blog] Error loading posts:', error);
+            return [];
+        }
+    }
+    
+    /**
+     * Load a single post from markdown file
+     */
+    async loadPost(filename) {
+        try {
+            // Check cache first
+            if (this.cache.has(filename)) {
+                console.log(`[Blog] Returning cached post: ${filename}`);
+                return this.cache.get(filename);
+            }
+            
+            const url = `${this.postsDirectory}${filename}`;
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                console.warn(`[Blog] Failed to load post: ${filename}`);
+                return null;
+            }
+            
+            const content = await response.text();
+            const post = this.parseMarkdown(content, filename);
+            
+            // Cache the parsed post
+            this.cache.set(filename, post);
+            
+            console.log(`[Blog] Loaded post: ${post.title}`);
+            return post;
+        } catch (error) {
+            console.error(`[Blog] Error loading post ${filename}:`, error);
+            return null;
+        }
+    }
+    
+    /**
+     * Parse markdown content with frontmatter
+     */
+    parseMarkdown(content, filename) {
+        // Extract frontmatter (YAML between --- markers)
+        const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+        const match = content.match(frontmatterRegex);
+        
+        let metadata = {};
+        let markdownContent = content;
+        
+        if (match) {
+            // Parse frontmatter
+            const frontmatterText = match[1];
+            const lines = frontmatterText.split('\n');
+            
+            lines.forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > -1) {
+                    const key = line.substring(0, colonIndex).trim();
+                    let value = line.substring(colonIndex + 1).trim();
+                    
+                    // Remove quotes
+                    value = value.replace(/^["']|["']$/g, '');
+                    
+                    // Parse arrays (tags)
+                    if (value.startsWith('[') && value.endsWith(']')) {
+                        value = value.slice(1, -1).split(',').map(v => v.trim().replace(/^["']|["']$/g, ''));
+                    }
+                    
+                    // Parse booleans
+                    if (value === 'true') value = true;
+                    if (value === 'false') value = false;
+                    
+                    metadata[key] = value;
+                }
+            });
+            
+            markdownContent = match[2];
+        }
+        
+        // Generate slug from filename
+        const slug = filename.replace('.md', '');
+        
+        // Calculate reading time (average 200 words per minute)
+        const wordCount = markdownContent.split(/\s+/).length;
+        const readingTime = Math.ceil(wordCount / 200);
+        
+        // Parse markdown to HTML (basic implementation)
+        const html = this.markdownToHtml(markdownContent);
+        
+        return {
+            ...metadata,
+            slug,
+            filename,
+            content: markdownContent,
+            html,
+            wordCount,
+            readingTime,
+            url: `/blog/${slug}`
+        };
+    }
+    
+    /**
+     * Convert markdown to HTML (basic implementation)
+     * In production, use a library like marked.js or showdown.js
+     */
+    markdownToHtml(markdown) {
+        let html = markdown;
+        
+        // Headers
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+        
+        // Bold
+        html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        
+        // Italic
+        html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        
+        // Links
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        
+        // Code blocks
+        html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+            const language = lang || 'plaintext';
+            const escapedCode = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return `<pre><code class="language-${language}">${escapedCode}</code></pre>`;
+        });
+        
+        // Inline code
+        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+        
+        // Lists
+        html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        
+        // Paragraphs
+        html = html.split('\n\n').map(para => {
+            if (para.trim() && !para.startsWith('<') && para !== '---') {
+                return `<p>${para}</p>`;
+            }
+            return para;
+        }).join('\n');
+        
+        // Horizontal rules
+        html = html.replace(/^---$/gm, '<hr>');
+        
+        return html;
+    }
+    
+    /**
+     * Render blog post list
+     */
+    renderPostList(container, options = {}) {
+        if (!container) {
+            console.error('[Blog] Container not found');
+            return;
+        }
+        
+        const {
+            limit = null,
+            featured = false,
+            category = null,
+            tag = null
+        } = options;
+        
+        let filteredPosts = [...this.posts];
+        
+        // Apply filters
+        if (featured) {
+            filteredPosts = filteredPosts.filter(post => post.featured);
+        }
+        
+        if (category) {
+            filteredPosts = filteredPosts.filter(post => post.category === category);
+        }
+        
+        if (tag) {
+            filteredPosts = filteredPosts.filter(post => 
+                post.tags && post.tags.includes(tag)
+            );
+        }
+        
+        // Apply limit
+        if (limit) {
+            filteredPosts = filteredPosts.slice(0, limit);
+        }
+        
+        // Clear container
+        container.innerHTML = '';
+        
+        if (filteredPosts.length === 0) {
+            container.innerHTML = '<p class="no-posts">No blog posts found.</p>';
+            return;
+        }
+        
+        // Create post cards
+        filteredPosts.forEach(post => {
+            const card = this.createPostCard(post);
+            container.appendChild(card);
+        });
+        
+        console.log(`[Blog] Rendered ${filteredPosts.length} posts`);
+    }
+    
+    /**
+     * Create a post card element
+     */
+    createPostCard(post) {
+        const card = document.createElement('article');
+        card.className = 'blog-post-card';
+        card.dataset.slug = post.slug;
+        
+        const date = new Date(post.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        const tags = post.tags ? post.tags.map(tag => 
+            `<span class="post-tag">${tag}</span>`
+        ).join('') : '';
+        
+        card.innerHTML = `
+            <div class="post-card-header">
+                ${post.featured ? '<span class="featured-badge">Featured</span>' : ''}
+                <div class="post-meta">
+                    <time datetime="${post.date}">${date}</time>
+                    <span class="reading-time">${post.readingTime} min read</span>
+                </div>
+            </div>
+            <h3 class="post-title">${post.title}</h3>
+            <p class="post-excerpt">${post.excerpt || ''}</p>
+            <div class="post-tags">${tags}</div>
+            <a href="${post.url}" class="read-more" data-slug="${post.slug}">
+                Read More →
+            </a>
+        `;
+        
+        // Add click handler
+        const readMoreLink = card.querySelector('.read-more');
+        readMoreLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.renderSinglePost(post.slug);
+            
+            // Track with analytics
+            if (globalThis.enhancedAnalytics) {
+                globalThis.enhancedAnalytics.trackEvent('blog_post_view', {
+                    slug: post.slug,
+                    title: post.title
+                });
+            }
+        });
+        
+        return card;
+    }
+    
+    /**
+     * Render a single blog post
+     */
+    async renderSinglePost(slug) {
+        console.log(`[Blog] Rendering post: ${slug}`);
+        
+        const post = this.posts.find(p => p.slug === slug);
+        
+        if (!post) {
+            console.error(`[Blog] Post not found: ${slug}`);
+            return;
+        }
+        
+        this.currentPost = post;
+        
+        // Find or create blog container
+        let blogSection = document.getElementById('blog-post');
+        
+        if (!blogSection) {
+            blogSection = document.createElement('section');
+            blogSection.id = 'blog-post';
+            blogSection.className = 'blog-post-section';
+            document.querySelector('main').appendChild(blogSection);
+        }
+        
+        // Scroll to blog section
+        blogSection.scrollIntoView({ behavior: 'smooth' });
+        
+        // Format date
+        const date = new Date(post.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Create tags HTML
+        const tags = post.tags ? post.tags.map(tag => 
+            `<span class="post-tag">${tag}</span>`
+        ).join('') : '';
+        
+        // Render post
+        blogSection.innerHTML = `
+            <div class="blog-post-container">
+                <button class="back-to-posts" onclick="blogManager.showPostList()">
+                    ← Back to Blog
+                </button>
+                
+                <article class="blog-post-content">
+                    <header class="post-header">
+                        ${post.featured ? '<span class="featured-badge">Featured</span>' : ''}
+                        <h1 class="post-title">${post.title}</h1>
+                        <div class="post-meta">
+                            <span class="post-author">By ${post.author}</span>
+                            <time datetime="${post.date}">${date}</time>
+                            <span class="reading-time">${post.readingTime} min read</span>
+                        </div>
+                        <div class="post-tags">${tags}</div>
+                    </header>
+                    
+                    <div class="post-body">
+                        ${post.html}
+                    </div>
+                    
+                    <footer class="post-footer">
+                        <div class="share-buttons">
+                            <h4>Share this post</h4>
+                            <button onclick="blogManager.sharePost('twitter')" class="share-btn twitter">
+                                Twitter
+                            </button>
+                            <button onclick="blogManager.sharePost('linkedin')" class="share-btn linkedin">
+                                LinkedIn
+                            </button>
+                            <button onclick="blogManager.sharePost('facebook')" class="share-btn facebook">
+                                Facebook
+                            </button>
+                            <button onclick="blogManager.copyPostLink()" class="share-btn copy">
+                                Copy Link
+                            </button>
+                        </div>
+                    </footer>
+                </article>
+                
+                <div id="blog-comments"></div>
+            </div>
+        `;
+        
+        // Add reading progress indicator
+        this.addReadingProgress();
+        
+        // Load comments
+        this.loadComments();
+        
+        // Add SEO meta tags and structured data
+        this.addSEOMetadata(post);
+        
+        // Update URL without reload
+        if (window.history && window.history.pushState) {
+            window.history.pushState({ post: slug }, post.title, post.url);
+        }
+        
+        console.log(`[Blog] Post rendered: ${post.title}`);
+    }
+    
+    /**
+     * Add SEO metadata for blog post
+     */
+    addSEOMetadata(post) {
+        const baseUrl = window.location.origin;
+        const postUrl = `${baseUrl}${post.url}`;
+        const imageUrl = post.image || `${baseUrl}/icons/icon-512.png`;
+        
+        // Update page title
+        document.title = `${post.title} | Matthew Anderson`;
+        
+        // Update or create meta description
+        this.updateMetaTag('name', 'description', post.excerpt || post.title);
+        
+        // Update or create meta author
+        this.updateMetaTag('name', 'author', post.author);
+        
+        // Article meta tags
+        this.updateMetaTag('property', 'article:published_time', post.date);
+        if (post.modified) {
+            this.updateMetaTag('property', 'article:modified_time', post.modified);
+        }
+        this.updateMetaTag('property', 'article:author', post.author);
+        if (post.tags) {
+            post.tags.forEach(tag => {
+                this.updateMetaTag('property', 'article:tag', tag, true);
+            });
+        }
+        
+        // Open Graph meta tags
+        this.updateMetaTag('property', 'og:type', 'article');
+        this.updateMetaTag('property', 'og:title', post.title);
+        this.updateMetaTag('property', 'og:description', post.excerpt || post.title);
+        this.updateMetaTag('property', 'og:url', postUrl);
+        this.updateMetaTag('property', 'og:image', imageUrl);
+        this.updateMetaTag('property', 'og:site_name', 'Matthew Anderson Portfolio');
+        
+        // Twitter Card meta tags
+        this.updateMetaTag('name', 'twitter:card', 'summary_large_image');
+        this.updateMetaTag('name', 'twitter:title', post.title);
+        this.updateMetaTag('name', 'twitter:description', post.excerpt || post.title);
+        this.updateMetaTag('name', 'twitter:image', imageUrl);
+        this.updateMetaTag('name', 'twitter:creator', '@and3rn3t');
+        
+        // Update canonical URL
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+            canonical = document.createElement('link');
+            canonical.rel = 'canonical';
+            document.head.appendChild(canonical);
+        }
+        canonical.href = postUrl;
+        
+        // Add structured data (Schema.org)
+        this.addStructuredData(post);
+        
+        console.log('[Blog] SEO metadata added');
+    }
+    
+    /**
+     * Update or create meta tag
+     */
+    updateMetaTag(attrName, attrValue, content, allowMultiple = false) {
+        if (!allowMultiple) {
+            let meta = document.querySelector(`meta[${attrName}="${attrValue}"]`);
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute(attrName, attrValue);
+                document.head.appendChild(meta);
+            }
+            meta.content = content;
+        } else {
+            // For tags that can have multiple instances (like article:tag)
+            const meta = document.createElement('meta');
+            meta.setAttribute(attrName, attrValue);
+            meta.content = content;
+            document.head.appendChild(meta);
+        }
+    }
+    
+    /**
+     * Add structured data for blog post
+     */
+    addStructuredData(post) {
+        // Remove existing blog post structured data
+        const existing = document.querySelector('script[type="application/ld+json"][data-blog-post]');
+        if (existing) {
+            existing.remove();
+        }
+        
+        const baseUrl = window.location.origin;
+        const postUrl = `${baseUrl}${post.url}`;
+        const imageUrl = post.image || `${baseUrl}/icons/icon-512.png`;
+        
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt || post.title,
+            "author": {
+                "@type": "Person",
+                "name": post.author,
+                "url": baseUrl,
+                "sameAs": [
+                    "https://github.com/and3rn3t",
+                    "https://linkedin.com/in/matthew-anderson"
+                ]
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Matthew Anderson",
+                "url": baseUrl
+            },
+            "datePublished": post.date,
+            "dateModified": post.modified || post.date,
+            "image": imageUrl,
+            "url": postUrl,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": postUrl
+            },
+            "wordCount": post.wordCount,
+            "keywords": post.tags ? post.tags.join(', ') : '',
+            "articleSection": post.category || 'General',
+            "inLanguage": "en-US",
+            "isAccessibleForFree": true
+        };
+        
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-blog-post', 'true');
+        script.textContent = JSON.stringify(structuredData, null, 2);
+        document.head.appendChild(script);
+        
+        console.log('[Blog] Structured data added');
+    }
+    
+    /**
+     * Reset SEO metadata to default (when leaving blog post)
+     */
+    resetSEOMetadata() {
+        // Reset title
+        document.title = 'Matthew Anderson | Software Developer Portfolio';
+        
+        // Reset description
+        this.updateMetaTag('name', 'description', 
+            'Software developer portfolio showcasing projects, skills, and technical expertise. View my work on GitHub.');
+        
+        // Remove article-specific tags
+        document.querySelectorAll('meta[property^="article:"]').forEach(el => el.remove());
+        
+        // Reset Open Graph
+        this.updateMetaTag('property', 'og:type', 'website');
+        this.updateMetaTag('property', 'og:title', 'Matthew Anderson | Software Developer Portfolio');
+        
+        // Remove blog post structured data
+        const existing = document.querySelector('script[type="application/ld+json"][data-blog-post]');
+        if (existing) {
+            existing.remove();
+        }
+        
+        // Reset canonical
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.href = window.location.origin + '/';
+        }
+        
+        console.log('[Blog] SEO metadata reset');
+    }
+    
+    /**
+     * Load GitHub Discussions comments using Giscus
+     */
+    loadComments() {
+        const commentsContainer = document.getElementById('blog-comments');
+        if (!commentsContainer) return;
+        
+        // Clear existing comments
+        commentsContainer.innerHTML = '';
+        
+        // Create Giscus container
+        const giscusContainer = document.createElement('div');
+        giscusContainer.className = 'giscus';
+        commentsContainer.appendChild(giscusContainer);
+        
+        // Load Giscus script
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'and3rn3t/and3rn3t');
+        script.setAttribute('data-repo-id', 'YOUR_REPO_ID'); // Replace with actual repo ID
+        script.setAttribute('data-category', 'Blog Comments');
+        script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID'); // Replace with actual category ID
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '0');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        
+        // Match theme
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const giscusTheme = currentTheme === 'dark' ? 'dark' : 'light';
+        script.setAttribute('data-theme', giscusTheme);
+        
+        script.setAttribute('data-lang', 'en');
+        script.setAttribute('data-loading', 'lazy');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+        
+        giscusContainer.appendChild(script);
+        
+        console.log('[Blog] Comments loaded with Giscus');
+    }
+    
+    /**
+     * Show post list view
+     */
+    showPostList() {
+        const blogSection = document.getElementById('blog-post');
+        if (blogSection) {
+            blogSection.innerHTML = '';
+        }
+        
+        // Reset SEO metadata
+        this.resetSEOMetadata();
+        
+        // Navigate to blog section
+        const blogListSection = document.getElementById('blog');
+        if (blogListSection) {
+            blogListSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Update URL
+        if (window.history && window.history.pushState) {
+            window.history.pushState({}, 'Blog', '/');
+        }
+        
+        this.currentPost = null;
+    }
+    
+    /**
+     * Add reading progress indicator
+     */
+    addReadingProgress() {
+        // Remove existing indicator
+        const existing = document.querySelector('.reading-progress');
+        if (existing) existing.remove();
+        
+        // Create progress bar
+        const progressBar = document.createElement('div');
+        progressBar.className = 'reading-progress';
+        progressBar.innerHTML = '<div class="reading-progress-bar"></div>';
+        document.body.appendChild(progressBar);
+        
+        // Update progress on scroll
+        const updateProgress = () => {
+            const post = document.querySelector('.blog-post-content');
+            if (!post) return;
+            
+            const windowHeight = window.innerHeight;
+            const postHeight = post.offsetHeight;
+            const scrollTop = window.scrollY;
+            const postTop = post.offsetTop;
+            
+            const scrollDistance = scrollTop - postTop;
+            const totalDistance = postHeight - windowHeight;
+            
+            const progress = Math.max(0, Math.min(100, (scrollDistance / totalDistance) * 100));
+            
+            const bar = document.querySelector('.reading-progress-bar');
+            if (bar) {
+                bar.style.width = `${progress}%`;
+            }
+        };
+        
+        window.addEventListener('scroll', updateProgress);
+        updateProgress();
+    }
+    
+    /**
+     * Share post on social media
+     */
+    sharePost(platform) {
+        if (!this.currentPost) return;
+        
+        const url = window.location.href;
+        const title = this.currentPost.title;
+        const text = this.currentPost.excerpt || title;
+        
+        let shareUrl = '';
+        
+        switch(platform) {
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                break;
+            case 'linkedin':
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                break;
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+        }
+        
+        if (shareUrl) {
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+            
+            // Track with analytics
+            if (globalThis.enhancedAnalytics) {
+                globalThis.enhancedAnalytics.trackEvent('blog_post_share', {
+                    platform,
+                    slug: this.currentPost.slug
+                });
+            }
+        }
+    }
+    
+    /**
+     * Copy post link to clipboard
+     */
+    async copyPostLink() {
+        const url = window.location.href;
+        
+        try {
+            await navigator.clipboard.writeText(url);
+            
+            // Show success message
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.style.background = '#4caf50';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 2000);
+            
+            // Track with analytics
+            if (globalThis.enhancedAnalytics) {
+                globalThis.enhancedAnalytics.trackEvent('blog_link_copy', {
+                    slug: this.currentPost ? this.currentPost.slug : 'unknown'
+                });
+            }
+        } catch (error) {
+            console.error('[Blog] Failed to copy link:', error);
+        }
+    }
+    
+    /**
+     * Setup event listeners
+     */
+    setupEventListeners() {
+        // Handle browser back/forward
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.post) {
+                this.renderSinglePost(event.state.post);
+            } else {
+                this.showPostList();
+            }
+        });
+        
+        // Listen for theme changes to update Giscus
+        document.addEventListener('themeChanged', (event) => {
+            this.updateGiscusTheme(event.detail.theme);
+        });
+    }
+    
+    /**
+     * Update Giscus theme when site theme changes
+     */
+    updateGiscusTheme(theme) {
+        const giscusFrame = document.querySelector('iframe.giscus-frame');
+        if (!giscusFrame) return;
+        
+        const giscusTheme = theme === 'dark' || theme === 'high-contrast' ? 'dark' : 'light';
+        
+        // Send message to Giscus iframe to update theme
+        giscusFrame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: giscusTheme } } },
+            'https://giscus.app'
+        );
+        
+        console.log(`[Blog] Updated Giscus theme to: ${giscusTheme}`);
+    }
+    
+    /**
+     * Check URL routing on load
+     */
+    checkRouting() {
+        const path = window.location.pathname;
+        const blogMatch = path.match(/^\/blog\/([^/]+)$/);
+        
+        if (blogMatch) {
+            const slug = blogMatch[1];
+            this.renderSinglePost(slug);
+        }
+    }
+    
+    /**
+     * Get posts by category
+     */
+    getPostsByCategory(category) {
+        return this.posts.filter(post => post.category === category);
+    }
+    
+    /**
+     * Get posts by tag
+     */
+    getPostsByTag(tag) {
+        return this.posts.filter(post => 
+            post.tags && post.tags.includes(tag)
+        );
+    }
+    
+    /**
+     * Get featured posts
+     */
+    getFeaturedPosts() {
+        return this.posts.filter(post => post.featured);
+    }
+    
+    /**
+     * Search posts
+     */
+    searchPosts(query) {
+        const lowerQuery = query.toLowerCase();
+        return this.posts.filter(post => 
+            post.title.toLowerCase().includes(lowerQuery) ||
+            post.excerpt.toLowerCase().includes(lowerQuery) ||
+            post.content.toLowerCase().includes(lowerQuery) ||
+            (post.tags && post.tags.some(tag => tag.toLowerCase().includes(lowerQuery)))
+        );
+    }
+}
+
+// Initialize blog manager
+let blogManager;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', async () => {
+        blogManager = new BlogManager();
+        await blogManager.init();
+        globalThis.blogManager = blogManager;
+        
+        // Load blog posts into the grid
+        const blogPostsContainer = document.getElementById('blog-posts');
+        if (blogPostsContainer && blogManager.postsLoaded) {
+            blogManager.renderPostList(blogPostsContainer);
+        }
+        
+        // Setup filter buttons
+        const filterButtons = document.querySelectorAll('.blog-filters .filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter posts
+                const category = btn.dataset.category;
+                const options = category === 'all' ? {} : { category };
+                blogManager.renderPostList(blogPostsContainer, options);
+            });
+        });
+    });
+} else {
+    (async () => {
+        blogManager = new BlogManager();
+        await blogManager.init();
+        globalThis.blogManager = blogManager;
+        
+        // Load blog posts into the grid
+        const blogPostsContainer = document.getElementById('blog-posts');
+        if (blogPostsContainer && blogManager.postsLoaded) {
+            blogManager.renderPostList(blogPostsContainer);
+        }
+        
+        // Setup filter buttons
+        const filterButtons = document.querySelectorAll('.blog-filters .filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter posts
+                const category = btn.dataset.category;
+                const options = category === 'all' ? {} : { category };
+                blogManager.renderPostList(blogPostsContainer, options);
+            });
+        });
+    })();
+}
+

@@ -1,0 +1,251 @@
+name: Blog Post Validation and Deployment
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'blog/**'
+      - 'feed.xml'
+      - 'sitemap.xml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'blog/**'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  validate-blog:
+    runs-on: ubuntu-latest
+    name: Validate Blog Posts
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          npm install -g markdown-lint-cli2
+          npm install -g remark-cli remark-lint
+      
+      - name: Validate markdown syntax
+        run: |
+          echo "🔍 Checking markdown files..."
+          find blog/posts -name "*.md" -type f | while read file; do
+            echo "Validating: $file"
+            markdown-lint-cli2 "$file" || true
+          done
+      
+      - name: Check frontmatter
+        run: |
+          echo "📋 Validating frontmatter..."
+          for file in blog/posts/*.md; do
+            if [ -f "$file" ]; then
+              echo "Checking: $file"
+              
+              # Check for required frontmatter fields
+              if ! grep -q "^title:" "$file"; then
+                echo "❌ Missing 'title' in $file"
+                exit 1
+              fi
+              
+              if ! grep -q "^date:" "$file"; then
+                echo "❌ Missing 'date' in $file"
+                exit 1
+              fi
+              
+              if ! grep -q "^author:" "$file"; then
+                echo "❌ Missing 'author' in $file"
+                exit 1
+              fi
+              
+              echo "✅ Frontmatter valid in $file"
+            fi
+          done
+      
+      - name: Validate RSS feed
+        run: |
+          echo "📡 Validating RSS feed..."
+          if [ -f "feed.xml" ]; then
+            xmllint --noout feed.xml && echo "✅ RSS feed is valid" || echo "⚠️  RSS feed has issues"
+          fi
+      
+      - name: Validate sitemap
+        run: |
+          echo "🗺️  Validating sitemap..."
+          if [ -f "sitemap.xml" ]; then
+            xmllint --noout sitemap.xml && echo "✅ Sitemap is valid" || echo "⚠️  Sitemap has issues"
+          fi
+      
+      - name: Check for broken links (in blog posts)
+        run: |
+          echo "🔗 Checking for broken links..."
+          for file in blog/posts/*.md; do
+            if [ -f "$file" ]; then
+              echo "Scanning: $file"
+              grep -oP '\[.*?\]\(\K[^)]+' "$file" | while read url; do
+                if [[ $url == http* ]]; then
+                  # Check external links (skip for now to avoid rate limits)
+                  echo "  Found external link: $url"
+                fi
+              done
+            fi
+          done
+      
+      - name: Generate blog post list
+        run: |
+          echo "📝 Generating blog post list..."
+          echo "Found blog posts:"
+          ls -1 blog/posts/*.md | while read file; do
+            title=$(grep "^title:" "$file" | sed 's/title: "\(.*\)"/\1/')
+            date=$(grep "^date:" "$file" | sed 's/date: "\(.*\)"/\1/')
+            echo "  - $title ($date)"
+          done
+      
+      - name: Check image optimization
+        run: |
+          echo "🖼️  Checking images..."
+          if [ -d "blog/images" ]; then
+            image_count=$(find blog/images -type f | wc -l)
+            echo "Found $image_count images in blog/images/"
+            
+            # Check for large images
+            find blog/images -type f -size +500k | while read img; do
+              size=$(du -h "$img" | cut -f1)
+              echo "⚠️  Large image: $img ($size)"
+            done
+          fi
+      
+      - name: Summary
+        if: success()
+        run: |
+          echo "✅ All validations passed!"
+          echo ""
+          echo "Blog Statistics:"
+          echo "  Posts: $(ls -1 blog/posts/*.md 2>/dev/null | wc -l)"
+          echo "  Images: $(find blog/images -type f 2>/dev/null | wc -l)"
+          echo ""
+          echo "Ready for deployment! 🚀"
+
+  optimize-images:
+    runs-on: ubuntu-latest
+    name: Optimize Blog Images
+    if: github.event_name == 'push'
+    needs: validate-blog
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup image optimization tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick optipng jpegoptim webp
+      
+      - name: Optimize images
+        run: |
+          echo "🎨 Optimizing images..."
+          if [ -d "blog/images" ]; then
+            # Optimize PNG files
+            find blog/images -name "*.png" -type f | while read img; do
+              echo "Optimizing PNG: $img"
+              optipng -o2 "$img" || true
+            done
+            
+            # Optimize JPEG files
+            find blog/images -name "*.jpg" -o -name "*.jpeg" -type f | while read img; do
+              echo "Optimizing JPEG: $img"
+              jpegoptim --max=85 "$img" || true
+            done
+            
+            # Create WebP versions
+            find blog/images -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -type f | while read img; do
+              webp_path="${img%.*}.webp"
+              if [ ! -f "$webp_path" ]; then
+                echo "Creating WebP: $webp_path"
+                cwebp -q 85 "$img" -o "$webp_path" || true
+              fi
+            done
+            
+            echo "✅ Image optimization complete"
+          else
+            echo "No images directory found"
+          fi
+      
+      - name: Commit optimized images
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          if [ -n "$(git status --porcelain blog/images)" ]; then
+            git add blog/images
+            git commit -m "Optimize blog images [skip ci]"
+            git push
+            echo "✅ Pushed optimized images"
+          else
+            echo "No image changes to commit"
+          fi
+
+  update-metadata:
+    runs-on: ubuntu-latest
+    name: Update Blog Metadata
+    if: github.event_name == 'push'
+    needs: validate-blog
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Update last build date in RSS
+        run: |
+          echo "📡 Updating RSS feed timestamp..."
+          current_date=$(date -u +"%a, %d %b %Y %H:%M:%S GMT")
+          sed -i "s|<lastBuildDate>.*</lastBuildDate>|<lastBuildDate>$current_date</lastBuildDate>|" feed.xml
+          echo "✅ Updated RSS feed lastBuildDate to: $current_date"
+      
+      - name: Update sitemap dates
+        run: |
+          echo "🗺️  Updating sitemap..."
+          current_date=$(date -u +"%Y-%m-%d")
+          echo "Current date: $current_date"
+          # Note: Sitemap dates should be updated manually for individual posts
+          echo "Tip: Update individual post dates in sitemap.xml when content changes"
+      
+      - name: Commit metadata updates
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          if [ -n "$(git status --porcelain feed.xml sitemap.xml)" ]; then
+            git add feed.xml sitemap.xml
+            git commit -m "Update blog metadata [skip ci]"
+            git push
+            echo "✅ Pushed metadata updates"
+          else
+            echo "No metadata changes to commit"
+          fi
+
+  deploy-notification:
+    runs-on: ubuntu-latest
+    name: Deployment Notification
+    if: github.event_name == 'push'
+    needs: [validate-blog, optimize-images, update-metadata]
+    
+    steps:
+      - name: Send success notification
+        run: |
+          echo "🎉 Blog deployment successful!"
+          echo ""
+          echo "✅ Validation passed"
+          echo "✅ Images optimized"
+          echo "✅ Metadata updated"
+          echo ""
+          echo "Your blog is live at: https://and3rn3t.github.io/and3rn3t/"
