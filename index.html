@@ -220,10 +220,10 @@
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 </div>
                 <div class="hero-social">
-                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener" class="social-link" title="GitHub Profile">
+                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Profile">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener" class="social-link" title="LinkedIn Profile">
+                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn Profile">
                         <i class="fab fa-linkedin"></i>
                     </a>
                     <a href="mailto:contact@matthewanderson.dev" class="social-link" title="Send Email">
@@ -485,7 +485,7 @@
             </div>
             
             <div class="projects-cta">
-                <a href="https://github.com/and3rn3t" target="_blank" rel="noopener" class="btn btn-outline">
+                <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
                     View All Projects on GitHub
                     <i class="fab fa-github"></i>
                 </a>
@@ -809,16 +809,57 @@
                     I'm always interested in discussing new opportunities, innovative projects, 
                     or just connecting with fellow developers and tech enthusiasts.
                 </p>
+                
+                <!-- Contact Form -->
+                <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <span class="error-message" id="subject-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    
+                    <!-- Honeypot for spam protection -->
+                    <input type="text" name="_gotcha" style="display: none;">
+                    
+                    <button type="submit" class="btn btn-primary" id="submit-button">
+                        <span class="submit-text">Send Message</span>
+                        <i class="fas fa-paper-plane submit-icon"></i>
+                        <div class="loading-spinner" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                    
+                    <div class="form-status" id="form-status" style="display: none;"></div>
+                </form>
+                
                 <div class="contact-methods">
                     <a href="mailto:contact@matthewanderson.dev" class="contact-method">
                         <i class="fas fa-envelope"></i>
                         <span>contact@matthewanderson.dev</span>
                     </a>
-                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener" class="contact-method">
+                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="contact-method">
                         <i class="fab fa-github"></i>
                         <span>@and3rn3t</span>
                     </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener" class="contact-method">
+                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener noreferrer" class="contact-method">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>

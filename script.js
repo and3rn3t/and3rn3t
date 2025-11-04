@@ -237,7 +237,7 @@ function displayAPIStatus() {
     }
 }
 
-// Enhanced error handler for API failures
+// Enhanced error handler for API failures with user feedback
 function handleAPIError(error, context = 'API request') {
     console.error(`${context} failed:`, error);
     
@@ -249,27 +249,163 @@ function handleAPIError(error, context = 'API request') {
     
     const userMessage = errorMessages[error.message] || 'Unable to load some GitHub data. Showing cached or fallback content.';
     
-    // Could show user-friendly error in UI
+    // Show user-friendly error notification
+    showErrorNotification(userMessage, context);
     console.info('User message:', userMessage);
     
     return userMessage;
 }
 
-// Cache management utilities
+// Global loading progress indicator
+function showGlobalLoadingProgress() {
+    let progressBar = document.getElementById('global-loading-progress');
+    if (!progressBar) {
+        progressBar = document.createElement('div');
+        progressBar.id = 'global-loading-progress';
+        progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            background-size: 200% 100%;
+            animation: loading-gradient 2s ease-in-out infinite;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        // Add the animation keyframes if not already present
+        if (!document.querySelector('#loading-keyframes')) {
+            const style = document.createElement('style');
+            style.id = 'loading-keyframes';
+            style.textContent = `
+                @keyframes loading-gradient {
+                    0% { background-position: 200% 0; }
+                    100% { background-position: -200% 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(progressBar);
+    }
+    
+    // Show the progress bar
+    setTimeout(() => {
+        if (progressBar) {
+            progressBar.style.opacity = '1';
+        }
+    }, 100);
+}
+
+function hideGlobalLoadingProgress() {
+    const progressBar = document.getElementById('global-loading-progress');
+    if (progressBar) {
+        progressBar.style.opacity = '0';
+        setTimeout(() => {
+            if (progressBar.parentNode) {
+                progressBar.parentNode.removeChild(progressBar);
+            }
+        }, 300);
+    }
+}
+
+// Show error notification to user
+function showErrorNotification(message, context = '') {
+    // Create notification element if it doesn't exist
+    let notification = document.getElementById('api-error-notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'api-error-notification';
+        notification.className = 'error-notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-width: 350px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+    }
+    
+    // Update notification content
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Show notification
+    setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Auto-hide after 8 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+    }, 8000);
+}
+
+// Enhanced cache management utilities
 function clearExpiredCache() {
     const now = Date.now();
     let removedCount = 0;
+    const cacheStats = {
+        totalEntries: githubAPI.cache.size,
+        expiredEntries: 0,
+        totalSize: 0
+    };
     
     for (const [key, value] of githubAPI.cache.entries()) {
+        // Calculate approximate cache size
+        cacheStats.totalSize += JSON.stringify(value.data).length;
+        
         if (value.expiry < now) {
             githubAPI.cache.delete(key);
+            removedCount++;
+            cacheStats.expiredEntries++;
+        }
+    }
+    
+    // Clear oldest entries if cache gets too large (>5MB estimated)
+    if (cacheStats.totalSize > 5000000 && githubAPI.cache.size > 10) {
+        const sortedEntries = Array.from(githubAPI.cache.entries())
+            .sort((a, b) => a[1].expiry - b[1].expiry);
+        
+        // Remove oldest 25% of entries
+        const toRemove = Math.floor(sortedEntries.length * 0.25);
+        for (let i = 0; i < toRemove; i++) {
+            githubAPI.cache.delete(sortedEntries[i][0]);
             removedCount++;
         }
     }
     
     if (removedCount > 0) {
-        console.log(`🧹 Cleared ${removedCount} expired cache entries`);
+        console.log(`🧹 Cleared ${removedCount} cache entries (${cacheStats.expiredEntries} expired, ${removedCount - cacheStats.expiredEntries} for memory management)`);
     }
+    
+    return { removedCount, ...cacheStats };
 }
 
 // Preload critical GitHub data
@@ -1086,6 +1222,9 @@ async function loadAllGitHubData() {
         if (indicator) indicator.style.display = 'block';
     }
     
+    // Show global loading progress
+    showGlobalLoadingProgress();
+    
     try {
         // Initialize search filter system early
         await projectSearchFilter.loadProjectData().catch(error => {
@@ -1123,6 +1262,9 @@ async function loadAllGitHubData() {
         for (const indicator of Object.values(loadingIndicators)) {
             if (indicator) indicator.style.display = 'none';
         }
+        
+        // Hide global loading progress
+        hideGlobalLoadingProgress();
     }
 }
 
@@ -3748,6 +3890,169 @@ function backupGitHubStatsLoader() {
 
 // Backup loader runs after main system has had time to load
 setTimeout(backupGitHubStatsLoader, 2000);
+
+// Contact Form Functionality
+class ContactFormManager {
+    constructor() {
+        this.form = document.getElementById('contact-form');
+        this.submitButton = document.getElementById('submit-button');
+        this.formStatus = document.getElementById('form-status');
+        
+        if (this.form) {
+            this.initializeForm();
+        }
+    }
+    
+    initializeForm() {
+        // Add form validation
+        this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        
+        // Add real-time validation
+        const inputs = this.form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => this.validateField(input));
+            input.addEventListener('input', () => this.clearFieldError(input));
+        });
+    }
+    
+    async handleSubmit(event) {
+        event.preventDefault();
+        
+        // Validate all fields
+        if (!this.validateForm()) {
+            this.showStatus('Please correct the errors above.', 'error');
+            return;
+        }
+        
+        // Show loading state
+        this.setLoadingState(true);
+        this.showStatus('Sending message...', 'info');
+        
+        try {
+            const formData = new FormData(this.form);
+            
+            // Submit to Formspree
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                this.showStatus('Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.form.reset();
+            } else {
+                throw new Error('Network response was not ok');
+            }
+            
+        } catch (error) {
+            console.error('Form submission error:', error);
+            this.showStatus('There was a problem sending your message. Please try again or contact me directly.', 'error');
+        } finally {
+            this.setLoadingState(false);
+        }
+    }
+    
+    validateForm() {
+        const fields = ['name', 'email', 'subject', 'message'];
+        let isValid = true;
+        
+        fields.forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (!this.validateField(field)) {
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+    
+    validateField(field) {
+        const value = field.value.trim();
+        const fieldName = field.name;
+        let errorMessage = '';
+        
+        // Required field validation
+        if (!value) {
+            errorMessage = `${this.getFieldLabel(fieldName)} is required.`;
+        } else if (fieldName === 'email') {
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                errorMessage = 'Please enter a valid email address.';
+            }
+        } else if (fieldName === 'name' && value.length < 2) {
+            errorMessage = 'Name must be at least 2 characters long.';
+        } else if (fieldName === 'message' && value.length < 10) {
+            errorMessage = 'Message must be at least 10 characters long.';
+        }
+        
+        this.showFieldError(field, errorMessage);
+        return !errorMessage;
+    }
+    
+    clearFieldError(field) {
+        field.classList.remove('error');
+        const errorElement = document.getElementById(`${field.name}-error`);
+        if (errorElement) {
+            errorElement.textContent = '';
+            errorElement.classList.remove('show');
+        }
+    }
+    
+    showFieldError(field, message) {
+        if (message) {
+            field.classList.add('error');
+            const errorElement = document.getElementById(`${field.name}-error`);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+            }
+        } else {
+            this.clearFieldError(field);
+        }
+    }
+    
+    getFieldLabel(fieldName) {
+        const labels = {
+            name: 'Name',
+            email: 'Email',
+            subject: 'Subject',
+            message: 'Message'
+        };
+        return labels[fieldName] || fieldName;
+    }
+    
+    setLoadingState(loading) {
+        if (loading) {
+            this.submitButton.classList.add('loading');
+            this.submitButton.disabled = true;
+        } else {
+            this.submitButton.classList.remove('loading');
+            this.submitButton.disabled = false;
+        }
+    }
+    
+    showStatus(message, type) {
+        this.formStatus.textContent = message;
+        this.formStatus.className = `form-status ${type}`;
+        this.formStatus.style.display = 'block';
+        
+        // Auto-hide success messages
+        if (type === 'success') {
+            setTimeout(() => {
+                this.formStatus.style.display = 'none';
+            }, 5000);
+        }
+    }
+}
+
+// Initialize contact form when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    new ContactFormManager();
+});
 
 // Force hero background color to prevent any override issues (theme-aware)
 function forceHeroBackground() {
