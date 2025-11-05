@@ -27,7 +27,7 @@
   "hireable": null,
   "bio": "Software engineer for Deere & Company, with a personal interest in data science and engineering.",
   "twitter_username": null,
-  "public_repos": 23,
+  "public_repos": 24,
   "public_gists": 0,
   "followers": 1,
   "following": 0,
@@ -35,6 +35,122 @@
   "updated_at": "2025-11-04T18:36:28Z"
 },
   "repositories": [
+  {
+    "id": 1089883477,
+    "node_id": "R_kgDOQPZNVQ",
+    "name": "telescope",
+    "full_name": "and3rn3t/telescope",
+    "private": false,
+    "owner": {
+      "login": "and3rn3t",
+      "id": 87380976,
+      "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "html_url": "https://github.com/and3rn3t",
+      "followers_url": "https://api.github.com/users/and3rn3t/followers",
+      "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+      "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+      "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+      "repos_url": "https://api.github.com/users/and3rn3t/repos",
+      "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/and3rn3t/telescope",
+    "description": null,
+    "fork": false,
+    "url": "https://api.github.com/repos/and3rn3t/telescope",
+    "forks_url": "https://api.github.com/repos/and3rn3t/telescope/forks",
+    "keys_url": "https://api.github.com/repos/and3rn3t/telescope/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/and3rn3t/telescope/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/and3rn3t/telescope/teams",
+    "hooks_url": "https://api.github.com/repos/and3rn3t/telescope/hooks",
+    "issue_events_url": "https://api.github.com/repos/and3rn3t/telescope/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/and3rn3t/telescope/events",
+    "assignees_url": "https://api.github.com/repos/and3rn3t/telescope/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/and3rn3t/telescope/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/and3rn3t/telescope/tags",
+    "blobs_url": "https://api.github.com/repos/and3rn3t/telescope/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/and3rn3t/telescope/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/and3rn3t/telescope/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/and3rn3t/telescope/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/and3rn3t/telescope/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/and3rn3t/telescope/languages",
+    "stargazers_url": "https://api.github.com/repos/and3rn3t/telescope/stargazers",
+    "contributors_url": "https://api.github.com/repos/and3rn3t/telescope/contributors",
+    "subscribers_url": "https://api.github.com/repos/and3rn3t/telescope/subscribers",
+    "subscription_url": "https://api.github.com/repos/and3rn3t/telescope/subscription",
+    "commits_url": "https://api.github.com/repos/and3rn3t/telescope/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/and3rn3t/telescope/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/and3rn3t/telescope/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/and3rn3t/telescope/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/and3rn3t/telescope/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/and3rn3t/telescope/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/and3rn3t/telescope/merges",
+    "archive_url": "https://api.github.com/repos/and3rn3t/telescope/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/and3rn3t/telescope/downloads",
+    "issues_url": "https://api.github.com/repos/and3rn3t/telescope/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/and3rn3t/telescope/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/and3rn3t/telescope/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/and3rn3t/telescope/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/and3rn3t/telescope/labels{/name}",
+    "releases_url": "https://api.github.com/repos/and3rn3t/telescope/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/and3rn3t/telescope/deployments",
+    "created_at": "2025-11-05T00:11:16Z",
+    "updated_at": "2025-11-05T00:13:33Z",
+    "pushed_at": "2025-11-05T00:14:00Z",
+    "git_url": "git://github.com/and3rn3t/telescope.git",
+    "ssh_url": "git@github.com:and3rn3t/telescope.git",
+    "clone_url": "https://github.com/and3rn3t/telescope.git",
+    "svn_url": "https://github.com/and3rn3t/telescope",
+    "homepage": null,
+    "size": 0,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "TypeScript",
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 8,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "allow_forking": true,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "topics": [
+
+    ],
+    "visibility": "public",
+    "forks": 0,
+    "open_issues": 8,
+    "watchers": 0,
+    "default_branch": "main",
+    "permissions": {
+      "admin": true,
+      "maintain": true,
+      "push": true,
+      "triage": true,
+      "pull": true
+    }
+  },
   {
     "id": 1088335678,
     "node_id": "R_kgDOQN6vPg",
@@ -1018,13 +1134,13 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/homehub/deployments",
     "created_at": "2025-08-29T22:05:27Z",
     "updated_at": "2025-11-04T18:47:14Z",
-    "pushed_at": "2025-11-04T18:52:14Z",
+    "pushed_at": "2025-11-04T22:31:36Z",
     "git_url": "git://github.com/and3rn3t/homehub.git",
     "ssh_url": "git@github.com:and3rn3t/homehub.git",
     "clone_url": "https://github.com/and3rn3t/homehub.git",
     "svn_url": "https://github.com/and3rn3t/homehub",
     "homepage": null,
-    "size": 4395,
+    "size": 5156,
     "stargazers_count": 1,
     "watchers_count": 1,
     "language": "TypeScript",
@@ -2612,14 +2728,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-04T22:28:43Z",
-    "pushed_at": "2025-11-04T22:28:39Z",
+    "updated_at": "2025-11-04T22:29:41Z",
+    "pushed_at": "2025-11-05T00:05:06Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 932,
+    "size": 1821,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2657,6 +2773,28 @@
   }
 ],
   "events": [
+  {
+    "id": "4464825965",
+    "type": "PublicEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+
+    },
+    "public": true,
+    "created_at": "2025-11-05T00:11:16Z"
+  },
   {
     "id": "5707172825",
     "type": "PushEvent",
@@ -3571,54 +3709,8 @@
     },
     "public": true,
     "created_at": "2025-11-04T15:29:17Z"
-  },
-  {
-    "id": "4455412842",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "action": "opened",
-      "number": 21,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/21",
-        "id": 2977065756,
-        "number": 21,
-        "head": {
-          "ref": "claude/fix-blank-page-scroll-animation-011CUo5bhC19is6QppPojxNr",
-          "sha": "622e81e90f176b07aa12acac60706747c7cf523e",
-          "repo": {
-            "id": 390771666,
-            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-            "name": "and3rn3t"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "0c425b9e2a293b3df0297ac7234759b9498ee58f",
-          "repo": {
-            "id": 390771666,
-            "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-            "name": "and3rn3t"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2025-11-04T15:29:02Z"
   }
 ],
-  "lastUpdated": "2025-11-04T22:28:48Z",
+  "lastUpdated": "2025-11-05T00:24:00Z",
   "rateLimitRemaining": "Enhanced with token"
 }
