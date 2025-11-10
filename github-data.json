@@ -103,14 +103,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/telescope/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/telescope/deployments",
     "created_at": "2025-11-05T00:11:16Z",
-    "updated_at": "2025-11-10T02:33:26Z",
-    "pushed_at": "2025-11-10T02:33:22Z",
+    "updated_at": "2025-11-10T03:32:46Z",
+    "pushed_at": "2025-11-10T03:37:55Z",
     "git_url": "git://github.com/and3rn3t/telescope.git",
     "ssh_url": "git@github.com:and3rn3t/telescope.git",
     "clone_url": "https://github.com/and3rn3t/telescope.git",
     "svn_url": "https://github.com/and3rn3t/telescope",
     "homepage": null,
-    "size": 1017,
+    "size": 1090,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "TypeScript",
@@ -124,7 +124,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 16,
+    "open_issues_count": 15,
     "license": {
       "key": "mit",
       "name": "MIT License",
@@ -140,7 +140,7 @@
     ],
     "visibility": "public",
     "forks": 0,
-    "open_issues": 16,
+    "open_issues": 15,
     "watchers": 0,
     "default_branch": "main",
     "permissions": {
@@ -1134,7 +1134,7 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/homehub/deployments",
     "created_at": "2025-08-29T22:05:27Z",
     "updated_at": "2025-11-04T18:47:14Z",
-    "pushed_at": "2025-11-09T20:34:28Z",
+    "pushed_at": "2025-11-10T03:13:33Z",
     "git_url": "git://github.com/and3rn3t/homehub.git",
     "ssh_url": "git@github.com:and3rn3t/homehub.git",
     "clone_url": "https://github.com/and3rn3t/homehub.git",
@@ -2728,14 +2728,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-10T00:27:58Z",
-    "pushed_at": "2025-11-10T00:27:55Z",
+    "updated_at": "2025-11-10T02:38:13Z",
+    "pushed_at": "2025-11-10T02:38:10Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1422,
+    "size": 1438,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2773,6 +2773,289 @@
   }
 ],
   "events": [
+  {
+    "id": "5824682366",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "ref": "dependabot/npm_and_yarn/vitejs/plugin-react-5.1.0",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/dependabot/npm_and_yarn/vitejs/plugin-react-5.1.0",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:32:47Z"
+  },
+  {
+    "id": "5824681451",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117528912,
+      "ref": "refs/heads/main",
+      "head": "9f1c8dce7985cdd9cde3c8b4662631f5a0ba53a2",
+      "before": "9318f62acd1a7dec74a31c0805e6cc90acaaf246"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:32:43Z"
+  },
+  {
+    "id": "5824678140",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "ref": "renovate/github-spark-0.x",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/renovate/github-spark-0.x",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:32:28Z"
+  },
+  {
+    "id": "5824677410",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117524826,
+      "ref": "refs/heads/main",
+      "head": "9318f62acd1a7dec74a31c0805e6cc90acaaf246",
+      "before": "e1ee0ae999ecd2f8335e1f99d07c8102db691328"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:32:24Z"
+  },
+  {
+    "id": "5824674236",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "ref": "renovate/typescript-5.x",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/renovate/typescript-5.x",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:32:09Z"
+  },
+  {
+    "id": "5824673115",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117520501,
+      "ref": "refs/heads/main",
+      "head": "e1ee0ae999ecd2f8335e1f99d07c8102db691328",
+      "before": "8787370f3c080dd4a2737c407296da89de29bdb1"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:32:04Z"
+  },
+  {
+    "id": "5824651138",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117498376,
+      "ref": "refs/heads/main",
+      "head": "8787370f3c080dd4a2737c407296da89de29bdb1",
+      "before": "be4494466b1f24673e4e25323658bea8e4b11bc8"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:30:22Z"
+  },
+  {
+    "id": "5824509005",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117355212,
+      "ref": "refs/heads/main",
+      "head": "be4494466b1f24673e4e25323658bea8e4b11bc8",
+      "before": "b9a0464b294fac59fca917dc8bbf9f38a25274ba"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:18:32Z"
+  },
+  {
+    "id": "5824457358",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117303202,
+      "ref": "refs/heads/main",
+      "head": "b9a0464b294fac59fca917dc8bbf9f38a25274ba",
+      "before": "c2b38e8f1bbdab734c91e14281551fcb84c2c538"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:14:25Z"
+  },
+  {
+    "id": "5824410334",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117255844,
+      "ref": "refs/heads/main",
+      "head": "c2b38e8f1bbdab734c91e14281551fcb84c2c538",
+      "before": "8db8371833476055b0b01de32fc1c06fb9fef93b"
+    },
+    "public": true,
+    "created_at": "2025-11-10T03:10:40Z"
+  },
+  {
+    "id": "5824202525",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1089883477,
+      "name": "and3rn3t/telescope",
+      "url": "https://api.github.com/repos/and3rn3t/telescope"
+    },
+    "payload": {
+      "repository_id": 1089883477,
+      "push_id": 28117046759,
+      "ref": "refs/heads/main",
+      "head": "8db8371833476055b0b01de32fc1c06fb9fef93b",
+      "before": "906bdf578abf66f3cedcf8f15b2bb402dba5e3f0"
+    },
+    "public": true,
+    "created_at": "2025-11-10T02:55:36Z"
+  },
   {
     "id": "5823918578",
     "type": "PushEvent",
@@ -3266,354 +3549,8 @@
     },
     "public": true,
     "created_at": "2025-11-05T15:27:43Z"
-  },
-  {
-    "id": "5726294672",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28018218084,
-      "ref": "refs/heads/main",
-      "head": "65b39cbdbc7594ff33a68e5dacf1937013ae0151",
-      "before": "fbe74d105dc16baaa028d2f44df51c3982cd2b08"
-    },
-    "public": true,
-    "created_at": "2025-11-05T14:53:19Z"
-  },
-  {
-    "id": "5710617017",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28002419749,
-      "ref": "refs/heads/main",
-      "head": "fbe74d105dc16baaa028d2f44df51c3982cd2b08",
-      "before": "b400cf0db17241addc8bc5ec6a3118ea97fc8497"
-    },
-    "public": true,
-    "created_at": "2025-11-05T02:31:21Z"
-  },
-  {
-    "id": "5709818757",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28001614875,
-      "ref": "refs/heads/main",
-      "head": "b400cf0db17241addc8bc5ec6a3118ea97fc8497",
-      "before": "6e999925b27525fe9722de79d5c13f38872a1448"
-    },
-    "public": true,
-    "created_at": "2025-11-05T01:32:48Z"
-  },
-  {
-    "id": "5709495726",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28001288146,
-      "ref": "refs/heads/main",
-      "head": "6e999925b27525fe9722de79d5c13f38872a1448",
-      "before": "075a0e633c272475609d00a736b8fc85c152abb5"
-    },
-    "public": true,
-    "created_at": "2025-11-05T01:09:01Z"
-  },
-  {
-    "id": "4464825965",
-    "type": "PublicEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-
-    },
-    "public": true,
-    "created_at": "2025-11-05T00:11:16Z"
-  },
-  {
-    "id": "5707172825",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27998940075,
-      "ref": "refs/heads/main",
-      "head": "1db812bdd0790aa68eac7c996f0c35dd8c0992e6",
-      "before": "cf7908e0c4dc2b4d05efdb6a8a0a306264d14af1"
-    },
-    "public": true,
-    "created_at": "2025-11-04T22:28:40Z"
-  },
-  {
-    "id": "5706693027",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27998455649,
-      "ref": "refs/heads/main",
-      "head": "85cb440dcbcc0fd54894adc5bbcc96add5e3a34c",
-      "before": "cac5efb933d16accd27f88613b811fa801f76fcb"
-    },
-    "public": true,
-    "created_at": "2025-11-04T22:01:36Z"
-  },
-  {
-    "id": "5706523132",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27998281826,
-      "ref": "refs/heads/main",
-      "head": "9fada87285c7b052d0e836b990d2c87ba0843560",
-      "before": "95ef574f95c2da539e3eb391d3a8d7f6879f6837"
-    },
-    "public": true,
-    "created_at": "2025-11-04T21:52:18Z"
-  },
-  {
-    "id": "5706482005",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27998240151,
-      "ref": "refs/heads/main",
-      "head": "2e2bd75e9edbc97addbb96b8ec01fe9dbbf401ed",
-      "before": "61fc31afe68da74b2afc73498be7563bffc29563"
-    },
-    "public": true,
-    "created_at": "2025-11-04T21:49:59Z"
-  },
-  {
-    "id": "5706373143",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "repository_id": 390771666,
-      "push_id": 27998130132,
-      "ref": "refs/heads/main",
-      "head": "ff4bbd077a88f2c59ea5a072aef2080942f3950b",
-      "before": "0659959c8df62bd95d47e8b83e98a84865787e05"
-    },
-    "public": true,
-    "created_at": "2025-11-04T21:43:49Z"
-  },
-  {
-    "id": "4462781883",
-    "type": "DiscussionEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 390771666,
-      "name": "and3rn3t/and3rn3t",
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-    },
-    "payload": {
-      "action": "created",
-      "discussion": {
-        "repository_url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-        "category": {
-          "id": 46514853,
-          "node_id": "DIC_kwDOF0qz0s4CxcKl",
-          "repository_id": 390771666,
-          "emoji": ":mega:",
-          "name": "Announcements",
-          "description": "Updates from maintainers",
-          "created_at": "2025-11-04T15:35:03.000-06:00",
-          "updated_at": "2025-11-04T15:35:03.000-06:00",
-          "slug": "announcements",
-          "is_answerable": false
-        },
-        "answer_html_url": null,
-        "answer_chosen_at": null,
-        "answer_chosen_by": null,
-        "html_url": "https://github.com/and3rn3t/and3rn3t/discussions/24",
-        "id": 9106329,
-        "node_id": "D_kwDOF0qz0s4AivOZ",
-        "number": 24,
-        "title": "Welcome to and3rn3t Discussions!",
-        "user": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "labels": [
-
-        ],
-        "state": "open",
-        "state_reason": null,
-        "locked": false,
-        "comments": 0,
-        "created_at": "2025-11-04T21:35:40Z",
-        "updated_at": "2025-11-04T21:35:41Z",
-        "active_lock_reason": null,
-        "body": "<!--\r\n    ✏️ Optional: Customize the content below to let your community know what you intend to use Discussions for.\r\n-->\r\n## 👋 Welcome!\r\n  We’re using Discussions as a place to connect with other members of our community. We hope that you:\r\n  * Ask questions you’re wondering about.\r\n  * Share ideas.\r\n  * Engage with other community members.\r\n  * Welcome others and are open-minded. Remember that this is a community we\r\n  build together 💪.\r\n\r\n  To get started, comment below with an introduction of yourself and tell us about what you do with this community.\r\n\r\n<!--\r\n  For the maintainers, here are some tips 💡 for getting started with Discussions. We'll leave these in Markdown comments for now, but feel free to take out the comments for all maintainers to see.\r\n\r\n  📢 **Announce to your community** that Discussions is available! Go ahead and send that tweet, post, or link it from the website to drive traffic here.\r\n\r\n  🔗 If you use issue templates, **link any relevant issue templates** such as questions and community conversations to Discussions. Declutter your issues by driving community content to where they belong in Discussions. If you need help, here's a [link to the documentation](https://docs.github.com/github/building-a-strong-community/configuring-issue-templates-for-your-repository#configuring-the-template-chooser).\r\n\r\n  ➡️ You can **convert issues to discussions** either individually or bulk by labels. Looking at you, issues labeled “question” or “discussion”.\r\n-->\r\n",
-        "reactions": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/discussions/24/reactions",
-          "total_count": 0,
-          "+1": 0,
-          "-1": 0,
-          "laugh": 0,
-          "hooray": 0,
-          "confused": 0,
-          "heart": 0,
-          "rocket": 0,
-          "eyes": 0
-        },
-        "timeline_url": "https://api.github.com/repos/and3rn3t/and3rn3t/discussions/24/timeline"
-      }
-    },
-    "public": true,
-    "created_at": "2025-11-04T21:35:40Z"
   }
 ],
-  "lastUpdated": "2025-11-10T02:38:09Z",
+  "lastUpdated": "2025-11-10T04:10:32Z",
   "rateLimitRemaining": "Enhanced with token"
 }
