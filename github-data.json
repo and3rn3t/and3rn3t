@@ -103,14 +103,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/silas/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/silas/deployments",
     "created_at": "2025-11-10T22:25:39Z",
-    "updated_at": "2025-11-11T03:19:23Z",
-    "pushed_at": "2025-11-11T03:19:19Z",
+    "updated_at": "2025-11-11T15:57:10Z",
+    "pushed_at": "2025-11-11T15:57:41Z",
     "git_url": "git://github.com/and3rn3t/silas.git",
     "ssh_url": "git@github.com:and3rn3t/silas.git",
     "clone_url": "https://github.com/and3rn3t/silas.git",
     "svn_url": "https://github.com/and3rn3t/silas",
     "homepage": null,
-    "size": 582,
+    "size": 599,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -124,7 +124,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 1,
+    "open_issues_count": 5,
     "license": null,
     "allow_forking": true,
     "is_template": false,
@@ -134,7 +134,7 @@
     ],
     "visibility": "public",
     "forks": 0,
-    "open_issues": 1,
+    "open_issues": 5,
     "watchers": 0,
     "default_branch": "main",
     "permissions": {
@@ -2838,14 +2838,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-11T12:11:12Z",
-    "pushed_at": "2025-11-11T12:11:08Z",
+    "updated_at": "2025-11-11T14:05:55Z",
+    "pushed_at": "2025-11-11T14:05:52Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1034,
+    "size": 1048,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2883,6 +2883,239 @@
   }
 ],
   "events": [
+  {
+    "id": "5870797402",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28163905425,
+      "ref": "refs/heads/main",
+      "head": "a168c5caec45149257bc341a127b92e977b6f36a",
+      "before": "75835f9426ab0d0995128558dad16c9022f162cb"
+    },
+    "public": true,
+    "created_at": "2025-11-11T15:57:06Z"
+  },
+  {
+    "id": "5868870116",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28161961222,
+      "ref": "refs/heads/main",
+      "head": "75835f9426ab0d0995128558dad16c9022f162cb",
+      "before": "32b1371b17c252686aa07683e2f7b5001b5f3fda"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:45:12Z"
+  },
+  {
+    "id": "5868740652",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28161830557,
+      "ref": "refs/heads/main",
+      "head": "32b1371b17c252686aa07683e2f7b5001b5f3fda",
+      "before": "28ed9d40b4d512aa2d91cf014f6b4692d0ae978d"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:40:24Z"
+  },
+  {
+    "id": "5868720106",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28161809773,
+      "ref": "refs/heads/main",
+      "head": "28ed9d40b4d512aa2d91cf014f6b4692d0ae978d",
+      "before": "e25fc24d5cdff47635ff79ad952e2aa1c6c534f3"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:39:38Z"
+  },
+  {
+    "id": "5868707786",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "ref": "renovate/configure",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/renovate/configure",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:39:10Z"
+  },
+  {
+    "id": "5868690863",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28161780378,
+      "ref": "refs/heads/main",
+      "head": "e25fc24d5cdff47635ff79ad952e2aa1c6c534f3",
+      "before": "59530e1f963a67e9f6fbd783c879fc3dff006106"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:38:31Z"
+  },
+  {
+    "id": "5868405380",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28161492186,
+      "ref": "refs/heads/main",
+      "head": "59530e1f963a67e9f6fbd783c879fc3dff006106",
+      "before": "e16769243101e6bd9bbb67542ad458ffc2460d93"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:28:32Z"
+  },
+  {
+    "id": "5868261475",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28161349407,
+      "ref": "refs/heads/main",
+      "head": "e16769243101e6bd9bbb67542ad458ffc2460d93",
+      "before": "c1427af52caa1019d22cc10f453e58a27cdc0b5f"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:23:28Z"
+  },
+  {
+    "id": "5867897508",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28160981214,
+      "ref": "refs/heads/main",
+      "head": "c1427af52caa1019d22cc10f453e58a27cdc0b5f",
+      "before": "2c792cd31e97ac81be14411e0b7ae8179d41680c"
+    },
+    "public": true,
+    "created_at": "2025-11-11T14:10:15Z"
+  },
   {
     "id": "5853884362",
     "type": "PushEvent",
@@ -3427,240 +3660,8 @@
     },
     "public": true,
     "created_at": "2025-11-10T22:43:27Z"
-  },
-  {
-    "id": "5849690147",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1093825727,
-      "name": "and3rn3t/silas",
-      "url": "https://api.github.com/repos/and3rn3t/silas"
-    },
-    "payload": {
-      "repository_id": 1093825727,
-      "push_id": 28142675236,
-      "ref": "refs/heads/main",
-      "head": "5663d8ebc204b979bd0331f4ceb70e8330475acf",
-      "before": "abb652cc25e06b4eb726a7d836d18a7f96df870c"
-    },
-    "public": true,
-    "created_at": "2025-11-10T22:43:23Z"
-  },
-  {
-    "id": "5849363991",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1093825727,
-      "name": "and3rn3t/silas",
-      "url": "https://api.github.com/repos/and3rn3t/silas"
-    },
-    "payload": {
-      "ref": "main",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/main",
-      "master_branch": "main",
-      "description": "Personal webpage for Silas",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-10T22:25:41Z"
-  },
-  {
-    "id": "5824682366",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "ref": "dependabot/npm_and_yarn/vitejs/plugin-react-5.1.0",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/dependabot/npm_and_yarn/vitejs/plugin-react-5.1.0",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:32:47Z"
-  },
-  {
-    "id": "5824681451",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28117528912,
-      "ref": "refs/heads/main",
-      "head": "9f1c8dce7985cdd9cde3c8b4662631f5a0ba53a2",
-      "before": "9318f62acd1a7dec74a31c0805e6cc90acaaf246"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:32:43Z"
-  },
-  {
-    "id": "5824678140",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "ref": "renovate/github-spark-0.x",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/renovate/github-spark-0.x",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:32:28Z"
-  },
-  {
-    "id": "5824677410",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28117524826,
-      "ref": "refs/heads/main",
-      "head": "9318f62acd1a7dec74a31c0805e6cc90acaaf246",
-      "before": "e1ee0ae999ecd2f8335e1f99d07c8102db691328"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:32:24Z"
-  },
-  {
-    "id": "5824674236",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "ref": "renovate/typescript-5.x",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/renovate/typescript-5.x",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:32:09Z"
-  },
-  {
-    "id": "5824673115",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28117520501,
-      "ref": "refs/heads/main",
-      "head": "e1ee0ae999ecd2f8335e1f99d07c8102db691328",
-      "before": "8787370f3c080dd4a2737c407296da89de29bdb1"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:32:04Z"
-  },
-  {
-    "id": "5824651138",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28117498376,
-      "ref": "refs/heads/main",
-      "head": "8787370f3c080dd4a2737c407296da89de29bdb1",
-      "before": "be4494466b1f24673e4e25323658bea8e4b11bc8"
-    },
-    "public": true,
-    "created_at": "2025-11-10T03:30:22Z"
   }
 ],
-  "lastUpdated": "2025-11-11T14:05:51Z",
+  "lastUpdated": "2025-11-11T16:06:58Z",
   "rateLimitRemaining": "Enhanced with token"
 }
