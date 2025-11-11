@@ -27,7 +27,7 @@
   "hireable": null,
   "bio": "Software engineer for Deere & Company, with a personal interest in data science and engineering.",
   "twitter_username": null,
-  "public_repos": 24,
+  "public_repos": 25,
   "public_gists": 0,
   "followers": 1,
   "following": 0,
@@ -35,6 +35,116 @@
   "updated_at": "2025-11-04T18:36:28Z"
 },
   "repositories": [
+  {
+    "id": 1093825727,
+    "node_id": "R_kgDOQTJ0vw",
+    "name": "silas",
+    "full_name": "and3rn3t/silas",
+    "private": false,
+    "owner": {
+      "login": "and3rn3t",
+      "id": 87380976,
+      "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "html_url": "https://github.com/and3rn3t",
+      "followers_url": "https://api.github.com/users/and3rn3t/followers",
+      "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+      "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+      "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+      "repos_url": "https://api.github.com/users/and3rn3t/repos",
+      "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/and3rn3t/silas",
+    "description": "Personal webpage for Silas",
+    "fork": false,
+    "url": "https://api.github.com/repos/and3rn3t/silas",
+    "forks_url": "https://api.github.com/repos/and3rn3t/silas/forks",
+    "keys_url": "https://api.github.com/repos/and3rn3t/silas/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/and3rn3t/silas/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/and3rn3t/silas/teams",
+    "hooks_url": "https://api.github.com/repos/and3rn3t/silas/hooks",
+    "issue_events_url": "https://api.github.com/repos/and3rn3t/silas/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/and3rn3t/silas/events",
+    "assignees_url": "https://api.github.com/repos/and3rn3t/silas/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/and3rn3t/silas/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/and3rn3t/silas/tags",
+    "blobs_url": "https://api.github.com/repos/and3rn3t/silas/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/and3rn3t/silas/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/and3rn3t/silas/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/and3rn3t/silas/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/and3rn3t/silas/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/and3rn3t/silas/languages",
+    "stargazers_url": "https://api.github.com/repos/and3rn3t/silas/stargazers",
+    "contributors_url": "https://api.github.com/repos/and3rn3t/silas/contributors",
+    "subscribers_url": "https://api.github.com/repos/and3rn3t/silas/subscribers",
+    "subscription_url": "https://api.github.com/repos/and3rn3t/silas/subscription",
+    "commits_url": "https://api.github.com/repos/and3rn3t/silas/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/and3rn3t/silas/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/and3rn3t/silas/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/and3rn3t/silas/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/and3rn3t/silas/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/and3rn3t/silas/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/and3rn3t/silas/merges",
+    "archive_url": "https://api.github.com/repos/and3rn3t/silas/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/and3rn3t/silas/downloads",
+    "issues_url": "https://api.github.com/repos/and3rn3t/silas/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/and3rn3t/silas/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/and3rn3t/silas/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/and3rn3t/silas/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/and3rn3t/silas/labels{/name}",
+    "releases_url": "https://api.github.com/repos/and3rn3t/silas/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/and3rn3t/silas/deployments",
+    "created_at": "2025-11-10T22:25:39Z",
+    "updated_at": "2025-11-10T23:26:02Z",
+    "pushed_at": "2025-11-10T23:25:58Z",
+    "git_url": "git://github.com/and3rn3t/silas.git",
+    "ssh_url": "git@github.com:and3rn3t/silas.git",
+    "clone_url": "https://github.com/and3rn3t/silas.git",
+    "svn_url": "https://github.com/and3rn3t/silas",
+    "homepage": null,
+    "size": 28,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "JavaScript",
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 0,
+    "license": null,
+    "allow_forking": true,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "topics": [
+
+    ],
+    "visibility": "public",
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 0,
+    "default_branch": "main",
+    "permissions": {
+      "admin": true,
+      "maintain": true,
+      "push": true,
+      "triage": true,
+      "pull": true
+    }
+  },
   {
     "id": 1089883477,
     "node_id": "R_kgDOQPZNVQ",
@@ -1366,7 +1476,7 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/couple-connect/deployments",
     "created_at": "2025-08-13T19:29:41Z",
     "updated_at": "2025-08-17T13:40:33Z",
-    "pushed_at": "2025-11-10T11:56:36Z",
+    "pushed_at": "2025-11-10T23:39:08Z",
     "git_url": "git://github.com/and3rn3t/couple-connect.git",
     "ssh_url": "git@github.com:and3rn3t/couple-connect.git",
     "clone_url": "https://github.com/and3rn3t/couple-connect.git",
@@ -2728,14 +2838,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-10T20:07:11Z",
-    "pushed_at": "2025-11-10T20:07:08Z",
+    "updated_at": "2025-11-10T22:06:04Z",
+    "pushed_at": "2025-11-11T00:05:02Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1634,
+    "size": 1649,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2773,6 +2883,136 @@
   }
 ],
   "events": [
+  {
+    "id": "5850398654",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28143387194,
+      "ref": "refs/heads/main",
+      "head": "3690c85f4b7e1ea6a2fdefbc4c01a5b2725fcfc6",
+      "before": "edeb1b51bc1e6184ec3bbf092855f622926f1ebb"
+    },
+    "public": true,
+    "created_at": "2025-11-10T23:25:59Z"
+  },
+  {
+    "id": "5849998672",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28142985399,
+      "ref": "refs/heads/main",
+      "head": "edeb1b51bc1e6184ec3bbf092855f622926f1ebb",
+      "before": "5663d8ebc204b979bd0331f4ceb70e8330475acf"
+    },
+    "public": true,
+    "created_at": "2025-11-10T23:01:22Z"
+  },
+  {
+    "id": "5849691565",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "ref": "copilot/create-personal-website-silas",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/copilot/create-personal-website-silas",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-10T22:43:27Z"
+  },
+  {
+    "id": "5849690147",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "repository_id": 1093825727,
+      "push_id": 28142675236,
+      "ref": "refs/heads/main",
+      "head": "5663d8ebc204b979bd0331f4ceb70e8330475acf",
+      "before": "abb652cc25e06b4eb726a7d836d18a7f96df870c"
+    },
+    "public": true,
+    "created_at": "2025-11-10T22:43:23Z"
+  },
+  {
+    "id": "5849363991",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1093825727,
+      "name": "and3rn3t/silas",
+      "url": "https://api.github.com/repos/and3rn3t/silas"
+    },
+    "payload": {
+      "ref": "main",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/main",
+      "master_branch": "main",
+      "description": "Personal webpage for Silas",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-11-10T22:25:41Z"
+  },
   {
     "id": "5824682366",
     "type": "DeleteEvent",
@@ -3419,138 +3659,8 @@
     },
     "public": true,
     "created_at": "2025-11-05T17:34:57Z"
-  },
-  {
-    "id": "5730148361",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28022097959,
-      "ref": "refs/heads/main",
-      "head": "958350a825c3520b40b9dfdf31b4692886168478",
-      "before": "5695709aa6e4bdfb80dd622c9bd62d561607ae2d"
-    },
-    "public": true,
-    "created_at": "2025-11-05T17:19:01Z"
-  },
-  {
-    "id": "5729400077",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28021344774,
-      "ref": "refs/heads/main",
-      "head": "5695709aa6e4bdfb80dd622c9bd62d561607ae2d",
-      "before": "626347116a3f145c07b803cd74d51d0c8a4f14bc"
-    },
-    "public": true,
-    "created_at": "2025-11-05T16:48:53Z"
-  },
-  {
-    "id": "5729019157",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28020961633,
-      "ref": "refs/heads/main",
-      "head": "626347116a3f145c07b803cd74d51d0c8a4f14bc",
-      "before": "155c8653d89fb1641b57af2b90267a67d626d6a4"
-    },
-    "public": true,
-    "created_at": "2025-11-05T16:33:37Z"
-  },
-  {
-    "id": "5728281734",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28020218136,
-      "ref": "refs/heads/main",
-      "head": "155c8653d89fb1641b57af2b90267a67d626d6a4",
-      "before": "8f07e4b45b287c3b8355f4d558057acda4375cb3"
-    },
-    "public": true,
-    "created_at": "2025-11-05T16:05:02Z"
-  },
-  {
-    "id": "5727255072",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1089883477,
-      "name": "and3rn3t/telescope",
-      "url": "https://api.github.com/repos/and3rn3t/telescope"
-    },
-    "payload": {
-      "repository_id": 1089883477,
-      "push_id": 28019184138,
-      "ref": "refs/heads/main",
-      "head": "8f07e4b45b287c3b8355f4d558057acda4375cb3",
-      "before": "65b39cbdbc7594ff33a68e5dacf1937013ae0151"
-    },
-    "public": true,
-    "created_at": "2025-11-05T15:27:43Z"
   }
 ],
-  "lastUpdated": "2025-11-10T22:06:00Z",
+  "lastUpdated": "2025-11-11T00:24:17Z",
   "rateLimitRemaining": "Enhanced with token"
 }
