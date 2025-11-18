@@ -1236,14 +1236,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/health/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/health/deployments",
     "created_at": "2025-08-30T21:38:34Z",
-    "updated_at": "2025-11-17T02:42:52Z",
-    "pushed_at": "2025-11-17T02:42:49Z",
+    "updated_at": "2025-11-17T23:53:36Z",
+    "pushed_at": "2025-11-17T23:53:32Z",
     "git_url": "git://github.com/and3rn3t/health.git",
     "ssh_url": "git@github.com:and3rn3t/health.git",
     "clone_url": "https://github.com/and3rn3t/health.git",
     "svn_url": "https://github.com/and3rn3t/health",
     "homepage": "https://health.andernet.dev",
-    "size": 26220,
+    "size": 26315,
     "stargazers_count": 4,
     "watchers_count": 4,
     "language": "TypeScript",
@@ -1360,7 +1360,7 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/homehub/deployments",
     "created_at": "2025-08-29T22:05:27Z",
     "updated_at": "2025-11-04T18:47:14Z",
-    "pushed_at": "2025-11-17T11:38:04Z",
+    "pushed_at": "2025-11-17T23:49:53Z",
     "git_url": "git://github.com/and3rn3t/homehub.git",
     "ssh_url": "git@github.com:and3rn3t/homehub.git",
     "clone_url": "https://github.com/and3rn3t/homehub.git",
@@ -2954,14 +2954,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-17T20:07:01Z",
-    "pushed_at": "2025-11-17T20:06:58Z",
+    "updated_at": "2025-11-17T22:05:32Z",
+    "pushed_at": "2025-11-18T00:05:12Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1313,
+    "size": 1331,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2999,6 +2999,58 @@
   }
 ],
   "events": [
+  {
+    "id": "6030419160",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28324407124,
+      "ref": "refs/heads/main",
+      "head": "1c069d6cdfc5616faebccf61e7bb02f2de6fdffc",
+      "before": "725c6fb26314d82c75f09a31dfe4e2aff5ef803f"
+    },
+    "public": true,
+    "created_at": "2025-11-17T23:53:33Z"
+  },
+  {
+    "id": "6029288721",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28323276106,
+      "ref": "refs/heads/main",
+      "head": "725c6fb26314d82c75f09a31dfe4e2aff5ef803f",
+      "before": "29cd4a2037de2d98310c728c4229f1eb624a9154"
+    },
+    "public": true,
+    "created_at": "2025-11-17T22:44:57Z"
+  },
   {
     "id": "6002215202",
     "type": "PushEvent",
@@ -4159,368 +4211,8 @@
     },
     "public": true,
     "created_at": "2025-11-16T02:03:43Z"
-  },
-  {
-    "id": "4702706963",
-    "type": "IssuesEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "action": "labeled",
-      "issue": {
-        "url": "https://api.github.com/repos/and3rn3t/health/issues/73",
-        "repository_url": "https://api.github.com/repos/and3rn3t/health",
-        "labels_url": "https://api.github.com/repos/and3rn3t/health/issues/73/labels{/name}",
-        "comments_url": "https://api.github.com/repos/and3rn3t/health/issues/73/comments",
-        "events_url": "https://api.github.com/repos/and3rn3t/health/issues/73/events",
-        "html_url": "https://github.com/and3rn3t/health/issues/73",
-        "id": 3629636387,
-        "node_id": "I_kwDOPnGq087YV9sj",
-        "number": 73,
-        "title": "Model drift detection pipeline",
-        "user": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "labels": [
-          {
-            "id": 9654395287,
-            "node_id": "LA_kwDOPnGq088AAAACP3Jhlw",
-            "url": "https://api.github.com/repos/and3rn3t/health/labels/Size:%20M",
-            "name": "Size: M",
-            "color": "fef2c0",
-            "default": false,
-            "description": "Medium (2–4 days)"
-          },
-          {
-            "id": 9654395839,
-            "node_id": "LA_kwDOPnGq088AAAACP3Jjvw",
-            "url": "https://api.github.com/repos/and3rn3t/health/labels/Epic:%20Cross-cutting%20Quality",
-            "name": "Epic: Cross-cutting Quality",
-            "color": "0366d6",
-            "default": false,
-            "description": "Epic: Cross-cutting Quality"
-          }
-        ],
-        "state": "open",
-        "locked": false,
-        "assignee": null,
-        "assignees": [
-
-        ],
-        "milestone": {
-          "url": "https://api.github.com/repos/and3rn3t/health/milestones/6",
-          "html_url": "https://github.com/and3rn3t/health/milestone/6",
-          "labels_url": "https://api.github.com/repos/and3rn3t/health/milestones/6/labels",
-          "id": 14145274,
-          "node_id": "MI_kwDOPnGq084A19b6",
-          "number": 6,
-          "title": "M6: SLOs, autoscale, cost governance",
-          "description": "Phase 6",
-          "creator": {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          },
-          "open_issues": 3,
-          "closed_issues": 0,
-          "state": "open",
-          "created_at": "2025-11-16T02:02:13Z",
-          "updated_at": "2025-11-16T02:03:42Z",
-          "due_on": null,
-          "closed_at": null
-        },
-        "comments": 0,
-        "created_at": "2025-11-16T02:03:40Z",
-        "updated_at": "2025-11-16T02:03:40Z",
-        "closed_at": null,
-        "active_lock_reason": null,
-        "sub_issues_summary": {
-          "total": 0,
-          "completed": 0,
-          "percent_completed": 0
-        },
-        "issue_dependencies_summary": {
-          "blocked_by": 0,
-          "total_blocked_by": 0,
-          "blocking": 0,
-          "total_blocking": 0
-        },
-        "body": "AC: Scheduled eval; alert on drift; retrain trigger doc.",
-        "reactions": {
-          "url": "https://api.github.com/repos/and3rn3t/health/issues/73/reactions",
-          "total_count": 0,
-          "+1": 0,
-          "-1": 0,
-          "laugh": 0,
-          "hooray": 0,
-          "confused": 0,
-          "heart": 0,
-          "rocket": 0,
-          "eyes": 0
-        },
-        "timeline_url": "https://api.github.com/repos/and3rn3t/health/issues/73/timeline",
-        "performed_via_github_app": null,
-        "state_reason": null
-      },
-      "label": {
-        "id": 9654395839,
-        "node_id": "LA_kwDOPnGq088AAAACP3Jjvw",
-        "url": "https://api.github.com/repos/and3rn3t/health/labels/Epic:%20Cross-cutting%20Quality",
-        "name": "Epic: Cross-cutting Quality",
-        "color": "0366d6",
-        "default": false,
-        "description": "Epic: Cross-cutting Quality"
-      },
-      "labels": [
-        {
-          "id": 9654395287,
-          "node_id": "LA_kwDOPnGq088AAAACP3Jhlw",
-          "url": "https://api.github.com/repos/and3rn3t/health/labels/Size:%20M",
-          "name": "Size: M",
-          "color": "fef2c0",
-          "default": false,
-          "description": "Medium (2–4 days)"
-        },
-        {
-          "id": 9654395839,
-          "node_id": "LA_kwDOPnGq088AAAACP3Jjvw",
-          "url": "https://api.github.com/repos/and3rn3t/health/labels/Epic:%20Cross-cutting%20Quality",
-          "name": "Epic: Cross-cutting Quality",
-          "color": "0366d6",
-          "default": false,
-          "description": "Epic: Cross-cutting Quality"
-        }
-      ]
-    },
-    "public": true,
-    "created_at": "2025-11-16T02:03:41Z"
-  },
-  {
-    "id": "4702706962",
-    "type": "IssuesEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "action": "labeled",
-      "issue": {
-        "url": "https://api.github.com/repos/and3rn3t/health/issues/73",
-        "repository_url": "https://api.github.com/repos/and3rn3t/health",
-        "labels_url": "https://api.github.com/repos/and3rn3t/health/issues/73/labels{/name}",
-        "comments_url": "https://api.github.com/repos/and3rn3t/health/issues/73/comments",
-        "events_url": "https://api.github.com/repos/and3rn3t/health/issues/73/events",
-        "html_url": "https://github.com/and3rn3t/health/issues/73",
-        "id": 3629636387,
-        "node_id": "I_kwDOPnGq087YV9sj",
-        "number": 73,
-        "title": "Model drift detection pipeline",
-        "user": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "labels": [
-          {
-            "id": 9654395287,
-            "node_id": "LA_kwDOPnGq088AAAACP3Jhlw",
-            "url": "https://api.github.com/repos/and3rn3t/health/labels/Size:%20M",
-            "name": "Size: M",
-            "color": "fef2c0",
-            "default": false,
-            "description": "Medium (2–4 days)"
-          },
-          {
-            "id": 9654395839,
-            "node_id": "LA_kwDOPnGq088AAAACP3Jjvw",
-            "url": "https://api.github.com/repos/and3rn3t/health/labels/Epic:%20Cross-cutting%20Quality",
-            "name": "Epic: Cross-cutting Quality",
-            "color": "0366d6",
-            "default": false,
-            "description": "Epic: Cross-cutting Quality"
-          }
-        ],
-        "state": "open",
-        "locked": false,
-        "assignee": null,
-        "assignees": [
-
-        ],
-        "milestone": {
-          "url": "https://api.github.com/repos/and3rn3t/health/milestones/6",
-          "html_url": "https://github.com/and3rn3t/health/milestone/6",
-          "labels_url": "https://api.github.com/repos/and3rn3t/health/milestones/6/labels",
-          "id": 14145274,
-          "node_id": "MI_kwDOPnGq084A19b6",
-          "number": 6,
-          "title": "M6: SLOs, autoscale, cost governance",
-          "description": "Phase 6",
-          "creator": {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          },
-          "open_issues": 3,
-          "closed_issues": 0,
-          "state": "open",
-          "created_at": "2025-11-16T02:02:13Z",
-          "updated_at": "2025-11-16T02:03:42Z",
-          "due_on": null,
-          "closed_at": null
-        },
-        "comments": 0,
-        "created_at": "2025-11-16T02:03:40Z",
-        "updated_at": "2025-11-16T02:03:40Z",
-        "closed_at": null,
-        "active_lock_reason": null,
-        "sub_issues_summary": {
-          "total": 0,
-          "completed": 0,
-          "percent_completed": 0
-        },
-        "issue_dependencies_summary": {
-          "blocked_by": 0,
-          "total_blocked_by": 0,
-          "blocking": 0,
-          "total_blocking": 0
-        },
-        "body": "AC: Scheduled eval; alert on drift; retrain trigger doc.",
-        "reactions": {
-          "url": "https://api.github.com/repos/and3rn3t/health/issues/73/reactions",
-          "total_count": 0,
-          "+1": 0,
-          "-1": 0,
-          "laugh": 0,
-          "hooray": 0,
-          "confused": 0,
-          "heart": 0,
-          "rocket": 0,
-          "eyes": 0
-        },
-        "timeline_url": "https://api.github.com/repos/and3rn3t/health/issues/73/timeline",
-        "performed_via_github_app": null,
-        "state_reason": null
-      },
-      "label": {
-        "id": 9654395839,
-        "node_id": "LA_kwDOPnGq088AAAACP3Jjvw",
-        "url": "https://api.github.com/repos/and3rn3t/health/labels/Epic:%20Cross-cutting%20Quality",
-        "name": "Epic: Cross-cutting Quality",
-        "color": "0366d6",
-        "default": false,
-        "description": "Epic: Cross-cutting Quality"
-      },
-      "labels": [
-        {
-          "id": 9654395287,
-          "node_id": "LA_kwDOPnGq088AAAACP3Jhlw",
-          "url": "https://api.github.com/repos/and3rn3t/health/labels/Size:%20M",
-          "name": "Size: M",
-          "color": "fef2c0",
-          "default": false,
-          "description": "Medium (2–4 days)"
-        },
-        {
-          "id": 9654395839,
-          "node_id": "LA_kwDOPnGq088AAAACP3Jjvw",
-          "url": "https://api.github.com/repos/and3rn3t/health/labels/Epic:%20Cross-cutting%20Quality",
-          "name": "Epic: Cross-cutting Quality",
-          "color": "0366d6",
-          "default": false,
-          "description": "Epic: Cross-cutting Quality"
-        }
-      ]
-    },
-    "public": true,
-    "created_at": "2025-11-16T02:03:41Z"
   }
 ],
-  "lastUpdated": "2025-11-17T22:05:29Z",
+  "lastUpdated": "2025-11-18T00:23:39Z",
   "rateLimitRemaining": "Enhanced with token"
 }
