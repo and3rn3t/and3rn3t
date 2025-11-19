@@ -1236,14 +1236,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/health/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/health/deployments",
     "created_at": "2025-08-30T21:38:34Z",
-    "updated_at": "2025-11-19T13:42:08Z",
-    "pushed_at": "2025-11-19T13:43:59Z",
+    "updated_at": "2025-11-19T16:04:57Z",
+    "pushed_at": "2025-11-19T16:06:39Z",
     "git_url": "git://github.com/and3rn3t/health.git",
     "ssh_url": "git@github.com:and3rn3t/health.git",
     "clone_url": "https://github.com/and3rn3t/health.git",
     "svn_url": "https://github.com/and3rn3t/health",
     "homepage": "https://health.andernet.dev",
-    "size": 27169,
+    "size": 27096,
     "stargazers_count": 4,
     "watchers_count": 4,
     "language": "TypeScript",
@@ -1257,7 +1257,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 40,
+    "open_issues_count": 46,
     "license": {
       "key": "mit",
       "name": "MIT License",
@@ -1280,7 +1280,7 @@
     ],
     "visibility": "public",
     "forks": 0,
-    "open_issues": 40,
+    "open_issues": 46,
     "watchers": 4,
     "default_branch": "main",
     "permissions": {
@@ -2954,14 +2954,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-19T12:11:11Z",
-    "pushed_at": "2025-11-19T12:11:08Z",
+    "updated_at": "2025-11-19T14:05:49Z",
+    "pushed_at": "2025-11-19T14:05:46Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1772,
+    "size": 1788,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -2999,6 +2999,266 @@
   }
 ],
   "events": [
+  {
+    "id": "6083648574",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28377678690,
+      "ref": "refs/heads/main",
+      "head": "326b699f6f62aa1decca118e464101f717072706",
+      "before": "b4d1f0efe898f6ed936299fc01d314d03b9f4162"
+    },
+    "public": true,
+    "created_at": "2025-11-19T16:04:53Z"
+  },
+  {
+    "id": "6083636707",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28377667814,
+      "ref": "refs/heads/main",
+      "head": "b4d1f0efe898f6ed936299fc01d314d03b9f4162",
+      "before": "9b4269ee97ea0ac24589cb6fda3ce40d145168bc"
+    },
+    "public": true,
+    "created_at": "2025-11-19T16:04:33Z"
+  },
+  {
+    "id": "6082722121",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28376786837,
+      "ref": "refs/heads/main",
+      "head": "9b4269ee97ea0ac24589cb6fda3ce40d145168bc",
+      "before": "a354dd02be149c181ac159ced2c1f273ef15540e"
+    },
+    "public": true,
+    "created_at": "2025-11-19T15:35:51Z"
+  },
+  {
+    "id": "6082278420",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28376333568,
+      "ref": "refs/heads/main",
+      "head": "a354dd02be149c181ac159ced2c1f273ef15540e",
+      "before": "d2d6a40548ab09ad8d7fa3b8239a16acc1dbecb2"
+    },
+    "public": true,
+    "created_at": "2025-11-19T15:21:09Z"
+  },
+  {
+    "id": "6081703895",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28375748766,
+      "ref": "refs/heads/main",
+      "head": "d2d6a40548ab09ad8d7fa3b8239a16acc1dbecb2",
+      "before": "7e5f6dcdc6825abc5c206361e86c26b8ca37f9b5"
+    },
+    "public": true,
+    "created_at": "2025-11-19T15:02:38Z"
+  },
+  {
+    "id": "6081587479",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28375634965,
+      "ref": "refs/heads/main",
+      "head": "7e5f6dcdc6825abc5c206361e86c26b8ca37f9b5",
+      "before": "19d604d5595a55d842da526c2349e625f3eb0c20"
+    },
+    "public": true,
+    "created_at": "2025-11-19T14:59:22Z"
+  },
+  {
+    "id": "6081437036",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28375492143,
+      "ref": "refs/heads/main",
+      "head": "19d604d5595a55d842da526c2349e625f3eb0c20",
+      "before": "c697264585f3aee41f2ea1a6fc1d19c8c2c1b4fc"
+    },
+    "public": true,
+    "created_at": "2025-11-19T14:54:51Z"
+  },
+  {
+    "id": "6081250508",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28375223673,
+      "ref": "refs/heads/main",
+      "head": "c697264585f3aee41f2ea1a6fc1d19c8c2c1b4fc",
+      "before": "4615f25db18d09ded4454a712422a346decacc58"
+    },
+    "public": true,
+    "created_at": "2025-11-19T14:46:19Z"
+  },
+  {
+    "id": "6081151029",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28375207581,
+      "ref": "refs/heads/main",
+      "head": "4615f25db18d09ded4454a712422a346decacc58",
+      "before": "f63ddbbb615c4b501d9d3830888f34c603f96de4"
+    },
+    "public": true,
+    "created_at": "2025-11-19T14:45:49Z"
+  },
+  {
+    "id": "6081100091",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1047636691,
+      "name": "and3rn3t/health",
+      "url": "https://api.github.com/repos/and3rn3t/health"
+    },
+    "payload": {
+      "repository_id": 1047636691,
+      "push_id": 28375080165,
+      "ref": "refs/heads/main",
+      "head": "f63ddbbb615c4b501d9d3830888f34c603f96de4",
+      "before": "0d545ce39979cbda48e4f44d4360ad0861b5a022"
+    },
+    "public": true,
+    "created_at": "2025-11-19T14:41:46Z"
+  },
   {
     "id": "6079203088",
     "type": "DeleteEvent",
@@ -3538,268 +3798,8 @@
     },
     "public": true,
     "created_at": "2025-11-18T02:50:31Z"
-  },
-  {
-    "id": "6033268132",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28327258153,
-      "ref": "refs/heads/main",
-      "head": "c9d7931b6b4938daf5eaf1169ea0afa808751a12",
-      "before": "e9f6c1158657adee2915fa13cdb74c66494668d6"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:46:13Z"
-  },
-  {
-    "id": "6033183696",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28327173643,
-      "ref": "refs/heads/main",
-      "head": "e9f6c1158657adee2915fa13cdb74c66494668d6",
-      "before": "b7f220a6122ba3ad78ffa16ea05d9717a3640780"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:41:28Z"
-  },
-  {
-    "id": "6033180098",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28327170027,
-      "ref": "refs/heads/main",
-      "head": "b7f220a6122ba3ad78ffa16ea05d9717a3640780",
-      "before": "defae9d15f127dee955955a06444e86a4bc14ee7"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:41:14Z"
-  },
-  {
-    "id": "6033169175",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28327159041,
-      "ref": "refs/heads/main",
-      "head": "defae9d15f127dee955955a06444e86a4bc14ee7",
-      "before": "03029cf710cb1a857342d02713649f65e225bfc9"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:40:34Z"
-  },
-  {
-    "id": "6033105530",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28327095410,
-      "ref": "refs/heads/main",
-      "head": "03029cf710cb1a857342d02713649f65e225bfc9",
-      "before": "6a8b391117c43ada26374e23a3eb3c449ad77f01"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:36:17Z"
-  },
-  {
-    "id": "6033052325",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28327042180,
-      "ref": "refs/heads/main",
-      "head": "6a8b391117c43ada26374e23a3eb3c449ad77f01",
-      "before": "3583eafeeefb135039a110a0614752876c6cab9f"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:32:41Z"
-  },
-  {
-    "id": "6032972017",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28326961755,
-      "ref": "refs/heads/main",
-      "head": "3583eafeeefb135039a110a0614752876c6cab9f",
-      "before": "ab94123b3d516444d91d478d1be4572023d3be6a"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:27:42Z"
-  },
-  {
-    "id": "6032843643",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28326833318,
-      "ref": "refs/heads/main",
-      "head": "ab94123b3d516444d91d478d1be4572023d3be6a",
-      "before": "61a5508b254c9fb317108a7faf8fd5e67b4130e0"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:20:03Z"
-  },
-  {
-    "id": "6032838115",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28326827761,
-      "ref": "refs/heads/main",
-      "head": "61a5508b254c9fb317108a7faf8fd5e67b4130e0",
-      "before": "dc2083dedd829aa6a80f58097821451226e00e8f"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:19:42Z"
-  },
-  {
-    "id": "6032771481",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1047636691,
-      "name": "and3rn3t/health",
-      "url": "https://api.github.com/repos/and3rn3t/health"
-    },
-    "payload": {
-      "repository_id": 1047636691,
-      "push_id": 28326761098,
-      "ref": "refs/heads/main",
-      "head": "dc2083dedd829aa6a80f58097821451226e00e8f",
-      "before": "11a489ef6ad10ebbb7259c49f5f338950714e18b"
-    },
-    "public": true,
-    "created_at": "2025-11-18T02:15:13Z"
   }
 ],
-  "lastUpdated": "2025-11-19T14:05:45Z",
+  "lastUpdated": "2025-11-19T16:07:38Z",
   "rateLimitRemaining": "Enhanced with token"
 }
