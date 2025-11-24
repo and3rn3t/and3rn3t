@@ -103,14 +103,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/minecraft/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/minecraft/deployments",
     "created_at": "2025-11-22T17:31:12Z",
-    "updated_at": "2025-11-23T21:56:16Z",
-    "pushed_at": "2025-11-23T21:56:12Z",
+    "updated_at": "2025-11-23T22:38:09Z",
+    "pushed_at": "2025-11-23T22:38:05Z",
     "git_url": "git://github.com/and3rn3t/minecraft.git",
     "ssh_url": "git@github.com:and3rn3t/minecraft.git",
     "clone_url": "https://github.com/and3rn3t/minecraft.git",
     "svn_url": "https://github.com/and3rn3t/minecraft",
     "homepage": null,
-    "size": 1134,
+    "size": 887,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "HTML",
@@ -3070,14 +3070,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-11-23T20:06:09Z",
-    "pushed_at": "2025-11-23T20:06:05Z",
+    "updated_at": "2025-11-23T22:05:21Z",
+    "pushed_at": "2025-11-24T00:05:54Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1442,
+    "size": 1461,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3115,6 +3115,110 @@
   }
 ],
   "events": [
+  {
+    "id": "6184245187",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1102030320,
+      "name": "and3rn3t/minecraft",
+      "url": "https://api.github.com/repos/and3rn3t/minecraft"
+    },
+    "payload": {
+      "repository_id": 1102030320,
+      "push_id": 28478377885,
+      "ref": "refs/heads/main",
+      "head": "be0303783e56e34e4063124ee48070ea851887ba",
+      "before": "66059514efa8eb15ed930d52ed20f3073923f1a0"
+    },
+    "public": true,
+    "created_at": "2025-11-23T22:38:06Z"
+  },
+  {
+    "id": "6184101198",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1102030320,
+      "name": "and3rn3t/minecraft",
+      "url": "https://api.github.com/repos/and3rn3t/minecraft"
+    },
+    "payload": {
+      "repository_id": 1102030320,
+      "push_id": 28478233818,
+      "ref": "refs/heads/main",
+      "head": "66059514efa8eb15ed930d52ed20f3073923f1a0",
+      "before": "79edccf63bc75a9872724921e676087f8e59043f"
+    },
+    "public": true,
+    "created_at": "2025-11-23T22:26:31Z"
+  },
+  {
+    "id": "6183971870",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1102030320,
+      "name": "and3rn3t/minecraft",
+      "url": "https://api.github.com/repos/and3rn3t/minecraft"
+    },
+    "payload": {
+      "repository_id": 1102030320,
+      "push_id": 28478104331,
+      "ref": "refs/heads/main",
+      "head": "79edccf63bc75a9872724921e676087f8e59043f",
+      "before": "8193c58b3f5672ac6d2b8ce4fe116e42f3337b13"
+    },
+    "public": true,
+    "created_at": "2025-11-23T22:15:13Z"
+  },
+  {
+    "id": "6183877861",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1102030320,
+      "name": "and3rn3t/minecraft",
+      "url": "https://api.github.com/repos/and3rn3t/minecraft"
+    },
+    "payload": {
+      "repository_id": 1102030320,
+      "push_id": 28478010279,
+      "ref": "refs/heads/main",
+      "head": "8193c58b3f5672ac6d2b8ce4fe116e42f3337b13",
+      "before": "87f68b514c69305634dead05549a5c8f9bcd1ed2"
+    },
+    "public": true,
+    "created_at": "2025-11-23T22:07:07Z"
+  },
   {
     "id": "6183750203",
     "type": "PushEvent",
@@ -3790,154 +3894,8 @@
     },
     "public": true,
     "created_at": "2025-11-23T05:44:15Z"
-  },
-  {
-    "id": "6172496426",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28466610589,
-      "ref": "refs/heads/main",
-      "head": "b745e83c29af81d47c741c1a679f56f3ebb953b7",
-      "before": "e8a518bd969fd089c0c9a45facc35ed0b0fe116c"
-    },
-    "public": true,
-    "created_at": "2025-11-23T05:32:56Z"
-  },
-  {
-    "id": "6172399596",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28466513644,
-      "ref": "refs/heads/main",
-      "head": "e8a518bd969fd089c0c9a45facc35ed0b0fe116c",
-      "before": "057476161360c50a3c79682cf589bb9230f9c350"
-    },
-    "public": true,
-    "created_at": "2025-11-23T05:23:20Z"
-  },
-  {
-    "id": "6172233552",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28466347457,
-      "ref": "refs/heads/main",
-      "head": "057476161360c50a3c79682cf589bb9230f9c350",
-      "before": "73f404296031dd0a630d51b3e85af17a9c7f9699"
-    },
-    "public": true,
-    "created_at": "2025-11-23T05:04:17Z"
-  },
-  {
-    "id": "4855214842",
-    "type": "ReleaseEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "action": "published",
-      "release": {
-        "url": "https://api.github.com/repos/and3rn3t/minecraft/releases/264584202",
-        "assets_url": "https://api.github.com/repos/and3rn3t/minecraft/releases/264584202/assets",
-        "upload_url": "https://uploads.github.com/repos/and3rn3t/minecraft/releases/264584202/assets{?name,label}",
-        "html_url": "https://github.com/and3rn3t/minecraft/releases/tag/v1.4.0",
-        "id": 264584202,
-        "author": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "node_id": "RE_kwDOQa-l8M4PxTwK",
-        "tag_name": "v1.4.0",
-        "target_commitish": "main",
-        "name": "v1.4.0: Web Admin Panel with RBAC and Authentication",
-        "draft": false,
-        "immutable": false,
-        "prerelease": false,
-        "created_at": "2025-11-23T04:46:54Z",
-        "updated_at": "2025-11-23T04:48:29Z",
-        "published_at": "2025-11-23T04:48:29Z",
-        "assets": [
-
-        ],
-        "tarball_url": "https://api.github.com/repos/and3rn3t/minecraft/tarball/v1.4.0",
-        "zipball_url": "https://api.github.com/repos/and3rn3t/minecraft/zipball/v1.4.0",
-        "body": "# v1.4.0: Web Admin Panel with RBAC and Authentication\n\n## 🎉 Major Release\n\nThis release introduces a complete web-based admin panel with role-based access control, user authentication, and a beautiful Minecraft-themed pixel art interface.\n\n## ✨ New Features\n\n### Web Admin Panel\n- **React-based web interface** with modern UI/UX\n- **Minecraft-themed pixel art design** with authentic colors and fonts\n- **Real-time server dashboard** with live metrics and status\n- **Real-time log viewer** with WebSocket support and filtering\n- **Player management** interface (view, whitelist, ban, op)\n- **Backup management UI** with create, restore, and delete functionality\n- **Server configuration editor** with syntax highlighting\n- **Worlds and plugins management** interfaces\n\n### Authentication & Security\n- **User registration and login** with secure password hashing\n- **OAuth integration** (Google, Apple)\n- **Role-Based Access Control (RBAC)** with three roles:\n  - **Admin**: Full system access (all permissions)\n  - **Operator**: Server management and player control\n  - **User**: Read-only access\n- **Permission system** with 25+ granular permissions\n- **User management interface** (list, update roles, enable/disable, delete)\n- **API key management** with secure generation and rotation\n- **Session-based authentication** with JWT support\n\n### REST API Enhancements\n- User management endpoints (`/api/users/*`)\n- Role and permission endpoints (`/api/roles`, `/api/permissions`)\n- API key management endpoints (`/api/keys/*`)\n- Permission-based access control on all endpoints\n- API key authentication support in `require_auth` decorator\n\n## 🧪 Testing\n\n- **32 comprehensive RBAC tests** (all passing)\n- Permission system validation tests\n- User management tests\n- API key access tests\n- Config file permission tests\n\n## 📚 Documentation\n\n- **RBAC documentation** (`docs/RBAC.md`) - Complete guide to role-based access control\n- **API key management guide** (`docs/API_KEYS.md`) - API key usage and best practices\n- Updated documentation index with new guides\n- Security best practices documentation\n\n## 🔧 Improvements\n\n- Fixed role permissions (removed `backup.create` from user role, `config.edit` from operator role)\n- Fixed API key authentication in permission-based endpoints\n- Fixed JSON serialization issues with subprocess output\n- Enhanced error handling in permission checks\n- Improved API key authentication flow\n\n## 🔒 Security\n\n- Implemented role-based permission system\n- Added protection against disabling/deleting last admin user\n- Secure API key storage with file permissions (600)\n- Password hashing with bcrypt\n- Session management with secure cookies\n\n## 📦 Installation\n\nThe web interface is included in the main repository. To use it:\n\n1. **Start the API server:**\n   ```bash\n   ./scripts/api-server.sh start\n   ```\n\n2. **Install web dependencies:**\n   ```bash\n   cd web\n   npm install\n   ```\n\n3. **Run the web interface:**\n   ```bash\n   npm run dev\n   ```\n\n4. **Access at:** `http://localhost:3000`\n\n## 🎨 UI Theme\n\nThe web interface features a beautiful Minecraft-themed pixel art design:\n- Pixel font (\"Press Start 2P\")\n- Authentic Minecraft colors (grass green, dirt brown, stone gray)\n- 3D button styling with borders\n- Minecraft-style cards and inputs\n- Consistent pixelated aesthetic throughout\n\n## 🔗 Related Documentation\n\n- [RBAC Guide](docs/RBAC.md)\n- [API Key Management](docs/API_KEYS.md)\n- [Web Interface Guide](docs/WEB_INTERFACE.md)\n- [API Documentation](docs/API.md)\n\n## 🙏 Thanks\n\nThank you for using Minecraft Server Management! This release represents a significant milestone in making server management more accessible and secure.\n\n---\n\n**Full Changelog**: See [CHANGELOG.md](CHANGELOG.md) for complete details.\n\n",
-        "short_description_html": "<h1>v1.4.0: Web Admin Panel with RBAC and Authentication</h1>\n<h2>🎉 Major Release</h2>\n<p>This release introduces a complete web-based admin panel with role-based access control, user authentication, and a beautiful Mi…</p>",
-        "is_short_description_html_truncated": true
-      }
-    },
-    "public": true,
-    "created_at": "2025-11-23T04:48:29Z"
   }
 ],
-  "lastUpdated": "2025-11-23T22:05:17Z",
+  "lastUpdated": "2025-11-24T00:25:23Z",
   "rateLimitRemaining": "Enhanced with token"
 }
