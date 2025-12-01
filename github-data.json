@@ -103,14 +103,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/net-traffic/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/net-traffic/deployments",
     "created_at": "2025-11-25T17:59:56Z",
-    "updated_at": "2025-12-01T05:59:52Z",
-    "pushed_at": "2025-12-01T05:59:53Z",
+    "updated_at": "2025-12-01T06:16:52Z",
+    "pushed_at": "2025-12-01T06:31:44Z",
     "git_url": "git://github.com/and3rn3t/net-traffic.git",
     "ssh_url": "git@github.com:and3rn3t/net-traffic.git",
     "clone_url": "https://github.com/and3rn3t/net-traffic.git",
     "svn_url": "https://github.com/and3rn3t/net-traffic",
     "homepage": null,
-    "size": 963,
+    "size": 1100,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "TypeScript",
@@ -898,7 +898,7 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/network/deployments",
     "created_at": "2025-10-17T22:48:41Z",
     "updated_at": "2025-11-13T01:53:10Z",
-    "pushed_at": "2025-11-26T11:53:53Z",
+    "pushed_at": "2025-12-01T07:08:25Z",
     "git_url": "git://github.com/and3rn3t/network.git",
     "ssh_url": "git@github.com:and3rn3t/network.git",
     "clone_url": "https://github.com/and3rn3t/network.git",
@@ -3076,14 +3076,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-12-01T04:25:23Z",
-    "pushed_at": "2025-12-01T04:25:19Z",
+    "updated_at": "2025-12-01T06:11:05Z",
+    "pushed_at": "2025-12-01T06:11:01Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1912,
+    "size": 1949,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3121,6 +3121,235 @@
   }
 ],
   "events": [
+  {
+    "id": "6364787723",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28658564183,
+      "ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "head": "de104de709a7a4064f320279b6f775f9053fc7d3",
+      "before": "13895a7891c4d14026a5f148b36c545a5158b65d"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:31:45Z"
+  },
+  {
+    "id": "6364747089",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28658523535,
+      "ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "head": "13895a7891c4d14026a5f148b36c545a5158b65d",
+      "before": "c89e912c07e1df6dc7ad67d988560144bfe036bd"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:29:36Z"
+  },
+  {
+    "id": "6364700880",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28658477293,
+      "ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "head": "c89e912c07e1df6dc7ad67d988560144bfe036bd",
+      "before": "d09d4f540b5728f50e86b58bdbd6b76feec4683c"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:27:02Z"
+  },
+  {
+    "id": "6364587494",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "master_branch": "main",
+      "description": null,
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:20:53Z"
+  },
+  {
+    "id": "6364513575",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:16:55Z"
+  },
+  {
+    "id": "6364511393",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28658287669,
+      "ref": "refs/heads/main",
+      "head": "69f9cf6688a01cbf3a81afda377fe7c8411dd9c1",
+      "before": "be98ba1aca26fa2535999d1084ac52381e47a943"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:16:48Z"
+  },
+  {
+    "id": "5000954492",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 22,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/net-traffic/pulls/22",
+        "id": 3057853403,
+        "number": 22,
+        "head": {
+          "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+          "sha": "8d8ee889057c84080229695b4d88431d63965102",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "be98ba1aca26fa2535999d1084ac52381e47a943",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:15:33Z"
+  },
+  {
+    "id": "6364413241",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+      "master_branch": "main",
+      "description": null,
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:11:07Z"
+  },
   {
     "id": "6364217091",
     "type": "DeleteEvent",
@@ -3708,216 +3937,8 @@
     },
     "public": true,
     "created_at": "2025-11-25T00:56:35Z"
-  },
-  {
-    "id": "6214047458",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28508197748,
-      "ref": "refs/heads/main",
-      "head": "79c88f132342d113c7a58de4557b567b231338ec",
-      "before": "18f49cc80191b7086279a03812dd0c28693b202d"
-    },
-    "public": true,
-    "created_at": "2025-11-24T22:40:17Z"
-  },
-  {
-    "id": "6213892490",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28508042698,
-      "ref": "refs/heads/main",
-      "head": "18f49cc80191b7086279a03812dd0c28693b202d",
-      "before": "0f7d0f5e65776bb645e716c6836ce9d59da75193"
-    },
-    "public": true,
-    "created_at": "2025-11-24T22:31:27Z"
-  },
-  {
-    "id": "6213549399",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28507699748,
-      "ref": "refs/heads/main",
-      "head": "0f7d0f5e65776bb645e716c6836ce9d59da75193",
-      "before": "369faf9f6dbccd41da4a31d3f7d4f79ad5c80109"
-    },
-    "public": true,
-    "created_at": "2025-11-24T22:14:12Z"
-  },
-  {
-    "id": "6213472381",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28507622625,
-      "ref": "refs/heads/main",
-      "head": "369faf9f6dbccd41da4a31d3f7d4f79ad5c80109",
-      "before": "696c4682ce749ce864ba6517aabcc4ad04abc1f5"
-    },
-    "public": true,
-    "created_at": "2025-11-24T22:10:18Z"
-  },
-  {
-    "id": "6213391208",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28507541448,
-      "ref": "refs/heads/main",
-      "head": "696c4682ce749ce864ba6517aabcc4ad04abc1f5",
-      "before": "fc0dee7db3a1161b7de12134f2d1fb23d2fc8ec7"
-    },
-    "public": true,
-    "created_at": "2025-11-24T22:06:14Z"
-  },
-  {
-    "id": "6208169889",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28502318971,
-      "ref": "refs/heads/main",
-      "head": "fc0dee7db3a1161b7de12134f2d1fb23d2fc8ec7",
-      "before": "85386005fc3ce1e36056fac23f376ae7c1148c1e"
-    },
-    "public": true,
-    "created_at": "2025-11-24T18:06:53Z"
-  },
-  {
-    "id": "6206290347",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28500440681,
-      "ref": "refs/heads/main",
-      "head": "85386005fc3ce1e36056fac23f376ae7c1148c1e",
-      "before": "fc119138a224310e2eefd2574db3d0ac3a0cd25c"
-    },
-    "public": true,
-    "created_at": "2025-11-24T16:51:09Z"
-  },
-  {
-    "id": "6205467247",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1102030320,
-      "name": "and3rn3t/minecraft",
-      "url": "https://api.github.com/repos/and3rn3t/minecraft"
-    },
-    "payload": {
-      "repository_id": 1102030320,
-      "push_id": 28499628741,
-      "ref": "refs/heads/main",
-      "head": "fc119138a224310e2eefd2574db3d0ac3a0cd25c",
-      "before": "4399bdfc4d481f2c40db5fc04aa61464d11beb69"
-    },
-    "public": true,
-    "created_at": "2025-11-24T16:20:09Z"
   }
 ],
-  "lastUpdated": "2025-12-01T06:09:35Z",
+  "lastUpdated": "2025-12-01T08:08:50Z",
   "rateLimitRemaining": "Enhanced with token"
 }
