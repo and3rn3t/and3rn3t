@@ -562,13 +562,13 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/telescope/deployments",
     "created_at": "2025-11-05T00:11:16Z",
     "updated_at": "2025-11-10T03:32:46Z",
-    "pushed_at": "2025-12-02T18:05:17Z",
+    "pushed_at": "2025-12-02T20:44:38Z",
     "git_url": "git://github.com/and3rn3t/telescope.git",
     "ssh_url": "git@github.com:and3rn3t/telescope.git",
     "clone_url": "https://github.com/and3rn3t/telescope.git",
     "svn_url": "https://github.com/and3rn3t/telescope",
     "homepage": null,
-    "size": 550,
+    "size": 547,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "TypeScript",
@@ -3076,14 +3076,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-12-02T18:10:28Z",
-    "pushed_at": "2025-12-02T18:10:25Z",
+    "updated_at": "2025-12-02T20:07:07Z",
+    "pushed_at": "2025-12-02T20:07:03Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1581,
+    "size": 1598,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3433,6 +3433,52 @@
     "created_at": "2025-12-01T20:33:40Z"
   },
   {
+    "id": "5021778215",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 23,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/net-traffic/pulls/23",
+        "id": 3060815021,
+        "number": 23,
+        "head": {
+          "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+          "sha": "de104de709a7a4064f320279b6f775f9053fc7d3",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "69f9cf6688a01cbf3a81afda377fe7c8411dd9c1",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-12-01T20:33:36Z"
+  },
+  {
     "id": "6385610219",
     "type": "PushEvent",
     "actor": {
@@ -3751,6 +3797,52 @@
     "created_at": "2025-12-01T06:16:48Z"
   },
   {
+    "id": "5000972587",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 22,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/net-traffic/pulls/22",
+        "id": 3057853403,
+        "number": 22,
+        "head": {
+          "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+          "sha": "8d8ee889057c84080229695b4d88431d63965102",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "be98ba1aca26fa2535999d1084ac52381e47a943",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-12-01T06:16:47Z"
+  },
+  {
     "id": "5000954492",
     "type": "PullRequestEvent",
     "actor": {
@@ -3875,6 +3967,52 @@
     "created_at": "2025-12-01T05:59:48Z"
   },
   {
+    "id": "5000718084",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 21,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/net-traffic/pulls/21",
+        "id": 3057816528,
+        "number": 21,
+        "head": {
+          "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
+          "sha": "06c2770cd62ec2ac8b84f44187cdca3bb7030268",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "7446367ab1088698d718afa549e75af00346729d",
+          "repo": {
+            "id": 1104071420,
+            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
+            "name": "net-traffic"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-12-01T05:59:48Z"
+  },
+  {
     "id": "5000713467",
     "type": "PullRequestEvent",
     "actor": {
@@ -3946,86 +4084,8 @@
     },
     "public": true,
     "created_at": "2025-12-01T05:58:35Z"
-  },
-  {
-    "id": "6363665446",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28657442183,
-      "ref": "refs/heads/main",
-      "head": "7446367ab1088698d718afa549e75af00346729d",
-      "before": "1e8bfa3605bcf552cb261875d1d72ea7a2fffc63"
-    },
-    "public": true,
-    "created_at": "2025-12-01T05:26:16Z"
-  },
-  {
-    "id": "6362801464",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28656579062,
-      "ref": "refs/heads/main",
-      "head": "1e8bfa3605bcf552cb261875d1d72ea7a2fffc63",
-      "before": "9943c156fcc9986919a3703686fd9f83c9af2cc1"
-    },
-    "public": true,
-    "created_at": "2025-12-01T04:28:57Z"
-  },
-  {
-    "id": "6362665925",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28656443439,
-      "ref": "refs/heads/main",
-      "head": "9943c156fcc9986919a3703686fd9f83c9af2cc1",
-      "before": "385970a0cdd622f52c07db031d127d2147f860b4"
-    },
-    "public": true,
-    "created_at": "2025-12-01T04:19:13Z"
   }
 ],
-  "lastUpdated": "2025-12-02T20:07:02Z",
+  "lastUpdated": "2025-12-02T22:05:35Z",
   "rateLimitRemaining": "Enhanced with token"
 }
