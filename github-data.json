@@ -103,14 +103,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/net-traffic/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/net-traffic/deployments",
     "created_at": "2025-11-25T17:59:56Z",
-    "updated_at": "2025-12-03T00:12:18Z",
-    "pushed_at": "2025-12-03T00:12:14Z",
+    "updated_at": "2025-12-03T01:34:02Z",
+    "pushed_at": "2025-12-03T01:33:58Z",
     "git_url": "git://github.com/and3rn3t/net-traffic.git",
     "ssh_url": "git@github.com:and3rn3t/net-traffic.git",
     "clone_url": "https://github.com/and3rn3t/net-traffic.git",
     "svn_url": "https://github.com/and3rn3t/net-traffic",
     "homepage": null,
-    "size": 1243,
+    "size": 1190,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "TypeScript",
@@ -3076,14 +3076,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-12-02T22:05:39Z",
-    "pushed_at": "2025-12-03T00:04:53Z",
+    "updated_at": "2025-12-03T00:26:56Z",
+    "pushed_at": "2025-12-03T00:26:53Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1615,
+    "size": 1652,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3121,6 +3121,162 @@
   }
 ],
   "events": [
+  {
+    "id": "6422467806",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28716231831,
+      "ref": "refs/heads/main",
+      "head": "c80ff7a85c3c1d79ce37a833ee94cff34a619924",
+      "before": "a4524cc7a723c2f7d21e97bb2799bf7119c1a05a"
+    },
+    "public": true,
+    "created_at": "2025-12-03T01:33:58Z"
+  },
+  {
+    "id": "6422163415",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28715927207,
+      "ref": "refs/heads/main",
+      "head": "a4524cc7a723c2f7d21e97bb2799bf7119c1a05a",
+      "before": "e0cf8315299cfe312e44582b087d9f8074339a03"
+    },
+    "public": true,
+    "created_at": "2025-12-03T01:13:17Z"
+  },
+  {
+    "id": "6422110169",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28715873877,
+      "ref": "refs/heads/main",
+      "head": "e0cf8315299cfe312e44582b087d9f8074339a03",
+      "before": "6868c1ae18e0d4f16e8180ed926ab59acbea916c"
+    },
+    "public": true,
+    "created_at": "2025-12-03T01:09:46Z"
+  },
+  {
+    "id": "6421615466",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28715378719,
+      "ref": "refs/heads/main",
+      "head": "6868c1ae18e0d4f16e8180ed926ab59acbea916c",
+      "before": "1eac9bdad75a4e047146c06aecd0cfa6a1480632"
+    },
+    "public": true,
+    "created_at": "2025-12-03T00:36:37Z"
+  },
+  {
+    "id": "6421565394",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28715328671,
+      "ref": "refs/heads/main",
+      "head": "1eac9bdad75a4e047146c06aecd0cfa6a1480632",
+      "before": "ce48225d363924e64da3082581fb519395ce6715"
+    },
+    "public": true,
+    "created_at": "2025-12-03T00:33:08Z"
+  },
+  {
+    "id": "6421520126",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1104071420,
+      "name": "and3rn3t/net-traffic",
+      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
+    },
+    "payload": {
+      "repository_id": 1104071420,
+      "push_id": 28715283329,
+      "ref": "refs/heads/main",
+      "head": "ce48225d363924e64da3082581fb519395ce6715",
+      "before": "05386006f642610a77b94c11b94a649306c25a7c"
+    },
+    "public": true,
+    "created_at": "2025-12-03T00:30:08Z"
+  },
   {
     "id": "6421267768",
     "type": "PushEvent",
@@ -3763,248 +3919,8 @@
     },
     "public": true,
     "created_at": "2025-12-01T20:33:36Z"
-  },
-  {
-    "id": "6385610219",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28679386209,
-      "ref": "refs/heads/main",
-      "head": "02da094c19d680aaf3acd47648d21d8f465ed196",
-      "before": "69f9cf6688a01cbf3a81afda377fe7c8411dd9c1"
-    },
-    "public": true,
-    "created_at": "2025-12-01T20:33:37Z"
-  },
-  {
-    "id": "5021771949",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "action": "assigned",
-      "number": 23,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/net-traffic/pulls/23",
-        "id": 3060815021,
-        "number": 23,
-        "head": {
-          "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
-          "sha": "de104de709a7a4064f320279b6f775f9053fc7d3",
-          "repo": {
-            "id": 1104071420,
-            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
-            "name": "net-traffic"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "69f9cf6688a01cbf3a81afda377fe7c8411dd9c1",
-          "repo": {
-            "id": 1104071420,
-            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
-            "name": "net-traffic"
-          }
-        }
-      },
-      "assignee": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "assignees": [
-        {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        }
-      ]
-    },
-    "public": true,
-    "created_at": "2025-12-01T20:33:19Z"
-  },
-  {
-    "id": "5021771932",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "action": "opened",
-      "number": 23,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/net-traffic/pulls/23",
-        "id": 3060815021,
-        "number": 23,
-        "head": {
-          "ref": "claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
-          "sha": "de104de709a7a4064f320279b6f775f9053fc7d3",
-          "repo": {
-            "id": 1104071420,
-            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
-            "name": "net-traffic"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "69f9cf6688a01cbf3a81afda377fe7c8411dd9c1",
-          "repo": {
-            "id": 1104071420,
-            "url": "https://api.github.com/repos/and3rn3t/net-traffic",
-            "name": "net-traffic"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2025-12-01T20:33:19Z"
-  },
-  {
-    "id": "6364787723",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28658564183,
-      "ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
-      "head": "de104de709a7a4064f320279b6f775f9053fc7d3",
-      "before": "13895a7891c4d14026a5f148b36c545a5158b65d"
-    },
-    "public": true,
-    "created_at": "2025-12-01T06:31:45Z"
-  },
-  {
-    "id": "6364747089",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28658523535,
-      "ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
-      "head": "13895a7891c4d14026a5f148b36c545a5158b65d",
-      "before": "c89e912c07e1df6dc7ad67d988560144bfe036bd"
-    },
-    "public": true,
-    "created_at": "2025-12-01T06:29:36Z"
-  },
-  {
-    "id": "6364700880",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28658477293,
-      "ref": "refs/heads/claude/enhance-frontend-013CtoZEUh76eNroZimn4QmR",
-      "head": "c89e912c07e1df6dc7ad67d988560144bfe036bd",
-      "before": "d09d4f540b5728f50e86b58bdbd6b76feec4683c"
-    },
-    "public": true,
-    "created_at": "2025-12-01T06:27:02Z"
   }
 ],
-  "lastUpdated": "2025-12-03T00:23:42Z",
+  "lastUpdated": "2025-12-03T02:37:16Z",
   "rateLimitRemaining": "Enhanced with token"
 }
