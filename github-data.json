@@ -788,13 +788,13 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/hack/deployments",
     "created_at": "2025-10-21T23:02:15Z",
     "updated_at": "2025-10-26T19:49:53Z",
-    "pushed_at": "2025-12-11T22:37:33Z",
+    "pushed_at": "2025-12-12T23:01:10Z",
     "git_url": "git://github.com/and3rn3t/hack.git",
     "ssh_url": "git@github.com:and3rn3t/hack.git",
     "clone_url": "https://github.com/and3rn3t/hack.git",
     "svn_url": "https://github.com/and3rn3t/hack",
     "homepage": null,
-    "size": 864,
+    "size": 865,
     "stargazers_count": 1,
     "watchers_count": 1,
     "language": "Rust",
@@ -808,7 +808,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 7,
+    "open_issues_count": 8,
     "license": null,
     "allow_forking": true,
     "is_template": false,
@@ -818,7 +818,7 @@
     ],
     "visibility": "public",
     "forks": 0,
-    "open_issues": 7,
+    "open_issues": 8,
     "watchers": 1,
     "default_branch": "main",
     "permissions": {
@@ -1945,14 +1945,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/weather/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/weather/deployments",
     "created_at": "2025-07-18T00:33:35Z",
-    "updated_at": "2025-12-11T03:36:25Z",
-    "pushed_at": "2025-12-11T06:36:28Z",
+    "updated_at": "2025-12-12T22:52:23Z",
+    "pushed_at": "2025-12-12T22:52:20Z",
     "git_url": "git://github.com/and3rn3t/weather.git",
     "ssh_url": "git@github.com:and3rn3t/weather.git",
     "clone_url": "https://github.com/and3rn3t/weather.git",
     "svn_url": "https://github.com/and3rn3t/weather",
     "homepage": "",
-    "size": 4510,
+    "size": 4579,
     "stargazers_count": 1,
     "watchers_count": 1,
     "language": "TypeScript",
@@ -3076,14 +3076,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-12-12T20:06:48Z",
-    "pushed_at": "2025-12-12T20:06:45Z",
+    "updated_at": "2025-12-12T22:05:42Z",
+    "pushed_at": "2025-12-13T00:04:58Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1908,
+    "size": 1924,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3121,6 +3121,84 @@
   }
 ],
   "events": [
+  {
+    "id": "6691984654",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1021785420,
+      "name": "and3rn3t/weather",
+      "url": "https://api.github.com/repos/and3rn3t/weather"
+    },
+    "payload": {
+      "repository_id": 1021785420,
+      "push_id": 28985754843,
+      "ref": "refs/heads/main",
+      "head": "0fa3baff95351401f5357cf0ae07964102348d50",
+      "before": "8f345bb4ffcabdba6812c4f71d0ff4e879cbcc60"
+    },
+    "public": true,
+    "created_at": "2025-12-12T22:52:20Z"
+  },
+  {
+    "id": "6691912074",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1021785420,
+      "name": "and3rn3t/weather",
+      "url": "https://api.github.com/repos/and3rn3t/weather"
+    },
+    "payload": {
+      "repository_id": 1021785420,
+      "push_id": 28985682227,
+      "ref": "refs/heads/main",
+      "head": "8f345bb4ffcabdba6812c4f71d0ff4e879cbcc60",
+      "before": "41a3ec2115f1ee984c1453c10e26e08a883fed5f"
+    },
+    "public": true,
+    "created_at": "2025-12-12T22:47:16Z"
+  },
+  {
+    "id": "6691868433",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1021785420,
+      "name": "and3rn3t/weather",
+      "url": "https://api.github.com/repos/and3rn3t/weather"
+    },
+    "payload": {
+      "repository_id": 1021785420,
+      "push_id": 28985638409,
+      "ref": "refs/heads/main",
+      "head": "41a3ec2115f1ee984c1453c10e26e08a883fed5f",
+      "before": "45cde7e0793b30f51929c0a7c0553ea62274764c"
+    },
+    "public": true,
+    "created_at": "2025-12-12T22:44:17Z"
+  },
   {
     "id": "6636968337",
     "type": "PushEvent",
@@ -3822,86 +3900,8 @@
     },
     "public": true,
     "created_at": "2025-12-10T18:22:30Z"
-  },
-  {
-    "id": "6626507094",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28920214476,
-      "ref": "refs/heads/main",
-      "head": "c069435d72402fb815c4dbf73dbef8a64dddcf87",
-      "before": "4a9675be87d4d8554581c1bd6baddc7100fa4739"
-    },
-    "public": true,
-    "created_at": "2025-12-10T18:07:11Z"
-  },
-  {
-    "id": "6624381953",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28918103219,
-      "ref": "refs/heads/main",
-      "head": "4a9675be87d4d8554581c1bd6baddc7100fa4739",
-      "before": "3aeb57e19d99b451753b256b12c91397092729d3"
-    },
-    "public": true,
-    "created_at": "2025-12-10T16:43:15Z"
-  },
-  {
-    "id": "6624305470",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1104071420,
-      "name": "and3rn3t/net-traffic",
-      "url": "https://api.github.com/repos/and3rn3t/net-traffic"
-    },
-    "payload": {
-      "repository_id": 1104071420,
-      "push_id": 28917970949,
-      "ref": "refs/heads/main",
-      "head": "3aeb57e19d99b451753b256b12c91397092729d3",
-      "before": "0f76ed273fe12da410cf2877d0f7ce129849603e"
-    },
-    "public": true,
-    "created_at": "2025-12-10T16:38:20Z"
   }
 ],
-  "lastUpdated": "2025-12-12T22:05:38Z",
+  "lastUpdated": "2025-12-13T00:23:43Z",
   "rateLimitRemaining": "Enhanced with token"
 }
