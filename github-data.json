@@ -103,17 +103,17 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/realms/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/realms/deployments",
     "created_at": "2025-12-18T16:00:59Z",
-    "updated_at": "2025-12-18T16:01:04Z",
-    "pushed_at": "2025-12-18T16:01:00Z",
+    "updated_at": "2025-12-18T16:47:19Z",
+    "pushed_at": "2025-12-18T16:47:13Z",
     "git_url": "git://github.com/and3rn3t/realms.git",
     "ssh_url": "git@github.com:and3rn3t/realms.git",
     "clone_url": "https://github.com/and3rn3t/realms.git",
     "svn_url": "https://github.com/and3rn3t/realms",
     "homepage": null,
-    "size": 0,
+    "size": 44,
     "stargazers_count": 0,
     "watchers_count": 0,
-    "language": null,
+    "language": "Lua",
     "has_issues": true,
     "has_projects": true,
     "has_downloads": true,
@@ -124,7 +124,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 1,
+    "open_issues_count": 0,
     "license": null,
     "allow_forking": true,
     "is_template": false,
@@ -134,7 +134,7 @@
     ],
     "visibility": "public",
     "forks": 0,
-    "open_issues": 1,
+    "open_issues": 0,
     "watchers": 0,
     "default_branch": "main",
     "permissions": {
@@ -3186,14 +3186,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2025-12-18T14:07:12Z",
-    "pushed_at": "2025-12-18T14:07:08Z",
+    "updated_at": "2025-12-18T16:07:52Z",
+    "pushed_at": "2025-12-18T16:07:48Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 2136,
+    "size": 2153,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3231,6 +3231,228 @@
   }
 ],
   "events": [
+  {
+    "id": "6839966525",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "repository_id": 1119014933,
+      "push_id": 29133877540,
+      "ref": "refs/heads/main",
+      "head": "350cf7672477f024379c98c8c5545348ff89a23d",
+      "before": "3200751fa51a9121d4aff075b8ec49cedec57332"
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:47:14Z"
+  },
+  {
+    "id": "6839189120",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "ref": "claude/setup-project-research-8Jdhp",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/setup-project-research-8Jdhp",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:16:28Z"
+  },
+  {
+    "id": "5390793217",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "action": "merged",
+      "number": 2,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/realms/pulls/2",
+        "id": 3114353032,
+        "number": 2,
+        "head": {
+          "ref": "claude/setup-project-research-8Jdhp",
+          "sha": "8f9d299bb91dce7f1139de91ea0211b5add701c7",
+          "repo": {
+            "id": 1119014933,
+            "url": "https://api.github.com/repos/and3rn3t/realms",
+            "name": "realms"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "d32c8d074eb09cdd97c05411ffbde5d1d04cff6b",
+          "repo": {
+            "id": 1119014933,
+            "url": "https://api.github.com/repos/and3rn3t/realms",
+            "name": "realms"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:16:23Z"
+  },
+  {
+    "id": "6839187558",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "repository_id": 1119014933,
+      "push_id": 29133097755,
+      "ref": "refs/heads/main",
+      "head": "3200751fa51a9121d4aff075b8ec49cedec57332",
+      "before": "380df27312ee575c0c81185a6282dd24eaf05c5b"
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:16:24Z"
+  },
+  {
+    "id": "6839181821",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "repository_id": 1119014933,
+      "push_id": 29133091968,
+      "ref": "refs/heads/main",
+      "head": "380df27312ee575c0c81185a6282dd24eaf05c5b",
+      "before": "d32c8d074eb09cdd97c05411ffbde5d1d04cff6b"
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:16:11Z"
+  },
+  {
+    "id": "5390763617",
+    "type": "PullRequestEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "action": "opened",
+      "number": 2,
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/realms/pulls/2",
+        "id": 3114353032,
+        "number": 2,
+        "head": {
+          "ref": "claude/setup-project-research-8Jdhp",
+          "sha": "8f9d299bb91dce7f1139de91ea0211b5add701c7",
+          "repo": {
+            "id": 1119014933,
+            "url": "https://api.github.com/repos/and3rn3t/realms",
+            "name": "realms"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "d32c8d074eb09cdd97c05411ffbde5d1d04cff6b",
+          "repo": {
+            "id": 1119014933,
+            "url": "https://api.github.com/repos/and3rn3t/realms",
+            "name": "realms"
+          }
+        }
+      }
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:15:09Z"
+  },
+  {
+    "id": "6839140578",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1119014933,
+      "name": "and3rn3t/realms",
+      "url": "https://api.github.com/repos/and3rn3t/realms"
+    },
+    "payload": {
+      "ref": "claude/setup-project-research-8Jdhp",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/claude/setup-project-research-8Jdhp",
+      "master_branch": "main",
+      "description": null,
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2025-12-18T16:14:35Z"
+  },
   {
     "id": "6838777901",
     "type": "CreateEvent",
@@ -3869,190 +4091,8 @@
     },
     "public": true,
     "created_at": "2025-12-10T22:58:14Z"
-  },
-  {
-    "id": "6632453860",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28926167370,
-      "ref": "refs/heads/main",
-      "head": "3eb9807e3af5ffab1f740b5eaf6efde567fc18a3",
-      "before": "a4acbb5f20ca46c95a79f2b204807e53a971bdb3"
-    },
-    "public": true,
-    "created_at": "2025-12-10T22:45:18Z"
-  },
-  {
-    "id": "6629555813",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28923266812,
-      "ref": "refs/heads/main",
-      "head": "a4acbb5f20ca46c95a79f2b204807e53a971bdb3",
-      "before": "4b33e65e891d407a3e686dea60d44ad9aa3f386d"
-    },
-    "public": true,
-    "created_at": "2025-12-10T20:21:19Z"
-  },
-  {
-    "id": "6629344327",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28923054936,
-      "ref": "refs/heads/main",
-      "head": "4b33e65e891d407a3e686dea60d44ad9aa3f386d",
-      "before": "5719ffa2fbb5e15dd2b2bdf77b275d642df41918"
-    },
-    "public": true,
-    "created_at": "2025-12-10T20:11:39Z"
-  },
-  {
-    "id": "6629265499",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28922975979,
-      "ref": "refs/heads/main",
-      "head": "5719ffa2fbb5e15dd2b2bdf77b275d642df41918",
-      "before": "699958ac4a2b535e4f269781d750fa676a0e13e0"
-    },
-    "public": true,
-    "created_at": "2025-12-10T20:08:02Z"
-  },
-  {
-    "id": "6629110497",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28922821134,
-      "ref": "refs/heads/main",
-      "head": "699958ac4a2b535e4f269781d750fa676a0e13e0",
-      "before": "5c69b43afdeacdb2841443a2cbd6d0450fce9509"
-    },
-    "public": true,
-    "created_at": "2025-12-10T20:01:15Z"
-  },
-  {
-    "id": "6628644668",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28922354417,
-      "ref": "refs/heads/main",
-      "head": "5c69b43afdeacdb2841443a2cbd6d0450fce9509",
-      "before": "04abc492df73acd984ee75ea5b11adb450b514be"
-    },
-    "public": true,
-    "created_at": "2025-12-10T19:40:28Z"
-  },
-  {
-    "id": "6628435360",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 28922144968,
-      "ref": "refs/heads/main",
-      "head": "04abc492df73acd984ee75ea5b11adb450b514be",
-      "before": "6565631585fc07f526ab06e0eede643851806032"
-    },
-    "public": true,
-    "created_at": "2025-12-10T19:31:02Z"
   }
 ],
-  "lastUpdated": "2025-12-18T16:07:47Z",
+  "lastUpdated": "2025-12-18T18:09:05Z",
   "rateLimitRemaining": "Enhanced with token"
 }
