@@ -27,7 +27,7 @@
   "hireable": null,
   "bio": "Software engineer for Deere & Company, with a personal interest in data science and engineering.",
   "twitter_username": null,
-  "public_repos": 29,
+  "public_repos": 30,
   "public_gists": 0,
   "followers": 1,
   "following": 0,
@@ -35,6 +35,122 @@
   "updated_at": "2025-12-10T18:23:51Z"
 },
   "repositories": [
+  {
+    "id": 1134570300,
+    "node_id": "R_kgDOQ6ArPA",
+    "name": "family",
+    "full_name": "and3rn3t/family",
+    "private": false,
+    "owner": {
+      "login": "and3rn3t",
+      "id": 87380976,
+      "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "html_url": "https://github.com/and3rn3t",
+      "followers_url": "https://api.github.com/users/and3rn3t/followers",
+      "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+      "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+      "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+      "repos_url": "https://api.github.com/users/and3rn3t/repos",
+      "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/and3rn3t/family",
+    "description": null,
+    "fork": false,
+    "url": "https://api.github.com/repos/and3rn3t/family",
+    "forks_url": "https://api.github.com/repos/and3rn3t/family/forks",
+    "keys_url": "https://api.github.com/repos/and3rn3t/family/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/and3rn3t/family/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/and3rn3t/family/teams",
+    "hooks_url": "https://api.github.com/repos/and3rn3t/family/hooks",
+    "issue_events_url": "https://api.github.com/repos/and3rn3t/family/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/and3rn3t/family/events",
+    "assignees_url": "https://api.github.com/repos/and3rn3t/family/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/and3rn3t/family/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/and3rn3t/family/tags",
+    "blobs_url": "https://api.github.com/repos/and3rn3t/family/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/and3rn3t/family/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/and3rn3t/family/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/and3rn3t/family/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/and3rn3t/family/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/and3rn3t/family/languages",
+    "stargazers_url": "https://api.github.com/repos/and3rn3t/family/stargazers",
+    "contributors_url": "https://api.github.com/repos/and3rn3t/family/contributors",
+    "subscribers_url": "https://api.github.com/repos/and3rn3t/family/subscribers",
+    "subscription_url": "https://api.github.com/repos/and3rn3t/family/subscription",
+    "commits_url": "https://api.github.com/repos/and3rn3t/family/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/and3rn3t/family/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/and3rn3t/family/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/and3rn3t/family/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/and3rn3t/family/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/and3rn3t/family/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/and3rn3t/family/merges",
+    "archive_url": "https://api.github.com/repos/and3rn3t/family/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/and3rn3t/family/downloads",
+    "issues_url": "https://api.github.com/repos/and3rn3t/family/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/and3rn3t/family/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/and3rn3t/family/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/and3rn3t/family/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/and3rn3t/family/labels{/name}",
+    "releases_url": "https://api.github.com/repos/and3rn3t/family/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/and3rn3t/family/deployments",
+    "created_at": "2026-01-14T22:35:53Z",
+    "updated_at": "2026-01-15T00:04:48Z",
+    "pushed_at": "2026-01-15T00:04:44Z",
+    "git_url": "git://github.com/and3rn3t/family.git",
+    "ssh_url": "git@github.com:and3rn3t/family.git",
+    "clone_url": "https://github.com/and3rn3t/family.git",
+    "svn_url": "https://github.com/and3rn3t/family",
+    "homepage": null,
+    "size": 609,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "TypeScript",
+    "has_issues": true,
+    "has_projects": false,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 6,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "allow_forking": true,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "topics": [
+
+    ],
+    "visibility": "public",
+    "forks": 0,
+    "open_issues": 6,
+    "watchers": 0,
+    "default_branch": "main",
+    "permissions": {
+      "admin": true,
+      "maintain": true,
+      "push": true,
+      "triage": true,
+      "pull": true
+    }
+  },
   {
     "id": 1126996610,
     "node_id": "R_kgDOQyyagg",
@@ -1014,13 +1130,13 @@
     "deployments_url": "https://api.github.com/repos/and3rn3t/hack/deployments",
     "created_at": "2025-10-21T23:02:15Z",
     "updated_at": "2025-10-26T19:49:53Z",
-    "pushed_at": "2026-01-06T17:44:31Z",
+    "pushed_at": "2026-01-14T22:55:59Z",
     "git_url": "git://github.com/and3rn3t/hack.git",
     "ssh_url": "git@github.com:and3rn3t/hack.git",
     "clone_url": "https://github.com/and3rn3t/hack.git",
     "svn_url": "https://github.com/and3rn3t/hack",
     "homepage": null,
-    "size": 887,
+    "size": 888,
     "stargazers_count": 1,
     "watchers_count": 1,
     "language": "Rust",
@@ -1034,7 +1150,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 12,
+    "open_issues_count": 13,
     "license": null,
     "allow_forking": true,
     "is_template": false,
@@ -1044,7 +1160,7 @@
     ],
     "visibility": "public",
     "forks": 0,
-    "open_issues": 12,
+    "open_issues": 13,
     "watchers": 1,
     "default_branch": "main",
     "permissions": {
@@ -3302,14 +3418,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2026-01-14T20:05:45Z",
-    "pushed_at": "2026-01-14T20:05:42Z",
+    "updated_at": "2026-01-14T22:06:40Z",
+    "pushed_at": "2026-01-15T00:06:08Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 1778,
+    "size": 1795,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3347,6 +3463,210 @@
   }
 ],
   "events": [
+  {
+    "id": "7482165562",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29777321079,
+      "ref": "refs/heads/main",
+      "head": "3cabc1a56e5d1fc083e81ef1e0d7c383111ba3dd",
+      "before": "540aa8a86fa9d1e56664677906970fe29cbb0d27"
+    },
+    "public": true,
+    "created_at": "2026-01-15T00:04:45Z"
+  },
+  {
+    "id": "7481971494",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29777126437,
+      "ref": "refs/heads/main",
+      "head": "540aa8a86fa9d1e56664677906970fe29cbb0d27",
+      "before": "75a63cb83574eb260f932eaea2d478eb76bdefa3"
+    },
+    "public": true,
+    "created_at": "2026-01-14T23:54:59Z"
+  },
+  {
+    "id": "7481712514",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29776866657,
+      "ref": "refs/heads/main",
+      "head": "75a63cb83574eb260f932eaea2d478eb76bdefa3",
+      "before": "468d4aa79067666bef4875956c68c24f1949c995"
+    },
+    "public": true,
+    "created_at": "2026-01-14T23:41:22Z"
+  },
+  {
+    "id": "7481123473",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29776275926,
+      "ref": "refs/heads/main",
+      "head": "468d4aa79067666bef4875956c68c24f1949c995",
+      "before": "1eb7992a2af51b82edb414dcadd0c812c98ebc54"
+    },
+    "public": true,
+    "created_at": "2026-01-14T23:10:19Z"
+  },
+  {
+    "id": "7481109858",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29776262183,
+      "ref": "refs/heads/main",
+      "head": "1eb7992a2af51b82edb414dcadd0c812c98ebc54",
+      "before": "6e7aab154ef1259c81c7a8ef57f946a520152ab9"
+    },
+    "public": true,
+    "created_at": "2026-01-14T23:09:39Z"
+  },
+  {
+    "id": "7481015200",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29776167370,
+      "ref": "refs/heads/main",
+      "head": "6e7aab154ef1259c81c7a8ef57f946a520152ab9",
+      "before": "03501bbc83f1101f3c15e4c2b3d69f0862617c69"
+    },
+    "public": true,
+    "created_at": "2026-01-14T23:04:59Z"
+  },
+  {
+    "id": "7480873262",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+      "repository_id": 1134570300,
+      "push_id": 29776024903,
+      "ref": "refs/heads/main",
+      "head": "03501bbc83f1101f3c15e4c2b3d69f0862617c69",
+      "before": "eaf9120a8ca1094604c54033d552f0b485fff4ba"
+    },
+    "public": true,
+    "created_at": "2026-01-14T22:58:53Z"
+  },
+  {
+    "id": "5818686079",
+    "type": "PublicEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1134570300,
+      "name": "and3rn3t/family",
+      "url": "https://api.github.com/repos/and3rn3t/family"
+    },
+    "payload": {
+
+    },
+    "public": true,
+    "created_at": "2026-01-14T22:35:53Z"
+  },
   {
     "id": "5583984052",
     "type": "PublicEvent",
@@ -3955,178 +4275,8 @@
     },
     "public": true,
     "created_at": "2025-12-18T16:01:00Z"
-  },
-  {
-    "id": "6783935369",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "ref": "claude/cleanup-and-deploy-nRoB4",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/claude/cleanup-and-deploy-nRoB4",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-12-16T20:47:45Z"
-  },
-  {
-    "id": "6783933781",
-    "type": "PushEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "repository_id": 1021785420,
-      "push_id": 29077799644,
-      "ref": "refs/heads/main",
-      "head": "94d472523a0de1fb5649071b1c3806597451357b",
-      "before": "0fa3baff95351401f5357cf0ae07964102348d50"
-    },
-    "public": true,
-    "created_at": "2025-12-16T20:47:41Z"
-  },
-  {
-    "id": "5344797569",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "action": "merged",
-      "number": 87,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/weather/pulls/87",
-        "id": 3107675208,
-        "number": 87,
-        "head": {
-          "ref": "claude/cleanup-and-deploy-nRoB4",
-          "sha": "987f6bf60fcbca610f2bfeb4e3b828c6112c1568",
-          "repo": {
-            "id": 1021785420,
-            "url": "https://api.github.com/repos/and3rn3t/weather",
-            "name": "weather"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "0fa3baff95351401f5357cf0ae07964102348d50",
-          "repo": {
-            "id": 1021785420,
-            "url": "https://api.github.com/repos/and3rn3t/weather",
-            "name": "weather"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2025-12-16T20:47:40Z"
-  },
-  {
-    "id": "5344792942",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "action": "opened",
-      "number": 87,
-      "pull_request": {
-        "url": "https://api.github.com/repos/and3rn3t/weather/pulls/87",
-        "id": 3107675208,
-        "number": 87,
-        "head": {
-          "ref": "claude/cleanup-and-deploy-nRoB4",
-          "sha": "987f6bf60fcbca610f2bfeb4e3b828c6112c1568",
-          "repo": {
-            "id": 1021785420,
-            "url": "https://api.github.com/repos/and3rn3t/weather",
-            "name": "weather"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "0fa3baff95351401f5357cf0ae07964102348d50",
-          "repo": {
-            "id": 1021785420,
-            "url": "https://api.github.com/repos/and3rn3t/weather",
-            "name": "weather"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2025-12-16T20:47:25Z"
-  },
-  {
-    "id": "6783879585",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1021785420,
-      "name": "and3rn3t/weather",
-      "url": "https://api.github.com/repos/and3rn3t/weather"
-    },
-    "payload": {
-      "ref": "claude/cleanup-and-deploy-nRoB4",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/claude/cleanup-and-deploy-nRoB4",
-      "master_branch": "main",
-      "description": "Playing around with weather app features and Android app integration",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2025-12-16T20:45:13Z"
   }
 ],
-  "lastUpdated": "2026-01-14T22:06:36Z",
+  "lastUpdated": "2026-01-15T00:23:36Z",
   "rateLimitRemaining": "Enhanced with token"
 }
