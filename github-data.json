@@ -27,7 +27,7 @@
   "hireable": null,
   "bio": "Software engineer for Deere & Company, with a personal interest in data science and engineering.",
   "twitter_username": null,
-  "public_repos": 31,
+  "public_repos": 32,
   "public_gists": 0,
   "followers": 1,
   "following": 0,
@@ -35,6 +35,122 @@
   "updated_at": "2025-12-10T18:23:51Z"
 },
   "repositories": [
+  {
+    "id": 1147455263,
+    "node_id": "R_kgDORGTHHw",
+    "name": "r-data",
+    "full_name": "and3rn3t/r-data",
+    "private": false,
+    "owner": {
+      "login": "and3rn3t",
+      "id": 87380976,
+      "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "html_url": "https://github.com/and3rn3t",
+      "followers_url": "https://api.github.com/users/and3rn3t/followers",
+      "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+      "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+      "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+      "repos_url": "https://api.github.com/users/and3rn3t/repos",
+      "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/and3rn3t/r-data",
+    "description": null,
+    "fork": false,
+    "url": "https://api.github.com/repos/and3rn3t/r-data",
+    "forks_url": "https://api.github.com/repos/and3rn3t/r-data/forks",
+    "keys_url": "https://api.github.com/repos/and3rn3t/r-data/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/and3rn3t/r-data/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/and3rn3t/r-data/teams",
+    "hooks_url": "https://api.github.com/repos/and3rn3t/r-data/hooks",
+    "issue_events_url": "https://api.github.com/repos/and3rn3t/r-data/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/and3rn3t/r-data/events",
+    "assignees_url": "https://api.github.com/repos/and3rn3t/r-data/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/and3rn3t/r-data/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/and3rn3t/r-data/tags",
+    "blobs_url": "https://api.github.com/repos/and3rn3t/r-data/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/and3rn3t/r-data/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/and3rn3t/r-data/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/and3rn3t/r-data/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/and3rn3t/r-data/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/and3rn3t/r-data/languages",
+    "stargazers_url": "https://api.github.com/repos/and3rn3t/r-data/stargazers",
+    "contributors_url": "https://api.github.com/repos/and3rn3t/r-data/contributors",
+    "subscribers_url": "https://api.github.com/repos/and3rn3t/r-data/subscribers",
+    "subscription_url": "https://api.github.com/repos/and3rn3t/r-data/subscription",
+    "commits_url": "https://api.github.com/repos/and3rn3t/r-data/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/and3rn3t/r-data/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/and3rn3t/r-data/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/and3rn3t/r-data/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/and3rn3t/r-data/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/and3rn3t/r-data/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/and3rn3t/r-data/merges",
+    "archive_url": "https://api.github.com/repos/and3rn3t/r-data/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/and3rn3t/r-data/downloads",
+    "issues_url": "https://api.github.com/repos/and3rn3t/r-data/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/and3rn3t/r-data/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/and3rn3t/r-data/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/and3rn3t/r-data/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/and3rn3t/r-data/labels{/name}",
+    "releases_url": "https://api.github.com/repos/and3rn3t/r-data/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/and3rn3t/r-data/deployments",
+    "created_at": "2026-02-01T19:13:57Z",
+    "updated_at": "2026-02-01T20:02:19Z",
+    "pushed_at": "2026-02-01T20:02:15Z",
+    "git_url": "git://github.com/and3rn3t/r-data.git",
+    "ssh_url": "git@github.com:and3rn3t/r-data.git",
+    "clone_url": "https://github.com/and3rn3t/r-data.git",
+    "svn_url": "https://github.com/and3rn3t/r-data",
+    "homepage": null,
+    "size": 0,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": "R",
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 0,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "allow_forking": true,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "topics": [
+
+    ],
+    "visibility": "public",
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 0,
+    "default_branch": "main",
+    "permissions": {
+      "admin": true,
+      "maintain": true,
+      "push": true,
+      "triage": true,
+      "pull": true
+    }
+  },
   {
     "id": 1138523570,
     "node_id": "R_kgDOQ9x9sg",
@@ -3534,14 +3650,14 @@
     "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
     "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
     "created_at": "2021-07-29T15:36:40Z",
-    "updated_at": "2026-02-01T16:08:13Z",
-    "pushed_at": "2026-02-01T16:08:10Z",
+    "updated_at": "2026-02-01T18:10:56Z",
+    "pushed_at": "2026-02-01T18:10:52Z",
     "git_url": "git://github.com/and3rn3t/and3rn3t.git",
     "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
     "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
     "svn_url": "https://github.com/and3rn3t/and3rn3t",
     "homepage": "https://github.com/and3rn3t",
-    "size": 2026,
+    "size": 2062,
     "stargazers_count": 0,
     "watchers_count": 0,
     "language": "JavaScript",
@@ -3579,6 +3695,195 @@
   }
 ],
   "events": [
+  {
+    "id": "8030023467",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1147455263,
+      "name": "and3rn3t/r-data",
+      "url": "https://api.github.com/repos/and3rn3t/r-data"
+    },
+    "payload": {
+      "repository_id": 1147455263,
+      "push_id": 30324880887,
+      "ref": "refs/heads/main",
+      "head": "01e7dea57c076158d82b5886023ea6cfaf479425",
+      "before": "2f998f2ae2c999b3d05255672e2ccc6db18869fe"
+    },
+    "public": true,
+    "created_at": "2026-02-01T20:02:16Z"
+  },
+  {
+    "id": "8029417957",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1147455263,
+      "name": "and3rn3t/r-data",
+      "url": "https://api.github.com/repos/and3rn3t/r-data"
+    },
+    "payload": {
+      "ref": "copilot/setup-r-data-analysis-repo",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/copilot/setup-r-data-analysis-repo",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-02-01T19:22:24Z"
+  },
+  {
+    "id": "8029417115",
+    "type": "PushEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1147455263,
+      "name": "and3rn3t/r-data",
+      "url": "https://api.github.com/repos/and3rn3t/r-data"
+    },
+    "payload": {
+      "repository_id": 1147455263,
+      "push_id": 30324270779,
+      "ref": "refs/heads/main",
+      "head": "2f998f2ae2c999b3d05255672e2ccc6db18869fe",
+      "before": "db891f8e40fd7d006e48c5c956cd31df1c5a4f59"
+    },
+    "public": true,
+    "created_at": "2026-02-01T19:22:21Z"
+  },
+  {
+    "id": "6225146065",
+    "type": "PullRequestReviewEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1147455263,
+      "name": "and3rn3t/r-data",
+      "url": "https://api.github.com/repos/and3rn3t/r-data"
+    },
+    "payload": {
+      "review": {
+        "id": 3736516189,
+        "node_id": "PRR_kwDORGTHH87etrZd",
+        "user": {
+          "login": "and3rn3t",
+          "id": 87380976,
+          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/and3rn3t",
+          "html_url": "https://github.com/and3rn3t",
+          "followers_url": "https://api.github.com/users/and3rn3t/followers",
+          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+          "repos_url": "https://api.github.com/users/and3rn3t/repos",
+          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "body": null,
+        "commit_id": "5ee415c762d6943c64be8266df4f28c09247b4a2",
+        "submitted_at": "2026-02-01T19:22:03Z",
+        "state": "approved",
+        "html_url": "https://github.com/and3rn3t/r-data/pull/1#pullrequestreview-3736516189",
+        "pull_request_url": "https://api.github.com/repos/and3rn3t/r-data/pulls/1",
+        "_links": {
+          "html": {
+            "href": "https://github.com/and3rn3t/r-data/pull/1#pullrequestreview-3736516189"
+          },
+          "pull_request": {
+            "href": "https://api.github.com/repos/and3rn3t/r-data/pulls/1"
+          }
+        },
+        "updated_at": "2026-02-01T19:22:03Z"
+      },
+      "pull_request": {
+        "url": "https://api.github.com/repos/and3rn3t/r-data/pulls/1",
+        "id": 3233788225,
+        "number": 1,
+        "head": {
+          "ref": "copilot/setup-r-data-analysis-repo",
+          "sha": "5ee415c762d6943c64be8266df4f28c09247b4a2",
+          "repo": {
+            "id": 1147455263,
+            "url": "https://api.github.com/repos/and3rn3t/r-data",
+            "name": "r-data"
+          }
+        },
+        "base": {
+          "ref": "main",
+          "sha": "db891f8e40fd7d006e48c5c956cd31df1c5a4f59",
+          "repo": {
+            "id": 1147455263,
+            "url": "https://api.github.com/repos/and3rn3t/r-data",
+            "name": "r-data"
+          }
+        }
+      },
+      "action": "created"
+    },
+    "public": true,
+    "created_at": "2026-02-01T19:22:04Z"
+  },
+  {
+    "id": "8029290048",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 87380976,
+      "login": "and3rn3t",
+      "display_login": "and3rn3t",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/and3rn3t",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+    },
+    "repo": {
+      "id": 1147455263,
+      "name": "and3rn3t/r-data",
+      "url": "https://api.github.com/repos/and3rn3t/r-data"
+    },
+    "payload": {
+      "ref": "main",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/main",
+      "master_branch": "main",
+      "description": null,
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-02-01T19:13:58Z"
+  },
   {
     "id": "5939337293",
     "type": "PublicEvent",
@@ -4220,30 +4525,8 @@
     },
     "public": true,
     "created_at": "2026-01-14T22:35:53Z"
-  },
-  {
-    "id": "5583984052",
-    "type": "PublicEvent",
-    "actor": {
-      "id": 87380976,
-      "login": "and3rn3t",
-      "display_login": "and3rn3t",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/and3rn3t",
-      "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-    },
-    "repo": {
-      "id": 1126996610,
-      "name": "and3rn3t/sky",
-      "url": "https://api.github.com/repos/and3rn3t/sky"
-    },
-    "payload": {
-
-    },
-    "public": true,
-    "created_at": "2026-01-03T00:51:45Z"
   }
 ],
-  "lastUpdated": "2026-02-01T18:09:55Z",
+  "lastUpdated": "2026-02-01T20:07:12Z",
   "rateLimitRemaining": "Enhanced with token"
 }
