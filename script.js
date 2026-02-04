@@ -3077,62 +3077,6 @@ function getLevelPercentage(level) {
 // Initialize skills matrix
 document.addEventListener('DOMContentLoaded', loadSkillsMatrix);
 
-// Add project filter functionality
-function initProjectFilters() {
-    const projectsGrid = document.getElementById('projects-grid');
-    if (!projectsGrid) return;
-    
-    // Create filter buttons
-    const projectsSection = document.querySelector('#projects');
-    if (!projectsSection) return;
-    
-    const filterContainer = document.createElement('div');
-    filterContainer.className = 'project-filters';
-    filterContainer.innerHTML = `
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">All Projects</button>
-            <button class="filter-btn" data-filter="health">Health</button>
-            <button class="filter-btn" data-filter="iot">IoT</button>
-            <button class="filter-btn" data-filter="mobile">Mobile</button>
-            <button class="filter-btn" data-filter="web">Web</button>
-        </div>
-    `;
-    
-    // Insert before projects grid
-    projectsGrid.parentElement.insertBefore(filterContainer, projectsGrid);
-    
-    // Add filter functionality
-    const filterButtons = filterContainer.querySelectorAll('.filter-btn');
-    for (const btn of filterButtons) {
-        btn.addEventListener('click', function() {
-            // Update active button
-            for (const b of filterButtons) {
-                b.classList.remove('active');
-            }
-            this.classList.add('active');
-            
-            // Filter projects
-            const filter = this.dataset.filter;
-            const projectCards = projectsGrid.querySelectorAll('.project-card');
-            
-            for (const card of projectCards) {
-                if (filter === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const category = card.querySelector('.project-category');
-                    const categoryText = category?.textContent.toLowerCase() || '';
-                    
-                    if (categoryText.includes(filter)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            }
-        });
-    }
-}
-
 // Add back to top button
 function initBackToTop() {
     const backToTopBtn = document.createElement('button');
@@ -3159,32 +3103,8 @@ function initBackToTop() {
     });
 }
 
-// Initialize project filters when projects are loaded
-function initProjectFiltersWhenReady() {
-    const projectsGrid = document.getElementById('projects-grid');
-    if (!projectsGrid) return;
-    
-    // Use MutationObserver to detect when projects are loaded
-    const observer = new MutationObserver((mutations) => {
-        const hasProjects = projectsGrid.querySelectorAll('.project-card').length > 0;
-        if (hasProjects) {
-            initProjectFilters();
-            observer.disconnect();
-        }
-    });
-    
-    observer.observe(projectsGrid, { childList: true, subtree: true });
-    
-    // Fallback timeout in case observer doesn't work
-    setTimeout(() => {
-        observer.disconnect();
-        initProjectFilters();
-    }, 5000);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     initBackToTop();
-    initProjectFiltersWhenReady();
 });
 
 // Add visitor counter (privacy-friendly, localStorage based)
