@@ -2185,10 +2185,6 @@ async function loadAllGitHubData() {
     showGlobalLoadingProgress();
     
     try {
-        // Initialize search filter system early
-        await projectSearchFilter.loadProjectData().catch(error => {
-        });
-        
         // Load core data in parallel with smart coordination
         const results = await Promise.allSettled([
             loadGitHubProjects(),
