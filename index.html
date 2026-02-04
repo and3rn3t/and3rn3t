@@ -174,7 +174,7 @@
             "@id": "https://andernet.dev/#person"
           },
           "datePublished": "2023-01-01T00:00:00+00:00",
-          "dateModified": "2025-11-04T00:00:00+00:00",
+          "dateModified": "2026-02-04T00:00:00+00:00",
           "breadcrumb": {
             "@id": "https://andernet.dev/#breadcrumb"
           },
@@ -464,8 +464,8 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     
     <!-- Font Awesome with async loading -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
     
     <!-- reCAPTCHA v3 for enhanced form security -->
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
@@ -502,9 +502,28 @@
         .stagger-animation {
             animation-delay: var(--animation-delay, 0ms);
         }
+        /* Skip to content link for keyboard accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color, #667eea);
+            color: white;
+            padding: 8px 16px;
+            z-index: 10000;
+            transition: top 0.3s;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#home" class="skip-link">Skip to main content</a>
+
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
         <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
@@ -522,41 +541,17 @@
                     <a href="#projects" class="nav-link touch-target">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#skills" class="nav-link touch-target">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#github-stats" class="nav-link touch-target">GitHub Stats</a>
-                </li>
-                <li class="nav-item">
                     <a href="#about" class="nav-link touch-target">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#blog" class="nav-link touch-target">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#analytics" class="nav-link touch-target">Analytics</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link touch-target">Contact</a>
                 </li>
             </ul>
-            <div class="nav-toggle hamburger" id="mobile-menu">
+            <button class="nav-toggle hamburger" id="mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Floating Table of Contents -->
-    <nav class="floating-toc" id="floating-toc" aria-label="Table of Contents">
-        <button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc-content">
-            <i class="fas fa-list"></i>
-            <span class="sr-only">Toggle Table of Contents</span>
-        </button>
-        <div class="toc-content" id="toc-content">
-            <h3 class="toc-title">Quick Navigation</h3>
-            <ul class="toc-links"></ul>
+            </button>
         </div>
     </nav>
 
@@ -1066,350 +1061,6 @@
         </div>
     </section>
 
-    <!-- Advanced GitHub Analytics Dashboard -->
-    <section class="analytics-dashboard animate-on-scroll" id="analytics">
-        <div class="container">
-            <h2 class="section-title">Development Analytics</h2>
-            <p class="section-intro">
-                Comprehensive insights into development patterns, contribution trends, and coding activity across repositories.
-            </p>
-            
-            <!-- Analytics Navigation -->
-            <div class="analytics-nav">
-                <button class="analytics-tab active" data-tab="overview" aria-label="Overview analytics">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Overview</span>
-                </button>
-                <button class="analytics-tab" data-tab="contributions" aria-label="Contribution analytics">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Contributions</span>
-                </button>
-                <button class="analytics-tab" data-tab="languages" aria-label="Language analytics">
-                    <i class="fas fa-code"></i>
-                    <span>Languages</span>
-                </button>
-                <button class="analytics-tab" data-tab="activity" aria-label="Activity analytics">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Activity</span>
-                </button>
-            </div>
-            
-            <!-- Analytics Content Panels -->
-            <div class="analytics-content">
-                
-                <!-- Overview Panel -->
-                <div class="analytics-panel active" id="overview-panel">
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-chart-pie"></i> Repository Overview</h3>
-                            </div>
-                            <div class="card-content">
-                                <div class="overview-stats" id="overview-stats">
-                                    <div class="loading">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                        <p>Loading overview data...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-star"></i> Top Repositories</h3>
-                            </div>
-                            <div class="card-content">
-                                <div class="top-repos-chart" id="top-repos-chart">
-                                    <div class="loading">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                        <p>Loading repository data...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Contributions Panel -->
-                <div class="analytics-panel" id="contributions-panel">
-                    <div class="analytics-card full-width">
-                        <div class="card-header">
-                            <h3><i class="fas fa-calendar-alt"></i> Contribution Heatmap</h3>
-                            <div class="card-controls">
-                                <select id="heatmap-year" class="year-selector" title="Select year for contribution heatmap">
-                                    <option value="2025">2025</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2023">2023</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="heatmap-container" id="contribution-heatmap">
-                                <div class="loading">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                    <p>Loading contribution data...</p>
-                                </div>
-                            </div>
-                            <div class="heatmap-legend">
-                                <span class="legend-label">Less</span>
-                                <div class="legend-colors">
-                                    <div class="legend-color" data-level="0"></div>
-                                    <div class="legend-color" data-level="1"></div>
-                                    <div class="legend-color" data-level="2"></div>
-                                    <div class="legend-color" data-level="3"></div>
-                                    <div class="legend-color" data-level="4"></div>
-                                </div>
-                                <span class="legend-label">More</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-chart-bar"></i> Monthly Contributions</h3>
-                            </div>
-                            <div class="card-content">
-                                <canvas id="monthly-contributions-chart" class="chart-canvas"></canvas>
-                            </div>
-                        </div>
-                        
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-clock"></i> Contribution Stats</h3>
-                            </div>
-                            <div class="card-content">
-                                <div class="contribution-stats" id="contribution-stats">
-                                    <div class="loading">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                        <p>Calculating stats...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Languages Panel -->
-                <div class="analytics-panel" id="languages-panel">
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-chart-pie"></i> Language Distribution</h3>
-                            </div>
-                            <div class="card-content">
-                                <canvas id="language-pie-chart" class="chart-canvas"></canvas>
-                            </div>
-                        </div>
-                        
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-trending-up"></i> Language Trends</h3>
-                            </div>
-                            <div class="card-content">
-                                <canvas id="language-trends-chart" class="chart-canvas"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="analytics-card full-width">
-                        <div class="card-header">
-                            <h3><i class="fas fa-code"></i> Language Statistics</h3>
-                        </div>
-                        <div class="card-content">
-                            <div class="language-stats" id="language-stats">
-                                <div class="loading">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                    <p>Loading language data...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Activity Panel -->
-                <div class="analytics-panel" id="activity-panel">
-                    <div class="analytics-card full-width">
-                        <div class="card-header">
-                            <h3><i class="fas fa-chart-line"></i> Code Frequency</h3>
-                            <div class="card-controls">
-                                <select id="frequency-period" class="period-selector" title="Select time period for code frequency analysis">
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">Monthly</option>
-                                    <option value="quarterly">Quarterly</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <canvas id="code-frequency-chart" class="chart-canvas"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="analytics-grid">
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-git-alt"></i> Commit Patterns</h3>
-                            </div>
-                            <div class="card-content">
-                                <canvas id="commit-patterns-chart" class="chart-canvas"></canvas>
-                            </div>
-                        </div>
-                        
-                        <div class="analytics-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-clock"></i> Daily Activity</h3>
-                            </div>
-                            <div class="card-content">
-                                <div class="activity-heatmap" id="daily-activity">
-                                    <div class="loading">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                        <p>Loading activity data...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <!-- Analytics Export -->
-            <div class="analytics-export">
-                <button class="export-button" onclick="portfolioAnalytics.exportData()" 
-                        title="Export analytics data for this session">
-                    Export Session Data
-                </button>
-                <div class="cf-analytics-status" id="cf-analytics-status">
-                    <span class="status-indicator loading">●</span>
-                    <span class="status-text">Cloudflare Analytics Loading...</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Recent Activity Section -->
-    <section class="recent-activity animate-on-scroll" id="recent-activity">
-        <div class="container">
-            <h2 class="section-title">Recent GitHub Activity</h2>
-            <div class="activity-feed" id="activity-feed">
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading recent activity...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GitHub Gists Section -->
-    <section class="gists-section animate-on-scroll" id="gists">
-        <div class="container">
-            <h2 class="section-title">📝 Latest Code Snippets (Gists)</h2>
-            <div class="gists-grid" id="gists-grid">
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading gists...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GitHub Insights Section -->
-    <section class="github-insights animate-on-scroll" id="insights">
-        <div class="container">
-            <h2 class="section-title">📊 Developer Insights</h2>
-            <div class="insights-grid">
-                <div class="insight-card">
-                    <h3>Commit Activity</h3>
-                    <div id="commit-chart">
-                        <img data-src="https://github-readme-activity-graph.vercel.app/graph?username=and3rn3t&theme=react-dark&hide_border=true&area=true" 
-                             alt="Commit Activity Graph" 
-                             loading="lazy"
-                             width="800" 
-                             height="400"
-                             class="performance-chart loading-placeholder" />
-                    </div>
-                </div>
-                <div class="insight-card">
-                    <h3>Most Productive Time</h3>
-                    <div id="productive-time">
-                        <img data-src="https://github-readme-stats.vercel.app/api/wakatime?username=and3rn3t&theme=radical&hide_border=true" 
-                             alt="Coding Time Stats" 
-                             loading="lazy"
-                             width="400" 
-                             height="200"
-                             class="performance-chart loading-placeholder" />
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Metrics -->
-            <div class="additional-metrics">
-                <h3 class="subsection-title">🎯 Quick Stats</h3>
-                <div class="metrics-badges">
-                    <img data-src="https://img.shields.io/github/followers/and3rn3t?label=Followers&style=for-the-badge&logo=github" 
-                         alt="GitHub Followers" 
-                         loading="lazy"
-                         class="metric-badge" />
-                    <img data-src="https://img.shields.io/github/stars/and3rn3t?label=Total%20Stars&style=for-the-badge&logo=github" 
-                         alt="GitHub Stars" 
-                         loading="lazy"
-                         class="metric-badge" />
-                    <img data-src="https://img.shields.io/badge/Focus-Full%20Stack%20Development-blueviolet?style=for-the-badge" 
-                         alt="Focus Area" 
-                         loading="lazy"
-                         class="metric-badge" />
-                    <img data-src="https://img.shields.io/badge/Learning-React%20%7C%20Python%20%7C%20PostgreSQL-informational?style=for-the-badge" 
-                         alt="Currently Learning" 
-                         loading="lazy"
-                         class="metric-badge" />
-                    <img data-src="https://img.shields.io/badge/Open%20For-Collaboration-success?style=for-the-badge" 
-                         alt="Open for Collaboration" 
-                         loading="lazy"
-                         class="metric-badge" />
-                    <img data-src="https://img.shields.io/badge/Status-Active%20Developer-brightgreen?style=for-the-badge" 
-                         alt="Status" 
-                         loading="lazy"
-                         class="metric-badge" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog animate-on-scroll" id="blog">
-        <div class="container">
-            <h2 class="section-title">Latest Blog Posts</h2>
-            <p class="section-description">
-                Thoughts, tutorials, and insights on software development, web technologies, and my journey as a developer.
-            </p>
-            
-            <div class="blog-filters">
-                <button class="filter-btn active" data-category="all">All Posts</button>
-                <button class="filter-btn" data-category="tutorial">Tutorials</button>
-                <button class="filter-btn" data-category="general">General</button>
-                <button class="filter-btn" data-category="showcase">Showcases</button>
-            </div>
-            
-            <div class="blog-posts-grid" id="blog-posts">
-                <!-- Blog posts will be loaded dynamically -->
-                <div class="loading-posts">
-                    <div class="spinner"></div>
-                    <p>Loading posts...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GitHub Achievements Section -->
-    <section class="achievements animate-on-scroll" id="achievements">
-        <div class="container">
-            <h2 class="section-title">GitHub Profile Badges</h2>
-            <div class="badges-grid" id="badges-grid">
-                <!-- Badges will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section class="contact animate-on-scroll" id="contact">
         <div class="container">
@@ -1505,9 +1156,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Matthew Anderson. Built with passion and modern web technologies.</p>
+            <p>&copy; <span id="current-year">2026</span> Matthew Anderson. Built with passion and modern web technologies.</p>
         </div>
     </footer>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
     <!-- Theme Picker -->
     <div class="theme-picker-container">
@@ -1531,7 +1183,7 @@
                     </div>
                     <span class="theme-name">☀️ Light</span>
                     <span class="theme-description">Default bright theme</span>
-                </>
+                </button>
                 
                 <button class="theme-option" data-theme="dark" role="menuitem">
                     <div class="theme-preview dark-preview">
@@ -1540,33 +1192,6 @@
                     </div>
                     <span class="theme-name">🌙 Dark</span>
                     <span class="theme-description">Easy on the eyes</span>
-                </button>
-                
-                <button class="theme-option" data-theme="high-contrast" role="menuitem">
-                    <div class="theme-preview high-contrast-preview">
-                        <div class="preview-bar"></div>
-                        <div class="preview-content"></div>
-                    </div>
-                    <span class="theme-name">⚫ High Contrast</span>
-                    <span class="theme-description">Maximum readability</span>
-                </button>
-                
-                <button class="theme-option" data-theme="colorblind" role="menuitem">
-                    <div class="theme-preview colorblind-preview">
-                        <div class="preview-bar"></div>
-                        <div class="preview-content"></div>
-                    </div>
-                    <span class="theme-name">🎨 Colorblind-Friendly</span>
-                    <span class="theme-description">Accessible color palette</span>
-                </button>
-                
-                <button class="theme-option" data-theme="solarized" role="menuitem">
-                    <div class="theme-preview solarized-preview">
-                        <div class="preview-bar"></div>
-                        <div class="preview-content"></div>
-                    </div>
-                    <span class="theme-name">🌅 Solarized</span>
-                    <span class="theme-description">Developer favorite</span>
                 </button>
             </div>
             

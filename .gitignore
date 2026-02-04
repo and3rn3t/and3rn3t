@@ -50,3 +50,6 @@ coverage/
 
 # nyc test coverage
 .nyc_output
+
+# Testing files (debug/dev only)
+/testing/

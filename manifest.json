@@ -67,58 +67,18 @@
       "purpose": "maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/screenshots/desktop-home.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Portfolio Home"
-    },
-    {
-      "src": "/screenshots/mobile-projects.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Projects Gallery"
-    }
-  ],
   "shortcuts": [
     {
       "name": "View Projects",
       "short_name": "Projects",
       "description": "Browse my project portfolio",
-      "url": "/#projects",
-      "icons": [
-        {
-          "src": "/icons/shortcut-projects.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "GitHub Stats",
-      "short_name": "Stats",
-      "description": "View GitHub statistics",
-      "url": "/#github-stats",
-      "icons": [
-        {
-          "src": "/icons/shortcut-stats.png",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "/#projects"
     },
     {
       "name": "Contact",
       "short_name": "Contact",
       "description": "Get in touch",
-      "url": "/#contact",
-      "icons": [
-        {
-          "src": "/icons/shortcut-contact.png",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "/#contact"
     }
   ],
   "related_applications": [],
