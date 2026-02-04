@@ -125,7 +125,6 @@ async function initializeApp() {
                 appState.managers.analytics = analyticsManager;
                 
                 // Additional UI enhancements
-                uiManager.initResumeButton();
                 loadGitHubBadges();
                 
                 debug.log('[App] Phase 4: Analytics & performance initialized');

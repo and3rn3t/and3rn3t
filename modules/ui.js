@@ -485,24 +485,6 @@ export class UIManager {
         return levels[level] || 50;
     }
 
-    // ========================================
-    // Resume Download
-    // ========================================
-
-    initResumeButton() {
-        const contactSection = document.querySelector('#contact .contact-methods');
-        if (!contactSection) return;
-        
-        const existingBtn = contactSection.querySelector('.resume-download');
-        if (existingBtn) return;
-        
-        const resumeButton = document.createElement('button');
-        resumeButton.className = 'contact-method resume-download';
-        resumeButton.innerHTML = '<i class="fas fa-file-pdf"></i><span>Download Resume</span>';
-        resumeButton.addEventListener('click', () => window.print());
-        contactSection.appendChild(resumeButton);
-    }
-
     destroy() {
         this.isInitialized = false;
         this.activeTasks.clear();

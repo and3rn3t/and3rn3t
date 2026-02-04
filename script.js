@@ -3009,22 +3009,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Resume/CV Download functionality
-function generateResume() {
-    globalThis.print();
-}
 
-// Add resume download button to contact section
-document.addEventListener('DOMContentLoaded', function() {
-    const contactSection = document.querySelector('#contact .contact-methods');
-    if (contactSection) {
-        const resumeButton = document.createElement('button');
-        resumeButton.className = 'contact-method resume-download';
-        resumeButton.innerHTML = '<i class="fas fa-file-pdf"></i><span>Download Resume</span>';
-        resumeButton.addEventListener('click', generateResume);
-        contactSection.appendChild(resumeButton);
-    }
-});
 
 // Add skills matrix visualization
 async function loadSkillsMatrix() {
