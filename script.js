@@ -249,7 +249,7 @@ const githubAPI = new GitHubAPIManager();
 // API Status and debugging utilities
 function displayAPIStatus() {
     const status = githubAPI.getRateLimitStatus();
-    console.log({
+    debug.log('[API] Rate limit status:', {
         remaining: status.remaining,
         limit: status.limit,
         resetTime: new Date(status.reset).toLocaleTimeString(),
@@ -259,7 +259,7 @@ function displayAPIStatus() {
     
     // Add visual indicator if rate limit is low
     if (status.percentage < 20) {
-        console.warn('GitHub API rate limit is low!');
+        debug.warn('[API] GitHub API rate limit is low!');
     }
 }
 
@@ -707,7 +707,7 @@ class PerformanceOptimizer {
         globalThis.addEventListener('load', () => {
             setTimeout(() => {
                 const loadTime = performance.now() - this.performanceMetrics.loadStart;
-                console.log({
+                debug.log('[Performance] Metrics:', {
                     totalLoadTime: `${loadTime.toFixed(2)}ms`,
                     firstContentfulPaint: this.performanceMetrics.firstContentfulPaint ? 
                         `${this.performanceMetrics.firstContentfulPaint.toFixed(2)}ms` : 'Not measured',
@@ -732,7 +732,7 @@ class PerformanceOptimizer {
 
         const overallScore = Object.values(scores).reduce((sum, score) => sum + score, 0) / 3;
         
-        console.log({
+        debug.log('[Performance] Score:', {
             individual: scores,
             overall: `${(overallScore * 100).toFixed(1)}%`,
             grade: this.getPerformanceGrade(overallScore)
@@ -1779,12 +1779,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load all GitHub data with optimized coordination
     loadAllGitHubData().catch(error => {
-        console.error('Failed to load GitHub data, showing demo projects:', error);
+        debug.error('[GitHub] Failed to load data, showing demo projects:', error);
         // Fallback: show demo projects if GitHub data fails to load
         setTimeout(() => {
             const projectsGrid = document.getElementById('projects-grid');
             if (projectsGrid && (!projectsGrid.children.length || projectsGrid.children.length === 1)) {
-                console.log('Loading demo projects as fallback');
+                debug.log('[GitHub] Loading demo projects as fallback');
                 showDemoProjects(projectsGrid);
             }
         }, 2000);
@@ -1828,7 +1828,7 @@ async function loadGitHubProjects() {
             const projectsDataResponse = await fetch('projects-data.json');
             projectsData = await projectsDataResponse.json();
         } catch (error) {
-            console.warn('Could not load projects-data.json');
+            debug.warn('[GitHub] Could not load projects-data.json');
         }
         
         // Get repositories using the optimized API manager
@@ -2223,7 +2223,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const hasContent = projectsGrid.children.length > 0 && 
                             !projectsGrid.querySelector('.loading');
             if (!hasContent) {
-                console.log('Projects grid empty, loading demo projects immediately');
+                debug.log('[GitHub] Projects grid empty, loading demo projects immediately');
                 showDemoProjects(projectsGrid);
             }
         }
@@ -2684,7 +2684,7 @@ function initThemeManager() {
     try {
         themeManager = new ThemeManager();
     } catch (error) {
-        console.error('Failed to initialize theme manager:', error);
+        debug.error('[Theme] Failed to initialize theme manager:', error);
     }
 }
 
@@ -2836,7 +2836,8 @@ class PerformanceBudget {
                 overage: value - budget,
                 timestamp: Date.now()
             });
-            console.warn({
+            debug.warn('[Performance] Budget exceeded:', {
+                metric,
                 actual: value,
                 budget: budget,
                 overage: `+${(value - budget).toFixed(2)}${metric.includes('Time') || metric.includes('Paint') ? 'ms' : ''}`
@@ -3860,7 +3861,7 @@ class MobileOptimizationSystem {
         if ('performance' in globalThis) {
             const navigation = performance.getEntriesByType('navigation')[0];
             if (navigation) {
-                console.log({
+                debug.log('[Mobile] Performance metrics:', {
                     'DOM Content Loaded': navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
                     'Load Complete': navigation.loadEventEnd - navigation.loadEventStart,
                     'First Paint': performance.getEntriesByName('first-paint')[0]?.startTime || 'Not available'
@@ -4844,7 +4845,7 @@ if ('serviceWorker' in navigator) {
                 scope: '/'
             });
             
-            console.log('[PWA] Service Worker registered successfully:', registration.scope);
+            debug.log('[PWA] Service Worker registered successfully:', registration.scope);
             
             // Handle updates
             registration.addEventListener('updatefound', () => {
@@ -4864,19 +4865,19 @@ if ('serviceWorker' in navigator) {
             }, 60 * 60 * 1000); // Check every hour
             
         } catch (error) {
-            console.error('[PWA] Service Worker registration failed:', error);
+            debug.error('[PWA] Service Worker registration failed:', error);
         }
     });
     
     // Handle controller change (new service worker activated)
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('[PWA] New service worker activated');
+        debug.log('[PWA] New service worker activated');
     });
     
     // Listen for messages from service worker
     navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data && event.data.type === 'CACHE_UPDATED') {
-            console.log('[PWA] Cache updated:', event.data.url);
+            debug.log('[PWA] Cache updated:', event.data.url);
         }
     });
 }
@@ -4944,7 +4945,7 @@ class TouchGestureManager {
         this.setupPullToRefresh();
         this.ensureMinimumTouchTargets();
         
-        console.log('[Touch] Gesture manager initialized');
+        debug.log('[Touch] Gesture manager initialized');
     }
     
     setupSwipeNavigation() {
@@ -5166,7 +5167,7 @@ class TouchGestureManager {
             // Show success message
             this.showToast('Content refreshed!');
         } catch (error) {
-            console.error('[Touch] Refresh failed:', error);
+            debug.error('[Touch] Refresh failed:', error);
             this.showToast('Refresh failed. Please try again.');
         }
     }
@@ -5241,7 +5242,7 @@ class TouchGestureManager {
             });
         });
         
-        console.log('[Touch] Minimum touch target sizes enforced');
+        debug.log('[Touch] Minimum touch target sizes enforced');
     }
 }
 
@@ -5307,7 +5308,7 @@ class MobilePerformanceOptimizer {
     }
     
     init() {
-        console.log('[Performance] Initializing mobile optimizations...');
+        debug.log('[Performance] Initializing mobile optimizations...');
         
         this.setupLazyLoading();
         this.optimizeAnimations();
@@ -5326,7 +5327,7 @@ class MobilePerformanceOptimizer {
             }, 250);
         }, { passive: true });
         
-        console.log('[Performance] Mobile optimizations initialized');
+        debug.log('[Performance] Mobile optimizations initialized');
     }
     
     setupLazyLoading() {
@@ -5476,7 +5477,7 @@ class MobilePerformanceOptimizer {
     }
     
     enableVirtualScrolling(container, items) {
-        console.log('[Performance] Enabling virtual scrolling for', items.length, 'items');
+        debug.log('[Performance] Enabling virtual scrolling for', items.length, 'items');
         
         const itemHeight = 400; // Approximate project card height
         const bufferSize = 3; // Render 3 items above and below viewport
@@ -5548,7 +5549,7 @@ class MobilePerformanceOptimizer {
             }
         });
         
-        console.log('[Performance] Image optimization applied');
+        debug.log('[Performance] Image optimization applied');
     }
     
     deferNonCriticalCSS() {
@@ -5580,7 +5581,7 @@ class MobilePerformanceOptimizer {
                 this.performanceObserver = new PerformanceObserver((list) => {
                     for (const entry of list.getEntries()) {
                         if (entry.duration > 50) {
-                            console.warn('[Performance] Long task detected:', entry.duration.toFixed(2), 'ms');
+                            debug.warn('[Performance] Long task detected:', entry.duration.toFixed(2), 'ms');
                         }
                     }
                 });
@@ -5600,7 +5601,7 @@ class MobilePerformanceOptimizer {
                     const connectTime = perfData.responseEnd - perfData.requestStart;
                     const renderTime = perfData.domComplete - perfData.domLoading;
                     
-                    console.log('[Performance] Page Load Metrics:', {
+                    debug.log('[Performance] Page Load Metrics:', {
                         pageLoadTime: `${pageLoadTime}ms`,
                         connectTime: `${connectTime}ms`,
                         renderTime: `${renderTime}ms`
@@ -5676,7 +5677,7 @@ class EnhancedAnalytics {
     }
     
     init() {
-        console.log('[Analytics] Enhanced analytics system initializing...');
+        debug.log('[Analytics] Enhanced analytics system initializing...');
         
         this.setupPageViewTracking();
         this.setupUserBehaviorTracking();
@@ -5689,8 +5690,8 @@ class EnhancedAnalytics {
         // Track initial page view
         this.trackPageView(window.location.pathname);
         
-        console.log('[Analytics] Enhanced analytics initialized');
-        console.log('[Analytics] Session ID:', this.sessionId);
+        debug.log('[Analytics] Enhanced analytics initialized');
+        debug.log('[Analytics] Session ID:', this.sessionId);
     }
     
     generateSessionId() {
@@ -5749,7 +5750,7 @@ class EnhancedAnalytics {
             });
         }
         
-        console.log('[Analytics] Page view tracked:', path);
+        debug.log('[Analytics] Page view tracked:', path);
         this.saveSessionData();
     }
     
@@ -5865,7 +5866,7 @@ class EnhancedAnalytics {
             timestamp: Date.now()
         });
         
-        console.log('[Analytics] Conversion tracked:', goalId, goal.name);
+        debug.log('[Analytics] Conversion tracked:', goalId, goal.name);
         
         if (globalThis.portfolioAnalytics) {
             globalThis.portfolioAnalytics.trackEvent('conversion', {
@@ -6031,7 +6032,7 @@ class EnhancedAnalytics {
         
         this.events.push(sessionSummary);
         
-        console.log('[Analytics] Session ended:', {
+        debug.log('[Analytics] Session ended:', {
             duration: `${(sessionDuration / 1000).toFixed(1)}s`,
             pageViews: this.pageViews,
             events: this.events.length,
@@ -6054,7 +6055,7 @@ class EnhancedAnalytics {
             
             localStorage.setItem('analytics_session', JSON.stringify(data));
         } catch (error) {
-            console.warn('[Analytics] Failed to save session data:', error);
+            debug.warn('[Analytics] Failed to save session data:', error);
         }
     }
     
@@ -6074,13 +6075,13 @@ class EnhancedAnalytics {
                     this.userJourney = parsed.userJourney || [];
                     this.maxScrollDepth = parsed.maxScrollDepth || 0;
                     
-                    console.log('[Analytics] Session restored:', this.sessionId);
+                    debug.log('[Analytics] Session restored:', this.sessionId);
                 } else {
                     localStorage.removeItem('analytics_session');
                 }
             }
         } catch (error) {
-            console.warn('[Analytics] Failed to load session data:', error);
+            debug.warn('[Analytics] Failed to load session data:', error);
         }
     }
     
@@ -6145,7 +6146,7 @@ class PerformanceMonitor {
     }
     
     init() {
-        console.log('[Performance] Monitoring system initializing...');
+        debug.log('[Performance] Monitoring system initializing...');
         
         this.trackWebVitals();
         this.trackNavigationTiming();
@@ -6154,7 +6155,7 @@ class PerformanceMonitor {
         this.trackMemoryUsage();
         this.setupPerformanceObserver();
         
-        console.log('[Performance] Monitoring system initialized');
+        debug.log('[Performance] Monitoring system initialized');
     }
     
     trackWebVitals() {
@@ -6184,14 +6185,14 @@ class PerformanceMonitor {
                 this.metrics.webVitals.lcp = lcp;
                 
                 const rating = this.getRating('lcp', lcp);
-                console.log(`[Performance] LCP: ${lcp.toFixed(0)}ms (${rating})`);
+                debug.log(`[Performance] LCP: ${lcp.toFixed(0)}ms (${rating})`);
                 
                 this.reportMetric('lcp', lcp, rating);
             });
             
             observer.observe({ type: 'largest-contentful-paint', buffered: true });
         } catch (error) {
-            console.warn('[Performance] LCP not supported');
+            debug.warn('[Performance] LCP not supported');
         }
     }
     
@@ -6204,7 +6205,7 @@ class PerformanceMonitor {
                     this.metrics.webVitals.fid = fid;
                     
                     const rating = this.getRating('fid', fid);
-                    console.log(`[Performance] FID: ${fid.toFixed(0)}ms (${rating})`);
+                    debug.log(`[Performance] FID: ${fid.toFixed(0)}ms (${rating})`);
                     
                     this.reportMetric('fid', fid, rating);
                 });
@@ -6212,7 +6213,7 @@ class PerformanceMonitor {
             
             observer.observe({ type: 'first-input', buffered: true });
         } catch (error) {
-            console.warn('[Performance] FID not supported');
+            debug.warn('[Performance] FID not supported');
         }
     }
     
@@ -6232,14 +6233,14 @@ class PerformanceMonitor {
                 this.metrics.webVitals.cls = clsValue;
                 
                 const rating = this.getRating('cls', clsValue);
-                console.log(`[Performance] CLS: ${clsValue.toFixed(3)} (${rating})`);
+                debug.log(`[Performance] CLS: ${clsValue.toFixed(3)} (${rating})`);
                 
                 this.reportMetric('cls', clsValue, rating);
             });
             
             observer.observe({ type: 'layout-shift', buffered: true });
         } catch (error) {
-            console.warn('[Performance] CLS not supported');
+            debug.warn('[Performance] CLS not supported');
         }
     }
     
@@ -6253,7 +6254,7 @@ class PerformanceMonitor {
                         this.metrics.webVitals.fcp = fcp;
                         
                         const rating = this.getRating('fcp', fcp);
-                        console.log(`[Performance] FCP: ${fcp.toFixed(0)}ms (${rating})`);
+                        debug.log(`[Performance] FCP: ${fcp.toFixed(0)}ms (${rating})`);
                         
                         this.reportMetric('fcp', fcp, rating);
                     }
@@ -6262,7 +6263,7 @@ class PerformanceMonitor {
             
             observer.observe({ type: 'paint', buffered: true });
         } catch (error) {
-            console.warn('[Performance] FCP not supported');
+            debug.warn('[Performance] FCP not supported');
         }
     }
     
@@ -6274,7 +6275,7 @@ class PerformanceMonitor {
                 this.metrics.webVitals.ttfb = ttfb;
                 
                 const rating = this.getRating('ttfb', ttfb);
-                console.log(`[Performance] TTFB: ${ttfb.toFixed(0)}ms (${rating})`);
+                debug.log(`[Performance] TTFB: ${ttfb.toFixed(0)}ms (${rating})`);
                 
                 this.reportMetric('ttfb', ttfb, rating);
             }
@@ -6300,7 +6301,7 @@ class PerformanceMonitor {
                 totalLoadTime: navTiming.loadEventEnd - navTiming.fetchStart
             };
             
-            console.log('[Performance] Navigation Timing:', {
+            debug.log('[Performance] Navigation Timing:', {
                 DNS: `${this.metrics.navigation.dnsLookup.toFixed(0)}ms`,
                 TCP: `${this.metrics.navigation.tcpConnection.toFixed(0)}ms`,
                 TTFB: `${this.metrics.navigation.timeToFirstByte.toFixed(0)}ms`,
@@ -6326,7 +6327,7 @@ class PerformanceMonitor {
             
             // Analyze resources
             const analysis = this.analyzeResources();
-            console.log('[Performance] Resource Analysis:', analysis);
+            debug.log('[Performance] Resource Analysis:', analysis);
         };
         
         window.addEventListener('load', () => {
@@ -6382,7 +6383,7 @@ class PerformanceMonitor {
                         timestamp: Date.now()
                     });
                     
-                    console.warn(`[Performance] Long task detected: ${entry.duration.toFixed(0)}ms`);
+                    debug.warn(`[Performance] Long task detected: ${entry.duration.toFixed(0)}ms`);
                     
                     // Report long task
                     if (globalThis.enhancedAnalytics) {
@@ -6396,7 +6397,7 @@ class PerformanceMonitor {
             
             observer.observe({ type: 'longtask', buffered: true });
         } catch (error) {
-            console.warn('[Performance] Long task observer not supported');
+            debug.warn('[Performance] Long task observer not supported');
         }
     }
     
@@ -6421,7 +6422,7 @@ class PerformanceMonitor {
             // Warn if memory usage is high
             const usagePercent = (memory.used / memory.limit) * 100;
             if (usagePercent > 90) {
-                console.warn(`[Performance] High memory usage: ${usagePercent.toFixed(1)}%`);
+                debug.warn(`[Performance] High memory usage: ${usagePercent.toFixed(1)}%`);
             }
         };
         
@@ -6436,14 +6437,14 @@ class PerformanceMonitor {
                 for (const entry of list.getEntries()) {
                     // Handle different entry types
                     if (entry.entryType === 'measure') {
-                        console.log(`[Performance] Custom measure: ${entry.name} = ${entry.duration.toFixed(2)}ms`);
+                        debug.log(`[Performance] Custom measure: ${entry.name} = ${entry.duration.toFixed(2)}ms`);
                     }
                 }
             });
             
             observer.observe({ entryTypes: ['measure', 'mark'] });
         } catch (error) {
-            console.warn('[Performance] Performance observer setup failed');
+            debug.warn('[Performance] Performance observer setup failed');
         }
     }
     
@@ -6511,7 +6512,7 @@ class PerformanceMonitor {
             score: this.calculatePerformanceScore()
         };
         
-        console.log('[Performance] Report generated:', report);
+        debug.log('[Performance] Report generated:', report);
         return report;
     }
     
@@ -6560,14 +6561,14 @@ class ErrorTracker {
     }
     
     init() {
-        console.log('[ErrorTracker] Initializing error tracking...');
+        debug.log('[ErrorTracker] Initializing error tracking...');
         
         this.setupGlobalErrorHandler();
         this.setupUnhandledRejectionHandler();
         this.setupResourceErrorHandler();
         this.setupConsoleErrorTracking();
         
-        console.log('[ErrorTracker] Error tracking initialized');
+        debug.log('[ErrorTracker] Error tracking initialized');
     }
     
     setupGlobalErrorHandler() {
@@ -6754,7 +6755,7 @@ class ErrorTracker {
             
             localStorage.setItem('error_log', JSON.stringify(errorLog));
         } catch (error) {
-            console.warn('[ErrorTracker] Failed to save error log:', error);
+            debug.warn('[ErrorTracker] Failed to save error log:', error);
         }
     }
     
@@ -6784,7 +6785,7 @@ class ErrorTracker {
         this.errorCounts.clear();
         this.reportedErrors.clear();
         localStorage.removeItem('error_log');
-        console.log('[ErrorTracker] Error log cleared');
+        debug.log('[ErrorTracker] Error log cleared');
     }
     
     exportErrors() {
@@ -6840,7 +6841,7 @@ function showInstallPromotion() {
 // Install PWA
 globalThis.installPWA = async function() {
     if (!deferredPrompt) {
-        console.log('[PWA] Install prompt not available');
+        debug.log('[PWA] Install prompt not available');
         return;
     }
     
@@ -6849,7 +6850,7 @@ globalThis.installPWA = async function() {
     
     // Wait for the user's response
     const { outcome } = await deferredPrompt.userChoice;
-    console.log(`[PWA] User response to install prompt: ${outcome}`);
+    debug.log(`[PWA] User response to install prompt: ${outcome}`);
     
     // Clear the deferred prompt
     deferredPrompt = null;
@@ -6863,7 +6864,7 @@ globalThis.installPWA = async function() {
 
 // Track app install
 window.addEventListener('appinstalled', () => {
-    console.log('[PWA] App installed successfully');
+    debug.log('[PWA] App installed successfully');
     
     // Track with analytics
     if (globalThis.portfolioAnalytics) {
@@ -6889,7 +6890,7 @@ function isPWA() {
 
 // Track PWA usage
 if (isPWA()) {
-    console.log('[PWA] Running as installed app');
+    debug.log('[PWA] Running as installed app');
     
     if (globalThis.portfolioAnalytics) {
         globalThis.portfolioAnalytics.trackEvent('pwa_launch', {

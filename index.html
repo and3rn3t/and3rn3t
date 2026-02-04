@@ -215,7 +215,10 @@
     
     <!-- Critical Resource Preloads -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
+    <link rel="modulepreload" href="main.js">
+    <link rel="modulepreload" href="modules/debug.js">
+    <link rel="modulepreload" href="modules/theme.js">
+    <link rel="modulepreload" href="modules/github-api.js">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     
     <!-- Cloudflare Web Analytics with Error Handling -->
@@ -299,21 +302,21 @@
             position: fixed; 
             top: 0; 
             width: 100%; 
+            height: 70px;
             background: rgba(255,255,255,0.95); 
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            z-index: 1000; 
-            padding: 1rem 0;
+            z-index: 1000;
         }
         .hero,
         section.hero,
         #home.hero { 
-            height: 100vh !important; 
-            max-height: 100vh !important;
+            min-height: 100vh !important;
+            height: auto !important; 
             display: flex; 
             align-items: center; 
-            padding-top: 80px;
-            padding-bottom: 0 !important;
+            padding-top: 100px !important;
+            padding-bottom: 40px !important;
             margin-bottom: 0 !important;
             background: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
             background-image: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
@@ -321,6 +324,7 @@
             z-index: 1;
             color: white !important;
             overflow: hidden !important;
+            box-sizing: border-box !important;
         }
         .hero-title, .hero-subtitle, .hero-description {
             color: white !important;
@@ -1052,16 +1056,9 @@
     <!-- Chart.js for data visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     
-    <!-- Main application script with async loading -->
-    <script src="script.js" async></script>
-    
-    <!-- Service Worker registration (for future PWA implementation) -->
-    <script>
-        if ('serviceWorker' in navigator && location.protocol === 'https:') {
-            window.addEventListener('load', () => {
-                // Will be implemented in PWA phase
-            });
-        }
-    </script>
+    <!-- Main application script (ES6 modules) -->
+    <script type="module" src="main.js"></script>
+    <!-- Fallback for older browsers -->
+    <script nomodule src="script.js" async></script>
 </body>
 </html>
