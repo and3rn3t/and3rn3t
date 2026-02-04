@@ -2192,10 +2192,7 @@ async function loadAllGitHubData() {
         // Load core data in parallel with smart coordination
         const results = await Promise.allSettled([
             loadGitHubProjects(),
-            loadGitHubStats(),
-            loadGitHubActivity(),
-            loadPinnedRepos(),
-            loadTopicsCloud()
+            loadGitHubStats()
         ]);
         
         // Check results and log any failures
@@ -2429,109 +2426,6 @@ function loadLanguageStats(repos, languageStats = null) {
 }
 
 // Load recent GitHub activity
-async function loadGitHubActivity() {
-    const activityFeed = document.getElementById('activity-feed');
-    
-    try {
-        // Fetch recent events using optimized API
-        const events = await githubAPI.getUserEvents(10);
-        
-        if (events.length === 0) {
-            activityFeed.innerHTML = '<p class="no-activity">No recent activity to display.</p>';
-            return;
-        }
-        
-        // Display activity items
-        const activityItems = events.slice(0, 8).map(event => {
-            const date = new Date(event.created_at);
-            const timeAgo = getTimeAgo(date);
-            
-            let action = '';
-            let details = '';
-            let icon;
-            
-            switch(event.type) {
-                case 'PushEvent': {
-                    icon = 'fa-code-commit';
-                    const commits = event.payload.commits?.length || 0;
-                    action = `Pushed ${commits} commit${commits === 1 ? '' : 's'} to`;
-                    details = event.repo.name;
-                    break;
-                }
-                case 'CreateEvent':
-                    icon = 'fa-plus-circle';
-                    action = `Created ${event.payload.ref_type}`;
-                    details = event.repo.name;
-                    break;
-                case 'WatchEvent':
-                    icon = 'fa-star';
-                    action = 'Starred';
-                    details = event.repo.name;
-                    break;
-                case 'ForkEvent':
-                    icon = 'fa-code-branch';
-                    action = 'Forked';
-                    details = event.repo.name;
-                    break;
-                case 'IssuesEvent':
-                    icon = 'fa-circle-dot';
-                    action = `${event.payload.action} issue in`;
-                    details = event.repo.name;
-                    break;
-                case 'PullRequestEvent':
-                    icon = 'fa-code-pull-request';
-                    action = `${event.payload.action} pull request in`;
-                    details = event.repo.name;
-                    break;
-                default:
-                    icon = 'fa-circle';
-                    action = event.type.replace('Event', '');
-                    details = event.repo.name;
-            }
-            
-            return `
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        <i class="fas ${icon}"></i>
-                    </div>
-                    <div class="activity-content">
-                        <p class="activity-action">${action} <strong>${details}</strong></p>
-                        <span class="activity-time">${timeAgo}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        
-        activityFeed.innerHTML = `<div class="activity-list">${activityItems}</div>`;
-        
-    } catch (error) {
-        activityFeed.innerHTML = '<p class="error-message">Unable to load recent activity.</p>';
-    }
-}
-
-// Helper function to calculate time ago
-function getTimeAgo(date) {
-    const seconds = Math.floor((Date.now() - date) / 1000);
-    
-    const intervals = {
-        year: 31536000,
-        month: 2592000,
-        week: 604800,
-        day: 86400,
-        hour: 3600,
-        minute: 60
-    };
-    
-    for (const [unit, secondsInUnit] of Object.entries(intervals)) {
-        const interval = Math.floor(seconds / secondsInUnit);
-        if (interval >= 1) {
-            return `${interval} ${unit}${interval === 1 ? '' : 's'} ago`;
-        }
-    }
-    
-    return 'just now';
-}
-
 // Load GitHub profile badges
 // Optimized GitHub badges loading with performance considerations
 function loadGitHubBadges() {
@@ -2600,91 +2494,6 @@ function loadGitHubBadges() {
     badgesGrid.innerHTML = '';
     for (const badge of badges) {
         loadBadgeWithObserver(badge, badgesGrid);
-    }
-}
-
-// Load pinned repositories
-async function loadPinnedRepos() {
-    const pinnedRepos = document.getElementById('pinned-repos');
-    
-    try {
-        // Fetch all repos and sort by stars to simulate pinned repos
-        const repos = await githubAPI.getRepositories('stars', 100);
-        
-        // Get top starred repositories that are not forks
-        const topRepos = repos
-            .filter(repo => !repo.fork)
-            .sort((a, b) => b.stargazers_count - a.stargazers_count)
-            .slice(0, 6);
-        
-        if (topRepos.length === 0) {
-            pinnedRepos.innerHTML = '<p class="no-activity">No pinned repositories to display.</p>';
-            return;
-        }
-        
-        pinnedRepos.innerHTML = topRepos.map(repo => `
-            <div class="pinned-repo-card">
-                <div class="pinned-repo-header">
-                    <i class="fas fa-book"></i>
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="pinned-repo-name">${repo.name}</a>
-                </div>
-                <p class="pinned-repo-desc">${repo.description || 'No description available'}</p>
-                <div class="pinned-repo-footer">
-                    <div class="pinned-repo-stats">
-                        ${repo.language ? `<span class="repo-language"><span class="language-dot"></span>${repo.language}</span>` : ''}
-                        <span class="repo-stat"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
-                        <span class="repo-stat"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-        
-    } catch (error) {
-        pinnedRepos.innerHTML = '<p class="error-message">Unable to load pinned repositories.</p>';
-    }
-}
-
-// Load topics cloud
-async function loadTopicsCloud() {
-    const topicsCloud = document.getElementById('topics-cloud');
-    
-    try {
-        const repos = await githubAPI.getRepositories('updated', 100);
-        
-        // Collect all topics
-        const topicsCount = {};
-        for (const repo of repos) {
-            if (repo.topics && repo.topics.length > 0) {
-                for (const topic of repo.topics) {
-                    topicsCount[topic] = (topicsCount[topic] || 0) + 1;
-                }
-            }
-        }
-        
-        // Sort by frequency
-        const sortedTopics = Object.entries(topicsCount)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 20);
-        
-        if (sortedTopics.length === 0) {
-            topicsCloud.innerHTML = '<p class="no-activity">No topics to display.</p>';
-            return;
-        }
-        
-        // Calculate size based on frequency
-        const maxCount = sortedTopics[0][1];
-        
-        topicsCloud.innerHTML = `
-            <div class="topics-list">
-                ${sortedTopics.map(([topic, count]) => {
-                    const size = Math.max(0.8, Math.min(2, count / maxCount * 2));
-                    return `<span class="topic-tag" style="font-size: ${size}rem">${topic} (${count})</span>`;
-                }).join('')}
-            </div>
-        `;
-        
-    } catch (error) {
-        topicsCloud.innerHTML = '<p class="error-message">Unable to load topics.</p>';
     }
 }
 
