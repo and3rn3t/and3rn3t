@@ -3009,8 +3009,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-
-
 // Add skills matrix visualization
 async function loadSkillsMatrix() {
     try {
