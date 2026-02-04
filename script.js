@@ -234,10 +234,6 @@ class GitHubAPIManager {
         return this.fetchGitHubData(`/users/${this.username}/events`, { per_page }, 180000); // 3 min cache
     }
 
-    async getGists() {
-        return this.fetchGitHubData(`/users/${this.username}/gists`, {}, 300000);
-    }
-
     // Get rate limit status
     getRateLimitStatus() {
         return {
@@ -2298,18 +2294,13 @@ async function loadAllGitHubData() {
         await projectSearchFilter.loadProjectData().catch(error => {
         });
         
-        // Initialize analytics dashboard
-        analytics.initialize().catch(error => {
-        });
-        
         // Load core data in parallel with smart coordination
         const results = await Promise.allSettled([
             loadGitHubProjects(),
             loadGitHubStats(),
             loadGitHubActivity(),
             loadPinnedRepos(),
-            loadTopicsCloud(),
-            loadGitHubGists()
+            loadTopicsCloud()
         ]);
         
         // Check results and log any failures
@@ -2444,13 +2435,6 @@ async function loadGitHubStats() {
                 <div class="stat-content">
                     <h3>${totalForks}</h3>
                     <p>Total Forks</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-download"></i>
-                <div class="stat-content">
-                    <h3>${userData.public_gists}</h3>
-                    <p>Public Gists</p>
                 </div>
             </div>
         `;
@@ -2806,47 +2790,6 @@ async function loadTopicsCloud() {
         
     } catch (error) {
         topicsCloud.innerHTML = '<p class="error-message">Unable to load topics.</p>';
-    }
-}
-
-// Load GitHub Gists
-async function loadGitHubGists() {
-    const gistsGrid = document.getElementById('gists-grid');
-    
-    try {
-        const gists = await githubAPI.getGists();
-        
-        if (gists.length === 0) {
-            gistsGrid.innerHTML = '<p class="no-activity">No public gists to display.</p>';
-            return;
-        }
-        
-        gistsGrid.innerHTML = gists.map(gist => {
-            const files = Object.values(gist.files);
-            const firstFile = files[0];
-            const fileCount = files.length;
-            const createdDate = new Date(gist.created_at).toLocaleDateString();
-            
-            return `
-                <div class="gist-card">
-                    <div class="gist-header">
-                        <i class="fas fa-code"></i>
-                        <a href="${gist.html_url}" target="_blank" rel="noopener noreferrer" class="gist-title">
-                            ${firstFile.filename}
-                        </a>
-                    </div>
-                    <p class="gist-description">${gist.description || 'No description provided'}</p>
-                    <div class="gist-footer">
-                        <span class="gist-language">${firstFile.language || 'Text'}</span>
-                        ${fileCount > 1 ? `<span class="gist-files">${fileCount} files</span>` : ''}
-                        <span class="gist-date">${createdDate}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        
-    } catch (error) {
-        gistsGrid.innerHTML = '<p class="error-message">Unable to load gists.</p>';
     }
 }
 
