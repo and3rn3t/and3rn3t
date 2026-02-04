@@ -2670,24 +2670,40 @@ body.dark-theme .top-project-highlights {
     *::after {
         box-shadow: none !important;
         text-shadow: none !important;
+        background-image: none !important;
     }
     
     /* Hero section becomes resume header */
-    .hero {
+    .hero,
+    section.hero,
+    #home.hero,
+    #home {
         padding: 0 !important;
         min-height: auto !important;
-        background: none !important;
+        background: white !important;
+        background-image: none !important;
+        background-color: white !important;
         text-align: left !important;
         margin-bottom: 0.5in !important;
+        color: #1a1a1a !important;
+    }
+    
+    .hero::before,
+    #home::before {
+        display: none !important;
+        content: none !important;
     }
     
     .hero-container {
         padding: 0 !important;
+        display: block !important;
+        grid-template-columns: 1fr !important;
     }
     
     .hero-content {
         max-width: 100% !important;
         text-align: left !important;
+        color: #1a1a1a !important;
     }
     
     .hero-title {
@@ -2818,20 +2834,32 @@ body.dark-theme .top-project-highlights {
         gap: 0.1in !important;
     }
     
+    .github-stats,
+    .github-stats section {
+        background: white !important;
+        background-image: none !important;
+    }
+    
     .stat-card {
         break-inside: avoid;
         padding: 0.1in !important;
         text-align: center !important;
         border: 0.5pt solid #ddd !important;
-        background: none !important;
+        background: white !important;
     }
     
-    .stat-value {
+    .stat-value,
+    .stat-content h3 {
         font-size: 16pt !important;
         color: #333 !important;
+        background: none !important;
+        -webkit-text-fill-color: #333 !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
     }
     
-    .stat-label {
+    .stat-label,
+    .stat-content p {
         font-size: 8pt !important;
         color: #555 !important;
     }
