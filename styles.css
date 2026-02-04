@@ -2618,299 +2618,6 @@ body.dark-theme .top-project-highlights {
     font-style: italic;
 }
 
-/* ========================================
-   PRINT / RESUME STYLES
-   ======================================== */
-
-/* Print-specific styles when printing resume */
-@media print {
-    @page {
-        margin: 0.75in;
-        size: letter;
-    }
-    
-    /* Hide non-essential elements */
-    .theme-toggle,
-    .theme-picker-container,
-    .back-to-top,
-    .filter-buttons,
-    .scroll-indicator,
-    .scroll-progress,
-    .hero-buttons,
-    .hero-social,
-    .navbar,
-    footer,
-    .loading,
-    .project-links,
-    .contact-methods,
-    .code-animation,
-    .hero-image,
-    .keyboard-help,
-    .global-search-modal,
-    .visit-count,
-    .resume-download,
-    .btn,
-    button:not(.no-print-hide) {
-        display: none !important;
-    }
-    
-    /* Reset body styles for print */
-    body {
-        background: white !important;
-        color: #1a1a1a !important;
-        font-size: 11pt !important;
-        line-height: 1.4 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    /* Remove all backgrounds and shadows */
-    *,
-    *::before,
-    *::after {
-        box-shadow: none !important;
-        text-shadow: none !important;
-        background-image: none !important;
-    }
-    
-    /* Hero section becomes resume header */
-    .hero,
-    section.hero,
-    #home.hero,
-    #home {
-        padding: 0 !important;
-        min-height: auto !important;
-        background: white !important;
-        background-image: none !important;
-        background-color: white !important;
-        text-align: left !important;
-        margin-bottom: 0.5in !important;
-        color: #1a1a1a !important;
-    }
-    
-    .hero::before,
-    #home::before {
-        display: none !important;
-        content: none !important;
-    }
-    
-    .hero-container {
-        padding: 0 !important;
-        display: block !important;
-        grid-template-columns: 1fr !important;
-    }
-    
-    .hero-content {
-        max-width: 100% !important;
-        text-align: left !important;
-        color: #1a1a1a !important;
-    }
-    
-    .hero-title {
-        font-size: 24pt !important;
-        color: #1a1a1a !important;
-        margin-bottom: 0.1in !important;
-    }
-    
-    .hero-title .highlight {
-        color: #1a1a1a !important;
-        background: none !important;
-        background-clip: unset !important;
-        -webkit-background-clip: unset !important;
-        -webkit-text-fill-color: #1a1a1a !important;
-    }
-    
-    .hero-subtitle {
-        font-size: 14pt !important;
-        color: #444 !important;
-        margin-bottom: 0.1in !important;
-    }
-    
-    .hero-description {
-        font-size: 10pt !important;
-        color: #555 !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-    }
-    
-    /* Section styling for resume */
-    section {
-        page-break-inside: avoid;
-        padding: 0.15in 0 !important;
-        margin: 0 !important;
-        background: none !important;
-    }
-    
-    .section-title {
-        font-size: 14pt !important;
-        color: #1a1a1a !important;
-        border-bottom: 1.5pt solid #333 !important;
-        padding-bottom: 0.05in !important;
-        margin-bottom: 0.1in !important;
-        background: none !important;
-        -webkit-text-fill-color: #1a1a1a !important;
-    }
-    
-    .section-title::after {
-        display: none !important;
-    }
-    
-    /* Skills section */
-    .skills-grid {
-        display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important;
-        gap: 0.1in !important;
-    }
-    
-    .skill-category {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        padding: 0.1in !important;
-        border: 0.5pt solid #ddd !important;
-        border-radius: 0 !important;
-        background: none !important;
-    }
-    
-    .skill-category h3 {
-        font-size: 10pt !important;
-        margin-bottom: 0.05in !important;
-        color: #333 !important;
-    }
-    
-    .skill-tags {
-        gap: 0.05in !important;
-    }
-    
-    .skill-tag {
-        font-size: 8pt !important;
-        padding: 0.02in 0.05in !important;
-        background: #f0f0f0 !important;
-        color: #333 !important;
-        border: 0.5pt solid #ccc !important;
-    }
-    
-    /* Projects section */
-    .projects-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.15in !important;
-    }
-    
-    .project-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        padding: 0.1in !important;
-        border: 0.5pt solid #ddd !important;
-        border-radius: 0 !important;
-        background: none !important;
-    }
-    
-    .project-card h3 {
-        font-size: 11pt !important;
-        color: #1a1a1a !important;
-        margin-bottom: 0.05in !important;
-    }
-    
-    .project-description {
-        font-size: 9pt !important;
-        color: #444 !important;
-    }
-    
-    .project-tech {
-        margin-top: 0.05in !important;
-    }
-    
-    .tech-tag {
-        font-size: 7pt !important;
-        padding: 0.01in 0.04in !important;
-        background: #e8e8e8 !important;
-        color: #333 !important;
-    }
-    
-    /* Stats */
-    .stats-grid {
-        display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important;
-        gap: 0.1in !important;
-    }
-    
-    .github-stats,
-    .github-stats section {
-        background: white !important;
-        background-image: none !important;
-    }
-    
-    .stat-card {
-        break-inside: avoid;
-        padding: 0.1in !important;
-        text-align: center !important;
-        border: 0.5pt solid #ddd !important;
-        background: white !important;
-    }
-    
-    .stat-value,
-    .stat-content h3 {
-        font-size: 16pt !important;
-        color: #333 !important;
-        background: none !important;
-        -webkit-text-fill-color: #333 !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
-    }
-    
-    .stat-label,
-    .stat-content p {
-        font-size: 8pt !important;
-        color: #555 !important;
-    }
-    
-    /* Contact section - show as simple text */
-    #contact {
-        margin-top: 0.2in !important;
-    }
-    
-    .contact-info {
-        display: block !important;
-    }
-    
-    /* Links */
-    a {
-        text-decoration: none !important;
-        color: #1a1a1a !important;
-    }
-    
-    a[href^="http"]:after,
-    a[href^="mailto"]:after {
-        content: " (" attr(href) ")";
-        font-size: 8pt;
-        color: #666;
-    }
-    
-    /* Hide the contact form in print */
-    .contact-form {
-        display: none !important;
-    }
-    
-    /* Top projects section */
-    .top-projects-summary {
-        border: none !important;
-        padding: 0 !important;
-        background: none !important;
-    }
-    
-    /* Skills matrix */
-    .skills-matrix {
-        margin-top: 0.1in !important;
-    }
-    
-    .skill-matrix-item {
-        break-inside: avoid;
-        padding: 0.05in !important;
-        background: none !important;
-        border: 0.5pt solid #ddd !important;
-    }
-}
-
 /* Dark theme adjustments for new features */
 body.dark-theme .skill-matrix-item {
     background: rgba(30, 41, 59, 0.8);
@@ -3504,36 +3211,36 @@ body.dark-theme .keyboard-help-close:hover {
 
 /* Dark Theme Support */
 body.dark-theme .global-search-content {
-    background: #1f2937;
+    background: var(--bg-secondary);
 }
 
 body.dark-theme .global-search-input-container {
-    background: #374151;
+    background: var(--bg-tertiary);
 }
 
 body.dark-theme .search-category {
-    background: #374151;
-    border-color: #4b5563;
-    color: #d1d5db;
+    background: var(--bg-tertiary);
+    border-color: var(--border-light);
+    color: var(--text-secondary);
 }
 
 body.dark-theme .search-result-item:hover,
 body.dark-theme .search-result-item.highlighted {
-    background: #374151;
+    background: var(--bg-tertiary);
 }
 
 body.dark-theme .search-results-summary,
 body.dark-theme .saved-searches,
 body.dark-theme .related-projects {
-    background: #374151;
-    border-color: #4b5563;
+    background: var(--bg-tertiary);
+    border-color: var(--border-light);
 }
 
 body.dark-theme .saved-search-item,
 body.dark-theme .related-project-item {
-    background: #1f2937;
-    border-color: #4b5563;
-    color: #d1d5db;
+    background: var(--bg-secondary);
+    border-color: var(--border-light);
+    color: var(--text-secondary);
 }
 
 /* Utility classes */
@@ -3887,7 +3594,7 @@ body.dark-theme .related-project-item {
 
 /* Dark Theme Enhancements */
 body.dark-theme .skeleton {
-    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--border-light) 50%, var(--bg-tertiary) 75%);
 }
 
 body.dark-theme .particle {
