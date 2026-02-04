@@ -20,7 +20,7 @@ jobs:
         
       - name: Fetch GitHub Data
         env:
-          GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Fetch user data
           echo "Fetching GitHub user data..."
