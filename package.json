@@ -1,0 +1,22 @@
+{
+  "name": "and3rn3t-portfolio",
+  "version": "2.0.0",
+  "description": "Matthew Anderson's Portfolio Website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "keywords": [
+    "portfolio",
+    "github-pages",
+    "es-modules"
+  ],
+  "author": "Matthew Anderson",
+  "license": "MIT"
+}

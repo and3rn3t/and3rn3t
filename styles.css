@@ -241,6 +241,63 @@ body {
     display: none !important;
 }
 
+/* Flexbox Utilities */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Touch Target Utility (WCAG 2.5.5) */
+.touch-target-base {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* Transition Utilities */
+.transition-fast {
+    transition: all var(--transition-fast);
+}
+
+.transition-base {
+    transition: all var(--transition-base);
+}
+
+.transition-slow {
+    transition: all var(--transition-slow);
+}
+
+/* Hover Effects */
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+.hover-lift-sm:hover {
+    transform: translateY(-2px);
+}
+
+/* Backdrop Blur */
+.backdrop-blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.backdrop-blur-lg {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
 /* Navigation */
 .navbar {
     position: fixed;
@@ -461,9 +518,7 @@ body {
 }
 
 /* Hero Section */
-.hero,
-section.hero,
-#home.hero {
+.hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -2008,46 +2063,6 @@ body.dark-theme .form-status.info {
     border-color: var(--info);
 }
 
-/* Print styles for resume */
-@media print {
-    .navbar,
-    .theme-toggle,
-    .scroll-indicator,
-    .hero-buttons,
-    .hero-social,
-    footer {
-        display: none !important;
-    }
-
-    body {
-        background: white;
-        color: black;
-    }
-
-    .project-card,
-    .stat-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
-    }
-
-    section {
-        page-break-inside: avoid;
-    }
-}
-
-/* Accessibility improvements */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
 /* Focus styles for keyboard navigation */
 a:focus,
 button:focus,
@@ -2684,6 +2699,31 @@ body.dark-theme .visit-count {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+    
+    .animate-on-scroll,
+    .reveal-on-scroll,
+    .slide-in-left,
+    .slide-in-right,
+    .scale-in,
+    .stagger-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .update-notification,
+    .install-banner {
+        transition: bottom 0.2s ease;
+    }
+    
+    .update-icon,
+    .install-icon {
+        animation: none;
+    }
+    
+    .update-button:hover,
+    .install-button:hover {
+        transform: none;
     }
 }
 
@@ -3539,25 +3579,6 @@ body.dark-theme .related-project-item {
     perspective: 1000px;
 }
 
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    .animate-on-scroll,
-    .reveal-on-scroll,
-    .slide-in-left,
-    .slide-in-right,
-    .scale-in,
-    .stagger-item {
-        opacity: 1 !important;
-        transform: none !important;
-    }
-}
-
 /* Dark Theme Enhancements */
 body.dark-theme .skeleton {
     background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
@@ -3759,11 +3780,6 @@ body.keyboard-navigation .focus-ring:focus {
 
 .pull-to-refresh .icon {
     animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 /* Enhanced Mobile Navigation */
@@ -5452,24 +5468,6 @@ body.keyboard-navigation .focus-ring:focus {
 [data-theme="high-contrast"] .install-button {
     font-weight: 700;
     border: 2px solid white;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    .update-notification,
-    .install-banner {
-        transition: bottom 0.2s ease;
-    }
-    
-    .update-icon,
-    .install-icon {
-        animation: none;
-    }
-    
-    .update-button:hover,
-    .install-button:hover {
-        transform: none;
-    }
 }
 
 /* PWA display mode detection */

@@ -6,16 +6,12 @@
  * @version 2.0.0
  */
 
-// Import all modules
+// Import critical modules only - others loaded dynamically
 import { DEBUG_MODE, debug } from './modules/debug.js';
-import { githubAPI } from './modules/github-api.js';
+import { errorHandler, ErrorType } from './modules/error-handler.js';
 import { initThemeManager } from './modules/theme.js';
-import { performanceManager } from './modules/performance.js';
 import { mobileManager } from './modules/mobile.js';
-import { analyticsManager } from './modules/analytics.js';
-import { projectsManager } from './modules/projects.js';
 import { navigationManager } from './modules/navigation.js';
-import { uiManager } from './modules/ui.js';
 
 // App configuration
 const APP_CONFIG = {
@@ -23,12 +19,40 @@ const APP_CONFIG = {
     name: 'Matthew Anderson Portfolio'
 };
 
-// App state
+// App state - expose globally for error handler access
 const appState = {
     isInitialized: false,
     initStartTime: null,
-    managers: {}
+    managers: {},
+    modules: {} // Lazy-loaded modules
 };
+
+// Expose appState for error handler notifications
+if (typeof window !== 'undefined') {
+    window.appState = appState;
+}
+
+/**
+ * Lazy load a module with error handling
+ * @param {string} modulePath - Path to the module
+ * @returns {Promise<any>} - The loaded module
+ */
+async function lazyLoad(modulePath) {
+    if (appState.modules[modulePath]) {
+        return appState.modules[modulePath];
+    }
+    try {
+        const module = await import(modulePath);
+        appState.modules[modulePath] = module;
+        return module;
+    } catch (error) {
+        await errorHandler.handle(error, {
+            context: { modulePath },
+            showUser: false
+        });
+        throw error;
+    }
+}
 
 /**
  * Initialize all application modules
@@ -56,6 +80,8 @@ async function initializeApp() {
         initMobileMenu();
         initNavigation();
         
+        // Lazy load UI module
+        const { uiManager } = await lazyLoad('./modules/ui.js');
         uiManager.init();
         appState.managers.ui = uiManager;
         
@@ -64,10 +90,12 @@ async function initializeApp() {
         
         debug.log('[App] Phase 2: Navigation & UI initialized');
         
-        // Phase 3: Content loading (show progress)
+        // Phase 3: Content loading (show progress) - lazy load projects module
         uiManager.showLoadingProgress('content');
         
-        // Load GitHub data in parallel
+        const { projectsManager } = await lazyLoad('./modules/projects.js');
+        
+        // Load content in parallel
         await Promise.allSettled([
             projectsManager.init('#projects-grid'),
             uiManager.loadGitHubStats(),
@@ -82,26 +110,38 @@ async function initializeApp() {
         // Make body visible (it starts with opacity: 0)
         document.body.classList.add('loaded');
         
-        // Phase 4: Non-critical features (deferred)
-        requestIdleCallback(() => {
-            performanceManager.init();
-            appState.managers.performance = performanceManager;
-            
-            analyticsManager.init();
-            appState.managers.analytics = analyticsManager;
-            
-            // Additional UI enhancements
-            uiManager.initResumeButton();
-            loadGitHubBadges();
-            
-            debug.log('[App] Phase 4: Analytics & performance initialized');
+        // Phase 4: Non-critical features (deferred with dynamic imports)
+        requestIdleCallback(async () => {
+            try {
+                const [{ performanceManager }, { analyticsManager }] = await Promise.all([
+                    lazyLoad('./modules/performance.js'),
+                    lazyLoad('./modules/analytics.js')
+                ]);
+                
+                performanceManager.init();
+                appState.managers.performance = performanceManager;
+                
+                analyticsManager.init();
+                appState.managers.analytics = analyticsManager;
+                
+                // Additional UI enhancements
+                uiManager.initResumeButton();
+                loadGitHubBadges();
+                
+                debug.log('[App] Phase 4: Analytics & performance initialized');
+            } catch (err) {
+                debug.error('[App] Phase 4 error:', err);
+            }
         }, { timeout: 2000 });
         
         // Setup global event handlers
         setupGlobalEvents();
         
-        // Set up cache cleanup interval
-        setInterval(clearExpiredCache, 10 * 60 * 1000);
+        // Set up cache cleanup interval (lazy load github-api only when needed)
+        setInterval(async () => {
+            const { githubAPI } = await lazyLoad('./modules/github-api.js');
+            clearExpiredCache(githubAPI);
+        }, 10 * 60 * 1000);
         
         // Mark initialization complete
         appState.isInitialized = true;
@@ -188,8 +228,11 @@ function loadGitHubBadges() {
 
 /**
  * Clear expired cache entries
+ * @param {Object} githubAPI - The GitHub API instance
  */
-function clearExpiredCache() {
+function clearExpiredCache(githubAPI) {
+    if (!githubAPI || !githubAPI.cache) return;
+    
     const now = Date.now();
     let removedCount = 0;
     
@@ -210,10 +253,11 @@ function clearExpiredCache() {
  */
 function setupGlobalEvents() {
     // Handle global errors
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', async (event) => {
         debug.error('[App] Uncaught error:', event.error);
-        if (analyticsManager.isInitialized) {
-            analyticsManager.trackError(event.error, {
+        const analytics = appState.managers.analytics;
+        if (analytics && analytics.isInitialized) {
+            analytics.trackError(event.error, {
                 type: 'uncaught',
                 filename: event.filename,
                 lineno: event.lineno
@@ -222,10 +266,11 @@ function setupGlobalEvents() {
     });
     
     // Handle unhandled promise rejections
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', async (event) => {
         debug.error('[App] Unhandled rejection:', event.reason);
-        if (analyticsManager.isInitialized) {
-            analyticsManager.trackError(event.reason, {
+        const analytics = appState.managers.analytics;
+        if (analytics && analytics.isInitialized) {
+            analytics.trackError(event.reason, {
                 type: 'unhandled_rejection'
             });
         }
@@ -233,20 +278,29 @@ function setupGlobalEvents() {
     
     // Handle theme changes - reapply hero background
     document.addEventListener('themeChanged', () => {
-        uiManager.forceHeroBackground();
+        const ui = appState.managers.ui;
+        if (ui && ui.forceHeroBackground) {
+            ui.forceHeroBackground();
+        }
     });
     
     // Handle online/offline
     window.addEventListener('online', () => {
         debug.log('[App] Connection restored');
         document.body.classList.remove('offline');
-        uiManager.showNotification('Connection restored', 'success', 3000);
+        const ui = appState.managers.ui;
+        if (ui && ui.showNotification) {
+            ui.showNotification('Connection restored', 'success', 3000);
+        }
     });
     
     window.addEventListener('offline', () => {
         debug.log('[App] Connection lost');
         document.body.classList.add('offline');
-        uiManager.showNotification('You are offline', 'warning', 5000);
+        const ui = appState.managers.ui;
+        if (ui && ui.showNotification) {
+            ui.showNotification('You are offline', 'warning', 5000);
+        }
     });
     
     // Service worker registration
@@ -265,6 +319,12 @@ function setupGlobalEvents() {
  * Handle initialization errors gracefully
  */
 function handleInitError(error) {
+    // Log to error handler
+    errorHandler.handle(error, {
+        showUser: true,
+        context: { phase: 'initialization' }
+    });
+    
     // Show error to user in development
     if (DEBUG_MODE) {
         const errorDiv = document.createElement('div');
@@ -292,9 +352,13 @@ function handleInitError(error) {
         setTimeout(() => errorDiv.remove(), 10000);
     }
     
-    // Track error
-    if (analyticsManager.isInitialized) {
-        analyticsManager.trackError(error, { context: 'initialization' });
+    // Ensure body is visible even on error
+    document.body.classList.add('loaded');
+    
+    // Track error via analytics if available
+    const analytics = appState.managers.analytics;
+    if (analytics && analytics.isInitialized) {
+        analytics.trackError(error, { context: 'initialization' });
     }
 }
 
@@ -305,7 +369,7 @@ window.PortfolioApp = {
     version: APP_CONFIG.version,
     debug: DEBUG_MODE,
     
-    // Manager access
+    // Manager access (lazy-loaded)
     get theme() { return appState.managers.theme; },
     get mobile() { return appState.managers.mobile; },
     get navigation() { return appState.managers.navigation; },
@@ -313,27 +377,37 @@ window.PortfolioApp = {
     get performance() { return appState.managers.performance; },
     get analytics() { return appState.managers.analytics; },
     get ui() { return appState.managers.ui; },
-    get github() { return githubAPI; },
+    get errors() { return errorHandler; },
     
     // Methods
     isReady() { return appState.isInitialized; },
     
     async refresh() {
         debug.log('[App] Refreshing...');
-        uiManager.showLoadingProgress('refresh');
-        await projectsManager.refresh();
-        await uiManager.loadGitHubStats();
-        uiManager.hideLoadingProgress('refresh');
-        uiManager.showNotification('Data refreshed', 'success', 3000);
+        const ui = appState.managers.ui;
+        const projects = appState.managers.projects;
+        
+        if (ui) ui.showLoadingProgress('refresh');
+        if (projects) await projects.refresh();
+        if (ui) {
+            await ui.loadGitHubStats();
+            ui.hideLoadingProgress('refresh');
+            ui.showNotification('Data refreshed', 'success', 3000);
+        }
     },
     
     getStats() {
+        const perf = appState.managers.performance;
+        const analytics = appState.managers.analytics;
+        const mobile = appState.managers.mobile;
+        
         return {
             version: APP_CONFIG.version,
             initialized: appState.isInitialized,
-            performance: performanceManager.getMetrics?.() || {},
-            session: analyticsManager.getSessionStats?.() || {},
-            device: mobileManager.getDeviceInfo?.() || {}
+            performance: perf?.getMetrics?.() || {},
+            session: analytics?.getSessionStats?.() || {},
+            device: mobile?.getDeviceInfo?.() || {},
+            errors: errorHandler.getStats()
         };
     }
 };
