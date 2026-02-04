@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'docs/**'
+      - 'testing/**'
+      - '.github/workflows/update-github-data.yml'
+      - 'README.md'
+      - 'LICENSE'
+      - 'renovate.json'
   workflow_dispatch:
 
 permissions:
@@ -13,7 +20,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -24,6 +31,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            *.html
+            *.css
+            *.js
+            *.json
+            *.xml
+            *.txt
+            *.pdf
+            icons
+            modules
+            CNAME
+          sparse-checkout-cone-mode: false
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
