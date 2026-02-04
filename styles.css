@@ -2063,6 +2063,60 @@ body.dark-theme .form-status.info {
     border-color: var(--info);
 }
 
+/* Dark theme - Section backgrounds */
+body.dark-theme .projects,
+body.dark-theme .skills,
+body.dark-theme .about,
+body.dark-theme section {
+    background: var(--bg-primary);
+}
+
+body.dark-theme .projects-grid,
+body.dark-theme .skills-grid,
+body.dark-theme .about-content {
+    background: transparent;
+}
+
+/* Dark theme - Cards and containers with white backgrounds */
+body.dark-theme .highlight-item,
+body.dark-theme .project-card,
+body.dark-theme .skill-category,
+body.dark-theme .skill-matrix-item,
+body.dark-theme .top-project-card,
+body.dark-theme .filter-btn,
+body.dark-theme .search-result-item {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+body.dark-theme .highlight-item:hover,
+body.dark-theme .project-card:hover,
+body.dark-theme .skill-category:hover {
+    background: var(--bg-tertiary);
+}
+
+/* Dark theme - Skill items */
+body.dark-theme .skill-item {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+body.dark-theme .skill-item:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
+}
+
+/* Dark theme - Section titles */
+body.dark-theme .section-title,
+body.dark-theme .subsection-title {
+    color: var(--text-primary);
+}
+
+body.dark-theme .section-intro,
+body.dark-theme p {
+    color: var(--text-secondary);
+}
+
 /* Focus styles for keyboard navigation */
 a:focus,
 button:focus,
