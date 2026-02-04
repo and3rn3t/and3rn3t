@@ -316,6 +316,29 @@ function setupGlobalEvents() {
 }
 
 /**
+ * Generate and print resume
+ * Called from onclick in HTML
+ */
+function generateResume() {
+    debug.log('[App] Generating resume...');
+    window.print();
+}
+
+// Expose generateResume globally for onclick handlers
+window.generateResume = generateResume;
+
+// Set up print event listeners for resume styling
+window.addEventListener('beforeprint', () => {
+    document.body.classList.add('printing');
+    debug.log('[App] Preparing print layout...');
+});
+
+window.addEventListener('afterprint', () => {
+    document.body.classList.remove('printing');
+    debug.log('[App] Print complete');
+});
+
+/**
  * Handle initialization errors gracefully
  */
 function handleInitError(error) {
