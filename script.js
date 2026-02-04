@@ -878,7 +878,7 @@ class EnhancedNavigation {
             // Handle Ctrl/Cmd combinations
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
                 e.preventDefault();
-                window.print();
+                generateResume();
             }
         });
         
@@ -6897,3 +6897,321 @@ if (isPWA()) {
         });
     }
 }
+
+// Resume Generator - Creates a professional PDF-style resume
+function generateResume() {
+    // Gather information from the page and portfolio data
+    const resumeData = {
+        name: 'Matthew Anderson',
+        title: 'Full-Stack Developer',
+        email: 'contact@matthewanderson.dev',
+        github: 'github.com/and3rn3t',
+        linkedin: 'linkedin.com/in/matthew-anderson',
+        website: 'andernet.dev',
+        summary: `Passionate full-stack developer with expertise in modern web technologies, home automation, 
+and IoT solutions. Experienced in building comprehensive, user-focused applications using 
+TypeScript, Python, Swift, React, and PostgreSQL. Strong focus on clean code, innovative 
+solutions, and cutting-edge development practices.`,
+        skills: {
+            frontend: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Responsive Design'],
+            backend: ['Python', 'Node.js', 'PostgreSQL', 'REST APIs', 'Database Design'],
+            tools: ['Git', 'Docker', 'Linux', 'IoT', 'Home Automation', 'Swift']
+        },
+        highlights: [
+            'Clean Code: Writing maintainable, scalable, and efficient code',
+            'IoT & Automation: Passionate about smart home technologies and automation',
+            'Innovation: Always exploring new technologies and creative solutions'
+        ]
+    };
+    
+    // Try to get project data from the page
+    const projectCards = document.querySelectorAll('.project-card');
+    const projects = [];
+    projectCards.forEach(card => {
+        const title = card.querySelector('.project-title, h3, .card-title')?.textContent?.trim();
+        const description = card.querySelector('.project-description, .card-description, p')?.textContent?.trim();
+        const stars = card.querySelector('.star-count, [data-stars]')?.textContent?.trim();
+        if (title && description) {
+            projects.push({ title, description: description.substring(0, 150), stars });
+        }
+    });
+    
+    // Create the resume HTML content
+    const resumeHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${resumeData.name} - Resume</title>
+    <style>
+        @page {
+            margin: 0.5in;
+            size: letter;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #8b4513;
+        }
+        .header h1 {
+            font-size: 28pt;
+            color: #8b4513;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .header h2 {
+            font-size: 14pt;
+            color: #666;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 10pt;
+        }
+        .contact-info span {
+            color: #555;
+        }
+        .contact-info a {
+            color: #8b4513;
+            text-decoration: none;
+        }
+        .section {
+            margin-bottom: 18px;
+        }
+        .section-title {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #8b4513;
+            border-bottom: 1px solid #8b4513;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary {
+            text-align: justify;
+            color: #444;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .skill-category h4 {
+            font-size: 11pt;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .skill-category ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .skill-category li {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+        }
+        .skill-category li::before {
+            content: "•";
+            color: #8b4513;
+            position: absolute;
+            left: 0;
+        }
+        .highlights-list {
+            list-style: none;
+        }
+        .highlights-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .highlights-list li::before {
+            content: "✓";
+            color: #8b4513;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .projects-list {
+            display: grid;
+            gap: 12px;
+        }
+        .project-item {
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 3px solid #8b4513;
+            border-radius: 0 4px 4px 0;
+        }
+        .project-item h4 {
+            font-size: 11pt;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .project-item p {
+            font-size: 10pt;
+            color: #666;
+        }
+        .footer {
+            margin-top: 25px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 9pt;
+            color: #888;
+        }
+        @media print {
+            body {
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>${resumeData.name}</h1>
+        <h2>${resumeData.title}</h2>
+        <div class="contact-info">
+            <span>📧 <a href="mailto:${resumeData.email}">${resumeData.email}</a></span>
+            <span>🌐 <a href="https://${resumeData.website}">${resumeData.website}</a></span>
+            <span>💻 <a href="https://${resumeData.github}">${resumeData.github}</a></span>
+            <span>💼 <a href="https://${resumeData.linkedin}">${resumeData.linkedin}</a></span>
+        </div>
+    </header>
+
+    <section class="section">
+        <h3 class="section-title">Professional Summary</h3>
+        <p class="summary">${resumeData.summary}</p>
+    </section>
+
+    <section class="section">
+        <h3 class="section-title">Technical Skills</h3>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Frontend</h4>
+                <ul>
+                    ${resumeData.skills.frontend.map(skill => `<li>${skill}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h4>Backend</h4>
+                <ul>
+                    ${resumeData.skills.backend.map(skill => `<li>${skill}</li>`).join('')}
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h4>Tools & Technologies</h4>
+                <ul>
+                    ${resumeData.skills.tools.map(skill => `<li>${skill}</li>`).join('')}
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h3 class="section-title">Core Competencies</h3>
+        <ul class="highlights-list">
+            ${resumeData.highlights.map(h => `<li>${h}</li>`).join('')}
+        </ul>
+    </section>
+
+    ${projects.length > 0 ? `
+    <section class="section">
+        <h3 class="section-title">Featured Projects</h3>
+        <div class="projects-list">
+            ${projects.slice(0, 4).map(p => `
+            <div class="project-item">
+                <h4>${p.title}${p.stars ? ` ⭐ ${p.stars}` : ''}</h4>
+                <p>${p.description}</p>
+            </div>
+            `).join('')}
+        </div>
+    </section>
+    ` : ''}
+
+    <section class="section">
+        <h3 class="section-title">Education & Continuous Learning</h3>
+        <ul class="highlights-list">
+            <li>Self-directed learning in modern web development technologies</li>
+            <li>Continuous professional development through practical project experience</li>
+            <li>Active participation in open-source community</li>
+        </ul>
+    </section>
+
+    <footer class="footer">
+        <p>Generated from andernet.dev • ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    </footer>
+
+    <div class="no-print" style="position: fixed; bottom: 20px; right: 20px;">
+        <button onclick="window.print()" style="padding: 12px 24px; background: #8b4513; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            📄 Print / Save as PDF
+        </button>
+        <button onclick="window.close()" style="margin-left: 10px; padding: 12px 24px; background: #666; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+            ✕ Close
+        </button>
+    </div>
+</body>
+</html>`;
+
+    // Open the resume in a new window
+    const resumeWindow = window.open('', '_blank', 'width=900,height=1100');
+    if (resumeWindow) {
+        resumeWindow.document.write(resumeHTML);
+        resumeWindow.document.close();
+        
+        // Track the event
+        if (globalThis.portfolioAnalytics) {
+            globalThis.portfolioAnalytics.trackEvent('resume_generated', {
+                projectsIncluded: projects.length,
+                timestamp: new Date().toISOString()
+            });
+        }
+    } else {
+        // Popup was blocked - offer to download instead
+        alert('Pop-up was blocked. Click OK to download the resume directly.');
+        downloadResumeAsHTML(resumeHTML);
+    }
+}
+
+// Fallback: Download resume as HTML file
+function downloadResumeAsHTML(htmlContent) {
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Matthew_Anderson_Resume.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Make generateResume available globally
+globalThis.generateResume = generateResume;
+
