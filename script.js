@@ -804,10 +804,6 @@ const performanceOptimizer = new PerformanceOptimizer();
 class EnhancedNavigation {
     constructor() {
         this.scrollProgress = document.getElementById('scroll-progress-bar');
-        this.floatingToc = document.getElementById('floating-toc');
-        this.tocToggle = document.getElementById('toc-toggle');
-        this.tocContent = document.getElementById('toc-content');
-        this.tocLinks = document.querySelector('.toc-links');
         this.keyboardHelp = document.getElementById('keyboard-help');
         
         this.keySequence = '';
@@ -819,19 +815,8 @@ class EnhancedNavigation {
     
     init() {
         this.initScrollProgress();
-        this.initFloatingToc();
         this.initKeyboardShortcuts();
         this.initSectionTracking();
-        
-        // Show floating TOC after user scrolls past hero
-        window.addEventListener('scroll', () => {
-            const heroHeight = document.querySelector('.hero').offsetHeight;
-            if (window.scrollY > heroHeight * 0.5) {
-                this.floatingToc.classList.add('visible');
-            } else {
-                this.floatingToc.classList.remove('visible');
-            }
-        });
     }
     
     initScrollProgress() {
@@ -849,81 +834,10 @@ class EnhancedNavigation {
         updateProgress(); // Initial call
     }
     
-    initFloatingToc() {
-        if (!this.tocToggle || !this.tocContent || !this.tocLinks) return;
-        
-        // Populate TOC with navigation items
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            const text = link.textContent;
-            
-            if (href.startsWith('#')) {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = href;
-                a.textContent = text;
-                a.addEventListener('click', this.handleTocClick.bind(this));
-                li.appendChild(a);
-                this.tocLinks.appendChild(li);
-            }
-        });
-        
-        // Toggle TOC
-        this.tocToggle.addEventListener('click', () => {
-            const isExpanded = this.tocToggle.getAttribute('aria-expanded') === 'true';
-            this.tocToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-        
-        // Close TOC when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!this.floatingToc.contains(e.target)) {
-                this.tocToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    }
-    
-    handleTocClick(e) {
-        e.preventDefault();
-        const target = document.querySelector(e.target.getAttribute('href'));
-        if (target) {
-            const offsetTop = target.offsetTop - 70;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-            
-            // Close TOC after navigation
-            this.tocToggle.setAttribute('aria-expanded', 'false');
-        }
-    }
-    
     initSectionTracking() {
         // Track which section is currently in view
         const sections = document.querySelectorAll('section[id]');
         this.sections = Array.from(sections);
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const id = entry.target.id;
-                const tocLink = this.tocLinks.querySelector(`a[href="#${id}"]`);
-                
-                if (entry.isIntersecting) {
-                    // Remove active class from all TOC links
-                    this.tocLinks.querySelectorAll('a').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    // Add active class to current section
-                    if (tocLink) {
-                        tocLink.classList.add('active');
-                    }
-                }
-            });
-        }, {
-            rootMargin: '-20% 0px -80% 0px'
-        });
-        
-        this.sections.forEach(section => observer.observe(section));
     }
     
     initKeyboardShortcuts() {
@@ -1063,8 +977,9 @@ class EnhancedNavigation {
     }
     
     closeAllDialogs() {
-        this.keyboardHelp.classList.remove('visible');
-        this.tocToggle.setAttribute('aria-expanded', 'false');
+        if (this.keyboardHelp) {
+            this.keyboardHelp.classList.remove('visible');
+        }
     }
 }
 
