@@ -3,7 +3,7 @@
     {
       "name": "health",
       "displayName": "Health Analytics Platform",
-      "description": "An innovative health tracking and analysis platform that leverages Apple HealthKit data and iPhone LiDAR sensors for advanced gait analysis and wellness monitoring.",
+      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones for gait analysis and wellness monitoring.",
       "longDescription": "This project combines cutting-edge mobile technology with health analytics to provide comprehensive wellness insights. Using Apple's HealthKit framework for health data collection and the advanced LiDAR sensors available in modern iPhones, the platform performs sophisticated gait analysis to help users understand their walking patterns and overall physical health. The application employs machine learning algorithms to identify trends and provide personalized recommendations.",
       "technologies": ["TypeScript", "HealthKit", "LiDAR", "Machine Learning", "iOS"],
       "highlights": [
@@ -17,25 +17,24 @@
       "github_repo": "and3rn3t/health"
     },
     {
-      "name": "HealthKitBridge",
-      "displayName": "HealthKit Bridge",
-      "description": "A lightweight iOS application that bridges Apple HealthKit data to web applications, enabling seamless health data integration for cross-platform solutions.",
-      "longDescription": "HealthKitBridge solves the challenge of accessing iOS health data from web applications by creating a secure bridge between HealthKit and web-based platforms. Built natively in Swift, this app allows developers to build cross-platform health applications while leveraging the comprehensive health data ecosystem that Apple provides. The bridge maintains privacy and security while enabling innovative web-based health solutions.",
-      "technologies": ["Swift", "HealthKit", "iOS", "Xcode", "Web APIs"],
+      "name": "huggingface",
+      "displayName": "HuggingFace Integration",
+      "description": "Experimenting with HuggingFace models and AI/ML integrations.",
+      "longDescription": "An experimental project exploring the HuggingFace ecosystem for machine learning and AI model integration. This project demonstrates how to leverage pre-trained models for various AI tasks.",
+      "technologies": ["TypeScript", "HuggingFace", "Machine Learning", "AI"],
       "highlights": [
-        "Secure data bridging between iOS and web platforms",
-        "Native Swift implementation for optimal performance",
-        "Privacy-preserving architecture",
-        "Simple API for web developers"
+        "Integration with HuggingFace model ecosystem",
+        "AI/ML experimentation platform",
+        "Pre-trained model usage"
       ],
-      "category": "Development Tools",
-      "status": "Stable",
-      "github_repo": "and3rn3t/HealthKitBridge"
+      "category": "AI & Machine Learning",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/huggingface"
     },
     {
       "name": "weather",
       "displayName": "Cross-Platform Weather App",
-      "description": "A modern weather application with native Android and iOS integration, demonstrating advanced mobile development techniques and beautiful UI design.",
+      "description": "Playing around with weather app features and Android app integration using Capacitor.",
       "longDescription": "This weather application showcases modern mobile development practices by building a single codebase that compiles to both Android and iOS using Capacitor. The app provides detailed weather information with an intuitive interface, demonstrating the power of cross-platform development while maintaining native performance and user experience. Features include location-based forecasts, severe weather alerts, and interactive weather maps.",
       "technologies": ["TypeScript", "Capacitor", "Android", "iOS", "Weather APIs"],
       "highlights": [
@@ -67,7 +66,7 @@
     {
       "name": "couple-connect",
       "displayName": "Couple Connect",
-      "description": "An accountability and relationship improvement app designed for couples to track goals, communicate effectively, and strengthen their relationship.",
+      "description": "Accountability app for couples to identify areas for improvement and track shared goals.",
       "longDescription": "Couple Connect is a unique application that helps couples improve their relationships through accountability, goal tracking, and effective communication. The app provides tools for setting shared goals, tracking progress, and identifying areas for growth. Built with React and deployed on Cloudflare's edge network for global performance, it includes features like mood tracking, shared calendars, and communication exercises designed by relationship experts. The application prioritizes privacy and security for sensitive relationship data.",
       "technologies": ["React", "JavaScript", "Vite", "Docker", "Cloudflare"],
       "highlights": [
@@ -83,7 +82,7 @@
     {
       "name": "network",
       "displayName": "Network Analytics Tool",
-      "description": "A powerful network monitoring and analytics tool that interfaces with UniFi networking equipment to provide insights into network performance and security.",
+      "description": "Testing UniFi API for network monitoring, analysis, and management of Ubiquiti networking equipment.",
       "longDescription": "This Python-based tool interfaces with Ubiquiti's UniFi API to provide comprehensive network monitoring, analysis, and management capabilities. It offers detailed insights into network traffic patterns, device connectivity, bandwidth usage, and potential security issues. The tool is designed for network administrators and enthusiasts who want deeper visibility into their network infrastructure beyond what standard management interfaces provide.",
       "technologies": ["Python", "UniFi API", "Network Protocols", "Data Analytics"],
       "highlights": [
@@ -99,7 +98,7 @@
     {
       "name": "hack",
       "displayName": "Hacking Simulator",
-      "description": "An educational hacking simulator built in Rust that teaches cybersecurity concepts through interactive gameplay and realistic scenarios.",
+      "description": "A hacking simulator built in Rust for learning cybersecurity concepts.",
       "longDescription": "This educational tool provides a safe, legal environment for learning about cybersecurity and ethical hacking concepts. Built in Rust for performance and safety, the simulator presents realistic hacking scenarios where users can learn about common vulnerabilities, security best practices, and penetration testing techniques. The project demonstrates advanced Rust programming concepts while making cybersecurity education accessible and engaging.",
       "technologies": ["Rust", "Systems Programming", "Cybersecurity", "Game Development"],
       "highlights": [
@@ -115,7 +114,7 @@
     {
       "name": "catastrophe",
       "displayName": "CATastrophe Game",
-      "description": "A playful game built with Unreal Engine where you play as a mischievous cat causing chaos around the house.",
+      "description": "CATastrophe: A Mischief Simulator - experimenting with Unreal Engine and C++ game development.",
       "longDescription": "CATastrophe is an experimental game development project using Unreal Engine and C++. Players control a curious cat navigating through detailed 3D environments, knocking objects off shelves, hiding in boxes, and generally causing adorable mayhem. The project serves as a learning experience in game development, 3D physics, and Unreal Engine's powerful capabilities. It showcases advanced C++ programming in a game development context and demonstrates skills in 3D modeling, physics simulation, and game design.",
       "technologies": ["C++", "Unreal Engine", "3D Modeling", "Game Physics", "Game Design"],
       "highlights": [
@@ -151,7 +150,7 @@
     "Mobile Applications",
     "Networking & Security",
     "Game Development",
-    "Development Tools",
+    "AI & Machine Learning",
     "Lifestyle & Relationships",
     "Education & Security"
   ],
