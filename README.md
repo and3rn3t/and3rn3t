@@ -24,23 +24,43 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 
 ### ⭐ [Health Analytics Platform](https://github.com/and3rn3t/health)
 > Advanced health tracking using Apple HealthKit and iPhone LiDAR sensors for gait analysis
-> 
-> **Tech:** TypeScript, HealthKit, LiDAR, ML | **Stars:** 4
+>
+> **Tech:** TypeScript, HealthKit, LiDAR, ML
 
 ### 📱 [HealthKit Bridge](https://github.com/and3rn3t/HealthKitBridge)
-> Native iOS app bridging HealthKit data to web applications
-> 
-> **Tech:** Swift, HealthKit, iOS | **Stars:** 3
+> Native iOS app bridging HealthKit data to web applications via an on-device HTTP server
+>
+> **Tech:** Swift, HealthKit, iOS
+
+### 🌐 [Network Analytics Tool](https://github.com/and3rn3t/network)
+> UniFi API integration for deep network monitoring, traffic analysis, and management
+>
+> **Tech:** Python, UniFi API, Network Protocols
+
+### 🔍 [Network Traffic Analyzer](https://github.com/and3rn3t/net-traffic)
+> Real-time traffic analysis and visualization for local network bandwidth and device activity
+>
+> **Tech:** TypeScript, WebSockets, Data Visualization
 
 ### 🏠 [Home Automation Hub](https://github.com/and3rn3t/homehub)
-> Centralized IoT control center for smart home devices
-> 
-> **Tech:** TypeScript, IoT, WebSockets, React | **Stars:** 1
+> Centralized IoT control center for smart home devices and automations
+>
+> **Tech:** TypeScript, IoT, WebSockets, React
 
 ### 🌤️ [Weather App](https://github.com/and3rn3t/weather)
-> Cross-platform weather application with native mobile integration
-> 
-> **Tech:** TypeScript, Capacitor, Android, iOS | **Stars:** 1
+> Cross-platform weather application with native Android and iOS integration via Capacitor
+>
+> **Tech:** TypeScript, Capacitor, Android, iOS
+
+### 🗄️ [dbt Data Models](https://github.com/and3rn3t/dbt)
+> Modular SQL transformation pipelines using dbt with schema testing and Jinja templating
+>
+> **Tech:** Python, dbt, SQL
+
+### 🎮 [Custom Minecraft Server](https://github.com/and3rn3t/minecraft)
+> Self-hosted Minecraft server with automated setup, plugin management, and a status dashboard
+>
+> **Tech:** HTML, JavaScript, Shell
 
 [**→ View All Projects**](https://and3rn3t.github.io/and3rn3t/#projects)
 

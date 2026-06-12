@@ -5,7 +5,13 @@
       "displayName": "Health Analytics Platform",
       "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones for gait analysis and wellness monitoring.",
       "longDescription": "This project combines cutting-edge mobile technology with health analytics to provide comprehensive wellness insights. Using Apple's HealthKit framework for health data collection and the advanced LiDAR sensors available in modern iPhones, the platform performs sophisticated gait analysis to help users understand their walking patterns and overall physical health. The application employs machine learning algorithms to identify trends and provide personalized recommendations.",
-      "technologies": ["TypeScript", "HealthKit", "LiDAR", "Machine Learning", "iOS"],
+      "technologies": [
+        "TypeScript",
+        "HealthKit",
+        "LiDAR",
+        "Machine Learning",
+        "iOS"
+      ],
       "highlights": [
         "Real-time gait analysis using LiDAR depth sensing",
         "Integration with Apple HealthKit for comprehensive health data",
@@ -17,42 +23,38 @@
       "github_repo": "and3rn3t/health"
     },
     {
-      "name": "huggingface",
-      "displayName": "HuggingFace Integration",
-      "description": "Experimenting with HuggingFace models and AI/ML integrations.",
-      "longDescription": "An experimental project exploring the HuggingFace ecosystem for machine learning and AI model integration. This project demonstrates how to leverage pre-trained models for various AI tasks.",
-      "technologies": ["TypeScript", "HuggingFace", "Machine Learning", "AI"],
-      "highlights": [
-        "Integration with HuggingFace model ecosystem",
-        "AI/ML experimentation platform",
-        "Pre-trained model usage"
+      "name": "HealthKitBridge",
+      "displayName": "HealthKit Bridge",
+      "description": "Native iOS app that bridges Apple HealthKit data to web applications via a local on-device HTTP server.",
+      "longDescription": "HealthKitBridge is a lightweight Swift application that acts as a local data bridge between Apple's HealthKit framework and web-based dashboards. It exposes a local HTTP endpoint that web apps can query to access authorized health data in real time — no cloud intermediary required. This privacy-first approach keeps sensitive health data on-device while enabling rich visualizations in any browser. It serves as the data-access layer for the Health Analytics Platform.",
+      "technologies": [
+        "Swift",
+        "HealthKit",
+        "iOS",
+        "HTTP Server"
       ],
-      "category": "AI & Machine Learning",
-      "status": "Active Development",
-      "github_repo": "and3rn3t/huggingface"
-    },
-    {
-      "name": "weather",
-      "displayName": "Cross-Platform Weather App",
-      "description": "Playing around with weather app features and Android app integration using Capacitor.",
-      "longDescription": "This weather application showcases modern mobile development practices by building a single codebase that compiles to both Android and iOS using Capacitor. The app provides detailed weather information with an intuitive interface, demonstrating the power of cross-platform development while maintaining native performance and user experience. Features include location-based forecasts, severe weather alerts, and interactive weather maps.",
-      "technologies": ["TypeScript", "Capacitor", "Android", "iOS", "Weather APIs"],
       "highlights": [
-        "Single codebase for iOS and Android",
-        "Native performance with web technologies",
-        "Real-time weather updates and alerts",
-        "Beautiful, intuitive user interface"
+        "On-device HTTP server for zero-cloud HealthKit access",
+        "Real-time streaming of heart rate, steps, and activity data",
+        "Privacy-first: health data never leaves the local network",
+        "Companion bridge for the Health Analytics Platform"
       ],
-      "category": "Mobile Applications",
+      "category": "Health & Wellness",
       "status": "Active Development",
-      "github_repo": "and3rn3t/weather"
+      "github_repo": "and3rn3t/HealthKitBridge"
     },
     {
       "name": "homehub",
       "displayName": "Home Automation Hub",
       "description": "A centralized home automation control center for managing IoT devices, smart home systems, and automations from a unified interface.",
       "longDescription": "HomeHub provides a comprehensive solution for managing modern smart homes. This platform integrates with various IoT protocols and devices to offer a unified control interface for lights, thermostats, security systems, and more. Built with TypeScript for type safety and maintainability, it emphasizes user experience and real-time responsiveness. The hub supports custom automation scenarios and provides detailed analytics about home energy usage and device activity.",
-      "technologies": ["TypeScript", "IoT Protocols", "WebSockets", "React", "Smart Home APIs"],
+      "technologies": [
+        "TypeScript",
+        "IoT Protocols",
+        "WebSockets",
+        "React",
+        "Smart Home APIs"
+      ],
       "highlights": [
         "Unified control for multiple smart home platforms",
         "Real-time device status and control",
@@ -64,11 +66,39 @@
       "github_repo": "and3rn3t/homehub"
     },
     {
+      "name": "weather",
+      "displayName": "Cross-Platform Weather App",
+      "description": "Playing around with weather app features and Android app integration using Capacitor.",
+      "longDescription": "This weather application showcases modern mobile development practices by building a single codebase that compiles to both Android and iOS using Capacitor. The app provides detailed weather information with an intuitive interface, demonstrating the power of cross-platform development while maintaining native performance and user experience. Features include location-based forecasts, severe weather alerts, and interactive weather maps.",
+      "technologies": [
+        "TypeScript",
+        "Capacitor",
+        "Android",
+        "iOS",
+        "Weather APIs"
+      ],
+      "highlights": [
+        "Single codebase for iOS and Android",
+        "Native performance with web technologies",
+        "Real-time weather updates and alerts",
+        "Beautiful, intuitive user interface"
+      ],
+      "category": "Mobile Applications",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/weather"
+    },
+    {
       "name": "couple-connect",
       "displayName": "Couple Connect",
       "description": "Accountability app for couples to identify areas for improvement and track shared goals.",
       "longDescription": "Couple Connect is a unique application that helps couples improve their relationships through accountability, goal tracking, and effective communication. The app provides tools for setting shared goals, tracking progress, and identifying areas for growth. Built with React and deployed on Cloudflare's edge network for global performance, it includes features like mood tracking, shared calendars, and communication exercises designed by relationship experts. The application prioritizes privacy and security for sensitive relationship data.",
-      "technologies": ["React", "JavaScript", "Vite", "Docker", "Cloudflare"],
+      "technologies": [
+        "React",
+        "JavaScript",
+        "Vite",
+        "Docker",
+        "Cloudflare"
+      ],
       "highlights": [
         "Shared goal tracking and accountability",
         "Privacy-focused relationship tools",
@@ -84,7 +114,12 @@
       "displayName": "Network Analytics Tool",
       "description": "Testing UniFi API for network monitoring, analysis, and management of Ubiquiti networking equipment.",
       "longDescription": "This Python-based tool interfaces with Ubiquiti's UniFi API to provide comprehensive network monitoring, analysis, and management capabilities. It offers detailed insights into network traffic patterns, device connectivity, bandwidth usage, and potential security issues. The tool is designed for network administrators and enthusiasts who want deeper visibility into their network infrastructure beyond what standard management interfaces provide.",
-      "technologies": ["Python", "UniFi API", "Network Protocols", "Data Analytics"],
+      "technologies": [
+        "Python",
+        "UniFi API",
+        "Network Protocols",
+        "Data Analytics"
+      ],
       "highlights": [
         "Deep integration with UniFi networking equipment",
         "Real-time network traffic analysis",
@@ -96,11 +131,57 @@
       "github_repo": "and3rn3t/network"
     },
     {
+      "name": "net-traffic",
+      "displayName": "Network Traffic Analyzer",
+      "description": "Real-time network traffic analysis and visualization tool for monitoring bandwidth, device activity, and anomalous patterns on a local network.",
+      "longDescription": "Network Traffic Analyzer is a TypeScript-based tool that captures and visualizes traffic data across home and lab networks. Built to complement UniFi networking infrastructure, it surfaces top-talkers, bandwidth trends, and anomalous connections through an intuitive live dashboard. The project explores packet-level inspection APIs and lightweight streaming architectures to deliver near-real-time visibility without enterprise-grade overhead.",
+      "technologies": [
+        "TypeScript",
+        "Network Protocols",
+        "Data Visualization",
+        "WebSockets"
+      ],
+      "highlights": [
+        "Real-time bandwidth and device activity monitoring",
+        "Anomaly detection for unexpected traffic patterns",
+        "Integrates with existing home network infrastructure",
+        "Lightweight streaming architecture with minimal overhead"
+      ],
+      "category": "Networking & Security",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/net-traffic"
+    },
+    {
+      "name": "huggingface",
+      "displayName": "HuggingFace Integration",
+      "description": "Experimenting with HuggingFace models and AI/ML integrations.",
+      "longDescription": "An experimental project exploring the HuggingFace ecosystem for machine learning and AI model integration. This project demonstrates how to leverage pre-trained models for various AI tasks.",
+      "technologies": [
+        "TypeScript",
+        "HuggingFace",
+        "Machine Learning",
+        "AI"
+      ],
+      "highlights": [
+        "Integration with HuggingFace model ecosystem",
+        "AI/ML experimentation platform",
+        "Pre-trained model usage"
+      ],
+      "category": "AI & Machine Learning",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/huggingface"
+    },
+    {
       "name": "hack",
       "displayName": "Hacking Simulator",
       "description": "A hacking simulator built in Rust for learning cybersecurity concepts.",
       "longDescription": "This educational tool provides a safe, legal environment for learning about cybersecurity and ethical hacking concepts. Built in Rust for performance and safety, the simulator presents realistic hacking scenarios where users can learn about common vulnerabilities, security best practices, and penetration testing techniques. The project demonstrates advanced Rust programming concepts while making cybersecurity education accessible and engaging.",
-      "technologies": ["Rust", "Systems Programming", "Cybersecurity", "Game Development"],
+      "technologies": [
+        "Rust",
+        "Systems Programming",
+        "Cybersecurity",
+        "Game Development"
+      ],
       "highlights": [
         "Safe environment for learning security concepts",
         "Realistic hacking scenarios",
@@ -112,11 +193,59 @@
       "github_repo": "and3rn3t/hack"
     },
     {
+      "name": "dbt",
+      "displayName": "dbt Data Models",
+      "description": "Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources.",
+      "longDescription": "This project applies dbt as a framework for managing data transformation logic in SQL. It covers building layered data models (staging, intermediate, mart), writing schema tests for data-quality validation, and using Jinja templating to keep SQL DRY and reusable. The goal is to bring software engineering best practices — version control, automated testing, in-code documentation — into analytics engineering workflows, with Python used for orchestration and tooling around the dbt project.",
+      "technologies": [
+        "Python",
+        "dbt",
+        "SQL",
+        "Data Engineering"
+      ],
+      "highlights": [
+        "Layered model architecture: staging, intermediate, and mart layers",
+        "Schema tests for automated data-quality validation",
+        "Jinja templating for reusable, DRY transformation logic",
+        "Software engineering practices applied to analytics pipelines"
+      ],
+      "category": "Data Engineering",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/dbt"
+    },
+    {
+      "name": "minecraft",
+      "displayName": "Custom Minecraft Server",
+      "description": "A self-hosted, custom-configured Minecraft server with automated setup scripts, plugin management, and a web dashboard for monitoring.",
+      "longDescription": "This project sets up and manages a fully customized Minecraft server environment for personal and family use. It includes automated provisioning scripts for server initialization, data pack and plugin configuration, and a lightweight web interface for viewing server status, connected players, and resource usage. The dashboard is built with HTML and vanilla JavaScript to keep dependencies minimal while still delivering useful real-time server insights.",
+      "technologies": [
+        "HTML",
+        "JavaScript",
+        "Shell",
+        "Minecraft"
+      ],
+      "highlights": [
+        "Automated server setup and plugin/data pack management",
+        "Scheduled backup system to prevent world data loss",
+        "Web dashboard for real-time server status and player monitoring",
+        "Modular configuration for easy customization and updates"
+      ],
+      "category": "Game Development",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/minecraft"
+    },
+    {
       "name": "catastrophe",
       "displayName": "CATastrophe Game",
       "description": "CATastrophe: A Mischief Simulator - experimenting with Unreal Engine and C++ game development.",
       "longDescription": "CATastrophe is an experimental game development project using Unreal Engine and C++. Players control a curious cat navigating through detailed 3D environments, knocking objects off shelves, hiding in boxes, and generally causing adorable mayhem. The project serves as a learning experience in game development, 3D physics, and Unreal Engine's powerful capabilities. It showcases advanced C++ programming in a game development context and demonstrates skills in 3D modeling, physics simulation, and game design.",
-      "technologies": ["C++", "Unreal Engine", "3D Modeling", "Game Physics", "Game Design"],
+      "technologies": [
+        "C++",
+        "Unreal Engine",
+        "3D Modeling",
+        "Game Physics",
+        "Game Design"
+      ],
       "highlights": [
         "Built with industry-standard Unreal Engine",
         "Advanced physics simulation for realistic interactions",
@@ -126,55 +255,92 @@
       "category": "Game Development",
       "status": "Experimental",
       "github_repo": "and3rn3t/catastrophe"
-    },
-    {
-      "name": "vitalsense-mobile",
-      "displayName": "VitalSense Mobile",
-      "description": "A mobile health monitoring application focused on tracking and analyzing vital health metrics with real-time insights.",
-      "longDescription": "VitalSense Mobile is a comprehensive health monitoring platform that helps users track vital health metrics including heart rate, blood pressure, oxygen levels, and more. The application provides real-time insights, trend analysis, and personalized health recommendations. With a focus on user privacy and data security, it enables users to take control of their health data while receiving actionable insights powered by modern analytics techniques.",
-      "technologies": ["Mobile Development", "Makefile", "Health APIs", "Data Analytics"],
-      "highlights": [
-        "Comprehensive vital signs tracking",
-        "Real-time health insights and alerts",
-        "Privacy-first data architecture",
-        "Trend analysis and health predictions"
-      ],
-      "category": "Health & Wellness",
-      "status": "New Project",
-      "github_repo": "and3rn3t/vitalsense-mobile"
     }
   ],
   "categories": [
+    "AI & Machine Learning",
+    "Data Engineering",
+    "Education & Security",
+    "Game Development",
     "Health & Wellness",
     "IoT & Home Automation",
-    "Mobile Applications",
-    "Networking & Security",
-    "Game Development",
-    "AI & Machine Learning",
     "Lifestyle & Relationships",
-    "Education & Security"
+    "Mobile Applications",
+    "Networking & Security"
   ],
   "skills": {
     "languages": {
-      "TypeScript": { "level": "Advanced", "years": 3 },
-      "Python": { "level": "Advanced", "years": 4 },
-      "Swift": { "level": "Intermediate", "years": 2 },
-      "JavaScript": { "level": "Advanced", "years": 5 },
-      "Rust": { "level": "Intermediate", "years": 1 },
-      "C++": { "level": "Intermediate", "years": 2 }
+      "TypeScript": {
+        "level": "Advanced",
+        "years": 3
+      },
+      "Python": {
+        "level": "Advanced",
+        "years": 4
+      },
+      "Swift": {
+        "level": "Intermediate",
+        "years": 2
+      },
+      "JavaScript": {
+        "level": "Advanced",
+        "years": 5
+      },
+      "Rust": {
+        "level": "Intermediate",
+        "years": 1
+      },
+      "C++": {
+        "level": "Intermediate",
+        "years": 2
+      },
+      "SQL": {
+        "level": "Intermediate",
+        "years": 2
+      }
     },
     "frameworks": {
-      "React": { "level": "Advanced", "projects": ["couple-connect", "homehub"] },
-      "Node.js": { "level": "Advanced", "projects": ["weather", "homehub"] },
-      "HealthKit": { "level": "Advanced", "projects": ["health", "HealthKitBridge"] },
-      "Unreal Engine": { "level": "Beginner", "projects": ["catastrophe"] }
+      "React": {
+        "level": "Advanced",
+        "projects": [
+          "couple-connect",
+          "homehub"
+        ]
+      },
+      "Node.js": {
+        "level": "Advanced",
+        "projects": [
+          "weather",
+          "homehub"
+        ]
+      },
+      "HealthKit": {
+        "level": "Advanced",
+        "projects": [
+          "health",
+          "HealthKitBridge"
+        ]
+      },
+      "Unreal Engine": {
+        "level": "Beginner",
+        "projects": [
+          "catastrophe"
+        ]
+      },
+      "dbt": {
+        "level": "Intermediate",
+        "projects": [
+          "dbt"
+        ]
+      }
     },
     "specializations": [
       "IoT & Home Automation",
       "Health Technology",
       "Cross-Platform Mobile Development",
       "Network Security",
-      "Game Development"
+      "Game Development",
+      "Data Engineering"
     ]
   }
 }
