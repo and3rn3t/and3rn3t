@@ -221,7 +221,8 @@
     <link rel="modulepreload" href="modules/mobile.js">
     <link rel="modulepreload" href="modules/navigation.js">
     <!-- Non-critical modules loaded lazily on-demand -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="vendor/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Cloudflare Web Analytics with Error Handling -->
     <script>
@@ -278,12 +279,9 @@
     <link rel="dns-prefetch" href="//api.github.com">
     <link rel="dns-prefetch" href="//github-readme-stats.vercel.app">
     <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com">
     
     <!-- Preconnect for critical third-party domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://api.github.com">
     
     <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
@@ -460,14 +458,10 @@
     <!-- Load main stylesheet after critical CSS -->
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
-    
-    <!-- Font loading optimization -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    
-    <!-- Font Awesome with async loading -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
+    <!-- Font Awesome (self-hosted) with async loading -->
+    <link rel="stylesheet" href="vendor/fontawesome/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="vendor/fontawesome/all.min.css"></noscript>
     
     <!-- reCAPTCHA v3 for enhanced form security -->
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>

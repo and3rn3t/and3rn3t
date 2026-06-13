@@ -1,16 +1,22 @@
 // Service Worker for Matthew Anderson's Portfolio
-// Version: 1.1.0
+// Version: 1.2.0
 
-const CACHE_NAME = 'portfolio-v1.1.0';
-const RUNTIME_CACHE = 'portfolio-runtime-v1.1';
-const API_CACHE = 'portfolio-api-v1.1';
+const CACHE_NAME = 'portfolio-v1.2.0';
+const RUNTIME_CACHE = 'portfolio-runtime-v1.2';
+const API_CACHE = 'portfolio-api-v1.2';
 
 // Assets to cache immediately on install
 const PRECACHE_ASSETS = [
     '/',
     '/index.html',
     '/styles.css',
-    '/script.js',
+    '/main.js',
+    '/modules/debug.js',
+    '/modules/error-handler.js',
+    '/modules/theme.js',
+    '/modules/mobile.js',
+    '/modules/navigation.js',
+    '/fonts/inter-variable.woff2',
     '/projects-data.json',
     '/manifest.json',
     '/offline.html'
@@ -30,7 +36,14 @@ self.addEventListener('install', (event) => {
         caches.open(CACHE_NAME)
             .then((cache) => {
                 console.log('[Service Worker] Precaching assets');
-                return cache.addAll(PRECACHE_ASSETS);
+                // Cache individually so one missing asset doesn't abort the whole install
+                return Promise.allSettled(
+                    PRECACHE_ASSETS.map((asset) =>
+                        cache.add(asset).catch((error) => {
+                            console.warn('[Service Worker] Failed to precache:', asset, error);
+                        })
+                    )
+                );
             })
             .then(() => self.skipWaiting())
             .catch((error) => {
