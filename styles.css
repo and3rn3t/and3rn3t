@@ -530,7 +530,7 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     background: var(--bg-dark);
@@ -694,7 +694,7 @@ section {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px;
+    width: 56px;
     height: 3px;
     background: var(--primary-color);
     border-radius: var(--radius-sm);
@@ -702,7 +702,7 @@ section {
 
 /* About Section */
 .about {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
 }
 
 .about-content {
@@ -729,17 +729,18 @@ section {
     padding: var(--space-8);
     background: var(--bg-primary);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
     transition: transform var(--transition-slow), box-shadow var(--transition-slow);
 }
 
 .highlight-item:hover {
     transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-dark);
 }
 
 .highlight-item i {
-    font-size: var(--font-size-5xl);
+    font-size: var(--font-size-4xl);
     color: var(--primary-color);
     margin-bottom: var(--space-4);
 }
@@ -775,7 +776,7 @@ section {
 }
 
 .skill-category h3 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     margin-bottom: var(--space-6);
     color: var(--text-primary);
@@ -814,8 +815,8 @@ section {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-8);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
     margin-bottom: var(--space-16);
 }
 
@@ -873,6 +874,7 @@ section {
 
 .contribution-widget img {
     max-width: 100%;
+    max-height: 180px;
     height: auto;
     border-radius: var(--radius-md);
 }
@@ -944,8 +946,9 @@ section {
 .project-card {
     background: var(--bg-primary);
     border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     transition: all var(--transition-base);
     position: relative;
 }
@@ -953,6 +956,7 @@ section {
 .project-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--border-dark);
 }
 
 .project-header {
@@ -1036,13 +1040,14 @@ section {
 
 .project-link.secondary {
     background: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
 }
 
 .project-link.secondary:hover {
-    background: var(--text-primary);
-    color: var(--text-white);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-dark);
 }
 
 .loading {
@@ -1444,7 +1449,7 @@ section {
     }
 
     .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .badges-grid {
@@ -1546,11 +1551,20 @@ section {
 
 
 .project-long-description {
-    margin: 15px 0;
+    margin: 12px 0;
     padding: 15px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: var(--radius-base);
     border-left: 4px solid var(--primary-color);
+}
+
+/* First highlight shown inline on the card */
+.project-highlight-lead {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: var(--space-2) 0 var(--space-3);
+    line-height: var(--line-height-snug);
+    font-style: italic;
 }
 
 .project-long-description summary {
@@ -2069,10 +2083,7 @@ body.dark-theme .contact-method {
     border-color: var(--border-color);
 }
 
-body.dark-theme .project-long-description {
-    background: rgba(255, 255, 255, 0.03);
-    border-left-color: var(--primary-color);
-}
+body.dark-theme .project-long-description {\n    background: rgba(255, 255, 255, 0.03);\n    border-left-color: var(--primary-color);\n}\n\nbody.dark-theme .project-highlight-lead {\n    color: var(--text-secondary);\n}
 
 body.dark-theme .language-tag {
     background: var(--bg-tertiary);

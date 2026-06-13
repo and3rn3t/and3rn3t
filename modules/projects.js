@@ -57,34 +57,61 @@ export class ProjectsManager {
         if (!this.container) return;
         
         this.isLoading = true;
-        
-        const curatedProjects = this.projectsData?.projects;
-        if (!curatedProjects?.length) {
-            debug.warn('[Projects] No curated projects found in metadata');
-            this.isLoading = false;
-            return;
-        }
-        
+
+        // Build a map of all repos from the GitHub data cache
         const repoMap = new Map();
-        
+        let selfStarredNames = null;
+
         try {
-            const repos = await githubAPI.getRepositories('stars', 100);
+            const cachedData = await githubAPI.loadCachedGitHubData();
+            const repos = cachedData?.repositories ?? await githubAPI.getRepositories('pushed', 100);
             for (const repo of repos) {
                 repoMap.set(repo.name, repo);
             }
-            debug.log(`[Projects] Fetched ${repoMap.size} repos for live stats`);
+            // Starred list from workflow — the primary curation signal
+            if (Array.isArray(cachedData?.selfStarredRepoNames) && cachedData.selfStarredRepoNames.length) {
+                selfStarredNames = new Set(cachedData.selfStarredRepoNames);
+            }
+            debug.log(`[Projects] ${repoMap.size} repos loaded, starred signal: ${selfStarredNames ? [...selfStarredNames].join(', ') : 'unavailable (fallback to curated list)'}`);
         } catch (error) {
-            debug.warn('[Projects] GitHub API unavailable, rendering metadata only:', error);
+            debug.warn('[Projects] GitHub API unavailable, falling back to metadata only:', error);
         }
-        
-        this.projects = curatedProjects.map(metadata => ({
-            metadata,
-            repo: repoMap.get(metadata.name) || null
-        }));
-        
+
+        // Build metadata lookup from projects-data.json
+        const metaMap = new Map();
+        for (const m of (this.projectsData?.projects ?? [])) {
+            metaMap.set(m.name, m);
+            // Also index by github_repo basename (e.g. "and3rn3t/health" → "health")
+            if (m.github_repo) {
+                const basename = m.github_repo.split('/').pop();
+                if (basename !== m.name) metaMap.set(basename, m);
+            }
+        }
+
+        if (selfStarredNames?.size) {
+            // PRIMARY PATH: self-starred repos drive the list
+            this.projects = [...selfStarredNames]
+                .map(name => ({
+                    metadata: metaMap.get(name) ?? null,
+                    repo: repoMap.get(name) ?? null,
+                }))
+                .filter(({ repo, metadata }) => repo || metadata); // drop ghosts
+        } else {
+            // FALLBACK: static curated list from projects-data.json
+            const curatedProjects = this.projectsData?.projects;
+            if (!curatedProjects?.length) {
+                debug.warn('[Projects] No curated projects found in metadata');
+                this.isLoading = false;
+                return;
+            }
+            this.projects = curatedProjects.map(metadata => ({
+                metadata,
+                repo: repoMap.get(metadata.name) ?? null,
+            }));
+        }
+
         this.renderProjects();
-        debug.log(`[Projects] Rendered ${this.projects.length} curated projects`);
-        
+        debug.log(`[Projects] Rendered ${this.projects.length} projects`);
         this.isLoading = false;
     }
 
@@ -117,23 +144,30 @@ export class ProjectsManager {
         const category = metadata?.category;
         const status = metadata?.status;
         const language = repo?.language || metadata?.technologies?.[0] || 'Code';
-        const updatedDate = repo?.updated_at ? new Date(repo.updated_at).toLocaleDateString() : null;
         const htmlUrl = repo?.html_url || `https://github.com/${metadata?.github_repo || 'and3rn3t'}`;
+        const homepage = repo?.homepage;
+        const highlights = metadata?.highlights ?? [];
+
+        // Relative push time ("3 days ago", "2 months ago")
+        const pushedAt = repo?.pushed_at;
+        const relativePush = pushedAt ? this._relativeTime(new Date(pushedAt)) : null;
 
         // Mark cards pushed within the last 180 days as recently active
         const SIX_MONTHS_MS = 180 * 24 * 60 * 60 * 1000;
-        const isRecent = repo?.pushed_at
-            ? (Date.now() - new Date(repo.pushed_at).getTime()) < SIX_MONTHS_MS
+        const isRecent = pushedAt
+            ? (Date.now() - new Date(pushedAt).getTime()) < SIX_MONTHS_MS
             : false;
 
         card.className = isRecent ? 'project-card project-card--recent' : 'project-card';
-        const homepage = repo?.homepage;
         
+        // First highlight shown inline; rest collapsed in <details>
+        const [firstHighlight, ...restHighlights] = highlights;
+
         const longDescHtml = longDescription ? `
             <details class="project-long-description">
-                <summary>Learn more about this project...</summary>
+                <summary>More about this project…</summary>
                 <p>${longDescription}</p>
-                ${metadata?.highlights ? `<ul class="project-highlights">${metadata.highlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
+                ${restHighlights.length ? `<ul class="project-highlights">${restHighlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
             </details>
         ` : '';
         
@@ -145,6 +179,7 @@ export class ProjectsManager {
                 </div>
                 <h3 class="project-title">${displayName}</h3>
                 <p class="project-description">${description}</p>
+                ${firstHighlight ? `<p class="project-highlight-lead">→ ${firstHighlight}</p>` : ''}
                 ${longDescHtml}
                 
                 <div class="project-stats">
@@ -152,18 +187,10 @@ export class ProjectsManager {
                         <i class="fas fa-star"></i>
                         <span>${repo?.stargazers_count ?? '—'}</span>
                     </div>
-                    <div class="project-stat" title="Forks">
-                        <i class="fas fa-code-branch"></i>
-                        <span>${repo?.forks_count ?? '—'}</span>
-                    </div>
-                    <div class="project-stat" title="Open Issues">
-                        <i class="fas fa-circle-dot"></i>
-                        <span>${repo?.open_issues_count ?? '—'}</span>
-                    </div>
-                    ${updatedDate ? `
-                    <div class="project-stat" title="Last Updated">
-                        <i class="fas fa-calendar"></i>
-                        <span>${updatedDate}</span>
+                    ${relativePush ? `
+                    <div class="project-stat" title="Last pushed">
+                        <i class="fas fa-code-commit"></i>
+                        <span>${relativePush}</span>
                     </div>` : ''}
                 </div>
                 
@@ -196,6 +223,22 @@ export class ProjectsManager {
         `;
         
         return card;
+    }
+
+    _relativeTime(date) {
+        const diff = Date.now() - date.getTime();
+        const minutes = Math.floor(diff / 60000);
+        const hours   = Math.floor(diff / 3600000);
+        const days    = Math.floor(diff / 86400000);
+        const weeks   = Math.floor(days / 7);
+        const months  = Math.floor(days / 30);
+        const years   = Math.floor(days / 365);
+        if (minutes < 60)  return `${minutes}m ago`;
+        if (hours   < 24)  return `${hours}h ago`;
+        if (days    < 7)   return `${days}d ago`;
+        if (weeks   < 5)   return `${weeks}w ago`;
+        if (months  < 12)  return `${months}mo ago`;
+        return `${years}y ago`;
     }
 
     animateCards() {

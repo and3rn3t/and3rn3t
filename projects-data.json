@@ -3,20 +3,19 @@
     {
       "name": "health",
       "displayName": "Health Analytics Platform",
-      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones for gait analysis and wellness monitoring.",
-      "longDescription": "This project combines cutting-edge mobile technology with health analytics to provide comprehensive wellness insights. Using Apple's HealthKit framework for health data collection and the advanced LiDAR sensors available in modern iPhones, the platform performs sophisticated gait analysis to help users understand their walking patterns and overall physical health. The application employs machine learning algorithms to identify trends and provide personalized recommendations.",
+      "description": "A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors. Live at health.andernet.dev.",
+      "longDescription": "This project combines iPhone LiDAR depth sensing with Apple HealthKit to analyze gait patterns without any wearable hardware. The iPhone becomes the sensor; a TypeScript web dashboard consumes live health data through the companion HealthKitBridge local HTTP server. The platform identifies walking irregularities, tracks wellness trends over time, and surfaces personalized insights — all processed on-device with no cloud intermediary. It's a real system with a live deployment, not a prototype.",
       "technologies": [
         "TypeScript",
         "HealthKit",
         "LiDAR",
-        "Machine Learning",
         "iOS"
       ],
       "highlights": [
-        "Real-time gait analysis using LiDAR depth sensing",
-        "Integration with Apple HealthKit for comprehensive health data",
-        "ML-powered insights and trend detection",
-        "Privacy-first approach to sensitive health data"
+        "Live at health.andernet.dev — real iOS sensor data driving a web dashboard",
+        "LiDAR gait analysis without wearables: uses depth map data available on any modern iPhone",
+        "On-device HealthKit data pipeline — sensitive health data never leaves the local network",
+        "TypeScript frontend consuming live health data via the companion HealthKitBridge HTTP server"
       ],
       "category": "Health & Wellness",
       "status": "Active Development",
@@ -46,20 +45,19 @@
     {
       "name": "homehub",
       "displayName": "Home Automation Hub",
-      "description": "A centralized home automation control center for managing IoT devices, smart home systems, and automations from a unified interface.",
-      "longDescription": "HomeHub provides a comprehensive solution for managing modern smart homes. This platform integrates with various IoT protocols and devices to offer a unified control interface for lights, thermostats, security systems, and more. Built with TypeScript for type safety and maintainability, it emphasizes user experience and real-time responsiveness. The hub supports custom automation scenarios and provides detailed analytics about home energy usage and device activity.",
+      "description": "A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.",
+      "longDescription": "HomeHub is a self-hosted TypeScript application that centralises control of lights, locks, thermostats, and sensors across different smart home ecosystems. It uses a WebSocket-driven architecture for sub-second device state updates without polling, and a custom rule engine for time- and state-based automations. Strong TypeScript typing is applied end-to-end — device state, event payloads, and automation rules all have explicit schemas — making the codebase maintainable as integrations grow. The project reflects how I approach personal infrastructure: I'd rather build a well-architected tool than configure someone else's SaaS.",
       "technologies": [
         "TypeScript",
-        "IoT Protocols",
         "WebSockets",
-        "React",
-        "Smart Home APIs"
+        "IoT Protocols",
+        "React"
       ],
       "highlights": [
-        "Unified control for multiple smart home platforms",
-        "Real-time device status and control",
-        "Custom automation scenarios",
-        "Energy usage monitoring and analytics"
+        "WebSocket-driven real-time control — device state updates without polling",
+        "Custom automation rule engine for time- and state-based triggers",
+        "Strong TypeScript typing across device state, event payloads, and rule schemas",
+        "Self-hosted; no vendor cloud dependency for local device control"
       ],
       "category": "IoT & Home Automation",
       "status": "Active Development",
@@ -112,8 +110,8 @@
     {
       "name": "network",
       "displayName": "Network Analytics Tool",
-      "description": "Testing UniFi API for network monitoring, analysis, and management of Ubiquiti networking equipment.",
-      "longDescription": "This Python-based tool interfaces with Ubiquiti's UniFi API to provide comprehensive network monitoring, analysis, and management capabilities. It offers detailed insights into network traffic patterns, device connectivity, bandwidth usage, and potential security issues. The tool is designed for network administrators and enthusiasts who want deeper visibility into their network infrastructure beyond what standard management interfaces provide.",
+      "description": "A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes.",
+      "longDescription": "The official UniFi dashboard shows you what Ubiquiti wants you to see. This Python tool queries the controller API directly to pull richer data: per-device traffic histories, client fingerprinting details, event logs, and WLAN association records. It provided the foundation for building custom alerting on unexpected devices and tracking bandwidth patterns over time. The project is also a useful template for working with any vendor REST API that exposes more than its official UI shows.",
       "technologies": [
         "Python",
         "UniFi API",
@@ -121,10 +119,10 @@
         "Data Analytics"
       ],
       "highlights": [
-        "Deep integration with UniFi networking equipment",
-        "Real-time network traffic analysis",
-        "Security monitoring and alerting",
-        "Historical data analysis and reporting"
+        "Surfaces UniFi data not accessible in the official dashboard via direct API queries",
+        "Device fingerprinting and per-client traffic history across network segments",
+        "Security event monitoring with alerting on unexpected device connections",
+        "Reusable pattern for any managed network vendor with a REST API"
       ],
       "category": "Networking & Security",
       "status": "Active Development",
@@ -133,19 +131,19 @@
     {
       "name": "net-traffic",
       "displayName": "Network Traffic Analyzer",
-      "description": "Real-time network traffic analysis and visualization tool for monitoring bandwidth, device activity, and anomalous patterns on a local network.",
-      "longDescription": "Network Traffic Analyzer is a TypeScript-based tool that captures and visualizes traffic data across home and lab networks. Built to complement UniFi networking infrastructure, it surfaces top-talkers, bandwidth trends, and anomalous connections through an intuitive live dashboard. The project explores packet-level inspection APIs and lightweight streaming architectures to deliver near-real-time visibility without enterprise-grade overhead.",
+      "description": "A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.",
+      "longDescription": "Network Traffic Analyzer is a self-hosted TypeScript service deployed on a Raspberry Pi 5 as a persistent home network sensor. It captures traffic metadata, computes per-device bandwidth totals, and pushes updates to a live dashboard via WebSockets — with no database and no polling. The architecture is intentionally lightweight: an in-memory streaming pipeline that stays responsive even on the Pi's constrained hardware. Built to complement UniFi data with packet-level visibility that the controller API doesn't provide.",
       "technologies": [
         "TypeScript",
-        "Network Protocols",
-        "Data Visualization",
-        "WebSockets"
+        "WebSockets",
+        "Raspberry Pi",
+        "Network Protocols"
       ],
       "highlights": [
-        "Real-time bandwidth and device activity monitoring",
-        "Anomaly detection for unexpected traffic patterns",
-        "Integrates with existing home network infrastructure",
-        "Lightweight streaming architecture with minimal overhead"
+        "Runs continuously on a Raspberry Pi 5 as a persistent home network sensor",
+        "Sub-second WebSocket updates — no polling, no database overhead",
+        "Top-talker detection and connection anomaly flagging without commercial tooling",
+        "In-memory streaming pipeline tuned to run on constrained Pi hardware"
       ],
       "category": "Networking & Security",
       "status": "Active Development",
@@ -153,19 +151,20 @@
     },
     {
       "name": "huggingface",
-      "displayName": "HuggingFace Integration",
-      "description": "Experimenting with HuggingFace models and AI/ML integrations.",
-      "longDescription": "An experimental project exploring the HuggingFace ecosystem for machine learning and AI model integration. This project demonstrates how to leverage pre-trained models for various AI tasks.",
+      "displayName": "Hugging Face API Sandbox",
+      "description": "A TypeScript sandbox for the Hugging Face Inference API, comparing text generation, sentence embeddings, and zero-shot classification across open-source model families.",
+      "longDescription": "This project is a structured exploration of the Hugging Face Inference API, organised as a set of experiments rather than a single feature. Each module targets a different capability: text generation with instruction-tuned models, semantic search via sentence embeddings (without a vector database), and zero-shot classification for content tagging with no training data. A key focus is evaluating practical trade-offs — latency, output quality, and cost — between hosted inference and running models locally. The goal is to build enough hands-on intuition with open-source LLMs to make informed architectural decisions in production contexts.",
       "technologies": [
         "TypeScript",
-        "HuggingFace",
-        "Machine Learning",
-        "AI"
+        "Hugging Face API",
+        "LLMs",
+        "Embeddings"
       ],
       "highlights": [
-        "Integration with HuggingFace model ecosystem",
-        "AI/ML experimentation platform",
-        "Pre-trained model usage"
+        "Semantic search via sentence embeddings — no vector DB required for small corpora",
+        "Zero-shot classification for content tagging with no labelled training data",
+        "Latency and quality benchmarks across hosted vs. local inference",
+        "Structured as reusable experiment modules, not a monolithic demo"
       ],
       "category": "AI & Machine Learning",
       "status": "Active Development",
@@ -215,22 +214,22 @@
     },
     {
       "name": "minecraft",
-      "displayName": "Custom Minecraft Server",
-      "description": "A self-hosted, custom-configured Minecraft server with automated setup scripts, plugin management, and a web dashboard for monitoring.",
-      "longDescription": "This project sets up and manages a fully customized Minecraft server environment for personal and family use. It includes automated provisioning scripts for server initialization, data pack and plugin configuration, and a lightweight web interface for viewing server status, connected players, and resource usage. The dashboard is built with HTML and vanilla JavaScript to keep dependencies minimal while still delivering useful real-time server insights.",
+      "displayName": "Self-Hosted Minecraft Server",
+      "description": "A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.",
+      "longDescription": "The interesting part of this project isn't Minecraft — it's the operational layer around it. A single provisioning script takes a fresh Linux host to a fully-configured, plugin-loaded server. Scheduled backups run with rotation policies to protect world data. A lightweight vanilla JavaScript dashboard surfaces real-time player count, server TPS, and JVM resource usage without any framework overhead. Everything is version-controlled: configs, scripts, and plugin manifests. It's the same infrastructure-as-code mindset I apply to production systems, applied to something I actually use.",
       "technologies": [
-        "HTML",
-        "JavaScript",
         "Shell",
-        "Minecraft"
+        "JavaScript",
+        "HTML",
+        "Linux"
       ],
       "highlights": [
-        "Automated server setup and plugin/data pack management",
-        "Scheduled backup system to prevent world data loss",
-        "Web dashboard for real-time server status and player monitoring",
-        "Modular configuration for easy customization and updates"
+        "One-command provisioning: fresh host to fully-configured server via shell script",
+        "Automated backup pipeline with rotation — no manual intervention for world preservation",
+        "Vanilla JS monitoring dashboard: player count, TPS, and JVM metrics in real time",
+        "Config and plugin manifests version-controlled in git — fully reproducible"
       ],
-      "category": "Game Development",
+      "category": "DevOps & Infrastructure",
       "status": "Active Development",
       "github_repo": "and3rn3t/minecraft"
     },
@@ -255,18 +254,103 @@
       "category": "Game Development",
       "status": "Experimental",
       "github_repo": "and3rn3t/catastrophe"
+    },
+    {
+      "name": "apple-music-dj",
+      "displayName": "Apple Music DJ",
+      "description": "A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.",
+      "longDescription": "Apple Music DJ is a Python skill built for OpenClaw, a macOS automation and launcher framework similar to Alfred or Raycast. It bridges keyboard-driven workflows with Apple Music playback: one shortcut opens a search palette, another queues a track or album, another adjusts volume — all without touching the mouse or switching windows. The plugin uses an AppleScript bridge for library access where the Apple Music API doesn't reach, and demonstrates the composability of Python scripting with macOS platform APIs. It's a practical tool I use daily.",
+      "technologies": [
+        "Python",
+        "AppleScript",
+        "Apple Music API",
+        "macOS"
+      ],
+      "highlights": [
+        "Daily-use tool: keyboard-only Apple Music control from any app via OpenClaw shortcut",
+        "AppleScript bridge for library access beyond what the Apple Music API exposes",
+        "Demonstrates Python + macOS platform scripting composability",
+        "Plugin architecture integrates cleanly with OpenClaw's skill system"
+      ],
+      "category": "Tools & Automation",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/apple-music-dj"
+    },
+    {
+      "name": "guess",
+      "displayName": "Guess — Transparent Akinator",
+      "description": "A 20-questions game that makes its decision tree fully visible as you play. Live at andernator.com — built to make information-theoretic narrowing tangible.",
+      "longDescription": "Guess is a TypeScript implementation of a 20-questions-style guessing game, with one key difference from Akinator: the algorithm is fully transparent. As you answer each question, the UI shows which candidates remain, the current confidence score, and why the next question was chosen — exposing the entropy-based selection logic in real time. The goal was to make constraint satisfaction feel intuitive rather than magical. It's live at andernator.com, works in any browser, and the decision tree logic is written from scratch with no external AI APIs.",
+      "technologies": [
+        "TypeScript",
+        "Algorithms",
+        "Decision Trees"
+      ],
+      "highlights": [
+        "Live at andernator.com — playable in any browser, no install required",
+        "Decision tree and confidence score rendered in real time as you answer",
+        "Entropy-based question selection written from scratch — no external AI APIs",
+        "Makes constraint-satisfaction search intuitive by showing the algorithm's reasoning"
+      ],
+      "category": "Tools & Automation",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/guess"
+    },
+    {
+      "name": "weather-app",
+      "displayName": "iOS 26 Weather App",
+      "description": "A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple's updated design system, WeatherKit, and Dynamic Island integration.",
+      "longDescription": "Built to stay current with Apple's platform as it evolves, this app tracks the iOS 26 design system and API changes in real time during the beta cycle. It uses WeatherKit for location-aware forecasts — Apple's privacy-respecting alternative to third-party weather APIs — and adopts the updated SwiftUI component system and visual language introduced in iOS 26. Dynamic Island integration provides glanceable weather state without opening the app. The project is less about the weather data and more about developing fluency with the latest Apple SDK while it's still in flux.",
+      "technologies": [
+        "Swift",
+        "SwiftUI",
+        "WeatherKit",
+        "iOS 26"
+      ],
+      "highlights": [
+        "Built during the iOS 26 beta — tracking live API and design system changes",
+        "WeatherKit integration: privacy-respecting forecasts with no third-party API",
+        "Dynamic Island glanceable weather state without opening the app",
+        "Adopts the updated iOS 26 SwiftUI component system and visual language"
+      ],
+      "category": "Mobile Applications",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/weather-app"
+    },
+    {
+      "name": "remote",
+      "displayName": "Denon AVR Remote",
+      "description": "A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable.",
+      "longDescription": "The official Denon remote app routes commands through the cloud, adding noticeable latency to every volume change. This Swift app bypasses that entirely: it communicates directly with the receiver over the local network via the Denon HTTP API, giving near-instant response on every control. Built with Swift structured concurrency (async/await) for a responsive UI even under rapid input, and covers volume, input switching, power, and multi-zone control. The project involved reverse-engineering the Denon HTTP API beyond what the official documentation covers.",
+      "technologies": [
+        "Swift",
+        "SwiftUI",
+        "iOS",
+        "Denon HTTP API"
+      ],
+      "highlights": [
+        "Direct LAN control bypasses cloud routing — near-instant response vs. vendor app",
+        "Reverse-engineered the Denon HTTP API for volume, input, power, and zone control",
+        "Swift structured concurrency (async/await) keeps UI responsive under rapid input",
+        "Built because the official app was frustrating — a pattern I apply to any bad tooling"
+      ],
+      "category": "IoT & Home Automation",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/remote"
     }
   ],
   "categories": [
     "AI & Machine Learning",
     "Data Engineering",
+    "DevOps & Infrastructure",
     "Education & Security",
     "Game Development",
     "Health & Wellness",
     "IoT & Home Automation",
     "Lifestyle & Relationships",
     "Mobile Applications",
-    "Networking & Security"
+    "Networking & Security",
+    "Tools & Automation"
   ],
   "skills": {
     "languages": {

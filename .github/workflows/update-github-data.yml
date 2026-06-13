@@ -70,10 +70,26 @@ jobs:
               print(f'  Events unavailable: {exc}')
               events = []
 
+          print('Fetching self-starred repos...')
+          try:
+              starred_all = gh_get_all(
+                  f'{BASE}/users/{USERNAME}/starred?per_page=100'
+              )
+              # Only own repos that the user has starred = portfolio curation signal
+              self_starred = [
+                  r['name'] for r in starred_all
+                  if r['owner']['login'] == USERNAME
+              ]
+              print(f'  {len(self_starred)} own repos self-starred: {self_starred}')
+          except Exception as exc:
+              print(f'  Starred fetch unavailable: {exc}')
+              self_starred = []
+
           output = {
               'user': user,
               'repositories': repos,
               'events': events,
+              'selfStarredRepoNames': self_starred,
               'lastUpdated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
               'totalRepos': len(repos),
           }

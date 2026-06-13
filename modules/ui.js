@@ -43,7 +43,6 @@ export class UIManager {
         this.initBackToTop();
         this.initSkillInteractions();
         this.initParallax();
-        this.forceHeroBackground();
         
         this.isInitialized = true;
         debug.log('[UI] UI manager initialized');
@@ -65,7 +64,7 @@ export class UIManager {
                 left: 0;
                 width: 100%;
                 height: 3px;
-                background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+                background: var(--primary-color);
                 background-size: 200% 100%;
                 animation: loading-gradient 2s ease-in-out infinite;
                 z-index: 9999;
@@ -303,18 +302,6 @@ export class UIManager {
     }
 
     // ========================================
-    // Hero Background
-    // ========================================
-
-    forceHeroBackground() {
-        const heroElement = document.querySelector('.hero, #home, section.hero');
-        if (heroElement) {
-            heroElement.style.setProperty('background', 'var(--gradient-primary)', 'important');
-            heroElement.style.setProperty('background-image', 'var(--gradient-primary)', 'important');
-        }
-    }
-
-    // ========================================
     // GitHub Stats Display
     // ========================================
 
@@ -332,28 +319,25 @@ export class UIManager {
             ]);
             
             const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-            const totalForks = repos.reduce((sum, repo) => sum + repo.forks_count, 0);
+            const activeRepos = repos.filter(r => {
+                const sixMonths = Date.now() - 180 * 24 * 60 * 60 * 1000;
+                return new Date(r.pushed_at) > sixMonths;
+            }).length;
+            const yearsSince = new Date().getFullYear() - 2021;
             
             statsGrid.innerHTML = `
                 <div class="stat-card">
                     <i class="fas fa-code-branch"></i>
                     <div class="stat-content">
                         <h3>${userData.public_repos}</h3>
-                        <p>Public Repositories</p>
+                        <p>Public Repos</p>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-bolt"></i>
                     <div class="stat-content">
-                        <h3>${userData.followers}</h3>
-                        <p>Followers</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-user-friends"></i>
-                    <div class="stat-content">
-                        <h3>${userData.following}</h3>
-                        <p>Following</p>
+                        <h3>${activeRepos}</h3>
+                        <p>Active (6 mo)</p>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -364,10 +348,10 @@ export class UIManager {
                     </div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-code-branch"></i>
+                    <i class="fas fa-calendar"></i>
                     <div class="stat-content">
-                        <h3>${totalForks}</h3>
-                        <p>Total Forks</p>
+                        <h3>${yearsSince}+</h3>
+                        <p>Years on GitHub</p>
                     </div>
                 </div>
             `;
@@ -377,7 +361,7 @@ export class UIManager {
             if (contributionGraph) {
                 contributionGraph.innerHTML = `
                     <div class="contribution-widget">
-                        <img src="https://ghchart.rshah.org/f5576c/and3rn3t" alt="GitHub Contribution Graph" />
+                        <img src="https://ghchart.rshah.org/16a34a/and3rn3t" alt="GitHub Contribution Graph" loading="lazy" />
                     </div>
                 `;
             }

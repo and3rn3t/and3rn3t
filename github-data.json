@@ -6701,5 +6701,17 @@
     }
   ],
   "lastUpdated": "2026-06-13T20:13:19Z",
-  "totalRepos": 44
+  "totalRepos": 44,
+  "selfStarredRepoNames": [
+    "apple-music-dj",
+    "homehub",
+    "guess",
+    "huggingface",
+    "net-traffic",
+    "network",
+    "health",
+    "weather-app",
+    "remote",
+    "minecraft"
+  ]
 }
