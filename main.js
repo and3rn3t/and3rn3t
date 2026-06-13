@@ -122,6 +122,15 @@ async function initializeApp() {
             debug.warn('[App] Interactions skipped:', err);
         }
 
+        // "Currently coding" widget — calls the CF Worker with static fallback.
+        try {
+            const { currentlyWidget } = await import('./modules/currently.js');
+            await currentlyWidget.init('#currently-coding');
+            appState.managers.currently = currentlyWidget;
+        } catch (err) {
+            debug.warn('[App] Currently widget skipped:', err);
+        }
+
         // Command palette (Cmd/Ctrl-K) — activates the existing search modal.
         try {
             const { commandPalette } = await import('./modules/command-palette.js');

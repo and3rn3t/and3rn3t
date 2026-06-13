@@ -20,7 +20,7 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 | # | Item | Status |
 | --- | --- | --- |
 | 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ✅ 2026-06-13 |
-| 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback) | ⬜ |
+| 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback) | ✅ 2026-06-13 |
 | 2.3 | Dynamic OG images (Worker + satori per section) | ⬜ |
 
 ## Phase 3 — Content & credibility
@@ -70,7 +70,16 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
   already capped at 2x in `hero-canvas.js`. Deferred `content-visibility` on below-fold
   sections to avoid regressions with the scroll-animation observers (revisit with visual
   verification). Bumped service worker cache to v1.3.0.
-- **2026-06-13** — Phase 2.1 done: new `modules/project-modal.js` renders an accessible,
+- **2026-06-13** — Phase 2.2 done: `worker/index.js` (Cloudflare Worker) + `wrangler.toml`
+  created. Worker fetches GitHub public events, picks the most interesting non-portfolio
+  event (push/PR/create/release/star), caches 5 min at CF edge, returns JSON. CORS
+  restricted to `https://and3rn3t.github.io` + localhost. New `modules/currently.js`
+  fetches the Worker (4 s timeout), falls back to pre-fetched events in
+  `github-data.json`. Renders a pulsing-dot pill in `#currently-coding` inside the about
+  section. Verified in-browser (static fallback): "Currently pushing to health",
+  branch `fix/e2e-failures`. **Deploy step**: `wrangler secret put GH_TOKEN` then
+  `npm run deploy:worker` (also update `WORKER_URL` in `modules/currently.js` with
+  the actual subdomain once deployed). renders an accessible,
   deep-linkable (`#project/<slug>`) case-study modal (focus trap, Esc/backdrop close,
   focus restore). Content is built only from real metadata + live GitHub stats (no
   fabrication). Replaced the per-card inline `<details>` write-up with a "Read case study"

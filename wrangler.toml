@@ -1,0 +1,16 @@
+name = "and3rn3t-portfolio"
+main = "worker/index.js"
+compatibility_date = "2024-09-23"
+
+# Workers are deployed to: https://and3rn3t-portfolio.<subdomain>.workers.dev
+# or a custom route (add below once a Cloudflare zone is attached).
+#
+# [routes]
+# pattern = "api.andernet.dev/*"
+# zone_name = "andernet.dev"
+
+[observability]
+enabled = true
+
+# Secrets set via: wrangler secret put GH_TOKEN
+# (a fine-grained PAT with read:user scope — not committed here)

@@ -6115,6 +6115,112 @@ body.keyboard-navigation .focus-ring:focus {
 }
 
 /* ==========================================================================
+   Currently Coding widget
+   ========================================================================== */
+
+#currently-coding {
+    margin: var(--space-4) 0 0;
+}
+
+.currently-widget {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+}
+
+/* Pulsing green dot */
+.currently-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
+    animation: currently-pulse 2s ease-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes currently-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5); }
+    70%  { box-shadow: 0 0 0 7px rgba(22, 163, 74, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+}
+
+.currently-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-secondary);
+}
+
+.currently-label i {
+    color: var(--primary-color);
+}
+
+.currently-repo {
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.currently-repo:hover {
+    text-decoration: underline;
+}
+
+.currently-message {
+    color: var(--text-secondary);
+    font-style: italic;
+    max-width: 32ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.currently-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+    color: var(--text-secondary);
+    opacity: 0.75;
+}
+
+.currently-branch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+}
+
+.currently-time {
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .currently-dot {
+        animation: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .currently-message {
+        display: none;
+    }
+    .currently-meta {
+        margin-left: 0;
+    }
+}
+
+/* ==========================================================================
    Project case-study modal
    ========================================================================== */
 
