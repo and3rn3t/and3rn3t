@@ -92,14 +92,20 @@ export default {
 
         let events;
         try {
-            const resp = await fetch(
-                `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=30`,
-                { headers: ghHeaders }
-            );
-            if (!resp.ok) {
-                throw new Error(`GitHub API ${resp.status}`);
+            // Fetch up to 3 pages (90 events) so portfolio-repo noise doesn't
+            // crowd out activity from other repos.
+            const pages = [];
+            for (let page = 1; page <= 3; page++) {
+                const resp = await fetch(
+                    `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=30&page=${page}`,
+                    { headers: ghHeaders }
+                );
+                if (!resp.ok) throw new Error(`GitHub API ${resp.status}`);
+                const chunk = await resp.json();
+                pages.push(...chunk);
+                if (chunk.length < 30) break; // no more pages
             }
-            events = await resp.json();
+            events = pages;
         } catch (err) {
             return jsonResponse({ error: 'upstream_error', detail: err.message }, request, 502);
         }
@@ -125,12 +131,27 @@ export default {
 
 /** Pick the most interesting recent event, skipping noise. */
 function pickActivity(events) {
+    const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days
+
+    // First pass: preferred repos only (skip portfolio noise).
     for (const event of events) {
         const repo = event.repo?.name ?? '';
         if (SKIP_REPOS.has(repo) || !INTERESTING_TYPES.has(event.type)) continue;
         const result = buildActivity(event, repo);
         if (result) return result;
     }
+
+    // Second pass: if non-skipped events are absent/stale, include portfolio repo
+    // when it has recent activity (within 7 days).
+    for (const event of events) {
+        const repo = event.repo?.name ?? '';
+        if (!INTERESTING_TYPES.has(event.type)) continue;
+        const age = new Date(event.created_at ?? 0).getTime();
+        if (age < cutoff) break;
+        const result = buildActivity(event, repo);
+        if (result) return result;
+    }
+
     return null;
 }
 

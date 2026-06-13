@@ -84,12 +84,28 @@ class CurrentlyWidget {
 
     pickActivity(events) {
         const INTERESTING = new Set(['PushEvent', 'PullRequestEvent', 'CreateEvent', 'ReleaseEvent']);
+        const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days
+
+        // First pass: skip portfolio repo, prefer recent activity.
         for (const event of events) {
             const repo = event.repo?.name ?? '';
             if (SKIP_REPOS.has(repo) || !INTERESTING.has(event.type)) continue;
             const result = this.buildActivity(event, repo);
             if (result) return result;
         }
+
+        // Second pass: everything outside SKIP_REPOS was stale or absent.
+        // If the best available activity (including portfolio repo) is recent,
+        // show it rather than leaving the widget blank or showing 2-week-old data.
+        for (const event of events) {
+            const repo = event.repo?.name ?? '';
+            if (!INTERESTING.has(event.type)) continue;
+            const age = new Date(event.created_at ?? 0).getTime();
+            if (age < cutoff) break; // events are chronological; nothing newer follows
+            const result = this.buildActivity(event, repo);
+            if (result) return result;
+        }
+
         return null;
     }
 
