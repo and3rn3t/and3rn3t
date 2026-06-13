@@ -130,6 +130,15 @@ async function initializeApp() {
         } catch (err) {
             debug.warn('[App] Command palette skipped:', err);
         }
+
+        // Keyboard help panel (?) + go-to navigation (g h/a/p/c).
+        try {
+            const { keyboardHelp } = await import('./modules/keyboard-help.js');
+            keyboardHelp.init();
+            appState.managers.keyboardHelp = keyboardHelp;
+        } catch (err) {
+            debug.warn('[App] Keyboard help skipped:', err);
+        }
         
         // Phase 4: Non-critical features (deferred with dynamic imports)
         requestIdleCallback(async () => {

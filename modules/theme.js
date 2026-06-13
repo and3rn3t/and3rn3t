@@ -16,6 +16,8 @@ export class ThemeManager {
         this.closeBtn = null;
         this.options = [];
         this.systemCheckbox = null;
+        // Suppress the View Transition on the very first paint (avoids a flash)
+        this.ready = false;
         
         this.init();
     }
@@ -25,6 +27,7 @@ export class ThemeManager {
         this.applyTheme(this.currentTheme, false);
         this.setupEventListeners();
         this.setupSystemThemeListener();
+        this.ready = true;
         debug.log('[Theme] Manager initialized with theme:', this.currentTheme);
     }
     
@@ -146,6 +149,34 @@ export class ThemeManager {
     }
     
     applyTheme(theme, savePreference = true) {
+        const commit = () => this.commitTheme(theme, savePreference);
+
+        const supportsViewTransitions = typeof document.startViewTransition === 'function';
+        const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+        // Animate only for user-initiated swaps on capable, motion-OK browsers
+        if (!this.ready || !supportsViewTransitions || reducedMotion) {
+            commit();
+            return;
+        }
+
+        this.setTransitionOrigin();
+        document.startViewTransition(commit);
+    }
+
+    setTransitionOrigin() {
+        const root = document.documentElement;
+        const rect = this.toggle?.getBoundingClientRect();
+        if (rect) {
+            root.style.setProperty('--theme-x', `${rect.left + rect.width / 2}px`);
+            root.style.setProperty('--theme-y', `${rect.top + rect.height / 2}px`);
+        } else {
+            root.style.setProperty('--theme-x', '50%');
+            root.style.setProperty('--theme-y', '50%');
+        }
+    }
+
+    commitTheme(theme, savePreference = true) {
         // Remove all theme classes
         document.body.classList.remove('dark-theme');
         

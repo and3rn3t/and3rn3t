@@ -455,6 +455,15 @@
         }
     </style>
     
+    <!-- Time-of-day hero accent: set early to avoid a tint flash -->
+    <script>
+        (function () {
+            var h = new Date().getHours();
+            var t = h < 6 ? 'night' : h < 9 ? 'dawn' : h < 18 ? 'day' : h < 21 ? 'dusk' : 'night';
+            document.documentElement.dataset.timeOfDay = t;
+        })();
+    </script>
+    
     <!-- Load main stylesheet after critical CSS -->
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
@@ -605,7 +614,7 @@
     </div>
 
     <!-- Keyboard Shortcuts Help -->
-    <div class="keyboard-help" id="keyboard-help">
+    <div class="keyboard-help" id="keyboard-help" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" aria-hidden="true">
         <div class="keyboard-help-content">
             <h3>⌨️ Keyboard Shortcuts</h3>
             <div class="shortcut-grid">
@@ -618,8 +627,8 @@
                     <span>Toggle theme</span>
                 </div>
                 <div class="shortcut-item">
-                    <kbd>Ctrl</kbd> + <kbd>P</kbd>
-                    <span>Generate resume</span>
+                    <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd>
+                    <span>Command palette</span>
                 </div>
                 <div class="shortcut-item">
                     <kbd>J</kbd>

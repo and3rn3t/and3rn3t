@@ -7,6 +7,42 @@
     src: url('fonts/inter-variable.woff2') format('woff2');
 }
 
+/* Theme switch — circular reveal via the View Transitions API.
+   Origin (--theme-x/--theme-y) is set in JS from the theme toggle button. */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+    animation: theme-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 2;
+}
+
+@keyframes theme-reveal {
+    from {
+        clip-path: circle(0% at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
+    to {
+        clip-path: circle(150% at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none !important;
+    }
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -610,6 +646,43 @@ body {
         rgba(10, 15, 12, 0.55) 100%
     );
     pointer-events: none;
+}
+
+/* Time-of-day accent — a subtle directional tint over the hero gradient.
+   Driven by [data-time-of-day] set in the head before first paint. Kept low
+   alpha so it complements the green brand rather than overpowering it. */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.55;
+    mix-blend-mode: soft-light;
+    background: transparent;
+    transition: background 1.2s ease;
+}
+
+[data-time-of-day='dawn'] .hero::before {
+    background: linear-gradient(160deg, rgba(255, 183, 94, 0.6) 0%, transparent 55%);
+}
+
+[data-time-of-day='day'] .hero::before {
+    background: linear-gradient(160deg, rgba(186, 230, 253, 0.4) 0%, transparent 60%);
+}
+
+[data-time-of-day='dusk'] .hero::before {
+    background: linear-gradient(160deg, rgba(251, 113, 133, 0.5) 0%, rgba(124, 58, 237, 0.35) 70%, transparent 100%);
+}
+
+[data-time-of-day='night'] .hero::before {
+    background: linear-gradient(160deg, rgba(30, 58, 138, 0.55) 0%, rgba(2, 6, 23, 0.4) 80%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero::before {
+        transition: none;
+    }
 }
 
 .hero-container {
