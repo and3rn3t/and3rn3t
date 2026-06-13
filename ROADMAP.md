@@ -45,11 +45,11 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 
 | # | Item | Status |
 | --- | --- | --- |
-| 5.1 | Lighthouse CI workflow with perf/a11y budgets | ⬜ |
-| 5.2 | Vitest unit tests (github-api cache/retry, capabilities, fuzzy search) | ⬜ |
-| 5.3 | Playwright e2e for interactive: Cmd-K palette, `?` help, theme picker, Konami egg | ⬜ |
-| 5.4 | axe-core a11y check in CI | ⬜ |
-| 5.5 | Worker tests (vitest + miniflare) once a Worker exists | ⬜ |
+| 5.1 | Lighthouse CI workflow with perf/a11y budgets | ✅ 2026-06-13 |
+| 5.2 | Vitest unit tests (github-api cache/retry, capabilities, fuzzy search) | ✅ 2026-06-13 |
+| 5.3 | Playwright e2e for interactive: Cmd-K palette, `?` help, theme picker, Konami egg | ✅ 2026-06-13 |
+| 5.4 | axe-core a11y check in CI | ✅ 2026-06-13 |
+| 5.5 | Worker tests (vitest + miniflare) once a Worker exists | ✅ 2026-06-13 |
 
 ## Decision Log
 

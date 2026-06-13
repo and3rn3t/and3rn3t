@@ -1,0 +1,41 @@
+name: Lighthouse CI
+
+on:
+  # Run after every push to main (the site is deployed at that point).
+  push:
+    branches: [main]
+  # Allow manual runs with an optional URL override.
+  workflow_dispatch:
+    inputs:
+      url:
+        description: URL to audit (defaults to https://andernet.dev)
+        required: false
+        default: 'https://andernet.dev'
+  # Weekly scheduled audit to catch drift.
+  schedule:
+    - cron: '0 8 * * 1'   # Mondays at 08:00 UTC
+
+jobs:
+  lighthouse:
+    name: Lighthouse audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: .lighthouserc.cjs
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+        env:
+          LHCI_URL: ${{ github.event.inputs.url || 'https://andernet.dev' }}

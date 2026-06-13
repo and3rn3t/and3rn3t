@@ -10,10 +10,22 @@
     "serve": "python3 -m http.server 8000",
     "build:worker": "wrangler deploy --dry-run --outdir dist-worker",
     "deploy:worker": "wrangler deploy",
-    "worker:dev": "wrangler dev worker/index.js"
+    "worker:dev": "wrangler dev worker/index.js",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug"
   },
   "devDependencies": {
-    "vite": "^7.0.0"
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.60.0",
+    "@vitest/coverage-v8": "^4.1.8",
+    "jsdom": "^29.1.1",
+    "vite": "^7.0.0",
+    "vitest": "^4.1.8"
   },
   "keywords": [
     "portfolio",
