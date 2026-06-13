@@ -855,8 +855,6 @@
         </div>
     </section>
 
-    </section>
-
     <!-- Writing / Blog Section -->
     <section class="writing animate-on-scroll" id="writing">
         <div class="container">
@@ -899,6 +897,12 @@
                         <p>Loading language stats...</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Recent Activity Feed -->
+            <div class="activity-feed-section">
+                <h3 class="subsection-title">Recent Activity</h3>
+                <div id="activity-feed" aria-label="Recent GitHub activity"></div>
             </div>
         </div>
     </section>
@@ -994,10 +998,55 @@
         </div>
     </section>
 
+    <!-- Guestbook Section -->
+    <section class="guestbook animate-on-scroll" id="guestbook">
+        <div class="container">
+            <h2 class="section-title">Guestbook</h2>
+            <p class="section-intro">Leave a note. Say hello. Tell me what you're building.</p>
+            <div class="guestbook-layout">
+                <div class="guestbook-form-col">
+                    <form id="guestbook-form" class="guestbook-form" novalidate>
+                        <div class="form-group">
+                            <label for="gb-name">Name</label>
+                            <input type="text" id="gb-name" name="name" required
+                                   class="form-input" placeholder="Your name"
+                                   maxlength="60" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="gb-message">Message</label>
+                            <textarea id="gb-message" name="message" rows="4" required
+                                      class="form-textarea" placeholder="What's on your mind?"
+                                      maxlength="500"></textarea>
+                        </div>
+                        <div id="turnstile-container" class="turnstile-container"></div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-pen" aria-hidden="true"></i> Sign guestbook
+                        </button>
+                        <output id="guestbook-status" class="guestbook-status" aria-live="polite"></output>
+                    </form>
+                </div>
+                <div class="guestbook-entries-col">
+                    <div id="guestbook-entries" aria-label="Guestbook entries">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading entries...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS, Vite, and GitHub Actions.</p>
+            <div class="footer-inner">
+                <p>&copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS, Vite, and GitHub Actions.</p>
+                <span class="view-count-widget" hidden aria-label="Page views">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <span data-view-count>0</span> views
+                </span>
+            </div>
         </div>
     </footer>
     <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>

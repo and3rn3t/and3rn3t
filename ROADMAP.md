@@ -36,10 +36,10 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 
 | # | Item | Status |
 | --- | --- | --- |
-| 4.1 | View counts + reactions (Worker + KV) | ⬜ |
-| 4.2 | Guestbook (Worker + KV + Turnstile) | ⬜ |
-| 4.3 | Verify Cloudflare Web Analytics live + small public stats widget | ⬜ |
-| 4.4 | Real GitHub activity feed from extended `github-data.json` | ⬜ |
+| 4.1 | View counts (Worker + KV — POST /views increments, footer widget shows count) | ✅ 2026-06-13 |
+| 4.2 | Guestbook (Worker + KV + Turnstile — /guestbook GET/POST, in-page section) | ✅ 2026-06-13 |
+| 4.3 | Cloudflare Web Analytics beacon live (token already embedded in index.html) | ✅ 2026-06-13 |
+| 4.4 | Real GitHub activity feed (modules/activity-feed.js, #activity-feed in github-stats) | ✅ 2026-06-13 |
 
 ## Phase 5 — Quality & infra guardrails
 

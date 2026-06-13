@@ -27,10 +27,10 @@
  */
 
 import { handleOgRequest } from './og.js';
+import { handleViewsRequest, handleGuestbookRequest, jsonResponse, corsHeaders } from './engagement.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
-const CORS_ORIGIN = 'https://and3rn3t.github.io'; // tighten: only the live site
 
 // Event types we care about, in priority order.
 const INTERESTING_TYPES = new Set([
@@ -57,6 +57,14 @@ export default {
 
         if (url.pathname === '/og') {
             return handleOgRequest(request);
+        }
+
+        if (url.pathname === '/views') {
+            return handleViewsRequest(request, env);
+        }
+
+        if (url.pathname === '/guestbook') {
+            return handleGuestbookRequest(request, env);
         }
 
         if (url.pathname !== '/activity') {
@@ -193,27 +201,4 @@ function buildActivity(event, repo) {
     }
 
     return null;
-}
-
-function corsHeaders(request) {
-    const origin = request.headers.get('Origin') ?? '';
-    // Allow the live site + localhost for local dev.
-    const allowed = origin === CORS_ORIGIN || origin.startsWith('http://localhost');
-    return {
-        'Access-Control-Allow-Origin': allowed ? origin : CORS_ORIGIN,
-        'Access-Control-Allow-Methods': 'GET, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Max-Age': '86400',
-        'Vary': 'Origin',
-    };
-}
-
-function jsonResponse(data, request, status = 200) {
-    return new Response(JSON.stringify(data), {
-        status,
-        headers: {
-            'Content-Type': 'application/json',
-            ...corsHeaders(request),
-        },
-    });
 }

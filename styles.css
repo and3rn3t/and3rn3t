@@ -1748,6 +1748,187 @@ body.dark-theme .timeline::before {
     border-radius: 0.25rem;
 }
 
+/* ─── Activity Feed ─────────────────────────────────────────────────────────── */
+.activity-feed-section {
+    margin-top: var(--space-8, 2rem);
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+}
+
+.activity-item {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr auto;
+    align-items: baseline;
+    gap: var(--space-2, 0.5rem);
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    border-radius: var(--radius-md, 0.5rem);
+    background: var(--bg-secondary);
+    font-size: var(--font-size-sm, 0.875rem);
+}
+
+.activity-icon {
+    color: var(--primary-color, #16a34a);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.activity-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.activity-repo {
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.activity-repo:hover {
+    color: var(--primary-color, #16a34a);
+}
+
+.activity-desc {
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 40ch;
+}
+
+.activity-time {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ─── Guestbook Section ─────────────────────────────────────────────────────── */
+.guestbook {
+    background: var(--bg-primary);
+}
+
+.guestbook-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10, 2.5rem);
+    margin-top: var(--space-6, 1.5rem);
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .guestbook-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+}
+
+.turnstile-container {
+    min-height: 65px;
+}
+
+.guestbook-status {
+    font-size: var(--font-size-sm, 0.875rem);
+    min-height: 1.25em;
+}
+
+.guestbook-status--success { color: var(--primary-color, #16a34a); }
+.guestbook-status--error   { color: #dc2626; }
+
+.guestbook-entries-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+}
+
+.guestbook-entry {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: var(--radius-lg, 0.75rem);
+    padding: var(--space-4, 1rem);
+}
+
+.guestbook-entry--new {
+    animation: entry-pop 0.3s var(--ease-out, ease-out);
+    border-color: var(--primary-color, #16a34a);
+}
+
+@keyframes entry-pop {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .guestbook-entry--new { animation: none; }
+}
+
+.guestbook-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-2, 0.5rem);
+    margin-bottom: var(--space-2, 0.5rem);
+}
+
+.guestbook-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.guestbook-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.guestbook-message {
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed, 1.625);
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.guestbook-empty,
+.guestbook-error {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm, 0.875rem);
+    padding: var(--space-4, 1rem);
+    text-align: center;
+}
+
+/* ─── Footer view counter ───────────────────────────────────────────────────── */
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4, 1rem);
+    flex-wrap: wrap;
+}
+
+.view-count-widget {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--text-secondary);
+}
+
 /* Contact Section */
 .contact {
     background: var(--bg-surface, var(--bg-secondary));

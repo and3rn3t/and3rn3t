@@ -12,5 +12,18 @@ compatibility_date = "2024-09-23"
 [observability]
 enabled = true
 
-# Secrets set via: wrangler secret put GH_TOKEN
-# (a fine-grained PAT with read:user scope — not committed here)
+# KV namespaces — create with:
+#   wrangler kv namespace create VIEWS_KV
+#   wrangler kv namespace create GUESTBOOK_KV
+# Then paste the returned IDs below.
+[[kv_namespaces]]
+binding = "VIEWS_KV"
+id      = "REPLACE_WITH_VIEWS_KV_ID"
+
+[[kv_namespaces]]
+binding = "GUESTBOOK_KV"
+id      = "REPLACE_WITH_GUESTBOOK_KV_ID"
+
+# Secrets set via wrangler secret put:
+#   wrangler secret put GH_TOKEN          (fine-grained PAT, read:user scope)
+#   wrangler secret put TURNSTILE_SECRET  (from dash.cloudflare.com → Turnstile)

@@ -149,6 +149,33 @@ async function initializeApp() {
             debug.warn('[App] Blog module skipped:', err);
         }
 
+        // Activity feed (recent GitHub events).
+        try {
+            const { activityFeed } = await import('./modules/activity-feed.js');
+            await activityFeed.init('#activity-feed');
+            appState.managers.activityFeed = activityFeed;
+        } catch (err) {
+            debug.warn('[App] Activity feed skipped:', err);
+        }
+
+        // Guestbook — loads entries + wires submission form.
+        try {
+            const { guestbookManager } = await import('./modules/guestbook.js');
+            await guestbookManager.init();
+            appState.managers.guestbook = guestbookManager;
+        } catch (err) {
+            debug.warn('[App] Guestbook skipped:', err);
+        }
+
+        // View counter — calls Worker, updates footer count.
+        try {
+            const { viewCounter } = await import('./modules/views.js');
+            await viewCounter.init();
+            appState.managers.views = viewCounter;
+        } catch (err) {
+            debug.warn('[App] View counter skipped:', err);
+        }
+
         // Command palette (Cmd/Ctrl-K) — activates the existing search modal.
         try {
             const { commandPalette } = await import('./modules/command-palette.js');
