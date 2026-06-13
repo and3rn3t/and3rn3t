@@ -5,6 +5,7 @@
 
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
+import { projectModal } from './project-modal.js';
 
 // Project display configuration
 const CONFIG = {
@@ -50,6 +51,15 @@ export class ProjectsManager {
             debug.warn('[Projects] Container not found:', containerSelector);
             return;
         }
+        
+        // Case-study modal: build once and open via event delegation.
+        projectModal.init();
+        this.container.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-case-study]');
+            if (!trigger) return;
+            e.preventDefault();
+            projectModal.open(trigger.dataset.caseStudy);
+        });
         
         // Load projects metadata
         await this.loadProjectsMetadata();
@@ -181,15 +191,36 @@ export class ProjectsManager {
         const langColor = LANGUAGE_COLORS[language];
         if (langColor) card.style.setProperty('--lang-color', langColor);
         
-        // First highlight shown inline; rest collapsed in <details>
-        const [firstHighlight, ...restHighlights] = highlights;
+        // First highlight shown inline; the full write-up opens in the case-study modal.
+        const [firstHighlight] = highlights;
+        const slug = repo?.name || metadata?.name || metadata?.github_repo?.split('/').pop();
+        const hasCaseStudy = Boolean(slug && (longDescription || highlights.length > 1));
 
-        const longDescHtml = longDescription ? `
-            <details class="project-long-description">
-                <summary>More about this project…</summary>
-                <p>${longDescription}</p>
-                ${restHighlights.length ? `<ul class="project-highlights">${restHighlights.map(h => `<li>${h}</li>`).join('')}</ul>` : ''}
-            </details>
+        if (hasCaseStudy) {
+            projectModal.register(slug, {
+                slug,
+                displayName,
+                description,
+                longDescription,
+                category,
+                status,
+                language,
+                technologies: metadata?.technologies ?? [],
+                highlights,
+                htmlUrl,
+                homepage,
+                stars: repo?.stargazers_count ?? null,
+                forks: repo?.forks_count ?? null,
+                openIssues: repo?.open_issues_count ?? null,
+                pushedRelative: relativePush,
+            });
+        }
+
+        const caseStudyHtml = hasCaseStudy ? `
+            <button type="button" class="project-case-study-btn" data-case-study="${slug}">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                Read case study
+            </button>
         ` : '';
         
         card.innerHTML = `
@@ -201,7 +232,7 @@ export class ProjectsManager {
                 <h3 class="project-title"><a href="${htmlUrl}" target="_blank" rel="noopener noreferrer">${displayName}</a></h3>
                 <p class="project-description">${description}</p>
                 ${firstHighlight ? `<p class="project-highlight-lead">→ ${firstHighlight}</p>` : ''}
-                ${longDescHtml}
+                ${caseStudyHtml}
                 
                 <div class="project-stats">
                     <div class="project-stat" title="Stars">

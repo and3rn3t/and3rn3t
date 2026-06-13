@@ -19,7 +19,7 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 
 | # | Item | Status |
 | --- | --- | --- |
-| 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ⬜ |
+| 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ✅ 2026-06-13 |
 | 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback) | ⬜ |
 | 2.3 | Dynamic OG images (Worker + satori per section) | ⬜ |
 
@@ -70,3 +70,9 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
   already capped at 2x in `hero-canvas.js`. Deferred `content-visibility` on below-fold
   sections to avoid regressions with the scroll-animation observers (revisit with visual
   verification). Bumped service worker cache to v1.3.0.
+- **2026-06-13** — Phase 2.1 done: new `modules/project-modal.js` renders an accessible,
+  deep-linkable (`#project/<slug>`) case-study modal (focus trap, Esc/backdrop close,
+  focus restore). Content is built only from real metadata + live GitHub stats (no
+  fabrication). Replaced the per-card inline `<details>` write-up with a "Read case study"
+  button. Verified in-browser: open/close, hash sync, dialog role + accessible name, all
+  sections render. Modal is built dynamically (no index.html markup needed).
