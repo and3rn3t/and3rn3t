@@ -971,6 +971,16 @@ section {
     color: var(--text-primary);
 }
 
+.project-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.project-title a:hover {
+    color: var(--primary-color);
+}
+
 .project-description {
     color: var(--text-secondary);
     line-height: var(--line-height-relaxed);
@@ -1048,6 +1058,18 @@ section {
     background: var(--bg-tertiary);
     color: var(--text-primary);
     border-color: var(--border-dark);
+}
+
+.project-link.live {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.project-link.live:hover {
+    background: var(--primary-color);
+    color: var(--text-white);
+    transform: translateY(-2px);
 }
 
 .loading {
@@ -1551,11 +1573,10 @@ section {
 
 
 .project-long-description {
-    margin: 12px 0;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.5);
+    margin: var(--space-3) 0;
     border-radius: var(--radius-base);
-    border-left: 4px solid var(--primary-color);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
 }
 
 /* First highlight shown inline on the card */
@@ -1567,23 +1588,50 @@ section {
     font-style: italic;
 }
 
-.project-long-description summary {
+.project-long-description > summary {
     cursor: pointer;
-    font-weight: var(--font-weight-semibold);
-    color: var(--primary-color);
-    padding: 5px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
     user-select: none;
-    transition: color var(--transition-base);
+    transition: color var(--transition-base), background var(--transition-base);
 }
 
-.project-long-description summary:hover {
-    color: var(--primary-dark);
+.project-long-description > summary::-webkit-details-marker {
+    display: none;
 }
 
-.project-long-description p {
-    margin-top: var(--space-2);
+.project-long-description > summary::after {
+    content: '↓';
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.project-long-description > summary:hover {
+    color: var(--primary-color);
+    background: var(--bg-secondary);
+}
+
+.project-long-description[open] > summary {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-long-description[open] > summary::after {
+    transform: rotate(180deg);
+}
+
+.project-long-description > p {
+    padding: var(--space-3) var(--space-4);
+    margin: 0;
     line-height: var(--line-height-loose);
-    color: var(--text-primary);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
 }
 
 .project-highlights {
@@ -1976,6 +2024,18 @@ body.dark-theme .project-card:hover,
 body.dark-theme .skill-category:hover,
 body.dark-theme .highlight-item:hover {
     background: var(--bg-tertiary);
+    border-color: var(--primary-color);
+}
+
+body.dark-theme .project-link.live {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+body.dark-theme .project-link.live:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
 }
 
 body.dark-theme .skill-item {
@@ -2083,7 +2143,18 @@ body.dark-theme .contact-method {
     border-color: var(--border-color);
 }
 
-body.dark-theme .project-long-description {\n    background: rgba(255, 255, 255, 0.03);\n    border-left-color: var(--primary-color);\n}\n\nbody.dark-theme .project-highlight-lead {\n    color: var(--text-secondary);\n}
+body.dark-theme .project-long-description {
+    border-color: var(--border-color);
+    background: transparent;
+}
+
+body.dark-theme .project-long-description > summary:hover {
+    background: var(--bg-tertiary);
+}
+
+body.dark-theme .project-highlight-lead {
+    color: var(--text-secondary);
+}
 
 body.dark-theme .language-tag {
     background: var(--bg-tertiary);

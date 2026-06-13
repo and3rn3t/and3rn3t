@@ -12,6 +12,25 @@ const CONFIG = {
     fallbackDataPath: 'projects-data.json'
 };
 
+const LANGUAGE_COLORS = {
+    TypeScript:  '#2b7489',
+    JavaScript:  '#f1e05a',
+    Swift:       '#ffac45',
+    Python:      '#3572A5',
+    HTML:        '#e34c26',
+    CSS:         '#563d7c',
+    Shell:       '#89e051',
+    Go:          '#00ADD8',
+    Rust:        '#dea584',
+    Java:        '#b07219',
+    Kotlin:      '#F18E33',
+    Ruby:        '#701516',
+    'C++':       '#f34b7d',
+    'C#':        '#178600',
+    SCSS:        '#c6538c',
+    Vue:         '#41b883',
+};
+
 export class ProjectsManager {
     constructor() {
         this.projects = [];
@@ -159,6 +178,8 @@ export class ProjectsManager {
             : false;
 
         card.className = isRecent ? 'project-card project-card--recent' : 'project-card';
+        const langColor = LANGUAGE_COLORS[language];
+        if (langColor) card.style.setProperty('--lang-color', langColor);
         
         // First highlight shown inline; rest collapsed in <details>
         const [firstHighlight, ...restHighlights] = highlights;
@@ -177,7 +198,7 @@ export class ProjectsManager {
                     ${category ? `<span class="project-category">${category}</span>` : ''}
                     ${isRecent ? `<span class="project-recent-badge"><span class="recent-dot"></span>Active</span>` : ''}
                 </div>
-                <h3 class="project-title">${displayName}</h3>
+                <h3 class="project-title"><a href="${htmlUrl}" target="_blank" rel="noopener noreferrer">${displayName}</a></h3>
                 <p class="project-description">${description}</p>
                 ${firstHighlight ? `<p class="project-highlight-lead">→ ${firstHighlight}</p>` : ''}
                 ${longDescHtml}
@@ -209,7 +230,7 @@ export class ProjectsManager {
                     View Code
                 </a>
                 ${homepage ? `
-                    <a href="${homepage}" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+                    <a href="${homepage}" target="_blank" rel="noopener noreferrer" class="project-link live">
                         <i class="fas fa-external-link-alt"></i>
                         Live Demo
                     </a>
