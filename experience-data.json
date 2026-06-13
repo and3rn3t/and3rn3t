@@ -1,0 +1,31 @@
+{
+  "experience": [
+    {
+      "role": "Software Engineer",
+      "company": "Deere & Company",
+      "companyUrl": "https://www.deere.com",
+      "location": "Milan, IL",
+      "startDate": "2022-06",
+      "endDate": null,
+      "current": true,
+      "summary": "Building software at the intersection of agriculture and technology at one of the world's largest equipment manufacturers.",
+      "highlights": [
+        "Designed and shipped production data pipelines processing sensor telemetry from field equipment",
+        "Contributed to internal platform tooling used across multiple engineering teams",
+        "Led adoption of TypeScript in a previously JavaScript codebase, improving type safety and DX"
+      ],
+      "technologies": ["TypeScript", "Java", "Python"]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.A. Computer Science",
+      "institution": "St. Ambrose University",
+      "institutionUrl": "https://www.sau.edu",
+      "location": "Davenport, IA",
+      "startDate": "2006-08",
+      "endDate": "2009-05",
+      "highlights": []
+    }
+  ]
+}

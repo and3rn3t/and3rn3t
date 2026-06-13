@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Matthew Anderson — Writing</title>
+    <link>https://andernet.dev/#writing</link>
+    <description>Technical posts on health tech, IoT, data engineering, and whatever else captures my attention.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 13 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <managingEditor>contact@matthewanderson.dev (Matthew Anderson)</managingEditor>
+    <webMaster>contact@matthewanderson.dev (Matthew Anderson)</webMaster>
+    <atom:link href="https://andernet.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://andernet.dev/icons/icon-192.png</url>
+      <title>Matthew Anderson</title>
+      <link>https://andernet.dev</link>
+    </image>
+
+    <item>
+      <title>On-Device Gait Analysis with iPhone LiDAR and HealthKit</title>
+      <link>https://andernet.dev/#post/lidar-gait-analysis-iphone</link>
+      <guid isPermaLink="false">https://andernet.dev/posts/lidar-gait-analysis-iphone</guid>
+      <pubDate>Mon, 12 May 2026 00:00:00 +0000</pubDate>
+      <description>How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</description>
+      <category>iOS</category>
+      <category>Swift</category>
+      <category>HealthKit</category>
+      <category>LiDAR</category>
+      <category>Health Tech</category>
+      <content:encoded><![CDATA[
+        <p>Most gait analysis systems require dedicated hardware: pressure-sensitive mats, instrumented shoes, or clinical-grade motion capture rigs. The iPhone 12 Pro and later ship with a LiDAR scanner that can produce a dense depth map at 30 fps — more than enough to track the geometry of a walking stride.</p>
+        <p>Read the full post at <a href="https://andernet.dev/#post/lidar-gait-analysis-iphone">andernet.dev</a>.</p>
+      ]]></content:encoded>
+    </item>
+
+    <item>
+      <title>Building a Local-First IoT Dashboard Without the Cloud</title>
+      <link>https://andernet.dev/#post/local-first-iot-dashboard</link>
+      <guid isPermaLink="false">https://andernet.dev/posts/local-first-iot-dashboard</guid>
+      <pubDate>Thu, 03 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down.</description>
+      <category>IoT</category>
+      <category>Home Automation</category>
+      <category>TypeScript</category>
+      <category>MQTT</category>
+      <category>Self-Hosted</category>
+      <content:encoded><![CDATA[
+        <p>Most smart home platforms are cloud-dependent by design. Your light switch sends a packet to a server in Virginia before it turns on the bulb two feet away. Latency aside, it means your home automation goes down when your ISP does.</p>
+        <p>Read the full post at <a href="https://andernet.dev/#post/local-first-iot-dashboard">andernet.dev</a>.</p>
+      ]]></content:encoded>
+    </item>
+
+  </channel>
+</rss>

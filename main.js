@@ -131,6 +131,24 @@ async function initializeApp() {
             debug.warn('[App] Currently widget skipped:', err);
         }
 
+        // Experience / timeline section.
+        try {
+            const { experienceManager } = await import('./modules/experience.js');
+            await experienceManager.init();
+            appState.managers.experience = experienceManager;
+        } catch (err) {
+            debug.warn('[App] Experience module skipped:', err);
+        }
+
+        // Blog / writing section.
+        try {
+            const { blogManager } = await import('./modules/blog.js');
+            await blogManager.init();
+            appState.managers.blog = blogManager;
+        } catch (err) {
+            debug.warn('[App] Blog module skipped:', err);
+        }
+
         // Command palette (Cmd/Ctrl-K) — activates the existing search modal.
         try {
             const { commandPalette } = await import('./modules/command-palette.js');

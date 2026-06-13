@@ -552,7 +552,13 @@
                     <a href="#about" class="nav-link touch-target">About</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#experience" class="nav-link touch-target">Experience</a>
+                </li>
+                <li class="nav-item">
                     <a href="#projects" class="nav-link touch-target">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#writing" class="nav-link touch-target">Writing</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link touch-target">Contact</a>
@@ -747,6 +753,42 @@
         </div>
     </section>
 
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience animate-on-scroll" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-layout">
+                <div class="timeline-column">
+                    <h3 class="timeline-group-heading"><i class="fas fa-briefcase" aria-hidden="true"></i> Work</h3>
+                    <div class="timeline" id="experience-timeline" aria-label="Work history">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading experience...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-column">
+                    <h3 class="timeline-group-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education</h3>
+                    <div class="timeline" id="education-timeline" aria-label="Education history">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Loading education...</p>
+                        </div>
+                    </div>
+                    <!-- Resume CTA -->
+                    <div class="resume-cta">
+                        <p class="resume-cta-label">Want the full picture?</p>
+                        <a href="/resume.pdf" download class="btn btn-primary resume-btn">
+                            <i class="fas fa-file-pdf" aria-hidden="true"></i> Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section class="projects animate-on-scroll" id="projects">
         <div class="container">
@@ -810,6 +852,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Writing / Blog Section -->
+    <section class="writing animate-on-scroll" id="writing">
+        <div class="container">
+            <h2 class="section-title">Writing</h2>
+            <p class="section-intro">Technical posts on the projects I build — health tech, IoT, data, and whatever else captures my attention.</p>
+            <div id="blog-posts" class="blog-posts-grid" aria-label="Blog posts"></div>
+            <div id="blog-article" class="blog-article-wrapper" hidden aria-label="Blog article"></div>
         </div>
     </section>
 
@@ -947,6 +1001,28 @@
         </div>
     </footer>
     <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+
+    <!-- Schema.org Person structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Matthew Anderson",
+        "url": "https://andernet.dev",
+        "email": "contact@matthewanderson.dev",
+        "jobTitle": "Software Engineer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Deere & Company",
+            "url": "https://www.deere.com"
+        },
+        "sameAs": [
+            "https://github.com/and3rn3t",
+            "https://linkedin.com/in/matthew-anderson"
+        ],
+        "knowsAbout": ["TypeScript", "Swift", "Python", "IoT", "Health Technology", "Data Engineering", "Home Automation"]
+    }
+    </script>
 
     <!-- Theme Picker -->
     <div class="theme-picker-container">

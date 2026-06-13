@@ -27,10 +27,10 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 
 | # | Item | Status |
 | --- | --- | --- |
-| 3.1 | Blog / writing section (markdown → HTML, list + article view, RSS, sitemap) | ⬜ |
-| 3.2 | Experience / timeline section | ⬜ |
+| 3.1 | Blog / writing section (posts-data.json, modules/blog.js, in-page article view, feed.xml) | ✅ 2026-06-13 |
+| 3.2 | Experience / timeline section (experience-data.json, modules/experience.js) | ✅ 2026-06-13 |
 | 3.3 | Testimonials section (static data) | ⬜ |
-| 3.4 | Resume integration — promote `resume.pdf`, structured data | ⬜ |
+| 3.4 | Resume integration — prominent CTA + schema.org Person JSON-LD | ✅ 2026-06-13 |
 
 ## Phase 4 — Engagement & data
 
