@@ -21,7 +21,7 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 | --- | --- | --- |
 | 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ✅ 2026-06-13 |
 | 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback) | ✅ 2026-06-13 |
-| 2.3 | Dynamic OG images (Worker + satori per section) | ⬜ |
+| 2.3 | Dynamic OG images (Worker SVG — portfolio + per-project cards) | ✅ 2026-06-13 |
 
 ## Phase 3 — Content & credibility
 
