@@ -93,7 +93,14 @@ export class ProjectsManager {
         
         this.container.innerHTML = '';
         
-        for (const { metadata, repo } of this.projects) {
+        // Sort by pushed_at descending; curated-only entries (no repo) go last
+        const sorted = [...this.projects].sort((a, b) => {
+            const aDate = a.repo?.pushed_at ? new Date(a.repo.pushed_at) : new Date(0);
+            const bDate = b.repo?.pushed_at ? new Date(b.repo.pushed_at) : new Date(0);
+            return bDate - aDate;
+        });
+        
+        for (const { metadata, repo } of sorted) {
             const card = this.createProjectCard(repo, metadata);
             this.container.appendChild(card);
         }
@@ -103,7 +110,6 @@ export class ProjectsManager {
 
     createProjectCard(repo, metadata) {
         const card = document.createElement('div');
-        card.className = 'project-card';
         
         const displayName = metadata?.displayName || repo?.name || 'Untitled';
         const description = metadata?.description || repo?.description || 'A coding project showcasing development skills.';
@@ -113,6 +119,14 @@ export class ProjectsManager {
         const language = repo?.language || metadata?.technologies?.[0] || 'Code';
         const updatedDate = repo?.updated_at ? new Date(repo.updated_at).toLocaleDateString() : null;
         const htmlUrl = repo?.html_url || `https://github.com/${metadata?.github_repo || 'and3rn3t'}`;
+
+        // Mark cards pushed within the last 180 days as recently active
+        const SIX_MONTHS_MS = 180 * 24 * 60 * 60 * 1000;
+        const isRecent = repo?.pushed_at
+            ? (Date.now() - new Date(repo.pushed_at).getTime()) < SIX_MONTHS_MS
+            : false;
+
+        card.className = isRecent ? 'project-card project-card--recent' : 'project-card';
         const homepage = repo?.homepage;
         
         const longDescHtml = longDescription ? `
@@ -125,7 +139,10 @@ export class ProjectsManager {
         
         card.innerHTML = `
             <div class="project-header">
-                ${category ? `<span class="project-category">${category}</span>` : ''}
+                <div class="project-card-badges">
+                    ${category ? `<span class="project-category">${category}</span>` : ''}
+                    ${isRecent ? `<span class="project-recent-badge"><span class="recent-dot"></span>Active</span>` : ''}
+                </div>
                 <h3 class="project-title">${displayName}</h3>
                 <p class="project-description">${description}</p>
                 ${longDescHtml}

@@ -19,46 +19,85 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Fetch user data
-          echo "Fetching GitHub user data..."
-          USER_DATA=$(curl -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/users/and3rn3t")
-          
-          # Fetch repositories
-          echo "Fetching repositories..."
-          REPOS_DATA=$(curl -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100")
-          
-          # Fetch recent activity (events)
-          echo "Fetching recent activity..."
-          EVENTS_DATA=$(curl -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/users/and3rn3t/events/public?per_page=30")
-          
-          # Create comprehensive GitHub data JSON
-          cat > github-data.json << EOF
-          {
-            "user": $USER_DATA,
-            "repositories": $REPOS_DATA,
-            "events": $EVENTS_DATA,
-            "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
-            "rateLimitRemaining": "Enhanced with token"
+          python3 - <<'PYEOF'
+          import json, os, sys, urllib.request, urllib.error
+          from datetime import datetime, timezone
+
+          token = os.environ['GITHUB_TOKEN']
+          headers = {
+              'Authorization': f'token {token}',
+              'Accept': 'application/vnd.github.v3+json',
+              'User-Agent': 'and3rn3t-portfolio-updater',
           }
-          EOF
+          BASE = 'https://api.github.com'
+          USERNAME = 'and3rn3t'
+
+          def gh_get(url):
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req) as resp:
+                  return json.loads(resp.read().decode())
+
+          def gh_get_all(url):
+              """Fetch every page until the API returns fewer than per_page items."""
+              results, page = [], 1
+              while True:
+                  sep = '&' if '?' in url else '?'
+                  paged = f'{url}{sep}page={page}'
+                  req = urllib.request.Request(paged, headers=headers)
+                  with urllib.request.urlopen(req) as resp:
+                      chunk = json.loads(resp.read().decode())
+                  if not chunk:
+                      break
+                  results.extend(chunk)
+                  if len(chunk) < 100:
+                      break
+                  page += 1
+              return results
+
+          print('Fetching user data...')
+          user = gh_get(f'{BASE}/users/{USERNAME}')
+
+          print('Fetching repositories (paginated, sorted by push date)...')
+          repos = gh_get_all(
+              f'{BASE}/users/{USERNAME}/repos?sort=pushed&direction=desc&per_page=100'
+          )
+          print(f'  {len(repos)} repositories fetched')
+
+          print('Fetching public events...')
+          try:
+              events = gh_get(f'{BASE}/users/{USERNAME}/events/public?per_page=30')
+          except Exception as exc:
+              print(f'  Events unavailable: {exc}')
+              events = []
+
+          output = {
+              'user': user,
+              'repositories': repos,
+              'events': events,
+              'lastUpdated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+              'totalRepos': len(repos),
+          }
+
+          with open('github-data.json', 'w', encoding='utf-8') as fh:
+              json.dump(output, fh, indent=2, ensure_ascii=False)
+              fh.write('\n')
+
+          print(f'github-data.json written ({len(repos)} repos, lastUpdated={output["lastUpdated"]})')
+          PYEOF
           
-      - name: Commit GitHub data
+      - name: Commit and push GitHub data
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
           if ! git diff --quiet github-data.json; then
             git add github-data.json
-            git commit -m "Update GitHub data - $(date -u +"%Y-%m-%d")" || exit 0
+            git commit -m "chore: update GitHub data - $(date -u +"%Y-%m-%d")"
+            git push
           else
             echo "No changes to GitHub data"
           fi
+
 
   update-metrics:
     runs-on: ubuntu-latest
