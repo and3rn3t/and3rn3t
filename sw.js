@@ -1,9 +1,9 @@
 // Service Worker for Matthew Anderson's Portfolio
-// Version: 1.2.0
+// Version: 1.3.0
 
-const CACHE_NAME = 'portfolio-v1.2.0';
-const RUNTIME_CACHE = 'portfolio-runtime-v1.2';
-const API_CACHE = 'portfolio-api-v1.2';
+const CACHE_NAME = 'portfolio-v1.3.0';
+const RUNTIME_CACHE = 'portfolio-runtime-v1.3';
+const API_CACHE = 'portfolio-api-v1.3';
 
 // Assets to cache immediately on install
 const PRECACHE_ASSETS = [

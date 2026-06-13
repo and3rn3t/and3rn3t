@@ -54,6 +54,17 @@ jobs:
                   page += 1
               return results
 
+          def gh_graphql(query, variables):
+              body = json.dumps({'query': query, 'variables': variables}).encode()
+              req = urllib.request.Request(
+                  f'{BASE}/graphql',
+                  data=body,
+                  headers={**headers, 'Content-Type': 'application/json'},
+                  method='POST',
+              )
+              with urllib.request.urlopen(req) as resp:
+                  return json.loads(resp.read().decode())
+
           print('Fetching user data...')
           user = gh_get(f'{BASE}/users/{USERNAME}')
 
@@ -85,11 +96,79 @@ jobs:
               print(f'  Starred fetch unavailable: {exc}')
               self_starred = []
 
+          print('Fetching contribution calendar (GraphQL)...')
+          CONTRIB_QUERY = """
+          query($login: String!) {
+            user(login: $login) {
+              contributionsCollection {
+                contributionCalendar {
+                  totalContributions
+                  weeks {
+                    contributionDays {
+                      date
+                      contributionCount
+                      contributionLevel
+                    }
+                  }
+                }
+              }
+            }
+          }
+          """
+          LEVEL_MAP = {
+              'NONE': 0,
+              'FIRST_QUARTILE': 1,
+              'SECOND_QUARTILE': 2,
+              'THIRD_QUARTILE': 3,
+              'FOURTH_QUARTILE': 4,
+          }
+          try:
+              gql = gh_graphql(CONTRIB_QUERY, {'login': USERNAME})
+              cal = gql['data']['user']['contributionsCollection']['contributionCalendar']
+              contributions = {
+                  'total': cal['totalContributions'],
+                  'weeks': [
+                      {
+                          'days': [
+                              {
+                                  'date': d['date'],
+                                  'count': d['contributionCount'],
+                                  'level': LEVEL_MAP.get(d['contributionLevel'], 0),
+                              }
+                              for d in week['contributionDays']
+                          ]
+                      }
+                      for week in cal['weeks']
+                  ],
+              }
+              print(f'  {contributions["total"]} contributions over {len(contributions["weeks"])} weeks')
+          except Exception as exc:
+              print(f'  Contributions unavailable: {exc}')
+              contributions = None
+
+          print('Aggregating language bytes (skipping forks/archived)...')
+          language_bytes = {}
+          for r in repos:
+              if r.get('fork') or r.get('archived'):
+                  continue
+              try:
+                  langs = gh_get(r['languages_url'])
+                  for lang, byte_count in langs.items():
+                      language_bytes[lang] = language_bytes.get(lang, 0) + byte_count
+              except Exception as exc:
+                  print(f"  languages for {r['name']} unavailable: {exc}")
+          language_bytes = dict(
+              sorted(language_bytes.items(), key=lambda kv: kv[1], reverse=True)
+          )
+          print(f'  {len(language_bytes)} languages aggregated')
+
           output = {
               'user': user,
               'repositories': repos,
               'events': events,
               'selfStarredRepoNames': self_starred,
+              'contributions': contributions,
+              'languageBytes': language_bytes,
               'lastUpdated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
               'totalRepos': len(repos),
           }

@@ -228,6 +228,20 @@ export class GitHubAPIManager {
         }
     }
 
+    // Pre-fetched contribution calendar (from the daily data workflow). Returns
+    // { total, weeks: [{ days: [{ date, count, level }] }] } or null if unavailable.
+    async getContributions() {
+        const cachedData = await this.loadCachedGitHubData();
+        return cachedData?.contributions ?? null;
+    }
+
+    // Pre-fetched language byte totals across non-fork repos (from the daily data
+    // workflow). Returns { [language]: bytes } sorted desc, or null if unavailable.
+    async getLanguageBytes() {
+        const cachedData = await this.loadCachedGitHubData();
+        return cachedData?.languageBytes ?? null;
+    }
+
     async getUserEvents(per_page = 30) {
         return this.fetchGitHubData(`/users/${GitHubAPIManager.username}/events`, { per_page }, 180000); // 3 min cache
     }

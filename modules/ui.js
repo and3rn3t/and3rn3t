@@ -356,14 +356,11 @@ export class UIManager {
                 </div>
             `;
             
-            this.loadLanguageStats(repos, languageStats);
+            await this.loadLanguageStats(repos, languageStats);
             
             if (contributionGraph) {
-                contributionGraph.innerHTML = `
-                    <div class="contribution-widget">
-                        <img src="https://ghchart.rshah.org/16a34a/and3rn3t" alt="GitHub Contribution Graph" loading="lazy" />
-                    </div>
-                `;
+                const contributions = await githubAPI.getContributions();
+                this.renderContributionHeatmap(contributions, contributionGraph);
             }
             
             debug.log('[UI] GitHub stats loaded');
@@ -376,42 +373,104 @@ export class UIManager {
         }
     }
 
-    loadLanguageStats(repos, container) {
+    async loadLanguageStats(repos, container) {
         if (!container) {
             container = document.getElementById('main-language-stats');
         }
         if (!container) return;
         
-        const languages = {};
-        for (const repo of repos) {
-            if (repo.language) {
-                languages[repo.language] = (languages[repo.language] || 0) + 1;
+        // Prefer real language bytes from the daily data workflow; fall back to
+        // counting each repo's primary language when bytes aren't available yet.
+        const byteData = await githubAPI.getLanguageBytes();
+        let entries;
+        if (byteData && Object.keys(byteData).length > 0) {
+            entries = Object.entries(byteData);
+        } else {
+            const languages = {};
+            for (const repo of repos) {
+                if (repo.language) {
+                    languages[repo.language] = (languages[repo.language] || 0) + 1;
+                }
             }
+            entries = Object.entries(languages);
         }
         
-        const sortedLanguages = Object.entries(languages)
-            .sort((a, b) => b[1] - a[1])
+        const sortedLanguages = entries
+            .toSorted((a, b) => b[1] - a[1])
             .slice(0, 8);
         
         const total = sortedLanguages.reduce((sum, [, count]) => sum + count, 0);
+        if (total === 0) return;
         
         container.innerHTML = `
             <div class="language-stats-container">
                 <h4>Languages Used</h4>
                 <div class="language-bars">
-                    ${sortedLanguages.map(([lang, count]) => `
+                    ${sortedLanguages.map(([lang, count]) => {
+                        const percent = (count / total) * 100;
+                        return `
                         <div class="language-bar-item">
                             <div class="language-bar-header">
                                 <span class="language-name">${lang}</span>
-                                <span class="language-percentage">${((count / total) * 100).toFixed(1)}%</span>
+                                <span class="language-percentage">${percent.toFixed(1)}%</span>
                             </div>
                             <div class="language-bar">
-                                <div class="language-bar-fill" style="width: ${(count / total) * 100}%; background-color: ${LANGUAGE_COLORS[lang] || '#666'}"></div>
+                                <div class="language-bar-fill" style="width: ${percent}%; background-color: ${LANGUAGE_COLORS[lang] || '#666'}"></div>
                             </div>
-                        </div>
-                    `).join('')}
+                        </div>`;
+                    }).join('')}
                 </div>
             </div>
+        `;
+    }
+
+    // Render a GitHub-style contribution heatmap from pre-fetched calendar data.
+    // Falls back to the third-party chart image when data isn't available yet.
+    renderContributionHeatmap(contributions, container) {
+        if (!container) return;
+        
+        if (!contributions || !Array.isArray(contributions.weeks) || contributions.weeks.length === 0) {
+            container.innerHTML = `
+                <div class="contribution-widget">
+                    <img src="https://ghchart.rshah.org/16a34a/and3rn3t" alt="GitHub contribution graph" loading="lazy" />
+                </div>
+            `;
+            return;
+        }
+        
+        const cells = [];
+        contributions.weeks.forEach((week, weekIndex) => {
+            for (const day of week.days) {
+                const weekday = new Date(`${day.date}T00:00:00`).getDay();
+                const dateLabel = new Date(`${day.date}T00:00:00`).toLocaleDateString(undefined, {
+                    weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
+                });
+                const plural = day.count === 1 ? '' : 's';
+                cells.push(
+                    `<div class="heatmap-cell" data-level="${day.level}" ` +
+                    `style="grid-column:${weekIndex + 1};grid-row:${weekday + 1}" ` +
+                    `title="${day.count} contribution${plural} on ${dateLabel}"></div>`
+                );
+            }
+        });
+        
+        const total = (contributions.total ?? 0).toLocaleString();
+        container.innerHTML = `
+            <figure class="contribution-widget" role="img" aria-label="${total} contributions in the last year">
+                <div class="heatmap-grid">${cells.join('')}</div>
+                <figcaption class="heatmap-footer">
+                    <span class="heatmap-total">${total} contributions in the last year</span>
+                    <span class="heatmap-legend" aria-hidden="true">
+                        <span class="heatmap-legend-label">Less</span>
+                        <span class="heatmap-cell" data-level="0"></span>
+                        <span class="heatmap-cell" data-level="1"></span>
+                        <span class="heatmap-cell" data-level="2"></span>
+                        <span class="heatmap-cell" data-level="3"></span>
+                        <span class="heatmap-cell" data-level="4"></span>
+                        <span class="heatmap-legend-label">More</span>
+                    </span>
+                </figcaption>
+            </figure>
         `;
     }
 
