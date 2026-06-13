@@ -90,6 +90,10 @@ async function initializeApp() {
         
         debug.log('[App] Phase 2: Navigation & UI initialized');
         
+        // Hero enhancements: text reveal runs immediately; WebGL gradient is
+        // dynamically imported and self-gates on device capability.
+        initHeroEnhancements();
+        
         // Phase 3: Content loading (show progress) - lazy load projects module
         uiManager.showLoadingProgress('content');
         
@@ -110,6 +114,23 @@ async function initializeApp() {
         // Make body visible (it starts with opacity: 0)
         document.body.classList.add('loaded');
         
+        // Micro-interactions on the freshly-rendered content (count-up, tilt, magnetic).
+        try {
+            const { initInteractions } = await import('./modules/interactions.js');
+            initInteractions();
+        } catch (err) {
+            debug.warn('[App] Interactions skipped:', err);
+        }
+
+        // Command palette (Cmd/Ctrl-K) — activates the existing search modal.
+        try {
+            const { commandPalette } = await import('./modules/command-palette.js');
+            commandPalette.init();
+            appState.managers.palette = commandPalette;
+        } catch (err) {
+            debug.warn('[App] Command palette skipped:', err);
+        }
+        
         // Phase 4: Non-critical features (deferred with dynamic imports)
         requestIdleCallback(async () => {
             try {
@@ -126,9 +147,16 @@ async function initializeApp() {
                 
                 // Additional UI enhancements
                 loadGitHubBadges();
+
+                // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
+                try {
+                    const { easterEgg } = await import('./modules/easter-egg.js');
+                    easterEgg.init();
+                } catch (err) {
+                    debug.warn('[App] Easter egg skipped:', err);
+                }
                 
-                debug.log('[App] Phase 4: Analytics & performance initialized');
-            } catch (err) {
+                debug.log('[App] Phase 4: Analytics & performance initialized');            } catch (err) {
                 debug.error('[App] Phase 4 error:', err);
             }
         }, { timeout: 2000 });
@@ -156,6 +184,38 @@ async function initializeApp() {
     } catch (error) {
         debug.error('[App] Initialization error:', error);
         handleInitError(error);
+    }
+}
+
+/**
+ * Initialize hero text reveal + (capability-gated) WebGL mesh gradient.
+ * Text effect is cheap and runs right away; the canvas chunk is lazy-loaded
+ * and only runs when device capability allows.
+ */
+async function initHeroEnhancements() {
+    try {
+        const { initHeroText } = await import('./modules/hero-text.js');
+        initHeroText();
+    } catch (err) {
+        debug.warn('[App] Hero text effect skipped:', err);
+    }
+
+    try {
+        const { canRunHeavyEffects } = await import('./modules/capabilities.js');
+        if (!canRunHeavyEffects()) {
+            return; // CSS fallback gradient remains visible.
+        }
+        const canvas = document.getElementById('hero-canvas');
+        if (!canvas) {
+            return;
+        }
+        const { initHeroCanvas } = await import('./modules/hero-canvas.js');
+        const handle = initHeroCanvas(canvas);
+        if (handle) {
+            appState.managers.heroCanvas = handle;
+        }
+    } catch (err) {
+        debug.warn('[App] Hero canvas skipped:', err);
     }
 }
 

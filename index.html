@@ -665,12 +665,18 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-canvas-wrap" aria-hidden="true">
+            <div class="hero-canvas-fallback"></div>
+            <canvas class="hero-canvas" id="hero-canvas"></canvas>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
                     Hi, I'm <span class="highlight">Matthew Anderson</span>
                 </h1>
-                <h2 class="hero-subtitle">Software Engineer at Deere & Company</h2>
+                <h2 class="hero-subtitle">
+                    <span class="hero-role" data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd">Software Engineer at Deere &amp; Company</span><span class="hero-caret" aria-hidden="true"></span>
+                </h2>
                 <p class="hero-description">
                     Software engineer at John Deere. Building things at the intersection of health tech, home automation, and data in my spare time.
                 </p>

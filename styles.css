@@ -539,6 +539,70 @@ body {
     overflow: hidden;
 }
 
+/* ── Hero mesh-gradient canvas ── */
+.hero-canvas-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* CSS fallback gradient — visible until/unless WebGL takes over */
+.hero-canvas-fallback {
+    position: absolute;
+    inset: -20%;
+    background:
+        radial-gradient(60% 60% at 25% 30%, rgba(74, 222, 128, 0.55), transparent 60%),
+        radial-gradient(55% 55% at 80% 25%, rgba(34, 197, 94, 0.45), transparent 60%),
+        radial-gradient(70% 70% at 60% 90%, rgba(22, 163, 74, 0.5), transparent 65%),
+        var(--bg-dark);
+    filter: saturate(1.1);
+    animation: heroFallbackDrift 18s ease-in-out infinite alternate;
+}
+
+.hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* Hidden until JS confirms WebGL; the fallback shows underneath. */
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.hero-canvas.is-active {
+    opacity: 1;
+}
+
+/* When JS marks the canvas as fallback-only, keep it hidden entirely. */
+.hero-canvas.is-fallback {
+    display: none;
+}
+
+@keyframes heroFallbackDrift {
+    from {
+        transform: translate3d(-2%, -1%, 0) scale(1.05);
+    }
+    to {
+        transform: translate3d(2%, 2%, 0) scale(1.12);
+    }
+}
+
+/* Soft readability scrim so text stays legible over the gradient. */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+        120% 90% at 50% 45%,
+        rgba(10, 15, 12, 0.15),
+        rgba(10, 15, 12, 0.55) 100%
+    );
+    pointer-events: none;
+}
+
 .hero-container {
     max-width: var(--container-xl);
     margin: 0 auto;
@@ -573,6 +637,27 @@ body {
     font-weight: var(--font-weight-normal);
     margin-bottom: var(--space-6);
     opacity: 0.9;
+}
+
+/* Rotating role typewriter caret */
+.hero-role {
+    color: #4ade80;
+}
+
+.hero-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    background: #4ade80;
+    vertical-align: text-bottom;
+    animation: heroCaretBlink 1s steps(1) infinite;
+}
+
+@keyframes heroCaretBlink {
+    50% {
+        opacity: 0;
+    }
 }
 
 .hero-description {
@@ -957,6 +1042,70 @@ section {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--border-dark);
+}
+
+/* ── 3D tilt + glare (JS-gated: .tilt-enabled added only on capable devices) ── */
+.tilt-enabled {
+    --rx: 0deg;
+    --ry: 0deg;
+    --glare-x: 50%;
+    --glare-y: 50%;
+    --glare-opacity: 0;
+    transform-style: preserve-3d;
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.18s ease, box-shadow var(--transition-base);
+    will-change: transform;
+}
+
+/* On capable devices the tilt provides the lift, so neutralise the flat hover. */
+.tilt-enabled:hover {
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.tilt-enabled::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+        220px circle at var(--glare-x) var(--glare-y),
+        rgba(255, 255, 255, 0.28),
+        transparent 60%
+    );
+    opacity: var(--glare-opacity);
+    transition: opacity 0.25s ease;
+    z-index: 3;
+}
+
+.stat-card.tilt-enabled {
+    overflow: hidden;
+}
+
+/* ── Magnetic elements ── */
+.magnetic {
+    transform: translate(var(--mx, 0), var(--my, 0));
+    transition: transform 0.25s var(--ease-spring);
+    will-change: transform;
+}
+
+/* Count-up emphasis */
+.stat-card h3.is-counting {
+    font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tilt-enabled,
+    .tilt-enabled:hover {
+        transform: none !important;
+    }
+    .tilt-enabled::after {
+        display: none;
+    }
+    .magnetic {
+        transform: none !important;
+    }
 }
 
 .project-header {
@@ -3050,6 +3199,209 @@ body.dark-theme .keyboard-help-close:hover {
 .global-search-results {
     max-height: 50vh;
     overflow-y: auto;
+}
+
+/* ── Command palette result items ── */
+.palette-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-base);
+    text-align: left;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: background var(--transition-fast);
+}
+
+.palette-item.is-active,
+.palette-item:hover {
+    background: var(--accent-light);
+}
+
+.palette-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    border-radius: var(--radius-base);
+    background: var(--bg-tertiary);
+    color: var(--accent-text);
+}
+
+.palette-item.is-active .palette-item-icon {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.palette-item-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.palette-item-title {
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.palette-item-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.palette-item-type {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-light);
+    flex-shrink: 0;
+}
+
+.palette-no-results {
+    padding: var(--space-8);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+body.dark-theme .palette-item {
+    color: var(--text-white);
+}
+
+body.dark-theme .palette-item.is-active,
+body.dark-theme .palette-item:hover {
+    background: rgba(34, 197, 94, 0.18);
+}
+
+body.dark-theme .palette-item-icon {
+    background: rgba(255, 255, 255, 0.08);
+    color: #4ade80;
+}
+
+/* ── Easter egg: dev-mode terminal overlay ── */
+.dev-terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dev-terminal-overlay.visible {
+    opacity: 1;
+}
+
+.dev-terminal {
+    width: min(92vw, 560px);
+    background: #0d1117;
+    border: 1px solid #1f6f3f;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.2);
+    overflow: hidden;
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.dev-terminal-overlay.visible .dev-terminal {
+    transform: translateY(0) scale(1);
+}
+
+.dev-terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: #161b22;
+    border-bottom: 1px solid #21262d;
+}
+
+.dev-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dev-dot--red {
+    background: #ff5f56;
+}
+
+.dev-dot--amber {
+    background: #ffbd2e;
+}
+
+.dev-dot--green {
+    background: #27c93f;
+}
+
+.dev-terminal-title {
+    margin-left: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: #8b949e;
+}
+
+.dev-terminal-body {
+    margin: 0;
+    padding: var(--space-6);
+    min-height: 220px;
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #4ade80;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.dev-terminal-hint {
+    margin: 0;
+    padding: 0 var(--space-6) var(--space-4);
+    font-size: var(--font-size-xs);
+    color: #8b949e;
+}
+
+.dev-terminal-hint kbd {
+    background: #21262d;
+    border-radius: var(--radius-sm);
+    padding: 1px 6px;
+    color: #c9d1d9;
+}
+
+/* Palette toast (e.g. "Email copied") */
+.palette-toast {
+    position: fixed;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%) translateY(1rem);
+    background: var(--bg-dark);
+    color: #fff;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    font-size: var(--font-size-sm);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    z-index: var(--z-tooltip);
+}
+
+.palette-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 .search-results-empty {
