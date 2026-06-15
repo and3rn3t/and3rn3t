@@ -54,7 +54,7 @@ export class ProjectModal {
             el.addEventListener('click', () => this.close());
         }
 
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (this.isOpen && e.key === 'Escape') {
                 e.preventDefault();
                 this.close();
@@ -67,7 +67,8 @@ export class ProjectModal {
         this.handleHash();
 
         // Cache the initial og:image so we can restore it on close.
-        defaultOgImage = document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '';
+        defaultOgImage =
+            document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '';
 
         debug.log('[ProjectModal] Initialized');
     }
@@ -87,7 +88,7 @@ export class ProjectModal {
     }
 
     _slugFromHash() {
-        const hash = globalThis.location.hash;
+        const { hash } = globalThis.location;
         return hash.startsWith('#project/')
             ? decodeURIComponent(hash.slice('#project/'.length))
             : null;
@@ -125,7 +126,8 @@ export class ProjectModal {
         document.addEventListener('keydown', this.trapFocus);
 
         // Update og:image so apps that check at paste-time see the project card.
-        document.querySelector('meta[property="og:image"]')
+        document
+            .querySelector('meta[property="og:image"]')
             ?.setAttribute('content', `${OG_WORKER_URL}?project=${encodeURIComponent(slug)}`);
 
         requestAnimationFrame(() => {
@@ -144,9 +146,10 @@ export class ProjectModal {
         document.removeEventListener('keydown', this.trapFocus);
 
         if (updateHash && this._slugFromHash()) {
-            const restore = this.previousHash && !this.previousHash.startsWith('#project/')
-                ? this.previousHash
-                : '#projects';
+            const restore =
+                this.previousHash && !this.previousHash.startsWith('#project/')
+                    ? this.previousHash
+                    : '#projects';
             globalThis.history.replaceState(null, '', restore);
         }
 
@@ -156,17 +159,18 @@ export class ProjectModal {
 
         // Restore default og:image.
         if (defaultOgImage) {
-            document.querySelector('meta[property="og:image"]')
+            document
+                .querySelector('meta[property="og:image"]')
                 ?.setAttribute('content', defaultOgImage);
         }
     }
 
-    trapFocus = (e) => {
+    trapFocus = e => {
         if (e.key !== 'Tab') return;
         const focusable = this.dialog.querySelectorAll(
             'button, input, [href], [tabindex]:not([tabindex="-1"])'
         );
-        const list = Array.from(focusable).filter((el) => el.offsetParent !== null);
+        const list = Array.from(focusable).filter(el => el.offsetParent !== null);
         if (list.length === 0) return;
         const first = list[0];
         const last = list.at(-1);
@@ -180,21 +184,20 @@ export class ProjectModal {
     };
 
     renderBody(d) {
-        const stat = (icon, value, label) => value === null || value === undefined
-            ? ''
-            : `<div class="project-modal-stat" title="${label}">
+        const stat = (icon, value, label) =>
+            value === null || value === undefined
+                ? ''
+                : `<div class="project-modal-stat" title="${label}">
                     <i class="fas fa-${icon}" aria-hidden="true"></i>
                     <span class="project-modal-stat-value">${value}</span>
                     <span class="project-modal-stat-label">${label}</span>
                 </div>`;
 
         const techTags = (d.technologies ?? [])
-            .map((t) => `<span class="language-tag">${t}</span>`)
+            .map(t => `<span class="language-tag">${t}</span>`)
             .join('');
 
-        const highlights = (d.highlights ?? [])
-            .map((h) => `<li>${h}</li>`)
-            .join('');
+        const highlights = (d.highlights ?? []).map(h => `<li>${h}</li>`).join('');
 
         const liveLink = d.homepage
             ? `<a href="${d.homepage}" target="_blank" rel="noopener noreferrer" class="project-link live">
@@ -220,23 +223,35 @@ export class ProjectModal {
                 ${d.pushedRelative ? stat('code-commit', d.pushedRelative, 'Last pushed') : ''}
             </div>
 
-            ${d.longDescription ? `
+            ${
+                d.longDescription
+                    ? `
                 <section class="project-modal-section">
                     <h3>Overview</h3>
                     <p>${d.longDescription}</p>
-                </section>` : ''}
+                </section>`
+                    : ''
+            }
 
-            ${highlights ? `
+            ${
+                highlights
+                    ? `
                 <section class="project-modal-section">
                     <h3>Highlights</h3>
                     <ul class="project-modal-highlights">${highlights}</ul>
-                </section>` : ''}
+                </section>`
+                    : ''
+            }
 
-            ${techTags ? `
+            ${
+                techTags
+                    ? `
                 <section class="project-modal-section">
                     <h3>Tech stack</h3>
                     <div class="project-modal-tech">${techTags}</div>
-                </section>` : ''}
+                </section>`
+                    : ''
+            }
 
             <footer class="project-modal-links">
                 <a href="${d.htmlUrl}" target="_blank" rel="noopener noreferrer" class="project-link">

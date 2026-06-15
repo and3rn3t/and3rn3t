@@ -32,16 +32,17 @@ class ExperienceManager {
         const container = document.querySelector(selector);
         if (!container || !Array.isArray(entries) || !entries.length) return;
 
-        container.innerHTML = entries.map((entry) => this.#renderEntry(entry, type)).join('');
+        container.innerHTML = entries.map(entry => this.#renderEntry(entry, type)).join('');
     }
 
     #renderEntry(entry, type) {
-        const dateRange = type === 'work'
-            ? this.#formatDateRange(entry.startDate, entry.endDate, entry.current)
-            : this.#formatDateRange(entry.startDate, entry.endDate, false);
+        const dateRange =
+            type === 'work'
+                ? this.#formatDateRange(entry.startDate, entry.endDate, entry.current)
+                : this.#formatDateRange(entry.startDate, entry.endDate, false);
 
         const nameField = type === 'work' ? entry.company : entry.institution;
-        const nameUrl  = type === 'work' ? entry.companyUrl : entry.institutionUrl;
+        const nameUrl = type === 'work' ? entry.companyUrl : entry.institutionUrl;
         const titleField = type === 'work' ? entry.role : entry.degree;
 
         const nameHtml = nameUrl
@@ -53,11 +54,11 @@ class ExperienceManager {
             : '';
 
         const highlightsHtml = entry.highlights?.length
-            ? `<ul class="timeline-highlights">${entry.highlights.map((h) => this.#highlightLi(h)).join('')}</ul>`
+            ? `<ul class="timeline-highlights">${entry.highlights.map(h => this.#highlightLi(h)).join('')}</ul>`
             : '';
 
         const techHtml = entry.technologies?.length
-            ? `<div class="timeline-tech">${entry.technologies.map((t) => this.#techTag(t)).join('')}</div>`
+            ? `<div class="timeline-tech">${entry.technologies.map(t => this.#techTag(t)).join('')}</div>`
             : '';
 
         const summaryHtml = entry.summary
@@ -91,18 +92,35 @@ class ExperienceManager {
     }
 
     #formatDateRange(startDate, endDate, current) {
-        const fmt = (d) => {
+        const fmt = d => {
             if (!d) return '';
             const [year, month] = d.split('-');
-            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const months = [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec',
+            ];
             return `${months[Number(month) - 1]} ${year}`;
         };
         const end = current ? 'Present' : fmt(endDate);
         return `${fmt(startDate)} – ${end}`;
     }
 
-    #highlightLi(text) { return `<li>${this.#escHtml(text)}</li>`; }
-    #techTag(text) { return `<span class="timeline-tech-tag">${this.#escHtml(text)}</span>`; }
+    #highlightLi(text) {
+        return `<li>${this.#escHtml(text)}</li>`;
+    }
+    #techTag(text) {
+        return `<span class="timeline-tech-tag">${this.#escHtml(text)}</span>`;
+    }
 
     #escHtml(str) {
         return String(str ?? '')

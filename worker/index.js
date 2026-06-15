@@ -27,7 +27,12 @@
  */
 
 import { handleOgRequest } from './og.js';
-import { handleViewsRequest, handleGuestbookRequest, jsonResponse, corsHeaders } from './engagement.js';
+import {
+    handleViewsRequest,
+    handleGuestbookRequest,
+    jsonResponse,
+    corsHeaders,
+} from './engagement.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
@@ -91,7 +96,7 @@ export default {
 
         // Fetch from GitHub.
         const ghHeaders = {
-            'Accept': 'application/vnd.github.v3+json',
+            Accept: 'application/vnd.github.v3+json',
             'User-Agent': 'and3rn3t-portfolio-worker/1.0',
         };
         if (env.GH_TOKEN) {
@@ -171,9 +176,8 @@ function buildActivity(event, repo) {
 
     if (event.type === 'PushEvent') {
         const commits = event.payload?.commits ?? [];
-        const commit = [...commits].reverse().find(
-            (c) => !c.message.startsWith('Merge')
-        ) ?? commits.at(-1);
+        const commit =
+            [...commits].reverse().find(c => !c.message.startsWith('Merge')) ?? commits.at(-1);
         const branch = (event.payload?.ref ?? '').replace('refs/heads/', '') || 'main';
         return { ...base, type: 'push', message: commit?.message?.split('\n')[0] ?? null, branch };
     }
@@ -186,14 +190,20 @@ function buildActivity(event, repo) {
     if (event.type === 'CreateEvent') {
         const refType = event.payload?.ref_type;
         if (refType !== 'repository' && refType !== 'branch') return null;
-        const message = refType === 'repository'
-            ? `Created repo ${repoName}`
-            : `Created branch ${event.payload?.ref}`;
+        const message =
+            refType === 'repository'
+                ? `Created repo ${repoName}`
+                : `Created branch ${event.payload?.ref}`;
         return { ...base, type: 'create', message, branch: null };
     }
 
     if (event.type === 'ReleaseEvent') {
-        return { ...base, type: 'release', message: `Released ${event.payload?.release?.tag_name}`, branch: null };
+        return {
+            ...base,
+            type: 'release',
+            message: `Released ${event.payload?.release?.tag_name}`,
+            branch: null,
+        };
     }
 
     if (event.type === 'WatchEvent') {

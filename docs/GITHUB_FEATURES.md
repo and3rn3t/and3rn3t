@@ -9,8 +9,10 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 ## 📊 New Sections Added
 
 ### 1. GitHub Statistics Dashboard
+
 **Location:** After Skills section  
 **Features:**
+
 - Real-time repository count
 - Follower and following counts
 - Total stars across all repositories
@@ -19,13 +21,16 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 - Contribution heatmap/calendar visualization
 
 **APIs Used:**
+
 - GitHub REST API v3 (`/users/{username}`)
 - GitHub REST API v3 (`/users/{username}/repos`)
 - ghchart.rshah.org for contribution visualization
 
 ### 2. Language Statistics
+
 **Location:** Within GitHub Stats section  
 **Features:**
+
 - Visual bar chart showing most used programming languages
 - Percentage distribution across repositories
 - Color-coded language indicators
@@ -35,8 +40,10 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 **Data Source:** Aggregated from all public repositories
 
 ### 3. Pinned Repositories
+
 **Location:** Top of Projects section  
 **Features:**
+
 - Top 6 starred repositories (simulating GitHub's pinned repos)
 - Repository name, description, and link
 - Language indicator
@@ -46,8 +53,10 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 **Filtering:** Excludes forked repositories, shows only owned projects
 
 ### 4. Repository Topics Cloud
+
 **Location:** Bottom of Projects section  
 **Features:**
+
 - Visual tag cloud of all repository topics
 - Size based on topic frequency
 - Interactive hover effects
@@ -55,8 +64,10 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 - Responsive layout
 
 ### 5. Recent GitHub Activity Feed
+
 **Location:** Separate section after Projects  
 **Features:**
+
 - Last 8 public events from the user
 - Event types tracked:
   - Push commits
@@ -70,8 +81,10 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 - Icon indicators for each event type
 
 ### 6. GitHub Gists Showcase
+
 **Location:** After Activity section  
 **Features:**
+
 - Latest 6 public gists
 - Gist title (filename)
 - Description
@@ -81,20 +94,25 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 - Direct links to gists
 
 ### 7. Developer Insights
+
 **Location:** Dedicated section  
 **Features:**
+
 - Commit activity graph (1-year view)
 - Most productive time visualization
 - Activity area chart
 - Integration with multiple stat providers
 
 **Services Used:**
+
 - github-readme-activity-graph.vercel.app
 - github-readme-stats.vercel.app
 
 ### 8. Quick Stats Badges
+
 **Location:** Within Insights section  
 **Features:**
+
 - GitHub followers badge
 - Total stars badge
 - Focus area badge
@@ -105,8 +123,10 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 **Service:** shields.io for badge generation
 
 ### 9. GitHub Profile Badges
+
 **Location:** Dedicated section  
 **Features:**
+
 - Profile view counter
 - Comprehensive GitHub stats card
 - Top languages compact card
@@ -115,6 +135,7 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 - GitHub trophies/achievements
 
 **Services Used:**
+
 - komarev.com (profile views)
 - github-readme-stats.vercel.app (stats & languages)
 - github-readme-streak-stats.herokuapp.com (streaks)
@@ -124,9 +145,11 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 ## 🤖 GitHub Actions Workflows
 
 ### 1. Snake Animation Generator (`snake.yml`)
+
 **Purpose:** Generates an animated snake eating the contribution graph  
 **Schedule:** Every 24 hours  
-**Triggers:** 
+**Triggers:**
+
 - Automated schedule
 - Manual dispatch
 - Push to main branch
@@ -134,13 +157,16 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 **Output:** SVG animation stored in `output` branch
 
 **Dependencies:**
+
 - Platane/snk action
 - crazy-max/ghaction-github-pages
 
 ### 2. GitHub Metrics (`metrics.yml`)
+
 **Purpose:** Generates comprehensive developer metrics  
 **Schedule:** Every 6 hours  
 **Features:**
+
 - Isometric calendar (full year)
 - Language analysis
 - Notable contributions
@@ -149,6 +175,7 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 - Coding habits and patterns
 
 **Dependencies:**
+
 - lowlighter/metrics action
 
 ## 📄 Enhanced README.md
@@ -156,6 +183,7 @@ This enhancement transforms the portfolio into a comprehensive GitHub showcase, 
 The README now includes:
 
 ### Visual Elements
+
 - Profile view counter badge
 - GitHub stats card with icons
 - Top languages compact view
@@ -164,28 +192,34 @@ The README now includes:
 - GitHub trophies showcase
 
 ### Tech Stack Badges
+
 **Frontend:**
+
 - HTML5
 - CSS3
 - JavaScript
 - React
 
 **Backend:**
+
 - Python
 - Node.js
 - PostgreSQL
 
 **Tools:**
+
 - Git
 - Docker
 - Linux
 
 ### Social Links
+
 - GitHub profile
 - LinkedIn
 - Email
 
 ### Additional Features
+
 - Snake animation embed
 - Inspirational quote
 - Centered, professional layout
@@ -194,6 +228,7 @@ The README now includes:
 ## 🎨 Design Features
 
 ### Styling
+
 - Dark gradient backgrounds
 - Glassmorphism effects (translucent cards with backdrop blur)
 - Smooth hover animations
@@ -203,13 +238,16 @@ The README now includes:
 - Error handling with friendly messages
 
 ### Responsive Design
+
 All new sections are fully responsive with:
+
 - Mobile-first approach
 - Single column layout on small screens
 - Touch-friendly hover effects
 - Optimized image loading
 
 ### Performance
+
 - Lazy loading for images
 - Async API calls with error handling
 - Graceful fallbacks for failed requests
@@ -218,6 +256,7 @@ All new sections are fully responsive with:
 ## 🔧 Technical Implementation
 
 ### APIs and Services Used
+
 1. **GitHub REST API v3**
    - User information
    - Repository listings
@@ -234,6 +273,7 @@ All new sections are fully responsive with:
    - komarev.com
 
 ### JavaScript Functions Added
+
 - `loadGitHubStats()` - Fetches and displays user statistics
 - `loadLanguageStats()` - Analyzes and visualizes language distribution
 - `loadGitHubActivity()` - Fetches and formats recent events
@@ -244,6 +284,7 @@ All new sections are fully responsive with:
 - `getTimeAgo()` - Formats timestamps to relative time
 
 ### CSS Classes Added
+
 - `.stat-card`, `.stat-content` - Statistics cards
 - `.language-bars`, `.language-item` - Language visualization
 - `.activity-item`, `.activity-icon` - Activity feed
@@ -286,6 +327,7 @@ Once deployed to GitHub Pages, all features will work automatically:
 ## 📱 Mobile Experience
 
 The mobile version includes:
+
 - Single-column layouts for all grids
 - Touch-optimized interactions
 - Readable font sizes
@@ -308,6 +350,7 @@ The mobile version includes:
 ## 🔮 Future Enhancements (Optional)
 
 Potential additions that could be made:
+
 - GitHub Sponsors integration
 - Repository dependency graphs
 - Code frequency charts

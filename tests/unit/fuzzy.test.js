@@ -57,8 +57,8 @@ test('score returns 0 for an empty query (shows everything)', () => {
 
 test('consecutive letter matches score higher than scattered matches', () => {
     const item = { title: 'Download résumé', subtitle: '' };
-    const consecutive = score('dow', item);   // d-o-w consecutive
-    const scattered   = score('dlr', item);   // d...l...r scattered
+    const consecutive = score('dow', item); // d-o-w consecutive
+    const scattered = score('dlr', item); // d...l...r scattered
     expect(consecutive).toBeGreaterThan(scattered);
 });
 
@@ -82,7 +82,7 @@ test('score searches subtitle and keywords too', () => {
 test('exact title prefix ranks above partial scatter', () => {
     const palette = item => score('tog', item);
     const togItem = { title: 'Toggle theme', subtitle: '' };
-    const other   = { title: 'Go to projects', subtitle: '' };
+    const other = { title: 'Go to projects', subtitle: '' };
     // 't o g' consecutive in "toggle" vs scattered in "to projects" ('t'...'o'...'g')
     expect(palette(togItem)).toBeGreaterThan(palette(other));
 });

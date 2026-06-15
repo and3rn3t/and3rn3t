@@ -8,13 +8,13 @@ import { debug } from './debug.js';
 export class GitHubAPIManager {
     static baseUrl = 'https://api.github.com';
     static username = 'and3rn3t';
-    
+
     constructor() {
         this.cache = new Map();
         this.rateLimitInfo = {
             remaining: 60,
             reset: Date.now() + 3600000,
-            limit: 60
+            limit: 60,
         };
         this.requestQueue = [];
         this.isProcessingQueue = false;
@@ -26,42 +26,42 @@ export class GitHubAPIManager {
     // Enhanced retry logic with exponential backoff
     async executeWithRetry(operation, maxRetries = this.maxRetries) {
         let lastError;
-        
+
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
                 return await operation();
             } catch (error) {
                 lastError = error;
-                
+
                 // Don't retry for certain error types
                 if (error.message.includes('404') || error.message.includes('403')) {
                     throw error;
                 }
-                
+
                 if (attempt === maxRetries) {
                     throw error;
                 }
-                
+
                 // Exponential backoff with jitter
                 const delay = this.baseDelay * Math.pow(2, attempt - 1) + Math.random() * 1000;
                 await new Promise(resolve => setTimeout(resolve, delay));
             }
         }
-        
+
         throw lastError;
     }
 
     // Load pre-fetched GitHub data from workflow
     async loadCachedGitHubData() {
         if (this.cachedData) return this.cachedData;
-        
+
         try {
             const response = await fetch('github-data.json');
             if (response.ok) {
                 this.cachedData = await response.json();
                 return this.cachedData;
             }
-        } catch (error) {
+        } catch (_error) {
             debug.warn('[GitHub] Pre-fetched data not available, using direct API');
         }
         return null;
@@ -72,7 +72,8 @@ export class GitHubAPIManager {
         return `${endpoint}:${JSON.stringify(params)}`;
     }
 
-    setCache(key, data, ttl = 300000) { // 5 minutes default TTL
+    setCache(key, data, ttl = 300000) {
+        // 5 minutes default TTL
         const expiry = Date.now() + ttl;
         this.cache.set(key, { data, expiry });
     }
@@ -90,9 +91,13 @@ export class GitHubAPIManager {
 
     // Rate limit handling
     updateRateLimit(headers) {
-        this.rateLimitInfo.remaining = Number.parseInt(headers.get('X-RateLimit-Remaining') || '60', 10);
+        this.rateLimitInfo.remaining = Number.parseInt(
+            headers.get('X-RateLimit-Remaining') || '60',
+            10
+        );
         this.rateLimitInfo.limit = Number.parseInt(headers.get('X-RateLimit-Limit') || '60', 10);
-        this.rateLimitInfo.reset = Number.parseInt(headers.get('X-RateLimit-Reset') || '0', 10) * 1000;
+        this.rateLimitInfo.reset =
+            Number.parseInt(headers.get('X-RateLimit-Reset') || '0', 10) * 1000;
     }
 
     async waitForRateLimit() {
@@ -110,13 +115,13 @@ export class GitHubAPIManager {
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
             try {
                 await this.waitForRateLimit();
-                
+
                 const response = await fetch(url, {
                     ...options,
                     headers: {
-                        'Accept': 'application/vnd.github.v3+json',
-                        ...options.headers
-                    }
+                        Accept: 'application/vnd.github.v3+json',
+                        ...options.headers,
+                    },
                 });
 
                 // Update rate limit info
@@ -139,7 +144,6 @@ export class GitHubAPIManager {
                 }
 
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-
             } catch (error) {
                 if (attempt === maxRetries) {
                     throw error;
@@ -155,7 +159,7 @@ export class GitHubAPIManager {
     // Main API method with caching and enhanced retry
     async fetchGitHubData(endpoint, params = {}, ttl = 300000) {
         const cacheKey = this.getCacheKey(endpoint, params);
-        
+
         // Check cache first
         const cachedData = this.getCache(cacheKey);
         if (cachedData) {
@@ -187,7 +191,7 @@ export class GitHubAPIManager {
         if (cachedData && cachedData.user) {
             return cachedData.user;
         }
-        
+
         // Fall back to direct API
         return this.fetchGitHubData(`/users/${GitHubAPIManager.username}`, {}, 600000); // 10 min cache
     }
@@ -197,20 +201,23 @@ export class GitHubAPIManager {
         const cachedData = await this.loadCachedGitHubData();
         if (cachedData && cachedData.repositories) {
             let repos = cachedData.repositories;
-            
+
             // Apply client-side sorting if needed
             if (sort === 'stars') {
                 repos = repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
             } else if (sort === 'updated') {
                 repos = repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
             }
-            
+
             // Apply limit
             return repos.slice(0, per_page);
         }
-        
+
         // Fall back to direct API
-        return this.fetchGitHubData(`/users/${GitHubAPIManager.username}/repos`, { sort, per_page });
+        return this.fetchGitHubData(`/users/${GitHubAPIManager.username}/repos`, {
+            sort,
+            per_page,
+        });
     }
 
     async getRecentActivity(per_page = 30) {
@@ -219,11 +226,13 @@ export class GitHubAPIManager {
         if (cachedData && cachedData.events) {
             return cachedData.events.slice(0, per_page);
         }
-        
+
         // Fall back to direct API (may be limited for public events)
         try {
-            return await this.fetchGitHubData(`/users/${GitHubAPIManager.username}/events/public`, { per_page });
-        } catch (error) {
+            return await this.fetchGitHubData(`/users/${GitHubAPIManager.username}/events/public`, {
+                per_page,
+            });
+        } catch (_error) {
             return [];
         }
     }
@@ -243,14 +252,18 @@ export class GitHubAPIManager {
     }
 
     async getUserEvents(per_page = 30) {
-        return this.fetchGitHubData(`/users/${GitHubAPIManager.username}/events`, { per_page }, 180000); // 3 min cache
+        return this.fetchGitHubData(
+            `/users/${GitHubAPIManager.username}/events`,
+            { per_page },
+            180000
+        ); // 3 min cache
     }
 
     // Get rate limit status
     getRateLimitStatus() {
         return {
             ...this.rateLimitInfo,
-            percentage: (this.rateLimitInfo.remaining / this.rateLimitInfo.limit) * 100
+            percentage: (this.rateLimitInfo.remaining / this.rateLimitInfo.limit) * 100,
         };
     }
 
@@ -262,9 +275,9 @@ export class GitHubAPIManager {
             limit: status.limit,
             resetTime: new Date(status.reset).toLocaleTimeString(),
             percentage: `${status.percentage.toFixed(1)}%`,
-            cacheEntries: this.cache.size
+            cacheEntries: this.cache.size,
         });
-        
+
         if (status.percentage < 20) {
             debug.warn('[API] GitHub API rate limit is low!');
         }
@@ -274,24 +287,24 @@ export class GitHubAPIManager {
     clearExpiredCache() {
         const now = Date.now();
         let removedCount = 0;
-        
+
         for (const [key, value] of this.cache.entries()) {
             if (value.expiry < now) {
                 this.cache.delete(key);
                 removedCount++;
             }
         }
-        
+
         if (removedCount > 0) {
             debug.log('[GitHub] Cleared', removedCount, 'expired cache entries');
         }
-        
+
         return removedCount;
     }
 
     // Clear all cache (for manual refresh)
     clearCache() {
-        const size = this.cache.size;
+        const { size } = this.cache;
         this.cache.clear();
         debug.log('[GitHub] Cleared all', size, 'cache entries');
     }

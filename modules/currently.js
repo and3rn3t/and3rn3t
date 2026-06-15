@@ -18,19 +18,19 @@ const WORKER_URL = 'https://and3rn3t-portfolio.andernet.workers.dev/activity';
 const SKIP_REPOS = new Set(['and3rn3t/and3rn3t']);
 
 const TYPE_LABELS = {
-    push:    'pushing to',
-    pr:      'opening a PR on',
-    create:  'created',
+    push: 'pushing to',
+    pr: 'opening a PR on',
+    create: 'created',
     release: 'released',
-    star:    'starred',
+    star: 'starred',
 };
 
 const TYPE_ICONS = {
-    push:    'code-branch',
-    pr:      'code-pull-request',
-    create:  'plus-circle',
+    push: 'code-branch',
+    pr: 'code-pull-request',
+    create: 'plus-circle',
     release: 'tag',
-    star:    'star',
+    star: 'star',
 };
 
 class CurrentlyWidget {
@@ -83,7 +83,12 @@ class CurrentlyWidget {
     }
 
     pickActivity(events) {
-        const INTERESTING = new Set(['PushEvent', 'PullRequestEvent', 'CreateEvent', 'ReleaseEvent']);
+        const INTERESTING = new Set([
+            'PushEvent',
+            'PullRequestEvent',
+            'CreateEvent',
+            'ReleaseEvent',
+        ]);
         const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days
 
         // First pass: skip portfolio repo, prefer recent activity.
@@ -117,20 +122,32 @@ class CurrentlyWidget {
 
         if (event.type === 'PushEvent') {
             const commits = event.payload?.commits ?? [];
-            const commit = [...commits].reverse().find(
-                (c) => !c.message?.startsWith('Merge')
-            ) ?? commits.at(-1);
+            const commit =
+                [...commits].reverse().find(c => !c.message?.startsWith('Merge')) ?? commits.at(-1);
             const branch = (event.payload?.ref ?? '').replace('refs/heads/', '') || 'main';
-            return { ...base, type: 'push', message: commit?.message?.split('\n')[0] ?? null, branch };
+            return {
+                ...base,
+                type: 'push',
+                message: commit?.message?.split('\n')[0] ?? null,
+                branch,
+            };
         }
         if (event.type === 'PullRequestEvent') {
             const pr = event.payload?.pull_request;
-            return { ...base, type: 'pr', message: pr?.title ?? null, branch: pr?.head?.ref ?? null };
+            return {
+                ...base,
+                type: 'pr',
+                message: pr?.title ?? null,
+                branch: pr?.head?.ref ?? null,
+            };
         }
         if (event.type === 'CreateEvent') {
             const refType = event.payload?.ref_type;
             if (refType !== 'repository' && refType !== 'branch') return null;
-            const message = refType === 'repository' ? `Created ${repoName}` : `Created branch ${event.payload?.ref}`;
+            const message =
+                refType === 'repository'
+                    ? `Created ${repoName}`
+                    : `Created branch ${event.payload?.ref}`;
             return { ...base, type: 'create', message, branch: null };
         }
         if (event.type === 'ReleaseEvent') {
@@ -151,9 +168,10 @@ class CurrentlyWidget {
             ? `<span class="currently-message">"${escHtml(activity.message)}"</span>`
             : '';
 
-        const branchHtml = activity.branch && activity.type === 'push'
-            ? `<span class="currently-branch"><i class="fas fa-code-branch" aria-hidden="true"></i>${escHtml(activity.branch)}</span>`
-            : '';
+        const branchHtml =
+            activity.branch && activity.type === 'push'
+                ? `<span class="currently-branch"><i class="fas fa-code-branch" aria-hidden="true"></i>${escHtml(activity.branch)}</span>`
+                : '';
 
         const timeHtml = relTime
             ? `<span class="currently-time" title="${escHtml(activity.pushedAt ?? '')}">${escHtml(relTime)}</span>`
@@ -179,10 +197,10 @@ class CurrentlyWidget {
         const m = Math.floor(diff / 60000);
         const h = Math.floor(diff / 3600000);
         const d = Math.floor(diff / 86400000);
-        if (m < 2)  return 'just now';
+        if (m < 2) return 'just now';
         if (m < 60) return `${m}m ago`;
         if (h < 24) return `${h}h ago`;
-        if (d < 7)  return `${d}d ago`;
+        if (d < 7) return `${d}d ago`;
         return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     }
 }

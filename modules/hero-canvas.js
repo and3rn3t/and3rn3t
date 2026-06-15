@@ -118,7 +118,7 @@ export function initHeroCanvas(canvas) {
         antialias: false,
         alpha: false,
         depth: false,
-        powerPreference: 'low-power'
+        powerPreference: 'low-power',
     });
 
     if (!gl) {
@@ -152,7 +152,7 @@ export function initHeroCanvas(canvas) {
     let rafId = 0;
     let running = false;
     let startTime = performance.now();
-    let frozenTime = 0; // when reduced motion, render a single static frame
+    const frozenTime = 0; // when reduced motion, render a single static frame
 
     const dpr = Math.min(globalThis.devicePixelRatio || 1, 2);
 
@@ -211,7 +211,7 @@ export function initHeroCanvas(canvas) {
 
     // Pause when scrolled away / tab hidden.
     const io = new IntersectionObserver(
-        (entries) => {
+        entries => {
             for (const entry of entries) {
                 if (entry.isIntersecting) {
                     start();
@@ -255,7 +255,7 @@ export function initHeroCanvas(canvas) {
             globalThis.removeEventListener('resize', onResize);
             gl.deleteProgram(program);
             gl.deleteBuffer(buffer);
-        }
+        },
     };
 }
 

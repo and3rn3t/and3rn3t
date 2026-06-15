@@ -10,15 +10,22 @@ import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 
 const MAX_EVENTS = 10;
-const INTERESTING = new Set(['PushEvent', 'PullRequestEvent', 'CreateEvent', 'ReleaseEvent', 'WatchEvent', 'DeleteEvent']);
+const INTERESTING = new Set([
+    'PushEvent',
+    'PullRequestEvent',
+    'CreateEvent',
+    'ReleaseEvent',
+    'WatchEvent',
+    'DeleteEvent',
+]);
 
 const EVENT_ICONS = {
-    PushEvent:        'code-commit',
+    PushEvent: 'code-commit',
     PullRequestEvent: 'code-pull-request',
-    CreateEvent:      'plus-circle',
-    ReleaseEvent:     'tag',
-    WatchEvent:       'star',
-    DeleteEvent:      'trash-alt',
+    CreateEvent: 'plus-circle',
+    ReleaseEvent: 'tag',
+    WatchEvent: 'star',
+    DeleteEvent: 'trash-alt',
 };
 
 class ActivityFeed {
@@ -53,7 +60,7 @@ class ActivityFeed {
             if (!desc) continue;
 
             const icon = EVENT_ICONS[event.type] ?? 'circle';
-            const rel  = this.#relTime(event.created_at);
+            const rel = this.#relTime(event.created_at);
 
             items.push(`
                 <li class="activity-item">
@@ -74,19 +81,23 @@ class ActivityFeed {
         switch (event.type) {
             case 'PushEvent': {
                 const commits = event.payload?.commits ?? [];
-                const commit = [...commits].reverse().find((c) => !c.message?.startsWith('Merge')) ?? commits.at(-1);
+                const commit =
+                    [...commits].reverse().find(c => !c.message?.startsWith('Merge')) ??
+                    commits.at(-1);
                 const msg = commit?.message?.split('\n')[0];
                 return msg ? `pushed "${msg}"` : `pushed to ${repoName}`;
             }
             case 'PullRequestEvent': {
                 const action = event.payload?.action ?? 'updated';
-                const title  = event.payload?.pull_request?.title ?? '';
+                const title = event.payload?.pull_request?.title ?? '';
                 return title ? `${action} PR: ${title}` : `${action} a pull request`;
             }
             case 'CreateEvent': {
                 const refType = event.payload?.ref_type;
-                const ref     = event.payload?.ref ?? repoName;
-                return refType === 'repository' ? `created repo ${repoName}` : `created ${refType} ${ref}`;
+                const ref = event.payload?.ref ?? repoName;
+                return refType === 'repository'
+                    ? `created repo ${repoName}`
+                    : `created ${refType} ${ref}`;
             }
             case 'ReleaseEvent': {
                 const tag = event.payload?.release?.tag_name ?? '';
@@ -96,7 +107,7 @@ class ActivityFeed {
                 return `starred ${repoName}`;
             case 'DeleteEvent': {
                 const refType = event.payload?.ref_type ?? 'ref';
-                const ref     = event.payload?.ref ?? '';
+                const ref = event.payload?.ref ?? '';
                 return `deleted ${refType} ${ref}`;
             }
             default:
@@ -107,13 +118,13 @@ class ActivityFeed {
     #relTime(iso) {
         if (!iso) return '';
         const diff = Date.now() - new Date(iso).getTime();
-        const mins  = Math.floor(diff / 60_000);
+        const mins = Math.floor(diff / 60_000);
         const hours = Math.floor(diff / 3_600_000);
-        const days  = Math.floor(diff / 86_400_000);
-        if (mins  <  1) return 'just now';
-        if (mins  < 60) return `${mins}m ago`;
+        const days = Math.floor(diff / 86_400_000);
+        if (mins < 1) return 'just now';
+        if (mins < 60) return `${mins}m ago`;
         if (hours < 24) return `${hours}h ago`;
-        if (days  <  7) return `${days}d ago`;
+        if (days < 7) return `${days}d ago`;
         return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
 

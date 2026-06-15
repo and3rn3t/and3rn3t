@@ -25,7 +25,7 @@ export function initCountUp(selector = '.stat-card h3') {
         return;
     }
 
-    const animate = (el) => {
+    const animate = el => {
         const raw = el.textContent.trim();
         const match = raw.match(/^(\d[\d,]*)(.*)$/);
         if (!match) {
@@ -42,7 +42,7 @@ export function initCountUp(selector = '.stat-card h3') {
         const start = performance.now();
         el.classList.add('is-counting');
 
-        const step = (now) => {
+        const step = now => {
             const p = Math.min((now - start) / duration, 1);
             // easeOutExpo
             const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
@@ -90,7 +90,7 @@ export function initTilt(selector = '.project-card', { max = 8 } = {}) {
         card.classList.add('tilt-enabled');
         let rafId = 0;
 
-        const onMove = (event) => {
+        const onMove = event => {
             if (rafId) {
                 return;
             }
@@ -139,7 +139,7 @@ export function initMagnetic(
         el.classList.add('magnetic');
         let rafId = 0;
 
-        const onMove = (event) => {
+        const onMove = event => {
             if (rafId) {
                 return;
             }

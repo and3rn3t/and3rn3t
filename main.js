@@ -1,14 +1,14 @@
 /**
  * Main Application Entry Point
  * Coordinates all modules and handles initialization
- * 
+ *
  * @author Matthew Anderson
  * @version 2.0.0
  */
 
 // Import critical modules only - others loaded dynamically
 import { DEBUG_MODE, debug } from './modules/debug.js';
-import { errorHandler, ErrorType } from './modules/error-handler.js';
+import { errorHandler } from './modules/error-handler.js';
 import { initThemeManager } from './modules/theme.js';
 import { mobileManager } from './modules/mobile.js';
 import { navigationManager } from './modules/navigation.js';
@@ -16,7 +16,7 @@ import { navigationManager } from './modules/navigation.js';
 // App configuration
 const APP_CONFIG = {
     version: '2.0.0',
-    name: 'Matthew Anderson Portfolio'
+    name: 'Matthew Anderson Portfolio',
 };
 
 // App state - expose globally for error handler access
@@ -24,12 +24,12 @@ const appState = {
     isInitialized: false,
     initStartTime: null,
     managers: {},
-    modules: {} // Lazy-loaded modules
+    modules: {}, // Lazy-loaded modules
 };
 
 // Expose appState for error handler notifications
-if (typeof window !== 'undefined') {
-    window.appState = appState;
+if (typeof globalThis !== 'undefined') {
+    globalThis.appState = appState;
 }
 
 /**
@@ -48,7 +48,7 @@ async function lazyLoad(modulePath) {
     } catch (error) {
         await errorHandler.handle(error, {
             context: { modulePath },
-            showUser: false
+            showUser: false,
         });
         throw error;
     }
@@ -62,58 +62,58 @@ async function initializeApp() {
         debug.warn('[App] Already initialized');
         return;
     }
-    
+
     appState.initStartTime = performance.now();
     debug.log(`[App] Initializing ${APP_CONFIG.name} v${APP_CONFIG.version}...`);
-    
+
     try {
         // Phase 1: Critical path - theme and mobile (prevents flash/layout shifts)
         const themeManager = initThemeManager();
         appState.managers.theme = themeManager;
-        
+
         mobileManager.init();
         appState.managers.mobile = mobileManager;
-        
+
         debug.log('[App] Phase 1: Theme & mobile initialized');
-        
+
         // Phase 2: Navigation and UI setup
         initMobileMenu();
         initNavigation();
-        
+
         // Lazy load UI module
         const { uiManager } = await lazyLoad('./modules/ui.js');
         uiManager.init();
         appState.managers.ui = uiManager;
-        
+
         navigationManager.init();
         appState.managers.navigation = navigationManager;
-        
+
         debug.log('[App] Phase 2: Navigation & UI initialized');
-        
+
         // Hero enhancements: text reveal runs immediately; WebGL gradient is
         // dynamically imported and self-gates on device capability.
         initHeroEnhancements();
-        
+
         // Phase 3: Content loading (show progress) - lazy load projects module
         uiManager.showLoadingProgress('content');
-        
+
         const { projectsManager } = await lazyLoad('./modules/projects.js');
-        
+
         // Load content in parallel
         await Promise.allSettled([
             projectsManager.init('#projects-grid'),
             uiManager.loadGitHubStats(),
-            uiManager.loadSkillsMatrix()
+            uiManager.loadSkillsMatrix(),
         ]);
-        
+
         appState.managers.projects = projectsManager;
-        
+
         uiManager.hideLoadingProgress('content');
         debug.log('[App] Phase 3: Content loaded');
-        
+
         // Make body visible (it starts with opacity: 0)
         document.body.classList.add('loaded');
-        
+
         // Micro-interactions on the freshly-rendered content (count-up, tilt, magnetic).
         try {
             const { initInteractions } = await import('./modules/interactions.js');
@@ -193,57 +193,65 @@ async function initializeApp() {
         } catch (err) {
             debug.warn('[App] Keyboard help skipped:', err);
         }
-        
-        // Phase 4: Non-critical features (deferred with dynamic imports)
-        requestIdleCallback(async () => {
-            try {
-                const [{ performanceManager }, { analyticsManager }] = await Promise.all([
-                    lazyLoad('./modules/performance.js'),
-                    lazyLoad('./modules/analytics.js')
-                ]);
-                
-                performanceManager.init();
-                appState.managers.performance = performanceManager;
-                
-                analyticsManager.init();
-                appState.managers.analytics = analyticsManager;
-                
-                // Additional UI enhancements
-                loadGitHubBadges();
 
-                // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
+        // Phase 4: Non-critical features (deferred with dynamic imports)
+        requestIdleCallback(
+            async () => {
                 try {
-                    const { easterEgg } = await import('./modules/easter-egg.js');
-                    easterEgg.init();
+                    const [{ performanceManager }, { analyticsManager }] = await Promise.all([
+                        lazyLoad('./modules/performance.js'),
+                        lazyLoad('./modules/analytics.js'),
+                    ]);
+
+                    performanceManager.init();
+                    appState.managers.performance = performanceManager;
+
+                    analyticsManager.init();
+                    appState.managers.analytics = analyticsManager;
+
+                    // Additional UI enhancements
+                    loadGitHubBadges();
+
+                    // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
+                    try {
+                        const { easterEgg } = await import('./modules/easter-egg.js');
+                        easterEgg.init();
+                    } catch (err) {
+                        debug.warn('[App] Easter egg skipped:', err);
+                    }
+
+                    debug.log('[App] Phase 4: Analytics & performance initialized');
                 } catch (err) {
-                    debug.warn('[App] Easter egg skipped:', err);
+                    debug.error('[App] Phase 4 error:', err);
                 }
-                
-                debug.log('[App] Phase 4: Analytics & performance initialized');            } catch (err) {
-                debug.error('[App] Phase 4 error:', err);
-            }
-        }, { timeout: 2000 });
-        
+            },
+            { timeout: 2000 }
+        );
+
         // Setup global event handlers
         setupGlobalEvents();
-        
+
         // Set up cache cleanup interval (lazy load github-api only when needed)
-        setInterval(async () => {
-            const { githubAPI } = await lazyLoad('./modules/github-api.js');
-            clearExpiredCache(githubAPI);
-        }, 10 * 60 * 1000);
-        
+        setInterval(
+            async () => {
+                const { githubAPI } = await lazyLoad('./modules/github-api.js');
+                clearExpiredCache(githubAPI);
+            },
+            10 * 60 * 1000
+        );
+
         // Mark initialization complete
         appState.isInitialized = true;
-        
+
         const initTime = performance.now() - appState.initStartTime;
         debug.log(`[App] Initialization complete in ${initTime.toFixed(2)}ms`);
-        
+
         // Dispatch ready event
-        window.dispatchEvent(new CustomEvent('app:ready', {
-            detail: { initTime, version: APP_CONFIG.version }
-        }));
-        
+        globalThis.dispatchEvent(
+            new CustomEvent('app:ready', {
+                detail: { initTime, version: APP_CONFIG.version },
+            })
+        );
     } catch (error) {
         debug.error('[App] Initialization error:', error);
         handleInitError(error);
@@ -288,14 +296,14 @@ async function initHeroEnhancements() {
 function initMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
-    
+
     if (!mobileMenu || !navMenu) return;
-    
+
     mobileMenu.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
         navMenu.classList.toggle('active');
     });
-    
+
     // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
     for (const link of navLinks) {
@@ -311,28 +319,32 @@ function initMobileMenu() {
  */
 function initNavigation() {
     const navbar = document.getElementById('navbar');
-    
+
     // Navbar scroll effect
     if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        }, { passive: true });
+        globalThis.addEventListener(
+            'scroll',
+            () => {
+                if (globalThis.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            },
+            { passive: true }
+        );
     }
-    
+
     // Smooth scroll for anchor links
     for (const anchor of document.querySelectorAll('a[href^="#"]')) {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const offsetTop = target.offsetTop - 70;
-                window.scrollTo({
+                globalThis.scrollTo({
                     top: offsetTop,
-                    behavior: 'smooth'
+                    behavior: 'smooth',
                 });
             }
         });
@@ -354,17 +366,17 @@ function loadGitHubBadges() {
  */
 function clearExpiredCache(githubAPI) {
     if (!githubAPI || !githubAPI.cache) return;
-    
+
     const now = Date.now();
     let removedCount = 0;
-    
+
     for (const [key, value] of githubAPI.cache.entries()) {
         if (value.expiry < now) {
             githubAPI.cache.delete(key);
             removedCount++;
         }
     }
-    
+
     if (removedCount > 0) {
         debug.log(`[App] Cleared ${removedCount} expired cache entries`);
     }
@@ -375,59 +387,60 @@ function clearExpiredCache(githubAPI) {
  */
 function setupGlobalEvents() {
     // Handle global errors
-    window.addEventListener('error', async (event) => {
+    globalThis.addEventListener('error', async event => {
         debug.error('[App] Uncaught error:', event.error);
-        const analytics = appState.managers.analytics;
+        const { analytics } = appState.managers;
         if (analytics && analytics.isInitialized) {
             analytics.trackError(event.error, {
                 type: 'uncaught',
                 filename: event.filename,
-                lineno: event.lineno
+                lineno: event.lineno,
             });
         }
     });
-    
+
     // Handle unhandled promise rejections
-    window.addEventListener('unhandledrejection', async (event) => {
+    globalThis.addEventListener('unhandledrejection', async event => {
         debug.error('[App] Unhandled rejection:', event.reason);
-        const analytics = appState.managers.analytics;
+        const { analytics } = appState.managers;
         if (analytics && analytics.isInitialized) {
             analytics.trackError(event.reason, {
-                type: 'unhandled_rejection'
+                type: 'unhandled_rejection',
             });
         }
     });
-    
+
     // Handle theme changes - reapply hero background
     document.addEventListener('themeChanged', () => {
-        const ui = appState.managers.ui;
+        const { ui } = appState.managers;
         if (ui && ui.forceHeroBackground) {
             ui.forceHeroBackground();
         }
     });
-    
+
     // Handle online/offline
-    window.addEventListener('online', () => {
+    globalThis.addEventListener('online', () => {
         debug.log('[App] Connection restored');
         document.body.classList.remove('offline');
-        const ui = appState.managers.ui;
+        const { ui } = appState.managers;
         if (ui && ui.showNotification) {
             ui.showNotification('Connection restored', 'success', 3000);
         }
     });
-    
-    window.addEventListener('offline', () => {
+
+    globalThis.addEventListener('offline', () => {
         debug.log('[App] Connection lost');
         document.body.classList.add('offline');
-        const ui = appState.managers.ui;
+        const { ui } = appState.managers;
         if (ui && ui.showNotification) {
             ui.showNotification('You are offline', 'warning', 5000);
         }
     });
-    
+
     // Service worker registration
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker
+            .register('/sw.js')
             .then(registration => {
                 debug.log('[App] Service Worker registered:', registration.scope);
             })
@@ -444,9 +457,9 @@ function handleInitError(error) {
     // Log to error handler
     errorHandler.handle(error, {
         showUser: true,
-        context: { phase: 'initialization' }
+        context: { phase: 'initialization' },
     });
-    
+
     // Show error to user in development
     if (DEBUG_MODE) {
         const errorDiv = document.createElement('div');
@@ -470,15 +483,15 @@ function handleInitError(error) {
             font-size: 12px;
         `;
         document.body.appendChild(errorDiv);
-        
+
         setTimeout(() => errorDiv.remove(), 10000);
     }
-    
+
     // Ensure body is visible even on error
     document.body.classList.add('loaded');
-    
+
     // Track error via analytics if available
-    const analytics = appState.managers.analytics;
+    const { analytics } = appState.managers;
     if (analytics && analytics.isInitialized) {
         analytics.trackError(error, { context: 'initialization' });
     }
@@ -487,28 +500,46 @@ function handleInitError(error) {
 /**
  * Expose public API for external access
  */
-window.PortfolioApp = {
+globalThis.PortfolioApp = {
     version: APP_CONFIG.version,
     debug: DEBUG_MODE,
-    
+
     // Manager access (lazy-loaded)
-    get theme() { return appState.managers.theme; },
-    get mobile() { return appState.managers.mobile; },
-    get navigation() { return appState.managers.navigation; },
-    get projects() { return appState.managers.projects; },
-    get performance() { return appState.managers.performance; },
-    get analytics() { return appState.managers.analytics; },
-    get ui() { return appState.managers.ui; },
-    get errors() { return errorHandler; },
-    
+    get theme() {
+        return appState.managers.theme;
+    },
+    get mobile() {
+        return appState.managers.mobile;
+    },
+    get navigation() {
+        return appState.managers.navigation;
+    },
+    get projects() {
+        return appState.managers.projects;
+    },
+    get performance() {
+        return appState.managers.performance;
+    },
+    get analytics() {
+        return appState.managers.analytics;
+    },
+    get ui() {
+        return appState.managers.ui;
+    },
+    get errors() {
+        return errorHandler;
+    },
+
     // Methods
-    isReady() { return appState.isInitialized; },
-    
+    isReady() {
+        return appState.isInitialized;
+    },
+
     async refresh() {
         debug.log('[App] Refreshing...');
-        const ui = appState.managers.ui;
-        const projects = appState.managers.projects;
-        
+        const { ui } = appState.managers;
+        const { projects } = appState.managers;
+
         if (ui) ui.showLoadingProgress('refresh');
         if (projects) await projects.refresh();
         if (ui) {
@@ -517,33 +548,35 @@ window.PortfolioApp = {
             ui.showNotification('Data refreshed', 'success', 3000);
         }
     },
-    
+
     getStats() {
         const perf = appState.managers.performance;
-        const analytics = appState.managers.analytics;
-        const mobile = appState.managers.mobile;
-        
+        const { analytics } = appState.managers;
+        const { mobile } = appState.managers;
+
         return {
             version: APP_CONFIG.version,
             initialized: appState.isInitialized,
             performance: perf?.getMetrics?.() || {},
             session: analytics?.getSessionStats?.() || {},
             device: mobile?.getDeviceInfo?.() || {},
-            errors: errorHandler.getStats()
+            errors: errorHandler.getStats(),
         };
-    }
+    },
 };
 
 // Polyfill for requestIdleCallback
-window.requestIdleCallback = window.requestIdleCallback || function(cb) {
-    const start = Date.now();
-    return setTimeout(() => {
-        cb({
-            didTimeout: false,
-            timeRemaining: () => Math.max(0, 50 - (Date.now() - start))
-        });
-    }, 1);
-};
+globalThis.requestIdleCallback =
+    globalThis.requestIdleCallback ||
+    function (cb) {
+        const start = Date.now();
+        return setTimeout(() => {
+            cb({
+                didTimeout: false,
+                timeRemaining: () => Math.max(0, 50 - (Date.now() - start)),
+            });
+        }, 1);
+    };
 
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {

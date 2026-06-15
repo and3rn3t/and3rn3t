@@ -11,6 +11,7 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 ### 🔗 **[View My Portfolio →](https://and3rn3t.github.io/and3rn3t/)**
 
 **Features:**
+
 - 📊 Real-time GitHub statistics and insights
 - 🌟 Top starred projects with detailed descriptions
 - 🎨 Dark/Light theme toggle
@@ -23,41 +24,49 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 ## 🚀 Featured Projects
 
 ### ⭐ [Health Analytics Platform](https://github.com/and3rn3t/health)
+
 > Advanced health tracking using Apple HealthKit and iPhone LiDAR sensors for gait analysis
 >
 > **Tech:** TypeScript, HealthKit, LiDAR, ML
 
 ### 📱 [HealthKit Bridge](https://github.com/and3rn3t/HealthKitBridge)
+
 > Native iOS app bridging HealthKit data to web applications via an on-device HTTP server
 >
 > **Tech:** Swift, HealthKit, iOS
 
 ### 🌐 [Network Analytics Tool](https://github.com/and3rn3t/network)
+
 > UniFi API integration for deep network monitoring, traffic analysis, and management
 >
 > **Tech:** Python, UniFi API, Network Protocols
 
 ### 🔍 [Network Traffic Analyzer](https://github.com/and3rn3t/net-traffic)
+
 > Real-time traffic analysis and visualization for local network bandwidth and device activity
 >
 > **Tech:** TypeScript, WebSockets, Data Visualization
 
 ### 🏠 [Home Automation Hub](https://github.com/and3rn3t/homehub)
+
 > Centralized IoT control center for smart home devices and automations
 >
 > **Tech:** TypeScript, IoT, WebSockets, React
 
 ### 🌤️ [Weather App](https://github.com/and3rn3t/weather)
+
 > Cross-platform weather application with native Android and iOS integration via Capacitor
 >
 > **Tech:** TypeScript, Capacitor, Android, iOS
 
 ### 🗄️ [dbt Data Models](https://github.com/and3rn3t/dbt)
+
 > Modular SQL transformation pipelines using dbt with schema testing and Jinja templating
 >
 > **Tech:** Python, dbt, SQL
 
 ### 🎮 [Custom Minecraft Server](https://github.com/and3rn3t/minecraft)
+
 > Self-hosted Minecraft server with automated setup, plugin management, and a status dashboard
 >
 > **Tech:** HTML, JavaScript, Shell
@@ -107,17 +116,20 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 ## 💻 Tech Stack
 
 ### Frontend Development
+
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
 ### Backend Development
+
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ### Tools & Technologies
+
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)

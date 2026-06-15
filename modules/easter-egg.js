@@ -21,7 +21,7 @@ const SEQUENCE = [
     'ArrowLeft',
     'ArrowRight',
     'b',
-    'a'
+    'a',
 ];
 
 const LINES = [
@@ -32,8 +32,8 @@ const LINES = [
     '> status',
     'building health tech, home automation & data projects 🌱',
     '> hint',
-    "press Cmd/Ctrl-K anywhere to open the command palette.",
-    '> exit'
+    'press Cmd/Ctrl-K anywhere to open the command palette.',
+    '> exit',
 ];
 
 class EasterEgg {
@@ -41,7 +41,7 @@ class EasterEgg {
     overlay = null;
 
     init() {
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             const expected = SEQUENCE[this.progress];
             if (e.key.toLowerCase() === expected.toLowerCase()) {
                 this.progress++;
@@ -81,12 +81,12 @@ class EasterEgg {
         const body = overlay.querySelector('#dev-terminal-body');
         this.type(body, LINES);
 
-        const onKey = (e) => {
+        const onKey = e => {
             if (e.key === 'Escape') {
                 this.deactivate();
             }
         };
-        overlay.addEventListener('click', (e) => {
+        overlay.addEventListener('click', e => {
             if (e.target === overlay) {
                 this.deactivate();
             }
@@ -110,9 +110,7 @@ class EasterEgg {
             }
             const current = lines[line];
             el.textContent =
-                lines.slice(0, line).join('\n') +
-                (line > 0 ? '\n' : '') +
-                current.slice(0, char);
+                lines.slice(0, line).join('\n') + (line > 0 ? '\n' : '') + current.slice(0, char);
             char++;
             if (char > current.length) {
                 line++;
@@ -134,7 +132,7 @@ class EasterEgg {
         }
         document.body.classList.remove('dev-mode');
         document.removeEventListener('keydown', this._onKey);
-        const overlay = this.overlay;
+        const { overlay } = this;
         this.overlay = null;
         overlay.classList.remove('visible');
         setTimeout(() => overlay.remove(), 300);

@@ -13,7 +13,7 @@ export const ErrorType = {
     DOM: 'dom',
     VALIDATION: 'validation',
     TIMEOUT: 'timeout',
-    UNKNOWN: 'unknown'
+    UNKNOWN: 'unknown',
 };
 
 // Error severity levels
@@ -21,7 +21,7 @@ export const ErrorSeverity = {
     INFO: 'info',
     WARNING: 'warning',
     ERROR: 'error',
-    CRITICAL: 'critical'
+    CRITICAL: 'critical',
 };
 
 /**
@@ -92,7 +92,7 @@ class ErrorHandler {
             severity: error.severity || ErrorSeverity.ERROR,
             stack: error.stack,
             context: error.context || {},
-            timestamp: error.timestamp || new Date().toISOString()
+            timestamp: error.timestamp || new Date().toISOString(),
         };
 
         this.errorLog.push(logEntry);
@@ -120,16 +120,18 @@ class ErrorHandler {
      * @returns {any} Result from fallback strategy or undefined
      */
     async handle(error, options = {}) {
-        const {
-            showUser = true,
-            fallbackValue = null,
-            context = {}
-        } = options;
+        const { showUser = true, fallbackValue = null, context = {} } = options;
 
         // Create AppError if needed
-        const appError = error instanceof AppError 
-            ? error 
-            : new AppError(error.message, this.classifyError(error), ErrorSeverity.ERROR, context);
+        const appError =
+            error instanceof AppError
+                ? error
+                : new AppError(
+                      error.message,
+                      this.classifyError(error),
+                      ErrorSeverity.ERROR,
+                      context
+                  );
 
         // Log the error
         this.log(appError);
@@ -169,7 +171,12 @@ class ErrorHandler {
         if (message.includes('timeout') || message.includes('abort')) {
             return ErrorType.TIMEOUT;
         }
-        if (message.includes('api') || message.includes('rate limit') || message.includes('403') || message.includes('404')) {
+        if (
+            message.includes('api') ||
+            message.includes('rate limit') ||
+            message.includes('403') ||
+            message.includes('404')
+        ) {
             return ErrorType.API;
         }
         if (message.includes('element') || message.includes('dom') || message.includes('null')) {
@@ -190,15 +197,18 @@ class ErrorHandler {
             [ErrorType.TIMEOUT]: 'The request took too long. Please try again.',
             [ErrorType.PARSE]: 'There was an issue processing the data.',
             [ErrorType.DOM]: 'There was a display issue. Try refreshing the page.',
-            [ErrorType.UNKNOWN]: 'Something went wrong. Please try again.'
+            [ErrorType.UNKNOWN]: 'Something went wrong. Please try again.',
         };
 
         const userMessage = messages[error.type] || messages[ErrorType.UNKNOWN];
 
         // Try to use notification system if available
-        if (typeof window !== 'undefined' && window.appState?.managers?.ui?.showNotification) {
+        if (
+            typeof globalThis !== 'undefined' &&
+            globalThis.appState?.managers?.ui?.showNotification
+        ) {
             const type = error.severity === ErrorSeverity.WARNING ? 'warning' : 'error';
-            window.appState.managers.ui.showNotification(userMessage, type, 5000);
+            globalThis.appState.managers.ui.showNotification(userMessage, type, 5000);
         }
     }
 
@@ -242,7 +252,7 @@ class ErrorHandler {
             total: this.errorLog.length,
             byType: {},
             bySeverity: {},
-            recent: this.errorLog.slice(-10)
+            recent: this.errorLog.slice(-10),
         };
 
         for (const entry of this.errorLog) {

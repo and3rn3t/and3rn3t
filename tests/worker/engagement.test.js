@@ -4,7 +4,7 @@
  * Node 18+ provides global Request/Response/URL/fetch, so no polyfills needed.
  * KV namespaces are mocked with a simple Map wrapper.
  */
-import { test, expect, beforeEach, vi } from 'vitest';
+import { test, expect, vi } from 'vitest';
 import {
     handleViewsRequest,
     handleGuestbookRequest,
@@ -17,10 +17,16 @@ import {
 function makeKV() {
     const store = new Map();
     return {
-        get:    (k)    => Promise.resolve(store.get(k) ?? null),
-        put:    (k, v) => { store.set(k, v); return Promise.resolve(); },
-        delete: (k)    => { store.delete(k); return Promise.resolve(); },
-        list:   ()     => Promise.resolve({ keys: [...store.keys()].map(name => ({ name })) }),
+        get: k => Promise.resolve(store.get(k) ?? null),
+        put: (k, v) => {
+            store.set(k, v);
+            return Promise.resolve();
+        },
+        delete: k => {
+            store.delete(k);
+            return Promise.resolve();
+        },
+        list: () => Promise.resolve({ keys: [...store.keys()].map(name => ({ name })) }),
     };
 }
 
@@ -35,15 +41,15 @@ function makeRequest(method, url, body) {
 // ── jsonResponse / corsHeaders ────────────────────────────────────────────────
 
 test('jsonResponse sets Content-Type to application/json', async () => {
-    const req  = makeRequest('GET', 'https://w.dev/views?page=home');
-    const res  = jsonResponse({ ok: true }, req, 200);
+    const req = makeRequest('GET', 'https://w.dev/views?page=home');
+    const res = jsonResponse({ ok: true }, req, 200);
     expect(res.headers.get('Content-Type')).toMatch(/application\/json/);
     expect(res.status).toBe(200);
 });
 
 test('corsHeaders includes Access-Control-Allow-Origin', () => {
     const req = makeRequest('OPTIONS', 'https://w.dev/views');
-    const h   = corsHeaders(req);
+    const h = corsHeaders(req);
     expect(h['Access-Control-Allow-Origin']).toBeDefined();
 });
 
@@ -118,8 +124,8 @@ test('GET /guestbook returns stored entries in order', async () => {
     const env = { GUESTBOOK_KV: makeKV() };
     // The handler stores a JSON array under the single 'entries' key.
     const entries = [
-        { name: 'Bob',   message: 'Hey',  date: '2026-06-13T12:00:00Z' },
-        { name: 'Alice', message: 'Hi',   date: '2026-06-01T00:00:00Z' },
+        { name: 'Bob', message: 'Hey', date: '2026-06-13T12:00:00Z' },
+        { name: 'Alice', message: 'Hi', date: '2026-06-01T00:00:00Z' },
     ];
     await env.GUESTBOOK_KV.put('entries', JSON.stringify(entries));
     const req = makeRequest('GET', 'https://w.dev/guestbook');

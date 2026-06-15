@@ -5,9 +5,7 @@ export default defineConfig({
         // Default environment for unit tests
         environment: 'jsdom',
         // Worker tests run in Node (native fetch/Request/Response)
-        environmentMatchGlobs: [
-            ['tests/worker/**', 'node'],
-        ],
+        environmentMatchGlobs: [['tests/worker/**', 'node']],
         include: ['tests/unit/**/*.test.js', 'tests/worker/**/*.test.js'],
         coverage: {
             provider: 'v8',

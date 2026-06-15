@@ -17,7 +17,7 @@ const GO_TO = {
     h: 'home',
     a: 'about',
     p: 'projects',
-    c: 'contact'
+    c: 'contact',
 };
 
 // How long a `g` prefix stays "armed" before it expires (ms).
@@ -39,13 +39,13 @@ class KeyboardHelp {
         this.closeBtn = document.getElementById('keyboard-help-close');
 
         this.closeBtn?.addEventListener('click', () => this.close());
-        this.panel.addEventListener('click', (e) => {
+        this.panel.addEventListener('click', e => {
             if (e.target === this.panel) {
                 this.close();
             }
         });
 
-        document.addEventListener('keydown', (e) => this.onKeydown(e));
+        document.addEventListener('keydown', e => this.onKeydown(e));
     }
 
     onKeydown(e) {
@@ -129,7 +129,7 @@ class KeyboardHelp {
         this.panel.classList.add('visible');
         this.panel.setAttribute('aria-hidden', 'false');
 
-        this.trapFocus = (e) => this.handleTrap(e);
+        this.trapFocus = e => this.handleTrap(e);
         document.addEventListener('keydown', this.trapFocus);
 
         // Focus the close button so Esc/Tab work immediately.

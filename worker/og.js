@@ -12,26 +12,26 @@
  */
 
 const SITE_URL = 'https://andernet.dev';
-const DATA_CACHE_TTL = 6 * 60 * 60;   // 6 h — aligns with daily workflow
+const DATA_CACHE_TTL = 6 * 60 * 60; // 6 h — aligns with daily workflow
 const PROJECTS_CACHE_TTL = 24 * 60 * 60; // 24 h
 
 // GitHub language colours (subset; add more as needed).
 const LANG_COLORS = {
-    TypeScript:  '#2b7489',
-    JavaScript:  '#f1e05a',
-    Swift:       '#ffac45',
-    Python:      '#3572a5',
-    HTML:        '#e34c26',
-    CSS:         '#563d7c',
-    Go:          '#00add8',
-    Rust:        '#dea584',
-    Java:        '#b07219',
-    Kotlin:      '#a97bff',
-    Ruby:        '#701516',
-    'C#':        '#178600',
-    'C++':       '#f34b7d',
-    Shell:       '#89e051',
-    Dockerfile:  '#384d54',
+    TypeScript: '#2b7489',
+    JavaScript: '#f1e05a',
+    Swift: '#ffac45',
+    Python: '#3572a5',
+    HTML: '#e34c26',
+    CSS: '#563d7c',
+    Go: '#00add8',
+    Rust: '#dea584',
+    Java: '#b07219',
+    Kotlin: '#a97bff',
+    Ruby: '#701516',
+    'C#': '#178600',
+    'C++': '#f34b7d',
+    Shell: '#89e051',
+    Dockerfile: '#384d54',
 };
 
 const FALLBACK_LANG_COLOR = '#6b7280';
@@ -57,9 +57,7 @@ export async function handleOgRequest(request) {
             ]);
             const project = findProject(projectsData, projectSlug);
             const repoStats = findRepoStats(ghData, projectSlug);
-            svg = project
-                ? renderProjectCard(project, repoStats)
-                : renderPortfolioCard(ghData);
+            svg = project ? renderProjectCard(project, repoStats) : renderPortfolioCard(ghData);
         } else {
             const ghData = await fetchJson(`${SITE_URL}/github-data.json`, DATA_CACHE_TTL);
             svg = renderPortfolioCard(ghData);
@@ -92,17 +90,19 @@ async function fetchJson(url, ttl) {
 
 function findProject(projectsData, slug) {
     const projects = projectsData?.projects ?? [];
-    return projects.find(
-        (p) =>
-            p.name === slug ||
-            p.github_repo?.split('/').pop() === slug ||
-            p.name?.toLowerCase() === slug.toLowerCase()
-    ) ?? null;
+    return (
+        projects.find(
+            p =>
+                p.name === slug ||
+                p.github_repo?.split('/').pop() === slug ||
+                p.name?.toLowerCase() === slug.toLowerCase()
+        ) ?? null
+    );
 }
 
 function findRepoStats(ghData, slug) {
     const repos = ghData?.repositories ?? [];
-    return repos.find((r) => r.name === slug || r.name?.toLowerCase() === slug.toLowerCase()) ?? null;
+    return repos.find(r => r.name === slug || r.name?.toLowerCase() === slug.toLowerCase()) ?? null;
 }
 
 // ---------------------------------------------------------------------------
@@ -129,24 +129,28 @@ function renderPortfolioCard(ghData) {
     const BAR_W = 480;
     const BAR_H = 16;
     let barX = BAR_X;
-    const barRects = topLangs.map(({ name, pct }) => {
-        const w = Math.round(BAR_W * pct);
-        const rect = `<rect x="${barX}" y="${BAR_Y}" width="${w}" height="${BAR_H}" rx="3" fill="${escSvg(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR)}"/>`;
-        barX += w;
-        return rect;
-    }).join('');
+    const barRects = topLangs
+        .map(({ name, pct }) => {
+            const w = Math.round(BAR_W * pct);
+            const rect = `<rect x="${barX}" y="${BAR_Y}" width="${w}" height="${BAR_H}" rx="3" fill="${escSvg(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR)}"/>`;
+            barX += w;
+            return rect;
+        })
+        .join('');
 
     // Language legend rows (max 5, two columns if needed).
-    const langLegend = topLangs.map(({ name, pct }, i) => {
-        const lx = BAR_X + (i >= 3 ? 240 : 0);
-        const ly = BAR_Y + 36 + (i % 3) * 28;
-        const color = escSvg(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR);
-        return `
+    const langLegend = topLangs
+        .map(({ name, pct }, i) => {
+            const lx = BAR_X + (i >= 3 ? 240 : 0);
+            const ly = BAR_Y + 36 + (i % 3) * 28;
+            const color = escSvg(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR);
+            return `
             <circle cx="${lx + 6}" cy="${ly - 4}" r="6" fill="${color}"/>
             <text x="${lx + 18}" y="${ly}" font-family="system-ui,sans-serif" font-size="20" fill="#9ca3af">
                 ${escSvg(name)} <tspan fill="#6b7280">${Math.round(pct * 100)}%</tspan>
             </text>`;
-    }).join('');
+        })
+        .join('');
 
     // Stat blocks.
     const stats = [
@@ -154,12 +158,14 @@ function renderPortfolioCard(ghData) {
         { value: starCount, label: 'Stars' },
         { value: contributions.toLocaleString('en-US'), label: 'Contributions' },
     ];
-    const statBlocks = stats.map(({ value, label }, i) => {
-        const sx = 80 + i * 175;
-        return `
+    const statBlocks = stats
+        .map(({ value, label }, i) => {
+            const sx = 80 + i * 175;
+            return `
             <text x="${sx}" y="370" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#16a34a">${escSvg(String(value))}</text>
             <text x="${sx}" y="398" font-family="system-ui,sans-serif" font-size="20" fill="#6b7280">${escSvg(label)}</text>`;
-    }).join('');
+        })
+        .join('');
 
     return svg1200x630(`
         ${dotGrid()}
@@ -205,19 +211,19 @@ function renderProjectCard(project, repoStats) {
 
     // Tech tag pills.
     let techX = 80;
-    const techPills = techs.map((t) => {
-        const color = LANG_COLORS[t] ?? FALLBACK_LANG_COLOR;
-        const w = Math.min(t.length * 12 + 28, 160);
-        const pill = `
+    const techPills = techs
+        .map(t => {
+            const color = LANG_COLORS[t] ?? FALLBACK_LANG_COLOR;
+            const w = Math.min(t.length * 12 + 28, 160);
+            const pill = `
             <rect x="${techX}" y="420" width="${w}" height="34" rx="6" fill="#1f2937" stroke="${escSvg(color)}" stroke-width="1.5"/>
             <text x="${techX + w / 2}" y="443" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="${escSvg(color)}">${escSvg(t)}</text>`;
-        techX += w + 12;
-        return pill;
-    }).join('');
+            techX += w + 12;
+            return pill;
+        })
+        .join('');
 
-    const statsText = stars || forks
-        ? `★ ${stars}   ⑂ ${forks}`
-        : '';
+    const statsText = stars || forks ? `★ ${stars}   ⑂ ${forks}` : '';
 
     return svg1200x630(`
         ${dotGrid()}

@@ -1,1059 +1,1261 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Matthew Anderson (@and3rn3t) — Software engineer at Deere &amp; Company. Building health tech, home automation, and data projects in my spare time.">
-    <meta name="keywords" content="Matthew Anderson, Software Engineer, TypeScript, Python, Swift, dbt, IoT, Home Automation, Health Technology, Data Engineering, React, Node.js, Game Development">
-    <meta name="author" content="Matthew Anderson">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Matthew Anderson (@and3rn3t) — Software engineer at Deere &amp; Company. Building health tech, home automation, and data projects in my spare time."
+    />
+    <meta
+      name="keywords"
+      content="Matthew Anderson, Software Engineer, TypeScript, Python, Swift, dbt, IoT, Home Automation, Health Technology, Data Engineering, React, Node.js, Game Development"
+    />
+    <meta name="author" content="Matthew Anderson" />
+
     <!-- PWA Meta Tags -->
-    <meta name="application-name" content="Matthew Anderson Portfolio">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="M. Anderson">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#16a34a">
-    <meta name="msapplication-TileColor" content="#16a34a">
-    <meta name="msapplication-tap-highlight" content="no">
-    
+    <meta name="application-name" content="Matthew Anderson Portfolio" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="M. Anderson" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="msapplication-TileColor" content="#16a34a" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
     <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    
+    <link rel="manifest" href="/manifest.json" />
+
     <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml">
-    
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Matthew Anderson's Blog"
+      href="/feed.xml"
+    />
+
     <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/icons/icon-72x72.svg">
-    <link rel="shortcut icon" href="/favicon.svg">
-    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/icons/icon-72x72.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+
     <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.svg">
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.svg">
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-128x128.svg">
-    <link rel="apple-touch-icon" href="/icons/icon-180x180.svg">
-    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.svg" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.svg" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-128x128.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-180x180.svg" />
+
     <!-- iOS Splash Screens -->
-    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-iphone5-640x1136.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-iphone6-750x1334.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" href="/icons/splash-iphone6plus-1242x2208.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="/icons/splash-iphonex-1125x2436.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="/icons/splash-iphonexsmax-1242x2688.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-iphonexr-828x1792.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-ipadpro10-1536x2048.svg">
-    <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="/icons/splash-ipadpro12-2048x2732.svg">
-    
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+      href="/icons/splash-iphone5-640x1136.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+      href="/icons/splash-iphone6-750x1334.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
+      href="/icons/splash-iphone6plus-1242x2208.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+      href="/icons/splash-iphonex-1125x2436.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+      href="/icons/splash-iphonexsmax-1242x2688.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+      href="/icons/splash-iphonexr-828x1792.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+      href="/icons/splash-ipadpro10-1536x2048.svg"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+      href="/icons/splash-ipadpro12-2048x2732.svg"
+    />
+
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://andernet.dev/">
-    <meta property="og:title" content="Matthew Anderson | Software Engineer Portfolio">
-    <meta property="og:description" content="Software engineer at Deere &amp; Company. Side projects in health tech, home automation, data engineering, and more.">
-    <meta property="og:image" content="https://and3rn3t-portfolio.andernet.workers.dev/og">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/svg+xml">
-    <meta property="og:site_name" content="Matthew Anderson Portfolio">
-    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://andernet.dev/" />
+    <meta property="og:title" content="Matthew Anderson | Software Engineer Portfolio" />
+    <meta
+      property="og:description"
+      content="Software engineer at Deere &amp; Company. Side projects in health tech, home automation, data engineering, and more."
+    />
+    <meta property="og:image" content="https://and3rn3t-portfolio.andernet.workers.dev/og" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://andernet.dev/">
-    <meta name="twitter:title" content="Matthew Anderson | Software Engineer Portfolio">
-    <meta name="twitter:description" content="Software engineer at Deere &amp; Company. Side projects in health tech, home automation, data engineering, and more.">
-    <meta name="twitter:image" content="https://and3rn3t-portfolio.andernet.workers.dev/og">
-    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://andernet.dev/" />
+    <meta name="twitter:title" content="Matthew Anderson | Software Engineer Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Software engineer at Deere &amp; Company. Side projects in health tech, home automation, data engineering, and more."
+    />
+    <meta name="twitter:image" content="https://and3rn3t-portfolio.andernet.workers.dev/og" />
+
     <!-- Additional SEO -->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
-    <meta name="rating" content="General">
-    <meta name="distribution" content="Global">
-    <meta name="coverage" content="Worldwide">
-    <meta name="target" content="all">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="canonical" href="https://andernet.dev/">
-    <link rel="alternate" hreflang="en" href="https://andernet.dev/">
-    
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="rating" content="General" />
+    <meta name="distribution" content="Global" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="target" content="all" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://andernet.dev/" />
+    <link rel="alternate" hreflang="en" href="https://andernet.dev/" />
+
     <!-- Structured Data for SEO - Enhanced -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Person",
-          "@id": "https://andernet.dev/#person",
-          "name": "Matthew Anderson",
-          "alternateName": "and3rn3t",
-          "url": "https://andernet.dev/",
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://andernet.dev/icons/icon-512x512.svg",
-            "width": 512,
-            "height": 512
-          },
-          "sameAs": [
-            "https://github.com/and3rn3t",
-            "https://linkedin.com/in/matthew-anderson"
-          ],
-          "jobTitle": "Software Engineer",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Deere & Company"
-          },
-          "knowsAbout": [
-            {
-              "@type": "Thing",
-              "name": "TypeScript",
-              "description": "Programming language for web development"
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://andernet.dev/#person",
+            "name": "Matthew Anderson",
+            "alternateName": "and3rn3t",
+            "url": "https://andernet.dev/",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://andernet.dev/icons/icon-512x512.svg",
+              "width": 512,
+              "height": 512
             },
-            {
-              "@type": "Thing",
-              "name": "Python",
-              "description": "Programming language for automation and data science"
+            "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/matthew-anderson"],
+            "jobTitle": "Software Engineer",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Deere & Company"
             },
-            {
-              "@type": "Thing",
-              "name": "Swift",
-              "description": "Programming language for iOS development"
-            },
-            {
-              "@type": "Thing",
-              "name": "React",
-              "description": "JavaScript library for building user interfaces"
-            },
-            {
-              "@type": "Thing",
-              "name": "IoT",
-              "description": "Internet of Things and smart home automation"
-            },
-            {
-              "@type": "Thing",
-              "name": "Home Automation",
-              "description": "Smart home systems and automation"
-            },
-            {
-              "@type": "Thing",
-              "name": "Health Technology",
-              "description": "Healthcare analytics and monitoring systems"
-            }
-          ],
-          "description": "Software engineer at Deere & Company, building projects in health tech, home automation, data engineering, and IoT.",
-          "knowsLanguage": ["en-US"],
-          "hasOccupation": {
-            "@type": "Occupation",
-            "name": "Software Engineer",
-            "occupationalCategory": "15-1252.00",
-            "skills": "TypeScript, Python, Swift, dbt, SQL, IoT, Home Automation, Data Engineering"
-          }
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://andernet.dev/#website",
-          "url": "https://andernet.dev/",
-          "name": "Matthew Anderson Portfolio",
-          "description": "Portfolio showcasing software engineering projects in health tech, home automation, data engineering, and IoT.",
-          "publisher": {
-            "@id": "https://andernet.dev/#person"
-          },
-          "inLanguage": "en-US",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://andernet.dev/#projects?search={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "WebPage",
-          "@id": "https://andernet.dev/#webpage",
-          "url": "https://andernet.dev/",
-          "name": "Matthew Anderson | Software Engineer Portfolio",
-          "description": "Software engineer at Deere & Company. Projects in health tech, home automation, data engineering, and IoT.",
-          "isPartOf": {
-            "@id": "https://andernet.dev/#website"
-          },
-          "about": {
-            "@id": "https://andernet.dev/#person"
-          },
-          "datePublished": "2023-01-01T00:00:00+00:00",
-          "dateModified": "2026-02-04T00:00:00+00:00",
-          "breadcrumb": {
-            "@id": "https://andernet.dev/#breadcrumb"
-          },
-          "inLanguage": "en-US"
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": "https://andernet.dev/#breadcrumb",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "item": {
-                "@id": "https://andernet.dev/",
-                "name": "Home"
+            "knowsAbout": [
+              {
+                "@type": "Thing",
+                "name": "TypeScript",
+                "description": "Programming language for web development"
+              },
+              {
+                "@type": "Thing",
+                "name": "Python",
+                "description": "Programming language for automation and data science"
+              },
+              {
+                "@type": "Thing",
+                "name": "Swift",
+                "description": "Programming language for iOS development"
+              },
+              {
+                "@type": "Thing",
+                "name": "React",
+                "description": "JavaScript library for building user interfaces"
+              },
+              {
+                "@type": "Thing",
+                "name": "IoT",
+                "description": "Internet of Things and smart home automation"
+              },
+              {
+                "@type": "Thing",
+                "name": "Home Automation",
+                "description": "Smart home systems and automation"
+              },
+              {
+                "@type": "Thing",
+                "name": "Health Technology",
+                "description": "Healthcare analytics and monitoring systems"
               }
+            ],
+            "description": "Software engineer at Deere & Company, building projects in health tech, home automation, data engineering, and IoT.",
+            "knowsLanguage": ["en-US"],
+            "hasOccupation": {
+              "@type": "Occupation",
+              "name": "Software Engineer",
+              "occupationalCategory": "15-1252.00",
+              "skills": "TypeScript, Python, Swift, dbt, SQL, IoT, Home Automation, Data Engineering"
             }
-          ]
-        },
-        {
-          "@type": "ProfilePage",
-          "@id": "https://andernet.dev/#profilepage",
-          "url": "https://andernet.dev/",
-          "name": "Matthew Anderson - Developer Profile",
-          "isPartOf": {
-            "@id": "https://andernet.dev/#website"
           },
-          "about": {
-            "@id": "https://andernet.dev/#person"
+          {
+            "@type": "WebSite",
+            "@id": "https://andernet.dev/#website",
+            "url": "https://andernet.dev/",
+            "name": "Matthew Anderson Portfolio",
+            "description": "Portfolio showcasing software engineering projects in health tech, home automation, data engineering, and IoT.",
+            "publisher": {
+              "@id": "https://andernet.dev/#person"
+            },
+            "inLanguage": "en-US",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://andernet.dev/#projects?search={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
           },
-          "description": "Professional portfolio and project showcase",
-          "inLanguage": "en-US"
-        }
-      ]
-    }
+          {
+            "@type": "WebPage",
+            "@id": "https://andernet.dev/#webpage",
+            "url": "https://andernet.dev/",
+            "name": "Matthew Anderson | Software Engineer Portfolio",
+            "description": "Software engineer at Deere & Company. Projects in health tech, home automation, data engineering, and IoT.",
+            "isPartOf": {
+              "@id": "https://andernet.dev/#website"
+            },
+            "about": {
+              "@id": "https://andernet.dev/#person"
+            },
+            "datePublished": "2023-01-01T00:00:00+00:00",
+            "dateModified": "2026-02-04T00:00:00+00:00",
+            "breadcrumb": {
+              "@id": "https://andernet.dev/#breadcrumb"
+            },
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://andernet.dev/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@id": "https://andernet.dev/",
+                  "name": "Home"
+                }
+              }
+            ]
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://andernet.dev/#profilepage",
+            "url": "https://andernet.dev/",
+            "name": "Matthew Anderson - Developer Profile",
+            "isPartOf": {
+              "@id": "https://andernet.dev/#website"
+            },
+            "about": {
+              "@id": "https://andernet.dev/#person"
+            },
+            "description": "Professional portfolio and project showcase",
+            "inLanguage": "en-US"
+          }
+        ]
+      }
     </script>
     <title>Matthew Anderson | Software Engineer</title>
-    
+
     <!-- Critical Resource Preloads -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="modulepreload" href="main.js">
-    <link rel="modulepreload" href="modules/debug.js">
-    <link rel="modulepreload" href="modules/theme.js">
-    <link rel="modulepreload" href="modules/mobile.js">
-    <link rel="modulepreload" href="modules/navigation.js">
-    <link rel="modulepreload" href="modules/ui.js">
-    <link rel="modulepreload" href="modules/projects.js">
-    <link rel="modulepreload" href="modules/github-api.js">
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="modulepreload" href="main.js" />
+    <link rel="modulepreload" href="modules/debug.js" />
+    <link rel="modulepreload" href="modules/theme.js" />
+    <link rel="modulepreload" href="modules/mobile.js" />
+    <link rel="modulepreload" href="modules/navigation.js" />
+    <link rel="modulepreload" href="modules/ui.js" />
+    <link rel="modulepreload" href="modules/projects.js" />
+    <link rel="modulepreload" href="modules/github-api.js" />
     <!-- Non-critical modules loaded lazily on-demand -->
-    <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="vendor/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    
+    <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="vendor/fontawesome/webfonts/fa-solid-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <!-- Cloudflare Web Analytics with Error Handling -->
     <script>
-        // Enhanced Analytics Configuration with Cloudflare Fallback
-        window.portfolioAnalytics = {
-            cloudflareEnabled: false,
-            customEventsEnabled: true,
-            performanceMonitoring: true,
-            userBehaviorTracking: true,
-            sessionId: null,
-            userId: null,
-            cloudflareAttempted: false,
-            cloudflareLoaded: false
+      // Enhanced Analytics Configuration with Cloudflare Fallback
+      window.portfolioAnalytics = {
+        cloudflareEnabled: false,
+        customEventsEnabled: true,
+        performanceMonitoring: true,
+        userBehaviorTracking: true,
+        sessionId: null,
+        userId: null,
+        cloudflareAttempted: false,
+        cloudflareLoaded: false,
+      };
+
+      // Attempt to load Cloudflare Analytics with error handling
+      function loadCloudflareAnalytics() {
+        if (window.portfolioAnalytics.cloudflareAttempted) return;
+
+        window.portfolioAnalytics.cloudflareAttempted = true;
+
+        const script = document.createElement('script');
+        script.defer = true;
+        script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        script.setAttribute(
+          'data-cf-beacon',
+          '{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'
+        );
+
+        script.onload = function () {
+          window.portfolioAnalytics.cloudflareEnabled = true;
+          window.portfolioAnalytics.cloudflareLoaded = true;
+          console.log('Cloudflare Analytics loaded successfully');
         };
 
-        // Attempt to load Cloudflare Analytics with error handling
-        function loadCloudflareAnalytics() {
-            if (window.portfolioAnalytics.cloudflareAttempted) return;
-            
-            window.portfolioAnalytics.cloudflareAttempted = true;
-            
-            const script = document.createElement('script');
-            script.defer = true;
-            script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-            script.setAttribute('data-cf-beacon', '{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}');
-            
-            script.onload = function() {
-                window.portfolioAnalytics.cloudflareEnabled = true;
-                window.portfolioAnalytics.cloudflareLoaded = true;
-                console.log('Cloudflare Analytics loaded successfully');
-            };
-            
-            script.onerror = function() {
-                console.warn('Cloudflare Analytics failed to load - continuing without external analytics');
-                window.portfolioAnalytics.cloudflareEnabled = false;
-                window.portfolioAnalytics.cloudflareLoaded = false;
-            };
-            
-            // Set timeout for loading
-            setTimeout(() => {
-                if (!window.portfolioAnalytics.cloudflareLoaded) {
-                    console.warn('Cloudflare Analytics load timeout - continuing without external analytics');
-                }
-            }, 5000);
-            
-            document.head.appendChild(script);
-        }
+        script.onerror = function () {
+          console.warn(
+            'Cloudflare Analytics failed to load - continuing without external analytics'
+          );
+          window.portfolioAnalytics.cloudflareEnabled = false;
+          window.portfolioAnalytics.cloudflareLoaded = false;
+        };
 
-        // Try to load Cloudflare Analytics after a short delay
-        setTimeout(loadCloudflareAnalytics, 500);
+        // Set timeout for loading
+        setTimeout(() => {
+          if (!window.portfolioAnalytics.cloudflareLoaded) {
+            console.warn(
+              'Cloudflare Analytics load timeout - continuing without external analytics'
+            );
+          }
+        }, 5000);
+
+        document.head.appendChild(script);
+      }
+
+      // Try to load Cloudflare Analytics after a short delay
+      setTimeout(loadCloudflareAnalytics, 500);
     </script>
-    
+
     <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="//api.github.com">
-    <link rel="dns-prefetch" href="//github-readme-stats.vercel.app">
-    <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com">
-    <link rel="dns-prefetch" href="//static.cloudflareinsights.com">
-    
+    <link rel="dns-prefetch" href="//api.github.com" />
+    <link rel="dns-prefetch" href="//github-readme-stats.vercel.app" />
+    <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com" />
+    <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
+
     <!-- Preconnect for critical third-party domains -->
-    <link rel="preconnect" href="https://api.github.com">
-    
+    <link rel="preconnect" href="https://api.github.com" />
+
     <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
     <style>
-        /* Critical CSS for initial page load */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6; 
-            color: #1e293b; 
-            background: #ffffff;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+      /* Critical CSS for initial page load */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        line-height: 1.6;
+        color: #1e293b;
+        background: #ffffff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      body.loaded {
+        opacity: 1;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 70px;
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+      }
+      .hero,
+      section.hero,
+      #home.hero {
+        min-height: 100vh !important;
+        height: auto !important;
+        display: flex;
+        align-items: center;
+        padding-top: 100px !important;
+        padding-bottom: 40px !important;
+        margin-bottom: 0 !important;
+        background: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
+        background-image: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
+        position: relative;
+        z-index: 1;
+        color: white !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+      }
+      .hero-title,
+      .hero-subtitle,
+      .hero-description {
+        color: white !important;
+      }
+      .highlight {
+        background: linear-gradient(135deg, #ff6b35 0%, #ffd700 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+      }
+      /* Ensure projects section is visible */
+      .projects,
+      #projects {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 80px 0 !important;
+        min-height: 400px !important;
+        position: relative !important;
+        z-index: 2 !important;
+        margin-top: 0 !important;
+      }
+      .section-title,
+      .subsection-title {
+        display: block !important;
+      }
+      .projects-grid,
+      .project-gallery {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+      /* Fix section spacing and overlap */
+      section:not(.hero) {
+        clear: both !important;
+        position: relative !important;
+        z-index: 10 !important;
+      }
+      /* Ensure proper spacing between hero and projects */
+      .hero + .projects,
+      .hero + #projects {
+        margin-top: 0 !important;
+        padding-top: 40px !important;
+      }
+      /* Prevent any transform that might cause overlap */
+      .hero.animate-on-scroll,
+      .hero .animate-on-scroll {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      /* Ensure animations don't cause layout issues */
+      .animate-on-scroll {
+        position: relative !important;
+      }
+
+      /* Comprehensive overlap prevention */
+      html,
+      body {
+        scroll-behavior: smooth !important;
+        overflow-x: hidden !important;
+      }
+
+      /* Force proper section stacking */
+      main,
+      .main-content {
+        display: block !important;
+        position: relative !important;
+        z-index: 5 !important;
+      }
+
+      /* Ensure all content sections are above hero */
+      section.projects,
+      section.skills,
+      section.about,
+      section.contact {
+        position: relative !important;
+        z-index: 10 !important;
+        border-top: 1px solid transparent !important;
+      }
+      .project-card {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 20px !important;
+        margin: 15px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      /* Loading spinner */
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #2563eb;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-        body.loaded { opacity: 1; }
-        .navbar { 
-            position: fixed; 
-            top: 0; 
-            width: 100%; 
-            height: 70px;
-            background: rgba(255,255,255,0.95); 
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+        100% {
+          transform: rotate(360deg);
         }
-        .hero,
-        section.hero,
-        #home.hero { 
-            min-height: 100vh !important;
-            height: auto !important; 
-            display: flex; 
-            align-items: center; 
-            padding-top: 100px !important;
-            padding-bottom: 40px !important;
-            margin-bottom: 0 !important;
-            background: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
-            background-image: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
-            position: relative;
-            z-index: 1;
-            color: white !important;
-            overflow: hidden !important;
-            box-sizing: border-box !important;
+      }
+      /* Performance optimization classes */
+      .loading-placeholder {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading-shimmer 2s infinite;
+        border-radius: 8px;
+        min-height: 40px;
+      }
+      .performance-chart.loaded {
+        animation: fade-in 0.3s ease;
+      }
+      .metric-badge {
+        transition: transform 0.2s ease;
+        border-radius: 4px;
+      }
+      .metric-badge:hover {
+        transform: scale(1.05);
+      }
+      @keyframes loading-shimmer {
+        0% {
+          background-position: -200% 0;
         }
-        .hero-title, .hero-subtitle, .hero-description {
-            color: white !important;
+        100% {
+          background-position: 200% 0;
         }
-        .highlight {
-            background: linear-gradient(135deg, #ff6b35 0%, #ffd700 100%) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
+      }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
-        /* Ensure projects section is visible */
-        .projects, #projects {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            padding: 80px 0 !important;
-            min-height: 400px !important;
-            position: relative !important;
-            z-index: 2 !important;
-            margin-top: 0 !important;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .section-title, .subsection-title {
-            display: block !important;
-        }
-        .projects-grid, .project-gallery {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-        /* Fix section spacing and overlap */
-        section:not(.hero) {
-            clear: both !important;
-            position: relative !important;
-            z-index: 10 !important;
-        }
-        /* Ensure proper spacing between hero and projects */
-        .hero + .projects,
-        .hero + #projects {
-            margin-top: 0 !important;
-            padding-top: 40px !important;
-        }
-        /* Prevent any transform that might cause overlap */
-        .hero.animate-on-scroll,
-        .hero .animate-on-scroll {
-            transform: none !important;
-            opacity: 1 !important;
-        }
-        /* Ensure animations don't cause layout issues */
-        .animate-on-scroll {
-            position: relative !important;
-        }
-        
-        /* Comprehensive overlap prevention */
-        html, body {
-            scroll-behavior: smooth !important;
-            overflow-x: hidden !important;
-        }
-        
-        /* Force proper section stacking */
-        main, .main-content {
-            display: block !important;
-            position: relative !important;
-            z-index: 5 !important;
-        }
-        
-        /* Ensure all content sections are above hero */
-        section.projects,
-        section.skills,
-        section.about,
-        section.contact {
-            position: relative !important;
-            z-index: 10 !important;
-            border-top: 1px solid transparent !important;
-        }
-        .project-card {
-            display: block !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            padding: 20px !important;
-            margin: 15px !important;
-            border-radius: 8px !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 1rem; 
-        }
-        /* Loading spinner */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #2563eb;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        /* Performance optimization classes */
-        .loading-placeholder {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading-shimmer 2s infinite;
-            border-radius: 8px;
-            min-height: 40px;
-        }
-        .performance-chart.loaded {
-            animation: fade-in 0.3s ease;
-        }
-        .metric-badge {
-            transition: transform 0.2s ease;
-            border-radius: 4px;
-        }
-        .metric-badge:hover {
-            transform: scale(1.05);
-        }
-        @keyframes loading-shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+      }
     </style>
-    
+
     <!-- Time-of-day hero accent: set early to avoid a tint flash -->
     <script>
-        (function () {
-            var h = new Date().getHours();
-            var t = h < 6 ? 'night' : h < 9 ? 'dawn' : h < 18 ? 'day' : h < 21 ? 'dusk' : 'night';
-            document.documentElement.dataset.timeOfDay = t;
-        })();
+      (function () {
+        var h = new Date().getHours();
+        var t = h < 6 ? 'night' : h < 9 ? 'dawn' : h < 18 ? 'day' : h < 21 ? 'dusk' : 'night';
+        document.documentElement.dataset.timeOfDay = t;
+      })();
     </script>
-    
+
     <!-- Load main stylesheet after critical CSS -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media = 'all'" />
+    <noscript><link rel="stylesheet" href="styles.css" /></noscript>
 
     <!-- Font Awesome (self-hosted) with async loading -->
-    <link rel="stylesheet" href="vendor/fontawesome/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="vendor/fontawesome/all.min.css"></noscript>
-    
+    <link
+      rel="stylesheet"
+      href="vendor/fontawesome/all.min.css"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript><link rel="stylesheet" href="vendor/fontawesome/all.min.css" /></noscript>
+
     <!-- reCAPTCHA v3 for enhanced form security -->
     <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
-    
+
     <!-- Visual Enhancement Utilities -->
     <style>
-        /* Critical animation styles for immediate loading */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Critical animation styles for immediate loading */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .animate-on-scroll.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
-        
-        .animate-on-scroll.animate-in {
-            opacity: 1;
-            transform: translateY(0);
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        .fade-in-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .stagger-animation {
-            animation-delay: var(--animation-delay, 0ms);
-        }
-        /* Skip to content link for keyboard accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--primary-color, #667eea);
-            color: white;
-            padding: 8px 16px;
-            z-index: 10000;
-            transition: top 0.3s;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .skip-link:focus {
-            top: 0;
-        }
+      }
+
+      .stagger-animation {
+        animation-delay: var(--animation-delay, 0ms);
+      }
+      /* Skip to content link for keyboard accessibility */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary-color, #667eea);
+        color: white;
+        padding: 8px 16px;
+        z-index: 10000;
+        transition: top 0.3s;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Skip to main content link for keyboard users -->
     <a href="#home" class="skip-link">Skip to main content</a>
 
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
-        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+      <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">@and3rn3t</a>
-            <ul class="nav-menu nav-links" id="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link touch-target">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link touch-target">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#experience" class="nav-link touch-target">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link touch-target">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#writing" class="nav-link touch-target">Writing</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link touch-target">Contact</a>
-                </li>
-            </ul>
-            <button class="nav-toggle hamburger" id="mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </div>
+      <div class="nav-container">
+        <a href="#home" class="nav-logo">@and3rn3t</a>
+        <ul class="nav-menu nav-links" id="nav-menu">
+          <li class="nav-item">
+            <a href="#home" class="nav-link touch-target">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link touch-target">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#experience" class="nav-link touch-target">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a href="#projects" class="nav-link touch-target">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a href="#writing" class="nav-link touch-target">Writing</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link touch-target">Contact</a>
+          </li>
+        </ul>
+        <button
+          class="nav-toggle hamburger"
+          id="mobile-menu"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="nav-links"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
     </nav>
 
     <!-- Global Search Modal -->
     <div class="global-search-modal" id="global-search-modal">
-        <div class="global-search-content">
-            <div class="global-search-header">
-                <div class="global-search-input-container">
-                    <i class="fas fa-search global-search-icon"></i>
-                    <input type="text" id="global-search-input" 
-                           placeholder="Search entire portfolio... (Ctrl+K)"
-                           class="global-search-input"
-                           autocomplete="off"
-                           spellcheck="false">
-                    <button class="global-search-close" id="global-search-close" 
-                            aria-label="Close global search" title="Close search (Esc)">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="search-categories">
-                    <button class="search-category active" data-category="all">
-                        <i class="fas fa-globe"></i> All
-                    </button>
-                    <button class="search-category" data-category="projects">
-                        <i class="fas fa-code"></i> Projects
-                    </button>
-                    <button class="search-category" data-category="skills">
-                        <i class="fas fa-cogs"></i> Skills
-                    </button>
-                    <button class="search-category" data-category="content">
-                        <i class="fas fa-file-alt"></i> Content
-                    </button>
-                </div>
-            </div>
-            <div class="global-search-results" id="global-search-results">
-                <div class="search-results-empty" id="search-results-empty">
-                    <i class="fas fa-search-plus"></i>
-                    <h3>Search Your Portfolio</h3>
-                    <p>Find projects, skills, technologies, and content across the entire portfolio.</p>
-                    <div class="search-tips">
-                        <div class="search-tip">
-                            <kbd>↑</kbd><kbd>↓</kbd> Navigate results
-                        </div>
-                        <div class="search-tip">
-                            <kbd>Enter</kbd> Open result
-                        </div>
-                        <div class="search-tip">
-                            <kbd>Esc</kbd> Close search
-                        </div>
-                    </div>
-                </div>
-                <div class="search-results-content" id="search-results-content"></div>
-            </div>
+      <div class="global-search-content">
+        <div class="global-search-header">
+          <div class="global-search-input-container">
+            <i class="fas fa-search global-search-icon"></i>
+            <input
+              type="text"
+              id="global-search-input"
+              placeholder="Search entire portfolio... (Ctrl+K)"
+              class="global-search-input"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button
+              class="global-search-close"
+              id="global-search-close"
+              aria-label="Close global search"
+              title="Close search (Esc)"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="search-categories">
+            <button class="search-category active" data-category="all">
+              <i class="fas fa-globe"></i> All
+            </button>
+            <button class="search-category" data-category="projects">
+              <i class="fas fa-code"></i> Projects
+            </button>
+            <button class="search-category" data-category="skills">
+              <i class="fas fa-cogs"></i> Skills
+            </button>
+            <button class="search-category" data-category="content">
+              <i class="fas fa-file-alt"></i> Content
+            </button>
+          </div>
         </div>
+        <div class="global-search-results" id="global-search-results">
+          <div class="search-results-empty" id="search-results-empty">
+            <i class="fas fa-search-plus"></i>
+            <h3>Search Your Portfolio</h3>
+            <p>Find projects, skills, technologies, and content across the entire portfolio.</p>
+            <div class="search-tips">
+              <div class="search-tip"><kbd>↑</kbd><kbd>↓</kbd> Navigate results</div>
+              <div class="search-tip"><kbd>Enter</kbd> Open result</div>
+              <div class="search-tip"><kbd>Esc</kbd> Close search</div>
+            </div>
+          </div>
+          <div class="search-results-content" id="search-results-content"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Keyboard Shortcuts Help -->
-    <div class="keyboard-help" id="keyboard-help" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" aria-hidden="true">
-        <div class="keyboard-help-content">
-            <h3>⌨️ Keyboard Shortcuts</h3>
-            <div class="shortcut-grid">
-                <div class="shortcut-item">
-                    <kbd>?</kbd>
-                    <span>Show/hide this help</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>T</kbd>
-                    <span>Toggle theme</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd>
-                    <span>Command palette</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>J</kbd>
-                    <span>Scroll down</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>K</kbd>
-                    <span>Scroll up</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>G</kbd> + <kbd>H</kbd>
-                    <span>Go to home</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>G</kbd> + <kbd>A</kbd>
-                    <span>Go to about</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>G</kbd> + <kbd>P</kbd>
-                    <span>Go to projects</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>G</kbd> + <kbd>C</kbd>
-                    <span>Go to contact</span>
-                </div>
-                <div class="shortcut-item">
-                    <kbd>Esc</kbd>
-                    <span>Close dialogs</span>
-                </div>
-            </div>
-            <button class="keyboard-help-close" id="keyboard-help-close">
-                <i class="fas fa-times"></i>
-                <span class="sr-only">Close help</span>
-            </button>
+    <div
+      class="keyboard-help"
+      id="keyboard-help"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Keyboard shortcuts"
+      aria-hidden="true"
+    >
+      <div class="keyboard-help-content">
+        <h3>⌨️ Keyboard Shortcuts</h3>
+        <div class="shortcut-grid">
+          <div class="shortcut-item">
+            <kbd>?</kbd>
+            <span>Show/hide this help</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>T</kbd>
+            <span>Toggle theme</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd>
+            <span>Command palette</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>J</kbd>
+            <span>Scroll down</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>K</kbd>
+            <span>Scroll up</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>G</kbd> + <kbd>H</kbd>
+            <span>Go to home</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>G</kbd> + <kbd>A</kbd>
+            <span>Go to about</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>G</kbd> + <kbd>P</kbd>
+            <span>Go to projects</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>G</kbd> + <kbd>C</kbd>
+            <span>Go to contact</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Esc</kbd>
+            <span>Close dialogs</span>
+          </div>
         </div>
+        <button class="keyboard-help-close" id="keyboard-help-close">
+          <i class="fas fa-times"></i>
+          <span class="sr-only">Close help</span>
+        </button>
+      </div>
     </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-canvas-wrap" aria-hidden="true">
-            <div class="hero-canvas-fallback"></div>
-            <canvas class="hero-canvas" id="hero-canvas"></canvas>
+      <div class="hero-canvas-wrap" aria-hidden="true">
+        <div class="hero-canvas-fallback"></div>
+        <canvas class="hero-canvas" id="hero-canvas"></canvas>
+      </div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">Hi, I'm <span class="highlight">Matthew Anderson</span></h1>
+          <h2 class="hero-subtitle">
+            <span
+              class="hero-role"
+              data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd"
+              >Software Engineer at Deere &amp; Company</span
+            ><span class="hero-caret" aria-hidden="true"></span>
+          </h2>
+          <p class="hero-description">
+            Software engineer at John Deere. Building things at the intersection of health tech,
+            home automation, and data in my spare time.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
+              <i class="fas fa-file-pdf"></i> Resume
+            </a>
+          </div>
+          <div class="hero-social">
+            <a
+              href="https://github.com/and3rn3t"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              title="GitHub Profile"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+              href="https://linkedin.com/in/matthew-anderson"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              title="LinkedIn Profile"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:contact@matthewanderson.dev" class="social-link" title="Send Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
         </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Hi, I'm <span class="highlight">Matthew Anderson</span>
-                </h1>
-                <h2 class="hero-subtitle">
-                    <span class="hero-role" data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd">Software Engineer at Deere &amp; Company</span><span class="hero-caret" aria-hidden="true"></span>
-                </h2>
-                <p class="hero-description">
-                    Software engineer at John Deere. Building things at the intersection of health tech, home automation, and data in my spare time.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                    <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
-                        <i class="fas fa-file-pdf"></i> Resume
-                    </a>
-                </div>
-                <div class="hero-social">
-                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Profile">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn Profile">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="mailto:contact@matthewanderson.dev" class="social-link" title="Send Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+      </div>
     </section>
 
     <!-- About Section -->
     <section class="about animate-on-scroll" id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Software engineer at Deere &amp; Company with a genuine interest in technology,
-                        home automation, and gadgetry. I tinker with health tech, IoT, data engineering,
-                        and the occasional game project &mdash; driven by curiosity and the satisfaction of
-                        building things that are actually useful.
-                    </p>
-                    <!-- Currently coding widget — populated by modules/currently.js -->
-                    <div id="currently-coding" aria-live="polite"></div>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-code"></i>
-                            <h3>Clean Code</h3>
-                            <p>Writing maintainable, scalable, and efficient code</p>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-home"></i>
-                            <h3>IoT &amp; Automation</h3>
-                            <p>Passionate about smart home technologies and automation</p>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <h3>Innovation</h3>
-                            <p>Always exploring new technologies and creative solutions</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Software engineer at Deere &amp; Company with a genuine interest in technology, home
+              automation, and gadgetry. I tinker with health tech, IoT, data engineering, and the
+              occasional game project &mdash; driven by curiosity and the satisfaction of building
+              things that are actually useful.
+            </p>
+            <!-- Currently coding widget — populated by modules/currently.js -->
+            <div id="currently-coding" aria-live="polite"></div>
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <i class="fas fa-code"></i>
+                <h3>Clean Code</h3>
+                <p>Writing maintainable, scalable, and efficient code</p>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-home"></i>
+                <h3>IoT &amp; Automation</h3>
+                <p>Passionate about smart home technologies and automation</p>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Innovation</h3>
+                <p>Always exploring new technologies and creative solutions</p>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-
+      </div>
     </section>
 
     <!-- Experience Section -->
     <section class="experience animate-on-scroll" id="experience">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="experience-layout">
-                <div class="timeline-column">
-                    <h3 class="timeline-group-heading"><i class="fas fa-briefcase" aria-hidden="true"></i> Work</h3>
-                    <div class="timeline" id="experience-timeline" aria-label="Work history">
-                        <div class="loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading experience...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-column">
-                    <h3 class="timeline-group-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Education</h3>
-                    <div class="timeline" id="education-timeline" aria-label="Education history">
-                        <div class="loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading education...</p>
-                        </div>
-                    </div>
-                    <!-- Resume CTA -->
-                    <div class="resume-cta">
-                        <p class="resume-cta-label">Want the full picture?</p>
-                        <a href="/resume.pdf" download class="btn btn-primary resume-btn">
-                            <i class="fas fa-file-pdf" aria-hidden="true"></i> Download Resume
-                        </a>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-layout">
+          <div class="timeline-column">
+            <h3 class="timeline-group-heading">
+              <i class="fas fa-briefcase" aria-hidden="true"></i> Work
+            </h3>
+            <div class="timeline" id="experience-timeline" aria-label="Work history">
+              <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading experience...</p>
+              </div>
             </div>
+          </div>
+          <div class="timeline-column">
+            <h3 class="timeline-group-heading">
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i> Education
+            </h3>
+            <div class="timeline" id="education-timeline" aria-label="Education history">
+              <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading education...</p>
+              </div>
+            </div>
+            <!-- Resume CTA -->
+            <div class="resume-cta">
+              <p class="resume-cta-label">Want the full picture?</p>
+              <a href="/resume.pdf" download class="btn btn-primary resume-btn">
+                <i class="fas fa-file-pdf" aria-hidden="true"></i> Download Resume
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Projects Section -->
     <section class="projects animate-on-scroll" id="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            
-            <!-- Top Starred Projects -->
-            <div class="top-projects-section">
-                <p class="section-intro">
-                    A curated selection of projects spanning health tech, home automation, data engineering, and more.
-                </p>
-                <div class="projects-grid" id="projects-grid">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading projects...</p>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+
+        <!-- Top Starred Projects -->
+        <div class="top-projects-section">
+          <p class="section-intro">
+            A curated selection of projects spanning health tech, home automation, data engineering,
+            and more.
+          </p>
+          <div class="projects-grid" id="projects-grid">
+            <div class="loading">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Loading projects...</p>
             </div>
-            
-            <div class="projects-cta">
-                <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                    View All Projects on GitHub
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
+          </div>
         </div>
+
+        <div class="projects-cta">
+          <a
+            href="https://github.com/and3rn3t"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline"
+          >
+            View All Projects on GitHub
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Skills Section -->
     <section class="skills animate-on-scroll" id="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">HTML5</span>
-                        <span class="skill-item">CSS3</span>
-                        <span class="skill-item">JavaScript</span>
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">Responsive Design</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">Node.js</span>
-                        <span class="skill-item">PostgreSQL</span>
-                        <span class="skill-item">REST APIs</span>
-                        <span class="skill-item">Database Design</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Git</span>
-                        <span class="skill-item">Docker</span>
-                        <span class="skill-item">Linux</span>
-                        <span class="skill-item">IoT</span>
-                        <span class="skill-item">Home Automation</span>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Frontend</h3>
+            <div class="skill-items">
+              <span class="skill-item">HTML5</span>
+              <span class="skill-item">CSS3</span>
+              <span class="skill-item">JavaScript</span>
+              <span class="skill-item">React</span>
+              <span class="skill-item">Responsive Design</span>
             </div>
+          </div>
+          <div class="skill-category">
+            <h3>Backend</h3>
+            <div class="skill-items">
+              <span class="skill-item">Python</span>
+              <span class="skill-item">Node.js</span>
+              <span class="skill-item">PostgreSQL</span>
+              <span class="skill-item">REST APIs</span>
+              <span class="skill-item">Database Design</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Tools & Technologies</h3>
+            <div class="skill-items">
+              <span class="skill-item">Git</span>
+              <span class="skill-item">Docker</span>
+              <span class="skill-item">Linux</span>
+              <span class="skill-item">IoT</span>
+              <span class="skill-item">Home Automation</span>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Writing / Blog Section -->
     <section class="writing animate-on-scroll" id="writing">
-        <div class="container">
-            <h2 class="section-title">Writing</h2>
-            <p class="section-intro">Technical posts on the projects I build — health tech, IoT, data, and whatever else captures my attention.</p>
-            <div id="blog-posts" class="blog-posts-grid" aria-label="Blog posts"></div>
-            <div id="blog-article" class="blog-article-wrapper" hidden aria-label="Blog article"></div>
-        </div>
+      <div class="container">
+        <h2 class="section-title">Writing</h2>
+        <p class="section-intro">
+          Technical posts on the projects I build — health tech, IoT, data, and whatever else
+          captures my attention.
+        </p>
+        <div id="blog-posts" class="blog-posts-grid" aria-label="Blog posts"></div>
+        <div id="blog-article" class="blog-article-wrapper" hidden aria-label="Blog article"></div>
+      </div>
     </section>
 
     <!-- GitHub Stats Section -->
     <section class="github-stats animate-on-scroll" id="github-stats">
-        <div class="container">
-            <h2 class="section-title">GitHub Statistics</h2>
-            <div class="stats-grid" id="stats-grid">
-                <!-- GitHub stats will be loaded dynamically -->
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading stats...</p>
-                </div>
-            </div>
-
-            <!-- GitHub Contribution Graph -->
-            <div class="contribution-section">
-                <h3 class="subsection-title">Contribution Activity</h3>
-                <div class="contribution-graph" id="contribution-graph">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading contributions...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Language Stats -->
-            <div class="language-stats-section">
-                <h3 class="subsection-title">Most Used Languages</h3>
-                <div class="language-stats" id="main-language-stats">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading language stats...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent Activity Feed -->
-            <div class="activity-feed-section">
-                <h3 class="subsection-title">Recent Activity</h3>
-                <div id="activity-feed" aria-label="Recent GitHub activity"></div>
-            </div>
+      <div class="container">
+        <h2 class="section-title">GitHub Statistics</h2>
+        <div class="stats-grid" id="stats-grid">
+          <!-- GitHub stats will be loaded dynamically -->
+          <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading stats...</p>
+          </div>
         </div>
+
+        <!-- GitHub Contribution Graph -->
+        <div class="contribution-section">
+          <h3 class="subsection-title">Contribution Activity</h3>
+          <div class="contribution-graph" id="contribution-graph">
+            <div class="loading">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Loading contributions...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Language Stats -->
+        <div class="language-stats-section">
+          <h3 class="subsection-title">Most Used Languages</h3>
+          <div class="language-stats" id="main-language-stats">
+            <div class="loading">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>Loading language stats...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Feed -->
+        <div class="activity-feed-section">
+          <h3 class="subsection-title">Recent Activity</h3>
+          <div id="activity-feed" aria-label="Recent GitHub activity"></div>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact animate-on-scroll" id="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <p class="contact-description">
-                    Open to interesting problems — whether that's a new role, a side project collaboration, or just a conversation about health tech, home automation, or data engineering.
-                </p>
-                
-                <!-- Contact Form -->
-                <form class="contact-form" action="https://formspree.io/f/xqagvdrq" method="POST" id="contact-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required 
-                                   class="form-input"
-                                   placeholder="Your full name" 
-                                   aria-describedby="name-error"
-                                   autocomplete="name"
-                                   minlength="2" maxlength="100">
-                            <span class="error-message" id="name-error" role="alert" aria-live="polite"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required 
-                                   class="form-input"
-                                   placeholder="your.email@example.com"
-                                   aria-describedby="email-error"
-                                   autocomplete="email"
-                                   maxlength="254">
-                            <span class="error-message" id="email-error" role="alert" aria-live="polite"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject *</label>
-                        <input type="text" id="subject" name="subject" required 
-                               class="form-input"
-                               placeholder="What would you like to discuss?"
-                               aria-describedby="subject-error"
-                               minlength="3" maxlength="200">
-                        <span class="error-message" id="subject-error" role="alert" aria-live="polite"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="6" required 
-                                  class="form-textarea"
-                                  placeholder="Tell me about your project, idea, or how we can work together..."
-                                  aria-describedby="message-error"
-                                  minlength="10" maxlength="5000"></textarea>
-                        <span class="error-message" id="message-error" role="alert" aria-live="polite"></span>
-                    </div>
-                    
-                    <!-- Honeypot for spam protection -->
-                    <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true">
-                    
-                    <!-- reCAPTCHA container -->
-                    <div class="recaptcha-container" id="recaptcha-container"></div>
-                    
-                    <button type="submit" class="btn btn-primary submit-button" id="submit-button" 
-                            aria-describedby="form-status">
-                        <span class="submit-text">Send Message</span>
-                        <i class="fas fa-paper-plane submit-icon"></i>
-                        <div class="loading-spinner">
-                            <i class="fas fa-spinner fa-spin"></i>
-                        </div>
-                    </button>
-                    
-                    <output class="form-status" id="form-status" aria-live="polite"></output>
-                </form>
-                
-                <div class="contact-methods">
-                    <a href="mailto:contact@matthewanderson.dev" class="contact-method touch-target">
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@matthewanderson.dev</span>
-                    </a>
-                    <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer" class="contact-method touch-target">
-                        <i class="fab fa-github"></i>
-                        <span>@and3rn3t</span>
-                    </a>
-                    <a href="https://linkedin.com/in/matthew-anderson" target="_blank" rel="noopener noreferrer" class="contact-method touch-target">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+          <p class="contact-description">
+            Open to interesting problems — whether that's a new role, a side project collaboration,
+            or just a conversation about health tech, home automation, or data engineering.
+          </p>
+
+          <!-- Contact Form -->
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/xqagvdrq"
+            method="POST"
+            id="contact-form"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="form-input"
+                  placeholder="Your full name"
+                  aria-describedby="name-error"
+                  autocomplete="name"
+                  minlength="2"
+                  maxlength="100"
+                />
+                <span class="error-message" id="name-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="form-input"
+                  placeholder="your.email@example.com"
+                  aria-describedby="email-error"
+                  autocomplete="email"
+                  maxlength="254"
+                />
+                <span class="error-message" id="email-error" role="alert" aria-live="polite"></span>
+              </div>
             </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                class="form-input"
+                placeholder="What would you like to discuss?"
+                aria-describedby="subject-error"
+                minlength="3"
+                maxlength="200"
+              />
+              <span class="error-message" id="subject-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                class="form-textarea"
+                placeholder="Tell me about your project, idea, or how we can work together..."
+                aria-describedby="message-error"
+                minlength="10"
+                maxlength="5000"
+              ></textarea>
+              <span class="error-message" id="message-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <!-- Honeypot for spam protection -->
+            <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true" />
+
+            <!-- reCAPTCHA container -->
+            <div class="recaptcha-container" id="recaptcha-container"></div>
+
+            <button
+              type="submit"
+              class="btn btn-primary submit-button"
+              id="submit-button"
+              aria-describedby="form-status"
+            >
+              <span class="submit-text">Send Message</span>
+              <i class="fas fa-paper-plane submit-icon"></i>
+              <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+            </button>
+
+            <output class="form-status" id="form-status" aria-live="polite"></output>
+          </form>
+
+          <div class="contact-methods">
+            <a href="mailto:contact@matthewanderson.dev" class="contact-method touch-target">
+              <i class="fas fa-envelope"></i>
+              <span>contact@matthewanderson.dev</span>
+            </a>
+            <a
+              href="https://github.com/and3rn3t"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-method touch-target"
+            >
+              <i class="fab fa-github"></i>
+              <span>@and3rn3t</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/matthew-anderson"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-method touch-target"
+            >
+              <i class="fab fa-linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Guestbook Section -->
     <section class="guestbook animate-on-scroll" id="guestbook">
-        <div class="container">
-            <h2 class="section-title">Guestbook</h2>
-            <p class="section-intro">Leave a note. Say hello. Tell me what you're building.</p>
-            <div class="guestbook-layout">
-                <div class="guestbook-form-col">
-                    <form id="guestbook-form" class="guestbook-form" novalidate>
-                        <div class="form-group">
-                            <label for="gb-name">Name</label>
-                            <input type="text" id="gb-name" name="name" required
-                                   class="form-input" placeholder="Your name"
-                                   maxlength="60" autocomplete="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="gb-message">Message</label>
-                            <textarea id="gb-message" name="message" rows="4" required
-                                      class="form-textarea" placeholder="What's on your mind?"
-                                      maxlength="500"></textarea>
-                        </div>
-                        <div id="turnstile-container" class="turnstile-container"></div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-pen" aria-hidden="true"></i> Sign guestbook
-                        </button>
-                        <output id="guestbook-status" class="guestbook-status" aria-live="polite"></output>
-                    </form>
-                </div>
-                <div class="guestbook-entries-col">
-                    <div id="guestbook-entries" aria-label="Guestbook entries">
-                        <div class="loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading entries...</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Guestbook</h2>
+        <p class="section-intro">Leave a note. Say hello. Tell me what you're building.</p>
+        <div class="guestbook-layout">
+          <div class="guestbook-form-col">
+            <form id="guestbook-form" class="guestbook-form" novalidate>
+              <div class="form-group">
+                <label for="gb-name">Name</label>
+                <input
+                  type="text"
+                  id="gb-name"
+                  name="name"
+                  required
+                  class="form-input"
+                  placeholder="Your name"
+                  maxlength="60"
+                  autocomplete="name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="gb-message">Message</label>
+                <textarea
+                  id="gb-message"
+                  name="message"
+                  rows="4"
+                  required
+                  class="form-textarea"
+                  placeholder="What's on your mind?"
+                  maxlength="500"
+                ></textarea>
+              </div>
+              <div id="turnstile-container" class="turnstile-container"></div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-pen" aria-hidden="true"></i> Sign guestbook
+              </button>
+              <output id="guestbook-status" class="guestbook-status" aria-live="polite"></output>
+            </form>
+          </div>
+          <div class="guestbook-entries-col">
+            <div id="guestbook-entries" aria-label="Guestbook entries">
+              <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading entries...</p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-inner">
-                <p>&copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS, Vite, and GitHub Actions.</p>
-                <span class="view-count-widget" hidden aria-label="Page views">
-                    <i class="fas fa-eye" aria-hidden="true"></i>
-                    <span data-view-count>0</span> views
-                </span>
-            </div>
+      <div class="container">
+        <div class="footer-inner">
+          <p>
+            &copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS,
+            Vite, and GitHub Actions.
+          </p>
+          <span class="view-count-widget" hidden aria-label="Page views">
+            <i class="fas fa-eye" aria-hidden="true"></i>
+            <span data-view-count>0</span> views
+          </span>
         </div>
+      </div>
     </footer>
-    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 
     <!-- Schema.org Person structured data -->
     <script type="application/ld+json">
-    {
+      {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Matthew Anderson",
@@ -1061,123 +1263,137 @@
         "email": "contact@matthewanderson.dev",
         "jobTitle": "Software Engineer",
         "worksFor": {
-            "@type": "Organization",
-            "name": "Deere & Company",
-            "url": "https://www.deere.com"
+          "@type": "Organization",
+          "name": "Deere & Company",
+          "url": "https://www.deere.com"
         },
-        "sameAs": [
-            "https://github.com/and3rn3t",
-            "https://linkedin.com/in/matthew-anderson"
-        ],
-        "knowsAbout": ["TypeScript", "Swift", "Python", "IoT", "Health Technology", "Data Engineering", "Home Automation"]
-    }
+        "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/matthew-anderson"],
+        "knowsAbout": [
+          "TypeScript",
+          "Swift",
+          "Python",
+          "IoT",
+          "Health Technology",
+          "Data Engineering",
+          "Home Automation"
+        ]
+      }
     </script>
 
     <!-- Theme Picker -->
     <div class="theme-picker-container">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Open theme picker" title="Change Theme (T)">
-            <i class="fas fa-palette"></i>
-        </button>
-        
-        <div class="theme-picker-menu" id="theme-picker-menu" aria-label="Theme selection">
-            <div class="theme-picker-header">
-                <h3>Choose Theme</h3>
-                <button class="theme-picker-close" id="theme-picker-close" aria-label="Close theme picker">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="theme-options" role="menu">
-                <button class="theme-option" data-theme="light" role="menuitem">
-                    <div class="theme-preview light-preview">
-                        <div class="preview-bar"></div>
-                        <div class="preview-content"></div>
-                    </div>
-                    <span class="theme-name">☀️ Light</span>
-                    <span class="theme-description">Default bright theme</span>
-                </button>
-                
-                <button class="theme-option" data-theme="dark" role="menuitem">
-                    <div class="theme-preview dark-preview">
-                        <div class="preview-bar"></div>
-                        <div class="preview-content"></div>
-                    </div>
-                    <span class="theme-name">🌙 Dark</span>
-                    <span class="theme-description">Easy on the eyes</span>
-                </button>
-            </div>
-            
-            <div class="theme-picker-footer">
-                <label class="theme-option-checkbox">
-                    <input type="checkbox" id="follow-system-theme">
-                    <span>Follow system preference</span>
-                </label>
-            </div>
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Open theme picker"
+        title="Change Theme (T)"
+      >
+        <i class="fas fa-palette"></i>
+      </button>
+
+      <div class="theme-picker-menu" id="theme-picker-menu" aria-label="Theme selection">
+        <div class="theme-picker-header">
+          <h3>Choose Theme</h3>
+          <button
+            class="theme-picker-close"
+            id="theme-picker-close"
+            aria-label="Close theme picker"
+          >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+
+        <div class="theme-options" role="menu">
+          <button class="theme-option" data-theme="light" role="menuitem">
+            <div class="theme-preview light-preview">
+              <div class="preview-bar"></div>
+              <div class="preview-content"></div>
+            </div>
+            <span class="theme-name">☀️ Light</span>
+            <span class="theme-description">Default bright theme</span>
+          </button>
+
+          <button class="theme-option" data-theme="dark" role="menuitem">
+            <div class="theme-preview dark-preview">
+              <div class="preview-bar"></div>
+              <div class="preview-content"></div>
+            </div>
+            <span class="theme-name">🌙 Dark</span>
+            <span class="theme-description">Easy on the eyes</span>
+          </button>
+        </div>
+
+        <div class="theme-picker-footer">
+          <label class="theme-option-checkbox">
+            <input type="checkbox" id="follow-system-theme" />
+            <span>Follow system preference</span>
+          </label>
+        </div>
+      </div>
     </div>
 
     <!-- Performance optimized script loading -->
     <script>
-        // Inline critical JavaScript for immediate execution
-        (function() {
-            // Track page load performance
-            const pageLoadStart = performance.now();
-            
-            // Show page when fonts are loaded
-            if (document.fonts) {
-                document.fonts.ready.then(() => {
-                    document.body.classList.add('fonts-loaded');
-                });
-            }
-            
-            // Critical performance metrics
-            window.addEventListener('load', () => {
-                const loadTime = performance.now() - pageLoadStart;
-                
-                // Report to analytics if available
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'page_load_time', {
-                        event_category: 'Performance',
-                        event_label: 'Load Time',
-                        value: Math.round(loadTime)
-                    });
-                }
+      // Inline critical JavaScript for immediate execution
+      (function () {
+        // Track page load performance
+        const pageLoadStart = performance.now();
+
+        // Show page when fonts are loaded
+        if (document.fonts) {
+          document.fonts.ready.then(() => {
+            document.body.classList.add('fonts-loaded');
+          });
+        }
+
+        // Critical performance metrics
+        window.addEventListener('load', () => {
+          const loadTime = performance.now() - pageLoadStart;
+
+          // Report to analytics if available
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_load_time', {
+              event_category: 'Performance',
+              event_label: 'Load Time',
+              value: Math.round(loadTime),
             });
-            
-            // Preload critical resources on interaction
-            let preloadTriggered = false;
-            const preloadCritical = () => {
-                if (preloadTriggered) return;
-                preloadTriggered = true;
-                
-                // Preload GitHub API endpoints
-                const endpoints = [
-                    'https://api.github.com/users/and3rn3t',
-                    'https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100'
-                ];
-                
-                for (const url of endpoints) {
-                    const link = document.createElement('link');
-                    link.rel = 'prefetch';
-                    link.href = url;
-                    document.head.appendChild(link);
-                }
-            };
-            
-            // Trigger preload on first interaction
-            for (const event of ['mousedown', 'touchstart', 'keydown']) {
-                document.addEventListener(event, preloadCritical, { once: true, passive: true });
-            }
-            
-            // Fallback preload after 3 seconds
-            setTimeout(preloadCritical, 3000);
-        })();
+          }
+        });
+
+        // Preload critical resources on interaction
+        let preloadTriggered = false;
+        const preloadCritical = () => {
+          if (preloadTriggered) return;
+          preloadTriggered = true;
+
+          // Preload GitHub API endpoints
+          const endpoints = [
+            'https://api.github.com/users/and3rn3t',
+            'https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100',
+          ];
+
+          for (const url of endpoints) {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = url;
+            document.head.appendChild(link);
+          }
+        };
+
+        // Trigger preload on first interaction
+        for (const event of ['mousedown', 'touchstart', 'keydown']) {
+          document.addEventListener(event, preloadCritical, { once: true, passive: true });
+        }
+
+        // Fallback preload after 3 seconds
+        setTimeout(preloadCritical, 3000);
+      })();
     </script>
-    
+
     <!-- Chart.js for data visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    
+
     <!-- Main application script (ES6 modules) -->
     <script type="module" src="main.js"></script>
-</body>
+  </body>
 </html>

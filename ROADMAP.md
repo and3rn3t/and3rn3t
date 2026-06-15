@@ -8,48 +8,48 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 
 ## Phase 1 — Foundation + quick wins
 
-| # | Item | Status |
-| --- | --- | --- |
-| 1.1 | Create this ROADMAP.md | ✅ 2026-06-13 |
-| 1.2 | Real contribution heatmap (extend `update-github-data.yml` → render `#contribution-graph`) | ✅ 2026-06-13 |
-| 1.3 | Real language proficiency from repo language bytes → `#main-language-stats` | ✅ 2026-06-13 |
-| 1.4 | Perf polish — modulepreload (✅), canvas DPR cap (already done), `content-visibility` (deferred) | 🟡 |
+| #   | Item                                                                                             | Status        |
+| --- | ------------------------------------------------------------------------------------------------ | ------------- |
+| 1.1 | Create this ROADMAP.md                                                                           | ✅ 2026-06-13 |
+| 1.2 | Real contribution heatmap (extend `update-github-data.yml` → render `#contribution-graph`)       | ✅ 2026-06-13 |
+| 1.3 | Real language proficiency from repo language bytes → `#main-language-stats`                      | ✅ 2026-06-13 |
+| 1.4 | Perf polish — modulepreload (✅), canvas DPR cap (already done), `content-visibility` (deferred) | 🟡            |
 
 ## Phase 2 — Signature wow features
 
-| # | Item | Status |
-| --- | --- | --- |
+| #   | Item                                                                                                         | Status        |
+| --- | ------------------------------------------------------------------------------------------------------------ | ------------- |
 | 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ✅ 2026-06-13 |
-| 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback) | ✅ 2026-06-13 |
-| 2.3 | Dynamic OG images (Worker SVG — portfolio + per-project cards) | ✅ 2026-06-13 |
+| 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback)                                     | ✅ 2026-06-13 |
+| 2.3 | Dynamic OG images (Worker SVG — portfolio + per-project cards)                                               | ✅ 2026-06-13 |
 
 ## Phase 3 — Content & credibility
 
-| # | Item | Status |
-| --- | --- | --- |
+| #   | Item                                                                                      | Status        |
+| --- | ----------------------------------------------------------------------------------------- | ------------- |
 | 3.1 | Blog / writing section (posts-data.json, modules/blog.js, in-page article view, feed.xml) | ✅ 2026-06-13 |
-| 3.2 | Experience / timeline section (experience-data.json, modules/experience.js) | ✅ 2026-06-13 |
-| 3.3 | Testimonials section (static data) | ⬜ |
-| 3.4 | Resume integration — prominent CTA + schema.org Person JSON-LD | ✅ 2026-06-13 |
+| 3.2 | Experience / timeline section (experience-data.json, modules/experience.js)               | ✅ 2026-06-13 |
+| 3.3 | Testimonials section (static data)                                                        | ⬜            |
+| 3.4 | Resume integration — prominent CTA + schema.org Person JSON-LD                            | ✅ 2026-06-13 |
 
 ## Phase 4 — Engagement & data
 
-| # | Item | Status |
-| --- | --- | --- |
-| 4.1 | View counts (Worker + KV — POST /views increments, footer widget shows count) | ✅ 2026-06-13 |
-| 4.2 | Guestbook (Worker + KV + Turnstile — /guestbook GET/POST, in-page section) | ✅ 2026-06-13 |
-| 4.3 | Cloudflare Web Analytics beacon live (token already embedded in index.html) | ✅ 2026-06-13 |
+| #   | Item                                                                                 | Status        |
+| --- | ------------------------------------------------------------------------------------ | ------------- |
+| 4.1 | View counts (Worker + KV — POST /views increments, footer widget shows count)        | ✅ 2026-06-13 |
+| 4.2 | Guestbook (Worker + KV + Turnstile — /guestbook GET/POST, in-page section)           | ✅ 2026-06-13 |
+| 4.3 | Cloudflare Web Analytics beacon live (token already embedded in index.html)          | ✅ 2026-06-13 |
 | 4.4 | Real GitHub activity feed (modules/activity-feed.js, #activity-feed in github-stats) | ✅ 2026-06-13 |
 
 ## Phase 5 — Quality & infra guardrails
 
-| # | Item | Status |
-| --- | --- | --- |
-| 5.1 | Lighthouse CI workflow with perf/a11y budgets | ✅ 2026-06-13 |
-| 5.2 | Vitest unit tests (github-api cache/retry, capabilities, fuzzy search) | ✅ 2026-06-13 |
+| #   | Item                                                                              | Status        |
+| --- | --------------------------------------------------------------------------------- | ------------- |
+| 5.1 | Lighthouse CI workflow with perf/a11y budgets                                     | ✅ 2026-06-13 |
+| 5.2 | Vitest unit tests (github-api cache/retry, capabilities, fuzzy search)            | ✅ 2026-06-13 |
 | 5.3 | Playwright e2e for interactive: Cmd-K palette, `?` help, theme picker, Konami egg | ✅ 2026-06-13 |
-| 5.4 | axe-core a11y check in CI | ✅ 2026-06-13 |
-| 5.5 | Worker tests (vitest + miniflare) once a Worker exists | ✅ 2026-06-13 |
+| 5.4 | axe-core a11y check in CI                                                         | ✅ 2026-06-13 |
+| 5.5 | Worker tests (vitest + miniflare) once a Worker exists                            | ✅ 2026-06-13 |
 
 ## Decision Log
 

@@ -13,12 +13,12 @@ export default defineConfig({
         // Reduce animation jitter in tests
         reducedMotion: 'reduce',
     },
-    projects: [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    ],
-    // Start `vite preview` (serves the built dist/) before running tests.
+    projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+    // Serve the repo root statically — mirrors GitHub Pages (raw source), which is
+    // the actual deployment. vite preview (dist/) breaks variable-path dynamic imports
+    // used by lazyLoad() in main.js.
     webServer: {
-        command: 'npm run preview -- --port 4173 --strictPort',
+        command: 'python3 -m http.server 4173',
         url: 'http://localhost:4173',
         reuseExistingServer: !process.env.CI,
         timeout: 30_000,

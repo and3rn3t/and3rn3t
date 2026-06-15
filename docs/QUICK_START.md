@@ -7,7 +7,9 @@ Your portfolio has been significantly enhanced with powerful features that showc
 ## 🚀 Key Features Added
 
 ### 1. **Top Starred Projects Showcase**
+
 Your most popular GitHub projects are now featured prominently with:
+
 - Detailed descriptions explaining what each project does
 - Key features and highlights
 - Technology stacks
@@ -15,24 +17,29 @@ Your most popular GitHub projects are now featured prominently with:
 - Direct links to repositories
 
 ### 2. **Enhanced Project Information**
+
 Every project now has:
+
 - Category badges (Health, IoT, Mobile, etc.)
 - Status indicators (Active, Stable, Experimental)
 - Expandable "Learn more" sections with full details
 - Beautiful visual hierarchy
 
 ### 3. **Dark/Light Theme Toggle**
+
 - Click the moon/sun icon in bottom-right corner
 - Press 'T' key for quick toggle
 - Your preference is saved automatically
 
 ### 4. **SEO & Discoverability**
+
 - Optimized for Google and other search engines
 - Social media sharing cards (Twitter, LinkedIn, Facebook)
 - Custom 404 error page
 - Sitemap for search engines
 
 ### 5. **Interactive Features**
+
 - Project filter by category
 - Back to top button (appears when scrolling)
 - Smooth animations and transitions
@@ -42,11 +49,13 @@ Every project now has:
 ## 📱 How to Use
 
 ### For You (Maintenance)
+
 1. **Update Projects**: Edit `projects-data.json` to add/modify project details
 2. **Change Colors**: Modify CSS variables in `styles.css`
 3. **Add Content**: Follow the existing structure in `index.html`
 
 ### For Visitors
+
 1. Navigate through sections using the menu
 2. Toggle theme with the button or 'T' key
 3. Filter projects by category
@@ -111,6 +120,7 @@ Every project now has:
 ## 🙏 Maintenance
 
 The portfolio is designed to be low-maintenance:
+
 - GitHub Actions auto-deploy changes to main branch
 - Projects load dynamically from GitHub API
 - Theme preference saves automatically
@@ -119,6 +129,7 @@ The portfolio is designed to be low-maintenance:
 ## 📧 Support
 
 If you need to make changes:
+
 1. Edit the relevant files
 2. Test locally (optional)
 3. Commit and push to main

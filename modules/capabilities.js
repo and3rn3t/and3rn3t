@@ -14,7 +14,7 @@
  * @type {{ reduced: boolean }}
  */
 export const motion = {
-    reduced: matchMediaSafe('(prefers-reduced-motion: reduce)')
+    reduced: matchMediaSafe('(prefers-reduced-motion: reduce)'),
 };
 
 /**
@@ -65,7 +65,7 @@ export const supportsWebGL = (() => {
         const canvas = document.createElement('canvas');
         return Boolean(
             globalThis.WebGLRenderingContext &&
-                (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+            (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
         );
     } catch {
         return false;
@@ -91,7 +91,7 @@ export function onReducedMotionChange(callback) {
         return () => {};
     }
     const mq = globalThis.matchMedia('(prefers-reduced-motion: reduce)');
-    const handler = (event) => {
+    const handler = event => {
         motion.reduced = event.matches;
         callback?.(event.matches);
     };

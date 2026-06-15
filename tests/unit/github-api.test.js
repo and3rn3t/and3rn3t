@@ -1,4 +1,4 @@
-import { test, expect, beforeEach, vi } from 'vitest';
+import { test, expect, vi } from 'vitest';
 import { GitHubAPIManager } from '../../modules/github-api.js';
 
 // Stub the debug module (avoids console noise and import errors).
@@ -88,7 +88,7 @@ test('loadCachedGitHubData memoises the result after first fetch', async () => {
         ok: true,
         json: () => Promise.resolve(payload),
     });
-    const first  = await api.loadCachedGitHubData();
+    const first = await api.loadCachedGitHubData();
     const second = await api.loadCachedGitHubData();
     expect(first).toEqual(payload);
     expect(second).toBe(first); // same reference — memoised

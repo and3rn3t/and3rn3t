@@ -42,7 +42,7 @@ class CommandPalette {
         this.buildItems();
 
         // Global open shortcut.
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             const key = e.key.toLowerCase();
             if ((e.metaKey || e.ctrlKey) && key === 'k') {
                 e.preventDefault();
@@ -61,10 +61,10 @@ class CommandPalette {
         });
 
         this.input.addEventListener('input', () => this.render());
-        this.input.addEventListener('keydown', (e) => this.onInputKeydown(e));
+        this.input.addEventListener('keydown', e => this.onInputKeydown(e));
 
         this.closeBtn?.addEventListener('click', () => this.close());
-        this.modal.addEventListener('click', (e) => {
+        this.modal.addEventListener('click', e => {
             if (e.target === this.modal) {
                 this.close();
             }
@@ -93,7 +93,7 @@ class CommandPalette {
                 icon: 'fa-moon',
                 title: 'Toggle theme',
                 subtitle: 'Switch between light and dark',
-                run: () => globalThis.appState?.managers?.theme?.toggle()
+                run: () => globalThis.appState?.managers?.theme?.toggle(),
             },
             {
                 type: 'action',
@@ -108,7 +108,7 @@ class CommandPalette {
                     } catch {
                         globalThis.location.href = `mailto:${EMAIL}`;
                     }
-                }
+                },
             },
             {
                 type: 'action',
@@ -116,7 +116,7 @@ class CommandPalette {
                 icon: 'fa-file-pdf',
                 title: 'Download résumé',
                 subtitle: 'Open resume.pdf',
-                run: () => globalThis.open('/resume.pdf', '_blank', 'noopener')
+                run: () => globalThis.open('/resume.pdf', '_blank', 'noopener'),
             },
             {
                 type: 'action',
@@ -125,7 +125,7 @@ class CommandPalette {
                 brand: true,
                 title: 'Open GitHub profile',
                 subtitle: GITHUB,
-                run: () => globalThis.open(GITHUB, '_blank', 'noopener')
+                run: () => globalThis.open(GITHUB, '_blank', 'noopener'),
             },
             {
                 type: 'action',
@@ -139,12 +139,12 @@ class CommandPalette {
                         'https://linkedin.com/in/matthew-anderson',
                         '_blank',
                         'noopener'
-                    )
-            }
+                    ),
+            },
         ];
 
         // Sections as jump targets.
-        const sections = Array.from(document.querySelectorAll('section[id]')).map((section) => {
+        const sections = Array.from(document.querySelectorAll('section[id]')).map(section => {
             const heading = section.querySelector('.section-title, h1, h2');
             const label = heading?.textContent?.trim() || section.id;
             return {
@@ -155,12 +155,12 @@ class CommandPalette {
                 subtitle: `#${section.id}`,
                 run: () => {
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                },
             };
         });
 
         // Skills from the DOM.
-        const skills = Array.from(document.querySelectorAll('.skill-item')).map((el) => {
+        const skills = Array.from(document.querySelectorAll('.skill-item')).map(el => {
             const name = el.textContent.trim();
             return {
                 type: 'skill',
@@ -172,7 +172,7 @@ class CommandPalette {
                     document
                         .getElementById('skills')
                         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                },
             };
         });
 
@@ -189,7 +189,7 @@ class CommandPalette {
                 return;
             }
             const data = await res.json();
-            const projects = (data.projects || []).map((p) => ({
+            const projects = (data.projects || []).map(p => ({
                 type: 'project',
                 category: 'projects',
                 icon: 'fa-code',
@@ -197,11 +197,9 @@ class CommandPalette {
                 subtitle: (p.technologies || []).slice(0, 3).join(' · ') || p.description,
                 keywords: [p.name, ...(p.technologies || [])].join(' ').toLowerCase(),
                 run: () => {
-                    const url = p.github_repo
-                        ? `https://github.com/${p.github_repo}`
-                        : `${GITHUB}`;
+                    const url = p.github_repo ? `https://github.com/${p.github_repo}` : `${GITHUB}`;
                     globalThis.open(url, '_blank', 'noopener');
-                }
+                },
             }));
             this.items = [...this.items, ...projects];
             if (this.isOpen) {
@@ -246,14 +244,14 @@ class CommandPalette {
     }
 
     /** Bound focus-trap handler. */
-    trapFocus = (e) => {
+    trapFocus = e => {
         if (e.key !== 'Tab') {
             return;
         }
         const focusable = this.modal.querySelectorAll(
             'button, input, [href], [tabindex]:not([tabindex="-1"])'
         );
-        const list = Array.from(focusable).filter((el) => el.offsetParent !== null);
+        const list = Array.from(focusable).filter(el => el.offsetParent !== null);
         if (list.length === 0) {
             return;
         }
@@ -293,8 +291,7 @@ class CommandPalette {
         if (this.filtered.length === 0) {
             return;
         }
-        this.activeIndex =
-            (this.activeIndex + delta + this.filtered.length) % this.filtered.length;
+        this.activeIndex = (this.activeIndex + delta + this.filtered.length) % this.filtered.length;
         this.highlightActive();
     }
 
@@ -312,7 +309,8 @@ class CommandPalette {
 
     /** Subsequence fuzzy score; higher is better, -1 = no match. */
     score(query, item) {
-        const haystack = `${item.title} ${item.subtitle || ''} ${item.keywords || ''}`.toLowerCase();
+        const haystack =
+            `${item.title} ${item.subtitle || ''} ${item.keywords || ''}`.toLowerCase();
         const q = query.toLowerCase().trim();
         if (q === '') {
             return 0;
@@ -335,14 +333,14 @@ class CommandPalette {
     render() {
         const query = this.input.value;
         const pool = this.items.filter(
-            (it) => this.activeCategory === 'all' || it.category === this.activeCategory
+            it => this.activeCategory === 'all' || it.category === this.activeCategory
         );
 
         this.filtered = pool
-            .map((it) => ({ it, s: this.score(query, it) }))
-            .filter((x) => x.s >= 0)
+            .map(it => ({ it, s: this.score(query, it) }))
+            .filter(x => x.s >= 0)
             .sort((a, b) => b.s - a.s)
-            .map((x) => x.it)
+            .map(x => x.it)
             .slice(0, 30);
 
         this.activeIndex = 0;
@@ -354,9 +352,7 @@ class CommandPalette {
 
         if (this.filtered.length === 0) {
             this.resultsContent.innerHTML =
-                query.trim() === ''
-                    ? ''
-                    : '<div class="palette-no-results">No matches found</div>';
+                query.trim() === '' ? '' : '<div class="palette-no-results">No matches found</div>';
             return;
         }
 

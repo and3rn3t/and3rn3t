@@ -21,7 +21,7 @@ const SCRAMBLE_CHARS = String.raw`!<>-_/[]{}—=+*^?#________`;
  * @param {number} [duration=1100] total ms
  */
 function scrambleReveal(el, finalText, duration = 1100) {
-    const length = finalText.length;
+    const { length } = finalText;
     const start = performance.now();
     // Each character settles at a staggered point in the timeline.
     const settleAt = Array.from({ length }, (_, i) => 0.3 + (i / length) * 0.6);
@@ -95,7 +95,7 @@ function rotateRoles(el, roles) {
  */
 export function initHeroText({
     nameSelector = '.hero-title .highlight',
-    roleSelector = '[data-roles]'
+    roleSelector = '[data-roles]',
 } = {}) {
     const nameEl = document.querySelector(nameSelector);
     const roleEl = document.querySelector(roleSelector);
@@ -108,7 +108,7 @@ export function initHeroText({
     if (roleEl) {
         const roles = (roleEl.dataset.roles || '')
             .split('|')
-            .map((r) => r.trim())
+            .map(r => r.trim())
             .filter(Boolean);
         if (roles.length === 0) {
             return;

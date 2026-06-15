@@ -68,7 +68,7 @@ connect-src 'self' beacon-v2.cloudflare.com;
 ## ✅ **Setup Checklist**
 
 - [ ] Cloudflare account created
-- [ ] Domain added to Cloudflare Web Analytics  
+- [ ] Domain added to Cloudflare Web Analytics
 - [ ] Token copied from dashboard
 - [ ] Token updated in index.html (replace YOUR_ACTUAL_CLOUDFLARE_TOKEN)
 - [ ] Site deployed/updated
@@ -83,22 +83,23 @@ For different environments, you might want:
 
 ```javascript
 // Development vs Production tokens
-const analyticsToken = window.location.hostname === 'localhost' 
-    ? 'DEV_TOKEN_HERE' 
-    : 'PROD_TOKEN_HERE';
+const analyticsToken =
+  window.location.hostname === 'localhost' ? 'DEV_TOKEN_HERE' : 'PROD_TOKEN_HERE';
 ```
 
 ### **Additional Beacon Options:**
 
 ```html
-<script defer src='https://static.cloudflare.com/beacon.min.js' 
-        data-cf-beacon='{
+<script
+  defer
+  src="https://static.cloudflare.com/beacon.min.js"
+  data-cf-beacon='{
             "token": "YOUR_TOKEN",
             "spa": true,
             "autoTrack": true,
             "debug": false
-        }'>
-</script>
+        }'
+></script>
 ```
 
 ## 📊 **What Gets Tracked**

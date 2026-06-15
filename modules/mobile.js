@@ -11,14 +11,14 @@ const GESTURE_CONFIG = {
     maxSwipeTime: 300,
     doubleTapDelay: 300,
     longPressDelay: 500,
-    touchMoveThreshold: 10
+    touchMoveThreshold: 10,
 };
 
 // Viewport breakpoints
 const BREAKPOINTS = {
     mobile: 480,
     tablet: 768,
-    desktop: 1024
+    desktop: 1024,
 };
 
 export class MobileManager {
@@ -37,9 +37,9 @@ export class MobileManager {
 
     init() {
         if (this.isInitialized) return;
-        
+
         debug.log('[Mobile] Initializing mobile manager...');
-        
+
         this.detectCapabilities();
         this.updateBreakpoint();
         this.updateOrientation();
@@ -47,12 +47,12 @@ export class MobileManager {
         this.setupTouchHandlers();
         this.setupOrientationHandler();
         this.optimizeForMobile();
-        
+
         this.isInitialized = true;
         debug.log('[Mobile] Mobile manager initialized', {
             isMobile: this.isMobile,
             isTouch: this.isTouch,
-            breakpoint: this.currentBreakpoint
+            breakpoint: this.currentBreakpoint,
         });
     }
 
@@ -62,26 +62,27 @@ export class MobileManager {
 
     detectCapabilities() {
         // Touch detection
-        this.isTouch = 'ontouchstart' in window || 
-                       navigator.maxTouchPoints > 0 ||
-                       window.matchMedia('(pointer: coarse)').matches;
-        
+        this.isTouch =
+            'ontouchstart' in globalThis ||
+            navigator.maxTouchPoints > 0 ||
+            globalThis.matchMedia('(pointer: coarse)').matches;
+
         // Mobile user agent detection
         const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
         const isMobileUA = mobileUA.test(navigator.userAgent);
-        
+
         // Combined detection
-        this.isMobile = isMobileUA || (this.isTouch && window.innerWidth <= BREAKPOINTS.tablet);
-        
+        this.isMobile = isMobileUA || (this.isTouch && globalThis.innerWidth <= BREAKPOINTS.tablet);
+
         // Add body classes
         document.body.classList.toggle('touch-device', this.isTouch);
         document.body.classList.toggle('mobile-device', this.isMobile);
     }
 
     updateBreakpoint() {
-        const width = window.innerWidth;
+        const width = globalThis.innerWidth;
         let newBreakpoint;
-        
+
         if (width <= BREAKPOINTS.mobile) {
             newBreakpoint = 'mobile';
         } else if (width <= BREAKPOINTS.tablet) {
@@ -89,39 +90,48 @@ export class MobileManager {
         } else {
             newBreakpoint = 'desktop';
         }
-        
+
         if (newBreakpoint !== this.currentBreakpoint) {
             const oldBreakpoint = this.currentBreakpoint;
             this.currentBreakpoint = newBreakpoint;
-            
-            document.body.classList.remove('breakpoint-mobile', 'breakpoint-tablet', 'breakpoint-desktop');
+
+            document.body.classList.remove(
+                'breakpoint-mobile',
+                'breakpoint-tablet',
+                'breakpoint-desktop'
+            );
             document.body.classList.add(`breakpoint-${newBreakpoint}`);
-            
+
             debug.log(`[Mobile] Breakpoint changed: ${oldBreakpoint} -> ${newBreakpoint}`);
-            
+
             // Dispatch event
-            window.dispatchEvent(new CustomEvent('breakpointchange', {
-                detail: { from: oldBreakpoint, to: newBreakpoint }
-            }));
+            globalThis.dispatchEvent(
+                new CustomEvent('breakpointchange', {
+                    detail: { from: oldBreakpoint, to: newBreakpoint },
+                })
+            );
         }
     }
 
     updateOrientation() {
-        const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-        
+        const newOrientation =
+            globalThis.innerWidth > globalThis.innerHeight ? 'landscape' : 'portrait';
+
         if (newOrientation !== this.orientation) {
             const oldOrientation = this.orientation;
             this.orientation = newOrientation;
-            
+
             document.body.classList.remove('orientation-portrait', 'orientation-landscape');
             document.body.classList.add(`orientation-${newOrientation}`);
-            
+
             debug.log(`[Mobile] Orientation changed: ${oldOrientation} -> ${newOrientation}`);
-            
+
             // Dispatch event
-            window.dispatchEvent(new CustomEvent('orientationchange', {
-                detail: { from: oldOrientation, to: newOrientation }
-            }));
+            globalThis.dispatchEvent(
+                new CustomEvent('orientationchange', {
+                    detail: { from: oldOrientation, to: newOrientation },
+                })
+            );
         }
     }
 
@@ -131,14 +141,18 @@ export class MobileManager {
 
     setupResizeObserver() {
         let resizeTimeout;
-        
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                this.updateBreakpoint();
-                this.updateOrientation();
-            }, 100);
-        }, { passive: true });
+
+        globalThis.addEventListener(
+            'resize',
+            () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    this.updateBreakpoint();
+                    this.updateOrientation();
+                }, 100);
+            },
+            { passive: true }
+        );
     }
 
     setupOrientationHandler() {
@@ -151,30 +165,30 @@ export class MobileManager {
 
     setupTouchHandlers() {
         if (!this.isTouch) return;
-        
+
         // Global touch handlers for gesture detection
-        document.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
-        document.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
-        document.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+        document.addEventListener('touchstart', e => this.handleTouchStart(e), { passive: true });
+        document.addEventListener('touchmove', e => this.handleTouchMove(e), { passive: false });
+        document.addEventListener('touchend', e => this.handleTouchEnd(e), { passive: true });
         document.addEventListener('touchcancel', () => this.handleTouchCancel(), { passive: true });
-        
+
         debug.log('[Mobile] Touch handlers initialized');
     }
 
     handleTouchStart(e) {
         if (e.touches.length !== 1) return;
-        
+
         const touch = e.touches[0];
         this.touchStartPos = { x: touch.clientX, y: touch.clientY };
         this.touchStartTime = Date.now();
-        
+
         // Long press detection
         this.longPressTimer = setTimeout(() => {
             if (this.touchStartPos) {
                 this.triggerGesture('longpress', {
                     x: this.touchStartPos.x,
                     y: this.touchStartPos.y,
-                    target: e.target
+                    target: e.target,
                 });
             }
         }, GESTURE_CONFIG.longPressDelay);
@@ -182,36 +196,38 @@ export class MobileManager {
 
     handleTouchMove(e) {
         if (!this.touchStartPos) return;
-        
+
         const touch = e.touches[0];
         const deltaX = touch.clientX - this.touchStartPos.x;
         const deltaY = touch.clientY - this.touchStartPos.y;
-        
+
         // Cancel long press if moved too much
-        if (Math.abs(deltaX) > GESTURE_CONFIG.touchMoveThreshold || 
-            Math.abs(deltaY) > GESTURE_CONFIG.touchMoveThreshold) {
+        if (
+            Math.abs(deltaX) > GESTURE_CONFIG.touchMoveThreshold ||
+            Math.abs(deltaY) > GESTURE_CONFIG.touchMoveThreshold
+        ) {
             clearTimeout(this.longPressTimer);
         }
-        
+
         // Prevent pull-to-refresh on mobile
-        if (deltaY > 0 && window.scrollY === 0) {
+        if (deltaY > 0 && globalThis.scrollY === 0) {
             // Allow the default behavior for pull-to-refresh
         }
     }
 
     handleTouchEnd(e) {
         clearTimeout(this.longPressTimer);
-        
+
         if (!this.touchStartPos || !this.touchStartTime) return;
-        
+
         const touch = e.changedTouches[0];
         const endPos = { x: touch.clientX, y: touch.clientY };
         const elapsed = Date.now() - this.touchStartTime;
-        
+
         const deltaX = endPos.x - this.touchStartPos.x;
         const deltaY = endPos.y - this.touchStartPos.y;
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        
+
         // Swipe detection
         if (distance >= GESTURE_CONFIG.minSwipeDistance && elapsed <= GESTURE_CONFIG.maxSwipeTime) {
             const direction = this.getSwipeDirection(deltaX, deltaY);
@@ -219,22 +235,24 @@ export class MobileManager {
                 direction,
                 distance,
                 velocity: distance / elapsed,
-                target: e.target
+                target: e.target,
             });
         }
-        
+
         // Double tap detection
         const now = Date.now();
-        if (distance < GESTURE_CONFIG.touchMoveThreshold && 
-            now - this.lastTapTime < GESTURE_CONFIG.doubleTapDelay) {
+        if (
+            distance < GESTURE_CONFIG.touchMoveThreshold &&
+            now - this.lastTapTime < GESTURE_CONFIG.doubleTapDelay
+        ) {
             this.triggerGesture('doubletap', {
                 x: endPos.x,
                 y: endPos.y,
-                target: e.target
+                target: e.target,
             });
         }
         this.lastTapTime = now;
-        
+
         this.touchStartPos = null;
         this.touchStartTime = null;
     }
@@ -248,7 +266,7 @@ export class MobileManager {
     getSwipeDirection(deltaX, deltaY) {
         const absX = Math.abs(deltaX);
         const absY = Math.abs(deltaY);
-        
+
         if (absX > absY) {
             return deltaX > 0 ? 'right' : 'left';
         } else {
@@ -269,7 +287,7 @@ export class MobileManager {
 
     off(gesture, callback) {
         if (!this.gestureCallbacks.has(gesture)) return;
-        
+
         const callbacks = this.gestureCallbacks.get(gesture);
         const index = callbacks.indexOf(callback);
         if (index > -1) {
@@ -288,9 +306,9 @@ export class MobileManager {
                 }
             });
         }
-        
+
         // Also dispatch a custom event
-        window.dispatchEvent(new CustomEvent(`gesture:${gesture}`, { detail: data }));
+        globalThis.dispatchEvent(new CustomEvent(`gesture:${gesture}`, { detail: data }));
         debug.log(`[Mobile] Gesture: ${gesture}`, data);
     }
 
@@ -300,20 +318,20 @@ export class MobileManager {
 
     optimizeForMobile() {
         if (!this.isMobile) return;
-        
+
         this.setupSafeAreas();
         this.optimizeButtons();
         this.optimizeInputs();
         this.preventZoom();
         this.setupPullToRefresh();
-        
+
         debug.log('[Mobile] Mobile optimizations applied');
     }
 
     setupSafeAreas() {
         // Handle iOS safe areas
         const root = document.documentElement;
-        
+
         // Check for safe area support
         if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
             root.style.setProperty('--safe-area-top', 'env(safe-area-inset-top)');
@@ -340,7 +358,7 @@ export class MobileManager {
         const inputs = document.querySelectorAll('input, textarea, select');
         inputs.forEach(input => {
             // Ensure font size is at least 16px to prevent zoom
-            const fontSize = window.getComputedStyle(input).fontSize;
+            const { fontSize } = globalThis.getComputedStyle(input);
             if (parseFloat(fontSize) < 16) {
                 input.style.fontSize = '16px';
             }
@@ -350,13 +368,17 @@ export class MobileManager {
     preventZoom() {
         // Prevent double-tap zoom
         let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, { passive: false });
+        document.addEventListener(
+            'touchend',
+            e => {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            },
+            { passive: false }
+        );
     }
 
     setupPullToRefresh() {
@@ -364,32 +386,44 @@ export class MobileManager {
         if (this.isMobile && 'serviceWorker' in navigator) {
             let startY = 0;
             let pulling = false;
-            
-            document.addEventListener('touchstart', (e) => {
-                if (window.scrollY === 0) {
-                    startY = e.touches[0].pageY;
-                    pulling = true;
-                }
-            }, { passive: true });
-            
-            document.addEventListener('touchmove', (e) => {
-                if (!pulling) return;
-                
-                const currentY = e.touches[0].pageY;
-                const pullDistance = currentY - startY;
-                
-                if (pullDistance > 100 && window.scrollY === 0) {
-                    document.body.classList.add('pull-to-refresh');
-                }
-            }, { passive: true });
-            
-            document.addEventListener('touchend', () => {
-                if (document.body.classList.contains('pull-to-refresh')) {
-                    document.body.classList.remove('pull-to-refresh');
-                    window.location.reload();
-                }
-                pulling = false;
-            }, { passive: true });
+
+            document.addEventListener(
+                'touchstart',
+                e => {
+                    if (globalThis.scrollY === 0) {
+                        startY = e.touches[0].pageY;
+                        pulling = true;
+                    }
+                },
+                { passive: true }
+            );
+
+            document.addEventListener(
+                'touchmove',
+                e => {
+                    if (!pulling) return;
+
+                    const currentY = e.touches[0].pageY;
+                    const pullDistance = currentY - startY;
+
+                    if (pullDistance > 100 && globalThis.scrollY === 0) {
+                        document.body.classList.add('pull-to-refresh');
+                    }
+                },
+                { passive: true }
+            );
+
+            document.addEventListener(
+                'touchend',
+                () => {
+                    if (document.body.classList.contains('pull-to-refresh')) {
+                        document.body.classList.remove('pull-to-refresh');
+                        globalThis.location.reload();
+                    }
+                    pulling = false;
+                },
+                { passive: true }
+            );
         }
     }
 
@@ -400,34 +434,34 @@ export class MobileManager {
     initMobileNav() {
         const hamburger = document.querySelector('.hamburger, .mobile-menu-toggle');
         const mobileNav = document.querySelector('.nav-links, .mobile-nav');
-        
+
         if (!hamburger || !mobileNav) return;
-        
+
         hamburger.addEventListener('click', () => {
             this.toggleMobileMenu(hamburger, mobileNav);
         });
-        
+
         // Close menu on outside click
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', e => {
             if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
                 this.closeMobileMenu(hamburger, mobileNav);
             }
         });
-        
+
         // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (e.key === 'Escape') {
                 this.closeMobileMenu(hamburger, mobileNav);
             }
         });
-        
+
         // Close menu on navigation
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 this.closeMobileMenu(hamburger, mobileNav);
             });
         });
-        
+
         debug.log('[Mobile] Mobile navigation initialized');
     }
 
@@ -435,7 +469,7 @@ export class MobileManager {
         const isOpen = nav.classList.toggle('active');
         hamburger.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', isOpen);
-        
+
         if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -460,9 +494,9 @@ export class MobileManager {
             isTouch: this.isTouch,
             breakpoint: this.currentBreakpoint,
             orientation: this.orientation,
-            viewportWidth: window.innerWidth,
-            viewportHeight: window.innerHeight,
-            pixelRatio: window.devicePixelRatio || 1
+            viewportWidth: globalThis.innerWidth,
+            viewportHeight: globalThis.innerHeight,
+            pixelRatio: globalThis.devicePixelRatio || 1,
         };
     }
 

@@ -23,21 +23,25 @@ The portfolio codebase has been refactored from a monolithic 7,218-line `script.
 ## Benefits
 
 ### 1. **Consolidated Duplicate Code**
+
 - **Mobile/Touch**: 6 overlapping classes → 1 unified `MobileManager`
 - **Performance**: 5 monitoring classes → 1 `PerformanceManager`
 - **Analytics**: 2 analytics systems → 1 `AnalyticsManager`
 
 ### 2. **Improved Debugging**
+
 - Single `DEBUG_MODE` flag controls all logging
 - Consistent `debug.log/warn/error` API
 - Performance measurement utilities
 
 ### 3. **Better Separation of Concerns**
+
 - Each module handles one responsibility
 - Clear imports/exports
 - Easier to test and maintain
 
 ### 4. **Modern JavaScript**
+
 - ES6 modules with proper imports/exports
 - Singleton pattern for managers
 - Async/await throughout
@@ -57,14 +61,15 @@ Update `index.html`:
 ```
 
 Also update the preload:
+
 ```html
 <!-- Replace: -->
-<link rel="preload" href="script.js" as="script">
+<link rel="preload" href="script.js" as="script" />
 
 <!-- With: -->
-<link rel="modulepreload" href="main.js">
-<link rel="modulepreload" href="modules/debug.js">
-<link rel="modulepreload" href="modules/theme.js">
+<link rel="modulepreload" href="main.js" />
+<link rel="modulepreload" href="modules/debug.js" />
+<link rel="modulepreload" href="modules/theme.js" />
 ```
 
 ### Option 2: Keep Both (Transitional)
@@ -92,6 +97,7 @@ npx esbuild main.js --bundle --outfile=bundle.js --format=iife --minify
 ```
 
 Then use the bundled file:
+
 ```html
 <script src="bundle.js" async></script>
 ```
@@ -99,29 +105,32 @@ Then use the bundled file:
 ## Module API Reference
 
 ### Debug Module
+
 ```javascript
 import { DEBUG_MODE, debug, measureTime } from './modules/debug.js';
 
-debug.log('Message');    // Only logs if DEBUG_MODE is true
+debug.log('Message'); // Only logs if DEBUG_MODE is true
 debug.warn('Warning');
 debug.error('Error');
 
 const duration = measureTime('operation', () => {
-    // Expensive operation
+  // Expensive operation
 });
 ```
 
 ### Theme Module
+
 ```javascript
 import { initThemeManager } from './modules/theme.js';
 
 const theme = initThemeManager();
-theme.toggle();          // Toggle dark/light
-theme.set('dark');       // Set specific theme
-theme.get();             // Get current theme
+theme.toggle(); // Toggle dark/light
+theme.set('dark'); // Set specific theme
+theme.get(); // Get current theme
 ```
 
 ### GitHub API Module
+
 ```javascript
 import { githubAPI } from './modules/github-api.js';
 
@@ -131,6 +140,7 @@ const activity = await githubAPI.getRecentActivity();
 ```
 
 ### Performance Module
+
 ```javascript
 import { performanceManager } from './modules/performance.js';
 
@@ -140,6 +150,7 @@ const report = performanceManager.generateReport();
 ```
 
 ### Mobile Module
+
 ```javascript
 import { mobileManager } from './modules/mobile.js';
 
@@ -147,12 +158,13 @@ mobileManager.init();
 console.log(mobileManager.isMobile);
 console.log(mobileManager.getDeviceInfo());
 
-mobileManager.on('swipe', (data) => {
-    console.log('Swipe:', data.direction);
+mobileManager.on('swipe', data => {
+  console.log('Swipe:', data.direction);
 });
 ```
 
 ### Analytics Module
+
 ```javascript
 import { analyticsManager } from './modules/analytics.js';
 
@@ -162,6 +174,7 @@ analyticsManager.trackPerformance('loadTime', 1234);
 ```
 
 ### Projects Module
+
 ```javascript
 import { projectsManager } from './modules/projects.js';
 
@@ -171,6 +184,7 @@ projectsManager.searchProjects('react');
 ```
 
 ### Navigation Module
+
 ```javascript
 import { navigationManager } from './modules/navigation.js';
 
@@ -198,6 +212,7 @@ console.log(PortfolioApp.getStats());
 ## Browser Support
 
 ES6 modules are supported in:
+
 - Chrome 61+
 - Firefox 60+
 - Safari 11+

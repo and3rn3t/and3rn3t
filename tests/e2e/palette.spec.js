@@ -9,7 +9,9 @@ import { test, expect } from '@playwright/test';
 test.beforeEach(async ({ page }) => {
     await page.goto('/');
     // Wait for JS modules to init.
-    await page.waitForFunction(() => typeof globalThis.appState !== 'undefined', { timeout: 5000 }).catch(() => {});
+    await page
+        .waitForFunction(() => typeof globalThis.appState !== 'undefined', { timeout: 5000 })
+        .catch(() => {});
 });
 
 test('Ctrl+K opens the command palette', async ({ page }) => {
@@ -36,7 +38,7 @@ test('palette closes when backdrop is clicked', async ({ page }) => {
     await page.waitForSelector('#global-search-modal.visible');
     // Click outside the inner dialog (on the modal backdrop).
     const modal = page.locator('#global-search-modal');
-    const box   = await modal.boundingBox();
+    const box = await modal.boundingBox();
     // Click top-left corner — outside the inner dialog.
     await page.mouse.click(box.x + 5, box.y + 5);
     await expect(modal).not.toHaveClass(/visible/);

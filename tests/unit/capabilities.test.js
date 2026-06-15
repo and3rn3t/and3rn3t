@@ -35,7 +35,9 @@ test('onReducedMotionChange updates motion.reduced when MQ fires', () => {
     let listener;
     const fakeMQ = {
         matches: false,
-        addEventListener: (_name, fn) => { listener = fn; },
+        addEventListener: (_name, fn) => {
+            listener = fn;
+        },
         removeEventListener: vi.fn(),
     };
     const origMM = globalThis.matchMedia;

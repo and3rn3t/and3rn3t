@@ -11,27 +11,27 @@
 
 import { debug } from './debug.js';
 
-const WORKER_BASE   = 'https://and3rn3t-portfolio.andernet.workers.dev';
+const WORKER_BASE = 'https://and3rn3t-portfolio.andernet.workers.dev';
 // Public sitekey — safe to commit. Get from dash.cloudflare.com → Turnstile.
 // Replace with your actual sitekey after creating a Turnstile site.
 const TURNSTILE_SITEKEY = 'REPLACE_WITH_TURNSTILE_SITEKEY';
 
 class GuestbookManager {
-    #form       = null;
-    #entriesEl  = null;
-    #statusEl   = null;
-    #token      = '';
+    #form = null;
+    #entriesEl = null;
+    #statusEl = null;
+    #token = '';
 
     async init() {
-        this.#form      = document.querySelector('#guestbook-form');
+        this.#form = document.querySelector('#guestbook-form');
         this.#entriesEl = document.querySelector('#guestbook-entries');
-        this.#statusEl  = document.querySelector('#guestbook-status');
+        this.#statusEl = document.querySelector('#guestbook-status');
 
         if (!this.#form || !this.#entriesEl) return;
 
         await this.#loadEntries();
         this.#initTurnstile();
-        this.#form.addEventListener('submit', (e) => this.#handleSubmit(e));
+        this.#form.addEventListener('submit', e => this.#handleSubmit(e));
         debug.log('[Guestbook] Initialized');
     }
 
@@ -51,17 +51,22 @@ class GuestbookManager {
 
     #renderEntries(entries) {
         if (!entries.length) {
-            this.#entriesEl.innerHTML = '<p class="guestbook-empty">No entries yet — be the first!</p>';
+            this.#entriesEl.innerHTML =
+                '<p class="guestbook-empty">No entries yet — be the first!</p>';
             return;
         }
-        this.#entriesEl.innerHTML = entries.map((e) => `
+        this.#entriesEl.innerHTML = entries
+            .map(
+                e => `
             <article class="guestbook-entry">
                 <header class="guestbook-entry-header">
                     <strong class="guestbook-name">${this.#escHtml(e.name)}</strong>
                     <time class="guestbook-date" datetime="${this.#escHtml(e.date)}">${this.#formatDate(e.date)}</time>
                 </header>
                 <p class="guestbook-message">${this.#escHtml(e.message)}</p>
-            </article>`).join('');
+            </article>`
+            )
+            .join('');
     }
 
     #initTurnstile() {
@@ -76,10 +81,16 @@ class GuestbookManager {
         script.addEventListener('load', () => {
             if (!globalThis.turnstile) return;
             globalThis.turnstile.render('#turnstile-container', {
-                sitekey:  TURNSTILE_SITEKEY,
-                callback: (token) => { this.#token = token; },
-                'expired-callback': () => { this.#token = ''; },
-                'error-callback':   () => { this.#token = ''; },
+                sitekey: TURNSTILE_SITEKEY,
+                callback: token => {
+                    this.#token = token;
+                },
+                'expired-callback': () => {
+                    this.#token = '';
+                },
+                'error-callback': () => {
+                    this.#token = '';
+                },
                 theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
             });
         });
@@ -89,9 +100,9 @@ class GuestbookManager {
     async #handleSubmit(e) {
         e.preventDefault();
         const data = new FormData(this.#form);
-        const nameVal    = data.get('name');
+        const nameVal = data.get('name');
         const messageVal = data.get('message');
-        const name    = (typeof nameVal    === 'string' ? nameVal    : '').trim();
+        const name = (typeof nameVal === 'string' ? nameVal : '').trim();
         const message = (typeof messageVal === 'string' ? messageVal : '').trim();
 
         if (!name || !message) return;
@@ -101,15 +112,18 @@ class GuestbookManager {
         }
 
         const btn = this.#form.querySelector('button[type="submit"]');
-        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        if (btn) {
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+        }
         this.#setStatus('', '');
 
         try {
             const resp = await fetch(`${WORKER_BASE}/guestbook`, {
-                method:  'POST',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify({ name, message, token: this.#token }),
-                signal:  AbortSignal.timeout(8000),
+                body: JSON.stringify({ name, message, token: this.#token }),
+                signal: AbortSignal.timeout(8000),
             });
             const result = await resp.json();
             if (resp.ok && result.ok) {
@@ -118,7 +132,7 @@ class GuestbookManager {
                 this.#token = '';
                 globalThis.turnstile?.reset?.('#turnstile-container');
                 // Prepend new entry to the list without a full reload.
-                const entry = result.entry;
+                const { entry } = result;
                 const newEl = document.createElement('article');
                 newEl.className = 'guestbook-entry guestbook-entry--new';
                 newEl.innerHTML = `
@@ -131,14 +145,20 @@ class GuestbookManager {
                 const emptyMsg = this.#entriesEl.querySelector('.guestbook-empty');
                 emptyMsg?.remove();
             } else {
-                this.#setStatus(result.error === 'invalid_captcha'
-                    ? 'Captcha verification failed — please try again.'
-                    : 'Something went wrong. Please try again.', 'error');
+                this.#setStatus(
+                    result.error === 'invalid_captcha'
+                        ? 'Captcha verification failed — please try again.'
+                        : 'Something went wrong. Please try again.',
+                    'error'
+                );
             }
         } catch {
             this.#setStatus('Network error. Please try again.', 'error');
         } finally {
-            if (btn) { btn.disabled = false; btn.textContent = 'Sign guestbook'; }
+            if (btn) {
+                btn.disabled = false;
+                btn.textContent = 'Sign guestbook';
+            }
         }
     }
 
@@ -151,7 +171,11 @@ class GuestbookManager {
 
     #formatDate(iso) {
         if (!iso) return '';
-        return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        return new Date(iso).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
     }
 
     #escHtml(str) {

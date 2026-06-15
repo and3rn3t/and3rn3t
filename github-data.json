@@ -479,10 +479,7 @@
       "web_commit_signoff_required": false,
       "has_pull_requests": true,
       "pull_request_creation_policy": "all",
-      "topics": [
-        "config",
-        "github-config"
-      ],
+      "topics": ["config", "github-config"],
       "visibility": "public",
       "forks": 1,
       "open_issues": 10,
@@ -2793,15 +2790,7 @@
       "web_commit_signoff_required": false,
       "has_pull_requests": true,
       "pull_request_creation_policy": "all",
-      "topics": [
-        "accountability",
-        "cloudflare",
-        "couples",
-        "docker",
-        "love",
-        "reactjs",
-        "vite"
-      ],
+      "topics": ["accountability", "cloudflare", "couples", "docker", "love", "reactjs", "vite"],
       "visibility": "public",
       "forks": 0,
       "open_issues": 32,
@@ -3583,12 +3572,7 @@
       "web_commit_signoff_required": false,
       "has_pull_requests": true,
       "pull_request_creation_policy": "all",
-      "topics": [
-        "android",
-        "capacitor",
-        "ios",
-        "weather"
-      ],
+      "topics": ["android", "capacitor", "ios", "weather"],
       "visibility": "public",
       "forks": 0,
       "open_issues": 19,
@@ -4378,12 +4362,7 @@
       "web_commit_signoff_required": false,
       "has_pull_requests": true,
       "pull_request_creation_policy": "all",
-      "topics": [
-        "axios",
-        "heroku-deployment",
-        "react",
-        "react-router-dom"
-      ],
+      "topics": ["axios", "heroku-deployment", "react", "react-router-dom"],
       "visibility": "public",
       "forks": 0,
       "open_issues": 1,
@@ -4829,12 +4808,7 @@
       "web_commit_signoff_required": false,
       "has_pull_requests": true,
       "pull_request_creation_policy": "all",
-      "topics": [
-        "axios",
-        "express-js",
-        "node-js",
-        "react"
-      ],
+      "topics": ["axios", "express-js", "node-js", "react"],
       "visibility": "public",
       "forks": 0,
       "open_issues": 1,
@@ -5060,13 +5034,7 @@
       "web_commit_signoff_required": false,
       "has_pull_requests": true,
       "pull_request_creation_policy": "all",
-      "topics": [
-        "express",
-        "heroku",
-        "nodejs",
-        "postgresql",
-        "sequelize"
-      ],
+      "topics": ["express", "heroku", "nodejs", "postgresql", "sequelize"],
       "visibility": "public",
       "forks": 0,
       "open_issues": 0,

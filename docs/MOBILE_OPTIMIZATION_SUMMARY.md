@@ -141,4 +141,4 @@ The mobile optimization system is production-ready and provides a premium mobile
 
 ---
 
-*Your portfolio now delivers a world-class mobile experience that will impress users and potential employers with its professional polish and attention to detail.*
+_Your portfolio now delivers a world-class mobile experience that will impress users and potential employers with its professional polish and attention to detail._
