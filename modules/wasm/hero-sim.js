@@ -79,9 +79,12 @@ export async function mountHeroSim(canvas, opts = {}) {
     const dpr = Math.min(globalThis.devicePixelRatio || 1, 2);
     const reduced = Boolean(opts.reducedMotion);
     const speed = opts.speed ?? 1.4;
-    // Trail persistence: higher = longer-lived trails. Erased via destination-out
+    // Trail persistence: lower = longer-lived trails. Erased via destination-out
     // each frame so the canvas stays transparent over whatever is behind it.
-    const trailFade = opts.trailFade ?? 0.09;
+    const trailFadeInput = Number(opts.trailFade ?? 0.09);
+    const trailFade = Number.isFinite(trailFadeInput)
+        ? Math.min(1, Math.max(0, trailFadeInput))
+        : 0.09;
     // Particles scale with area but stay capped so low-power devices stay smooth.
     const density = opts.density ?? 0.0009;
 
