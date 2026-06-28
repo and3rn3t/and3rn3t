@@ -57,13 +57,13 @@ Hybrid architecture: a thin JS host shell with a Rust/AssemblyScript→WASM core
 few genuinely compute/visual-heavy pieces. WASM is always lazy-loaded + capability-gated,
 and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/wasm/`.
 
-| #   | Item                                                                                                | Status        |
-| --- | --------------------------------------------------------------------------------------------------- | ------------- |
-| 6.1 | WASM toolchain (AssemblyScript) wired into Vite build + lazy load (`asconfig.json`, `build:wasm`)   | ✅ 2026-06-28 |
-| 6.2 | Hero particle flow-field compute core in WASM (`assembly/hero-sim.ts` + `modules/wasm/hero-sim.js`) | ✅ 2026-06-28 |
-| 6.3 | `wasm-lab.html` interactive showcase + live FPS/particle HUD (measured: 3.5k particles @ 120fps)    | ✅ 2026-06-28 |
-| 6.4 | Wire the WASM hero behind the existing capability gate as an opt-in hero mode                       | ⬜            |
-| 6.5 | Edge OG images via a Rust WASM rasterizer (port `worker/og.js` → PNG), SVG kept as fallback         | ⬜            |
+| #   | Item                                                                                                                                                                                                | Status        |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 6.1 | WASM toolchain (AssemblyScript) wired into Vite build + lazy load (`asconfig.json`, `build:wasm`)                                                                                                   | ✅ 2026-06-28 |
+| 6.2 | Hero particle flow-field compute core in WASM (`assembly/hero-sim.ts` + `modules/wasm/hero-sim.js`)                                                                                                 | ✅ 2026-06-28 |
+| 6.3 | `wasm-lab.html` interactive showcase + live FPS/particle HUD (measured: 3.5k particles @ 120fps)                                                                                                    | ✅ 2026-06-28 |
+| 6.4 | WASM hero shipped live: `initHeroEnhancements` mounts the flow-field first, falling back to the WebGL shader then CSS (`main.js`); transparent `destination-out` trails composite over the gradient | ✅ 2026-06-28 |
+| 6.5 | Edge OG images via a Rust WASM rasterizer (port `worker/og.js` → PNG), SVG kept as fallback                                                                                                         | ⬜            |
 
 ## Decision Log
 
