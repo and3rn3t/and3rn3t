@@ -96,7 +96,7 @@ export function init(n: i32, w: f32, h: f32): void {
   }
 }
 
-/** Resize the field without reallocating; particles are clamped into bounds. */
+/** Resize the field bounds without reallocating existing particles. */
 export function resize(w: f32, h: f32): void {
   width = w;
   height = h;
@@ -181,7 +181,7 @@ export function step(time: f32, speed: f32): void {
 
 /** Byte offset of the particle buffer in WASM linear memory. */
 export function particlePtr(): usize {
-  return changetype<usize>(particles.buffer);
+  return particles.dataStart;
 }
 
 /** Number of particles currently allocated. */

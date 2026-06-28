@@ -34,11 +34,12 @@ async function loadSim() {
             },
         },
     };
-    const { instance } = await WebAssembly.instantiateStreaming(fetch(WASM_URL), imports).catch(
+    const response = await fetch(WASM_URL);
+    const { instance } = await WebAssembly.instantiateStreaming(response.clone(), imports).catch(
         async () => {
             // Some static hosts serve .wasm without the application/wasm MIME type,
             // which breaks streaming. Fall back to ArrayBuffer instantiation.
-            const bytes = await fetch(WASM_URL).then(r => r.arrayBuffer());
+            const bytes = await response.arrayBuffer();
             return WebAssembly.instantiate(bytes, imports);
         }
     );
@@ -84,11 +85,12 @@ export async function mountHeroSim(canvas, opts = {}) {
     let width = 0;
     let height = 0;
     let count = 0;
+    let stride = 0;
     let view = null; // Float32Array over WASM memory.
 
     function refreshView() {
         const ptr = sim.particlePtr();
-        const stride = sim.stride();
+        stride = sim.stride();
         count = sim.particleCount();
         view = new Float32Array(sim.memory.buffer, ptr, count * stride);
     }
@@ -115,6 +117,9 @@ export async function mountHeroSim(canvas, opts = {}) {
 
     function onPointerMove(event) {
         const rect = canvas.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) {
+            return;
+        }
         pointer.tx = ((event.clientX - rect.left) / rect.width) * 2 - 1;
         pointer.ty = ((event.clientY - rect.top) / rect.height) * 2 - 1;
         pointer.strength = 1;
@@ -160,7 +165,7 @@ export async function mountHeroSim(canvas, opts = {}) {
         ctx.strokeStyle = `rgba(${isDark() ? GREEN_DARK : GREEN_LIGHT}, 0.85)`;
         ctx.beginPath();
         for (let i = 0; i < count; i++) {
-            const b = i * 4;
+            const b = i * stride;
             const x = view[b];
             const y = view[b + 1];
             const px = view[b + 2];

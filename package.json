@@ -16,7 +16,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve": "python3 -m http.server 8000",
-    "build:wasm": "asc assembly/hero-sim.ts --config asconfig.json --target release && rm -f modules/wasm/hero-core.js modules/wasm/hero-core.d.ts",
+    "build:wasm": "asc assembly/hero-sim.ts --config asconfig.json --target release && node -e \"const { rmSync } = require('node:fs'); rmSync('modules/wasm/hero-core.js', { force: true }); rmSync('modules/wasm/hero-core.d.ts', { force: true });\"",
     "build:wasm:debug": "asc assembly/hero-sim.ts --config asconfig.json --target debug",
     "build:worker": "wrangler deploy --dry-run --outdir dist-worker",
     "deploy:worker": "wrangler deploy",
