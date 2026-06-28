@@ -56,7 +56,7 @@ async function loadSim() {
 /**
  * Mount the WASM particle field onto a canvas.
  * @param {HTMLCanvasElement} canvas
- * @param {{ density?: number, speed?: number, reducedMotion?: boolean }} [opts]
+ * @param {{ density?: number, speed?: number, reducedMotion?: boolean, trailFade?: number }} [opts]
  * @returns {Promise<HeroSimHandle | null>}
  */
 export async function mountHeroSim(canvas, opts = {}) {
@@ -79,6 +79,9 @@ export async function mountHeroSim(canvas, opts = {}) {
     const dpr = Math.min(globalThis.devicePixelRatio || 1, 2);
     const reduced = Boolean(opts.reducedMotion);
     const speed = opts.speed ?? 1.4;
+    // Trail persistence: higher = longer-lived trails. Erased via destination-out
+    // each frame so the canvas stays transparent over whatever is behind it.
+    const trailFade = opts.trailFade ?? 0.09;
     // Particles scale with area but stay capped so low-power devices stay smooth.
     const density = opts.density ?? 0.0009;
 
@@ -155,9 +158,12 @@ export async function mountHeroSim(canvas, opts = {}) {
             refreshView(); // memory grew → re-bind the view.
         }
 
-        // Fade previous frame for trails instead of hard clear.
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = isDark() ? 'rgba(3, 6, 5, 0.06)' : 'rgba(255, 255, 255, 0.07)';
+        // Fade previous frame for trails. `destination-out` lowers the alpha of
+        // existing pixels (erasing old trails toward transparent) instead of
+        // painting an opaque veil, so the canvas composites cleanly over whatever
+        // sits behind it (e.g. the hero's animated gradient) in any theme.
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = `rgba(0, 0, 0, ${trailFade})`;
         ctx.fillRect(0, 0, width, height);
 
         ctx.globalCompositeOperation = 'lighter';

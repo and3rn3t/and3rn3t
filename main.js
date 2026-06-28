@@ -259,9 +259,12 @@ async function initializeApp() {
 }
 
 /**
- * Initialize hero text reveal + (capability-gated) WebGL mesh gradient.
- * Text effect is cheap and runs right away; the canvas chunk is lazy-loaded
- * and only runs when device capability allows.
+ * Initialize hero text reveal + (capability-gated) animated background.
+ * Text effect is cheap and runs right away. For the background we try the
+ * WebAssembly particle flow-field first (compute in WASM, paint in JS); if WASM
+ * is unavailable we fall back to the WebGL mesh-gradient shader, and if that
+ * also fails the static CSS gradient stays visible. Everything is lazy-loaded
+ * and only runs when device capability allows, so first paint is untouched.
  */
 async function initHeroEnhancements() {
     try {
@@ -272,7 +275,7 @@ async function initHeroEnhancements() {
     }
 
     try {
-        const { canRunHeavyEffects } = await import('./modules/capabilities.js');
+        const { canRunHeavyEffects, motion } = await import('./modules/capabilities.js');
         if (!canRunHeavyEffects()) {
             return; // CSS fallback gradient remains visible.
         }
@@ -280,6 +283,23 @@ async function initHeroEnhancements() {
         if (!canvas) {
             return;
         }
+
+        // Primary: WASM particle flow-field (transparent 2D canvas over the
+        // gradient). loadSim() throws before touching the canvas context if WASM
+        // can't load, so the element stays clean for the WebGL fallback below.
+        try {
+            const { mountHeroSim } = await import('./modules/wasm/hero-sim.js');
+            const wasmHandle = await mountHeroSim(canvas, { reducedMotion: motion.reduced });
+            if (wasmHandle) {
+                appState.managers.heroCanvas = wasmHandle;
+                canvas.classList.add('is-active');
+                return;
+            }
+        } catch (err) {
+            debug.warn('[App] WASM hero core skipped, trying WebGL shader:', err);
+        }
+
+        // Fallback: WebGL mesh-gradient shader.
         const { initHeroCanvas } = await import('./modules/hero-canvas.js');
         const handle = initHeroCanvas(canvas);
         if (handle) {
