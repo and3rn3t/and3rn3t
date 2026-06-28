@@ -51,6 +51,20 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 | 5.4 | axe-core a11y check in CI                                                         | ✅ 2026-06-13 |
 | 5.5 | Worker tests (vitest + miniflare) once a Worker exists                            | ✅ 2026-06-13 |
 
+## Phase 6 — WebAssembly (compute core)
+
+Hybrid architecture: a thin JS host shell with a Rust/AssemblyScript→WASM core for the
+few genuinely compute/visual-heavy pieces. WASM is always lazy-loaded + capability-gated,
+and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/wasm/`.
+
+| #   | Item                                                                                                | Status        |
+| --- | --------------------------------------------------------------------------------------------------- | ------------- |
+| 6.1 | WASM toolchain (AssemblyScript) wired into Vite build + lazy load (`asconfig.json`, `build:wasm`)   | ✅ 2026-06-28 |
+| 6.2 | Hero particle flow-field compute core in WASM (`assembly/hero-sim.ts` + `modules/wasm/hero-sim.js`) | ✅ 2026-06-28 |
+| 6.3 | `wasm-lab.html` interactive showcase + live FPS/particle HUD (measured: 3.5k particles @ 120fps)    | ✅ 2026-06-28 |
+| 6.4 | Wire the WASM hero behind the existing capability gate as an opt-in hero mode                       | ⬜            |
+| 6.5 | Edge OG images via a Rust WASM rasterizer (port `worker/og.js` → PNG), SVG kept as fallback         | ⬜            |
+
 ## Decision Log
 
 - **2026-06-13** — Static-first: prefer extending `update-github-data.yml` over a Worker
@@ -85,3 +99,21 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
   fabrication). Replaced the per-card inline `<details>` write-up with a "Read case study"
   button. Verified in-browser: open/close, hash sync, dialog role + accessible name, all
   sections render. Modal is built dynamically (no index.html markup needed).
+
+- **2026-06-28** — WASM evaluation (Phase 6). The ask was "rewrite the app in WASM."
+  Finding: ~7,600 lines here are DOM/fetch/theming/event glue that JS already does well —
+  a literal full rewrite would re-implement browser plumbing for no user-visible gain.
+  **Recommendation: hybrid, not a literal full rewrite.** Keep the JS host shell; move the
+  genuinely compute/visual-heavy work into a small WASM core. Built and measured a vertical
+  slice: an AssemblyScript particle flow-field (`assembly/hero-sim.ts`) whose physics run
+  entirely in WASM linear memory while JS only paints the shared buffer. Results (Chrome,
+  DPR 2): 6,203-byte wasm (3.3 KB gzip), ~0.2 ms init, ~1.4 ms/step at 5k particles, live
+  at 3,486 particles @ locked 120 fps — visibly out-classing the static GLSL gradient.
+  Toolchain: AssemblyScript chosen over Rust/wasm-pack because no system Rust is present
+  and AS installs as a devDependency with zero machine-level changes; the wasm is loaded
+  via `new URL(..., import.meta.url)` + manual `WebAssembly.instantiate` (no top-level
+  await, so the es2020 build target is untouched). Guardrails honored: lazy-loaded,
+  capability-gateable, with the existing CSS fallback intact; lint + 43 unit tests + Vite
+  build all green. Next: 6.4 wire the WASM hero behind the capability gate as an opt-in
+  mode; 6.5 port OG images to a Rust WASM rasterizer (deferred — needs the Rust toolchain
+  and Worker deploy access to validate).

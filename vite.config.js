@@ -19,6 +19,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: 'index.html',
+                'wasm-lab': 'wasm-lab.html',
             },
             output: {
                 // Chunk file naming

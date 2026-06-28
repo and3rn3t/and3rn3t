@@ -11,7 +11,15 @@ export default [
 
     // Ignore generated/vendored output
     {
-        ignores: ['dist/**', 'dist-worker/**', 'vendor/**', 'node_modules/**', 'coverage/**'],
+        ignores: [
+            'dist/**',
+            'dist-worker/**',
+            'vendor/**',
+            'node_modules/**',
+            'coverage/**',
+            'build/**',
+            'assembly/**',
+        ],
     },
 
     // Browser modules (modules/)
