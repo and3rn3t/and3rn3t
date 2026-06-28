@@ -5,3 +5,9 @@ test-results/
 playwright-report/
 coverage/
 pnpm-lock.yaml
+
+# Generated data (produced by update-github-data.yml; commits skip CI)
+github-data.json
+
+# Local tool caches
+.impeccable/

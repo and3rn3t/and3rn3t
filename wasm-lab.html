@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>WASM Flow Field — Lab</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: #03110b;
+        color: #e8fff1;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        overflow: hidden;
+      }
+      #stage {
+        position: fixed;
+        inset: 0;
+      }
+      #stage canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .hud {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(74, 222, 128, 0.35);
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-variant-numeric: tabular-nums;
+        line-height: 1.5;
+        max-width: 320px;
+      }
+      .hud h1 {
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #4ade80;
+        margin-bottom: 8px;
+      }
+      .hud .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        font-size: 13px;
+      }
+      .hud .row b {
+        color: #4ade80;
+      }
+      .hud .note {
+        margin-top: 10px;
+        font-size: 11px;
+        opacity: 0.65;
+      }
+      .hud button {
+        margin-top: 10px;
+        background: rgba(74, 222, 128, 0.15);
+        color: #e8fff1;
+        border: 1px solid rgba(74, 222, 128, 0.4);
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .hud button:hover {
+        background: rgba(74, 222, 128, 0.28);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage"><canvas id="sim-canvas"></canvas></div>
+    <div class="hud">
+      <h1>WASM Flow Field</h1>
+      <div class="row"><span>Status</span><b id="status">loading…</b></div>
+      <div class="row"><span>Particles</span><b id="particles">—</b></div>
+      <div class="row"><span>FPS</span><b id="fps">—</b></div>
+      <div class="row"><span>WASM size</span><b>6.2 KB</b></div>
+      <div class="note">
+        Particle physics runs entirely in WebAssembly linear memory; JS only paints the shared
+        buffer. Move the cursor to perturb the field.
+      </div>
+      <button id="theme">Toggle theme</button>
+    </div>
+
+    <script type="module">
+      import { mountHeroSim } from './modules/wasm/hero-sim.js';
+
+      (async () => {
+        const canvas = document.getElementById('sim-canvas');
+        const statusEl = document.getElementById('status');
+        const particlesEl = document.getElementById('particles');
+        const fpsEl = document.getElementById('fps');
+
+        document.getElementById('theme').addEventListener('click', () => {
+          document.body.classList.toggle('dark-theme');
+        });
+        document.body.classList.add('dark-theme');
+
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const handle = await mountHeroSim(canvas, { reducedMotion: reduced });
+
+        if (!handle) {
+          statusEl.textContent = 'WASM unavailable';
+          return;
+        }
+        statusEl.textContent = reduced ? 'static (reduced motion)' : 'running';
+        particlesEl.textContent = handle.particles().toLocaleString();
+        setInterval(() => {
+          fpsEl.textContent = String(handle.fps());
+        }, 500);
+      })();
+    </script>
+  </body>
+</html>

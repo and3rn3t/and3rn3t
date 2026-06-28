@@ -1413,7 +1413,7 @@ section {
 
 /* btn-outline in light contexts (projects section, etc.) */
 .projects-cta .btn-outline {
-  color: var(--primary-color);
+  color: #15803d;
   border-color: var(--primary-color);
   background: transparent;
 }
@@ -1974,6 +1974,11 @@ body.dark-theme .timeline::before {
   gap: 0.4rem;
   font-size: var(--font-size-sm, 0.875rem);
   color: var(--text-secondary);
+}
+
+/* Footer sits on a dark background, so muted text must lighten for AA contrast. */
+.footer .view-count-widget {
+  color: #d1d5db;
 }
 
 /* Contact Section */
@@ -3941,8 +3946,8 @@ body.dark-theme .keyboard-help-close:hover {
 }
 
 .search-category.active {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
+  background: #15803d;
+  border-color: #15803d;
   color: var(--text-white);
 }
 
@@ -3985,7 +3990,7 @@ body.dark-theme .keyboard-help-close:hover {
 }
 
 .palette-item.is-active .palette-item-icon {
-  background: var(--primary-color);
+  background: #15803d;
   color: #fff;
 }
 
@@ -4015,7 +4020,7 @@ body.dark-theme .keyboard-help-close:hover {
   font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--text-light);
+  color: var(--text-secondary);
   flex-shrink: 0;
 }
 

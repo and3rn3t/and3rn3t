@@ -7,6 +7,14 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    // Keyboard shortcuts (?, g h) are wired by the keyboard-help manager, which
+    // initializes after several deferred dynamic imports. Wait for it so key
+    // presses aren't dropped before the listeners attach.
+    await page
+        .waitForFunction(() => Boolean(globalThis.appState?.managers?.keyboardHelp), {
+            timeout: 10000,
+        })
+        .catch(() => {});
 });
 
 // ── Theme ─────────────────────────────────────────────────────────────────────

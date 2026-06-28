@@ -53,3 +53,6 @@ coverage/
 
 # Testing files (debug/dev only)
 /testing/
+# Playwright test artifacts
+test-results/
+playwright-report/

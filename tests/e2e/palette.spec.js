@@ -8,9 +8,11 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    // Wait for JS modules to init.
+    // Wait for the command palette manager to register its global shortcut.
+    // appState is exposed very early, but the palette is initialized after many
+    // deferred dynamic imports — waiting only for appState races the keypress.
     await page
-        .waitForFunction(() => typeof globalThis.appState !== 'undefined', { timeout: 5000 })
+        .waitForFunction(() => Boolean(globalThis.appState?.managers?.palette), { timeout: 10000 })
         .catch(() => {});
 });
 
@@ -48,7 +50,7 @@ test('typing filters results', async ({ page }) => {
     await page.keyboard.press('Control+k');
     await page.waitForSelector('#global-search-modal.visible');
     await page.fill('#global-search-input', 'theme');
-    const items = page.locator('.palette-result-item');
+    const items = page.locator('.palette-item');
     await expect(items).not.toHaveCount(0);
     const titles = await items.allTextContents();
     expect(titles.some(t => /theme/i.test(t))).toBe(true);

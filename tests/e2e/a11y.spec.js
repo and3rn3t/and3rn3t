@@ -24,6 +24,12 @@ test.describe('Accessibility — main page', () => {
 
     test('command palette modal is accessible when open', async ({ page }) => {
         await page.goto('/');
+        // Ensure the palette manager has attached its global shortcut before pressing.
+        await page
+            .waitForFunction(() => Boolean(globalThis.appState?.managers?.palette), {
+                timeout: 10000,
+            })
+            .catch(() => {});
         await page.keyboard.press('Control+k');
         await page.waitForSelector('#global-search-modal.visible');
 
