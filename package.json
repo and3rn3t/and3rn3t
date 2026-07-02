@@ -12,6 +12,7 @@
     "url": "https://github.com/and3rn3t/and3rn3t/issues"
   },
   "scripts": {
+    "prepare": "husky",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -35,6 +36,8 @@
     "test:e2e:debug": "playwright test --debug"
   },
   "devDependencies": {
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
     "@axe-core/playwright": "^4.11.3",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",
@@ -59,7 +62,7 @@
   "license": "MIT",
   "packageManager": "pnpm@10.34.4",
   "engines": {
-    "node": ">=22",
+    "node": ">=24",
     "pnpm": ">=10"
   }
 }
