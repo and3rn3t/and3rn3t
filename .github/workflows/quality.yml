@@ -6,74 +6,27 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint & format
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: pnpm/action-setup@v6
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Check formatting
-        run: pnpm format:check
+    uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@main
+    with:
+      command: pnpm lint && pnpm format:check
+      package-manager: pnpm
 
   unit:
     name: Unit tests (Vitest)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: pnpm/action-setup@v6
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run unit + worker tests
-        run: pnpm test:unit
+    uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@main
+    with:
+      command: pnpm test:unit
+      package-manager: pnpm
 
   e2e:
     name: E2E + a11y (Playwright + axe)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: pnpm/action-setup@v6
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install chromium --with-deps
-
-      - name: Run Playwright e2e tests
-        run: pnpm test:e2e
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7
+    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@main
+    with:
+      command: pnpm test:e2e
+      package-manager: pnpm
