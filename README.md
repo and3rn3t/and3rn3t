@@ -23,53 +23,60 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 
 ## 🚀 Featured Projects
 
-### ⭐ [Health Analytics Platform](https://github.com/and3rn3t/health)
+_Auto-updated daily from live repo data — no more stale links or descriptions._
 
-> Advanced health tracking using Apple HealthKit and iPhone LiDAR sensors for gait analysis
+<!-- FEATURED-PROJECTS:START -->
+
+### 🌐 [telescope](https://github.com/and3rn3t/telescope)
+
+> A general overview of the JWST for fun
 >
-> **Tech:** TypeScript, HealthKit, LiDAR, ML
+> **Tech:** TypeScript
 
-### 📱 [HealthKit Bridge](https://github.com/and3rn3t/HealthKitBridge)
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> Native iOS app bridging HealthKit data to web applications via an on-device HTTP server
+> Unifying network information on a RPi 5
 >
-> **Tech:** Swift, HealthKit, iOS
+> **Tech:** TypeScript
 
-### 🌐 [Network Analytics Tool](https://github.com/and3rn3t/network)
+### 🖥️ [minecraft](https://github.com/and3rn3t/minecraft)
 
-> UniFi API integration for deep network monitoring, traffic analysis, and management
+> Custom Minecraft Server
 >
-> **Tech:** Python, UniFi API, Network Protocols
+> **Tech:** HTML
 
-### 🔍 [Network Traffic Analyzer](https://github.com/and3rn3t/net-traffic)
+### 🌐 [silas](https://github.com/and3rn3t/silas)
 
-> Real-time traffic analysis and visualization for local network bandwidth and device activity
+> Personal webpage for Silas
 >
-> **Tech:** TypeScript, WebSockets, Data Visualization
+> **Tech:** JavaScript
 
-### 🏠 [Home Automation Hub](https://github.com/and3rn3t/homehub)
+### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
 
-> Centralized IoT control center for smart home devices and automations
+> Overview and sandbox for Hugging Face AI API
 >
-> **Tech:** TypeScript, IoT, WebSockets, React
+> **Tech:** TypeScript
 
-### 🌤️ [Weather App](https://github.com/and3rn3t/weather)
+### 🎮 [catastrophe](https://github.com/and3rn3t/catastrophe)
 
-> Cross-platform weather application with native Android and iOS integration via Capacitor
+> CATastrophe: A Mischief Simulator (Experimenting with Unreal Engine)
 >
-> **Tech:** TypeScript, Capacitor, Android, iOS
+> **Tech:** C++
 
-### 🗄️ [dbt Data Models](https://github.com/and3rn3t/dbt)
+### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
 
-> Modular SQL transformation pipelines using dbt with schema testing and Jinja templating
+> iOS26 Weather App
 >
-> **Tech:** Python, dbt, SQL
+> **Tech:** Swift
 
-### 🎮 [Custom Minecraft Server](https://github.com/and3rn3t/minecraft)
+### 🌐 [health](https://github.com/and3rn3t/health)
 
-> Self-hosted Minecraft server with automated setup, plugin management, and a status dashboard
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
 >
-> **Tech:** HTML, JavaScript, Shell
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
+
+<!-- FEATURED-PROJECTS:END -->
 
 [**→ View All Projects**](https://and3rn3t.github.io/and3rn3t/#projects)
 
@@ -151,21 +158,5 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 ### 💡 "Code is like humor. When you have to explain it, it's bad." – Cory House
 
 ![Snake animation](https://github.com/and3rn3t/and3rn3t/blob/output/github-contribution-grid-snake.svg)
-
-</div>
-
-## 📊 GitHub Statistics
-
-<div align="center">
-
-![Profile Views](https://komarev.com/ghpvc/?username=and3rn3t&style=for-the-badge&color=blueviolet)
-
-</div>
-
-<div align="center">
-  
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=and3rn3t&show_icons=true&theme=radical&hide_border=true&count_private=true)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=and3rn3t&layout=compact&theme=radical&hide_border=true)
 
 </div>

@@ -183,6 +183,64 @@ jobs:
               fh.write('\n')
 
           print(f'github-data.json written ({len(repos)} repos, lastUpdated={output["lastUpdated"]})')
+
+          print('Rendering Featured Projects section into README.md...')
+          EMOJI_BY_LANGUAGE = {
+              'TypeScript': '🌐', 'JavaScript': '🌐', 'Python': '🐍', 'Swift': '📱',
+              'C++': '🎮', 'HTML': '🖥️', 'Shell': '🐚', 'Rust': '🦀',
+          }
+
+          def featured_candidates(repos):
+              skip_names = {'and3rn3t', '.github'}
+              picked = []
+              for r in repos:
+                  if r.get('fork') or r.get('archived') or r['name'] in skip_names:
+                      continue
+                  if 'inactive' in (r.get('topics') or []):
+                      continue
+                  if not r.get('description'):
+                      continue
+                  picked.append(r)
+              picked.sort(key=lambda r: r['pushed_at'], reverse=True)
+              return picked[:8]
+
+          def render_card(r):
+              emoji = EMOJI_BY_LANGUAGE.get(r.get('language'), '⭐')
+              name, desc = r['name'], r['description']
+              homepage = (r.get('homepage') or '').strip()
+              tech_bits = [r['language']] if r.get('language') else []
+              tech_bits += (r.get('topics') or [])[:4]
+              tech_line = f"\n>\n> **Tech:** {', '.join(tech_bits)}" if tech_bits else ''
+              link_line = f"\n> 🔗 [Live]({homepage})" if homepage else ''
+              return (
+                  f"### {emoji} [{name}](https://github.com/and3rn3t/{name})\n\n"
+                  f"> {desc}{tech_line}{link_line}\n"
+              )
+
+          cards = featured_candidates(repos)
+          block = '\n'.join(render_card(r) for r in cards)
+
+          with open('README.md', encoding='utf-8') as fh:
+              readme = fh.read()
+
+          start_marker = '<!-- FEATURED-PROJECTS:START -->'
+          end_marker = '<!-- FEATURED-PROJECTS:END -->'
+          start = readme.find(start_marker)
+          end = readme.find(end_marker)
+          if start != -1 and end != -1:
+              new_readme = (
+                  readme[:start + len(start_marker)]
+                  + '\n\n' + block + '\n'
+                  + readme[end:]
+              )
+              if new_readme != readme:
+                  with open('README.md', 'w', encoding='utf-8') as fh:
+                      fh.write(new_readme)
+                  print(f'README.md updated with {len(cards)} featured project(s)')
+              else:
+                  print('README.md featured projects already up to date')
+          else:
+              print('Featured Projects markers not found in README.md — skipping')
           PYEOF
 
       - name: Commit and push GitHub data
@@ -190,9 +248,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          if ! git diff --quiet github-data.json; then
-            git add github-data.json
-            git commit -m "chore: update GitHub data - $(date -u +"%Y-%m-%d")"
+          if ! git diff --quiet github-data.json README.md; then
+            git add github-data.json README.md
+            git commit -m "chore: update GitHub data and featured projects - $(date -u +"%Y-%m-%d")"
             git push
           else
             echo "No changes to GitHub data"
