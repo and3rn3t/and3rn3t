@@ -17,7 +17,7 @@ on:
 
 jobs:
   lighthouse:
-    uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@main
+    uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@v1
     with:
       url: ${{ github.event.inputs.url || 'https://andernet.dev' }}
       config-path: .lighthouserc.cjs
