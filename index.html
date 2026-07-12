@@ -95,10 +95,10 @@
       property="og:description"
       content="Software engineer at Deere &amp; Company. Side projects in health tech, home automation, data engineering, and more."
     />
-    <meta property="og:image" content="https://and3rn3t-portfolio.andernet.workers.dev/og" />
+    <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
 
     <!-- Twitter -->
@@ -109,7 +109,7 @@
       name="twitter:description"
       content="Software engineer at Deere &amp; Company. Side projects in health tech, home automation, data engineering, and more."
     />
-    <meta name="twitter:image" content="https://and3rn3t-portfolio.andernet.workers.dev/og" />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <!-- Additional SEO -->
     <meta
@@ -145,7 +145,7 @@
               "width": 512,
               "height": 512
             },
-            "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/matthew-anderson"],
+            "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/and3rn3t"],
             "jobTitle": "Software Engineer",
             "worksFor": {
               "@type": "Organization",
@@ -345,8 +345,6 @@
 
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//api.github.com" />
-    <link rel="dns-prefetch" href="//github-readme-stats.vercel.app" />
-    <link rel="dns-prefetch" href="//github-readme-streak-stats.herokuapp.com" />
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
 
     <!-- Preconnect for critical third-party domains -->
@@ -389,112 +387,32 @@
         backdrop-filter: blur(10px);
         z-index: 1000;
       }
-      .hero,
-      section.hero,
-      #home.hero {
-        min-height: 100vh !important;
-        height: auto !important;
+      /* Above-the-fold hero shell — must visually match styles.css so there is
+         no off-brand flash while the full stylesheet loads asynchronously. */
+      .hero {
+        min-height: 80vh;
         display: flex;
         align-items: center;
-        padding-top: 100px !important;
-        padding-bottom: 40px !important;
-        margin-bottom: 0 !important;
-        background: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
-        background-image: linear-gradient(135deg, #8b4513 0%, #800020 100%) !important;
+        background:
+          radial-gradient(60% 60% at 25% 30%, rgba(74, 222, 128, 0.4), transparent 60%),
+          radial-gradient(70% 70% at 60% 90%, rgba(22, 163, 74, 0.35), transparent 65%), #111827;
+        color: #ffffff;
         position: relative;
-        z-index: 1;
-        color: white !important;
-        overflow: hidden !important;
-        box-sizing: border-box !important;
+        overflow: hidden;
       }
       .hero-title,
       .hero-subtitle,
       .hero-description {
-        color: white !important;
+        color: #ffffff;
       }
       .highlight {
-        background: linear-gradient(135deg, #ff6b35 0%, #ffd700 100%) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        background-clip: text !important;
+        background: linear-gradient(120deg, #86efac 0%, #4ade80 45%, #22c55e 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
-      /* Ensure projects section is visible */
-      .projects,
-      #projects {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        padding: 80px 0 !important;
-        min-height: 400px !important;
-        position: relative !important;
-        z-index: 2 !important;
-        margin-top: 0 !important;
-      }
-      .section-title,
-      .subsection-title {
-        display: block !important;
-      }
-      .projects-grid,
-      .project-gallery {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-      }
-      /* Fix section spacing and overlap */
-      section:not(.hero) {
-        clear: both !important;
-        position: relative !important;
-        z-index: 10 !important;
-      }
-      /* Ensure proper spacing between hero and projects */
-      .hero + .projects,
-      .hero + #projects {
-        margin-top: 0 !important;
-        padding-top: 40px !important;
-      }
-      /* Prevent any transform that might cause overlap */
-      .hero.animate-on-scroll,
-      .hero .animate-on-scroll {
-        transform: none !important;
-        opacity: 1 !important;
-      }
-      /* Ensure animations don't cause layout issues */
-      .animate-on-scroll {
-        position: relative !important;
-      }
-
-      /* Comprehensive overlap prevention */
-      html,
       body {
-        scroll-behavior: smooth !important;
-        overflow-x: hidden !important;
-      }
-
-      /* Force proper section stacking */
-      main,
-      .main-content {
-        display: block !important;
-        position: relative !important;
-        z-index: 5 !important;
-      }
-
-      /* Ensure all content sections are above hero */
-      section.projects,
-      section.skills,
-      section.about,
-      section.contact {
-        position: relative !important;
-        z-index: 10 !important;
-        border-top: 1px solid transparent !important;
-      }
-      .project-card {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        padding: 20px !important;
-        margin: 15px !important;
-        border-radius: 8px !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        overflow-x: hidden;
       }
       .container {
         max-width: 1200px;
@@ -578,9 +496,6 @@
       onload="this.media = 'all'"
     />
     <noscript><link rel="stylesheet" href="vendor/fontawesome/all.min.css" /></noscript>
-
-    <!-- reCAPTCHA v3 for enhanced form security -->
-    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 
     <!-- Visual Enhancement Utilities -->
     <style>
@@ -831,7 +746,7 @@
               <i class="fab fa-github"></i>
             </a>
             <a
-              href="https://linkedin.com/in/matthew-anderson"
+              href="https://linkedin.com/in/and3rn3t"
               target="_blank"
               rel="noopener noreferrer"
               class="social-link"
@@ -839,12 +754,15 @@
             >
               <i class="fab fa-linkedin"></i>
             </a>
-            <a href="mailto:contact@matthewanderson.dev" class="social-link" title="Send Email">
+            <a href="mailto:and3rn3t@icloud.com" class="social-link" title="Send Email">
               <i class="fas fa-envelope"></i>
             </a>
           </div>
         </div>
       </div>
+      <a href="#about" class="hero-scroll-cue" aria-label="Scroll to About section">
+        <span class="hero-scroll-cue-chevron" aria-hidden="true"></span>
+      </a>
     </section>
 
     <!-- About Section -->
@@ -993,6 +911,14 @@
       </div>
     </section>
 
+    <!-- Testimonials Section (hidden until testimonials-data.json has entries) -->
+    <section class="testimonials animate-on-scroll" id="testimonials" hidden>
+      <div class="container">
+        <h2 class="section-title">Kind Words</h2>
+        <div class="testimonials-grid" id="testimonials-grid"></div>
+      </div>
+    </section>
+
     <!-- Writing / Blog Section -->
     <section class="writing animate-on-scroll" id="writing">
       <div class="container">
@@ -1135,9 +1061,6 @@
             <!-- Honeypot for spam protection -->
             <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true" />
 
-            <!-- reCAPTCHA container -->
-            <div class="recaptcha-container" id="recaptcha-container"></div>
-
             <button
               type="submit"
               class="btn btn-primary submit-button"
@@ -1155,9 +1078,9 @@
           </form>
 
           <div class="contact-methods">
-            <a href="mailto:contact@matthewanderson.dev" class="contact-method touch-target">
+            <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
               <i class="fas fa-envelope"></i>
-              <span>contact@matthewanderson.dev</span>
+              <span>and3rn3t@icloud.com</span>
             </a>
             <a
               href="https://github.com/and3rn3t"
@@ -1169,7 +1092,7 @@
               <span>@and3rn3t</span>
             </a>
             <a
-              href="https://linkedin.com/in/matthew-anderson"
+              href="https://linkedin.com/in/and3rn3t"
               target="_blank"
               rel="noopener noreferrer"
               class="contact-method touch-target"
@@ -1260,14 +1183,14 @@
         "@type": "Person",
         "name": "Matthew Anderson",
         "url": "https://andernet.dev",
-        "email": "contact@matthewanderson.dev",
+        "email": "and3rn3t@icloud.com",
         "jobTitle": "Software Engineer",
         "worksFor": {
           "@type": "Organization",
           "name": "Deere & Company",
           "url": "https://www.deere.com"
         },
-        "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/matthew-anderson"],
+        "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/and3rn3t"],
         "knowsAbout": [
           "TypeScript",
           "Swift",
