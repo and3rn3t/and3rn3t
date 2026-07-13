@@ -88,7 +88,7 @@ async function fetchJson(url, ttl) {
     return resp.json();
 }
 
-function findProject(projectsData, slug) {
+export function findProject(projectsData, slug) {
     const projects = projectsData?.projects ?? [];
     return (
         projects.find(
@@ -100,7 +100,7 @@ function findProject(projectsData, slug) {
     );
 }
 
-function findRepoStats(ghData, slug) {
+export function findRepoStats(ghData, slug) {
     const repos = ghData?.repositories ?? [];
     return repos.find(r => r.name === slug || r.name?.toLowerCase() === slug.toLowerCase()) ?? null;
 }
@@ -109,7 +109,7 @@ function findRepoStats(ghData, slug) {
 // Portfolio card
 // ---------------------------------------------------------------------------
 
-function renderPortfolioCard(ghData) {
+export function renderPortfolioCard(ghData) {
     const repos = ghData?.repositories ?? [];
     const repoCount = repos.length;
     const starCount = repos.reduce((s, r) => s + (r.stargazers_count ?? 0), 0);
@@ -201,7 +201,7 @@ function renderPortfolioCard(ghData) {
 // Project card
 // ---------------------------------------------------------------------------
 
-function renderProjectCard(project, repoStats) {
+export function renderProjectCard(project, repoStats) {
     const name = escSvg(project.displayName ?? project.name);
     const desc = escSvg(truncate(project.description ?? '', 82));
     const category = escSvg(project.category ?? '');

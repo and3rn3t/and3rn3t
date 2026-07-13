@@ -243,14 +243,32 @@ jobs:
               print('Featured Projects markers not found in README.md — skipping')
           PYEOF
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Regenerate OG images
+        run: pnpm generate:og
+
       - name: Commit and push GitHub data
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          if ! git diff --quiet github-data.json README.md; then
-            git add github-data.json README.md
-            git commit -m "chore: update GitHub data and featured projects - $(date -u +"%Y-%m-%d")"
+          git add github-data.json README.md og/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d")"
             git push
           else
             echo "No changes to GitHub data"

@@ -13,7 +13,7 @@
 
 import { debug } from './debug.js';
 
-const EMAIL = 'contact@matthewanderson.dev';
+const EMAIL = 'and3rn3t@icloud.com';
 const GITHUB = 'https://github.com/and3rn3t';
 
 class CommandPalette {
@@ -133,13 +133,9 @@ class CommandPalette {
                 icon: 'fa-linkedin',
                 brand: true,
                 title: 'Open LinkedIn',
-                subtitle: 'linkedin.com/in/matthew-anderson',
+                subtitle: 'linkedin.com/in/and3rn3t',
                 run: () =>
-                    globalThis.open(
-                        'https://linkedin.com/in/matthew-anderson',
-                        '_blank',
-                        'noopener'
-                    ),
+                    globalThis.open('https://linkedin.com/in/and3rn3t', '_blank', 'noopener'),
             },
         ];
 

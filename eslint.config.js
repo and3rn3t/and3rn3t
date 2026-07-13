@@ -131,8 +131,32 @@ export default [
             sourceType: 'module',
             globals: {
                 ...globals.node,
-                // window is used inside page.evaluate() browser-context callbacks
+                // used inside page.evaluate()/waitForFunction browser-context callbacks
                 window: 'readonly',
+                document: 'readonly',
+                getComputedStyle: 'readonly',
+            },
+        },
+        rules: {
+            'no-unused-vars': [
+                'error',
+                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+            ],
+            'prefer-const': 'error',
+            'no-var': 'error',
+        },
+    },
+
+    // Build/maintenance scripts (Node process; page.evaluate() callbacks run in browser)
+    {
+        files: ['scripts/**/*.mjs', 'scripts/**/*.js'],
+        languageOptions: {
+            ecmaVersion: 2022,
+            sourceType: 'module',
+            globals: {
+                ...globals.node,
+                // document is used inside page.evaluate() browser-context callbacks
+                document: 'readonly',
             },
         },
         rules: {

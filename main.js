@@ -140,6 +140,15 @@ async function initializeApp() {
             debug.warn('[App] Experience module skipped:', err);
         }
 
+        // Testimonials section (stays hidden until data exists).
+        try {
+            const { testimonialsManager } = await import('./modules/testimonials.js');
+            await testimonialsManager.init();
+            appState.managers.testimonials = testimonialsManager;
+        } catch (err) {
+            debug.warn('[App] Testimonials module skipped:', err);
+        }
+
         // Blog / writing section.
         try {
             const { blogManager } = await import('./modules/blog.js');

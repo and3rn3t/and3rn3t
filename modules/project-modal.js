@@ -199,6 +199,18 @@ export class ProjectModal {
 
         const highlights = (d.highlights ?? []).map(h => `<li>${h}</li>`).join('');
 
+        // Optional curated impact metrics from projects-data.json:
+        // "metrics": [{ "value": "30 fps", "label": "LiDAR depth stream" }, …]
+        const metrics = (d.metrics ?? [])
+            .filter(m => m?.value && m?.label)
+            .map(
+                m => `<div class="project-modal-metric">
+                    <span class="project-modal-metric-value">${m.value}</span>
+                    <span class="project-modal-metric-label">${m.label}</span>
+                </div>`
+            )
+            .join('');
+
         const liveLink = d.homepage
             ? `<a href="${d.homepage}" target="_blank" rel="noopener noreferrer" class="project-link live">
                     <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
@@ -229,6 +241,16 @@ export class ProjectModal {
                 <section class="project-modal-section">
                     <h3>Overview</h3>
                     <p>${d.longDescription}</p>
+                </section>`
+                    : ''
+            }
+
+            ${
+                metrics
+                    ? `
+                <section class="project-modal-section">
+                    <h3>By the numbers</h3>
+                    <div class="project-modal-metrics">${metrics}</div>
                 </section>`
                     : ''
             }

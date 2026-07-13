@@ -31,14 +31,18 @@ export default defineConfig({
                 // Note: vite build (dist/) is NOT the production deployment — GitHub Pages
                 // serves raw source. Only literal-path imports are bundleable; variable-path
                 // lazyLoad() calls (ui.js, projects.js, github-api.js, etc.) are excluded.
-                manualChunks: {
+                // Vite 8 (rolldown) only accepts the function form.
+                manualChunks(id) {
                     // Theme and navigation (critical path)
-                    core: [
-                        './modules/debug.js',
-                        './modules/theme.js',
-                        './modules/mobile.js',
-                        './modules/navigation.js',
-                    ],
+                    const core = [
+                        '/modules/debug.js',
+                        '/modules/theme.js',
+                        '/modules/mobile.js',
+                        '/modules/navigation.js',
+                    ];
+                    if (core.some(path => id.endsWith(path))) {
+                        return 'core';
+                    }
                 },
             },
         },

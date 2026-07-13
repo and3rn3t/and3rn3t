@@ -1,6 +1,7 @@
 👋 Hi, I'm @and3rn3t (Matthew Anderson)
+💼 Software Engineer at Deere & Company
 👀 I'm interested in technology, home automation and general gadgetry.
-🌱 I'm currently learning full-stack web development (HTML5, CSS, JavaScript, React, Python, PostgreSQL, etc)
+🛠️ I build across the stack — web apps (TypeScript/React), iOS apps (Swift), Python tooling, and Cloudflare Workers
 
 ---
 
@@ -8,7 +9,7 @@
 
 Check out my **interactive portfolio** with comprehensive GitHub statistics and detailed project showcase:
 
-### 🔗 **[View My Portfolio →](https://and3rn3t.github.io/and3rn3t/)**
+### 🔗 **[View My Portfolio →](https://andernet.dev)**
 
 **Features:**
 
@@ -18,6 +19,11 @@ Check out my **interactive portfolio** with comprehensive GitHub statistics and 
 - 📱 Fully responsive design
 - 🔍 SEO optimized for better discoverability
 - ⚡ Fast, modern, and accessible
+
+**Under the hood:** hand-rolled vanilla-JS ES modules (no framework), a WebAssembly particle
+simulation (AssemblyScript) powering the hero, a single design-token-driven stylesheet, and a
+Cloudflare Worker serving dynamic OG images, view counts, and the guestbook. Installable as a PWA
+with full offline support.
 
 ---
 
@@ -78,7 +84,7 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:END -->
 
-[**→ View All Projects**](https://and3rn3t.github.io/and3rn3t/#projects)
+[**→ View All Projects**](https://andernet.dev/#projects)
 
 ---
 
@@ -146,8 +152,8 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 <div align="center">
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/and3rn3t)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/matthew-anderson)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@matthewanderson.dev)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/and3rn3t)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:and3rn3t@icloud.com)
 
 </div>
 

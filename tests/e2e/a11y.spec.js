@@ -32,6 +32,15 @@ test.describe('Accessibility — main page', () => {
             .catch(() => {});
         await page.keyboard.press('Control+k');
         await page.waitForSelector('#global-search-modal.visible');
+        // Wait out the fade/slide-in (250ms modal fade + 350ms content slide) —
+        // axe blends mid-transition opacity into composited colors and reports
+        // false contrast failures. The fixed wait covers the transition window
+        // even when the transition engages a frame after .visible lands.
+        await page.waitForTimeout(700);
+        await page.waitForFunction(() => {
+            const modal = document.querySelector('#global-search-modal');
+            return modal && getComputedStyle(modal).opacity === '1';
+        });
 
         const results = await new AxeBuilder({ page })
             .withTags(['wcag2a', 'wcag2aa'])
