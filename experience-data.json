@@ -4,28 +4,75 @@
       "role": "Software Engineer",
       "company": "Deere & Company",
       "companyUrl": "https://www.deere.com",
-      "location": "Milan, IL",
-      "startDate": "2022-06",
+      "startDate": "2021",
       "endDate": null,
       "current": true,
-      "summary": "Building software at the intersection of agriculture and technology at one of the world's largest equipment manufacturers.",
+      "summary": "Aftermarket & Customer Support, Global Parts Information Technology — Parts Order Management Legacy & Dealer Business System Integrations Team. Support Java and SAP service parts order management applications, developing solutions for complex business challenges and partnering with the product manager to prioritize work that delivers clear value to the company and its dealers.",
       "highlights": [
-        "Designed and shipped production data pipelines processing sensor telemetry from field equipment",
-        "Contributed to internal platform tooling used across multiple engineering teams",
-        "Led adoption of TypeScript in a previously JavaScript codebase, improving type safety and DX"
+        "Converting legacy Java processes into APIs and microservices to make applications more scalable and easier to maintain",
+        "Building front-end interfaces in TypeScript and React to improve the user experience",
+        "Partnering directly with the Parts Order Management product manager to identify and prioritize work that delivers clear value to the company and its dealers"
       ],
-      "technologies": ["TypeScript", "Java", "Python"]
+      "technologies": ["Java", "SAP", "SAP ABAP", "SAP CPI", "TypeScript", "React"]
+    },
+    {
+      "role": "Business Analyst",
+      "company": "Deere & Company",
+      "companyUrl": "https://www.deere.com",
+      "startDate": "2013",
+      "endDate": "2021",
+      "current": false,
+      "summary": "Global Information Technology, Human Resources & Corporate Functions Domain — Corporate Functions & John Deere University Teams. Acting co-product manager for the Corporate Functions team, supporting Corporate Social Responsibility, Brand Management & Licensing, Public Affairs, Environmental Health & Safety, Aviation, and Facilities through the company's Agile reorganization.",
+      "highlights": [
+        "2021 — Provided direction as co-product manager during the transition to Agile, developing task boards, reports, and processes to guide daily standups and sprint planning",
+        "2018 — Built a Tableau project combining multiple CSR and HR data sources into a community scorecard used by facility leadership across 20+ global locations; all unit campaigns saw a marked percentage increase in giving in 2019",
+        "2016 — Led a development team building automated payroll deduction processes for charitable giving, significantly reducing manual processing time"
+      ],
+      "technologies": ["SAP", "Tableau", "SQL", "Excel"]
+    },
+    {
+      "role": "IT Early Development Program",
+      "company": "Deere & Company",
+      "companyUrl": "https://www.deere.com",
+      "startDate": "2009",
+      "endDate": "2013",
+      "current": false,
+      "summary": "Global Information Technology, Datacenter 24x7 Support & Dealer Systems Go-Live Support. A rotational program helping recent computer science graduates navigate different roles and business units within the company.",
+      "highlights": [
+        "2012 — Administered training for more than 50 dealer employees during a systems migration at two of the company's largest Construction & Forestry dealers, in Orlando, Florida and Bangor, Maine"
+      ],
+      "technologies": []
     }
   ],
   "education": [
     {
-      "degree": "B.A. Computer Science",
+      "degree": "B.A. Information Systems",
       "institution": "St. Ambrose University",
       "institutionUrl": "https://www.sau.edu",
       "location": "Davenport, IA",
-      "startDate": "2006-08",
-      "endDate": "2009-05",
+      "startDate": null,
+      "endDate": "2009",
       "highlights": []
+    },
+    {
+      "degree": "Graduate-level coursework, Computer Science",
+      "institution": "St. Ambrose University",
+      "institutionUrl": "https://www.sau.edu",
+      "location": "Davenport, IA",
+      "startDate": "2009",
+      "endDate": "2012",
+      "highlights": []
+    },
+    {
+      "degree": "Software Engineering Immersive",
+      "institution": "General Assembly",
+      "institutionUrl": "https://generalassemb.ly",
+      "location": null,
+      "startDate": "2021",
+      "endDate": "2021",
+      "highlights": [
+        "12-week immersive program sharpening full-stack development skills, including React, Node, and Express"
+      ]
     }
   ]
 }
