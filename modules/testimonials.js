@@ -40,8 +40,9 @@ class TestimonialsManager {
             .filter(Boolean)
             .map(v => this.#escHtml(v))
             .join(' · ');
-        const attribution = entry.link
-            ? `<a href="${this.#escHtml(entry.link)}" target="_blank" rel="noopener noreferrer">${name}</a>`
+        const safeLink = this.#safeUrl(entry.link);
+        const attribution = safeLink
+            ? `<a href="${this.#escHtml(safeLink)}" target="_blank" rel="noopener noreferrer">${name}</a>`
             : name;
 
         return `
@@ -60,6 +61,17 @@ class TestimonialsManager {
             .replaceAll('<', '&lt;')
             .replaceAll('>', '&gt;')
             .replaceAll('"', '&quot;');
+    }
+
+    /** Only allow http(s) links — rejects javascript: and other unsafe schemes. */
+    #safeUrl(url) {
+        if (!url) return null;
+        try {
+            const parsed = new URL(url, globalThis.location.origin);
+            return ['http:', 'https:'].includes(parsed.protocol) ? url : null;
+        } catch {
+            return null;
+        }
     }
 }
 
