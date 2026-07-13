@@ -95,6 +95,7 @@ class ExperienceManager {
         const fmt = d => {
             if (!d) return '';
             const [year, month] = d.split('-');
+            if (!month) return year;
             const months = [
                 'Jan',
                 'Feb',
@@ -111,8 +112,9 @@ class ExperienceManager {
             ];
             return `${months[Number(month) - 1]} ${year}`;
         };
+        const start = fmt(startDate);
         const end = current ? 'Present' : fmt(endDate);
-        return `${fmt(startDate)} – ${end}`;
+        return start ? `${start} – ${end}` : end;
     }
 
     #highlightLi(text) {
