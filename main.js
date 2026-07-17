@@ -489,33 +489,6 @@ function handleInitError(error) {
         context: { phase: 'initialization' },
     });
 
-    // Show error to user in development
-    if (DEBUG_MODE) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'init-error';
-        errorDiv.innerHTML = `
-            <h3>⚠️ Initialization Error</h3>
-            <p>${error.message}</p>
-            <pre>${error.stack}</pre>
-        `;
-        errorDiv.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #f44336;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-            z-index: 10000;
-            font-family: monospace;
-            font-size: 12px;
-        `;
-        document.body.appendChild(errorDiv);
-
-        setTimeout(() => errorDiv.remove(), 10000);
-    }
-
     // Ensure body is visible even on error
     document.body.classList.add('loaded');
 
