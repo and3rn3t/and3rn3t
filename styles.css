@@ -925,6 +925,7 @@ body {
 /* Section Styles */
 section {
   padding: var(--space-24) 0;
+  color: var(--text-secondary);
 }
 
 /* ── Testimonials ── */
