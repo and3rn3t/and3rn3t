@@ -3,7 +3,7 @@
  * Provides centralized error handling, graceful degradation, and user-friendly error messages
  */
 
-import { DEBUG_MODE, debug } from './debug.js';
+import { debug } from './debug.js';
 
 // Error types for categorization
 export const ErrorType = {
@@ -100,11 +100,6 @@ class ErrorHandler {
         // Keep log size manageable
         if (this.errorLog.length > this.maxLogSize) {
             this.errorLog.shift();
-        }
-
-        // Log to console in debug mode
-        if (DEBUG_MODE) {
-            debug.error('[ErrorHandler]', logEntry);
         }
 
         // Notify listeners

@@ -97,7 +97,7 @@ export class AnalyticsManager {
     }
 
     generateId() {
-        return 'xxxx-xxxx-xxxx'.replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
+        return crypto.randomUUID();
     }
 
     // ========================================

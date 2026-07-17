@@ -10,7 +10,7 @@ export default defineConfig({
         sourcemap: true,
 
         // Minification settings
-        minify: 'esbuild',
+        minify: 'oxc',
 
         // Target modern browsers (ES2020+)
         target: 'es2020',
