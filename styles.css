@@ -1541,7 +1541,7 @@ section {
   align-items: center;
   gap: var(--space-1);
   font-size: var(--font-size-sm);
-  color: var(--text-light);
+  color: var(--text-secondary);
 }
 
 .project-stat i {
