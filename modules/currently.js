@@ -10,10 +10,10 @@
 
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
+import { WORKER_BASE } from './config.js';
+import { escapeHtml } from './utils/html.js';
 
-// ── Change this once the Worker is deployed ──────────────────────────────────
-const WORKER_URL = 'https://and3rn3t-portfolio.andernet.workers.dev/activity';
-// ─────────────────────────────────────────────────────────────────────────────
+const WORKER_URL = `${WORKER_BASE}/activity`;
 
 const SKIP_REPOS = new Set(['and3rn3t/and3rn3t']);
 
@@ -165,16 +165,16 @@ class CurrentlyWidget {
         const relTime = activity.pushedAt ? this._relTime(new Date(activity.pushedAt)) : null;
 
         const messageHtml = activity.message
-            ? `<span class="currently-message">"${escHtml(activity.message)}"</span>`
+            ? `<span class="currently-message">"${escapeHtml(activity.message)}"</span>`
             : '';
 
         const branchHtml =
             activity.branch && activity.type === 'push'
-                ? `<span class="currently-branch"><i class="fas fa-code-branch" aria-hidden="true"></i>${escHtml(activity.branch)}</span>`
+                ? `<span class="currently-branch"><i class="fas fa-code-branch" aria-hidden="true"></i>${escapeHtml(activity.branch)}</span>`
                 : '';
 
         const timeHtml = relTime
-            ? `<span class="currently-time" title="${escHtml(activity.pushedAt ?? '')}">${escHtml(relTime)}</span>`
+            ? `<span class="currently-time" title="${escapeHtml(activity.pushedAt ?? '')}">${escapeHtml(relTime)}</span>`
             : '';
 
         this.container.innerHTML = `
@@ -182,9 +182,9 @@ class CurrentlyWidget {
                 <span class="currently-dot" aria-hidden="true"></span>
                 <span class="currently-label">
                     <i class="fas fa-${icon}" aria-hidden="true"></i>
-                    Currently ${escHtml(verb)}
-                    <a href="${escHtml(activity.repoUrl)}" target="_blank" rel="noopener noreferrer"
-                       class="currently-repo">${escHtml(activity.repoName)}</a>
+                    Currently ${escapeHtml(verb)}
+                    <a href="${escapeHtml(activity.repoUrl)}" target="_blank" rel="noopener noreferrer"
+                       class="currently-repo">${escapeHtml(activity.repoName)}</a>
                 </span>
                 ${messageHtml}
                 <span class="currently-meta">${branchHtml}${timeHtml}</span>
@@ -205,13 +205,6 @@ class CurrentlyWidget {
     }
 }
 
-function escHtml(str) {
-    return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;');
-}
 
 export const currentlyWidget = new CurrentlyWidget();
 export default currentlyWidget;

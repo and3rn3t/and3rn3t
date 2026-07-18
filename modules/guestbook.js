@@ -10,8 +10,9 @@
  */
 
 import { debug } from './debug.js';
+import { WORKER_BASE } from './config.js';
+import { escapeHtml } from './utils/html.js';
 
-const WORKER_BASE = 'https://and3rn3t-portfolio.andernet.workers.dev';
 // Public sitekey — safe to commit. Get from dash.cloudflare.com → Turnstile.
 // Replace with your actual sitekey after creating a Turnstile site.
 const TURNSTILE_SITEKEY = 'REPLACE_WITH_TURNSTILE_SITEKEY';
@@ -60,10 +61,10 @@ class GuestbookManager {
                 e => `
             <article class="guestbook-entry">
                 <header class="guestbook-entry-header">
-                    <strong class="guestbook-name">${this.#escHtml(e.name)}</strong>
-                    <time class="guestbook-date" datetime="${this.#escHtml(e.date)}">${this.#formatDate(e.date)}</time>
+                    <strong class="guestbook-name">${escapeHtml(e.name)}</strong>
+                    <time class="guestbook-date" datetime="${escapeHtml(e.date)}">${this.#formatDate(e.date)}</time>
                 </header>
-                <p class="guestbook-message">${this.#escHtml(e.message)}</p>
+                <p class="guestbook-message">${escapeHtml(e.message)}</p>
             </article>`
             )
             .join('');
@@ -137,10 +138,10 @@ class GuestbookManager {
                 newEl.className = 'guestbook-entry guestbook-entry--new';
                 newEl.innerHTML = `
                     <header class="guestbook-entry-header">
-                        <strong class="guestbook-name">${this.#escHtml(entry.name)}</strong>
+                        <strong class="guestbook-name">${escapeHtml(entry.name)}</strong>
                         <time class="guestbook-date">${this.#formatDate(entry.date)}</time>
                     </header>
-                    <p class="guestbook-message">${this.#escHtml(entry.message)}</p>`;
+                    <p class="guestbook-message">${escapeHtml(entry.message)}</p>`;
                 this.#entriesEl.prepend(newEl);
                 const emptyMsg = this.#entriesEl.querySelector('.guestbook-empty');
                 emptyMsg?.remove();
@@ -178,14 +179,6 @@ class GuestbookManager {
         });
     }
 
-    #escHtml(str) {
-        return String(str ?? '')
-            .replaceAll('&', '&amp;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;')
-            .replaceAll('"', '&quot;')
-            .replaceAll("'", '&#39;');
-    }
 }
 
 export const guestbookManager = new GuestbookManager();

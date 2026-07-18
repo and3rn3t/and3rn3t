@@ -8,6 +8,7 @@
 
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
+import { escapeHtml } from './utils/html.js';
 
 const MAX_EVENTS = 10;
 const INTERESTING = new Set([
@@ -64,12 +65,12 @@ class ActivityFeed {
 
             items.push(`
                 <li class="activity-item">
-                    <span class="activity-icon" aria-hidden="true"><i class="fas fa-${this.#escHtml(icon)}"></i></span>
+                    <span class="activity-icon" aria-hidden="true"><i class="fas fa-${escapeHtml(icon)}"></i></span>
                     <span class="activity-body">
-                        <a href="${this.#escHtml(repoUrl)}" target="_blank" rel="noopener noreferrer" class="activity-repo">${this.#escHtml(repoName)}</a>
-                        <span class="activity-desc">${this.#escHtml(desc)}</span>
+                        <a href="${escapeHtml(repoUrl)}" target="_blank" rel="noopener noreferrer" class="activity-repo">${escapeHtml(repoName)}</a>
+                        <span class="activity-desc">${escapeHtml(desc)}</span>
                     </span>
-                    <time class="activity-time" datetime="${this.#escHtml(event.created_at ?? '')}">${this.#escHtml(rel)}</time>
+                    <time class="activity-time" datetime="${escapeHtml(event.created_at ?? '')}">${escapeHtml(rel)}</time>
                 </li>`);
 
             if (items.length >= MAX_EVENTS) break;
@@ -128,14 +129,6 @@ class ActivityFeed {
         return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
 
-    #escHtml(str) {
-        return String(str ?? '')
-            .replaceAll('&', '&amp;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;')
-            .replaceAll('"', '&quot;')
-            .replaceAll("'", '&#39;');
-    }
 }
 
 export const activityFeed = new ActivityFeed();

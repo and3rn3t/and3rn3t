@@ -6,6 +6,7 @@
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { projectModal } from './project-modal.js';
+import { escapeHtml } from './utils/html.js';
 
 // Project display configuration
 const CONFIG = {
@@ -238,12 +239,12 @@ export class ProjectsManager {
         card.innerHTML = `
             <div class="project-header">
                 <div class="project-card-badges">
-                    ${category ? `<span class="project-category">${category}</span>` : ''}
+                    ${category ? `<span class="project-category">${escapeHtml(category)}</span>` : ''}
                     ${isRecent ? `<span class="project-recent-badge"><span class="recent-dot"></span>Active</span>` : ''}
                 </div>
-                <h3 class="project-title"><a href="${htmlUrl}" target="_blank" rel="noopener noreferrer">${displayName}</a></h3>
-                <p class="project-description">${description}</p>
-                ${firstHighlight ? `<p class="project-highlight-lead">→ ${firstHighlight}</p>` : ''}
+                <h3 class="project-title"><a href="${escapeHtml(htmlUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(displayName)}</a></h3>
+                <p class="project-description">${escapeHtml(description)}</p>
+                ${firstHighlight ? `<p class="project-highlight-lead">→ ${escapeHtml(firstHighlight)}</p>` : ''}
                 ${caseStudyHtml}
                 
                 <div class="project-stats">
@@ -263,29 +264,29 @@ export class ProjectsManager {
                 </div>
                 
                 <div class="project-languages">
-                    <span class="language-tag primary">${language}</span>
+                    <span class="language-tag primary">${escapeHtml(language)}</span>
                     ${(repo?.topics?.slice(0, 3) || metadata?.technologies?.slice(1, 4) || [])
-                        .map(tag => `<span class="language-tag">${tag}</span>`)
+                        .map(tag => `<span class="language-tag">${escapeHtml(tag)}</span>`)
                         .join('')}
-                    ${status ? `<span class="status-badge ${status.toLowerCase().replace(/\s+/g, '-')}">${status}</span>` : ''}
+                    ${status ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
                 </div>
             </div>
             
             <div class="project-links">
-                <a href="${htmlUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+                <a href="${escapeHtml(htmlUrl)}" target="_blank" rel="noopener noreferrer" class="project-link">
                     <i class="fab fa-github"></i>
                     View Code
                 </a>
                 ${
                     homepage
                         ? `
-                    <a href="${homepage}" target="_blank" rel="noopener noreferrer" class="project-link live">
+                    <a href="${escapeHtml(homepage)}" target="_blank" rel="noopener noreferrer" class="project-link live">
                         <i class="fas fa-external-link-alt"></i>
                         Live Demo
                     </a>
                 `
                         : `
-                    <a href="${htmlUrl}/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
+                    <a href="${escapeHtml(htmlUrl)}/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
                         <i class="fas fa-file-alt"></i>
                         Documentation
                     </a>

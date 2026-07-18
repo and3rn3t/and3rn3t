@@ -12,6 +12,7 @@
  */
 
 import { debug } from './debug.js';
+import { escapeHtml } from './utils/html.js';
 
 const EMAIL = 'and3rn3t@icloud.com';
 const GITHUB = 'https://github.com/and3rn3t';
@@ -405,13 +406,6 @@ class CommandPalette {
     }
 }
 
-function escapeHtml(str) {
-    return String(str)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;');
-}
 
 export const commandPalette = new CommandPalette();
 export default commandPalette;

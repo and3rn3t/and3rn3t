@@ -7,6 +7,7 @@
  */
 
 import { debug } from './debug.js';
+import { escapeHtml } from './utils/html.js';
 
 class ExperienceManager {
     async init() {
@@ -46,11 +47,11 @@ class ExperienceManager {
         const titleField = type === 'work' ? entry.role : entry.degree;
 
         const nameHtml = nameUrl
-            ? `<a href="${this.#escHtml(nameUrl)}" target="_blank" rel="noopener noreferrer" class="timeline-company-link">${this.#escHtml(nameField)}</a>`
-            : this.#escHtml(nameField);
+            ? `<a href="${escapeHtml(nameUrl)}" target="_blank" rel="noopener noreferrer" class="timeline-company-link">${escapeHtml(nameField)}</a>`
+            : escapeHtml(nameField);
 
         const locationHtml = entry.location
-            ? `<span class="timeline-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> ${this.#escHtml(entry.location)}</span>`
+            ? `<span class="timeline-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> ${escapeHtml(entry.location)}</span>`
             : '';
 
         const highlightsHtml = entry.highlights?.length
@@ -62,7 +63,7 @@ class ExperienceManager {
             : '';
 
         const summaryHtml = entry.summary
-            ? `<p class="timeline-summary">${this.#escHtml(entry.summary)}</p>`
+            ? `<p class="timeline-summary">${escapeHtml(entry.summary)}</p>`
             : '';
 
         const currentBadge = entry.current
@@ -75,13 +76,13 @@ class ExperienceManager {
                 <div class="timeline-content">
                     <header class="timeline-header">
                         <div class="timeline-title-row">
-                            <h3 class="timeline-role">${this.#escHtml(titleField)}</h3>
+                            <h3 class="timeline-role">${escapeHtml(titleField)}</h3>
                             ${currentBadge}
                         </div>
                         <div class="timeline-meta">
                             <span class="timeline-company">${nameHtml}</span>
                             ${locationHtml}
-                            <span class="timeline-dates"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ${this.#escHtml(dateRange)}</span>
+                            <span class="timeline-dates"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ${escapeHtml(dateRange)}</span>
                         </div>
                     </header>
                     ${summaryHtml}
@@ -118,20 +119,12 @@ class ExperienceManager {
     }
 
     #highlightLi(text) {
-        return `<li>${this.#escHtml(text)}</li>`;
+        return `<li>${escapeHtml(text)}</li>`;
     }
     #techTag(text) {
-        return `<span class="timeline-tech-tag">${this.#escHtml(text)}</span>`;
+        return `<span class="timeline-tech-tag">${escapeHtml(text)}</span>`;
     }
 
-    #escHtml(str) {
-        return String(str ?? '')
-            .replaceAll('&', '&amp;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;')
-            .replaceAll('"', '&quot;')
-            .replaceAll("'", '&#39;');
-    }
 }
 
 export const experienceManager = new ExperienceManager();

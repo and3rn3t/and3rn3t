@@ -7,6 +7,7 @@
  */
 
 import { debug } from './debug.js';
+import { escapeHtml } from './utils/html.js';
 
 const READING_SPEED_WPM = 200;
 
@@ -45,15 +46,15 @@ class BlogManager {
         this.#listEl.innerHTML = this.#posts
             .map(
                 post => `
-            <article class="blog-card" data-slug="${this.#escHtml(post.slug)}">
+            <article class="blog-card" data-slug="${escapeHtml(post.slug)}">
                 <div class="blog-card-meta">
-                    <time datetime="${this.#escHtml(post.date)}" class="blog-date">${this.#formatDate(post.date)}</time>
+                    <time datetime="${escapeHtml(post.date)}" class="blog-date">${this.#formatDate(post.date)}</time>
                     <span class="blog-reading-time"><i class="fas fa-clock" aria-hidden="true"></i> ${post.readingMinutes ?? this.#estimateMinutes(post.content)} min read</span>
                 </div>
-                <h3 class="blog-card-title">${this.#escHtml(post.title)}</h3>
-                <p class="blog-card-summary">${this.#escHtml(post.summary)}</p>
-                <div class="blog-card-tags">${(post.tags ?? []).map(t => `<span class="blog-tag">${this.#escHtml(t)}</span>`).join('')}</div>
-                <a href="#post/${this.#escHtml(post.slug)}" class="blog-read-more" aria-label="Read ${this.#escHtml(post.title)}">Read post <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <h3 class="blog-card-title">${escapeHtml(post.title)}</h3>
+                <p class="blog-card-summary">${escapeHtml(post.summary)}</p>
+                <div class="blog-card-tags">${(post.tags ?? []).map(t => `<span class="blog-tag">${escapeHtml(t)}</span>`).join('')}</div>
+                <a href="#post/${escapeHtml(post.slug)}" class="blog-read-more" aria-label="Read ${escapeHtml(post.title)}">Read post <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </article>`
             )
             .join('');
@@ -87,7 +88,7 @@ class BlogManager {
 
         const mins = post.readingMinutes ?? this.#estimateMinutes(post.content);
         const tags = (post.tags ?? [])
-            .map(t => `<span class="blog-tag">${this.#escHtml(t)}</span>`)
+            .map(t => `<span class="blog-tag">${escapeHtml(t)}</span>`)
             .join('');
 
         this.#articleEl.innerHTML = `
@@ -96,10 +97,10 @@ class BlogManager {
                 <article class="blog-article-body">
                     <header class="blog-article-header">
                         <div class="blog-card-meta">
-                            <time datetime="${this.#escHtml(post.date)}">${this.#formatDate(post.date)}</time>
+                            <time datetime="${escapeHtml(post.date)}">${this.#formatDate(post.date)}</time>
                             <span class="blog-reading-time"><i class="fas fa-clock" aria-hidden="true"></i> ${mins} min read</span>
                         </div>
-                        <h1 class="blog-article-title">${this.#escHtml(post.title)}</h1>
+                        <h1 class="blog-article-title">${escapeHtml(post.title)}</h1>
                         <div class="blog-card-tags">${tags}</div>
                     </header>
                     <div class="blog-article-content">${post.content}</div>
@@ -139,14 +140,6 @@ class BlogManager {
         return Math.max(1, Math.round(words / READING_SPEED_WPM));
     }
 
-    #escHtml(str) {
-        return String(str ?? '')
-            .replaceAll('&', '&amp;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;')
-            .replaceAll('"', '&quot;')
-            .replaceAll("'", '&#39;');
-    }
 }
 
 export const blogManager = new BlogManager();

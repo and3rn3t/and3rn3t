@@ -8,6 +8,7 @@
  */
 
 import { debug } from './debug.js';
+import { escapeHtml } from './utils/html.js';
 
 class TestimonialsManager {
     async init() {
@@ -35,19 +36,19 @@ class TestimonialsManager {
     }
 
     #renderCard(entry) {
-        const name = this.#escHtml(entry.name ?? '');
+        const name = escapeHtml(entry.name ?? '');
         const meta = [entry.role, entry.company]
             .filter(Boolean)
-            .map(v => this.#escHtml(v))
+            .map(v => escapeHtml(v))
             .join(' · ');
         const safeLink = this.#safeUrl(entry.link);
         const attribution = safeLink
-            ? `<a href="${this.#escHtml(safeLink)}" target="_blank" rel="noopener noreferrer">${name}</a>`
+            ? `<a href="${escapeHtml(safeLink)}" target="_blank" rel="noopener noreferrer">${name}</a>`
             : name;
 
         return `
             <figure class="testimonial-card">
-                <blockquote class="testimonial-quote">${this.#escHtml(entry.quote ?? '')}</blockquote>
+                <blockquote class="testimonial-quote">${escapeHtml(entry.quote ?? '')}</blockquote>
                 <figcaption class="testimonial-attribution">
                     <span class="testimonial-name">${attribution}</span>
                     ${meta ? `<span class="testimonial-meta">${meta}</span>` : ''}
@@ -55,13 +56,6 @@ class TestimonialsManager {
             </figure>`;
     }
 
-    #escHtml(str) {
-        return String(str)
-            .replaceAll('&', '&amp;')
-            .replaceAll('<', '&lt;')
-            .replaceAll('>', '&gt;')
-            .replaceAll('"', '&quot;');
-    }
 
     /** Only allow http(s) links — rejects javascript: and other unsafe schemes. */
     #safeUrl(url) {

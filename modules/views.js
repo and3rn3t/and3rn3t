@@ -7,8 +7,7 @@
  */
 
 import { debug } from './debug.js';
-
-const WORKER_BASE = 'https://and3rn3t-portfolio.andernet.workers.dev';
+import { WORKER_BASE } from './config.js';
 
 class ViewCounter {
     async init() {

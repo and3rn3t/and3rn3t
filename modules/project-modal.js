@@ -10,9 +10,10 @@
  */
 
 import { debug } from './debug.js';
+import { WORKER_BASE } from './config.js';
 
-/** Worker base URL for OG image generation. Update after deploying the Worker. */
-const OG_WORKER_URL = 'https://and3rn3t-portfolio.andernet.workers.dev/og';
+/** Worker endpoint for OG image generation. */
+const OG_WORKER_URL = `${WORKER_BASE}/og`;
 
 /** The og:image meta value set at page load (restored on modal close). */
 let defaultOgImage = '';
