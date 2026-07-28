@@ -56,7 +56,6 @@ class TestimonialsManager {
             </figure>`;
     }
 
-
     /** Only allow http(s) links — rejects javascript: and other unsafe schemes. */
     #safeUrl(url) {
         if (!url) return null;
