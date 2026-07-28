@@ -95,7 +95,7 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 </div>
 
 <div align="center">
-  
+
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=and3rn3t&show_icons=true&theme=radical&hide_border=true&count_private=true)
 
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=and3rn3t&layout=compact&theme=radical&hide_border=true)
@@ -160,7 +160,7 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 ---
 
 <div align="center">
-  
+
 ### 💡 "Code is like humor. When you have to explain it, it's bad." – Cory House
 
 ![Snake animation](https://github.com/and3rn3t/and3rn3t/blob/output/github-contribution-grid-snake.svg)
