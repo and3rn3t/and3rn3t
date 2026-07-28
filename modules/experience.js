@@ -124,7 +124,6 @@ class ExperienceManager {
     #techTag(text) {
         return `<span class="timeline-tech-tag">${escapeHtml(text)}</span>`;
     }
-
 }
 
 export const experienceManager = new ExperienceManager();

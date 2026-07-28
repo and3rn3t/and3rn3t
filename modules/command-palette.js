@@ -406,6 +406,5 @@ class CommandPalette {
     }
 }
 
-
 export const commandPalette = new CommandPalette();
 export default commandPalette;

@@ -205,6 +205,5 @@ class CurrentlyWidget {
     }
 }
 
-
 export const currentlyWidget = new CurrentlyWidget();
 export default currentlyWidget;

@@ -178,7 +178,6 @@ class GuestbookManager {
             day: 'numeric',
         });
     }
-
 }
 
 export const guestbookManager = new GuestbookManager();
