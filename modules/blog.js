@@ -139,7 +139,6 @@ class BlogManager {
             .split(/\s+/).length;
         return Math.max(1, Math.round(words / READING_SPEED_WPM));
     }
-
 }
 
 export const blogManager = new BlogManager();
