@@ -128,7 +128,6 @@ class ActivityFeed {
         if (days < 7) return `${days}d ago`;
         return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
-
 }
 
 export const activityFeed = new ActivityFeed();
