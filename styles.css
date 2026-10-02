@@ -1580,7 +1580,7 @@ section {
   flex: 1;
   text-align: center;
   padding: var(--space-3);
-  background: var(--primary-color);
+  background: var(--primary-dark); /* green-700: 5.0:1 with white text (AA) */
   color: var(--text-white);
   text-decoration: none;
   border-radius: var(--radius-base);
@@ -1593,7 +1593,7 @@ section {
 }
 
 .project-link:hover {
-  background: var(--primary-dark);
+  background: #166534; /* green-800 */
   transform: translateY(-2px);
 }
 
