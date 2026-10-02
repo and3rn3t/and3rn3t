@@ -56,8 +56,8 @@
        ======================================== */
 
   /* ── Accent: Bright Green ── */
-  --primary-color: #16a34a; /* green-600 — decorative fills/borders only; use --accent-text for text */
-  --primary-dark: #15803d; /* green-700 — hover state */
+  --primary-color: #15803d; /* green-700 — fills/buttons; 5.0:1 with white text (AA) */
+  --primary-dark: #166534; /* green-800 — hover state */
   --secondary-color: #22c55e; /* green-500 */
   --accent-color: #16a34a;
   --accent-light: #dcfce7; /* green-100 — subtle tints */
@@ -801,7 +801,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: var(--text-white);
   border-color: var(--primary-color);
 }
