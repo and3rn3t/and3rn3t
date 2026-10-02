@@ -103,14 +103,14 @@
       "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
       "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
       "created_at": "2021-07-29T15:36:40Z",
-      "updated_at": "2026-10-02T22:01:04Z",
-      "pushed_at": "2026-10-02T22:01:00Z",
+      "updated_at": "2026-10-02T22:16:21Z",
+      "pushed_at": "2026-10-02T22:16:19Z",
       "git_url": "git://github.com/and3rn3t/and3rn3t.git",
       "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
       "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
       "svn_url": "https://github.com/and3rn3t/and3rn3t",
       "homepage": "https://github.com/and3rn3t",
-      "size": 4321,
+      "size": 5217,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "JavaScript",
@@ -229,7 +229,7 @@
       "clone_url": "https://github.com/and3rn3t/jonah.git",
       "svn_url": "https://github.com/and3rn3t/jonah",
       "homepage": null,
-      "size": 522,
+      "size": 863,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -352,7 +352,7 @@
       "clone_url": "https://github.com/and3rn3t/family.git",
       "svn_url": "https://github.com/and3rn3t/family",
       "homepage": null,
-      "size": 984,
+      "size": 1123,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -475,7 +475,7 @@
       "clone_url": "https://github.com/and3rn3t/network.git",
       "svn_url": "https://github.com/and3rn3t/network",
       "homepage": null,
-      "size": 9113,
+      "size": 9010,
       "stargazers_count": 3,
       "watchers_count": 3,
       "language": "Python",
@@ -596,7 +596,7 @@
       "clone_url": "https://github.com/and3rn3t/sky.git",
       "svn_url": "https://github.com/and3rn3t/sky",
       "homepage": null,
-      "size": 1775,
+      "size": 382,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -718,7 +718,7 @@
       "clone_url": "https://github.com/and3rn3t/catastrophe.git",
       "svn_url": "https://github.com/and3rn3t/catastrophe",
       "homepage": null,
-      "size": 640327,
+      "size": 640328,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "C++",
@@ -838,7 +838,7 @@
       "clone_url": "https://github.com/and3rn3t/guess.git",
       "svn_url": "https://github.com/and3rn3t/guess",
       "homepage": "https://andernator.com",
-      "size": 25253,
+      "size": 25257,
       "stargazers_count": 1,
       "watchers_count": 1,
       "language": "TypeScript",
@@ -6223,6 +6223,125 @@
   ],
   "events": [
     {
+      "id": "16313260293",
+      "type": "PullRequestEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 390771666,
+        "name": "and3rn3t/and3rn3t",
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "action": "merged",
+        "number": 89,
+        "pull_request": {
+          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/89",
+          "id": 4722022402,
+          "number": 89,
+          "head": {
+            "ref": "fix/metrics-via-pr",
+            "sha": "a90eb649f4bd8630da060c08435e893ed0f414f9",
+            "repo": {
+              "id": 390771666,
+              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+              "name": "and3rn3t"
+            }
+          },
+          "base": {
+            "ref": "main",
+            "sha": "b19e4fec42c837780802429a2a1ca1e6d8bc3854",
+            "repo": {
+              "id": 390771666,
+              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+              "name": "and3rn3t"
+            }
+          }
+        }
+      },
+      "public": true,
+      "created_at": "2026-10-02T22:16:17Z"
+    },
+    {
+      "id": "16313145650",
+      "type": "PullRequestEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 390771666,
+        "name": "and3rn3t/and3rn3t",
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "action": "opened",
+        "number": 89,
+        "pull_request": {
+          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/89",
+          "id": 4722022402,
+          "number": 89,
+          "head": {
+            "ref": "fix/metrics-via-pr",
+            "sha": "a90eb649f4bd8630da060c08435e893ed0f414f9",
+            "repo": {
+              "id": 390771666,
+              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+              "name": "and3rn3t"
+            }
+          },
+          "base": {
+            "ref": "main",
+            "sha": "b19e4fec42c837780802429a2a1ca1e6d8bc3854",
+            "repo": {
+              "id": 390771666,
+              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+              "name": "and3rn3t"
+            }
+          }
+        }
+      },
+      "public": true,
+      "created_at": "2026-10-02T22:13:58Z"
+    },
+    {
+      "id": "22831919251",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 390771666,
+        "name": "and3rn3t/and3rn3t",
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/metrics-via-pr",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/fix/metrics-via-pr",
+        "master_branch": "main",
+        "description": "Config files for my GitHub profile.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-02T22:13:58Z"
+    },
+    {
       "id": "22831080195",
       "type": "PushEvent",
       "actor": {
@@ -10015,284 +10134,6 @@
       },
       "public": true,
       "created_at": "2026-10-02T00:19:47Z"
-    },
-    {
-      "id": "16239557365",
-      "type": "PullRequestReviewEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 1102030320,
-        "name": "and3rn3t/minecraft",
-        "url": "https://api.github.com/repos/and3rn3t/minecraft"
-      },
-      "payload": {
-        "review": {
-          "id": 5387052942,
-          "node_id": "PRR_kwDOQa-l8M8AAAABQRfnjg",
-          "user": {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          },
-          "body": null,
-          "commit_id": "4953606b32d3d8f2cd02d403d3612a430c59af92",
-          "state": "commented",
-          "html_url": "https://github.com/and3rn3t/minecraft/pull/82#pullrequestreview-5387052942",
-          "pull_request_url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82",
-          "_links": {
-            "html": {
-              "href": "https://github.com/and3rn3t/minecraft/pull/82#pullrequestreview-5387052942"
-            },
-            "pull_request": {
-              "href": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82"
-            }
-          },
-          "submitted_at": "2026-10-02T00:19:47Z",
-          "updated_at": "2026-10-02T00:19:47Z"
-        },
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82",
-          "id": 4684428164,
-          "number": 82,
-          "head": {
-            "ref": "refactor/scripts-api-web-cleanup",
-            "sha": "5260c5666181b048d11134481bb7cf69ee0dca6b",
-            "repo": {
-              "id": 1102030320,
-              "url": "https://api.github.com/repos/and3rn3t/minecraft",
-              "name": "minecraft"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "ab7a1b427dba401a87abb8823322f5cd39258f6e",
-            "repo": {
-              "id": 1102030320,
-              "url": "https://api.github.com/repos/and3rn3t/minecraft",
-              "name": "minecraft"
-            }
-          }
-        },
-        "action": "created"
-      },
-      "public": true,
-      "created_at": "2026-10-02T00:19:47Z"
-    },
-    {
-      "id": "16239556592",
-      "type": "PullRequestReviewCommentEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 1102030320,
-        "name": "and3rn3t/minecraft",
-        "url": "https://api.github.com/repos/and3rn3t/minecraft"
-      },
-      "payload": {
-        "action": "created",
-        "comment": {
-          "url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/comments/4161760771",
-          "pull_request_review_id": 5387052851,
-          "id": 4161760771,
-          "node_id": "PRRC_kwDOQa-l8M74D24D",
-          "diff_hunk": "@@ -0,0 +1,282 @@\n+\"\"\"Scheduled commands: config/command-schedule.json CRUD, guarded by a file\n+lock shared with scripts/command-scheduler.py, the daemon that actually fires\n+them.\n+\"\"\"\n+\n+import fcntl\n+import json\n+import os\n+import tempfile\n+import uuid\n+from contextlib import contextmanager\n+from datetime import datetime, timezone\n+from pathlib import Path\n+\n+from flask import Blueprint, jsonify, request\n+\n+from api import server\n+\n+bp = Blueprint(\"scheduler\", __name__)\n+\n+\n+@bp.route(\"/api/scheduler/schedules\", methods=[\"GET\"])\n+@server.require_permission(\"server.command\")\n+def list_schedules():\n+    \"\"\"List all scheduled commands\"\"\"\n+    return jsonify({\"success\": True, \"schedules\": _load_schedules().get(\"schedules\", [])}), 200\n+\n+\n+# The types scripts/command-scheduler.py knows how to fire. Anything else would\n+# be written to the file and then silently never run.\n+SCHEDULE_TYPES = (\"interval\", \"daily\", \"weekly\", \"cron\", \"once\")\n+\n+\n+@contextmanager\n+def _schedule_lock():\n+    \"\"\"Hold an exclusive lock for the length of a read-modify-write.\n+\n+    scripts/command-scheduler.py writes this file too, recording last_run and\n+    run_count on every pass. Without a lock, a pass that started before an API\n+    write lands will write the pre-edit list back over it, and a reader can\n+    catch the file mid-truncate. The daemon takes the same lock on the same\n+    path, so the two exclude each other.\n+    \"\"\"\n+    server.SCHEDULE_FILE.parent.mkdir(parents=True, exist_ok=True)\n+    lock_path = server.SCHEDULE_FILE.with_name(server.SCHEDULE_FILE.name + \".lock\")\n+    with open(lock_path, \"w\") as lock_file:\n+        fcntl.flock(lock_file, fcntl.LOCK_EX)\n+        try:\n+            yield\n+        finally:\n+            fcntl.flock(lock_file, fcntl.LOCK_UN)\n+\n+\n+def _load_schedules():\n+    \"\"\"Read the schedule file the scheduler daemon runs from.\"\"\"\n+    if not server.SCHEDULE_FILE.exists():\n+        return {\"schedules\": []}\n+    try:\n+        with open(server.SCHEDULE_FILE, \"r\") as f:\n+            return json.load(f)\n+    except json.JSONDecodeError:\n+        # Matches the daemon, which also treats an unreadable file as empty\n+        # rather than refusing to run at all.\n+        server.app.logger.error(\"Schedule file is not valid JSON; treating it as empty\")\n+        return {\"schedules\": []}\n+\n+\n+def _save_schedules(schedule_data):\n+    \"\"\"Write the schedule file back, atomically.\n+\n+    Truncating in place lets the daemon read half a document; writing a\n+    sibling and renaming means it sees either the old file or the new one.\n+    \"\"\"\n+    server.SCHEDULE_FILE.parent.mkdir(parents=True, exist_ok=True)\n+    fd, tmp_path = tempfile.mkstemp(dir=str(server.SCHEDULE_FILE.parent), prefix=\".schedule-\", suffix=\".tmp\")\n+    try:\n+        with os.fdopen(fd, \"w\") as f:\n+            json.dump(schedule_data, f, indent=2)\n+            f.flush()\n+            os.fsync(f.fileno())\n+        os.replace(tmp_path, server.SCHEDULE_FILE)\n+    except BaseException:\n+        Path(tmp_path).unlink(missing_ok=True)\n+        raise\n+\n+\n+def _schedule_type_fields(schedule_type, data):\n+    \"\"\"Pick out the fields a given schedule type needs.\n+\n+    Returns (fields, error). The defaults match\n+    ``scripts/command-scheduler.py``'s own reader, so a record written here\n+    behaves the same as one the script wrote.\n+    \"\"\"\n+    if schedule_type == \"interval\":\n+        return {\"interval_minutes\": data.get(\"interval_minutes\", 60)}, None\n+    if schedule_type == \"daily\":\n+        return {\"run_time\": data.get(\"run_time\", \"00:00\")}, None\n+    if schedule_type == \"weekly\":",
-          "path": "api/blueprints/scheduler.py",
-          "commit_id": "5260c5666181b048d11134481bb7cf69ee0dca6b",
-          "original_commit_id": "3026de5d8347802f36e43f75f3b5b3c20a199ddf",
-          "user": {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          },
-          "body": "Fixed in 4953606: _schedule_type_fields now validates interval_minutes (numeric, > 0), run_time (HH:MM, valid ranges), day_of_week (0-6) and run_datetime (parseable ISO 8601) before saving, since command-scheduler.py reads interval_minutes/run_time/day_of_week without a try/except. Covered by 10 new parametrized regression tests (tests/api/test_scheduler.py::test_malformed_schedule_fields_are_rejected) verified to fail against the unfixed code.",
-          "created_at": "2026-10-02T00:19:45Z",
-          "updated_at": "2026-10-02T00:19:46Z",
-          "html_url": "https://github.com/and3rn3t/minecraft/pull/82#discussion_r4161760771",
-          "pull_request_url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82",
-          "_links": {
-            "self": {
-              "href": "https://api.github.com/repos/and3rn3t/minecraft/pulls/comments/4161760771"
-            },
-            "html": {
-              "href": "https://github.com/and3rn3t/minecraft/pull/82#discussion_r4161760771"
-            },
-            "pull_request": {
-              "href": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82"
-            }
-          },
-          "reactions": {
-            "url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/comments/4161760771/reactions",
-            "total_count": 0,
-            "+1": 0,
-            "-1": 0,
-            "laugh": 0,
-            "hooray": 0,
-            "confused": 0,
-            "heart": 0,
-            "rocket": 0,
-            "eyes": 0
-          },
-          "in_reply_to_id": 4139896035,
-          "original_position": 98,
-          "position": 110,
-          "subject_type": "line"
-        },
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82",
-          "id": 4684428164,
-          "number": 82,
-          "head": {
-            "ref": "refactor/scripts-api-web-cleanup",
-            "sha": "5260c5666181b048d11134481bb7cf69ee0dca6b",
-            "repo": {
-              "id": 1102030320,
-              "url": "https://api.github.com/repos/and3rn3t/minecraft",
-              "name": "minecraft"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "ab7a1b427dba401a87abb8823322f5cd39258f6e",
-            "repo": {
-              "id": 1102030320,
-              "url": "https://api.github.com/repos/and3rn3t/minecraft",
-              "name": "minecraft"
-            }
-          }
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-02T00:19:45Z"
-    },
-    {
-      "id": "16239556576",
-      "type": "PullRequestReviewEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 1102030320,
-        "name": "and3rn3t/minecraft",
-        "url": "https://api.github.com/repos/and3rn3t/minecraft"
-      },
-      "payload": {
-        "review": {
-          "id": 5387052851,
-          "node_id": "PRR_kwDOQa-l8M8AAAABQRfnMw",
-          "user": {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          },
-          "body": null,
-          "commit_id": "4953606b32d3d8f2cd02d403d3612a430c59af92",
-          "state": "commented",
-          "html_url": "https://github.com/and3rn3t/minecraft/pull/82#pullrequestreview-5387052851",
-          "pull_request_url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82",
-          "_links": {
-            "html": {
-              "href": "https://github.com/and3rn3t/minecraft/pull/82#pullrequestreview-5387052851"
-            },
-            "pull_request": {
-              "href": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82"
-            }
-          },
-          "submitted_at": "2026-10-02T00:19:45Z",
-          "updated_at": "2026-10-02T00:19:46Z"
-        },
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/minecraft/pulls/82",
-          "id": 4684428164,
-          "number": 82,
-          "head": {
-            "ref": "refactor/scripts-api-web-cleanup",
-            "sha": "5260c5666181b048d11134481bb7cf69ee0dca6b",
-            "repo": {
-              "id": 1102030320,
-              "url": "https://api.github.com/repos/and3rn3t/minecraft",
-              "name": "minecraft"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "ab7a1b427dba401a87abb8823322f5cd39258f6e",
-            "repo": {
-              "id": 1102030320,
-              "url": "https://api.github.com/repos/and3rn3t/minecraft",
-              "name": "minecraft"
-            }
-          }
-        },
-        "action": "created"
-      },
-      "public": true,
-      "created_at": "2026-10-02T00:19:46Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -10308,7 +10149,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 3661,
+    "total": 3663,
     "weeks": [
       {
         "days": [
@@ -12367,7 +12208,7 @@
           },
           {
             "date": "2026-10-02",
-            "count": 41,
+            "count": 43,
             "level": 3
           }
         ]
@@ -12400,6 +12241,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-02T22:01:35Z",
+  "lastUpdated": "2026-10-02T22:16:46Z",
   "totalRepos": 52
 }
