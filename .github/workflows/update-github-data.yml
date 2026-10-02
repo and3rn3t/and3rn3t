@@ -301,9 +301,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-          # main is protected: commit to a branch and merge via PR
-          committer_branch: automation/update-metrics
-          committer_merge_method: merge
+          # main is protected: open a PR from a metrics-run-* branch and merge it
+          output_action: pull-request-merge
 
           # Options
           user: and3rn3t
