@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -261,18 +262,33 @@ jobs:
       - name: Regenerate OG images
         run: pnpm generate:og
 
-      - name: Commit and push GitHub data
+      - name: Commit GitHub data via PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
           git add github-data.json README.md og/
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d")"
-            git push
-          else
+          if git diff --cached --quiet; then
             echo "No changes to GitHub data"
+            exit 0
           fi
+
+          # main is protected (PR required), so push a branch and merge a PR.
+          BRANCH=automation/update-github-data
+          git checkout -B "$BRANCH"
+          git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d")"
+          git push --force origin "$BRANCH"
+
+          PR=$(gh pr list --head "$BRANCH" --base main --json number -q '.[0].number')
+          if [ -z "$PR" ]; then
+            PR=$(gh pr create --base main --head "$BRANCH" \
+              --title "chore: update GitHub data - $(date -u +%Y-%m-%d)" \
+              --body "Automated daily refresh of github-data.json, README featured projects, and OG images." \
+              | grep -oE '[0-9]+$')
+          fi
+          gh pr merge "$PR" --merge --delete-branch
 
   update-metrics:
     runs-on: ubuntu-latest
