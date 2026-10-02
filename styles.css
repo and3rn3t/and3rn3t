@@ -62,6 +62,7 @@
   --accent-color: #16a34a;
   --accent-light: #dcfce7; /* green-100 — subtle tints */
   --accent-text: #15803d; /* green-700 — text on white */
+  --accent-text-strong: #166534; /* green-800 — text on green tints */
 
   /* ── Text (neutral gray) ── */
   --text-primary: #111827; /* gray-900 */
@@ -1923,7 +1924,7 @@ body.dark-theme .timeline::before {
   padding: var(--space-1) var(--space-2);
   border-radius: 999px;
   background: color-mix(in srgb, var(--primary-color, #16a34a) 10%, transparent);
-  color: var(--accent-text, #15803d);
+  color: var(--accent-text-strong, #166534); /* green-800: AA on tinted bg */
   border: 1px solid color-mix(in srgb, var(--primary-color, #16a34a) 25%, transparent);
   font-weight: 500;
 }
@@ -3089,6 +3090,7 @@ body.dark-theme {
   --accent-color: #4ade80;
   --accent-light: rgba(74, 222, 128, 0.12);
   --accent-text: #4ade80;
+  --accent-text-strong: #4ade80;
 
   --bg-overlay-light: rgba(10, 10, 10, 0.98);
   --bg-overlay-light-solid: rgba(10, 10, 10, 1);
