@@ -1308,7 +1308,7 @@ section {
   margin: var(--space-4) auto 0;
   max-width: 760px;
   font-size: var(--font-size-xs);
-  color: var(--text-secondary);
+  color: #d1d5db; /* gray-300: AA on the always-dark github-stats section */
 }
 
 .heatmap-legend {
