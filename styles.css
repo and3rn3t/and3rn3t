@@ -56,7 +56,7 @@
        ======================================== */
 
   /* ── Accent: Bright Green ── */
-  --primary-color: #16a34a; /* green-600 — fills, buttons (AA on white) */
+  --primary-color: #16a34a; /* green-600 — decorative fills/borders only; use --accent-text for text */
   --primary-dark: #15803d; /* green-700 — hover state */
   --secondary-color: #22c55e; /* green-500 */
   --accent-color: #16a34a;
@@ -396,7 +396,7 @@ body {
 .nav-logo {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   text-decoration: none;
   transition: color var(--transition-base);
 }
@@ -420,7 +420,7 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .nav-link::after {
@@ -814,7 +814,7 @@ body {
 
 .btn-secondary {
   background: var(--bg-primary);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   border-color: var(--primary-color);
 }
 
@@ -975,7 +975,7 @@ section {
   display: block;
   font-size: var(--font-size-5xl);
   line-height: 1;
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-2);
 }
@@ -1129,7 +1129,7 @@ section {
 
 .highlight-item i {
   font-size: var(--font-size-4xl);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   margin-bottom: var(--space-4);
 }
 
@@ -1224,7 +1224,7 @@ section {
 
 .stat-card i {
   font-size: var(--font-size-4xl);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   margin-bottom: var(--space-4);
 }
 
@@ -1527,7 +1527,7 @@ section {
 }
 
 .project-title a:hover {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .project-description {
@@ -1631,7 +1631,7 @@ section {
 .loading i {
   font-size: var(--font-size-3xl);
   margin-bottom: var(--space-4);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .projects-cta {
@@ -1764,7 +1764,7 @@ body.dark-theme .timeline::before {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
   background: color-mix(in srgb, var(--primary-color, #16a34a) 12%, transparent);
   padding: var(--space-1) var(--space-2);
   border-radius: 999px;
@@ -1780,7 +1780,7 @@ body.dark-theme .timeline::before {
 }
 
 .timeline-company-link {
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
   text-decoration: none;
   font-weight: 500;
 }
@@ -1923,7 +1923,7 @@ body.dark-theme .timeline::before {
   padding: var(--space-1) var(--space-2);
   border-radius: 999px;
   background: color-mix(in srgb, var(--primary-color, #16a34a) 10%, transparent);
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
   border: 1px solid color-mix(in srgb, var(--primary-color, #16a34a) 25%, transparent);
   font-weight: 500;
 }
@@ -1932,7 +1932,7 @@ body.dark-theme .timeline::before {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2, 0.5rem);
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
   font-size: var(--font-size-sm, 0.875rem);
   font-weight: 500;
   text-decoration: none;
@@ -1964,7 +1964,7 @@ body.dark-theme .timeline::before {
 }
 
 .blog-back-link:hover {
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
 }
 
 .blog-article-header {
@@ -1999,7 +1999,7 @@ body.dark-theme .timeline::before {
 }
 
 .blog-article-content a {
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
 }
 
 .blog-article-content code {
@@ -2036,7 +2036,7 @@ body.dark-theme .timeline::before {
 }
 
 .activity-icon {
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
   font-size: var(--font-size-xs);
   text-align: center;
 }
@@ -2057,7 +2057,7 @@ body.dark-theme .timeline::before {
 }
 
 .activity-repo:hover {
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
 }
 
 .activity-desc {
@@ -2110,7 +2110,7 @@ body.dark-theme .timeline::before {
 }
 
 .guestbook-status--success {
-  color: var(--primary-color, #16a34a);
+  color: var(--accent-text, #15803d);
 }
 .guestbook-status--error {
   color: #dc2626;
@@ -2259,7 +2259,7 @@ body.dark-theme .timeline::before {
 
 .contact-method i {
   font-size: var(--font-size-2xl);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 /* Contact Form */
@@ -2646,7 +2646,7 @@ body.dark-theme .timeline::before {
   gap: var(--space-1);
   padding: var(--space-1) var(--space-2);
   background: transparent;
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   border: 1px solid var(--primary-color);
   border-radius: var(--radius-xl);
   font-size: var(--font-size-xs);
@@ -2723,12 +2723,12 @@ body.dark-theme .timeline::before {
 }
 
 .project-long-description > summary:hover {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   background: var(--bg-secondary);
 }
 
 .project-long-description[open] > summary {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -2756,7 +2756,7 @@ body.dark-theme .timeline::before {
 }
 
 .project-highlights li::marker {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .project-stat[title] {
@@ -3148,7 +3148,7 @@ body.dark-theme .btn-primary:hover {
 
 body.dark-theme .project-link.live {
   background: transparent;
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   border-color: var(--primary-color);
 }
 
@@ -3291,7 +3291,7 @@ body.dark-theme .project-category {
 }
 
 body.dark-theme .project-recent-badge {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   border-color: var(--primary-color);
 }
 
@@ -3444,7 +3444,7 @@ details:focus {
 
 .summary-stat i {
   font-size: var(--font-size-4xl);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .stat-info h4 {
@@ -3534,7 +3534,7 @@ details:focus {
 }
 
 .top-project-title a:hover {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .top-project-description {
@@ -3553,7 +3553,7 @@ details:focus {
 }
 
 .top-project-highlights strong {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   display: block;
   margin-bottom: var(--space-2);
 }
@@ -3618,7 +3618,7 @@ details:focus {
 }
 
 .stat-badge i {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .top-project-links {
@@ -4172,7 +4172,7 @@ body.dark-theme .keyboard-help-close:hover {
 
 .search-category:hover {
   border-color: var(--primary-color);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .search-category.active {
@@ -5256,7 +5256,7 @@ body.keyboard-navigation .focus-ring:focus {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
   font-size: var(--font-size-sm);
   opacity: 0;
   transition: all var(--transition-base);
@@ -6250,7 +6250,7 @@ body.keyboard-navigation .focus-ring:focus {
 
   .contact-method i {
     font-size: var(--font-size-2xl);
-    color: var(--primary-color);
+    color: var(--accent-text, #15803d);
   }
 
   .contact-method span {
@@ -7080,7 +7080,7 @@ body.keyboard-navigation .focus-ring:focus {
 }
 
 .currently-label i {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .currently-repo {
@@ -7286,7 +7286,7 @@ body.modal-open {
 }
 
 .project-modal-stat i {
-  color: var(--primary-color);
+  color: var(--accent-text, #15803d);
 }
 
 .project-modal-stat-value {
