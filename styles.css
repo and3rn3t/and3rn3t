@@ -1611,12 +1611,12 @@ section {
 
 .project-link.live {
   background: transparent;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  color: var(--accent-text); /* green-700: AA on white */
+  border: 1px solid var(--accent-text);
 }
 
 .project-link.live:hover {
-  background: var(--primary-color);
+  background: var(--primary-dark);
   color: var(--text-white);
   transform: translateY(-2px);
 }
@@ -3744,7 +3744,7 @@ body.dark-theme .top-project-highlights {
 
 .skill-level-label {
   padding: var(--space-1) var(--space-2);
-  background: var(--primary-color);
+  background: var(--primary-dark); /* green-700: AA with white text */
   color: var(--text-white);
   border-radius: var(--radius-md);
   font-size: var(--font-size-xs);
