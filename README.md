@@ -33,47 +33,48 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [telescope](https://github.com/and3rn3t/telescope)
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
-> A general overview of the JWST for fun
+> Personal portfolio for Jonah (GitHub Spark template).
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
-### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
+### 🌐 [family](https://github.com/and3rn3t/family)
 
-> Unifying network information on a RPi 5
+> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
 
-### 🖥️ [minecraft](https://github.com/and3rn3t/minecraft)
+### 🐍 [network](https://github.com/and3rn3t/network)
 
-> Custom Minecraft Server
+> Testing UniFi API
 >
-> **Tech:** HTML
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
-### 🌐 [silas](https://github.com/and3rn3t/silas)
+### 🌐 [sky](https://github.com/and3rn3t/sky)
 
-> Personal webpage for Silas
+> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
 >
-> **Tech:** JavaScript
-
-### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
-
-> Overview and sandbox for Hugging Face AI API
->
-> **Tech:** TypeScript
+> **Tech:** TypeScript, astronomy, react, spark-template, typescript
 
 ### 🎮 [catastrophe](https://github.com/and3rn3t/catastrophe)
 
 > CATastrophe: A Mischief Simulator (Experimenting with Unreal Engine)
 >
-> **Tech:** C++
+> **Tech:** C++, cpp, gamedev, unreal-engine
 
-### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
+### 🌐 [guess](https://github.com/and3rn3t/guess)
 
-> iOS26 Weather App
+> A guessing game like "Akinator", but with more visibility to the user how it works.
 >
-> **Tech:** Swift
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
+
+### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
+
+> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
+>
+> **Tech:** JavaScript, eslint, react, shared-config, typescript
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
