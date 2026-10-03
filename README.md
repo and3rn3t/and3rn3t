@@ -33,6 +33,25 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [guess](https://github.com/and3rn3t/guess)
+
+> A guessing game like "Akinator", but with more visibility to the user how it works.
+>
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
+
+### 🐍 [network](https://github.com/and3rn3t/network)
+
+> Testing UniFi API
+>
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
+
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
 > Personal portfolio for Jonah (GitHub Spark template).
@@ -44,12 +63,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
 >
 > **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 ### 🌐 [sky](https://github.com/and3rn3t/sky)
 
@@ -63,25 +76,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** C++, cpp, gamedev, unreal-engine
 
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> A guessing game like "Akinator", but with more visibility to the user how it works.
->
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
-
 ### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
 
 > Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
 >
 > **Tech:** JavaScript, eslint, react, shared-config, typescript
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 
