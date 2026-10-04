@@ -5275,6 +5275,7 @@ body.keyboard-navigation .focus-ring:focus {
     gap: 0;
     transform: translateX(-100%);
     opacity: 0;
+    visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none;
     overflow-y: auto;
@@ -5284,6 +5285,7 @@ body.keyboard-navigation .focus-ring:focus {
   .nav-menu.active {
     transform: translateX(0);
     opacity: 1;
+    visibility: visible;
     box-shadow: var(--shadow-xl);
   }
 
@@ -6126,8 +6128,9 @@ body.keyboard-navigation .focus-ring:focus {
 
 /* Performance Optimization for Mobile */
 @media (max-width: 768px) {
-  /* Use GPU acceleration for smooth animations */
-  .nav-menu,
+  /* Use GPU acceleration for smooth animations. Not .nav-menu: its transform
+     is what slides the closed menu off-screen, and translateZ(0) here would
+     override it and leave an invisible overlay catching every tap. */
   .project-card,
   .btn,
   .social-link,
