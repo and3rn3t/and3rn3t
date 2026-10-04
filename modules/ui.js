@@ -39,7 +39,6 @@ export class UIManager {
         debug.log('[UI] Initializing UI manager...');
 
         this.initScrollAnimations();
-        this.initTypingEffect();
         this.initBackToTop();
         this.initSkillInteractions();
         this.initParallax();
@@ -191,55 +190,6 @@ export class UIManager {
 
             animationObserver.observe(el);
         }
-    }
-
-    // ========================================
-    // Typing Effect
-    // ========================================
-
-    initTypingEffect() {
-        const texts = [
-            'Full-Stack Developer',
-            'Technology Enthusiast',
-            'IoT Specialist',
-            'Problem Solver',
-        ];
-
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingSpeed = 100;
-        const deletingSpeed = 50;
-        const pauseDuration = 2000;
-
-        const heroSubtitle = document.querySelector('.hero-subtitle');
-        if (!heroSubtitle) return;
-
-        const typeEffect = () => {
-            const currentText = texts[textIndex];
-
-            if (isDeleting) {
-                heroSubtitle.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                heroSubtitle.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let timeout = isDeleting ? deletingSpeed : typingSpeed;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                timeout = pauseDuration;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-            }
-
-            setTimeout(typeEffect, timeout);
-        };
-
-        setTimeout(typeEffect, 1000);
     }
 
     // ========================================
