@@ -1039,7 +1039,7 @@ section {
 
 /* GitHub strip — dark panel inside About (stat + heatmap styles assume a dark ground) */
 .github-strip {
-  max-width: 960px;
+  max-width: var(--container-lg);
   margin: var(--space-12) auto 0;
   padding: var(--space-8);
   border-radius: var(--radius-xl);
@@ -1080,7 +1080,7 @@ section {
 
 .stat-card i {
   font-size: var(--font-size-xl);
-  color: #4ade80;
+  color: var(--secondary-color);
   margin-bottom: var(--space-2);
 }
 
@@ -1088,7 +1088,7 @@ section {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-2);
-  color: #4ade80;
+  color: var(--secondary-color);
 }
 
 .stat-content p {
