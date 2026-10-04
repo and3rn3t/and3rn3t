@@ -308,7 +308,9 @@ jobs:
           # main is protected (PR required), so push a branch and merge a PR.
           BRANCH=automation/update-github-data
           git checkout -B "$BRANCH"
-          git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d")"
+          # [skip ci]: PR checks can't run on GITHUB_TOKEN-created PRs (GitHub blocks
+          # recursive triggers), so skip them rather than leave 7 failed runs per PR.
+          git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d") [skip ci]"
           git push --force origin "$BRANCH"
 
           PR=$(gh pr list --head "$BRANCH" --base main --json number -q '.[0].number')
@@ -333,6 +335,7 @@ jobs:
 
           # main is protected: open a PR from a metrics-run-* branch and merge it
           output_action: pull-request-merge
+          committer_message: 'chore: update github-metrics.svg [skip ci]'
 
           # Options
           user: and3rn3t
@@ -366,3 +369,18 @@ jobs:
           plugin_notable_from: organization
 
           plugin_lines: yes
+
+  # Merges made with GITHUB_TOKEN don't fire push events, so pages.yml never runs
+  # for these updates on its own. Dispatch it explicitly (workflow_dispatch is
+  # exempt from that rule) so the refreshed data and SVG actually go live.
+  deploy-pages:
+    runs-on: ubuntu-latest
+    needs: [update-github-data, update-metrics]
+    if: ${{ !cancelled() && needs.update-github-data.result == 'success' }}
+    permissions:
+      actions: write
+    steps:
+      - name: Trigger Pages deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
