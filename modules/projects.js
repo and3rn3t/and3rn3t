@@ -229,7 +229,7 @@ export class ProjectsManager {
 
         const caseStudyHtml = hasCaseStudy
             ? `
-            <button type="button" class="project-case-study-btn" data-case-study="${slug}">
+            <button type="button" class="project-case-study-btn" data-case-study="${escapeHtml(slug)}">
                 <i class="fas fa-book-open" aria-hidden="true"></i>
                 Read case study
             </button>
@@ -246,7 +246,7 @@ export class ProjectsManager {
                 <p class="project-description">${escapeHtml(description)}</p>
                 ${firstHighlight ? `<p class="project-highlight-lead">→ ${escapeHtml(firstHighlight)}</p>` : ''}
                 ${caseStudyHtml}
-                
+
                 <div class="project-stats">
                     <div class="project-stat" title="Stars">
                         <i class="fas fa-star"></i>
@@ -262,7 +262,7 @@ export class ProjectsManager {
                             : ''
                     }
                 </div>
-                
+
                 <div class="project-languages">
                     <span class="language-tag primary">${escapeHtml(language)}</span>
                     ${(repo?.topics?.slice(0, 3) || metadata?.technologies?.slice(1, 4) || [])
@@ -271,7 +271,7 @@ export class ProjectsManager {
                     ${status ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
                 </div>
             </div>
-            
+
             <div class="project-links">
                 <a href="${escapeHtml(htmlUrl)}" target="_blank" rel="noopener noreferrer" class="project-link">
                     <i class="fab fa-github"></i>
