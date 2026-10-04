@@ -1,4 +1,5 @@
 allowBuilds:
   esbuild: false
+  workerd: true
 overrides:
   undici: '>=7.28.0 <8'

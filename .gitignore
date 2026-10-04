@@ -10,6 +10,8 @@ bower_components/
 
 # Build outputs
 dist/
+dist-worker/
+.wrangler/
 build/
 .tmp/
 
