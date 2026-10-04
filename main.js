@@ -148,15 +148,6 @@ async function initializeApp() {
             debug.warn('[App] Blog module skipped:', err);
         }
 
-        // Activity feed (recent GitHub events).
-        try {
-            const { activityFeed } = await import('./modules/activity-feed.js');
-            await activityFeed.init('#activity-feed');
-            appState.managers.activityFeed = activityFeed;
-        } catch (err) {
-            debug.warn('[App] Activity feed skipped:', err);
-        }
-
         // Guestbook — loads entries + wires submission form.
         try {
             const { guestbookManager } = await import('./modules/guestbook.js');

@@ -8,12 +8,12 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done · ❌ dropped
 
 ## Phase 1 — Foundation + quick wins
 
-| #   | Item                                                                                             | Status        |
-| --- | ------------------------------------------------------------------------------------------------ | ------------- |
-| 1.1 | Create this ROADMAP.md                                                                           | ✅ 2026-06-13 |
-| 1.2 | Real contribution heatmap (extend `update-github-data.yml` → render `#contribution-graph`)       | ✅ 2026-06-13 |
-| 1.3 | Real language proficiency from repo language bytes → `#main-language-stats`                      | ✅ 2026-06-13 |
-| 1.4 | Perf polish — modulepreload (✅), canvas DPR cap (already done), `content-visibility` (rejected) | ✅ 2026-10-04 |
+| #   | Item                                                                                                                                    | Status        |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 1.1 | Create this ROADMAP.md                                                                                                                  | ✅ 2026-06-13 |
+| 1.2 | Real contribution heatmap (extend `update-github-data.yml` → render `#contribution-graph`)                                              | ✅ 2026-06-13 |
+| 1.3 | Real language proficiency from repo language bytes (workflow still writes `languageBytes`; on-page bars removed in the streamline pass) | ❌ superseded |
+| 1.4 | Perf polish — modulepreload (✅), canvas DPR cap (already done), `content-visibility` (rejected)                                        | ✅ 2026-10-04 |
 
 ## Phase 2 — Signature wow features
 
@@ -34,12 +34,12 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done · ❌ dropped
 
 ## Phase 4 — Engagement & data
 
-| #   | Item                                                                                 | Status        |
-| --- | ------------------------------------------------------------------------------------ | ------------- |
-| 4.1 | View counts (Worker + KV — POST /views increments, footer widget shows count)        | ✅ 2026-06-13 |
-| 4.2 | Guestbook (Worker + KV + Turnstile — /guestbook GET/POST, in-page section)           | ✅ 2026-06-13 |
-| 4.3 | Cloudflare Web Analytics beacon live (token already embedded in index.html)          | ✅ 2026-06-13 |
-| 4.4 | Real GitHub activity feed (modules/activity-feed.js, #activity-feed in github-stats) | ✅ 2026-06-13 |
+| #   | Item                                                                                                                             | Status        |
+| --- | -------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 4.1 | View counts (Worker + KV — POST /views increments, footer widget shows count)                                                    | ✅ 2026-06-13 |
+| 4.2 | Guestbook (Worker + KV + Turnstile — /guestbook GET/POST, in-page section)                                                       | ✅ 2026-06-13 |
+| 4.3 | Cloudflare Web Analytics beacon live (token already embedded in index.html)                                                      | ✅ 2026-06-13 |
+| 4.4 | Real GitHub activity feed (Worker `/activity` kept for the currently-coding widget; feed section removed in the streamline pass) | ❌ superseded |
 
 ## Phase 5 — Quality & infra guardrails
 
@@ -140,3 +140,8 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   removed (it prefetched two unauthenticated GitHub API calls per visit and reported to a
   `gtag` that never loads); the hand-written skills proficiency matrix removed, per the
   2026-06-13 rule against invented proficiency; stale marketing docs removed from `docs/`.
+- **2026-10-04** — Streamline pass, phase 2 (sections): Skills and GitHub Statistics merged into
+  About as a tech strip and a compact dark GitHub panel (4 stats + heatmap). The languages
+  block (it repeated the tech strip) and the activity feed (it repeated the currently-coding
+  widget) were removed from the client. The workflow still writes `languageBytes` and the Worker
+  keeps `/activity` for `currently.js`. Projects now comes before Experience, and nav drops "Home".

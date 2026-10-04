@@ -6,26 +6,6 @@
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 
-// Language colors for stats display
-const LANGUAGE_COLORS = {
-    JavaScript: '#f1e05a',
-    Python: '#3572A5',
-    HTML: '#e34c26',
-    CSS: '#563d7c',
-    TypeScript: '#2b7489',
-    Java: '#b07219',
-    Go: '#00ADD8',
-    Ruby: '#701516',
-    PHP: '#4F5D95',
-    'C++': '#f34b7d',
-    C: '#555555',
-    Shell: '#89e051',
-    'C#': '#178600',
-    Swift: '#ffac45',
-    Kotlin: '#F18E33',
-    Rust: '#dea584',
-};
-
 export class UIManager {
     constructor() {
         this.isInitialized = false;
@@ -40,7 +20,6 @@ export class UIManager {
 
         this.initScrollAnimations();
         this.initBackToTop();
-        this.initSkillInteractions();
         this.initParallax();
 
         this.isInitialized = true;
@@ -166,7 +145,7 @@ export class UIManager {
 
     initScrollAnimations() {
         const animationElements = document.querySelectorAll(
-            '.hero-content, .about-text, .skills-grid, .animate-on-scroll'
+            '.hero-content, .about-text, .animate-on-scroll'
         );
 
         const animationObserver = new IntersectionObserver(
@@ -225,24 +204,6 @@ export class UIManager {
     }
 
     // ========================================
-    // Skill Interactions
-    // ========================================
-
-    initSkillInteractions() {
-        const skillItems = document.querySelectorAll('.skill-item');
-
-        for (const item of skillItems) {
-            item.addEventListener('mouseenter', function () {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-            });
-
-            item.addEventListener('mouseleave', function () {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        }
-    }
-
-    // ========================================
     // Parallax Effect
     // ========================================
 
@@ -269,7 +230,6 @@ export class UIManager {
     async loadGitHubStats() {
         const statsGrid = document.getElementById('stats-grid');
         const contributionGraph = document.getElementById('contribution-graph');
-        const languageStats = document.getElementById('main-language-stats');
 
         if (!statsGrid) return;
 
@@ -317,8 +277,6 @@ export class UIManager {
                 </div>
             `;
 
-            await this.loadLanguageStats(repos, languageStats);
-
             if (contributionGraph) {
                 const contributions = await githubAPI.getContributions();
                 this.renderContributionHeatmap(contributions, contributionGraph);
@@ -332,57 +290,6 @@ export class UIManager {
                     '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
             }
         }
-    }
-
-    async loadLanguageStats(repos, container) {
-        if (!container) {
-            container = document.getElementById('main-language-stats');
-        }
-        if (!container) return;
-
-        // Prefer real language bytes from the daily data workflow; fall back to
-        // counting each repo's primary language when bytes aren't available yet.
-        const byteData = await githubAPI.getLanguageBytes();
-        let entries;
-        if (byteData && Object.keys(byteData).length > 0) {
-            entries = Object.entries(byteData);
-        } else {
-            const languages = {};
-            for (const repo of repos) {
-                if (repo.language) {
-                    languages[repo.language] = (languages[repo.language] || 0) + 1;
-                }
-            }
-            entries = Object.entries(languages);
-        }
-
-        const sortedLanguages = entries.toSorted((a, b) => b[1] - a[1]).slice(0, 8);
-
-        const total = sortedLanguages.reduce((sum, [, count]) => sum + count, 0);
-        if (total === 0) return;
-
-        container.innerHTML = `
-            <div class="language-stats-container">
-                <h4>Languages Used</h4>
-                <div class="language-bars">
-                    ${sortedLanguages
-                        .map(([lang, count]) => {
-                            const percent = (count / total) * 100;
-                            return `
-                        <div class="language-bar-item">
-                            <div class="language-bar-header">
-                                <span class="language-name">${lang}</span>
-                                <span class="language-percentage">${percent.toFixed(1)}%</span>
-                            </div>
-                            <div class="language-bar">
-                                <div class="language-bar-fill" style="width: ${percent}%; background-color: ${LANGUAGE_COLORS[lang] || '#666'}"></div>
-                            </div>
-                        </div>`;
-                        })
-                        .join('')}
-                </div>
-            </div>
-        `;
     }
 
     // Render a GitHub-style contribution heatmap from pre-fetched calendar data.

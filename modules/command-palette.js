@@ -157,7 +157,7 @@ class CommandPalette {
         });
 
         // Skills from the DOM.
-        const skills = Array.from(document.querySelectorAll('.skill-item')).map(el => {
+        const skills = Array.from(document.querySelectorAll('.tech-chip')).map(el => {
             const name = el.textContent.trim();
             return {
                 type: 'skill',
@@ -167,7 +167,7 @@ class CommandPalette {
                 subtitle: 'Skill',
                 run: () => {
                     document
-                        .getElementById('skills')
+                        .getElementById('about')
                         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 },
             };
