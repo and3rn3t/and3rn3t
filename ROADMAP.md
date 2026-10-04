@@ -13,7 +13,7 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 | 1.1 | Create this ROADMAP.md                                                                           | ✅ 2026-06-13 |
 | 1.2 | Real contribution heatmap (extend `update-github-data.yml` → render `#contribution-graph`)       | ✅ 2026-06-13 |
 | 1.3 | Real language proficiency from repo language bytes → `#main-language-stats`                      | ✅ 2026-06-13 |
-| 1.4 | Perf polish — modulepreload (✅), canvas DPR cap (already done), `content-visibility` (deferred) | 🟡            |
+| 1.4 | Perf polish — modulepreload (✅), canvas DPR cap (already done), `content-visibility` (rejected) | ✅ 2026-10-04 |
 
 ## Phase 2 — Signature wow features
 
@@ -117,3 +117,15 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   build all green. Next: 6.4 wire the WASM hero behind the capability gate as an opt-in
   mode; 6.5 port OG images to a Rust WASM rasterizer (deferred — needs the Rust toolchain
   and Worker deploy access to validate).
+- **2026-10-04** — Catch-up refresh after a ~2.5-month gap. Escaped all project-modal output
+  and added a shared `safeUrl()` (#97). Upgraded to Vitest 5 + jsdom 30, splitting tests into
+  `unit` (jsdom) and `worker` (node) projects because `environmentMatchGlobs` is gone (#98).
+  Closed 1.4 by measuring `content-visibility: auto` on the below-fold sections against raw
+  source: about 13 ms less layout and style work on load, but 2 of the 8 `.animate-on-scroll`
+  sections never got `animate-in`, so they stayed hidden on mobile. Not worth it; rejected.
+  **The Worker is not live:** `and3rn3t-portfolio.andernet.workers.dev` returns Cloudflare
+  error 1042 on every route, and `wrangler.toml` still has `REPLACE_WITH_*` KV IDs. So 2.2
+  (currently coding), 2.3 (dynamic OG), 4.1 (view counts) and 4.2 (guestbook) are built and
+  tested but not deployed. The site shows static fallbacks, and the browser logs CORS errors
+  for `/activity`, `/views` and `/guestbook`. Needs: KV namespaces, `GH_TOKEN`/`TURNSTILE_SECRET`
+  secrets, `wrangler deploy`.
