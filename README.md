@@ -39,18 +39,18 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** Python, arm64, docker, docker-compose, flask
 
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
 > A guessing game like "Akinator", but with more visibility to the user how it works.
 >
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
-
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
 
 ### 🐍 [network](https://github.com/and3rn3t/network)
 
