@@ -3592,12 +3592,6 @@ body.dark-theme .top-project-highlights {
   box-shadow: var(--shadow-lg);
 }
 
-.skill-name {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-}
-
 /* Back to top button */
 .back-to-top {
   position: fixed;
