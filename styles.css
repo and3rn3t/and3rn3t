@@ -1427,7 +1427,15 @@ section {
 }
 
 .projects-cta {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.projects-more-btn[hidden],
+.project-card[hidden] {
+  display: none;
 }
 
 /* btn-outline in light contexts (projects section, etc.) */

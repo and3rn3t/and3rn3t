@@ -145,3 +145,9 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   block (it repeated the tech strip) and the activity feed (it repeated the currently-coding
   widget) were removed from the client. The workflow still writes `languageBytes` and the Worker
   keeps `/activity` for `currently.js`. Projects now comes before Experience, and nav drops "Home".
+- **2026-10-04** — Streamline pass, phase 3 (projects): six projects carry `featured: true` in
+  `projects-data.json` (health, homehub, guess, and3rn3t, minecraft, weather-app) and render
+  first. The rest of the list, still curated by starring repos, sits behind a "Show N more"
+  expander. Featured entries are pinned even when not starred, and the new `and3rn3t` entry is
+  the portfolio itself. Curated `technologies`/`homepage` now take precedence over repo
+  topics/homepage on cards.

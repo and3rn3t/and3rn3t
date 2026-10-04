@@ -1,7 +1,27 @@
 {
   "projects": [
     {
+      "name": "and3rn3t",
+      "featured": true,
+      "displayName": "andernet.dev — This Portfolio",
+      "description": "The site you're on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.",
+      "longDescription": "This portfolio is plain ES modules served straight from GitHub Pages: no framework, with a phased startup that lazy-loads everything beyond the critical path. The hero background is a particle flow-field written in AssemblyScript and compiled to WebAssembly. It falls back to a WebGL gradient, then to CSS, depending on what the device can handle. A small Cloudflare Worker covers what static hosting can't: Open Graph cards, a KV-backed view counter, a Turnstile-protected guestbook, and a cached feed of recent GitHub activity. A daily GitHub Actions workflow refreshes repository stats and the contribution calendar, so the numbers on the page stay current.",
+      "technologies": ["JavaScript", "WebAssembly", "Cloudflare Workers", "Vite", "GitHub Actions"],
+      "highlights": [
+        "Framework-free ES modules with a phased, lazy-loaded startup",
+        "AssemblyScript → WebAssembly particle flow-field with WebGL and CSS fallbacks",
+        "Cloudflare Worker + KV for OG cards, view counts, guestbook and live activity",
+        "Daily Actions workflow keeps stats and the contribution heatmap fresh",
+        "ESLint, Vitest, Playwright + axe-core and Lighthouse CI on every change"
+      ],
+      "category": "Tools & Automation",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/and3rn3t",
+      "homepage": "https://andernet.dev"
+    },
+    {
       "name": "health",
+      "featured": true,
       "displayName": "Health Analytics Platform",
       "description": "A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors. Live at health.andernet.dev.",
       "longDescription": "This project combines iPhone LiDAR depth sensing with Apple HealthKit to analyze gait patterns without any wearable hardware. The iPhone becomes the sensor; a TypeScript web dashboard consumes live health data through the companion HealthKitBridge local HTTP server. The platform identifies walking irregularities, tracks wellness trends over time, and surfaces personalized insights — all processed on-device with no cloud intermediary. It's a real system with a live deployment, not a prototype.",
@@ -34,6 +54,7 @@
     },
     {
       "name": "homehub",
+      "featured": true,
       "displayName": "Home Automation Hub",
       "description": "A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.",
       "longDescription": "HomeHub is a self-hosted TypeScript application that centralises control of lights, locks, thermostats, and sensors across different smart home ecosystems. It uses a WebSocket-driven architecture for sub-second device state updates without polling, and a custom rule engine for time- and state-based automations. Strong TypeScript typing is applied end-to-end — device state, event payloads, and automation rules all have explicit schemas — making the codebase maintainable as integrations grow. The project reflects how I approach personal infrastructure: I'd rather build a well-architected tool than configure someone else's SaaS.",
@@ -162,6 +183,7 @@
     },
     {
       "name": "minecraft",
+      "featured": true,
       "displayName": "Self-Hosted Minecraft Server",
       "description": "A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.",
       "longDescription": "The interesting part of this project isn't Minecraft — it's the operational layer around it. A single provisioning script takes a fresh Linux host to a fully-configured, plugin-loaded server. Scheduled backups run with rotation policies to protect world data. A lightweight vanilla JavaScript dashboard surfaces real-time player count, server TPS, and JVM resource usage without any framework overhead. Everything is version-controlled: configs, scripts, and plugin manifests. It's the same infrastructure-as-code mindset I apply to production systems, applied to something I actually use.",
@@ -210,6 +232,7 @@
     },
     {
       "name": "guess",
+      "featured": true,
       "displayName": "Guess — Transparent Akinator",
       "description": "A 20-questions game that makes its decision tree fully visible as you play. Live at andernator.com — built to make information-theoretic narrowing tangible.",
       "longDescription": "Guess is a TypeScript implementation of a 20-questions-style guessing game, with one key difference from Akinator: the algorithm is fully transparent. As you answer each question, the UI shows which candidates remain, the current confidence score, and why the next question was chosen — exposing the entropy-based selection logic in real time. The goal was to make constraint satisfaction feel intuitive rather than magical. It's live at andernator.com, works in any browser, and the decision tree logic is written from scratch with no external AI APIs.",
@@ -226,6 +249,7 @@
     },
     {
       "name": "weather-app",
+      "featured": true,
       "displayName": "iOS 26 Weather App",
       "description": "A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple's updated design system, WeatherKit, and Dynamic Island integration.",
       "longDescription": "Built to stay current with Apple's platform as it evolves, this app tracks the iOS 26 design system and API changes in real time during the beta cycle. It uses WeatherKit for location-aware forecasts — Apple's privacy-respecting alternative to third-party weather APIs — and adopts the updated SwiftUI component system and visual language introduced in iOS 26. Dynamic Island integration provides glanceable weather state without opening the app. The project is less about the weather data and more about developing fluency with the latest Apple SDK while it's still in flux.",

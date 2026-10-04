@@ -38,6 +38,8 @@ export class ProjectsManager {
         this.projects = [];
         this.projectsData = null;
         this.container = null;
+        this.moreButton = null;
+        this.extraCount = 0;
         this.isLoading = false;
         this.isInitialized = false;
     }
@@ -146,6 +148,14 @@ export class ProjectsManager {
             }));
         }
 
+        // Featured projects are pinned from projects-data.json even when not starred.
+        const listed = new Set(this.projects.map(p => p.metadata?.name ?? p.repo?.name));
+        for (const metadata of this.projectsData?.projects ?? []) {
+            if (metadata.featured && !listed.has(metadata.name)) {
+                this.projects.push({ metadata, repo: repoMap.get(metadata.name) ?? null });
+            }
+        }
+
         this.renderProjects();
         debug.log(`[Projects] Rendered ${this.projects.length} projects`);
         this.isLoading = false;
@@ -157,18 +167,81 @@ export class ProjectsManager {
         this.container.innerHTML = '';
 
         // Sort by pushed_at descending; curated-only entries (no repo) go last
-        const sorted = [...this.projects].sort((a, b) => {
+        const byPushed = (a, b) => {
             const aDate = a.repo?.pushed_at ? new Date(a.repo.pushed_at) : new Date(0);
             const bDate = b.repo?.pushed_at ? new Date(b.repo.pushed_at) : new Date(0);
             return bDate - aDate;
-        });
+        };
 
-        for (const { metadata, repo } of sorted) {
+        // Featured cards show first; the rest stay hidden behind "Show more".
+        // With no featured flags (e.g. metadata failed to load) everything shows.
+        const featured = this.projects.filter(p => p.metadata?.featured).sort(byPushed);
+        const rest = this.projects.filter(p => !p.metadata?.featured).sort(byPushed);
+        const hideRest = featured.length > 0;
+
+        for (const { metadata, repo } of featured) {
+            this.container.appendChild(this.createProjectCard(repo, metadata));
+        }
+        for (const { metadata, repo } of rest) {
             const card = this.createProjectCard(repo, metadata);
+            if (hideRest) {
+                card.dataset.extra = '';
+                card.hidden = true;
+            }
             this.container.appendChild(card);
         }
 
+        this.extraCount = hideRest ? rest.length : 0;
+        this.setupShowMore();
+
+        // A deep link to a hidden project's case study expands the grid, so the
+        // modal can return focus to a visible card when it closes.
+        const slug = globalThis.location.hash.startsWith('#project/')
+            ? decodeURIComponent(globalThis.location.hash.slice('#project/'.length))
+            : null;
+        const deepLinked = slug
+            ? [...this.container.querySelectorAll('[data-case-study]')].find(
+                  el => el.dataset.caseStudy === slug
+              )
+            : null;
+        if (deepLinked?.closest('[data-extra]')) this.setExpanded(true);
+
         this.animateCards();
+    }
+
+    setupShowMore() {
+        this.moreButton ??= document.getElementById('projects-more-btn');
+        const btn = this.moreButton;
+        if (!btn) return;
+
+        btn.hidden = this.extraCount === 0;
+        this.setExpanded(false);
+
+        if (!btn.dataset.bound) {
+            btn.dataset.bound = 'true';
+            btn.addEventListener('click', () => {
+                const expand = btn.getAttribute('aria-expanded') !== 'true';
+                this.setExpanded(expand);
+                if (expand) {
+                    this.container
+                        ?.querySelector('[data-extra] .project-title a')
+                        ?.focus({ preventScroll: false });
+                }
+            });
+        }
+    }
+
+    setExpanded(expand) {
+        for (const card of this.container?.querySelectorAll('[data-extra]') ?? []) {
+            card.hidden = !expand;
+        }
+        const btn = this.moreButton;
+        if (!btn) return;
+        const plural = this.extraCount === 1 ? '' : 's';
+        btn.setAttribute('aria-expanded', String(expand));
+        btn.textContent = expand
+            ? 'Show fewer projects'
+            : `Show ${this.extraCount} more project${plural}`;
     }
 
     createProjectCard(repo, metadata) {
@@ -185,8 +258,13 @@ export class ProjectsManager {
         const language = repo?.language || metadata?.technologies?.[0] || 'Code';
         const htmlUrl =
             repo?.html_url || `https://github.com/${metadata?.github_repo || 'and3rn3t'}`;
-        const homepage = repo?.homepage;
+        const homepage = metadata?.homepage ?? repo?.homepage;
         const highlights = metadata?.highlights ?? [];
+        // Up to three tags beyond the primary language, curated first; skip
+        // whichever one is already shown as the primary tag.
+        const secondaryTags = (metadata?.technologies ?? repo?.topics ?? [])
+            .filter(tag => tag.toLowerCase() !== language.toLowerCase())
+            .slice(0, 3);
 
         // Relative push time ("3 days ago", "2 months ago")
         const pushedAt = repo?.pushed_at;
@@ -265,7 +343,7 @@ export class ProjectsManager {
 
                 <div class="project-languages">
                     <span class="language-tag primary">${escapeHtml(language)}</span>
-                    ${(repo?.topics?.slice(0, 3) || metadata?.technologies?.slice(1, 4) || [])
+                    ${secondaryTags
                         .map(tag => `<span class="language-tag">${escapeHtml(tag)}</span>`)
                         .join('')}
                     ${status ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
