@@ -11,6 +11,7 @@
 
 import { debug } from './debug.js';
 import { WORKER_BASE } from './config.js';
+import { escapeHtml, safeUrl } from './utils/html.js';
 
 /** Worker endpoint for OG image generation. */
 const OG_WORKER_URL = `${WORKER_BASE}/og`;
@@ -188,17 +189,17 @@ export class ProjectModal {
         const stat = (icon, value, label) =>
             value === null || value === undefined
                 ? ''
-                : `<div class="project-modal-stat" title="${label}">
-                    <i class="fas fa-${icon}" aria-hidden="true"></i>
-                    <span class="project-modal-stat-value">${value}</span>
-                    <span class="project-modal-stat-label">${label}</span>
+                : `<div class="project-modal-stat" title="${escapeHtml(label)}">
+                    <i class="fas fa-${escapeHtml(icon)}" aria-hidden="true"></i>
+                    <span class="project-modal-stat-value">${escapeHtml(value)}</span>
+                    <span class="project-modal-stat-label">${escapeHtml(label)}</span>
                 </div>`;
 
         const techTags = (d.technologies ?? [])
-            .map(t => `<span class="language-tag">${t}</span>`)
+            .map(t => `<span class="language-tag">${escapeHtml(t)}</span>`)
             .join('');
 
-        const highlights = (d.highlights ?? []).map(h => `<li>${h}</li>`).join('');
+        const highlights = (d.highlights ?? []).map(h => `<li>${escapeHtml(h)}</li>`).join('');
 
         // Optional curated impact metrics from projects-data.json:
         // "metrics": [{ "value": "30 fps", "label": "LiDAR depth stream" }, …]
@@ -206,14 +207,15 @@ export class ProjectModal {
             .filter(m => m?.value && m?.label)
             .map(
                 m => `<div class="project-modal-metric">
-                    <span class="project-modal-metric-value">${m.value}</span>
-                    <span class="project-modal-metric-label">${m.label}</span>
+                    <span class="project-modal-metric-value">${escapeHtml(m.value)}</span>
+                    <span class="project-modal-metric-label">${escapeHtml(m.label)}</span>
                 </div>`
             )
             .join('');
 
-        const liveLink = d.homepage
-            ? `<a href="${d.homepage}" target="_blank" rel="noopener noreferrer" class="project-link live">
+        const homepage = safeUrl(d.homepage);
+        const liveLink = homepage
+            ? `<a href="${escapeHtml(homepage)}" target="_blank" rel="noopener noreferrer" class="project-link live">
                     <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
                 </a>`
             : '';
@@ -221,11 +223,11 @@ export class ProjectModal {
         return `
             <header class="project-modal-header">
                 <div class="project-modal-badges">
-                    ${d.category ? `<span class="project-category">${d.category}</span>` : ''}
-                    ${d.status ? `<span class="status-badge ${d.status.toLowerCase().replaceAll(/\s+/g, '-')}">${d.status}</span>` : ''}
+                    ${d.category ? `<span class="project-category">${escapeHtml(d.category)}</span>` : ''}
+                    ${d.status ? `<span class="status-badge ${escapeHtml(d.status.toLowerCase().replaceAll(/\s+/g, '-'))}">${escapeHtml(d.status)}</span>` : ''}
                 </div>
-                <h2 class="project-modal-title" id="project-modal-title">${d.displayName}</h2>
-                <p class="project-modal-tagline">${d.description}</p>
+                <h2 class="project-modal-title" id="project-modal-title">${escapeHtml(d.displayName)}</h2>
+                <p class="project-modal-tagline">${escapeHtml(d.description)}</p>
             </header>
 
             <div class="project-modal-stats">
@@ -241,7 +243,7 @@ export class ProjectModal {
                     ? `
                 <section class="project-modal-section">
                     <h3>Overview</h3>
-                    <p>${d.longDescription}</p>
+                    <p>${escapeHtml(d.longDescription)}</p>
                 </section>`
                     : ''
             }
@@ -277,7 +279,7 @@ export class ProjectModal {
             }
 
             <footer class="project-modal-links">
-                <a href="${d.htmlUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+                <a href="${escapeHtml(safeUrl(d.htmlUrl) ?? '#')}" target="_blank" rel="noopener noreferrer" class="project-link">
                     <i class="fab fa-github" aria-hidden="true"></i> View Code
                 </a>
                 ${liveLink}
