@@ -103,7 +103,6 @@ async function initializeApp() {
         await Promise.allSettled([
             projectsManager.init('#projects-grid'),
             uiManager.loadGitHubStats(),
-            uiManager.loadSkillsMatrix(),
         ]);
 
         appState.managers.projects = projectsManager;
@@ -138,15 +137,6 @@ async function initializeApp() {
             appState.managers.experience = experienceManager;
         } catch (err) {
             debug.warn('[App] Experience module skipped:', err);
-        }
-
-        // Testimonials section (stays hidden until data exists).
-        try {
-            const { testimonialsManager } = await import('./modules/testimonials.js');
-            await testimonialsManager.init();
-            appState.managers.testimonials = testimonialsManager;
-        } catch (err) {
-            debug.warn('[App] Testimonials module skipped:', err);
         }
 
         // Blog / writing section.
@@ -217,9 +207,6 @@ async function initializeApp() {
 
                     analyticsManager.init();
                     appState.managers.analytics = analyticsManager;
-
-                    // Additional UI enhancements
-                    loadGitHubBadges();
 
                     // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
                     try {
@@ -378,15 +365,6 @@ function initNavigation() {
             }
         });
     }
-}
-
-/**
- * Load GitHub badges
- */
-function loadGitHubBadges() {
-    // GitHub badges are loaded via external services in the HTML
-    // This function can be extended to dynamically load additional badges
-    debug.log('[App] GitHub badges loaded');
 }
 
 /**

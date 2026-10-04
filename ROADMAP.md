@@ -4,7 +4,7 @@ Multi-phase plan for the next round of work on the portfolio. Status is kept cur
 items are worked. Worker items deploy via Cloudflare/Wrangler, separate from the GitHub
 Pages static deploy.
 
-Status legend: ⬜ not started · 🟡 in progress · ✅ done
+Status legend: ⬜ not started · 🟡 in progress · ✅ done · ❌ dropped
 
 ## Phase 1 — Foundation + quick wins
 
@@ -29,7 +29,7 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done
 | --- | ----------------------------------------------------------------------------------------- | ------------- |
 | 3.1 | Blog / writing section (posts-data.json, modules/blog.js, in-page article view, feed.xml) | ✅ 2026-06-13 |
 | 3.2 | Experience / timeline section (experience-data.json, modules/experience.js)               | ✅ 2026-06-13 |
-| 3.3 | Testimonials section (static data)                                                        | ⬜            |
+| 3.3 | Testimonials section (static data)                                                        | ❌ dropped    |
 | 3.4 | Resume integration — prominent CTA + schema.org Person JSON-LD                            | ✅ 2026-06-13 |
 
 ## Phase 4 — Engagement & data
@@ -135,3 +135,8 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   `GH_TOKEN` are set; the Turnstile site key is in `modules/guestbook.js`. On andernet.dev,
   `/activity`, `/views` and `/guestbook` return 200 with CORS for andernet.dev, so 2.2, 2.3,
   4.1 and 4.2 are now actually live.
+- **2026-10-04** — Streamline pass, phase 1 (dead weight): testimonials dropped (3.3) and their
+  module, data and CSS removed; the unused Chart.js CDN script and the inline perf snippet
+  removed (it prefetched two unauthenticated GitHub API calls per visit and reported to a
+  `gtag` that never loads); the hand-written skills proficiency matrix removed, per the
+  2026-06-13 rule against invented proficiency; stale marketing docs removed from `docs/`.
