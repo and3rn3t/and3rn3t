@@ -21,32 +21,89 @@ const SCRAMBLE_CHARS = String.raw`!<>-_/[]{}—=+*^?#________`;
  * @param {number} [duration=1100] total ms
  */
 function scrambleReveal(el, finalText, duration = 1100) {
-    const { length } = finalText;
+    const chars = Array.from(finalText);
+    // Scramble glyphs are narrower than the real name, which would reflow the
+    // centred heading every frame (layout shift). Give each glyph a fixed-width
+    // cell measured from the final text, hold the heading's height, and restore
+    // plain text once everything has settled.
+    const block = el.closest('h1, h2, p') ?? el;
+    block.style.minHeight = `${block.offsetHeight}px`;
+    el.textContent = '';
+    // Cells sit in a nowrap span per word so lines still only break at spaces.
+    let word = null;
+    const cells = chars.map(char => {
+        if (char === ' ') {
+            el.append(' ');
+            word = null;
+            return null;
+        }
+        if (!word) {
+            word = document.createElement('span');
+            word.style.whiteSpace = 'nowrap';
+            el.append(word);
+        }
+        const cell = document.createElement('span');
+        cell.textContent = char;
+        word.append(cell);
+        return cell;
+    });
+    const widths = cells.map(cell => cell?.getBoundingClientRect().width ?? 0);
+    cells.forEach((cell, i) => {
+        if (!cell) return;
+        cell.style.display = 'inline-block';
+        cell.style.width = `${widths[i]}px`;
+        cell.style.textAlign = 'center';
+    });
+
     const start = performance.now();
     // Each character settles at a staggered point in the timeline.
-    const settleAt = Array.from({ length }, (_, i) => 0.3 + (i / length) * 0.6);
+    const settleAt = chars.map((_, i) => 0.3 + (i / chars.length) * 0.6);
 
     function frame(now) {
         const progress = Math.min((now - start) / duration, 1);
-        let output = '';
-        for (let i = 0; i < length; i++) {
-            const char = finalText[i];
-            if (char === ' ') {
-                output += ' ';
-            } else if (progress >= settleAt[i]) {
-                output += char;
-            } else {
-                output += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-            }
-        }
-        el.textContent = output;
+        cells.forEach((cell, i) => {
+            if (!cell) return;
+            cell.textContent =
+                progress >= settleAt[i]
+                    ? chars[i]
+                    : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        });
         if (progress < 1) {
             requestAnimationFrame(frame);
         } else {
             el.textContent = finalText;
+            block.style.minHeight = '';
         }
     }
     requestAnimationFrame(frame);
+}
+
+/**
+ * Reserve enough height on `container` for the tallest role, so typing and
+ * deleting (which wraps lines at narrow widths) never shifts the layout below.
+ * @param {HTMLElement} container
+ * @param {HTMLElement} roleEl
+ * @param {string[]} roles
+ */
+function reserveRoleHeight(container, roleEl, roles) {
+    const measure = () => {
+        const current = roleEl.textContent;
+        container.style.minHeight = '';
+        let tallest = 0;
+        for (const role of roles) {
+            roleEl.textContent = role;
+            tallest = Math.max(tallest, container.offsetHeight);
+        }
+        roleEl.textContent = current;
+        container.style.minHeight = `${tallest}px`;
+    };
+    measure();
+
+    let frame = 0;
+    globalThis.addEventListener('resize', () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(measure);
+    });
 }
 
 /**
@@ -116,6 +173,7 @@ export function initHeroText({
         if (motion.reduced) {
             roleEl.textContent = roles[0];
         } else {
+            reserveRoleHeight(roleEl.parentElement ?? roleEl, roleEl, roles);
             roleEl.textContent = '';
             rotateRoles(roleEl, roles);
         }
