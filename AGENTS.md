@@ -4,7 +4,7 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 
 ## Stack
 
-- Vite build, vanilla JS modules (not React); **pnpm** (`pnpm@11`, Node `>=24`, `.nvmrc` pinned)
+- Vite build, vanilla JS modules (not React); **pnpm** (`pnpm@11`, Node `^24.15.0 || >=26` (jsdom 30 / Vitest 5), `.nvmrc` pinned)
 - Cloudflare Worker `and3rn3t-portfolio` (`wrangler.toml`; KV binding `VIEWS_KV`)
 - Tests: Vitest unit + Playwright e2e; Lighthouse CI workflow
 - CI: `pages.yml`, `quality.yml`, `lighthouse.yml`, `update-github-data.yml` (auto-refreshes `github-data.json`)
