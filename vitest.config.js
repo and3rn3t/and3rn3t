@@ -2,11 +2,25 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
     test: {
-        // Default environment for unit tests
-        environment: 'jsdom',
-        // Worker tests run in Node (native fetch/Request/Response)
-        environmentMatchGlobs: [['tests/worker/**', 'node']],
-        include: ['tests/unit/**/*.test.js', 'tests/worker/**/*.test.js'],
+        projects: [
+            {
+                extends: true,
+                test: {
+                    name: 'unit',
+                    include: ['tests/unit/**/*.test.js'],
+                    environment: 'jsdom',
+                },
+            },
+            {
+                // Worker tests run in Node (native fetch/Request/Response)
+                extends: true,
+                test: {
+                    name: 'worker',
+                    include: ['tests/worker/**/*.test.js'],
+                    environment: 'node',
+                },
+            },
+        ],
         coverage: {
             provider: 'v8',
             reporter: ['text', 'html', 'lcov'],
