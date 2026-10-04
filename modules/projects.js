@@ -260,6 +260,11 @@ export class ProjectsManager {
             repo?.html_url || `https://github.com/${metadata?.github_repo || 'and3rn3t'}`;
         const homepage = metadata?.homepage ?? repo?.homepage;
         const highlights = metadata?.highlights ?? [];
+        // Up to three tags beyond the primary language, curated first; skip
+        // whichever one is already shown as the primary tag.
+        const secondaryTags = (metadata?.technologies ?? repo?.topics ?? [])
+            .filter(tag => tag.toLowerCase() !== language.toLowerCase())
+            .slice(0, 3);
 
         // Relative push time ("3 days ago", "2 months ago")
         const pushedAt = repo?.pushed_at;
@@ -338,7 +343,7 @@ export class ProjectsManager {
 
                 <div class="project-languages">
                     <span class="language-tag primary">${escapeHtml(language)}</span>
-                    ${(metadata?.technologies?.slice(1, 4) ?? repo?.topics?.slice(0, 3) ?? [])
+                    ${secondaryTags
                         .map(tag => `<span class="language-tag">${escapeHtml(tag)}</span>`)
                         .join('')}
                     ${status ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
