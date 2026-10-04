@@ -1,159 +1,89 @@
 /**
  * Theme Manager Module
- * Handles dark/light theme switching with system preference support
+ * Single light/dark toggle. Follows the system preference until the visitor
+ * picks a theme, then remembers that choice.
  */
 
 import { debug } from './debug.js';
 
+const STORAGE_KEY = 'theme';
+const META_COLORS = { light: '#fefefe', dark: '#1a0e0a' };
+
+function readSaved() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved === 'light' || saved === 'dark' ? saved : null;
+    } catch {
+        return null;
+    }
+}
+
+function save(theme) {
+    try {
+        localStorage.setItem(STORAGE_KEY, theme);
+    } catch {
+        // Storage blocked (private mode etc.) — the toggle still works per page view.
+    }
+}
+
+// The old theme picker stored an opt-in "follow system" flag. Following the
+// system is now the default, so that flag just means "no saved choice".
+function migrateLegacyPreference() {
+    try {
+        if (localStorage.getItem('followSystemTheme') === 'true') {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+        localStorage.removeItem('followSystemTheme');
+    } catch {
+        // Ignore — nothing to migrate without storage.
+    }
+}
+
 export class ThemeManager {
+    button = null;
+    currentTheme = 'light';
+    // Suppress the View Transition on the very first paint (avoids a flash)
+    ready = false;
+
     constructor() {
-        this.themes = ['light', 'dark'];
-        this.currentTheme = this.getInitialTheme();
-        this.followSystem = localStorage.getItem('followSystemTheme') === 'true';
-
-        this.toggle = null;
-        this.menu = null;
-        this.closeBtn = null;
-        this.options = [];
-        this.systemCheckbox = null;
-        // Suppress the View Transition on the very first paint (avoids a flash)
-        this.ready = false;
-
         this.init();
     }
 
     init() {
-        this.initializeElements();
-        this.applyTheme(this.currentTheme, false);
+        migrateLegacyPreference();
+        this.button = document.getElementById('theme-toggle');
+
+        this.commitTheme(readSaved() ?? this.getSystemTheme());
         this.setupEventListeners();
-        this.setupSystemThemeListener();
         this.ready = true;
         debug.log('[Theme] Manager initialized with theme:', this.currentTheme);
     }
 
-    initializeElements() {
-        this.toggle = document.getElementById('theme-toggle');
-        this.menu = document.getElementById('theme-picker-menu');
-        this.closeBtn = document.getElementById('theme-picker-close');
-        this.options = document.querySelectorAll('.theme-option');
-        this.systemCheckbox = document.getElementById('follow-system-theme');
-
-        if (this.systemCheckbox) {
-            this.systemCheckbox.checked = this.followSystem;
-        }
-    }
-
-    getInitialTheme() {
-        // Check if user wants to follow system preference
-        if (localStorage.getItem('followSystemTheme') === 'true') {
-            return this.getSystemTheme();
-        }
-
-        // Otherwise use saved preference or default to light
-        return localStorage.getItem('theme') || 'light';
-    }
-
     getSystemTheme() {
-        if (
-            globalThis.matchMedia &&
-            globalThis.matchMedia('(prefers-color-scheme: dark)').matches
-        ) {
-            return 'dark';
-        }
-        return 'light';
+        return globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
     setupEventListeners() {
-        // Toggle button opens/closes menu
-        if (this.toggle) {
-            this.toggle.addEventListener('click', () => {
-                this.toggleMenu();
-            });
-        }
+        this.button?.addEventListener('click', () => this.toggle());
 
-        // Close button
-        if (this.closeBtn) {
-            this.closeBtn.addEventListener('click', () => {
-                this.closeMenu();
-            });
-        }
-
-        // Theme options
-        this.options.forEach(option => {
-            option.addEventListener('click', e => {
-                const { theme } = e.currentTarget.dataset;
-                this.applyTheme(theme);
-                this.closeMenu();
-            });
-        });
-
-        // System preference checkbox
-        if (this.systemCheckbox) {
-            this.systemCheckbox.addEventListener('change', e => {
-                this.followSystem = e.target.checked;
-                localStorage.setItem('followSystemTheme', this.followSystem);
-
-                if (this.followSystem) {
-                    this.applyTheme(this.getSystemTheme());
-                }
-            });
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', e => {
-            if (!e.target.closest('.theme-picker-container')) {
-                this.closeMenu();
-            }
-        });
-
-        // Keyboard shortcuts
+        // Press 'T' to toggle the theme (ignored while typing or with modifiers).
         document.addEventListener('keydown', e => {
-            // Don't trigger if typing in input
-            const isTyping =
-                document.activeElement.tagName === 'INPUT' ||
-                document.activeElement.tagName === 'TEXTAREA';
+            if (e.key !== 't' && e.key !== 'T') return;
+            if (e.metaKey || e.ctrlKey || e.altKey) return;
+            const el = document.activeElement;
+            if (el?.closest('input, textarea, select, [contenteditable="true"]')) return;
+            e.preventDefault();
+            this.toggle();
+        });
 
-            if (isTyping) return;
-
-            // Press 'T' to toggle theme menu
-            if (e.key === 't' || e.key === 'T') {
-                e.preventDefault();
-                this.toggleMenu();
-            }
-
-            // Press 'Escape' to close menu
-            if (e.key === 'Escape' && this.menu?.classList.contains('active')) {
-                this.closeMenu();
-            }
+        // Track the OS setting until the visitor makes an explicit choice.
+        globalThis.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!readSaved()) this.applyTheme(e.matches ? 'dark' : 'light');
         });
     }
 
-    setupSystemThemeListener() {
-        if (!globalThis.matchMedia) return;
-
-        const darkModeQuery = globalThis.matchMedia('(prefers-color-scheme: dark)');
-        darkModeQuery.addEventListener('change', e => {
-            if (this.followSystem) {
-                const theme = e.matches ? 'dark' : 'light';
-                this.applyTheme(theme, false);
-            }
-        });
-    }
-
-    toggleMenu() {
-        if (this.menu) {
-            this.menu.classList.toggle('active');
-        }
-    }
-
-    closeMenu() {
-        if (this.menu) {
-            this.menu.classList.remove('active');
-        }
-    }
-
-    applyTheme(theme, savePreference = true) {
-        const commit = () => this.commitTheme(theme, savePreference);
+    applyTheme(theme) {
+        const commit = () => this.commitTheme(theme);
 
         const supportsViewTransitions = typeof document.startViewTransition === 'function';
         const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -170,68 +100,39 @@ export class ThemeManager {
 
     setTransitionOrigin() {
         const root = document.documentElement;
-        const rect = this.toggle?.getBoundingClientRect();
-        if (rect) {
-            root.style.setProperty('--theme-x', `${rect.left + rect.width / 2}px`);
-            root.style.setProperty('--theme-y', `${rect.top + rect.height / 2}px`);
-        } else {
-            root.style.setProperty('--theme-x', '50%');
-            root.style.setProperty('--theme-y', '50%');
-        }
+        const rect = this.button?.getBoundingClientRect();
+        root.style.setProperty('--theme-x', rect ? `${rect.left + rect.width / 2}px` : '50%');
+        root.style.setProperty('--theme-y', rect ? `${rect.top + rect.height / 2}px` : '50%');
     }
 
-    commitTheme(theme, savePreference = true) {
-        // Remove all theme classes
-        document.body.classList.remove('dark-theme');
-
-        // Apply new theme class (except for light which is default)
-        if (theme === 'dark') {
-            document.body.classList.add('dark-theme');
-        }
-
+    commitTheme(theme) {
+        const isDark = theme === 'dark';
+        document.body.classList.toggle('dark-theme', isDark);
         this.currentTheme = theme;
-
-        // Save preference
-        if (savePreference) {
-            localStorage.setItem('theme', theme);
-        }
-
-        // Update active state on options
-        this.options.forEach(option => {
-            if (option.dataset.theme === theme) {
-                option.classList.add('active');
-            } else {
-                option.classList.remove('active');
-            }
-        });
+        this.updateButton(isDark);
 
         // Trigger custom event for other components
-        document.dispatchEvent(
-            new CustomEvent('themeChanged', {
-                detail: { theme, followSystem: this.followSystem },
-            })
-        );
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
 
         // Update meta theme-color
-        this.updateMetaThemeColor(theme);
-
-        debug.log('[Theme] Applied theme:', theme);
-    }
-
-    updateMetaThemeColor(theme) {
         let metaTheme = document.querySelector('meta[name="theme-color"]');
         if (!metaTheme) {
             metaTheme = document.createElement('meta');
             metaTheme.name = 'theme-color';
             document.head.appendChild(metaTheme);
         }
+        metaTheme.content = META_COLORS[theme] ?? META_COLORS.light;
 
-        const colors = {
-            light: '#fefefe',
-            dark: '#1a0e0a',
-        };
+        debug.log('[Theme] Applied theme:', theme);
+    }
 
-        metaTheme.content = colors[theme] || colors.light;
+    updateButton(isDark) {
+        if (!this.button) return;
+        const label = isDark ? 'Switch to light theme' : 'Switch to dark theme';
+        this.button.setAttribute('aria-label', label);
+        this.button.title = `${label} (T)`;
+        const icon = this.button.querySelector('i');
+        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     }
 
     // Public API
@@ -244,8 +145,9 @@ export class ThemeManager {
     }
 
     toggle() {
-        const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
-        this.applyTheme(newTheme);
+        const next = this.isDark() ? 'light' : 'dark';
+        save(next);
+        this.applyTheme(next);
     }
 }
 

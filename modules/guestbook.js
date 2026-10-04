@@ -92,6 +92,8 @@ class GuestbookManager {
                     this.#token = '';
                 },
                 theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
+                // The normal widget is a fixed 300px; use compact on very narrow screens.
+                size: container.clientWidth < 300 ? 'compact' : 'normal',
             });
         });
         document.head.appendChild(script);

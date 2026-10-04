@@ -1811,8 +1811,46 @@ body.dark-theme .timeline::before {
 }
 
 /* ─── Guestbook Section ─────────────────────────────────────────────────────── */
-.guestbook {
+/* Guestbook lives in the Contact tabs; this card mirrors .contact-form */
+.guestbook-card {
+  max-width: 800px;
+  margin: 0 auto var(--space-16);
+  padding: var(--space-10) var(--space-12);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
   background: var(--bg-primary);
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+}
+
+.guestbook-intro {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  /* Full width: Turnstile renders at a fixed 300px and must fit inside. */
+  .guestbook-card {
+    margin: 0 0 var(--space-12);
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .contact-tabs {
+    display: flex;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .contact-tab {
+    flex: 1;
+    justify-content: center;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+  }
+
+  .contact-tab i {
+    display: none;
+  }
 }
 
 .guestbook-layout {
@@ -1849,6 +1887,11 @@ body.dark-theme .timeline::before {
 }
 .guestbook-status--error {
   color: #dc2626;
+}
+
+.guestbook-form-col,
+.guestbook-entries-col {
+  min-width: 0;
 }
 
 .guestbook-entries-col {
@@ -1998,6 +2041,49 @@ body.dark-theme .timeline::before {
 }
 
 /* Contact Form */
+/* Contact tabs — segmented control above the form / guestbook cards */
+.contact-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-6);
+  padding: var(--space-1);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+}
+
+.contact-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    color var(--transition-base);
+}
+
+.contact-tab:hover {
+  color: var(--text-primary);
+}
+
+.contact-tab[aria-selected='true'] {
+  background: var(--accent-text, #15803d);
+  color: var(--text-white);
+}
+
+.contact-panel[hidden] {
+  display: none;
+}
+
 .contact-form {
   max-width: 800px;
   margin: 0 auto var(--space-16);
@@ -2587,167 +2673,6 @@ body.dark-theme .timeline::before {
   transform: scale(0.95);
 }
 
-.theme-picker-menu {
-  position: absolute;
-  bottom: 70px;
-  right: 0;
-  width: 320px;
-  max-height: 0;
-  background: var(--bg-primary);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-2xl);
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: all var(--transition-base);
-  pointer-events: none;
-}
-
-.theme-picker-menu.active {
-  max-height: 600px;
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: all;
-}
-
-.theme-picker-header {
-  padding: var(--space-5);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--bg-secondary);
-}
-
-.theme-picker-header h3 {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.theme-picker-close {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-size: var(--font-size-lg);
-  cursor: pointer;
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-base);
-}
-
-.theme-picker-close:hover {
-  color: var(--error);
-  background: var(--bg-tertiary);
-}
-
-.theme-options {
-  padding: var(--space-4);
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.theme-option {
-  width: 100%;
-  padding: var(--space-4);
-  border: 2px solid var(--border-light);
-  border-radius: var(--radius-md);
-  background: var(--bg-primary);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  margin-bottom: var(--space-3);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.theme-option:hover {
-  border-color: var(--primary-color);
-  background: var(--bg-secondary);
-  transform: translateX(4px);
-}
-
-.theme-option.active {
-  border-color: var(--primary-color);
-  background: var(--accent-light, #dcfce7);
-  box-shadow: var(--shadow-md);
-}
-
-.theme-preview {
-  width: 100%;
-  height: 50px;
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-3);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.theme-preview .preview-bar {
-  height: 15px;
-  width: 100%;
-}
-
-.theme-preview .preview-content {
-  flex: 1;
-}
-
-/* Theme preview colors */
-.light-preview .preview-bar {
-  background: #16a34a;
-}
-
-.light-preview .preview-content {
-  background: #ffffff;
-}
-
-.dark-preview .preview-bar {
-  background: #4ade80;
-}
-
-.dark-preview .preview-content {
-  background: #111827;
-}
-
-.theme-name {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--text-primary);
-  display: block;
-  margin-bottom: var(--space-1);
-}
-
-.theme-description {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  display: block;
-}
-
-.theme-picker-footer {
-  padding: var(--space-4);
-  border-top: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-}
-
-.theme-option-checkbox {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  cursor: pointer;
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
-.theme-option-checkbox input[type='checkbox'] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .theme-picker-container {
@@ -2759,11 +2684,6 @@ body.dark-theme .timeline::before {
     width: 48px;
     height: 48px;
     font-size: var(--font-size-xl);
-  }
-
-  .theme-picker-menu {
-    width: calc(100vw - 40px);
-    right: -10px;
   }
 }
 
@@ -2858,6 +2778,11 @@ body.dark-theme .project-link.live:hover {
   color: var(--bg-primary);
 }
 
+body.dark-theme .contact-tab[aria-selected='true'] {
+  color: var(--bg-dark);
+}
+
+body.dark-theme .guestbook-card,
 body.dark-theme .contact-form {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
@@ -2865,19 +2790,25 @@ body.dark-theme .contact-form {
 }
 
 body.dark-theme .contact-form input,
-body.dark-theme .contact-form textarea {
+body.dark-theme .contact-form textarea,
+body.dark-theme .guestbook-card input,
+body.dark-theme .guestbook-card textarea {
   background: var(--bg-tertiary);
   border-color: var(--border-color);
   color: var(--text-primary);
 }
 
 body.dark-theme .contact-form input::placeholder,
-body.dark-theme .contact-form textarea::placeholder {
+body.dark-theme .contact-form textarea::placeholder,
+body.dark-theme .guestbook-card input::placeholder,
+body.dark-theme .guestbook-card textarea::placeholder {
   color: var(--text-light);
 }
 
 body.dark-theme .contact-form input:focus,
-body.dark-theme .contact-form textarea:focus {
+body.dark-theme .contact-form textarea:focus,
+body.dark-theme .guestbook-card input:focus,
+body.dark-theme .guestbook-card textarea:focus {
   border-color: var(--primary-color);
   box-shadow: var(--shadow-focus);
 }
@@ -2990,36 +2921,6 @@ body.dark-theme .recent-dot {
 
 body.dark-theme .project-card--recent {
   border-left-color: var(--primary-color);
-}
-
-body.dark-theme .theme-picker-menu {
-  background: var(--bg-secondary);
-  border-color: var(--border-color);
-}
-
-body.dark-theme .theme-picker-header {
-  background: var(--bg-tertiary);
-  border-color: var(--border-color);
-}
-
-body.dark-theme .theme-option {
-  background: var(--bg-secondary);
-  border-color: var(--border-color);
-}
-
-body.dark-theme .theme-option:hover {
-  background: var(--bg-tertiary);
-  border-color: var(--primary-color);
-}
-
-body.dark-theme .theme-option.active {
-  background: var(--accent-light);
-  border-color: var(--primary-color);
-}
-
-body.dark-theme .theme-picker-footer {
-  background: var(--bg-tertiary);
-  border-color: var(--border-color);
 }
 
 body.dark-theme .keyboard-help-content {

@@ -912,98 +912,208 @@
             or just a conversation about health tech, home automation, or data engineering.
           </p>
 
-          <!-- Contact Form -->
-          <form
-            class="contact-form"
-            action="https://formspree.io/f/xqagvdrq"
-            method="POST"
-            id="contact-form"
+          <div class="contact-tabs" role="tablist" aria-label="Ways to get in touch">
+            <button
+              type="button"
+              class="contact-tab"
+              role="tab"
+              id="contact-tab-message"
+              aria-controls="contact-panel-message"
+              aria-selected="true"
+            >
+              <i class="fas fa-paper-plane" aria-hidden="true"></i> Send a message
+            </button>
+            <button
+              type="button"
+              class="contact-tab"
+              role="tab"
+              id="contact-tab-guestbook"
+              aria-controls="contact-panel-guestbook"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              <i class="fas fa-pen" aria-hidden="true"></i> Sign the guestbook
+            </button>
+          </div>
+
+          <div
+            class="contact-panel"
+            role="tabpanel"
+            id="contact-panel-message"
+            aria-labelledby="contact-tab-message"
           >
-            <div class="form-row">
+            <form
+              class="contact-form"
+              action="https://formspree.io/f/xqagvdrq"
+              method="POST"
+              id="contact-form"
+            >
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="form-input"
+                    placeholder="Your full name"
+                    aria-describedby="name-error"
+                    autocomplete="name"
+                    minlength="2"
+                    maxlength="100"
+                  />
+                  <span
+                    class="error-message"
+                    id="name-error"
+                    role="alert"
+                    aria-live="polite"
+                  ></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="form-input"
+                    placeholder="your.email@example.com"
+                    aria-describedby="email-error"
+                    autocomplete="email"
+                    maxlength="254"
+                  />
+                  <span
+                    class="error-message"
+                    id="email-error"
+                    role="alert"
+                    aria-live="polite"
+                  ></span>
+                </div>
+              </div>
+
               <div class="form-group">
-                <label for="name">Name *</label>
+                <label for="subject">Subject *</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="subject"
+                  name="subject"
                   required
                   class="form-input"
-                  placeholder="Your full name"
-                  aria-describedby="name-error"
-                  autocomplete="name"
-                  minlength="2"
-                  maxlength="100"
+                  placeholder="What would you like to discuss?"
+                  aria-describedby="subject-error"
+                  minlength="3"
+                  maxlength="200"
                 />
-                <span class="error-message" id="name-error" role="alert" aria-live="polite"></span>
+                <span
+                  class="error-message"
+                  id="subject-error"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
               </div>
 
               <div class="form-group">
-                <label for="email">Email *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
+                <label for="message">Message *</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
                   required
-                  class="form-input"
-                  placeholder="your.email@example.com"
-                  aria-describedby="email-error"
-                  autocomplete="email"
-                  maxlength="254"
-                />
-                <span class="error-message" id="email-error" role="alert" aria-live="polite"></span>
+                  class="form-textarea"
+                  placeholder="Tell me about your project, idea, or how we can work together..."
+                  aria-describedby="message-error"
+                  minlength="10"
+                  maxlength="5000"
+                ></textarea>
+                <span
+                  class="error-message"
+                  id="message-error"
+                  role="alert"
+                  aria-live="polite"
+                ></span>
+              </div>
+
+              <!-- Honeypot for spam protection -->
+              <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true" />
+
+              <button
+                type="submit"
+                class="btn btn-primary submit-button"
+                id="submit-button"
+                aria-describedby="form-status"
+              >
+                <span class="submit-text">Send Message</span>
+                <i class="fas fa-paper-plane submit-icon"></i>
+                <div class="loading-spinner">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </div>
+              </button>
+
+              <output class="form-status" id="form-status" aria-live="polite"></output>
+            </form>
+          </div>
+
+          <div
+            class="contact-panel guestbook-card"
+            role="tabpanel"
+            id="contact-panel-guestbook"
+            aria-labelledby="contact-tab-guestbook"
+            hidden
+          >
+            <p class="guestbook-intro">
+              Leave a public note. Say hello, or tell me what you're building.
+            </p>
+            <div class="guestbook-layout">
+              <div class="guestbook-form-col">
+                <form id="guestbook-form" class="guestbook-form" novalidate>
+                  <div class="form-group">
+                    <label for="gb-name">Name</label>
+                    <input
+                      type="text"
+                      id="gb-name"
+                      name="name"
+                      required
+                      class="form-input"
+                      placeholder="Your name"
+                      maxlength="60"
+                      autocomplete="name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="gb-message">Message</label>
+                    <textarea
+                      id="gb-message"
+                      name="message"
+                      rows="4"
+                      required
+                      class="form-textarea"
+                      placeholder="What's on your mind?"
+                      maxlength="500"
+                    ></textarea>
+                  </div>
+                  <div id="turnstile-container" class="turnstile-container"></div>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-pen" aria-hidden="true"></i> Sign guestbook
+                  </button>
+                  <output
+                    id="guestbook-status"
+                    class="guestbook-status"
+                    aria-live="polite"
+                  ></output>
+                </form>
+              </div>
+              <div class="guestbook-entries-col">
+                <div id="guestbook-entries" aria-label="Guestbook entries">
+                  <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading entries...</p>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="form-group">
-              <label for="subject">Subject *</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                required
-                class="form-input"
-                placeholder="What would you like to discuss?"
-                aria-describedby="subject-error"
-                minlength="3"
-                maxlength="200"
-              />
-              <span class="error-message" id="subject-error" role="alert" aria-live="polite"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message *</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                required
-                class="form-textarea"
-                placeholder="Tell me about your project, idea, or how we can work together..."
-                aria-describedby="message-error"
-                minlength="10"
-                maxlength="5000"
-              ></textarea>
-              <span class="error-message" id="message-error" role="alert" aria-live="polite"></span>
-            </div>
-
-            <!-- Honeypot for spam protection -->
-            <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true" />
-
-            <button
-              type="submit"
-              class="btn btn-primary submit-button"
-              id="submit-button"
-              aria-describedby="form-status"
-            >
-              <span class="submit-text">Send Message</span>
-              <i class="fas fa-paper-plane submit-icon"></i>
-              <div class="loading-spinner">
-                <i class="fas fa-spinner fa-spin"></i>
-              </div>
-            </button>
-
-            <output class="form-status" id="form-status" aria-live="polite"></output>
-          </form>
+          </div>
 
           <div class="contact-methods">
             <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
@@ -1028,58 +1138,6 @@
               <i class="fab fa-linkedin"></i>
               <span>LinkedIn</span>
             </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Guestbook Section -->
-    <section class="guestbook animate-on-scroll" id="guestbook">
-      <div class="container">
-        <h2 class="section-title">Guestbook</h2>
-        <p class="section-intro">Leave a note. Say hello. Tell me what you're building.</p>
-        <div class="guestbook-layout">
-          <div class="guestbook-form-col">
-            <form id="guestbook-form" class="guestbook-form" novalidate>
-              <div class="form-group">
-                <label for="gb-name">Name</label>
-                <input
-                  type="text"
-                  id="gb-name"
-                  name="name"
-                  required
-                  class="form-input"
-                  placeholder="Your name"
-                  maxlength="60"
-                  autocomplete="name"
-                />
-              </div>
-              <div class="form-group">
-                <label for="gb-message">Message</label>
-                <textarea
-                  id="gb-message"
-                  name="message"
-                  rows="4"
-                  required
-                  class="form-textarea"
-                  placeholder="What's on your mind?"
-                  maxlength="500"
-                ></textarea>
-              </div>
-              <div id="turnstile-container" class="turnstile-container"></div>
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-pen" aria-hidden="true"></i> Sign guestbook
-              </button>
-              <output id="guestbook-status" class="guestbook-status" aria-live="polite"></output>
-            </form>
-          </div>
-          <div class="guestbook-entries-col">
-            <div id="guestbook-entries" aria-label="Guestbook entries">
-              <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Loading entries...</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1131,56 +1189,17 @@
       }
     </script>
 
-    <!-- Theme Picker -->
+    <!-- Theme Toggle -->
     <div class="theme-picker-container">
       <button
+        type="button"
         class="theme-toggle"
         id="theme-toggle"
-        aria-label="Open theme picker"
-        title="Change Theme (T)"
+        aria-label="Switch to dark theme"
+        title="Switch to dark theme (T)"
       >
-        <i class="fas fa-palette"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
       </button>
-
-      <div class="theme-picker-menu" id="theme-picker-menu" aria-label="Theme selection">
-        <div class="theme-picker-header">
-          <h3>Choose Theme</h3>
-          <button
-            class="theme-picker-close"
-            id="theme-picker-close"
-            aria-label="Close theme picker"
-          >
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <div class="theme-options" role="menu">
-          <button class="theme-option" data-theme="light" role="menuitem">
-            <div class="theme-preview light-preview">
-              <div class="preview-bar"></div>
-              <div class="preview-content"></div>
-            </div>
-            <span class="theme-name">☀️ Light</span>
-            <span class="theme-description">Default bright theme</span>
-          </button>
-
-          <button class="theme-option" data-theme="dark" role="menuitem">
-            <div class="theme-preview dark-preview">
-              <div class="preview-bar"></div>
-              <div class="preview-content"></div>
-            </div>
-            <span class="theme-name">🌙 Dark</span>
-            <span class="theme-description">Easy on the eyes</span>
-          </button>
-        </div>
-
-        <div class="theme-picker-footer">
-          <label class="theme-option-checkbox">
-            <input type="checkbox" id="follow-system-theme" />
-            <span>Follow system preference</span>
-          </label>
-        </div>
-      </div>
     </div>
 
     <!-- Main application script (ES6 modules) -->
