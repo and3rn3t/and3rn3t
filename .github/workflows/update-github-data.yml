@@ -310,6 +310,13 @@ jobs:
           base: header, activity, community, repositories, metadata
           config_timezone: America/New_York
 
+          # Fail the run instead of rendering error boxes into the committed SVG.
+          plugins_errors_fatal: yes
+
+          # The activity and habits plugins are intentionally off. They read commit
+          # lists from PushEvent payloads, which GitHub's events API no longer returns,
+          # so they crash on every run (lowlighter/metrics is unmaintained since 2023).
+
           # Enable plugins
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
@@ -328,17 +335,4 @@ jobs:
           plugin_notable: yes
           plugin_notable_from: organization
 
-          plugin_activity: yes
-          plugin_activity_days: 14
-          plugin_activity_filter: all
-          plugin_activity_limit: 5
-          plugin_activity_load: 300
-          plugin_activity_visibility: all
-
           plugin_lines: yes
-
-          plugin_habits: yes
-          plugin_habits_charts: yes
-          plugin_habits_days: 14
-          plugin_habits_facts: yes
-          plugin_habits_from: 200
