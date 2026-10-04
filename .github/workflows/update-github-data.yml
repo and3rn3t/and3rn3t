@@ -87,6 +87,36 @@ jobs:
               print(f'  Events unavailable: {exc}')
               events = []
 
+          # The events API no longer includes commit lists in PushEvent payloads or
+          # titles in PullRequestEvent payloads; fill them back in from the commit/PR
+          # endpoints so the activity feed can show real messages.
+          print('Hydrating push commits and PR titles...')
+          lookups, hydrated = {}, 0
+          def lookup(url):
+              if url not in lookups:
+                  try:
+                      lookups[url] = gh_get(url)
+                  except Exception as exc:
+                      print(f'  Lookup failed for {url}: {exc}')
+                      lookups[url] = None
+              return lookups[url]
+          for ev in events:
+              payload = ev.get('payload') or {}
+              repo_name = (ev.get('repo') or {}).get('name')
+              if ev.get('type') == 'PushEvent' and not payload.get('commits') and payload.get('head') and repo_name:
+                  commit = lookup(f"{BASE}/repos/{repo_name}/commits/{payload['head']}")
+                  if commit:
+                      payload['commits'] = [{'sha': commit['sha'], 'message': commit['commit']['message']}]
+                      hydrated += 1
+              elif ev.get('type') == 'PullRequestEvent':
+                  pr = payload.get('pull_request') or {}
+                  if pr.get('url') and not pr.get('title'):
+                      full = lookup(pr['url'])
+                      if full:
+                          pr['title'] = full.get('title')
+                          hydrated += 1
+          print(f'  {hydrated} events hydrated ({len(lookups)} API lookups)')
+
           print('Fetching self-starred repos...')
           try:
               starred_all = gh_get_all(
@@ -310,6 +340,13 @@ jobs:
           base: header, activity, community, repositories, metadata
           config_timezone: America/New_York
 
+          # Fail the run instead of rendering error boxes into the committed SVG.
+          plugins_errors_fatal: yes
+
+          # The activity and habits plugins are intentionally off. They read commit
+          # lists from PushEvent payloads, which GitHub's events API no longer returns,
+          # so they crash on every run (lowlighter/metrics is unmaintained since 2023).
+
           # Enable plugins
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
@@ -328,17 +365,4 @@ jobs:
           plugin_notable: yes
           plugin_notable_from: organization
 
-          plugin_activity: yes
-          plugin_activity_days: 14
-          plugin_activity_filter: all
-          plugin_activity_limit: 5
-          plugin_activity_load: 300
-          plugin_activity_visibility: all
-
           plugin_lines: yes
-
-          plugin_habits: yes
-          plugin_habits_charts: yes
-          plugin_habits_days: 14
-          plugin_habits_facts: yes
-          plugin_habits_from: 200
