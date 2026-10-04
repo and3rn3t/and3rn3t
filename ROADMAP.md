@@ -140,3 +140,8 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   removed (it prefetched two unauthenticated GitHub API calls per visit and reported to a
   `gtag` that never loads); the hand-written skills proficiency matrix removed, per the
   2026-06-13 rule against invented proficiency; stale marketing docs removed from `docs/`.
+- **2026-10-04** — Streamline pass, phase 2 (sections): Skills and GitHub Statistics merged into
+  About as a tech strip and a compact dark GitHub panel (4 stats + heatmap). The languages
+  block (it repeated the tech strip) and the activity feed (it repeated the currently-coding
+  widget) were removed from the client. The workflow still writes `languageBytes` and the Worker
+  keeps `/activity` for `currently.js`. Projects now comes before Experience, and nav drops "Home".

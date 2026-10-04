@@ -244,13 +244,6 @@ export class GitHubAPIManager {
         return cachedData?.contributions ?? null;
     }
 
-    // Pre-fetched language byte totals across non-fork repos (from the daily data
-    // workflow). Returns { [language]: bytes } sorted desc, or null if unavailable.
-    async getLanguageBytes() {
-        const cachedData = await this.loadCachedGitHubData();
-        return cachedData?.languageBytes ?? null;
-    }
-
     async getUserEvents(per_page = 30) {
         return this.fetchGitHubData(
             `/users/${GitHubAPIManager.username}/events`,

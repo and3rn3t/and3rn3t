@@ -978,9 +978,7 @@ section {
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
     .section-title,
-    .about-highlights,
     .projects-grid,
-    .skills-grid,
     .blog-posts-grid,
     .stats-grid,
     .timeline {
@@ -1019,116 +1017,58 @@ section {
   color: var(--text-secondary);
 }
 
-.about-highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-8);
-  margin-top: var(--space-12);
-}
-
-.highlight-item {
-  text-align: center;
-  padding: var(--space-8);
-  background: var(--bg-primary);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  transition:
-    transform var(--transition-slow),
-    box-shadow var(--transition-slow);
-}
-
-.highlight-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-dark);
-}
-
-.highlight-item i {
-  font-size: var(--font-size-4xl);
-  color: var(--accent-text, #15803d);
-  margin-bottom: var(--space-4);
-}
-
-.highlight-item h3 {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-2);
-  color: var(--text-primary);
-}
-
-.highlight-item p {
-  color: var(--text-secondary);
-}
-
-/* Skills Section */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-8);
-}
-
-.skill-category {
-  background: var(--bg-primary);
-  padding: var(--space-8);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-slow);
-}
-
-.skill-category:hover {
-  transform: translateY(-3px);
-}
-
-.skill-category h3 {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-6);
-  color: var(--text-primary);
-  text-align: center;
-}
-
-.skill-items {
+/* Compact tech strip — the real stack, no proficiency levels */
+.tech-strip {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.skill-item {
+.tech-chip {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  transition: all var(--transition-base);
-  border: 2px solid transparent;
 }
 
-.skill-item:hover {
-  background: var(--primary-color);
-  color: var(--text-white);
-  transform: translateY(-2px);
-}
-
-/* GitHub Stats Section */
-.github-stats {
-  padding: var(--space-24) 0;
+/* GitHub strip — dark panel inside About (stat + heatmap styles assume a dark ground) */
+.github-strip {
+  max-width: 960px;
+  margin: var(--space-12) auto 0;
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
   background: var(--bg-dark);
+  color: var(--text-white);
+}
+
+.github-strip-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-white);
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
-  margin-bottom: var(--space-16);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
 }
 
 .stat-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
-  padding: var(--space-8);
+  padding: var(--space-4);
   text-align: center;
   transition: all var(--transition-base);
 }
@@ -1139,13 +1079,13 @@ section {
 }
 
 .stat-card i {
-  font-size: var(--font-size-4xl);
-  color: var(--accent-text, #15803d);
-  margin-bottom: var(--space-4);
+  font-size: var(--font-size-xl);
+  color: #4ade80;
+  margin-bottom: var(--space-2);
 }
 
 .stat-content h3 {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-2);
   color: #4ade80;
@@ -1156,22 +1096,10 @@ section {
   font-size: var(--font-size-sm);
 }
 
-.subsection-title {
-  font-size: var(--font-size-3xl);
-  margin-bottom: var(--space-8);
-  text-align: center;
-  color: var(--text-white);
-}
-
-.contribution-section,
-.language-stats-section {
-  margin-top: var(--space-12);
-}
-
 .contribution-widget {
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
-  padding: var(--space-8);
+  padding: var(--space-4);
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -1249,58 +1177,6 @@ section {
   .heatmap-cell {
     border-radius: 1px;
   }
-}
-
-.language-bars {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.language-item {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-md);
-  padding: var(--space-6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.language-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-3);
-}
-
-.language-name {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-weight: var(--font-weight-semibold);
-}
-
-.language-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: var(--radius-circle);
-  display: inline-block;
-}
-
-.language-percentage {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: var(--font-weight-semibold);
-}
-
-.language-bar {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-
-.language-bar-fill {
-  height: 100%;
-  border-radius: var(--radius-sm);
-  transition: width 1s ease;
 }
 
 /* Projects Section */
@@ -1926,71 +1802,6 @@ body.dark-theme .timeline::before {
   border-radius: 0.25rem;
 }
 
-/* ─── Activity Feed ─────────────────────────────────────────────────────────── */
-.activity-feed-section {
-  margin-top: var(--space-8, 2rem);
-}
-
-.activity-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2, 0.5rem);
-}
-
-.activity-item {
-  display: grid;
-  grid-template-columns: 1.5rem 1fr auto;
-  align-items: baseline;
-  gap: var(--space-2, 0.5rem);
-  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
-  border-radius: var(--radius-md, 0.5rem);
-  background: var(--bg-secondary);
-  font-size: var(--font-size-sm, 0.875rem);
-}
-
-.activity-icon {
-  color: var(--accent-text, #15803d);
-  font-size: var(--font-size-xs);
-  text-align: center;
-}
-
-.activity-body {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.3rem;
-  min-width: 0;
-}
-
-.activity-repo {
-  font-weight: 600;
-  color: var(--text-primary);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.activity-repo:hover {
-  color: var(--accent-text, #15803d);
-}
-
-.activity-desc {
-  color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 40ch;
-}
-
-.activity-time {
-  color: var(--text-secondary);
-  font-size: var(--font-size-xs);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
 /* ─── Guestbook Section ─────────────────────────────────────────────────────── */
 .guestbook {
   background: var(--bg-primary);
@@ -2474,14 +2285,6 @@ body.dark-theme .timeline::before {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
-  }
-
-  .about-highlights {
-    grid-template-columns: 1fr;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
   }
 
   .projects-grid {
@@ -3010,16 +2813,16 @@ body.dark-theme .nav-menu {
 }
 
 body.dark-theme .project-card,
-body.dark-theme .stat-card,
-body.dark-theme .skill-category,
-body.dark-theme .highlight-item {
+body.dark-theme .github-strip {
+  border: 1px solid var(--border-color);
+}
+
+body.dark-theme .stat-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
 }
 
-body.dark-theme .project-card:hover,
-body.dark-theme .skill-category:hover,
-body.dark-theme .highlight-item:hover {
+body.dark-theme .project-card:hover {
   background: var(--bg-tertiary);
   border-color: var(--primary-color);
 }
@@ -3043,16 +2846,6 @@ body.dark-theme .project-link.live {
 }
 
 body.dark-theme .project-link.live:hover {
-  background: var(--primary-color);
-  color: var(--bg-primary);
-}
-
-body.dark-theme .skill-item {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
-}
-
-body.dark-theme .skill-item:hover {
   background: var(--primary-color);
   color: var(--bg-primary);
 }
@@ -3114,7 +2907,6 @@ body.dark-theme section {
 
 body.dark-theme .about,
 body.dark-theme .projects,
-body.dark-theme .skills,
 body.dark-theme .contact {
   background: var(--bg-primary);
 }
@@ -3127,8 +2919,7 @@ body.dark-theme .contact {
   background: var(--bg-secondary);
 }
 
-body.dark-theme .section-title,
-body.dark-theme .subsection-title {
+body.dark-theme .section-title {
   color: var(--text-primary);
 }
 
@@ -4678,15 +4469,9 @@ body.dark-theme .related-project-item {
 
 /* Enhanced Card Animations — .project-card's canonical hover lives with its
    base styles in the Projects section; these cover the other card types. */
-.skill-category,
 .stat-card {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-}
-
-.skill-category:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
 }
 
 /* Enhanced stats card hover removed - will enhance existing */
@@ -5311,15 +5096,8 @@ body.keyboard-navigation .focus-ring:focus {
 
 /* Mobile-Optimized Statistics Cards */
 @media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
-    padding: 0 var(--space-4);
-  }
-
   .stat-card {
-    padding: var(--space-5) var(--space-3);
-    min-height: 100px;
+    padding: var(--space-4) var(--space-3);
   }
 
   .stat-value {
@@ -5507,12 +5285,6 @@ body.keyboard-navigation .focus-ring:focus {
     width: 50px;
     height: 3px;
     bottom: -8px;
-  }
-
-  .subsection-title {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
-    margin-bottom: var(--space-6);
-    padding: 0 var(--space-2);
   }
 
   .section-intro {
@@ -5826,71 +5598,9 @@ body.keyboard-navigation .focus-ring:focus {
     line-height: var(--line-height-loose);
     margin-bottom: var(--space-5);
   }
-
-  .about-highlights {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-    margin-top: var(--space-8);
-  }
-
-  .highlight-item {
-    padding: var(--space-6);
-  }
-
-  .highlight-item i {
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--space-3);
-  }
-
-  .highlight-item h3 {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-2);
-  }
-
-  .highlight-item p {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-loose);
-  }
 }
 
 /* Mobile Skills Section */
-@media (max-width: 768px) {
-  .skills {
-    padding: var(--space-12) 0;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  .skill-category {
-    padding: var(--space-6);
-  }
-
-  .skill-category h3 {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-4);
-  }
-
-  .skill-items {
-    gap: var(--space-2);
-    justify-content: center;
-  }
-
-  .skill-item {
-    padding: var(--space-2) var(--space-4);
-    font-size: var(--font-size-sm);
-    /* Enhanced touch target */
-    min-height: 36px;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .skill-item:active {
-    transform: scale(0.97);
-  }
-}
 
 /* Mobile Project Cards and Grid */
 @media (max-width: 768px) {
@@ -6081,41 +5791,20 @@ body.keyboard-navigation .focus-ring:focus {
   }
 }
 
-/* Mobile GitHub Stats Section */
+/* Mobile GitHub strip */
 @media (max-width: 768px) {
-  .github-stats {
-    padding: var(--space-12) 0;
+  .github-strip {
+    padding: var(--space-5);
   }
 
   .stats-grid {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-5);
-    padding: 0 var(--space-3);
-  }
-
-  .stat-card {
-    padding: var(--space-6);
-    border-radius: var(--radius-lg);
-  }
-
-  .stat-card i {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--space-3);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    padding: 0;
   }
 
   .stat-content h3 {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--space-2);
-  }
-
-  .stat-content p {
-    font-size: var(--font-size-base);
-  }
-
-  /* Contribution graph mobile */
-  .contribution-section {
-    margin-top: var(--space-8);
-    padding: 0 var(--space-3);
+    font-size: var(--font-size-2xl);
   }
 
   .contribution-graph {
@@ -6129,38 +5818,6 @@ body.keyboard-navigation .focus-ring:focus {
     min-width: 600px;
     width: 100%;
     height: auto;
-  }
-
-  /* Language stats mobile */
-  .language-stats-section {
-    margin-top: var(--space-8);
-    padding: 0 var(--space-3);
-  }
-
-  .language-stats {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .language-bars {
-    gap: var(--space-4);
-  }
-
-  .language-item {
-    padding: var(--space-4);
-    min-width: 280px;
-  }
-
-  .language-info {
-    margin-bottom: var(--space-2);
-  }
-
-  .language-name {
-    font-size: var(--font-size-base);
-  }
-
-  .language-percentage {
-    font-size: var(--font-size-sm);
   }
 }
 
@@ -6372,8 +6029,7 @@ body.keyboard-navigation .focus-ring:focus {
 
   /* Stagger animations for lists */
   .nav-menu.active .nav-item,
-  .projects-grid .project-card,
-  .skills-grid .skill-category {
+  .projects-grid .project-card {
     animation: slideUpFade 0.4s ease-out forwards;
   }
 
@@ -6456,11 +6112,6 @@ body.keyboard-navigation .focus-ring:focus {
 
 /* Large Mobile Devices and Tablets Portrait */
 @media (min-width: 480px) and (max-width: 768px) {
-  .about-highlights,
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -6562,11 +6213,6 @@ body.keyboard-navigation .focus-ring:focus {
   body.dark-theme .contact-method {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-theme .skill-item {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-white);
   }
 
   body.dark-theme .project-card {
