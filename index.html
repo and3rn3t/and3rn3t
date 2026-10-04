@@ -911,14 +911,6 @@
       </div>
     </section>
 
-    <!-- Testimonials Section (hidden until testimonials-data.json has entries) -->
-    <section class="testimonials animate-on-scroll" id="testimonials" hidden>
-      <div class="container">
-        <h2 class="section-title">Kind Words</h2>
-        <div class="testimonials-grid" id="testimonials-grid"></div>
-      </div>
-    </section>
-
     <!-- Writing / Blog Section -->
     <section class="writing animate-on-scroll" id="writing">
       <div class="container">
@@ -1254,67 +1246,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Performance optimized script loading -->
-    <script>
-      // Inline critical JavaScript for immediate execution
-      (function () {
-        // Track page load performance
-        const pageLoadStart = performance.now();
-
-        // Show page when fonts are loaded
-        if (document.fonts) {
-          document.fonts.ready.then(() => {
-            document.body.classList.add('fonts-loaded');
-          });
-        }
-
-        // Critical performance metrics
-        window.addEventListener('load', () => {
-          const loadTime = performance.now() - pageLoadStart;
-
-          // Report to analytics if available
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_load_time', {
-              event_category: 'Performance',
-              event_label: 'Load Time',
-              value: Math.round(loadTime),
-            });
-          }
-        });
-
-        // Preload critical resources on interaction
-        let preloadTriggered = false;
-        const preloadCritical = () => {
-          if (preloadTriggered) return;
-          preloadTriggered = true;
-
-          // Preload GitHub API endpoints
-          const endpoints = [
-            'https://api.github.com/users/and3rn3t',
-            'https://api.github.com/users/and3rn3t/repos?sort=stars&per_page=100',
-          ];
-
-          for (const url of endpoints) {
-            const link = document.createElement('link');
-            link.rel = 'prefetch';
-            link.href = url;
-            document.head.appendChild(link);
-          }
-        };
-
-        // Trigger preload on first interaction
-        for (const event of ['mousedown', 'touchstart', 'keydown']) {
-          document.addEventListener(event, preloadCritical, { once: true, passive: true });
-        }
-
-        // Fallback preload after 3 seconds
-        setTimeout(preloadCritical, 3000);
-      })();
-    </script>
-
-    <!-- Chart.js for data visualizations -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
 
     <!-- Main application script (ES6 modules) -->
     <script type="module" src="main.js"></script>

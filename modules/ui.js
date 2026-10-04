@@ -442,63 +442,6 @@ export class UIManager {
         `;
     }
 
-    // ========================================
-    // Skills Matrix
-    // ========================================
-
-    async loadSkillsMatrix() {
-        try {
-            const response = await fetch('projects-data.json');
-            const projectsData = await response.json();
-
-            if (!projectsData.skills) return;
-
-            const skillsSection = document.querySelector('#skills .skills-grid');
-            if (!skillsSection) return;
-
-            const skillsMatrix = document.createElement('div');
-            skillsMatrix.className = 'skills-matrix';
-            skillsMatrix.innerHTML = `
-                <h3 class="subsection-title">Proficiency Levels</h3>
-                <div class="skills-matrix-grid">
-                    ${Object.entries(projectsData.skills.languages)
-                        .map(
-                            ([lang, data]) => `
-                        <div class="skill-matrix-item">
-                            <div class="skill-matrix-header">
-                                <span class="skill-name">${lang}</span>
-                                <span class="skill-level-label">${data.level}</span>
-                            </div>
-                            <div class="skill-level-indicator">
-                                <div class="skill-level-bar">
-                                    <div class="skill-level-fill" style="width: ${this.getLevelPercentage(data.level)}%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-experience">${data.years} years experience</div>
-                        </div>
-                    `
-                        )
-                        .join('')}
-                </div>
-            `;
-
-            skillsSection.parentElement.appendChild(skillsMatrix);
-            debug.log('[UI] Skills matrix loaded');
-        } catch (error) {
-            debug.warn('[UI] Failed to load skills matrix:', error);
-        }
-    }
-
-    getLevelPercentage(level) {
-        const levels = {
-            Beginner: 25,
-            Intermediate: 50,
-            Advanced: 85,
-            Expert: 100,
-        };
-        return levels[level] || 50;
-    }
-
     destroy() {
         this.isInitialized = false;
         this.activeTasks.clear();

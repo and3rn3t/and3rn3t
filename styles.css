@@ -362,12 +362,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Backdrop Blur utilities — removed; no-op for any class references */
-.backdrop-blur,
-.backdrop-blur-lg {
-  /* intentionally empty */
-}
-
 /* Navigation */
 .navbar {
   position: fixed;
@@ -864,16 +858,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* Hero image + code animation — removed */
-.hero-image {
-  display: none;
-}
-
-/* scroll-indicator — removed */
-.scroll-indicator {
-  display: none;
-}
-
 /* ── Hero scroll cue ── */
 .hero-scroll-cue {
   position: absolute;
@@ -932,75 +916,6 @@ body {
 /* Section Styles */
 section {
   padding: var(--space-24) 0;
-}
-
-/* ── Testimonials ── */
-.testimonials {
-  background: var(--bg-secondary);
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-8);
-}
-
-.testimonial-card {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform 250ms var(--ease-spring),
-    box-shadow var(--transition-base),
-    border-color var(--transition-base);
-  position: relative;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
-  border-color: rgba(22, 163, 74, 0.45);
-}
-
-.testimonial-quote {
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-relaxed);
-  color: var(--text-primary);
-  margin-bottom: var(--space-6);
-}
-
-.testimonial-quote::before {
-  content: '\201C';
-  display: block;
-  font-size: var(--font-size-5xl);
-  line-height: 1;
-  color: var(--accent-text, #15803d);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-2);
-}
-
-.testimonial-attribution {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.testimonial-name {
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
-}
-
-.testimonial-name a {
-  color: inherit;
-  text-decoration: none;
-  border-bottom: 1px solid var(--primary-color);
-}
-
-.testimonial-meta {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
 }
 
 /* ── Project modal metric chips ── */
@@ -2818,37 +2733,10 @@ body.dark-theme .timeline::before {
   }
 }
 
-/* Animation for project cards on hover — shimmer removed */
+/* Project card containment for hover effects */
 .project-card {
   position: relative;
   overflow: hidden;
-}
-
-/* Skills matrix enhancements */
-.skills-matrix {
-  margin-top: var(--space-12);
-}
-
-.skill-level-indicator {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
-}
-
-.skill-level-bar {
-  flex: 1;
-  height: 8px;
-  background: var(--border-color);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-
-.skill-level-fill {
-  height: 100%;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-sm);
-  transition: width 0.3s ease;
 }
 
 /* ========================================
@@ -3704,61 +3592,6 @@ body.dark-theme .top-project-highlights {
   box-shadow: var(--shadow-lg);
 }
 
-/* Skills Matrix */
-.skills-matrix {
-  margin-top: var(--space-12);
-  padding-top: 3rem;
-  border-top: 2px solid var(--border-color);
-}
-
-.skills-matrix-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-6);
-  margin-top: var(--space-8);
-}
-
-.skill-matrix-item {
-  padding: var(--space-6);
-  background: var(--bg-primary);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
-}
-
-.skill-matrix-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-
-.skill-matrix-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-4);
-}
-
-.skill-name {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-lg);
-  color: var(--text-primary);
-}
-
-.skill-level-label {
-  padding: var(--space-1) var(--space-2);
-  background: var(--primary-dark); /* green-700: AA with white text */
-  color: var(--text-white);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-}
-
-.skill-experience {
-  margin-top: 0.5rem;
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-}
-
 /* Back to top button */
 .back-to-top {
   position: fixed;
@@ -3840,11 +3673,6 @@ body.dark-theme .top-project-highlights {
   font-style: italic;
 }
 
-/* Dark theme adjustments for new features */
-body.dark-theme .skill-matrix-item {
-  background: rgba(30, 41, 59, 0.8);
-}
-
 body.dark-theme .visit-count {
   background: rgba(15, 23, 42, 0.8);
 }
@@ -3910,10 +3738,6 @@ body.dark-theme .visit-count {
 
 /* Responsive adjustments for new features */
 @media (max-width: 768px) {
-  .skills-matrix-grid {
-    grid-template-columns: 1fr;
-  }
-
   .back-to-top {
     bottom: 80px;
     right: 20px;
@@ -3925,8 +3749,7 @@ body.dark-theme .visit-count {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .project-card,
-  .stat-card,
-  .skill-matrix-item {
+  .stat-card {
     border: 2px solid currentColor;
   }
 
@@ -5873,11 +5696,6 @@ body.keyboard-navigation .focus-ring:focus {
     order: 2;
   }
 
-  .hero-image {
-    order: 1;
-    margin-bottom: var(--space-4);
-  }
-
   .hero-title {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
     line-height: var(--line-height-tight);
@@ -5946,10 +5764,6 @@ body.keyboard-navigation .focus-ring:focus {
     max-width: 280px;
     height: 180px;
     margin: 0 auto;
-  }
-
-  .scroll-indicator {
-    bottom: var(--space-6);
   }
 
   .scroll-arrow {
