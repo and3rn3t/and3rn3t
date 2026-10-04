@@ -127,5 +127,6 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   error 1042 on every route, and `wrangler.toml` still has `REPLACE_WITH_*` KV IDs. So 2.2
   (currently coding), 2.3 (dynamic OG), 4.1 (view counts) and 4.2 (guestbook) are built and
   tested but not deployed. The site shows static fallbacks, and the browser logs CORS errors
-  for `/activity`, `/views` and `/guestbook`. Needs: KV namespaces, `GH_TOKEN`/`TURNSTILE_SECRET`
-  secrets, `wrangler deploy`.
+  for `/activity`, `/views` and `/guestbook`. Needs: KV namespaces, a Turnstile site (public
+  site key into `TURNSTILE_SITEKEY` in `modules/guestbook.js`, which is still a `REPLACE_WITH_*`
+  placeholder), the `GH_TOKEN`/`TURNSTILE_SECRET` secrets, and `wrangler deploy`.
