@@ -130,3 +130,8 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   for `/activity`, `/views` and `/guestbook`. Needs: KV namespaces, a Turnstile site (public
   site key into `TURNSTILE_SITEKEY` in `modules/guestbook.js`, which is still a `REPLACE_WITH_*`
   placeholder), the `GH_TOKEN`/`TURNSTILE_SECRET` secrets, and `wrangler deploy`.
+- **2026-10-04** — Worker deployed. The `and3rn3t-portfolio-views` and `-guestbook` KV
+  namespaces are created and their IDs are in `wrangler.toml`; `TURNSTILE_SECRET` and
+  `GH_TOKEN` are set; the Turnstile site key is in `modules/guestbook.js`. On andernet.dev,
+  `/activity`, `/views` and `/guestbook` return 200 with CORS for andernet.dev, so 2.2, 2.3,
+  4.1 and 4.2 are now actually live.

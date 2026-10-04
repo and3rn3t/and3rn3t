@@ -14,8 +14,7 @@ import { WORKER_BASE } from './config.js';
 import { escapeHtml } from './utils/html.js';
 
 // Public sitekey — safe to commit. Get from dash.cloudflare.com → Turnstile.
-// Replace with your actual sitekey after creating a Turnstile site.
-const TURNSTILE_SITEKEY = 'REPLACE_WITH_TURNSTILE_SITEKEY';
+const TURNSTILE_SITEKEY = '0x4AAAAAAFNonLuoeiwThp5v';
 
 class GuestbookManager {
     #form = null;

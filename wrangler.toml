@@ -18,11 +18,11 @@ enabled = true
 # Then paste the returned IDs below.
 [[kv_namespaces]]
 binding = "VIEWS_KV"
-id      = "REPLACE_WITH_VIEWS_KV_ID"
+id      = "a35cba6980164bfea60443492b852a8a"
 
 [[kv_namespaces]]
 binding = "GUESTBOOK_KV"
-id      = "REPLACE_WITH_GUESTBOOK_KV_ID"
+id      = "470f1e368c014affaac0b2bab91a3f8f"
 
 # Secrets set via wrangler secret put:
 #   wrangler secret put GH_TOKEN          (fine-grained PAT, read:user scope)
