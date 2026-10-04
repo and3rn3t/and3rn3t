@@ -8,7 +8,7 @@
  */
 
 import { debug } from './debug.js';
-import { escapeHtml } from './utils/html.js';
+import { escapeHtml, safeUrl } from './utils/html.js';
 
 class TestimonialsManager {
     async init() {
@@ -41,7 +41,7 @@ class TestimonialsManager {
             .filter(Boolean)
             .map(v => escapeHtml(v))
             .join(' · ');
-        const safeLink = this.#safeUrl(entry.link);
+        const safeLink = safeUrl(entry.link);
         const attribution = safeLink
             ? `<a href="${escapeHtml(safeLink)}" target="_blank" rel="noopener noreferrer">${name}</a>`
             : name;
@@ -54,17 +54,6 @@ class TestimonialsManager {
                     ${meta ? `<span class="testimonial-meta">${meta}</span>` : ''}
                 </figcaption>
             </figure>`;
-    }
-
-    /** Only allow http(s) links — rejects javascript: and other unsafe schemes. */
-    #safeUrl(url) {
-        if (!url) return null;
-        try {
-            const parsed = new URL(url, globalThis.location.origin);
-            return ['http:', 'https:'].includes(parsed.protocol) ? url : null;
-        } catch {
-            return null;
-        }
     }
 }
 
