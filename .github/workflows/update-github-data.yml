@@ -87,6 +87,36 @@ jobs:
               print(f'  Events unavailable: {exc}')
               events = []
 
+          # The events API no longer includes commit lists in PushEvent payloads or
+          # titles in PullRequestEvent payloads; fill them back in from the commit/PR
+          # endpoints so the activity feed can show real messages.
+          print('Hydrating push commits and PR titles...')
+          lookups, hydrated = {}, 0
+          def lookup(url):
+              if url not in lookups:
+                  try:
+                      lookups[url] = gh_get(url)
+                  except Exception as exc:
+                      print(f'  Lookup failed for {url}: {exc}')
+                      lookups[url] = None
+              return lookups[url]
+          for ev in events:
+              payload = ev.get('payload') or {}
+              repo_name = (ev.get('repo') or {}).get('name')
+              if ev.get('type') == 'PushEvent' and not payload.get('commits') and payload.get('head') and repo_name:
+                  commit = lookup(f"{BASE}/repos/{repo_name}/commits/{payload['head']}")
+                  if commit:
+                      payload['commits'] = [{'sha': commit['sha'], 'message': commit['commit']['message']}]
+                      hydrated += 1
+              elif ev.get('type') == 'PullRequestEvent':
+                  pr = payload.get('pull_request') or {}
+                  if pr.get('url') and not pr.get('title'):
+                      full = lookup(pr['url'])
+                      if full:
+                          pr['title'] = full.get('title')
+                          hydrated += 1
+          print(f'  {hydrated} events hydrated ({len(lookups)} API lookups)')
+
           print('Fetching self-starred repos...')
           try:
               starred_all = gh_get_all(

@@ -123,10 +123,12 @@ export default {
             return jsonResponse({ error: 'upstream_error', detail: err.message }, request, 502);
         }
 
-        const activity = pickActivity(events);
-        if (!activity) {
+        const event = pickEvent(events);
+        if (!event) {
             return jsonResponse({ error: 'no_activity' }, request, 404);
         }
+        await hydrateEvent(event, ghHeaders);
+        const activity = buildActivity(event, event.repo?.name ?? '');
 
         // Store in CF cache (honour CF Cache rules: only GET, 200 responses).
         const responseToCache = new Response(JSON.stringify(activity), {
@@ -143,15 +145,14 @@ export default {
 };
 
 /** Pick the most interesting recent event, skipping noise. */
-function pickActivity(events) {
+function pickEvent(events) {
     const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days
 
     // First pass: preferred repos only (skip portfolio noise).
     for (const event of events) {
         const repo = event.repo?.name ?? '';
         if (SKIP_REPOS.has(repo) || !INTERESTING_TYPES.has(event.type)) continue;
-        const result = buildActivity(event, repo);
-        if (result) return result;
+        if (buildActivity(event, repo)) return event;
     }
 
     // Second pass: if non-skipped events are absent/stale, include portfolio repo
@@ -161,11 +162,44 @@ function pickActivity(events) {
         if (!INTERESTING_TYPES.has(event.type)) continue;
         const age = new Date(event.created_at ?? 0).getTime();
         if (age < cutoff) break;
-        const result = buildActivity(event, repo);
-        if (result) return result;
+        if (buildActivity(event, repo)) return event;
     }
 
     return null;
+}
+
+/**
+ * GitHub's events API no longer includes commit lists in PushEvent payloads or
+ * titles in PullRequestEvent payloads. Fill them back in with one API call when
+ * absent. Mutates `event`; failures leave it untouched (buildActivity falls back).
+ */
+export async function hydrateEvent(event, headers) {
+    const payload = event.payload;
+    if (!payload) return;
+    try {
+        if (event.type === 'PushEvent' && !payload.commits?.length && payload.head) {
+            const resp = await fetch(
+                `https://api.github.com/repos/${event.repo?.name}/commits/${payload.head}`,
+                { headers }
+            );
+            if (resp.ok) {
+                const commit = await resp.json();
+                payload.commits = [{ sha: commit.sha, message: commit.commit?.message ?? '' }];
+            }
+        } else if (
+            event.type === 'PullRequestEvent' &&
+            payload.pull_request?.url &&
+            !payload.pull_request.title
+        ) {
+            const resp = await fetch(payload.pull_request.url, { headers });
+            if (resp.ok) {
+                const pr = await resp.json();
+                payload.pull_request.title = pr.title;
+            }
+        }
+    } catch {
+        // Best effort — keep the generic fallback text.
+    }
 }
 
 function buildActivity(event, repo) {
