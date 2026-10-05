@@ -33,17 +33,35 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker, docker-compose, flask
-
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
+
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
+
+### 🐍 [network](https://github.com/and3rn3t/network)
+
+> Testing UniFi API
+>
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
+
+### ⭐ [ai-template-repo](https://github.com/and3rn3t/ai-template-repo)
+
+> Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.
+>
+> **Tech:** Makefile, ai-assisted-development, claude, template
+
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -51,12 +69,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
@@ -69,18 +81,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
 >
 > **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
-
-### 🌐 [sky](https://github.com/and3rn3t/sky)
-
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
->
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
-
-### 🎮 [catastrophe](https://github.com/and3rn3t/catastrophe)
-
-> CATastrophe: A Mischief Simulator (Experimenting with Unreal Engine)
->
-> **Tech:** C++, cpp, gamedev, unreal-engine
 
 <!-- FEATURED-PROJECTS:END -->
 
