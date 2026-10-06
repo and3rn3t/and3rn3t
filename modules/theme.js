@@ -42,6 +42,9 @@ function migrateLegacyPreference() {
 export class ThemeManager {
     button = null;
     currentTheme = 'light';
+    // The visitor's explicit choice, kept in memory so a storage failure
+    // doesn't hand control back to the OS setting mid-visit.
+    chosenTheme = null;
     // Suppress the View Transition on the very first paint (avoids a flash)
     ready = false;
 
@@ -53,7 +56,8 @@ export class ThemeManager {
         migrateLegacyPreference();
         this.button = document.getElementById('theme-toggle');
 
-        this.commitTheme(readSaved() ?? this.getSystemTheme());
+        this.chosenTheme = readSaved();
+        this.commitTheme(this.chosenTheme ?? this.getSystemTheme());
         this.setupEventListeners();
         this.ready = true;
         debug.log('[Theme] Manager initialized with theme:', this.currentTheme);
@@ -78,7 +82,7 @@ export class ThemeManager {
 
         // Track the OS setting until the visitor makes an explicit choice.
         globalThis.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!readSaved()) this.applyTheme(e.matches ? 'dark' : 'light');
+            if (!this.chosenTheme) this.applyTheme(e.matches ? 'dark' : 'light');
         });
     }
 
@@ -146,6 +150,7 @@ export class ThemeManager {
 
     toggle() {
         const next = this.isDark() ? 'light' : 'dark';
+        this.chosenTheme = next;
         save(next);
         this.applyTheme(next);
     }

@@ -1833,24 +1833,6 @@ body.dark-theme .timeline::before {
     margin: 0 0 var(--space-12);
     padding: var(--space-6) var(--space-4);
   }
-
-  .contact-tabs {
-    display: flex;
-    max-width: 420px;
-    margin-inline: auto;
-  }
-
-  .contact-tab {
-    flex: 1;
-    justify-content: center;
-    padding: var(--space-2) var(--space-3);
-    font-size: var(--font-size-sm);
-    white-space: nowrap;
-  }
-
-  .contact-tab i {
-    display: none;
-  }
 }
 
 .guestbook-layout {
@@ -2082,6 +2064,27 @@ body.dark-theme .timeline::before {
 
 .contact-panel[hidden] {
   display: none;
+}
+
+/* Mobile tabs — after the base rules so these win the cascade */
+@media (max-width: 768px) {
+  .contact-tabs {
+    display: flex;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .contact-tab {
+    flex: 1;
+    justify-content: center;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+  }
+
+  .contact-tab i {
+    display: none;
+  }
 }
 
 .contact-form {
@@ -2802,7 +2805,8 @@ body.dark-theme .contact-form input::placeholder,
 body.dark-theme .contact-form textarea::placeholder,
 body.dark-theme .guestbook-card input::placeholder,
 body.dark-theme .guestbook-card textarea::placeholder {
-  color: var(--text-light);
+  /* #9ca3af on --bg-tertiary ≈ 6.7:1 (--text-light is only 3.6:1) */
+  color: var(--gray-500);
 }
 
 body.dark-theme .contact-form input:focus,

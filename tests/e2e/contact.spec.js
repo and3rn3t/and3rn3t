@@ -16,6 +16,7 @@ const turnstileScripts = page =>
 
 test('message tab is selected by default and Turnstile is not loaded', async ({ page }) => {
     await page.goto('/');
+    await expect(page.locator('#guestbook-form button[type="submit"]')).toBeDisabled();
     await expect(page.locator('#contact-tab-message')).toHaveAttribute('aria-selected', 'true');
     await expect(page.locator('#contact-panel-message')).toBeVisible();
     await expect(page.locator('#contact-panel-guestbook')).toBeHidden();
@@ -31,6 +32,8 @@ test('guestbook tab shows the guestbook and loads Turnstile on demand', async ({
     await expect(page.locator('#contact-panel-guestbook')).toBeVisible();
     await expect(page.locator('#contact-panel-message')).toBeHidden();
     await expect.poll(() => turnstileScripts(page)).toBe(1);
+    // Submit ships disabled and is enabled once the JS handler is attached.
+    await expect(page.locator('#guestbook-form button[type="submit"]')).toBeEnabled();
 });
 
 test('arrow keys move between tabs', async ({ page }) => {
