@@ -151,3 +151,9 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   expander. Featured entries are pinned even when not starred, and the new `and3rn3t` entry is
   the portfolio itself. Curated `technologies`/`homepage` now take precedence over repo
   topics/homepage on cards.
+- **2026-10-04** — Streamline pass, phase 4 (contact + theme): the guestbook moved into a
+  "Sign the guestbook" tab inside Contact (ARIA tabs, `modules/contact-tabs.js`). The guestbook
+  module and Turnstile now load only when that tab first opens, and old `#guestbook` links open
+  it. The two-option theme picker became a single light/dark toggle that follows the system
+  until the visitor picks a theme. This also fixes the Cmd-K "Toggle theme" action, which threw
+  because `ThemeManager.toggle()` was shadowed by the button property.

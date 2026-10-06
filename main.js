@@ -121,6 +121,16 @@ async function initializeApp() {
             debug.warn('[App] Interactions skipped:', err);
         }
 
+        // Contact tabs — the guestbook (and Turnstile) loads when its tab opens.
+        // Wired before the network-bound widgets below so the tabs respond at once.
+        try {
+            const { contactTabs } = await import('./modules/contact-tabs.js');
+            contactTabs.init();
+            appState.managers.contactTabs = contactTabs;
+        } catch (err) {
+            debug.warn('[App] Contact tabs skipped:', err);
+        }
+
         // "Currently coding" widget — calls the CF Worker with static fallback.
         try {
             const { currentlyWidget } = await import('./modules/currently.js');
@@ -146,15 +156,6 @@ async function initializeApp() {
             appState.managers.blog = blogManager;
         } catch (err) {
             debug.warn('[App] Blog module skipped:', err);
-        }
-
-        // Guestbook — loads entries + wires submission form.
-        try {
-            const { guestbookManager } = await import('./modules/guestbook.js');
-            await guestbookManager.init();
-            appState.managers.guestbook = guestbookManager;
-        } catch (err) {
-            debug.warn('[App] Guestbook skipped:', err);
         }
 
         // View counter — calls Worker, updates footer count.

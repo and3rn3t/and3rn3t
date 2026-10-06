@@ -29,9 +29,15 @@ class GuestbookManager {
 
         if (!this.#form || !this.#entriesEl) return;
 
-        await this.#loadEntries();
-        this.#initTurnstile();
+        // The submit button ships disabled so the form can't fall back to a
+        // native GET (reloading the page with the message in the URL) before
+        // this handler exists. Wire it first, then do the network work.
         this.#form.addEventListener('submit', e => this.#handleSubmit(e));
+        const submitBtn = this.#form.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = false;
+
+        this.#initTurnstile();
+        await this.#loadEntries();
         debug.log('[Guestbook] Initialized');
     }
 
@@ -92,6 +98,8 @@ class GuestbookManager {
                     this.#token = '';
                 },
                 theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
+                // The normal widget is a fixed 300px; use compact on very narrow screens.
+                size: container.clientWidth < 300 ? 'compact' : 'normal',
             });
         });
         document.head.appendChild(script);

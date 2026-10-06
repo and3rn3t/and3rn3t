@@ -24,11 +24,32 @@ test('theme toggle button is present and interactive', async ({ page }) => {
     await expect(toggle).toBeVisible();
 });
 
+test('clicking the theme toggle flips the theme and remembers it', async ({ page }) => {
+    await page.evaluate(() => localStorage.setItem('theme', 'light'));
+    await page.reload();
+    const toggle = page.locator('#theme-toggle');
+    await expect(toggle).toHaveAttribute('aria-label', 'Switch to dark theme');
+
+    await toggle.click();
+    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+    await expect(toggle).toHaveAttribute('aria-label', 'Switch to light theme');
+    expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('dark');
+
+    await page.reload();
+    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+});
+
+test('with no saved choice the theme follows the system preference', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.evaluate(() => localStorage.removeItem('theme'));
+    await page.reload();
+    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+});
+
 test('body gets dark-theme class when dark mode is applied', async ({ page }) => {
     // Force dark via localStorage so we control the state.
     await page.evaluate(() => {
         localStorage.setItem('theme', 'dark');
-        localStorage.removeItem('followSystemTheme');
     });
     await page.reload();
     await expect(page.locator('body')).toHaveClass(/dark-theme/);
@@ -37,7 +58,6 @@ test('body gets dark-theme class when dark mode is applied', async ({ page }) =>
 test('body does not have dark-theme class after switching to light', async ({ page }) => {
     await page.evaluate(() => {
         localStorage.setItem('theme', 'light');
-        localStorage.removeItem('followSystemTheme');
     });
     await page.reload();
     await expect(page.locator('body')).not.toHaveClass(/dark-theme/);
