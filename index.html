@@ -765,14 +765,14 @@
     <!-- About Section -->
     <section class="about animate-on-scroll" id="about">
       <div class="container">
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title">About</h2>
         <div class="about-content">
           <div class="about-text">
             <p>
-              Software engineer at Deere &amp; Company with a genuine interest in technology, home
-              automation, and gadgetry. I tinker with health tech, IoT, data engineering, and the
-              occasional game project &mdash; driven by curiosity and the satisfaction of building
-              things that are actually useful.
+              Recent side projects include an iPhone app that measures gait with LiDAR, a home
+              dashboard that runs without the cloud, and a 20-questions game that shows its
+              reasoning as you play. I care about the unglamorous parts too: tests, accessibility,
+              and being able to explain every byte I ship.
             </p>
             <!-- Currently coding widget — populated by modules/currently.js -->
             <div id="currently-coding" aria-live="polite"></div>
@@ -815,10 +815,6 @@
 
         <!-- Top Starred Projects -->
         <div class="top-projects-section">
-          <p class="section-intro">
-            A curated selection of projects spanning health tech, home automation, data engineering,
-            and more.
-          </p>
           <div class="projects-grid" id="projects-grid">
             <div class="loading">
               <i class="fas fa-spinner fa-spin"></i>
@@ -860,7 +856,7 @@
             <h3 class="timeline-group-heading">
               <i class="fas fa-briefcase" aria-hidden="true"></i> Work
             </h3>
-            <div class="timeline" id="experience-timeline" aria-label="Work history">
+            <div class="timeline" id="experience-timeline" role="group" aria-label="Work history">
               <div class="loading">
                 <i class="fas fa-spinner fa-spin"></i>
                 <p>Loading experience...</p>
@@ -871,7 +867,12 @@
             <h3 class="timeline-group-heading">
               <i class="fas fa-graduation-cap" aria-hidden="true"></i> Education
             </h3>
-            <div class="timeline" id="education-timeline" aria-label="Education history">
+            <div
+              class="timeline"
+              id="education-timeline"
+              role="group"
+              aria-label="Education history"
+            >
               <div class="loading">
                 <i class="fas fa-spinner fa-spin"></i>
                 <p>Loading education...</p>
@@ -893,12 +894,15 @@
     <section class="writing animate-on-scroll" id="writing">
       <div class="container">
         <h2 class="section-title">Writing</h2>
-        <p class="section-intro">
-          Technical posts on the projects I build — health tech, IoT, data, and whatever else
-          captures my attention.
-        </p>
-        <div id="blog-posts" class="blog-posts-grid" aria-label="Blog posts"></div>
-        <div id="blog-article" class="blog-article-wrapper" hidden aria-label="Blog article"></div>
+        <p class="section-intro">How these projects work, and what I learned building them.</p>
+        <div id="blog-posts" class="blog-posts-grid" role="group" aria-label="Blog posts"></div>
+        <div
+          id="blog-article"
+          class="blog-article-wrapper"
+          role="article"
+          hidden
+          aria-label="Blog article"
+        ></div>
       </div>
     </section>
 
@@ -908,8 +912,8 @@
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-content">
           <p class="contact-description">
-            Open to interesting problems — whether that's a new role, a side project collaboration,
-            or just a conversation about health tech, home automation, or data engineering.
+            Open to a new role, a side-project collaboration, or just a good conversation about
+            something you're building.
           </p>
 
           <div class="contact-tabs" role="tablist" aria-label="Ways to get in touch">
@@ -1105,7 +1109,7 @@
                 </form>
               </div>
               <div class="guestbook-entries-col">
-                <div id="guestbook-entries" aria-label="Guestbook entries">
+                <div id="guestbook-entries" role="group" aria-label="Guestbook entries">
                   <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i>
                     <p>Loading entries...</p>
@@ -1149,7 +1153,7 @@
         <div class="footer-inner">
           <p>
             &copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS,
-            Vite, and GitHub Actions.
+            Vite, and a Cloudflare Worker.
           </p>
           <span class="view-count-widget" hidden aria-label="Page views">
             <i class="fas fa-eye" aria-hidden="true"></i>

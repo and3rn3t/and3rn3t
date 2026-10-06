@@ -65,6 +65,17 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
 | 6.4 | WASM hero shipped live: `initHeroEnhancements` mounts the flow-field first, falling back to the WebGL shader then CSS (`main.js`); transparent `destination-out` trails composite over the gradient | ✅ 2026-06-28 |
 | 6.5 | Edge OG images via a Rust WASM rasterizer (port `worker/og.js` → PNG), SVG kept as fallback                                                                                                         | ⬜            |
 
+## Phase 7 — Streamline
+
+| #   | Item                                                                          | Status        |
+| --- | ----------------------------------------------------------------------------- | ------------- |
+| 7.1 | Remove dead weight (Chart.js, testimonials, skills matrix, stale docs) — #109 | ✅ 2026-10-04 |
+| 7.2 | Merge Skills + GitHub stats into About; Projects before Experience — #110     | ✅ 2026-10-04 |
+| 7.3 | Six featured projects + "Show more" expander — #111                           | ✅ 2026-10-04 |
+| 7.4 | Fix closed mobile nav menu blocking every tap — #113                          | ✅ 2026-10-06 |
+| 7.5 | Guestbook into Contact tabs; single light/dark toggle — #114                  | ✅ 2026-10-06 |
+| 7.6 | Copy pass: de-duplicate hero/About/intros; correct "How This Site Works" post | ✅ 2026-10-06 |
+
 ## Decision Log
 
 - **2026-06-13** — Static-first: prefer extending `update-github-data.yml` over a Worker
@@ -157,3 +168,8 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   it. The two-option theme picker became a single light/dark toggle that follows the system
   until the visitor picks a theme. This also fixes the Cmd-K "Toggle theme" action, which threw
   because `ThemeManager.toggle()` was shadowed by the button property.
+- **2026-10-06** — Streamline pass, phase 5 (copy): About no longer repeats the hero, section
+  intros were trimmed, and the "How This Site Works" post (and `feed.xml`) no longer claims the
+  removed skill levels. The intermittent axe failure was traced to labelled `<div>`s without a
+  role: `#blog-posts` is empty until the posts load, and axe flags `aria-prohibited-attr` on it.
+  Those containers now have roles, and project cards skip their fade under reduced motion.

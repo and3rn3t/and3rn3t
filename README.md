@@ -7,15 +7,16 @@
 
 ## 🎯 Featured Portfolio Website
 
-Check out my **interactive portfolio** with comprehensive GitHub statistics and detailed project showcase:
+Check out my **portfolio**: featured projects with in-depth case studies, technical writing, and a live look at what I'm working on:
 
 ### 🔗 **[View My Portfolio →](https://andernet.dev)**
 
 **Features:**
 
-- 📊 Real-time GitHub statistics and insights
-- 🌟 Top starred projects with detailed descriptions
-- 🎨 Dark/Light theme toggle
+- 🌟 Featured projects with in-depth case studies
+- 📝 Technical writing on how they're built
+- 📊 Live GitHub activity and contribution heatmap
+- 🎨 Light/dark theme that follows your system
 - 📱 Fully responsive design
 - 🔍 SEO optimized for better discoverability
 - ⚡ Fast, modern, and accessible
