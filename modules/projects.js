@@ -395,6 +395,8 @@ export class ProjectsManager {
     animateCards() {
         const cards = this.container?.querySelectorAll('.project-card');
         if (!cards) return;
+        // Respect reduced-motion: show the cards without the staggered fade.
+        if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
 
         cards.forEach((card, index) => {
             card.style.opacity = '0';
