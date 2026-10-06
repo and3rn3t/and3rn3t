@@ -103,14 +103,14 @@
       "releases_url": "https://api.github.com/repos/and3rn3t/fastlane/releases{/id}",
       "deployments_url": "https://api.github.com/repos/and3rn3t/fastlane/deployments",
       "created_at": "2026-08-12T18:59:03Z",
-      "updated_at": "2026-10-04T18:54:06Z",
-      "pushed_at": "2026-10-05T02:16:11Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "pushed_at": "2026-10-06T02:47:44Z",
       "git_url": "git://github.com/and3rn3t/fastlane.git",
       "ssh_url": "git@github.com:and3rn3t/fastlane.git",
       "clone_url": "https://github.com/and3rn3t/fastlane.git",
       "svn_url": "https://github.com/and3rn3t/fastlane",
       "homepage": null,
-      "size": 1667,
+      "size": 1739,
       "stargazers_count": 1,
       "watchers_count": 1,
       "language": "TypeScript",
@@ -142,6 +142,741 @@
       "forks": 0,
       "open_issues": 5,
       "watchers": 1,
+      "default_branch": "main",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": false
+      }
+    },
+    {
+      "id": 1156702820,
+      "node_id": "R_kgDORPHiZA",
+      "name": "jonah",
+      "full_name": "and3rn3t/jonah",
+      "private": false,
+      "owner": {
+        "login": "and3rn3t",
+        "id": 87380976,
+        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "html_url": "https://github.com/and3rn3t",
+        "followers_url": "https://api.github.com/users/and3rn3t/followers",
+        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+        "repos_url": "https://api.github.com/users/and3rn3t/repos",
+        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/and3rn3t/jonah",
+      "description": "Personal portfolio for Jonah (GitHub Spark template).",
+      "fork": false,
+      "url": "https://api.github.com/repos/and3rn3t/jonah",
+      "forks_url": "https://api.github.com/repos/and3rn3t/jonah/forks",
+      "keys_url": "https://api.github.com/repos/and3rn3t/jonah/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/and3rn3t/jonah/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/and3rn3t/jonah/teams",
+      "hooks_url": "https://api.github.com/repos/and3rn3t/jonah/hooks",
+      "issue_events_url": "https://api.github.com/repos/and3rn3t/jonah/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/and3rn3t/jonah/events",
+      "assignees_url": "https://api.github.com/repos/and3rn3t/jonah/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/and3rn3t/jonah/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/and3rn3t/jonah/tags",
+      "blobs_url": "https://api.github.com/repos/and3rn3t/jonah/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/and3rn3t/jonah/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/and3rn3t/jonah/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/and3rn3t/jonah/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/and3rn3t/jonah/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/and3rn3t/jonah/languages",
+      "stargazers_url": "https://api.github.com/repos/and3rn3t/jonah/stargazers",
+      "contributors_url": "https://api.github.com/repos/and3rn3t/jonah/contributors",
+      "subscribers_url": "https://api.github.com/repos/and3rn3t/jonah/subscribers",
+      "subscription_url": "https://api.github.com/repos/and3rn3t/jonah/subscription",
+      "commits_url": "https://api.github.com/repos/and3rn3t/jonah/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/and3rn3t/jonah/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/and3rn3t/jonah/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/and3rn3t/jonah/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/and3rn3t/jonah/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/and3rn3t/jonah/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/and3rn3t/jonah/merges",
+      "archive_url": "https://api.github.com/repos/and3rn3t/jonah/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/and3rn3t/jonah/downloads",
+      "issues_url": "https://api.github.com/repos/and3rn3t/jonah/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/and3rn3t/jonah/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/and3rn3t/jonah/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/and3rn3t/jonah/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/and3rn3t/jonah/labels{/name}",
+      "releases_url": "https://api.github.com/repos/and3rn3t/jonah/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/and3rn3t/jonah/deployments",
+      "created_at": "2026-02-13T00:28:34Z",
+      "updated_at": "2026-10-05T05:15:02Z",
+      "pushed_at": "2026-10-06T02:13:01Z",
+      "git_url": "git://github.com/and3rn3t/jonah.git",
+      "ssh_url": "git@github.com:and3rn3t/jonah.git",
+      "clone_url": "https://github.com/and3rn3t/jonah.git",
+      "svn_url": "https://github.com/and3rn3t/jonah",
+      "homepage": null,
+      "size": 526,
+      "stargazers_count": 0,
+      "watchers_count": 0,
+      "language": "TypeScript",
+      "has_issues": true,
+      "has_projects": true,
+      "has_downloads": false,
+      "has_wiki": false,
+      "has_pages": false,
+      "has_discussions": false,
+      "forks_count": 0,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 5,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "has_pull_requests": true,
+      "pull_request_creation_policy": "all",
+      "topics": [
+        "cloudflare-workers",
+        "portfolio",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "visibility": "public",
+      "forks": 0,
+      "open_issues": 5,
+      "watchers": 0,
+      "default_branch": "main",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": false
+      }
+    },
+    {
+      "id": 1047636691,
+      "node_id": "R_kgDOPnGq0w",
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "private": false,
+      "owner": {
+        "login": "and3rn3t",
+        "id": 87380976,
+        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "html_url": "https://github.com/and3rn3t",
+        "followers_url": "https://api.github.com/users/and3rn3t/followers",
+        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+        "repos_url": "https://api.github.com/users/and3rn3t/repos",
+        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/and3rn3t/health",
+      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
+      "fork": false,
+      "url": "https://api.github.com/repos/and3rn3t/health",
+      "forks_url": "https://api.github.com/repos/and3rn3t/health/forks",
+      "keys_url": "https://api.github.com/repos/and3rn3t/health/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/and3rn3t/health/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/and3rn3t/health/teams",
+      "hooks_url": "https://api.github.com/repos/and3rn3t/health/hooks",
+      "issue_events_url": "https://api.github.com/repos/and3rn3t/health/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/and3rn3t/health/events",
+      "assignees_url": "https://api.github.com/repos/and3rn3t/health/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/and3rn3t/health/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/and3rn3t/health/tags",
+      "blobs_url": "https://api.github.com/repos/and3rn3t/health/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/and3rn3t/health/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/and3rn3t/health/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/and3rn3t/health/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/and3rn3t/health/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/and3rn3t/health/languages",
+      "stargazers_url": "https://api.github.com/repos/and3rn3t/health/stargazers",
+      "contributors_url": "https://api.github.com/repos/and3rn3t/health/contributors",
+      "subscribers_url": "https://api.github.com/repos/and3rn3t/health/subscribers",
+      "subscription_url": "https://api.github.com/repos/and3rn3t/health/subscription",
+      "commits_url": "https://api.github.com/repos/and3rn3t/health/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/and3rn3t/health/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/and3rn3t/health/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/and3rn3t/health/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/and3rn3t/health/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/and3rn3t/health/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/and3rn3t/health/merges",
+      "archive_url": "https://api.github.com/repos/and3rn3t/health/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/and3rn3t/health/downloads",
+      "issues_url": "https://api.github.com/repos/and3rn3t/health/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/and3rn3t/health/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/and3rn3t/health/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/and3rn3t/health/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/and3rn3t/health/labels{/name}",
+      "releases_url": "https://api.github.com/repos/and3rn3t/health/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/and3rn3t/health/deployments",
+      "created_at": "2025-08-30T21:38:34Z",
+      "updated_at": "2026-10-01T22:01:59Z",
+      "pushed_at": "2026-10-06T01:57:00Z",
+      "git_url": "git://github.com/and3rn3t/health.git",
+      "ssh_url": "git@github.com:and3rn3t/health.git",
+      "clone_url": "https://github.com/and3rn3t/health.git",
+      "svn_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "size": 33675,
+      "stargazers_count": 4,
+      "watchers_count": 4,
+      "language": "TypeScript",
+      "has_issues": true,
+      "has_projects": false,
+      "has_downloads": false,
+      "has_wiki": false,
+      "has_pages": true,
+      "has_discussions": false,
+      "forks_count": 1,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 11,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "has_pull_requests": true,
+      "pull_request_creation_policy": "all",
+      "topics": [
+        "ai",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "ml",
+        "walking",
+        "wellness"
+      ],
+      "visibility": "public",
+      "forks": 1,
+      "open_issues": 11,
+      "watchers": 4,
+      "default_branch": "main",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": false
+      }
+    },
+    {
+      "id": 1126996610,
+      "node_id": "R_kgDOQyyagg",
+      "name": "sky",
+      "full_name": "and3rn3t/sky",
+      "private": false,
+      "owner": {
+        "login": "and3rn3t",
+        "id": 87380976,
+        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "html_url": "https://github.com/and3rn3t",
+        "followers_url": "https://api.github.com/users/and3rn3t/followers",
+        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+        "repos_url": "https://api.github.com/users/and3rn3t/repos",
+        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/and3rn3t/sky",
+      "description": "A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).",
+      "fork": false,
+      "url": "https://api.github.com/repos/and3rn3t/sky",
+      "forks_url": "https://api.github.com/repos/and3rn3t/sky/forks",
+      "keys_url": "https://api.github.com/repos/and3rn3t/sky/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/and3rn3t/sky/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/and3rn3t/sky/teams",
+      "hooks_url": "https://api.github.com/repos/and3rn3t/sky/hooks",
+      "issue_events_url": "https://api.github.com/repos/and3rn3t/sky/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/and3rn3t/sky/events",
+      "assignees_url": "https://api.github.com/repos/and3rn3t/sky/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/and3rn3t/sky/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/and3rn3t/sky/tags",
+      "blobs_url": "https://api.github.com/repos/and3rn3t/sky/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/and3rn3t/sky/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/and3rn3t/sky/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/and3rn3t/sky/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/and3rn3t/sky/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/and3rn3t/sky/languages",
+      "stargazers_url": "https://api.github.com/repos/and3rn3t/sky/stargazers",
+      "contributors_url": "https://api.github.com/repos/and3rn3t/sky/contributors",
+      "subscribers_url": "https://api.github.com/repos/and3rn3t/sky/subscribers",
+      "subscription_url": "https://api.github.com/repos/and3rn3t/sky/subscription",
+      "commits_url": "https://api.github.com/repos/and3rn3t/sky/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/and3rn3t/sky/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/and3rn3t/sky/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/and3rn3t/sky/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/and3rn3t/sky/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/and3rn3t/sky/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/and3rn3t/sky/merges",
+      "archive_url": "https://api.github.com/repos/and3rn3t/sky/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/and3rn3t/sky/downloads",
+      "issues_url": "https://api.github.com/repos/and3rn3t/sky/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/and3rn3t/sky/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/and3rn3t/sky/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/and3rn3t/sky/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/and3rn3t/sky/labels{/name}",
+      "releases_url": "https://api.github.com/repos/and3rn3t/sky/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/and3rn3t/sky/deployments",
+      "created_at": "2026-01-03T00:51:45Z",
+      "updated_at": "2026-10-02T21:05:17Z",
+      "pushed_at": "2026-10-05T18:09:12Z",
+      "git_url": "git://github.com/and3rn3t/sky.git",
+      "ssh_url": "git@github.com:and3rn3t/sky.git",
+      "clone_url": "https://github.com/and3rn3t/sky.git",
+      "svn_url": "https://github.com/and3rn3t/sky",
+      "homepage": null,
+      "size": 819,
+      "stargazers_count": 0,
+      "watchers_count": 0,
+      "language": "TypeScript",
+      "has_issues": true,
+      "has_projects": true,
+      "has_downloads": false,
+      "has_wiki": false,
+      "has_pages": false,
+      "has_discussions": false,
+      "forks_count": 0,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 7,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "has_pull_requests": true,
+      "pull_request_creation_policy": "all",
+      "topics": [
+        "astronomy",
+        "react",
+        "spark-template",
+        "typescript",
+        "vite"
+      ],
+      "visibility": "public",
+      "forks": 0,
+      "open_issues": 7,
+      "watchers": 0,
+      "default_branch": "main",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": false
+      }
+    },
+    {
+      "id": 1047182978,
+      "node_id": "R_kgDOPmq-gg",
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "private": false,
+      "owner": {
+        "login": "and3rn3t",
+        "id": 87380976,
+        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "html_url": "https://github.com/and3rn3t",
+        "followers_url": "https://api.github.com/users/and3rn3t/followers",
+        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+        "repos_url": "https://api.github.com/users/and3rn3t/repos",
+        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "fork": false,
+      "url": "https://api.github.com/repos/and3rn3t/homehub",
+      "forks_url": "https://api.github.com/repos/and3rn3t/homehub/forks",
+      "keys_url": "https://api.github.com/repos/and3rn3t/homehub/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/and3rn3t/homehub/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/and3rn3t/homehub/teams",
+      "hooks_url": "https://api.github.com/repos/and3rn3t/homehub/hooks",
+      "issue_events_url": "https://api.github.com/repos/and3rn3t/homehub/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/and3rn3t/homehub/events",
+      "assignees_url": "https://api.github.com/repos/and3rn3t/homehub/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/and3rn3t/homehub/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/and3rn3t/homehub/tags",
+      "blobs_url": "https://api.github.com/repos/and3rn3t/homehub/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/and3rn3t/homehub/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/and3rn3t/homehub/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/and3rn3t/homehub/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/and3rn3t/homehub/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/and3rn3t/homehub/languages",
+      "stargazers_url": "https://api.github.com/repos/and3rn3t/homehub/stargazers",
+      "contributors_url": "https://api.github.com/repos/and3rn3t/homehub/contributors",
+      "subscribers_url": "https://api.github.com/repos/and3rn3t/homehub/subscribers",
+      "subscription_url": "https://api.github.com/repos/and3rn3t/homehub/subscription",
+      "commits_url": "https://api.github.com/repos/and3rn3t/homehub/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/and3rn3t/homehub/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/and3rn3t/homehub/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/and3rn3t/homehub/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/and3rn3t/homehub/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/and3rn3t/homehub/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/and3rn3t/homehub/merges",
+      "archive_url": "https://api.github.com/repos/and3rn3t/homehub/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/and3rn3t/homehub/downloads",
+      "issues_url": "https://api.github.com/repos/and3rn3t/homehub/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/and3rn3t/homehub/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/and3rn3t/homehub/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/and3rn3t/homehub/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/and3rn3t/homehub/labels{/name}",
+      "releases_url": "https://api.github.com/repos/and3rn3t/homehub/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/and3rn3t/homehub/deployments",
+      "created_at": "2025-08-29T22:05:27Z",
+      "updated_at": "2026-09-09T03:19:25Z",
+      "pushed_at": "2026-10-05T17:30:25Z",
+      "git_url": "git://github.com/and3rn3t/homehub.git",
+      "ssh_url": "git@github.com:and3rn3t/homehub.git",
+      "clone_url": "https://github.com/and3rn3t/homehub.git",
+      "svn_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "size": 5368,
+      "stargazers_count": 2,
+      "watchers_count": 2,
+      "language": "TypeScript",
+      "has_issues": true,
+      "has_projects": true,
+      "has_downloads": false,
+      "has_wiki": false,
+      "has_pages": false,
+      "has_discussions": false,
+      "forks_count": 0,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 7,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "has_pull_requests": true,
+      "pull_request_creation_policy": "all",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "visibility": "public",
+      "forks": 0,
+      "open_issues": 7,
+      "watchers": 2,
+      "default_branch": "main",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": false
+      }
+    },
+    {
+      "id": 1134570300,
+      "node_id": "R_kgDOQ6ArPA",
+      "name": "family",
+      "full_name": "and3rn3t/family",
+      "private": false,
+      "owner": {
+        "login": "and3rn3t",
+        "id": 87380976,
+        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "html_url": "https://github.com/and3rn3t",
+        "followers_url": "https://api.github.com/users/and3rn3t/followers",
+        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+        "repos_url": "https://api.github.com/users/and3rn3t/repos",
+        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/and3rn3t/family",
+      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
+      "fork": false,
+      "url": "https://api.github.com/repos/and3rn3t/family",
+      "forks_url": "https://api.github.com/repos/and3rn3t/family/forks",
+      "keys_url": "https://api.github.com/repos/and3rn3t/family/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/and3rn3t/family/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/and3rn3t/family/teams",
+      "hooks_url": "https://api.github.com/repos/and3rn3t/family/hooks",
+      "issue_events_url": "https://api.github.com/repos/and3rn3t/family/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/and3rn3t/family/events",
+      "assignees_url": "https://api.github.com/repos/and3rn3t/family/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/and3rn3t/family/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/and3rn3t/family/tags",
+      "blobs_url": "https://api.github.com/repos/and3rn3t/family/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/and3rn3t/family/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/and3rn3t/family/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/and3rn3t/family/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/and3rn3t/family/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/and3rn3t/family/languages",
+      "stargazers_url": "https://api.github.com/repos/and3rn3t/family/stargazers",
+      "contributors_url": "https://api.github.com/repos/and3rn3t/family/contributors",
+      "subscribers_url": "https://api.github.com/repos/and3rn3t/family/subscribers",
+      "subscription_url": "https://api.github.com/repos/and3rn3t/family/subscription",
+      "commits_url": "https://api.github.com/repos/and3rn3t/family/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/and3rn3t/family/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/and3rn3t/family/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/and3rn3t/family/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/and3rn3t/family/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/and3rn3t/family/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/and3rn3t/family/merges",
+      "archive_url": "https://api.github.com/repos/and3rn3t/family/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/and3rn3t/family/downloads",
+      "issues_url": "https://api.github.com/repos/and3rn3t/family/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/and3rn3t/family/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/and3rn3t/family/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/and3rn3t/family/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/and3rn3t/family/labels{/name}",
+      "releases_url": "https://api.github.com/repos/and3rn3t/family/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/and3rn3t/family/deployments",
+      "created_at": "2026-01-14T22:35:53Z",
+      "updated_at": "2026-10-02T21:04:57Z",
+      "pushed_at": "2026-10-05T15:39:23Z",
+      "git_url": "git://github.com/and3rn3t/family.git",
+      "ssh_url": "git@github.com:and3rn3t/family.git",
+      "clone_url": "https://github.com/and3rn3t/family.git",
+      "svn_url": "https://github.com/and3rn3t/family",
+      "homepage": null,
+      "size": 1123,
+      "stargazers_count": 0,
+      "watchers_count": 0,
+      "language": "TypeScript",
+      "has_issues": true,
+      "has_projects": false,
+      "has_downloads": false,
+      "has_wiki": false,
+      "has_pages": false,
+      "has_discussions": false,
+      "forks_count": 0,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 3,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "has_pull_requests": true,
+      "pull_request_creation_policy": "all",
+      "topics": [
+        "kiosk",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "visibility": "public",
+      "forks": 0,
+      "open_issues": 3,
+      "watchers": 0,
+      "default_branch": "main",
+      "permissions": {
+        "admin": false,
+        "maintain": false,
+        "push": false,
+        "triage": false,
+        "pull": false
+      }
+    },
+    {
+      "id": 390771666,
+      "node_id": "MDEwOlJlcG9zaXRvcnkzOTA3NzE2NjY=",
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "private": false,
+      "owner": {
+        "login": "and3rn3t",
+        "id": 87380976,
+        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "html_url": "https://github.com/and3rn3t",
+        "followers_url": "https://api.github.com/users/and3rn3t/followers",
+        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
+        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
+        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
+        "repos_url": "https://api.github.com/users/and3rn3t/repos",
+        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "fork": false,
+      "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
+      "forks_url": "https://api.github.com/repos/and3rn3t/and3rn3t/forks",
+      "keys_url": "https://api.github.com/repos/and3rn3t/and3rn3t/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/and3rn3t/and3rn3t/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/and3rn3t/and3rn3t/teams",
+      "hooks_url": "https://api.github.com/repos/and3rn3t/and3rn3t/hooks",
+      "issue_events_url": "https://api.github.com/repos/and3rn3t/and3rn3t/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/and3rn3t/and3rn3t/events",
+      "assignees_url": "https://api.github.com/repos/and3rn3t/and3rn3t/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/and3rn3t/and3rn3t/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/and3rn3t/and3rn3t/tags",
+      "blobs_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/and3rn3t/and3rn3t/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/and3rn3t/and3rn3t/languages",
+      "stargazers_url": "https://api.github.com/repos/and3rn3t/and3rn3t/stargazers",
+      "contributors_url": "https://api.github.com/repos/and3rn3t/and3rn3t/contributors",
+      "subscribers_url": "https://api.github.com/repos/and3rn3t/and3rn3t/subscribers",
+      "subscription_url": "https://api.github.com/repos/and3rn3t/and3rn3t/subscription",
+      "commits_url": "https://api.github.com/repos/and3rn3t/and3rn3t/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/and3rn3t/and3rn3t/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/and3rn3t/and3rn3t/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/and3rn3t/and3rn3t/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/and3rn3t/and3rn3t/merges",
+      "archive_url": "https://api.github.com/repos/and3rn3t/and3rn3t/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/and3rn3t/and3rn3t/downloads",
+      "issues_url": "https://api.github.com/repos/and3rn3t/and3rn3t/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/and3rn3t/and3rn3t/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/and3rn3t/and3rn3t/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/and3rn3t/and3rn3t/labels{/name}",
+      "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
+      "created_at": "2021-07-29T15:36:40Z",
+      "updated_at": "2026-10-05T03:20:54Z",
+      "pushed_at": "2026-10-05T05:25:12Z",
+      "git_url": "git://github.com/and3rn3t/and3rn3t.git",
+      "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
+      "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
+      "svn_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "size": 5911,
+      "stargazers_count": 0,
+      "watchers_count": 0,
+      "language": "JavaScript",
+      "has_issues": true,
+      "has_projects": false,
+      "has_downloads": false,
+      "has_wiki": false,
+      "has_pages": true,
+      "has_discussions": false,
+      "forks_count": 1,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 2,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": false,
+      "has_pull_requests": true,
+      "pull_request_creation_policy": "all",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "visibility": "public",
+      "forks": 1,
+      "open_issues": 2,
+      "watchers": 0,
       "default_branch": "main",
       "permissions": {
         "admin": false,
@@ -240,7 +975,7 @@
       "mirror_url": null,
       "archived": false,
       "disabled": false,
-      "open_issues_count": 10,
+      "open_issues_count": 11,
       "license": {
         "key": "mit",
         "name": "MIT License",
@@ -264,7 +999,7 @@
       ],
       "visibility": "public",
       "forks": 0,
-      "open_issues": 10,
+      "open_issues": 11,
       "watchers": 1,
       "default_branch": "main",
       "permissions": {
@@ -505,125 +1240,6 @@
       "forks": 0,
       "open_issues": 6,
       "watchers": 2,
-      "default_branch": "main",
-      "permissions": {
-        "admin": false,
-        "maintain": false,
-        "push": false,
-        "triage": false,
-        "pull": false
-      }
-    },
-    {
-      "id": 390771666,
-      "node_id": "MDEwOlJlcG9zaXRvcnkzOTA3NzE2NjY=",
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "private": false,
-      "owner": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "fork": false,
-      "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-      "forks_url": "https://api.github.com/repos/and3rn3t/and3rn3t/forks",
-      "keys_url": "https://api.github.com/repos/and3rn3t/and3rn3t/keys{/key_id}",
-      "collaborators_url": "https://api.github.com/repos/and3rn3t/and3rn3t/collaborators{/collaborator}",
-      "teams_url": "https://api.github.com/repos/and3rn3t/and3rn3t/teams",
-      "hooks_url": "https://api.github.com/repos/and3rn3t/and3rn3t/hooks",
-      "issue_events_url": "https://api.github.com/repos/and3rn3t/and3rn3t/issues/events{/number}",
-      "events_url": "https://api.github.com/repos/and3rn3t/and3rn3t/events",
-      "assignees_url": "https://api.github.com/repos/and3rn3t/and3rn3t/assignees{/user}",
-      "branches_url": "https://api.github.com/repos/and3rn3t/and3rn3t/branches{/branch}",
-      "tags_url": "https://api.github.com/repos/and3rn3t/and3rn3t/tags",
-      "blobs_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/blobs{/sha}",
-      "git_tags_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/tags{/sha}",
-      "git_refs_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/refs{/sha}",
-      "trees_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/trees{/sha}",
-      "statuses_url": "https://api.github.com/repos/and3rn3t/and3rn3t/statuses/{sha}",
-      "languages_url": "https://api.github.com/repos/and3rn3t/and3rn3t/languages",
-      "stargazers_url": "https://api.github.com/repos/and3rn3t/and3rn3t/stargazers",
-      "contributors_url": "https://api.github.com/repos/and3rn3t/and3rn3t/contributors",
-      "subscribers_url": "https://api.github.com/repos/and3rn3t/and3rn3t/subscribers",
-      "subscription_url": "https://api.github.com/repos/and3rn3t/and3rn3t/subscription",
-      "commits_url": "https://api.github.com/repos/and3rn3t/and3rn3t/commits{/sha}",
-      "git_commits_url": "https://api.github.com/repos/and3rn3t/and3rn3t/git/commits{/sha}",
-      "comments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/comments{/number}",
-      "issue_comment_url": "https://api.github.com/repos/and3rn3t/and3rn3t/issues/comments{/number}",
-      "contents_url": "https://api.github.com/repos/and3rn3t/and3rn3t/contents/{+path}",
-      "compare_url": "https://api.github.com/repos/and3rn3t/and3rn3t/compare/{base}...{head}",
-      "merges_url": "https://api.github.com/repos/and3rn3t/and3rn3t/merges",
-      "archive_url": "https://api.github.com/repos/and3rn3t/and3rn3t/{archive_format}{/ref}",
-      "downloads_url": "https://api.github.com/repos/and3rn3t/and3rn3t/downloads",
-      "issues_url": "https://api.github.com/repos/and3rn3t/and3rn3t/issues{/number}",
-      "pulls_url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls{/number}",
-      "milestones_url": "https://api.github.com/repos/and3rn3t/and3rn3t/milestones{/number}",
-      "notifications_url": "https://api.github.com/repos/and3rn3t/and3rn3t/notifications{?since,all,participating}",
-      "labels_url": "https://api.github.com/repos/and3rn3t/and3rn3t/labels{/name}",
-      "releases_url": "https://api.github.com/repos/and3rn3t/and3rn3t/releases{/id}",
-      "deployments_url": "https://api.github.com/repos/and3rn3t/and3rn3t/deployments",
-      "created_at": "2021-07-29T15:36:40Z",
-      "updated_at": "2026-10-04T20:34:42Z",
-      "pushed_at": "2026-10-04T20:34:55Z",
-      "git_url": "git://github.com/and3rn3t/and3rn3t.git",
-      "ssh_url": "git@github.com:and3rn3t/and3rn3t.git",
-      "clone_url": "https://github.com/and3rn3t/and3rn3t.git",
-      "svn_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "size": 5732,
-      "stargazers_count": 0,
-      "watchers_count": 0,
-      "language": "JavaScript",
-      "has_issues": true,
-      "has_projects": false,
-      "has_downloads": false,
-      "has_wiki": false,
-      "has_pages": true,
-      "has_discussions": false,
-      "forks_count": 1,
-      "mirror_url": null,
-      "archived": false,
-      "disabled": false,
-      "open_issues_count": 2,
-      "license": {
-        "key": "mit",
-        "name": "MIT License",
-        "spdx_id": "MIT",
-        "url": "https://api.github.com/licenses/mit",
-        "node_id": "MDc6TGljZW5zZTEz"
-      },
-      "allow_forking": true,
-      "is_template": false,
-      "web_commit_signoff_required": false,
-      "has_pull_requests": true,
-      "pull_request_creation_policy": "all",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "visibility": "public",
-      "forks": 1,
-      "open_issues": 2,
-      "watchers": 0,
       "default_branch": "main",
       "permissions": {
         "admin": false,
@@ -1006,374 +1622,6 @@
       }
     },
     {
-      "id": 1156702820,
-      "node_id": "R_kgDORPHiZA",
-      "name": "jonah",
-      "full_name": "and3rn3t/jonah",
-      "private": false,
-      "owner": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "html_url": "https://github.com/and3rn3t/jonah",
-      "description": "Personal portfolio for Jonah (GitHub Spark template).",
-      "fork": false,
-      "url": "https://api.github.com/repos/and3rn3t/jonah",
-      "forks_url": "https://api.github.com/repos/and3rn3t/jonah/forks",
-      "keys_url": "https://api.github.com/repos/and3rn3t/jonah/keys{/key_id}",
-      "collaborators_url": "https://api.github.com/repos/and3rn3t/jonah/collaborators{/collaborator}",
-      "teams_url": "https://api.github.com/repos/and3rn3t/jonah/teams",
-      "hooks_url": "https://api.github.com/repos/and3rn3t/jonah/hooks",
-      "issue_events_url": "https://api.github.com/repos/and3rn3t/jonah/issues/events{/number}",
-      "events_url": "https://api.github.com/repos/and3rn3t/jonah/events",
-      "assignees_url": "https://api.github.com/repos/and3rn3t/jonah/assignees{/user}",
-      "branches_url": "https://api.github.com/repos/and3rn3t/jonah/branches{/branch}",
-      "tags_url": "https://api.github.com/repos/and3rn3t/jonah/tags",
-      "blobs_url": "https://api.github.com/repos/and3rn3t/jonah/git/blobs{/sha}",
-      "git_tags_url": "https://api.github.com/repos/and3rn3t/jonah/git/tags{/sha}",
-      "git_refs_url": "https://api.github.com/repos/and3rn3t/jonah/git/refs{/sha}",
-      "trees_url": "https://api.github.com/repos/and3rn3t/jonah/git/trees{/sha}",
-      "statuses_url": "https://api.github.com/repos/and3rn3t/jonah/statuses/{sha}",
-      "languages_url": "https://api.github.com/repos/and3rn3t/jonah/languages",
-      "stargazers_url": "https://api.github.com/repos/and3rn3t/jonah/stargazers",
-      "contributors_url": "https://api.github.com/repos/and3rn3t/jonah/contributors",
-      "subscribers_url": "https://api.github.com/repos/and3rn3t/jonah/subscribers",
-      "subscription_url": "https://api.github.com/repos/and3rn3t/jonah/subscription",
-      "commits_url": "https://api.github.com/repos/and3rn3t/jonah/commits{/sha}",
-      "git_commits_url": "https://api.github.com/repos/and3rn3t/jonah/git/commits{/sha}",
-      "comments_url": "https://api.github.com/repos/and3rn3t/jonah/comments{/number}",
-      "issue_comment_url": "https://api.github.com/repos/and3rn3t/jonah/issues/comments{/number}",
-      "contents_url": "https://api.github.com/repos/and3rn3t/jonah/contents/{+path}",
-      "compare_url": "https://api.github.com/repos/and3rn3t/jonah/compare/{base}...{head}",
-      "merges_url": "https://api.github.com/repos/and3rn3t/jonah/merges",
-      "archive_url": "https://api.github.com/repos/and3rn3t/jonah/{archive_format}{/ref}",
-      "downloads_url": "https://api.github.com/repos/and3rn3t/jonah/downloads",
-      "issues_url": "https://api.github.com/repos/and3rn3t/jonah/issues{/number}",
-      "pulls_url": "https://api.github.com/repos/and3rn3t/jonah/pulls{/number}",
-      "milestones_url": "https://api.github.com/repos/and3rn3t/jonah/milestones{/number}",
-      "notifications_url": "https://api.github.com/repos/and3rn3t/jonah/notifications{?since,all,participating}",
-      "labels_url": "https://api.github.com/repos/and3rn3t/jonah/labels{/name}",
-      "releases_url": "https://api.github.com/repos/and3rn3t/jonah/releases{/id}",
-      "deployments_url": "https://api.github.com/repos/and3rn3t/jonah/deployments",
-      "created_at": "2026-02-13T00:28:34Z",
-      "updated_at": "2026-10-02T21:06:10Z",
-      "pushed_at": "2026-10-02T21:10:13Z",
-      "git_url": "git://github.com/and3rn3t/jonah.git",
-      "ssh_url": "git@github.com:and3rn3t/jonah.git",
-      "clone_url": "https://github.com/and3rn3t/jonah.git",
-      "svn_url": "https://github.com/and3rn3t/jonah",
-      "homepage": null,
-      "size": 863,
-      "stargazers_count": 0,
-      "watchers_count": 0,
-      "language": "TypeScript",
-      "has_issues": true,
-      "has_projects": true,
-      "has_downloads": false,
-      "has_wiki": false,
-      "has_pages": false,
-      "has_discussions": false,
-      "forks_count": 0,
-      "mirror_url": null,
-      "archived": false,
-      "disabled": false,
-      "open_issues_count": 4,
-      "license": {
-        "key": "mit",
-        "name": "MIT License",
-        "spdx_id": "MIT",
-        "url": "https://api.github.com/licenses/mit",
-        "node_id": "MDc6TGljZW5zZTEz"
-      },
-      "allow_forking": true,
-      "is_template": false,
-      "web_commit_signoff_required": false,
-      "has_pull_requests": true,
-      "pull_request_creation_policy": "all",
-      "topics": [
-        "cloudflare-workers",
-        "portfolio",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "visibility": "public",
-      "forks": 0,
-      "open_issues": 4,
-      "watchers": 0,
-      "default_branch": "main",
-      "permissions": {
-        "admin": false,
-        "maintain": false,
-        "push": false,
-        "triage": false,
-        "pull": false
-      }
-    },
-    {
-      "id": 1134570300,
-      "node_id": "R_kgDOQ6ArPA",
-      "name": "family",
-      "full_name": "and3rn3t/family",
-      "private": false,
-      "owner": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "html_url": "https://github.com/and3rn3t/family",
-      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
-      "fork": false,
-      "url": "https://api.github.com/repos/and3rn3t/family",
-      "forks_url": "https://api.github.com/repos/and3rn3t/family/forks",
-      "keys_url": "https://api.github.com/repos/and3rn3t/family/keys{/key_id}",
-      "collaborators_url": "https://api.github.com/repos/and3rn3t/family/collaborators{/collaborator}",
-      "teams_url": "https://api.github.com/repos/and3rn3t/family/teams",
-      "hooks_url": "https://api.github.com/repos/and3rn3t/family/hooks",
-      "issue_events_url": "https://api.github.com/repos/and3rn3t/family/issues/events{/number}",
-      "events_url": "https://api.github.com/repos/and3rn3t/family/events",
-      "assignees_url": "https://api.github.com/repos/and3rn3t/family/assignees{/user}",
-      "branches_url": "https://api.github.com/repos/and3rn3t/family/branches{/branch}",
-      "tags_url": "https://api.github.com/repos/and3rn3t/family/tags",
-      "blobs_url": "https://api.github.com/repos/and3rn3t/family/git/blobs{/sha}",
-      "git_tags_url": "https://api.github.com/repos/and3rn3t/family/git/tags{/sha}",
-      "git_refs_url": "https://api.github.com/repos/and3rn3t/family/git/refs{/sha}",
-      "trees_url": "https://api.github.com/repos/and3rn3t/family/git/trees{/sha}",
-      "statuses_url": "https://api.github.com/repos/and3rn3t/family/statuses/{sha}",
-      "languages_url": "https://api.github.com/repos/and3rn3t/family/languages",
-      "stargazers_url": "https://api.github.com/repos/and3rn3t/family/stargazers",
-      "contributors_url": "https://api.github.com/repos/and3rn3t/family/contributors",
-      "subscribers_url": "https://api.github.com/repos/and3rn3t/family/subscribers",
-      "subscription_url": "https://api.github.com/repos/and3rn3t/family/subscription",
-      "commits_url": "https://api.github.com/repos/and3rn3t/family/commits{/sha}",
-      "git_commits_url": "https://api.github.com/repos/and3rn3t/family/git/commits{/sha}",
-      "comments_url": "https://api.github.com/repos/and3rn3t/family/comments{/number}",
-      "issue_comment_url": "https://api.github.com/repos/and3rn3t/family/issues/comments{/number}",
-      "contents_url": "https://api.github.com/repos/and3rn3t/family/contents/{+path}",
-      "compare_url": "https://api.github.com/repos/and3rn3t/family/compare/{base}...{head}",
-      "merges_url": "https://api.github.com/repos/and3rn3t/family/merges",
-      "archive_url": "https://api.github.com/repos/and3rn3t/family/{archive_format}{/ref}",
-      "downloads_url": "https://api.github.com/repos/and3rn3t/family/downloads",
-      "issues_url": "https://api.github.com/repos/and3rn3t/family/issues{/number}",
-      "pulls_url": "https://api.github.com/repos/and3rn3t/family/pulls{/number}",
-      "milestones_url": "https://api.github.com/repos/and3rn3t/family/milestones{/number}",
-      "notifications_url": "https://api.github.com/repos/and3rn3t/family/notifications{?since,all,participating}",
-      "labels_url": "https://api.github.com/repos/and3rn3t/family/labels{/name}",
-      "releases_url": "https://api.github.com/repos/and3rn3t/family/releases{/id}",
-      "deployments_url": "https://api.github.com/repos/and3rn3t/family/deployments",
-      "created_at": "2026-01-14T22:35:53Z",
-      "updated_at": "2026-10-02T21:04:57Z",
-      "pushed_at": "2026-10-02T21:08:03Z",
-      "git_url": "git://github.com/and3rn3t/family.git",
-      "ssh_url": "git@github.com:and3rn3t/family.git",
-      "clone_url": "https://github.com/and3rn3t/family.git",
-      "svn_url": "https://github.com/and3rn3t/family",
-      "homepage": null,
-      "size": 1123,
-      "stargazers_count": 0,
-      "watchers_count": 0,
-      "language": "TypeScript",
-      "has_issues": true,
-      "has_projects": false,
-      "has_downloads": false,
-      "has_wiki": false,
-      "has_pages": false,
-      "has_discussions": false,
-      "forks_count": 0,
-      "mirror_url": null,
-      "archived": false,
-      "disabled": false,
-      "open_issues_count": 3,
-      "license": {
-        "key": "mit",
-        "name": "MIT License",
-        "spdx_id": "MIT",
-        "url": "https://api.github.com/licenses/mit",
-        "node_id": "MDc6TGljZW5zZTEz"
-      },
-      "allow_forking": true,
-      "is_template": false,
-      "web_commit_signoff_required": false,
-      "has_pull_requests": true,
-      "pull_request_creation_policy": "all",
-      "topics": [
-        "kiosk",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "visibility": "public",
-      "forks": 0,
-      "open_issues": 3,
-      "watchers": 0,
-      "default_branch": "main",
-      "permissions": {
-        "admin": false,
-        "maintain": false,
-        "push": false,
-        "triage": false,
-        "pull": false
-      }
-    },
-    {
-      "id": 1126996610,
-      "node_id": "R_kgDOQyyagg",
-      "name": "sky",
-      "full_name": "and3rn3t/sky",
-      "private": false,
-      "owner": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "html_url": "https://github.com/and3rn3t/sky",
-      "description": "A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).",
-      "fork": false,
-      "url": "https://api.github.com/repos/and3rn3t/sky",
-      "forks_url": "https://api.github.com/repos/and3rn3t/sky/forks",
-      "keys_url": "https://api.github.com/repos/and3rn3t/sky/keys{/key_id}",
-      "collaborators_url": "https://api.github.com/repos/and3rn3t/sky/collaborators{/collaborator}",
-      "teams_url": "https://api.github.com/repos/and3rn3t/sky/teams",
-      "hooks_url": "https://api.github.com/repos/and3rn3t/sky/hooks",
-      "issue_events_url": "https://api.github.com/repos/and3rn3t/sky/issues/events{/number}",
-      "events_url": "https://api.github.com/repos/and3rn3t/sky/events",
-      "assignees_url": "https://api.github.com/repos/and3rn3t/sky/assignees{/user}",
-      "branches_url": "https://api.github.com/repos/and3rn3t/sky/branches{/branch}",
-      "tags_url": "https://api.github.com/repos/and3rn3t/sky/tags",
-      "blobs_url": "https://api.github.com/repos/and3rn3t/sky/git/blobs{/sha}",
-      "git_tags_url": "https://api.github.com/repos/and3rn3t/sky/git/tags{/sha}",
-      "git_refs_url": "https://api.github.com/repos/and3rn3t/sky/git/refs{/sha}",
-      "trees_url": "https://api.github.com/repos/and3rn3t/sky/git/trees{/sha}",
-      "statuses_url": "https://api.github.com/repos/and3rn3t/sky/statuses/{sha}",
-      "languages_url": "https://api.github.com/repos/and3rn3t/sky/languages",
-      "stargazers_url": "https://api.github.com/repos/and3rn3t/sky/stargazers",
-      "contributors_url": "https://api.github.com/repos/and3rn3t/sky/contributors",
-      "subscribers_url": "https://api.github.com/repos/and3rn3t/sky/subscribers",
-      "subscription_url": "https://api.github.com/repos/and3rn3t/sky/subscription",
-      "commits_url": "https://api.github.com/repos/and3rn3t/sky/commits{/sha}",
-      "git_commits_url": "https://api.github.com/repos/and3rn3t/sky/git/commits{/sha}",
-      "comments_url": "https://api.github.com/repos/and3rn3t/sky/comments{/number}",
-      "issue_comment_url": "https://api.github.com/repos/and3rn3t/sky/issues/comments{/number}",
-      "contents_url": "https://api.github.com/repos/and3rn3t/sky/contents/{+path}",
-      "compare_url": "https://api.github.com/repos/and3rn3t/sky/compare/{base}...{head}",
-      "merges_url": "https://api.github.com/repos/and3rn3t/sky/merges",
-      "archive_url": "https://api.github.com/repos/and3rn3t/sky/{archive_format}{/ref}",
-      "downloads_url": "https://api.github.com/repos/and3rn3t/sky/downloads",
-      "issues_url": "https://api.github.com/repos/and3rn3t/sky/issues{/number}",
-      "pulls_url": "https://api.github.com/repos/and3rn3t/sky/pulls{/number}",
-      "milestones_url": "https://api.github.com/repos/and3rn3t/sky/milestones{/number}",
-      "notifications_url": "https://api.github.com/repos/and3rn3t/sky/notifications{?since,all,participating}",
-      "labels_url": "https://api.github.com/repos/and3rn3t/sky/labels{/name}",
-      "releases_url": "https://api.github.com/repos/and3rn3t/sky/releases{/id}",
-      "deployments_url": "https://api.github.com/repos/and3rn3t/sky/deployments",
-      "created_at": "2026-01-03T00:51:45Z",
-      "updated_at": "2026-10-02T21:05:17Z",
-      "pushed_at": "2026-10-02T21:05:15Z",
-      "git_url": "git://github.com/and3rn3t/sky.git",
-      "ssh_url": "git@github.com:and3rn3t/sky.git",
-      "clone_url": "https://github.com/and3rn3t/sky.git",
-      "svn_url": "https://github.com/and3rn3t/sky",
-      "homepage": null,
-      "size": 382,
-      "stargazers_count": 0,
-      "watchers_count": 0,
-      "language": "TypeScript",
-      "has_issues": true,
-      "has_projects": true,
-      "has_downloads": false,
-      "has_wiki": false,
-      "has_pages": false,
-      "has_discussions": false,
-      "forks_count": 0,
-      "mirror_url": null,
-      "archived": false,
-      "disabled": false,
-      "open_issues_count": 2,
-      "license": {
-        "key": "mit",
-        "name": "MIT License",
-        "spdx_id": "MIT",
-        "url": "https://api.github.com/licenses/mit",
-        "node_id": "MDc6TGljZW5zZTEz"
-      },
-      "allow_forking": true,
-      "is_template": false,
-      "web_commit_signoff_required": false,
-      "has_pull_requests": true,
-      "pull_request_creation_policy": "all",
-      "topics": [
-        "astronomy",
-        "react",
-        "spark-template",
-        "typescript",
-        "vite"
-      ],
-      "visibility": "public",
-      "forks": 0,
-      "open_issues": 2,
-      "watchers": 0,
-      "default_branch": "main",
-      "permissions": {
-        "admin": false,
-        "maintain": false,
-        "push": false,
-        "triage": false,
-        "pull": false
-      }
-    },
-    {
       "id": 1074099968,
       "node_id": "R_kgDOQAV3AA",
       "name": "catastrophe",
@@ -1615,131 +1863,6 @@
       }
     },
     {
-      "id": 1047636691,
-      "node_id": "R_kgDOPnGq0w",
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "private": false,
-      "owner": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "html_url": "https://github.com/and3rn3t/health",
-      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
-      "fork": false,
-      "url": "https://api.github.com/repos/and3rn3t/health",
-      "forks_url": "https://api.github.com/repos/and3rn3t/health/forks",
-      "keys_url": "https://api.github.com/repos/and3rn3t/health/keys{/key_id}",
-      "collaborators_url": "https://api.github.com/repos/and3rn3t/health/collaborators{/collaborator}",
-      "teams_url": "https://api.github.com/repos/and3rn3t/health/teams",
-      "hooks_url": "https://api.github.com/repos/and3rn3t/health/hooks",
-      "issue_events_url": "https://api.github.com/repos/and3rn3t/health/issues/events{/number}",
-      "events_url": "https://api.github.com/repos/and3rn3t/health/events",
-      "assignees_url": "https://api.github.com/repos/and3rn3t/health/assignees{/user}",
-      "branches_url": "https://api.github.com/repos/and3rn3t/health/branches{/branch}",
-      "tags_url": "https://api.github.com/repos/and3rn3t/health/tags",
-      "blobs_url": "https://api.github.com/repos/and3rn3t/health/git/blobs{/sha}",
-      "git_tags_url": "https://api.github.com/repos/and3rn3t/health/git/tags{/sha}",
-      "git_refs_url": "https://api.github.com/repos/and3rn3t/health/git/refs{/sha}",
-      "trees_url": "https://api.github.com/repos/and3rn3t/health/git/trees{/sha}",
-      "statuses_url": "https://api.github.com/repos/and3rn3t/health/statuses/{sha}",
-      "languages_url": "https://api.github.com/repos/and3rn3t/health/languages",
-      "stargazers_url": "https://api.github.com/repos/and3rn3t/health/stargazers",
-      "contributors_url": "https://api.github.com/repos/and3rn3t/health/contributors",
-      "subscribers_url": "https://api.github.com/repos/and3rn3t/health/subscribers",
-      "subscription_url": "https://api.github.com/repos/and3rn3t/health/subscription",
-      "commits_url": "https://api.github.com/repos/and3rn3t/health/commits{/sha}",
-      "git_commits_url": "https://api.github.com/repos/and3rn3t/health/git/commits{/sha}",
-      "comments_url": "https://api.github.com/repos/and3rn3t/health/comments{/number}",
-      "issue_comment_url": "https://api.github.com/repos/and3rn3t/health/issues/comments{/number}",
-      "contents_url": "https://api.github.com/repos/and3rn3t/health/contents/{+path}",
-      "compare_url": "https://api.github.com/repos/and3rn3t/health/compare/{base}...{head}",
-      "merges_url": "https://api.github.com/repos/and3rn3t/health/merges",
-      "archive_url": "https://api.github.com/repos/and3rn3t/health/{archive_format}{/ref}",
-      "downloads_url": "https://api.github.com/repos/and3rn3t/health/downloads",
-      "issues_url": "https://api.github.com/repos/and3rn3t/health/issues{/number}",
-      "pulls_url": "https://api.github.com/repos/and3rn3t/health/pulls{/number}",
-      "milestones_url": "https://api.github.com/repos/and3rn3t/health/milestones{/number}",
-      "notifications_url": "https://api.github.com/repos/and3rn3t/health/notifications{?since,all,participating}",
-      "labels_url": "https://api.github.com/repos/and3rn3t/health/labels{/name}",
-      "releases_url": "https://api.github.com/repos/and3rn3t/health/releases{/id}",
-      "deployments_url": "https://api.github.com/repos/and3rn3t/health/deployments",
-      "created_at": "2025-08-30T21:38:34Z",
-      "updated_at": "2026-10-01T22:01:59Z",
-      "pushed_at": "2026-10-02T18:20:45Z",
-      "git_url": "git://github.com/and3rn3t/health.git",
-      "ssh_url": "git@github.com:and3rn3t/health.git",
-      "clone_url": "https://github.com/and3rn3t/health.git",
-      "svn_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "size": 34295,
-      "stargazers_count": 4,
-      "watchers_count": 4,
-      "language": "TypeScript",
-      "has_issues": true,
-      "has_projects": false,
-      "has_downloads": false,
-      "has_wiki": false,
-      "has_pages": true,
-      "has_discussions": false,
-      "forks_count": 1,
-      "mirror_url": null,
-      "archived": false,
-      "disabled": false,
-      "open_issues_count": 10,
-      "license": {
-        "key": "mit",
-        "name": "MIT License",
-        "spdx_id": "MIT",
-        "url": "https://api.github.com/licenses/mit",
-        "node_id": "MDc6TGljZW5zZTEz"
-      },
-      "allow_forking": true,
-      "is_template": false,
-      "web_commit_signoff_required": false,
-      "has_pull_requests": true,
-      "pull_request_creation_policy": "all",
-      "topics": [
-        "ai",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "ml",
-        "walking",
-        "wellness"
-      ],
-      "visibility": "public",
-      "forks": 1,
-      "open_issues": 10,
-      "watchers": 4,
-      "default_branch": "main",
-      "permissions": {
-        "admin": false,
-        "maintain": false,
-        "push": false,
-        "triage": false,
-        "pull": false
-      }
-    },
-    {
       "id": 1149289669,
       "node_id": "R_kgDORIDExQ",
       "name": "huggingface",
@@ -1854,129 +1977,6 @@
       "forks": 0,
       "open_issues": 11,
       "watchers": 0,
-      "default_branch": "main",
-      "permissions": {
-        "admin": false,
-        "maintain": false,
-        "push": false,
-        "triage": false,
-        "pull": false
-      }
-    },
-    {
-      "id": 1047182978,
-      "node_id": "R_kgDOPmq-gg",
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "private": false,
-      "owner": {
-        "login": "and3rn3t",
-        "id": 87380976,
-        "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "html_url": "https://github.com/and3rn3t",
-        "followers_url": "https://api.github.com/users/and3rn3t/followers",
-        "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-        "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-        "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-        "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-        "repos_url": "https://api.github.com/users/and3rn3t/repos",
-        "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-        "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-        "type": "User",
-        "user_view_type": "public",
-        "site_admin": false
-      },
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "fork": false,
-      "url": "https://api.github.com/repos/and3rn3t/homehub",
-      "forks_url": "https://api.github.com/repos/and3rn3t/homehub/forks",
-      "keys_url": "https://api.github.com/repos/and3rn3t/homehub/keys{/key_id}",
-      "collaborators_url": "https://api.github.com/repos/and3rn3t/homehub/collaborators{/collaborator}",
-      "teams_url": "https://api.github.com/repos/and3rn3t/homehub/teams",
-      "hooks_url": "https://api.github.com/repos/and3rn3t/homehub/hooks",
-      "issue_events_url": "https://api.github.com/repos/and3rn3t/homehub/issues/events{/number}",
-      "events_url": "https://api.github.com/repos/and3rn3t/homehub/events",
-      "assignees_url": "https://api.github.com/repos/and3rn3t/homehub/assignees{/user}",
-      "branches_url": "https://api.github.com/repos/and3rn3t/homehub/branches{/branch}",
-      "tags_url": "https://api.github.com/repos/and3rn3t/homehub/tags",
-      "blobs_url": "https://api.github.com/repos/and3rn3t/homehub/git/blobs{/sha}",
-      "git_tags_url": "https://api.github.com/repos/and3rn3t/homehub/git/tags{/sha}",
-      "git_refs_url": "https://api.github.com/repos/and3rn3t/homehub/git/refs{/sha}",
-      "trees_url": "https://api.github.com/repos/and3rn3t/homehub/git/trees{/sha}",
-      "statuses_url": "https://api.github.com/repos/and3rn3t/homehub/statuses/{sha}",
-      "languages_url": "https://api.github.com/repos/and3rn3t/homehub/languages",
-      "stargazers_url": "https://api.github.com/repos/and3rn3t/homehub/stargazers",
-      "contributors_url": "https://api.github.com/repos/and3rn3t/homehub/contributors",
-      "subscribers_url": "https://api.github.com/repos/and3rn3t/homehub/subscribers",
-      "subscription_url": "https://api.github.com/repos/and3rn3t/homehub/subscription",
-      "commits_url": "https://api.github.com/repos/and3rn3t/homehub/commits{/sha}",
-      "git_commits_url": "https://api.github.com/repos/and3rn3t/homehub/git/commits{/sha}",
-      "comments_url": "https://api.github.com/repos/and3rn3t/homehub/comments{/number}",
-      "issue_comment_url": "https://api.github.com/repos/and3rn3t/homehub/issues/comments{/number}",
-      "contents_url": "https://api.github.com/repos/and3rn3t/homehub/contents/{+path}",
-      "compare_url": "https://api.github.com/repos/and3rn3t/homehub/compare/{base}...{head}",
-      "merges_url": "https://api.github.com/repos/and3rn3t/homehub/merges",
-      "archive_url": "https://api.github.com/repos/and3rn3t/homehub/{archive_format}{/ref}",
-      "downloads_url": "https://api.github.com/repos/and3rn3t/homehub/downloads",
-      "issues_url": "https://api.github.com/repos/and3rn3t/homehub/issues{/number}",
-      "pulls_url": "https://api.github.com/repos/and3rn3t/homehub/pulls{/number}",
-      "milestones_url": "https://api.github.com/repos/and3rn3t/homehub/milestones{/number}",
-      "notifications_url": "https://api.github.com/repos/and3rn3t/homehub/notifications{?since,all,participating}",
-      "labels_url": "https://api.github.com/repos/and3rn3t/homehub/labels{/name}",
-      "releases_url": "https://api.github.com/repos/and3rn3t/homehub/releases{/id}",
-      "deployments_url": "https://api.github.com/repos/and3rn3t/homehub/deployments",
-      "created_at": "2025-08-29T22:05:27Z",
-      "updated_at": "2026-09-09T03:19:25Z",
-      "pushed_at": "2026-10-01T12:03:30Z",
-      "git_url": "git://github.com/and3rn3t/homehub.git",
-      "ssh_url": "git@github.com:and3rn3t/homehub.git",
-      "clone_url": "https://github.com/and3rn3t/homehub.git",
-      "svn_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "size": 5368,
-      "stargazers_count": 2,
-      "watchers_count": 2,
-      "language": "TypeScript",
-      "has_issues": true,
-      "has_projects": true,
-      "has_downloads": false,
-      "has_wiki": false,
-      "has_pages": false,
-      "has_discussions": false,
-      "forks_count": 0,
-      "mirror_url": null,
-      "archived": false,
-      "disabled": false,
-      "open_issues_count": 7,
-      "license": {
-        "key": "mit",
-        "name": "MIT License",
-        "spdx_id": "MIT",
-        "url": "https://api.github.com/licenses/mit",
-        "node_id": "MDc6TGljZW5zZTEz"
-      },
-      "allow_forking": true,
-      "is_template": false,
-      "web_commit_signoff_required": false,
-      "has_pull_requests": true,
-      "pull_request_creation_policy": "all",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "visibility": "public",
-      "forks": 0,
-      "open_issues": 7,
-      "watchers": 2,
       "default_branch": "main",
       "permissions": {
         "admin": false,
@@ -6223,6 +6223,843 @@
   ],
   "events": [
     {
+      "id": "23107095218",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/follow-ups",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/follow-ups",
+        "master_branch": "main",
+        "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T15:09:06Z"
+    },
+    {
+      "id": "23106693909",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/follow-ups",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/follow-ups",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T15:02:54Z"
+    },
+    {
+      "id": "23092940192",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 390771666,
+        "name": "and3rn3t/and3rn3t",
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "repository_id": 390771666,
+        "push_id": 45429425764,
+        "ref": "refs/heads/docs/roadmap-refresh",
+        "head": "3667731dea6e2a1b135e2d67d5c651b25222ea2d",
+        "before": "d3b4fc77031065f57cc56f8c7302b3ea7c6f7bc6",
+        "commits": [
+          {
+            "sha": "3667731dea6e2a1b135e2d67d5c651b25222ea2d",
+            "message": "docs(roadmap): include Turnstile site key in Worker deploy checklist\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-04T17:00:44Z"
+    },
+    {
+      "id": "23092575377",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 390771666,
+        "name": "and3rn3t/and3rn3t",
+        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "docs/roadmap-refresh",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/docs/roadmap-refresh",
+        "master_branch": "main",
+        "description": "Config files for my GitHub profile.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T16:55:09Z"
+    },
+    {
+      "id": "23091448546",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45428040655,
+        "ref": "refs/heads/main",
+        "head": "ca5daa4b79ad771ecfd7322f16f20c58f1dac9d1",
+        "before": "beabb92c2cef9f3f7d38d514b6645f0bc8996a5b",
+        "commits": [
+          {
+            "sha": "ca5daa4b79ad771ecfd7322f16f20c58f1dac9d1",
+            "message": "docs(roadmap): consolidate, add boss levels and scaling, record the Paper decision (#110)\n\nMove the finished O-items to a Pi checklist, fold the management backlog\ninto the items it serves, and move tech debt to docs/TECH_DEBT.md.\nAdd B2 (boss levels and scaling), B1 (MythicMobs, deferred) and D1\n(When Dungeons Arise, blocked upstream). F9 records the decision to stay\non vanilla 26.3 with a revisit condition.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-04T16:38:12Z"
+    },
+    {
+      "id": "23088674235",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45425624550,
+        "ref": "refs/heads/main",
+        "head": "9cc235dd5a2f47313cc2a976f834c916d70549bd",
+        "before": "513bfc0e6453f42cca4c8429e0829bb9d027494e",
+        "commits": [
+          {
+            "sha": "9cc235dd5a2f47313cc2a976f834c916d70549bd",
+            "message": "fix: land the review fixes that were pushed after their PRs merged (#108)\n\n* fix: land the review fixes that were pushed after their PRs merged\n\nFive commits were pushed to PR branches after the PR had already merged, so\nthey never reached main. Three of them fixed things already reported as done.\n\n- gitleaks: allowlist the Python tool caches on generic-api-key, the form\n  8.24.3 honours (a top-level block is ignored there; a scanner-level one is\n  rejected by newer versions next to [[allowlists]])\n- web: the vendor-chunk check looks at every package, keeps its own list, and\n  validates its own table\n- manage.sh: report a failed backup on stderr, which is what POST /api/backup\n  returns; with a Bats test that fails against the old script\n- ruff: drop the exclude list that replaced ruff's 25 defaults with 7\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(backup): report every failure on stderr, and show the API's reason in the panel\n\nReview of #108. create_backup still wrote two of its three failure messages to\nstdout (no data directory; failed integrity check), which POST /api/backup never\nreturns, and left an unreadable archive in backups/. useErrorHandler preferred\nerr.message, which an Axios error always has, over the reason the API returned,\nso the panel showed 'Request failed with status code 500'.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: make the unreadable-archive fixture fail on GNU tar too\n\nGNU tar lists a junk stream shorter than one 512-byte block as an empty archive\nand exits 0; BSD tar rejects it. The fixture is now 1024 bytes, which both\nreject. Checked on macOS and on ubuntu 24.04 with Bats 1.10.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-04T15:59:28Z"
+    },
+    {
+      "id": "23082959619",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/react-19",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/react-19",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T03:40:51Z"
+    },
+    {
+      "id": "23081757453",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/tailwind-4",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/tailwind-4",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T14:19:16Z"
+    },
+    {
+      "id": "23081638852",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/vite-8",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/vite-8",
+        "master_branch": "main",
+        "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T03:16:13Z"
+    },
+    {
+      "id": "23079090127",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/web-test-tooling",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/web-test-tooling",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T02:30:02Z"
+    },
+    {
+      "id": "23069260226",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45390507702,
+        "ref": "refs/heads/chore/faster-make-ci",
+        "head": "5433e3c3aed763e091a13e62e93201d7fbc8c6f8",
+        "before": "c8b69ef18bef45a0cb73a6797ab17052586c710d",
+        "commits": [
+          {
+            "sha": "5433e3c3aed763e091a13e62e93201d7fbc8c6f8",
+            "message": "chore(ci): CI_SERIAL=1 runs the BATS suite after the fast checks, as before\n\nSerial mode ran the suite first, so it delayed finding an early lint failure\nand did not match the order the docs describe.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-04T04:42:13Z"
+    },
+    {
+      "id": "23063956207",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45386449888,
+        "ref": "refs/heads/main",
+        "head": "4dcd215e392209a2bfbcb44aa6424c59d4215676",
+        "before": "59858bb7be08af411362786a28f09c40a59c19b1",
+        "commits": [
+          {
+            "sha": "4dcd215e392209a2bfbcb44aa6424c59d4215676",
+            "message": "chore(web): upgrade to Vite 8 and plugin-react 6, and check the vendor chunks (#103)\n\nVite 8 bundles with Rolldown, which rejects the object form of\nmanualChunks; the vendor split now uses codeSplitting groups. A lost group\nwould not fail the build, so check-build-chunks.mjs asserts the chunks and\nruns in CI and make ci (which never ran the web build before).\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-04T03:09:51Z"
+    },
+    {
+      "id": "23061414178",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45371435340,
+        "ref": "refs/heads/main",
+        "head": "0d9775ad920639ba83d8375901f3d93ce50671f3",
+        "before": "9107a8b6adbb3893f233b3f7d8a365aff79ceab7",
+        "commits": [
+          {
+            "sha": "0d9775ad920639ba83d8375901f3d93ce50671f3",
+            "message": "fix(scripts): cleanup-system.sh no longer deletes backups, wipes /tmp, or prunes unused volumes (#97)\n\n- backups are left to cleanup-backups.sh (run by backup-scheduler.sh after every\n  backup, retention-aware); the old step deleted every *.tar.gz older than 30 days\n  once there were more than 10, which could leave one and took the *.deleted.*\n  safety backups world-manager.sh writes\n- no more rm -rf /tmp/* or ~/.cache/*: only the pip cache is removed\n- docker: prune dangling images and week-old build cache instead of\n  `system prune -af --volumes`; report \"cleaned with warnings\" when a prune fails\n- new BATS suite; rm and sudo are stubbed so a regression cannot touch the\n  machine running the tests\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T21:42:41Z"
+    },
+    {
+      "id": "23058810847",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "test/plugin-world-manager-bats",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/test/plugin-world-manager-bats",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-03T21:02:54Z"
+    },
+    {
+      "id": "23058651211",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "test/plugin-world-manager-bats",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/test/plugin-world-manager-bats",
+        "master_branch": "main",
+        "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-03T21:00:40Z"
+    },
+    {
+      "id": "23054037491",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45365366231,
+        "ref": "refs/heads/main",
+        "head": "32893c4df92e470fe34c54bfbbec6ad1b3892a13",
+        "before": "fd9229e80d316560ef19b20e8b88cf026f4f4681",
+        "commits": [
+          {
+            "sha": "32893c4df92e470fe34c54bfbbec6ad1b3892a13",
+            "message": "refactor(api): split the permission model and request authentication out of server.py (#93)\n\n- api/rbac.py: permission names, role table, API-key scoping (pure data/functions)\n- api/auth_guard.py: require_auth, require_permission, has_permission, CSRF checks,\n  get_username_from_request; reads USERS/API_KEYS from api.server at call time\n- blueprints, server.py and test patch targets use the new modules directly\n- delete the unused require_api_key decorator\n- auth_guard imports server after its own definitions, so importing it first no\n  longer fails with a partially initialised module; test_import_order.py covers it\n- issue_csrf_token is public (used across modules); /api/status no longer stacks\n  require_auth on require_permission\n- document that an unknown and a disabled API key get the same response, with a test\n- AGENTS.md: endpoint convention now matches how blueprints are written\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T19:51:17Z"
+    },
+    {
+      "id": "23052965543",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45377397425,
+        "ref": "refs/heads/main",
+        "head": "645f1f4ac55a131772669d085fbd6606f8755335",
+        "before": "284ddd4d8abb45814daabd1c1a86eb6a1948c9f6",
+        "commits": [
+          {
+            "sha": "645f1f4ac55a131772669d085fbd6606f8755335",
+            "message": "chore(web): bump Playwright to 1.63.0 and pin it with its CI image (#100)\n\n* chore(web): bump Playwright to 1.63.0 and pin it with its CI image\n\n@playwright/test and playwright are pinned exactly in package.json (the version must\nequal the CI container's tag), the lockfile, PLAYWRIGHT_IMAGE in the Makefile and the\nplaywright-tests job's image and version guard move to 1.63.0. All 17 browser tests\npass in the 1.63.0 image against the existing screenshot baselines, so none were\nre-rendered. docs/CI_CD.md lists the four places to change together, since Renovate\nbumps the npm packages but not the image tag.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* ci: make the Playwright version check read the pins instead of repeating one\n\nCopilot review: the playwright-tests job's first step compared the lockfile with a\nsecond hard-coded \"1.63.0\", so updating the container image alone could still pass.\nA job's container image has to be a literal, so the check now reads it.\n\nscripts/check-playwright-pin.sh takes the lockfile as the source of truth and checks\npackage.json (pinned exactly), the Makefile's PLAYWRIGHT_IMAGE and the workflow's\ncontainer image against it, requires exactly one image tag in each file, and reports\nevery disagreement. The workflow step runs it, so does `make ci`, and it has BATS\ntests (the image or the lockfile updated alone, a caret range, two images, an\nunreadable lockfile; they fail with the workflow comparison removed).\n\nAlso drop the hard-coded test count from the changelog (AGENTS.md: no counts in prose).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T23:45:31Z"
+    },
+    {
+      "id": "23052539022",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45364106361,
+        "ref": "refs/heads/main",
+        "head": "fd9229e80d316560ef19b20e8b88cf026f4f4681",
+        "before": "1ea0c56eaf73e4d2ce8484847d902e597ff5f69d",
+        "commits": [
+          {
+            "sha": "fd9229e80d316560ef19b20e8b88cf026f4f4681",
+            "message": "refactor(api): split config redaction, path validation and auth crypto out of server.py (#92)\n\n- api/config_redaction.py: redact_config_secrets, describe_yaml_error\n- api/paths.py: _within_allowed_roots, is_path_allowed, resolve_allowed_path\n- api/auth_crypto.py: password hashing, JWT, TOTP, Apple ID-token verification\n- callers and test patch targets use the new modules directly; no re-exports\n- state the tests patch (PROJECT_ROOT, ALLOWED_FILE_PATHS, SECRET_KEY) stays\n  on api.server and is read at call time\n- CodeQL totals unchanged (37: 32 error, 2 warning, 3 note)\n\nTwo small behaviour fixes found while moving the code:\n- bcrypt and PyJWT shared one try/except, so a missing bcrypt also disabled\n  JWTs and Apple sign-in; pyotp and qrcode did the same, which would have\n  blocked 2FA logins when only qrcode (setup QR image) was missing. Each is\n  now imported separately; TOTP_AVAILABLE becomes PYOTP_AVAILABLE and\n  QRCODE_AVAILABLE.\n- tests for the invalid-YAML error responses, which had none.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T19:28:56Z"
+    },
+    {
+      "id": "23049862343",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45361816290,
+        "ref": "refs/heads/main",
+        "head": "0c99cf16ef995357c57e4ce0169fba6a0cfdfd77",
+        "before": "9df945084bc4070aca1bfbb844566adb02475831",
+        "commits": [
+          {
+            "sha": "0c99cf16ef995357c57e4ce0169fba6a0cfdfd77",
+            "message": "chore(api): replace eventlet with Flask-SocketIO threading mode (#90)\n\n- async_mode=\"threading\" with simple-websocket; no monkey-patching\n- drop eventlet from requirements, add simple-websocket\n- socketio.run passes allow_unsafe_werkzeug=True (single process behind nginx)\n- update roadmap O7, changelog, and the stale eventlet notes in docs/systemd\n\nVerified against a live server over polling and WebSocket transports.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T18:48:14Z"
+    },
+    {
+      "id": "23049622722",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/drop-eventlet",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/drop-eventlet",
+        "master_branch": "main",
+        "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-03T18:44:42Z"
+    },
+    {
+      "id": "23049333150",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/tech-debt-phase-1",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/tech-debt-phase-1",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-03T18:40:18Z"
+    },
+    {
+      "id": "23044142846",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/react-19",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/react-19",
+        "master_branch": "main",
+        "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T03:38:47Z"
+    },
+    {
+      "id": "23043639139",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45369344496,
+        "ref": "refs/heads/main",
+        "head": "89b392095e335a2acf7abdba5a008b42331b6b59",
+        "before": "4005a932cdc36ab282e18a8b6e6be8ba16bace35",
+        "commits": [
+          {
+            "sha": "89b392095e335a2acf7abdba5a008b42331b6b59",
+            "message": "test(scripts): add BATS suites for world-manager.sh and plugin-manager.sh, and fix what they found (#95)\n\nworld-manager.sh\n- per-world config now applies: it was source'd, and the CREATED line (a date\n  with a space) made every source fail, so config never worked and switch died\n  after editing level-name; the config is read as plain data and never executed\n- config/switch on a world with no config file no longer go through create,\n  which offered to overwrite the world and moved it aside on yes\n- delete no longer removes a world whose backup could not be written\n- values written into server.properties are escaped for sed; the seed is\n  appended with printf; create refuses control characters in type and seed\n- names like ../x are refused; the tar fallback for templates (no rsync) puts\n  --exclude before the path so player data stays out\n- any directory under data/ with a level.dat is a world, not only world*\n  (backups create leaves beside a world are skipped)\n\nplugin-manager.sh\n- depend: [A, B] and block-list dependencies are understood\n- a jar's declared name is not trusted as a path; names given to\n  enable/disable/remove/update that point outside plugins/ are refused\n- the config backup no longer leaves an empty directory; a failed unzip no\n  longer leaks a temp dir\n\nBoth suites also pass on Ubuntu (GNU userland).\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T21:02:53Z"
+    },
+    {
+      "id": "23042744586",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/vite-8",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/vite-8",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T03:09:53Z"
+    },
+    {
+      "id": "23042652549",
+      "type": "CreateEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "chore/vite-8",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/chore/vite-8",
+        "master_branch": "main",
+        "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-04T03:07:59Z"
+    },
+    {
+      "id": "23034888155",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45361367004,
+        "ref": "refs/heads/main",
+        "head": "9df945084bc4070aca1bfbb844566adb02475831",
+        "before": "064c2ace56aff2d9c5a64ef3fcffbe080f3cab30",
+        "commits": [
+          {
+            "sha": "9df945084bc4070aca1bfbb844566adb02475831",
+            "message": "chore: tech-debt phase 1 — require security deps, one rate limiter, resolve template TODOs (#89)\n\n- api/server.py: flask-cors, flask-limiter and api.security are hard imports;\n  a missing one stops startup instead of silently disabling protection\n- /api/server/command moves to Flask-Limiter; remove the hand-rolled\n  rate_limit() and its storage\n- add test_required_imports.py covering the startup failure\n- resolve template TODOs in .github/ and CODE_OF_CONDUCT.md\n- start-all.sh sources lib/common.sh\n- update in-range web dev dependencies (Playwright held to match the image)\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T18:40:18Z"
+    },
+    {
+      "id": "23033442000",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45377314452,
+        "ref": "refs/heads/chore/playwright-1.63",
+        "head": "c35fc1e411fcd7a810bdd841591feed9da8c6a6b",
+        "before": "e01da703cb40ac6fa6f82bbc149a38c9844c41f4",
+        "commits": [
+          {
+            "sha": "c35fc1e411fcd7a810bdd841591feed9da8c6a6b",
+            "message": "ci: make the Playwright version check read the pins instead of repeating one\n\nCopilot review: the playwright-tests job's first step compared the lockfile with a\nsecond hard-coded \"1.63.0\", so updating the container image alone could still pass.\nA job's container image has to be a literal, so the check now reads it.\n\nscripts/check-playwright-pin.sh takes the lockfile as the source of truth and checks\npackage.json (pinned exactly), the Makefile's PLAYWRIGHT_IMAGE and the workflow's\ncontainer image against it, requires exactly one image tag in each file, and reports\nevery disagreement. The workflow step runs it, so does `make ci`, and it has BATS\ntests (the image or the lockfile updated alone, a caret range, two images, an\nunreadable lockfile; they fail with the workflow comparison removed).\n\nAlso drop the hard-coded test count from the changelog (AGENTS.md: no counts in prose).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T23:43:42Z"
+    },
+    {
+      "id": "23028147327",
+      "type": "DeleteEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "fix/cleanup-system-safety",
+        "ref_type": "branch",
+        "full_ref": "refs/heads/fix/cleanup-system-safety",
+        "pusher_type": "user"
+      },
+      "public": true,
+      "created_at": "2026-10-03T21:42:43Z"
+    },
+    {
+      "id": "23027124638",
+      "type": "PushEvent",
+      "actor": {
+        "id": 87380976,
+        "login": "and3rn3t",
+        "display_login": "and3rn3t",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/and3rn3t",
+        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
+      },
+      "repo": {
+        "id": 1102030320,
+        "name": "and3rn3t/minecraft",
+        "url": "https://api.github.com/repos/and3rn3t/minecraft"
+      },
+      "payload": {
+        "repository_id": 1102030320,
+        "push_id": 45370277221,
+        "ref": "refs/heads/main",
+        "head": "9107a8b6adbb3893f233b3f7d8a365aff79ceab7",
+        "before": "89b392095e335a2acf7abdba5a008b42331b6b59",
+        "commits": [
+          {
+            "sha": "9107a8b6adbb3893f233b3f7d8a365aff79ceab7",
+            "message": "docs: consolidate the setup guides and make the update and optimization docs match the repo (#96)\n\n- remove MINECRAFT_SERVER_SETUP.md, DOCKER_BOOT_SETUP.md and DOCKER_DEPLOYMENT_FLOW.md:\n  the first two duplicated INSTALL.md and RPI5_FULL_DEPLOYMENT.md (and pasted a systemd\n  unit that had drifted from systemd/minecraft.service); the third was a plan from before\n  the deploy agent and said CI does not push images\n- INSTALL.md: add a \"Start on Boot\" section that installs the shipped unit\n- UPDATE_DOCKER_IMAGE.md: rewrite to match the repo (compose builds on the Pi; the deploy\n  agent and auto-update.sh restart only when nobody is online; a GHCR image is opt-in)\n- SYSTEM_OPTIMIZATIONS.md: cut to what optimize-system.sh applies; drop generic code advice,\n  the pasted cleanup script and its timer, and a reference to a script that does not exist\n- UPDATE_CODEBASE.md: say the deploy agent makes it unnecessary\n- fix README, INDEX and a wrong ROADMAP link\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ]
+      },
+      "public": true,
+      "created_at": "2026-10-03T21:20:22Z"
+    },
+    {
       "id": "23010937366",
       "type": "PushEvent",
       "actor": {
@@ -9351,1339 +10188,6 @@
       },
       "public": true,
       "created_at": "2026-10-04T18:34:24Z"
-    },
-    {
-      "id": "22989785322",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45435089786,
-        "ref": "refs/heads/main",
-        "head": "a2915573f4421e69ae1dcdd7166989232f7efccd",
-        "before": "cadfaef57f2f8da325978de904e9034f606e5179",
-        "commits": [
-          {
-            "sha": "a2915573f4421e69ae1dcdd7166989232f7efccd",
-            "message": "fix(hero): eliminate load-time layout shift and stale role text (#103)\n\nCLS on load was about 0.44 (desktop) and 0.31-0.44 (mobile), all from the hero:\n\n- ui.js still ran a legacy typing effect that, after 1s, overwrote\n  .hero-subtitle with hard-coded old roles (\"Full-Stack Developer\", ...),\n  deleting the data-roles span and caret that hero-text.js animates.\n  Remove it.\n- The role typewriter changed the subtitle's height as roles wrapped\n  and unwrapped. Reserve the tallest role's height, and re-measure on\n  resize.\n- The name scramble used narrower glyphs, which reflowed the centred\n  heading every frame and sometimes dropped a line. Render each glyph\n  in a fixed-width cell (per-word nowrap) and hold the heading height\n  until it settles.\n\nCLS is now 0.000 on load at 1280x800 and 390x844.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:34:23Z"
-    },
-    {
-      "id": "16398082201",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "merged",
-        "number": 103,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/103",
-          "id": 4736579656,
-          "number": 103,
-          "head": {
-            "ref": "fix/hero-layout-shift",
-            "sha": "cad708a3ae9cd0352196f8ccb63192cf2d6d77f5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "cadfaef57f2f8da325978de904e9034f606e5179",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "fix(hero): eliminate load-time layout shift and stale role text"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:34:22Z"
-    },
-    {
-      "id": "16398052581",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "assigned",
-        "number": 103,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/103",
-          "id": 4736579656,
-          "number": 103,
-          "head": {
-            "ref": "fix/hero-layout-shift",
-            "sha": "cad708a3ae9cd0352196f8ccb63192cf2d6d77f5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "cadfaef57f2f8da325978de904e9034f606e5179",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "fix(hero): eliminate load-time layout shift and stale role text"
-        },
-        "assignee": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "assignees": [
-          {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:24:31Z"
-    },
-    {
-      "id": "22989702461",
-      "type": "DeleteEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/enrich-activity-events",
-        "ref_type": "branch",
-        "full_ref": "refs/heads/feat/enrich-activity-events",
-        "pusher_type": "user"
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:33:06Z"
-    },
-    {
-      "id": "22989700904",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45435010997,
-        "ref": "refs/heads/main",
-        "head": "cadfaef57f2f8da325978de904e9034f606e5179",
-        "before": "8adbbe884a53eab02bae80c120e4f880bb861314",
-        "commits": [
-          {
-            "sha": "cadfaef57f2f8da325978de904e9034f606e5179",
-            "message": "feat(activity): restore commit messages and PR titles in activity events (#102)\n\nGitHub's events API no longer includes commit lists in PushEvent\npayloads or titles in PullRequestEvent payloads, so the activity feed\nand the \"currently coding\" widget fell back to generic text.\n\n- Data workflow: fill both back in from the commit and PR endpoints\n  (de-duplicated, best effort) before writing github-data.json.\n- Worker: pick the event first, then fill in only that one (one extra\n  subrequest, still edge-cached for 5 minutes).\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:33:05Z"
-    },
-    {
-      "id": "16398031538",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "merged",
-        "number": 102,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/102",
-          "id": 4736503011,
-          "number": 102,
-          "head": {
-            "ref": "feat/enrich-activity-events",
-            "sha": "37329cbf03baa4e60e7dddca2dda9fc10bfc3028",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "feat(activity): restore commit messages and PR titles in activity events"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:33:03Z"
-    },
-    {
-      "id": "16398025923",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "assigned",
-        "number": 102,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/102",
-          "id": 4736503011,
-          "number": 102,
-          "head": {
-            "ref": "feat/enrich-activity-events",
-            "sha": "37329cbf03baa4e60e7dddca2dda9fc10bfc3028",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "feat(activity): restore commit messages and PR titles in activity events"
-        },
-        "assignee": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "assignees": [
-          {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:12:35Z"
-    },
-    {
-      "id": "22989675148",
-      "type": "DeleteEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/metrics-plugins",
-        "ref_type": "branch",
-        "full_ref": "refs/heads/fix/metrics-plugins",
-        "pusher_type": "user"
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:32:41Z"
-    },
-    {
-      "id": "16398015880",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "merged",
-        "number": 101,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/101",
-          "id": 4736463471,
-          "number": 101,
-          "head": {
-            "ref": "fix/metrics-plugins",
-            "sha": "92c8888668fae1aba824ab01cbf2d0f7b171c89d",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "fix(ci): drop broken metrics plugins, make plugin errors fatal"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:32:38Z"
-    },
-    {
-      "id": "22989673815",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45434986158,
-        "ref": "refs/heads/main",
-        "head": "8adbbe884a53eab02bae80c120e4f880bb861314",
-        "before": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-        "commits": [
-          {
-            "sha": "8adbbe884a53eab02bae80c120e4f880bb861314",
-            "message": "fix(ci): drop broken metrics plugins, make plugin errors fatal (#101)\n\nThe activity and habits plugins read commit lists from PushEvent\npayloads, which GitHub's events API no longer returns. Both crashed on\nevery run, and since plugin errors were non-fatal the job reported\nsuccess while committing a github-metrics.svg with two 'Unexpected\nerror' boxes. Remove both plugins and set plugins_errors_fatal so a\nbroken plugin fails the run instead of shipping a broken image.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:32:39Z"
-    },
-    {
-      "id": "16398010945",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "assigned",
-        "number": 101,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/101",
-          "id": 4736463471,
-          "number": 101,
-          "head": {
-            "ref": "fix/metrics-plugins",
-            "sha": "92c8888668fae1aba824ab01cbf2d0f7b171c89d",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "fix(ci): drop broken metrics plugins, make plugin errors fatal"
-        },
-        "assignee": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "assignees": [
-          {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:06:02Z"
-    },
-    {
-      "id": "16397711427",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "opened",
-        "number": 103,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/103",
-          "id": 4736579656,
-          "number": 103,
-          "head": {
-            "ref": "fix/hero-layout-shift",
-            "sha": "cad708a3ae9cd0352196f8ccb63192cf2d6d77f5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "cadfaef57f2f8da325978de904e9034f606e5179",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "fix(hero): eliminate load-time layout shift and stale role text"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:24:31Z"
-    },
-    {
-      "id": "22989142193",
-      "type": "CreateEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/hero-layout-shift",
-        "ref_type": "branch",
-        "full_ref": "refs/heads/fix/hero-layout-shift",
-        "master_branch": "main",
-        "description": "Config files for my GitHub profile.",
-        "pusher_type": "user"
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:24:30Z"
-    },
-    {
-      "id": "16397268810",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "opened",
-        "number": 102,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/102",
-          "id": 4736503011,
-          "number": 102,
-          "head": {
-            "ref": "feat/enrich-activity-events",
-            "sha": "37329cbf03baa4e60e7dddca2dda9fc10bfc3028",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "feat(activity): restore commit messages and PR titles in activity events"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:12:35Z"
-    },
-    {
-      "id": "16397027639",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "opened",
-        "number": 101,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/101",
-          "id": 4736463471,
-          "number": 101,
-          "head": {
-            "ref": "fix/metrics-plugins",
-            "sha": "92c8888668fae1aba824ab01cbf2d0f7b171c89d",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "72f913409fc620dec8a82f0db35252ed8dda16c5",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "fix(ci): drop broken metrics plugins, make plugin errors fatal"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T18:06:02Z"
-    },
-    {
-      "id": "22987207679",
-      "type": "DeleteEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "chore/worker-deploy",
-        "ref_type": "branch",
-        "full_ref": "refs/heads/chore/worker-deploy",
-        "pusher_type": "user"
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:54:48Z"
-    },
-    {
-      "id": "16396617884",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "merged",
-        "number": 100,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/100",
-          "id": 4736192135,
-          "number": 100,
-          "head": {
-            "ref": "chore/worker-deploy",
-            "sha": "a1b7960f31991de24506c120379877aaf198be53",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "953eb3addc2d3881165c6b6399fe8c318b7ac989",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "chore(worker): add wrangler, wire production KV + Turnstile site key"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:54:45Z"
-    },
-    {
-      "id": "16396612913",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "assigned",
-        "number": 100,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/100",
-          "id": 4736192135,
-          "number": 100,
-          "head": {
-            "ref": "chore/worker-deploy",
-            "sha": "a1b7960f31991de24506c120379877aaf198be53",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "953eb3addc2d3881165c6b6399fe8c318b7ac989",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "chore(worker): add wrangler, wire production KV + Turnstile site key"
-        },
-        "assignee": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "assignees": [
-          {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:19:58Z"
-    },
-    {
-      "id": "22985820975",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45431391261,
-        "ref": "refs/heads/chore/worker-deploy",
-        "head": "a1b7960f31991de24506c120379877aaf198be53",
-        "before": "0efef4009e4ab12f7df59511cf99d534bc1906bc",
-        "commits": [
-          {
-            "sha": "a1b7960f31991de24506c120379877aaf198be53",
-            "message": "feat(worker): wire production KV namespaces and Turnstile site key\n\nPoint VIEWS_KV and GUESTBOOK_KV at the real namespaces, and swap the\nREPLACE_WITH_TURNSTILE_SITEKEY placeholder for the public site key. On\nmain, Turnstile returns 400 for the placeholder, so guestbook posts\ncan't get a token. Record in the roadmap that the Worker is live.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:33:16Z"
-    },
-    {
-      "id": "16395357122",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "opened",
-        "number": 100,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/100",
-          "id": 4736192135,
-          "number": 100,
-          "head": {
-            "ref": "chore/worker-deploy",
-            "sha": "a1b7960f31991de24506c120379877aaf198be53",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "953eb3addc2d3881165c6b6399fe8c318b7ac989",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "chore(worker): add wrangler, wire production KV + Turnstile site key"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:19:58Z"
-    },
-    {
-      "id": "22984395200",
-      "type": "DeleteEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/a11y-contrast-6",
-        "ref_type": "branch",
-        "full_ref": "refs/heads/fix/a11y-contrast-6",
-        "pusher_type": "user"
-      },
-      "public": true,
-      "created_at": "2026-10-02T21:44:01Z"
-    },
-    {
-      "id": "22984246879",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45429931782,
-        "ref": "refs/heads/main",
-        "head": "121571df061b039ab29e11becbc062fca075dfff",
-        "before": "dde876dccf9dc96464c6800783758be1f603ce33",
-        "commits": [
-          {
-            "sha": "121571df061b039ab29e11becbc062fca075dfff",
-            "message": "Merge pull request #99 from and3rn3t/docs/roadmap-refresh\n\ndocs(roadmap): close 1.4, log October refresh and undeployed Worker"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:08:54Z"
-    },
-    {
-      "id": "16394949922",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "merged",
-        "number": 99,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/99",
-          "id": 4736045736,
-          "number": 99,
-          "head": {
-            "ref": "docs/roadmap-refresh",
-            "sha": "139344068c66bd0310c12ae1d7be678c10f3b120",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "dde876dccf9dc96464c6800783758be1f603ce33",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "docs(roadmap): close 1.4, log October refresh and undeployed Worker"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:08:53Z"
-    },
-    {
-      "id": "22983907121",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45295109289,
-        "ref": "refs/heads/main",
-        "head": "4ab1efca2937b6ba479f92bca786669236273abd",
-        "before": "07158b77d396e99a538f616b7df9346685276228",
-        "commits": [
-          {
-            "sha": "4ab1efca2937b6ba479f92bca786669236273abd",
-            "message": "Merge pull request #84 from and3rn3t/fix/a11y-contrast-4\n\nfix(a11y): blog-tag contrast on tinted bg"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-02T21:36:22Z"
-    },
-    {
-      "id": "22983872349",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45429581983,
-        "ref": "refs/heads/docs/roadmap-refresh",
-        "head": "139344068c66bd0310c12ae1d7be678c10f3b120",
-        "before": "3667731dea6e2a1b135e2d67d5c651b25222ea2d",
-        "commits": [
-          {
-            "sha": "139344068c66bd0310c12ae1d7be678c10f3b120",
-            "message": "Merge branch 'main' into docs/roadmap-refresh"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:03:09Z"
-    },
-    {
-      "id": "22983832154",
-      "type": "DeleteEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "chore/deps-refresh",
-        "ref_type": "branch",
-        "full_ref": "refs/heads/chore/deps-refresh",
-        "pusher_type": "user"
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:02:32Z"
-    },
-    {
-      "id": "22983831312",
-      "type": "PushEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "repository_id": 390771666,
-        "push_id": 45429542993,
-        "ref": "refs/heads/main",
-        "head": "dde876dccf9dc96464c6800783758be1f603ce33",
-        "before": "10b8e6e7d343ba92377ad6055008846a97608abd",
-        "commits": [
-          {
-            "sha": "dde876dccf9dc96464c6800783758be1f603ce33",
-            "message": "Merge pull request #98 from and3rn3t/chore/deps-refresh\n\nchore(deps): dev-dependency refresh + vitest 5"
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:02:31Z"
-    },
-    {
-      "id": "16394716734",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "merged",
-        "number": 98,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/98",
-          "id": 4736005986,
-          "number": 98,
-          "head": {
-            "ref": "chore/deps-refresh",
-            "sha": "e1222a091ccba9d3ba162b88044277c734f26b93",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "ecdbd7becf9cf10548193777447be97c48894e44",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "chore(deps): dev-dependency refresh + vitest 5"
-        }
-      },
-      "public": true,
-      "created_at": "2026-10-04T17:02:30Z"
-    },
-    {
-      "id": "16394707631",
-      "type": "PullRequestEvent",
-      "actor": {
-        "id": 87380976,
-        "login": "and3rn3t",
-        "display_login": "and3rn3t",
-        "gravatar_id": "",
-        "url": "https://api.github.com/users/and3rn3t",
-        "avatar_url": "https://avatars.githubusercontent.com/u/87380976?"
-      },
-      "repo": {
-        "id": 390771666,
-        "name": "and3rn3t/and3rn3t",
-        "url": "https://api.github.com/repos/and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "action": "assigned",
-        "number": 98,
-        "pull_request": {
-          "url": "https://api.github.com/repos/and3rn3t/and3rn3t/pulls/98",
-          "id": 4736005986,
-          "number": 98,
-          "head": {
-            "ref": "chore/deps-refresh",
-            "sha": "e1222a091ccba9d3ba162b88044277c734f26b93",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "base": {
-            "ref": "main",
-            "sha": "ecdbd7becf9cf10548193777447be97c48894e44",
-            "repo": {
-              "id": 390771666,
-              "url": "https://api.github.com/repos/and3rn3t/and3rn3t",
-              "name": "and3rn3t"
-            }
-          },
-          "title": "chore(deps): dev-dependency refresh + vitest 5"
-        },
-        "assignee": {
-          "login": "and3rn3t",
-          "id": 87380976,
-          "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-          "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-          "gravatar_id": "",
-          "url": "https://api.github.com/users/and3rn3t",
-          "html_url": "https://github.com/and3rn3t",
-          "followers_url": "https://api.github.com/users/and3rn3t/followers",
-          "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-          "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-          "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-          "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-          "repos_url": "https://api.github.com/users/and3rn3t/repos",
-          "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-          "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-          "type": "User",
-          "user_view_type": "public",
-          "site_admin": false
-        },
-        "assignees": [
-          {
-            "login": "and3rn3t",
-            "id": 87380976,
-            "node_id": "MDQ6VXNlcjg3MzgwOTc2",
-            "avatar_url": "https://avatars.githubusercontent.com/u/87380976?v=4",
-            "gravatar_id": "",
-            "url": "https://api.github.com/users/and3rn3t",
-            "html_url": "https://github.com/and3rn3t",
-            "followers_url": "https://api.github.com/users/and3rn3t/followers",
-            "following_url": "https://api.github.com/users/and3rn3t/following{/other_user}",
-            "gists_url": "https://api.github.com/users/and3rn3t/gists{/gist_id}",
-            "starred_url": "https://api.github.com/users/and3rn3t/starred{/owner}{/repo}",
-            "subscriptions_url": "https://api.github.com/users/and3rn3t/subscriptions",
-            "organizations_url": "https://api.github.com/users/and3rn3t/orgs",
-            "repos_url": "https://api.github.com/users/and3rn3t/repos",
-            "events_url": "https://api.github.com/users/and3rn3t/events{/privacy}",
-            "received_events_url": "https://api.github.com/users/and3rn3t/received_events",
-            "type": "User",
-            "user_view_type": "public",
-            "site_admin": false
-          }
-        ]
-      },
-      "public": true,
-      "created_at": "2026-10-04T16:48:25Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -12738,6 +12242,11 @@
             "date": "2026-10-05",
             "count": 0,
             "level": 0
+          },
+          {
+            "date": "2026-10-06",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -12769,6 +12278,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-05T03:18:25Z",
+  "lastUpdated": "2026-10-06T03:12:49Z",
   "totalRepos": 52
 }
