@@ -33,30 +33,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker, docker-compose, flask
-
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
-
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> A guessing game like "Akinator", but with more visibility to the user how it works.
->
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
@@ -64,11 +45,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
-### 🌐 [family](https://github.com/and3rn3t/family)
+### 🌐 [health](https://github.com/and3rn3t/health)
 
-> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
 >
-> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🌐 [sky](https://github.com/and3rn3t/sky)
 
@@ -76,11 +58,30 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, astronomy, react, spark-template, typescript
 
-### 🎮 [catastrophe](https://github.com/and3rn3t/catastrophe)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> CATastrophe: A Mischief Simulator (Experimenting with Unreal Engine)
+> My attempt to build an inclusive homehub / automation project.
 >
-> **Tech:** C++, cpp, gamedev, unreal-engine
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
+
+### 🌐 [family](https://github.com/and3rn3t/family)
+
+> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
+>
+> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
+
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
+
+### 🐍 [network](https://github.com/and3rn3t/network)
+
+> Testing UniFi API
+>
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 <!-- FEATURED-PROJECTS:END -->
 
