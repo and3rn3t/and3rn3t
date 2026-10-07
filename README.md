@@ -40,11 +40,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript
 
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> Personal portfolio for Jonah (GitHub Spark template).
+> My attempt to build an inclusive homehub / automation project.
 >
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -53,36 +54,36 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, ai, gait-analysis, health, healthkit
 > 🔗 [Live](https://health.andernet.dev)
 
-### 🌐 [sky](https://github.com/and3rn3t/sky)
+### 🌐 [guess](https://github.com/and3rn3t/guess)
 
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+> A guessing game like "Akinator", but with more visibility to the user how it works.
 >
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
 
-> My attempt to build an inclusive homehub / automation project.
+> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
 >
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [family](https://github.com/and3rn3t/family)
-
-> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
->
-> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
-
-### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
+> **Tech:** JavaScript, eslint, react, shared-config, typescript
 
 ### 🐍 [network](https://github.com/and3rn3t/network)
 
 > Testing UniFi API
 >
 > **Tech:** Python, cloudflare-workers, networking, python, unifi
+
+### 🌐 [sky](https://github.com/and3rn3t/sky)
+
+> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+>
+> **Tech:** TypeScript, astronomy, react, spark-template, typescript
+
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+
+> Personal portfolio for Jonah (GitHub Spark template).
+>
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
 <!-- FEATURED-PROJECTS:END -->
 
