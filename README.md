@@ -34,18 +34,23 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🐍 [network](https://github.com/and3rn3t/network)
+
+> Testing UniFi API
+>
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
+
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🌐 [sky](https://github.com/and3rn3t/sky)
 
-> My attempt to build an inclusive homehub / automation project.
+> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
 >
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
+> **Tech:** TypeScript, astronomy, react, spark-template, typescript
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -54,6 +59,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, ai, gait-analysis, health, healthkit
 > 🔗 [Live](https://health.andernet.dev)
 
+### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
+
+> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
+>
+> **Tech:** Swift, homebrew, homekit, swift, xcode
+
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
 > A guessing game like "Akinator", but with more visibility to the user how it works.
@@ -61,29 +72,18 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
 
-### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
-
-> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
->
-> **Tech:** JavaScript, eslint, react, shared-config, typescript
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
-
-### 🌐 [sky](https://github.com/and3rn3t/sky)
-
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
->
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
-
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
 > Personal portfolio for Jonah (GitHub Spark template).
 >
 > **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+
+### 🌐 [silas](https://github.com/and3rn3t/silas)
+
+> Personal webpage for Silas
+>
+> **Tech:** JavaScript, cloudflare-pages, game, javascript, playwright
+> 🔗 [Live](https://silas-anderson.pages.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 
