@@ -1,9 +1,7 @@
 name: Lighthouse CI
 
 on:
-  # Run after every push to main (the site is deployed at that point).
-  push:
-    branches: [main]
+  # Audits after each push-triggered deploy run from pages.yml, so they see the new build.
   # Allow manual runs with an optional URL override.
   workflow_dispatch:
     inputs:
