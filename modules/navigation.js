@@ -92,13 +92,6 @@ export class NavigationManager {
         globalThis.scrollTo({ top: 0 });
     }
 
-    scrollToSection(sectionId) {
-        const section = document.querySelector(`#${sectionId}`);
-        if (section) {
-            this.scrollToElement(section);
-        }
-    }
-
     // ========================================
     // Active States
     // ========================================
@@ -147,32 +140,7 @@ export class NavigationManager {
 
         debug.log('[Navigation] Active section:', sectionId);
     }
-
-    // ========================================
-    // Utilities
-    // ========================================
-
-    getSections() {
-        return Array.from(this.sections).map(s => ({
-            id: s.id,
-            title: s.querySelector('h2, h3')?.textContent || s.id,
-            isActive: s.id === this.currentSection,
-        }));
-    }
-
-    getCurrentSection() {
-        return this.currentSection;
-    }
-
-    // Cleanup
-    destroy() {
-        this.navLinks = [];
-        this.sections = [];
-        this.isInitialized = false;
-    }
 }
 
 // Create singleton instance
 export const navigationManager = new NavigationManager();
-
-export default navigationManager;

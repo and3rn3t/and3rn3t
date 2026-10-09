@@ -16,14 +16,13 @@ export class GitHubAPIManager {
             reset: Date.now() + 3600000,
             limit: 60,
         };
-        this.requestQueue = [];
-        this.isProcessingQueue = false;
         this.cachedData = null;
         this.maxRetries = 3;
         this.baseDelay = 1000; // 1 second base delay
     }
 
-    // Enhanced retry logic with exponential backoff
+    // Retry with exponential backoff and jitter. Client errors (404, rate limit) are
+    // not retried: they fail the same way every time.
     async executeWithRetry(operation, maxRetries = this.maxRetries) {
         let lastError;
 
@@ -33,12 +32,7 @@ export class GitHubAPIManager {
             } catch (error) {
                 lastError = error;
 
-                // Don't retry for certain error types
-                if (error.message.includes('404') || error.message.includes('403')) {
-                    throw error;
-                }
-
-                if (attempt === maxRetries) {
+                if (error.status === 403 || error.status === 404 || attempt === maxRetries) {
                     throw error;
                 }
 
@@ -56,7 +50,7 @@ export class GitHubAPIManager {
     loadCachedGitHubData() {
         this.cachedDataPromise ??= (async () => {
             try {
-                const response = await fetch('github-data.json');
+                const response = await fetch('/github-data.json');
                 if (response.ok) {
                     this.cachedData = await response.json();
                     return this.cachedData;
@@ -113,53 +107,31 @@ export class GitHubAPIManager {
         }
     }
 
-    // Enhanced fetch with retry logic and exponential backoff
-    async fetchWithRetry(url, options = {}, maxRetries = 3) {
-        for (let attempt = 1; attempt <= maxRetries; attempt++) {
-            try {
-                await this.waitForRateLimit();
-
-                const response = await fetch(url, {
-                    ...options,
-                    headers: {
-                        Accept: 'application/vnd.github.v3+json',
-                        ...options.headers,
-                    },
-                });
-
-                // Update rate limit info
-                this.updateRateLimit(response.headers);
-
-                if (response.ok) {
-                    return response;
-                }
-
-                // Handle specific HTTP errors
-                if (response.status === 403) {
-                    const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
-                    if (rateLimitRemaining === '0') {
-                        throw new Error('GitHub API rate limit exceeded');
-                    }
-                }
-
-                if (response.status === 404) {
-                    throw new Error('Resource not found');
-                }
-
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            } catch (error) {
-                if (attempt === maxRetries) {
-                    throw error;
-                }
-
-                // Exponential backoff: 1s, 2s, 4s
-                const delay = Math.pow(2, attempt - 1) * 1000;
-                await new Promise(resolve => setTimeout(resolve, delay));
-            }
+    // Single fetch; failures throw an Error carrying the HTTP `status` so
+    // executeWithRetry can decide whether retrying makes sense.
+    async fetchGitHub(url) {
+        await this.waitForRateLimit();
+        const response = await fetch(url, {
+            headers: { Accept: 'application/vnd.github.v3+json' },
+        });
+        this.updateRateLimit(response.headers);
+        if (response.ok) {
+            return response;
         }
+
+        let message = `HTTP ${response.status}: ${response.statusText}`;
+        if (response.status === 404) {
+            message = 'Resource not found';
+        } else if (
+            response.status === 403 &&
+            response.headers.get('X-RateLimit-Remaining') === '0'
+        ) {
+            message = 'GitHub API rate limit exceeded';
+        }
+        throw Object.assign(new Error(message), { status: response.status });
     }
 
-    // Main API method with caching and enhanced retry
+    // Main API method with caching and retry
     async fetchGitHubData(endpoint, params = {}, ttl = 300000) {
         const cacheKey = this.getCacheKey(endpoint, params);
 
@@ -177,7 +149,7 @@ export class GitHubAPIManager {
         }
 
         return await this.executeWithRetry(async () => {
-            const response = await this.fetchWithRetry(url.toString());
+            const response = await this.fetchGitHub(url.toString());
             const data = await response.json();
 
             // Cache the result
@@ -203,13 +175,12 @@ export class GitHubAPIManager {
         // Try cached data first
         const cachedData = await this.loadCachedGitHubData();
         if (cachedData && cachedData.repositories) {
-            let repos = cachedData.repositories;
-
-            // Apply client-side sorting if needed
+            // Sort a copy: the cached array is shared with other modules.
+            const repos = [...cachedData.repositories];
             if (sort === 'stars') {
-                repos = repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+                repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
             } else if (sort === 'updated') {
-                repos = repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+                repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
             }
 
             // Apply limit
@@ -223,60 +194,11 @@ export class GitHubAPIManager {
         });
     }
 
-    async getRecentActivity(per_page = 30) {
-        // Try cached data first
-        const cachedData = await this.loadCachedGitHubData();
-        if (cachedData && cachedData.events) {
-            return cachedData.events.slice(0, per_page);
-        }
-
-        // Fall back to direct API (may be limited for public events)
-        try {
-            return await this.fetchGitHubData(`/users/${GitHubAPIManager.username}/events/public`, {
-                per_page,
-            });
-        } catch (_error) {
-            return [];
-        }
-    }
-
     // Pre-fetched contribution calendar (from the daily data workflow). Returns
     // { total, weeks: [{ days: [{ date, count, level }] }] } or null if unavailable.
     async getContributions() {
         const cachedData = await this.loadCachedGitHubData();
         return cachedData?.contributions ?? null;
-    }
-
-    async getUserEvents(per_page = 30) {
-        return this.fetchGitHubData(
-            `/users/${GitHubAPIManager.username}/events`,
-            { per_page },
-            180000
-        ); // 3 min cache
-    }
-
-    // Get rate limit status
-    getRateLimitStatus() {
-        return {
-            ...this.rateLimitInfo,
-            percentage: (this.rateLimitInfo.remaining / this.rateLimitInfo.limit) * 100,
-        };
-    }
-
-    // Display API status for debugging
-    displayAPIStatus() {
-        const status = this.getRateLimitStatus();
-        debug.log('[API] Rate limit status:', {
-            remaining: status.remaining,
-            limit: status.limit,
-            resetTime: new Date(status.reset).toLocaleTimeString(),
-            percentage: `${status.percentage.toFixed(1)}%`,
-            cacheEntries: this.cache.size,
-        });
-
-        if (status.percentage < 20) {
-            debug.warn('[API] GitHub API rate limit is low!');
-        }
     }
 
     // Clear expired cache entries
@@ -297,16 +219,7 @@ export class GitHubAPIManager {
 
         return removedCount;
     }
-
-    // Clear all cache (for manual refresh)
-    clearCache() {
-        const { size } = this.cache;
-        this.cache.clear();
-        debug.log('[GitHub] Cleared all', size, 'cache entries');
-    }
 }
 
 // Create singleton instance
 export const githubAPI = new GitHubAPIManager();
-
-export default githubAPI;

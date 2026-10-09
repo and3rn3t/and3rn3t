@@ -7,7 +7,7 @@
  */
 
 // Import critical modules only - others loaded dynamically
-import { DEBUG_MODE, debug } from './modules/debug.js';
+import { debug } from './modules/debug.js';
 import { errorHandler } from './modules/error-handler.js';
 import { initThemeManager } from './modules/theme.js';
 import { navigationManager } from './modules/navigation.js';
@@ -23,7 +23,6 @@ const appState = {
     isInitialized: false,
     initStartTime: null,
     managers: {},
-    modules: {}, // Lazy-loaded modules
 };
 
 // Expose appState for error handler notifications
@@ -32,24 +31,16 @@ if (typeof globalThis !== 'undefined') {
 }
 
 /**
- * Lazy load a module with error handling
- * @param {string} modulePath - Path to the module
- * @returns {Promise<any>} - The loaded module
+ * Import an optional module and start it. A failure only skips that feature.
+ * @param {string} label - Name used in the debug log
+ * @param {() => Promise<any>} load - Dynamic import
+ * @param {(module: any) => any} start - Starts the feature from the loaded module
  */
-async function lazyLoad(modulePath) {
-    if (appState.modules[modulePath]) {
-        return appState.modules[modulePath];
-    }
+async function startOptional(label, load, start) {
     try {
-        const module = await import(modulePath);
-        appState.modules[modulePath] = module;
-        return module;
-    } catch (error) {
-        await errorHandler.handle(error, {
-            context: { modulePath },
-            showUser: false,
-        });
-        throw error;
+        await start(await load());
+    } catch (err) {
+        debug.warn(`[App] ${label} skipped:`, err);
     }
 }
 
@@ -76,8 +67,8 @@ async function initializeApp() {
         initMobileMenu();
         initNavigation();
 
-        // Lazy load UI module
-        const { uiManager } = await lazyLoad('./modules/ui.js');
+        // Load UI module
+        const { uiManager } = await import('./modules/ui.js');
         uiManager.init();
         appState.managers.ui = uiManager;
 
@@ -90,10 +81,10 @@ async function initializeApp() {
         // dynamically imported and self-gates on device capability.
         initHeroEnhancements();
 
-        // Phase 3: Content loading (show progress) - lazy load projects module
+        // Phase 3: Content loading (show progress)
         uiManager.showLoadingProgress('content');
 
-        const { projectsManager } = await lazyLoad('./modules/projects.js');
+        const { projectsManager } = await import('./modules/projects.js');
 
         // Load content in parallel
         await Promise.allSettled([
@@ -107,111 +98,99 @@ async function initializeApp() {
         debug.log('[App] Phase 3: Content loaded');
 
         // Micro-interactions on the freshly-rendered content (count-up, tilt, magnetic).
-        try {
-            const { initInteractions } = await import('./modules/interactions.js');
-            initInteractions();
-        } catch (err) {
-            debug.warn('[App] Interactions skipped:', err);
-        }
+        await startOptional(
+            'Interactions',
+            () => import('./modules/interactions.js'),
+            m => m.initInteractions()
+        );
 
-        // Contact tabs — the guestbook (and Turnstile) loads when its tab opens.
-        // Wired before the network-bound widgets below so the tabs respond at once.
-        try {
-            const { contactTabs } = await import('./modules/contact-tabs.js');
-            contactTabs.init();
-            appState.managers.contactTabs = contactTabs;
-        } catch (err) {
-            debug.warn('[App] Contact tabs skipped:', err);
-        }
-
-        // Command palette (Cmd/Ctrl-K) and keyboard help (?, g h/a/p/c) are purely local,
-        // so wire them before any network-bound widget.
-        try {
-            const { commandPalette } = await import('./modules/command-palette.js');
-            commandPalette.init();
-            appState.managers.palette = commandPalette;
-        } catch (err) {
-            debug.warn('[App] Command palette skipped:', err);
-        }
-
-        try {
-            const { keyboardHelp } = await import('./modules/keyboard-help.js');
-            keyboardHelp.init();
-            appState.managers.keyboardHelp = keyboardHelp;
-        } catch (err) {
-            debug.warn('[App] Keyboard help skipped:', err);
-        }
+        // Contact tabs (the guestbook and Turnstile load when its tab opens), the command
+        // palette (Cmd/Ctrl-K) and keyboard help (?, g h/a/p/c) are purely local, so wire
+        // them before any network-bound widget so they respond at once.
+        await startOptional(
+            'Contact tabs',
+            () => import('./modules/contact-tabs.js'),
+            m => {
+                m.contactTabs.init();
+                appState.managers.contactTabs = m.contactTabs;
+            }
+        );
+        await startOptional(
+            'Command palette',
+            () => import('./modules/command-palette.js'),
+            m => {
+                m.commandPalette.init();
+                appState.managers.palette = m.commandPalette;
+            }
+        );
+        await startOptional(
+            'Keyboard help',
+            () => import('./modules/keyboard-help.js'),
+            m => {
+                m.keyboardHelp.init();
+                appState.managers.keyboardHelp = m.keyboardHelp;
+            }
+        );
 
         // Network-bound widgets are independent of each other: run them together so one
         // slow request (e.g. the Worker) doesn't hold up the rest.
-        const widgets = [
+        await Promise.all([
             // "Currently coding" — calls the CF Worker with static fallback.
-            [
-                'currently',
+            startOptional(
                 'Currently widget',
                 () => import('./modules/currently.js'),
-                'currentlyWidget',
-                m => m.init('#currently-coding'),
-            ],
-            // Experience / timeline section.
-            [
-                'experience',
+                async m => {
+                    await m.currentlyWidget.init('#currently-coding');
+                    appState.managers.currently = m.currentlyWidget;
+                }
+            ),
+            startOptional(
                 'Experience module',
                 () => import('./modules/experience.js'),
-                'experienceManager',
-                m => m.init(),
-            ],
-            // Blog / writing section.
-            [
-                'blog',
+                async m => {
+                    await m.experienceManager.init();
+                    appState.managers.experience = m.experienceManager;
+                }
+            ),
+            startOptional(
                 'Blog module',
                 () => import('./modules/blog.js'),
-                'blogManager',
-                m => m.init(),
-            ],
-            // View counter — calls Worker, updates footer count.
-            [
-                'views',
+                async m => {
+                    await m.blogManager.init();
+                    appState.managers.blog = m.blogManager;
+                }
+            ),
+            // View counter — calls the Worker, updates the footer count.
+            startOptional(
                 'View counter',
                 () => import('./modules/views.js'),
-                'viewCounter',
-                m => m.init(),
-            ],
-        ];
-        await Promise.allSettled(
-            widgets.map(async ([key, label, load, exportName, start]) => {
-                try {
-                    const manager = (await load())[exportName];
-                    await start(manager);
-                    appState.managers[key] = manager;
-                } catch (err) {
-                    debug.warn(`[App] ${label} skipped:`, err);
+                async m => {
+                    await m.viewCounter.init();
+                    appState.managers.views = m.viewCounter;
                 }
-            })
-        );
+            ),
+        ]);
 
         // Phase 4: Non-critical features (deferred)
+        // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
         requestIdleCallback(
-            async () => {
-                // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
-                try {
-                    const { easterEgg } = await import('./modules/easter-egg.js');
-                    easterEgg.init();
-                } catch (err) {
-                    debug.warn('[App] Easter egg skipped:', err);
-                }
-            },
+            () =>
+                startOptional(
+                    'Easter egg',
+                    () => import('./modules/easter-egg.js'),
+                    m => m.easterEgg.init()
+                ),
             { timeout: 2000 }
         );
 
         // Setup global event handlers
         setupGlobalEvents();
 
-        // Set up cache cleanup interval (lazy load github-api only when needed)
+        // Periodically drop expired GitHub API cache entries
         setInterval(
             async () => {
-                const { githubAPI } = await lazyLoad('./modules/github-api.js');
-                clearExpiredCache(githubAPI);
+                const { githubAPI } = await import('./modules/github-api.js');
+                githubAPI.clearExpiredCache();
             },
             10 * 60 * 1000
         );
@@ -315,43 +294,21 @@ function initMobileMenu() {
  */
 function initNavigation() {
     const navbar = document.getElementById('navbar');
+    const progressBar = document.getElementById('scroll-progress-bar');
 
-    // Navbar scroll effect
-    if (navbar) {
-        globalThis.addEventListener(
-            'scroll',
-            () => {
-                if (globalThis.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            },
-            { passive: true }
-        );
-    }
-}
-
-/**
- * Clear expired cache entries
- * @param {Object} githubAPI - The GitHub API instance
- */
-function clearExpiredCache(githubAPI) {
-    if (!githubAPI || !githubAPI.cache) return;
-
-    const now = Date.now();
-    let removedCount = 0;
-
-    for (const [key, value] of githubAPI.cache.entries()) {
-        if (value.expiry < now) {
-            githubAPI.cache.delete(key);
-            removedCount++;
-        }
-    }
-
-    if (removedCount > 0) {
-        debug.log(`[App] Cleared ${removedCount} expired cache entries`);
-    }
+    // Navbar scroll effect + reading-progress bar
+    globalThis.addEventListener(
+        'scroll',
+        () => {
+            navbar?.classList.toggle('scrolled', globalThis.scrollY > 50);
+            if (progressBar) {
+                const max = document.documentElement.scrollHeight - globalThis.innerHeight;
+                const pct = max > 0 ? Math.min(100, (globalThis.scrollY / max) * 100) : 0;
+                progressBar.style.width = `${pct}%`;
+            }
+        },
+        { passive: true }
+    );
 }
 
 /**
@@ -366,14 +323,6 @@ function setupGlobalEvents() {
     // Handle unhandled promise rejections
     globalThis.addEventListener('unhandledrejection', async event => {
         debug.error('[App] Unhandled rejection:', event.reason);
-    });
-
-    // Handle theme changes - reapply hero background
-    document.addEventListener('themeChanged', () => {
-        const { ui } = appState.managers;
-        if (ui && ui.forceHeroBackground) {
-            ui.forceHeroBackground();
-        }
     });
 
     // Handle online/offline
@@ -436,59 +385,7 @@ function handleInitError(error) {
     });
 }
 
-/**
- * Expose public API for external access
- */
-globalThis.PortfolioApp = {
-    version: APP_CONFIG.version,
-    debug: DEBUG_MODE,
-
-    // Manager access (lazy-loaded)
-    get theme() {
-        return appState.managers.theme;
-    },
-    get navigation() {
-        return appState.managers.navigation;
-    },
-    get projects() {
-        return appState.managers.projects;
-    },
-    get ui() {
-        return appState.managers.ui;
-    },
-    get errors() {
-        return errorHandler;
-    },
-
-    // Methods
-    isReady() {
-        return appState.isInitialized;
-    },
-
-    async refresh() {
-        debug.log('[App] Refreshing...');
-        const { ui } = appState.managers;
-        const { projects } = appState.managers;
-
-        if (ui) ui.showLoadingProgress('refresh');
-        if (projects) await projects.refresh();
-        if (ui) {
-            await ui.loadGitHubStats();
-            ui.hideLoadingProgress('refresh');
-            ui.showNotification('Data refreshed', 'success', 3000);
-        }
-    },
-
-    getStats() {
-        return {
-            version: APP_CONFIG.version,
-            initialized: appState.isInitialized,
-            errors: errorHandler.getStats(),
-        };
-    },
-};
-
-// Polyfill for requestIdleCallback
+// Polyfill for requestIdleCallback (Safari)
 globalThis.requestIdleCallback =
     globalThis.requestIdleCallback ||
     function (cb) {
@@ -508,6 +405,3 @@ if (document.readyState === 'loading') {
     // DOM already loaded
     initializeApp();
 }
-
-// Export for potential module use
-export { initializeApp, appState, APP_CONFIG };

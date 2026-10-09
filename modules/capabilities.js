@@ -110,3 +110,6 @@ function matchMediaSafe(query) {
     }
     return globalThis.matchMedia(query).matches;
 }
+
+// Keep `motion.reduced` current for the whole session, not only for explicit subscribers.
+onReducedMotionChange();

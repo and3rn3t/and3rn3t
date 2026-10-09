@@ -10,6 +10,8 @@
  * reduced-motion and exposes a live FPS sample for measurement.
  */
 
+import { whileVisible } from '../utils/while-visible.js';
+
 const GREEN_LIGHT = '34, 197, 94'; // #22c55e
 const GREEN_DARK = '74, 222, 128'; // #4ade80
 
@@ -49,8 +51,6 @@ async function loadSim() {
 /**
  * @typedef {Object} HeroSimHandle
  * @property {() => void} destroy
- * @property {() => number} fps      Most recent frames-per-second sample.
- * @property {() => number} particles Particle count in the simulation.
  */
 
 /**
@@ -135,8 +135,6 @@ export async function mountHeroSim(canvas, opts = {}) {
     let raf = 0;
     let running = false;
     let startTime = performance.now();
-    let lastFrame = startTime;
-    let fps = 0;
 
     function isDark() {
         return document.body.classList.contains('dark-theme');
@@ -144,11 +142,6 @@ export async function mountHeroSim(canvas, opts = {}) {
 
     function frame(now) {
         const elapsed = (now - startTime) / 1000;
-        const dt = now - lastFrame;
-        lastFrame = now;
-        if (dt > 0) {
-            fps += (1000 / dt - fps) * 0.1; // smoothed
-        }
 
         // Ease pointer; decay strength when idle.
         pointer.x += (pointer.tx - pointer.x) * 0.05;
@@ -195,7 +188,6 @@ export async function mountHeroSim(canvas, opts = {}) {
         }
         running = true;
         startTime = performance.now();
-        lastFrame = startTime;
         raf = requestAnimationFrame(frame);
         if (reduced) {
             running = false; // single static frame only
@@ -207,28 +199,8 @@ export async function mountHeroSim(canvas, opts = {}) {
         cancelAnimationFrame(raf);
     }
 
-    const io = new IntersectionObserver(
-        entries => {
-            for (const entry of entries) {
-                if (entry.isIntersecting) {
-                    start();
-                } else {
-                    stop();
-                }
-            }
-        },
-        { threshold: 0.01 }
-    );
-    io.observe(canvas);
-
-    function onVisibility() {
-        if (document.hidden) {
-            stop();
-        } else {
-            start();
-        }
-    }
-    document.addEventListener('visibilitychange', onVisibility);
+    // Pause when scrolled away / tab hidden.
+    const unobserve = whileVisible(canvas, start, stop);
 
     let resizeTimer = 0;
     function onResize() {
@@ -242,13 +214,10 @@ export async function mountHeroSim(canvas, opts = {}) {
     return {
         destroy() {
             stop();
-            io.disconnect();
-            document.removeEventListener('visibilitychange', onVisibility);
+            unobserve();
             globalThis.removeEventListener('pointermove', onPointerMove);
             globalThis.removeEventListener('resize', onResize);
             clearTimeout(resizeTimer);
         },
-        fps: () => Math.round(fps),
-        particles: () => count,
     };
 }

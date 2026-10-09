@@ -56,7 +56,7 @@
       <link>https://andernet.dev/posts/lidar-gait-analysis-iphone/</link>
       <guid isPermaLink="false">https://andernet.dev/posts/lidar-gait-analysis-iphone</guid>
       <pubDate>Tue, 12 May 2026 00:00:00 +0000</pubDate>
-      <description>How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</description>
+      <description>How I used the iPhone&#39;s LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</description>
       <category>iOS</category>
       <category>Swift</category>
       <category>HealthKit</category>

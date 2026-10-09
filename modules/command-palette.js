@@ -12,6 +12,7 @@
  */
 
 import { debug } from './debug.js';
+import { loadJSON } from './utils/data.js';
 import { escapeHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
 
@@ -178,11 +179,10 @@ class CommandPalette {
 
     async loadProjects() {
         try {
-            const res = await fetch('/projects-data.json');
-            if (!res.ok) {
+            const data = await loadJSON('/projects-data.json');
+            if (!data) {
                 return;
             }
-            const data = await res.json();
             const projects = (data.projects || []).map(p => ({
                 type: 'project',
                 category: 'projects',
@@ -403,4 +403,3 @@ class CommandPalette {
 }
 
 export const commandPalette = new CommandPalette();
-export default commandPalette;

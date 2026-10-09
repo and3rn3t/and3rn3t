@@ -178,4 +178,3 @@ class KeyboardHelp {
 }
 
 export const keyboardHelp = new KeyboardHelp();
-export default keyboardHelp;
