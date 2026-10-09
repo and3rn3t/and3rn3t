@@ -5,7 +5,8 @@ views, referrers, browsers and countries. There are no custom events.
 
 ## How it is loaded
 
-`index.html` appends the beacon 500 ms after load:
+An inline script in the `<head>` of `index.html` appends the beacon 500 ms after it runs (a timer
+started during page parse, not the `load` event):
 
 ```html
 <script

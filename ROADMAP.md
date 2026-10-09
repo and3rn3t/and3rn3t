@@ -205,8 +205,9 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   matched the check), and the error handler's fallbacks swallowed init errors; fixed, the module
   went from 282 lines to 38. About 700 lines of dead JS, `wasm-lab.html` and `styles.css`'s
   6,799 to 5,174 lines (dead rules, 17 merged media blocks) removed with a 30-screenshot pixel
-  diff against `main`. Stylelint now actually enforces the design tokens. `github-data.json`
-  shrank from 494 KB to 112 KB, the unused metrics SVG job was dropped, and OG images regenerate
-  only when their inputs change. Left for a human: 22 `@media (max-width: 768px)` blocks that
+  diff against `main`. Two follow-ups are separate PRs so they can be reviewed on their own:
+  Stylelint enforcement of the design tokens (#140), and the data workflow (#141: a slimmer
+  `github-data.json`, dropping the unused metrics SVG job, OG renders only when their inputs
+  change). Left for a human: 22 `@media (max-width: 768px)` blocks that
   can't be merged without choosing which conflicting rule is intended. Also not done: per-post OG
   cards (6.5) and project screenshots in cards.
