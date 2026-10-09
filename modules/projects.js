@@ -306,6 +306,9 @@ export class ProjectsManager {
             });
         }
 
+        // The "Active" badge already says so; don't repeat it as a status tag
+        const showStatus = Boolean(status) && !(isRecent && /^active\b/i.test(status));
+
         const caseStudyHtml = hasCaseStudy
             ? `
             <button type="button" class="project-case-study-btn" data-case-study="${escapeHtml(slug)}">
@@ -347,7 +350,7 @@ export class ProjectsManager {
                     ${secondaryTags
                         .map(tag => `<span class="language-tag">${escapeHtml(tag)}</span>`)
                         .join('')}
-                    ${status ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
+                    ${showStatus ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
                 </div>
             </div>
 

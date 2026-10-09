@@ -23,7 +23,7 @@
       "name": "health",
       "featured": true,
       "displayName": "Health Analytics Platform",
-      "description": "A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors. Live at health.andernet.dev.",
+      "description": "A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.",
       "longDescription": "This project combines iPhone LiDAR depth sensing with Apple HealthKit to analyze gait patterns without any wearable hardware. The iPhone becomes the sensor; a TypeScript web dashboard consumes live health data through the companion HealthKitBridge local HTTP server. The platform identifies walking irregularities, tracks wellness trends over time, and surfaces personalized insights — all processed on-device with no cloud intermediary. It's a real system with a live deployment, not a prototype.",
       "technologies": ["TypeScript", "HealthKit", "LiDAR", "iOS"],
       "highlights": [
@@ -234,7 +234,7 @@
       "name": "guess",
       "featured": true,
       "displayName": "Guess — Transparent Akinator",
-      "description": "A 20-questions game that makes its decision tree fully visible as you play. Live at andernator.com — built to make information-theoretic narrowing tangible.",
+      "description": "A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.",
       "longDescription": "Guess is a TypeScript implementation of a 20-questions-style guessing game, with one key difference from Akinator: the algorithm is fully transparent. As you answer each question, the UI shows which candidates remain, the current confidence score, and why the next question was chosen — exposing the entropy-based selection logic in real time. The goal was to make constraint satisfaction feel intuitive rather than magical. It's live at andernator.com, works in any browser, and the decision tree logic is written from scratch with no external AI APIs.",
       "technologies": ["TypeScript", "Algorithms", "Decision Trees"],
       "highlights": [

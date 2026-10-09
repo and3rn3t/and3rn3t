@@ -538,17 +538,30 @@
             <a href="#contact" class="nav-link touch-target">Contact</a>
           </li>
         </ul>
-        <button
-          class="nav-toggle hamburger"
-          id="mobile-menu"
-          aria-label="Toggle navigation menu"
-          aria-expanded="false"
-          aria-controls="nav-links"
-        >
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
+        <div class="nav-actions">
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#moon"></use>
+            </svg>
+          </button>
+          <button
+            class="nav-toggle hamburger"
+            id="mobile-menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
       </div>
     </nav>
 
@@ -1237,21 +1250,6 @@
         ]
       }
     </script>
-
-    <!-- Theme Toggle -->
-    <div class="theme-picker-container">
-      <button
-        type="button"
-        class="theme-toggle"
-        id="theme-toggle"
-        aria-label="Switch to dark theme"
-        title="Switch to dark theme (T)"
-      >
-        <svg class="icon" aria-hidden="true" focusable="false">
-          <use href="/icons/sprite.svg#moon"></use>
-        </svg>
-      </button>
-    </div>
 
     <!-- Main application script (ES6 modules) -->
     <script type="module" src="main.js"></script>

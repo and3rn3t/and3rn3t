@@ -288,7 +288,7 @@ export class UIManager {
             debug.warn('[UI] Failed to load GitHub stats:', error);
             if (statsGrid) {
                 statsGrid.innerHTML =
-                    '<p class="error-message">Unable to load GitHub statistics at this time.</p>';
+                    '<p class="error-message show">Unable to load GitHub statistics at this time.</p>';
             }
         }
     }
