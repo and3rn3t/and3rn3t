@@ -10,7 +10,6 @@
 import { DEBUG_MODE, debug } from './modules/debug.js';
 import { errorHandler } from './modules/error-handler.js';
 import { initThemeManager } from './modules/theme.js';
-import { mobileManager } from './modules/mobile.js';
 import { navigationManager } from './modules/navigation.js';
 
 // App configuration
@@ -67,14 +66,11 @@ async function initializeApp() {
     debug.log(`[App] Initializing ${APP_CONFIG.name} v${APP_CONFIG.version}...`);
 
     try {
-        // Phase 1: Critical path - theme and mobile (prevents flash/layout shifts)
+        // Phase 1: Critical path - theme (prevents flash)
         const themeManager = initThemeManager();
         appState.managers.theme = themeManager;
 
-        mobileManager.init();
-        appState.managers.mobile = mobileManager;
-
-        debug.log('[App] Phase 1: Theme & mobile initialized');
+        debug.log('[App] Phase 1: Theme initialized');
 
         // Phase 2: Navigation and UI setup
         initMobileMenu();
@@ -194,32 +190,15 @@ async function initializeApp() {
             })
         );
 
-        // Phase 4: Non-critical features (deferred with dynamic imports)
+        // Phase 4: Non-critical features (deferred)
         requestIdleCallback(
             async () => {
+                // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
                 try {
-                    const [{ performanceManager }, { analyticsManager }] = await Promise.all([
-                        lazyLoad('./modules/performance.js'),
-                        lazyLoad('./modules/analytics.js'),
-                    ]);
-
-                    performanceManager.init();
-                    appState.managers.performance = performanceManager;
-
-                    analyticsManager.init();
-                    appState.managers.analytics = analyticsManager;
-
-                    // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
-                    try {
-                        const { easterEgg } = await import('./modules/easter-egg.js');
-                        easterEgg.init();
-                    } catch (err) {
-                        debug.warn('[App] Easter egg skipped:', err);
-                    }
-
-                    debug.log('[App] Phase 4: Analytics & performance initialized');
+                    const { easterEgg } = await import('./modules/easter-egg.js');
+                    easterEgg.init();
                 } catch (err) {
-                    debug.error('[App] Phase 4 error:', err);
+                    debug.warn('[App] Easter egg skipped:', err);
                 }
             },
             { timeout: 2000 }
@@ -351,21 +330,6 @@ function initNavigation() {
             { passive: true }
         );
     }
-
-    // Smooth scroll for anchor links
-    for (const anchor of document.querySelectorAll('a[href^="#"]')) {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 70;
-                globalThis.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth',
-                });
-            }
-        });
-    }
 }
 
 /**
@@ -397,25 +361,11 @@ function setupGlobalEvents() {
     // Handle global errors
     globalThis.addEventListener('error', async event => {
         debug.error('[App] Uncaught error:', event.error);
-        const { analytics } = appState.managers;
-        if (analytics && analytics.isInitialized) {
-            analytics.trackError(event.error, {
-                type: 'uncaught',
-                filename: event.filename,
-                lineno: event.lineno,
-            });
-        }
     });
 
     // Handle unhandled promise rejections
     globalThis.addEventListener('unhandledrejection', async event => {
         debug.error('[App] Unhandled rejection:', event.reason);
-        const { analytics } = appState.managers;
-        if (analytics && analytics.isInitialized) {
-            analytics.trackError(event.reason, {
-                type: 'unhandled_rejection',
-            });
-        }
     });
 
     // Handle theme changes - reapply hero background
@@ -484,12 +434,6 @@ function handleInitError(error) {
         showUser: true,
         context: { phase: 'initialization' },
     });
-
-    // Track error via analytics if available
-    const { analytics } = appState.managers;
-    if (analytics && analytics.isInitialized) {
-        analytics.trackError(error, { context: 'initialization' });
-    }
 }
 
 /**
@@ -503,20 +447,11 @@ globalThis.PortfolioApp = {
     get theme() {
         return appState.managers.theme;
     },
-    get mobile() {
-        return appState.managers.mobile;
-    },
     get navigation() {
         return appState.managers.navigation;
     },
     get projects() {
         return appState.managers.projects;
-    },
-    get performance() {
-        return appState.managers.performance;
-    },
-    get analytics() {
-        return appState.managers.analytics;
     },
     get ui() {
         return appState.managers.ui;
@@ -545,16 +480,9 @@ globalThis.PortfolioApp = {
     },
 
     getStats() {
-        const perf = appState.managers.performance;
-        const { analytics } = appState.managers;
-        const { mobile } = appState.managers;
-
         return {
             version: APP_CONFIG.version,
             initialized: appState.isInitialized,
-            performance: perf?.getMetrics?.() || {},
-            session: analytics?.getSessionStats?.() || {},
-            device: mobile?.getDeviceInfo?.() || {},
             errors: errorHandler.getStats(),
         };
     },

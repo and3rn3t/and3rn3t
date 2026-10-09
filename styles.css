@@ -26,6 +26,27 @@
   }
 }
 
+/* Anchored sections clear the fixed navbar (scrolling is smooth unless reduced motion is set) */
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + var(--space-2));
+}
+
+/* Touch devices: comfortable tap targets, and 16px inputs so iOS doesn't zoom on focus */
+@media (pointer: coarse) {
+  button,
+  .btn,
+  [role='button'] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: max(1rem, 16px);
+  }
+}
+
 /* Theme switch — circular reveal via the View Transitions API.
    Origin (--theme-x/--theme-y) is set in JS from the theme toggle button. */
 ::view-transition-old(root),
@@ -70,6 +91,7 @@
 }
 
 :root {
+  --nav-height: 70px;
   /* ========================================
        COLOR SYSTEM
        ======================================== */
@@ -4773,30 +4795,6 @@ body.keyboard-navigation .focus-ring:focus {
   }
 }
 
-/* Pull-to-Refresh Indicator */
-.pull-to-refresh {
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--accent-text, #15803d);
-  font-size: var(--font-size-sm);
-  opacity: 0;
-  transition: all var(--transition-base);
-}
-
-.pull-to-refresh.visible {
-  opacity: 1;
-  top: 20px;
-}
-
-.pull-to-refresh .icon {
-  animation: spin 1s linear infinite;
-}
-
 /* Enhanced Mobile Navigation */
 @media (max-width: 768px) {
   .nav-links {
@@ -5207,8 +5205,12 @@ body.keyboard-navigation .focus-ring:focus {
 
 /* Mobile Navigation Enhancements */
 @media (max-width: 768px) {
+  :root {
+    --nav-height: 60px;
+  }
+
   .navbar {
-    height: 60px;
+    height: var(--nav-height);
     padding: 0 var(--space-3);
   }
 

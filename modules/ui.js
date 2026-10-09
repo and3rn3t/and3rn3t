@@ -190,7 +190,7 @@ export class UIManager {
         globalThis.addEventListener(
             'scroll',
             () => {
-                if (globalThis.pageYOffset > 300) {
+                if (globalThis.pageYOffset > 400) {
                     backToTopBtn.classList.add('visible');
                 } else {
                     backToTopBtn.classList.remove('visible');
@@ -200,7 +200,7 @@ export class UIManager {
         );
 
         backToTopBtn.addEventListener('click', () => {
-            globalThis.scrollTo({ top: 0, behavior: 'smooth' });
+            globalThis.scrollTo({ top: 0 });
         });
     }
 

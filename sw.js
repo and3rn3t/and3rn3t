@@ -16,7 +16,6 @@ const PRECACHE_ASSETS = [
     '/modules/debug.js',
     '/modules/error-handler.js',
     '/modules/theme.js',
-    '/modules/mobile.js',
     '/modules/navigation.js',
     '/fonts/inter-variable.woff2',
     '/icons/sprite.svg',

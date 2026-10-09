@@ -264,7 +264,6 @@
     <link rel="modulepreload" href="main.js" />
     <link rel="modulepreload" href="modules/debug.js" />
     <link rel="modulepreload" href="modules/theme.js" />
-    <link rel="modulepreload" href="modules/mobile.js" />
     <link rel="modulepreload" href="modules/navigation.js" />
     <link rel="modulepreload" href="modules/ui.js" />
     <link rel="modulepreload" href="modules/projects.js" />
@@ -423,32 +422,6 @@
           transform: rotate(360deg);
         }
       }
-      /* Performance optimization classes */
-      .loading-placeholder {
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 200% 100%;
-        animation: loading-shimmer 2s infinite;
-        border-radius: 8px;
-        min-height: 40px;
-      }
-      .performance-chart.loaded {
-        animation: fade-in 0.3s ease;
-      }
-      .metric-badge {
-        transition: transform 0.2s ease;
-        border-radius: 4px;
-      }
-      .metric-badge:hover {
-        transform: scale(1.05);
-      }
-      @keyframes loading-shimmer {
-        0% {
-          background-position: -200% 0;
-        }
-        100% {
-          background-position: 200% 0;
-        }
-      }
       @keyframes fade-in {
         from {
           opacity: 0;
@@ -537,7 +510,7 @@
       })();
     </script>
     <!-- Skip to main content link for keyboard users -->
-    <a href="#home" class="skip-link">Skip to main content</a>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
@@ -713,501 +686,509 @@
       </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero-canvas-wrap" aria-hidden="true">
-        <div class="hero-canvas-fallback"></div>
-        <canvas class="hero-canvas" id="hero-canvas"></canvas>
-      </div>
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1 class="hero-title">Hi, I'm <span class="highlight">Matthew Anderson</span></h1>
-          <h2 class="hero-subtitle">
-            <span
-              class="hero-role"
-              data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd"
-              >Software Engineer at Deere &amp; Company</span
-            ><span class="hero-caret" aria-hidden="true"></span>
-          </h2>
-          <p class="hero-description">
-            Software engineer at John Deere. Building things at the intersection of health tech,
-            home automation, and data in my spare time.
-          </p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#file-pdf"></use>
-              </svg>
-              Resume
-            </a>
-          </div>
-          <div class="hero-social">
-            <a
-              href="https://github.com/and3rn3t"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-link"
-              title="GitHub Profile"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#github"></use>
-              </svg>
-            </a>
-            <a
-              href="https://linkedin.com/in/and3rn3t"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-link"
-              title="LinkedIn Profile"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#linkedin"></use>
-              </svg>
-            </a>
-            <a href="mailto:and3rn3t@icloud.com" class="social-link" title="Send Email">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#envelope"></use>
-              </svg>
-            </a>
-          </div>
+    <main id="main">
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <div class="hero-canvas-wrap" aria-hidden="true">
+          <div class="hero-canvas-fallback"></div>
+          <canvas class="hero-canvas" id="hero-canvas"></canvas>
         </div>
-      </div>
-      <a href="#about" class="hero-scroll-cue" aria-label="Scroll to About section">
-        <span class="hero-scroll-cue-chevron" aria-hidden="true"></span>
-      </a>
-    </section>
-
-    <!-- About Section -->
-    <section class="about animate-on-scroll" id="about">
-      <div class="container">
-        <h2 class="section-title">About</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <p>
-              Recent side projects include an iPhone app that measures gait with LiDAR, a home
-              dashboard that runs without the cloud, and a 20-questions game that shows its
-              reasoning as you play. I care about the unglamorous parts too: tests, accessibility,
-              and being able to explain every byte I ship.
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1 class="hero-title">Hi, I'm <span class="highlight">Matthew Anderson</span></h1>
+            <h2 class="hero-subtitle">
+              <span
+                class="hero-role"
+                data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd"
+                >Software Engineer at Deere &amp; Company</span
+              ><span class="hero-caret" aria-hidden="true"></span>
+            </h2>
+            <p class="hero-description">
+              Software engineer at John Deere. Building things at the intersection of health tech,
+              home automation, and data in my spare time.
             </p>
-            <!-- Currently coding widget — populated by modules/currently.js -->
-            <div id="currently-coding" aria-live="polite"></div>
-            <ul class="tech-strip" aria-label="Tools I work with most">
-              <li class="tech-chip">TypeScript</li>
-              <li class="tech-chip">Swift</li>
-              <li class="tech-chip">Python</li>
-              <li class="tech-chip">React</li>
-              <li class="tech-chip">Cloudflare Workers</li>
-              <li class="tech-chip">HealthKit</li>
-              <li class="tech-chip">dbt</li>
-              <li class="tech-chip">Docker</li>
-            </ul>
-          </div>
-        </div>
-        <div class="github-strip">
-          <h3 class="github-strip-title">
-            <svg class="icon" aria-hidden="true" focusable="false">
-              <use href="/icons/sprite.svg#github"></use>
-            </svg>
-            On GitHub
-          </h3>
-          <div class="stats-grid" id="stats-grid">
-            <div class="loading">
-              <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#spinner"></use>
-              </svg>
-              <p>Loading stats...</p>
-            </div>
-          </div>
-          <div class="contribution-graph" id="contribution-graph">
-            <div class="loading">
-              <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#spinner"></use>
-              </svg>
-              <p>Loading contributions...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects animate-on-scroll" id="projects">
-      <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-
-        <!-- Top Starred Projects -->
-        <div class="top-projects-section">
-          <div class="projects-grid" id="projects-grid">
-            <div class="loading">
-              <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#spinner"></use>
-              </svg>
-              <p>Loading projects...</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="projects-cta">
-          <button
-            type="button"
-            class="btn btn-outline projects-more-btn"
-            id="projects-more-btn"
-            aria-expanded="false"
-            aria-controls="projects-grid"
-            hidden
-          >
-            Show more projects
-          </button>
-          <a
-            href="https://github.com/and3rn3t"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-outline"
-          >
-            View All Projects on GitHub
-            <svg class="icon" aria-hidden="true" focusable="false">
-              <use href="/icons/sprite.svg#github"></use>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience animate-on-scroll" id="experience">
-      <div class="container">
-        <h2 class="section-title">Experience</h2>
-        <div class="experience-layout">
-          <div class="timeline-column">
-            <h3 class="timeline-group-heading">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#briefcase"></use>
-              </svg>
-              Work
-            </h3>
-            <div class="timeline" id="experience-timeline" role="group" aria-label="Work history">
-              <div class="loading">
-                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#spinner"></use>
-                </svg>
-                <p>Loading experience...</p>
-              </div>
-            </div>
-          </div>
-          <div class="timeline-column">
-            <h3 class="timeline-group-heading">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#graduation-cap"></use>
-              </svg>
-              Education
-            </h3>
-            <div
-              class="timeline"
-              id="education-timeline"
-              role="group"
-              aria-label="Education history"
-            >
-              <div class="loading">
-                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#spinner"></use>
-                </svg>
-                <p>Loading education...</p>
-              </div>
-            </div>
-            <!-- Resume CTA -->
-            <div class="resume-cta">
-              <p class="resume-cta-label">Want the full picture?</p>
-              <a href="/resume.pdf" download class="btn btn-primary resume-btn">
+            <div class="hero-buttons">
+              <a href="#projects" class="btn btn-primary">View My Work</a>
+              <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+              <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
                 <svg class="icon" aria-hidden="true" focusable="false">
                   <use href="/icons/sprite.svg#file-pdf"></use>
                 </svg>
-                Download Resume
+                Resume
+              </a>
+            </div>
+            <div class="hero-social">
+              <a
+                href="https://github.com/and3rn3t"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                title="GitHub Profile"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#github"></use>
+                </svg>
+              </a>
+              <a
+                href="https://linkedin.com/in/and3rn3t"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                title="LinkedIn Profile"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#linkedin"></use>
+                </svg>
+              </a>
+              <a href="mailto:and3rn3t@icloud.com" class="social-link" title="Send Email">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#envelope"></use>
+                </svg>
               </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+        <a href="#about" class="hero-scroll-cue" aria-label="Scroll to About section">
+          <span class="hero-scroll-cue-chevron" aria-hidden="true"></span>
+        </a>
+      </section>
 
-    <!-- Writing / Blog Section -->
-    <section class="writing animate-on-scroll" id="writing">
-      <div class="container">
-        <h2 class="section-title">Writing</h2>
-        <p class="section-intro">How these projects work, and what I learned building them.</p>
-        <div id="blog-posts" class="blog-posts-grid" role="group" aria-label="Blog posts"></div>
-        <div
-          id="blog-article"
-          class="blog-article-wrapper"
-          role="article"
-          hidden
-          aria-label="Blog article"
-        ></div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact animate-on-scroll" id="contact">
-      <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-          <p class="contact-description">
-            Open to a new role, a side-project collaboration, or just a good conversation about
-            something you're building.
-          </p>
-
-          <div class="contact-tabs" role="tablist" aria-label="Ways to get in touch">
-            <button
-              type="button"
-              class="contact-tab"
-              role="tab"
-              id="contact-tab-message"
-              aria-controls="contact-panel-message"
-              aria-selected="true"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#paper-plane"></use>
-              </svg>
-              Send a message
-            </button>
-            <button
-              type="button"
-              class="contact-tab"
-              role="tab"
-              id="contact-tab-guestbook"
-              aria-controls="contact-panel-guestbook"
-              aria-selected="false"
-              tabindex="-1"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#pen"></use>
-              </svg>
-              Sign the guestbook
-            </button>
+      <!-- About Section -->
+      <section class="about animate-on-scroll" id="about">
+        <div class="container">
+          <h2 class="section-title">About</h2>
+          <div class="about-content">
+            <div class="about-text">
+              <p>
+                Recent side projects include an iPhone app that measures gait with LiDAR, a home
+                dashboard that runs without the cloud, and a 20-questions game that shows its
+                reasoning as you play. I care about the unglamorous parts too: tests, accessibility,
+                and being able to explain every byte I ship.
+              </p>
+              <!-- Currently coding widget — populated by modules/currently.js -->
+              <div id="currently-coding" aria-live="polite"></div>
+              <ul class="tech-strip" aria-label="Tools I work with most">
+                <li class="tech-chip">TypeScript</li>
+                <li class="tech-chip">Swift</li>
+                <li class="tech-chip">Python</li>
+                <li class="tech-chip">React</li>
+                <li class="tech-chip">Cloudflare Workers</li>
+                <li class="tech-chip">HealthKit</li>
+                <li class="tech-chip">dbt</li>
+                <li class="tech-chip">Docker</li>
+              </ul>
+            </div>
           </div>
-
-          <div
-            class="contact-panel"
-            role="tabpanel"
-            id="contact-panel-message"
-            aria-labelledby="contact-tab-message"
-          >
-            <form
-              class="contact-form"
-              action="https://formspree.io/f/xqagvdrq"
-              method="POST"
-              id="contact-form"
-            >
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    class="form-input"
-                    placeholder="Your full name"
-                    aria-describedby="name-error"
-                    autocomplete="name"
-                    minlength="2"
-                    maxlength="100"
-                  />
-                  <span
-                    class="error-message"
-                    id="name-error"
-                    role="alert"
-                    aria-live="polite"
-                  ></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="email">Email *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    class="form-input"
-                    placeholder="your.email@example.com"
-                    aria-describedby="email-error"
-                    autocomplete="email"
-                    maxlength="254"
-                  />
-                  <span
-                    class="error-message"
-                    id="email-error"
-                    role="alert"
-                    aria-live="polite"
-                  ></span>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="subject">Subject *</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  class="form-input"
-                  placeholder="What would you like to discuss?"
-                  aria-describedby="subject-error"
-                  minlength="3"
-                  maxlength="200"
-                />
-                <span
-                  class="error-message"
-                  id="subject-error"
-                  role="alert"
-                  aria-live="polite"
-                ></span>
-              </div>
-
-              <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="6"
-                  required
-                  class="form-textarea"
-                  placeholder="Tell me about your project, idea, or how we can work together..."
-                  aria-describedby="message-error"
-                  minlength="10"
-                  maxlength="5000"
-                ></textarea>
-                <span
-                  class="error-message"
-                  id="message-error"
-                  role="alert"
-                  aria-live="polite"
-                ></span>
-              </div>
-
-              <!-- Honeypot for spam protection -->
-              <input type="text" name="_gotcha" class="honeypot" tabindex="-1" aria-hidden="true" />
-
-              <button
-                type="submit"
-                class="btn btn-primary submit-button"
-                id="submit-button"
-                aria-describedby="form-status"
-              >
-                <span class="submit-text">Send Message</span>
-                <svg class="icon submit-icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#paper-plane"></use>
+          <div class="github-strip">
+            <h3 class="github-strip-title">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#github"></use>
+              </svg>
+              On GitHub
+            </h3>
+            <div class="stats-grid" id="stats-grid">
+              <div class="loading">
+                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#spinner"></use>
                 </svg>
-                <div class="loading-spinner">
-                  <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                    <use href="/icons/sprite.svg#spinner"></use>
-                  </svg>
-                </div>
-              </button>
-
-              <output class="form-status" id="form-status" aria-live="polite"></output>
-            </form>
-          </div>
-
-          <div
-            class="contact-panel guestbook-card"
-            role="tabpanel"
-            id="contact-panel-guestbook"
-            aria-labelledby="contact-tab-guestbook"
-            hidden
-          >
-            <p class="guestbook-intro">
-              Leave a public note. Say hello, or tell me what you're building.
-            </p>
-            <div class="guestbook-layout">
-              <div class="guestbook-form-col">
-                <form id="guestbook-form" class="guestbook-form" novalidate>
-                  <div class="form-group">
-                    <label for="gb-name">Name</label>
-                    <input
-                      type="text"
-                      id="gb-name"
-                      name="name"
-                      required
-                      class="form-input"
-                      placeholder="Your name"
-                      maxlength="60"
-                      autocomplete="name"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="gb-message">Message</label>
-                    <textarea
-                      id="gb-message"
-                      name="message"
-                      rows="4"
-                      required
-                      class="form-textarea"
-                      placeholder="What's on your mind?"
-                      maxlength="500"
-                    ></textarea>
-                  </div>
-                  <div id="turnstile-container" class="turnstile-container"></div>
-                  <button type="submit" class="btn btn-primary" disabled>
-                    <svg class="icon" aria-hidden="true" focusable="false">
-                      <use href="/icons/sprite.svg#pen"></use>
-                    </svg>
-                    Sign guestbook
-                  </button>
-                  <output
-                    id="guestbook-status"
-                    class="guestbook-status"
-                    aria-live="polite"
-                  ></output>
-                </form>
+                <p>Loading stats...</p>
               </div>
-              <div class="guestbook-entries-col">
-                <div id="guestbook-entries" role="group" aria-label="Guestbook entries">
-                  <div class="loading">
-                    <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                      <use href="/icons/sprite.svg#spinner"></use>
-                    </svg>
-                    <p>Loading entries...</p>
-                  </div>
-                </div>
+            </div>
+            <div class="contribution-graph" id="contribution-graph">
+              <div class="loading">
+                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#spinner"></use>
+                </svg>
+                <p>Loading contributions...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="projects animate-on-scroll" id="projects">
+        <div class="container">
+          <h2 class="section-title">Featured Projects</h2>
+
+          <!-- Top Starred Projects -->
+          <div class="top-projects-section">
+            <div class="projects-grid" id="projects-grid">
+              <div class="loading">
+                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#spinner"></use>
+                </svg>
+                <p>Loading projects...</p>
               </div>
             </div>
           </div>
 
-          <div class="contact-methods">
-            <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#envelope"></use>
-              </svg>
-              <span>and3rn3t@icloud.com</span>
-            </a>
+          <div class="projects-cta">
+            <button
+              type="button"
+              class="btn btn-outline projects-more-btn"
+              id="projects-more-btn"
+              aria-expanded="false"
+              aria-controls="projects-grid"
+              hidden
+            >
+              Show more projects
+            </button>
             <a
               href="https://github.com/and3rn3t"
               target="_blank"
               rel="noopener noreferrer"
-              class="contact-method touch-target"
+              class="btn btn-outline"
             >
+              View All Projects on GitHub
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#github"></use>
               </svg>
-              <span>@and3rn3t</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/and3rn3t"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-method touch-target"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#linkedin"></use>
-              </svg>
-              <span>LinkedIn</span>
             </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- Experience Section -->
+      <section class="experience animate-on-scroll" id="experience">
+        <div class="container">
+          <h2 class="section-title">Experience</h2>
+          <div class="experience-layout">
+            <div class="timeline-column">
+              <h3 class="timeline-group-heading">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#briefcase"></use>
+                </svg>
+                Work
+              </h3>
+              <div class="timeline" id="experience-timeline" role="group" aria-label="Work history">
+                <div class="loading">
+                  <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                    <use href="/icons/sprite.svg#spinner"></use>
+                  </svg>
+                  <p>Loading experience...</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-column">
+              <h3 class="timeline-group-heading">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#graduation-cap"></use>
+                </svg>
+                Education
+              </h3>
+              <div
+                class="timeline"
+                id="education-timeline"
+                role="group"
+                aria-label="Education history"
+              >
+                <div class="loading">
+                  <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                    <use href="/icons/sprite.svg#spinner"></use>
+                  </svg>
+                  <p>Loading education...</p>
+                </div>
+              </div>
+              <!-- Resume CTA -->
+              <div class="resume-cta">
+                <p class="resume-cta-label">Want the full picture?</p>
+                <a href="/resume.pdf" download class="btn btn-primary resume-btn">
+                  <svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/icons/sprite.svg#file-pdf"></use>
+                  </svg>
+                  Download Resume
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Writing / Blog Section -->
+      <section class="writing animate-on-scroll" id="writing">
+        <div class="container">
+          <h2 class="section-title">Writing</h2>
+          <p class="section-intro">How these projects work, and what I learned building them.</p>
+          <div id="blog-posts" class="blog-posts-grid" role="group" aria-label="Blog posts"></div>
+          <div
+            id="blog-article"
+            class="blog-article-wrapper"
+            role="article"
+            hidden
+            aria-label="Blog article"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact animate-on-scroll" id="contact">
+        <div class="container">
+          <h2 class="section-title">Get In Touch</h2>
+          <div class="contact-content">
+            <p class="contact-description">
+              Open to a new role, a side-project collaboration, or just a good conversation about
+              something you're building.
+            </p>
+
+            <div class="contact-tabs" role="tablist" aria-label="Ways to get in touch">
+              <button
+                type="button"
+                class="contact-tab"
+                role="tab"
+                id="contact-tab-message"
+                aria-controls="contact-panel-message"
+                aria-selected="true"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#paper-plane"></use>
+                </svg>
+                Send a message
+              </button>
+              <button
+                type="button"
+                class="contact-tab"
+                role="tab"
+                id="contact-tab-guestbook"
+                aria-controls="contact-panel-guestbook"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#pen"></use>
+                </svg>
+                Sign the guestbook
+              </button>
+            </div>
+
+            <div
+              class="contact-panel"
+              role="tabpanel"
+              id="contact-panel-message"
+              aria-labelledby="contact-tab-message"
+            >
+              <form
+                class="contact-form"
+                action="https://formspree.io/f/xqagvdrq"
+                method="POST"
+                id="contact-form"
+              >
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      class="form-input"
+                      placeholder="Your full name"
+                      aria-describedby="name-error"
+                      autocomplete="name"
+                      minlength="2"
+                      maxlength="100"
+                    />
+                    <span
+                      class="error-message"
+                      id="name-error"
+                      role="alert"
+                      aria-live="polite"
+                    ></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      class="form-input"
+                      placeholder="your.email@example.com"
+                      aria-describedby="email-error"
+                      autocomplete="email"
+                      maxlength="254"
+                    />
+                    <span
+                      class="error-message"
+                      id="email-error"
+                      role="alert"
+                      aria-live="polite"
+                    ></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">Subject *</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    required
+                    class="form-input"
+                    placeholder="What would you like to discuss?"
+                    aria-describedby="subject-error"
+                    minlength="3"
+                    maxlength="200"
+                  />
+                  <span
+                    class="error-message"
+                    id="subject-error"
+                    role="alert"
+                    aria-live="polite"
+                  ></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    required
+                    class="form-textarea"
+                    placeholder="Tell me about your project, idea, or how we can work together..."
+                    aria-describedby="message-error"
+                    minlength="10"
+                    maxlength="5000"
+                  ></textarea>
+                  <span
+                    class="error-message"
+                    id="message-error"
+                    role="alert"
+                    aria-live="polite"
+                  ></span>
+                </div>
+
+                <!-- Honeypot for spam protection -->
+                <input
+                  type="text"
+                  name="_gotcha"
+                  class="honeypot"
+                  tabindex="-1"
+                  aria-hidden="true"
+                />
+
+                <button
+                  type="submit"
+                  class="btn btn-primary submit-button"
+                  id="submit-button"
+                  aria-describedby="form-status"
+                >
+                  <span class="submit-text">Send Message</span>
+                  <svg class="icon submit-icon" aria-hidden="true" focusable="false">
+                    <use href="/icons/sprite.svg#paper-plane"></use>
+                  </svg>
+                  <div class="loading-spinner">
+                    <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                      <use href="/icons/sprite.svg#spinner"></use>
+                    </svg>
+                  </div>
+                </button>
+
+                <output class="form-status" id="form-status" aria-live="polite"></output>
+              </form>
+            </div>
+
+            <div
+              class="contact-panel guestbook-card"
+              role="tabpanel"
+              id="contact-panel-guestbook"
+              aria-labelledby="contact-tab-guestbook"
+              hidden
+            >
+              <p class="guestbook-intro">
+                Leave a public note. Say hello, or tell me what you're building.
+              </p>
+              <div class="guestbook-layout">
+                <div class="guestbook-form-col">
+                  <form id="guestbook-form" class="guestbook-form" novalidate>
+                    <div class="form-group">
+                      <label for="gb-name">Name</label>
+                      <input
+                        type="text"
+                        id="gb-name"
+                        name="name"
+                        required
+                        class="form-input"
+                        placeholder="Your name"
+                        maxlength="60"
+                        autocomplete="name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="gb-message">Message</label>
+                      <textarea
+                        id="gb-message"
+                        name="message"
+                        rows="4"
+                        required
+                        class="form-textarea"
+                        placeholder="What's on your mind?"
+                        maxlength="500"
+                      ></textarea>
+                    </div>
+                    <div id="turnstile-container" class="turnstile-container"></div>
+                    <button type="submit" class="btn btn-primary" disabled>
+                      <svg class="icon" aria-hidden="true" focusable="false">
+                        <use href="/icons/sprite.svg#pen"></use>
+                      </svg>
+                      Sign guestbook
+                    </button>
+                    <output
+                      id="guestbook-status"
+                      class="guestbook-status"
+                      aria-live="polite"
+                    ></output>
+                  </form>
+                </div>
+                <div class="guestbook-entries-col">
+                  <div id="guestbook-entries" role="group" aria-label="Guestbook entries">
+                    <div class="loading">
+                      <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                        <use href="/icons/sprite.svg#spinner"></use>
+                      </svg>
+                      <p>Loading entries...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-methods">
+              <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#envelope"></use>
+                </svg>
+                <span>and3rn3t@icloud.com</span>
+              </a>
+              <a
+                href="https://github.com/and3rn3t"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-method touch-target"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#github"></use>
+                </svg>
+                <span>@and3rn3t</span>
+              </a>
+              <a
+                href="https://linkedin.com/in/and3rn3t"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-method touch-target"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#linkedin"></use>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
