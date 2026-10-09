@@ -48,19 +48,26 @@
 
   <!-- Blog Posts -->
   <url>
-    <loc>https://andernet.dev/#post/lidar-gait-analysis-iphone</loc>
+    <loc>https://andernet.dev/posts/how-this-site-works/</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://andernet.dev/posts/lidar-gait-analysis-iphone/</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://andernet.dev/#post/local-first-iot-dashboard</loc>
+    <loc>https://andernet.dev/posts/local-first-iot-dashboard/</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- Offline Page (for PWA) -->
   <url>
     <loc>https://andernet.dev/offline.html</loc>

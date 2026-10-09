@@ -24,6 +24,7 @@
     "worker:dev": "wrangler dev worker/index.js",
     "generate:og": "node scripts/generate-og.mjs",
     "build:icons": "node scripts/build-icons.mjs",
+    "generate:posts": "node scripts/generate-posts.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

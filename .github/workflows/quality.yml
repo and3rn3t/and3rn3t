@@ -17,6 +17,13 @@ jobs:
       command: pnpm lint && pnpm format:check
       package-manager: pnpm
 
+  generated:
+    name: Generated files are up to date
+    uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1
+    with:
+      command: pnpm generate:posts && git diff --exit-code -- posts feed.xml sitemap.xml
+      package-manager: pnpm
+
   unit:
     name: Unit tests (Vitest)
     uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1

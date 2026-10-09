@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker | Matthew Anderson</title>
+    <meta name="description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
+    <meta name="author" content="Matthew Anderson" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://andernet.dev/posts/how-this-site-works/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+    <meta property="og:url" content="https://andernet.dev/posts/how-this-site-works/" />
+    <meta property="og:title" content="How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker" />
+    <meta property="og:description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
+    <meta property="og:image" content="https://andernet.dev/og/default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="article:published_time" content="2026-07-12" />
+    <meta property="article:author" content="Matthew Anderson" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="WebAssembly" />
+    <meta property="article:tag" content="Cloudflare Workers" />
+    <meta property="article:tag" content="CSS" />
+    <meta property="article:tag" content="Architecture" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker" />
+    <meta name="twitter:description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
+
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker",
+  "description": "A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts.",
+  "datePublished": "2026-07-12",
+  "dateModified": "2026-07-12",
+  "url": "https://andernet.dev/posts/how-this-site-works/",
+  "mainEntityOfPage": "https://andernet.dev/posts/how-this-site-works/",
+  "image": "https://andernet.dev/og/default.png",
+  "keywords": "JavaScript, WebAssembly, Cloudflare Workers, CSS, Architecture",
+  "inLanguage": "en-US",
+  "author": {
+    "@type": "Person",
+    "name": "Matthew Anderson",
+    "url": "https://andernet.dev"
+  },
+  "publisher": {
+    "@id": "https://andernet.dev/#person"
+  }
+}
+    </script>
+  </head>
+  <body>
+    <script>
+      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem('theme');
+        } catch (e) {}
+        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.body.classList.add('dark-theme');
+        }
+      })();
+    </script>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="post-nav">
+      <div class="post-nav-inner">
+        <a href="/" class="nav-logo">@and3rn3t</a>
+        <div class="post-nav-actions">
+          <a href="/#writing" class="post-nav-link">All posts</a>
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#moon"></use></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="post-page">
+      <div class="container">
+        <div class="blog-article-inner">
+          <a href="/#writing" class="blog-back-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-left"></use></svg> Back to writing</a>
+          <article class="blog-article-body">
+            <header class="blog-article-header">
+              <div class="blog-card-meta">
+                <time datetime="2026-07-12">July 12, 2026</time>
+                <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 7 min read</span>
+              </div>
+              <h1 class="blog-article-title">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</h1>
+              <div class="blog-card-tags"><span class="blog-tag">JavaScript</span><span class="blog-tag">WebAssembly</span><span class="blog-tag">Cloudflare Workers</span><span class="blog-tag">CSS</span><span class="blog-tag">Architecture</span></div>
+            </header>
+            <div class="blog-article-content"><p>This portfolio looks like a typical modern web app, but there is no framework underneath — no React, no Vue, no build-time magic required to run it. The production site is plain ES modules served straight from GitHub Pages. This post walks through the architecture and the reasoning behind it.</p>
+
+<h3>Vanilla ES modules, loaded in phases</h3>
+<p>The entry point, <code>main.js</code>, orchestrates a four-phase startup: theme and mobile detection first (to prevent flash and layout shift), then navigation and UI, then content, then deferred extras like analytics. Everything beyond the critical path is a dynamic <code>import()</code>, so the first paint only pays for what it needs. There are about 25 modules — projects, GitHub stats, a Cmd-K command palette, a guestbook — and each one lazy-loads independently.</p>
+
+<h3>A WebAssembly particle field in the hero</h3>
+<p>The animated background behind the hero headline is a particle flow-field simulation written in AssemblyScript and compiled to WebAssembly. A capability check decides at runtime what you get: capable devices run the WASM simulation, mid-tier devices get a WebGL mesh gradient, and everything else falls back to a static CSS gradient. If you have <code>prefers-reduced-motion</code> enabled, the animation never starts at all.</p>
+
+<h3>One stylesheet, driven by design tokens</h3>
+<p>All styling lives in a single <code>styles.css</code> built on CSS custom properties — a full token system for color, typography, spacing, radii, elevation, and easing. Dark mode is a class on <code>body</code> that redefines the tokens; every component inherits the right values for free. Newer CSS features like scroll-driven animations (<code>animation-timeline: view()</code>) are layered in behind <code>@supports</code>, so older browsers simply render the page statically.</p>
+
+<h3>A Cloudflare Worker for the dynamic bits</h3>
+<p>GitHub Pages is static, so anything dynamic lives in a small Cloudflare Worker: Open Graph card generation, a KV-backed view counter, a Turnstile-protected guestbook, and a cached feed of my latest GitHub activity that powers the “currently coding” line on the About section. The share cards you see when this site is linked on social platforms are rendered as SVG by the Worker and rasterized to PNG in CI, because most social scrapers refuse SVG images.</p>
+
+<h3>Data that updates itself</h3>
+<p>A GitHub Actions workflow runs daily: it pulls my repository list, contribution calendar, and language statistics from the GitHub API, writes them to a JSON file in the repo, regenerates the OG images, and commits the result. The projects grid merges that live data with curated case-study metadata, so stars, languages, and last-pushed dates are never stale.</p>
+
+<h3>Kept honest by CI</h3>
+<p>Every change runs through ESLint, Prettier, Vitest unit tests, and Playwright end-to-end tests including an axe-core accessibility audit. Lighthouse CI enforces budgets — accessibility is a hard gate, and color-contrast failures block the build. The site is also an installable PWA with a service worker and a full offline page.</p>
+
+<p>Could a framework do all this? Absolutely. But for a site this size, the browser platform alone turned out to be plenty — and every byte shipped is a byte I can explain.</p></div>
+          </article>
+          <nav class="post-pager" aria-label="More posts">
+          
+          <a class="post-pager-link post-pager-next" href="/posts/lidar-gait-analysis-iphone/" rel="next">
+            <span class="post-pager-label">Older post</span>
+            <span class="post-pager-title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</span>
+          </a>
+          </nav>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Matthew Anderson · <a href="/">andernet.dev</a></p>
+      </div>
+    </footer>
+
+    <script type="module" src="/modules/post-page.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf"}'
+    ></script>
+  </body>
+</html>

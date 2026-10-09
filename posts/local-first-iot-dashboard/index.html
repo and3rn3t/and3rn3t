@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Building a Local-First IoT Dashboard Without the Cloud | Matthew Anderson</title>
+    <meta name="description" content="Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down." />
+    <meta name="author" content="Matthew Anderson" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://andernet.dev/posts/local-first-iot-dashboard/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+    <meta property="og:url" content="https://andernet.dev/posts/local-first-iot-dashboard/" />
+    <meta property="og:title" content="Building a Local-First IoT Dashboard Without the Cloud" />
+    <meta property="og:description" content="Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down." />
+    <meta property="og:image" content="https://andernet.dev/og/default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="article:published_time" content="2026-04-03" />
+    <meta property="article:author" content="Matthew Anderson" />
+    <meta property="article:tag" content="IoT" />
+    <meta property="article:tag" content="Home Automation" />
+    <meta property="article:tag" content="TypeScript" />
+    <meta property="article:tag" content="MQTT" />
+    <meta property="article:tag" content="Self-Hosted" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Building a Local-First IoT Dashboard Without the Cloud" />
+    <meta name="twitter:description" content="Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down." />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
+
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Building a Local-First IoT Dashboard Without the Cloud",
+  "description": "Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down.",
+  "datePublished": "2026-04-03",
+  "dateModified": "2026-04-03",
+  "url": "https://andernet.dev/posts/local-first-iot-dashboard/",
+  "mainEntityOfPage": "https://andernet.dev/posts/local-first-iot-dashboard/",
+  "image": "https://andernet.dev/og/default.png",
+  "keywords": "IoT, Home Automation, TypeScript, MQTT, Self-Hosted",
+  "inLanguage": "en-US",
+  "author": {
+    "@type": "Person",
+    "name": "Matthew Anderson",
+    "url": "https://andernet.dev"
+  },
+  "publisher": {
+    "@id": "https://andernet.dev/#person"
+  }
+}
+    </script>
+  </head>
+  <body>
+    <script>
+      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem('theme');
+        } catch (e) {}
+        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.body.classList.add('dark-theme');
+        }
+      })();
+    </script>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="post-nav">
+      <div class="post-nav-inner">
+        <a href="/" class="nav-logo">@and3rn3t</a>
+        <div class="post-nav-actions">
+          <a href="/#writing" class="post-nav-link">All posts</a>
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#moon"></use></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="post-page">
+      <div class="container">
+        <div class="blog-article-inner">
+          <a href="/#writing" class="blog-back-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-left"></use></svg> Back to writing</a>
+          <article class="blog-article-body">
+            <header class="blog-article-header">
+              <div class="blog-card-meta">
+                <time datetime="2026-04-03">April 3, 2026</time>
+                <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 5 min read</span>
+              </div>
+              <h1 class="blog-article-title">Building a Local-First IoT Dashboard Without the Cloud</h1>
+              <div class="blog-card-tags"><span class="blog-tag">IoT</span><span class="blog-tag">Home Automation</span><span class="blog-tag">TypeScript</span><span class="blog-tag">MQTT</span><span class="blog-tag">Self-Hosted</span></div>
+            </header>
+            <div class="blog-article-content"><p>Most smart home platforms are cloud-dependent by design. Your light switch sends a packet to a server in Virginia before it turns on the bulb two feet away. Latency aside, it means your home automation goes down when your ISP does, and your usage data lives on someone else's infrastructure.</p><p>HomeHub started as a frustration project after my Wemo switches became unresponsive during a 30-minute outage. The goal was a local-first dashboard where the only hard dependency is the local network.</p><h3>The stack</h3><p>MQTT is the backbone — it's lightweight, supports publish/subscribe, and has mature client libraries in every language. <a href='https://mosquitto.org'>Eclipse Mosquitto</a> runs in a Docker container on a Raspberry Pi 4. Devices that don't speak MQTT natively get a thin bridge adapter (usually a small Python script).</p><p>The dashboard itself is a TypeScript app served locally by the Pi. WebSockets keep state in sync — the MQTT broker broadcasts state changes to the web client via a small Node.js relay. The whole thing works on a phone browser over Wi-Fi, making it a decent control panel without a dedicated touchscreen.</p><h3>What I learned</h3><p>The hardest part wasn't the code — it was device onboarding. Every vendor has a different local API story. Philips Hue has a great local REST API. Wemo has a SOAP endpoint (yes, SOAP). Some devices only expose local control after you've authenticated with their cloud once.</p><p>For anything new I buy, local API support is now a hard requirement. The <a href='https://www.home-assistant.io/blog/2023/01/26/matter-livestream-blog/'>Matter standard</a> is making this better, though adoption is still patchy.</p><p>The repo is at <a href='https://github.com/and3rn3t/homehub'>github.com/and3rn3t/homehub</a>. It's not packaged as a general-purpose tool — it's specific to my setup — but the architecture might be useful if you're solving a similar problem.</p></div>
+          </article>
+          <nav class="post-pager" aria-label="More posts">
+          <a class="post-pager-link post-pager-prev" href="/posts/lidar-gait-analysis-iphone/" rel="prev">
+            <span class="post-pager-label">Newer post</span>
+            <span class="post-pager-title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</span>
+          </a>
+          
+          </nav>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Matthew Anderson · <a href="/">andernet.dev</a></p>
+      </div>
+    </footer>
+
+    <script type="module" src="/modules/post-page.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf"}'
+    ></script>
+  </body>
+</html>

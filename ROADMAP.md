@@ -76,6 +76,17 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
 | 7.5 | Guestbook into Contact tabs; single light/dark toggle — #114                  | ✅ 2026-10-06 |
 | 7.6 | Copy pass: de-duplicate hero/About/intros; correct "How This Site Works" post | ✅ 2026-10-06 |
 
+## Phase 8 — UX pass
+
+| #   | Item                                                                                                          | Status        |
+| --- | ------------------------------------------------------------------------------------------------------------- | ------------- |
+| 8.1 | Service worker serves fresh code (SWR/network-first, deploy-stamped cache); deep links no longer throw — #128 | ✅ 2026-10-09 |
+| 8.2 | First paint: no opacity gate, Inter subset, Font Awesome → SVG sprite, one data fetch — #130                  | ✅ 2026-10-09 |
+| 8.3 | Remove analytics/performance/mobile modules; one scroll owner; scroll-spy fix; `<main>` — #131                | ✅ 2026-10-09 |
+| 8.4 | Mobile polish: navbar theme toggle, contact form, card copy, contrast — #132                                  | ✅ 2026-10-09 |
+| 8.5 | Static post pages (`/posts/<slug>/`), feed and sitemap generated from `posts-data.json`                       | ✅ 2026-10-09 |
+| 8.6 | Project screenshots in cards/case studies; View Transitions for modal and post navigation                     | ⬜            |
+
 ## Decision Log
 
 - **2026-06-13** — Static-first: prefer extending `update-github-data.yml` over a Worker
@@ -173,3 +184,14 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   removed skill levels. The intermittent axe failure was traced to labelled `<div>`s without a
   role: `#blog-posts` is empty until the posts load, and axe flags `aria-prohibited-attr` on it.
   Those containers now have roles, and project cards skip their fade under reduced motion.
+- **2026-10-09** — UX pass (Phase 8), from a code audit plus a Playwright probe of the live
+  site. Wins came from under the surface: the service worker served JS/CSS/JSON cache-first
+  with a hand-bumped version (returning visitors saw stale code), `#post/…` and `#project/…`
+  deep links threw in `navigation.js`, 490 KB of fonts loaded for 40 icons, and ~2,350 lines of
+  analytics/performance/mobile code did nothing visible. Decisions: posts become real pages
+  at `posts/<slug>/index.html` (works on GitHub Pages, python http.server and Vite alike),
+  generated and committed, with CI failing if `pnpm generate:posts` leaves a diff; Cloudflare
+  Web Analytics stays as the only analytics. The audit wrongly called `.stat-card` dead (the
+  About stats grid renders it) and missed that spacing tokens shrink on mobile
+  (`--space-10` is 32px there), so fixed-size controls use rem. Post pages reuse the default OG
+  card; per-post cards would need the Rust rasterizer work (6.5).
