@@ -42,6 +42,7 @@ jobs:
             *.pdf
             icons
             modules
+            posts
             fonts
             CNAME
           sparse-checkout-cone-mode: false

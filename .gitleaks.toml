@@ -1,0 +1,22 @@
+# Gitleaks configuration.
+#
+# The default rules are kept in full; the one allowlist below records a value that is
+# public by design. It is a per-rule allowlist (nested under [[rules]] with a bare `id`,
+# like the one in the minecraft repo) because a top-level [[allowlists]] block does not
+# apply to findings from the extended default ruleset in gitleaks 8.24.3, the version
+# pinned in the shared reusable-gitleaks.yml workflow.
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+[rules.allowlist]
+regexTarget = "match"
+regexes = [
+  # Cloudflare Web Analytics site token. It identifies the site to the beacon script and is
+  # served in the page source of every visit (index.html and the generated posts/*), so it
+  # cannot be kept secret. Listed by exact value, so any other token is still reported.
+  '''883fb1c6a2c744d4b745475d92f474bf''',
+]

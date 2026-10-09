@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>On-Device Gait Analysis with iPhone LiDAR and HealthKit | Matthew Anderson</title>
+    <meta name="description" content="How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary." />
+    <meta name="author" content="Matthew Anderson" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://andernet.dev/posts/lidar-gait-analysis-iphone/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+    <meta property="og:url" content="https://andernet.dev/posts/lidar-gait-analysis-iphone/" />
+    <meta property="og:title" content="On-Device Gait Analysis with iPhone LiDAR and HealthKit" />
+    <meta property="og:description" content="How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary." />
+    <meta property="og:image" content="https://andernet.dev/og/default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="article:published_time" content="2026-05-12" />
+    <meta property="article:author" content="Matthew Anderson" />
+    <meta property="article:tag" content="iOS" />
+    <meta property="article:tag" content="Swift" />
+    <meta property="article:tag" content="HealthKit" />
+    <meta property="article:tag" content="LiDAR" />
+    <meta property="article:tag" content="Health Tech" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="On-Device Gait Analysis with iPhone LiDAR and HealthKit" />
+    <meta name="twitter:description" content="How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary." />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
+
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "On-Device Gait Analysis with iPhone LiDAR and HealthKit",
+  "description": "How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.",
+  "datePublished": "2026-05-12",
+  "dateModified": "2026-05-12",
+  "url": "https://andernet.dev/posts/lidar-gait-analysis-iphone/",
+  "mainEntityOfPage": "https://andernet.dev/posts/lidar-gait-analysis-iphone/",
+  "image": "https://andernet.dev/og/default.png",
+  "keywords": "iOS, Swift, HealthKit, LiDAR, Health Tech",
+  "inLanguage": "en-US",
+  "author": {
+    "@type": "Person",
+    "name": "Matthew Anderson",
+    "url": "https://andernet.dev"
+  },
+  "publisher": {
+    "@id": "https://andernet.dev/#person"
+  }
+}
+    </script>
+  </head>
+  <body>
+    <script>
+      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem('theme');
+        } catch (e) {}
+        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.body.classList.add('dark-theme');
+        }
+      })();
+    </script>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="post-nav">
+      <div class="post-nav-inner">
+        <a href="/" class="nav-logo">@and3rn3t</a>
+        <div class="post-nav-actions">
+          <a href="/#writing" class="post-nav-link">All posts</a>
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#moon"></use></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="post-page">
+      <div class="container">
+        <div class="blog-article-inner">
+          <a href="/#writing" class="blog-back-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-left"></use></svg> Back to writing</a>
+          <article class="blog-article-body">
+            <header class="blog-article-header">
+              <div class="blog-card-meta">
+                <time datetime="2026-05-12">May 12, 2026</time>
+                <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 6 min read</span>
+              </div>
+              <h1 class="blog-article-title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</h1>
+              <div class="blog-card-tags"><span class="blog-tag">iOS</span><span class="blog-tag">Swift</span><span class="blog-tag">HealthKit</span><span class="blog-tag">LiDAR</span><span class="blog-tag">Health Tech</span></div>
+            </header>
+            <div class="blog-article-content"><p>Most gait analysis systems require dedicated hardware: pressure-sensitive mats, instrumented shoes, or clinical-grade motion capture rigs. The iPhone 12 Pro and later ship with a LiDAR scanner that can produce a dense depth map at 30 fps — more than enough to track the geometry of a walking stride. This post covers how I built a system that uses nothing but the phone itself to flag gait irregularities in real time.</p><h3>The sensor pipeline</h3><p>ARKit gives you per-frame depth maps through <code>ARDepthData</code>. The key insight is that you don't need the full reconstruction — just a cropped region of interest at foot height. I extract a ~200×100 pixel slice from the bottom third of each depth frame and track the lowest-point trajectory as a proxy for step timing.</p><p>Step events are derived by looking for local minima in the depth signal over a rolling 2-second window. From that you can compute cadence, stride symmetry (left vs. right timing), and coefficient of variation — a standard clinical measure of gait regularity.</p><h3>Getting the data to a web dashboard</h3><p>The companion <a href='https://github.com/and3rn3t/HealthKitBridge'>HealthKitBridge</a> iOS app runs a local HTTP server on the device (using Swift's Network framework). The TypeScript web dashboard at <a href='https://health.andernet.dev'>health.andernet.dev</a> polls this endpoint over the local network — no internet required, no data leaves the room.</p><p>HealthKit is used for ground-truth step counts (the onboard pedometer is extremely accurate) and to pull longer-term trends: resting heart rate, VO₂ max estimates, and walking speed history Apple already captures in the background.</p><h3>What it can (and can't) detect</h3><p>The system reliably catches asymmetric stride timing — a common early indicator of hip or knee issues — and large cadence deviations. It's less reliable on carpeted surfaces (the LiDAR reading is noisier) and doesn't handle stairs or slopes well without an explicit classifier. Clinical-grade it is not, but as a personal tracking tool it's surprisingly useful.</p><p>Source code for both the iOS bridge and the TypeScript dashboard are on GitHub if you want to dig in.</p></div>
+          </article>
+          <nav class="post-pager" aria-label="More posts">
+          <a class="post-pager-link post-pager-prev" href="/posts/how-this-site-works/" rel="prev">
+            <span class="post-pager-label">Newer post</span>
+            <span class="post-pager-title">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</span>
+          </a>
+          <a class="post-pager-link post-pager-next" href="/posts/local-first-iot-dashboard/" rel="next">
+            <span class="post-pager-label">Older post</span>
+            <span class="post-pager-title">Building a Local-First IoT Dashboard Without the Cloud</span>
+          </a>
+          </nav>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Matthew Anderson · <a href="/">andernet.dev</a></p>
+      </div>
+    </footer>
+
+    <script type="module" src="/modules/post-page.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf"}'
+    ></script>
+  </body>
+</html>
