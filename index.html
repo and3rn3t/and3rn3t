@@ -338,7 +338,8 @@
 
     <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
     <style>
-      /* Critical CSS for initial page load */
+      /* Base styles that load before styles.css. Some rules here (e.g. .loading-spinner)
+         are not repeated in styles.css, so don't drop this block wholesale. */
       * {
         margin: 0;
         padding: 0;
@@ -372,8 +373,8 @@
         backdrop-filter: blur(10px);
         z-index: 1000;
       }
-      /* Above-the-fold hero shell — must visually match styles.css so there is
-         no off-brand flash while the full stylesheet loads asynchronously. */
+      /* Above-the-fold hero shell. styles.css is render-blocking and loads after this
+         block, so it wins on any conflict; keep these values in line with it. */
       .hero {
         min-height: 80vh;
         display: flex;
@@ -422,16 +423,6 @@
           transform: rotate(360deg);
         }
       }
-      @keyframes fade-in {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
     </style>
 
     <!-- Time-of-day hero accent: set early to avoid a tint flash -->
@@ -458,25 +449,6 @@
       .animate-on-scroll.animate-in {
         opacity: 1;
         transform: translateY(0);
-      }
-
-      .fade-in-up {
-        animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .stagger-animation {
-        animation-delay: var(--animation-delay, 0ms);
       }
     </style>
   </head>
