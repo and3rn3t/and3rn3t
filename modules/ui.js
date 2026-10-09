@@ -3,6 +3,7 @@
  * Handles all DOM manipulation, animations, and UI components
  */
 
+import { motion } from './capabilities.js';
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { icon } from './utils/icon.js';
@@ -96,6 +97,8 @@ export class UIManager {
         if (!notification) {
             notification = document.createElement('div');
             notification.id = 'app-notification';
+            notification.setAttribute('role', 'status');
+            notification.setAttribute('aria-live', 'polite');
             notification.style.cssText = `
                 position: fixed;
                 top: 20px;
@@ -122,11 +125,7 @@ export class UIManager {
 
         notification.style.background = colors[type] || colors.info;
         notification.style.color = 'white';
-        notification.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span>${message}</span>
-            </div>
-        `;
+        notification.textContent = message;
 
         setTimeout(() => {
             notification.style.opacity = '1';
@@ -209,16 +208,13 @@ export class UIManager {
     // ========================================
 
     initParallax() {
+        const hero = document.querySelector('.hero');
+        if (!hero) return;
         globalThis.addEventListener(
             'scroll',
             () => {
-                const scrolled = globalThis.pageYOffset;
-                const parallaxElements = document.querySelectorAll('.hero');
-
-                for (const element of parallaxElements) {
-                    const speed = 0.5;
-                    element.style.backgroundPositionY = `${scrolled * speed}px`;
-                }
+                if (motion.reduced) return;
+                hero.style.backgroundPositionY = `${globalThis.scrollY * 0.5}px`;
             },
             { passive: true }
         );

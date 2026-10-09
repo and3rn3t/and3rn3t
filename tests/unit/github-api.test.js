@@ -65,10 +65,65 @@ test('executeWithRetry rejects immediately on 404 errors (no retry)', async () =
     await expect(
         api.executeWithRetry(() => {
             calls++;
-            return Promise.reject(new Error('404 not found'));
+            return Promise.reject(Object.assign(new Error('Resource not found'), { status: 404 }));
         }, 3)
-    ).rejects.toThrow('404');
+    ).rejects.toThrow('Resource not found');
     expect(calls).toBe(1); // bailed after first attempt
+});
+
+// ── fetchGitHubData ──────────────────────────────────────────────────────────
+
+const response = (status, headers = {}) => ({
+    ok: status >= 200 && status < 300,
+    status,
+    statusText: String(status),
+    headers: new Headers(headers),
+    json: () => Promise.resolve({ status }),
+});
+
+test('fetchGitHubData does not retry a real 404 response', async () => {
+    const api = new GitHubAPIManager();
+    api.baseDelay = 0;
+    globalThis.fetch = vi.fn().mockResolvedValue(response(404));
+    await expect(api.fetchGitHubData('/users/nobody')).rejects.toMatchObject({ status: 404 });
+    expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+});
+
+test('fetchGitHubData does not retry when rate limited', async () => {
+    const api = new GitHubAPIManager();
+    api.baseDelay = 0;
+    globalThis.fetch = vi
+        .fn()
+        .mockResolvedValue(
+            response(403, { 'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset': '0' })
+        );
+    await expect(api.fetchGitHubData('/users/x')).rejects.toThrow('rate limit exceeded');
+    expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+});
+
+test('fetchGitHubData retries a 5xx and returns the later success', async () => {
+    const api = new GitHubAPIManager();
+    api.baseDelay = 0;
+    globalThis.fetch = vi
+        .fn()
+        .mockResolvedValueOnce(response(502))
+        .mockResolvedValue(response(200));
+    await expect(api.fetchGitHubData('/users/x')).resolves.toEqual({ status: 200 });
+    expect(globalThis.fetch).toHaveBeenCalledTimes(2);
+});
+
+// ── getRepositories ──────────────────────────────────────────────────────────
+
+test('getRepositories sorts a copy, leaving the shared cached array untouched', async () => {
+    const api = new GitHubAPIManager();
+    const repositories = [
+        { name: 'a', stargazers_count: 1 },
+        { name: 'b', stargazers_count: 5 },
+    ];
+    api.cachedDataPromise = Promise.resolve({ repositories });
+    const sorted = await api.getRepositories('stars');
+    expect(sorted.map(r => r.name)).toEqual(['b', 'a']);
+    expect(repositories.map(r => r.name)).toEqual(['a', 'b']);
 });
 
 test('executeWithRetry rejects after exhausting all retries', async () => {

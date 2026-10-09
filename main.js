@@ -7,7 +7,7 @@
  */
 
 // Import critical modules only - others loaded dynamically
-import { DEBUG_MODE, debug } from './modules/debug.js';
+import { debug } from './modules/debug.js';
 import { errorHandler } from './modules/error-handler.js';
 import { initThemeManager } from './modules/theme.js';
 import { navigationManager } from './modules/navigation.js';
@@ -368,14 +368,6 @@ function setupGlobalEvents() {
         debug.error('[App] Unhandled rejection:', event.reason);
     });
 
-    // Handle theme changes - reapply hero background
-    document.addEventListener('themeChanged', () => {
-        const { ui } = appState.managers;
-        if (ui && ui.forceHeroBackground) {
-            ui.forceHeroBackground();
-        }
-    });
-
     // Handle online/offline
     globalThis.addEventListener('online', () => {
         debug.log('[App] Connection restored');
@@ -436,59 +428,7 @@ function handleInitError(error) {
     });
 }
 
-/**
- * Expose public API for external access
- */
-globalThis.PortfolioApp = {
-    version: APP_CONFIG.version,
-    debug: DEBUG_MODE,
-
-    // Manager access (lazy-loaded)
-    get theme() {
-        return appState.managers.theme;
-    },
-    get navigation() {
-        return appState.managers.navigation;
-    },
-    get projects() {
-        return appState.managers.projects;
-    },
-    get ui() {
-        return appState.managers.ui;
-    },
-    get errors() {
-        return errorHandler;
-    },
-
-    // Methods
-    isReady() {
-        return appState.isInitialized;
-    },
-
-    async refresh() {
-        debug.log('[App] Refreshing...');
-        const { ui } = appState.managers;
-        const { projects } = appState.managers;
-
-        if (ui) ui.showLoadingProgress('refresh');
-        if (projects) await projects.refresh();
-        if (ui) {
-            await ui.loadGitHubStats();
-            ui.hideLoadingProgress('refresh');
-            ui.showNotification('Data refreshed', 'success', 3000);
-        }
-    },
-
-    getStats() {
-        return {
-            version: APP_CONFIG.version,
-            initialized: appState.isInitialized,
-            errors: errorHandler.getStats(),
-        };
-    },
-};
-
-// Polyfill for requestIdleCallback
+// Polyfill for requestIdleCallback (Safari)
 globalThis.requestIdleCallback =
     globalThis.requestIdleCallback ||
     function (cb) {
