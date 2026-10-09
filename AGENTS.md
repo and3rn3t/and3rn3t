@@ -14,7 +14,8 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 ```bash
 pnpm install
 pnpm dev             # vite dev server (production ships raw source, there is no build)
-pnpm validate        # lint + format:check + test:unit + check:refs ← done-gate
+pnpm validate        # lint + lint:css + format:check + test:unit + check:refs ← done-gate
+pnpm lint:css        # stylelint: spacing/type must use design-system tokens
 pnpm check:refs      # every file the site references exists and is in the pages.yml publish allowlist
 pnpm test            # unit + e2e
 pnpm worker:dev      # wrangler dev worker/index.js
