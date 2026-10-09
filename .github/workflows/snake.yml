@@ -2,7 +2,7 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    # Daily at 5 AM UTC, after the GitHub data/metrics update
+    # Daily at 5 AM UTC, after the GitHub data update
     - cron: '0 5 * * *'
   workflow_dispatch:
 
