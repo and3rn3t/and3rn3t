@@ -82,3 +82,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+
+  # Audit the live site once the new build is up. Push deploys only: the daily
+  # data-refresh dispatch changes JSON, not anything Lighthouse scores.
+  lighthouse:
+    if: github.event_name == 'push'
+    needs: deploy
+    permissions:
+      contents: read
+    uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1
+    with:
+      url: https://andernet.dev
+      config-path: .lighthouserc.cjs
