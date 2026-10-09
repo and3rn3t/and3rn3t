@@ -1,4 +1,4 @@
-name: Update GitHub Data & Metrics
+name: Update GitHub Data
 
 on:
   schedule:
@@ -198,10 +198,48 @@ jobs:
           )
           print(f'  {len(language_bytes)} languages aggregated')
 
+          # The site only reads a handful of fields, and github-data.json is fetched on
+          # every visit, so keep just those. (The README renderer below still sees the
+          # full repo objects.) If a module starts reading another field, add it here.
+          REPO_FIELDS = (
+              'id', 'name', 'full_name', 'description', 'html_url', 'homepage', 'language',
+              'topics', 'stargazers_count', 'forks_count', 'open_issues_count',
+              'pushed_at', 'updated_at', 'created_at', 'fork', 'archived',
+          )
+          USER_FIELDS = ('login', 'name', 'html_url', 'public_repos', 'followers', 'created_at')
+
+          def pick(obj, fields):
+              return {k: obj[k] for k in fields if k in obj}
+
+          def slim_event(ev):
+              payload = ev.get('payload') or {}
+              pr = payload.get('pull_request') or {}
+              slim_payload = {}
+              if payload.get('commits'):
+                  slim_payload['commits'] = [pick(c, ('sha', 'message')) for c in payload['commits']]
+              if payload.get('ref') is not None:
+                  slim_payload['ref'] = payload['ref']
+              if payload.get('ref_type'):
+                  slim_payload['ref_type'] = payload['ref_type']
+              if payload.get('release'):
+                  slim_payload['release'] = pick(payload['release'], ('tag_name',))
+              if pr:
+                  slim_payload['pull_request'] = {
+                      'title': pr.get('title'),
+                      'head': pick(pr.get('head') or {}, ('ref',)),
+                  }
+              return {
+                  'id': ev.get('id'),
+                  'type': ev.get('type'),
+                  'repo': pick(ev.get('repo') or {}, ('name',)),
+                  'payload': slim_payload,
+                  'created_at': ev.get('created_at'),
+              }
+
           output = {
-              'user': user,
-              'repositories': repos,
-              'events': events,
+              'user': pick(user, USER_FIELDS),
+              'repositories': [pick(r, REPO_FIELDS) for r in repos],
+              'events': [slim_event(ev) for ev in events],
               'selfStarredRepoNames': self_starred,
               'contributions': contributions,
               'languageBytes': language_bytes,
@@ -274,22 +312,59 @@ jobs:
               print('Featured Projects markers not found in README.md — skipping')
           PYEOF
 
+      # The OG cards only depend on a few fields of the data (repo names and star/fork
+      # counts, language bytes, contribution total) plus the generator and its inputs.
+      # Most days none of that changes, so skip the Chromium install and rendering.
+      # The hash is committed so the next run can compare against it.
+      - name: Check whether OG images need regenerating
+        id: og
+        run: |
+          HASH=$({
+            # Hash what the cards render, not the raw data: the API returns repos in
+            # push order (so sort them), and language bytes grow with every commit while
+            # the card only shows the top 5 as a rounded percentage and bar width.
+            jq -S '{
+              repos: ([.repositories[] | {name, stargazers_count, forks_count}] | sort_by(.name)),
+              languages: (
+                (.languageBytes | map(.) | add) as $total
+                | .languageBytes | to_entries | sort_by(-.value) | .[0:5]
+                | map({name: .key, pct: (100 * .value / $total | round), bar: (480 * .value / $total | round)})
+              ),
+              contributions: .contributions.total
+            }' github-data.json
+            cat projects-data.json scripts/generate-og.mjs worker/og.js \
+                modules/utils/html.js fonts/inter-variable.woff2
+          } | sha256sum | cut -d' ' -f1)
+          if [ "$HASH" = "$(cat .github/og-inputs.sha256 2>/dev/null)" ]; then
+            echo "OG inputs unchanged"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "OG inputs changed ($HASH)"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "$HASH" > .github/og-inputs.sha256
+          fi
+
       - name: Setup pnpm
+        if: steps.og.outputs.changed == 'true'
         uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
 
       - name: Setup Node
+        if: steps.og.outputs.changed == 'true'
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
           cache: pnpm
 
       - name: Install dependencies
+        if: steps.og.outputs.changed == 'true'
         run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Chromium
+        if: steps.og.outputs.changed == 'true'
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Regenerate OG images
+        if: steps.og.outputs.changed == 'true'
         run: pnpm generate:og
 
       - name: Commit GitHub data via PR
@@ -299,7 +374,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add github-data.json README.md og/
+          git add github-data.json README.md og/ .github/og-inputs.sha256
           if git diff --cached --quiet; then
             echo "No changes to GitHub data"
             exit 0
@@ -322,61 +397,12 @@ jobs:
           fi
           gh pr merge "$PR" --merge --delete-branch
 
-  update-metrics:
-    runs-on: ubuntu-latest
-    needs: update-github-data
-    permissions:
-      contents: write
-      pull-requests: write
-    steps:
-      - uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # latest
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-          # main is protected: open a PR from a metrics-run-* branch and merge it
-          output_action: pull-request-merge
-          committer_message: 'chore: update github-metrics.svg [skip ci]'
-
-          # Options
-          user: and3rn3t
-          template: classic
-          base: header, activity, community, repositories, metadata
-          config_timezone: America/New_York
-
-          # Fail the run instead of rendering error boxes into the committed SVG.
-          plugins_errors_fatal: yes
-
-          # The activity and habits plugins are intentionally off. They read commit
-          # lists from PushEvent payloads, which GitHub's events API no longer returns,
-          # so they crash on every run (lowlighter/metrics is unmaintained since 2023).
-
-          # Enable plugins
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-
-          plugin_languages: yes
-          plugin_languages_analysis_timeout: 15
-          plugin_languages_categories: markup, programming
-          plugin_languages_colors: github
-          plugin_languages_limit: 8
-          plugin_languages_recent_categories: markup, programming
-          plugin_languages_recent_days: 14
-          plugin_languages_recent_load: 300
-          plugin_languages_sections: most-used
-          plugin_languages_threshold: 0%
-
-          plugin_notable: yes
-          plugin_notable_from: organization
-
-          plugin_lines: yes
-
   # Merges made with GITHUB_TOKEN don't fire push events, so pages.yml never runs
   # for these updates on its own. Dispatch it explicitly (workflow_dispatch is
-  # exempt from that rule) so the refreshed data and SVG actually go live.
+  # exempt from that rule) so the refreshed data actually goes live.
   deploy-pages:
     runs-on: ubuntu-latest
-    needs: [update-github-data, update-metrics]
-    if: ${{ !cancelled() && needs.update-github-data.result == 'success' }}
+    needs: update-github-data
     permissions:
       actions: write
     steps:

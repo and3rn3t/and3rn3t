@@ -593,6 +593,7 @@ body {
   width: 1px;
   height: 1px;
   padding: 0;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- optical nudge, not on the spacing scale */
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
@@ -735,7 +736,7 @@ body {
 .hero-title {
   font-size: clamp(2.75rem, 6.5vw, var(--font-size-7xl));
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--letter-spacing-tight);
   margin-bottom: var(--space-4);
   line-height: var(--line-height-tight);
   color: var(--text-white);
@@ -765,6 +766,7 @@ body {
   display: inline-block;
   width: 2px;
   height: 1em;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- optical nudge, not on the spacing scale */
   margin-left: 2px;
   background: #4ade80;
   vertical-align: text-bottom;
@@ -1453,9 +1455,10 @@ section {
 
 .timeline-group-heading {
   font-size: var(--font-size-lg);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
   text-transform: uppercase;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- no matching letter-spacing token; keeps the current tracking */
   letter-spacing: 0.08em;
   margin-bottom: var(--space-6);
   display: flex;
@@ -1465,6 +1468,7 @@ section {
 
 .timeline {
   position: relative;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- off-scale value with no matching token; swapping would shift the layout */
   padding-left: 1.75rem;
 }
 
@@ -1535,14 +1539,14 @@ body.dark-theme .timeline::before {
 
 .timeline-role {
   font-size: var(--font-size-base);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   margin: 0;
 }
 
 .timeline-current-badge {
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
   color: var(--accent-text);
@@ -1563,7 +1567,7 @@ body.dark-theme .timeline::before {
 .timeline-company-link {
   color: var(--accent-text);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .timeline-company-link:hover {
@@ -1668,12 +1672,13 @@ body.dark-theme .timeline::before {
 .blog-reading-time {
   display: flex;
   align-items: center;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- off-scale value with no matching token; swapping would shift the layout */
   gap: 0.3rem;
 }
 
 .blog-card-title {
   font-size: var(--font-size-xl);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   line-height: var(--line-height-snug);
   margin: 0;
@@ -1700,7 +1705,7 @@ body.dark-theme .timeline::before {
   background: color-mix(in srgb, var(--primary-color) 10%, transparent);
   color: var(--accent-text-strong); /* green-800: AA on tinted bg */
   border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .blog-read-more {
@@ -1709,7 +1714,7 @@ body.dark-theme .timeline::before {
   gap: var(--space-2);
   color: var(--accent-text);
   font-size: var(--font-size-sm);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   text-decoration: none;
   margin-top: auto;
 }
@@ -1746,7 +1751,7 @@ body.dark-theme .timeline::before {
 
 .blog-article-title {
   font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--text-primary);
   line-height: var(--line-height-snug);
   margin: var(--space-3) 0 var(--space-4);
@@ -1760,7 +1765,7 @@ body.dark-theme .timeline::before {
 
 .blog-article-content h3 {
   font-size: var(--font-size-xl);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   margin: var(--space-8) 0 var(--space-3);
   color: var(--text-primary);
 }
@@ -1777,6 +1782,7 @@ body.dark-theme .timeline::before {
   font-family: ui-monospace, monospace;
   font-size: var(--font-size-sm);
   background: var(--bg-secondary);
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- off-scale value with no matching token; swapping would shift the layout */
   padding: 0.15em 0.4em;
   border-radius: 0.25rem;
 }
@@ -1972,7 +1978,7 @@ body.dark-theme .timeline::before {
 }
 
 .guestbook-name {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
 }
 
@@ -2010,6 +2016,7 @@ body.dark-theme .timeline::before {
 .view-count-widget {
   display: flex;
   align-items: center;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- off-scale value with no matching token; swapping would shift the layout */
   gap: 0.4rem;
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
@@ -2149,6 +2156,7 @@ body.dark-theme .timeline::before {
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   font-size: var(--font-size-sm);
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- no matching letter-spacing token; keeps the current tracking */
   letter-spacing: 0.025em;
   text-transform: uppercase;
   opacity: 0.9;
@@ -2462,6 +2470,7 @@ body.dark-theme .timeline::before {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- no matching letter-spacing token; keeps the current tracking */
   letter-spacing: 0.5px;
 }
 
@@ -2476,6 +2485,7 @@ body.dark-theme .timeline::before {
   border-radius: var(--radius-xl);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- no matching letter-spacing token; keeps the current tracking */
   letter-spacing: 0.5px;
 }
 
@@ -2530,6 +2540,7 @@ body.dark-theme .timeline::before {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- no matching letter-spacing token; keeps the current tracking */
   letter-spacing: 0.5px;
   margin-left: var(--space-1);
 }
@@ -3010,7 +3021,7 @@ details:focus {
 @media (max-width: 768px) {
   .keyboard-help-content {
     padding: var(--space-6);
-    margin: 1rem;
+    margin: var(--space-4);
   }
 
   .shortcut-grid {
@@ -3044,7 +3055,7 @@ details:focus {
   }
 
   .keyboard-help-content {
-    margin: 0.5rem;
+    margin: var(--space-2);
     padding: var(--space-4);
   }
 
@@ -3275,6 +3286,7 @@ body.dark-theme .keyboard-help-close:hover {
 .palette-item-type {
   font-size: var(--font-size-xs);
   text-transform: uppercase;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list -- no matching letter-spacing token; keeps the current tracking */
   letter-spacing: 0.04em;
   color: var(--text-secondary);
   flex-shrink: 0;
@@ -3613,7 +3625,7 @@ body.dark-theme .particle {
   }
 
   .project-card:last-child {
-    margin-right: 20px;
+    margin-right: var(--space-5);
   }
 }
 
@@ -3679,7 +3691,7 @@ body.dark-theme .particle {
   }
 
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
   }
 
   .form-input,
@@ -3988,6 +4000,7 @@ body.dark-theme .particle {
   #home.hero {
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list -- off-scale value with no matching token; swapping would shift the layout */
     padding-top: 60px;
   }
 
