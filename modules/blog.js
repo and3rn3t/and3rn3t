@@ -93,7 +93,7 @@ class BlogManager {
 
         this.#articleEl.innerHTML = `
             <div class="blog-article-inner">
-                <a href="#blog" class="blog-back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to writing</a>
+                <a href="#writing" class="blog-back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to writing</a>
                 <article class="blog-article-body">
                     <header class="blog-article-header">
                         <div class="blog-card-meta">
@@ -109,7 +109,7 @@ class BlogManager {
 
         this.#articleEl.querySelector('.blog-back-link')?.addEventListener('click', e => {
             e.preventDefault();
-            globalThis.history.pushState(null, '', '#blog');
+            globalThis.history.pushState(null, '', '#writing');
             this.#closeArticle();
         });
 
