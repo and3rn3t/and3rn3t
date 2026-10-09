@@ -1,9 +1,11 @@
 // Service Worker for Matthew Anderson's Portfolio
-// Version: 1.6.0
+// BUILD_ID is stamped with the commit SHA by pages.yml at deploy time, so every
+// deploy gets a new cache name and the browser sees a byte-different worker.
+const BUILD_ID = '__BUILD_SHA__';
 
-const CACHE_NAME = 'portfolio-v1.6.0';
-const RUNTIME_CACHE = 'portfolio-runtime-v1.6';
-const API_CACHE = 'portfolio-api-v1.6';
+const CACHE_NAME = `portfolio-${BUILD_ID}`;
+const RUNTIME_CACHE = `portfolio-runtime-${BUILD_ID}`;
+const API_CACHE = `portfolio-api-${BUILD_ID}`;
 
 // Assets to cache immediately on install
 const PRECACHE_ASSETS = [
@@ -30,13 +32,10 @@ const API_ROUTES = [
 
 // Install event - cache critical assets
 self.addEventListener('install', event => {
-    console.log('[Service Worker] Installing...');
-
     event.waitUntil(
         caches
             .open(CACHE_NAME)
             .then(cache => {
-                console.log('[Service Worker] Precaching assets');
                 // Cache individually so one missing asset doesn't abort the whole install
                 return Promise.allSettled(
                     PRECACHE_ASSETS.map(asset =>
@@ -55,8 +54,6 @@ self.addEventListener('install', event => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', event => {
-    console.log('[Service Worker] Activating...');
-
     event.waitUntil(
         caches
             .keys()
@@ -73,7 +70,6 @@ self.addEventListener('activate', event => {
                             );
                         })
                         .map(cacheName => {
-                            console.log('[Service Worker] Deleting old cache:', cacheName);
                             return caches.delete(cacheName);
                         })
                 );
@@ -117,7 +113,19 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Static assets - Cache First strategy
+    // Our own data files and pages change without a code deploy - always try the network
+    if (isFreshContent(request, url)) {
+        event.respondWith(networkFirstStrategy(request, RUNTIME_CACHE));
+        return;
+    }
+
+    // Code: serve instantly from cache, refresh in the background
+    if (isCode(url)) {
+        event.respondWith(staleWhileRevalidateStrategy(request, CACHE_NAME));
+        return;
+    }
+
+    // Immutable-ish binaries (fonts, images, wasm) - Cache First strategy
     if (isStaticAsset(url)) {
         event.respondWith(cacheFirstStrategy(request, CACHE_NAME));
         return;
@@ -136,19 +144,18 @@ function isAPIRequest(url) {
     );
 }
 
+// Pages and JSON data (github-data.json, posts-data.json, ...) must stay fresh
+function isFreshContent(request, url) {
+    return request.mode === 'navigate' || url.pathname.endsWith('.json');
+}
+
+function isCode(url) {
+    return url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+}
+
 // Check if request is for a static asset
 function isStaticAsset(url) {
-    const staticExtensions = [
-        '.css',
-        '.js',
-        '.json',
-        '.png',
-        '.jpg',
-        '.jpeg',
-        '.svg',
-        '.woff',
-        '.woff2',
-    ];
+    const staticExtensions = ['.wasm', '.png', '.jpg', '.jpeg', '.svg', '.woff', '.woff2'];
     return staticExtensions.some(ext => url.pathname.endsWith(ext));
 }
 
@@ -184,8 +191,8 @@ async function networkFirstStrategy(request, cacheName) {
         }
         return networkResponse;
     } catch (_error) {
-        console.log('[Service Worker] Network failed, using cache');
-        const cachedResponse = await cache.match(request);
+        // Fall back to this cache, then to anything precached at install
+        const cachedResponse = (await cache.match(request)) || (await caches.match(request));
 
         if (cachedResponse) {
             return cachedResponse;
@@ -207,8 +214,7 @@ async function staleWhileRevalidateStrategy(request, cacheName) {
             }
             return networkResponse;
         })
-        .catch(error => {
-            console.log('[Service Worker] Network request failed:', error);
+        .catch(() => {
             return null; // Return null instead of undefined
         });
 
@@ -262,59 +268,3 @@ self.addEventListener('message', event => {
         );
     }
 });
-
-// Background sync for form submissions
-self.addEventListener('sync', event => {
-    if (event.tag === 'sync-form-submissions') {
-        event.waitUntil(syncFormSubmissions());
-    }
-});
-
-async function syncFormSubmissions() {
-    // Implement form submission sync logic here
-    console.log('[Service Worker] Syncing form submissions');
-}
-
-// Push notification support (optional)
-self.addEventListener('push', event => {
-    if (!event.data) {
-        return;
-    }
-
-    const data = event.data.json();
-    const title = data.title || 'Portfolio Update';
-    const options = {
-        body: data.body || 'New content available',
-        icon: '/icons/icon-192x192.png',
-        badge: '/icons/badge-72x72.png',
-        vibrate: [200, 100, 200],
-        data: {
-            url: data.url || '/',
-        },
-    };
-
-    event.waitUntil(self.registration.showNotification(title, options));
-});
-
-self.addEventListener('notificationclick', event => {
-    event.notification.close();
-
-    const urlToOpen = event.notification.data.url || '/';
-
-    event.waitUntil(
-        clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windowClients => {
-            // Check if there's already a window open
-            for (const client of windowClients) {
-                if (client.url === urlToOpen && 'focus' in client) {
-                    return client.focus();
-                }
-            }
-            // Open new window if none exists
-            if (clients.openWindow) {
-                return clients.openWindow(urlToOpen);
-            }
-        })
-    );
-});
-
-console.log('[Service Worker] Loaded');
