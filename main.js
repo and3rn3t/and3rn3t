@@ -110,9 +110,6 @@ async function initializeApp() {
         uiManager.hideLoadingProgress('content');
         debug.log('[App] Phase 3: Content loaded');
 
-        // Make body visible (it starts with opacity: 0)
-        document.body.classList.add('loaded');
-
         // Micro-interactions on the freshly-rendered content (count-up, tilt, magnetic).
         try {
             const { initInteractions } = await import('./modules/interactions.js');
@@ -131,43 +128,8 @@ async function initializeApp() {
             debug.warn('[App] Contact tabs skipped:', err);
         }
 
-        // "Currently coding" widget — calls the CF Worker with static fallback.
-        try {
-            const { currentlyWidget } = await import('./modules/currently.js');
-            await currentlyWidget.init('#currently-coding');
-            appState.managers.currently = currentlyWidget;
-        } catch (err) {
-            debug.warn('[App] Currently widget skipped:', err);
-        }
-
-        // Experience / timeline section.
-        try {
-            const { experienceManager } = await import('./modules/experience.js');
-            await experienceManager.init();
-            appState.managers.experience = experienceManager;
-        } catch (err) {
-            debug.warn('[App] Experience module skipped:', err);
-        }
-
-        // Blog / writing section.
-        try {
-            const { blogManager } = await import('./modules/blog.js');
-            await blogManager.init();
-            appState.managers.blog = blogManager;
-        } catch (err) {
-            debug.warn('[App] Blog module skipped:', err);
-        }
-
-        // View counter — calls Worker, updates footer count.
-        try {
-            const { viewCounter } = await import('./modules/views.js');
-            await viewCounter.init();
-            appState.managers.views = viewCounter;
-        } catch (err) {
-            debug.warn('[App] View counter skipped:', err);
-        }
-
-        // Command palette (Cmd/Ctrl-K) — activates the existing search modal.
+        // Command palette (Cmd/Ctrl-K) and keyboard help (?, g h/a/p/c) are purely local,
+        // so wire them before any network-bound widget.
         try {
             const { commandPalette } = await import('./modules/command-palette.js');
             commandPalette.init();
@@ -176,7 +138,6 @@ async function initializeApp() {
             debug.warn('[App] Command palette skipped:', err);
         }
 
-        // Keyboard help panel (?) + go-to navigation (g h/a/p/c).
         try {
             const { keyboardHelp } = await import('./modules/keyboard-help.js');
             keyboardHelp.init();
@@ -184,6 +145,54 @@ async function initializeApp() {
         } catch (err) {
             debug.warn('[App] Keyboard help skipped:', err);
         }
+
+        // Network-bound widgets are independent of each other: run them together so one
+        // slow request (e.g. the Worker) doesn't hold up the rest.
+        const widgets = [
+            // "Currently coding" — calls the CF Worker with static fallback.
+            [
+                'currently',
+                'Currently widget',
+                () => import('./modules/currently.js'),
+                'currentlyWidget',
+                m => m.init('#currently-coding'),
+            ],
+            // Experience / timeline section.
+            [
+                'experience',
+                'Experience module',
+                () => import('./modules/experience.js'),
+                'experienceManager',
+                m => m.init(),
+            ],
+            // Blog / writing section.
+            [
+                'blog',
+                'Blog module',
+                () => import('./modules/blog.js'),
+                'blogManager',
+                m => m.init(),
+            ],
+            // View counter — calls Worker, updates footer count.
+            [
+                'views',
+                'View counter',
+                () => import('./modules/views.js'),
+                'viewCounter',
+                m => m.init(),
+            ],
+        ];
+        await Promise.allSettled(
+            widgets.map(async ([key, label, load, exportName, start]) => {
+                try {
+                    const manager = (await load())[exportName];
+                    await start(manager);
+                    appState.managers[key] = manager;
+                } catch (err) {
+                    debug.warn(`[App] ${label} skipped:`, err);
+                }
+            })
+        );
 
         // Phase 4: Non-critical features (deferred with dynamic imports)
         requestIdleCallback(
@@ -475,9 +484,6 @@ function handleInitError(error) {
         showUser: true,
         context: { phase: 'initialization' },
     });
-
-    // Ensure body is visible even on error
-    document.body.classList.add('loaded');
 
     // Track error via analytics if available
     const { analytics } = appState.managers;

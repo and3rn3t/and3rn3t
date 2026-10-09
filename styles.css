@@ -7,6 +7,25 @@
   src: url('fonts/inter-variable.woff2') format('woff2');
 }
 
+/* Inline SVG icons (icons/sprite.svg) — sized like the old icon font */
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+
+.icon-spin {
+  animation: icon-spin 1s linear infinite;
+}
+
+@keyframes icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Theme switch — circular reveal via the View Transitions API.
    Origin (--theme-x/--theme-y) is set in JS from the theme toggle button. */
 ::view-transition-old(root),
@@ -1078,7 +1097,7 @@ section {
   border-color: var(--primary-color);
 }
 
-.stat-card i {
+.stat-card .icon {
   font-size: var(--font-size-xl);
   color: var(--secondary-color);
   margin-bottom: var(--space-2);
@@ -1342,7 +1361,7 @@ section {
   color: var(--text-secondary);
 }
 
-.project-stat i {
+.project-stat .icon {
   font-size: var(--font-size-sm);
 }
 
@@ -1420,7 +1439,7 @@ section {
   color: var(--text-secondary);
 }
 
-.loading i {
+.loading .icon {
   font-size: var(--font-size-3xl);
   margin-bottom: var(--space-4);
   color: var(--accent-text, #15803d);
@@ -2017,7 +2036,7 @@ body.dark-theme .timeline::before {
   border-color: var(--primary-color);
 }
 
-.contact-method i {
+.contact-method .icon {
   font-size: var(--font-size-2xl);
   color: var(--accent-text, #15803d);
 }
@@ -2082,7 +2101,7 @@ body.dark-theme .timeline::before {
     white-space: nowrap;
   }
 
-  .contact-tab i {
+  .contact-tab .icon {
     display: none;
   }
 }
@@ -3036,7 +3055,7 @@ details:focus {
   gap: var(--space-4);
 }
 
-.summary-stat i {
+.summary-stat .icon {
   font-size: var(--font-size-4xl);
   color: var(--accent-text, #15803d);
 }
@@ -3211,7 +3230,7 @@ details:focus {
   border: 1px solid var(--border-color);
 }
 
-.stat-badge i {
+.stat-badge .icon {
   color: var(--accent-text, #15803d);
 }
 
@@ -3349,7 +3368,7 @@ body.dark-theme .top-project-highlights {
   color: var(--text-secondary);
 }
 
-.loading i {
+.loading .icon {
   font-size: var(--font-size-3xl);
   margin-bottom: var(--space-4);
   animation: spin 1s linear infinite;
@@ -3928,7 +3947,7 @@ body.dark-theme .palette-item-icon {
   color: var(--text-secondary);
 }
 
-.search-results-empty i {
+.search-results-empty .icon {
   font-size: var(--font-size-5xl);
   margin-bottom: var(--space-4);
   color: var(--text-light);
@@ -4072,7 +4091,7 @@ body.dark-theme .palette-item-icon {
   font-size: var(--font-size-sm);
 }
 
-.metric i {
+.metric .icon {
   color: var(--accent-color);
 }
 
@@ -4614,22 +4633,6 @@ body.dark-theme .hover-glow:hover {
 body.keyboard-navigation .focus-ring:focus {
   outline: 3px solid var(--primary-color);
   outline-offset: 2px;
-}
-
-/* Loading State Enhancements */
-.loaded {
-  animation: loadComplete 0.5s ease-out;
-}
-
-@keyframes loadComplete {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* Advanced Mobile Optimization & Touch Gestures */
@@ -5689,7 +5692,7 @@ body.keyboard-navigation .focus-ring:focus {
     background: var(--bg-tertiary);
   }
 
-  .contact-method i {
+  .contact-method .icon {
     font-size: var(--font-size-2xl);
     color: var(--accent-text, #15803d);
   }
@@ -6457,7 +6460,7 @@ body.keyboard-navigation .focus-ring:focus {
   color: var(--text-secondary);
 }
 
-.currently-label i {
+.currently-label .icon {
   color: var(--accent-text, #15803d);
 }
 
@@ -6663,7 +6666,7 @@ body.modal-open {
   color: var(--text-secondary);
 }
 
-.project-modal-stat i {
+.project-modal-stat .icon {
   color: var(--accent-text, #15803d);
 }
 

@@ -19,6 +19,7 @@ const PRECACHE_ASSETS = [
     '/modules/mobile.js',
     '/modules/navigation.js',
     '/fonts/inter-variable.woff2',
+    '/icons/sprite.svg',
     '/projects-data.json',
     '/manifest.json',
     '/offline.html',

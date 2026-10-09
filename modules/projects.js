@@ -7,6 +7,7 @@ import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { projectModal } from './project-modal.js';
 import { escapeHtml } from './utils/html.js';
+import { icon } from './utils/icon.js';
 
 // Project display configuration
 const CONFIG = {
@@ -308,7 +309,7 @@ export class ProjectsManager {
         const caseStudyHtml = hasCaseStudy
             ? `
             <button type="button" class="project-case-study-btn" data-case-study="${escapeHtml(slug)}">
-                <i class="fas fa-book-open" aria-hidden="true"></i>
+                ${icon('book-open')}
                 Read case study
             </button>
         `
@@ -327,14 +328,14 @@ export class ProjectsManager {
 
                 <div class="project-stats">
                     <div class="project-stat" title="Stars">
-                        <i class="fas fa-star"></i>
+                        ${icon('star')}
                         <span>${repo?.stargazers_count ?? '—'}</span>
                     </div>
                     ${
                         relativePush
                             ? `
                     <div class="project-stat" title="Last pushed">
-                        <i class="fas fa-code-commit"></i>
+                        ${icon('code-commit')}
                         <span>${relativePush}</span>
                     </div>`
                             : ''
@@ -352,20 +353,20 @@ export class ProjectsManager {
 
             <div class="project-links">
                 <a href="${escapeHtml(htmlUrl)}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <i class="fab fa-github"></i>
+                    ${icon('github')}
                     View Code
                 </a>
                 ${
                     homepage
                         ? `
                     <a href="${escapeHtml(homepage)}" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <i class="fas fa-external-link-alt"></i>
+                        ${icon('external-link-alt')}
                         Live Demo
                     </a>
                 `
                         : `
                     <a href="${escapeHtml(htmlUrl)}/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <i class="fas fa-file-alt"></i>
+                        ${icon('file-alt')}
                         Documentation
                     </a>
                 `

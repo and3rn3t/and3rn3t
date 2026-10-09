@@ -5,6 +5,7 @@
  */
 
 import { debug } from './debug.js';
+import { SPRITE_URL } from './utils/icon.js';
 
 const STORAGE_KEY = 'theme';
 const META_COLORS = { light: '#fefefe', dark: '#1a0e0a' };
@@ -135,8 +136,9 @@ export class ThemeManager {
         const label = isDark ? 'Switch to light theme' : 'Switch to dark theme';
         this.button.setAttribute('aria-label', label);
         this.button.title = `${label} (T)`;
-        const icon = this.button.querySelector('i');
-        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        this.button
+            .querySelector('use')
+            ?.setAttribute('href', `${SPRITE_URL}#${isDark ? 'sun' : 'moon'}`);
     }
 
     // Public API

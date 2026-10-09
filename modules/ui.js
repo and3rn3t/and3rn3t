@@ -5,6 +5,7 @@
 
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
+import { icon } from './utils/icon.js';
 
 export class UIManager {
     constructor() {
@@ -181,7 +182,7 @@ export class UIManager {
         if (!backToTopBtn) {
             backToTopBtn = document.createElement('button');
             backToTopBtn.className = 'back-to-top';
-            backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            backToTopBtn.innerHTML = icon('arrow-up');
             backToTopBtn.setAttribute('aria-label', 'Back to top');
             document.body.appendChild(backToTopBtn);
         }
@@ -248,28 +249,28 @@ export class UIManager {
 
             statsGrid.innerHTML = `
                 <div class="stat-card">
-                    <i class="fas fa-code-branch"></i>
+                    ${icon('code-branch')}
                     <div class="stat-content">
                         <h3>${userData.public_repos}</h3>
                         <p>Public Repos</p>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-bolt"></i>
+                    ${icon('bolt')}
                     <div class="stat-content">
                         <h3>${activeRepos}</h3>
                         <p>Active (6 mo)</p>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-star"></i>
+                    ${icon('star')}
                     <div class="stat-content">
                         <h3>${totalStars}</h3>
                         <p>Total Stars</p>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-calendar"></i>
+                    ${icon('calendar')}
                     <div class="stat-content">
                         <h3>${yearsSince}+</h3>
                         <p>Years on GitHub</p>

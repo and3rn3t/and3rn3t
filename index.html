@@ -261,7 +261,6 @@
     <title>Matthew Anderson | Software Engineer</title>
 
     <!-- Critical Resource Preloads -->
-    <link rel="preload" href="styles.css" as="style" />
     <link rel="modulepreload" href="main.js" />
     <link rel="modulepreload" href="modules/debug.js" />
     <link rel="modulepreload" href="modules/theme.js" />
@@ -272,13 +271,6 @@
     <link rel="modulepreload" href="modules/github-api.js" />
     <!-- Non-critical modules loaded lazily on-demand -->
     <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link
-      rel="preload"
-      href="vendor/fontawesome/webfonts/fa-solid-900.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
 
     <!-- Cloudflare Web Analytics with Error Handling -->
     <script>
@@ -366,11 +358,10 @@
         line-height: 1.6;
         color: #1e293b;
         background: #ffffff;
-        opacity: 0;
-        transition: opacity 0.3s ease;
       }
-      body.loaded {
-        opacity: 1;
+      body.dark-theme {
+        background: #1a0e0a;
+        color: #f1f5f9;
       }
       .navbar {
         position: fixed;
@@ -480,17 +471,7 @@
     </script>
 
     <!-- Load main stylesheet after critical CSS -->
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media = 'all'" />
-    <noscript><link rel="stylesheet" href="styles.css" /></noscript>
-
-    <!-- Font Awesome (self-hosted) with async loading -->
-    <link
-      rel="stylesheet"
-      href="vendor/fontawesome/all.min.css"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <noscript><link rel="stylesheet" href="vendor/fontawesome/all.min.css" /></noscript>
+    <link rel="stylesheet" href="styles.css" />
 
     <!-- Visual Enhancement Utilities -->
     <style>
@@ -543,6 +524,18 @@
     </style>
   </head>
   <body>
+    <script>
+      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem('theme');
+        } catch (e) {}
+        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.body.classList.add('dark-theme');
+        }
+      })();
+    </script>
     <!-- Skip to main content link for keyboard users -->
     <a href="#home" class="skip-link">Skip to main content</a>
 
@@ -591,7 +584,9 @@
       <div class="global-search-content">
         <div class="global-search-header">
           <div class="global-search-input-container">
-            <i class="fas fa-search global-search-icon"></i>
+            <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#search"></use>
+            </svg>
             <input
               type="text"
               id="global-search-input"
@@ -606,27 +601,43 @@
               aria-label="Close global search"
               title="Close search (Esc)"
             >
-              <i class="fas fa-times"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#times"></use>
+              </svg>
             </button>
           </div>
           <div class="search-categories">
             <button class="search-category active" data-category="all">
-              <i class="fas fa-globe"></i> All
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#globe"></use>
+              </svg>
+              All
             </button>
             <button class="search-category" data-category="projects">
-              <i class="fas fa-code"></i> Projects
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#code"></use>
+              </svg>
+              Projects
             </button>
             <button class="search-category" data-category="skills">
-              <i class="fas fa-cogs"></i> Skills
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#cogs"></use>
+              </svg>
+              Skills
             </button>
             <button class="search-category" data-category="content">
-              <i class="fas fa-file-alt"></i> Content
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#file-alt"></use>
+              </svg>
+              Content
             </button>
           </div>
         </div>
         <div class="global-search-results" id="global-search-results">
           <div class="search-results-empty" id="search-results-empty">
-            <i class="fas fa-search-plus"></i>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#search-plus"></use>
+            </svg>
             <h3>Search Your Portfolio</h3>
             <p>Find projects, skills, technologies, and content across the entire portfolio.</p>
             <div class="search-tips">
@@ -694,7 +705,9 @@
           </div>
         </div>
         <button class="keyboard-help-close" id="keyboard-help-close">
-          <i class="fas fa-times"></i>
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/icons/sprite.svg#times"></use>
+          </svg>
           <span class="sr-only">Close help</span>
         </button>
       </div>
@@ -724,7 +737,10 @@
             <a href="#projects" class="btn btn-primary">View My Work</a>
             <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
-              <i class="fas fa-file-pdf"></i> Resume
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#file-pdf"></use>
+              </svg>
+              Resume
             </a>
           </div>
           <div class="hero-social">
@@ -735,7 +751,9 @@
               class="social-link"
               title="GitHub Profile"
             >
-              <i class="fab fa-github"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#github"></use>
+              </svg>
             </a>
             <a
               href="https://linkedin.com/in/and3rn3t"
@@ -744,10 +762,14 @@
               class="social-link"
               title="LinkedIn Profile"
             >
-              <i class="fab fa-linkedin"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#linkedin"></use>
+              </svg>
             </a>
             <a href="mailto:and3rn3t@icloud.com" class="social-link" title="Send Email">
-              <i class="fas fa-envelope"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#envelope"></use>
+              </svg>
             </a>
           </div>
         </div>
@@ -785,17 +807,24 @@
         </div>
         <div class="github-strip">
           <h3 class="github-strip-title">
-            <i class="fab fa-github" aria-hidden="true"></i> On GitHub
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#github"></use>
+            </svg>
+            On GitHub
           </h3>
           <div class="stats-grid" id="stats-grid">
             <div class="loading">
-              <i class="fas fa-spinner fa-spin"></i>
+              <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#spinner"></use>
+              </svg>
               <p>Loading stats...</p>
             </div>
           </div>
           <div class="contribution-graph" id="contribution-graph">
             <div class="loading">
-              <i class="fas fa-spinner fa-spin"></i>
+              <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#spinner"></use>
+              </svg>
               <p>Loading contributions...</p>
             </div>
           </div>
@@ -812,7 +841,9 @@
         <div class="top-projects-section">
           <div class="projects-grid" id="projects-grid">
             <div class="loading">
-              <i class="fas fa-spinner fa-spin"></i>
+              <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#spinner"></use>
+              </svg>
               <p>Loading projects...</p>
             </div>
           </div>
@@ -836,7 +867,9 @@
             class="btn btn-outline"
           >
             View All Projects on GitHub
-            <i class="fab fa-github"></i>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#github"></use>
+            </svg>
           </a>
         </div>
       </div>
@@ -849,18 +882,26 @@
         <div class="experience-layout">
           <div class="timeline-column">
             <h3 class="timeline-group-heading">
-              <i class="fas fa-briefcase" aria-hidden="true"></i> Work
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#briefcase"></use>
+              </svg>
+              Work
             </h3>
             <div class="timeline" id="experience-timeline" role="group" aria-label="Work history">
               <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
+                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#spinner"></use>
+                </svg>
                 <p>Loading experience...</p>
               </div>
             </div>
           </div>
           <div class="timeline-column">
             <h3 class="timeline-group-heading">
-              <i class="fas fa-graduation-cap" aria-hidden="true"></i> Education
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#graduation-cap"></use>
+              </svg>
+              Education
             </h3>
             <div
               class="timeline"
@@ -869,7 +910,9 @@
               aria-label="Education history"
             >
               <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
+                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#spinner"></use>
+                </svg>
                 <p>Loading education...</p>
               </div>
             </div>
@@ -877,7 +920,10 @@
             <div class="resume-cta">
               <p class="resume-cta-label">Want the full picture?</p>
               <a href="/resume.pdf" download class="btn btn-primary resume-btn">
-                <i class="fas fa-file-pdf" aria-hidden="true"></i> Download Resume
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#file-pdf"></use>
+                </svg>
+                Download Resume
               </a>
             </div>
           </div>
@@ -920,7 +966,10 @@
               aria-controls="contact-panel-message"
               aria-selected="true"
             >
-              <i class="fas fa-paper-plane" aria-hidden="true"></i> Send a message
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#paper-plane"></use>
+              </svg>
+              Send a message
             </button>
             <button
               type="button"
@@ -931,7 +980,10 @@
               aria-selected="false"
               tabindex="-1"
             >
-              <i class="fas fa-pen" aria-hidden="true"></i> Sign the guestbook
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#pen"></use>
+              </svg>
+              Sign the guestbook
             </button>
           </div>
 
@@ -1044,9 +1096,13 @@
                 aria-describedby="form-status"
               >
                 <span class="submit-text">Send Message</span>
-                <i class="fas fa-paper-plane submit-icon"></i>
+                <svg class="icon submit-icon" aria-hidden="true" focusable="false">
+                  <use href="/icons/sprite.svg#paper-plane"></use>
+                </svg>
                 <div class="loading-spinner">
-                  <i class="fas fa-spinner fa-spin"></i>
+                  <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                    <use href="/icons/sprite.svg#spinner"></use>
+                  </svg>
                 </div>
               </button>
 
@@ -1094,7 +1150,10 @@
                   </div>
                   <div id="turnstile-container" class="turnstile-container"></div>
                   <button type="submit" class="btn btn-primary" disabled>
-                    <i class="fas fa-pen" aria-hidden="true"></i> Sign guestbook
+                    <svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/icons/sprite.svg#pen"></use>
+                    </svg>
+                    Sign guestbook
                   </button>
                   <output
                     id="guestbook-status"
@@ -1106,7 +1165,9 @@
               <div class="guestbook-entries-col">
                 <div id="guestbook-entries" role="group" aria-label="Guestbook entries">
                   <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
+                    <svg class="icon icon-spin" aria-hidden="true" focusable="false">
+                      <use href="/icons/sprite.svg#spinner"></use>
+                    </svg>
                     <p>Loading entries...</p>
                   </div>
                 </div>
@@ -1116,7 +1177,9 @@
 
           <div class="contact-methods">
             <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
-              <i class="fas fa-envelope"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#envelope"></use>
+              </svg>
               <span>and3rn3t@icloud.com</span>
             </a>
             <a
@@ -1125,7 +1188,9 @@
               rel="noopener noreferrer"
               class="contact-method touch-target"
             >
-              <i class="fab fa-github"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#github"></use>
+              </svg>
               <span>@and3rn3t</span>
             </a>
             <a
@@ -1134,7 +1199,9 @@
               rel="noopener noreferrer"
               class="contact-method touch-target"
             >
-              <i class="fab fa-linkedin"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#linkedin"></use>
+              </svg>
               <span>LinkedIn</span>
             </a>
           </div>
@@ -1151,7 +1218,9 @@
             Vite, and a Cloudflare Worker.
           </p>
           <span class="view-count-widget" hidden aria-label="Page views">
-            <i class="fas fa-eye" aria-hidden="true"></i>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#eye"></use>
+            </svg>
             <span data-view-count>0</span> views
           </span>
         </div>
@@ -1197,7 +1266,9 @@
         aria-label="Switch to dark theme"
         title="Switch to dark theme (T)"
       >
-        <i class="fas fa-moon" aria-hidden="true"></i>
+        <svg class="icon" aria-hidden="true" focusable="false">
+          <use href="/icons/sprite.svg#moon"></use>
+        </svg>
       </button>
     </div>
 

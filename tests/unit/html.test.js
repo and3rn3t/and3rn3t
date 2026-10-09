@@ -43,7 +43,7 @@ test('project modal renders hostile repo data as inert text', async () => {
         htmlUrl: 'https://github.com/and3rn3t/x',
     });
 
-    expect(container.querySelector('img, script, svg, b, i:not(.fas):not(.fab)')).toBeNull();
+    expect(container.querySelector('img, script, svg:not(.icon), b, i')).toBeNull();
     expect(container.querySelector('.project-modal-title').textContent).toContain('<img');
     expect(container.querySelector('.project-link.live')).toBeNull();
     expect(container.querySelector('.project-link').getAttribute('href')).toBe(

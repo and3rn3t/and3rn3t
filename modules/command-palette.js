@@ -13,6 +13,7 @@
 
 import { debug } from './debug.js';
 import { escapeHtml } from './utils/html.js';
+import { icon } from './utils/icon.js';
 
 const EMAIL = 'and3rn3t@icloud.com';
 const GITHUB = 'https://github.com/and3rn3t';
@@ -91,7 +92,7 @@ class CommandPalette {
             {
                 type: 'action',
                 category: 'all',
-                icon: 'fa-moon',
+                icon: 'moon',
                 title: 'Toggle theme',
                 subtitle: 'Switch between light and dark',
                 run: () => globalThis.appState?.managers?.theme?.toggle(),
@@ -99,7 +100,7 @@ class CommandPalette {
             {
                 type: 'action',
                 category: 'all',
-                icon: 'fa-envelope',
+                icon: 'envelope',
                 title: 'Copy email address',
                 subtitle: EMAIL,
                 run: async () => {
@@ -114,7 +115,7 @@ class CommandPalette {
             {
                 type: 'action',
                 category: 'all',
-                icon: 'fa-file-pdf',
+                icon: 'file-pdf',
                 title: 'Download résumé',
                 subtitle: 'Open resume.pdf',
                 run: () => globalThis.open('/resume.pdf', '_blank', 'noopener'),
@@ -122,8 +123,7 @@ class CommandPalette {
             {
                 type: 'action',
                 category: 'all',
-                icon: 'fa-github',
-                brand: true,
+                icon: 'github',
                 title: 'Open GitHub profile',
                 subtitle: GITHUB,
                 run: () => globalThis.open(GITHUB, '_blank', 'noopener'),
@@ -131,8 +131,7 @@ class CommandPalette {
             {
                 type: 'action',
                 category: 'all',
-                icon: 'fa-linkedin',
-                brand: true,
+                icon: 'linkedin',
                 title: 'Open LinkedIn',
                 subtitle: 'linkedin.com/in/and3rn3t',
                 run: () =>
@@ -147,7 +146,7 @@ class CommandPalette {
             return {
                 type: 'content',
                 category: 'content',
-                icon: 'fa-arrow-right',
+                icon: 'arrow-right',
                 title: `Go to ${label}`,
                 subtitle: `#${section.id}`,
                 run: () => {
@@ -162,7 +161,7 @@ class CommandPalette {
             return {
                 type: 'skill',
                 category: 'skills',
-                icon: 'fa-cog',
+                icon: 'cog',
                 title: name,
                 subtitle: 'Skill',
                 run: () => {
@@ -189,7 +188,7 @@ class CommandPalette {
             const projects = (data.projects || []).map(p => ({
                 type: 'project',
                 category: 'projects',
-                icon: 'fa-code',
+                icon: 'code',
                 title: p.displayName || p.name,
                 subtitle: (p.technologies || []).slice(0, 3).join(' · ') || p.description,
                 keywords: [p.name, ...(p.technologies || [])].join(' ').toLowerCase(),
@@ -355,10 +354,9 @@ class CommandPalette {
 
         this.resultsContent.innerHTML = this.filtered
             .map((item, i) => {
-                const iconClass = item.brand ? 'fab' : 'fas';
                 return `
                 <button class="palette-item${i === 0 ? ' is-active' : ''}" data-index="${i}" type="button">
-                    <span class="palette-item-icon"><i class="${iconClass} ${item.icon}"></i></span>
+                    <span class="palette-item-icon">${icon(item.icon)}</span>
                     <span class="palette-item-text">
                         <span class="palette-item-title">${escapeHtml(item.title)}</span>
                         ${item.subtitle ? `<span class="palette-item-subtitle">${escapeHtml(item.subtitle)}</span>` : ''}

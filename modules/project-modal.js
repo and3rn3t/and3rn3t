@@ -12,6 +12,7 @@
 import { debug } from './debug.js';
 import { WORKER_BASE } from './config.js';
 import { escapeHtml, safeUrl } from './utils/html.js';
+import { icon } from './utils/icon.js';
 
 /** Worker endpoint for OG image generation. */
 const OG_WORKER_URL = `${WORKER_BASE}/og`;
@@ -41,7 +42,7 @@ export class ProjectModal {
             <div class="project-modal-backdrop" data-modal-close></div>
             <div class="project-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
                 <button class="project-modal-close" type="button" aria-label="Close case study" data-modal-close>
-                    <i class="fas fa-times" aria-hidden="true"></i>
+                    ${icon('times')}
                 </button>
                 <div class="project-modal-body" id="project-modal-body"></div>
             </div>
@@ -186,11 +187,11 @@ export class ProjectModal {
     };
 
     renderBody(d) {
-        const stat = (icon, value, label) =>
+        const stat = (iconName, value, label) =>
             value === null || value === undefined
                 ? ''
                 : `<div class="project-modal-stat" title="${escapeHtml(label)}">
-                    <i class="fas fa-${escapeHtml(icon)}" aria-hidden="true"></i>
+                    ${icon(iconName)}
                     <span class="project-modal-stat-value">${escapeHtml(value)}</span>
                     <span class="project-modal-stat-label">${escapeHtml(label)}</span>
                 </div>`;
@@ -216,7 +217,7 @@ export class ProjectModal {
         const homepage = safeUrl(d.homepage);
         const liveLink = homepage
             ? `<a href="${escapeHtml(homepage)}" target="_blank" rel="noopener noreferrer" class="project-link live">
-                    <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
+                    ${icon('external-link-alt')} Live Demo
                 </a>`
             : '';
 
@@ -280,7 +281,7 @@ export class ProjectModal {
 
             <footer class="project-modal-links">
                 <a href="${escapeHtml(safeUrl(d.htmlUrl) ?? '#')}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <i class="fab fa-github" aria-hidden="true"></i> View Code
+                    ${icon('github')} View Code
                 </a>
                 ${liveLink}
             </footer>
