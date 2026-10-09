@@ -6,7 +6,6 @@ on:
       - main
     paths-ignore:
       - 'docs/**'
-      - 'testing/**'
       - '.github/workflows/update-github-data.yml'
       - 'README.md'
       - 'LICENSE'
@@ -32,20 +31,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          # Explicit allowlist of what the site serves. Patterns are anchored with a
+          # leading `/` so they can't match config, tests or Worker source in subfolders.
           sparse-checkout: |
-            *.html
-            *.css
-            *.js
-            *.json
-            *.xml
-            *.txt
-            *.pdf
-            icons
-            modules
-            posts
-            fonts
-            CNAME
+            /*.html
+            /styles.css
+            /main.js
+            /sw.js
+            /manifest.json
+            /favicon.svg
+            /robots.txt
+            /sitemap.xml
+            /feed.xml
+            /resume.pdf
+            /CNAME
+            /experience-data.json
+            /github-data.json
+            /posts-data.json
+            /projects-data.json
+            /fonts/
+            /icons/
+            /modules/
+            /og/
+            /posts/
           sparse-checkout-cone-mode: false
+
+      - name: Check published files
+        run: |
+          missing=0
+          for f in index.html 404.html offline.html styles.css main.js sw.js manifest.json \
+                   favicon.svg og/default.png icons/sprite.svg fonts/inter-variable.woff2 CNAME; do
+            [ -e "$f" ] || { echo "::error::missing from deploy: $f"; missing=1; }
+          done
+          leaked=$(find . -path ./.git -prune -o -type f \( -name 'package.json' -o -name '*.config.*' \
+                   -o -path './tests/*' -o -path './worker/*' -o -path './scripts/*' \) -print)
+          [ -z "$leaked" ] || { echo "::error::should not be published:"; echo "$leaked"; missing=1; }
+          exit $missing
 
       - name: Stamp service worker build id
         run: sed -i "s/__BUILD_SHA__/${GITHUB_SHA::12}/" sw.js
