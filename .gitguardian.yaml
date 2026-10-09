@@ -1,0 +1,9 @@
+# GitGuardian configuration (https://docs.gitguardian.com/ggshield-docs/reference/configuration).
+version: 2
+
+secret:
+  ignored-matches:
+    # Cloudflare Web Analytics site token: public by design, served in the page source of
+    # index.html and the generated posts/*. It cannot be kept secret.
+    - name: Cloudflare Web Analytics site token
+      match: 883fb1c6a2c744d4b745475d92f474bf
