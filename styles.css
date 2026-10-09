@@ -3789,10 +3789,6 @@ body.dark-theme .particle {
     overflow-x: hidden;
   }
 
-  /* Enhanced scrolling for mobile */
-  * {
-  }
-
   /* Better container padding on mobile */
   .container {
     padding: 0 var(--space-4);
