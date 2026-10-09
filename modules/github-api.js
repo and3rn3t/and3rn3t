@@ -51,20 +51,23 @@ export class GitHubAPIManager {
         throw lastError;
     }
 
-    // Load pre-fetched GitHub data from workflow
-    async loadCachedGitHubData() {
-        if (this.cachedData) return this.cachedData;
-
-        try {
-            const response = await fetch('github-data.json');
-            if (response.ok) {
-                this.cachedData = await response.json();
-                return this.cachedData;
+    // Load pre-fetched GitHub data from workflow. The in-flight promise is shared so
+    // projects, stats and the currently-coding pill trigger a single request.
+    loadCachedGitHubData() {
+        this.cachedDataPromise ??= (async () => {
+            try {
+                const response = await fetch('github-data.json');
+                if (response.ok) {
+                    this.cachedData = await response.json();
+                    return this.cachedData;
+                }
+            } catch (_error) {
+                debug.warn('[GitHub] Pre-fetched data not available, using direct API');
             }
-        } catch (_error) {
-            debug.warn('[GitHub] Pre-fetched data not available, using direct API');
-        }
-        return null;
+            this.cachedDataPromise = null; // allow a later retry
+            return null;
+        })();
+        return this.cachedDataPromise;
     }
 
     // Cache management with TTL (Time To Live)

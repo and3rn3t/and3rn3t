@@ -8,6 +8,7 @@
 
 import { debug } from './debug.js';
 import { escapeHtml } from './utils/html.js';
+import { icon } from './utils/icon.js';
 
 const READING_SPEED_WPM = 200;
 
@@ -49,12 +50,12 @@ class BlogManager {
             <article class="blog-card" data-slug="${escapeHtml(post.slug)}">
                 <div class="blog-card-meta">
                     <time datetime="${escapeHtml(post.date)}" class="blog-date">${this.#formatDate(post.date)}</time>
-                    <span class="blog-reading-time"><i class="fas fa-clock" aria-hidden="true"></i> ${post.readingMinutes ?? this.#estimateMinutes(post.content)} min read</span>
+                    <span class="blog-reading-time">${icon('clock')} ${post.readingMinutes ?? this.#estimateMinutes(post.content)} min read</span>
                 </div>
                 <h3 class="blog-card-title">${escapeHtml(post.title)}</h3>
                 <p class="blog-card-summary">${escapeHtml(post.summary)}</p>
                 <div class="blog-card-tags">${(post.tags ?? []).map(t => `<span class="blog-tag">${escapeHtml(t)}</span>`).join('')}</div>
-                <a href="#post/${escapeHtml(post.slug)}" class="blog-read-more" aria-label="Read ${escapeHtml(post.title)}">Read post <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <a href="#post/${escapeHtml(post.slug)}" class="blog-read-more" aria-label="Read ${escapeHtml(post.title)}">Read post ${icon('arrow-right')}</a>
             </article>`
             )
             .join('');
@@ -93,12 +94,12 @@ class BlogManager {
 
         this.#articleEl.innerHTML = `
             <div class="blog-article-inner">
-                <a href="#writing" class="blog-back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to writing</a>
+                <a href="#writing" class="blog-back-link">${icon('arrow-left')} Back to writing</a>
                 <article class="blog-article-body">
                     <header class="blog-article-header">
                         <div class="blog-card-meta">
                             <time datetime="${escapeHtml(post.date)}">${this.#formatDate(post.date)}</time>
-                            <span class="blog-reading-time"><i class="fas fa-clock" aria-hidden="true"></i> ${mins} min read</span>
+                            <span class="blog-reading-time">${icon('clock')} ${mins} min read</span>
                         </div>
                         <h1 class="blog-article-title">${escapeHtml(post.title)}</h1>
                         <div class="blog-card-tags">${tags}</div>

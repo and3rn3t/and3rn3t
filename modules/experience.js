@@ -8,6 +8,7 @@
 
 import { debug } from './debug.js';
 import { escapeHtml } from './utils/html.js';
+import { icon } from './utils/icon.js';
 
 class ExperienceManager {
     async init() {
@@ -51,7 +52,7 @@ class ExperienceManager {
             : escapeHtml(nameField);
 
         const locationHtml = entry.location
-            ? `<span class="timeline-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> ${escapeHtml(entry.location)}</span>`
+            ? `<span class="timeline-location">${icon('map-marker-alt')} ${escapeHtml(entry.location)}</span>`
             : '';
 
         const highlightsHtml = entry.highlights?.length
@@ -82,7 +83,7 @@ class ExperienceManager {
                         <div class="timeline-meta">
                             <span class="timeline-company">${nameHtml}</span>
                             ${locationHtml}
-                            <span class="timeline-dates"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ${escapeHtml(dateRange)}</span>
+                            <span class="timeline-dates">${icon('calendar-alt')} ${escapeHtml(dateRange)}</span>
                         </div>
                     </header>
                     ${summaryHtml}

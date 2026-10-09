@@ -43,7 +43,6 @@ jobs:
             icons
             modules
             fonts
-            vendor
             CNAME
           sparse-checkout-cone-mode: false
 

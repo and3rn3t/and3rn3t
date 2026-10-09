@@ -12,6 +12,7 @@ import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { WORKER_BASE } from './config.js';
 import { escapeHtml } from './utils/html.js';
+import { icon } from './utils/icon.js';
 
 const WORKER_URL = `${WORKER_BASE}/activity`;
 
@@ -161,7 +162,7 @@ class CurrentlyWidget {
         if (!this.container) return;
 
         const verb = TYPE_LABELS[activity.type] ?? 'working on';
-        const icon = TYPE_ICONS[activity.type] ?? 'code';
+        const iconName = TYPE_ICONS[activity.type] ?? 'code';
         const relTime = activity.pushedAt ? this._relTime(new Date(activity.pushedAt)) : null;
 
         const messageHtml = activity.message
@@ -170,7 +171,7 @@ class CurrentlyWidget {
 
         const branchHtml =
             activity.branch && activity.type === 'push'
-                ? `<span class="currently-branch"><i class="fas fa-code-branch" aria-hidden="true"></i>${escapeHtml(activity.branch)}</span>`
+                ? `<span class="currently-branch">${icon('code-branch')}${escapeHtml(activity.branch)}</span>`
                 : '';
 
         const timeHtml = relTime
@@ -181,7 +182,7 @@ class CurrentlyWidget {
             <div class="currently-widget" role="status" aria-live="polite">
                 <span class="currently-dot" aria-hidden="true"></span>
                 <span class="currently-label">
-                    <i class="fas fa-${icon}" aria-hidden="true"></i>
+                    ${icon(iconName)}
                     Currently ${escapeHtml(verb)}
                     <a href="${escapeHtml(activity.repoUrl)}" target="_blank" rel="noopener noreferrer"
                        class="currently-repo">${escapeHtml(activity.repoName)}</a>
