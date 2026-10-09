@@ -5,7 +5,7 @@ let notify;
 
 beforeEach(() => {
     globalThis.IntersectionObserver = class {
-        constructor(callback) {
+        constructor(callback, _options) {
             notify = isIntersecting => callback([{ isIntersecting }]);
         }
         observe() {}
