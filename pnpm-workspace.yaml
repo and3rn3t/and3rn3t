@@ -4,3 +4,7 @@ allowBuilds:
   workerd: true
 overrides:
   undici: '>=7.28.0 <8'
+  # miniflare (via wrangler) pins sharp to exactly 0.35.4, which has a librsvg CVE
+  # (GHSA-wq5f-xc86-pv6w, fixed in 0.35.5). Drop this once wrangler ships a miniflare that
+  # depends on sharp >= 0.35.5.
+  sharp: '0.35.5'
