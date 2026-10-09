@@ -44,3 +44,26 @@ for (const id of ['about', 'projects', 'experience', 'writing', 'contact']) {
         );
     });
 }
+
+test.describe('mobile navbar', () => {
+    test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+
+    test('theme toggle sits in the navbar without overlapping the menu button', async ({
+        page,
+    }) => {
+        const toggle = page.locator('#navbar #theme-toggle');
+        await expect(toggle).toBeVisible();
+
+        const [t, h, nav] = await Promise.all([
+            toggle.boundingBox(),
+            page.locator('.nav-toggle').boundingBox(),
+            page.locator('#navbar').boundingBox(),
+        ]);
+        expect(t.x + t.width).toBeLessThanOrEqual(h.x);
+        // Both buttons fit inside the bar
+        for (const box of [t, h]) {
+            expect(box.y).toBeGreaterThanOrEqual(nav.y);
+            expect(box.y + box.height).toBeLessThanOrEqual(nav.y + nav.height);
+        }
+    });
+});
