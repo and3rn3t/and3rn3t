@@ -31,5 +31,5 @@
 
 ### Validation
 
-- `pnpm validate` will catch linting, formatting, and build issues.
+- `pnpm validate` will catch linting, formatting, failing unit tests, and broken or unpublished file references (`pnpm check:refs`).
 - Stylelint rules enforce consistent spacing and CSS variable patterns.

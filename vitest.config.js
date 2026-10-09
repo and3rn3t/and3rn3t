@@ -21,12 +21,6 @@ export default defineConfig({
                 },
             },
         ],
-        coverage: {
-            provider: 'v8',
-            reporter: ['text', 'html', 'lcov'],
-            include: ['modules/**/*.js', 'worker/**/*.js'],
-            exclude: ['modules/debug.js'],
-        },
         globals: false,
     },
 });

@@ -1,10 +1,10 @@
 # AGENTS.md — and3rn3t portfolio
 
-Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`, `index.html`) built with Vite, plus a Cloudflare Worker (`worker/index.js`) for dynamic bits (view counts via KV).
+Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`, `index.html`), served as raw source by GitHub Pages (no bundler), plus a Cloudflare Worker (`worker/index.js`) for dynamic bits (view counts via KV).
 
 ## Stack
 
-- Vite build, vanilla JS modules (not React); **pnpm** (`pnpm@11`, Node `^24.15.0 || >=26` (jsdom 30 / Vitest 5), `.nvmrc` pinned)
+- Vanilla JS modules (not React); Vite is only the local dev server (`pnpm dev`); **pnpm** (`pnpm@11`, Node `^24.15.0 || >=26` (jsdom 30 / Vitest 5), `.nvmrc` pinned)
 - Cloudflare Worker `and3rn3t-portfolio` (`wrangler.toml`; KV binding `VIEWS_KV`)
 - Tests: Vitest unit + Playwright e2e; Lighthouse CI workflow
 - CI: `pages.yml`, `quality.yml`, `lighthouse.yml`, `update-github-data.yml` (auto-refreshes `github-data.json`)
@@ -13,8 +13,9 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 
 ```bash
 pnpm install
-pnpm dev             # vite
-pnpm validate        # lint + format:check + test:unit + build ← done-gate
+pnpm dev             # vite dev server (production ships raw source, there is no build)
+pnpm validate        # lint + format:check + test:unit + check:refs ← done-gate
+pnpm check:refs      # every file the site references exists and is in the pages.yml publish allowlist
 pnpm test            # unit + e2e
 pnpm worker:dev      # wrangler dev worker/index.js
 pnpm build:worker    # wrangler deploy --dry-run

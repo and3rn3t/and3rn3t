@@ -2,192 +2,96 @@ import js from '@eslint/js';
 import globals from 'globals';
 import prettierConfig from 'eslint-config-prettier';
 
+// Rules shared by every JS file in the repo.
+const baseRules = {
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
+    'prefer-const': 'error',
+    'no-var': 'error',
+};
+
+// Extra rules for code that ships (browser modules, Worker, service worker).
+const shippedRules = {
+    ...baseRules,
+    'object-shorthand': 'error',
+    'prefer-template': 'error',
+    'no-unsafe-optional-chaining': 'error',
+};
+
 export default [
-    // Base recommended rules
     js.configs.recommended,
 
     // Prettier disables style rules that conflict with prettier formatting
     prettierConfig,
 
-    // Ignore generated/vendored output
+    // Generated output and the AssemblyScript source (not JS)
     {
-        ignores: [
-            'dist/**',
-            'dist-worker/**',
-            'vendor/**',
-            'node_modules/**',
-            'coverage/**',
-            'build/**',
-            'assembly/**',
-        ],
+        ignores: ['dist/**', 'dist-worker/**', 'node_modules/**', 'coverage/**', 'assembly/**'],
     },
 
-    // Browser modules (modules/)
+    // Everything defaults to modern ES modules with the base rules.
+    {
+        languageOptions: { ecmaVersion: 2022, sourceType: 'module' },
+        rules: baseRules,
+    },
+
+    // Browser modules
     {
         files: ['modules/**/*.js', 'main.js'],
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
-            globals: {
-                ...globals.browser,
-                // Cloudflare-style globals available in modern browsers
-                __APP_VERSION__: 'readonly',
-            },
-        },
+        languageOptions: { globals: globals.browser },
         rules: {
+            ...shippedRules,
             // Prefer globalThis over window/self (documented convention)
             'no-restricted-globals': [
                 'error',
                 { name: 'window', message: 'Use globalThis instead of window.' },
                 { name: 'self', message: 'Use globalThis instead of self.' },
             ],
-            // Catch common issues
-            'no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
-            ],
-            'no-console': 'off',
-            'prefer-const': 'error',
-            'no-var': 'error',
-            'object-shorthand': 'error',
-            'prefer-template': 'error',
             'prefer-destructuring': ['error', { array: false, object: true }],
-            // Use .at(-1) style is a pattern preference — not enforced by ESLint core
-            // Optional chaining: enforced by no-unsafe-optional-chaining
-            'no-unsafe-optional-chaining': 'error',
         },
     },
 
-    // Cloudflare Worker (worker/)
+    // Cloudflare Worker (bindings and secrets arrive on `env`, not as globals)
     {
         files: ['worker/**/*.js'],
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
-            globals: {
-                ...globals.worker,
-                // Cloudflare Worker globals
-                VIEWS_KV: 'readonly',
-                GUESTBOOK_KV: 'readonly',
-                GH_TOKEN: 'readonly',
-                TURNSTILE_SECRET: 'readonly',
-            },
-        },
-        rules: {
-            'no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
-            ],
-            'prefer-const': 'error',
-            'no-var': 'error',
-            'object-shorthand': 'error',
-            'prefer-template': 'error',
-        },
+        languageOptions: { globals: globals.worker },
+        rules: shippedRules,
     },
 
-    // Config files (vite, vitest, playwright, eslint itself, lighthouse — run in Node)
+    // Service worker (its own global scope: self, caches, clients, ...)
     {
-        files: ['*.config.js', '*.config.cjs', '.lighthouserc.cjs', 'eslint.config.js'],
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
-            globals: {
-                ...globals.node,
-                process: 'readonly',
-            },
-        },
-        rules: {
-            'prefer-const': 'error',
-            'no-var': 'error',
-        },
+        files: ['sw.js'],
+        languageOptions: { sourceType: 'script', globals: globals.serviceworker },
+        rules: shippedRules,
+    },
+
+    // Node: config files and build/maintenance scripts. Scripts that drive Playwright use
+    // `document` inside page.evaluate() callbacks, which run in the browser.
+    {
+        files: ['*.config.js', '*.config.mjs', '.lighthouserc.cjs', 'scripts/**/*.{js,mjs}'],
+        languageOptions: { globals: { ...globals.node, document: 'readonly' } },
+    },
+
+    {
+        files: ['**/*.cjs'],
+        languageOptions: { sourceType: 'commonjs' },
     },
 
     // Unit + worker tests (Vitest)
     {
         files: ['tests/unit/**/*.js', 'tests/worker/**/*.js'],
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
-            globals: {
-                ...globals.browser,
-                ...globals.node,
-            },
-        },
-        rules: {
-            'no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
-            ],
-            'prefer-const': 'error',
-            'no-var': 'error',
-        },
+        languageOptions: { globals: { ...globals.browser, ...globals.node } },
     },
 
-    // E2E tests (Playwright — Node process; page.evaluate() callbacks run in browser so window is valid)
+    // E2E tests (Node; page.evaluate()/waitForFunction callbacks run in the browser)
     {
         files: ['tests/e2e/**/*.js'],
         languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
             globals: {
                 ...globals.node,
-                // used inside page.evaluate()/waitForFunction browser-context callbacks
                 window: 'readonly',
                 document: 'readonly',
                 getComputedStyle: 'readonly',
             },
-        },
-        rules: {
-            'no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
-            ],
-            'prefer-const': 'error',
-            'no-var': 'error',
-        },
-    },
-
-    // Build/maintenance scripts (Node process; page.evaluate() callbacks run in browser)
-    {
-        files: ['scripts/**/*.mjs', 'scripts/**/*.js'],
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'module',
-            globals: {
-                ...globals.node,
-                // document is used inside page.evaluate() browser-context callbacks
-                document: 'readonly',
-            },
-        },
-        rules: {
-            'no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
-            ],
-            'prefer-const': 'error',
-            'no-var': 'error',
-        },
-    },
-
-    // Service worker (sw.js — has its own global scope: self, caches, clients, fetch, etc.)
-    {
-        files: ['sw.js'],
-        languageOptions: {
-            ecmaVersion: 2022,
-            sourceType: 'script',
-            globals: {
-                ...globals.serviceworker,
-            },
-        },
-        rules: {
-            'no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
-            ],
-            'prefer-const': 'error',
-            'no-var': 'error',
-            'object-shorthand': 'error',
-            'prefer-template': 'error',
         },
     },
 ];
