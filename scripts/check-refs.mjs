@@ -46,7 +46,10 @@ function walk(dir, ext, out = []) {
 }
 
 // HTML pages: src/href attributes (skip <a href> to other sites; anchors are filtered above).
-const pages = ['index.html', '404.html', 'offline.html', ...walk('posts', '.html')];
+const pages = [
+  ...readdirSync(ROOT).filter(name => name.endsWith('.html')), // every root page
+  ...walk('posts', '.html'),
+];
 for (const page of pages) {
   for (const [, url] of read(page).matchAll(/\s(?:src|href)="([^"]+)"/g)) addRef(url, page);
   // Social cards etc. live in content="" (only absolute links to this site count).
@@ -60,6 +63,13 @@ const manifest = JSON.parse(read('manifest.json'));
 for (const item of [...(manifest.icons ?? []), ...(manifest.screenshots ?? [])]) {
   addRef(item.src, 'manifest.json');
 }
+// Entry points: start URL, shortcuts and a share target must all resolve to a real page.
+const manifestUrls = [
+  manifest.start_url,
+  ...(manifest.shortcuts ?? []).map(shortcut => shortcut.url),
+  manifest.share_target?.action,
+];
+for (const url of manifestUrls.filter(Boolean)) addRef(url, 'manifest.json');
 
 // Service worker precache list.
 const precache = read('sw.js').match(/PRECACHE_ASSETS = \[([\s\S]*?)\]/)?.[1] ?? '';
@@ -78,6 +88,12 @@ for (const file of scripts) {
     addRef(url, file);
   }
   for (const [, url] of src.matchAll(/\bfetch\(\s*['"](\/[^'"]+)['"]/g)) addRef(url, file);
+  // Assets resolved against the module itself, e.g. new URL('./x.wasm', import.meta.url).
+  for (const [, url] of src.matchAll(
+    /new URL\(\s*['"](\.{1,2}\/[^'"]+)['"]\s*,\s*import\.meta\.url/g
+  )) {
+    addRef(url, file);
+  }
 }
 
 // Publish allowlist from the Pages workflow (gitignore-style patterns, non-cone mode).
