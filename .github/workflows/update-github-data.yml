@@ -320,9 +320,16 @@ jobs:
         id: og
         run: |
           HASH=$({
+            # Hash what the cards render, not the raw data: the API returns repos in
+            # push order (so sort them), and language bytes grow with every commit while
+            # the card only shows the top 5 as a rounded percentage and bar width.
             jq -S '{
-              repos: [.repositories[] | {name, stargazers_count, forks_count}],
-              languages: .languageBytes,
+              repos: ([.repositories[] | {name, stargazers_count, forks_count}] | sort_by(.name)),
+              languages: (
+                (.languageBytes | map(.) | add) as $total
+                | .languageBytes | to_entries | sort_by(-.value) | .[0:5]
+                | map({name: .key, pct: (100 * .value / $total | round), bar: (480 * .value / $total | round)})
+              ),
               contributions: .contributions.total
             }' github-data.json
             cat projects-data.json scripts/generate-og.mjs worker/og.js \
