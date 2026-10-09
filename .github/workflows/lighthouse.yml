@@ -1,10 +1,7 @@
 name: Lighthouse CI
 
 on:
-  # Run once a push-triggered Pages deploy has finished, so the audit sees the new build.
-  workflow_run:
-    workflows: ['Deploy to GitHub Pages']
-    types: [completed]
+  # Audits after each push-triggered deploy run from pages.yml, so they see the new build.
   # Allow manual runs with an optional URL override.
   workflow_dispatch:
     inputs:
@@ -18,8 +15,6 @@ on:
 
 jobs:
   lighthouse:
-    # Skip failed deploys and the daily data-refresh deploys (dispatched by the bot).
-    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
     uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1
     with:
       url: ${{ github.event.inputs.url || 'https://andernet.dev' }}
