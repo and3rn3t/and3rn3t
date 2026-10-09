@@ -40,18 +40,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** Python, cloudflare-workers, networking, python, unifi
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
-
-### 🌐 [sky](https://github.com/and3rn3t/sky)
-
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
->
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
-
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
 > Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
@@ -59,11 +47,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, ai, gait-analysis, health, healthkit
 > 🔗 [Live](https://health.andernet.dev)
 
-### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** Swift, homebrew, homekit, swift, xcode
+> **Tech:** TypeScript
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -72,18 +60,30 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
 
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> My attempt to build an inclusive homehub / automation project.
+>
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
+
+### 🌐 [sky](https://github.com/and3rn3t/sky)
+
+> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+>
+> **Tech:** TypeScript, astronomy, react, spark-template, typescript
+
+### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
+
+> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
+>
+> **Tech:** Swift, homebrew, homekit, swift, xcode
+
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
 > Personal portfolio for Jonah (GitHub Spark template).
 >
 > **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
-
-### 🌐 [silas](https://github.com/and3rn3t/silas)
-
-> Personal webpage for Silas
->
-> **Tech:** JavaScript, cloudflare-pages, game, javascript, playwright
-> 🔗 [Live](https://silas-anderson.pages.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 
