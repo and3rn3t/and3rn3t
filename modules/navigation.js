@@ -6,6 +6,9 @@
 import { debug } from './debug.js';
 import { analyticsManager } from './analytics.js';
 
+// Plain in-page section anchors (#about); excludes #post/<slug> and #project/<slug>
+const SECTION_HASH = /^#[A-Za-z][\w-]*$/;
+
 // Navigation configuration
 const CONFIG = {
     scrollOffset: 80,
@@ -65,6 +68,9 @@ export class NavigationManager {
                 return;
             }
 
+            // Only plain #section-id links; #post/slug and #project/slug have their own handlers
+            if (!SECTION_HASH.test(targetId)) return;
+
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
@@ -82,7 +88,7 @@ export class NavigationManager {
         });
 
         // Handle initial hash on page load
-        if (globalThis.location.hash) {
+        if (SECTION_HASH.test(globalThis.location.hash)) {
             setTimeout(() => {
                 const target = document.querySelector(globalThis.location.hash);
                 if (target) {

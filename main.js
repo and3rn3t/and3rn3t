@@ -442,11 +442,28 @@ function setupGlobalEvents() {
             .register('/sw.js')
             .then(registration => {
                 debug.log('[App] Service Worker registered:', registration.scope);
+                watchForServiceWorkerUpdate();
             })
             .catch(error => {
                 debug.warn('[App] Service Worker registration failed:', error);
             });
     }
+}
+
+/**
+ * The worker takes over as soon as it installs, so a controller change means the
+ * code behind this tab was replaced. Say so; don't reload under the visitor.
+ */
+function watchForServiceWorkerUpdate() {
+    if (!navigator.serviceWorker.controller) return; // first install, nothing was replaced
+    navigator.serviceWorker.addEventListener(
+        'controllerchange',
+        () => {
+            const { ui } = appState.managers;
+            ui?.showNotification?.('Site updated. Refresh for the latest version.', 'info', 8000);
+        },
+        { once: true }
+    );
 }
 
 /**
