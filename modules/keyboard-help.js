@@ -5,7 +5,7 @@
  * makes its advertised shortcuts honest:
  *   - `?`            toggle this help panel
  *   - `g` then h/a/p/c   jump to home / about / projects / contact
- * (Theme `t`, scroll `j`/`k`, search `/`, and `Esc` are wired elsewhere.)
+ * (Theme `t`, the `/` palette, and `Esc` are wired elsewhere.)
  *
  * Fully keyboard-driven with a focus trap, and dismissible via Esc, the close
  * button, or a click on the backdrop.

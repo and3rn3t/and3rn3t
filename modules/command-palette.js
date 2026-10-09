@@ -150,7 +150,7 @@ class CommandPalette {
                 title: `Go to ${label}`,
                 subtitle: `#${section.id}`,
                 run: () => {
-                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    section.scrollIntoView({ block: 'start' });
                 },
             };
         });
@@ -165,9 +165,7 @@ class CommandPalette {
                 title: name,
                 subtitle: 'Skill',
                 run: () => {
-                    document
-                        .getElementById('about')
-                        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('about')?.scrollIntoView({ block: 'start' });
                 },
             };
         });

@@ -114,7 +114,7 @@ class BlogManager {
             this.#closeArticle();
         });
 
-        this.#articleEl.scrollIntoView({ behavior: 'smooth' });
+        this.#articleEl.scrollIntoView();
     }
 
     #closeArticle() {
