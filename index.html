@@ -271,26 +271,9 @@
     <!-- Non-critical modules loaded lazily on-demand -->
     <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Cloudflare Web Analytics with Error Handling -->
+    <!-- Cloudflare Web Analytics, loaded after first paint. Failure is harmless. -->
     <script>
-      // Enhanced Analytics Configuration with Cloudflare Fallback
-      window.portfolioAnalytics = {
-        cloudflareEnabled: false,
-        customEventsEnabled: true,
-        performanceMonitoring: true,
-        userBehaviorTracking: true,
-        sessionId: null,
-        userId: null,
-        cloudflareAttempted: false,
-        cloudflareLoaded: false,
-      };
-
-      // Attempt to load Cloudflare Analytics with error handling
-      function loadCloudflareAnalytics() {
-        if (window.portfolioAnalytics.cloudflareAttempted) return;
-
-        window.portfolioAnalytics.cloudflareAttempted = true;
-
+      setTimeout(() => {
         const script = document.createElement('script');
         script.defer = true;
         script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
@@ -298,35 +281,8 @@
           'data-cf-beacon',
           '{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'
         );
-
-        script.onload = function () {
-          window.portfolioAnalytics.cloudflareEnabled = true;
-          window.portfolioAnalytics.cloudflareLoaded = true;
-          console.log('Cloudflare Analytics loaded successfully');
-        };
-
-        script.onerror = function () {
-          console.warn(
-            'Cloudflare Analytics failed to load - continuing without external analytics'
-          );
-          window.portfolioAnalytics.cloudflareEnabled = false;
-          window.portfolioAnalytics.cloudflareLoaded = false;
-        };
-
-        // Set timeout for loading
-        setTimeout(() => {
-          if (!window.portfolioAnalytics.cloudflareLoaded) {
-            console.warn(
-              'Cloudflare Analytics load timeout - continuing without external analytics'
-            );
-          }
-        }, 5000);
-
         document.head.appendChild(script);
-      }
-
-      // Try to load Cloudflare Analytics after a short delay
-      setTimeout(loadCloudflareAnalytics, 500);
+      }, 500);
     </script>
 
     <!-- DNS prefetch for external resources -->

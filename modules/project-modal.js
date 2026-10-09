@@ -290,4 +290,3 @@ export class ProjectModal {
 }
 
 export const projectModal = new ProjectModal();
-export default projectModal;

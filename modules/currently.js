@@ -11,12 +11,11 @@
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { WORKER_BASE } from './config.js';
+import { SKIP_REPOS, pickEvent, buildActivity } from './utils/activity.js';
 import { escapeHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
 
 const WORKER_URL = `${WORKER_BASE}/activity`;
-
-const SKIP_REPOS = new Set(['and3rn3t/and3rn3t']);
 
 const TYPE_LABELS = {
     push: 'pushing to',
@@ -84,78 +83,8 @@ class CurrentlyWidget {
     }
 
     pickActivity(events) {
-        const INTERESTING = new Set([
-            'PushEvent',
-            'PullRequestEvent',
-            'CreateEvent',
-            'ReleaseEvent',
-        ]);
-        const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days
-
-        // First pass: skip portfolio repo, prefer recent activity.
-        for (const event of events) {
-            const repo = event.repo?.name ?? '';
-            if (SKIP_REPOS.has(repo) || !INTERESTING.has(event.type)) continue;
-            const result = this.buildActivity(event, repo);
-            if (result) return result;
-        }
-
-        // Second pass: everything outside SKIP_REPOS was stale or absent.
-        // If the best available activity (including portfolio repo) is recent,
-        // show it rather than leaving the widget blank or showing 2-week-old data.
-        for (const event of events) {
-            const repo = event.repo?.name ?? '';
-            if (!INTERESTING.has(event.type)) continue;
-            const age = new Date(event.created_at ?? 0).getTime();
-            if (age < cutoff) break; // events are chronological; nothing newer follows
-            const result = this.buildActivity(event, repo);
-            if (result) return result;
-        }
-
-        return null;
-    }
-
-    buildActivity(event, repo) {
-        const repoName = repo.split('/').pop();
-        const repoUrl = `https://github.com/${repo}`;
-        const pushedAt = event.created_at ?? null;
-        const base = { repo, repoName, repoUrl, pushedAt };
-
-        if (event.type === 'PushEvent') {
-            const commits = event.payload?.commits ?? [];
-            const commit =
-                [...commits].reverse().find(c => !c.message?.startsWith('Merge')) ?? commits.at(-1);
-            const branch = (event.payload?.ref ?? '').replace('refs/heads/', '') || 'main';
-            return {
-                ...base,
-                type: 'push',
-                message: commit?.message?.split('\n')[0] ?? null,
-                branch,
-            };
-        }
-        if (event.type === 'PullRequestEvent') {
-            const pr = event.payload?.pull_request;
-            return {
-                ...base,
-                type: 'pr',
-                message: pr?.title ?? null,
-                branch: pr?.head?.ref ?? null,
-            };
-        }
-        if (event.type === 'CreateEvent') {
-            const refType = event.payload?.ref_type;
-            if (refType !== 'repository' && refType !== 'branch') return null;
-            const message =
-                refType === 'repository'
-                    ? `Created ${repoName}`
-                    : `Created branch ${event.payload?.ref}`;
-            return { ...base, type: 'create', message, branch: null };
-        }
-        if (event.type === 'ReleaseEvent') {
-            const tag = event.payload?.release?.tag_name;
-            return { ...base, type: 'release', message: `Released ${tag}`, branch: null };
-        }
-        return null;
+        const event = pickEvent(events);
+        return event ? buildActivity(event, event.repo?.name ?? '') : null;
     }
 
     render(activity) {
@@ -207,4 +136,3 @@ class CurrentlyWidget {
 }
 
 export const currentlyWidget = new CurrentlyWidget();
-export default currentlyWidget;

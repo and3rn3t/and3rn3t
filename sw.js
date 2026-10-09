@@ -24,12 +24,6 @@ const PRECACHE_ASSETS = [
     '/offline.html',
 ];
 
-// API endpoints to cache with network-first strategy
-const API_ROUTES = [
-    'https://api.github.com/users/and3rn3t',
-    'https://api.github.com/users/and3rn3t/repos',
-];
-
 // Install event - cache critical assets
 self.addEventListener('install', event => {
     event.waitUntil(
@@ -137,11 +131,7 @@ self.addEventListener('fetch', event => {
 
 // Check if request is to an API endpoint
 function isAPIRequest(url) {
-    return (
-        url.hostname === 'api.github.com' ||
-        url.pathname.includes('/api/') ||
-        API_ROUTES.some(route => url.href.startsWith(route))
-    );
+    return url.hostname === 'api.github.com' || url.pathname.includes('/api/');
 }
 
 // Pages and JSON data (github-data.json, posts-data.json, ...) must stay fresh
@@ -251,20 +241,3 @@ async function getOfflineFallback(request) {
         }),
     });
 }
-
-// Listen for messages from the client
-self.addEventListener('message', event => {
-    if (event.origin !== self.location.origin) return;
-
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
-
-    if (event.data && event.data.type === 'CLEAR_CACHE') {
-        event.waitUntil(
-            caches.keys().then(cacheNames => {
-                return Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
-            })
-        );
-    }
-});

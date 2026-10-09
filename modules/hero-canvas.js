@@ -12,6 +12,7 @@
  */
 
 import { canRunHeavyEffects, supportsWebGL, motion } from './capabilities.js';
+import { whileVisible } from './utils/while-visible.js';
 
 const VERTEX_SHADER = `
 attribute vec2 a_position;
@@ -210,28 +211,7 @@ export function initHeroCanvas(canvas) {
     }
 
     // Pause when scrolled away / tab hidden.
-    const io = new IntersectionObserver(
-        entries => {
-            for (const entry of entries) {
-                if (entry.isIntersecting) {
-                    start();
-                } else {
-                    stop();
-                }
-            }
-        },
-        { threshold: 0.01 }
-    );
-    io.observe(canvas);
-
-    function onVisibility() {
-        if (document.hidden) {
-            stop();
-        } else {
-            start();
-        }
-    }
-    document.addEventListener('visibilitychange', onVisibility);
+    const unobserve = whileVisible(canvas, start, stop);
 
     function onPointerMove(event) {
         const rect = canvas.getBoundingClientRect();
@@ -249,8 +229,7 @@ export function initHeroCanvas(canvas) {
     return {
         destroy() {
             stop();
-            io.disconnect();
-            document.removeEventListener('visibilitychange', onVisibility);
+            unobserve();
             globalThis.removeEventListener('pointermove', onPointerMove);
             globalThis.removeEventListener('resize', onResize);
             gl.deleteProgram(program);

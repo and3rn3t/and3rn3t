@@ -6,13 +6,14 @@
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { projectModal } from './project-modal.js';
+import { loadJSON } from './utils/data.js';
 import { escapeHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
 
 // Project display configuration
 const CONFIG = {
     cardAnimationDelay: 100,
-    fallbackDataPath: 'projects-data.json',
+    fallbackDataPath: '/projects-data.json',
 };
 
 const LANGUAGE_COLORS = {
@@ -41,7 +42,6 @@ export class ProjectsManager {
         this.container = null;
         this.moreButton = null;
         this.extraCount = 0;
-        this.isLoading = false;
         this.isInitialized = false;
     }
 
@@ -76,20 +76,14 @@ export class ProjectsManager {
     }
 
     async loadProjectsMetadata() {
-        try {
-            const response = await fetch(CONFIG.fallbackDataPath);
-            if (response.ok) {
-                this.projectsData = await response.json();
-            }
-        } catch (_error) {
+        this.projectsData = await loadJSON(CONFIG.fallbackDataPath);
+        if (!this.projectsData) {
             debug.warn('[Projects] Could not load projects-data.json');
         }
     }
 
     async loadProjects() {
         if (!this.container) return;
-
-        this.isLoading = true;
 
         // Build a map of all repos from the GitHub data cache
         const repoMap = new Map();
@@ -140,7 +134,6 @@ export class ProjectsManager {
             const curatedProjects = this.projectsData?.projects;
             if (!curatedProjects?.length) {
                 debug.warn('[Projects] No curated projects found in metadata');
-                this.isLoading = false;
                 return;
             }
             this.projects = curatedProjects.map(metadata => ({
@@ -159,7 +152,6 @@ export class ProjectsManager {
 
         this.renderProjects();
         debug.log(`[Projects] Rendered ${this.projects.length} projects`);
-        this.isLoading = false;
     }
 
     renderProjects() {
@@ -426,4 +418,3 @@ export class ProjectsManager {
 }
 
 export const projectsManager = new ProjectsManager();
-export default projectsManager;
