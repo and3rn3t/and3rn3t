@@ -21,7 +21,8 @@ jobs:
     name: Generated files are up to date
     uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1
     with:
-      command: pnpm generate:posts && git diff --exit-code -- posts feed.xml sitemap.xml
+      # `git add -N` makes brand-new generated files visible to `git diff`, which otherwise ignores untracked files
+      command: pnpm generate:posts && git add -N posts feed.xml sitemap.xml && git diff --exit-code -- posts feed.xml sitemap.xml
       package-manager: pnpm
 
   unit:
