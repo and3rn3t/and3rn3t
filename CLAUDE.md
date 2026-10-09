@@ -32,4 +32,4 @@
 ### Validation
 
 - `pnpm validate` will catch linting, formatting, failing unit tests, and broken or unpublished file references (`pnpm check:refs`).
-- `pnpm lint:css` (Stylelint, part of `validate`) fails on raw px/rem in padding, margin, gap, font-size and letter-spacing, and on raw line-height or font-weight numbers. `clamp()`, `max()`, `min()` and `env()` are allowed. A value with no matching token needs `/* stylelint-disable-next-line declaration-property-value-disallowed-list -- reason */`; a disable that no longer suppresses anything also fails.
+- `pnpm lint:css` (Stylelint, part of `validate`) fails on raw px/rem/em lengths in padding, margin, gap, font-size and letter-spacing, and on raw line-height or font-weight numbers. A raw length is allowed only _inside_ `clamp()`, `max()`, `min()` or `env()`, not beside them (`max(var(--space-4), env(...)) 12px` still fails). A value with no matching token needs `/* stylelint-disable-next-line declaration-property-value-disallowed-list -- reason */`; a disable that no longer suppresses anything also fails.
