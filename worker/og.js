@@ -11,6 +11,8 @@
  * iMessage, and all Chromium-based scrapers. No WASM or npm dependencies.
  */
 
+import { escapeHtml } from '../modules/utils/html.js';
+
 const SITE_URL = 'https://andernet.dev';
 const DATA_CACHE_TTL = 6 * 60 * 60; // 6 h — aligns with daily workflow
 const PROJECTS_CACHE_TTL = 24 * 60 * 60; // 24 h
@@ -132,7 +134,7 @@ export function renderPortfolioCard(ghData) {
     const barRects = topLangs
         .map(({ name, pct }) => {
             const w = Math.round(BAR_W * pct);
-            const rect = `<rect x="${barX}" y="${BAR_Y}" width="${w}" height="${BAR_H}" rx="3" fill="${escSvg(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR)}"/>`;
+            const rect = `<rect x="${barX}" y="${BAR_Y}" width="${w}" height="${BAR_H}" rx="3" fill="${escapeHtml(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR)}"/>`;
             barX += w;
             return rect;
         })
@@ -143,11 +145,11 @@ export function renderPortfolioCard(ghData) {
         .map(({ name, pct }, i) => {
             const lx = BAR_X + (i >= 3 ? 240 : 0);
             const ly = BAR_Y + 36 + (i % 3) * 28;
-            const color = escSvg(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR);
+            const color = escapeHtml(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR);
             return `
             <circle cx="${lx + 6}" cy="${ly - 4}" r="6" fill="${color}"/>
             <text x="${lx + 18}" y="${ly}" font-family="system-ui,sans-serif" font-size="20" fill="#9ca3af">
-                ${escSvg(name)} <tspan fill="#6b7280">${Math.round(pct * 100)}%</tspan>
+                ${escapeHtml(name)} <tspan fill="#6b7280">${Math.round(pct * 100)}%</tspan>
             </text>`;
         })
         .join('');
@@ -162,8 +164,8 @@ export function renderPortfolioCard(ghData) {
         .map(({ value, label }, i) => {
             const sx = 80 + i * 175;
             return `
-            <text x="${sx}" y="370" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#16a34a">${escSvg(String(value))}</text>
-            <text x="${sx}" y="398" font-family="system-ui,sans-serif" font-size="20" fill="#6b7280">${escSvg(label)}</text>`;
+            <text x="${sx}" y="370" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#16a34a">${escapeHtml(String(value))}</text>
+            <text x="${sx}" y="398" font-family="system-ui,sans-serif" font-size="20" fill="#6b7280">${escapeHtml(label)}</text>`;
         })
         .join('');
 
@@ -202,9 +204,9 @@ export function renderPortfolioCard(ghData) {
 // ---------------------------------------------------------------------------
 
 export function renderProjectCard(project, repoStats) {
-    const name = escSvg(project.displayName ?? project.name);
-    const desc = escSvg(truncate(project.description ?? '', 82));
-    const category = escSvg(project.category ?? '');
+    const name = escapeHtml(project.displayName ?? project.name);
+    const desc = escapeHtml(truncate(project.description ?? '', 82));
+    const category = escapeHtml(project.category ?? '');
     const techs = (project.technologies ?? []).slice(0, 4);
     const stars = repoStats?.stargazers_count ?? 0;
     const forks = repoStats?.forks_count ?? 0;
@@ -216,8 +218,8 @@ export function renderProjectCard(project, repoStats) {
             const color = LANG_COLORS[t] ?? FALLBACK_LANG_COLOR;
             const w = Math.min(t.length * 12 + 28, 160);
             const pill = `
-            <rect x="${techX}" y="420" width="${w}" height="34" rx="6" fill="#1f2937" stroke="${escSvg(color)}" stroke-width="1.5"/>
-            <text x="${techX + w / 2}" y="443" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="${escSvg(color)}">${escSvg(t)}</text>`;
+            <rect x="${techX}" y="420" width="${w}" height="34" rx="6" fill="#1f2937" stroke="${escapeHtml(color)}" stroke-width="1.5"/>
+            <text x="${techX + w / 2}" y="443" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="${escapeHtml(color)}">${escapeHtml(t)}</text>`;
             techX += w + 12;
             return pill;
         })
@@ -243,13 +245,13 @@ export function renderProjectCard(project, repoStats) {
         <line x1="80" y1="330" x2="680" y2="330" stroke="#1f2937" stroke-width="1.5"/>
 
         <!-- Stars / Forks -->
-        <text x="80" y="386" font-family="system-ui,sans-serif" font-size="28" fill="#16a34a">${escSvg(statsText)}</text>
+        <text x="80" y="386" font-family="system-ui,sans-serif" font-size="28" fill="#16a34a">${escapeHtml(statsText)}</text>
 
         <!-- Tech tags -->
         ${techPills}
 
         <!-- Bottom -->
-        <text x="80" y="598" font-family="system-ui,sans-serif" font-size="22" fill="#4b5563">andernet.dev · github.com/and3rn3t/${escSvg(project.github_repo?.split('/').pop() ?? project.name)}</text>
+        <text x="80" y="598" font-family="system-ui,sans-serif" font-size="22" fill="#4b5563">andernet.dev · github.com/and3rn3t/${escapeHtml(project.github_repo?.split('/').pop() ?? project.name)}</text>
     `);
 }
 
@@ -297,15 +299,6 @@ function dotGrid() {
 // ---------------------------------------------------------------------------
 // Utilities
 // ---------------------------------------------------------------------------
-
-function escSvg(str) {
-    return String(str ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
-}
 
 function truncate(str, max) {
     return str.length > max ? `${str.slice(0, max - 1)}…` : str;

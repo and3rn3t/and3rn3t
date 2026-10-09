@@ -140,4 +140,3 @@ class EasterEgg {
 }
 
 export const easterEgg = new EasterEgg();
-export default easterEgg;

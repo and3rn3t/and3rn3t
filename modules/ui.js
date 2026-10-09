@@ -353,4 +353,3 @@ export class UIManager {
 }
 
 export const uiManager = new UIManager();
-export default uiManager;

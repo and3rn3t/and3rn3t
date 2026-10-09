@@ -141,11 +141,6 @@ export class ThemeManager {
             ?.setAttribute('href', `${SPRITE_URL}#${isDark ? 'sun' : 'moon'}`);
     }
 
-    // Public API
-    getTheme() {
-        return this.currentTheme;
-    }
-
     isDark() {
         return this.currentTheme === 'dark';
     }
@@ -167,5 +162,3 @@ export function initThemeManager() {
         return null;
     }
 }
-
-export default ThemeManager;

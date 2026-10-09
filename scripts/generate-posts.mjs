@@ -15,6 +15,7 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { escapeHtml } from '../modules/utils/html.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://andernet.dev';
@@ -26,12 +27,7 @@ const { posts } = JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8')
 // Newest first, whatever order the data file is in
 posts.sort((a, b) => b.date.localeCompare(a.date));
 
-const esc = value =>
-  String(value ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;');
+const esc = escapeHtml;
 
 const postUrl = post => `${SITE}/posts/${post.slug}/`;
 const postPath = post => `/posts/${post.slug}/`;

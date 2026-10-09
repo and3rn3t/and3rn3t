@@ -15,8 +15,7 @@ export default defineConfig({
     },
     projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
     // Serve the repo root statically — mirrors GitHub Pages (raw source), which is
-    // the actual deployment. vite preview (dist/) breaks variable-path dynamic imports
-    // used by lazyLoad() in main.js.
+    // the actual deployment.
     webServer: {
         command: 'python3 -m http.server 4173',
         url: 'http://localhost:4173',
