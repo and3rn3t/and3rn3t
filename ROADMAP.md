@@ -195,3 +195,19 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   About stats grid renders it) and missed that spacing tokens shrink on mobile
   (`--space-10` is 32px there), so fixed-size controls use rem. Post pages reuse the default OG
   card; per-post cards would need the Rust rasterizer work (6.5).
+- **2026-10-09** — Cleanup pass (Phase 9), from three audits (JS, CSS/HTML, tooling) whose claims
+  were checked against the code and the live site before acting. The headline find was in
+  production: `pages.yml` used unanchored sparse-checkout globs, so `favicon.svg` and
+  `og/default.png` 404'd (no share image anywhere) while `package.json`, `tests/` and `worker/`
+  were public. Now an anchored allowlist with a guard step, and `pnpm check:refs` fails CI when a
+  referenced file is missing or unpublished; it replaces `vite build` in `validate` because the
+  bundle never shipped. JS: 404s and rate limits were retried up to 9 times (error text never
+  matched the check), and the error handler's fallbacks swallowed init errors; fixed, the module
+  went from 282 lines to 38. About 700 lines of dead JS, `wasm-lab.html` and `styles.css`'s
+  6,799 to 5,174 lines (dead rules, 17 merged media blocks) removed with a 30-screenshot pixel
+  diff against `main`. Two follow-ups are separate PRs so they can be reviewed on their own:
+  Stylelint enforcement of the design tokens (#140), and the data workflow (#141: a slimmer
+  `github-data.json`, dropping the unused metrics SVG job, OG renders only when their inputs
+  change). Left for a human: 22 `@media (max-width: 768px)` blocks that
+  can't be merged without choosing which conflicting rule is intended. Also not done: per-post OG
+  cards (6.5) and project screenshots in cards.
