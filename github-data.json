@@ -9,23 +9,27 @@
   },
   "repositories": [
     {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
+      "id": 1156702820,
+      "name": "jonah",
+      "full_name": "and3rn3t/jonah",
+      "description": "Personal portfolio for Jonah (GitHub Spark template).",
+      "html_url": "https://github.com/and3rn3t/jonah",
+      "homepage": null,
+      "language": "TypeScript",
       "topics": [
-        "config",
-        "github-config"
+        "cloudflare-workers",
+        "portfolio",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
       ],
       "stargazers_count": 0,
-      "forks_count": 1,
+      "forks_count": 0,
       "open_issues_count": 2,
-      "pushed_at": "2026-10-09T21:15:52Z",
-      "updated_at": "2026-10-09T21:10:07Z",
-      "created_at": "2021-07-29T15:36:40Z",
+      "pushed_at": "2026-10-10T01:57:16Z",
+      "updated_at": "2026-10-07T13:33:25Z",
+      "created_at": "2026-02-13T00:28:34Z",
       "fork": false,
       "archived": false
     },
@@ -41,9 +45,103 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 6,
-      "pushed_at": "2026-10-09T04:53:18Z",
+      "pushed_at": "2026-10-10T01:45:38Z",
       "updated_at": "2026-10-05T06:17:34Z",
       "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "game",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-10T01:05:18Z",
+      "updated_at": "2026-10-07T13:38:25Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 12,
+      "pushed_at": "2026-10-10T00:31:54Z",
+      "updated_at": "2026-08-05T18:38:02Z",
+      "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1166214014,
+      "name": "apple-music-dj",
+      "full_name": "and3rn3t/apple-music-dj",
+      "description": "OpenClaw skill for managing your Apple Music library",
+      "html_url": "https://github.com/and3rn3t/apple-music-dj",
+      "homepage": "",
+      "language": "Python",
+      "topics": [
+        "apple-music",
+        "claude-skill",
+        "python"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-09T21:59:01Z",
+      "updated_at": "2026-10-09T21:59:04Z",
+      "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-09T21:44:08Z",
+      "updated_at": "2026-10-09T21:44:11Z",
+      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -94,31 +192,6 @@
       "pushed_at": "2026-10-08T19:39:11Z",
       "updated_at": "2026-10-01T22:01:59Z",
       "created_at": "2025-08-30T21:38:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "game",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-08T16:39:17Z",
-      "updated_at": "2026-10-07T13:38:25Z",
-      "created_at": "2026-04-16T22:47:09Z",
       "fork": false,
       "archived": false
     },
@@ -195,31 +268,6 @@
       "archived": false
     },
     {
-      "id": 1156702820,
-      "name": "jonah",
-      "full_name": "and3rn3t/jonah",
-      "description": "Personal portfolio for Jonah (GitHub Spark template).",
-      "html_url": "https://github.com/and3rn3t/jonah",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "portfolio",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-07T13:33:22Z",
-      "updated_at": "2026-10-07T13:33:25Z",
-      "created_at": "2026-02-13T00:28:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1093825727,
       "name": "silas",
       "full_name": "and3rn3t/silas",
@@ -287,32 +335,6 @@
       "pushed_at": "2026-10-06T21:49:02Z",
       "updated_at": "2026-10-06T21:49:04Z",
       "created_at": "2026-01-14T22:35:53Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 11,
-      "pushed_at": "2026-10-05T00:54:28Z",
-      "updated_at": "2026-08-05T18:38:02Z",
-      "created_at": "2025-11-25T17:59:56Z",
       "fork": false,
       "archived": false
     },
@@ -615,28 +637,6 @@
       "pushed_at": "2026-08-31T09:10:09Z",
       "updated_at": "2026-08-25T01:14:42Z",
       "created_at": "2025-10-21T23:02:15Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1166214014,
-      "name": "apple-music-dj",
-      "full_name": "and3rn3t/apple-music-dj",
-      "description": "OpenClaw skill for managing your Apple Music library",
-      "html_url": "https://github.com/and3rn3t/apple-music-dj",
-      "homepage": "",
-      "language": "Python",
-      "topics": [
-        "apple-music",
-        "claude-skill",
-        "python"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-08-04T02:32:56Z",
-      "updated_at": "2026-08-04T02:32:59Z",
-      "created_at": "2026-02-25T01:47:38Z",
       "fork": false,
       "archived": false
     },
@@ -1172,6 +1172,867 @@
   ],
   "events": [
     {
+      "id": "23545746152",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "8ca8bca90c95d6eda9bf02fc02fa39fb417a4007",
+            "message": "docs: make the roadmap order-independent, describe the beacon timer accurately\n\nReview feedback:\n- ROADMAP.md stated #141's results (smaller data file, metrics job removed, OG\n  gating) as done although #141 can merge after this PR. Describe them as the\n  separate PRs they are (#140, #141) so the entry is true in any merge order.\n- The analytics doc said the beacon loads 500 ms after load; the timer starts\n  when the inline head script runs, not on the load event.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/docs/refresh"
+      },
+      "created_at": "2026-10-09T21:33:01Z"
+    },
+    {
+      "id": "23544905684",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "chore/slim-data-job",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T21:18:57Z"
+    },
+    {
+      "id": "23543943696",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "style/css-purge",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T21:04:01Z"
+    },
+    {
+      "id": "23542820893",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6d21fcb94e3753718951fd610f31647aa60d44c8",
+            "message": "Merge pull request #138 from and3rn3t/style/css-purge\n\nstyle(css): remove ~1,600 lines of dead CSS, merge scattered media blocks"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-09T21:04:00Z"
+    },
+    {
+      "id": "23542235671",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "efe2e8769dd13188e8cca1b4274fa6e679687510",
+            "message": "Merge branch 'main' into style/css-purge"
+          }
+        ],
+        "ref": "refs/heads/style/css-purge"
+      },
+      "created_at": "2026-10-09T20:53:37Z"
+    },
+    {
+      "id": "23541489063",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f39a78b630bf0e532ccbdfb1ed1937a7f7c63cf2",
+            "message": "fix(js): whileVisible only runs when on screen and tab visible\n\nReview feedback: returning to a hidden tab called start() even when the canvas\nhad scrolled offscreen in the meantime. Track both conditions and re-evaluate\non either change. The first evaluation always fires so an element that starts\noffscreen still gets stop(). Adds tests for both cases.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/js-error-handling"
+      },
+      "created_at": "2026-10-09T20:54:50Z"
+    },
+    {
+      "id": "23540541670",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "chore/tooling-cleanup",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T20:47:25Z"
+    },
+    {
+      "id": "23539669350",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/pages-publish-allowlist",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T20:11:24Z"
+    },
+    {
+      "id": "23534248397",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "refactor/drop-dead-modules",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:46:05Z"
+    },
+    {
+      "id": "23534142515",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "refactor/drop-dead-modules",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:44:28Z"
+    },
+    {
+      "id": "23533830103",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e849f8d0152d0d9fb890269a27d2e6d98ba49c4d",
+            "message": "Merge pull request #130 from and3rn3t/perf/first-paint\n\nperf: faster first paint and ~460 KB less font weight"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-09T18:39:38Z"
+    },
+    {
+      "id": "23533288289",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/sw-and-deeplinks",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:31:09Z"
+    },
+    {
+      "id": "23531602854",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "61b9faa25796093b36d6429ab239c3b13f1336f7",
+            "message": "Merge main into chore/modernize-phase1\n\nResolve cryptography pin conflicts: keep main's v50 security floor with a\nlooser upper bound (>=50,<51). Pin the new lint job's actions to the same\nSHAs Renovate used.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/modernize-phase1"
+      },
+      "created_at": "2026-10-09T21:52:39Z"
+    },
+    {
+      "id": "23531528867",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "chore/modernize-phase1",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T21:51:08Z"
+    },
+    {
+      "id": "23530578610",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0e195bf2f1e7eef689f801ea3f1fa0952e204ebc",
+            "message": "chore(css): only exempt raw lengths that sit inside clamp/max/min/env\n\nReview feedback: the lookahead exempted a whole declaration as soon as any\nallowed function appeared, so 'padding: max(var(--space-4), env(...)) 12px'\npassed. The pattern now walks the value and fails on a raw px/rem/em length at\nthe top level, skipping only whole clamp/max/min/env/var calls; calc() is not\nskipped. Moved the config to stylelint.config.mjs so the pattern is built from\nnamed pieces instead of repeated three times in JSON. Probe cases: six allowed\nforms pass, six disallowed (including the one above and calc(1rem + 2px)) fail.\nThe real stylesheet has no new violations.\n\nCLAUDE.md now says px/rem/em, and that the exemption is for lengths inside the\nfunctions.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/stylelint"
+      },
+      "created_at": "2026-10-09T21:31:42Z"
+    },
+    {
+      "id": "23529780173",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "chore/stylelint",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T21:15:53Z"
+    },
+    {
+      "id": "23529661849",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/js-error-handling",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T21:03:44Z"
+    },
+    {
+      "id": "23528858995",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0e469b5d1dbb31a417b7783ba874dec441aa732d",
+            "message": "ci: run Lighthouse as a post-deploy job instead of on workflow_run\n\nactionlint rejects a reusable-workflow call under the low-trust workflow_run\ntrigger without an explicit cache limit. Run the audit as a job in pages.yml\n(needs: deploy, push events only) instead: same 'audit the new build'\nbehaviour, trusted trigger. lighthouse.yml keeps the weekly and manual runs.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n(cherry picked from commit 439093ea1388f8700bb30d15d27c211d94b2c44e)"
+          }
+        ],
+        "ref": "refs/heads/fix/pages-publish-allowlist"
+      },
+      "created_at": "2026-10-09T20:49:52Z"
+    },
+    {
+      "id": "23528711751",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "bdacd83dbdf522d9124fad685e30e8db430f51da",
+            "message": "style(css): drop empty universal rule left by the prefix removal\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/style/css-purge"
+      },
+      "created_at": "2026-10-09T20:55:54Z"
+    },
+    {
+      "id": "23526738794",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6a814960098c8680336eaec457e1d9d23a2ef4f7",
+            "message": "Merge branch 'main' into fix/pages-publish-allowlist"
+          }
+        ],
+        "ref": "refs/heads/fix/pages-publish-allowlist"
+      },
+      "created_at": "2026-10-09T20:13:28Z"
+    },
+    {
+      "id": "23525437817",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "renovate/vite-and-vitest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T19:57:45Z"
+    },
+    {
+      "id": "23522484398",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "perf/first-paint",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:38:25Z"
+    },
+    {
+      "id": "23522053435",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/sw-and-deeplinks",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:28:40Z"
+    },
+    {
+      "id": "23521989247",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "style/mobile-polish",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:56:05Z"
+    },
+    {
+      "id": "23521703137",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "style/mobile-polish",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:54:34Z"
+    },
+    {
+      "id": "23521687015",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d379671fe7db594d6436871db34417a89b97b555",
+            "message": "Merge pull request #128 from and3rn3t/fix/sw-and-deeplinks\n\nfix: serve fresh code via service worker and repair deep links"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-09T18:31:07Z"
+    },
+    {
+      "id": "23521191196",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "df646a1a9404c1a4e2075af113cfcebb1cbea8cc",
+            "message": "Merge pull request #131 from and3rn3t/refactor/drop-dead-modules\n\nrefactor: remove dead modules and duplicate scroll handling"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-09T18:46:04Z"
+    },
+    {
+      "id": "23520808336",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "perf/first-paint",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-09T18:39:39Z"
+    },
+    {
+      "id": "16864829954",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: modernize toolchain (Python 3.10+, ruff, CI lint)",
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:58:59Z"
+    },
+    {
+      "id": "23520317466",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e6f3ed668cc3d6eb45d9eb0246c8928bc9e573eb",
+            "message": "Merge branch 'main' into renovate/vite-and-vitest"
+          }
+        ],
+        "ref": "refs/heads/renovate/vite-and-vitest"
+      },
+      "created_at": "2026-10-09T18:31:34Z"
+    },
+    {
+      "id": "16864754693",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:57:44Z"
+    },
+    {
+      "id": "16864754677",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:57:44Z"
+    },
+    {
+      "id": "16864753835",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:57:43Z"
+    },
+    {
+      "id": "16864753699",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:57:43Z"
+    },
+    {
+      "id": "16864411753",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: modernize toolchain (Python 3.10+, ruff, CI lint)",
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:51:09Z"
+    },
+    {
+      "id": "16864368356",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: modernize toolchain (Python 3.10+, ruff, CI lint)",
+          "head": {
+            "ref": "chore/modernize-phase1"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:51:09Z"
+    },
+    {
+      "id": "16863948848",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: bring AGENTS.md in line with the repo",
+          "head": {
+            "ref": "docs/agents-md"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:44:06Z"
+    },
+    {
+      "id": "16863942582",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: bring AGENTS.md in line with the repo",
+          "head": {
+            "ref": "docs/agents-md"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:42:11Z"
+    },
+    {
+      "id": "16863833594",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: bring AGENTS.md in line with the repo",
+          "head": {
+            "ref": "docs/agents-md"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:42:11Z"
+    },
+    {
+      "id": "16863696926",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: replace template and stale docs with accurate ones",
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:39:59Z"
+    },
+    {
+      "id": "16863597947",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(data): slim github-data.json, drop unused metrics SVG, skip idle OG renders",
+          "head": {
+            "ref": "chore/slim-data-job"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:38:22Z"
+    },
+    {
+      "id": "16863412938",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(css): enforce design tokens with Stylelint",
+          "head": {
+            "ref": "chore/stylelint"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:35:19Z"
+    },
+    {
+      "id": "16863274107",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:33:03Z"
+    },
+    {
+      "id": "16863274106",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:33:04Z"
+    },
+    {
+      "id": "16863272873",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:33:01Z"
+    },
+    {
+      "id": "16863272822",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:33:03Z"
+    },
+    {
+      "id": "16863245872",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/slim-data-job"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:32:36Z"
+    },
+    {
+      "id": "16863245854",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/slim-data-job"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:32:37Z"
+    },
+    {
+      "id": "16863193029",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/stylelint"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:31:45Z"
+    },
+    {
+      "id": "16863193021",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/stylelint"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:31:46Z"
+    },
+    {
+      "id": "16863190180",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/stylelint"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:31:42Z"
+    },
+    {
+      "id": "16863190141",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/stylelint"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:31:43Z"
+    },
+    {
+      "id": "16863082569",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: replace template and stale docs with accurate ones",
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:20:26Z"
+    },
+    {
+      "id": "16863072172",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(data): slim github-data.json, drop unused metrics SVG, skip idle OG renders",
+          "head": {
+            "ref": "chore/slim-data-job"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:18:58Z"
+    },
+    {
+      "id": "16863055792",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(css): enforce design tokens with Stylelint",
+          "head": {
+            "ref": "chore/stylelint"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:15:54Z"
+    },
+    {
+      "id": "16862477873",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: replace template and stale docs with accurate ones",
+          "head": {
+            "ref": "docs/refresh"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:20:26Z"
+    },
+    {
+      "id": "16862385045",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(data): slim github-data.json, drop unused metrics SVG, skip idle OG renders",
+          "head": {
+            "ref": "chore/slim-data-job"
+          }
+        }
+      },
+      "created_at": "2026-10-09T21:18:58Z"
+    },
+    {
       "id": "16862191784",
       "type": "PullRequestEvent",
       "repo": {
@@ -1691,868 +2552,6 @@
         }
       },
       "created_at": "2026-10-09T19:12:51Z"
-    },
-    {
-      "id": "16856547709",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): update dependency vite to v8.3.4",
-          "head": {
-            "ref": "renovate/vite-and-vitest"
-          }
-        }
-      },
-      "created_at": "2026-10-06T05:45:59Z"
-    },
-    {
-      "id": "16854389810",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {},
-      "created_at": "2026-10-09T19:30:12Z"
-    },
-    {
-      "id": "16854387873",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): bump source-map-js from 1.2.1 to 1.2.2 in the npm_and_yarn group across 1 directory",
-          "head": {
-            "ref": "dependabot/npm_and_yarn/npm_and_yarn-501f592bae"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:32:53Z"
-    },
-    {
-      "id": "16854386210",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {},
-      "created_at": "2026-10-09T19:30:09Z"
-    },
-    {
-      "id": "16854290700",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): patch sharp and source-map-js (Dependabot alerts)",
-          "head": {
-            "ref": "fix/dependabot-alerts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:28:57Z"
-    },
-    {
-      "id": "16854200111",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): patch sharp and source-map-js (Dependabot alerts)",
-          "head": {
-            "ref": "fix/dependabot-alerts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:27:33Z"
-    },
-    {
-      "id": "16854178656",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): patch sharp and source-map-js (Dependabot alerts)",
-          "head": {
-            "ref": "fix/dependabot-alerts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:27:33Z"
-    },
-    {
-      "id": "16853814588",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: static, indexable post pages",
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:22:52Z"
-    },
-    {
-      "id": "16853019571",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:55Z"
-    },
-    {
-      "id": "16853017872",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:53Z"
-    },
-    {
-      "id": "16853017732",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:53Z"
-    },
-    {
-      "id": "16853015953",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:52Z"
-    },
-    {
-      "id": "16853014583",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:50Z"
-    },
-    {
-      "id": "16853014402",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:51Z"
-    },
-    {
-      "id": "16852328097",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: static, indexable post pages",
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:02:37Z"
-    },
-    {
-      "id": "16852199687",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: static, indexable post pages",
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:02:37Z"
-    },
-    {
-      "id": "16851669019",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "style: mobile polish — navbar theme toggle, contact form, project cards, contrast",
-          "head": {
-            "ref": "style/mobile-polish"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:56:03Z"
-    },
-    {
-      "id": "16851645007",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "style: mobile polish — navbar theme toggle, contact form, project cards, contrast",
-          "head": {
-            "ref": "style/mobile-polish"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:54:35Z"
-    },
-    {
-      "id": "16851548902",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "style: mobile polish — navbar theme toggle, contact form, project cards, contrast",
-          "head": {
-            "ref": "style/mobile-polish"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:54:35Z"
-    },
-    {
-      "id": "16850860727",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: remove dead modules and duplicate scroll handling",
-          "head": {
-            "ref": "refactor/drop-dead-modules"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:46:03Z"
-    },
-    {
-      "id": "16850843915",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: remove dead modules and duplicate scroll handling",
-          "head": {
-            "ref": "refactor/drop-dead-modules"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:44:29Z"
-    },
-    {
-      "id": "16850731938",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: remove dead modules and duplicate scroll handling",
-          "head": {
-            "ref": "refactor/drop-dead-modules"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:44:29Z"
-    },
-    {
-      "id": "16850342971",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: faster first paint and ~460 KB less font weight",
-          "head": {
-            "ref": "perf/first-paint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:39:37Z"
-    },
-    {
-      "id": "16850332435",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: faster first paint and ~460 KB less font weight",
-          "head": {
-            "ref": "perf/first-paint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:38:26Z"
-    },
-    {
-      "id": "16850245389",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: faster first paint and ~460 KB less font weight",
-          "head": {
-            "ref": "perf/first-paint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:38:26Z"
-    },
-    {
-      "id": "16849664368",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: serve fresh code via service worker and repair deep links",
-          "head": {
-            "ref": "fix/sw-and-deeplinks"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:31:06Z"
-    },
-    {
-      "id": "16849650032",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: serve fresh code via service worker and repair deep links",
-          "head": {
-            "ref": "fix/sw-and-deeplinks"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:28:41Z"
-    },
-    {
-      "id": "16849468221",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: serve fresh code via service worker and repair deep links",
-          "head": {
-            "ref": "fix/sw-and-deeplinks"
-          }
-        }
-      },
-      "created_at": "2026-10-09T18:28:41Z"
-    },
-    {
-      "id": "23371964079",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9b43b3cfb46b6aec7ac802c19e34fb5c21208eca",
-            "message": "Merge pull request #244 from and3rn3t/renovate/pnpm-11.x\n\nchore(deps): update pnpm to v11.28.5"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-07T13:33:28Z"
-    },
-    {
-      "id": "23371933668",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "fcad4a9179c4e8b921c81386ed5d19816cc8141c",
-            "message": "Merge pull request #73 from and3rn3t/dependabot/npm_and_yarn/npm_and_yarn-903ed42b99\n\nBump brace-expansion from 5.0.9 to 5.0.12 in the npm_and_yarn group across 1 directory"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-07T13:33:14Z"
-    },
-    {
-      "id": "23371918601",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "dddefc94cf9097778924fb905a9c762ca61b9eee",
-            "message": "Merge pull request #78 from and3rn3t/renovate/fastapi-0.x\n\nchore(deps): update dependency fastapi to v0.142.2"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-07T13:33:06Z"
-    },
-    {
-      "id": "23371906599",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/frontend/npm_and_yarn-501f592bae",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-07T13:33:00Z"
-    },
-    {
-      "id": "23371902772",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d4e9767bd7d3f5ba91777832b9642401fe3e03b2",
-            "message": "Merge pull request #81 from and3rn3t/dependabot/npm_and_yarn/frontend/npm_and_yarn-501f592bae\n\nbuild(deps): bump source-map-js from 1.2.1 to 1.2.2 in /frontend in the npm_and_yarn group across 1 directory"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-07T13:32:59Z"
-    },
-    {
-      "id": "23337039328",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c799fce039d08fe5a5953914915622df70124376",
-            "message": "Merge pull request #245 from and3rn3t/renovate/actions-download-artifact-digest\n\nchore(deps): update actions/download-artifact digest to 9000827"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-07T13:33:36Z"
-    },
-    {
-      "id": "23331644582",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/npm_and_yarn-26e1df0fee",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-07T13:33:22Z"
-    },
-    {
-      "id": "23331634567",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/npm_and_yarn-903ed42b99",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-07T13:33:15Z"
-    },
-    {
-      "id": "23325074856",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "refactor/streamline-copy",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T22:16:17Z"
-    },
-    {
-      "id": "23322541467",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "4c1cd96e71e1e88c85d1838bbea95e13e5c093c4",
-            "message": "Merge pull request #55 from and3rn3t/renovate/radix-ui-primitives-monorepo\n\nchore(deps): update radix-ui-primitives monorepo"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:49:17Z"
-    },
-    {
-      "id": "23322529800",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/tailwind-merge-3.7.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T21:49:10Z"
-    },
-    {
-      "id": "23322493256",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "ref": "renovate/uvicorn-0.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T21:48:47Z"
-    },
-    {
-      "id": "23322485737",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "ref": "renovate/black-26.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T21:48:42Z"
-    },
-    {
-      "id": "23317303924",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2877aacb1fd8ba3ad4c5753e15f9344d8685610c",
-            "message": "Merge pull request #57 from and3rn3t/dependabot/npm_and_yarn/npm_and_yarn-26e1df0fee\n\nchore(deps): bump the npm_and_yarn group across 1 directory with 2 updates"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-07T13:33:21Z"
-    },
-    {
-      "id": "23317251635",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "ref": "renovate/fastapi-0.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-07T13:33:07Z"
-    },
-    {
-      "id": "23314214830",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/actions-download-artifact-digest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-07T13:33:37Z"
-    },
-    {
-      "id": "23311455476",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/npm_and_yarn-17440a2fbd",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T21:49:24Z"
-    },
-    {
-      "id": "23311435303",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9d9aab6def80d44d43fe5bc167714461a823510a",
-            "message": "Merge pull request #69 from and3rn3t/dependabot/npm_and_yarn/react-resizable-panels-4.14.1\n\nBump react-resizable-panels from 2.1.9 to 4.14.1"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:49:11Z"
-    },
-    {
-      "id": "23311419696",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2b8655308dd2eeb8b45a0331b50034cd6a2ecadc",
-            "message": "Merge pull request #44 from and3rn3t/dependabot/npm_and_yarn/npm_and_yarn-4dba2e46d2\n\nchore(deps): bump the npm_and_yarn group across 2 directories with 7 updates"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:49:01Z"
-    },
-    {
-      "id": "23311402427",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "6ea80c9de7ab3e46c6f0f9db12ed7c929f9165fd",
-            "message": "Merge pull request #77 from and3rn3t/renovate/python-dotenv-1.x\n\nchore(deps): update dependency python-dotenv to v1.2.4"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:48:50Z"
-    },
-    {
-      "id": "23311380074",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "da3b953f8d17bd3cc11dce1cc8ab516e3e31f4b0",
-            "message": "Merge pull request #120 from and3rn3t/renovate/pnpm-11.x\n\nchore(deps): update pnpm to v11.28.5"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:48:36Z"
-    },
-    {
-      "id": "23290935606",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/pnpm-11.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-07T13:33:30Z"
-    },
-    {
-      "id": "23287004213",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5c5ef0173edb13cf6bd6d607b831c549f999a9af",
-            "message": "fix: address review on contact tabs and theme toggle\n\n- Guestbook submit ships disabled and is enabled once the JS handler\n  is attached, so an early submit can't fall back to a native GET\n- Keep the visitor's theme choice in memory so a storage failure\n  doesn't hand control back to the OS setting\n- Move mobile contact-tab rules after the base rules so they apply\n- Dark placeholders use --gray-500 (6.7:1) instead of --text-light\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/refactor/streamline-contact-theme"
-      },
-      "created_at": "2026-10-06T22:04:35Z"
-    },
-    {
-      "id": "23286876402",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c60b067fa1e15451ea9453858dfce9b0fd38bb46",
-            "message": "Merge branch 'main' into refactor/streamline-contact-theme"
-          }
-        ],
-        "ref": "refs/heads/refactor/streamline-contact-theme"
-      },
-      "created_at": "2026-10-06T22:02:03Z"
-    },
-    {
-      "id": "23286793310",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "refactor/streamline-copy",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T22:17:58Z"
-    },
-    {
-      "id": "23286235409",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b685ad0283d5f2d4ac4d67b9596643d635a2756a",
-            "message": "Merge pull request #72 from and3rn3t/dependabot/npm_and_yarn/eslint-10.11.0\n\nBump eslint from 10.8.0 to 10.11.0"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:49:03Z"
-    },
-    {
-      "id": "23286230605",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "4eb99a3a4ff7cc15da29815df5f6a69c41c9a1c4",
-            "message": "Merge pull request #241 from and3rn3t/renovate/pnpm-11.x\n\nchore(deps): update pnpm to v11.28.4"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:48:57Z"
-    },
-    {
-      "id": "23286227650",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3acb9c305f5c317bf2342d1b74ffec02888ed026",
-            "message": "Merge pull request #76 from and3rn3t/dependabot/npm_and_yarn/frontend/npm_and_yarn-90a0b23fa4\n\nbuild(deps): bump the npm_and_yarn group across 2 directories with 3 updates"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-06T21:48:54Z"
-    },
-    {
-      "id": "23284334979",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/eslint-10.11.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-06T21:49:05Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2566,7 +2565,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 3754,
+    "total": 3772,
     "weeks": [
       {
         "days": [
@@ -2738,12 +2737,12 @@
           },
           {
             "date": "2025-11-04",
-            "count": 66,
+            "count": 65,
             "level": 4
           },
           {
             "date": "2025-11-05",
-            "count": 14,
+            "count": 15,
             "level": 1
           },
           {
@@ -3065,12 +3064,12 @@
           },
           {
             "date": "2026-01-02",
-            "count": 4,
+            "count": 3,
             "level": 1
           },
           {
             "date": "2026-01-03",
-            "count": 8,
+            "count": 9,
             "level": 1
           }
         ]
@@ -3245,17 +3244,17 @@
           },
           {
             "date": "2026-02-03",
-            "count": 66,
-            "level": 4
-          },
-          {
-            "date": "2026-02-04",
             "count": 64,
             "level": 4
           },
           {
+            "date": "2026-02-04",
+            "count": 65,
+            "level": 4
+          },
+          {
             "date": "2026-02-05",
-            "count": 28,
+            "count": 29,
             "level": 2
           },
           {
@@ -3294,12 +3293,12 @@
           },
           {
             "date": "2026-02-12",
-            "count": 46,
+            "count": 45,
             "level": 3
           },
           {
             "date": "2026-02-13",
-            "count": 10,
+            "count": 11,
             "level": 1
           },
           {
@@ -3362,12 +3361,12 @@
           },
           {
             "date": "2026-02-24",
-            "count": 31,
+            "count": 30,
             "level": 2
           },
           {
             "date": "2026-02-25",
-            "count": 14,
+            "count": 15,
             "level": 1
           },
           {
@@ -3981,12 +3980,12 @@
           },
           {
             "date": "2026-06-15",
-            "count": 14,
+            "count": 13,
             "level": 1
           },
           {
             "date": "2026-06-16",
-            "count": 4,
+            "count": 5,
             "level": 1
           },
           {
@@ -4508,12 +4507,12 @@
           },
           {
             "date": "2026-09-18",
-            "count": 19,
+            "count": 18,
             "level": 2
           },
           {
             "date": "2026-09-19",
-            "count": 32,
+            "count": 33,
             "level": 2
           }
         ]
@@ -4625,8 +4624,13 @@
           },
           {
             "date": "2026-10-09",
-            "count": 50,
-            "level": 3
+            "count": 68,
+            "level": 4
+          },
+          {
+            "date": "2026-10-10",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -4636,16 +4640,16 @@
     "TypeScript": 13093809,
     "HTML": 5782478,
     "Swift": 5121304,
-    "Python": 3660355,
-    "JavaScript": 2540101,
-    "Shell": 1088231,
-    "CSS": 619120,
+    "Python": 3659258,
+    "JavaScript": 2541570,
+    "Shell": 1088181,
+    "CSS": 621282,
     "R": 618546,
     "Rust": 416849,
     "Kotlin": 300781,
     "PowerShell": 292114,
     "C++": 202428,
-    "Makefile": 57329,
+    "Makefile": 57444,
     "mcfunction": 24740,
     "Dockerfile": 11040,
     "Ruby": 9684,
@@ -4658,6 +4662,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-09T21:17:23Z",
+  "lastUpdated": "2026-10-10T03:15:36Z",
   "totalRepos": 52
 }
