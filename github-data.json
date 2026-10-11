@@ -9,6 +9,239 @@
   },
   "repositories": [
     {
+      "id": 1166214014,
+      "name": "apple-music-dj",
+      "full_name": "and3rn3t/apple-music-dj",
+      "description": "OpenClaw skill for managing your Apple Music library",
+      "html_url": "https://github.com/and3rn3t/apple-music-dj",
+      "homepage": "",
+      "language": "Python",
+      "topics": [
+        "apple-music",
+        "claude-skill",
+        "python"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-11T03:09:47Z",
+      "updated_at": "2026-10-11T03:07:11Z",
+      "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-11T00:30:52Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1193055292,
+      "name": "test-project",
+      "full_name": "and3rn3t/test-project",
+      "description": "Template test bed that mirrors the ai-template-repo structure.",
+      "html_url": "https://github.com/and3rn3t/test-project",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "template",
+        "testing"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-10T23:12:44Z",
+      "updated_at": "2026-07-08T01:10:09Z",
+      "created_at": "2026-03-26T20:37:33Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1171723267,
+      "name": "apple-photos-cleaner",
+      "full_name": "and3rn3t/apple-photos-cleaner",
+      "description": "OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.",
+      "html_url": "https://github.com/and3rn3t/apple-photos-cleaner",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "apple-photos",
+        "claude-skill",
+        "python"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-10T22:34:35Z",
+      "updated_at": "2026-07-08T01:09:39Z",
+      "created_at": "2026-03-03T14:40:25Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-10T20:44:32Z",
+      "updated_at": "2026-10-04T16:38:15Z",
+      "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "ml",
+        "walking",
+        "wellness"
+      ],
+      "stargazers_count": 4,
+      "forks_count": 1,
+      "open_issues_count": 12,
+      "pushed_at": "2026-10-10T17:59:48Z",
+      "updated_at": "2026-10-01T22:01:59Z",
+      "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1134570300,
+      "name": "family",
+      "full_name": "and3rn3t/family",
+      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
+      "html_url": "https://github.com/and3rn3t/family",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "kiosk",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-10T14:38:17Z",
+      "updated_at": "2026-10-06T21:49:04Z",
+      "created_at": "2026-01-14T22:35:53Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1080816618,
+      "name": "hack",
+      "full_name": "and3rn3t/hack",
+      "description": "A hacking simulator",
+      "html_url": "https://github.com/and3rn3t/hack",
+      "homepage": null,
+      "language": "Rust",
+      "topics": [
+        "game",
+        "hacking-simulator",
+        "rust",
+        "wasm"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-10T06:25:54Z",
+      "updated_at": "2026-08-25T01:14:42Z",
+      "created_at": "2025-10-21T23:02:15Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-10T05:09:18Z",
+      "updated_at": "2026-10-10T03:16:26Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1078539335,
+      "name": "network",
+      "full_name": "and3rn3t/network",
+      "description": "Testing UniFi API",
+      "html_url": "https://github.com/and3rn3t/network",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "python",
+        "unifi"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-10T04:39:19Z",
+      "updated_at": "2026-10-07T13:33:10Z",
+      "created_at": "2025-10-17T22:48:41Z",
+      "fork": false,
+      "archived": false
+    },
+    {
       "id": 1156702820,
       "name": "jonah",
       "full_name": "and3rn3t/jonah",
@@ -30,24 +263,6 @@
       "pushed_at": "2026-10-10T01:57:16Z",
       "updated_at": "2026-10-07T13:33:25Z",
       "created_at": "2026-02-13T00:28:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-10T01:45:38Z",
-      "updated_at": "2026-10-05T06:17:34Z",
-      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -99,99 +314,6 @@
       "pushed_at": "2026-10-10T00:31:54Z",
       "updated_at": "2026-08-05T18:38:02Z",
       "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1166214014,
-      "name": "apple-music-dj",
-      "full_name": "and3rn3t/apple-music-dj",
-      "description": "OpenClaw skill for managing your Apple Music library",
-      "html_url": "https://github.com/and3rn3t/apple-music-dj",
-      "homepage": "",
-      "language": "Python",
-      "topics": [
-        "apple-music",
-        "claude-skill",
-        "python"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-09T21:59:01Z",
-      "updated_at": "2026-10-09T21:59:04Z",
-      "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-09T21:44:08Z",
-      "updated_at": "2026-10-09T21:44:11Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1078539335,
-      "name": "network",
-      "full_name": "and3rn3t/network",
-      "description": "Testing UniFi API",
-      "html_url": "https://github.com/and3rn3t/network",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "python",
-        "unifi"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-08T20:05:06Z",
-      "updated_at": "2026-10-07T13:33:10Z",
-      "created_at": "2025-10-17T22:48:41Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "ml",
-        "walking",
-        "wellness"
-      ],
-      "stargazers_count": 4,
-      "forks_count": 1,
-      "open_issues_count": 12,
-      "pushed_at": "2026-10-08T19:39:11Z",
-      "updated_at": "2026-10-01T22:01:59Z",
-      "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
     },
@@ -314,31 +436,6 @@
       "archived": false
     },
     {
-      "id": 1134570300,
-      "name": "family",
-      "full_name": "and3rn3t/family",
-      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
-      "html_url": "https://github.com/and3rn3t/family",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "kiosk",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-06T21:49:02Z",
-      "updated_at": "2026-10-06T21:49:04Z",
-      "created_at": "2026-01-14T22:35:53Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1070938222,
       "name": "dbt",
       "full_name": "and3rn3t/dbt",
@@ -377,37 +474,6 @@
       "pushed_at": "2026-10-04T19:27:40Z",
       "updated_at": "2026-07-08T01:09:34Z",
       "created_at": "2026-03-26T19:58:01Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 0,
-      "pushed_at": "2026-10-04T16:38:13Z",
-      "updated_at": "2026-10-04T16:38:15Z",
-      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -618,29 +684,6 @@
       "archived": false
     },
     {
-      "id": 1080816618,
-      "name": "hack",
-      "full_name": "and3rn3t/hack",
-      "description": "A hacking simulator",
-      "html_url": "https://github.com/and3rn3t/hack",
-      "homepage": null,
-      "language": "Rust",
-      "topics": [
-        "game",
-        "hacking-simulator",
-        "rust",
-        "wasm"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-08-31T09:10:09Z",
-      "updated_at": "2026-08-25T01:14:42Z",
-      "created_at": "2025-10-21T23:02:15Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1270705393,
       "name": "amiibo",
       "full_name": "and3rn3t/amiibo",
@@ -687,27 +730,6 @@
       "archived": false
     },
     {
-      "id": 1193055292,
-      "name": "test-project",
-      "full_name": "and3rn3t/test-project",
-      "description": "Template test bed that mirrors the ai-template-repo structure.",
-      "html_url": "https://github.com/and3rn3t/test-project",
-      "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "template",
-        "testing"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 0,
-      "pushed_at": "2026-07-08T01:10:05Z",
-      "updated_at": "2026-07-08T01:10:09Z",
-      "created_at": "2026-03-26T20:37:33Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1147455263,
       "name": "r-data",
       "full_name": "and3rn3t/r-data",
@@ -744,28 +766,6 @@
       "pushed_at": "2026-07-08T01:09:38Z",
       "updated_at": "2026-07-08T01:09:42Z",
       "created_at": "2025-10-03T21:56:24Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1171723267,
-      "name": "apple-photos-cleaner",
-      "full_name": "and3rn3t/apple-photos-cleaner",
-      "description": "OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.",
-      "html_url": "https://github.com/and3rn3t/apple-photos-cleaner",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "apple-photos",
-        "claude-skill",
-        "python"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 0,
-      "pushed_at": "2026-07-08T01:09:35Z",
-      "updated_at": "2026-07-08T01:09:39Z",
-      "created_at": "2026-03-03T14:40:25Z",
       "fork": false,
       "archived": false
     },
@@ -1172,176 +1172,876 @@
   ],
   "events": [
     {
-      "id": "23545746152",
+      "id": "16925467282",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): clearer disclosure of playlist edits, --apply, verify_setup cleanup (3.2.4)",
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:07:07Z"
+    },
+    {
+      "id": "16925420955",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:05:32Z"
+    },
+    {
+      "id": "16925420954",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:05:31Z"
+    },
+    {
+      "id": "16925420269",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:05:29Z"
+    },
+    {
+      "id": "16925420243",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:05:30Z"
+    },
+    {
+      "id": "16925419361",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:05:27Z"
+    },
+    {
+      "id": "16925419282",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T03:05:28Z"
+    },
+    {
+      "id": "23650116283",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "commits": [
           {
-            "sha": "8ca8bca90c95d6eda9bf02fc02fa39fb417a4007",
-            "message": "docs: make the roadmap order-independent, describe the beacon timer accurately\n\nReview feedback:\n- ROADMAP.md stated #141's results (smaller data file, metrics job removed, OG\n  gating) as done although #141 can merge after this PR. Describe them as the\n  separate PRs they are (#140, #141) so the entry is true in any merge order.\n- The analytics doc said the beacon loads 500 ms after load; the timer starts\n  when the inline head script runs, not on the load event.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "6cd3511398c973bf305e27f3018cb8cc976c8a60",
+            "message": "fix: verify_setup honors signals mid-request; accurate playlist_health --apply wording\n\nverify_setup.sh runs curl in the background and waits (with --max-time), so\nINT/TERM clean up the token file immediately. playlist_health fix --apply\nmessages, docs and tests now say it removes duplicate copies and only adds\nreplacements.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
-        "ref": "refs/heads/docs/refresh"
+        "ref": "refs/heads/fix/hardening-3.2.4"
       },
-      "created_at": "2026-10-09T21:33:01Z"
+      "created_at": "2026-10-11T03:05:27Z"
     },
     {
-      "id": "23544905684",
-      "type": "CreateEvent",
+      "id": "16925291167",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "chore/slim-data-job",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "ci(publish): warn on a suspicious verdict, fail only on malicious or unknown",
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
       },
-      "created_at": "2026-10-09T21:18:57Z"
+      "created_at": "2026-10-11T03:00:55Z"
     },
     {
-      "id": "23543943696",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "style/css-purge",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T21:04:01Z"
-    },
-    {
-      "id": "23542820893",
+      "id": "23649799855",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "commits": [
           {
-            "sha": "6d21fcb94e3753718951fd610f31647aa60d44c8",
-            "message": "Merge pull request #138 from and3rn3t/style/css-purge\n\nstyle(css): remove ~1,600 lines of dead CSS, merge scattered media blocks"
+            "sha": "b1e94182e0ed2cd45322165a7e6a2090233c823a",
+            "message": "ci(publish): warn on a suspicious verdict, fail only on malicious or unknown (#33)\n\n* ci(publish): warn on a suspicious verdict, fail only on malicious or unknown\n\nClawHub's LLM review is not stable: the same code has flipped between benign and\nsuspicious on re-scans (3.2.2 went suspicious -> benign; 3.2.3 went benign ->\nsuspicious within 16 minutes). The check runs *after* the publish, so failing\nthe run on \"suspicious\" changes nothing on the registry and just teaches people\nto ignore red runs.\n\ncheck_verdict now:\n- fails on malicious/blocked (by status or verdict) and on an unknown status\n  (fail closed)\n- returns _suspicious for a suspicious verdict -> the CLI prints a ::warning::\n  with the reviewer's summary and exits 0, without waiting for the card\n- keeps the clean path and the card-pending warning as before\n\nVerified against live ClawHub data: 3.2.3 (suspicious) exits 0 with the warning,\n3.2.1 (clean) passes quietly. Tests cover malicious/blocked, the verdict field,\nunknown statuses, suspicious, the CLI paths; making suspicious fail again breaks\ntwo of them. CONTRIBUTING explains the reasoning.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* ci(publish): validate suspicious results fully, escape ClawHub text, report the matched field\n\nReview feedback on #33:\n\n- the early return for \"suspicious\" skipped fail-closed checks: an unknown status\n  with verdict \"suspicious\", or a suspicious result carrying a real failure such\n  as signature.invalid, exited 0. Now only status == \"suspicious\" qualifies (a\n  verdict alone never downgrades a status) and any reason outside\n  {security.status_not_clean, card.missing} is a failure\n- ClawHub's summary was embedded raw in a ::warning:: workflow command, so text\n  containing a newline followed by ::error::... could forge annotations. Text\n  from ClawHub is now escaped (%, CR, LF) in every ::warning::/::error:: and\n  flattened to one line in plain log output\n- a hard failure reported the unrelated `status` when the `verdict` field matched\n  (status \"clean\", verdict \"malicious\" -> \"is 'clean'\"); it names the field that\n  matched\n- the module help and CONTRIBUTING now list blocked, unrecognized statuses and\n  unexpected reasons as failures\n\n17 new tests; undoing each fix breaks some of them (checked with bytecode caching\noff). Verified live: 3.2.3 still produces a single ::warning:: line and exits 0.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-09T21:04:00Z"
+      "created_at": "2026-10-11T03:00:56Z"
     },
     {
-      "id": "23542235671",
-      "type": "PushEvent",
+      "id": "16925248724",
+      "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "commits": [
-          {
-            "sha": "efe2e8769dd13188e8cca1b4274fa6e679687510",
-            "message": "Merge branch 'main' into style/css-purge"
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
           }
-        ],
-        "ref": "refs/heads/style/css-purge"
+        }
       },
-      "created_at": "2026-10-09T20:53:37Z"
+      "created_at": "2026-10-11T02:59:29Z"
     },
     {
-      "id": "23541489063",
-      "type": "PushEvent",
+      "id": "16925248711",
+      "type": "PullRequestReviewEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "commits": [
-          {
-            "sha": "f39a78b630bf0e532ccbdfb1ed1937a7f7c63cf2",
-            "message": "fix(js): whileVisible only runs when on screen and tab visible\n\nReview feedback: returning to a hidden tab called start() even when the canvas\nhad scrolled offscreen in the meantime. Track both conditions and re-evaluate\non either change. The first evaluation always fires so an element that starts\noffscreen still gets stop(). Adds tests for both cases.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
           }
-        ],
-        "ref": "refs/heads/fix/js-error-handling"
+        }
       },
-      "created_at": "2026-10-09T20:54:50Z"
+      "created_at": "2026-10-11T02:59:30Z"
     },
     {
-      "id": "23540541670",
+      "id": "16925247941",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:27Z"
+    },
+    {
+      "id": "16925247929",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:28Z"
+    },
+    {
+      "id": "16925247074",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:25Z"
+    },
+    {
+      "id": "16925247067",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:26Z"
+    },
+    {
+      "id": "16925246109",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:24Z"
+    },
+    {
+      "id": "16925246102",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:23Z"
+    },
+    {
+      "id": "16925245342",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:22Z"
+    },
+    {
+      "id": "16925245295",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:59:21Z"
+    },
+    {
+      "id": "16925176389",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): clearer disclosure of playlist edits, --apply, verify_setup cleanup (3.2.4)",
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:55:51Z"
+    },
+    {
+      "id": "16925146657",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): clearer disclosure of playlist edits, --apply, verify_setup cleanup (3.2.4)",
+          "head": {
+            "ref": "fix/hardening-3.2.4"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:55:51Z"
+    },
+    {
+      "id": "23649453040",
       "type": "CreateEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "chore/tooling-cleanup",
+        "ref": "fix/hardening-3.2.4",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-09T20:47:25Z"
+      "created_at": "2026-10-11T02:55:50Z"
     },
     {
-      "id": "23539669350",
-      "type": "CreateEvent",
+      "id": "16925032731",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "fix/pages-publish-allowlist",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "ci(publish): warn on a suspicious verdict, fail only on malicious or unknown",
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
       },
-      "created_at": "2026-10-09T20:11:24Z"
+      "created_at": "2026-10-11T02:51:03Z"
     },
     {
-      "id": "23534248397",
+      "id": "16925014745",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci(publish): warn on a suspicious verdict, fail only on malicious or unknown",
+          "head": {
+            "ref": "ci/warn-on-suspicious"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:51:03Z"
+    },
+    {
+      "id": "23649017174",
       "type": "DeleteEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "refactor/drop-dead-modules",
+        "ref": "ci/card-lag-is-a-warning",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-09T18:46:05Z"
+      "created_at": "2026-10-11T02:49:26Z"
     },
     {
-      "id": "23534142515",
-      "type": "CreateEvent",
+      "id": "16924969047",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "refactor/drop-dead-modules",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "ci(publish): a skill card that isn't generated yet is a warning, not a failure",
+          "head": {
+            "ref": "ci/card-lag-is-a-warning"
+          }
+        }
       },
-      "created_at": "2026-10-09T18:44:28Z"
+      "created_at": "2026-10-11T02:49:23Z"
     },
     {
-      "id": "23533830103",
+      "id": "16924880818",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/card-lag-is-a-warning"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:46:10Z"
+    },
+    {
+      "id": "16924880802",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/card-lag-is-a-warning"
+          }
+        }
+      },
+      "created_at": "2026-10-11T02:46:10Z"
+    },
+    {
+      "id": "16924785036",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci(publish): a skill card that isn't generated yet is a warning, not a failure",
+          "head": {
+            "ref": "ci/card-lag-is-a-warning"
+          }
+        }
+      },
+      "created_at": "2026-10-11T01:58:14Z"
+    },
+    {
+      "id": "16923562120",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci(publish): a skill card that isn't generated yet is a warning, not a failure",
+          "head": {
+            "ref": "ci/card-lag-is-a-warning"
+          }
+        }
+      },
+      "created_at": "2026-10-11T01:58:14Z"
+    },
+    {
+      "id": "16922994908",
+      "type": "ReleaseEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "release": {
+          "tag_name": "v3.2.3"
+        }
+      },
+      "created_at": "2026-10-11T01:37:50Z"
+    },
+    {
+      "id": "23643920209",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "commits": [
           {
-            "sha": "e849f8d0152d0d9fb890269a27d2e6d98ba49c4d",
-            "message": "Merge pull request #130 from and3rn3t/perf/first-paint\n\nperf: faster first paint and ~460 KB less font weight"
+            "sha": "a508a27b127c37a4930c2a37bf0566977e0da24b",
+            "message": "fix(security): concert prep previews by default; repair two broken cron jobs (3.2.3) (#31)\n\n* fix(security): concert prep previews by default; repair two broken cron jobs (3.2.3)\n\nClawHub's review of 3.2.2 rated it \"suspicious\": a documented workflow could\ncreate a playlist without the confirmation the skill promises. It was right —\nscripts/concert_prep.sh has created its playlist unconditionally since v3.0, and\nthe 3.2.2 listing copy (\"anything that changes your account is opt-in and\nconfirmed first\") made that mismatch visible. 3.2.1 made no such claim.\n\n- concert_prep.sh now prints the proposed playlist (name, description, tracks)\n  as JSON and writes nothing; --create (anywhere on the line) builds it. stdout\n  is a single JSON document in both modes\n- SKILL.md: preview first, re-run with --create only after a yes; say plainly\n  that scheduled jobs run unattended (installing one is the approval)\n- tests: \"nothing is written by default\" across every write-capable entry point\n  (concert prep, similar/era/trend, gap analysis, health fix, new releases,\n  import, cron install), plus a doc/script consistency check\n\nFound while auditing the write paths: two default cron jobs never worked.\nnew-releases passed the storefront where new_releases.sh expects\n<profile.json> <storefront> (exit 1) and daily-drop passed --profile to\ndaily_pick.py, which takes positional <profile.json> <storefront> (exit 2).\nCron only logs, so both failed silently since v3.0. Fixed, and a new test\nexecutes every default job's real command against the mock.\n\nVersion 3.2.3. 907 tests; each fix was mutation-checked against the old bug.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(concert_prep): don't report created:true when the playlist name already exists\n\nReview feedback on #31: build_playlist.sh create exits 0 when a playlist with\nthat name already exists (it skips the POST), so concert_prep.sh printed\ncreated:true and a success message after creating nothing.\n\nThe script now checks for the name itself, as strategy_engine does:\n- the preview carries name_exists and warns that --create would skip it\n- --create on a taken name prints created:false with a skipped_reason and makes\n  no write attempt, instead of claiming success\n- SKILL.md tells the agent to pick another name when the preview says so\n\nThe builder's exit code is unchanged on purpose: new_releases.sh runs under\n`set -e` and would abort if the \"skip\" case became a non-zero exit.\n\nTests cover the preview, the taken-name create, and a different name still\nworking; they fail if the check is removed.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-09T18:39:38Z"
+      "created_at": "2026-10-11T01:36:12Z"
     },
     {
-      "id": "23533288289",
-      "type": "DeleteEvent",
+      "id": "16922947687",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "fix/sw-and-deeplinks",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(security): concert prep previews by default; repair two broken cron jobs (3.2.3)",
+          "head": {
+            "ref": "fix/concert-prep-preview"
+          }
+        }
       },
-      "created_at": "2026-10-09T18:31:09Z"
+      "created_at": "2026-10-11T01:36:11Z"
     },
     {
-      "id": "23531602854",
+      "id": "16922873953",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/concert-prep-preview"
+          }
+        }
+      },
+      "created_at": "2026-10-11T01:33:36Z"
+    },
+    {
+      "id": "16922873945",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/concert-prep-preview"
+          }
+        }
+      },
+      "created_at": "2026-10-11T01:33:37Z"
+    },
+    {
+      "id": "16922629327",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): concert prep previews by default; repair two broken cron jobs (3.2.3)",
+          "head": {
+            "ref": "fix/concert-prep-preview"
+          }
+        }
+      },
+      "created_at": "2026-10-11T01:24:32Z"
+    },
+    {
+      "id": "16922619122",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): concert prep previews by default; repair two broken cron jobs (3.2.3)",
+          "head": {
+            "ref": "fix/concert-prep-preview"
+          }
+        }
+      },
+      "created_at": "2026-10-11T01:24:32Z"
+    },
+    {
+      "id": "23643098932",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "fix/concert-prep-preview",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-11T01:24:31Z"
+    },
+    {
+      "id": "16922069800",
+      "type": "ReleaseEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "release": {
+          "tag_name": "v3.2.2"
+        }
+      },
+      "created_at": "2026-10-11T01:05:44Z"
+    },
+    {
+      "id": "23641136448",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "ci/clawhub-publish",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-11T00:56:32Z"
+    },
+    {
+      "id": "16921802725",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: publish to ClawHub from a GitHub release, behind an approval gate",
+          "head": {
+            "ref": "ci/clawhub-publish"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:56:30Z"
+    },
+    {
+      "id": "16921792188",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: publish to ClawHub from a GitHub release, behind an approval gate",
+          "head": {
+            "ref": "ci/clawhub-publish"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:54:23Z"
+    },
+    {
+      "id": "16921739939",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: publish to ClawHub from a GitHub release, behind an approval gate",
+          "head": {
+            "ref": "ci/clawhub-publish"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:54:23Z"
+    },
+    {
+      "id": "23640521375",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "docs/clawhub-listing",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-11T00:48:10Z"
+    },
+    {
+      "id": "16921557919",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(listing): sharper ClawHub summary, \"At a glance\", README samples (3.2.2)",
+          "head": {
+            "ref": "docs/clawhub-listing"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:48:08Z"
+    },
+    {
+      "id": "16921527202",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(listing): sharper ClawHub summary, \"At a glance\", README samples (3.2.2)",
+          "head": {
+            "ref": "docs/clawhub-listing"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:46:40Z"
+    },
+    {
+      "id": "16921515312",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(listing): sharper ClawHub summary, \"At a glance\", README samples (3.2.2)",
+          "head": {
+            "ref": "docs/clawhub-listing"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:46:40Z"
+    },
+    {
+      "id": "23639704486",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "chore/clawhubignore",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-11T00:36:47Z"
+    },
+    {
+      "id": "16921226396",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(packaging): add .clawhubignore so clawhub publish stops shipping dev files",
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:36:44Z"
+    },
+    {
+      "id": "16921182788",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:35:16Z"
+    },
+    {
+      "id": "16921182767",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:35:17Z"
+    },
+    {
+      "id": "16921182212",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:35:15Z"
+    },
+    {
+      "id": "16921182194",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:35:16Z"
+    },
+    {
+      "id": "16921181658",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:35:14Z"
+    },
+    {
+      "id": "16921181648",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/clawhubignore"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:35:15Z"
+    },
+    {
+      "id": "23639592917",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
@@ -1349,259 +2049,473 @@
       "payload": {
         "commits": [
           {
-            "sha": "61b9faa25796093b36d6429ab239c3b13f1336f7",
-            "message": "Merge main into chore/modernize-phase1\n\nResolve cryptography pin conflicts: keep main's v50 security floor with a\nlooser upper bound (>=50,<51). Pin the new lint job's actions to the same\nSHAs Renovate used.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "25fa999c2cbe4d3f0e1a8d896ac89b1ea45cc777",
+            "message": "test(packaging): assert on the files that would really ship; pin the publish SHA\n\nReview feedback on #27:\n\n- the old test inspected rule strings, so a broad rule (`*.md`, `*`) or one added\n  only to .gitignore — which ClawHub also applies — would hide runtime files\n  while it stayed green. shipped_files() now reproduces the CLI's selection with\n  git's own ignore engine (dot-entries skipped, .gitignore + .clawhubignore) and\n  the tests assert the real result: runtime files ship, tests/ and dev files\n  (now including renovate.json and Makefile) don't, and nothing unexpected is\n  added at the root or in new directories (LICENSE is allowed on purpose).\n- self-tests on synthetic repos prove the checker reacts to a broad rule, a\n  `*` rule, a .gitignore-only rule and a removed exclusion.\n- CONTRIBUTING: export `origin/main` after `git fetch` and reuse the same SHA\n  for the archive and --source-commit, instead of `checkout main && pull`, which\n  can publish a locally-ahead or divergent branch.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
-        "ref": "refs/heads/chore/modernize-phase1"
+        "ref": "refs/heads/chore/clawhubignore"
       },
-      "created_at": "2026-10-09T21:52:39Z"
+      "created_at": "2026-10-11T00:35:14Z"
     },
     {
-      "id": "23531528867",
-      "type": "CreateEvent",
+      "id": "16921100839",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "chore/modernize-phase1",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(codeql): clear the 17 open code-scanning alerts",
+          "head": {
+            "ref": "fix/codeql-alerts"
+          }
+        }
       },
-      "created_at": "2026-10-09T21:51:08Z"
+      "created_at": "2026-10-11T00:32:30Z"
     },
     {
-      "id": "23530578610",
+      "id": "16921047665",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/codeql-alerts"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:30:48Z"
+    },
+    {
+      "id": "16921047664",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/codeql-alerts"
+          }
+        }
+      },
+      "created_at": "2026-10-11T00:30:47Z"
+    },
+    {
+      "id": "23639270288",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "commits": [
           {
-            "sha": "0e195bf2f1e7eef689f801ea3f1fa0952e204ebc",
-            "message": "chore(css): only exempt raw lengths that sit inside clamp/max/min/env\n\nReview feedback: the lookahead exempted a whole declaration as soon as any\nallowed function appeared, so 'padding: max(var(--space-4), env(...)) 12px'\npassed. The pattern now walks the value and fails on a raw px/rem/em length at\nthe top level, skipping only whole clamp/max/min/env/var calls; calc() is not\nskipped. Moved the config to stylelint.config.mjs so the pattern is built from\nnamed pieces instead of repeated three times in JSON. Probe cases: six allowed\nforms pass, six disallowed (including the one above and calc(1rem + 2px)) fail.\nThe real stylesheet has no new violations.\n\nCLAUDE.md now says px/rem/em, and that the exemption is for lengths inside the\nfunctions.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "ec1113e9fc4b63e4916346161b6a9839bd44f8dd",
+            "message": "fix(strategy_engine): warn when the existing-playlist lookup exits non-zero too\n\nReview feedback on #26: the warning only covered exceptions, while an ordinary\nnon-zero exit from apple_music_api.sh still returned None silently. A failed\nlookup means create may duplicate a playlist, so every failure mode is now\nsurfaced (exception, non-zero exit with its stderr). A successful lookup with\nno match stays quiet.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
-        "ref": "refs/heads/chore/stylelint"
+        "ref": "refs/heads/fix/codeql-alerts"
       },
-      "created_at": "2026-10-09T21:31:42Z"
+      "created_at": "2026-10-11T00:30:47Z"
     },
     {
-      "id": "23529780173",
-      "type": "CreateEvent",
+      "id": "16921016314",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "chore/stylelint",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T21:15:53Z"
-    },
-    {
-      "id": "23529661849",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/js-error-handling",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T21:03:44Z"
-    },
-    {
-      "id": "23528858995",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "0e469b5d1dbb31a417b7783ba874dec441aa732d",
-            "message": "ci: run Lighthouse as a post-deploy job instead of on workflow_run\n\nactionlint rejects a reusable-workflow call under the low-trust workflow_run\ntrigger without an explicit cache limit. Run the audit as a job in pages.yml\n(needs: deploy, push events only) instead: same 'audit the new build'\nbehaviour, trusted trigger. lighthouse.yml keeps the weekly and manual runs.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n(cherry picked from commit 439093ea1388f8700bb30d15d27c211d94b2c44e)"
+        "pull_request": {
+          "title": "chore(packaging): add .clawhubignore so clawhub publish stops shipping dev files",
+          "head": {
+            "ref": "chore/clawhubignore"
           }
-        ],
-        "ref": "refs/heads/fix/pages-publish-allowlist"
+        }
       },
-      "created_at": "2026-10-09T20:49:52Z"
+      "created_at": "2026-10-11T00:28:18Z"
     },
     {
-      "id": "23528711751",
-      "type": "PushEvent",
+      "id": "16920987207",
+      "type": "ReleaseEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "commits": [
-          {
-            "sha": "bdacd83dbdf522d9124fad685e30e8db430f51da",
-            "message": "style(css): drop empty universal rule left by the prefix removal\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+        "release": {
+          "tag_name": "v3.2.1"
+        }
+      },
+      "created_at": "2026-10-11T00:28:45Z"
+    },
+    {
+      "id": "16920986319",
+      "type": "ReleaseEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "release": {
+          "tag_name": "v3.2.0"
+        }
+      },
+      "created_at": "2026-10-11T00:28:44Z"
+    },
+    {
+      "id": "16920972482",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(packaging): add .clawhubignore so clawhub publish stops shipping dev files",
+          "head": {
+            "ref": "chore/clawhubignore"
           }
-        ],
-        "ref": "refs/heads/style/css-purge"
+        }
       },
-      "created_at": "2026-10-09T20:55:54Z"
+      "created_at": "2026-10-11T00:28:18Z"
     },
     {
-      "id": "23526738794",
-      "type": "PushEvent",
+      "id": "16920943760",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "commits": [
-          {
-            "sha": "6a814960098c8680336eaec457e1d9d23a2ef4f7",
-            "message": "Merge branch 'main' into fix/pages-publish-allowlist"
+        "pull_request": {
+          "title": "fix(codeql): clear the 17 open code-scanning alerts",
+          "head": {
+            "ref": "fix/codeql-alerts"
           }
-        ],
-        "ref": "refs/heads/fix/pages-publish-allowlist"
+        }
       },
-      "created_at": "2026-10-09T20:13:28Z"
+      "created_at": "2026-10-11T00:26:55Z"
     },
     {
-      "id": "23525437817",
-      "type": "DeleteEvent",
+      "id": "16920931373",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "renovate/vite-and-vitest",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(codeql): clear the 17 open code-scanning alerts",
+          "head": {
+            "ref": "fix/codeql-alerts"
+          }
+        }
       },
-      "created_at": "2026-10-09T19:57:45Z"
+      "created_at": "2026-10-11T00:26:55Z"
     },
     {
-      "id": "23522484398",
-      "type": "CreateEvent",
+      "id": "16920445917",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "perf/first-paint",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(security): enforce cron install confirmation; rename seed strategy to similar (3.2.1)",
+          "head": {
+            "ref": "fix/audit-followup"
+          }
+        }
       },
-      "created_at": "2026-10-09T18:38:25Z"
+      "created_at": "2026-10-11T00:11:13Z"
     },
     {
-      "id": "23522053435",
-      "type": "CreateEvent",
+      "id": "16920405628",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "fix/sw-and-deeplinks",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(security): enforce cron install confirmation; rename seed strategy to similar (3.2.1)",
+          "head": {
+            "ref": "fix/audit-followup"
+          }
+        }
       },
-      "created_at": "2026-10-09T18:28:40Z"
+      "created_at": "2026-10-11T00:09:17Z"
     },
     {
-      "id": "23521989247",
-      "type": "DeleteEvent",
+      "id": "16920385681",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "style/mobile-polish",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(security): enforce cron install confirmation; rename seed strategy to similar (3.2.1)",
+          "head": {
+            "ref": "fix/audit-followup"
+          }
+        }
       },
-      "created_at": "2026-10-09T18:56:05Z"
+      "created_at": "2026-10-11T00:09:17Z"
     },
     {
-      "id": "23521703137",
-      "type": "CreateEvent",
+      "id": "16919553278",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "style/mobile-polish",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(security): address ClawHub audit — cron injection, log and profile permissions",
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
       },
-      "created_at": "2026-10-09T18:54:34Z"
+      "created_at": "2026-10-10T23:40:44Z"
     },
     {
-      "id": "23521687015",
+      "id": "16919395288",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:35:24Z"
+    },
+    {
+      "id": "16919395258",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:35:24Z"
+    },
+    {
+      "id": "16919394677",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:35:23Z"
+    },
+    {
+      "id": "16919394668",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:35:23Z"
+    },
+    {
+      "id": "16919077388",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): address ClawHub audit — cron injection, log and profile permissions",
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:24:35Z"
+    },
+    {
+      "id": "16919067442",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(security): address ClawHub audit — cron injection, log and profile permissions",
+          "head": {
+            "ref": "fix/security-audit"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:24:35Z"
+    },
+    {
+      "id": "23633778952",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "commits": [
           {
-            "sha": "d379671fe7db594d6436871db34417a89b97b555",
-            "message": "Merge pull request #128 from and3rn3t/fix/sw-and-deeplinks\n\nfix: serve fresh code via service worker and repair deep links"
+            "sha": "56b135626ee9917129a437f7d03dc8b123a5d049",
+            "message": "ci(codeql): add workflow_dispatch so it can be run by hand (#22)\n\nGitHub auto-disables scheduled workflows after 60 days of repo inactivity\n(CodeQL and Stale were both disabled_inactivity). A disabled workflow also\nignores its push/pull_request triggers, so PRs silently lose code scanning.\nWith workflow_dispatch the workflow can be started manually and re-checked.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-09T18:31:07Z"
+      "created_at": "2026-10-10T23:14:58Z"
     },
     {
-      "id": "23521191196",
+      "id": "16918768021",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci(codeql): add workflow_dispatch so it can be run by hand",
+          "head": {
+            "ref": "ci/codeql-dispatch"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:14:56Z"
+    },
+    {
+      "id": "16918616286",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(shell): make interrupt cleanup race-free and signals immediate",
+          "head": {
+            "ref": "fix/interrupt-cleanup-race"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:10:07Z"
+    },
+    {
+      "id": "16918612790",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(shell): make interrupt cleanup race-free and signals immediate",
+          "head": {
+            "ref": "fix/interrupt-cleanup-race"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:08:28Z"
+    },
+    {
+      "id": "16918564778",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(shell): make interrupt cleanup race-free and signals immediate",
+          "head": {
+            "ref": "fix/interrupt-cleanup-race"
+          }
+        }
+      },
+      "created_at": "2026-10-10T23:08:28Z"
+    },
+    {
+      "id": "16917952218",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci(codeql): add workflow_dispatch so it can be run by hand",
+          "head": {
+            "ref": "ci/codeql-dispatch"
+          }
+        }
+      },
+      "created_at": "2026-10-10T22:48:50Z"
+    },
+    {
+      "id": "23631822865",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "feature/v3.2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-10T22:48:04Z"
+    },
+    {
+      "id": "16917871595",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat: v3.2.0 — seed/era/blend strategies, taste drift, import, feedback",
+          "head": {
+            "ref": "feature/v3.2"
+          }
+        }
+      },
+      "created_at": "2026-10-10T22:46:13Z"
+    },
+    {
+      "id": "23631689774",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "commits": [
           {
-            "sha": "df646a1a9404c1a4e2075af113cfcebb1cbea8cc",
-            "message": "Merge pull request #131 from and3rn3t/refactor/drop-dead-modules\n\nrefactor: remove dead modules and duplicate scroll handling"
+            "sha": "a3c3215020d356dc4834104d7b3951ad4ec5c19b",
+            "message": "feat: v3.2.0 — seed/era/blend strategies, taste drift, import, feedback (#21)\n\n* feat: v3.2.0 — seed/era/blend strategies, taste drift, import, feedback\n\nNew playlist strategies\n- seed (\"songs like X\"), era (decade throwback), blend (two listeners, 60% cap)\n- real energy-arc sequencing (wave/ascending/descending) via shared GENRE_ENERGY\n- refresh now excludes library songs (--include-library opts back in)\n\nNew features\n- taste drift: dated snapshots from taste_profiler, taste_drift.py, drift card,\n  opt-in monthly-drift cron job\n- import_playlist.py: CSV/text import, ISRC first then strict title+artist match\n- feedback.py: like/dislike/clear songs and update the cached profile\n- --favorite with --create; gap-analysis --add-missing N (preview unless --yes)\n- profile signals from recently added items and recent radio stations\n- new apple_music_api.sh commands: similar-artists, songs-by-isrc,\n  recently-added, recent-stations, add-to-library, favorite, rate, unrate\n\nFixes found by the new mock-API integration tests\n- curl now runs with -g so URLs containing [ ] work (also fixes the existing\n  replay-summary <year>)\n- RETURN traps leaked to callers, aborting add-to-playlist and\n  remove-from-playlist with an unbound-variable error\n\nTesting\n- tests/mock_api.py: local Apple Music API stand-in; APPLE_MUSIC_API_BASE\n  (loopback only) points the wrapper at it\n- 628 tests (27 end-to-end against the mock), 91% coverage; ruff and\n  ShellCheck clean. Response shapes are unverified against the real API.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(shell): replace RETURN traps with explicit temp-file cleanup\n\nOn bash 4+/5 (Linux CI, Homebrew bash) RETURN traps stay armed after the\nfunction that set them returns, so they fire again in the caller where the\nfunction's locals no longer exist: every API call aborted with\n\"tmpfile: unbound variable\" under `set -u`. One helper's trap also replaced\nanother's, leaving the token-bearing curl config behind in $TMPDIR.\n\n- _retry/_with_auth remove their own temp files right after use\n- EXIT/INT/TERM traps (re-installed in _with_auth, since pipeline subshells\n  reset traps) are only a backstop for interrupts\n- tests: no token files left after normal calls or after SIGINT/SIGTERM\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: address review feedback on strategies, import, cron, drift\n\n- import: match artists on whole credits (Muse != Museum, Queen != Queen\n  Latifah) while still accepting collaborator credits\n- cron: shlex.quote every interpolated path/storefront so profile paths with\n  spaces or shell metacharacters stay single arguments (all jobs)\n- blend: enforce the 60% share against the final playlist length, not the\n  requested size; a lopsided candidate pool no longer yields a 100/0 \"blend\"\n- wave arc: asymmetric target curve so the opener is mid-energy and the\n  closer is the quietest track\n- drift: unreadable/corrupt snapshots raise a clean error instead of a\n  traceback; stray non-date files are ignored\n- profiler: station titles match genres on word boundaries\n  (\"Popular Hits Radio\" is no longer Pop)\n- mock API: missing song-detail now returns a real 404\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-09T18:46:04Z"
+      "created_at": "2026-10-10T22:46:14Z"
     },
     {
-      "id": "23520808336",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "perf/first-paint",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T18:39:39Z"
-    },
-    {
-      "id": "16864829954",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: modernize toolchain (Python 3.10+, ruff, CI lint)",
-          "head": {
-            "ref": "chore/modernize-phase1"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:58:59Z"
-    },
-    {
-      "id": "23520317466",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "e6f3ed668cc3d6eb45d9eb0246c8928bc9e573eb",
-            "message": "Merge branch 'main' into renovate/vite-and-vitest"
-          }
-        ],
-        "ref": "refs/heads/renovate/vite-and-vitest"
-      },
-      "created_at": "2026-10-09T18:31:34Z"
-    },
-    {
-      "id": "16864754693",
+      "id": "16917856521",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
@@ -1610,14 +2524,14 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/modernize-phase1"
+            "ref": "feature/v3.2"
           }
         }
       },
-      "created_at": "2026-10-09T21:57:44Z"
+      "created_at": "2026-10-10T22:45:46Z"
     },
     {
-      "id": "16864754677",
+      "id": "16917856478",
       "type": "PullRequestReviewEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
@@ -1626,14 +2540,14 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/modernize-phase1"
+            "ref": "feature/v3.2"
           }
         }
       },
-      "created_at": "2026-10-09T21:57:44Z"
+      "created_at": "2026-10-10T22:45:47Z"
     },
     {
-      "id": "16864753835",
+      "id": "16917855674",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
@@ -1642,14 +2556,14 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/modernize-phase1"
+            "ref": "feature/v3.2"
           }
         }
       },
-      "created_at": "2026-10-09T21:57:43Z"
+      "created_at": "2026-10-10T22:45:45Z"
     },
     {
-      "id": "16864753699",
+      "id": "16917855670",
       "type": "PullRequestReviewEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
@@ -1658,900 +2572,11 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/modernize-phase1"
+            "ref": "feature/v3.2"
           }
         }
       },
-      "created_at": "2026-10-09T21:57:43Z"
-    },
-    {
-      "id": "16864411753",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: modernize toolchain (Python 3.10+, ruff, CI lint)",
-          "head": {
-            "ref": "chore/modernize-phase1"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:51:09Z"
-    },
-    {
-      "id": "16864368356",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: modernize toolchain (Python 3.10+, ruff, CI lint)",
-          "head": {
-            "ref": "chore/modernize-phase1"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:51:09Z"
-    },
-    {
-      "id": "16863948848",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: bring AGENTS.md in line with the repo",
-          "head": {
-            "ref": "docs/agents-md"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:44:06Z"
-    },
-    {
-      "id": "16863942582",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: bring AGENTS.md in line with the repo",
-          "head": {
-            "ref": "docs/agents-md"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:42:11Z"
-    },
-    {
-      "id": "16863833594",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: bring AGENTS.md in line with the repo",
-          "head": {
-            "ref": "docs/agents-md"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:42:11Z"
-    },
-    {
-      "id": "16863696926",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: replace template and stale docs with accurate ones",
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:39:59Z"
-    },
-    {
-      "id": "16863597947",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(data): slim github-data.json, drop unused metrics SVG, skip idle OG renders",
-          "head": {
-            "ref": "chore/slim-data-job"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:38:22Z"
-    },
-    {
-      "id": "16863412938",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(css): enforce design tokens with Stylelint",
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:35:19Z"
-    },
-    {
-      "id": "16863274107",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:33:03Z"
-    },
-    {
-      "id": "16863274106",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:33:04Z"
-    },
-    {
-      "id": "16863272873",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:33:01Z"
-    },
-    {
-      "id": "16863272822",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:33:03Z"
-    },
-    {
-      "id": "16863245872",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/slim-data-job"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:32:36Z"
-    },
-    {
-      "id": "16863245854",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/slim-data-job"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:32:37Z"
-    },
-    {
-      "id": "16863193029",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:31:45Z"
-    },
-    {
-      "id": "16863193021",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:31:46Z"
-    },
-    {
-      "id": "16863190180",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:31:42Z"
-    },
-    {
-      "id": "16863190141",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:31:43Z"
-    },
-    {
-      "id": "16863082569",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: replace template and stale docs with accurate ones",
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:20:26Z"
-    },
-    {
-      "id": "16863072172",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(data): slim github-data.json, drop unused metrics SVG, skip idle OG renders",
-          "head": {
-            "ref": "chore/slim-data-job"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:18:58Z"
-    },
-    {
-      "id": "16863055792",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(css): enforce design tokens with Stylelint",
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:15:54Z"
-    },
-    {
-      "id": "16862477873",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: replace template and stale docs with accurate ones",
-          "head": {
-            "ref": "docs/refresh"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:20:26Z"
-    },
-    {
-      "id": "16862385045",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(data): slim github-data.json, drop unused metrics SVG, skip idle OG renders",
-          "head": {
-            "ref": "chore/slim-data-job"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:18:58Z"
-    },
-    {
-      "id": "16862191784",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(css): enforce design tokens with Stylelint",
-          "head": {
-            "ref": "chore/stylelint"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:15:54Z"
-    },
-    {
-      "id": "16861819525",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(tooling): check-refs replaces vite build, tidy eslint/vite/quality configs",
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:10:02Z"
-    },
-    {
-      "id": "16861455602",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {},
-      "created_at": "2026-10-09T21:04:24Z"
-    },
-    {
-      "id": "16861429688",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "style(css): remove ~1,600 lines of dead CSS, merge scattered media blocks",
-          "head": {
-            "ref": "style/css-purge"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:03:59Z"
-    },
-    {
-      "id": "16861409890",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(js): retry + error-handling bugs; remove dead code, share duplicated helpers",
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:03:41Z"
-    },
-    {
-      "id": "16861232231",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:01:00Z"
-    },
-    {
-      "id": "16861232124",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T21:01:01Z"
-    },
-    {
-      "id": "16860980730",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:14Z"
-    },
-    {
-      "id": "16860980682",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:15Z"
-    },
-    {
-      "id": "16860978552",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:13Z"
-    },
-    {
-      "id": "16860978540",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:12Z"
-    },
-    {
-      "id": "16860975686",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:10Z"
-    },
-    {
-      "id": "16860975656",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:10Z"
-    },
-    {
-      "id": "16860974050",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:08Z"
-    },
-    {
-      "id": "16860973999",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:57:09Z"
-    },
-    {
-      "id": "16860899107",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "style/css-purge"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:55:59Z"
-    },
-    {
-      "id": "16860899059",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "style/css-purge"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:55:59Z"
-    },
-    {
-      "id": "16860831126",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:54:57Z"
-    },
-    {
-      "id": "16860831018",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:54:54Z"
-    },
-    {
-      "id": "16860737029",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "style(css): remove ~1,600 lines of dead CSS, merge scattered media blocks",
-          "head": {
-            "ref": "style/css-purge"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:38:07Z"
-    },
-    {
-      "id": "16860712260",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(tooling): check-refs replaces vite build, tidy eslint/vite/quality configs",
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:47:25Z"
-    },
-    {
-      "id": "16860686629",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(js): retry + error-handling bugs; remove dead code, share duplicated helpers",
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:28:01Z"
-    },
-    {
-      "id": "16860624286",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(deploy): publish favicon + OG images, stop publishing source files",
-          "head": {
-            "ref": "fix/pages-publish-allowlist"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:51:49Z"
-    },
-    {
-      "id": "16860327428",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(tooling): check-refs replaces vite build, tidy eslint/vite/quality configs",
-          "head": {
-            "ref": "chore/tooling-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:47:25Z"
-    },
-    {
-      "id": "16859697004",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "style(css): remove ~1,600 lines of dead CSS, merge scattered media blocks",
-          "head": {
-            "ref": "style/css-purge"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:38:07Z"
-    },
-    {
-      "id": "16858930490",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(js): retry + error-handling bugs; remove dead code, share duplicated helpers",
-          "head": {
-            "ref": "fix/js-error-handling"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:28:01Z"
-    },
-    {
-      "id": "16857860608",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(deploy): publish favicon + OG images, stop publishing source files",
-          "head": {
-            "ref": "fix/pages-publish-allowlist"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:11:25Z"
-    },
-    {
-      "id": "16857713044",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(deps): repair broken lockfile (main CI is red)",
-          "head": {
-            "ref": "fix/broken-lockfile"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:12:31Z"
-    },
-    {
-      "id": "16857662414",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(deps): repair broken lockfile (main CI is red)",
-          "head": {
-            "ref": "fix/broken-lockfile"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:11:10Z"
-    },
-    {
-      "id": "16857627855",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(deploy): publish favicon + OG images, stop publishing source files",
-          "head": {
-            "ref": "fix/pages-publish-allowlist"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:11:25Z"
-    },
-    {
-      "id": "16857608347",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(deps): repair broken lockfile (main CI is red)",
-          "head": {
-            "ref": "fix/broken-lockfile"
-          }
-        }
-      },
-      "created_at": "2026-10-09T20:11:10Z"
-    },
-    {
-      "id": "16857533206",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:54Z"
-    },
-    {
-      "id": "16857532266",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/static-posts"
-          }
-        }
-      },
-      "created_at": "2026-10-09T19:12:51Z"
+      "created_at": "2026-10-10T22:45:45Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2565,47 +2590,8 @@
     "homehub"
   ],
   "contributions": {
-    "total": 3772,
+    "total": 3798,
     "weeks": [
-      {
-        "days": [
-          {
-            "date": "2025-10-05",
-            "count": 0,
-            "level": 0
-          },
-          {
-            "date": "2025-10-06",
-            "count": 19,
-            "level": 2
-          },
-          {
-            "date": "2025-10-07",
-            "count": 1,
-            "level": 1
-          },
-          {
-            "date": "2025-10-08",
-            "count": 1,
-            "level": 1
-          },
-          {
-            "date": "2025-10-09",
-            "count": 8,
-            "level": 1
-          },
-          {
-            "date": "2025-10-10",
-            "count": 4,
-            "level": 1
-          },
-          {
-            "date": "2025-10-11",
-            "count": 25,
-            "level": 2
-          }
-        ]
-      },
       {
         "days": [
           {
@@ -4629,6 +4615,15 @@
           },
           {
             "date": "2026-10-10",
+            "count": 26,
+            "level": 2
+          }
+        ]
+      },
+      {
+        "days": [
+          {
+            "date": "2026-10-11",
             "count": 0,
             "level": 0
           }
@@ -4640,16 +4635,16 @@
     "TypeScript": 13093809,
     "HTML": 5782478,
     "Swift": 5121304,
-    "Python": 3659258,
+    "Python": 3935474,
     "JavaScript": 2541570,
-    "Shell": 1088181,
+    "Shell": 1098731,
     "CSS": 621282,
     "R": 618546,
     "Rust": 416849,
     "Kotlin": 300781,
     "PowerShell": 292114,
     "C++": 202428,
-    "Makefile": 57444,
+    "Makefile": 57460,
     "mcfunction": 24740,
     "Dockerfile": 11040,
     "Ruby": 9684,
@@ -4662,6 +4657,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-10T03:15:36Z",
+  "lastUpdated": "2026-10-11T03:17:13Z",
   "totalRepos": 52
 }

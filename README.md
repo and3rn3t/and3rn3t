@@ -34,11 +34,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
-> Personal portfolio for Jonah (GitHub Spark template).
+> OpenClaw skill for managing your Apple Music library
 >
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+> **Tech:** Python, apple-music, claude-skill, python
 
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
@@ -46,30 +46,23 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript
 
-### 🌐 [guess](https://github.com/and3rn3t/guess)
+### ⭐ [test-project](https://github.com/and3rn3t/test-project)
 
-> A guessing game like "Akinator", but with more visibility to the user how it works.
+> Template test bed that mirrors the ai-template-repo structure.
 >
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
+> **Tech:** Makefile, template, testing
 
-### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
+### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
 
-> Unifying network information on a RPi 5
+> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
 >
-> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
+> **Tech:** Python, apple-photos, claude-skill, python
 
-### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> OpenClaw skill for managing your Apple Music library
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** Python, apple-music, claude-skill, python
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -78,12 +71,17 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, ai, gait-analysis, health, healthkit
 > 🔗 [Live](https://health.andernet.dev)
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🌐 [family](https://github.com/and3rn3t/family)
 
-> My attempt to build an inclusive homehub / automation project.
+> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
 >
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
+> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
+
+### 🦀 [hack](https://github.com/and3rn3t/hack)
+
+> A hacking simulator
+>
+> **Tech:** Rust, game, hacking-simulator, rust, wasm
 
 <!-- FEATURED-PROJECTS:END -->
 
