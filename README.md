@@ -34,11 +34,29 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+
+> Personal portfolio for Jonah (GitHub Spark template).
+>
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+
+### 🌐 [telescope](https://github.com/and3rn3t/telescope)
+
+> A general overview of the JWST for fun
+>
+> **Tech:** TypeScript, cloudflare-workers, jwst, nasa, react
+
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
 > OpenClaw skill for managing your Apple Music library
 >
 > **Tech:** Python, apple-music, claude-skill, python
+
+### 🐍 [network](https://github.com/and3rn3t/network)
+
+> Testing UniFi API
+>
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
@@ -46,42 +64,23 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript
 
-### ⭐ [test-project](https://github.com/and3rn3t/test-project)
-
-> Template test bed that mirrors the ai-template-repo structure.
->
-> **Tech:** Makefile, template, testing
-
-### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
-
-> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
->
-> **Tech:** Python, apple-photos, claude-skill, python
-
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
 > **Tech:** Python, arm64, docker, docker-compose, flask
 
-### 🌐 [health](https://github.com/and3rn3t/health)
+### 🌐 [flipper](https://github.com/and3rn3t/flipper)
 
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
 >
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
 
-### 🌐 [family](https://github.com/and3rn3t/family)
+### ⭐ [test-project](https://github.com/and3rn3t/test-project)
 
-> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
+> Template test bed that mirrors the ai-template-repo structure.
 >
-> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
-
-### 🦀 [hack](https://github.com/and3rn3t/hack)
-
-> A hacking simulator
->
-> **Tech:** Rust, game, hacking-simulator, rust, wasm
+> **Tech:** Makefile, template, testing
 
 <!-- FEATURED-PROJECTS:END -->
 
