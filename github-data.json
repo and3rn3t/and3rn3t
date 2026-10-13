@@ -3,11 +3,58 @@
     "login": "and3rn3t",
     "name": "Matthew Anderson",
     "html_url": "https://github.com/and3rn3t",
-    "public_repos": 52,
+    "public_repos": 53,
     "followers": 1,
     "created_at": "2021-07-13T15:01:44Z"
   },
   "repositories": [
+    {
+      "id": 1171723267,
+      "name": "apple-photos-cleaner",
+      "full_name": "and3rn3t/apple-photos-cleaner",
+      "description": "OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.",
+      "html_url": "https://github.com/and3rn3t/apple-photos-cleaner",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "apple-photos",
+        "claude-skill",
+        "python"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 19,
+      "pushed_at": "2026-10-13T02:50:11Z",
+      "updated_at": "2026-10-13T02:50:14Z",
+      "created_at": "2026-03-03T14:40:25Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1150200899,
+      "name": "weather-app",
+      "full_name": "and3rn3t/weather-app",
+      "description": "iOS26 Weather App",
+      "html_url": "https://github.com/and3rn3t/weather-app",
+      "homepage": null,
+      "language": "Swift",
+      "topics": [
+        "android",
+        "fastlane",
+        "ios",
+        "swift",
+        "weather",
+        "xcode"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 9,
+      "pushed_at": "2026-10-13T02:27:58Z",
+      "updated_at": "2026-07-17T19:02:29Z",
+      "created_at": "2026-02-05T02:05:57Z",
+      "fork": false,
+      "archived": false
+    },
     {
       "id": 1156702820,
       "name": "jonah",
@@ -27,9 +74,227 @@
       "stargazers_count": 0,
       "forks_count": 0,
       "open_issues_count": 5,
-      "pushed_at": "2026-10-12T01:23:54Z",
+      "pushed_at": "2026-10-13T01:38:11Z",
       "updated_at": "2026-10-07T13:33:25Z",
       "created_at": "2026-02-13T00:28:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1166214014,
+      "name": "apple-music-dj",
+      "full_name": "and3rn3t/apple-music-dj",
+      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
+      "html_url": "https://github.com/and3rn3t/apple-music-dj",
+      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
+      "language": "Python",
+      "topics": [
+        "agent-skill",
+        "agent-skills",
+        "ai-dj",
+        "apple-music",
+        "claude-code",
+        "claude-skill",
+        "clawhub",
+        "cli",
+        "music",
+        "music-discovery",
+        "music-recommendation",
+        "musickit",
+        "openclaw",
+        "playlist",
+        "playlist-generator",
+        "python",
+        "spotify-to-apple-music"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 2,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-13T00:47:49Z",
+      "updated_at": "2026-10-13T00:47:51Z",
+      "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1416205905,
+      "name": "awesome-claude-skills",
+      "full_name": "and3rn3t/awesome-claude-skills",
+      "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
+      "html_url": "https://github.com/and3rn3t/awesome-claude-skills",
+      "homepage": "",
+      "language": null,
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 0,
+      "pushed_at": "2026-10-12T22:47:26Z",
+      "updated_at": "2026-10-12T22:47:11Z",
+      "created_at": "2026-10-12T22:47:11Z",
+      "fork": true,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-12T17:27:05Z",
+      "updated_at": "2026-10-04T16:38:15Z",
+      "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-12T14:08:42Z",
+      "updated_at": "2026-10-07T02:52:40Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-12T13:34:03Z",
+      "updated_at": "2026-10-12T09:30:44Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1177251835,
+      "name": "docker-playground",
+      "full_name": "and3rn3t/docker-playground",
+      "description": "Learning more about docker with the Docker API and a sandbox env",
+      "html_url": "https://github.com/and3rn3t/docker-playground",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "docker",
+        "react",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-12T06:30:16Z",
+      "updated_at": "2026-08-25T01:14:17Z",
+      "created_at": "2026-03-09T21:07:36Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-12T06:09:00Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1094375223,
+      "name": "vac",
+      "full_name": "and3rn3t/vac",
+      "description": "Playing with connecting to robotic vacuum without cloud services",
+      "html_url": "https://github.com/and3rn3t/vac",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "home-automation",
+        "iot",
+        "python",
+        "robotics"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-12T06:06:26Z",
+      "updated_at": "2026-07-17T19:02:43Z",
+      "created_at": "2025-11-11T16:16:05Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1093825727,
+      "name": "silas",
+      "full_name": "and3rn3t/silas",
+      "description": "Personal webpage for Silas",
+      "html_url": "https://github.com/and3rn3t/silas",
+      "homepage": "https://silas-anderson.pages.dev",
+      "language": "JavaScript",
+      "topics": [
+        "cloudflare-pages",
+        "game",
+        "javascript",
+        "playwright"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-12T03:51:40Z",
+      "updated_at": "2026-08-25T01:14:08Z",
+      "created_at": "2025-11-10T22:25:39Z",
       "fork": false,
       "archived": false
     },
@@ -61,28 +326,6 @@
       "archived": false
     },
     {
-      "id": 1166214014,
-      "name": "apple-music-dj",
-      "full_name": "and3rn3t/apple-music-dj",
-      "description": "OpenClaw skill for managing your Apple Music library",
-      "html_url": "https://github.com/and3rn3t/apple-music-dj",
-      "homepage": "",
-      "language": "Python",
-      "topics": [
-        "apple-music",
-        "claude-skill",
-        "python"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-11T22:51:05Z",
-      "updated_at": "2026-10-11T22:47:38Z",
-      "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1078539335,
       "name": "network",
       "full_name": "and3rn3t/network",
@@ -102,55 +345,6 @@
       "pushed_at": "2026-10-11T21:57:03Z",
       "updated_at": "2026-10-07T13:33:10Z",
       "created_at": "2025-10-17T22:48:41Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-11T20:57:07Z",
-      "updated_at": "2026-10-05T06:17:34Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-11T11:03:43Z",
-      "updated_at": "2026-10-04T16:38:15Z",
-      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -179,27 +373,6 @@
       "archived": false
     },
     {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-11T05:09:30Z",
-      "updated_at": "2026-10-11T03:18:01Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1193055292,
       "name": "test-project",
       "full_name": "and3rn3t/test-project",
@@ -217,28 +390,6 @@
       "pushed_at": "2026-10-10T23:12:44Z",
       "updated_at": "2026-07-08T01:10:09Z",
       "created_at": "2026-03-26T20:37:33Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1171723267,
-      "name": "apple-photos-cleaner",
-      "full_name": "and3rn3t/apple-photos-cleaner",
-      "description": "OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.",
-      "html_url": "https://github.com/and3rn3t/apple-photos-cleaner",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "apple-photos",
-        "claude-skill",
-        "python"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-10T22:34:35Z",
-      "updated_at": "2026-07-08T01:09:39Z",
-      "created_at": "2026-03-03T14:40:25Z",
       "fork": false,
       "archived": false
     },
@@ -369,31 +520,6 @@
       "archived": false
     },
     {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-08T12:28:23Z",
-      "updated_at": "2026-10-07T02:52:40Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1126996610,
       "name": "sky",
       "full_name": "and3rn3t/sky",
@@ -437,29 +563,6 @@
       "pushed_at": "2026-10-07T16:08:14Z",
       "updated_at": "2026-09-27T13:43:51Z",
       "created_at": "2026-02-25T23:30:58Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1093825727,
-      "name": "silas",
-      "full_name": "and3rn3t/silas",
-      "description": "Personal webpage for Silas",
-      "html_url": "https://github.com/and3rn3t/silas",
-      "homepage": "https://silas-anderson.pages.dev",
-      "language": "JavaScript",
-      "topics": [
-        "cloudflare-pages",
-        "game",
-        "javascript",
-        "playwright"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-07T08:45:59Z",
-      "updated_at": "2026-08-25T01:14:08Z",
-      "created_at": "2025-11-10T22:25:39Z",
       "fork": false,
       "archived": false
     },
@@ -577,54 +680,6 @@
       "archived": false
     },
     {
-      "id": 1094375223,
-      "name": "vac",
-      "full_name": "and3rn3t/vac",
-      "description": "Playing with connecting to robotic vacuum without cloud services",
-      "html_url": "https://github.com/and3rn3t/vac",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "home-automation",
-        "iot",
-        "python",
-        "robotics"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-09-30T16:54:26Z",
-      "updated_at": "2026-07-17T19:02:43Z",
-      "created_at": "2025-11-11T16:16:05Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1150200899,
-      "name": "weather-app",
-      "full_name": "and3rn3t/weather-app",
-      "description": "iOS26 Weather App",
-      "html_url": "https://github.com/and3rn3t/weather-app",
-      "homepage": null,
-      "language": "Swift",
-      "topics": [
-        "android",
-        "fastlane",
-        "ios",
-        "swift",
-        "weather",
-        "xcode"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 9,
-      "pushed_at": "2026-09-28T09:13:14Z",
-      "updated_at": "2026-07-17T19:02:29Z",
-      "created_at": "2026-02-05T02:05:57Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1376614095,
       "name": "birds",
       "full_name": "and3rn3t/birds",
@@ -640,29 +695,6 @@
       "updated_at": "2026-09-19T03:37:53Z",
       "created_at": "2026-09-19T01:50:31Z",
       "fork": true,
-      "archived": false
-    },
-    {
-      "id": 1177251835,
-      "name": "docker-playground",
-      "full_name": "and3rn3t/docker-playground",
-      "description": "Learning more about docker with the Docker API and a sandbox env",
-      "html_url": "https://github.com/and3rn3t/docker-playground",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "docker",
-        "react",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-09-13T14:28:23Z",
-      "updated_at": "2026-08-25T01:14:17Z",
-      "created_at": "2026-03-09T21:07:36Z",
-      "fork": false,
       "archived": false
     },
     {
@@ -1172,48 +1204,639 @@
   ],
   "events": [
     {
-      "id": "16966798314",
-      "type": "ReleaseEvent",
+      "id": "17063267272",
+      "type": "IssuesEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
-      "payload": {
-        "release": {
-          "tag_name": "v3.4.0"
-        }
-      },
-      "created_at": "2026-10-11T22:51:05Z"
+      "payload": {},
+      "created_at": "2026-10-13T03:12:40Z"
     },
     {
-      "id": "23722659280",
+      "id": "17063212763",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T03:11:28Z"
+    },
+    {
+      "id": "17063211953",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T03:11:27Z"
+    },
+    {
+      "id": "17062216624",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: add public roadmap",
+          "head": {
+            "ref": "docs/roadmap"
+          }
+        }
+      },
+      "created_at": "2026-10-13T02:50:10Z"
+    },
+    {
+      "id": "23832580367",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "8ba87aa9faa6af60f606b2b553d7b2f933ccdf76",
+            "message": "Merge pull request #5 from and3rn3t/docs/roadmap\n\ndocs: add public roadmap"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-13T02:50:11Z"
+    },
+    {
+      "id": "17062206605",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: add public roadmap",
+          "head": {
+            "ref": "docs/roadmap"
+          }
+        }
+      },
+      "created_at": "2026-10-13T02:47:43Z"
+    },
+    {
+      "id": "17062195354",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:48Z"
+    },
+    {
+      "id": "17062185108",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:33Z"
+    },
+    {
+      "id": "17062178078",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:24Z"
+    },
+    {
+      "id": "17062177138",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:24Z"
+    },
+    {
+      "id": "17062176922",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:24Z"
+    },
+    {
+      "id": "17062176913",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:24Z"
+    },
+    {
+      "id": "17062176495",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:23Z"
+    },
+    {
+      "id": "17062176132",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:23Z"
+    },
+    {
+      "id": "17062176054",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:23Z"
+    },
+    {
+      "id": "17062175750",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:23Z"
+    },
+    {
+      "id": "17062175612",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:23Z"
+    },
+    {
+      "id": "17062174148",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:19Z"
+    },
+    {
+      "id": "17062174064",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:18Z"
+    },
+    {
+      "id": "17062174037",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:18Z"
+    },
+    {
+      "id": "17062173250",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:18Z"
+    },
+    {
+      "id": "17062172836",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:17Z"
+    },
+    {
+      "id": "17062171992",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:17Z"
+    },
+    {
+      "id": "17062171677",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:16Z"
+    },
+    {
+      "id": "17062169755",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:15Z"
+    },
+    {
+      "id": "17062169731",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:15Z"
+    },
+    {
+      "id": "17062168813",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:15Z"
+    },
+    {
+      "id": "17062168210",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:12Z"
+    },
+    {
+      "id": "17062167845",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:11Z"
+    },
+    {
+      "id": "17062167635",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:10Z"
+    },
+    {
+      "id": "17062166574",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:09Z"
+    },
+    {
+      "id": "17062166013",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:09Z"
+    },
+    {
+      "id": "17062164652",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:08Z"
+    },
+    {
+      "id": "17062164502",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:08Z"
+    },
+    {
+      "id": "17062164053",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163900",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163869",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163758",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163757",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163274",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163235",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062163113",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:07Z"
+    },
+    {
+      "id": "17062162860",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:06Z"
+    },
+    {
+      "id": "17062162729",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:06Z"
+    },
+    {
+      "id": "17062161909",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:03Z"
+    },
+    {
+      "id": "17062161298",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:02Z"
+    },
+    {
+      "id": "17062161210",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:02Z"
+    },
+    {
+      "id": "17062159003",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:00Z"
+    },
+    {
+      "id": "17062158682",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:00Z"
+    },
+    {
+      "id": "17062158242",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:00Z"
+    },
+    {
+      "id": "17062157699",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:49:00Z"
+    },
+    {
+      "id": "17062157266",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:59Z"
+    },
+    {
+      "id": "17062156740",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:59Z"
+    },
+    {
+      "id": "17062156520",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:59Z"
+    },
+    {
+      "id": "17062156343",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:58Z"
+    },
+    {
+      "id": "17062154867",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:54Z"
+    },
+    {
+      "id": "17062154793",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:54Z"
+    },
+    {
+      "id": "17062154626",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:54Z"
+    },
+    {
+      "id": "17062154554",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T02:48:54Z"
+    },
+    {
+      "id": "17062099184",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: add public roadmap",
+          "head": {
+            "ref": "docs/roadmap"
+          }
+        }
+      },
+      "created_at": "2026-10-13T02:47:43Z"
+    },
+    {
+      "id": "23830941974",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "05552f3c85899b52c7bd7d16dfdf34a3a9eb8530",
+            "message": "ci: add ClawHub publish workflow\n\nPublishes to the registry when SKILL.md changes on main, using the\nfrontmatter version as the source of truth. Supports workflow_dispatch\nwith a dry_run input so the pipeline can be exercised without pushing\na version to the public registry.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-13T02:22:42Z"
+    },
+    {
+      "id": "23827768756",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4c7f4d9f8b2ba0446af5ec954d49e243f21eef12",
+            "message": "test: cover the failure paths of the destructive executor\n\ncleanup_executor is the only script that can destroy data and had the worst\ncoverage in the repo. The untested branches were the ones that matter most:\na timeout, an unexpected exception, and a non-zero osascript exit all have to\nreport zero deletions rather than assuming the batch succeeded.\n\nEach new test was mutation-checked — making the timeout handler credit the\nbatch to success_count fails the test, so these bite rather than just pass.\n\nAlso covers that --limit actually caps the candidate list, since that is the\nbound on how much a single run can ever touch.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-13T01:29:37Z"
+    },
+    {
+      "id": "23826534722",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "11e9711b08efb076a4a9058ec35ccfb34b40084d",
+            "message": "fix(cleanup): target assets by UUID instead of filename when deleting\n\ngenerate_trash_applescript used `search for <filename>` and deleted every\nmatch. Photos filenames are not unique — the same IMG_0042.HEIC can exist\nmany times across devices and re-imports — so a cleanup run could trash\nphotos that were never candidates, including favorites and photos the\ncategory filters had deliberately excluded.\n\nAssets are now addressed by their stable ZASSET.ZUUID via Photos'\n`media item id \"<UUID>/L0/001\"`, with the filename kept only as a\ncross-check: any id that fails to resolve, or whose filename no longer\nmatches the database, is skipped rather than deleted.\n\nFail-safe throughout:\n- require_uuid_support() aborts on libraries without ZASSET.ZUUID rather\n  than falling back to filename matching\n- generate_trash_applescript raises if any candidate lacks a UUID, and\n  execute_cleanup records that as a batch error without invoking osascript\n- the script reports DELETED:<n> SKIPPED:<n>, so success_count reflects\n  what Photos actually did instead of assuming the whole batch succeeded;\n  unparseable output counts as zero deletions\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-13T01:08:34Z"
+    },
+    {
+      "id": "23825283859",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "release/3.4.0",
+        "ref": "chore/public-profile",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-11T22:47:36Z"
+      "created_at": "2026-10-13T00:47:49Z"
     },
     {
-      "id": "16966680110",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(metadata): follow the OpenClaw/ClawHub spec; MIT-0 (3.4.0)",
-          "head": {
-            "ref": "release/3.4.0"
-          }
-        }
-      },
-      "created_at": "2026-10-11T22:47:34Z"
-    },
-    {
-      "id": "23722658444",
+      "id": "23825282449",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
@@ -1221,1303 +1844,320 @@
       "payload": {
         "commits": [
           {
-            "sha": "b2ad895c770401b114b917ed2a092280c6a1503c",
-            "message": "fix(metadata): follow the OpenClaw/ClawHub spec; MIT-0 (3.4.0) (#41)\n\n* fix(metadata): follow the OpenClaw/ClawHub frontmatter spec; relicense to MIT-0\n\n- os: [darwin, linux] replaces the unread `platforms` key, so the platform\n  gate actually applies; emoji/homepage/install move under metadata.openclaw\n- drop minVersion and permissions (read by nothing, gated nothing)\n- SKILL.md script commands use {baseDir}/scripts/... so they work from any cwd\n- clawhub.json mirrors all nine env vars and os\n- relicense MIT -> MIT-0, the license ClawHub publishes every skill under\n- tests/test_openclaw_metadata.py guards all of this (part of make audit);\n  pyyaml added to the dev deps and CI installs\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore(release): 3.4.0\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+            "sha": "8298b53fd16e444ca95c170695176eb867a972be",
+            "message": "chore: public profile — social preview, honest coverage badge, community links (#50)\n\n* chore: public profile — social preview, honest coverage badge, community links\n\n- Social preview card (assets/social-preview.png, `make social-preview`), kept out of the\n  ClawHub package and guarded by tests/test_packaging.py\n- CI fails when the README coverage badge drifts more than a point from measured coverage\n  (release_checks.py check-coverage-badge)\n- README: ClawHub badge, read-only-by-default line, Discussions and good-first-issue links;\n  test module count corrected (22 → 27)\n- Issue chooser routes questions to Discussions and security reports to the policy\n- ROADMAP links the seeded issues (#46–#49)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs(security): report vulnerabilities through GitHub private reporting\n\nPrivate vulnerability reporting is now enabled. SECURITY.md and the issue chooser link to it,\nwith email kept as a fallback.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test: cover the social preview generator and committed assets\n\nThe SVG must parse and be 1280x640, the committed SVG must match render_svg(), and the PNG must be\n1280x640 and under GitHub's 1 MB limit — mirroring the demo-tour checks.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-11T22:47:35Z"
+      "created_at": "2026-10-13T00:47:48Z"
     },
     {
-      "id": "16966614003",
+      "id": "17056552697",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "pull_request": {
-          "title": "fix(metadata): follow the OpenClaw/ClawHub spec; MIT-0 (3.4.0)",
+          "title": "chore: public profile — social preview, honest coverage badge, community links",
           "head": {
-            "ref": "release/3.4.0"
+            "ref": "chore/public-profile"
           }
         }
       },
-      "created_at": "2026-10-11T22:44:59Z"
+      "created_at": "2026-10-13T00:47:47Z"
     },
     {
-      "id": "16966590798",
+      "id": "17055300416",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/public-profile"
+          }
+        }
+      },
+      "created_at": "2026-10-13T00:20:40Z"
+    },
+    {
+      "id": "17055300365",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/public-profile"
+          }
+        }
+      },
+      "created_at": "2026-10-13T00:20:41Z"
+    },
+    {
+      "id": "23823680312",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0a198efc23c870d6b029bf35db40aa0fd19e8eab",
+            "message": "test: cover the social preview generator and committed assets\n\nThe SVG must parse and be 1280x640, the committed SVG must match render_svg(), and the PNG must be\n1280x640 and under GitHub's 1 MB limit — mirroring the demo-tour checks.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/public-profile"
+      },
+      "created_at": "2026-10-13T00:20:40Z"
+    },
+    {
+      "id": "23823617556",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "eb441c3df3e43a092187b4a3e64bd0b934a28edc",
+            "message": "docs(security): report vulnerabilities through GitHub private reporting\n\nPrivate vulnerability reporting is now enabled. SECURITY.md and the issue chooser link to it,\nwith email kept as a fallback.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/public-profile"
+      },
+      "created_at": "2026-10-13T00:19:37Z"
+    },
+    {
+      "id": "17055110207",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: taste codes, OpenClaw/ClawHub metadata spec, MIT-0 (3.4.0)",
+          "title": "chore: public profile — social preview, honest coverage badge, community links",
           "head": {
-            "ref": "feat/blend-share-codes"
+            "ref": "chore/public-profile"
           }
         }
       },
-      "created_at": "2026-10-11T22:38:29Z"
+      "created_at": "2026-10-13T00:16:14Z"
     },
     {
-      "id": "16966590759",
-      "type": "IssueCommentEvent",
+      "id": "17055098434",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: public profile — social preview, honest coverage badge, community links",
+          "head": {
+            "ref": "chore/public-profile"
+          }
+        }
+      },
+      "created_at": "2026-10-13T00:16:14Z"
+    },
+    {
+      "id": "17054929260",
+      "type": "IssuesEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {},
-      "created_at": "2026-10-11T22:45:00Z"
+      "created_at": "2026-10-13T00:12:32Z"
     },
     {
-      "id": "16966589409",
-      "type": "PullRequestEvent",
+      "id": "17054929151",
+      "type": "IssuesEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
-      "payload": {
-        "pull_request": {
-          "title": "fix(metadata): follow the OpenClaw/ClawHub spec; MIT-0 (3.4.0)",
-          "head": {
-            "ref": "release/3.4.0"
-          }
-        }
-      },
-      "created_at": "2026-10-11T22:44:59Z"
+      "payload": {},
+      "created_at": "2026-10-13T00:12:32Z"
     },
     {
-      "id": "23722492284",
-      "type": "CreateEvent",
+      "id": "17054929021",
+      "type": "IssuesEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
-      "payload": {
-        "ref": "release/3.4.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T22:44:40Z"
+      "payload": {},
+      "created_at": "2026-10-13T00:12:32Z"
     },
     {
-      "id": "16966262383",
-      "type": "PullRequestEvent",
+      "id": "17054928975",
+      "type": "IssuesEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
-      "payload": {
-        "pull_request": {
-          "title": "feat: taste codes, OpenClaw/ClawHub metadata spec, MIT-0 (3.4.0)",
-          "head": {
-            "ref": "feat/blend-share-codes"
-          }
-        }
-      },
-      "created_at": "2026-10-11T22:33:25Z"
+      "payload": {},
+      "created_at": "2026-10-13T00:12:32Z"
     },
     {
-      "id": "16966186695",
-      "type": "PullRequestEvent",
+      "id": "17054927774",
+      "type": "IssuesEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
-      "payload": {
-        "pull_request": {
-          "title": "feat: taste codes, OpenClaw/ClawHub metadata spec, MIT-0 (3.4.0)",
-          "head": {
-            "ref": "feat/blend-share-codes"
-          }
-        }
-      },
-      "created_at": "2026-10-11T22:33:25Z"
+      "payload": {},
+      "created_at": "2026-10-13T00:12:30Z"
     },
     {
-      "id": "23721828179",
-      "type": "CreateEvent",
+      "id": "17054927613",
+      "type": "IssuesEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
-      "payload": {
-        "ref": "feat/blend-share-codes",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T22:33:18Z"
+      "payload": {},
+      "created_at": "2026-10-13T00:12:30Z"
     },
     {
-      "id": "23720641041",
+      "id": "17054927473",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:12:30Z"
+    },
+    {
+      "id": "17054926924",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:12:29Z"
+    },
+    {
+      "id": "17054926611",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:12:29Z"
+    },
+    {
+      "id": "17054926209",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:12:28Z"
+    },
+    {
+      "id": "17054926065",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:12:28Z"
+    },
+    {
+      "id": "17054925937",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:12:28Z"
+    },
+    {
+      "id": "17054609843",
+      "type": "DiscussionEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {},
+      "created_at": "2026-10-13T00:05:52Z"
+    },
+    {
+      "id": "23819821902",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
-        "ref": "feat/blend-share-codes",
+        "ref": "release/3.4.1",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-11T22:12:45Z"
+      "created_at": "2026-10-12T23:16:36Z"
     },
     {
-      "id": "16965438064",
+      "id": "17052228402",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: taste codes — blend with a friend without swapping files",
+          "title": "chore(release): 3.4.1",
           "head": {
-            "ref": "feat/blend-share-codes"
+            "ref": "release/3.4.1"
           }
         }
       },
-      "created_at": "2026-10-11T22:12:42Z"
+      "created_at": "2026-10-12T23:16:34Z"
     },
     {
-      "id": "16965354098",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/blend-share-codes"
-          }
-        }
-      },
-      "created_at": "2026-10-11T22:10:28Z"
-    },
-    {
-      "id": "16965353998",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/blend-share-codes"
-          }
-        }
-      },
-      "created_at": "2026-10-11T22:10:28Z"
-    },
-    {
-      "id": "16965266199",
+      "id": "17052217201",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: taste codes — blend with a friend without swapping files",
+          "title": "chore(release): 3.4.1",
           "head": {
-            "ref": "feat/blend-share-codes"
+            "ref": "release/3.4.1"
           }
         }
       },
-      "created_at": "2026-10-11T21:52:11Z"
+      "created_at": "2026-10-12T23:13:51Z"
     },
     {
-      "id": "23719633582",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5289e28dafa2d8398768fb8545f8e24b0d1a232c",
-            "message": "docs(security): complete the privacy disclosure and test it (3.3.1) (#37)\n\n* docs(security): complete the privacy disclosure and test it; date released changelog sections\n\n- SKILL.md lists storefront.cache and config.json, names api.music.apple.com, and says tokens reach\n  curl through a short-lived owner-only temp file deleted on exit\n- tests/test_trust_claims.py keeps those claims true: allowed hosts, no risky constructs, every\n  APPLE_* variable and stored file documented, and every account-writing command in\n  apple_music_api.sh calls _confirm (enumerated from the script)\n- test_listing.py fails if a released changelog section has no date; 3.2.0-3.3.0 now carry theirs\n- ROADMAP.md gains a \"Trust and reviews\" section\n- CODE_OF_CONDUCT.md has a real enforcement contact\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore(release): 3.3.1\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: compare parsed hosts exactly in the trust-claims test\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: no GitHub exemption in the trust-claims host check\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: address review — release dates from the published releases, 'only destination is Apple' wording, tighter claim checks\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T13:16:38Z"
-    },
-    {
-      "id": "16964679898",
+      "id": "17052089657",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: taste codes — blend with a friend without swapping files",
+          "title": "chore(release): 3.4.1",
           "head": {
-            "ref": "feat/blend-share-codes"
+            "ref": "release/3.4.1"
           }
         }
       },
-      "created_at": "2026-10-11T21:52:11Z"
+      "created_at": "2026-10-12T23:13:51Z"
     },
     {
-      "id": "23719422000",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "feat/blend-share-codes",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T21:52:10Z"
-    },
-    {
-      "id": "23718654781",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "feat/launch-polish-3.3.2",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T21:39:07Z"
-    },
-    {
-      "id": "23718653473",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "77a24d69a62b00c2e86412afc0b1bc8896569a61",
-            "message": "feat: animated README demo, Spotify import guide, pre-publish self-audit (#38)\n\n* feat: animated README demo, Spotify import guide, pre-publish self-audit\n\n- assets/demo-tour.svg: animated replay of the real `demo.py tour` (make demo-svg)\n- README \"Moving from Spotify?\" section, references/spotify-import.md and a sample export\n- `make audit` (.github/scripts/self_audit.py): trust checks, shipped changes since the last tag and\n  a review prompt for ClawHub's concerns; step 0 of the release process in CONTRIBUTING.md\n- test_trust_claims: every /v1/me/... endpoint the scripts call must be in SKILL.md's tables\n  (added the two read endpoints that were missing)\n- docs no longer say Exportify CSVs carry ISRC codes; such imports match by title + artist\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* style: satisfy ruff in make_demo_svg.py (zip strict, unused loop vars)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore: add make ci (ruff, ShellCheck, coverage floor, actionlint) and document the local setup\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: address review — Exportify docs match its real export, exact endpoint check, audit sees deletions\n\n- Exportify's CSV does include an ISRC column (checked its source); the guide and changelog no longer\n  claim otherwise, and describe the title + artist fallback and the comma-separated artist credits\n- the endpoint check matches documented paths exactly; adds the library/artists and\n  music-summaries/milestones read endpoints to the privacy table\n- self_audit: files deleted or renamed since the tag are included in the shipped diff\n- make_demo_svg: each scene's request is measured for the viewBox width\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T21:39:05Z"
-    },
-    {
-      "id": "16964197015",
+      "id": "17051932203",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: animated README demo, Spotify import guide, pre-publish self-audit",
+          "title": "docs: README intro names Claude Code alongside OpenClaw",
           "head": {
-            "ref": "feat/launch-polish-3.3.2"
+            "ref": "docs/readme-intro-claude-code"
           }
         }
       },
-      "created_at": "2026-10-11T21:39:04Z"
-    },
-    {
-      "id": "23718531020",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "chore/trust-claims-3.3.1",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T13:16:39Z"
-    },
-    {
-      "id": "16964095053",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:19Z"
-    },
-    {
-      "id": "16964095031",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:20Z"
-    },
-    {
-      "id": "16964093692",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:17Z"
-    },
-    {
-      "id": "16964093618",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:18Z"
-    },
-    {
-      "id": "16964092488",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:15Z"
-    },
-    {
-      "id": "16964092438",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:16Z"
-    },
-    {
-      "id": "16964090946",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:13Z"
-    },
-    {
-      "id": "16964090934",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:14Z"
-    },
-    {
-      "id": "16964089700",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:10Z"
-    },
-    {
-      "id": "16964089663",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:36:12Z"
-    },
-    {
-      "id": "23718463058",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7f79542e37cc36ddce58e60eb7bc78eca161f389",
-            "message": "fix: address review — Exportify docs match its real export, exact endpoint check, audit sees deletions\n\n- Exportify's CSV does include an ISRC column (checked its source); the guide and changelog no longer\n  claim otherwise, and describe the title + artist fallback and the comma-separated artist credits\n- the endpoint check matches documented paths exactly; adds the library/artists and\n  music-summaries/milestones read endpoints to the privacy table\n- self_audit: files deleted or renamed since the tag are included in the shipped diff\n- make_demo_svg: each scene's request is measured for the viewBox width\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/launch-polish-3.3.2"
-      },
-      "created_at": "2026-10-11T21:35:54Z"
-    },
-    {
-      "id": "23718127733",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "f3a0813a480ba1567ca51514c2e5930aa88cc307",
-            "message": "test: no GitHub exemption in the trust-claims host check\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/trust-claims-3.3.1"
-      },
-      "created_at": "2026-10-11T13:09:39Z"
-    },
-    {
-      "id": "23718121613",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d3403b425b00836f590da961796de9a7bffed2b6",
-            "message": "test: compare parsed hosts exactly in the trust-claims test\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/trust-claims-3.3.1"
-      },
-      "created_at": "2026-10-11T13:09:33Z"
-    },
-    {
-      "id": "16963555449",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: animated README demo, Spotify import guide, pre-publish self-audit",
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:21:26Z"
-    },
-    {
-      "id": "16963534548",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: animated README demo, Spotify import guide, pre-publish self-audit",
-          "head": {
-            "ref": "feat/launch-polish-3.3.2"
-          }
-        }
-      },
-      "created_at": "2026-10-11T21:21:26Z"
-    },
-    {
-      "id": "23717576436",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "feat/launch-polish-3.3.2",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T21:21:25Z"
-    },
-    {
-      "id": "23706686136",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/agents-md",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T21:42:10Z"
-    },
-    {
-      "id": "23705285598",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/refresh",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T21:20:25Z"
-    },
-    {
-      "id": "23703679727",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a8cb792a2c7069d886217af30ca6db481198e059",
-            "message": "chore(tooling): harden check-refs, drop dead share_target, update docs\n\nReview feedback on check-refs:\n- Validate every root *.html page, not a fixed list (wasm-lab.html was skipped).\n- Validate manifest start_url, shortcut URLs and share_target.action.\n- Follow new URL('./x', import.meta.url) so deleting hero-core.wasm now fails.\nEach new check was shown to fail on a deliberate break.\n\nmanifest.json: removed share_target. It pointed at /share, which nothing\nserves, so installing the PWA registered a share target that landed on the 404\npage. check-refs flagged it as soon as manifest URLs were validated.\n\nAGENTS.md and CLAUDE.md: validate runs check:refs, not a build; the site ships\nraw source and Vite is only the dev server.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/tooling-cleanup"
-      },
-      "created_at": "2026-10-09T20:57:01Z"
-    },
-    {
-      "id": "23701949161",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "bda58116f6791bbdb67923e6738a142dbb77568d",
-            "message": "Merge pull request #139 from and3rn3t/chore/tooling-cleanup\n\nchore(tooling): check-refs replaces vite build, tidy eslint/vite/quality configs"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-09T21:10:03Z"
-    },
-    {
-      "id": "23701551276",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/js-error-handling",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T20:28:00Z"
-    },
-    {
-      "id": "23700410332",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/broken-lockfile",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T20:12:33Z"
-    },
-    {
-      "id": "23700295258",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/broken-lockfile",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T20:11:09Z"
-    },
-    {
-      "id": "23696616661",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3e8a08b52e42bf567cae8793d7d3d37253f20cb9",
-            "message": "Merge pull request #119 from and3rn3t/renovate/vite-and-vitest\n\nchore(deps): update dependency vite to v8.3.4"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-09T19:57:43Z"
-    },
-    {
-      "id": "23695416219",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "84d6c5a0a37693ab2bc80a66cbcfeef4505505c5",
-            "message": "ci: allowlist the public Cloudflare Analytics token in secret scanners\n\nThe generated post pages embed the Cloudflare Web Analytics beacon token, which\ngitleaks' generic-api-key rule reports. The token identifies the site to the\nbeacon and is served in every page's source, so it is not a secret (index.html\nalready carries it).\n\nPer-rule allowlist by exact value, in the form gitleaks 8.24.3 honours (the\nversion pinned in the shared workflow). Verified against 8.24.3 and 8.30.1: the\ndefault rules report 6 findings, the config clears them, the PR's commits scan\nclean, and a different token is still reported. .gitguardian.yaml ignores the\nsame value for GitGuardian.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/static-posts"
-      },
-      "created_at": "2026-10-09T19:07:41Z"
-    },
-    {
-      "id": "23693960284",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "571b93251224c6b864423f4eca7002f126c65d5d",
-            "message": "Merge pull request #133 from and3rn3t/feat/static-posts\n\nfeat: static, indexable post pages"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-09T19:22:54Z"
-    },
-    {
-      "id": "16944502195",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(security): complete the privacy disclosure and test it (3.3.1)",
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:16:37Z"
-    },
-    {
-      "id": "16944452450",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:15:21Z"
-    },
-    {
-      "id": "16944452424",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:15:22Z"
-    },
-    {
-      "id": "16944451202",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:15:20Z"
-    },
-    {
-      "id": "16944451165",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:15:19Z"
-    },
-    {
-      "id": "16944449972",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:15:17Z"
-    },
-    {
-      "id": "16944449955",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:15:18Z"
-    },
-    {
-      "id": "16944191197",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(security): complete the privacy disclosure and test it (3.3.1)",
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:05:54Z"
-    },
-    {
-      "id": "16944097547",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(security): complete the privacy disclosure and test it (3.3.1)",
-          "head": {
-            "ref": "chore/trust-claims-3.3.1"
-          }
-        }
-      },
-      "created_at": "2026-10-11T13:05:54Z"
-    },
-    {
-      "id": "23686935496",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "chore/trust-claims-3.3.1",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T13:05:53Z"
-    },
-    {
-      "id": "23686692682",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "54ccfa8cebc24aac68e05e985f2c698c2da8c765",
-            "message": "feat(listing): make the Apple tokens optional so OpenClaw loads the skill for the demo\n\nOpenClaw hides a skill whose requires.env variables are unset, so a new\nuser could never be offered the no-token demo. Per ClawHub's skill\nformat, optional variables belong in metadata.openclaw.envVars with\nrequired: false. Move both tokens there (primaryEnv unchanged) and\ndeclare every other APPLE_* variable the scripts read, so ClawHub's\ndeclared-vs-used check stays clean. Scripts still require the tokens at\nrun time. Docs (SKILL.md, README, SECURITY.md, CHANGELOG) say so, and\ntests guard both properties.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_011eyxAuLX67CJau9icERsm5"
-          }
-        ],
-        "ref": "refs/heads/feat/demo-mode-guided-setup"
-      },
-      "created_at": "2026-10-11T04:44:55Z"
-    },
-    {
-      "id": "23686468701",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ba9797c528236b626b43db522e0e6ff16161ae62",
-            "message": "fix(codeql): address the five code-scanning findings on #36\n\n- setup_auth: print the sign-in link only when no browser was opened\n  (--no-browser or webbrowser.open fails); the random path is a one-time\n  loopback nonce and is named that way now\n- setup_auth: request handlers no longer mix explicit and implicit\n  returns; POST validation moves to TokenCatcher.accept()\n- demo serve: contextlib.suppress(KeyboardInterrupt) instead of an empty\n  except\n- tests/mock_api.py: declare the re-export with __all__\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_011eyxAuLX67CJau9icERsm5"
-          }
-        ],
-        "ref": "refs/heads/feat/demo-mode-guided-setup"
-      },
-      "created_at": "2026-10-11T04:34:50Z"
-    },
-    {
-      "id": "23686334084",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "611a4eec62f32ebdb229705a0d26035b91329f08",
-            "message": "fix: address Copilot review on #36\n\n- demo: resolve path arguments (incl. --opt=path) before the real-data\n  check, so '..' and symlink aliases can't reach ~/.apple-music-dj;\n  refuse a symlinked sandbox; tour exits 1 and names failed steps\n- generate_dev_token: unreadable key file is a TokenError, not a traceback\n- setup_auth: lock around first-token capture (threaded server); status\n  explains an unreadable age record\n- renewal messages consistently point to setup_auth.py --new-dev-token\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_011eyxAuLX67CJau9icERsm5"
-          }
-        ],
-        "ref": "refs/heads/feat/demo-mode-guided-setup"
-      },
-      "created_at": "2026-10-11T04:38:27Z"
-    },
-    {
-      "id": "23684658820",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "feat/demo-mode-guided-setup",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T04:29:07Z"
-    },
-    {
-      "id": "23683187387",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/confirm-writes-3.2.5",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T03:32:34Z"
-    },
-    {
-      "id": "23681853519",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "eba387ac79f946e982734a4ec7e608de0816aa65",
-            "message": "fix(security): clearer disclosure of playlist edits, --apply, verify_setup cleanup (3.2.4) (#34)\n\n* fix(security): clearer disclosure of playlist edits, --apply, verify_setup cleanup (3.2.4)\n\nHardening from ClawHub's review of 3.2.3 (its verdict flipped from Pass to Review\non identical code; these are the points that were fair):\n\n- playlist_health.py fix: --apply replaces --auto (\"auto\" read as unattended).\n  `fix` only previews unless --apply is given; --auto stays as a hidden alias and\n  the result keeps the legacy auto_applied key beside the new applied\n- SKILL.md discloses that editing an existing playlist can remove tracks (data\n  written table + At a glance safety note), that the scheduled health check is\n  report-only, and that ratings are written only on the user's explicit say-so\n- verify_setup.sh removes its token temp file on interrupt (pid-tagged names +\n  EXIT/INT/TERM traps) and honors the same loopback-only APPLE_MUSIC_API_BASE\n  test hook as the API wrapper, so it is now tested end to end\n- apple_music_api.sh cleanup names its exact temp-file kinds instead of am_*\n- docs no longer suggest rm -rf on ~/.apple-music-dj: list first, delete\n  deliberately, agents never unprompted; troubleshooting removes only the cached\n  profile\n\nTests: 924 pass (+--apply/--auto flag and preview-safety tests, verify_setup\nnormal/interrupt/remote-base tests, doc guards for rm -rf, the disclosure and\n--apply wording). Version 3.2.4.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(lint): silence ShellCheck's older SC2317 for the trap-invoked cleanup, not just SC2329\n\nCI's ShellCheck is older than 0.11 and reports the 'invoked indirectly through\ntrap' false positive as SC2317; newer versions call it SC2329. The directive named\nonly the new code, so CI's lint failed while local passed. It now names both.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: verify_setup honors signals mid-request; accurate playlist_health --apply wording\n\nverify_setup.sh runs curl in the background and waits (with --max-time), so\nINT/TERM clean up the token file immediately. playlist_health fix --apply\nmessages, docs and tests now say it removes duplicate copies and only adds\nreplacements.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T03:07:08Z"
-    },
-    {
-      "id": "23681514454",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d8029e9828dd6f4dc25c18ad1482851917a52102",
-            "message": "chore: modernize toolchain (Python 3.10+, ruff, CI lint) (#20)\n\n* chore: modernize toolchain (Python 3.10+, ruff, CI lint)\n\n- Raise minimum Python to 3.10 (3.9 is EOL); CI tests 3.10/3.12/3.14\n- Loosen cryptography pin to >=46,<50\n- Add ruff config, `make ruff`, and ruff/shellcheck in CI and pre-commit\n- Remove unused imports and dead assignments flagged by ruff\n- Drop placeholder lighthouse workflow and duplicate Markdown issue templates\n- Add pip caching and least-privilege permissions to the test workflow\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(ci): drop useless cat flagged by ShellCheck SC2002\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: compare full Python version tuple; list all supported classifiers\n\nAddresses Copilot review on #20.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-09T21:59:00Z"
-    },
-    {
-      "id": "23681429570",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "25e5bd4894c91b55bfe5b11ac51f1ec2bd2dcaa1",
-            "message": "fix(lint): silence ShellCheck's older SC2317 for the trap-invoked cleanup, not just SC2329\n\nCI's ShellCheck is older than 0.11 and reports the 'invoked indirectly through\ntrap' false positive as SC2317; newer versions call it SC2329. The directive named\nonly the new code, so CI's lint failed while local passed. It now names both.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/hardening-3.2.4"
-      },
-      "created_at": "2026-10-11T02:59:57Z"
-    },
-    {
-      "id": "23680565901",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "53f01b8028a15b507c6d1818f6772e32ad08223c",
-            "message": "ci(publish): a skill card that isn't generated yet is a warning, not a failure (#32)\n\n* ci(publish): a skill card that hasn't been generated yet is a warning, not a failure\n\nThe 3.2.3 publish run ended red even though everything was fine: the release was\nlive, the audit said Pass, and ClawHub's security verdict was clean and benign.\nThe only thing that failed it was the skill card not existing within the check's\n5-minute retry window (10 x 30s). ClawHub generates the card asynchronously, and\nfor earlier versions it took on the order of half an hour.\n\nThe card is metadata, not a safety property, so a clean release must not show a\nred run because of it:\n- check_verdict still fails on any non-clean security verdict or any other\n  verification problem — a missing card never excuses a bad verdict\n- if the only issue is card.missing it retries briefly (default now 4 x 30s),\n  then returns with _card_pending and the CLI prints a ::warning:: and exits 0\n- if the card shows up in time nothing is flagged\n\nTests cover the warning, the arrives-in-time case, the short default wait, and\nthat a pending card can't mask a suspicious verdict (each fails against the old\nbehavior). Verified the real command against live 3.2.3: exits 0 with the\nwarning. CONTRIBUTING documents it. This only touches CI helper code under\n.github/, which is not packaged, so no new skill version is needed.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* ci(publish): only an explicit card.missing may be treated as \"card pending\"\n\nReview feedback on #32: a verification response with decision \"fail\" (or any\nnon-pass decision) and a clean security object but an absent/empty `reasons`\nlist reached the unconditional card-pending return, so an unrelated failed\nverification was downgraded to a warning and the gate exited 0.\n\ncheck_verdict now treats a result as card-pending only when `reasons` explicitly\ncontains card.missing. A non-passing decision with no reasons (empty, absent,\nnull, an unknown decision, or no decision at all) raises CheckError instead.\ndecision \"pass\" with no reasons still passes.\n\nFive new tests cover those payloads and fail against the old behavior.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T02:49:24Z"
-    },
-    {
-      "id": "23680386013",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "0cd659f2b467cd2eaa01fef671a668d11fa0fb1e",
-            "message": "Merge pull request #142 from and3rn3t/docs/refresh\n\ndocs: replace template and stale docs with accurate ones"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-09T21:40:00Z"
-    },
-    {
-      "id": "23680152330",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "ci/warn-on-suspicious",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T03:00:57Z"
-    },
-    {
-      "id": "23678160672",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "style/css-purge",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-09T21:04:01Z"
-    },
-    {
-      "id": "23677146748",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/concert-prep-preview",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T01:36:14Z"
-    },
-    {
-      "id": "23674484594",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9a8f850e4bcaa375380a8a430bf6ad7b868a28d1",
-            "message": "docs(listing): sharper ClawHub summary, \"At a glance\", README samples (3.2.2) (#28)\n\nThe ClawHub page uses the frontmatter description as its summary (cut off with\n\"Read more\" after a few sentences) and renders SKILL.md as the page body.\n\n- description now opens with a short pitch, keeps every trigger phrase, and\n  adds \"more like\" / \"how has my taste changed\"; new tags listening-history,\n  taste-profile, playlist-import\n- SKILL.md gains an \"At a glance\" section (what it does, things to say, what it\n  needs, safety model); the intro no longer claims it \"writes everything\n  directly\" to the library\n- README: real sample outputs replace the \"coming soon\" placeholder (a taste\n  card SVG, a \"songs like\" playlist, a drift report) — generated by the actual\n  scripts from a fictional profile / demo catalog and labeled as such\n- tests/test_listing.py guards version agreement, the description opening and\n  trigger phrases, README image links, and the scanner-flagged --seed pattern\n- version 3.2.2\n\nNo skill-card.md is added on purpose: ClawHub generates the card itself and the\nCLI strips any uploaded one.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T00:48:09Z"
-    },
-    {
-      "id": "23674407471",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/clawhub-listing",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T00:46:39Z"
-    },
-    {
-      "id": "23673694916",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "bfd916cf3c8de3418f4f502acf070b185c3b8993",
-            "message": "fix(codeql): clear the 17 open code-scanning alerts (#26)\n\n* fix(codeql): clear the 17 open code-scanning alerts\n\nNone were vulnerabilities; all were CodeQL quality rules. CodeQL had been\ndisabled for ~2 months, so they had piled up.\n\n- py/uninitialized-local-variable (4, \"error\"): daily_pick, listening_insights,\n  playlist_health, strategy_engine — add an explicit else that exits, so the\n  variable is provably assigned (argparse already makes the chain exhaustive)\n- py/empty-except (4): replace `except: pass` with real handling —\n  contextlib.suppress for the storefront cache read, an early return for the\n  history file, a stderr warning when the existing-playlist lookup fails, and\n  an isdecimal() check instead of try/except for malformed release dates\n- py/import-and-import-from (6, tests): use pytest's \"module.attr\" string\n  target instead of a local `import _common`\n- py/mixed-returns (mock_api._handle) and py/unnecessary-lambda (2 in\n  test_daily_pick): tidied\n\nTests: 797 pass (+3 for the two behavior changes).\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(strategy_engine): warn when the existing-playlist lookup exits non-zero too\n\nReview feedback on #26: the warning only covered exceptions, while an ordinary\nnon-zero exit from apple_music_api.sh still returned None silently. A failed\nlookup means create may duplicate a playlist, so every failure mode is now\nsurfaced (exception, non-zero exit with its stderr). A successful lookup with\nno match stays quiet.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T00:32:31Z"
-    },
-    {
-      "id": "23673202352",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/codeql-alerts",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T00:32:32Z"
-    },
-    {
-      "id": "23672513692",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/audit-followup",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T00:11:16Z"
-    },
-    {
-      "id": "23672415146",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/audit-followup",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T00:09:16Z"
-    },
-    {
-      "id": "23671663502",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8588476e20ac718a1f4a113dce50e776c760b13a",
-            "message": "Merge pull request #134 from and3rn3t/fix/dependabot-alerts\n\nchore(deps): patch sharp and source-map-js (Dependabot alerts)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-09T19:28:58Z"
-    },
-    {
-      "id": "23671200054",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "fdd22b453e14d4e01713f9ad201b0fefbfbc2f43",
-            "message": "fix(security): enforce cron install confirmation; rename seed strategy to similar (3.2.1) (#25)\n\nFollow-up to the ClawHub audit of 3.2.0:\n\n1. Cron install had no executable confirmation gate (T06). The \"show the\n   user first\" step was only a SKILL.md instruction. `install --dry-run` now\n   prints the exact crontab lines plus a digest, and `install` only proceeds\n   with `--confirm <digest>`. A bare install changes nothing and exits 2, and\n   the digest only matches the lines it was printed for (jobs, paths,\n   storefront and log dir are all in it), so one approval can't authorize a\n   different install. Remove needs no confirmation.\n\n2. Static analysis flagged SKILL.md:168 (suspicious.secret_argv_exposure): it\n   read the seed example's `--seed <value>` as a crypto seed phrase passed on\n   the command line. The strategy is now `similar` with `--similar-to` /\n   `--similar-type`; the 3.2.0 spellings still work as hidden aliases and\n   aren't advertised in --help. History logs strategy `similar`.\n\nVersion bumped to 3.2.1. Tests: 794 pass (+19), including mutation checks that\nweakening the gate (proceed without --confirm, accept any digest) fails tests.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T00:11:15Z"
-    },
-    {
-      "id": "23670965378",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a929b0e93fc8cb3c0afae380aeea97ee9bad5ea4",
-            "message": "fix(security): address ClawHub audit — cron injection, log and profile permissions (#24)\n\n* fix(security): address ClawHub audit — cron injection, log and profile permissions\n\nFindings from the v3.1.0 audit:\n\n1. Cron command injection (setup_cron.py)\n   - validate --profile/--log-dir/--python/--storefront/--jobs: no newlines or\n     control characters, no '%' (cron turns it into a newline even inside\n     quotes), --python must be an executable file, storefront a 2-letter code\n   - quote the log path (it was the one unquoted interpolation) and refuse any\n     finished line containing a newline/control char/'%'\n   - jobs run under `umask 077`; new `install --dry-run` prints the exact lines\n\n2. Profiles/caches written with loose permissions\n   - os.open(..., 0o600) only sets the mode on creation; the profiler's\n     cache-hit --output path used a plain write_text(), and new directories got\n     the default 0755\n   - new _common.write_private()/ensure_private_dir(): fchmod 0600 on every\n     write, every new directory level 0700, ~/.apple-music-dj tightened to\n     0700, other existing directories untouched; used by all writers (profile\n     cache/output, snapshots, history, config, feedback, card, strategy output,\n     storefront cache)\n\n3. Cron logs exposed to other local users\n   - create the log dir 0700 and log files 0600 before cron writes to them;\n     reject symlinked or foreign-owned dirs/files and dirs others can write to\n\nTests: 755 pass (79 new), including mutation checks that reverting each fix\nfails its tests. SECURITY.md documents the data/cron model; SKILL.md tells the\nagent to show `--dry-run` output and get a yes before installing.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(codeql): resolve the two new code-scanning alerts on this PR\n\n- taste_card.py: py/uninitialized-local-variable on `result` — add an\n  explicit else branch that exits for an unknown --mode (unreachable via\n  argparse choices, but makes the assignment provable)\n- test_private_writes.py: py/import-and-import-from — use `_common.name`\n  consistently instead of mixing `import _common` with `from _common import`\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(security): refuse symlinked/foreign targets in write_private; reject empty --jobs\n\nReview feedback on #24:\n\n- write_private followed symlinks and applied O_TRUNC before validating the\n  target, so a symlink at any --output path truncated and chmod'ed an unrelated\n  file (and a writable foreign-owned file was truncated before fchmod failed).\n  It now opens without O_TRUNC and with O_NOFOLLOW, checks fstat (regular file,\n  owned by us), and only then truncates. Symlinks are refused with a clear\n  message; stream devices (/dev/stdout is a symlink on Linux) still work.\n- setup_cron: `--jobs ''` / whitespace / commas parsed to an empty list that the\n  truthiness checks treated as \"not given\", so install scheduled every default\n  job and remove removed every job. An explicit empty list is now an error,\n  unknown job names are rejected up front, and `is not None` distinguishes\n  \"omitted\" from \"given\".\n\nTests fail against the previous behavior (symlink target truncated, foreign\nfile overwritten, empty --jobs accepted).\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-10T23:40:45Z"
-    },
-    {
-      "id": "23670694452",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9263a1bbfc6ca80ae2e461196b4e7e8a62ba92d7",
-            "message": "fix(security): refuse symlinked/foreign targets in write_private; reject empty --jobs\n\nReview feedback on #24:\n\n- write_private followed symlinks and applied O_TRUNC before validating the\n  target, so a symlink at any --output path truncated and chmod'ed an unrelated\n  file (and a writable foreign-owned file was truncated before fchmod failed).\n  It now opens without O_TRUNC and with O_NOFOLLOW, checks fstat (regular file,\n  owned by us), and only then truncates. Symlinks are refused with a clear\n  message; stream devices (/dev/stdout is a symlink on Linux) still work.\n- setup_cron: `--jobs ''` / whitespace / commas parsed to an empty list that the\n  truthiness checks treated as \"not given\", so install scheduled every default\n  job and remove removed every job. An explicit empty list is now an error,\n  unknown job names are rejected up front, and `is not None` distinguishes\n  \"omitted\" from \"given\".\n\nTests fail against the previous behavior (symlink target truncated, foreign\nfile overwritten, empty --jobs accepted).\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/security-audit"
-      },
-      "created_at": "2026-10-10T23:35:13Z"
-    },
-    {
-      "id": "23668004449",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/interrupt-cleanup-race",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-10T23:10:09Z"
-    },
-    {
-      "id": "23663360018",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b0169315f17bae465e335b93b06fd770729cf05a",
-            "message": "feat: demo mode, one-step token setup, token-age warnings, listing fixes (3.3.0) (#36)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-11T04:50:09Z"
-    },
-    {
-      "id": "23661391189",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "ci/warn-on-suspicious",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T02:50:50Z"
-    },
-    {
-      "id": "23661391613",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "ci/card-lag-is-a-warning",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T02:50:51Z"
-    },
-    {
-      "id": "23660663019",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/hardening-3.2.4",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-11T03:07:08Z"
-    },
-    {
-      "id": "16928296798",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: demo mode, one-step token setup, token-age warnings, listing fixes (3.3.0)",
-          "head": {
-            "ref": "feat/demo-mode-guided-setup"
-          }
-        }
-      },
-      "created_at": "2026-10-11T04:29:29Z"
-    },
-    {
-      "id": "16928291876",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: demo mode, one-step token setup, token-age warnings, listing fixes (3.3.0)",
-          "head": {
-            "ref": "feat/demo-mode-guided-setup"
-          }
-        }
-      },
-      "created_at": "2026-10-11T04:50:08Z"
+      "created_at": "2026-10-12T23:10:48Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2531,7 +2171,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 3753,
+    "total": 3805,
     "weeks": [
       {
         "days": [
@@ -4570,8 +4210,13 @@
           },
           {
             "date": "2026-10-12",
-            "count": 0,
-            "level": 0
+            "count": 51,
+            "level": 3
+          },
+          {
+            "date": "2026-10-13",
+            "count": 1,
+            "level": 1
           }
         ]
       }
@@ -4581,7 +4226,7 @@
     "TypeScript": 13093809,
     "HTML": 5782478,
     "Swift": 5121304,
-    "Python": 4027966,
+    "Python": 4057055,
     "JavaScript": 2541570,
     "Shell": 1101861,
     "CSS": 621282,
@@ -4590,7 +4235,7 @@
     "Kotlin": 300781,
     "PowerShell": 292114,
     "C++": 202428,
-    "Makefile": 58038,
+    "Makefile": 59063,
     "mcfunction": 24740,
     "Dockerfile": 11040,
     "Ruby": 9684,
@@ -4603,6 +4248,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-12T03:23:04Z",
-  "totalRepos": 52
+  "lastUpdated": "2026-10-13T03:17:11Z",
+  "totalRepos": 53
 }
