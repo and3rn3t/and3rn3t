@@ -34,35 +34,30 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
+
+> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
+>
+> **Tech:** Python, apple-photos, claude-skill, python
+
+### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
+
+> iOS26 Weather App
+>
+> **Tech:** Swift, android, fastlane, ios, swift
+
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
 > Personal portfolio for Jonah (GitHub Spark template).
 >
 > **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
-### 🌐 [telescope](https://github.com/and3rn3t/telescope)
-
-> A general overview of the JWST for fun
->
-> **Tech:** TypeScript, cloudflare-workers, jwst, nasa, react
-
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
-> OpenClaw skill for managing your Apple Music library
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
 >
-> **Tech:** Python, apple-music, claude-skill, python
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
-
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
+> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
@@ -70,17 +65,24 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** Python, arm64, docker, docker-compose, flask
 
-### 🌐 [flipper](https://github.com/and3rn3t/flipper)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
+> My attempt to build an inclusive homehub / automation project.
 >
-> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
 
-### ⭐ [test-project](https://github.com/and3rn3t/test-project)
+### 🌐 [docker-playground](https://github.com/and3rn3t/docker-playground)
 
-> Template test bed that mirrors the ai-template-repo structure.
+> Learning more about docker with the Docker API and a sandbox env
 >
-> **Tech:** Makefile, template, testing
+> **Tech:** TypeScript, docker, react, typescript, vite
+
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
 
 <!-- FEATURED-PROJECTS:END -->
 
