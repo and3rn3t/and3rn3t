@@ -23,10 +23,188 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 19,
-      "pushed_at": "2026-10-13T02:50:11Z",
-      "updated_at": "2026-10-13T02:50:14Z",
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-14T02:39:37Z",
+      "updated_at": "2026-10-14T02:39:40Z",
       "created_at": "2026-03-03T14:40:25Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1166214014,
+      "name": "apple-music-dj",
+      "full_name": "and3rn3t/apple-music-dj",
+      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
+      "html_url": "https://github.com/and3rn3t/apple-music-dj",
+      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
+      "language": "Python",
+      "topics": [
+        "agent-skill",
+        "agent-skills",
+        "ai-dj",
+        "apple-music",
+        "claude-code",
+        "claude-skill",
+        "clawhub",
+        "cli",
+        "music",
+        "music-discovery",
+        "music-recommendation",
+        "musickit",
+        "openclaw",
+        "playlist",
+        "playlist-generator",
+        "python",
+        "spotify-to-apple-music"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 2,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-13T22:29:48Z",
+      "updated_at": "2026-10-13T22:29:52Z",
+      "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1134570300,
+      "name": "family",
+      "full_name": "and3rn3t/family",
+      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
+      "html_url": "https://github.com/and3rn3t/family",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "kiosk",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-13T18:53:08Z",
+      "updated_at": "2026-10-06T21:49:04Z",
+      "created_at": "2026-01-14T22:35:53Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-13T17:27:16Z",
+      "updated_at": "2026-10-07T02:52:40Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-13T16:57:57Z",
+      "updated_at": "2026-10-13T03:18:02Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-13T11:18:15Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "ml",
+        "walking",
+        "wellness"
+      ],
+      "stargazers_count": 4,
+      "forks_count": 1,
+      "open_issues_count": 12,
+      "pushed_at": "2026-10-13T09:37:29Z",
+      "updated_at": "2026-10-01T22:01:59Z",
+      "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1149289669,
+      "name": "huggingface",
+      "full_name": "and3rn3t/huggingface",
+      "description": "Overview and sandbox for Hugging Face AI API",
+      "html_url": "https://github.com/and3rn3t/huggingface",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "cloudflare-workers",
+        "huggingface",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 12,
+      "pushed_at": "2026-10-13T05:31:00Z",
+      "updated_at": "2026-10-04T18:54:30Z",
+      "created_at": "2026-02-04T00:09:29Z",
       "fork": false,
       "archived": false
     },
@@ -81,42 +259,6 @@
       "archived": false
     },
     {
-      "id": 1166214014,
-      "name": "apple-music-dj",
-      "full_name": "and3rn3t/apple-music-dj",
-      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
-      "html_url": "https://github.com/and3rn3t/apple-music-dj",
-      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
-      "language": "Python",
-      "topics": [
-        "agent-skill",
-        "agent-skills",
-        "ai-dj",
-        "apple-music",
-        "claude-code",
-        "claude-skill",
-        "clawhub",
-        "cli",
-        "music",
-        "music-discovery",
-        "music-recommendation",
-        "musickit",
-        "openclaw",
-        "playlist",
-        "playlist-generator",
-        "python",
-        "spotify-to-apple-music"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 2,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-13T00:47:49Z",
-      "updated_at": "2026-10-13T00:47:51Z",
-      "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1416205905,
       "name": "awesome-claude-skills",
       "full_name": "and3rn3t/awesome-claude-skills",
@@ -166,52 +308,6 @@
       "archived": false
     },
     {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-12T14:08:42Z",
-      "updated_at": "2026-10-07T02:52:40Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-12T13:34:03Z",
-      "updated_at": "2026-10-12T09:30:44Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1177251835,
       "name": "docker-playground",
       "full_name": "and3rn3t/docker-playground",
@@ -231,24 +327,6 @@
       "pushed_at": "2026-10-12T06:30:16Z",
       "updated_at": "2026-08-25T01:14:17Z",
       "created_at": "2026-03-09T21:07:36Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-12T06:09:00Z",
-      "updated_at": "2026-10-05T06:17:34Z",
-      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -390,58 +468,6 @@
       "pushed_at": "2026-10-10T23:12:44Z",
       "updated_at": "2026-07-08T01:10:09Z",
       "created_at": "2026-03-26T20:37:33Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "ml",
-        "walking",
-        "wellness"
-      ],
-      "stargazers_count": 4,
-      "forks_count": 1,
-      "open_issues_count": 12,
-      "pushed_at": "2026-10-10T17:59:48Z",
-      "updated_at": "2026-10-01T22:01:59Z",
-      "created_at": "2025-08-30T21:38:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1134570300,
-      "name": "family",
-      "full_name": "and3rn3t/family",
-      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
-      "html_url": "https://github.com/and3rn3t/family",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "kiosk",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-10T14:38:17Z",
-      "updated_at": "2026-10-06T21:49:04Z",
-      "created_at": "2026-01-14T22:35:53Z",
       "fork": false,
       "archived": false
     },
@@ -650,32 +676,6 @@
       "pushed_at": "2026-10-02T21:04:51Z",
       "updated_at": "2026-10-02T21:04:59Z",
       "created_at": "2025-10-11T06:29:44Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1149289669,
-      "name": "huggingface",
-      "full_name": "and3rn3t/huggingface",
-      "description": "Overview and sandbox for Hugging Face AI API",
-      "html_url": "https://github.com/and3rn3t/huggingface",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "cloudflare-workers",
-        "huggingface",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 11,
-      "pushed_at": "2026-10-02T00:48:26Z",
-      "updated_at": "2026-10-04T18:54:30Z",
-      "created_at": "2026-02-04T00:09:29Z",
       "fork": false,
       "archived": false
     },
@@ -1204,628 +1204,660 @@
   ],
   "events": [
     {
-      "id": "17063267272",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T03:12:40Z"
-    },
-    {
-      "id": "17063212763",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T03:11:28Z"
-    },
-    {
-      "id": "17063211953",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T03:11:27Z"
-    },
-    {
-      "id": "17062216624",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: add public roadmap",
-          "head": {
-            "ref": "docs/roadmap"
-          }
-        }
-      },
-      "created_at": "2026-10-13T02:50:10Z"
-    },
-    {
-      "id": "23832580367",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8ba87aa9faa6af60f606b2b553d7b2f933ccdf76",
-            "message": "Merge pull request #5 from and3rn3t/docs/roadmap\n\ndocs: add public roadmap"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-13T02:50:11Z"
-    },
-    {
-      "id": "17062206605",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: add public roadmap",
-          "head": {
-            "ref": "docs/roadmap"
-          }
-        }
-      },
-      "created_at": "2026-10-13T02:47:43Z"
-    },
-    {
-      "id": "17062195354",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:48Z"
-    },
-    {
-      "id": "17062185108",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:33Z"
-    },
-    {
-      "id": "17062178078",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:24Z"
-    },
-    {
-      "id": "17062177138",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:24Z"
-    },
-    {
-      "id": "17062176922",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:24Z"
-    },
-    {
-      "id": "17062176913",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:24Z"
-    },
-    {
-      "id": "17062176495",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:23Z"
-    },
-    {
-      "id": "17062176132",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:23Z"
-    },
-    {
-      "id": "17062176054",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:23Z"
-    },
-    {
-      "id": "17062175750",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:23Z"
-    },
-    {
-      "id": "17062175612",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:23Z"
-    },
-    {
-      "id": "17062174148",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:19Z"
-    },
-    {
-      "id": "17062174064",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:18Z"
-    },
-    {
-      "id": "17062174037",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:18Z"
-    },
-    {
-      "id": "17062173250",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:18Z"
-    },
-    {
-      "id": "17062172836",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:17Z"
-    },
-    {
-      "id": "17062171992",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:17Z"
-    },
-    {
-      "id": "17062171677",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:16Z"
-    },
-    {
-      "id": "17062169755",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:15Z"
-    },
-    {
-      "id": "17062169731",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:15Z"
-    },
-    {
-      "id": "17062168813",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:15Z"
-    },
-    {
-      "id": "17062168210",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:12Z"
-    },
-    {
-      "id": "17062167845",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:11Z"
-    },
-    {
-      "id": "17062167635",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:10Z"
-    },
-    {
-      "id": "17062166574",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:09Z"
-    },
-    {
-      "id": "17062166013",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:09Z"
-    },
-    {
-      "id": "17062164652",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:08Z"
-    },
-    {
-      "id": "17062164502",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:08Z"
-    },
-    {
-      "id": "17062164053",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163900",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163869",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163758",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163757",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163274",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163235",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062163113",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:07Z"
-    },
-    {
-      "id": "17062162860",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:06Z"
-    },
-    {
-      "id": "17062162729",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:06Z"
-    },
-    {
-      "id": "17062161909",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:03Z"
-    },
-    {
-      "id": "17062161298",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:02Z"
-    },
-    {
-      "id": "17062161210",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:02Z"
-    },
-    {
-      "id": "17062159003",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:00Z"
-    },
-    {
-      "id": "17062158682",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:00Z"
-    },
-    {
-      "id": "17062158242",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:00Z"
-    },
-    {
-      "id": "17062157699",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:49:00Z"
-    },
-    {
-      "id": "17062157266",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:59Z"
-    },
-    {
-      "id": "17062156740",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:59Z"
-    },
-    {
-      "id": "17062156520",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:59Z"
-    },
-    {
-      "id": "17062156343",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:58Z"
-    },
-    {
-      "id": "17062154867",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:54Z"
-    },
-    {
-      "id": "17062154793",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:54Z"
-    },
-    {
-      "id": "17062154626",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:54Z"
-    },
-    {
-      "id": "17062154554",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T02:48:54Z"
-    },
-    {
-      "id": "17062099184",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: add public roadmap",
-          "head": {
-            "ref": "docs/roadmap"
-          }
-        }
-      },
-      "created_at": "2026-10-13T02:47:43Z"
-    },
-    {
-      "id": "23830941974",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "05552f3c85899b52c7bd7d16dfdf34a3a9eb8530",
-            "message": "ci: add ClawHub publish workflow\n\nPublishes to the registry when SKILL.md changes on main, using the\nfrontmatter version as the source of truth. Supports workflow_dispatch\nwith a dry_run input so the pipeline can be exercised without pushing\na version to the public registry.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-13T02:22:42Z"
-    },
-    {
-      "id": "23827768756",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "4c7f4d9f8b2ba0446af5ec954d49e243f21eef12",
-            "message": "test: cover the failure paths of the destructive executor\n\ncleanup_executor is the only script that can destroy data and had the worst\ncoverage in the repo. The untested branches were the ones that matter most:\na timeout, an unexpected exception, and a non-zero osascript exit all have to\nreport zero deletions rather than assuming the batch succeeded.\n\nEach new test was mutation-checked — making the timeout handler credit the\nbatch to success_count fails the test, so these bite rather than just pass.\n\nAlso covers that --limit actually caps the candidate list, since that is the\nbound on how much a single run can ever touch.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-13T01:29:37Z"
-    },
-    {
-      "id": "23826534722",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "11e9711b08efb076a4a9058ec35ccfb34b40084d",
-            "message": "fix(cleanup): target assets by UUID instead of filename when deleting\n\ngenerate_trash_applescript used `search for <filename>` and deleted every\nmatch. Photos filenames are not unique — the same IMG_0042.HEIC can exist\nmany times across devices and re-imports — so a cleanup run could trash\nphotos that were never candidates, including favorites and photos the\ncategory filters had deliberately excluded.\n\nAssets are now addressed by their stable ZASSET.ZUUID via Photos'\n`media item id \"<UUID>/L0/001\"`, with the filename kept only as a\ncross-check: any id that fails to resolve, or whose filename no longer\nmatches the database, is skipped rather than deleted.\n\nFail-safe throughout:\n- require_uuid_support() aborts on libraries without ZASSET.ZUUID rather\n  than falling back to filename matching\n- generate_trash_applescript raises if any candidate lacks a UUID, and\n  execute_cleanup records that as a batch error without invoking osascript\n- the script reports DELETED:<n> SKIPPED:<n>, so success_count reflects\n  what Photos actually did instead of assuming the whole batch succeeded;\n  unparseable output counts as zero deletions\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-13T01:08:34Z"
-    },
-    {
-      "id": "23825283859",
+      "id": "23933632754",
       "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "fix/doctor-real-library",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-14T02:39:38Z"
+    },
+    {
+      "id": "23933631738",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e5509aa12c28a2e8dbcdaf102c91f273d63a41ff",
+            "message": "Merge pull request #33 from and3rn3t/fix/doctor-real-library\n\nfix: doctor on a real macOS 26 library (R*Tree guard denial); recognize Tahoe"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-14T02:39:37Z"
+    },
+    {
+      "id": "17162232977",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: doctor on a real macOS 26 library (R*Tree guard denial); recognize Tahoe",
+          "head": {
+            "ref": "fix/doctor-real-library"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:39:36Z"
+    },
+    {
+      "id": "17162151925",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: doctor on a real macOS 26 library (R*Tree guard denial); recognize Tahoe",
+          "head": {
+            "ref": "fix/doctor-real-library"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:37:02Z"
+    },
+    {
+      "id": "17162114312",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: doctor on a real macOS 26 library (R*Tree guard denial); recognize Tahoe",
+          "head": {
+            "ref": "fix/doctor-real-library"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:37:02Z"
+    },
+    {
+      "id": "17161805782",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T1.2,T1.10): schema fingerprinting and doctor command",
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:30:11Z"
+    },
+    {
+      "id": "17161789586",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T02:30:17Z"
+    },
+    {
+      "id": "17161721757",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:47Z"
+    },
+    {
+      "id": "17161721704",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:48Z"
+    },
+    {
+      "id": "17161721181",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:47Z"
+    },
+    {
+      "id": "17161720869",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:45Z"
+    },
+    {
+      "id": "17161719447",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:40Z"
+    },
+    {
+      "id": "17161719402",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:43Z"
+    },
+    {
+      "id": "17161718129",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:46Z"
+    },
+    {
+      "id": "17161717792",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:46Z"
+    },
+    {
+      "id": "17161717350",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:42Z"
+    },
+    {
+      "id": "17161715557",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:28:41Z"
+    },
+    {
+      "id": "17161478713",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T1.2,T1.10): schema fingerprinting and doctor command",
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:23:06Z"
+    },
+    {
+      "id": "17161449414",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T1.2,T1.10): schema fingerprinting and doctor command",
+          "head": {
+            "ref": "feat/t1.2-t1.10-fingerprint-doctor"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:23:06Z"
+    },
+    {
+      "id": "23932259464",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "1c233230810693e102323b24c63938f83c669167",
+            "message": "Merge pull request #31 from and3rn3t/feat/t1.4-graceful-degradation\n\nfeat(T1.4): graceful degradation contract for optional columns"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-14T02:17:17Z"
+    },
+    {
+      "id": "23932253920",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.4-graceful-degradation",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-14T02:17:19Z"
+    },
+    {
+      "id": "17161165644",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T1.4): graceful degradation contract for optional columns",
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:17:16Z"
+    },
+    {
+      "id": "17161165396",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T02:17:18Z"
+    },
+    {
+      "id": "17161068705",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:17Z"
+    },
+    {
+      "id": "17161068396",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:14Z"
+    },
+    {
+      "id": "17161067948",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:18Z"
+    },
+    {
+      "id": "17161067922",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:12Z"
+    },
+    {
+      "id": "17161065325",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:11Z"
+    },
+    {
+      "id": "17161064552",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:16Z"
+    },
+    {
+      "id": "17161064361",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:16Z"
+    },
+    {
+      "id": "17161063480",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:13Z"
+    },
+    {
+      "id": "17161062922",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:11Z"
+    },
+    {
+      "id": "17161062210",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:09Z"
+    },
+    {
+      "id": "17161061430",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:09Z"
+    },
+    {
+      "id": "17161060987",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:07Z"
+    },
+    {
+      "id": "17161060872",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:05Z"
+    },
+    {
+      "id": "17161060476",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:08Z"
+    },
+    {
+      "id": "17161059231",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:03Z"
+    },
+    {
+      "id": "17161058799",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:01Z"
+    },
+    {
+      "id": "17161057902",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:07Z"
+    },
+    {
+      "id": "17161055882",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:15:06Z"
+    },
+    {
+      "id": "17160953363",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T1.4): graceful degradation contract for optional columns",
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:01:16Z"
+    },
+    {
+      "id": "23931759496",
+      "type": "CreateEvent",
       "repo": {
         "name": "and3rn3t/apple-music-dj"
       },
@@ -1833,331 +1865,622 @@
         "ref": "chore/public-profile",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-13T00:47:49Z"
+      "created_at": "2026-10-13T00:16:06Z"
     },
     {
-      "id": "23825282449",
+      "id": "17160501303",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:30Z"
+    },
+    {
+      "id": "17160501105",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:36Z"
+    },
+    {
+      "id": "17160497066",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:28Z"
+    },
+    {
+      "id": "17160496646",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:29Z"
+    },
+    {
+      "id": "17160494525",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:26Z"
+    },
+    {
+      "id": "17160494414",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:27Z"
+    },
+    {
+      "id": "17160493713",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:25Z"
+    },
+    {
+      "id": "17160493117",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:26Z"
+    },
+    {
+      "id": "17160492539",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:21Z"
+    },
+    {
+      "id": "17160492371",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:26Z"
+    },
+    {
+      "id": "17160491074",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:25Z"
+    },
+    {
+      "id": "17160489833",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:03:23Z"
+    },
+    {
+      "id": "17160393408",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T1.4): graceful degradation contract for optional columns",
+          "head": {
+            "ref": "feat/t1.4-graceful-degradation"
+          }
+        }
+      },
+      "created_at": "2026-10-14T02:01:16Z"
+    },
+    {
+      "id": "23931277105",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.4-graceful-degradation",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-14T02:00:59Z"
+    },
+    {
+      "id": "23930382870",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "commits": [
           {
-            "sha": "8298b53fd16e444ca95c170695176eb867a972be",
-            "message": "chore: public profile — social preview, honest coverage badge, community links (#50)\n\n* chore: public profile — social preview, honest coverage badge, community links\n\n- Social preview card (assets/social-preview.png, `make social-preview`), kept out of the\n  ClawHub package and guarded by tests/test_packaging.py\n- CI fails when the README coverage badge drifts more than a point from measured coverage\n  (release_checks.py check-coverage-badge)\n- README: ClawHub badge, read-only-by-default line, Discussions and good-first-issue links;\n  test module count corrected (22 → 27)\n- Issue chooser routes questions to Discussions and security reports to the policy\n- ROADMAP links the seeded issues (#46–#49)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs(security): report vulnerabilities through GitHub private reporting\n\nPrivate vulnerability reporting is now enabled. SECURITY.md and the issue chooser link to it,\nwith email kept as a fallback.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test: cover the social preview generator and committed assets\n\nThe SVG must parse and be 1280x640, the committed SVG must match render_svg(), and the PNG must be\n1280x640 and under GitHub's 1 MB limit — mirroring the demo-tour checks.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+            "sha": "f700e7b7491f545babaf7467614ef320bd5737dc",
+            "message": "Merge pull request #30 from and3rn3t/test/close-acceptance-gaps\n\ntest: close remaining acceptance gaps (T0.1 DST, T0.5 defaults, T1.19 library change)"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-13T00:47:48Z"
+      "created_at": "2026-10-14T01:45:57Z"
     },
     {
-      "id": "17056552697",
+      "id": "17159648328",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:45:59Z"
+    },
+    {
+      "id": "17159647704",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:45:58Z"
+    },
+    {
+      "id": "17159647552",
       "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
-          "title": "chore: public profile — social preview, honest coverage badge, community links",
+          "title": "test: close remaining acceptance gaps (T0.1 DST, T0.5 defaults, T1.19 library change)",
           "head": {
-            "ref": "chore/public-profile"
+            "ref": "test/close-acceptance-gaps"
           }
         }
       },
-      "created_at": "2026-10-13T00:47:47Z"
+      "created_at": "2026-10-14T01:45:56Z"
     },
     {
-      "id": "17055300416",
+      "id": "17159647010",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:45:58Z"
+    },
+    {
+      "id": "17159560213",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/public-profile"
+            "ref": "test/close-acceptance-gaps"
           }
         }
       },
-      "created_at": "2026-10-13T00:20:40Z"
+      "created_at": "2026-10-14T01:44:13Z"
     },
     {
-      "id": "17055300365",
+      "id": "17159559442",
       "type": "PullRequestReviewEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/public-profile"
+            "ref": "test/close-acceptance-gaps"
           }
         }
       },
-      "created_at": "2026-10-13T00:20:41Z"
+      "created_at": "2026-10-14T01:44:14Z"
     },
     {
-      "id": "23823680312",
+      "id": "23930272940",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "commits": [
           {
-            "sha": "0a198efc23c870d6b029bf35db40aa0fd19e8eab",
-            "message": "test: cover the social preview generator and committed assets\n\nThe SVG must parse and be 1280x640, the committed SVG must match render_svg(), and the PNG must be\n1280x640 and under GitHub's 1 MB limit — mirroring the demo-tour checks.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+            "sha": "8668e9f86753978fb231076cee7d26746bfec064",
+            "message": "test(T1.19): stale export token after the library changes\n\nsmart_export recomputes its plan separately from cleanup_executor, so it\ngets its own check: a favorite added between --plan-only and --confirm\ngives exit 11, osascript is not called, and the refreshed plan includes\nthe new asset.\n\nAddresses Copilot review on #30.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
           }
         ],
-        "ref": "refs/heads/chore/public-profile"
+        "ref": "refs/heads/test/close-acceptance-gaps"
       },
-      "created_at": "2026-10-13T00:20:40Z"
+      "created_at": "2026-10-14T01:44:11Z"
     },
     {
-      "id": "23823617556",
+      "id": "17159555316",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:37Z"
+    },
+    {
+      "id": "17159554755",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:33Z"
+    },
+    {
+      "id": "17159547609",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:25Z"
+    },
+    {
+      "id": "17159535619",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:31Z"
+    },
+    {
+      "id": "17159501031",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test: close remaining acceptance gaps (T0.1 DST, T0.5 defaults, T1.19 library change)",
+          "head": {
+            "ref": "test/close-acceptance-gaps"
+          }
+        }
+      },
+      "created_at": "2026-10-14T01:40:59Z"
+    },
+    {
+      "id": "17159459163",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:35Z"
+    },
+    {
+      "id": "17159455546",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:29Z"
+    },
+    {
+      "id": "17159444337",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:23Z"
+    },
+    {
+      "id": "17159434659",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:43Z"
+    },
+    {
+      "id": "17159431690",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:41Z"
+    },
+    {
+      "id": "17159431239",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:40Z"
+    },
+    {
+      "id": "17159429880",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:40Z"
+    },
+    {
+      "id": "17159423526",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:32Z"
+    },
+    {
+      "id": "17159422871",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:32Z"
+    },
+    {
+      "id": "17159422501",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:31Z"
+    },
+    {
+      "id": "17159421273",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:28Z"
+    },
+    {
+      "id": "17159418767",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:24Z"
+    },
+    {
+      "id": "23930094647",
       "type": "PushEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "commits": [
           {
-            "sha": "eb441c3df3e43a092187b4a3e64bd0b934a28edc",
-            "message": "docs(security): report vulnerabilities through GitHub private reporting\n\nPrivate vulnerability reporting is now enabled. SECURITY.md and the issue chooser link to it,\nwith email kept as a fallback.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+            "sha": "3988b5d2d53959888207cc14f7067c5ff3451528",
+            "message": "test: close remaining acceptance gaps for T0.1, T0.5 and T1.19\n\n- T0.1 (#6): DST boundaries. The NULL-offset fallback, in Python and in\n  SQL, is checked on both sides of New York's 2025 spring-forward and\n  fall-back. A recorded offset ignores the system's DST.\n- T0.5 (#10): every \"(default: X)\" in SKILL.md's option lists (22 of\n  them) is compared with the real argparse default, captured by stopping\n  each main() at parse_args. All already matched.\n- T1.19 (#20): a screenshot added to the library between preview and\n  execute makes the token stale: exit 11, osascript not called, and the\n  refreshed preview includes the new asset.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
           }
         ],
-        "ref": "refs/heads/chore/public-profile"
+        "ref": "refs/heads/test/close-acceptance-gaps"
       },
-      "created_at": "2026-10-13T00:19:37Z"
+      "created_at": "2026-10-14T01:41:08Z"
     },
     {
-      "id": "17055110207",
+      "id": "17159400766",
       "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
-          "title": "chore: public profile — social preview, honest coverage badge, community links",
+          "title": "test: close remaining acceptance gaps (T0.1 DST, T0.5 defaults, T1.19 library change)",
           "head": {
-            "ref": "chore/public-profile"
+            "ref": "test/close-acceptance-gaps"
           }
         }
       },
-      "created_at": "2026-10-13T00:16:14Z"
+      "created_at": "2026-10-14T01:40:59Z"
     },
     {
-      "id": "17055098434",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: public profile — social preview, honest coverage badge, community links",
-          "head": {
-            "ref": "chore/public-profile"
-          }
-        }
-      },
-      "created_at": "2026-10-13T00:16:14Z"
-    },
-    {
-      "id": "17054929260",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:32Z"
-    },
-    {
-      "id": "17054929151",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:32Z"
-    },
-    {
-      "id": "17054929021",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:32Z"
-    },
-    {
-      "id": "17054928975",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:32Z"
-    },
-    {
-      "id": "17054927774",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:30Z"
-    },
-    {
-      "id": "17054927613",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:30Z"
-    },
-    {
-      "id": "17054927473",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:30Z"
-    },
-    {
-      "id": "17054926924",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:29Z"
-    },
-    {
-      "id": "17054926611",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:29Z"
-    },
-    {
-      "id": "17054926209",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:28Z"
-    },
-    {
-      "id": "17054926065",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:28Z"
-    },
-    {
-      "id": "17054925937",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:12:28Z"
-    },
-    {
-      "id": "17054609843",
-      "type": "DiscussionEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-13T00:05:52Z"
-    },
-    {
-      "id": "23819821902",
+      "id": "23929933073",
       "type": "DeleteEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
-        "ref": "release/3.4.1",
+        "ref": "refactor/t1.1-schema-registry",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-12T23:16:36Z"
+      "created_at": "2026-10-14T01:38:28Z"
     },
     {
-      "id": "17052228402",
+      "id": "17159279407",
       "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
-          "title": "chore(release): 3.4.1",
+          "title": "refactor(T1.1): central schema registry",
           "head": {
-            "ref": "release/3.4.1"
+            "ref": "refactor/t1.1-schema-registry"
           }
         }
       },
-      "created_at": "2026-10-12T23:16:34Z"
+      "created_at": "2026-10-14T01:38:26Z"
     },
     {
-      "id": "17052217201",
+      "id": "17159170337",
       "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
-          "title": "chore(release): 3.4.1",
+          "title": "refactor(T1.1): central schema registry",
           "head": {
-            "ref": "release/3.4.1"
+            "ref": "refactor/t1.1-schema-registry"
           }
         }
       },
-      "created_at": "2026-10-12T23:13:51Z"
+      "created_at": "2026-10-14T01:35:34Z"
     },
     {
-      "id": "17052089657",
+      "id": "17159141118",
       "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
-          "title": "chore(release): 3.4.1",
+          "title": "refactor(T1.1): central schema registry",
           "head": {
-            "ref": "release/3.4.1"
+            "ref": "refactor/t1.1-schema-registry"
           }
         }
       },
-      "created_at": "2026-10-12T23:13:51Z"
+      "created_at": "2026-10-14T01:35:34Z"
     },
     {
-      "id": "17051932203",
+      "id": "17158920477",
       "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-photos-cleaner"
       },
       "payload": {
         "pull_request": {
-          "title": "docs: README intro names Claude Code alongside OpenClaw",
+          "title": "feat(T1.19)!: require a confirmation token for every mutation",
           "head": {
-            "ref": "docs/readme-intro-claude-code"
+            "ref": "feat/t1.19-confirm-tokens"
           }
         }
       },
-      "created_at": "2026-10-12T23:10:48Z"
+      "created_at": "2026-10-14T01:31:09Z"
+    },
+    {
+      "id": "23929470189",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e572d2090fae6aadf6ec97a2e250e2f2c5e33e51",
+            "message": "Merge pull request #26 from and3rn3t/feat/t1.9-t1.20-exit-codes-authorizer\n\nfeat(T1.9,T1.20): exit codes and read-only SQLite authorizer; fix --library"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-14T01:30:40Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2171,7 +2494,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 3805,
+    "total": 3859,
     "weeks": [
       {
         "days": [
@@ -4215,8 +4538,13 @@
           },
           {
             "date": "2026-10-13",
-            "count": 1,
-            "level": 1
+            "count": 55,
+            "level": 4
+          },
+          {
+            "date": "2026-10-14",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -4226,7 +4554,7 @@
     "TypeScript": 13093809,
     "HTML": 5782478,
     "Swift": 5121304,
-    "Python": 4057055,
+    "Python": 4207579,
     "JavaScript": 2541570,
     "Shell": 1101861,
     "CSS": 621282,
@@ -4248,6 +4576,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-13T03:17:11Z",
+  "lastUpdated": "2026-10-14T03:11:46Z",
   "totalRepos": 53
 }
