@@ -9,6 +9,158 @@
   },
   "repositories": [
     {
+      "id": 1287619779,
+      "name": ".github",
+      "full_name": "and3rn3t/.github",
+      "description": null,
+      "html_url": "https://github.com/and3rn3t/.github",
+      "homepage": null,
+      "language": "Shell",
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 10,
+      "pushed_at": "2026-10-15T03:10:20Z",
+      "updated_at": "2026-07-13T00:24:45Z",
+      "created_at": "2026-07-02T21:26:10Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1126996610,
+      "name": "sky",
+      "full_name": "and3rn3t/sky",
+      "description": "A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).",
+      "html_url": "https://github.com/and3rn3t/sky",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "astronomy",
+        "react",
+        "spark-template",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-15T01:50:22Z",
+      "updated_at": "2026-10-07T13:33:18Z",
+      "created_at": "2026-01-03T00:51:45Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1288624692,
+      "name": "eslint-config",
+      "full_name": "and3rn3t/eslint-config",
+      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
+      "html_url": "https://github.com/and3rn3t/eslint-config",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "eslint",
+        "react",
+        "shared-config",
+        "typescript"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-15T00:20:11Z",
+      "updated_at": "2026-07-08T01:09:44Z",
+      "created_at": "2026-07-03T19:42:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1078539335,
+      "name": "network",
+      "full_name": "and3rn3t/network",
+      "description": "Testing UniFi API",
+      "html_url": "https://github.com/and3rn3t/network",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "python",
+        "unifi"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-14T15:49:17Z",
+      "updated_at": "2026-10-07T13:33:10Z",
+      "created_at": "2025-10-17T22:48:41Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-14T15:43:03Z",
+      "updated_at": "2026-10-14T03:12:39Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1156702820,
+      "name": "jonah",
+      "full_name": "and3rn3t/jonah",
+      "description": "Personal portfolio for Jonah (GitHub Spark template).",
+      "html_url": "https://github.com/and3rn3t/jonah",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "portfolio",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-14T15:26:52Z",
+      "updated_at": "2026-10-07T13:33:25Z",
+      "created_at": "2026-02-13T00:28:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-14T04:25:36Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
       "id": 1171723267,
       "name": "apple-photos-cleaner",
       "full_name": "and3rn3t/apple-photos-cleaner",
@@ -117,45 +269,6 @@
       "archived": false
     },
     {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-13T16:57:57Z",
-      "updated_at": "2026-10-13T03:18:02Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-13T11:18:15Z",
-      "updated_at": "2026-10-05T06:17:34Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1047636691,
       "name": "health",
       "full_name": "and3rn3t/health",
@@ -230,31 +343,6 @@
       "pushed_at": "2026-10-13T02:27:58Z",
       "updated_at": "2026-07-17T19:02:29Z",
       "created_at": "2026-02-05T02:05:57Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1156702820,
-      "name": "jonah",
-      "full_name": "and3rn3t/jonah",
-      "description": "Personal portfolio for Jonah (GitHub Spark template).",
-      "html_url": "https://github.com/and3rn3t/jonah",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "portfolio",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-13T01:38:11Z",
-      "updated_at": "2026-10-07T13:33:25Z",
-      "created_at": "2026-02-13T00:28:34Z",
       "fork": false,
       "archived": false
     },
@@ -404,29 +492,6 @@
       "archived": false
     },
     {
-      "id": 1078539335,
-      "name": "network",
-      "full_name": "and3rn3t/network",
-      "description": "Testing UniFi API",
-      "html_url": "https://github.com/and3rn3t/network",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "python",
-        "unifi"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-11T21:57:03Z",
-      "updated_at": "2026-10-07T13:33:10Z",
-      "created_at": "2025-10-17T22:48:41Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1165780517,
       "name": "flipper",
       "full_name": "and3rn3t/flipper",
@@ -546,30 +611,6 @@
       "archived": false
     },
     {
-      "id": 1126996610,
-      "name": "sky",
-      "full_name": "and3rn3t/sky",
-      "description": "A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).",
-      "html_url": "https://github.com/and3rn3t/sky",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "astronomy",
-        "react",
-        "spark-template",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-07T18:04:53Z",
-      "updated_at": "2026-10-07T13:33:18Z",
-      "created_at": "2026-01-03T00:51:45Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1167084183,
       "name": "homekit-automator",
       "full_name": "and3rn3t/homekit-automator",
@@ -589,29 +630,6 @@
       "pushed_at": "2026-10-07T16:08:14Z",
       "updated_at": "2026-09-27T13:43:51Z",
       "created_at": "2026-02-25T23:30:58Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1288624692,
-      "name": "eslint-config",
-      "full_name": "and3rn3t/eslint-config",
-      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
-      "html_url": "https://github.com/and3rn3t/eslint-config",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "eslint",
-        "react",
-        "shared-config",
-        "typescript"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-06T22:49:16Z",
-      "updated_at": "2026-07-08T01:09:44Z",
-      "created_at": "2026-07-03T19:42:39Z",
       "fork": false,
       "archived": false
     },
@@ -695,24 +713,6 @@
       "updated_at": "2026-09-19T03:37:53Z",
       "created_at": "2026-09-19T01:50:31Z",
       "fork": true,
-      "archived": false
-    },
-    {
-      "id": 1287619779,
-      "name": ".github",
-      "full_name": "and3rn3t/.github",
-      "description": null,
-      "html_url": "https://github.com/and3rn3t/.github",
-      "homepage": null,
-      "language": "Shell",
-      "topics": [],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 10,
-      "pushed_at": "2026-09-12T11:59:23Z",
-      "updated_at": "2026-07-13T00:24:45Z",
-      "created_at": "2026-07-02T21:26:10Z",
-      "fork": false,
       "archived": false
     },
     {
@@ -1203,6 +1203,132 @@
     }
   ],
   "events": [
+    {
+      "id": "24014633990",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "docs/roadmap",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-13T02:50:12Z"
+    },
+    {
+      "id": "24001802372",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6b1de0ce86723bcb82a333569b87a39cd1f97ea2",
+            "message": "chore(release): 3.4.1 (#44)\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-12T23:16:35Z"
+    },
+    {
+      "id": "24000893773",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9b8819f63363b1363e35f5c16bdccf898d44000f",
+            "message": "docs: Claude Code install section; fit description to the Agent Skills limit (#42)\n\n* docs: Claude Code install section; fit description to the 1024-char Agent Skills limit\n\nThe description was 1,660 characters, over the Agent Skills spec limit that Claude-side\nvalidators and community skill lists enforce. Trimmed to 950 while keeping every trigger\nphrase the listing tests require, and added a test guarding the limit.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: list Claude Code as a skill host; count the YAML trailing newline in the length test\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-12T23:06:21Z"
+    },
+    {
+      "id": "24000048754",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/awesome-claude-skills"
+      },
+      "payload": {
+        "ref": "add-apple-music-dj",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-12T22:47:27Z"
+    },
+    {
+      "id": "23976232850",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "da69c5c8db1eea5fbe612a89e7664d9de81a6198",
+            "message": "perf: stream cursors instead of fetchall on full-library scans\n\nFive queries read one row per asset and grouped the results in Python, so\n`fetchall()` materialized the entire library before any work started. On a\nsynthetic 200k-row table that is 71 MB of peak allocation; iterating the\ncursor instead is ~0, with identical results.\n\nDeliberately not a `--limit` flag. These five are duplicate detection and\nhabit statistics, where a cap doesn't bound the work, it silently changes the\nanswer — you miss duplicate pairs, or compute statistics over a sample and\nreport them as the library total. `--limit` already exists in\ncleanup_executor and similarity_finder, where capping what you act on is\nmeaningful.\n\nThe other 52 fetchall() calls are GROUP BY aggregates, PRAGMA introspection,\nor already LIMIT-ed, and return tens of rows regardless of library size.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-13T01:26:43Z"
+    },
+    {
+      "id": "17189607906",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:42Z"
+    },
+    {
+      "id": "17189606139",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:39Z"
+    },
+    {
+      "id": "17189578666",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-14T01:41:27Z"
+    },
+    {
+      "id": "23965787845",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "docs/readme-intro-claude-code",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-12T23:10:50Z"
+    },
+    {
+      "id": "23945475096",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "docs/roadmap",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-13T02:47:33Z"
+    },
     {
       "id": "23933632754",
       "type": "DeleteEvent",
@@ -2337,150 +2463,6 @@
       },
       "payload": {},
       "created_at": "2026-10-14T01:41:31Z"
-    },
-    {
-      "id": "17159421273",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-14T01:41:28Z"
-    },
-    {
-      "id": "17159418767",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-14T01:41:24Z"
-    },
-    {
-      "id": "23930094647",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3988b5d2d53959888207cc14f7067c5ff3451528",
-            "message": "test: close remaining acceptance gaps for T0.1, T0.5 and T1.19\n\n- T0.1 (#6): DST boundaries. The NULL-offset fallback, in Python and in\n  SQL, is checked on both sides of New York's 2025 spring-forward and\n  fall-back. A recorded offset ignores the system's DST.\n- T0.5 (#10): every \"(default: X)\" in SKILL.md's option lists (22 of\n  them) is compared with the real argparse default, captured by stopping\n  each main() at parse_args. All already matched.\n- T1.19 (#20): a screenshot added to the library between preview and\n  execute makes the token stale: exit 11, osascript not called, and the\n  refreshed preview includes the new asset.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/test/close-acceptance-gaps"
-      },
-      "created_at": "2026-10-14T01:41:08Z"
-    },
-    {
-      "id": "17159400766",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "test: close remaining acceptance gaps (T0.1 DST, T0.5 defaults, T1.19 library change)",
-          "head": {
-            "ref": "test/close-acceptance-gaps"
-          }
-        }
-      },
-      "created_at": "2026-10-14T01:40:59Z"
-    },
-    {
-      "id": "23929933073",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "refactor/t1.1-schema-registry",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-14T01:38:28Z"
-    },
-    {
-      "id": "17159279407",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor(T1.1): central schema registry",
-          "head": {
-            "ref": "refactor/t1.1-schema-registry"
-          }
-        }
-      },
-      "created_at": "2026-10-14T01:38:26Z"
-    },
-    {
-      "id": "17159170337",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor(T1.1): central schema registry",
-          "head": {
-            "ref": "refactor/t1.1-schema-registry"
-          }
-        }
-      },
-      "created_at": "2026-10-14T01:35:34Z"
-    },
-    {
-      "id": "17159141118",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor(T1.1): central schema registry",
-          "head": {
-            "ref": "refactor/t1.1-schema-registry"
-          }
-        }
-      },
-      "created_at": "2026-10-14T01:35:34Z"
-    },
-    {
-      "id": "17158920477",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.19)!: require a confirmation token for every mutation",
-          "head": {
-            "ref": "feat/t1.19-confirm-tokens"
-          }
-        }
-      },
-      "created_at": "2026-10-14T01:31:09Z"
-    },
-    {
-      "id": "23929470189",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "e572d2090fae6aadf6ec97a2e250e2f2c5e33e51",
-            "message": "Merge pull request #26 from and3rn3t/feat/t1.9-t1.20-exit-codes-authorizer\n\nfeat(T1.9,T1.20): exit codes and read-only SQLite authorizer; fix --library"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-14T01:30:40Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -4545,6 +4527,11 @@
             "date": "2026-10-14",
             "count": 0,
             "level": 0
+          },
+          {
+            "date": "2026-10-15",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -4576,6 +4563,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-14T03:11:46Z",
+  "lastUpdated": "2026-10-15T03:11:26Z",
   "totalRepos": 53
 }
