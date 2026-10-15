@@ -34,6 +34,36 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [sky](https://github.com/and3rn3t/sky)
+
+> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+>
+> **Tech:** TypeScript, astronomy, react, spark-template, typescript
+
+### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
+
+> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
+>
+> **Tech:** JavaScript, eslint, react, shared-config, typescript
+
+### 🐍 [network](https://github.com/and3rn3t/network)
+
+> Testing UniFi API
+>
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
+
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+
+> Personal portfolio for Jonah (GitHub Spark template).
+>
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
 ### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
 
 > OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
@@ -52,38 +82,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
 >
 > **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
-
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
-
-> My attempt to build an inclusive homehub / automation project.
->
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
-
-### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
-
-> Overview and sandbox for Hugging Face AI API
->
-> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
-
-### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
-
-> iOS26 Weather App
->
-> **Tech:** Swift, android, fastlane, ios, swift
 
 <!-- FEATURED-PROJECTS:END -->
 
