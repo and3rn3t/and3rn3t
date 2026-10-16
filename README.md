@@ -34,29 +34,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [sky](https://github.com/and3rn3t/sky)
+### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
 
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
 >
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
-
-### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
-
-> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
->
-> **Tech:** JavaScript, eslint, react, shared-config, typescript
-
-### 🐍 [network](https://github.com/and3rn3t/network)
-
-> Testing UniFi API
->
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
-
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
-
-> Personal portfolio for Jonah (GitHub Spark template).
->
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+> **Tech:** Python, apple-photos, claude-skill, python
 
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
@@ -64,18 +46,37 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript
 
-### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
+### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
 
-> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
+> iOS26 Weather App
 >
-> **Tech:** Python, apple-photos, claude-skill, python
+> **Tech:** Swift, android, fastlane, ios, swift
 
-### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
+### 🌐 [guess](https://github.com/and3rn3t/guess)
 
-> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
+> A guessing game like "Akinator", but with more visibility to the user how it works.
 >
-> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
-> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
+
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> My attempt to build an inclusive homehub / automation project.
+>
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
+
+### 🌐 [sky](https://github.com/and3rn3t/sky)
+
+> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+>
+> **Tech:** TypeScript, astronomy, react, spark-template, typescript
+
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+
+> Personal portfolio for Jonah (GitHub Spark template).
+>
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
 ### 🌐 [family](https://github.com/and3rn3t/family)
 
