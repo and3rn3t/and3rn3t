@@ -9,6 +9,184 @@
   },
   "repositories": [
     {
+      "id": 1193055292,
+      "name": "test-project",
+      "full_name": "and3rn3t/test-project",
+      "description": "Template test bed that mirrors the ai-template-repo structure.",
+      "html_url": "https://github.com/and3rn3t/test-project",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "template",
+        "testing"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-16T20:33:16Z",
+      "updated_at": "2026-07-08T01:10:09Z",
+      "created_at": "2026-03-26T20:37:33Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1149289669,
+      "name": "huggingface",
+      "full_name": "and3rn3t/huggingface",
+      "description": "Overview and sandbox for Hugging Face AI API",
+      "html_url": "https://github.com/and3rn3t/huggingface",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "cloudflare-workers",
+        "huggingface",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 13,
+      "pushed_at": "2026-10-16T20:27:18Z",
+      "updated_at": "2026-10-04T18:54:30Z",
+      "created_at": "2026-02-04T00:09:29Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1094375223,
+      "name": "vac",
+      "full_name": "and3rn3t/vac",
+      "description": "Playing with connecting to robotic vacuum without cloud services",
+      "html_url": "https://github.com/and3rn3t/vac",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "home-automation",
+        "iot",
+        "python",
+        "robotics"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-16T17:36:42Z",
+      "updated_at": "2026-07-17T19:02:43Z",
+      "created_at": "2025-11-11T16:16:05Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1093825727,
+      "name": "silas",
+      "full_name": "and3rn3t/silas",
+      "description": "Personal webpage for Silas",
+      "html_url": "https://github.com/and3rn3t/silas",
+      "homepage": "https://silas-anderson.pages.dev",
+      "language": "JavaScript",
+      "topics": [
+        "cloudflare-pages",
+        "game",
+        "javascript",
+        "playwright"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-16T16:52:51Z",
+      "updated_at": "2026-08-25T01:14:08Z",
+      "created_at": "2025-11-10T22:25:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-16T15:55:15Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1078539335,
+      "name": "network",
+      "full_name": "and3rn3t/network",
+      "description": "Testing UniFi API",
+      "html_url": "https://github.com/and3rn3t/network",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "python",
+        "unifi"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-16T15:32:50Z",
+      "updated_at": "2026-10-15T14:02:17Z",
+      "created_at": "2025-10-17T22:48:41Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-16T10:08:19Z",
+      "updated_at": "2026-10-16T03:12:43Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1288624692,
+      "name": "eslint-config",
+      "full_name": "and3rn3t/eslint-config",
+      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
+      "html_url": "https://github.com/and3rn3t/eslint-config",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "eslint",
+        "react",
+        "shared-config",
+        "typescript"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-16T06:23:54Z",
+      "updated_at": "2026-07-08T01:09:44Z",
+      "created_at": "2026-07-03T19:42:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
       "id": 1171723267,
       "name": "apple-photos-cleaner",
       "full_name": "and3rn3t/apple-photos-cleaner",
@@ -27,24 +205,6 @@
       "pushed_at": "2026-10-16T02:13:36Z",
       "updated_at": "2026-10-16T02:13:38Z",
       "created_at": "2026-03-03T14:40:25Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-16T01:34:13Z",
-      "updated_at": "2026-10-05T06:17:34Z",
-      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -95,27 +255,6 @@
       "pushed_at": "2026-10-15T19:47:27Z",
       "updated_at": "2026-10-15T14:03:13Z",
       "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-15T19:16:56Z",
-      "updated_at": "2026-10-15T14:01:53Z",
-      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -215,29 +354,6 @@
       "pushed_at": "2026-10-15T14:04:48Z",
       "updated_at": "2026-10-15T14:03:04Z",
       "created_at": "2026-01-14T22:35:53Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1078539335,
-      "name": "network",
-      "full_name": "and3rn3t/network",
-      "description": "Testing UniFi API",
-      "html_url": "https://github.com/and3rn3t/network",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "python",
-        "unifi"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-15T14:04:36Z",
-      "updated_at": "2026-10-15T14:02:17Z",
-      "created_at": "2025-10-17T22:48:41Z",
       "fork": false,
       "archived": false
     },
@@ -457,29 +573,6 @@
       "archived": false
     },
     {
-      "id": 1288624692,
-      "name": "eslint-config",
-      "full_name": "and3rn3t/eslint-config",
-      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
-      "html_url": "https://github.com/and3rn3t/eslint-config",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "eslint",
-        "react",
-        "shared-config",
-        "typescript"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-15T00:20:11Z",
-      "updated_at": "2026-07-08T01:09:44Z",
-      "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1166214014,
       "name": "apple-music-dj",
       "full_name": "and3rn3t/apple-music-dj",
@@ -516,32 +609,6 @@
       "archived": false
     },
     {
-      "id": 1149289669,
-      "name": "huggingface",
-      "full_name": "and3rn3t/huggingface",
-      "description": "Overview and sandbox for Hugging Face AI API",
-      "html_url": "https://github.com/and3rn3t/huggingface",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "cloudflare-workers",
-        "huggingface",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 12,
-      "pushed_at": "2026-10-13T05:31:00Z",
-      "updated_at": "2026-10-04T18:54:30Z",
-      "created_at": "2026-02-04T00:09:29Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1416205905,
       "name": "awesome-claude-skills",
       "full_name": "and3rn3t/awesome-claude-skills",
@@ -557,73 +624,6 @@
       "updated_at": "2026-10-12T22:47:11Z",
       "created_at": "2026-10-12T22:47:11Z",
       "fork": true,
-      "archived": false
-    },
-    {
-      "id": 1094375223,
-      "name": "vac",
-      "full_name": "and3rn3t/vac",
-      "description": "Playing with connecting to robotic vacuum without cloud services",
-      "html_url": "https://github.com/and3rn3t/vac",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "home-automation",
-        "iot",
-        "python",
-        "robotics"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-12T06:06:26Z",
-      "updated_at": "2026-07-17T19:02:43Z",
-      "created_at": "2025-11-11T16:16:05Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1093825727,
-      "name": "silas",
-      "full_name": "and3rn3t/silas",
-      "description": "Personal webpage for Silas",
-      "html_url": "https://github.com/and3rn3t/silas",
-      "homepage": "https://silas-anderson.pages.dev",
-      "language": "JavaScript",
-      "topics": [
-        "cloudflare-pages",
-        "game",
-        "javascript",
-        "playwright"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-12T03:51:40Z",
-      "updated_at": "2026-08-25T01:14:08Z",
-      "created_at": "2025-11-10T22:25:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1193055292,
-      "name": "test-project",
-      "full_name": "and3rn3t/test-project",
-      "description": "Template test bed that mirrors the ai-template-repo structure.",
-      "html_url": "https://github.com/and3rn3t/test-project",
-      "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "template",
-        "testing"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-10T23:12:44Z",
-      "updated_at": "2026-07-08T01:10:09Z",
-      "created_at": "2026-03-26T20:37:33Z",
-      "fork": false,
       "archived": false
     },
     {
@@ -1204,6 +1204,1010 @@
   ],
   "events": [
     {
+      "id": "24264758988",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "ci/release-drafter-no-version-guess",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:11:55Z"
+    },
+    {
+      "id": "24262214125",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "release/v1.3.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T23:47:22Z"
+    },
+    {
+      "id": "24261875541",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homekit-automator"
+      },
+      "payload": {
+        "ref": "renovate/apple-swift-log-1.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:03:53Z"
+    },
+    {
+      "id": "24261779640",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/react-day-picker-10.0.2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:33Z"
+    },
+    {
+      "id": "24261735988",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "ref": "renovate/pydantic-settings-2.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:01:57Z"
+    },
+    {
+      "id": "24261732643",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5766c18d24cd8d3ee4721b4265c61165a2bc4d75",
+            "message": "Merge pull request #85 from and3rn3t/renovate/pydantic-settings-2.x\n\nchore(deps): update dependency pydantic-settings to v2.16.0"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:01:55Z"
+    },
+    {
+      "id": "24261723500",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "dcb1f575d0a4597835006a52a50e89344426dc8d",
+            "message": "Merge pull request #150 from and3rn3t/renovate/vite-and-vitest\n\nchore(deps): update dependency vitest to v5.0.4"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:01:38Z"
+    },
+    {
+      "id": "24261176770",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "fix/35-scene-search-macos26",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T23:37:36Z"
+    },
+    {
+      "id": "24252827101",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "ci/publish-summary-status",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T11:48:37Z"
+    },
+    {
+      "id": "24252773361",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f3f6d8d1a0d0609bd8f7fcc694b164fdfcdc87a5",
+            "message": "fix(#37): label screen recordings in storage_analyzer --human\n\nformat_summary mapped every non-screenshot source to \"Photos & Videos\",\nso recordings and ordinary media printed as two identical lines. An\nexplicit SOURCE_LABELS mapping now names all three, with a human-output\nregression test.\n\nAddresses Copilot review on #39.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/37-screen-recordings"
+      },
+      "created_at": "2026-10-15T11:47:45Z"
+    },
+    {
+      "id": "24251050537",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9d1d3cf19c438fbbebefacdf45fe8e41bd79d83d",
+            "message": "Merge pull request #58 from and3rn3t/renovate/uuid-14.x-lockfile\n\nchore(deps): update dependency uuid to v14.0.3"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:03:39Z"
+    },
+    {
+      "id": "24251045403",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "renovate/react-hook-form-7.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:03:35Z"
+    },
+    {
+      "id": "24250986714",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "64e86531e4f3fa24ce6fd3c1871ddd242bf575bc",
+            "message": "Merge pull request #75 from and3rn3t/dependabot/npm_and_yarn/radix-ui/react-tooltip-1.2.16\n\nBump @radix-ui/react-tooltip from 1.2.14 to 1.2.16"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:02:45Z"
+    },
+    {
+      "id": "24250961925",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e5f86165c4345f5536ffe46e40c571aee4c275a7",
+            "message": "Merge pull request #78 from and3rn3t/dependabot/npm_and_yarn/github/spark-0.46.15\n\nBump @github/spark from 0.46.2 to 0.46.15"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:02:24Z"
+    },
+    {
+      "id": "24241026639",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "perf/timeline-scene-index",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T01:59:21Z"
+    },
+    {
+      "id": "24240043478",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.7-result-envelope",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T01:51:44Z"
+    },
+    {
+      "id": "24239428690",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2ec221dc59a5f650b5c80cef8e584c070100cd57",
+            "message": "Merge pull request #52 from and3rn3t/release/v1.4.0\n\nchore(release): 1.4.0 \"One CLI\""
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T02:13:36Z"
+    },
+    {
+      "id": "24239399924",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/38-original-filenames",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T11:55:47Z"
+    },
+    {
+      "id": "24239020363",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "21df8899b15de2ef4eec7748aaacb5028f5604fe",
+            "message": "feat: show original filenames in previews and reports (#38)\n\nOn current macOS ZASSET.ZFILENAME is Photos' internal storage name (a\nUUID), so a real library's cleanup preview listed \"B3E2E2AA-….jpeg\" and\nthe user couldn't tell what they were approving.\n\n- _common: original_filename_sql(schema) selects\n  ZADDITIONALASSETATTRIBUTES.ZORIGINALFILENAME as original_filename (NULL\n  when absent), and build_asset_query includes it. display_name(item)\n  prefers it over filename.\n- All 16 scripts that list files add original_filename to their items,\n  declare an optional \"original_filenames\" section (ORIGINAL_FILENAME\n  group), and print display_name() in --human output. cleanup_executor,\n  smart_export, scene_search (search mode only) and storage_analyzer gain\n  a Degradation so a missing column is reported.\n- filename is unchanged and stays the AppleScript identity cross-check;\n  a test pins that the display name never reaches the script.\n\nTests: tests/test_original_filenames.py (UUID storage names plus real\noriginal names, as on modern libraries), and the degradation sweep's\nrich fixture gains the column.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/38-original-filenames"
+      },
+      "created_at": "2026-10-15T11:51:50Z"
+    },
+    {
+      "id": "24237126124",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t2.23-md-csv-output",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T01:48:47Z"
+    },
+    {
+      "id": "24234667493",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "526ba155523100cefba180de6d3c7d275f25d07d",
+            "message": "fix(T1.8): --quiet drops diagnostics, never the result\n\nAddresses Copilot review on #48.\n\n- cleanup_executor with no candidates: in human mode the message is the\n  result, so it goes to stdout even with --quiet (before, both streams\n  were empty). JSON mode is unchanged: JSON on stdout, with a stderr\n  note unless --quiet.\n- smart_export: the final \"Export complete\" counts went to the progress\n  stream, which --quiet discards. In human mode they now print to stdout\n  (in JSON mode they're in the result), and skipped items are reported\n  on stderr in both formats as a problem.\n\nRegression tests fail before this change.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/t1.8-consistent-flags"
+      },
+      "created_at": "2026-10-16T00:27:35Z"
+    },
+    {
+      "id": "17413436520",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "openclaw/openclaw"
+      },
+      "payload": {},
+      "created_at": "2026-10-16T17:34:43Z"
+    },
+    {
+      "id": "24222988467",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "renovate/uuid-14.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:03:41Z"
+    },
+    {
+      "id": "24222962032",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "89728630e39e10c497a3f1807925260076b6d4b3",
+            "message": "Merge pull request #61 from and3rn3t/renovate/radix-ui-primitives-monorepo\n\nchore(deps): update radix-ui-primitives monorepo"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:03:20Z"
+    },
+    {
+      "id": "24222936230",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/family"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "918e2f3023f3d26ab55a3f44fd3b20d142f9b4a0",
+            "message": "Merge pull request #45 from and3rn3t/renovate/express-5.x-lockfile\n\nchore(deps): update dependency express to v5.3.0"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:03:00Z"
+    },
+    {
+      "id": "24222882526",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "renovate/node-24.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:20Z"
+    },
+    {
+      "id": "24221708305",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "perf/timeline-scene-index",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T02:09:38Z"
+    },
+    {
+      "id": "24221326128",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9eb979523297cd4b2d0249615001453db8051967",
+            "message": "perf: load index labels only for the photos a run shows\n\nAddresses Copilot review on #51: the first top() loaded every asset's\nlabels, so on_this_day (a few photos) decoded and cached the whole\nlibrary's label associations.\n\n- SearchIndex.labels_for_uuids(uuids) reads labels for just those UUIDs,\n  in chunked `uuid_0 IN (...)` queries on the assets index, filtering\n  uuid_1 in Python. It replaces the whole-library labels_by_uuid.\n- IndexLabels.preload(ids) loads a batch once; timeline_recap preloads\n  every photo in the timeline and on_this_day every photo across the\n  years shown. top() only counts in memory and loads anything missing.\n\nThe synthetic 2,000-event timeline stays at 0.04 s. A new test checks\non_this_day asks the index about exactly the photos it shows (2 of 4).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/perf/timeline-scene-index"
+      },
+      "created_at": "2026-10-16T02:05:50Z"
+    },
+    {
+      "id": "17404208642",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {},
+      "created_at": "2026-10-15T23:25:40Z"
+    },
+    {
+      "id": "24216945508",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b496e0551d8558b52891c7afc6b4fce4bb6e14ca",
+            "message": "fix(T1.7): envelope leads in Markdown and survives in CSV\n\nAddresses Copilot review on #50.\n\n- Markdown rendered every scalar before any list, so a command's own\n  fields (e.g. smart_export's output_dir/exported) came before\n  `warnings`. The envelope is now rendered as its own leading block.\n- CSV only collected lists of objects, so the envelope vanished and an\n  empty result was a bare header. A first `section=envelope` row now\n  carries schema_version/command/generated_at; warnings follow as\n  `warnings` rows. ENVELOPE_KEYS names the fields once.\n\nTests cover Markdown order with empty and populated warnings, CSV\nmetadata for an empty result, warnings as rows, and the per-command\nCSV check now expects the envelope row (4 fail before this change).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/t1.7-result-envelope"
+      },
+      "created_at": "2026-10-16T02:02:15Z"
+    },
+    {
+      "id": "24215876169",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "release/v1.4.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T02:10:52Z"
+    },
+    {
+      "id": "24215807141",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f69479372c6bd9c69b60c33edca1284bde658e6a",
+            "message": "Merge pull request #49 from and3rn3t/feat/t2.23-md-csv-output\n\nfeat(T2.23): --format md|csv for every command"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T01:48:46Z"
+    },
+    {
+      "id": "24214656810",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "ref": "renovate/black-26.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:03Z"
+    },
+    {
+      "id": "24213521618",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4ca28957098cc9d80fae2717a159a6fbae3afd34",
+            "message": "fix(T2.23): neutralize CSV formulas; keep `section` as the source path\n\nAddresses Copilot review on #49.\n\n- CSV injection: album titles, filenames and names come from the\n  library, i.e. from whoever shared a photo. A text cell starting with\n  = + - @, tab or CR now gets a leading apostrophe, so a spreadsheet\n  shows it instead of running it. Numbers (e.g. -33.86 latitude) and the\n  JSON/Markdown formats are untouched. Recorded in the threat model.\n- `section` always holds the row's source path. A payload field named\n  `section` (degraded entries, doctor's degraded_sections) used to\n  overwrite it and is now kept as `entry_section`.\n\nRegression tests (TestCsvInjection, hostile album title end to end,\nnonempty degraded): 9 fail before this change.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/t2.23-md-csv-output"
+      },
+      "created_at": "2026-10-16T01:42:50Z"
+    },
+    {
+      "id": "24213428584",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t2.23-md-csv-output",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:32:09Z"
+    },
+    {
+      "id": "24213241138",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b1197232426ba5de812311852dbba53276609990",
+            "message": "Merge pull request #48 from and3rn3t/feat/t1.8-consistent-flags\n\nfeat(T1.8): consistent flags across every command"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T00:29:55Z"
+    },
+    {
+      "id": "24212042123",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.6-unified-cli",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:15:48Z"
+    },
+    {
+      "id": "24211500378",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "renovate/tanstack-query-monorepo",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:03:28Z"
+    },
+    {
+      "id": "24211478460",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "renovate/node-24.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:03:15Z"
+    },
+    {
+      "id": "24211467181",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "3759fd677b2ba6ce1b059918f5d30f07a16e34dc",
+            "message": "Merge pull request #247 from and3rn3t/renovate/github-codeql-action-digest\n\nchore(deps): update github/codeql-action digest to 24c5418"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:03:08Z"
+    },
+    {
+      "id": "24211421076",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/hookform/resolvers-5.9.1",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:40Z"
+    },
+    {
+      "id": "24211342682",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "renovate/vite-and-vitest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:01:41Z"
+    },
+    {
+      "id": "24211322262",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "af209b485f6cd013cf9bac6aeef6930e91996188",
+            "message": "Merge pull request #153 from and3rn3t/renovate/node-24.x\n\nchore(deps): update node.js to v24.22.0"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:01:32Z"
+    },
+    {
+      "id": "24211249975",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.6-unified-cli",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:06:59Z"
+    },
+    {
+      "id": "24209447629",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "fix/35-scene-search-macos26",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T23:46:24Z"
+    },
+    {
+      "id": "24208413851",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.8-consistent-flags",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:21:49Z"
+    },
+    {
+      "id": "24205895789",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6df2a7049493b9bc8d077e794d176a90dde2f800",
+            "message": "fix(T1.6): defer annotations so Python 3.9 reaches the upgrade message\n\nmain()'s `list[str] | None` annotation raised TypeError at definition\ntime on 3.9, before _bootstrap ran, so both source entry points crashed\ninstead of explaining. from __future__ import annotations defers it.\nVerified on a real 3.9.25 (TypeError before, upgrade message after); a\ntest pins the import, since CI has no 3.9.\n\nAddresses Copilot review on #47.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/t1.6-unified-cli"
+      },
+      "created_at": "2026-10-16T00:13:12Z"
+    },
+    {
+      "id": "24205784203",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f3944a82866e317094c30f6992cba3d4bb960c75",
+            "message": "Merge pull request #46 from and3rn3t/ci/release-drafter-no-version-guess\n\nci: stop Release Drafter guessing the version"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T00:11:54Z"
+    },
+    {
+      "id": "24205075513",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d6148e8897b1f14700b8c4a77716569f4b534faa",
+            "message": "Merge pull request #74 from and3rn3t/dependabot/npm_and_yarn/lucide-react-1.52.0\n\nBump lucide-react from 1.31.0 to 1.52.0"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:02:53Z"
+    },
+    {
+      "id": "24205067545",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/radix-ui/react-tooltip-1.2.16",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:47Z"
+    },
+    {
+      "id": "24205021953",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4b73530b257072a53d1a90391fb40ea1cda97a8b",
+            "message": "fix(#35): address review — validate index columns, report source limits\n\nAddresses Copilot review on #44.\n\n- _scenes: an index is usable only if every column the queries use\n  exists (INDEX_COLUMNS, checked via the registry), not just the tables.\n- doctor: new per-script SOURCE_LIMITATIONS. When the search index is\n  the scene source, scene_search.scene_confidence is reported as\n  degraded with its reason even though ZCONFIDENCE exists.\n- scene_search --human prints the \"unavailable\" error instead of\n  rendering an empty library.\n- Index results: undated photos sort last; previously they sorted ahead\n  of pre-2001 photos, whose Core Data timestamps are negative.\n- Related scenes come only from the results actually returned, honoring\n  --top.\n\nEach has a regression test that fails before this change.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/35-scene-search-macos26"
+      },
+      "created_at": "2026-10-15T23:43:54Z"
+    },
+    {
+      "id": "24205008187",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "1d4e2c0bb99a90e5cc069cd3ef18c4fde05608fd",
+            "message": "Merge pull request #84 from and3rn3t/renovate/black-26.x\n\nchore(deps): update dependency black to v26.10.1"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:02:02Z"
+    },
+    {
+      "id": "24204557101",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "ci/publish-summary-status",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T11:59:24Z"
+    },
+    {
+      "id": "24204227627",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d401d04a067cfa78b676b8b18adb9bbfd35f291f",
+            "message": "Merge pull request #45 from and3rn3t/release/v1.3.0\n\nchore(release): 1.3.0 \"Scene search on macOS 26\""
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T23:54:32Z"
+    },
+    {
+      "id": "24203987109",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "721bf6c6ae51eb74322fa60edf83abee9452570d",
+            "message": "Merge pull request #39 from and3rn3t/fix/37-screen-recordings\n\nfix: stop treating screen recordings as screenshots (#37)"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T11:51:49Z"
+    },
+    {
+      "id": "17387786705",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.7-result-envelope"
+          }
+        }
+      },
+      "created_at": "2026-10-16T12:16:18Z"
+    },
+    {
+      "id": "24199155943",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "92038b65870691799c1047daedddcb96a8c95462",
+            "message": "Merge pull request #36 from and3rn3t/release/v1.1.0\n\nchore(release): 1.1.0 \"Solid ground\""
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T11:30:20Z"
+    },
+    {
+      "id": "24196292845",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "release/v1.2.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T12:03:59Z"
+    },
+    {
+      "id": "24195968572",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c7dfee3b031e6358e412918544f846a2f781a48f",
+            "message": "Merge pull request #42 from and3rn3t/ci/publish-summary-status\n\nci: report ClawHub's real publication status in the run summary"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T11:59:21Z"
+    },
+    {
+      "id": "24195826212",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2df5e21b1c796e8f6bf63b65fc46730454a57ef7",
+            "message": "ci: capture publish JSON outside the bundle; only 'published' counts\n\nAddresses Copilot review on #42.\n\n- tee wrote publish.json into ., the folder clawhub publishes, while it\n  was collecting files, so the capture could enter the bundle. It now\n  goes to $RUNNER_TEMP.\n- The summary says \"Published\" only for an explicit published status.\n  pending stays pending, and anything else (submitted, unknown) is\n  reported as not confirmed, with the clawhub inspect command.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/ci/publish-summary-status"
+      },
+      "created_at": "2026-10-15T11:57:14Z"
+    },
+    {
+      "id": "24195605976",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a404c161e36a019ba80f1bb3f6bdb4704f4378ff",
+            "message": "fix(#38): drop original_filenames from aggregate-only commands\n\nlocation_mapper and timeline_recap only output aggregates (locations,\ntrips, events): their per-photo dicts never reach JSON or text. A\nmissing ZORIGINALFILENAME therefore produced a `degraded` warning about\ndata neither command shows. The declaration, check, select and internal\nfield are removed from both.\n\nGuard: test_declared_sections_reach_the_output runs every script that\ndeclares original_filenames with inputs that make it list files\n(ITEM_PRODUCING), and fails if \"original_filename\" never reaches the\noutput. It fails on exactly these two scripts before this change.\n\nAddresses Copilot review on #40.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/38-original-filenames"
+      },
+      "created_at": "2026-10-15T11:53:58Z"
+    },
+    {
+      "id": "24194086990",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "release/v1.1.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T11:30:22Z"
+    },
+    {
+      "id": "17378742798",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/t1.8-consistent-flags"
+          }
+        }
+      },
+      "created_at": "2026-10-16T09:23:18Z"
+    },
+    {
+      "id": "17365856633",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(T2.23): --format md|csv for every command",
+          "head": {
+            "ref": "feat/t2.23-md-csv-output"
+          }
+        }
+      },
+      "created_at": "2026-10-16T01:48:45Z"
+    },
+    {
+      "id": "17364963964",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(release): 1.1.0 \"Solid ground\"",
+          "head": {
+            "ref": "release/v1.1.0"
+          }
+        }
+      },
+      "created_at": "2026-10-15T11:30:19Z"
+    },
+    {
+      "id": "24158243288",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/lucide-react-1.52.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:55Z"
+    },
+    {
+      "id": "24156997280",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2c62de161c167e7676b753f0d5c0e8173494ba29",
+            "message": "Merge pull request #59 from and3rn3t/renovate/react-hook-form-7.x-lockfile\n\nchore(deps): update dependency react-hook-form to v7.90.0"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T14:03:32Z"
+    },
+    {
+      "id": "24156760799",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/github/spark-0.46.15",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:02:26Z"
+    },
+    {
+      "id": "17362284569",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: scene search on macOS 26 via Photos' search index (#35)",
+          "head": {
+            "ref": "fix/35-scene-search-macos26"
+          }
+        }
+      },
+      "created_at": "2026-10-15T23:46:21Z"
+    },
+    {
+      "id": "24156654607",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "renovate/playwright",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T14:01:50Z"
+    },
+    {
       "id": "17360668513",
       "type": "PullRequestEvent",
       "repo": {
@@ -1524,1060 +2528,6 @@
         }
       },
       "created_at": "2026-10-16T01:42:59Z"
-    },
-    {
-      "id": "17357582186",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t2.23-md-csv-output"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:42:53Z"
-    },
-    {
-      "id": "17357581347",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t2.23-md-csv-output"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:42:50Z"
-    },
-    {
-      "id": "17357580958",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t2.23-md-csv-output"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:42:52Z"
-    },
-    {
-      "id": "17357505245",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T2.23): --format md|csv for every command",
-          "head": {
-            "ref": "feat/t2.23-md-csv-output"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:32:21Z"
-    },
-    {
-      "id": "17353891605",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T2.23): --format md|csv for every command",
-          "head": {
-            "ref": "feat/t2.23-md-csv-output"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:32:21Z"
-    },
-    {
-      "id": "17353585016",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.8-consistent-flags"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:27:37Z"
-    },
-    {
-      "id": "17353584992",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.8-consistent-flags"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:27:38Z"
-    },
-    {
-      "id": "17353583496",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.8-consistent-flags"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:27:36Z"
-    },
-    {
-      "id": "17353419079",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.8): consistent flags across every command",
-          "head": {
-            "ref": "feat/t1.8-consistent-flags"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:21:50Z"
-    },
-    {
-      "id": "17353208502",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.8): consistent flags across every command",
-          "head": {
-            "ref": "feat/t1.8-consistent-flags"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:21:50Z"
-    },
-    {
-      "id": "17352928021",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:17:30Z"
-    },
-    {
-      "id": "17352926987",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:17:29Z"
-    },
-    {
-      "id": "17352816626",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.6): unified photos-cleaner entry point",
-          "head": {
-            "ref": "feat/t1.6-unified-cli"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:15:45Z"
-    },
-    {
-      "id": "17352646210",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.6-unified-cli"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:13:13Z"
-    },
-    {
-      "id": "17352646197",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.6-unified-cli"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:13:12Z"
-    },
-    {
-      "id": "17352571615",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.6): unified photos-cleaner entry point",
-          "head": {
-            "ref": "feat/t1.6-unified-cli"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:07:14Z"
-    },
-    {
-      "id": "17352559903",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "ci: stop Release Drafter guessing the version",
-          "head": {
-            "ref": "ci/release-drafter-no-version-guess"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:11:52Z"
-    },
-    {
-      "id": "17352548668",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "ci: stop Release Drafter guessing the version",
-          "head": {
-            "ref": "ci/release-drafter-no-version-guess"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:00:53Z"
-    },
-    {
-      "id": "17352388243",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "ci/release-drafter-no-version-guess"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:09:16Z"
-    },
-    {
-      "id": "17352388217",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "ci/release-drafter-no-version-guess"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:09:17Z"
-    },
-    {
-      "id": "17352251851",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.6): unified photos-cleaner entry point",
-          "head": {
-            "ref": "feat/t1.6-unified-cli"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:07:14Z"
-    },
-    {
-      "id": "17351826832",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "ci: stop Release Drafter guessing the version",
-          "head": {
-            "ref": "ci/release-drafter-no-version-guess"
-          }
-        }
-      },
-      "created_at": "2026-10-16T00:00:53Z"
-    },
-    {
-      "id": "17351414971",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(release): 1.3.0 \"Scene search on macOS 26\"",
-          "head": {
-            "ref": "release/v1.3.0"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:54:31Z"
-    },
-    {
-      "id": "17351404691",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(release): 1.3.0 \"Scene search on macOS 26\"",
-          "head": {
-            "ref": "release/v1.3.0"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:47:23Z"
-    },
-    {
-      "id": "17350934481",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(release): 1.3.0 \"Scene search on macOS 26\"",
-          "head": {
-            "ref": "release/v1.3.0"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:47:23Z"
-    },
-    {
-      "id": "17350867698",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-15T23:46:23Z"
-    },
-    {
-      "id": "17350726910",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: scene search on macOS 26 via Photos' search index (#35)",
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:37:38Z"
-    },
-    {
-      "id": "17350714586",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:44:03Z"
-    },
-    {
-      "id": "17350714481",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:44:04Z"
-    },
-    {
-      "id": "17350711775",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:44:01Z"
-    },
-    {
-      "id": "17350711759",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:44:02Z"
-    },
-    {
-      "id": "17350709460",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:43:59Z"
-    },
-    {
-      "id": "17350706953",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:43:56Z"
-    },
-    {
-      "id": "17350706840",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:43:57Z"
-    },
-    {
-      "id": "17350704589",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:43:54Z"
-    },
-    {
-      "id": "17350298845",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: scene search on macOS 26 via Photos' search index (#35)",
-          "head": {
-            "ref": "fix/35-scene-search-macos26"
-          }
-        }
-      },
-      "created_at": "2026-10-15T23:37:38Z"
-    },
-    {
-      "id": "24136553747",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homekit-automator"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d1f4c216e60541589b8a9d5d266eae06185e08e0",
-            "message": "Merge pull request #24 from and3rn3t/renovate/apple-swift-log-1.x\n\nchore(deps): update dependency apple/swift-log to from: \"1.16.1\""
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T14:03:51Z"
-    },
-    {
-      "id": "24136481174",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "ref": "renovate/radix-ui-primitives-monorepo",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T14:03:22Z"
-    },
-    {
-      "id": "24136350780",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "71156aea5e8750151eaea09eff75074c42077d9d",
-            "message": "Merge pull request #77 from and3rn3t/dependabot/npm_and_yarn/react-day-picker-10.0.2\n\nBump react-day-picker from 10.0.1 to 10.0.2"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T14:02:31Z"
-    },
-    {
-      "id": "24136244741",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ce29d9f8715397bec5666a53b2ab97b3f70e4983",
-            "message": "Merge pull request #147 from and3rn3t/renovate/playwright\n\nchore(deps): update dependency @playwright/test to v1.64.0"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T14:01:48Z"
-    },
-    {
-      "id": "24134194797",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "fix/37-screen-recordings",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T11:40:29Z"
-    },
-    {
-      "id": "24133032900",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "ref": "renovate/express-5.x-lockfile",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T14:03:01Z"
-    },
-    {
-      "id": "24132975372",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "32fca4a8d77afe740fb31d40c94106fe702c3ee5",
-            "message": "Merge pull request #76 from and3rn3t/dependabot/npm_and_yarn/hookform/resolvers-5.9.1\n\nBump @hookform/resolvers from 4.1.3 to 5.9.1"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T14:02:38Z"
-    },
-    {
-      "id": "24132923518",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c22ea0fe00e7ca867393be33c6c5993d9d69df43",
-            "message": "Merge branch 'fix/37-screen-recordings' into feat/38-original-filenames"
-          }
-        ],
-        "ref": "refs/heads/feat/38-original-filenames"
-      },
-      "created_at": "2026-10-15T11:47:55Z"
-    },
-    {
-      "id": "24132919039",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "ref": "renovate/fastapi-0.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T14:02:14Z"
-    },
-    {
-      "id": "24132912657",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a3003dd096c41ccca550fb69b25287d39167bed4",
-            "message": "Merge pull request #82 from and3rn3t/renovate/fastapi-0.x\n\nchore(deps): update dependency fastapi to v0.143.1"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T14:02:12Z"
-    },
-    {
-      "id": "24132335524",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "0e655576edaefc204a44b2538a725a6e028a3209",
-            "message": "Merge pull request #60 from and3rn3t/renovate/tanstack-query-monorepo\n\nchore(deps): update dependency @tanstack/react-query to v5.104.3"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T14:03:26Z"
-    },
-    {
-      "id": "24132293226",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/github-codeql-action-digest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T14:03:09Z"
-    },
-    {
-      "id": "24132086475",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "renovate/node-24.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T14:01:34Z"
-    },
-    {
-      "id": "24128649846",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "docs/t1.23-skill-router",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T11:19:13Z"
-    },
-    {
-      "id": "24128646546",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2926fe6cbf0979f2eab84a917d9cb844b6f193ba",
-            "message": "Merge pull request #34 from and3rn3t/docs/t1.23-skill-router\n\ndocs(T1.23): slim SKILL.md to a router; per-command references"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T11:19:12Z"
-    },
-    {
-      "id": "24125770887",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "release/v1.1.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T11:25:01Z"
-    },
-    {
-      "id": "24123984167",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "docs/t1.23-skill-router",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T11:13:56Z"
-    },
-    {
-      "id": "24118952864",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "afe1b561b86783bc48387afbe5f9c459d88460b6",
-            "message": "Merge pull request #40 from and3rn3t/feat/38-original-filenames\n\nfeat: show original filenames in previews and reports (#38)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T11:55:47Z"
-    },
-    {
-      "id": "24118450747",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "fix/37-screen-recordings",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T11:51:49Z"
-    },
-    {
-      "id": "24116380476",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c15363614a38473557fb3d542d5c717c491b4df1",
-            "message": "Merge pull request #43 from and3rn3t/release/v1.2.0\n\nchore(release): 1.2.0 \"Real-library fixes\""
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-15T12:03:58Z"
-    },
-    {
-      "id": "24116074480",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "release/v1.2.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T12:01:31Z"
-    },
-    {
-      "id": "17330082861",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-15T11:23:30Z"
-    },
-    {
-      "id": "24114231701",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "feat/38-original-filenames",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-15T11:46:45Z"
-    },
-    {
-      "id": "24110681325",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8531b6172425067ca94263eadc43bdd5949fba8a",
-            "message": "fix(T1.4): make the degradation contract match what each script reads\n\nAddresses Copilot review on #31.\n\n- face_quality: declare ZSIZE/ZYAWANGLE/ZFACEISINCENTER (face_score\n  section); compute_face_score falls back to neutral values without them.\n- similarity_finder: declare all 17 FEATURE_COLUMNS (similarity_features);\n  a missing feature counts as 0 and shifts cosine scores.\n- icloud_status / shared_library: drop the publish_dates, visibility and\n  participation sections, whose columns were selected but never read\n  (and their now-unused logical names).\n- people_analyzer: a missing ZFACECOUNT stays null instead of becoming 0.\n- cleanup_executor and smart_export (hand-written mains) now include\n  \"degraded\" in preview, plan and result JSON.\n- timeline_recap --narrative appends the degraded note.\n- test_degradation asserts the \"degraded\" key is present instead of\n  .get()-defaulting it. The rich fixture gains the newly declared\n  columns, and there are regression tests for the narrative note and the\n  null face_count.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/t1.4-graceful-degradation"
-      },
-      "created_at": "2026-10-14T02:14:49Z"
-    },
-    {
-      "id": "17317814980",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/37-screen-recordings"
-          }
-        }
-      },
-      "created_at": "2026-10-15T16:58:06Z"
-    },
-    {
-      "id": "24104198437",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "501cac34603d7cce422cf97ad383994ecbe801f1",
-            "message": "fix(T1.10): diagnose old Python before imports fail; fixed check list\n\nAddresses Copilot review on #32.\n\n- On Python 3.9 (stock macOS python3), importing _common fails with a\n  TypeError on its `X | None` annotations, so doctor's python check\n  could never run. New _bootstrap is doctor's first project import; on\n  < 3.10 it prints the fix and exits 1. Verified against a real 3.9.25:\n  before, `TypeError: unsupported operand type(s) for |`; after, the\n  fix message.\n- Every report lists the same checks (CHECK_NAMES) in order. read_access\n  and optimize_storage are now explicit \"skip\" when the library is\n  missing or unreadable, instead of being absent.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/t1.2-t1.10-fingerprint-doctor"
-      },
-      "created_at": "2026-10-14T02:28:25Z"
-    },
-    {
-      "id": "17314501817",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop treating screen recordings as screenshots (#37)",
-          "head": {
-            "ref": "fix/37-screen-recordings"
-          }
-        }
-      },
-      "created_at": "2026-10-15T11:51:46Z"
-    },
-    {
-      "id": "24101270039",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5cc4f5bed0980dda489301912d7f5d07b8c8c13a",
-            "message": "Merge pull request #27 from and3rn3t/feat/t1.19-confirm-tokens\n\nfeat(T1.19)!: require a confirmation token for every mutation"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-14T01:31:11Z"
-    },
-    {
-      "id": "17312441460",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {},
-      "created_at": "2026-10-15T16:02:35Z"
-    },
-    {
-      "id": "24100735493",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "459eb10feb8e0301059e339e1a912dbce520d5fd",
-            "message": "test(T1.20): drop pragma_table_info() from the allowed-reads test\n\nOn SQLite 3.40 (python.org 3.10 builds, the CI floor) building the\npragma_table_info virtual table authorizes internal UPDATEs on\nsqlite_master, which the guard denies. No script uses the table-valued\nform; document that PRAGMA table_info(...) is the supported spelling.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/t1.9-t1.20-exit-codes-authorizer"
-      },
-      "created_at": "2026-10-14T01:21:03Z"
-    },
-    {
-      "id": "24100434772",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "feat/t1.19-confirm-tokens",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-14T01:15:15Z"
-    },
-    {
-      "id": "24100432461",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "docs/t0.16-t0.9-policy-threat-model",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-14T01:15:13Z"
-    },
-    {
-      "id": "24099903665",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "eded32c3d80002d276bc504fa54ff2c3e034f5bd",
-            "message": "chore(T0.13): add CHANGELOG and RELEASING, bump to 1.0.3\n\nCHANGELOG.md follows Keep a Changelog and is backfilled to 1.0.0. No tags\nexisted, so versions are anchored on commits, and 1.0.1, which was published\nwithout a repo bump, is recorded as such. RELEASING.md documents the\npublish-on-merge flow: bump SKILL.md + pyproject.toml, update the CHANGELOG\nand ROADMAP, run the checks, merge, verify the ClawHub run and listing, then\ntag and publish the drafted GitHub Release.\n\nROADMAP.md marks the 1.0.3 items shipped and records the Python floor\ndecision.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/1.0.3-hygiene"
-      },
-      "created_at": "2026-10-13T23:01:01Z"
-    },
-    {
-      "id": "24099481036",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "ref": "chore/1.0.3-hygiene",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-13T22:54:08Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2591,7 +2541,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 3926,
+    "total": 3927,
     "weeks": [
       {
         "days": [
@@ -4650,6 +4600,11 @@
           },
           {
             "date": "2026-10-16",
+            "count": 1,
+            "level": 1
+          },
+          {
+            "date": "2026-10-17",
             "count": 0,
             "level": 0
           }
@@ -4683,6 +4638,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-16T03:11:50Z",
+  "lastUpdated": "2026-10-17T03:10:34Z",
   "totalRepos": 53
 }

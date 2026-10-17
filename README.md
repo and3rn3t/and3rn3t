@@ -34,11 +34,30 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
+### ⭐ [test-project](https://github.com/and3rn3t/test-project)
 
-> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
+> Template test bed that mirrors the ai-template-repo structure.
 >
-> **Tech:** Python, apple-photos, claude-skill, python
+> **Tech:** Makefile, template, testing
+
+### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
+
+> Overview and sandbox for Hugging Face AI API
+>
+> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
+
+### 🌐 [vac](https://github.com/and3rn3t/vac)
+
+> Playing with connecting to robotic vacuum without cloud services
+>
+> **Tech:** JavaScript, home-automation, iot, python, robotics
+
+### 🌐 [silas](https://github.com/and3rn3t/silas)
+
+> Personal webpage for Silas
+>
+> **Tech:** JavaScript, cloudflare-pages, game, javascript, playwright
+> 🔗 [Live](https://silas-anderson.pages.dev)
 
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
@@ -46,43 +65,23 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript
 
-### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
+### 🐍 [network](https://github.com/and3rn3t/network)
 
-> iOS26 Weather App
+> Testing UniFi API
 >
-> **Tech:** Swift, android, fastlane, ios, swift
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
-### 🌐 [guess](https://github.com/and3rn3t/guess)
+### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
 
-> A guessing game like "Akinator", but with more visibility to the user how it works.
+> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
 >
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
+> **Tech:** JavaScript, eslint, react, shared-config, typescript
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
 
-> My attempt to build an inclusive homehub / automation project.
+> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
 >
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [sky](https://github.com/and3rn3t/sky)
-
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
->
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
-
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
-
-> Personal portfolio for Jonah (GitHub Spark template).
->
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
-
-### 🌐 [family](https://github.com/and3rn3t/family)
-
-> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
->
-> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
+> **Tech:** Python, apple-photos, claude-skill, python
 
 <!-- FEATURED-PROJECTS:END -->
 
