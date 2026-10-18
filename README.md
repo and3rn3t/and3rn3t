@@ -34,11 +34,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### ⭐ [test-project](https://github.com/and3rn3t/test-project)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> Template test bed that mirrors the ai-template-repo structure.
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** Makefile, template, testing
+> **Tech:** TypeScript
 
 ### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
 
@@ -46,42 +46,42 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
 
-### 🌐 [vac](https://github.com/and3rn3t/vac)
+### 🌐 [flipper](https://github.com/and3rn3t/flipper)
 
-> Playing with connecting to robotic vacuum without cloud services
+> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
 >
-> **Tech:** JavaScript, home-automation, iot, python, robotics
+> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
 
-### 🌐 [silas](https://github.com/and3rn3t/silas)
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> Personal webpage for Silas
+> Unifying network information on a RPi 5
 >
-> **Tech:** JavaScript, cloudflare-pages, game, javascript, playwright
-> 🔗 [Live](https://silas-anderson.pages.dev)
+> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> Personal portfolio for Jonah (GitHub Spark template).
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
-### 🐍 [network](https://github.com/and3rn3t/network)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> Testing UniFi API
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
-### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
+### 🌐 [telescope](https://github.com/and3rn3t/telescope)
 
-> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
+> A general overview of the JWST for fun
 >
-> **Tech:** JavaScript, eslint, react, shared-config, typescript
+> **Tech:** TypeScript, cloudflare-workers, jwst, nasa, react
 
-### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
+### 🌐 [health](https://github.com/and3rn3t/health)
 
-> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
 >
-> **Tech:** Python, apple-photos, claude-skill, python
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 

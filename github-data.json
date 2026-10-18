@@ -9,23 +9,20 @@
   },
   "repositories": [
     {
-      "id": 1193055292,
-      "name": "test-project",
-      "full_name": "and3rn3t/test-project",
-      "description": "Template test bed that mirrors the ai-template-repo structure.",
-      "html_url": "https://github.com/and3rn3t/test-project",
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
       "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "template",
-        "testing"
-      ],
-      "stargazers_count": 0,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 1,
       "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-16T20:33:16Z",
-      "updated_at": "2026-07-08T01:10:09Z",
-      "created_at": "2026-03-26T20:37:33Z",
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-18T01:26:55Z",
+      "updated_at": "2026-10-05T06:17:34Z",
+      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -48,10 +45,170 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 13,
-      "pushed_at": "2026-10-16T20:27:18Z",
+      "open_issues_count": 14,
+      "pushed_at": "2026-10-18T01:26:23Z",
       "updated_at": "2026-10-04T18:54:30Z",
       "created_at": "2026-02-04T00:09:29Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1165780517,
+      "name": "flipper",
+      "full_name": "and3rn3t/flipper",
+      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
+      "html_url": "https://github.com/and3rn3t/flipper",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-17T23:16:13Z",
+      "updated_at": "2026-07-17T19:03:48Z",
+      "created_at": "2026-02-24T14:38:23Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 13,
+      "pushed_at": "2026-10-17T22:33:54Z",
+      "updated_at": "2026-08-05T18:38:02Z",
+      "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1156702820,
+      "name": "jonah",
+      "full_name": "and3rn3t/jonah",
+      "description": "Personal portfolio for Jonah (GitHub Spark template).",
+      "html_url": "https://github.com/and3rn3t/jonah",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "portfolio",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-17T22:10:47Z",
+      "updated_at": "2026-10-15T14:03:43Z",
+      "created_at": "2026-02-13T00:28:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-17T22:02:49Z",
+      "updated_at": "2026-10-04T16:38:15Z",
+      "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1089883477,
+      "name": "telescope",
+      "full_name": "and3rn3t/telescope",
+      "description": "A general overview of the JWST for fun",
+      "html_url": "https://github.com/and3rn3t/telescope",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "jwst",
+        "nasa",
+        "react",
+        "space",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 10,
+      "pushed_at": "2026-10-17T22:02:20Z",
+      "updated_at": "2026-07-17T19:02:34Z",
+      "created_at": "2025-11-05T00:11:16Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "ml",
+        "walking",
+        "wellness"
+      ],
+      "stargazers_count": 4,
+      "forks_count": 1,
+      "open_issues_count": 12,
+      "pushed_at": "2026-10-17T21:26:29Z",
+      "updated_at": "2026-10-01T22:01:59Z",
+      "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
     },
@@ -71,8 +228,8 @@
       ],
       "stargazers_count": 1,
       "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-16T17:36:42Z",
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-17T19:50:03Z",
       "updated_at": "2026-07-17T19:02:43Z",
       "created_at": "2025-11-11T16:16:05Z",
       "fork": false,
@@ -94,28 +251,77 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 8,
-      "pushed_at": "2026-10-16T16:52:51Z",
+      "open_issues_count": 9,
+      "pushed_at": "2026-10-17T16:40:28Z",
       "updated_at": "2026-08-25T01:14:08Z",
       "created_at": "2025-11-10T22:25:39Z",
       "fork": false,
       "archived": false
     },
     {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
       "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 1,
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
       "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-16T15:55:15Z",
-      "updated_at": "2026-10-05T06:17:34Z",
-      "created_at": "2026-08-12T18:59:03Z",
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-17T10:30:39Z",
+      "updated_at": "2026-10-07T02:52:40Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-17T09:04:09Z",
+      "updated_at": "2026-10-17T03:11:26Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1193055292,
+      "name": "test-project",
+      "full_name": "and3rn3t/test-project",
+      "description": "Template test bed that mirrors the ai-template-repo structure.",
+      "html_url": "https://github.com/and3rn3t/test-project",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "template",
+        "testing"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-16T20:33:16Z",
+      "updated_at": "2026-07-08T01:10:09Z",
+      "created_at": "2026-03-26T20:37:33Z",
       "fork": false,
       "archived": false
     },
@@ -139,27 +345,6 @@
       "pushed_at": "2026-10-16T15:32:50Z",
       "updated_at": "2026-10-15T14:02:17Z",
       "created_at": "2025-10-17T22:48:41Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-16T10:08:19Z",
-      "updated_at": "2026-10-16T03:12:43Z",
-      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -259,31 +444,6 @@
       "archived": false
     },
     {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-15T18:17:01Z",
-      "updated_at": "2026-10-07T02:52:40Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1126996610,
       "name": "sky",
       "full_name": "and3rn3t/sky",
@@ -304,31 +464,6 @@
       "pushed_at": "2026-10-15T18:04:11Z",
       "updated_at": "2026-10-15T14:02:57Z",
       "created_at": "2026-01-03T00:51:45Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1156702820,
-      "name": "jonah",
-      "full_name": "and3rn3t/jonah",
-      "description": "Personal portfolio for Jonah (GitHub Spark template).",
-      "html_url": "https://github.com/and3rn3t/jonah",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "portfolio",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-15T14:06:11Z",
-      "updated_at": "2026-10-15T14:03:43Z",
-      "created_at": "2026-02-13T00:28:34Z",
       "fork": false,
       "archived": false
     },
@@ -381,84 +516,6 @@
       "archived": false
     },
     {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "ml",
-        "walking",
-        "wellness"
-      ],
-      "stargazers_count": 4,
-      "forks_count": 1,
-      "open_issues_count": 12,
-      "pushed_at": "2026-10-15T13:26:50Z",
-      "updated_at": "2026-10-01T22:01:59Z",
-      "created_at": "2025-08-30T21:38:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1089883477,
-      "name": "telescope",
-      "full_name": "and3rn3t/telescope",
-      "description": "A general overview of the JWST for fun",
-      "html_url": "https://github.com/and3rn3t/telescope",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "jwst",
-        "nasa",
-        "react",
-        "space",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 9,
-      "pushed_at": "2026-10-15T06:30:05Z",
-      "updated_at": "2026-07-17T19:02:34Z",
-      "created_at": "2025-11-05T00:11:16Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1165780517,
-      "name": "flipper",
-      "full_name": "and3rn3t/flipper",
-      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
-      "html_url": "https://github.com/and3rn3t/flipper",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-15T06:24:04Z",
-      "updated_at": "2026-07-17T19:03:48Z",
-      "created_at": "2026-02-24T14:38:23Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1177251835,
       "name": "docker-playground",
       "full_name": "and3rn3t/docker-playground",
@@ -500,37 +557,6 @@
       "pushed_at": "2026-10-15T03:59:43Z",
       "updated_at": "2026-07-08T01:09:34Z",
       "created_at": "2026-03-26T19:58:01Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-15T03:28:55Z",
-      "updated_at": "2026-10-04T16:38:15Z",
-      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -646,32 +672,6 @@
       "pushed_at": "2026-10-10T06:25:54Z",
       "updated_at": "2026-08-25T01:14:42Z",
       "created_at": "2025-10-21T23:02:15Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 12,
-      "pushed_at": "2026-10-10T00:31:54Z",
-      "updated_at": "2026-08-05T18:38:02Z",
-      "created_at": "2025-11-25T17:59:56Z",
       "fork": false,
       "archived": false
     },
@@ -1203,6 +1203,185 @@
     }
   ],
   "events": [
+    {
+      "id": "24301423848",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5f72a37644102576bfa1ee454e32f8790c7df3d5",
+            "message": "fix(T2.23): RFC 4180 line endings so embedded CR is quoted on every Python\n\ncsv.writer only quotes fields containing a character of its line\nterminator. With \"\\n\", a value containing a bare CR was written\nunquoted on CI's Pythons, producing a broken row; local 3.14.3 happened\nto quote it. \"\\r\\n\" (the CSV standard, and what spreadsheets expect)\nquotes both. A new test keeps CR/LF inside their cell, checked on a real\n3.10.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/t2.23-md-csv-output"
+      },
+      "created_at": "2026-10-16T01:44:54Z"
+    },
+    {
+      "id": "24298341396",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.8-consistent-flags",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:29:56Z"
+    },
+    {
+      "id": "24297476537",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "bdd9748d516d82b025ae96514bfcacb8b4cc9acf",
+            "message": "docs(release): publish the untagged draft by ID via the API\n\ngh release edit takes a tag name, and the draft no longer has a tag, so\nstep 8 now finds the draft's ID and PATCHes the release.\n\nAddresses Copilot review on #46.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/ci/release-drafter-no-version-guess"
+      },
+      "created_at": "2026-10-16T00:09:16Z"
+    },
+    {
+      "id": "24297193271",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "95e22e75cf76b4a304a93c07ec4a766bc33a706a",
+            "message": "test: patch SearchIndex via the imported class\n\nCodeQL flagged _scenes imported both with `import` and `from ... import`\nin test_scene_search_index. Patching the class object already imported\nworks the same, since there is one class object.\n\nAddresses code scanning on #51.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/perf/timeline-scene-index"
+      },
+      "created_at": "2026-10-16T02:02:20Z"
+    },
+    {
+      "id": "24291044480",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "feat/t1.7-result-envelope",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T02:03:56Z"
+    },
+    {
+      "id": "24291042679",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "dd511ead9fe000afec3b6639d1ccbb014c941793",
+            "message": "Merge pull request #50 from and3rn3t/feat/t1.7-result-envelope\n\nfeat(T1.7): additive result envelope on every structured output"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T02:03:54Z"
+    },
+    {
+      "id": "24286627544",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f1ae554e577a6fc0af4492ae503cc136c0c8b192",
+            "message": "Merge pull request #47 from and3rn3t/feat/t1.6-unified-cli\n\nfeat(T1.6): unified photos-cleaner entry point"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T00:15:46Z"
+    },
+    {
+      "id": "24284386770",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "release/v1.3.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-15T23:54:33Z"
+    },
+    {
+      "id": "24283597037",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b21e12488d04de45e8d17ccd8b72a30f01f0737e",
+            "message": "Merge pull request #44 from and3rn3t/fix/35-scene-search-macos26\n\nfix: scene search on macOS 26 via Photos' search index (#35)"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-15T23:46:22Z"
+    },
+    {
+      "id": "24279595598",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "ci/release-drafter-no-version-guess",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T00:00:52Z"
+    },
+    {
+      "id": "24276707341",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "release/v1.4.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-16T02:13:37Z"
+    },
+    {
+      "id": "24272770951",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "020750fe6d62b71c7283399cf5addcba6006f01f",
+            "message": "Merge pull request #51 from and3rn3t/perf/timeline-scene-index\n\nperf: load search-index scene labels once per run, not per event"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-16T02:09:37Z"
+    },
     {
       "id": "24264758988",
       "type": "DeleteEvent",
@@ -2336,198 +2515,6 @@
         }
       },
       "created_at": "2026-10-16T02:06:33Z"
-    },
-    {
-      "id": "17358584132",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.7-result-envelope"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:06:23Z"
-    },
-    {
-      "id": "17358561234",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/timeline-scene-index"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:05:54Z"
-    },
-    {
-      "id": "17358560615",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/timeline-scene-index"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:05:50Z"
-    },
-    {
-      "id": "17358481441",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: load search-index scene labels once per run, not per event",
-          "head": {
-            "ref": "perf/timeline-scene-index"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:59:32Z"
-    },
-    {
-      "id": "17358468647",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.7): additive result envelope on every structured output",
-          "head": {
-            "ref": "feat/t1.7-result-envelope"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:03:53Z"
-    },
-    {
-      "id": "17358450991",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.7): additive result envelope on every structured output",
-          "head": {
-            "ref": "feat/t1.7-result-envelope"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:51:55Z"
-    },
-    {
-      "id": "17358406130",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/timeline-scene-index"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:02:20Z"
-    },
-    {
-      "id": "17358405252",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.7-result-envelope"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:02:17Z"
-    },
-    {
-      "id": "17358404168",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t1.7-result-envelope"
-          }
-        }
-      },
-      "created_at": "2026-10-16T02:02:15Z"
-    },
-    {
-      "id": "17358290199",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: load search-index scene labels once per run, not per event",
-          "head": {
-            "ref": "perf/timeline-scene-index"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:59:32Z"
-    },
-    {
-      "id": "17357966169",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(T1.7): additive result envelope on every structured output",
-          "head": {
-            "ref": "feat/t1.7-result-envelope"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:51:55Z"
-    },
-    {
-      "id": "17357583185",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/t2.23-md-csv-output"
-          }
-        }
-      },
-      "created_at": "2026-10-16T01:42:59Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2543,45 +2530,6 @@
   "contributions": {
     "total": 3927,
     "weeks": [
-      {
-        "days": [
-          {
-            "date": "2025-10-12",
-            "count": 18,
-            "level": 2
-          },
-          {
-            "date": "2025-10-13",
-            "count": 18,
-            "level": 2
-          },
-          {
-            "date": "2025-10-14",
-            "count": 10,
-            "level": 1
-          },
-          {
-            "date": "2025-10-15",
-            "count": 17,
-            "level": 1
-          },
-          {
-            "date": "2025-10-16",
-            "count": 14,
-            "level": 1
-          },
-          {
-            "date": "2025-10-17",
-            "count": 7,
-            "level": 1
-          },
-          {
-            "date": "2025-10-18",
-            "count": 6,
-            "level": 1
-          }
-        ]
-      },
       {
         "days": [
           {
@@ -4609,6 +4557,15 @@
             "level": 0
           }
         ]
+      },
+      {
+        "days": [
+          {
+            "date": "2026-10-18",
+            "count": 0,
+            "level": 0
+          }
+        ]
       }
     ]
   },
@@ -4638,6 +4595,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-17T03:10:34Z",
+  "lastUpdated": "2026-10-18T03:11:00Z",
   "totalRepos": 53
 }
