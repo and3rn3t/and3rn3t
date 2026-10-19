@@ -34,47 +34,23 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
+
+> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
+>
+> **Tech:** Swift, homebrew, homekit, swift, xcode
+
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
 
-### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
+### 🐍 [network](https://github.com/and3rn3t/network)
 
-> Overview and sandbox for Hugging Face AI API
+> Testing UniFi API
 >
-> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
-
-### 🌐 [flipper](https://github.com/and3rn3t/flipper)
-
-> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
->
-> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
-
-### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
-
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
-
-> Personal portfolio for Jonah (GitHub Spark template).
->
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
-
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker, docker-compose, flask
-
-### 🌐 [telescope](https://github.com/and3rn3t/telescope)
-
-> A general overview of the JWST for fun
->
-> **Tech:** TypeScript, cloudflare-workers, jwst, nasa, react
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -82,6 +58,30 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, ai, gait-analysis, health, healthkit
 > 🔗 [Live](https://health.andernet.dev)
+
+### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
+
+> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
+>
+> **Tech:** JavaScript, eslint, react, shared-config, typescript
+
+### 🌐 [docker-playground](https://github.com/and3rn3t/docker-playground)
+
+> Learning more about docker with the Docker API and a sandbox env
+>
+> **Tech:** TypeScript, docker, react, typescript, vite
+
+### 🌐 [flipper](https://github.com/and3rn3t/flipper)
+
+> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
+>
+> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
+
+### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
+
+> Overview and sandbox for Hugging Face AI API
+>
+> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
 
 <!-- FEATURED-PROJECTS:END -->
 
