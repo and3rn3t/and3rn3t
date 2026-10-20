@@ -34,11 +34,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
+### 🐍 [network](https://github.com/and3rn3t/network)
 
-> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
+> Testing UniFi API
 >
-> **Tech:** Swift, homebrew, homekit, swift, xcode
+> **Tech:** Python, cloudflare-workers, networking, python, unifi
 
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
@@ -46,24 +46,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript
 
-### 🐍 [network](https://github.com/and3rn3t/network)
+### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
 
-> Testing UniFi API
+> iOS26 Weather App
 >
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
-
-### 🌐 [eslint-config](https://github.com/and3rn3t/eslint-config)
-
-> Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).
->
-> **Tech:** JavaScript, eslint, react, shared-config, typescript
+> **Tech:** Swift, android, fastlane, ios, swift
 
 ### 🌐 [docker-playground](https://github.com/and3rn3t/docker-playground)
 
@@ -71,17 +58,30 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, docker, react, typescript, vite
 
-### 🌐 [flipper](https://github.com/and3rn3t/flipper)
+### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
-> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
+> Personal portfolio for Jonah (GitHub Spark template).
 >
-> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
+> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
-### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> Overview and sandbox for Hugging Face AI API
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
+> **Tech:** Python, arm64, docker, docker-compose, flask
+
+### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
+
+> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
+>
+> **Tech:** Swift, homebrew, homekit, swift, xcode
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+>
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 
