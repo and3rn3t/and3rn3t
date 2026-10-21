@@ -34,29 +34,43 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [network](https://github.com/and3rn3t/network)
+### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
 
-> Testing UniFi API
+> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
 >
-> **Tech:** Python, cloudflare-workers, networking, python, unifi
+> **Tech:** Python, apple-photos, claude-skill, python
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🌐 [workspace-tools](https://github.com/and3rn3t/workspace-tools)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.
 >
-> **Tech:** TypeScript
+> **Tech:** JavaScript, github-actions, meta, tooling, workspace
 
-### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
+### 🌐 [guess](https://github.com/and3rn3t/guess)
 
-> iOS26 Weather App
+> A guessing game like "Akinator", but with more visibility to the user how it works.
 >
-> **Tech:** Swift, android, fastlane, ios, swift
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
 
-### 🌐 [docker-playground](https://github.com/and3rn3t/docker-playground)
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> Learning more about docker with the Docker API and a sandbox env
+> Unifying network information on a RPi 5
 >
-> **Tech:** TypeScript, docker, react, typescript, vite
+> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
+
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> My attempt to build an inclusive homehub / automation project.
+>
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
+
+### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
+
+> Overview and sandbox for Hugging Face AI API
+>
+> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
 
 ### 🌐 [jonah](https://github.com/and3rn3t/jonah)
 
@@ -64,24 +78,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
 
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+### 🌐 [flipper](https://github.com/and3rn3t/flipper)
 
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
 >
-> **Tech:** Python, arm64, docker, docker-compose, flask
-
-### 📱 [homekit-automator](https://github.com/and3rn3t/homekit-automator)
-
-> HomeKit automation tool; nested Xcode project with a Homebrew Formula.
->
-> **Tech:** Swift, homebrew, homekit, swift, xcode
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
 
 <!-- FEATURED-PROJECTS:END -->
 
