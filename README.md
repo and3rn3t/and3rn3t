@@ -34,17 +34,38 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
+> My attempt to build an inclusive homehub / automation project.
 >
-> **Tech:** Python, apple-photos, claude-skill, python
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
 
-### 🌐 [workspace-tools](https://github.com/and3rn3t/workspace-tools)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** JavaScript, github-actions, meta, tooling, workspace
+> **Tech:** Python, arm64, docker, docker-compose, flask
+
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
+
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
+>
+> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
+
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+>
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -53,36 +74,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
 
-### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> Unifying network information on a RPi 5
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
-
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
-
-> My attempt to build an inclusive homehub / automation project.
->
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [huggingface](https://github.com/and3rn3t/huggingface)
-
-> Overview and sandbox for Hugging Face AI API
->
-> **Tech:** TypeScript, ai, cloudflare-workers, huggingface, react
-
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
-
-> Personal portfolio for Jonah (GitHub Spark template).
->
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
-
-### 🌐 [flipper](https://github.com/and3rn3t/flipper)
-
-> Flipper Zero Lab — interactive experimentation dashboard, no hardware required.
->
-> **Tech:** TypeScript, cloudflare-workers, react, tailwindcss, typescript
+> **Tech:** TypeScript
 
 <!-- FEATURED-PROJECTS:END -->
 
