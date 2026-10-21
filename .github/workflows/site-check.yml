@@ -4,7 +4,7 @@ name: Site Check
 
 on:
   schedule:
-    - cron: "20 7 * * *"
+    - cron: '20 7 * * *'
   workflow_dispatch:
 
 permissions:
