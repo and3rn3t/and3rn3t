@@ -271,14 +271,17 @@ jobs:
                       continue
                   picked.append(r)
               picked.sort(key=lambda r: r['pushed_at'], reverse=True)
-              return picked[:8]
+              # Repos tagged `featured` (set from workspace-tools' workspace.json)
+              # win; fall back to most recently pushed if none are tagged.
+              featured = [r for r in picked if 'featured' in (r.get('topics') or [])]
+              return (featured or picked)[:8]
 
           def render_card(r):
               emoji = EMOJI_BY_LANGUAGE.get(r.get('language'), '⭐')
               name, desc = r['name'], r['description']
               homepage = (r.get('homepage') or '').strip()
               tech_bits = [r['language']] if r.get('language') else []
-              tech_bits += (r.get('topics') or [])[:4]
+              tech_bits += [t for t in (r.get('topics') or []) if t != 'featured'][:4]
               tech_line = f"\n>\n> **Tech:** {', '.join(tech_bits)}" if tech_bits else ''
               link_line = f"\n> 🔗 [Live]({homepage})" if homepage else ''
               return (
