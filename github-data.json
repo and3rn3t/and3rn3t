@@ -9,141 +9,6 @@
   },
   "repositories": [
     {
-      "id": 1289483809,
-      "name": "workspace-tools",
-      "full_name": "and3rn3t/workspace-tools",
-      "description": "Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.",
-      "html_url": "https://github.com/and3rn3t/workspace-tools",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "github-actions",
-        "meta",
-        "tooling",
-        "workspace"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 0,
-      "pushed_at": "2026-10-21T08:59:14Z",
-      "updated_at": "2026-10-21T08:59:18Z",
-      "created_at": "2026-07-04T20:11:00Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1288624692,
-      "name": "eslint-config",
-      "full_name": "and3rn3t/eslint-config",
-      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
-      "html_url": "https://github.com/and3rn3t/eslint-config",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "eslint",
-        "react",
-        "shared-config",
-        "typescript"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-21T08:59:13Z",
-      "updated_at": "2026-10-21T08:59:17Z",
-      "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1287619779,
-      "name": ".github",
-      "full_name": "and3rn3t/.github",
-      "description": null,
-      "html_url": "https://github.com/and3rn3t/.github",
-      "homepage": null,
-      "language": "Shell",
-      "topics": [],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 10,
-      "pushed_at": "2026-10-21T08:58:15Z",
-      "updated_at": "2026-10-21T08:58:19Z",
-      "created_at": "2026-07-02T21:26:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-21T08:52:10Z",
-      "updated_at": "2026-10-21T08:52:14Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 8,
-      "pushed_at": "2026-10-21T06:58:35Z",
-      "updated_at": "2026-10-21T08:58:43Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1175514361,
-      "name": "remote",
-      "full_name": "and3rn3t/remote",
-      "description": "Building a Denon AVR remote to tinker with Denon API",
-      "html_url": "https://github.com/and3rn3t/remote",
-      "homepage": "",
-      "language": "Swift",
-      "topics": [
-        "denon",
-        "home-automation",
-        "ios",
-        "swift",
-        "xcode"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-21T06:47:03Z",
-      "updated_at": "2026-10-21T01:24:11Z",
-      "created_at": "2026-03-07T20:16:37Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1102030320,
       "name": "minecraft",
       "full_name": "and3rn3t/minecraft",
@@ -168,10 +33,33 @@
       ],
       "stargazers_count": 1,
       "forks_count": 0,
-      "open_issues_count": 8,
-      "pushed_at": "2026-10-21T06:06:16Z",
-      "updated_at": "2026-10-21T08:58:44Z",
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-22T01:34:47Z",
+      "updated_at": "2026-10-22T01:34:51Z",
       "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1078539335,
+      "name": "network",
+      "full_name": "and3rn3t/network",
+      "description": "Testing UniFi API",
+      "html_url": "https://github.com/and3rn3t/network",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "python",
+        "unifi"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-21T22:23:00Z",
+      "updated_at": "2026-10-21T01:24:10Z",
+      "created_at": "2025-10-17T22:48:41Z",
       "fork": false,
       "archived": false
     },
@@ -206,8 +94,8 @@
       "stargazers_count": 1,
       "forks_count": 3,
       "open_issues_count": 8,
-      "pushed_at": "2026-10-21T05:03:32Z",
-      "updated_at": "2026-10-21T08:58:39Z",
+      "pushed_at": "2026-10-21T20:27:55Z",
+      "updated_at": "2026-10-21T09:42:15Z",
       "created_at": "2026-02-25T01:47:38Z",
       "fork": false,
       "archived": false
@@ -232,10 +120,81 @@
       ],
       "stargazers_count": 1,
       "forks_count": 0,
-      "open_issues_count": 14,
-      "pushed_at": "2026-10-21T04:59:31Z",
-      "updated_at": "2026-10-21T08:58:46Z",
+      "open_issues_count": 10,
+      "pushed_at": "2026-10-21T20:22:07Z",
+      "updated_at": "2026-10-21T11:48:44Z",
       "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1288624692,
+      "name": "eslint-config",
+      "full_name": "and3rn3t/eslint-config",
+      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
+      "html_url": "https://github.com/and3rn3t/eslint-config",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "eslint",
+        "react",
+        "shared-config",
+        "typescript"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-21T20:01:39Z",
+      "updated_at": "2026-10-21T16:26:27Z",
+      "created_at": "2026-07-03T19:42:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1175514361,
+      "name": "remote",
+      "full_name": "and3rn3t/remote",
+      "description": "Building a Denon AVR remote to tinker with Denon API",
+      "html_url": "https://github.com/and3rn3t/remote",
+      "homepage": "",
+      "language": "Swift",
+      "topics": [
+        "denon",
+        "home-automation",
+        "ios",
+        "swift",
+        "xcode"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-21T19:49:30Z",
+      "updated_at": "2026-10-21T01:24:11Z",
+      "created_at": "2026-03-07T20:16:37Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1165780517,
+      "name": "flipper",
+      "full_name": "and3rn3t/flipper",
+      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
+      "html_url": "https://github.com/and3rn3t/flipper",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 9,
+      "pushed_at": "2026-10-21T19:20:20Z",
+      "updated_at": "2026-10-21T01:23:36Z",
+      "created_at": "2026-02-24T14:38:23Z",
       "fork": false,
       "archived": false
     },
@@ -261,27 +220,35 @@
       "stargazers_count": 5,
       "forks_count": 1,
       "open_issues_count": 11,
-      "pushed_at": "2026-10-21T04:51:17Z",
-      "updated_at": "2026-10-21T08:58:42Z",
+      "pushed_at": "2026-10-21T19:16:24Z",
+      "updated_at": "2026-10-21T09:05:04Z",
       "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
     },
     {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": null,
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": null,
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
       "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 0,
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
       "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-21T03:16:28Z",
-      "updated_at": "2026-10-18T17:28:17Z",
-      "created_at": "2026-10-18T15:34:10Z",
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-21T19:01:46Z",
+      "updated_at": "2026-10-21T09:42:52Z",
+      "created_at": "2025-08-29T22:05:27Z",
       "fork": false,
       "archived": false
     },
@@ -301,8 +268,8 @@
       "stargazers_count": 0,
       "forks_count": 0,
       "open_issues_count": 2,
-      "pushed_at": "2026-10-21T02:48:44Z",
-      "updated_at": "2026-10-21T01:33:31Z",
+      "pushed_at": "2026-10-21T18:49:29Z",
+      "updated_at": "2026-10-21T09:42:37Z",
       "created_at": "2026-03-03T14:40:25Z",
       "fork": false,
       "archived": false
@@ -327,9 +294,109 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 8,
-      "pushed_at": "2026-10-21T01:57:40Z",
-      "updated_at": "2026-10-21T08:58:41Z",
+      "pushed_at": "2026-10-21T18:33:24Z",
+      "updated_at": "2026-10-21T09:42:48Z",
       "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": null,
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-21T18:12:34Z",
+      "updated_at": "2026-10-21T09:42:40Z",
+      "created_at": "2026-10-18T15:34:10Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-21T17:16:14Z",
+      "updated_at": "2026-10-21T09:42:33Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-21T17:14:05Z",
+      "updated_at": "2026-10-21T09:51:29Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1289483809,
+      "name": "workspace-tools",
+      "full_name": "and3rn3t/workspace-tools",
+      "description": "Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.",
+      "html_url": "https://github.com/and3rn3t/workspace-tools",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "github-actions",
+        "meta",
+        "tooling",
+        "workspace"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 0,
+      "pushed_at": "2026-10-21T16:29:09Z",
+      "updated_at": "2026-10-21T16:29:14Z",
+      "created_at": "2026-07-04T20:11:00Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1287619779,
+      "name": ".github",
+      "full_name": "and3rn3t/.github",
+      "description": null,
+      "html_url": "https://github.com/and3rn3t/.github",
+      "homepage": null,
+      "language": "Shell",
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-21T16:24:46Z",
+      "updated_at": "2026-10-21T16:25:15Z",
+      "created_at": "2026-07-02T21:26:10Z",
       "fork": false,
       "archived": false
     },
@@ -352,9 +419,9 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 15,
-      "pushed_at": "2026-10-21T01:51:10Z",
-      "updated_at": "2026-10-21T01:33:43Z",
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-21T11:06:59Z",
+      "updated_at": "2026-10-21T11:04:13Z",
       "created_at": "2026-02-04T00:09:29Z",
       "fork": false,
       "archived": false
@@ -381,50 +448,6 @@
       "pushed_at": "2026-10-21T01:51:06Z",
       "updated_at": "2026-10-21T01:24:08Z",
       "created_at": "2026-02-13T00:28:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1165780517,
-      "name": "flipper",
-      "full_name": "and3rn3t/flipper",
-      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
-      "html_url": "https://github.com/and3rn3t/flipper",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 8,
-      "pushed_at": "2026-10-21T01:50:59Z",
-      "updated_at": "2026-10-21T01:23:36Z",
-      "created_at": "2026-02-24T14:38:23Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-21T01:47:40Z",
-      "updated_at": "2026-10-21T08:58:40Z",
-      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -489,29 +512,6 @@
       "pushed_at": "2026-10-21T01:26:44Z",
       "updated_at": "2026-10-21T01:24:12Z",
       "created_at": "2026-01-03T00:51:45Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1078539335,
-      "name": "network",
-      "full_name": "and3rn3t/network",
-      "description": "Testing UniFi API",
-      "html_url": "https://github.com/and3rn3t/network",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "python",
-        "unifi"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-21T01:26:29Z",
-      "updated_at": "2026-10-21T01:24:10Z",
-      "created_at": "2025-10-17T22:48:41Z",
       "fork": false,
       "archived": false
     },
@@ -1230,6 +1230,1123 @@
   ],
   "events": [
     {
+      "id": "24761463499",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/shared-eslint-config",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T01:53:30Z"
+    },
+    {
+      "id": "24761323748",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "chore/eslint-config-0.3",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T01:51:07Z"
+    },
+    {
+      "id": "24760639301",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "475b2015fc5c4ca7948acba89620ba4c41e04d91",
+            "message": "ci: verbose npm log on publish to surface OIDC errors\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:39:20Z"
+    },
+    {
+      "id": "24760296544",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "38ef97c5d83b39fbd9153fa0dc0332876ec87370",
+            "message": "style: apply Prettier to src so CI format:check passes\n\nCI's verify step ('npm run format:check') failed on 72 unformatted\nfiles. Formatting only, no code changes.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:33:39Z"
+    },
+    {
+      "id": "24759736431",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "17d9d20799c029ab7df7066d3081d847cb245e40",
+            "message": "chore(renovate): switch to dormant preset\n\nNo human project commits in 90 days, so Renovate batches updates into a monthly window with at most 2 open PRs (security PRs still open immediately). Re-run workspace-tools' make renovate-tier-apply when the repo becomes active again.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:24:09Z"
+    },
+    {
+      "id": "24759693267",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/cats"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b293d03c57f8654a1529c3df9e0db06e0eb07ee5",
+            "message": "chore: bump .nvmrc to 24.22.0\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:23:26Z"
+    },
+    {
+      "id": "24759355585",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "58deeef6a1484c298cdef24b68eff2f67fe38a48",
+            "message": "ci: publish via npm trusted publishing instead of NPM_TOKEN\n\nThe NPM_TOKEN automation token was rejected (E404 on PUT) when publishing 0.3.0. OIDC trusted publishing is configured on npmjs.com for this repo + publish.yml; pin npm >= 11.5.1, which it requires.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:35:41Z"
+    },
+    {
+      "id": "24759239109",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b2b423fd3cada06ae4956bd6ec89c093e2861fdc",
+            "message": "docs: align README with workspace standard\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:33:43Z"
+    },
+    {
+      "id": "24759237966",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/minecraft"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6bfbdb0c5bc0960b7caefb3df9910a64b320c1e9",
+            "message": "docs: align README with workspace standard\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:33:42Z"
+    },
+    {
+      "id": "24758916253",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0c005d94a1889819385cf957167e37402229805f",
+            "message": "docs: add AGENTS.md and CLAUDE.md\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:10:24Z"
+    },
+    {
+      "id": "24758774353",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/minecraft"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "07488ecea2e991142272d1506b20a51f9ab19f32",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:07:59Z"
+    },
+    {
+      "id": "24758730226",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/Printer"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5be9aa604bf80431d1dc683f2a849baf191213ec",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:07:15Z"
+    },
+    {
+      "id": "24758655954",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/dbt"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "3023c36f9c5b7307cb5080115aee6f5af2648d9c",
+            "message": "chore(renovate): switch to dormant preset\n\nNo human project commits in 90 days, so Renovate batches updates into a monthly window with at most 2 open PRs (security PRs still open immediately). Re-run workspace-tools' make renovate-tier-apply when the repo becomes active again.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:24:00Z"
+    },
+    {
+      "id": "24757911194",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "694229deed648911255a46c07624eb0bd5de2664",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:11:48Z"
+    },
+    {
+      "id": "24757809104",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0d357f9f9964127188b596308cf7c523811a0e8e",
+            "message": "docs: add AGENTS.md and CLAUDE.md\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:10:07Z"
+    },
+    {
+      "id": "24757691175",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "04ecb7d4868f3f9318e744a073eb6a004cd58b78",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:08:09Z"
+    },
+    {
+      "id": "24757688176",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/telescope"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "71aecc2f5395c2aabceeff551d4d89da969b8eb1",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:08:06Z"
+    },
+    {
+      "id": "24757686283",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/silas"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "cc5b864b2d31f59cc4411af0abe37d07bd25d655",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:08:04Z"
+    },
+    {
+      "id": "24757008483",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b369aacbe191bae46877781f5fd4205a3c9e5863",
+            "message": "ci: pin workflow templates to @v1 to match caller repos\n\nEvery caller repo references the reusable workflows at @v1 (or its SHA);\nthe templates still said @main, which showed up as ~85 drift items in the\nworkspace consistency report. v1 and main currently point at the same commit.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01HqH4BQkTREV1QyHMkpCbWg"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T00:38:28Z"
+    },
+    {
+      "id": "24756023558",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/workspace-tools"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f4a1120dfa76897417d43e26b333a9ddb08777f5",
+            "message": "feat(tools): shared manifest, week-over-week diff, unified dashboard scoring\n\n- tools/lib/manifest.mjs: single source of truth for managed files, type\n  detection, .consistency-ignore handling and per-repo evaluation; used by\n  both sync-configs.mjs and dashboard.mjs so their numbers always agree\n- sync-configs.mjs: --since-last (make changes) diffs against\n  .consistency-snapshot.json (new repos, newly missing, new drift, fixes);\n  --json for machine-readable state; --drift lists drift only; files listed\n  in .consistency-ignore may also be deliberately absent\n- dashboard.mjs: scores the full manifest, grouped columns, missing-files\n  and no-CI cards (CI now checked for every repo type), NEW badge\n- .gitignore: ignore every top-level folder except tools/ so new clones\n  never show up as untracked\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01HqH4BQkTREV1QyHMkpCbWg"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T00:21:31Z"
+    },
+    {
+      "id": "24755251315",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/fastlane"
+      },
+      "payload": {
+        "ref": "chore/shared-eslint-config",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T01:20:36Z"
+    },
+    {
+      "id": "24754474794",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a188c0153a4637152fef89e6bbb5a165ee7ff96b",
+            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T01:07:55Z"
+    },
+    {
+      "id": "24752147389",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "03ab9f34e9dfe1e85a917f306c9b26f706536a67",
+            "message": "chore: add copilot instructions\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T00:30:05Z"
+    },
+    {
+      "id": "24750066283",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6121f504ad691edc100cd1f15a12fed5fe7757ea",
+            "message": "Merge pull request #155 from and3rn3t/renovate/pnpm-11.x\n\nchore(deps): update pnpm to v11.28.6"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-20T23:06:36Z"
+    },
+    {
+      "id": "24750059167",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "fc21f71d89b08d27387ae40dfe8a02a5dd5bd16d",
+            "message": "Merge pull request #87 from and3rn3t/renovate/pydantic-settings-2.x\n\nchore(deps): update dependency pydantic-settings to v2.16.1"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-20T23:06:29Z"
+    },
+    {
+      "id": "24746720028",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "22cf7fbc83bbd7f4c62c8d8ac24e8203e57d41f0",
+            "message": "Merge pull request #86 from and3rn3t/renovate/fastapi-0.x\n\nchore(deps): update dependency fastapi to v0.156.1"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-20T23:06:32Z"
+    },
+    {
+      "id": "24746715284",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "fbd1017d7b68b8de94fa2f8221aeb7326d9384fc",
+            "message": "Merge pull request #162 from and3rn3t/renovate/playwright\n\nchore(deps): update dependency @playwright/test to v1.64.1"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-20T23:06:28Z"
+    },
+    {
+      "id": "24732658651",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "7aceddba310dcbce021223274254c6b3ddd646c9",
+            "message": "chore(deps): update node.js to v24.22.1 (#2)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T16:26:09Z"
+    },
+    {
+      "id": "24732437904",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d6955d33a333cc6148220ce67d7cc83d80e0dce0",
+            "message": "Merge pull request #12 from and3rn3t/renovate/actions-setup-python-7.x\n\nchore(deps): update actions/setup-python action to v7"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T16:24:21Z"
+    },
+    {
+      "id": "24732204375",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "ref": "renovate/node-24.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T16:22:33Z"
+    },
+    {
+      "id": "24732136318",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "65bfae7a5298956d8d05f40be7bee11a763fa3c1",
+            "message": "Merge pull request #3 from and3rn3t/renovate/pnpm-action-setup-6.x\n\nchore(deps): update pnpm/action-setup action to v6"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T16:22:02Z"
+    },
+    {
+      "id": "24728873721",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e6def4b6d32f899ac29e160df9befbc04772a36b",
+            "message": "Merge pull request #13 from and3rn3t/renovate/actions-stale-11.x\n\nchore(deps): update actions/stale action to v11"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T16:24:37Z"
+    },
+    {
+      "id": "24728860030",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "ref": "renovate/actions-setup-python-7.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T16:24:25Z"
+    },
+    {
+      "id": "24728834293",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c32c64697c1d45567d8d880e41b5e1237b77aa5e",
+            "message": "Merge pull request #11 from and3rn3t/renovate/actions-setup-node-7.x\n\nchore(deps): update actions/setup-node action to v7"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T16:24:03Z"
+    },
+    {
+      "id": "24728675326",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "ref": "chore/workspace-fixes",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T16:21:42Z"
+    },
+    {
+      "id": "17833293226",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: workspace baseline fixes",
+          "head": {
+            "ref": "chore/workspace-fixes"
+          }
+        }
+      },
+      "created_at": "2026-10-21T16:21:40Z"
+    },
+    {
+      "id": "24728429979",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0415d76d5dfdf1dec81d4756d411850057f38618",
+            "message": "Merge pull request #15 from and3rn3t/feat/site-check-lighthouse\n\nfeat(site-check): add Lighthouse scores artifact"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T16:18:01Z"
+    },
+    {
+      "id": "17832963136",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(site-check): add Lighthouse scores artifact",
+          "head": {
+            "ref": "feat/site-check-lighthouse"
+          }
+        }
+      },
+      "created_at": "2026-10-21T16:17:57Z"
+    },
+    {
+      "id": "24728347354",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e604f8376ba0c8e301f9ec3ce7ca9b1a6787de93",
+            "message": "fix(site-check): Lighthouse job can't fail the check; correct action version comment\n\nThe pinned SHA is lighthouse-ci-action's v12 tag (there is no v12.6.2 tag).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/site-check-lighthouse"
+      },
+      "created_at": "2026-10-21T16:16:48Z"
+    },
+    {
+      "id": "17831386443",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: workspace baseline fixes",
+          "head": {
+            "ref": "chore/workspace-fixes"
+          }
+        }
+      },
+      "created_at": "2026-10-21T16:00:31Z"
+    },
+    {
+      "id": "17830911951",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(site-check): add Lighthouse scores artifact",
+          "head": {
+            "ref": "feat/site-check-lighthouse"
+          }
+        }
+      },
+      "created_at": "2026-10-21T15:55:18Z"
+    },
+    {
+      "id": "24710076524",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "72778a3eb8c0fce55fbc6f21441af89e649f3e89",
+            "message": "chore(deps): update dependency react-error-boundary to v6.1.6 (#104)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T11:48:41Z"
+    },
+    {
+      "id": "24709480040",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/nanoid-3.3.20",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T11:39:43Z"
+    },
+    {
+      "id": "24709478148",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b4ecbee730c46ef2e740d3b3d9106921f4d99326",
+            "message": "chore(deps): bump nanoid from 3.3.16 to 3.3.20 (#102)\n\nBumps [nanoid](https://github.com/ai/nanoid) from 3.3.16 to 3.3.20.\n- [Release notes](https://github.com/ai/nanoid/releases)\n- [Changelog](https://github.com/ai/nanoid/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/ai/nanoid/compare/3.3.16...3.3.20)\n\n---\nupdated-dependencies:\n- dependency-name: nanoid\n  dependency-version: 3.3.20\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T11:39:41Z"
+    },
+    {
+      "id": "24709283788",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/tanstack-query-monorepo",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T11:36:50Z"
+    },
+    {
+      "id": "17807358461",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:22Z"
+    },
+    {
+      "id": "17807337054",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:10Z"
+    },
+    {
+      "id": "17807334431",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:08Z"
+    },
+    {
+      "id": "17807328729",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:03Z"
+    },
+    {
+      "id": "17807322283",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:00Z"
+    },
+    {
+      "id": "17806860896",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:14Z"
+    },
+    {
+      "id": "17806857897",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:11Z"
+    },
+    {
+      "id": "17806845505",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:36:58Z"
+    },
+    {
+      "id": "17806449339",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T11:22:56Z"
+    },
+    {
+      "id": "24707205322",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "56a52be58a637ab62f0d5d4fe8b7a8a1912c75b3",
+            "message": "fix(deps): replace dependency framer-motion with motion (#90)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T11:05:12Z"
+    },
+    {
+      "id": "24707138276",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/brace-expansion-1.1.21",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T11:04:11Z"
+    },
+    {
+      "id": "24706950767",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/cloudflare",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T11:01:16Z"
+    },
+    {
+      "id": "24706737907",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "fb1c25d36b67907878406a44e01ebf5a0c446c32",
+            "message": "Merge branch 'main' into renovate/python-multipart-0.x"
+          }
+        ],
+        "ref": "refs/heads/renovate/python-multipart-0.x"
+      },
+      "created_at": "2026-10-21T10:58:04Z"
+    },
+    {
+      "id": "17804244371",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:55:02Z"
+    },
+    {
+      "id": "24706489845",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "ref": "chore/eslint-config-0.3",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T10:54:14Z"
+    },
+    {
+      "id": "17804178314",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps): bump @and3rn3t/eslint-config to 0.3.0 (ESLint 10)",
+          "head": {
+            "ref": "chore/eslint-config-0.3"
+          }
+        }
+      },
+      "created_at": "2026-10-21T10:54:12Z"
+    },
+    {
+      "id": "24706430454",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/undici-7.30.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T10:53:18Z"
+    },
+    {
+      "id": "24706330495",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0d24d65618ba79c597a96d07147aef02ce591391",
+            "message": "chore(deps-dev): bump browserslist from 4.28.1 to 4.29.4 (#75)\n\nBumps [browserslist](https://github.com/browserslist/browserslist) from 4.28.1 to 4.29.4.\n- [Release notes](https://github.com/browserslist/browserslist/releases)\n- [Changelog](https://github.com/browserslist/browserslist/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/browserslist/browserslist/compare/4.28.1...4.29.4)\n\n---\nupdated-dependencies:\n- dependency-name: browserslist\n  dependency-version: 4.28.9\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T10:51:43Z"
+    },
+    {
+      "id": "24706220934",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4a1930fcc6076d576c055bb60e80d9db6c63a2d9",
+            "message": "chore(deps): bump dompurify from 3.3.1 to 3.4.16 (#68)\n\nBumps [dompurify](https://github.com/cure53/DOMPurify) from 3.3.1 to 3.4.16.\n- [Release notes](https://github.com/cure53/DOMPurify/releases)\n- [Commits](https://github.com/cure53/DOMPurify/compare/3.3.1...3.4.16)\n\n---\nupdated-dependencies:\n- dependency-name: dompurify\n  dependency-version: 3.4.13\n  dependency-type: direct:production\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T10:50:02Z"
+    },
+    {
+      "id": "17802847162",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:21Z"
+    },
+    {
+      "id": "17802845029",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:19Z"
+    },
+    {
+      "id": "17802842699",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:18Z"
+    },
+    {
+      "id": "17802841262",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:16Z"
+    },
+    {
+      "id": "17802840616",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:15Z"
+    },
+    {
+      "id": "17802836660",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:12Z"
+    },
+    {
+      "id": "17802828994",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:07Z"
+    },
+    {
+      "id": "17802827528",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:06Z"
+    },
+    {
+      "id": "17802826301",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:04Z"
+    },
+    {
+      "id": "17802821728",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T10:37:01Z"
+    },
+    {
+      "id": "24702584702",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/multi-ca625267f0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T09:53:22Z"
+    },
+    {
+      "id": "17798638096",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {},
+      "created_at": "2026-10-21T09:45:41Z"
+    },
+    {
+      "id": "24701989014",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/web/source-map-js-1.2.2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-21T09:44:10Z"
+    },
+    {
+      "id": "24701933752",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/fastlane"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "48c7de6fe645329b1c278430fb801724b05f7670",
+            "message": "chore(deps): update pnpm to v10.34.7 (#60)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T09:43:18Z"
+    },
+    {
+      "id": "24701908732",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/fastlane"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "8d6f9df179654d0912344ff2357eb6ea4cde5484",
+            "message": "chore(deps): update cloudflare (#55)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T09:42:54Z"
+    },
+    {
+      "id": "24701887200",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "752f12648890e0c5db4e34e6deb1c45fbddf6a6a",
+            "message": "chore(deps): update and3rn3t/.github digest to c3cca43 (#53)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-21T09:42:33Z"
+    },
+    {
       "id": "24699060298",
       "type": "PushEvent",
       "repo": {
@@ -1386,1236 +2503,6 @@
         }
       },
       "created_at": "2026-10-21T01:51:04Z"
-    },
-    {
-      "id": "24671657229",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/workspace-tools"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7e2669fc5aa7d6cb3d367ae158435e2d788a8d85",
-            "message": "feat(docs): update CLAUDE.md to mark completed projects with checkmarks"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:34:18Z"
-    },
-    {
-      "id": "24671604042",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/birds"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "80ed8e7cce6fda65f56fe0d7591b7d3485fe26d8",
-            "message": "docs: align README with workspace standard\n\nCredit upstream (arnegiacomo/fugleramme) prominently and add this fork's CI badge.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:33:30Z"
-    },
-    {
-      "id": "24671602825",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2ff032c24c87df395f5023e59d2271870e9c45fe",
-            "message": "docs: align README with workspace standard\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:33:28Z"
-    },
-    {
-      "id": "24671601094",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "71f045d9427ac8e0995c34997e35e27e7c7bf962",
-            "message": "docs: align README with workspace standard\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:33:27Z"
-    },
-    {
-      "id": "24671599685",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "675f1bda706f4c15157303026826ebf2873cf216",
-            "message": "ci: add daily site check\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:33:25Z"
-    },
-    {
-      "id": "17768025256",
-      "type": "ReleaseEvent",
-      "repo": {
-        "name": "and3rn3t/eslint-config"
-      },
-      "payload": {
-        "release": {
-          "tag_name": "v0.3.0"
-        }
-      },
-      "created_at": "2026-10-21T01:32:39Z"
-    },
-    {
-      "id": "24671052926",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/test-project"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c2d5399e5f173c598925ca6fc40e5ccf830b678d",
-            "message": "chore(renovate): switch to dormant preset\n\nNo human project commits in 90 days, so Renovate batches updates into a monthly window with at most 2 open PRs (security PRs still open immediately). Re-run workspace-tools' make renovate-tier-apply when the repo becomes active again.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:24:11Z"
-    },
-    {
-      "id": "24671044989",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "41a932beb177fa1e7189eed11b1e22c130c023f5",
-            "message": "chore(renovate): switch to dormant preset\n\nNo human project commits in 90 days, so Renovate batches updates into a monthly window with at most 2 open PRs (security PRs still open immediately). Re-run workspace-tools' make renovate-tier-apply when the repo becomes active again.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:24:05Z"
-    },
-    {
-      "id": "24671044177",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homekit-automator"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "83baea2a1f9c192da4cee62d1aec62b3f5654df3",
-            "message": "chore(renovate): switch to dormant preset\n\nNo human project commits in 90 days, so Renovate batches updates into a monthly window with at most 2 open PRs (security PRs still open immediately). Re-run workspace-tools' make renovate-tier-apply when the repo becomes active again.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:24:03Z"
-    },
-    {
-      "id": "24671039232",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/amiibo"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "e1a41817b76a11452c292cb04410c03139b075ea",
-            "message": "chore(renovate): switch to dormant preset\n\nNo human project commits in 90 days, so Renovate batches updates into a monthly window with at most 2 open PRs (security PRs still open immediately). Re-run workspace-tools' make renovate-tier-apply when the repo becomes active again.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:23:58Z"
-    },
-    {
-      "id": "24671012313",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "fb53e22758c59400d041bfc6c4a067ef8ffa2dcc",
-            "message": "chore: bump .nvmrc to 24.22.0\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:23:30Z"
-    },
-    {
-      "id": "17767396767",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/fastlane"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: adopt shared @and3rn3t/eslint-config (ESLint 10)",
-          "head": {
-            "ref": "chore/shared-eslint-config"
-          }
-        }
-      },
-      "created_at": "2026-10-21T01:20:37Z"
-    },
-    {
-      "id": "24670799618",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/.github"
-      },
-      "payload": {
-        "ref": "feat/reusable-site-check",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-21T01:19:54Z"
-    },
-    {
-      "id": "17767357996",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/.github"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: add reusable site-check workflow (uptime + broken links)",
-          "head": {
-            "ref": "feat/reusable-site-check"
-          }
-        }
-      },
-      "created_at": "2026-10-21T01:19:55Z"
-    },
-    {
-      "id": "24670319899",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "943baa99cd21f935aef82ec985f0aeb02e9e0b39",
-            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:11:52Z"
-    },
-    {
-      "id": "24670311624",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-photos-cleaner"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "48c98f61406346e5a8654c683168ee0bc1ee4282",
-            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:11:47Z"
-    },
-    {
-      "id": "24670241985",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ea7422e248a55c9be64141fd83650484fa3e5405",
-            "message": "docs: add AGENTS.md and CLAUDE.md\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:10:32Z"
-    },
-    {
-      "id": "24670229688",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d69b3cb313db2de998a1c628d20cfe10763a2a56",
-            "message": "docs: add AGENTS.md\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:10:21Z"
-    },
-    {
-      "id": "24670093942",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/hack"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c2d4f5d1e67b2930e26170b235af1efb02552773",
-            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:07:56Z"
-    },
-    {
-      "id": "24670066683",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "21c137a2c7edfb803bf11a3d27a0f63dca76b10f",
-            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:07:28Z"
-    },
-    {
-      "id": "24670054160",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/birds"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "4da7691beb0102c78c37be1e042d984e13ceb444",
-            "message": "chore: add CODEOWNERS with default owner\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:07:20Z"
-    },
-    {
-      "id": "24669705708",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/workspace-tools"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "6c73c99a594caa99ba639cc216b545fdb817ae1b",
-            "message": "feat(tools): activity tiers, presentation score, make meta\n\n- lib/activity.mjs: active/dormant tiers from human project commits in the\n  last 90 days (bots and manifest-only sweeps excluded; TIER_OVERRIDES pin)\n- lib/presentation.mjs: README/docs/GitHub-side checks for active repos,\n  blessable via `presentation:<key>` in .consistency-ignore\n- github-meta.mjs (`make meta`): cache description, topics, homepage,\n  protection, per-workflow CI and latest release in .github-meta.json\n- dashboard: Active/Dormant sections, Presentation column and cards\n- make changes: tracks tier moves and presentation regressions/fixes\n- make report: refreshes meta; CI section lists every failing workflow\n- manifest: .github/CODEOWNERS baseline from tools/templates/CODEOWNERS\n- lib/github.mjs: shared token resolution and API client\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-21T01:01:29Z"
-    },
-    {
-      "id": "24662749978",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/zod-4.6.7",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-20T23:06:45Z"
-    },
-    {
-      "id": "24662748776",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "bd869875ee179042b9e3292e242638988c2583b6",
-            "message": "Merge pull request #81 from and3rn3t/dependabot/npm_and_yarn/zod-4.6.7\n\nchore(deps): bump zod from 4.4.3 to 4.6.7"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-20T23:06:44Z"
-    },
-    {
-      "id": "24662738167",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "renovate/vite-and-vitest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-20T23:06:34Z"
-    },
-    {
-      "id": "24662737120",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/sky"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "1f571003a3da7d9f0748ada12744053e5d989bfb",
-            "message": "Merge pull request #83 from and3rn3t/dependabot/npm_and_yarn/radix-ui/react-progress-1.2.0\n\nchore(deps): bump @radix-ui/react-progress from 1.1.16 to 1.2.0"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-20T23:06:32Z"
-    },
-    {
-      "id": "24662734935",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/github-codeql-action-digest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-20T23:06:30Z"
-    },
-    {
-      "id": "24662734778",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/network"
-      },
-      "payload": {
-        "ref": "renovate/pydantic-settings-2.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-20T23:06:30Z"
-    },
-    {
-      "id": "24662735027",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "renovate/playwright",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-20T23:06:30Z"
-    },
-    {
-      "id": "24662733340",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7ca9f7d71b88b298ff76f5b6e8c81eb665f255e4",
-            "message": "Merge pull request #46 from and3rn3t/dependabot/npm_and_yarn/npm_and_yarn-9ec07dc764\n\nchore(deps): bump the npm_and_yarn group across 1 directory with 3 updates"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-20T23:06:29Z"
-    },
-    {
-      "id": "24662733024",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7314ef05525fc8315f1eab9866eb965778209556",
-            "message": "Merge pull request #249 from and3rn3t/renovate/github-codeql-action-digest\n\nchore(deps): update github/codeql-action digest to 6f2ac81"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-20T23:06:28Z"
-    },
-    {
-      "id": "24649022913",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8ef23180d820dfc034704e588dc8af33ba2382d4",
-            "message": "Merge branch 'main' into feat/report-formats"
-          }
-        ],
-        "ref": "refs/heads/feat/report-formats"
-      },
-      "created_at": "2026-10-18T16:58:15Z"
-    },
-    {
-      "id": "24647498125",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "fix/release-drafter-permissions",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T16:40:52Z"
-    },
-    {
-      "id": "24642840557",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "e96c0d4027c42a598b8770bdfaeadb4dc43d780c",
-            "message": "Merge pull request #1 from and3rn3t/copilot/copy-implementation-commit-4579f7a\n\nAdd standalone Shortcuts Doctor inspection skill"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T15:51:49Z"
-    },
-    {
-      "id": "24638922228",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/report-formats",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T16:56:41Z"
-    },
-    {
-      "id": "24637938630",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a5a81d03ebfb1aa8d77bc9150ea4ccba5f4e6c4b",
-            "message": "Merge branch 'main' into renovate/pnpm-11.x"
-          }
-        ],
-        "ref": "refs/heads/renovate/pnpm-11.x"
-      },
-      "created_at": "2026-10-18T16:45:37Z"
-    },
-    {
-      "id": "24625752447",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "37969bed46a35b038acce273a3c640067aaa4b4d",
-            "message": "Merge pull request #9 from and3rn3t/feat/report-formats\n\nfeat(cli): add --format text|json|md report output"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T17:02:35Z"
-    },
-    {
-      "id": "24624330937",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b10e440cb8b7088d1965539b6aa14a0a98d0172b",
-            "message": "Merge pull request #6 from and3rn3t/renovate/pnpm-11.x\n\nchore(deps): update pnpm to v11.28.6"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T16:47:17Z"
-    },
-    {
-      "id": "24623481090",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5259e5357512fe3166188b270217fe184b6c8cae",
-            "message": "Merge pull request #2 from and3rn3t/renovate/pin-dependencies\n\nchore(deps): pin dependencies"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T16:37:46Z"
-    },
-    {
-      "id": "24513949483",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/fail-on-quiet",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:19:56Z"
-    },
-    {
-      "id": "24513705710",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/inspect-subcommand",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:16:40Z"
-    },
-    {
-      "id": "24513259145",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/report-schema-v2",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:10:31Z"
-    },
-    {
-      "id": "24512988787",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "63e57dfa5173a7a4e2defabc37fee49de864ec61",
-            "message": "Merge pull request #10 from and3rn3t/renovate/github-actions\n\nchore(deps): update pnpm/action-setup action to v4.4.0"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T17:06:51Z"
-    },
-    {
-      "id": "24509910559",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/report-formats",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:02:37Z"
-    },
-    {
-      "id": "24508462792",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "31b9633c8881a99ac9a93399b338368d242a55d9",
-            "message": "Merge pull request #8 from and3rn3t/fix/release-drafter-permissions\n\nfix(ci): grant release drafter the permissions its shared job requires"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T16:42:45Z"
-    },
-    {
-      "id": "24507484117",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "93680b4f481249f72b9cefa796295c4a7e1ff5d5",
-            "message": "Merge pull request #3 from and3rn3t/renovate/node-24.x\n\nchore(deps): update node.js to v24.22.0"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T16:44:39Z"
-    },
-    {
-      "id": "24507245034",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "chore/foundation-setup",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T16:25:12Z"
-    },
-    {
-      "id": "24494995590",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/npm-packaging",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:32:07Z"
-    },
-    {
-      "id": "24493864029",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/fail-on-quiet",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:28:16Z"
-    },
-    {
-      "id": "24493359076",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "renovate/github-actions",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:06:52Z"
-    },
-    {
-      "id": "24492091266",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9301ed9a909d63df539a9421b472d3c12813b879",
-            "message": "test(cli): cover isTTY defaults and bundled --format output\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/report-formats"
-      },
-      "created_at": "2026-10-18T17:01:22Z"
-    },
-    {
-      "id": "24491944573",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "renovate/node-24.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T16:44:49Z"
-    },
-    {
-      "id": "24491149711",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "renovate/pnpm-11.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T16:47:19Z"
-    },
-    {
-      "id": "24488706589",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "45cce926c8704562df5940d3144a6125005aa512",
-            "message": "Merge pull request #13 from and3rn3t/feat/fail-on-quiet\n\nfeat(cli): add --fail-on and --quiet for CI use"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T17:28:14Z"
-    },
-    {
-      "id": "24487364179",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "main",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T15:34:18Z"
-    },
-    {
-      "id": "24485296752",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8c251bd7d21dc5b65f6087676e427a95a30aa974",
-            "message": "chore: enforce coverage thresholds in validate gate\n\nvalidate ran plain vitest, so the thresholds in vitest.config.ts were\nnever checked by pre-push, CI, or releases. Run test:coverage instead.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/foundation-setup"
-      },
-      "created_at": "2026-10-18T16:35:08Z"
-    },
-    {
-      "id": "24462153372",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7e95117788a845cb49806e1ffe7ca0d8cbc753e8",
-            "message": "Merge pull request #12 from and3rn3t/feat/inspect-subcommand\n\nfeat(cli): add inspect subcommand and bin entry"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T17:18:52Z"
-    },
-    {
-      "id": "24462153747",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/inspect-subcommand",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:18:53Z"
-    },
-    {
-      "id": "24461944260",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7d17cea0ad99d3fc3f4f5f4d2e5515fb82f54bcb",
-            "message": "Merge pull request #11 from and3rn3t/feat/report-schema-v2\n\nfeat(core): add report formatVersion 2 with JSON Schema"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T17:13:38Z"
-    },
-    {
-      "id": "24451890946",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/report-schema-v2",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-18T17:13:39Z"
-    },
-    {
-      "id": "24450340370",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "15650fce135b233e023e521d9f5994ce3244f2ad",
-            "message": "Merge pull request #5 from and3rn3t/chore/foundation-setup\n\nchore: set up project foundation (TS workspace, gates, CI, roadmap)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-18T16:37:05Z"
-    },
-    {
-      "id": "17543432364",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): package the CLI for npm with an opt-in provenance publish job",
-          "head": {
-            "ref": "feat/npm-packaging"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:32:08Z"
-    },
-    {
-      "id": "17543261006",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add --fail-on and --quiet for CI use",
-          "head": {
-            "ref": "feat/fail-on-quiet"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:28:13Z"
-    },
-    {
-      "id": "17543254471",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add --fail-on and --quiet for CI use",
-          "head": {
-            "ref": "feat/fail-on-quiet"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:19:57Z"
-    },
-    {
-      "id": "17542892499",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add --fail-on and --quiet for CI use",
-          "head": {
-            "ref": "feat/fail-on-quiet"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:19:57Z"
-    },
-    {
-      "id": "17542843517",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add inspect subcommand and bin entry",
-          "head": {
-            "ref": "feat/inspect-subcommand"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:18:51Z"
-    },
-    {
-      "id": "17542757700",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add inspect subcommand and bin entry",
-          "head": {
-            "ref": "feat/inspect-subcommand"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:16:40Z"
-    },
-    {
-      "id": "17542745009",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add inspect subcommand and bin entry",
-          "head": {
-            "ref": "feat/inspect-subcommand"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:16:40Z"
-    },
-    {
-      "id": "17542609063",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(core): add report formatVersion 2 with JSON Schema",
-          "head": {
-            "ref": "feat/report-schema-v2"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:13:36Z"
-    },
-    {
-      "id": "17542494987",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(core): add report formatVersion 2 with JSON Schema",
-          "head": {
-            "ref": "feat/report-schema-v2"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:10:32Z"
-    },
-    {
-      "id": "17542471407",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(core): add report formatVersion 2 with JSON Schema",
-          "head": {
-            "ref": "feat/report-schema-v2"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:10:32Z"
-    },
-    {
-      "id": "17542121125",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add --format text|json|md report output",
-          "head": {
-            "ref": "feat/report-formats"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:02:34Z"
-    },
-    {
-      "id": "17542053533",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/report-formats"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:01:02Z"
-    },
-    {
-      "id": "17542053506",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/report-formats"
-          }
-        }
-      },
-      "created_at": "2026-10-18T17:01:02Z"
-    },
-    {
-      "id": "17541920376",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add --format text|json|md report output",
-          "head": {
-            "ref": "feat/report-formats"
-          }
-        }
-      },
-      "created_at": "2026-10-18T16:56:43Z"
-    },
-    {
-      "id": "17541867960",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(cli): add --format text|json|md report output",
-          "head": {
-            "ref": "feat/report-formats"
-          }
-        }
-      },
-      "created_at": "2026-10-18T16:56:43Z"
-    },
-    {
-      "id": "17541387396",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): update pnpm to v11.28.6",
-          "head": {
-            "ref": "renovate/pnpm-11.x"
-          }
-        }
-      },
-      "created_at": "2026-10-18T16:25:45Z"
-    },
-    {
-      "id": "17541341352",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): update node.js to v24.22.0",
-          "head": {
-            "ref": "renovate/node-24.x"
-          }
-        }
-      },
-      "created_at": "2026-10-18T15:34:44Z"
-    },
-    {
-      "id": "17541265792",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(ci): grant release drafter the permissions its shared job requires",
-          "head": {
-            "ref": "fix/release-drafter-permissions"
-          }
-        }
-      },
-      "created_at": "2026-10-18T16:42:44Z"
-    },
-    {
-      "id": "17541238853",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(ci): grant release drafter the permissions its shared job requires",
-          "head": {
-            "ref": "fix/release-drafter-permissions"
-          }
-        }
-      },
-      "created_at": "2026-10-18T16:40:53Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2629,7 +2516,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4001,
+    "total": 4025,
     "weeks": [
       {
         "days": [
@@ -4678,19 +4565,24 @@
           },
           {
             "date": "2026-10-21",
-            "count": 11,
-            "level": 1
+            "count": 35,
+            "level": 2
+          },
+          {
+            "date": "2026-10-22",
+            "count": 0,
+            "level": 0
           }
         ]
       }
     ]
   },
   "languageBytes": {
-    "TypeScript": 13176404,
+    "TypeScript": 13176607,
     "HTML": 5782478,
     "Swift": 5121304,
     "Python": 4310360,
-    "JavaScript": 2624655,
+    "JavaScript": 2688813,
     "Shell": 1102684,
     "CSS": 621295,
     "R": 618546,
@@ -4698,7 +4590,7 @@
     "Kotlin": 300781,
     "PowerShell": 292114,
     "C++": 202428,
-    "Makefile": 62343,
+    "Makefile": 62887,
     "mcfunction": 24740,
     "Dockerfile": 11280,
     "Ruby": 9684,
@@ -4711,6 +4603,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-21T09:00:09Z",
+  "lastUpdated": "2026-10-22T03:11:33Z",
   "totalRepos": 54
 }
