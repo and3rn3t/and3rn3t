@@ -67,7 +67,13 @@ export default [
     // Node: config files and build/maintenance scripts. Scripts that drive Playwright use
     // `document` inside page.evaluate() callbacks, which run in the browser.
     {
-        files: ['*.config.js', '*.config.mjs', '.lighthouserc.cjs', 'scripts/**/*.{js,mjs}'],
+        files: [
+            '*.config.js',
+            '*.config.mjs',
+            '.lighthouserc.cjs',
+            'scripts/**/*.{js,mjs}',
+            'skills/*/scripts/*.mjs',
+        ],
         languageOptions: { globals: { ...globals.node, document: 'readonly' } },
     },
 
