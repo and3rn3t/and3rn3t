@@ -34,23 +34,18 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [apple-photos-cleaner](https://github.com/and3rn3t/apple-photos-cleaner)
-
-> OpenClaw skill for Apple Photos library cleanup, analysis, duplicate detection, and timeline recaps. Pure Python, no API tokens needed.
->
-> **Tech:** Python, apple-photos, claude-skill, python
-
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
 
-### 📱 [weather-app](https://github.com/and3rn3t/weather-app)
+### 🌐 [health](https://github.com/and3rn3t/health)
 
-> iOS26 Weather App
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
 >
-> **Tech:** Swift, android, fastlane, ios, swift
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -66,23 +61,24 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
 > 🔗 [Live](https://homehub.andernet.dev)
 
-### 🌐 [sky](https://github.com/and3rn3t/sky)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** TypeScript, astronomy, react, spark-template, typescript
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
-### 🌐 [jonah](https://github.com/and3rn3t/jonah)
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
-> Personal portfolio for Jonah (GitHub Spark template).
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
 >
-> **Tech:** TypeScript, cloudflare-workers, portfolio, react, tailwindcss
+> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
-### 🌐 [family](https://github.com/and3rn3t/family)
+### 🌐 [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.
+> Unifying network information on a RPi 5
 >
-> **Tech:** TypeScript, kiosk, raspberry-pi, react, tailwindcss
+> **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
 
 <!-- FEATURED-PROJECTS:END -->
 
