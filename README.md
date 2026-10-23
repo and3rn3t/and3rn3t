@@ -34,6 +34,33 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+>
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
+
+### 🌐 [guess](https://github.com/and3rn3t/guess)
+
+> A guessing game like "Akinator", but with more visibility to the user how it works.
+>
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
+
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> My attempt to build an inclusive homehub / automation project.
+>
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
+
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
@@ -52,33 +79,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > Unifying network information on a RPi 5
 >
 > **Tech:** TypeScript, cloudflare-workers, networking, raspberry-pi, react
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
-
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
-
-> My attempt to build an inclusive homehub / automation project.
->
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> A guessing game like "Akinator", but with more visibility to the user how it works.
->
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
-
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
 
 <!-- FEATURED-PROJECTS:END -->
 
