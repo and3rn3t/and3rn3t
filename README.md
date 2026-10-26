@@ -34,6 +34,19 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
+### 🌐 [guess](https://github.com/and3rn3t/guess)
+
+> A guessing game like "Akinator", but with more visibility to the user how it works.
+>
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
+
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
 > AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
@@ -54,25 +67,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
-
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
 > My attempt to build an inclusive homehub / automation project.
 >
 > **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
 > 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> A guessing game like "Akinator", but with more visibility to the user how it works.
->
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
