@@ -34,11 +34,31 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
+
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
+>
+> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
+
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker, docker-compose, flask
+
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
+
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> My attempt to build an inclusive homehub / automation project.
+>
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -46,13 +66,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
-
-### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
-
-> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
->
-> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
-> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -66,19 +79,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > Unifying network information on a RPi 5
 >
 > **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
-
-> My attempt to build an inclusive homehub / automation project.
->
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker, docker-compose, flask
 
 <!-- FEATURED-PROJECTS:END -->
 
