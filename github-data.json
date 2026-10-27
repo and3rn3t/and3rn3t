@@ -9,76 +9,6 @@
   },
   "repositories": [
     {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-26T01:43:21Z",
-      "updated_at": "2026-10-23T15:30:33Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1165780517,
-      "name": "flipper",
-      "full_name": "and3rn3t/flipper",
-      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
-      "html_url": "https://github.com/and3rn3t/flipper",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 9,
-      "pushed_at": "2026-10-25T23:48:13Z",
-      "updated_at": "2026-10-21T01:23:36Z",
-      "created_at": "2026-02-24T14:38:23Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "game",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 11,
-      "pushed_at": "2026-10-25T17:22:00Z",
-      "updated_at": "2026-10-24T01:46:42Z",
-      "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 390771666,
       "name": "and3rn3t",
       "full_name": "and3rn3t/and3rn3t",
@@ -92,9 +22,9 @@
       ],
       "stargazers_count": 0,
       "forks_count": 1,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-25T05:08:09Z",
-      "updated_at": "2026-10-25T03:12:20Z",
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-27T03:09:19Z",
+      "updated_at": "2026-10-26T05:24:01Z",
       "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
@@ -129,10 +59,154 @@
       ],
       "stargazers_count": 1,
       "forks_count": 5,
-      "open_issues_count": 23,
-      "pushed_at": "2026-10-25T00:05:57Z",
-      "updated_at": "2026-10-25T00:06:00Z",
+      "open_issues_count": 24,
+      "pushed_at": "2026-10-27T02:27:20Z",
+      "updated_at": "2026-10-26T18:52:24Z",
       "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "featured",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-27T00:48:28Z",
+      "updated_at": "2026-10-23T20:31:31Z",
+      "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1134570300,
+      "name": "family",
+      "full_name": "and3rn3t/family",
+      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
+      "html_url": "https://github.com/and3rn3t/family",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "kiosk",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-27T00:22:37Z",
+      "updated_at": "2026-10-23T23:15:27Z",
+      "created_at": "2026-01-14T22:35:53Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-27T00:11:09Z",
+      "updated_at": "2026-10-26T04:34:43Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 9,
+      "pushed_at": "2026-10-26T22:45:18Z",
+      "updated_at": "2026-10-24T02:22:35Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": null,
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-10-26T20:32:54Z",
+      "updated_at": "2026-10-26T04:41:34Z",
+      "created_at": "2026-10-18T15:34:10Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1078539335,
+      "name": "network",
+      "full_name": "and3rn3t/network",
+      "description": "Testing UniFi API",
+      "html_url": "https://github.com/and3rn3t/network",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "python",
+        "unifi"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-26T18:30:16Z",
+      "updated_at": "2026-10-21T01:24:10Z",
+      "created_at": "2025-10-17T22:48:41Z",
       "fork": false,
       "archived": false
     },
@@ -153,9 +227,207 @@
       "stargazers_count": 0,
       "forks_count": 0,
       "open_issues_count": 0,
-      "pushed_at": "2026-10-24T15:57:56Z",
-      "updated_at": "2026-10-24T15:58:01Z",
+      "pushed_at": "2026-10-26T18:09:42Z",
+      "updated_at": "2026-10-26T18:09:48Z",
       "created_at": "2026-07-04T20:11:00Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "game",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 11,
+      "pushed_at": "2026-10-26T18:03:44Z",
+      "updated_at": "2026-10-24T01:46:42Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1126996610,
+      "name": "sky",
+      "full_name": "and3rn3t/sky",
+      "description": "A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).",
+      "html_url": "https://github.com/and3rn3t/sky",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "astronomy",
+        "react",
+        "spark-template",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-26T17:33:22Z",
+      "updated_at": "2026-10-21T01:24:12Z",
+      "created_at": "2026-01-03T00:51:45Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1288624692,
+      "name": "eslint-config",
+      "full_name": "and3rn3t/eslint-config",
+      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
+      "html_url": "https://github.com/and3rn3t/eslint-config",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "eslint",
+        "react",
+        "shared-config",
+        "typescript"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-26T17:21:43Z",
+      "updated_at": "2026-10-23T14:05:48Z",
+      "created_at": "2026-07-03T19:42:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "featured",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "ml",
+        "walking",
+        "wellness"
+      ],
+      "stargazers_count": 5,
+      "forks_count": 1,
+      "open_issues_count": 13,
+      "pushed_at": "2026-10-26T12:41:54Z",
+      "updated_at": "2026-10-21T09:05:04Z",
+      "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1150200899,
+      "name": "weather-app",
+      "full_name": "and3rn3t/weather-app",
+      "description": "iOS26 Weather App",
+      "html_url": "https://github.com/and3rn3t/weather-app",
+      "homepage": null,
+      "language": "Swift",
+      "topics": [
+        "android",
+        "fastlane",
+        "ios",
+        "swift",
+        "weather",
+        "xcode"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 9,
+      "pushed_at": "2026-10-26T09:16:31Z",
+      "updated_at": "2026-10-21T01:08:12Z",
+      "created_at": "2026-02-05T02:05:57Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1080816618,
+      "name": "hack",
+      "full_name": "and3rn3t/hack",
+      "description": "A hacking simulator",
+      "html_url": "https://github.com/and3rn3t/hack",
+      "homepage": null,
+      "language": "Rust",
+      "topics": [
+        "game",
+        "hacking-simulator",
+        "rust",
+        "wasm"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-26T09:10:04Z",
+      "updated_at": "2026-10-21T01:07:59Z",
+      "created_at": "2025-10-21T23:02:15Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1156702820,
+      "name": "jonah",
+      "full_name": "and3rn3t/jonah",
+      "description": "Personal portfolio for Jonah (GitHub Spark template).",
+      "html_url": "https://github.com/and3rn3t/jonah",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "portfolio",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-26T05:23:39Z",
+      "updated_at": "2026-10-26T05:21:50Z",
+      "created_at": "2026-02-13T00:28:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1165780517,
+      "name": "flipper",
+      "full_name": "and3rn3t/flipper",
+      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
+      "html_url": "https://github.com/and3rn3t/flipper",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-25T23:48:13Z",
+      "updated_at": "2026-10-21T01:23:36Z",
+      "created_at": "2026-02-24T14:38:23Z",
       "fork": false,
       "archived": false
     },
@@ -223,34 +495,6 @@
       "archived": false
     },
     {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "featured",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "ml",
-        "walking",
-        "wellness"
-      ],
-      "stargazers_count": 5,
-      "forks_count": 1,
-      "open_issues_count": 13,
-      "pushed_at": "2026-10-24T02:48:24Z",
-      "updated_at": "2026-10-21T09:05:04Z",
-      "created_at": "2025-08-30T21:38:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1104071420,
       "name": "net-traffic",
       "full_name": "and3rn3t/net-traffic",
@@ -274,112 +518,6 @@
       "pushed_at": "2026-10-24T02:47:28Z",
       "updated_at": "2026-10-23T21:55:14Z",
       "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 9,
-      "pushed_at": "2026-10-24T02:23:52Z",
-      "updated_at": "2026-10-24T02:22:35Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "featured",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-24T01:21:23Z",
-      "updated_at": "2026-10-23T20:31:31Z",
-      "created_at": "2025-11-22T17:31:12Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1134570300,
-      "name": "family",
-      "full_name": "and3rn3t/family",
-      "description": "Family Organizer — chore/schedule kiosk app for Raspberry Pi 4B.",
-      "html_url": "https://github.com/and3rn3t/family",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "kiosk",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-23T23:15:24Z",
-      "updated_at": "2026-10-23T23:15:27Z",
-      "created_at": "2026-01-14T22:35:53Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1078539335,
-      "name": "network",
-      "full_name": "and3rn3t/network",
-      "description": "Testing UniFi API",
-      "html_url": "https://github.com/and3rn3t/network",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "python",
-        "unifi"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-23T20:30:10Z",
-      "updated_at": "2026-10-21T01:24:10Z",
-      "created_at": "2025-10-17T22:48:41Z",
       "fork": false,
       "archived": false
     },
@@ -428,47 +566,6 @@
       "archived": false
     },
     {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": null,
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-23T15:39:54Z",
-      "updated_at": "2026-10-23T14:07:34Z",
-      "created_at": "2026-10-18T15:34:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1288624692,
-      "name": "eslint-config",
-      "full_name": "and3rn3t/eslint-config",
-      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
-      "html_url": "https://github.com/and3rn3t/eslint-config",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "eslint",
-        "react",
-        "shared-config",
-        "typescript"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-23T14:05:46Z",
-      "updated_at": "2026-10-23T14:05:48Z",
-      "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1171723267,
       "name": "apple-photos-cleaner",
       "full_name": "and3rn3t/apple-photos-cleaner",
@@ -487,31 +584,6 @@
       "pushed_at": "2026-10-23T14:05:30Z",
       "updated_at": "2026-10-23T14:05:32Z",
       "created_at": "2026-03-03T14:40:25Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1150200899,
-      "name": "weather-app",
-      "full_name": "and3rn3t/weather-app",
-      "description": "iOS26 Weather App",
-      "html_url": "https://github.com/and3rn3t/weather-app",
-      "homepage": null,
-      "language": "Swift",
-      "topics": [
-        "android",
-        "fastlane",
-        "ios",
-        "swift",
-        "weather",
-        "xcode"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-23T01:25:46Z",
-      "updated_at": "2026-10-21T01:08:12Z",
-      "created_at": "2026-02-05T02:05:57Z",
       "fork": false,
       "archived": false
     },
@@ -577,55 +649,6 @@
       "pushed_at": "2026-10-21T16:24:46Z",
       "updated_at": "2026-10-21T16:25:15Z",
       "created_at": "2026-07-02T21:26:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1156702820,
-      "name": "jonah",
-      "full_name": "and3rn3t/jonah",
-      "description": "Personal portfolio for Jonah (GitHub Spark template).",
-      "html_url": "https://github.com/and3rn3t/jonah",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "portfolio",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-21T01:51:06Z",
-      "updated_at": "2026-10-21T01:24:08Z",
-      "created_at": "2026-02-13T00:28:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1126996610,
-      "name": "sky",
-      "full_name": "and3rn3t/sky",
-      "description": "A personalized celestial-event discovery platform — location-aware night-sky alerts (Spark template, early stage).",
-      "html_url": "https://github.com/and3rn3t/sky",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "astronomy",
-        "react",
-        "spark-template",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-21T01:26:44Z",
-      "updated_at": "2026-10-21T01:24:12Z",
-      "created_at": "2026-01-03T00:51:45Z",
       "fork": false,
       "archived": false
     },
@@ -717,7 +740,7 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 10,
+      "open_issues_count": 9,
       "pushed_at": "2026-10-21T01:23:38Z",
       "updated_at": "2026-10-21T01:23:42Z",
       "created_at": "2025-11-05T00:11:16Z",
@@ -784,29 +807,6 @@
       "pushed_at": "2026-10-21T01:08:01Z",
       "updated_at": "2026-10-21T01:08:05Z",
       "created_at": "2026-02-01T19:13:57Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1080816618,
-      "name": "hack",
-      "full_name": "and3rn3t/hack",
-      "description": "A hacking simulator",
-      "html_url": "https://github.com/and3rn3t/hack",
-      "homepage": null,
-      "language": "Rust",
-      "topics": [
-        "game",
-        "hacking-simulator",
-        "rust",
-        "wasm"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-21T01:07:55Z",
-      "updated_at": "2026-10-21T01:07:59Z",
-      "created_at": "2025-10-21T23:02:15Z",
       "fork": false,
       "archived": false
     },
@@ -1229,6 +1229,243 @@
     }
   ],
   "events": [
+    {
+      "id": "25281600125",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "853a5335413c80e21b12a0c79e6cd5c41fb6b510",
+            "message": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files (#133)\n\n* fix: stop swallowing errors in listings, playlist history and build_playlist\n\n- Library and recent-track listings no longer hide request errors: a failure on the\n  first page exits non-zero, a later one warns that the results are partial.\n- An unreadable playlist history is kept as .corrupt instead of being overwritten.\n- build_playlist.sh warns when the duplicate-name check or history logging fails.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(history): set a corrupt history file aside without an empty except\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: don't let a UTC-midnight crossing change which snapshot the drift job compares\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: keep HTTP diagnostics and never lose a history file we could not set aside\n\n- Listing failures print the failed response, not just a generic error.\n- Corrupt history backups use a free name (.corrupt, .corrupt.1, ...) and are\n  created without replacing anything.\n- If the corrupt file cannot be kept, raise instead of letting a save overwrite it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore(release): 3.5.1\n\nBump SKILL.md, pyproject.toml and clawhub.json to 3.5.1 and add a 3.5.1 changelog\nsection for the error-handling fixes.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs(changelog): limit the corrupt-history note to malformed files\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-26T18:52:21Z"
+    },
+    {
+      "id": "25280005155",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6c096a158e58d83b767f9335edfa14690373a711",
+            "message": "fix: stop swallowing errors; release 3.5.1 (#132)\n\n* fix: stop swallowing errors in listings, playlist history and build_playlist\n\n- Library and recent-track listings no longer hide request errors: a failure on the\n  first page exits non-zero, a later one warns that the results are partial.\n- An unreadable playlist history is kept as .corrupt instead of being overwritten.\n- build_playlist.sh warns when the duplicate-name check or history logging fails.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(history): set a corrupt history file aside without an empty except\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: don't let a UTC-midnight crossing change which snapshot the drift job compares\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: keep HTTP diagnostics and never lose a history file we could not set aside\n\n- Listing failures print the failed response, not just a generic error.\n- Corrupt history backups use a free name (.corrupt, .corrupt.1, ...) and are\n  created without replacing anything.\n- If the corrupt file cannot be kept, raise instead of letting a save overwrite it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore(release): 3.5.1\n\nBump SKILL.md, pyproject.toml and clawhub.json to 3.5.1 and add a 3.5.1 changelog\nsection for the error-handling fixes.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-26T18:48:00Z"
+    },
+    {
+      "id": "25279415708",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "3b4748297cdf88840b0d2dbf54196271dab33b22",
+            "message": "Merge remote-tracking branch 'origin/main' into fix/stop-swallowing-errors\n\n# Conflicts:\n#\tCHANGELOG.md"
+          }
+        ],
+        "ref": "refs/heads/fix/stop-swallowing-errors"
+      },
+      "created_at": "2026-10-26T18:50:42Z"
+    },
+    {
+      "id": "25278154029",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "dc36767015dfacc988a285b34e68ef1fd3e604b8",
+            "message": "Merge branch 'main' into fix/stop-swallowing-errors"
+          }
+        ],
+        "ref": "refs/heads/fix/stop-swallowing-errors"
+      },
+      "created_at": "2026-10-26T18:43:26Z"
+    },
+    {
+      "id": "25278094376",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "fix/stop-swallowing-errors",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-26T18:42:50Z"
+    },
+    {
+      "id": "25276898317",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "fix/stop-swallowing-errors",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-26T18:52:22Z"
+    },
+    {
+      "id": "25272954301",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/workspace-tools"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "048c117930e9832ea32d541d7daf6d24294f3f4a",
+            "message": "feat(workspace): add historical data for workspace activity on 2026-10-25 and 2026-10-26"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-26T18:09:43Z"
+    },
+    {
+      "id": "18285800217",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:47:09Z"
+    },
+    {
+      "id": "18266619960",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: stop swallowing errors; release 3.5.1",
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:47:58Z"
+    },
+    {
+      "id": "18266436619",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files",
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:52:19Z"
+    },
+    {
+      "id": "18266389376",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files",
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:50:06Z"
+    },
+    {
+      "id": "18266181149",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files",
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:50:06Z"
+    },
+    {
+      "id": "18265793610",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:47:10Z"
+    },
+    {
+      "id": "18265277594",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: stop swallowing errors; release 3.5.1",
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:42:51Z"
+    },
+    {
+      "id": "18265218492",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: stop swallowing errors; release 3.5.1",
+          "head": {
+            "ref": "fix/stop-swallowing-errors"
+          }
+        }
+      },
+      "created_at": "2026-10-26T18:42:51Z"
+    },
     {
       "id": "25176478267",
       "type": "PushEvent",
@@ -2330,176 +2567,6 @@
         "ref": "refs/heads/main"
       },
       "created_at": "2026-10-24T19:01:48Z"
-    },
-    {
-      "id": "25071600648",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/contributor-quickstart",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T23:20:41Z"
-    },
-    {
-      "id": "18129493077",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: contributor quick start, make help, and git hooks from make setup",
-          "head": {
-            "ref": "docs/contributor-quickstart"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:20:38Z"
-    },
-    {
-      "id": "25071393727",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "claude/jolly-dirac-sgoq6z",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-23T20:30:33Z"
-    },
-    {
-      "id": "25070873940",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "491bdce3746d2b042cdf64007f11da36de7e47f5",
-            "message": "Merge remote-tracking branch 'origin/main' into chore/renovate-pre-commit\n\n# Conflicts:\n#\tpyproject.toml"
-          }
-        ],
-        "ref": "refs/heads/chore/renovate-pre-commit"
-      },
-      "created_at": "2026-10-24T18:46:36Z"
-    },
-    {
-      "id": "18128884573",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/contributor-quickstart"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:03:40Z"
-    },
-    {
-      "id": "18128884513",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/contributor-quickstart"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:03:40Z"
-    },
-    {
-      "id": "18128673533",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:50Z"
-    },
-    {
-      "id": "18128654655",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:20Z"
-    },
-    {
-      "id": "18128654494",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:20Z"
-    },
-    {
-      "id": "18128654316",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:19Z"
-    },
-    {
-      "id": "18128654149",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:19Z"
-    },
-    {
-      "id": "18128653978",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:19Z"
-    },
-    {
-      "id": "18128653474",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:18Z"
-    },
-    {
-      "id": "18128653366",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:18Z"
-    },
-    {
-      "id": "18128653254",
-      "type": "IssuesEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {},
-      "created_at": "2026-10-24T22:57:18Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2513,7 +2580,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4032,
+    "total": 4037,
     "weeks": [
       {
         "days": [
@@ -4552,6 +4619,11 @@
           },
           {
             "date": "2026-10-26",
+            "count": 5,
+            "level": 1
+          },
+          {
+            "date": "2026-10-27",
             "count": 0,
             "level": 0
           }
@@ -4585,6 +4657,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-26T03:14:39Z",
+  "lastUpdated": "2026-10-27T03:12:12Z",
   "totalRepos": 54
 }
