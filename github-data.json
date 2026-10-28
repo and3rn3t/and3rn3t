@@ -9,23 +9,55 @@
   },
   "repositories": [
     {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
+      "language": "TypeScript",
       "topics": [
-        "config",
-        "github-config"
+        "agent-skills",
+        "apple-shortcuts",
+        "cli",
+        "ios",
+        "macos",
+        "nodejs",
+        "privacy",
+        "security",
+        "shortcuts",
+        "static-analysis",
+        "typescript"
       ],
       "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-27T03:09:19Z",
-      "updated_at": "2026-10-26T05:24:01Z",
-      "created_at": "2021-07-29T15:36:40Z",
+      "forks_count": 0,
+      "open_issues_count": 26,
+      "pushed_at": "2026-10-28T01:56:48Z",
+      "updated_at": "2026-10-28T01:48:10Z",
+      "created_at": "2026-10-18T15:34:10Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1289483809,
+      "name": "workspace-tools",
+      "full_name": "and3rn3t/workspace-tools",
+      "description": "Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.",
+      "html_url": "https://github.com/and3rn3t/workspace-tools",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "github-actions",
+        "meta",
+        "tooling",
+        "workspace"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 0,
+      "pushed_at": "2026-10-27T17:03:44Z",
+      "updated_at": "2026-10-27T17:03:50Z",
+      "created_at": "2026-07-04T20:11:00Z",
       "fork": false,
       "archived": false
     },
@@ -59,10 +91,127 @@
       ],
       "stargazers_count": 1,
       "forks_count": 5,
-      "open_issues_count": 24,
-      "pushed_at": "2026-10-27T02:27:20Z",
-      "updated_at": "2026-10-26T18:52:24Z",
+      "open_issues_count": 23,
+      "pushed_at": "2026-10-27T16:58:48Z",
+      "updated_at": "2026-10-27T16:58:51Z",
       "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "HTML",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "networking",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-27T16:58:42Z",
+      "updated_at": "2026-10-27T16:55:13Z",
+      "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-27T15:41:16Z",
+      "updated_at": "2026-10-27T03:13:01Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "game",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 11,
+      "pushed_at": "2026-10-27T14:09:06Z",
+      "updated_at": "2026-10-24T01:46:42Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1177251835,
+      "name": "docker-playground",
+      "full_name": "and3rn3t/docker-playground",
+      "description": "Learning more about docker with the Docker API and a sandbox env",
+      "html_url": "https://github.com/and3rn3t/docker-playground",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "docker",
+        "react",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-27T06:18:42Z",
+      "updated_at": "2026-10-21T01:23:30Z",
+      "created_at": "2026-03-09T21:07:36Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-27T03:29:33Z",
+      "updated_at": "2026-10-26T04:34:43Z",
+      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -124,26 +273,6 @@
       "archived": false
     },
     {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-27T00:11:09Z",
-      "updated_at": "2026-10-26T04:34:43Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1047182978,
       "name": "homehub",
       "full_name": "and3rn3t/homehub",
@@ -170,24 +299,6 @@
       "archived": false
     },
     {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": null,
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-10-26T20:32:54Z",
-      "updated_at": "2026-10-26T04:41:34Z",
-      "created_at": "2026-10-18T15:34:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1078539335,
       "name": "network",
       "full_name": "and3rn3t/network",
@@ -207,55 +318,6 @@
       "pushed_at": "2026-10-26T18:30:16Z",
       "updated_at": "2026-10-21T01:24:10Z",
       "created_at": "2025-10-17T22:48:41Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1289483809,
-      "name": "workspace-tools",
-      "full_name": "and3rn3t/workspace-tools",
-      "description": "Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.",
-      "html_url": "https://github.com/and3rn3t/workspace-tools",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "github-actions",
-        "meta",
-        "tooling",
-        "workspace"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 0,
-      "pushed_at": "2026-10-26T18:09:42Z",
-      "updated_at": "2026-10-26T18:09:48Z",
-      "created_at": "2026-07-04T20:11:00Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "game",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 11,
-      "pushed_at": "2026-10-26T18:03:44Z",
-      "updated_at": "2026-10-24T01:46:42Z",
-      "created_at": "2026-04-16T22:47:09Z",
       "fork": false,
       "archived": false
     },
@@ -495,33 +557,6 @@
       "archived": false
     },
     {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "HTML",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-24T02:47:28Z",
-      "updated_at": "2026-10-23T21:55:14Z",
-      "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1376614095,
       "name": "birds",
       "full_name": "and3rn3t/birds",
@@ -584,29 +619,6 @@
       "pushed_at": "2026-10-23T14:05:30Z",
       "updated_at": "2026-10-23T14:05:32Z",
       "created_at": "2026-03-03T14:40:25Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1177251835,
-      "name": "docker-playground",
-      "full_name": "and3rn3t/docker-playground",
-      "description": "Learning more about docker with the Docker API and a sandbox env",
-      "html_url": "https://github.com/and3rn3t/docker-playground",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "docker",
-        "react",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-10-22T22:43:35Z",
-      "updated_at": "2026-10-21T01:23:30Z",
-      "created_at": "2026-03-09T21:07:36Z",
       "fork": false,
       "archived": false
     },
@@ -1230,1343 +1242,1346 @@
   ],
   "events": [
     {
-      "id": "25281600125",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "853a5335413c80e21b12a0c79e6cd5c41fb6b510",
-            "message": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files (#133)\n\n* fix: stop swallowing errors in listings, playlist history and build_playlist\n\n- Library and recent-track listings no longer hide request errors: a failure on the\n  first page exits non-zero, a later one warns that the results are partial.\n- An unreadable playlist history is kept as .corrupt instead of being overwritten.\n- build_playlist.sh warns when the duplicate-name check or history logging fails.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(history): set a corrupt history file aside without an empty except\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: don't let a UTC-midnight crossing change which snapshot the drift job compares\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: keep HTTP diagnostics and never lose a history file we could not set aside\n\n- Listing failures print the failed response, not just a generic error.\n- Corrupt history backups use a free name (.corrupt, .corrupt.1, ...) and are\n  created without replacing anything.\n- If the corrupt file cannot be kept, raise instead of letting a save overwrite it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore(release): 3.5.1\n\nBump SKILL.md, pyproject.toml and clawhub.json to 3.5.1 and add a 3.5.1 changelog\nsection for the error-handling fixes.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs(changelog): limit the corrupt-history note to malformed files\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-26T18:52:21Z"
-    },
-    {
-      "id": "25280005155",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "6c096a158e58d83b767f9335edfa14690373a711",
-            "message": "fix: stop swallowing errors; release 3.5.1 (#132)\n\n* fix: stop swallowing errors in listings, playlist history and build_playlist\n\n- Library and recent-track listings no longer hide request errors: a failure on the\n  first page exits non-zero, a later one warns that the results are partial.\n- An unreadable playlist history is kept as .corrupt instead of being overwritten.\n- build_playlist.sh warns when the duplicate-name check or history logging fails.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(history): set a corrupt history file aside without an empty except\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: don't let a UTC-midnight crossing change which snapshot the drift job compares\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: keep HTTP diagnostics and never lose a history file we could not set aside\n\n- Listing failures print the failed response, not just a generic error.\n- Corrupt history backups use a free name (.corrupt, .corrupt.1, ...) and are\n  created without replacing anything.\n- If the corrupt file cannot be kept, raise instead of letting a save overwrite it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore(release): 3.5.1\n\nBump SKILL.md, pyproject.toml and clawhub.json to 3.5.1 and add a 3.5.1 changelog\nsection for the error-handling fixes.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-26T18:48:00Z"
-    },
-    {
-      "id": "25279415708",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3b4748297cdf88840b0d2dbf54196271dab33b22",
-            "message": "Merge remote-tracking branch 'origin/main' into fix/stop-swallowing-errors\n\n# Conflicts:\n#\tCHANGELOG.md"
-          }
-        ],
-        "ref": "refs/heads/fix/stop-swallowing-errors"
-      },
-      "created_at": "2026-10-26T18:50:42Z"
-    },
-    {
-      "id": "25278154029",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "dc36767015dfacc988a285b34e68ef1fd3e604b8",
-            "message": "Merge branch 'main' into fix/stop-swallowing-errors"
-          }
-        ],
-        "ref": "refs/heads/fix/stop-swallowing-errors"
-      },
-      "created_at": "2026-10-26T18:43:26Z"
-    },
-    {
-      "id": "25278094376",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/stop-swallowing-errors",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-26T18:42:50Z"
-    },
-    {
-      "id": "25276898317",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/stop-swallowing-errors",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-26T18:52:22Z"
-    },
-    {
-      "id": "25272954301",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/workspace-tools"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "048c117930e9832ea32d541d7daf6d24294f3f4a",
-            "message": "feat(workspace): add historical data for workspace activity on 2026-10-25 and 2026-10-26"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-26T18:09:43Z"
-    },
-    {
-      "id": "18285800217",
+      "id": "18411089335",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "fix/stop-swallowing-errors"
+            "ref": "feat/secrets"
           }
         }
       },
-      "created_at": "2026-10-26T18:47:09Z"
+      "created_at": "2026-10-28T01:53:04Z"
     },
     {
-      "id": "18266619960",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop swallowing errors; release 3.5.1",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:47:58Z"
-    },
-    {
-      "id": "18266436619",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:52:19Z"
-    },
-    {
-      "id": "18266389376",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:50:06Z"
-    },
-    {
-      "id": "18266181149",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(changelog): limit the 3.5.1 corrupt-history note to malformed files",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:50:06Z"
-    },
-    {
-      "id": "18265793610",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:47:10Z"
-    },
-    {
-      "id": "18265277594",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop swallowing errors; release 3.5.1",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:42:51Z"
-    },
-    {
-      "id": "18265218492",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop swallowing errors; release 3.5.1",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-26T18:42:51Z"
-    },
-    {
-      "id": "25176478267",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5700bf89600a14e54c0c1646ea5954077c57bdf2",
-            "message": "ci: test on Linux arm64 and say how Windows is supported (#123)\n\nAdd an ubuntu-24.04-arm job (Python 3.14) to the test matrix, since the scripts\nalso run on Raspberry Pi-class boxes, and keep the README coverage-badge check\non the x86-64 job. The README now states the Windows position: use WSL2, as the\nscripts need bash, curl and jq.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T22:43:54Z"
-    },
-    {
-      "id": "25174486638",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/stop-swallowing-errors",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-25T00:05:58Z"
-    },
-    {
-      "id": "25173692108",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/contributor-quickstart",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T23:51:34Z"
-    },
-    {
-      "id": "25173568961",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "db8fff85f34c10555044ffc00a593bbbc2257f7e",
-            "message": "fix: harden stream writes and soften the cap notice\n\nOpen stream targets without O_TRUNC, with O_NOFOLLOW, and check the opened\ndescriptor is not a regular file or directory. Say the library 'may have more'\nsince exactly 500 items is indistinguishable from hitting the cap.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/docs/contributor-quickstart"
-      },
-      "created_at": "2026-10-24T23:49:20Z"
-    },
-    {
-      "id": "25173362536",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2121829f47df6bd8117deaaa520686b394a561ce",
-            "message": "Merge branch 'main' into docs/contributor-quickstart"
-          }
-        ],
-        "ref": "refs/heads/docs/contributor-quickstart"
-      },
-      "created_at": "2026-10-24T23:45:32Z"
-    },
-    {
-      "id": "25170729977",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/contributor-quickstart",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:56:11Z"
-    },
-    {
-      "id": "25170114268",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "ci/arm64-and-windows-note",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:43:56Z"
-    },
-    {
-      "id": "25168837223",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-milestone-names",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:20:40Z"
-    },
-    {
-      "id": "25162772647",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "release/3.5.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T19:05:38Z"
-    },
-    {
-      "id": "25162516662",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "chore/renovate-pre-commit",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T19:01:50Z"
-    },
-    {
-      "id": "25156852534",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "38c4c95af9049418b122720ff64f8437893bb8eb",
-            "message": "chore(release): 3.5.0 (#119)\n\nBump SKILL.md, pyproject.toml and clawhub.json to 3.5.0 and move the Unreleased\nchangelog into a 3.5.0 section.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T19:07:53Z"
-    },
-    {
-      "id": "25149743153",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-milestones",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T17:23:03Z"
-    },
-    {
-      "id": "25148960735",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "bff767f309d59fcdba9d4118d1d4a4bb65e5c7eb",
-            "message": "feat: let likes and dislikes steer playlists (#95)\n\n* feat: let likes and dislikes steer playlists\n\nRatings now act on the artist and genres around a song, not only that\nsong. Two dislikes for an artist (and no likes) leave them out of every\nstrategy and the daily pick; an artist you play a lot is only scored\ndown. Liked artists and genres get a small capped boost. Counts live in\nthe profile's rating_signals: feedback.py updates them on each rating,\ntaste_profiler.py rebuilds them from Apple Music ratings (at most 25\nlookups). Boosted tracks say why in their reason, and the playlist JSON\nlists affected artists under steered_by_ratings.\n\nCloses #64\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix: per-song rating store and both listeners' ratings in blend (#95 review)\n\nrating_signals now keeps each rated song's artist and genres and always\nrecomputes the artist/genre counts from them, so clearing a song that\nnever counted (failed lookup, past the profiler's cap) can't subtract\nanother song's dislike, and a re-rated song keeps its details without a\nnew lookup.\n\nA blend now applies both listeners' ratings: an artist one listener\ndisliked twice is left out unless that listener plays them a lot or the\nother listener likes them; score changes from both add up and the\nreason names whose rating it was.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T15:49:03Z"
-    },
-    {
-      "id": "25148824401",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b6d9755af95f358b027c122d099f7a02dc199e7c",
-            "message": "feat: richer genre matching and one place for scoring weights (#94)\n\n* feat: richer genre matching and one place for scoring weights\n\n- GENRE_ENERGY / GENRE_ADJACENCY cover ~90 Apple genres; unlisted names\n  fall back to the listed genre they end with (base_genre), so energy no\n  longer flattens to 0.5. New latin and caribbean/african families.\n- genre_proximity adds a 0.75 sub-genre tier (root_genre); constellation\n  treats sub-genres of your genres as familiar\n- taste_affinity weights a genre match by its share of your listening;\n  used by mood, trend, similar, era, blend and the daily pick\n- Scoring weights are named constants at the top of strategy_engine.py\n  and daily_pick.py; every strategy takes an optional rng\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix: mood mixes drop off-energy tracks and accept your own genres\n\nA sleep mix padded with Dance tracks is worse than a shorter one, so\ntracks below MIN_ENERGY_FIT are dropped again instead of ranked last.\nA track now qualifies through a mood genre or one of the listener's\ngenres, so a jazz fan's sleep mix can be quiet jazz (the strategy\nguide's personalization key). The demo integration test uses focus:\nthe demo catalog has nothing quiet enough for sleep.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test: curation-quality suite for every strategy\n\nRuns each strategy against a synthetic 18-artist catalog with a fixed\nseed and checks length, artist/album spread, exclusions, repeatability\nand each strategy's own promise (sleep quiet and descending, workout\nloud and ascending, constellation fans out, blend stays balanced).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix: reduce genre roots until they stop changing (#94 review)\n\nModern Hard Rock -> Hard Rock -> Rock and Contemporary R&B -> R&B/Soul ->\nSoul now share a root with their parents (0.75, familiar in constellation)\ninstead of only a family match. Also drop a duplicate strategy_engine\nimport flagged by CodeQL.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T15:47:00Z"
-    },
-    {
-      "id": "25148730502",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-refresh",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T17:21:29Z"
-    },
-    {
-      "id": "25147210882",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "renovate/ruff-0.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T17:00:01Z"
-    },
-    {
-      "id": "25146945422",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "chore/renovate-pre-commit",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T16:56:28Z"
-    },
-    {
-      "id": "25143642770",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/taste-profile-source-weights",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T15:59:00Z"
-    },
-    {
-      "id": "25143573111",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/workspace-tools"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "81711f3110716b8f0e0f7ae155b01cd4322dae14",
-            "message": "feat(workspace): add new entries for workspace history and repository metrics"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T15:57:57Z"
-    },
-    {
-      "id": "25143417840",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "242babdae636752eed4683a2df05f852a7e7a7ad",
-            "message": "Merge remote-tracking branch 'origin/fix/taste-profile-source-weights' into fix/taste-profile-source-weights\n\n# Conflicts:\n#\tscripts/taste_profiler.py"
-          }
-        ],
-        "ref": "refs/heads/fix/taste-profile-source-weights"
-      },
-      "created_at": "2026-10-24T15:55:56Z"
-    },
-    {
-      "id": "25142869411",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "feat/rating-signals",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T15:49:03Z"
-    },
-    {
-      "id": "25107710921",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7411d63597db316fc20f8352e1ab182d2ea4f64e",
-            "message": "fix: stop swallowing errors in listings, playlist history and build_playlist (#131)\n\n* fix: stop swallowing errors in listings, playlist history and build_playlist\n\n- Library and recent-track listings no longer hide request errors: a failure on the\n  first page exits non-zero, a later one warns that the results are partial.\n- An unreadable playlist history is kept as .corrupt instead of being overwritten.\n- build_playlist.sh warns when the duplicate-name check or history logging fails.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(history): set a corrupt history file aside without an empty except\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: don't let a UTC-midnight crossing change which snapshot the drift job compares\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: keep HTTP diagnostics and never lose a history file we could not set aside\n\n- Listing failures print the failed response, not just a generic error.\n- Corrupt history backups use a free name (.corrupt, .corrupt.1, ...) and are\n  created without replacing anything.\n- If the corrupt file cannot be kept, raise instead of letting a save overwrite it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-25T00:05:57Z"
-    },
-    {
-      "id": "25104011128",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "chore/make-setup",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:57:06Z"
-    },
-    {
-      "id": "25102109410",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-milestone-names",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:22:10Z"
-    },
-    {
-      "id": "25102108285",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3762a9028828e4828ca6e05299b43a2d64211ad7",
-            "message": "docs(roadmap): match the renamed milestones (#121)\n\n\"3.5 — Launch\" is now \"Launch\" (3.5.0 shipped) and \"3.7 — Remix\" is now\n\"3.7 — New strategies\" (remix shipped in 3.5.0). The links point at the same\nmilestones; only the link text changes.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T22:22:09Z"
-    },
-    {
-      "id": "25099327984",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/readme-refresh",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:20:31Z"
-    },
-    {
-      "id": "25089362963",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/contributor-quickstart",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T23:57:01Z"
-    },
-    {
-      "id": "25089333785",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/contributor-quickstart",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T23:56:21Z"
-    },
-    {
-      "id": "25088612111",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/contributor-quickstart",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T23:42:16Z"
-    },
-    {
-      "id": "25087496603",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d852c53b00e363a4a3217a238c0a4cf6fd76ba50",
-            "message": "test: don't let a UTC-midnight crossing change which snapshot the drift job compares\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/stop-swallowing-errors"
-      },
-      "created_at": "2026-10-25T00:01:35Z"
-    },
-    {
-      "id": "25087197140",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d9bcdf7988a7baac2fd43b51af8241fdbb6bfb52",
-            "message": "fix: address review feedback on timeouts, clean swaps, trimming and remix\n\n- call_api's runner signals the child's whole process group and bounds the final\n  output read, so a descendant holding the pipes can't outlast the timeout.\n- Each curl attempt is capped to what is left of the retry deadline.\n- A clean-version swap can't reintroduce a disliked, library, recent, seed or\n  already-listed song; an explicit song and its clean twin become one entry.\n- --minutes keeps a blend balanced, can drop a single end track to land the\n  target, and remix reports kept/swapped counts for the trimmed playlist.\n- remix reads every page of a long playlist (new catalog-playlist-tracks) and\n  treats originals your filters rule out as swaps.\n- Update the README coverage badge to 95%.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/renovate-pre-commit"
-      },
-      "created_at": "2026-10-24T18:58:16Z"
-    },
-    {
-      "id": "25086395232",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2ce3090130ba18e17fd5f08ead709f555d285a2a",
-            "message": "fix(make): install git hooks in linked worktrees and submodules too\n\nIn those checkouts .git is a file, not a directory, so the -d test skipped the\nhook install while make setup still reported success. Test for any .git entry.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/docs/contributor-quickstart"
-      },
-      "created_at": "2026-10-24T23:03:40Z"
-    },
-    {
-      "id": "25085776614",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a69e8e82cdafd0e4da9eb9d7198b08211ce18838",
-            "message": "fix(make): rebuild a copied .venv even while the original exists\n\npip --version still succeeds in a copied venv because its #! line runs the\noriginal environment's Python, so the old probe kept it. Check instead that\npip's #! line points into this .venv, and rebuild when it does not.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/make-setup"
-      },
-      "created_at": "2026-10-24T22:54:08Z"
-    },
-    {
-      "id": "25085500947",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "chore/make-setup",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:49:47Z"
-    },
-    {
-      "id": "25085022782",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "ci/arm64-and-windows-note",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:41:47Z"
-    },
-    {
-      "id": "25083512731",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-shipped",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:34:12Z"
-    },
-    {
-      "id": "25083402908",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "0bee533a6333cc6f416350ab257acb3b76c7b191",
-            "message": "fix: reduce genre roots until they stop changing (#94 review)\n\nModern Hard Rock -> Hard Rock -> Rock and Contemporary R&B -> R&B/Soul ->\nSoul now share a root with their parents (0.75, familiar in constellation)\ninstead of only a family match. Also drop a duplicate strategy_engine\nimport flagged by CodeQL.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/scoring-phase-3"
-      },
-      "created_at": "2026-10-23T22:41:08Z"
-    },
-    {
-      "id": "25083307732",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-shipped",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T22:31:09Z"
-    },
-    {
-      "id": "25081794772",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "claude/jolly-dirac-sgoq6z",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-23T21:20:07Z"
-    },
-    {
-      "id": "25081535607",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "749b48f2eb84e820eab87fed494714d4ae3214d5",
-            "message": "docs: link roadmap items to their issues (#89)\n\nEvery open roadmap item now links to an issue (#80-#88 created from the\nroadmap; #46, #48, #60, #64, #66 already existed). Tick Leaner SKILL.md:\n#63 is closed and the trim shipped.\n\n\nClaude-Session: https://claude.ai/code/session_01VYKjsvuWdoW9gK81yjcvSS\n\nCo-authored-by: Claude <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-23T21:17:07Z"
-    },
-    {
-      "id": "25081255499",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "42ddc8564d6bfdaa047e9b8c5910f037b136bcc5",
-            "message": "fix(deps): bump ruff-pre-commit to v0.17.2 to match the dev pin\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/renovate/ruff-0.x"
-      },
-      "created_at": "2026-10-24T16:51:47Z"
-    },
-    {
-      "id": "25081206206",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "claude/jolly-dirac-sgoq6z",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-23T21:13:25Z"
-    },
-    {
-      "id": "25080296584",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-refresh",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T17:14:27Z"
-    },
-    {
-      "id": "25080136217",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5d63c8f41ba7550a98f64291555555019e7603cb",
-            "message": "fix: keep HTTP diagnostics and never lose a history file we could not set aside\n\n- Listing failures print the failed response, not just a generic error.\n- Corrupt history backups use a free name (.corrupt, .corrupt.1, ...) and are\n  created without replacing anything.\n- If the corrupt file cannot be kept, raise instead of letting a save overwrite it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/stop-swallowing-errors"
-      },
-      "created_at": "2026-10-25T00:03:08Z"
-    },
-    {
-      "id": "25079952898",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "docs/roadmap-refresh",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T17:08:48Z"
-    },
-    {
-      "id": "25079854287",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5672599a8bd2d1573e98e1dc4f6238309b73a175",
-            "message": "Merge remote-tracking branch 'origin/main' into docs/contributor-quickstart\n\n# Conflicts:\n#\tAGENTS.md\n#\tCONTRIBUTING.md\n#\tMakefile"
-          }
-        ],
-        "ref": "refs/heads/docs/contributor-quickstart"
-      },
-      "created_at": "2026-10-24T22:58:26Z"
-    },
-    {
-      "id": "25079414721",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9b47df998c3f0a59cb3aca88f2bd4f1619f017a5",
-            "message": "Merge branch 'main' into renovate/ruff"
-          }
-        ],
-        "ref": "refs/heads/renovate/ruff"
-      },
-      "created_at": "2026-10-24T17:00:37Z"
-    },
-    {
-      "id": "25078642554",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "781c08d69cebdd3844eff8ae6399f9cd81d099b1",
-            "message": "docs(roadmap): drop what shipped in 3.5.0 (#122)\n\nThe roadmap says shipped work lives in the changelog, but eleven finished items\n(#46, #60, #62, #101, #105, #109, #111-#115) were still listed as open. Remove\nthem, name them under \"Recently shipped\", and drop the now-empty Tech debt\nsection.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T22:34:11Z"
-    },
-    {
-      "id": "25078115464",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/scoring-phase-1",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-23T21:48:43Z"
-    },
-    {
-      "id": "25078039393",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "30b867c440804cc35e4e593106cba890729d1c0a",
-            "message": "Merge branch 'main' into docs/roadmap-milestone-names"
-          }
-        ],
-        "ref": "refs/heads/docs/roadmap-milestone-names"
-      },
-      "created_at": "2026-10-24T22:21:36Z"
-    },
-    {
-      "id": "25077944695",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "4fd4620d0684305da07637837eab31524313950e",
-            "message": "docs: contributor quick start, make help, and git hooks from make setup (#125)\n\n* chore: add make setup for a ready-to-use dev environment\n\nmake setup creates .venv (rebuilding one whose scripts point at a moved path),\ninstalls the dev extras and checks that bash, curl and jq are installed, noting\nif actionlint is missing. CONTRIBUTING and AGENTS now start there; ShellCheck\ncomes from the dev extra, not Homebrew.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(make): rebuild a copied .venv even while the original exists\n\npip --version still succeeds in a copied venv because its #! line runs the\noriginal environment's Python, so the old probe kept it. Check instead that\npip's #! line points into this .venv, and rebuild when it does not.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: contributor quick start, make help, and git hooks from make setup\n\nPut a five-command quick start at the top of CONTRIBUTING, add `make help` to\nlist the targets from their ## comments, and have `make setup` install the\npre-commit hooks (ruff, ShellCheck, Conventional Commits) with a pinned\npre-commit in the dev extra, so a bad commit message is caught locally.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(make): install git hooks in linked worktrees and submodules too\n\nIn those checkouts .git is a file, not a directory, so the -d test skipped the\nhook install while make setup still reported success. Test for any .git entry.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T23:20:40Z"
-    },
-    {
-      "id": "25076712722",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/scoring-phase-3",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T15:47:00Z"
-    },
-    {
-      "id": "25075405035",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "claude/jolly-dirac-sgoq6z",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-23T20:08:06Z"
-    },
-    {
-      "id": "18131023812",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop swallowing errors in listings, playlist history and build_playlist",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-25T00:05:56Z"
-    },
-    {
-      "id": "18130923538",
+      "id": "18411088701",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "fix/stop-swallowing-errors"
+            "ref": "feat/secrets"
           }
         }
       },
-      "created_at": "2026-10-25T00:03:11Z"
+      "created_at": "2026-10-28T01:53:01Z"
     },
     {
-      "id": "18130923525",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-25T00:03:11Z"
-    },
-    {
-      "id": "18130922845",
+      "id": "18410460403",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "fix/stop-swallowing-errors"
+            "ref": "feat/secrets"
           }
         }
       },
-      "created_at": "2026-10-25T00:03:09Z"
+      "created_at": "2026-10-28T01:53:03Z"
     },
     {
-      "id": "18130922839",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-25T00:03:10Z"
-    },
-    {
-      "id": "18130922001",
+      "id": "18409765499",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "fix/stop-swallowing-errors"
+            "ref": "feat/variables"
           }
         }
       },
-      "created_at": "2026-10-25T00:03:08Z"
+      "created_at": "2026-10-28T01:19:50Z"
     },
     {
-      "id": "18130921991",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-25T00:03:08Z"
-    },
-    {
-      "id": "18130774000",
+      "id": "18409722018",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "fix/stop-swallowing-errors"
+            "ref": "feat/control-flow"
           }
         }
       },
-      "created_at": "2026-10-24T23:58:46Z"
+      "created_at": "2026-10-28T01:17:50Z"
     },
     {
-      "id": "18130773990",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:58:47Z"
-    },
-    {
-      "id": "25074361386",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "88ae2326123034615668eaf1c591e0c9d09d0f5a",
-            "message": "fix(history): set a corrupt history file aside without an empty except\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/stop-swallowing-errors"
-      },
-      "created_at": "2026-10-24T23:58:46Z"
-    },
-    {
-      "id": "18130729779",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop swallowing errors in listings, playlist history and build_playlist",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:56:58Z"
-    },
-    {
-      "id": "18130716545",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: stop swallowing errors in listings, playlist history and build_playlist",
-          "head": {
-            "ref": "fix/stop-swallowing-errors"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:56:58Z"
-    },
-    {
-      "id": "25074227498",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/stop-swallowing-errors",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-24T23:56:53Z"
-    },
-    {
-      "id": "18130538260",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: contributor quick start, make setup, atomic state writes",
-          "head": {
-            "ref": "docs/contributor-quickstart"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:51:31Z"
-    },
-    {
-      "id": "25073854539",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c603923f85279a50e98266ad74892fe3cf9be14a",
-            "message": "docs: contributor quick start, make setup, atomic state writes (#130)\n\n* chore: add make setup for a ready-to-use dev environment\n\nmake setup creates .venv (rebuilding one whose scripts point at a moved path),\ninstalls the dev extras and checks that bash, curl and jq are installed, noting\nif actionlint is missing. CONTRIBUTING and AGENTS now start there; ShellCheck\ncomes from the dev extra, not Homebrew.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(make): rebuild a copied .venv even while the original exists\n\npip --version still succeeds in a copied venv because its #! line runs the\noriginal environment's Python, so the old probe kept it. Check instead that\npip's #! line points into this .venv, and rebuild when it does not.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: contributor quick start, make help, and git hooks from make setup\n\nPut a five-command quick start at the top of CONTRIBUTING, add `make help` to\nlist the targets from their ## comments, and have `make setup` install the\npre-commit hooks (ruff, ShellCheck, Conventional Commits) with a pinned\npre-commit in the dev extra, so a bad commit message is caught locally.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(make): install git hooks in linked worktrees and submodules too\n\nIn those checkouts .git is a file, not a directory, so the -d test skipped the\nhook install while make setup still reported success. Test for any .git entry.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: write private state files atomically\n\nwrite_private truncated files in place, so a crash or an overlapping cron run\ncould leave config, feedback or snapshots half-written. Write an owner-only\ntemp file, fsync, then os.replace it over the target.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(api): say when library listing stops at the 500-item cap\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: harden stream writes and soften the cap notice\n\nOpen stream targets without O_TRUNC, with O_NOFOLLOW, and check the opened\ndescriptor is not a regular file or directory. Say the library 'may have more'\nsince exactly 500 items is indistinguishable from hitting the cap.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-24T23:51:33Z"
-    },
-    {
-      "id": "18130459191",
+      "id": "18409720906",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "docs/contributor-quickstart"
+            "ref": "feat/control-flow"
           }
         }
       },
-      "created_at": "2026-10-24T23:49:11Z"
+      "created_at": "2026-10-28T01:17:46Z"
     },
     {
-      "id": "18130459176",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "docs/contributor-quickstart"
-          }
-        }
-      },
-      "created_at": "2026-10-24T23:49:12Z"
-    },
-    {
-      "id": "18130458551",
+      "id": "18408347606",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "docs/contributor-quickstart"
+            "ref": "feat/web-deploy"
           }
         }
       },
-      "created_at": "2026-10-24T23:49:09Z"
+      "created_at": "2026-10-27T23:35:59Z"
     },
     {
-      "id": "18130458527",
+      "id": "18408346519",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:35:56Z"
+    },
+    {
+      "id": "18407589714",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:35:57Z"
+    },
+    {
+      "id": "18407156152",
       "type": "PullRequestReviewEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "docs/contributor-quickstart"
+            "ref": "feat/secrets"
           }
         }
       },
-      "created_at": "2026-10-24T23:49:10Z"
+      "created_at": "2026-10-28T01:53:04Z"
     },
     {
-      "id": "18130306614",
-      "type": "PullRequestEvent",
+      "id": "18407154697",
+      "type": "PullRequestReviewEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
-          "title": "docs: contributor quick start, make setup, atomic state writes",
+          "title": null,
           "head": {
-            "ref": "docs/contributor-quickstart"
+            "ref": "feat/secrets"
           }
         }
       },
-      "created_at": "2026-10-24T23:43:00Z"
+      "created_at": "2026-10-28T01:53:03Z"
     },
     {
-      "id": "18130252110",
-      "type": "PullRequestEvent",
+      "id": "18407153424",
+      "type": "PullRequestReviewEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
         "pull_request": {
-          "title": "docs: contributor quick start, make setup, atomic state writes",
+          "title": null,
           "head": {
-            "ref": "docs/contributor-quickstart"
+            "ref": "feat/secrets"
           }
         }
       },
-      "created_at": "2026-10-24T23:43:00Z"
+      "created_at": "2026-10-28T01:53:02Z"
     },
     {
-      "id": "25071856728",
-      "type": "PushEvent",
+      "id": "18406883938",
+      "type": "PullRequestEvent",
       "repo": {
-        "name": "and3rn3t/apple-music-dj"
+        "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
-        "commits": [
-          {
-            "sha": "e329dde7b546129db285ed02e2d00ab3d68f691a",
-            "message": "Work through the issue backlog: security fix, --minutes, remix, clean mode, strategy split (#118)\n\n* chore(renovate): bump pre-commit revs and group ruff and ShellCheck pins\n\nRenovate's pre-commit manager is opt-in, so ruff bumps touched only\npyproject.toml and failed the pin guard in tests/test_ci_workflow.py\n(PR #98). Enable it and group each tool's two pins into one PR.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(api): time out stalled requests and clean token files on SIGTERM\n\ncurl had no timeout, and call_api killed the script with SIGKILL, which bash\ncan't trap, leaving both tokens in $TMPDIR. Add curl connect/max timeouts and a\nretry deadline, and end a stuck script with SIGTERM before SIGKILL.\n\nCloses #60\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* ci: raise the coverage floor from 80% to 90%\n\nCoverage is at 95%, so an 80% floor let a large drop through unnoticed.\n\nCloses #114\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: exercise every API command and the other shell scripts\n\nRun each apple_music_api.sh command against the mock, with a check that the\ntable matches the dispatcher so a new command can't ship untested. Cover\nbuild_playlist.sh, new_releases.sh and the verify_setup.sh failure paths.\n\nAlso fix build_playlist.sh on an empty song-ID file: `grep -c || echo 0`\nproduced \"0\\n0\", so it died on an arithmetic error instead of reporting\n\"No song IDs\". The mock gains a catalog genres route.\n\nCloses #113\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* ci: type-check scripts/ with a pinned mypy\n\nAdd mypy==2.4.0 to the [dev] extra, run it non-strict on scripts/ from\n`make typecheck` (part of `make ci`), the lint job and the release gate, and\nfix what it found. The bulk came from call_api's wide return type, which now\nhas overloads (raw=True gives str | None, otherwise Any).\n\nCloses #115\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* refactor: run sibling scripts through one run_script helper\n\nstrategy_engine.py and playlist_health.py each shelled out to build_playlist.sh\nand apple_music_api.sh their own way. Add _common.run_script (bare script name,\nSIGTERM-first timeout, captured text) and use it everywhere, including call_api.\n\nplaylist_health now reports a failed build_playlist.sh call with its stderr\ninstead of claiming the duplicate removal or replacement succeeded.\n\nCloses #112\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* refactor: split strategy_engine.py into one module per strategy\n\nMove the eight strategies into scripts/strategies/, with the scoring constants,\nsequencing and candidate helpers they share in their own modules.\nstrategy_engine.py keeps the CLI, naming and playlist-write calls and\nre-exports the moved names, so every documented command and import still works.\n\ndaily_pick.py now shares TASTE_WEIGHT instead of redeclaring it (JITTER differs\non purpose and stays separate). Tests patch dependencies through\ntests/strategy_helpers.patch_everywhere since each module imports them by name,\nand the trust-claims scan now covers scripts/strategies/.\n\nCloses #111\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* feat: --minutes for exact-length playlists on every strategy\n\n--minutes N replaces --size: the strategy is asked for a pool about 30% larger\nthan N minutes needs, then tracks are dropped until the total durationInMillis\nis within about a minute of N. Dropping from an ordered list keeps its order,\nso energy arcs and constellation's gradient survive. The JSON reports\ntarget_minutes and the real duration_minutes.\n\nEvery candidate now carries duration_ms, and the demo catalog has durations.\n\nCloses #105\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* feat: remix any Apple Music playlist to your taste\n\nAdd --strategy remix --playlist-url <link or pl.ID>: fetch a catalog playlist\n(new apple_music_api.sh catalog-playlist), keep the tracks that fit your taste\nand swap the rest for the same artist's better fit, a similar artist, or more\nfrom an artist you're keeping. The JSON reports how much was kept and each\nswap's reason. Links are validated before any request.\n\nCloses #101\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* feat: clean mode keeps explicit songs out of every playlist\n\nclean_only in config.json (or --clean on strategy_engine.py) drops songs whose\ncontentRating is explicit from every strategy and the daily pick. A song with a\nclean version (same title and artist) is swapped for it via a catalog search,\ncached per song and capped at 15 per run. Candidates now carry an explicit flag.\n\nCloses #109\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* feat(demo): a 250-song catalog so demo playlists are full length\n\nDemo mode and `demo.py serve` now run against DEMO_CATALOG: about 250 songs by\n26 artists across ten genres, with a fictional listener whose history spans a\ndozen of them. The old 13-song catalog stays as SMALL_CATALOG for the\nintegration tests. Artists' top songs span albums, and similar-artist lists\nreach into other genres. A demo profile built from the old catalog is rebuilt\nautomatically, and the README replay is regenerated.\n\nCloses #46\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: report a non-object --data file and an unreadable track-IDs file\n\ntaste_card.py --data now refuses valid JSON that isn't an object (a list or\nnull from a script that failed part-way) instead of crashing with an\nAttributeError, in all three modes. playlist_history.py log reports a missing\nor unreadable --track-ids-file with an ERROR line instead of a traceback and\nlogs nothing.\n\nCloses #62\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: address CodeQL findings on the strategy split\n\nList the names strategy_engine re-exports in __all__ instead of per-line noqa\ncomments, give the call_api overload stubs docstrings instead of bare `...`,\nand import _common one way in test_clean_mode.py.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix: address review feedback on timeouts, clean swaps, trimming and remix\n\n- call_api's runner signals the child's whole process group and bounds the final\n  output read, so a descendant holding the pipes can't outlast the timeout.\n- Each curl attempt is capped to what is left of the retry deadline.\n- A clean-version swap can't reintroduce a disliked, library, recent, seed or\n  already-listed song; an explicit song and its clean twin become one entry.\n- --minutes keeps a blend balanced, can drop a single end track to land the\n  target, and remix reports kept/swapped counts for the trimmed playlist.\n- remix reads every page of a long playlist (new catalog-playlist-tracks) and\n  treats originals your filters rule out as swaps.\n- Update the README coverage badge to 95%.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+        "pull_request": {
+          "title": "feat(core): hardcoded secret detection",
+          "head": {
+            "ref": "feat/secrets"
           }
-        ],
-        "ref": "refs/heads/main"
+        }
       },
-      "created_at": "2026-10-24T19:01:48Z"
+      "created_at": "2026-10-28T01:42:52Z"
+    },
+    {
+      "id": "18406868038",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): parameter shape for Get Contents of URL",
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:48:06Z"
+    },
+    {
+      "id": "18406867317",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T01:48:08Z"
+    },
+    {
+      "id": "18406685824",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:45:03Z"
+    },
+    {
+      "id": "18406685809",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:45:04Z"
+    },
+    {
+      "id": "18406683985",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:45:01Z"
+    },
+    {
+      "id": "18406683979",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:45:02Z"
+    },
+    {
+      "id": "18406555834",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): hardcoded secret detection",
+          "head": {
+            "ref": "feat/secrets"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:42:52Z"
+    },
+    {
+      "id": "18406533590",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-csp"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:26:29Z"
+    },
+    {
+      "id": "18406532642",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-csp"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:26:26Z"
+    },
+    {
+      "id": "18406514035",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): parameter shape for Get Contents of URL",
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:36:38Z"
+    },
+    {
+      "id": "18406420691",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-inspector-input"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:45:48Z"
+    },
+    {
+      "id": "18406189120",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): parameter shape for Get Contents of URL",
+          "head": {
+            "ref": "feat/parameter-shape"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:36:38Z"
+    },
+    {
+      "id": "18405942188",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-scaffold"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:29:52Z"
+    },
+    {
+      "id": "18405858101",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-csp"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:26:25Z"
+    },
+    {
+      "id": "18405817658",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T01:30:31Z"
+    },
+    {
+      "id": "18405816344",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): inferred previous-action input edges",
+          "head": {
+            "ref": "feat/implicit-input"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:30:28Z"
+    },
+    {
+      "id": "18405816301",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T01:30:30Z"
+    },
+    {
+      "id": "18405700180",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): possible source-to-sink paths",
+          "head": {
+            "ref": "feat/source-to-sink"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:28:35Z"
+    },
+    {
+      "id": "18405579828",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/implicit-input"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:26:34Z"
+    },
+    {
+      "id": "18405578729",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/implicit-input"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:26:35Z"
+    },
+    {
+      "id": "18405538490",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): possible source-to-sink paths",
+          "head": {
+            "ref": "feat/source-to-sink"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:24:30Z"
+    },
+    {
+      "id": "18405457005",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): possible source-to-sink paths",
+          "head": {
+            "ref": "feat/source-to-sink"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:24:30Z"
+    },
+    {
+      "id": "18405429590",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T01:24:04Z"
+    },
+    {
+      "id": "18405429498",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): named variables and magic-variable tokens",
+          "head": {
+            "ref": "feat/variables"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:24:02Z"
+    },
+    {
+      "id": "18405405316",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): control-flow structure (if, menu, repeat)",
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:23:36Z"
+    },
+    {
+      "id": "18405404472",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T01:23:37Z"
+    },
+    {
+      "id": "18405182396",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/variables"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:19:52Z"
+    },
+    {
+      "id": "18405182355",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/variables"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:19:53Z"
+    },
+    {
+      "id": "18405180652",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/variables"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:19:51Z"
+    },
+    {
+      "id": "18405064130",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:17:51Z"
+    },
+    {
+      "id": "18405062841",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:17:48Z"
+    },
+    {
+      "id": "18405062001",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:17:49Z"
+    },
+    {
+      "id": "18405059830",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:17:47Z"
+    },
+    {
+      "id": "18404937750",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): inferred previous-action input edges",
+          "head": {
+            "ref": "feat/implicit-input"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:13:32Z"
+    },
+    {
+      "id": "18404809704",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): inferred previous-action input edges",
+          "head": {
+            "ref": "feat/implicit-input"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:13:32Z"
+    },
+    {
+      "id": "18404696673",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): named variables and magic-variable tokens",
+          "head": {
+            "ref": "feat/variables"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:10:25Z"
+    },
+    {
+      "id": "18404633391",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): named variables and magic-variable tokens",
+          "head": {
+            "ref": "feat/variables"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:10:25Z"
+    },
+    {
+      "id": "18404458061",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/release-verify-publish"
+          }
+        }
+      },
+      "created_at": "2026-10-27T21:31:03Z"
+    },
+    {
+      "id": "18404401938",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): control-flow structure (if, menu, repeat)",
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:05:25Z"
+    },
+    {
+      "id": "18404353021",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): control-flow structure (if, menu, repeat)",
+          "head": {
+            "ref": "feat/control-flow"
+          }
+        }
+      },
+      "created_at": "2026-10-28T01:05:25Z"
+    },
+    {
+      "id": "18403617794",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:53:56Z"
+    },
+    {
+      "id": "18403617569",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:53:55Z"
+    },
+    {
+      "id": "18403617304",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:53:55Z"
+    },
+    {
+      "id": "18403617110",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:53:55Z"
+    },
+    {
+      "id": "18403616865",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:53:55Z"
+    },
+    {
+      "id": "18403615810",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:53:52Z"
+    },
+    {
+      "id": "18403586505",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "research/export-format-profile"
+          }
+        }
+      },
+      "created_at": "2026-10-27T21:10:46Z"
+    },
+    {
+      "id": "18403581844",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "research/export-format-profile"
+          }
+        }
+      },
+      "created_at": "2026-10-27T21:10:41Z"
+    },
+    {
+      "id": "18403391539",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): note on iCloud links and the download steps",
+          "head": {
+            "ref": "feat/web-link-note"
+          }
+        }
+      },
+      "created_at": "2026-10-28T00:50:25Z"
+    },
+    {
+      "id": "18403297552",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): note on iCloud links and the download steps",
+          "head": {
+            "ref": "feat/web-link-note"
+          }
+        }
+      },
+      "created_at": "2026-10-28T00:22:11Z"
+    },
+    {
+      "id": "18402616186",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-offline-pwa"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:29:09Z"
+    },
+    {
+      "id": "18402615836",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-offline-pwa"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:29:07Z"
+    },
+    {
+      "id": "18401566825",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): note on iCloud links and the download steps",
+          "head": {
+            "ref": "feat/web-link-note"
+          }
+        }
+      },
+      "created_at": "2026-10-28T00:22:11Z"
+    },
+    {
+      "id": "18401076697",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: web app is live",
+          "head": {
+            "ref": "docs/web-live"
+          }
+        }
+      },
+      "created_at": "2026-10-28T00:14:40Z"
+    },
+    {
+      "id": "18400965798",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: web app is live",
+          "head": {
+            "ref": "docs/web-live"
+          }
+        }
+      },
+      "created_at": "2026-10-28T00:12:41Z"
+    },
+    {
+      "id": "18400946545",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:12:42Z"
+    },
+    {
+      "id": "18400945982",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-28T00:12:44Z"
+    },
+    {
+      "id": "18400943865",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: web app is live",
+          "head": {
+            "ref": "docs/web-live"
+          }
+        }
+      },
+      "created_at": "2026-10-28T00:12:41Z"
+    },
+    {
+      "id": "18400943652",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-csp"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:26:27Z"
+    },
+    {
+      "id": "18400941587",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-csp"
+          }
+        }
+      },
+      "created_at": "2026-10-27T22:26:23Z"
+    },
+    {
+      "id": "18399149490",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: release 0.4.0",
+          "head": {
+            "ref": "release/0.4.0"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:45:28Z"
+    },
+    {
+      "id": "18399140878",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: release 0.4.0",
+          "head": {
+            "ref": "release/0.4.0"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:39:08Z"
+    },
+    {
+      "id": "18398742722",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: release 0.4.0",
+          "head": {
+            "ref": "release/0.4.0"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:39:08Z"
+    },
+    {
+      "id": "18398666251",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): deploy on release tag and verify the live site",
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:37:54Z"
+    },
+    {
+      "id": "18398535637",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:36:00Z"
+    },
+    {
+      "id": "18398533955",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:35:58Z"
+    },
+    {
+      "id": "18398532218",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:35:57Z"
+    },
+    {
+      "id": "18398427770",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "research/export-format-profile"
+          }
+        }
+      },
+      "created_at": "2026-10-27T21:10:44Z"
+    },
+    {
+      "id": "18398311431",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(web): web app README and status",
+          "head": {
+            "ref": "docs/web-app"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:32:43Z"
+    },
+    {
+      "id": "18398245659",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-27T23:31:48Z"
+    },
+    {
+      "id": "18398245310",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): work offline, and be installable",
+          "head": {
+            "ref": "feat/web-offline-pwa"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:31:46Z"
+    },
+    {
+      "id": "18398211881",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(web): web app README and status",
+          "head": {
+            "ref": "docs/web-app"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:31:18Z"
+    },
+    {
+      "id": "18398065388",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-offline-pwa"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:29:10Z"
+    },
+    {
+      "id": "18398063701",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/web-offline-pwa"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:29:08Z"
+    },
+    {
+      "id": "18398037160",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): deploy on release tag and verify the live site",
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:27:48Z"
+    },
+    {
+      "id": "18397977294",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): deploy on release tag and verify the live site",
+          "head": {
+            "ref": "feat/web-deploy"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:27:48Z"
+    },
+    {
+      "id": "18397599044",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(web): work offline, and be installable",
+          "head": {
+            "ref": "feat/web-offline-pwa"
+          }
+        }
+      },
+      "created_at": "2026-10-27T23:18:12Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2580,7 +2595,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4037,
+    "total": 4287,
     "weeks": [
       {
         "days": [
@@ -2617,7 +2632,7 @@
           {
             "date": "2025-11-01",
             "count": 37,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -2631,12 +2646,12 @@
           {
             "date": "2025-11-03",
             "count": 66,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2025-11-04",
             "count": 65,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2025-11-05",
@@ -2665,12 +2680,12 @@
           {
             "date": "2025-11-09",
             "count": 23,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-10",
             "count": 35,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-11",
@@ -2695,7 +2710,7 @@
           {
             "date": "2025-11-15",
             "count": 46,
-            "level": 3
+            "level": 1
           }
         ]
       },
@@ -2704,12 +2719,12 @@
           {
             "date": "2025-11-16",
             "count": 26,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-17",
             "count": 37,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-18",
@@ -2719,22 +2734,22 @@
           {
             "date": "2025-11-19",
             "count": 71,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2025-11-20",
             "count": 20,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-21",
             "count": 31,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-22",
             "count": 32,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -2743,17 +2758,17 @@
           {
             "date": "2025-11-23",
             "count": 56,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2025-11-24",
             "count": 24,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-25",
             "count": 30,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-11-26",
@@ -2782,7 +2797,7 @@
           {
             "date": "2025-11-30",
             "count": 24,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-12-01",
@@ -2836,7 +2851,7 @@
           {
             "date": "2025-12-10",
             "count": 31,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-12-11",
@@ -2880,7 +2895,7 @@
           {
             "date": "2025-12-18",
             "count": 20,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2025-12-19",
@@ -3031,7 +3046,7 @@
           {
             "date": "2026-01-14",
             "count": 44,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-01-15",
@@ -3133,7 +3148,7 @@
           {
             "date": "2026-02-01",
             "count": 21,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-02",
@@ -3143,17 +3158,17 @@
           {
             "date": "2026-02-03",
             "count": 64,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-02-04",
             "count": 65,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-02-05",
             "count": 29,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-06",
@@ -3163,7 +3178,7 @@
           {
             "date": "2026-02-07",
             "count": 29,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -3172,27 +3187,27 @@
           {
             "date": "2026-02-08",
             "count": 24,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-09",
             "count": 27,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-10",
             "count": 23,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-11",
             "count": 38,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-12",
             "count": 45,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-02-13",
@@ -3260,7 +3275,7 @@
           {
             "date": "2026-02-24",
             "count": 30,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-25",
@@ -3333,7 +3348,7 @@
           {
             "date": "2026-03-09",
             "count": 30,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-03-10",
@@ -3494,7 +3509,7 @@
           {
             "date": "2026-04-07",
             "count": 36,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-08",
@@ -3543,7 +3558,7 @@
           {
             "date": "2026-04-16",
             "count": 34,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-17",
@@ -3553,7 +3568,7 @@
           {
             "date": "2026-04-18",
             "count": 34,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -3562,12 +3577,12 @@
           {
             "date": "2026-04-19",
             "count": 23,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-20",
             "count": 20,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-21",
@@ -3587,12 +3602,12 @@
           {
             "date": "2026-04-24",
             "count": 25,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-25",
             "count": 21,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -3601,12 +3616,12 @@
           {
             "date": "2026-04-26",
             "count": 30,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-27",
             "count": 29,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-04-28",
@@ -3621,17 +3636,17 @@
           {
             "date": "2026-04-30",
             "count": 42,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-05-01",
             "count": 26,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-02",
             "count": 48,
-            "level": 3
+            "level": 1
           }
         ]
       },
@@ -3640,17 +3655,17 @@
           {
             "date": "2026-05-03",
             "count": 66,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-05-04",
             "count": 39,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-05-05",
             "count": 37,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-06",
@@ -3679,7 +3694,7 @@
           {
             "date": "2026-05-10",
             "count": 35,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-11",
@@ -3748,7 +3763,7 @@
           {
             "date": "2026-05-23",
             "count": 21,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -3762,7 +3777,7 @@
           {
             "date": "2026-05-25",
             "count": 36,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-26",
@@ -3772,7 +3787,7 @@
           {
             "date": "2026-05-27",
             "count": 45,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-05-28",
@@ -3972,17 +3987,17 @@
           {
             "date": "2026-07-02",
             "count": 29,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-07-03",
             "count": 61,
-            "level": 4
+            "level": 1
           },
           {
             "date": "2026-07-04",
             "count": 128,
-            "level": 4
+            "level": 3
           }
         ]
       },
@@ -3991,7 +4006,7 @@
           {
             "date": "2026-07-05",
             "count": 65,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-07-06",
@@ -4001,7 +4016,7 @@
           {
             "date": "2026-07-07",
             "count": 101,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-07-08",
@@ -4055,7 +4070,7 @@
           {
             "date": "2026-07-17",
             "count": 42,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-07-18",
@@ -4094,7 +4109,7 @@
           {
             "date": "2026-07-24",
             "count": 20,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-07-25",
@@ -4152,7 +4167,7 @@
           {
             "date": "2026-08-03",
             "count": 27,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-08-04",
@@ -4269,7 +4284,7 @@
           {
             "date": "2026-08-24",
             "count": 33,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-08-25",
@@ -4411,7 +4426,7 @@
           {
             "date": "2026-09-19",
             "count": 33,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -4420,7 +4435,7 @@
           {
             "date": "2026-09-20",
             "count": 29,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-09-21",
@@ -4464,7 +4479,7 @@
           {
             "date": "2026-09-28",
             "count": 34,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-09-29",
@@ -4484,12 +4499,12 @@
           {
             "date": "2026-10-02",
             "count": 43,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-10-03",
             "count": 36,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -4498,7 +4513,7 @@
           {
             "date": "2026-10-04",
             "count": 44,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-10-05",
@@ -4508,7 +4523,7 @@
           {
             "date": "2026-10-06",
             "count": 20,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-10-07",
@@ -4523,12 +4538,12 @@
           {
             "date": "2026-10-09",
             "count": 68,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-10-10",
             "count": 30,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -4542,12 +4557,12 @@
           {
             "date": "2026-10-12",
             "count": 51,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-10-13",
             "count": 55,
-            "level": 3
+            "level": 1
           },
           {
             "date": "2026-10-14",
@@ -4557,7 +4572,7 @@
           {
             "date": "2026-10-15",
             "count": 67,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-10-16",
@@ -4575,8 +4590,8 @@
         "days": [
           {
             "date": "2026-10-18",
-            "count": 39,
-            "level": 3
+            "count": 40,
+            "level": 1
           },
           {
             "date": "2026-10-19",
@@ -4586,12 +4601,12 @@
           {
             "date": "2026-10-20",
             "count": 111,
-            "level": 4
+            "level": 2
           },
           {
             "date": "2026-10-21",
             "count": 35,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-10-22",
@@ -4600,13 +4615,13 @@
           },
           {
             "date": "2026-10-23",
-            "count": 76,
-            "level": 4
+            "count": 77,
+            "level": 2
           },
           {
             "date": "2026-10-24",
             "count": 53,
-            "level": 3
+            "level": 1
           }
         ]
       },
@@ -4624,6 +4639,11 @@
           },
           {
             "date": "2026-10-27",
+            "count": 248,
+            "level": 4
+          },
+          {
+            "date": "2026-10-28",
             "count": 0,
             "level": 0
           }
@@ -4632,13 +4652,13 @@
     ]
   },
   "languageBytes": {
-    "TypeScript": 13176707,
-    "HTML": 9485282,
+    "TypeScript": 13436266,
+    "HTML": 9486085,
     "Swift": 5121304,
     "Python": 4559322,
-    "JavaScript": 2900930,
-    "Shell": 1105612,
-    "CSS": 634403,
+    "JavaScript": 2988487,
+    "Shell": 1110244,
+    "CSS": 637906,
     "R": 618546,
     "Rust": 416849,
     "Kotlin": 300781,
@@ -4657,6 +4677,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-27T03:12:12Z",
+  "lastUpdated": "2026-10-28T03:08:46Z",
   "totalRepos": 54
 }
