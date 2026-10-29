@@ -34,6 +34,19 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+>
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
+
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
 > AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
@@ -54,12 +67,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
-
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
@@ -72,13 +79,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
 > 🔗 [Live](https://homehub.andernet.dev)
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 
