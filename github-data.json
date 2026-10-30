@@ -29,9 +29,9 @@
       ],
       "stargazers_count": 5,
       "forks_count": 1,
-      "open_issues_count": 9,
-      "pushed_at": "2026-10-29T01:59:13Z",
-      "updated_at": "2026-10-29T01:57:03Z",
+      "open_issues_count": 6,
+      "pushed_at": "2026-10-30T02:27:17Z",
+      "updated_at": "2026-10-29T21:41:47Z",
       "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
@@ -50,9 +50,83 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 7,
-      "pushed_at": "2026-10-29T01:38:52Z",
+      "pushed_at": "2026-10-30T01:56:17Z",
       "updated_at": "2026-10-26T04:34:43Z",
       "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1150200899,
+      "name": "weather-app",
+      "full_name": "and3rn3t/weather-app",
+      "description": "iOS26 Weather App",
+      "html_url": "https://github.com/and3rn3t/weather-app",
+      "homepage": null,
+      "language": "Swift",
+      "topics": [
+        "android",
+        "fastlane",
+        "ios",
+        "swift",
+        "weather",
+        "xcode"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-30T01:11:47Z",
+      "updated_at": "2026-10-21T01:08:12Z",
+      "created_at": "2026-02-05T02:05:57Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "game",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-30T00:40:00Z",
+      "updated_at": "2026-10-30T00:40:03Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1078539335,
+      "name": "network",
+      "full_name": "and3rn3t/network",
+      "description": "Testing UniFi API",
+      "html_url": "https://github.com/and3rn3t/network",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "cloudflare-workers",
+        "networking",
+        "python",
+        "unifi"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-29T23:05:27Z",
+      "updated_at": "2026-10-21T01:24:10Z",
+      "created_at": "2025-10-17T22:48:41Z",
       "fork": false,
       "archived": false
     },
@@ -67,33 +141,63 @@
       "topics": [],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-28T22:56:38Z",
-      "updated_at": "2026-10-21T16:25:15Z",
+      "open_issues_count": 1,
+      "pushed_at": "2026-10-29T22:19:20Z",
+      "updated_at": "2026-10-29T22:19:23Z",
       "created_at": "2026-07-02T21:26:10Z",
       "fork": false,
       "archived": false
     },
     {
-      "id": 1288624692,
-      "name": "eslint-config",
-      "full_name": "and3rn3t/eslint-config",
-      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
-      "html_url": "https://github.com/and3rn3t/eslint-config",
-      "homepage": null,
-      "language": "JavaScript",
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "HTML",
       "topics": [
-        "eslint",
+        "cloudflare-workers",
+        "featured",
+        "networking",
+        "raspberry-pi",
         "react",
-        "shared-config",
-        "typescript"
+        "tailwindcss",
+        "typescript",
+        "vite"
       ],
-      "stargazers_count": 0,
+      "stargazers_count": 1,
       "forks_count": 0,
-      "open_issues_count": 3,
-      "pushed_at": "2026-10-28T22:11:10Z",
-      "updated_at": "2026-10-23T14:05:48Z",
-      "created_at": "2026-07-03T19:42:39Z",
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-29T22:11:43Z",
+      "updated_at": "2026-10-29T22:07:06Z",
+      "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-29T22:06:54Z",
+      "updated_at": "2026-10-29T22:06:57Z",
+      "created_at": "2025-08-29T22:05:27Z",
       "fork": false,
       "archived": false
     },
@@ -120,31 +224,10 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 27,
-      "pushed_at": "2026-10-28T20:52:16Z",
-      "updated_at": "2026-10-28T01:48:10Z",
+      "open_issues_count": 25,
+      "pushed_at": "2026-10-29T20:58:20Z",
+      "updated_at": "2026-10-29T20:58:23Z",
       "created_at": "2026-10-18T15:34:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 7,
-      "pushed_at": "2026-10-28T20:10:06Z",
-      "updated_at": "2026-10-28T03:09:34Z",
-      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -178,109 +261,10 @@
       ],
       "stargazers_count": 1,
       "forks_count": 5,
-      "open_issues_count": 24,
-      "pushed_at": "2026-10-28T19:59:45Z",
+      "open_issues_count": 25,
+      "pushed_at": "2026-10-29T20:55:49Z",
       "updated_at": "2026-10-27T16:58:51Z",
       "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1289483809,
-      "name": "workspace-tools",
-      "full_name": "and3rn3t/workspace-tools",
-      "description": "Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.",
-      "html_url": "https://github.com/and3rn3t/workspace-tools",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "github-actions",
-        "meta",
-        "tooling",
-        "workspace"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 0,
-      "pushed_at": "2026-10-27T17:03:44Z",
-      "updated_at": "2026-10-27T17:03:50Z",
-      "created_at": "2026-07-04T20:11:00Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "HTML",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 8,
-      "pushed_at": "2026-10-27T16:58:42Z",
-      "updated_at": "2026-10-27T16:55:13Z",
-      "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "game",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 11,
-      "pushed_at": "2026-10-27T14:09:06Z",
-      "updated_at": "2026-10-24T01:46:42Z",
-      "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1177251835,
-      "name": "docker-playground",
-      "full_name": "and3rn3t/docker-playground",
-      "description": "Learning more about docker with the Docker API and a sandbox env",
-      "html_url": "https://github.com/and3rn3t/docker-playground",
-      "homepage": "",
-      "language": "TypeScript",
-      "topics": [
-        "docker",
-        "react",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-27T06:18:42Z",
-      "updated_at": "2026-10-21T01:23:30Z",
-      "created_at": "2026-03-09T21:07:36Z",
       "fork": false,
       "archived": false
     },
@@ -310,9 +294,145 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 6,
-      "pushed_at": "2026-10-27T00:48:28Z",
+      "pushed_at": "2026-10-29T19:19:25Z",
       "updated_at": "2026-10-23T20:31:31Z",
       "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 7,
+      "pushed_at": "2026-10-29T16:00:04Z",
+      "updated_at": "2026-10-29T03:09:26Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1165780517,
+      "name": "flipper",
+      "full_name": "and3rn3t/flipper",
+      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
+      "html_url": "https://github.com/and3rn3t/flipper",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 8,
+      "pushed_at": "2026-10-29T07:47:12Z",
+      "updated_at": "2026-10-21T01:23:36Z",
+      "created_at": "2026-02-24T14:38:23Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1193029111,
+      "name": "ai-template-repo",
+      "full_name": "and3rn3t/ai-template-repo",
+      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
+      "html_url": "https://github.com/and3rn3t/ai-template-repo",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "ai-assisted-development",
+        "claude",
+        "template"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-10-29T04:02:13Z",
+      "updated_at": "2026-10-21T01:34:56Z",
+      "created_at": "2026-03-26T19:58:01Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1288624692,
+      "name": "eslint-config",
+      "full_name": "and3rn3t/eslint-config",
+      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
+      "html_url": "https://github.com/and3rn3t/eslint-config",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "eslint",
+        "react",
+        "shared-config",
+        "typescript"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-10-28T22:11:10Z",
+      "updated_at": "2026-10-23T14:05:48Z",
+      "created_at": "2026-07-03T19:42:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1289483809,
+      "name": "workspace-tools",
+      "full_name": "and3rn3t/workspace-tools",
+      "description": "Matt's GitHub workspace index — shared conventions, baseline tooling, and cross-repo consistency scripts for and3rn3t repos.",
+      "html_url": "https://github.com/and3rn3t/workspace-tools",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "github-actions",
+        "meta",
+        "tooling",
+        "workspace"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 0,
+      "pushed_at": "2026-10-27T17:03:44Z",
+      "updated_at": "2026-10-27T17:03:50Z",
+      "created_at": "2026-07-04T20:11:00Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1177251835,
+      "name": "docker-playground",
+      "full_name": "and3rn3t/docker-playground",
+      "description": "Learning more about docker with the Docker API and a sandbox env",
+      "html_url": "https://github.com/and3rn3t/docker-playground",
+      "homepage": "",
+      "language": "TypeScript",
+      "topics": [
+        "docker",
+        "react",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-10-27T06:18:42Z",
+      "updated_at": "2026-10-21T01:23:30Z",
+      "created_at": "2026-03-09T21:07:36Z",
       "fork": false,
       "archived": false
     },
@@ -342,55 +462,6 @@
       "archived": false
     },
     {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 9,
-      "pushed_at": "2026-10-26T22:45:18Z",
-      "updated_at": "2026-10-24T02:22:35Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1078539335,
-      "name": "network",
-      "full_name": "and3rn3t/network",
-      "description": "Testing UniFi API",
-      "html_url": "https://github.com/and3rn3t/network",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "cloudflare-workers",
-        "networking",
-        "python",
-        "unifi"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-10-26T18:30:16Z",
-      "updated_at": "2026-10-21T01:24:10Z",
-      "created_at": "2025-10-17T22:48:41Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1126996610,
       "name": "sky",
       "full_name": "and3rn3t/sky",
@@ -411,31 +482,6 @@
       "pushed_at": "2026-10-26T17:33:22Z",
       "updated_at": "2026-10-21T01:24:12Z",
       "created_at": "2026-01-03T00:51:45Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1150200899,
-      "name": "weather-app",
-      "full_name": "and3rn3t/weather-app",
-      "description": "iOS26 Weather App",
-      "html_url": "https://github.com/and3rn3t/weather-app",
-      "homepage": null,
-      "language": "Swift",
-      "topics": [
-        "android",
-        "fastlane",
-        "ios",
-        "swift",
-        "weather",
-        "xcode"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 9,
-      "pushed_at": "2026-10-26T09:16:31Z",
-      "updated_at": "2026-10-21T01:08:12Z",
-      "created_at": "2026-02-05T02:05:57Z",
       "fork": false,
       "archived": false
     },
@@ -488,30 +534,6 @@
       "archived": false
     },
     {
-      "id": 1165780517,
-      "name": "flipper",
-      "full_name": "and3rn3t/flipper",
-      "description": "Flipper Zero Lab — interactive experimentation dashboard, no hardware required.",
-      "html_url": "https://github.com/and3rn3t/flipper",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 8,
-      "pushed_at": "2026-10-25T23:48:13Z",
-      "updated_at": "2026-10-21T01:23:36Z",
-      "created_at": "2026-02-24T14:38:23Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1193055292,
       "name": "test-project",
       "full_name": "and3rn3t/test-project",
@@ -529,28 +551,6 @@
       "pushed_at": "2026-10-24T13:53:29Z",
       "updated_at": "2026-10-21T01:24:14Z",
       "created_at": "2026-03-26T20:37:33Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1193029111,
-      "name": "ai-template-repo",
-      "full_name": "and3rn3t/ai-template-repo",
-      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
-      "html_url": "https://github.com/and3rn3t/ai-template-repo",
-      "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "ai-assisted-development",
-        "claude",
-        "template"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 2,
-      "pushed_at": "2026-10-24T13:51:10Z",
-      "updated_at": "2026-10-21T01:34:56Z",
-      "created_at": "2026-03-26T19:58:01Z",
       "fork": false,
       "archived": false
     },
@@ -1242,7 +1242,608 @@
   ],
   "events": [
     {
-      "id": "25475842445",
+      "id": "18621731399",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:07:03Z"
+    },
+    {
+      "id": "18618998011",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(ci): pin golden regression model + golden cell review",
+          "head": {
+            "ref": "chore/pin-golden-model"
+          }
+        }
+      },
+      "created_at": "2026-10-30T00:39:58Z"
+    },
+    {
+      "id": "18618162350",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(ci): set golden gate threshold to measured baseline (10%)",
+          "head": {
+            "ref": "chore/golden-threshold-baseline"
+          }
+        }
+      },
+      "created_at": "2026-10-30T00:26:53Z"
+    },
+    {
+      "id": "18617284662",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/golden-threshold-baseline"
+          }
+        }
+      },
+      "created_at": "2026-10-30T00:13:40Z"
+    },
+    {
+      "id": "18616753188",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(ci): set golden gate threshold to measured baseline (10%)",
+          "head": {
+            "ref": "chore/golden-threshold-baseline"
+          }
+        }
+      },
+      "created_at": "2026-10-30T00:05:55Z"
+    },
+    {
+      "id": "18616378847",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(ci): pin golden regression model + golden cell review",
+          "head": {
+            "ref": "chore/pin-golden-model"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:47:22Z"
+    },
+    {
+      "id": "18616363476",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: drop prettier from lint-staged",
+          "head": {
+            "ref": "fix/lint-staged-drop-prettier"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:59:53Z"
+    },
+    {
+      "id": "18615552306",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(ci): pin golden regression model + golden cell review",
+          "head": {
+            "ref": "chore/pin-golden-model"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:47:22Z"
+    },
+    {
+      "id": "18615311174",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: drop prettier from lint-staged",
+          "head": {
+            "ref": "fix/lint-staged-drop-prettier"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:43:49Z"
+    },
+    {
+      "id": "18615029960",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(mobile): align deps with Expo SDK 56",
+          "head": {
+            "ref": "chore/align-expo-sdk-deps"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:39:36Z"
+    },
+    {
+      "id": "18614450626",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(mobile): align deps with Expo SDK 56",
+          "head": {
+            "ref": "chore/align-expo-sdk-deps"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:31:09Z"
+    },
+    {
+      "id": "18614352579",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(deps): update expo & react native",
+          "head": {
+            "ref": "renovate/expo-and-react-native"
+          }
+        }
+      },
+      "created_at": "2026-10-29T23:26:31Z"
+    },
+    {
+      "id": "18611107738",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:44:32Z"
+    },
+    {
+      "id": "18611106494",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:44:31Z"
+    },
+    {
+      "id": "18610854724",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:41:05Z"
+    },
+    {
+      "id": "18610853753",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:41:04Z"
+    },
+    {
+      "id": "18610826239",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(ci): pin Playwright e2e jobs to ubuntu-24.04",
+          "head": {
+            "ref": "fix/ci-pin-e2e-ubuntu-24"
+          }
+        }
+      },
+      "created_at": "2026-10-29T22:40:41Z"
+    },
+    {
+      "id": "18610540935",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(ci): pin Playwright e2e jobs to ubuntu-24.04",
+          "head": {
+            "ref": "fix/ci-pin-e2e-ubuntu-24"
+          }
+        }
+      },
+      "created_at": "2026-10-29T22:36:56Z"
+    },
+    {
+      "id": "18609546309",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:24:02Z"
+    },
+    {
+      "id": "18609469142",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps-dev): bump sharp from 0.35.1 to 0.35.5 in the npm_and_yarn group across 1 directory",
+          "head": {
+            "ref": "dependabot/npm_and_yarn/npm_and_yarn-6a821d8e38"
+          }
+        }
+      },
+      "created_at": "2026-10-23T16:34:23Z"
+    },
+    {
+      "id": "18608216473",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T22:07:02Z"
+    },
+    {
+      "id": "18608204349",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04",
+          "head": {
+            "ref": "chore/bump-github-workflows-sha"
+          }
+        }
+      },
+      "created_at": "2026-10-29T22:06:52Z"
+    },
+    {
+      "id": "18607426279",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04",
+          "head": {
+            "ref": "chore/bump-github-workflows-sha"
+          }
+        }
+      },
+      "created_at": "2026-10-29T21:56:52Z"
+    },
+    {
+      "id": "18607343047",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(e2e): pin Playwright runner to ubuntu-24.04",
+          "head": {
+            "ref": "fix/playwright-ubuntu-24.04"
+          }
+        }
+      },
+      "created_at": "2026-10-29T21:55:48Z"
+    },
+    {
+      "id": "18607132836",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(e2e): pin Playwright runner to ubuntu-24.04",
+          "head": {
+            "ref": "fix/playwright-ubuntu-24.04"
+          }
+        }
+      },
+      "created_at": "2026-10-29T21:53:14Z"
+    },
+    {
+      "id": "18607064338",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:52:22Z"
+    },
+    {
+      "id": "18607063641",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:52:21Z"
+    },
+    {
+      "id": "18607005505",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: adopt shared @and3rn3t/eslint-config",
+          "head": {
+            "ref": "chore/shared-eslint-config"
+          }
+        }
+      },
+      "created_at": "2026-10-29T21:51:38Z"
+    },
+    {
+      "id": "18606821337",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: adopt shared @and3rn3t/eslint-config",
+          "head": {
+            "ref": "chore/shared-eslint-config"
+          }
+        }
+      },
+      "created_at": "2026-10-21T01:52:22Z"
+    },
+    {
+      "id": "18606646082",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:47:07Z"
+    },
+    {
+      "id": "18606211055",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(e2e): two-step Suspense skeleton wait to eliminate race condition",
+          "head": {
+            "ref": "fix/e2e-suspense-wait-race"
+          }
+        }
+      },
+      "created_at": "2026-10-29T21:41:43Z"
+    },
+    {
+      "id": "18606209721",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:41:45Z"
+    },
+    {
+      "id": "18603075366",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(e2e): two-step Suspense skeleton wait to eliminate race condition",
+          "head": {
+            "ref": "fix/e2e-suspense-wait-race"
+          }
+        }
+      },
+      "created_at": "2026-08-27T22:40:43Z"
+    },
+    {
+      "id": "18602794619",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:00:56Z"
+    },
+    {
+      "id": "18602794533",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps): update dependency @rollup/rollup-win32-x64-msvc to v4.66.0",
+          "head": {
+            "ref": "renovate/rollup-rollup-win32-x64-msvc-4.x"
+          }
+        }
+      },
+      "created_at": "2026-10-28T14:07:43Z"
+    },
+    {
+      "id": "18602792003",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:00:53Z"
+    },
+    {
+      "id": "18602791173",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps): update dependency minimatch@<3.1.4 to v3.1.5",
+          "head": {
+            "ref": "renovate/minimatch-3.1.4-3.x"
+          }
+        }
+      },
+      "created_at": "2026-10-22T15:37:34Z"
+    },
+    {
+      "id": "18602790244",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps): update dependency picomatch@>=4.0.0,<4.0.4 to v4.0.7",
+          "head": {
+            "ref": "renovate/picomatch-=4.0.0,-4.0.4-4.x"
+          }
+        }
+      },
+      "created_at": "2026-10-22T15:53:15Z"
+    },
+    {
+      "id": "18602788259",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:00:51Z"
+    },
+    {
+      "id": "18602785238",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps): update github/codeql-action digest to 4bfa242",
+          "head": {
+            "ref": "renovate/github-codeql-action-digest"
+          }
+        }
+      },
+      "created_at": "2026-10-21T19:26:04Z"
+    },
+    {
+      "id": "18602785189",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:00:49Z"
+    },
+    {
+      "id": "18602783489",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(deps): update dependency lint-staged>picomatch to v4.0.7",
+          "head": {
+            "ref": "renovate/lint-staged-picomatch-4.x"
+          }
+        }
+      },
+      "created_at": "2026-10-22T15:29:57Z"
+    },
+    {
+      "id": "18602780927",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T21:00:46Z"
+    },
+    {
+      "id": "18602574769",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(core): hardcoded secret detection",
+          "head": {
+            "ref": "feat/secrets"
+          }
+        }
+      },
+      "created_at": "2026-10-29T20:58:18Z"
+    },
+    {
+      "id": "18602573916",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {},
+      "created_at": "2026-10-29T20:58:20Z"
+    },
+    {
+      "id": "25551251130",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -1250,40 +1851,28 @@
       "payload": {
         "commits": [
           {
-            "sha": "b9d95a9e0f2a4b9e43899f5ef35c5c92d35565df",
-            "message": "test(web): wait for the focus effect instead of racing it\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "7b2c1f6583c7514e378e60b6054db0602088bb8e",
+            "message": "Merge pull request #111 from and3rn3t/feat/parameter-shape\n\nfeat(core): parameter shape for Get Contents of URL"
           }
         ],
-        "ref": "refs/heads/feat/secrets"
+        "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-28T01:56:49Z"
+      "created_at": "2026-10-28T01:48:07Z"
     },
     {
-      "id": "25475210537",
-      "type": "DeleteEvent",
+      "id": "25549778629",
+      "type": "CreateEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
-        "ref": "feat/parameter-shape",
+        "ref": "feat/secrets",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-28T01:48:09Z"
+      "created_at": "2026-10-28T01:41:53Z"
     },
     {
-      "id": "25473754990",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/implicit-input",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T01:30:30Z"
-    },
-    {
-      "id": "25473551876",
+      "id": "25548996623",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -1291,230 +1880,17 @@
       "payload": {
         "commits": [
           {
-            "sha": "2afc57f05620efc6c9f6acc3238c802ecec81617",
-            "message": "Merge remote-tracking branch 'origin/feat/source-to-sink' into feat/source-to-sink"
-          }
-        ],
-        "ref": "refs/heads/feat/source-to-sink"
-      },
-      "created_at": "2026-10-28T01:27:17Z"
-    },
-    {
-      "id": "25473062349",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a2392290e682d095ed0f7b1c91911f4bd50cda29",
-            "message": "fix: rebuild the merged ReportView tests from both sides\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "1705e8f0a8c95053cfd8c6c8748096c77a3b70af",
+            "message": "Merge feat/variables into feat/implicit-input\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/feat/implicit-input"
       },
-      "created_at": "2026-10-28T01:20:40Z"
+      "created_at": "2026-10-28T01:17:39Z"
     },
     {
-      "id": "25472297991",
+      "id": "25548403698",
       "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/variables",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T01:10:24Z"
-    },
-    {
-      "id": "25470895432",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "566f8069cd153e61b5ba15aaf84136848cc1dfa2",
-            "message": "Merge pull request #104 from and3rn3t/feat/web-link-note\n\nfeat(web): note on iCloud links and the download steps"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-28T00:50:31Z"
-    },
-    {
-      "id": "25468675035",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-link-note",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T00:22:10Z"
-    },
-    {
-      "id": "25468149568",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "docs/web-live",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T00:14:42Z"
-    },
-    {
-      "id": "25466675506",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "e3762c6106647431175affead2e90d99dd4c83db",
-            "message": "Merge pull request #106 from and3rn3t/feat/control-flow\n\nfeat(core): control-flow structure (if, menu, repeat)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-28T01:23:39Z"
-    },
-    {
-      "id": "25463779348",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-offline-pwa",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:17:54Z"
-    },
-    {
-      "id": "25459067195",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "49886f531b9fe4c89ec2d4dd281e808322eaa619",
-            "message": "Merge branch 'main' into feat/group-findings"
-          }
-        ],
-        "ref": "refs/heads/feat/group-findings"
-      },
-      "created_at": "2026-10-27T22:20:22Z"
-    },
-    {
-      "id": "25457845997",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a03193b884f9863853edc196ac9b1eb1c2b10cb7",
-            "message": "Merge branch 'main' into feat/web-deploy"
-          }
-        ],
-        "ref": "refs/heads/feat/web-deploy"
-      },
-      "created_at": "2026-10-27T23:32:28Z"
-    },
-    {
-      "id": "25456399202",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "tmp/union-head",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T21:49:34Z"
-    },
-    {
-      "id": "25455944293",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "bfd604c114270954795edd58c40e6f99d96d8a14",
-            "message": "fix(core): make secret scanning linear and stop reading fragments as whole values\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/secrets"
-      },
-      "created_at": "2026-10-28T01:52:54Z"
-    },
-    {
-      "id": "25455852813",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "6a1bcc46a13e13f3a135687dd06fa754bc7dff83",
-            "message": "Merge pull request #97 from and3rn3t/test/web-e2e\n\ntest(web): Playwright end-to-end suite and CI job"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T23:06:38Z"
-    },
-    {
-      "id": "25454291754",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "757330cef038f420299e193b31ce203aa2835cb9",
-            "message": "Merge pull request #108 from and3rn3t/feat/implicit-input\n\nfeat(core): inferred previous-action input edges"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-28T01:30:30Z"
-    },
-    {
-      "id": "25449898788",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "afaa82b16e7a09f9b974a79637ba22d05e3dad92",
-            "message": "feat(core): detect hardcoded secrets without ever echoing them\n\nCloses #43\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/secrets"
-      },
-      "created_at": "2026-10-28T01:42:51Z"
-    },
-    {
-      "id": "25448890156",
-      "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
@@ -1522,40 +1898,11 @@
         "ref": "feat/source-to-sink",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-28T01:28:38Z"
+      "created_at": "2026-10-28T01:24:29Z"
     },
     {
-      "id": "25447751397",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "cc7c8b1fe0cb4fb8b230e873bb1b19632c985b76",
-            "message": "Merge feat/control-flow into feat/variables\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/variables"
-      },
-      "created_at": "2026-10-28T01:16:54Z"
-    },
-    {
-      "id": "25447532638",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/implicit-input",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T01:13:31Z"
-    },
-    {
-      "id": "25447223097",
-      "type": "CreateEvent",
+      "id": "25548336532",
+      "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
@@ -1563,56 +1910,22 @@
         "ref": "feat/control-flow",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-28T01:05:24Z"
+      "created_at": "2026-10-28T01:23:38Z"
     },
     {
-      "id": "25447041081",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "17ccccc2fd3bb2fe245c3b972797fa81039e8fdc",
-            "message": "Merge pull request #110 from and3rn3t/feat/source-to-sink\n\nfeat(core): possible source-to-sink paths"
-          }
-        ],
-        "ref": "refs/heads/feat/implicit-input"
-      },
-      "created_at": "2026-10-28T01:28:36Z"
-    },
-    {
-      "id": "25446800953",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "af803e9757205bfe15c1cf5dd449a2deddaac975",
-            "message": "fix(core): ignore inherited body types and backslash authorities in request shape\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/parameter-shape"
-      },
-      "created_at": "2026-10-28T01:44:18Z"
-    },
-    {
-      "id": "25446704482",
+      "id": "25545632206",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
-        "ref": "chore/release-0.3.0",
+        "ref": "feat/web-link-note",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-27T20:09:19Z"
+      "created_at": "2026-10-28T00:50:36Z"
     },
     {
-      "id": "25446434250",
+      "id": "25539793828",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -1620,154 +1933,16 @@
       "payload": {
         "commits": [
           {
-            "sha": "92ad7fce3f54cb151a6568dc45206566c91c2fc3",
-            "message": "Merge branch 'main' into feat/secrets"
-          }
-        ],
-        "ref": "refs/heads/feat/secrets"
-      },
-      "created_at": "2026-10-28T01:48:43Z"
-    },
-    {
-      "id": "25446304712",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "docs/v0.3-doc-refresh",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T20:05:13Z"
-    },
-    {
-      "id": "25446178498",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/parameter-shape",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T01:36:37Z"
-    },
-    {
-      "id": "25445928961",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d3d0e5c01ca587c42471b8f868f0460560c7c224",
-            "message": "fix(core): flag grouped actions without a mode, nest Markdown as bullets, keep depth optional\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/control-flow"
-      },
-      "created_at": "2026-10-28T01:15:48Z"
-    },
-    {
-      "id": "25445835942",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "chore/release-0.3.1",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T21:14:58Z"
-    },
-    {
-      "id": "25445830631",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "764af572d7819970feca93cdc55bb674542608b4",
-            "message": "Merge remote-tracking branch 'origin/main' into chore/npm-package-metadata\n\n# Conflicts:\n#\tCHANGELOG.md"
-          }
-        ],
-        "ref": "refs/heads/chore/npm-package-metadata"
-      },
-      "created_at": "2026-10-27T20:00:30Z"
-    },
-    {
-      "id": "25445817803",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "cc91693a65de49e382dd28fdd8793e03b7d9fe39",
-            "message": "Merge remote-tracking branch 'origin/main' into docs/v0.3-doc-refresh"
-          }
-        ],
-        "ref": "refs/heads/docs/v0.3-doc-refresh"
-      },
-      "created_at": "2026-10-27T20:00:21Z"
-    },
-    {
-      "id": "25445656415",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3d549256c177b6d1d973b763e7a668acdb87c215",
-            "message": "fix(web): bound deploy verification by its deadline and serialize deploys\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/web-deploy"
-      },
-      "created_at": "2026-10-27T23:35:46Z"
-    },
-    {
-      "id": "25445269016",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "1f0d19d40abbd54a49e8454b569b9a13a2942eda",
-            "message": "Merge branch 'main' into research/export-format-profile"
-          }
-        ],
-        "ref": "refs/heads/research/export-format-profile"
-      },
-      "created_at": "2026-10-27T21:08:41Z"
-    },
-    {
-      "id": "25445022747",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "76b27750cfc15af23e2a30c6ae5e0e21da51605b",
-            "message": "Merge branch 'main' into feat/web-offline-pwa"
+            "sha": "0ec71bd2660bca486e5ca1e9cd009bf66e861162",
+            "message": "test(web): replace an ambiguous alternation with plain assertions\n\nIn /private|some\\/route|\\.md$/ the anchor applies only to the last\nalternative. The intent was three independent checks, so assert them\nseparately.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
         "ref": "refs/heads/feat/web-offline-pwa"
       },
-      "created_at": "2026-10-27T23:28:23Z"
+      "created_at": "2026-10-27T23:20:23Z"
     },
     {
-      "id": "25444789445",
+      "id": "25539363041",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -1775,155 +1950,17 @@
       "payload": {
         "commits": [
           {
-            "sha": "3cf761912ebb55c657f307ab0132bd508c623631",
-            "message": "Merge branch 'feat/implicit-input' into feat/source-to-sink"
-          }
-        ],
-        "ref": "refs/heads/feat/source-to-sink"
-      },
-      "created_at": "2026-10-28T01:26:10Z"
-    },
-    {
-      "id": "25444767598",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "efebd38e35daf7e81247cc42f012d2bbfbe599c2",
-            "message": "fix(core): start Otherwise and menu branches from the block's input\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/implicit-input"
-      },
-      "created_at": "2026-10-28T01:25:54Z"
-    },
-    {
-      "id": "25444750925",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ee1c113e840f255162f42aac98634b5c939cf3dd",
-            "message": "Merge pull request #107 from and3rn3t/feat/variables\n\nfeat(core): named variables and magic-variable tokens"
+            "sha": "a633f54829cff8a9448fd777c7378398897d4ad1",
+            "message": "Merge pull request #99 from and3rn3t/feat/web-offline-pwa\n\nfeat(web): work offline, and be installable"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-28T01:24:05Z"
+      "created_at": "2026-10-27T23:31:47Z"
     },
     {
-      "id": "25444750647",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/variables",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T01:24:05Z"
-    },
-    {
-      "id": "25444635233",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "73687cc0d6389f7725d82c974dbe5b2141278ee9",
-            "message": "Merge remote-tracking branch 'origin/main' into fix/catalog-real-identifiers\n\n# Conflicts:\n#\tCHANGELOG.md"
-          }
-        ],
-        "ref": "refs/heads/fix/catalog-real-identifiers"
-      },
-      "created_at": "2026-10-27T21:02:08Z"
-    },
-    {
-      "id": "25444216968",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b81170c03229fd2d628e8ceb2f3abcb3e036489c",
-            "message": "fix(web,test): page long link lists; cover variables in the installed-skill tests\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/variables"
-      },
-      "created_at": "2026-10-28T01:19:34Z"
-    },
-    {
-      "id": "25444161133",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "fix/plist-16-byte-integers",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T20:57:25Z"
-    },
-    {
-      "id": "25442901569",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "1d66bc3bdbe8ae90264813dabe0cbba8e13b8a5e",
-            "message": "Merge remote-tracking branch 'origin/main' into chore/npm-package-metadata\n\n# Conflicts:\n#\tCHANGELOG.md"
-          }
-        ],
-        "ref": "refs/heads/chore/npm-package-metadata"
-      },
-      "created_at": "2026-10-27T19:32:17Z"
-    },
-    {
-      "id": "25442593557",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "73c5f1f897bc417fc61b4d067dee9a46a5f9e0f6",
-            "message": "Merge pull request #96 from and3rn3t/feat/web-report-view\n\nfeat(web): show the full report for an inspected export"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T22:56:00Z"
-    },
-    {
-      "id": "25441091505",
+      "id": "25539020972",
       "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "docs/web-live",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-28T00:12:40Z"
-    },
-    {
-      "id": "25440486604",
-      "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
@@ -1931,555 +1968,11 @@
         "ref": "feat/web-deploy",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-27T23:37:56Z"
+      "created_at": "2026-10-27T23:27:47Z"
     },
     {
-      "id": "25440161583",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "30c656c50b03016bfe498c6de6f5e2f059dc0dcf",
-            "message": "Merge remote-tracking branch 'origin/feat/web-offline-pwa' into feat/web-offline-pwa"
-          }
-        ],
-        "ref": "refs/heads/feat/web-offline-pwa"
-      },
-      "created_at": "2026-10-27T23:29:41Z"
-    },
-    {
-      "id": "25440073937",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ac4fcf006fccc0b756b10338d16cc000c6cd38d0",
-            "message": "Merge pull request #92 from and3rn3t/feat/web-csp\n\nfeat(web): strict CSP and a build guard against network APIs"
-          }
-        ],
-        "ref": "refs/heads/feat/web-scaffold"
-      },
-      "created_at": "2026-10-27T22:28:15Z"
-    },
-    {
-      "id": "25439982605",
+      "id": "25536528415",
       "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-offline-pwa",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:31:48Z"
-    },
-    {
-      "id": "25439706921",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/group-findings",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T22:24:00Z"
-    },
-    {
-      "id": "25439565174",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "1299af8fed2905f56b7c1cfaef88f94eb0a32061",
-            "message": "Merge remote-tracking branch 'origin/main' into docs/v0.3-doc-refresh\n\n# Conflicts:\n#\tCHANGELOG.md"
-          }
-        ],
-        "ref": "refs/heads/docs/v0.3-doc-refresh"
-      },
-      "created_at": "2026-10-27T19:02:11Z"
-    },
-    {
-      "id": "25439435863",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "f7ab1a5bd0e24470f5d8edfccda008c0b6597b9b",
-            "message": "Merge remote-tracking branch 'origin/main' into docs/getting-an-export\n\n# Conflicts:\n#\tCHANGELOG.md"
-          }
-        ],
-        "ref": "refs/heads/docs/getting-an-export"
-      },
-      "created_at": "2026-10-27T19:00:59Z"
-    },
-    {
-      "id": "25438888726",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "fbd8561b9c010868ef0b94ae2cff20d3facdee9b",
-            "message": "Merge pull request #70 from and3rn3t/chore/npm-package-metadata\n\nchore(cli): add homepage and bugs to the npm package metadata"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T20:02:15Z"
-    },
-    {
-      "id": "25438714247",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a3babc9b44224ba8796a818d4e1afe340bff87d1",
-            "message": "Merge pull request #100 from and3rn3t/feat/web-deploy\n\nfeat(web): deploy on release tag and verify the live site"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T23:37:55Z"
-    },
-    {
-      "id": "25438590816",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-markdown-download",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:14:30Z"
-    },
-    {
-      "id": "25438129345",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "docs/web-app",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:31:17Z"
-    },
-    {
-      "id": "25437977222",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "test/web-e2e",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:06:40Z"
-    },
-    {
-      "id": "25437405434",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "release/0.4.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:45:32Z"
-    },
-    {
-      "id": "25437371539",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "release/0.4.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:39:07Z"
-    },
-    {
-      "id": "25437030296",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7f52dc84f5fb469dde45b3c2f8aec648d402996b",
-            "message": "Merge branch 'main' into test/read-export-retry"
-          }
-        ],
-        "ref": "refs/heads/test/read-export-retry"
-      },
-      "created_at": "2026-10-27T21:55:35Z"
-    },
-    {
-      "id": "25436963437",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "docs/getting-an-export",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T18:38:01Z"
-    },
-    {
-      "id": "25436602903",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "38fcf866d699f85ea637a50ccd7fe9a2b0c4bce0",
-            "message": "fix(web): keep the drop highlight while a drag crosses the zone's children\n\ndragleave bubbles from the paragraph and buttons, so moving a dragged\nfile between them cleared the highlight until the next dragover.\nCount dragenter/dragleave instead, clearing only at depth zero and on\ndrop (relatedTarget is null in Safari, so it can't be used). Tests\ncover a child-to-child transition and a drop resetting the count.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/web-inspector-input"
-      },
-      "created_at": "2026-10-27T22:45:28Z"
-    },
-    {
-      "id": "25436393474",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "947f1cdb1d26f49c5102d562ef330a895c724143",
-            "message": "Merge pull request #101 from and3rn3t/docs/web-app\n\ndocs(web): web app README and status"
-          }
-        ],
-        "ref": "refs/heads/feat/web-deploy"
-      },
-      "created_at": "2026-10-27T23:32:44Z"
-    },
-    {
-      "id": "25435988810",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "895b72955d7f165e5b007db95cb19b90396037ae",
-            "message": "Merge remote-tracking branch 'origin/main' into docs/v0.3-doc-refresh"
-          }
-        ],
-        "ref": "refs/heads/docs/v0.3-doc-refresh"
-      },
-      "created_at": "2026-10-27T19:32:08Z"
-    },
-    {
-      "id": "25435942185",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "ci/release-version-guard",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T18:28:07Z"
-    },
-    {
-      "id": "25435918073",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/rules-catalog",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T19:31:25Z"
-    },
-    {
-      "id": "25435054141",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "037e8be7de1f5b2c389f596ea7d7cfd2d5974754",
-            "message": "Merge origin/main into ci/workflow-lint\n\nBrings in #79's verify-npm job and disables its setup-node cache too,\nwhich zizmor flagged after the merge.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/ci/workflow-lint"
-      },
-      "created_at": "2026-10-27T21:34:55Z"
-    },
-    {
-      "id": "25435033958",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-scaffold",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T22:32:01Z"
-    },
-    {
-      "id": "25434921366",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "72ba69d46ed48b1b0151b293696ac094dec0fd1c",
-            "message": "Merge pull request #98 from and3rn3t/feat/web-markdown-download\n\nfeat(web): download the report as Markdown"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T23:14:28Z"
-    },
-    {
-      "id": "25434795270",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "6f2d103c14403f5872d19bfff304da4e042d4fce",
-            "message": "Merge pull request #90 from and3rn3t/feat/group-findings\n\nfeat(core): group repeated findings from the same rule into one finding"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T22:23:58Z"
-    },
-    {
-      "id": "25434756328",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "00f1870b33d18aa4310b37303a0024d3c54416a2",
-            "message": "Merge branch 'main' into feat/web-scaffold"
-          }
-        ],
-        "ref": "refs/heads/feat/web-scaffold"
-      },
-      "created_at": "2026-10-27T22:28:49Z"
-    },
-    {
-      "id": "25434531686",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "128bc62e95f7921aca8f279a03cf67192e842973",
-            "message": "fix(web): close gaps in the build guard found in review\n\n- Reject duplicate CSP directives: browsers enforce the first copy, so\n  a permissive directive could hide before a strict one.\n- Reject any '! header' rule that detaches the CSP or another required\n  header, and a required header set twice in one rule.\n- Flag eval wherever it appears (window.eval, globalThis.eval,\n  (0, eval)) and Function( with or without new.\n- Check every srcset/imagesrcset candidate, plus formaction and ping.\n- Report diagnostic paths with forward slashes on every platform.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/web-csp"
-      },
-      "created_at": "2026-10-27T22:26:16Z"
-    },
-    {
-      "id": "25434516853",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "test/web-e2e",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T23:04:51Z"
-    },
-    {
-      "id": "25433932293",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-inspector-input",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T22:39:15Z"
-    },
-    {
-      "id": "25433660939",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d061d8a101dd8a3ef3dcb0afd778dfc6f09a5a58",
-            "message": "Merge pull request #95 from and3rn3t/feat/web-inspector-input\n\nfeat(web): inspect an export from a file picker or a drop"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T22:54:52Z"
-    },
-    {
-      "id": "25433362796",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/group-findings",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T22:07:28Z"
-    },
-    {
-      "id": "25433351465",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "feat/web-scaffold",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T22:07:21Z"
-    },
-    {
-      "id": "25433204593",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "805adbb3e01e40771b6a293c638f6b279967772c",
-            "message": "Merge remote-tracking branch 'origin/main' into docs/v0.3-doc-refresh"
-          }
-        ],
-        "ref": "refs/heads/docs/v0.3-doc-refresh"
-      },
-      "created_at": "2026-10-27T19:04:50Z"
-    },
-    {
-      "id": "25432927840",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "refactor/cli-parseargs",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T19:02:06Z"
-    },
-    {
-      "id": "25432512702",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "fa5dd572c7f612f4b44eec0c52c4e75016bcc49d",
-            "message": "Merge branch 'feat/web-inspector-input' into feat/web-report-view"
-          }
-        ],
-        "ref": "refs/heads/feat/web-report-view"
-      },
-      "created_at": "2026-10-27T22:45:48Z"
-    },
-    {
-      "id": "25432363045",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "chore/ignore-claude-worktrees",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-27T22:20:06Z"
-    },
-    {
-      "id": "25431984898",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5f140112672643af43556f9c26ba145cc9d0d40b",
-            "message": "Merge pull request #84 from and3rn3t/test/read-export-retry\n\ntest(cli): cover the EAGAIN retry and piped-stdin read paths"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T21:57:20Z"
-    },
-    {
-      "id": "25431760091",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "964b41686ea0f3d03e2df4a4785002e5a9dd6553",
-            "message": "Merge pull request #83 from and3rn3t/chore/changelog-fragments\n\nchore: changelog fragments instead of editing CHANGELOG.md in every PR"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-27T21:54:55Z"
-    },
-    {
-      "id": "25431669154",
-      "type": "CreateEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
@@ -2487,10 +1980,10 @@
         "ref": "feat/web-report-view",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-27T22:44:11Z"
+      "created_at": "2026-10-27T22:56:01Z"
     },
     {
-      "id": "25431312354",
+      "id": "25535626552",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -2498,16 +1991,16 @@
       "payload": {
         "commits": [
           {
-            "sha": "d9e62cc94a56a3773a5ff5083698838f1360ee3c",
-            "message": "Merge pull request #91 from and3rn3t/feat/web-scaffold\n\nfeat(web): scaffold apps/web as Workers static assets"
+            "sha": "e2bf7e0be1279550ef2e31f65cc563ee0348fabf",
+            "message": "Merge remote-tracking branch 'origin/feat/web-scaffold' into feat/web-scaffold"
           }
         ],
-        "ref": "refs/heads/main"
+        "ref": "refs/heads/feat/web-scaffold"
       },
-      "created_at": "2026-10-27T22:31:59Z"
+      "created_at": "2026-10-27T22:29:43Z"
     },
     {
-      "id": "25431039690",
+      "id": "25534625215",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -2515,40 +2008,137 @@
       "payload": {
         "commits": [
           {
-            "sha": "df3e781e692d5ef2e3843695fa1f4282037ee2e8",
-            "message": "Merge remote-tracking branch 'origin/main' into ci/workflow-lint\n\n# Conflicts:\n#\tCHANGELOG.md"
+            "sha": "1edc216e432b0c7769ff47827776678432cc05ef",
+            "message": "Merge remote-tracking branch 'origin/feat/parameter-shape' into feat/secrets"
           }
         ],
-        "ref": "refs/heads/ci/workflow-lint"
+        "ref": "refs/heads/feat/secrets"
       },
-      "created_at": "2026-10-27T21:40:26Z"
+      "created_at": "2026-10-28T01:45:01Z"
     },
     {
-      "id": "25430969102",
+      "id": "25531317237",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
-        "ref": "feat/web-csp",
+        "ref": "test/read-export-retry",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-27T22:28:17Z"
+      "created_at": "2026-10-27T21:57:21Z"
     },
     {
-      "id": "25430281388",
+      "id": "25530627990",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "tmp/union-base",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T21:49:20Z"
+    },
+    {
+      "id": "25530128189",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e4ee708da65714ab3936caef7467a5bfe680becf",
+            "message": "fix(ci): bound each registry poll by the remaining deadline\n\ncurl had no overall timeout, so a registry that accepted the\nconnection and then stalled could hang verification past its\ndeadline. Pass the remaining time (at most 30s) to --max-time and cap\nthe sleep the same way.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/ci/release-verify-publish"
+      },
+      "created_at": "2026-10-27T21:31:03Z"
+    },
+    {
+      "id": "25529698468",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a38fa98e3fd480ad19c263970f8a89ad8417a8a5",
+            "message": "Merge remote-tracking branch 'origin/main' into ci/codeql-single-analysis\n\n# Conflicts:\n#\tCHANGELOG.md"
+          }
+        ],
+        "ref": "refs/heads/ci/codeql-single-analysis"
+      },
+      "created_at": "2026-10-27T21:38:28Z"
+    },
+    {
+      "id": "25528419918",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e094a6c631369352e45813d9064c89b26ea854fe",
+            "message": "Merge pull request #77 from and3rn3t/research/export-format-profile\n\ndocs(research): profile 138 real exports and record the format"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-27T21:13:28Z"
+    },
+    {
+      "id": "25528165226",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0de6194600e2d735161671e55df1fffb353c57bf",
+            "message": "Merge pull request #103 from and3rn3t/docs/web-live\n\ndocs: web app is live"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-28T00:14:41Z"
+    },
+    {
+      "id": "25527635941",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f6452ea4815b84ddb51e46d9dcaa46fb43fdfdd9",
+            "message": "Merge pull request #78 from and3rn3t/chore/release-0.3.1\n\nchore(release): 0.3.1"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-10-27T21:16:41Z"
+    },
+    {
+      "id": "25527294014",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
       },
       "payload": {
-        "ref": "ci/codeql-single-analysis",
+        "ref": "research/export-format-profile",
         "ref_type": "branch"
       },
-      "created_at": "2026-10-27T21:39:47Z"
+      "created_at": "2026-10-27T21:13:30Z"
     },
     {
-      "id": "25430279160",
+      "id": "25525918099",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -2556,16 +2146,88 @@
       "payload": {
         "commits": [
           {
-            "sha": "9938a684cd284e84051ad074e9ac235585b1f188",
-            "message": "Merge pull request #80 from and3rn3t/ci/codeql-single-analysis\n\nci(codeql): run one analysis; javascript already covers TypeScript"
+            "sha": "f8c763cd6473b1184625cc3e45c6c084621cfb8a",
+            "message": "Merge pull request #102 from and3rn3t/release/0.4.0\n\nchore: release 0.4.0"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-10-27T21:39:46Z"
+      "created_at": "2026-10-27T23:45:30Z"
     },
     {
-      "id": "25430093060",
+      "id": "25524847698",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "docs/web-app",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T23:32:46Z"
+    },
+    {
+      "id": "25522976869",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "feat/web-markdown-download",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T23:09:06Z"
+    },
+    {
+      "id": "25521803887",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "feat/web-inspector-input",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T22:54:54Z"
+    },
+    {
+      "id": "25521004729",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "fix/plist-decode-speed",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T20:13:07Z"
+    },
+    {
+      "id": "25520409126",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "chore/release-0.3.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T20:07:21Z"
+    },
+    {
+      "id": "25519857376",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "chore/npm-package-metadata",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T20:02:16Z"
+    },
+    {
+      "id": "25518356603",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/apple-shortcuts-doctor"
@@ -2573,13 +2235,252 @@
       "payload": {
         "commits": [
           {
-            "sha": "1fa8294703e4be5aa5c8a3b1a1a1bb816002a088",
-            "message": "docs(web): record how _headers rules combine, checked with wrangler dev\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "e513633d67a79528025c4915e64cdb681a0e4b51",
+            "message": "Merge remote-tracking branch 'origin/main' into ci/smoke-test-tarball\n\n# Conflicts:\n#\tCHANGELOG.md"
           }
         ],
-        "ref": "refs/heads/feat/web-csp"
+        "ref": "refs/heads/ci/smoke-test-tarball"
       },
-      "created_at": "2026-10-27T22:17:41Z"
+      "created_at": "2026-10-27T19:32:25Z"
+    },
+    {
+      "id": "25517940249",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "feat/core-plist-parser",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T19:28:46Z"
+    },
+    {
+      "id": "25516863006",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "chore/changelog-fragments",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T21:54:57Z"
+    },
+    {
+      "id": "25516685131",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "test/read-export-retry",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T21:52:57Z"
+    },
+    {
+      "id": "25516657423",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4a2950350cbaff8635e8ac7e110a26391dc1ab51",
+            "message": "Merge remote-tracking branch 'origin/main' into chore/npm-package-metadata\n\n# Conflicts:\n#\tCHANGELOG.md"
+          }
+        ],
+        "ref": "refs/heads/chore/npm-package-metadata"
+      },
+      "created_at": "2026-10-27T19:30:44Z"
+    },
+    {
+      "id": "25516607165",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "chore/changelog-fragments",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T21:52:05Z"
+    },
+    {
+      "id": "25516385941",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "tmp/union-base",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T21:49:40Z"
+    },
+    {
+      "id": "25516357047",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "tmp/union-head",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T21:49:21Z"
+    },
+    {
+      "id": "25515056374",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "204698dd31cef48833911d9c3ccecd16bc44bb52",
+            "message": "Merge branch 'main' into fix/cli-version-unknown-options"
+          }
+        ],
+        "ref": "refs/heads/fix/cli-version-unknown-options"
+      },
+      "created_at": "2026-10-27T19:02:26Z"
+    },
+    {
+      "id": "25514725228",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c14121fc442126734b7a934b1b2944e724a1dba5",
+            "message": "Merge remote-tracking branch 'origin/main' into refactor/cli-parseargs\n\n# Conflicts:\n#\tCHANGELOG.md"
+          }
+        ],
+        "ref": "refs/heads/refactor/cli-parseargs"
+      },
+      "created_at": "2026-10-27T18:59:48Z"
+    },
+    {
+      "id": "25514512389",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5964364692dc5245f646cd9357e9c2c431f05d77",
+            "message": "fix(core): bound decoded plist bytes and harden lookups\n\n- Charge string and data bytes against a 64 MiB budget before\n  allocating, so a large value referenced many times from a small\n  binary plist can't exhaust memory.\n- Resolve XML entities and real specials on own keys only, so\n  &constructor; and <real>__proto__</real> fail instead of decoding.\n- Push array items one at a time in the reference walker; spreading a\n  200,000-item array exceeded the engine's argument limit.\n- Require every truncated seed to be rejected, not just to not leak.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/core-plist-parser"
+      },
+      "created_at": "2026-10-27T18:57:57Z"
+    },
+    {
+      "id": "25514263967",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e867b3b134f2867cad422d0b94aeeac6ec2c412f",
+            "message": "Merge remote-tracking branch 'origin/main' into docs/v0.3-doc-refresh"
+          }
+        ],
+        "ref": "refs/heads/docs/v0.3-doc-refresh"
+      },
+      "created_at": "2026-10-27T19:06:48Z"
+    },
+    {
+      "id": "25514233742",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d02514ea35d86504d56e2c16121055d40010b23a",
+            "message": "Merge remote-tracking branch 'origin/main' into ci/smoke-test-tarball\n\n# Conflicts:\n#\tCHANGELOG.md"
+          }
+        ],
+        "ref": "refs/heads/ci/smoke-test-tarball"
+      },
+      "created_at": "2026-10-27T19:06:32Z"
+    },
+    {
+      "id": "25513651907",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5d514b6c8655246aecc6a8f997d588623d7203f2",
+            "message": "Merge remote-tracking branch 'origin/main' into feat/core-plist-parser\n\n# Conflicts:\n#\tCHANGELOG.md"
+          }
+        ],
+        "ref": "refs/heads/feat/core-plist-parser"
+      },
+      "created_at": "2026-10-27T19:01:40Z"
+    },
+    {
+      "id": "25513095463",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "feat/core-plist-parser",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T18:44:45Z"
+    },
+    {
+      "id": "25512108267",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "ci/smoke-test-tarball",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T18:49:06Z"
+    },
+    {
+      "id": "25511542094",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "fix/cli-version-unknown-options",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T18:31:14Z"
+    },
+    {
+      "id": "25510381903",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "docs/roadmap-to-issues",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-10-27T18:20:29Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2593,7 +2494,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4287,
+    "total": 4320,
     "weeks": [
       {
         "days": [
@@ -4637,7 +4538,7 @@
           },
           {
             "date": "2026-10-27",
-            "count": 248,
+            "count": 253,
             "level": 4
           },
           {
@@ -4647,6 +4548,11 @@
           },
           {
             "date": "2026-10-29",
+            "count": 28,
+            "level": 1
+          },
+          {
+            "date": "2026-10-30",
             "count": 0,
             "level": 0
           }
@@ -4655,11 +4561,11 @@
     ]
   },
   "languageBytes": {
-    "TypeScript": 13436266,
+    "TypeScript": 13458220,
     "HTML": 9486085,
     "Swift": 5121304,
     "Python": 4559322,
-    "JavaScript": 2988487,
+    "JavaScript": 2993490,
     "Shell": 1110244,
     "CSS": 637906,
     "R": 618546,
@@ -4680,6 +4586,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-10-29T03:09:15Z",
+  "lastUpdated": "2026-10-30T03:09:03Z",
   "totalRepos": 54
 }
