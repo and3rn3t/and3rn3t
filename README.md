@@ -34,18 +34,24 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [health](https://github.com/and3rn3t/health)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+>
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -73,12 +79,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
 > 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
-
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker, docker-compose, flask
 
 <!-- FEATURED-PROJECTS:END -->
 
