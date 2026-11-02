@@ -34,11 +34,24 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> My attempt to build an inclusive homehub / automation project.
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
+
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
+
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -47,11 +60,18 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, ai, gait-analysis, health, healthkit
 > 🔗 [Live](https://health.andernet.dev)
 
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
 >
-> **Tech:** Python, arm64, docker, docker-compose, flask
+> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
+
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -59,26 +79,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
-
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
-
-> My attempt to build an inclusive homehub / automation project.
->
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
-
-> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
->
-> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
-> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
 <!-- FEATURED-PROJECTS:END -->
 
