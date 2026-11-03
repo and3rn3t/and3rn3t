@@ -41,17 +41,24 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
 > 🔗 [Live](https://homehub.andernet.dev)
 
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
 > **Tech:** Python, arm64, docker, docker-compose, flask
+
+### 🌐 [guess](https://github.com/and3rn3t/guess)
+
+> A guessing game like "Akinator", but with more visibility to the user how it works.
+>
+> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
+> 🔗 [Live](https://andernator.com)
+
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -72,13 +79,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
-
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> A guessing game like "Akinator", but with more visibility to the user how it works.
->
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
 
 <!-- FEATURED-PROJECTS:END -->
 
