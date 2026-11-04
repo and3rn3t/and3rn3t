@@ -28,9 +28,48 @@
       "stargazers_count": 2,
       "forks_count": 0,
       "open_issues_count": 6,
-      "pushed_at": "2026-11-03T01:13:36Z",
+      "pushed_at": "2026-11-03T11:48:47Z",
       "updated_at": "2026-11-02T06:30:17Z",
       "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1376614095,
+      "name": "birds",
+      "full_name": "and3rn3t/birds",
+      "description": "E-ink bird frame for Raspberry Pi - real-time bird detection by audio, fully local AI, rendered as real, hand-cut 1800s bird illustrations.",
+      "html_url": "https://github.com/and3rn3t/birds",
+      "homepage": "http://arnegiacomo.dev/fugleramme/",
+      "language": "Python",
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 2,
+      "pushed_at": "2026-11-03T07:47:18Z",
+      "updated_at": "2026-10-21T01:33:34Z",
+      "created_at": "2026-09-19T01:50:31Z",
+      "fork": true,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-03T05:06:05Z",
+      "updated_at": "2026-11-03T03:07:59Z",
+      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -284,27 +323,6 @@
       "pushed_at": "2026-11-02T07:03:53Z",
       "updated_at": "2026-10-21T01:24:14Z",
       "created_at": "2026-03-26T20:37:33Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-02T05:06:39Z",
-      "updated_at": "2026-11-02T03:08:58Z",
-      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -737,24 +755,6 @@
       "updated_at": "2026-10-27T17:03:50Z",
       "created_at": "2026-07-04T20:11:00Z",
       "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1376614095,
-      "name": "birds",
-      "full_name": "and3rn3t/birds",
-      "description": "E-ink bird frame for Raspberry Pi - real-time bird detection by audio, fully local AI, rendered as real, hand-cut 1800s bird illustrations.",
-      "html_url": "https://github.com/and3rn3t/birds",
-      "homepage": "http://arnegiacomo.dev/fugleramme/",
-      "language": "Python",
-      "topics": [],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-10-23T17:42:56Z",
-      "updated_at": "2026-10-21T01:33:34Z",
-      "created_at": "2026-09-19T01:50:31Z",
-      "fork": true,
       "archived": false
     },
     {
@@ -1242,6 +1242,1113 @@
   ],
   "events": [
     {
+      "id": "26053469083",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "10375cf723e6f47b09512a0012b8f00eefae55c7",
+            "message": "refactor: burn down frontend lint debt and ratchet lint (phase 4a) (#125)\n\n* refactor: remove unused variables and imports\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore(lint): allow non-component exports in ui primitives and contexts\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix: keep device notes edited in mock mode\n\nMock mode wrote notes into behavioral.notes behind an `as any`, but the list\nreads device.notes, so the edit was silently lost. Store it on the device like\nthe real API path does.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* refactor: replace explicit any with real types in app code and tests\n\nUse the API client return types in ApplicationUsageDashboard, declare\nwindow.errorTracker globally (renaming the misspelled vite-end.d.ts and dropping\nits unused Spark globals), use typed mockData fixtures and vi.mocked() in\nuseApiData tests, and a named fetchMock / unknown casts for test doubles.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* refactor: derive capture and stale-snapshot state in useApiData\n\nReplace two setState-in-effect syncs with derived values (a start/stop\noverride that expires on the next health poll, and the snapshot flag from the\nqueries isFetched state), list USE_REAL_API as a hook dependency, and use a\nshared empty-array fallback so the snapshot-save effect stops re-running every\nrender while queries are empty. FlowDetailView now fetches by flow.id instead\nof reading a variable declared later in render.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* refactor: keep render pure in App, DataExporter, DashboardTab and MaintenancePanel\n\nAdd a useNow() hook instead of Date.now() during render, compute DataExporter\ndefault dates and mock-mode trend labels once via lazy useState (the trend\nlabels previously re-rolled on every render), and declare MaintenancePanel\nrefreshStats before the effect that calls it.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* refactor: replace setState-in-effect syncs with derived and initial state\n\n- FlowFilters, SearchBar, useFlowFilters presets: adjust state during render\n  when the input changes instead of in an effect (SearchBar also stops\n  re-running its effect every render on a fresh default results object)\n- useDataSource mock data, AuthContext loading, dashboard loading flags:\n  lazy/initial state instead of setting it on mount\n- useFlowFilters: drop the shouldFetch flag that only delayed auto-fetch by a\n  render\n- ThemeToggle: drop the SSR hydration guard (client-only SPA)\n- useThroughputGauge: track the peak during render; the decay tick stamps the\n  hold start\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore(lint): make explicit any an error and cap warnings at 5\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix: re-open search results when a cached search is repeated\n\nTrack every data transition in the auto-show marker, including back to\nundefined, so a repeated search served from the query cache still opens the\ndialog. Adds a regression test.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T23:34:55Z"
+    },
+    {
+      "id": "26052793449",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "814b27dd5c8af9f7db5713f146d86ed1de006c89",
+            "message": "docs: consolidate docs and scripts (phase 3) (#121)\n\n* chore: remove one-off Pi fix scripts and consolidate scripts reference\n\nDelete unreferenced fix-*/restart/kill-port scripts, PowerShell duplicates,\nobsolete host-diagnose/log-tail/tunnel-test scripts and setup-cloudflare-env.sh\n(Pages env vars never reach the prebuilt CI bundle). scripts/README.md is now\nthe single reference; docs/SCRIPTS_REFERENCE.md is removed.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: merge deployment, tunnel and env docs into DEPLOYMENT.md\n\nReplace five overlapping guides (several described a nonexistent deploy.yml,\nNode 20, and Pages-dashboard env vars that never reach the prebuilt CI bundle)\nwith one accurate page. TROUBLESHOOTING.md now covers only the Pi backend and\nkeeps the capture tips from the deleted fix scripts.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: merge capture placement, internals and extraction docs into CAPTURE.md\n\nCondense three overlapping docs into one, verified against\nservices/packet_capture/service.py (5-minute flow eviction, not 60s; BPF\nfilter and sampling are not configurable today). Keeps the remote_ssh setup\nand the UDM Pro port-mirroring gotcha.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: drop superseded docs, make README the docs index and fix dangling links\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T23:05:06Z"
+    },
+    {
+      "id": "26052597593",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/cleanup-docs-scripts",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T23:02:42Z"
+    },
+    {
+      "id": "26051227952",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "078da914ee9945ab777c54e28df44034bc5a9957",
+            "message": "docs: clarify that CI build env vars come from GitHub secrets\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/cleanup-hygiene"
+      },
+      "created_at": "2026-11-01T22:44:04Z"
+    },
+    {
+      "id": "26048968978",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/dnspython-2.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:12:25Z"
+    },
+    {
+      "id": "26048423947",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "327df839521c0923f7b72161e29034c0eeea2b18",
+            "message": "chore(deps): update dependency bcrypt to v4.3.0 (#108)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:04:49Z"
+    },
+    {
+      "id": "26048421240",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/tanstack-query-monorepo",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:04:47Z"
+    },
+    {
+      "id": "26047496259",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/python-multipart-0.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:12:28Z"
+    },
+    {
+      "id": "26046829573",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/bcrypt-4.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:04:50Z"
+    },
+    {
+      "id": "26046235458",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "refactor/split-monoliths",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:34:14Z"
+    },
+    {
+      "id": "26046233428",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0250e1b07b7ee045611cd128cf379db4ce5d86e8",
+            "message": "Merge pull request #74 from and3rn3t/refactor/split-monoliths\n\nrefactor: split App and AdminPanel into sections and per-tab components"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T21:34:13Z"
+    },
+    {
+      "id": "26045954026",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "test/vitest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:54:41Z"
+    },
+    {
+      "id": "26044982364",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2225ad3a9bf8c2e66e915d171eeeea3236f2aec1",
+            "message": "chore(backend): widen ruff rules, format, and add service tests (phase 4b) (#124)\n\n* refactor(backend): widen ruff rules and apply safe autofixes\n\nSelect E, F, W, I, UP and B (ignoring E501 and FastAPI-idiomatic B008) with\npy311 target, and apply ruff's safe fixes: PEP 604/585 annotations,\ncollections.abc imports, sorted imports, datetime.UTC, TimeoutError alias.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix(backend): chain re-raised HTTPExceptions and remove bare excepts\n\nAdd `from e` to 15 HTTPException re-raises so the original cause stays in\ntracebacks, replace two bare `except:` with `except Exception:`, move\nerror_handler imports to the top, use StrEnum for UserRole, and mark the\nintentional late imports in main.py and conftest.py with noqa.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* style(backend): apply ruff format\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* ci: check backend formatting with ruff format --check\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test(backend): cover threat scoring and device fingerprinting\n\nAdd unit tests for ThreatDetectionService (score thresholds, abrupt-reset\nregression guard, RTT sample averaging, classification, storage failure) and\nDeviceFingerprintingService (DHCP naming, MAC reuse, new-device alerts, type\nheuristics, fallback names, backfill).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore(backend): require Python 3.11+ in installer and docs\n\nThe backend already targets py311 (ruff, CI) and now uses datetime.UTC and\nStrEnum, so stop advertising 3.10.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* test(backend): make RTT averaging assertion able to fail\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T23:22:15Z"
+    },
+    {
+      "id": "26044973575",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "46d5caa8ac2d49188364a9943bc14a5c5fafef61",
+            "message": "Merge branch 'main' into feat/photos-r2"
+          }
+        ],
+        "ref": "refs/heads/feat/photos-r2"
+      },
+      "created_at": "2026-11-01T21:18:30Z"
+    },
+    {
+      "id": "26043326153",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/npm_and_yarn-3e626d7f1c",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T20:57:41Z"
+    },
+    {
+      "id": "26043025122",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/cleanup-dead-code",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:55:07Z"
+    },
+    {
+      "id": "26043025349",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/cleanup-backend",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T23:22:16Z"
+    },
+    {
+      "id": "26043020686",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "fix/kv-auth",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:13:12Z"
+    },
+    {
+      "id": "26042783628",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9d54662dbce986287ec1ca31b0084c8992fe24de",
+            "message": "Merge pull request #70 from and3rn3t/fix/lockfile-linux-optional-deps\n\nfix: restore nested @emnapi lockfile entries so npm ci passes"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T20:50:15Z"
+    },
+    {
+      "id": "26042634671",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "fix/lockfile-linux-optional-deps",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T20:48:18Z"
+    },
+    {
+      "id": "26039330728",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a6631a9c14d076338fc4863df571ff3d9b68423a",
+            "message": "chore(deps): update dependency @tanstack/react-query to v5.105.1 (#114)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:04:46Z"
+    },
+    {
+      "id": "26039326985",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/multi-fbf11548f4",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:04:44Z"
+    },
+    {
+      "id": "26038169283",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "80d572469191fd59d420e3be68aa925891f42e94",
+            "message": "chore(deps): update dependency dnspython to v2.9.1 (#111)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:12:23Z"
+    },
+    {
+      "id": "26038039477",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "bc2d7d25da99cdf7ab39db6e8ce9adefe8723ca4",
+            "message": "fix: unblock photo migration under CSP and size pool canvas by layout box\n\n- Decode legacy data: URLs locally (dataUrlToBlob) instead of fetch(), which\n  the new CSP connect-src 'self' blocks, breaking \"Move photos\"\n- Size the pool canvas from clientWidth/clientHeight; getBoundingClientRect\n  included the entrance scaleY transform and ResizeObserver never refired\n  when it finished, leaving a squashed or zero-height bitmap\n\nAddresses Copilot review on #75.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/perf/polish"
+      },
+      "created_at": "2026-11-01T21:48:02Z"
+    },
+    {
+      "id": "26037741776",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "90fbedce9e617f37f3ef2f6eb7d39cd132b1f818",
+            "message": "Merge branch 'main' into renovate/and3rn3t-.github-digest"
+          }
+        ],
+        "ref": "refs/heads/renovate/and3rn3t-.github-digest"
+      },
+      "created_at": "2026-11-01T19:44:51Z"
+    },
+    {
+      "id": "26037698270",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "f470b94f729118b6eef42d0655d3445bf2e13c79",
+            "message": "fix: regenerate package-lock on Linux so npm ci finds bundled @emnapi deps\n\nnpm on macOS drops the @emnapi/core and @emnapi/runtime entries bundled\ninside @tailwindcss/oxide-wasm32-wasi, which makes npm ci fail on Linux CI.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/perf/polish"
+      },
+      "created_at": "2026-11-01T21:42:43Z"
+    },
+    {
+      "id": "26037666856",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/npm_and_yarn-e2ace21792",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:44:06Z"
+    },
+    {
+      "id": "26037018206",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/uuid-14.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:45:31Z"
+    },
+    {
+      "id": "26037016815",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "14f8ae43a42a67312b0db4db00ef148be7cefce8",
+            "message": "chore(deps): update dependency uuid to v14.0.3 (#291)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T19:45:30Z"
+    },
+    {
+      "id": "26036934799",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "test/vitest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:56:45Z"
+    },
+    {
+      "id": "26036883449",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/dashjs-5.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:33:53Z"
+    },
+    {
+      "id": "26035958659",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/cleanup-hygiene",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:47:00Z"
+    },
+    {
+      "id": "26035946030",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "01fa601981101cbfcc678039527b15bcc45e7c31",
+            "message": "Merge pull request #73 from and3rn3t/feat/photos-r2\n\nfeat(gallery): store photos in R2 instead of base64 in KV"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T21:19:35Z"
+    },
+    {
+      "id": "26035272919",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "refactor/split-monoliths",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:33:02Z"
+    },
+    {
+      "id": "26035139076",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2cba4e975f72519857e53d29e2d7e79cbca2ad29",
+            "message": "Merge branch 'main' into chore/bump-github-workflows-sha"
+          }
+        ],
+        "ref": "refs/heads/chore/bump-github-workflows-sha"
+      },
+      "created_at": "2026-11-01T19:20:32Z"
+    },
+    {
+      "id": "26034607696",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "16c49b9433dfaf840d10f37b02859b28cbc4d0f8",
+            "message": "chore: adopt shared @and3rn3t/eslint-config\n\nReplace the local base ESLint config with @and3rn3t/eslint-config 0.3.0 and\nkeep net-traffic's no-explicit-any warning and *.config.js ignore local. The\nReact Compiler rule downgrades are now provided by the shared base.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/shared-eslint-config"
+      },
+      "created_at": "2026-11-01T22:25:43Z"
+    },
+    {
+      "id": "26034158426",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "feat/photos-r2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:17:17Z"
+    },
+    {
+      "id": "26033051630",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/vite-and-vitest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:04:58Z"
+    },
+    {
+      "id": "26032684241",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d6e45f3e21c6552dbaa55b176f56208cb4e34db3",
+            "message": "Merge pull request #69 from and3rn3t/dependabot/npm_and_yarn/npm_and_yarn-3e626d7f1c\n\nchore(deps): bump the npm_and_yarn group across 1 directory with 2 updates"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T20:57:39Z"
+    },
+    {
+      "id": "26032561948",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c87a89c52e2abd0d83093f414712ecae1de74739",
+            "message": "Merge pull request #76 from and3rn3t/test/vitest\n\ntest: add Vitest suite for Pages Functions and useKV"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T21:56:44Z"
+    },
+    {
+      "id": "26032186542",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "fix/lockfile-linux-optional-deps",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T20:50:16Z"
+    },
+    {
+      "id": "26031779729",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "cd8eb4682debb53ee8c3014ce119a774d6921081",
+            "message": "chore: sync package-lock with Linux optional deps\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/eslint-config-0.3"
+      },
+      "created_at": "2026-11-01T20:23:50Z"
+    },
+    {
+      "id": "26031705904",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "efaf001b625208f515510455dfa3636cf8b3f6b2",
+            "message": "docs: make AGENTS.md canonical and fix stale stack claims\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T20:44:12Z"
+    },
+    {
+      "id": "26031197803",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "7ac041b52ec5cd8a8106e5f0ad6fd7d6441e1e6b",
+            "message": "chore: repo hygiene cleanup (phase 1) (#119)\n\n* chore: stop tracking coverage output\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore: remove unused Spark sha, proxy worker and duplicate issue templates\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore: point wrangler.toml at the net-traffic Pages project\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore: drop dead kill and optimize npm scripts\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: fold AGENT_INSTRUCTIONS into AGENTS.md and fix stale Node version\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* docs: clarify that CI build env vars come from GitHub secrets\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:46:58Z"
+    },
+    {
+      "id": "26030592265",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "ff7373c0255292371ec7b35f3e7e4c207c27abf6",
+            "message": "Merge origin/main into chore/repo-cleanup\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/repo-cleanup"
+      },
+      "created_at": "2026-11-01T20:09:22Z"
+    },
+    {
+      "id": "26030153836",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "3c6bde9944a52399356b1e6fa547822cc4315456",
+            "message": "Merge pull request #66 from and3rn3t/chore/eslint-config-0.3\n\nchore(deps): bump @and3rn3t/eslint-config to 0.3.0 (ESLint 10)"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T20:26:07Z"
+    },
+    {
+      "id": "26029809826",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "fix/kv-auth",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T21:15:04Z"
+    },
+    {
+      "id": "26029751859",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6b99751431d054b9fbfc1665af4f74283266988c",
+            "message": "Merge branch 'main' into fix/kv-auth"
+          }
+        ],
+        "ref": "refs/heads/fix/kv-auth"
+      },
+      "created_at": "2026-11-01T21:14:02Z"
+    },
+    {
+      "id": "26029041188",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2cf87525228448a3638d6f28cfc57a4fc9caad22",
+            "message": "chore(deps-dev): bump js-yaml (#295)\n\nBumps the npm_and_yarn group with 1 update in the / directory: [js-yaml](https://github.com/nodeca/js-yaml).\n\n\nUpdates `js-yaml` from 4.1.1 to 4.3.2\n- [Changelog](https://github.com/nodeca/js-yaml/blob/4.3.2/CHANGELOG.md)\n- [Commits](https://github.com/nodeca/js-yaml/compare/4.1.1...4.3.2)\n\n---\nupdated-dependencies:\n- dependency-name: js-yaml\n  dependency-version: 4.3.2\n  dependency-type: indirect\n  dependency-group: npm_and_yarn\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T19:50:28Z"
+    },
+    {
+      "id": "26028965841",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "chore/repo-cleanup",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T20:08:04Z"
+    },
+    {
+      "id": "26028083771",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "fix/ghas-code-scanning-alerts",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:55:48Z"
+    },
+    {
+      "id": "26027020585",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d2864b0ccd7810430a77f7c794e7d607aca648c4",
+            "message": "Merge branch 'main' into renovate/uuid-14.x-lockfile"
+          }
+        ],
+        "ref": "refs/heads/renovate/uuid-14.x-lockfile"
+      },
+      "created_at": "2026-11-01T19:40:30Z"
+    },
+    {
+      "id": "26023522767",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/and3rn3t-.github-digest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:51:57Z"
+    },
+    {
+      "id": "26022484759",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/marked-18.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:39:17Z"
+    },
+    {
+      "id": "26021775008",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4febb43c11bbf6e05bb346f4ffcbded5ab21d2be",
+            "message": "Merge branch 'main' into renovate/dashjs-5.x-lockfile"
+          }
+        ],
+        "ref": "refs/heads/renovate/dashjs-5.x-lockfile"
+      },
+      "created_at": "2026-11-01T19:30:18Z"
+    },
+    {
+      "id": "26019456063",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d09f09db74c03f3db367234e9c5ba7d52559b353",
+            "message": "chore: remove dead code and unused dependencies (phase 2) (#120)\n\n* chore: remove GitHub Spark runtime and Vite plugins\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* fix: import motion/react and list react-resizable instead of relying on transitive deps\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n* chore: remove unused shadcn components and their dependencies\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:55:06Z"
+    },
+    {
+      "id": "26019388307",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "fix/ghas-code-scanning-alerts",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:59:52Z"
+    },
+    {
+      "id": "26018052383",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/react-error-boundary-6.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:39:52Z"
+    },
+    {
+      "id": "26018031665",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/react-day-picker-10.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:39:35Z"
+    },
+    {
+      "id": "26016651856",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "05c614fa723e5625337f271cf13f8541a8d3d109",
+            "message": "chore: adopt shared @and3rn3t/eslint-config\n\nReplace the local base ESLint config with @and3rn3t/eslint-config 0.3.0 and\nkeep net-traffic's no-explicit-any warning and *.config.js ignore local. The\nReact Compiler rule downgrades are now provided by the shared base.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/shared-eslint-config"
+      },
+      "created_at": "2026-11-01T22:22:14Z"
+    },
+    {
+      "id": "26016604612",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "chore/bump-github-workflows-sha",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:19:21Z"
+    },
+    {
+      "id": "26015716537",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a13da00ee45604699a69513888c1abbd2453f096",
+            "message": "chore(deps): update dependency @vitejs/plugin-react-swc to v4.3.3 (#106)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:04:56Z"
+    },
+    {
+      "id": "26015306766",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6866326c30a1944ac559ff084c8a54dc2105fc72",
+            "message": "chore(deps): bump undici and wrangler (#115)\n\nBumps [undici](https://github.com/nodejs/undici) to 7.30.1 and updates ancestor dependency [wrangler](https://github.com/cloudflare/workers-sdk/tree/HEAD/packages/wrangler). These dependencies need to be updated together.\n\n\nUpdates `undici` from 7.29.1 to 7.30.1\n- [Release notes](https://github.com/nodejs/undici/releases)\n- [Commits](https://github.com/nodejs/undici/compare/v7.29.1...v7.30.1)\n\nUpdates `wrangler` from 4.151.3 to 4.156.0\n- [Release notes](https://github.com/cloudflare/workers-sdk/releases)\n- [Commits](https://github.com/cloudflare/workers-sdk/commits/wrangler@4.156.0/packages/wrangler)\n\n---\nupdated-dependencies:\n- dependency-name: undici\n  dependency-version: 7.30.1\n  dependency-type: indirect\n- dependency-name: wrangler\n  dependency-version: 4.153.0\n  dependency-type: direct:development\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:04:43Z"
+    },
+    {
+      "id": "26014021615",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "76201f25b9ce4112fd3ac881067d8a555d9a995b",
+            "message": "Merge branch 'main' into perf/polish"
+          }
+        ],
+        "ref": "refs/heads/perf/polish"
+      },
+      "created_at": "2026-11-01T21:40:31Z"
+    },
+    {
+      "id": "26010917369",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/cleanup-backend",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T23:09:05Z"
+    },
+    {
+      "id": "26010883611",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "chore/slim-workflows",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T20:56:35Z"
+    },
+    {
+      "id": "26009951571",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "ref": "chore/slim-workflows",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T20:55:32Z"
+    },
+    {
+      "id": "26008782305",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "chore/cleanup-hygiene",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:40:28Z"
+    },
+    {
+      "id": "26006600431",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "ref": "renovate/and3rn3t-.github-digest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T22:12:20Z"
+    },
+    {
+      "id": "26006328700",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a2f9954cfce397a00b9b0ad25b7cd8e4f45843af",
+            "message": "Merge branch 'main' into renovate/and3rn3t-.github-digest"
+          }
+        ],
+        "ref": "refs/heads/renovate/and3rn3t-.github-digest"
+      },
+      "created_at": "2026-11-01T19:45:49Z"
+    },
+    {
+      "id": "26006178093",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e09f24697ce60c010ee118dd02fc1aab21977ded",
+            "message": "chore(deps): update dependency sonner to v2.0.8 (#105)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T22:07:48Z"
+    },
+    {
+      "id": "26005860446",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "2476922077766969f4249e8c18b817655a6ab378",
+            "message": "chore(deps): update dependency react-day-picker to v10.0.2 (#288)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T19:39:35Z"
+    },
+    {
+      "id": "26005418069",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9f8489610ef88f0922f0890baeec0a381124bef1",
+            "message": "chore(deps): update dependency dashjs to v5.2.1 (#285)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T19:33:51Z"
+    },
+    {
+      "id": "26004628708",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/npm_and_yarn-56e86fd9c9",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-01T19:50:29Z"
+    },
+    {
+      "id": "26002566236",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c7120b35bab7be533eda1848ae09b12b37889afe",
+            "message": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04 (#292)\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T19:24:59Z"
+    },
+    {
+      "id": "26002032097",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/jonah"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c5052b5026c0880ced32128b4bb8bba381c7a5ee",
+            "message": "Merge pull request #72 from and3rn3t/fix/kv-auth\n\nfix(security): require admin token for KV writes and private reads"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-01T21:15:03Z"
+    },
+    {
       "id": "25995634093",
       "type": "DeleteEvent",
       "repo": {
@@ -1460,1148 +2567,6 @@
         }
       },
       "created_at": "2026-11-01T23:02:53Z"
-    },
-    {
-      "id": "18835875865",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: consolidate docs and scripts (phase 3)",
-          "head": {
-            "ref": "chore/cleanup-docs-scripts"
-          }
-        }
-      },
-      "created_at": "2026-11-01T23:02:53Z"
-    },
-    {
-      "id": "18835534737",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: remove dead code and unused dependencies (phase 2)",
-          "head": {
-            "ref": "chore/cleanup-dead-code"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:55:05Z"
-    },
-    {
-      "id": "18835446157",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: remove dead code and unused dependencies (phase 2)",
-          "head": {
-            "ref": "chore/cleanup-dead-code"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:52:44Z"
-    },
-    {
-      "id": "18835435211",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: remove dead code and unused dependencies (phase 2)",
-          "head": {
-            "ref": "chore/cleanup-dead-code"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:52:44Z"
-    },
-    {
-      "id": "18835179758",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: repo hygiene cleanup (phase 1)",
-          "head": {
-            "ref": "chore/cleanup-hygiene"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:46:56Z"
-    },
-    {
-      "id": "18835063187",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/cleanup-hygiene"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:44:19Z"
-    },
-    {
-      "id": "18835063046",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/cleanup-hygiene"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:44:20Z"
-    },
-    {
-      "id": "18834948053",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: repo hygiene cleanup (phase 1)",
-          "head": {
-            "ref": "chore/cleanup-hygiene"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:40:30Z"
-    },
-    {
-      "id": "18834898326",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: repo hygiene cleanup (phase 1)",
-          "head": {
-            "ref": "chore/cleanup-hygiene"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:40:30Z"
-    },
-    {
-      "id": "18834382497",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: adopt shared @and3rn3t/eslint-config",
-          "head": {
-            "ref": "chore/shared-eslint-config"
-          }
-        }
-      },
-      "created_at": "2026-11-01T22:28:56Z"
-    },
-    {
-      "id": "18832907118",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "test: add Vitest suite for Pages Functions and useKV",
-          "head": {
-            "ref": "test/vitest"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:56:43Z"
-    },
-    {
-      "id": "18832895131",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "test: add Vitest suite for Pages Functions and useKV",
-          "head": {
-            "ref": "test/vitest"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:54:53Z"
-    },
-    {
-      "id": "18832822223",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "test: add Vitest suite for Pages Functions and useKV",
-          "head": {
-            "ref": "test/vitest"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:54:53Z"
-    },
-    {
-      "id": "18832578682",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: remove Spark, fix collapsed layout, polish perf/a11y/headers",
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:49:20Z"
-    },
-    {
-      "id": "18832519332",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:48:03Z"
-    },
-    {
-      "id": "18832519294",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:48:04Z"
-    },
-    {
-      "id": "18832518241",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:48:02Z"
-    },
-    {
-      "id": "18832518235",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:48:03Z"
-    },
-    {
-      "id": "18832166484",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: remove Spark, fix collapsed layout, polish perf/a11y/headers",
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:38:43Z"
-    },
-    {
-      "id": "18832093830",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf: remove Spark, fix collapsed layout, polish perf/a11y/headers",
-          "head": {
-            "ref": "perf/polish"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:38:43Z"
-    },
-    {
-      "id": "18831888454",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: split App and AdminPanel into sections and per-tab components",
-          "head": {
-            "ref": "refactor/split-monoliths"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:34:11Z"
-    },
-    {
-      "id": "18831883357",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: split App and AdminPanel into sections and per-tab components",
-          "head": {
-            "ref": "refactor/split-monoliths"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:33:02Z"
-    },
-    {
-      "id": "18831835425",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: split App and AdminPanel into sections and per-tab components",
-          "head": {
-            "ref": "refactor/split-monoliths"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:33:02Z"
-    },
-    {
-      "id": "18831215927",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(gallery): store photos in R2 instead of base64 in KV",
-          "head": {
-            "ref": "feat/photos-r2"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:19:34Z"
-    },
-    {
-      "id": "18831148244",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(gallery): store photos in R2 instead of base64 in KV",
-          "head": {
-            "ref": "feat/photos-r2"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:17:46Z"
-    },
-    {
-      "id": "18831131508",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(gallery): store photos in R2 instead of base64 in KV",
-          "head": {
-            "ref": "feat/photos-r2"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:17:46Z"
-    },
-    {
-      "id": "18830999244",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(security): require admin token for KV writes and private reads",
-          "head": {
-            "ref": "fix/kv-auth"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:15:02Z"
-    },
-    {
-      "id": "18830924454",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(security): require admin token for KV writes and private reads",
-          "head": {
-            "ref": "fix/kv-auth"
-          }
-        }
-      },
-      "created_at": "2026-11-01T21:13:29Z"
-    },
-    {
-      "id": "18830120948",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(ci): slim workflows for a personal site",
-          "head": {
-            "ref": "chore/slim-workflows"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:56:33Z"
-    },
-    {
-      "id": "18830088698",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(ci): slim workflows for a personal site",
-          "head": {
-            "ref": "chore/slim-workflows"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:55:33Z"
-    },
-    {
-      "id": "18830075322",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(ci): slim workflows for a personal site",
-          "head": {
-            "ref": "chore/slim-workflows"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:55:33Z"
-    },
-    {
-      "id": "18829838573",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: restore nested @emnapi lockfile entries so npm ci passes",
-          "head": {
-            "ref": "fix/lockfile-linux-optional-deps"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:50:13Z"
-    },
-    {
-      "id": "18829780286",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: restore nested @emnapi lockfile entries so npm ci passes",
-          "head": {
-            "ref": "fix/lockfile-linux-optional-deps"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:48:19Z"
-    },
-    {
-      "id": "18829750038",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: restore nested @emnapi lockfile entries so npm ci passes",
-          "head": {
-            "ref": "fix/lockfile-linux-optional-deps"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:48:19Z"
-    },
-    {
-      "id": "18828732824",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): bump the npm_and_yarn group across 1 directory with 1 update",
-          "head": {
-            "ref": "dependabot/npm_and_yarn/npm_and_yarn-ad9b34e941"
-          }
-        }
-      },
-      "created_at": "2026-10-26T05:24:06Z"
-    },
-    {
-      "id": "18828731348",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T20:26:42Z"
-    },
-    {
-      "id": "18828703521",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/jonah"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): bump @and3rn3t/eslint-config to 0.3.0 (ESLint 10)",
-          "head": {
-            "ref": "chore/eslint-config-0.3"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:26:05Z"
-    },
-    {
-      "id": "18828283533",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: repo cleanup (docs, scripts, config, deps)",
-          "head": {
-            "ref": "chore/repo-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:17:21Z"
-    },
-    {
-      "id": "18827858374",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: repo cleanup (docs, scripts, config, deps)",
-          "head": {
-            "ref": "chore/repo-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:08:05Z"
-    },
-    {
-      "id": "18827835846",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: repo cleanup (docs, scripts, config, deps)",
-          "head": {
-            "ref": "chore/repo-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-11-01T20:08:05Z"
-    },
-    {
-      "id": "18827452196",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(security): resolve CodeQL code-scanning alerts",
-          "head": {
-            "ref": "fix/ghas-code-scanning-alerts"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:59:50Z"
-    },
-    {
-      "id": "18827445495",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(security): resolve CodeQL code-scanning alerts",
-          "head": {
-            "ref": "fix/ghas-code-scanning-alerts"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:55:49Z"
-    },
-    {
-      "id": "18827261597",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(security): resolve CodeQL code-scanning alerts",
-          "head": {
-            "ref": "fix/ghas-code-scanning-alerts"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:55:49Z"
-    },
-    {
-      "id": "18827086511",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(deps): update and3rn3t/.github digest to 0415d76",
-          "head": {
-            "ref": "renovate/and3rn3t-.github-digest"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:49:07Z"
-    },
-    {
-      "id": "18827085285",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:51:55Z"
-    },
-    {
-      "id": "18826427337",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:37:40Z"
-    },
-    {
-      "id": "18825882456",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:25:43Z"
-    },
-    {
-      "id": "18825881249",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:25:42Z"
-    },
-    {
-      "id": "18825880847",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:25:41Z"
-    },
-    {
-      "id": "18825880415",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:25:40Z"
-    },
-    {
-      "id": "18825879259",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {},
-      "created_at": "2026-11-01T19:25:38Z"
-    },
-    {
-      "id": "18825848741",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04",
-          "head": {
-            "ref": "chore/bump-github-workflows-sha"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:24:57Z"
-    },
-    {
-      "id": "18825635176",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04",
-          "head": {
-            "ref": "chore/bump-github-workflows-sha"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:19:22Z"
-    },
-    {
-      "id": "18825591766",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04",
-          "head": {
-            "ref": "chore/bump-github-workflows-sha"
-          }
-        }
-      },
-      "created_at": "2026-11-01T19:19:22Z"
-    },
-    {
-      "id": "25826679776",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "chore/pin-golden-model",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T23:47:10Z"
-    },
-    {
-      "id": "25826101970",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "813c4d27ad8d5e9926db0139f9d6c267c8d3451c",
-            "message": "chore(deps): update tailwind css to v4.3.3 (#272)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-30T00:22:59Z"
-    },
-    {
-      "id": "25825125423",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "e93570bcfd9d89431c2b5f064b3fae6899d56948",
-            "message": "Merge branch 'main' into chore/golden-threshold-baseline"
-          }
-        ],
-        "ref": "refs/heads/chore/golden-threshold-baseline"
-      },
-      "created_at": "2026-10-30T00:11:34Z"
-    },
-    {
-      "id": "25821869589",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ff8aac74e206ea1f2728e8dba5d4d4a1d445519f",
-            "message": "Merge branch 'main' into renovate/actions-upload-artifact-digest"
-          }
-        ],
-        "ref": "refs/heads/renovate/actions-upload-artifact-digest"
-      },
-      "created_at": "2026-10-29T22:50:39Z"
-    },
-    {
-      "id": "25820555359",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "fix/ci-pin-e2e-ubuntu-24",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T22:36:55Z"
-    },
-    {
-      "id": "25819312826",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8177b4b77819a9464e15f99a0adc776c0e3d253d",
-            "message": "chore(deps): update dependency react-error-boundary to v6.1.6 (#262)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T23:01:24Z"
-    },
-    {
-      "id": "25817634179",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7ed02b17b0100a866c4e5c8d5e2feeda738d3138",
-            "message": "ci: bump shared workflows to pin Playwright runner to ubuntu-24.04 (#289)\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T22:06:54Z"
-    },
-    {
-      "id": "25815811315",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/and3rn3t-.github-digest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T22:22:44Z"
-    },
-    {
-      "id": "25815479513",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/.github"
-      },
-      "payload": {
-        "ref": "renovate/node-26.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T22:18:44Z"
-    },
-    {
-      "id": "25815276230",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/health"
-      },
-      "payload": {
-        "ref": "fix/e2e-suspense-wait-race",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T21:41:45Z"
-    },
-    {
-      "id": "25813237677",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/.github"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "144276521206c8ac26bd5c3ac743c47d2020f169",
-            "message": "Merge pull request #18 from and3rn3t/fix/playwright-ubuntu-24.04\n\nfix(e2e): pin Playwright runner to ubuntu-24.04"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T21:55:49Z"
-    },
-    {
-      "id": "25812845955",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "41242280ea82537cc9561632bbbdd1ee41609057",
-            "message": "chore: adopt shared @and3rn3t/eslint-config (#278)\n\nReplace the local base ESLint config with @and3rn3t/eslint-config 0.3.0 and\nkeep homehub's no-explicit-any / no-non-null-assertion warnings and the\nworkers/dist ignore local. Drops the base lint deps the package provides.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T21:51:39Z"
-    },
-    {
-      "id": "25781873634",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/.github"
-      },
-      "payload": {
-        "ref": "fix/playwright-ubuntu-24.04",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T21:55:50Z"
-    },
-    {
-      "id": "25781519132",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a54e4e80171c5731ee2b86939ece8719c66b562a",
-            "message": "chore(deps): update dependency @tanstack/react-virtual to v3.14.24 (#283)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T21:52:20Z"
-    },
-    {
-      "id": "25738939581",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "db9f5d0a5dd389e35a541e83b843790147a3800e",
-            "message": "chore(ci): pin golden regression model to gpt-4o-mini-2024-07-18 (#271)\n\nThe gate used the floating gpt-4o-mini alias, so model updates could move\nthe baseline without any repo change. GOLDEN_MODEL still overrides.\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-30T00:39:59Z"
-    },
-    {
-      "id": "25737928535",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "71a7964fd313555db1f0b5afd53c6b17788cff42",
-            "message": "Merge branch 'main' into chore/pin-golden-model"
-          }
-        ],
-        "ref": "refs/heads/chore/pin-golden-model"
-      },
-      "created_at": "2026-10-30T00:27:10Z"
-    },
-    {
-      "id": "25737912485",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "099694b7bd8828356e9cc4555e839d5180cfeec1",
-            "message": "chore(ci): set golden gate threshold to measured baseline (10%) (#274)\n\n* chore(ci): set golden gate threshold to measured baseline (10%)\n\nThe pipeline scores 90.6-92.2% against the curated cells (7.85-9.37%\ndeviation), so the 3% limit failed on every run since at least 2026-10-15\nand the gate could not catch regressions. Threshold is now 10%.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: describe golden gate as a baseline gate (10%), not 3%\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-30T00:26:54Z"
-    },
-    {
-      "id": "25736889666",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "555bd2435887e5d8c2ca3b14c03a1f36f67ac9e7",
-            "message": "chore(deps): update vite & vitest (#273)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-30T00:10:54Z"
-    },
-    {
-      "id": "25734676674",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "chore/align-expo-sdk-deps",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-29T23:39:39Z"
-    },
-    {
-      "id": "25732836770",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "chore/pin-golden-model",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-10-30T00:40:01Z"
-    },
-    {
-      "id": "25731912527",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "575427e564a35a91f94d0973b4adbb65788fe671",
-            "message": "chore(deps): update actions/upload-artifact digest to cf430e0 (#246)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T23:05:21Z"
-    },
-    {
-      "id": "25728466311",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9272819123105c2426b807ba694496f58151df85",
-            "message": "chore(deps): update dependency vitest to v4.1.11 [security] (#259)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-10-29T22:22:17Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -4661,6 +4626,11 @@
             "date": "2026-11-03",
             "count": 0,
             "level": 0
+          },
+          {
+            "date": "2026-11-04",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -4692,6 +4662,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-03T03:07:48Z",
+  "lastUpdated": "2026-11-04T03:07:24Z",
   "totalRepos": 54
 }
