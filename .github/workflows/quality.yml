@@ -12,7 +12,7 @@ permissions:
 jobs:
   verify:
     name: Lint, unit tests, refs, generated files
-    uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1
+    uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
     with:
       # One install for all the fast checks. `git add -N` makes brand-new generated files
       # visible to `git diff`, which otherwise ignores untracked files.
@@ -24,7 +24,7 @@ jobs:
 
   e2e:
     name: E2E + a11y (Playwright + axe)
-    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@bac71674cf57c550774f71a70e32a5bb7bec48ad # v1
+    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
     with:
       command: pnpm test:e2e
       package-manager: pnpm
