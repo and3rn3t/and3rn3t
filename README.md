@@ -34,6 +34,13 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+>
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
+
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
 > My attempt to build an inclusive homehub / automation project.
@@ -59,13 +66,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > Unifying network information on a RPi 5
 >
 > **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
->
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
