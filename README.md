@@ -34,19 +34,17 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [health](https://github.com/and3rn3t/health)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** TypeScript
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> My attempt to build an inclusive homehub / automation project.
+> Unifying network information on a RPi 5
 >
-> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
-> 🔗 [Live](https://homehub.andernet.dev)
+> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
@@ -61,11 +59,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
 > 🔗 [Live](https://andernator.com)
 
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> Unifying network information on a RPi 5
+> My attempt to build an inclusive homehub / automation project.
 >
-> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
+> **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
+> 🔗 [Live](https://homehub.andernet.dev)
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
@@ -74,11 +73,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
 > 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🌐 [health](https://github.com/and3rn3t/health)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> 🔗 [Live](https://health.andernet.dev)
 
 <!-- FEATURED-PROJECTS:END -->
 
