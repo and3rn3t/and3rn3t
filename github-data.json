@@ -9,6 +9,158 @@
   },
   "repositories": [
     {
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "HTML",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "networking",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-11-06T23:28:47Z",
+      "updated_at": "2026-11-05T20:42:42Z",
+      "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-06T17:22:55Z",
+      "updated_at": "2026-11-05T20:51:10Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "game",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-06T11:42:22Z",
+      "updated_at": "2026-11-05T20:41:25Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "My attempt to build an inclusive homehub / automation project.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "react",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-06T10:35:49Z",
+      "updated_at": "2026-11-05T20:41:44Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 3,
+      "pushed_at": "2026-11-06T05:06:14Z",
+      "updated_at": "2026-11-06T03:08:32Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "featured",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-06T04:48:44Z",
+      "updated_at": "2026-11-05T20:42:38Z",
+      "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
       "id": 1150200899,
       "name": "weather-app",
       "full_name": "and3rn3t/weather-app",
@@ -765,158 +917,6 @@
       "archived": true
     },
     {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-05T20:51:59Z",
-      "updated_at": "2026-11-05T20:51:10Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 3,
-      "pushed_at": "2026-11-05T20:48:19Z",
-      "updated_at": "2026-11-05T20:40:02Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "HTML",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-11-05T20:47:03Z",
-      "updated_at": "2026-11-05T20:42:42Z",
-      "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "featured",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-11-05T20:45:58Z",
-      "updated_at": "2026-11-05T20:42:38Z",
-      "created_at": "2025-11-22T17:31:12Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "A guessing game like \"Akinator\", but with more visibility to the user how it works.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "game",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-11-05T20:44:37Z",
-      "updated_at": "2026-11-05T20:41:25Z",
-      "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "My attempt to build an inclusive homehub / automation project.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "react",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-05T20:44:04Z",
-      "updated_at": "2026-11-05T20:41:44Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1166214014,
       "name": "apple-music-dj",
       "full_name": "and3rn3t/apple-music-dj",
@@ -1241,6 +1241,865 @@
     }
   ],
   "events": [
+    {
+      "id": "26383702168",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "cfbf3b855af851cf5bd17580b744132121a21f3b",
+            "message": "ci(ios): skip the six live-network integration tests; fail when tests fail\n\nThe six tests (EndToEndWorkflowTests x2, IntegrationTestScenarios x3,\nWeatherServiceIntegrationTests x1) cache mock data and assert on it, but\nWeatherService() also starts a live Open-Meteo refresh that overwrites the cache\n(63.1/63.4 observed vs the expected 65.0). They need a URLSession seam; until\nthen they stay out of Coverage and ci.yml. Also set pipefail in ci.yml's test\nstep so a failing xcodebuild is no longer masked by xcbeautify.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/ci-failures"
+      },
+      "created_at": "2026-11-06T00:39:15Z"
+    },
+    {
+      "id": "26366183176",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "1059b0a30a559e10a4d6a33bc5e3a553d20fd163",
+            "message": "fix(ci): grant contents:write to the release-drafter caller\n\nThe reusable release-drafter job needs contents: write to create and\nupdate draft releases. A caller cannot grant less than the called job\nrequests, so with contents: read every run ended in startup_failure.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/release-drafter-permissions"
+      },
+      "created_at": "2026-11-05T21:19:14Z"
+    },
+    {
+      "id": "26364837906",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/project3"
+      },
+      "payload": {
+        "ref": "renovate/configure",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:05:30Z"
+    },
+    {
+      "id": "26364586368",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/vite-f15065d81d",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:03:22Z"
+    },
+    {
+      "id": "26364558433",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "dependabot/github_actions/actions/setup-node-5",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:03:08Z"
+    },
+    {
+      "id": "26364333924",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/posture"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/lucide-react-1.23.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:00:46Z"
+    },
+    {
+      "id": "26364247388",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/docker-playground"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/source-map-js-1.2.2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:59:58Z"
+    },
+    {
+      "id": "26364178276",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/flipper"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/humanfs/node-0.16.8",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:59:26Z"
+    },
+    {
+      "id": "26364013062",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/telescope"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/js-yaml-4.3.2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:58:06Z"
+    },
+    {
+      "id": "26363662333",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/vac"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/brace-expansion-1.1.21",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:55:11Z"
+    },
+    {
+      "id": "26363559014",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/sky"
+      },
+      "payload": {
+        "ref": "renovate/and3rn3t-.github-digest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:54:16Z"
+    },
+    {
+      "id": "26362356212",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "df4b7859ae9b69d7c0afc660a74be9522441dbe5",
+            "message": "chore(deps): update dependency dnspython to v2.9.2 (#131)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:42:38Z"
+    },
+    {
+      "id": "26362280947",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/web/undici-7.30.1",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:41:54Z"
+    },
+    {
+      "id": "26362225318",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9011b1eb1c8516a3e0ba316a355d15ea44d65372",
+            "message": "chore(deps): update dependency motion to v12.43.0 (#276)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:41:21Z"
+    },
+    {
+      "id": "26362210415",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "ref": "renovate/react-router-monorepo",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:41:13Z"
+    },
+    {
+      "id": "26362136694",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/birds"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "136567dc88133d3d7b96c66e6b99e92023f592c0",
+            "message": "chore(deps): bump certifi from 2026.7.22 to 2026.10.18 (#2)\n\nBumps [certifi](https://github.com/certifi/python-certifi) from 2026.7.22 to 2026.10.18.\n- [Commits](https://github.com/certifi/python-certifi/compare/2026.07.22...2026.10.18)\n\n---\nupdated-dependencies:\n- dependency-name: certifi\n  dependency-version: 2026.10.18\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:40:34Z"
+    },
+    {
+      "id": "26362116374",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "ref": "renovate/and3rn3t-.github-digest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:40:24Z"
+    },
+    {
+      "id": "26361038688",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "53335bce19f4349d160a5e41fe1ba315e07912c0",
+            "message": "chore(deps): update node.js to v24.22.2 (#122)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:30:00Z"
+    },
+    {
+      "id": "26360068974",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9668b1d3ccdf26155b85c510a1eff748d21e3096",
+            "message": "chore: add Claude code settings with permissions configuration (#192)"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:20:33Z"
+    },
+    {
+      "id": "26359874075",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "chore/claude-settings",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:18:56Z"
+    },
+    {
+      "id": "26359867192",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/hack"
+      },
+      "payload": {
+        "ref": "chore/claude-settings",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:18:53Z"
+    },
+    {
+      "id": "26359733958",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "chore/claude-settings",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:17:51Z"
+    },
+    {
+      "id": "26359118150",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/minecraft"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "39202d9bfc0cefe318a64ae4d5a2b5437d7b678f",
+            "message": "feat: add initial Claude code settings with permissions configuration"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:12:33Z"
+    },
+    {
+      "id": "26358892609",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "ref": "fix/release-drafter-permissions",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:10:12Z"
+    },
+    {
+      "id": "26307993866",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/dbt"
+      },
+      "payload": {
+        "ref": "fix/release-drafter-permissions",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:18:53Z"
+    },
+    {
+      "id": "26306691377",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/react-router-nationalparks"
+      },
+      "payload": {
+        "ref": "renovate/configure",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:05:45Z"
+    },
+    {
+      "id": "26306644609",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/kids-comic-creator"
+      },
+      "payload": {
+        "ref": "renovate/configure",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:05:15Z"
+    },
+    {
+      "id": "26306456977",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/eslint-community/eslint-utils-4.9.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:03:26Z"
+    },
+    {
+      "id": "26306409081",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/react-47b46a4058",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:03:03Z"
+    },
+    {
+      "id": "26306376088",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "renovate/capacitor-app-7.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:02:46Z"
+    },
+    {
+      "id": "26306268293",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/simulation"
+      },
+      "payload": {
+        "ref": "dependabot/github_actions/codecov/codecov-action-7",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:01:54Z"
+    },
+    {
+      "id": "26305974711",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/flipper"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/vite-7.3.7",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:59:11Z"
+    },
+    {
+      "id": "26305896369",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/telescope"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/humanfs/node-0.16.8",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:58:23Z"
+    },
+    {
+      "id": "26305257178",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "179e27a2d677e018d3e1a8dd7f31067b6d643ba9",
+            "message": "fix(test): make ServicePerformanceTests nonisolated with @MainActor members\n\nA main-actor XCTestCase subclass cannot override XCTestCase's nonisolated\ninits under SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor, so the test target\nnever compiled (the previous @MainActor/async setUp attempt left the three\ninit errors). Checked with swiftc -swift-version 6 -default-isolation MainActor.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/ci-failures"
+      },
+      "created_at": "2026-11-05T22:26:58Z"
+    },
+    {
+      "id": "26305172536",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/fastlane"
+      },
+      "payload": {
+        "ref": "renovate/node-24.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:51:08Z"
+    },
+    {
+      "id": "26305169893",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/fastlane"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "47d675cfc1c1f922541a54e1d4bfee805dd560de",
+            "message": "chore(deps): update node.js to v24.22.2 (#67)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:51:06Z"
+    },
+    {
+      "id": "26304709554",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5ae194c583b0839a9818fbc45d5aef273646cc0b",
+            "message": "ci(ios): run only the default test-plan configuration\n\nWeatherTestPlan defines six configurations (Address and Thread Sanitizer, Arabic\nRTL, pseudo-locale, XXL text) and retries failures up to 3x, so xcodebuild test\nran the whole suite ~6 times, twice under sanitizers: ~10,000 CPU-seconds and a\n30-minute timeout. CI now runs 'Default Configuration' only.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/ci-failures"
+      },
+      "created_at": "2026-11-05T23:55:38Z"
+    },
+    {
+      "id": "26304184591",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c47e6d5dee5d6bf48f715725e85a234579499b35",
+            "message": "chore(deps): update dependency react-router-dom to v7.18.5 (#277)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:41:11Z"
+    },
+    {
+      "id": "26304055147",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "0658e728777e4ea1acdafc6efa4f9b5b4ceb1f9f",
+            "message": "ci(ios): run unit tests serially with per-test time limits; keep the result bundle\n\nThe iOS test jobs ran past their 30-minute limit: parallel simulator clones\nplus the UI-test target starved the runner (trivial struct tests reported\n60-75s). Skip weatherUITests, disable parallel clones, add per-test\ntime allowances so a hang fails fast, and upload Coverage.xcresult so\nfailures can be inspected.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/ci-failures"
+      },
+      "created_at": "2026-11-05T23:32:47Z"
+    },
+    {
+      "id": "26302430368",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "7ba1c8f19cb0ed5d8fa2da879a6d630fd6b5ec5f",
+            "message": "Merge branch 'main' into renovate/vite-and-vitest"
+          }
+        ],
+        "ref": "refs/heads/renovate/vite-and-vitest"
+      },
+      "created_at": "2026-11-05T20:24:35Z"
+    },
+    {
+      "id": "26302398424",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "de1e3a3172d96cc31e9e54975520659c461c0e75",
+            "message": "Merge pull request #94 from and3rn3t/renovate/react\n\nfix(deps): update react to v19.3.1"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:24:17Z"
+    },
+    {
+      "id": "26301872013",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/huggingface"
+      },
+      "payload": {
+        "ref": "chore/claude-settings",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:19:00Z"
+    },
+    {
+      "id": "26301084885",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/flipper"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "a92491bc953dc6b0d31ba9344c036c06c22221d6",
+            "message": "chore: add initial Claude code settings configuration"
+          }
+        ],
+        "ref": "refs/heads/chore/eslint-config-0.3"
+      },
+      "created_at": "2026-11-05T20:11:25Z"
+    },
+    {
+      "id": "26300958665",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-photos-cleaner"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "102a91465328caf2e36a19dd9ddfbabeeffddeda",
+            "message": "feat: add initial Claude settings configuration with permissions"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:10:09Z"
+    },
+    {
+      "id": "26300679748",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/eslint-config"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6e55b90f3258b9230c6919f8f30bfd93b41a31ac",
+            "message": "chore: release v0.4.0 with Prettier base and tsconfig support"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:07:01Z"
+    },
+    {
+      "id": "26300663819",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/ai-template-repo"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4048b8ed0da460cc9623b13a3ff1c0292b54d994",
+            "message": "chore: add initial Claude code settings configuration"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:06:52Z"
+    },
+    {
+      "id": "26300631665",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/workspace-tools"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "8b6ebc40fbfffc342ab8c2c62312460d5f8b81b7",
+            "message": "feat(workspace): enhance tooling with shared config detection and history commit feature"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:06:33Z"
+    },
+    {
+      "id": "26299322926",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "ref": "fix/ci-failures",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:28:20Z"
+    },
+    {
+      "id": "26298422779",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/apple-shortcuts-doctor"
+      },
+      "payload": {
+        "ref": "fix/release-drafter-contents-write",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:19:29Z"
+    },
+    {
+      "id": "26298366535",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/dbt"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "86ca1b2cad47e473efee66632a01425de7a14857",
+            "message": "fix(ci): grant contents:write to the release-drafter caller\n\nThe reusable release-drafter job needs contents: write to create and\nupdate draft releases. A caller cannot grant less than the called job\nrequests, so with contents: read every run ended in startup_failure.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/release-drafter-permissions"
+      },
+      "created_at": "2026-11-05T21:18:54Z"
+    },
+    {
+      "id": "26297249985",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "4aa1630ae29a4230f3adb4f7a7c6aab84e91de15",
+            "message": "fix(ci): wait for simulators before xcodebuild; quick-ci builds at the repo root\n\n- add a retrying 'Wait for iOS simulators' step to every iOS job; the first\n  CoreSimulator call on a fresh runner intermittently reported no devices\n- quick-ci: drop working-directory: weather, the project is at the root\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/ci-failures"
+      },
+      "created_at": "2026-11-05T22:17:41Z"
+    },
+    {
+      "id": "26296595245",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/testing-9caa6741c4",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:02:54Z"
+    },
+    {
+      "id": "26296588289",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather"
+      },
+      "payload": {
+        "ref": "renovate/capacitor-monorepo",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:02:50Z"
+    },
+    {
+      "id": "26296436573",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/couple-connect"
+      },
+      "payload": {
+        "ref": "dependabot/github_actions/docker/metadata-action-6",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:01:35Z"
+    },
+    {
+      "id": "26296404423",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/couple-connect"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/wrangler-4.106.0",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T21:01:18Z"
+    },
+    {
+      "id": "26296139045",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/flipper"
+      },
+      "payload": {
+        "ref": "dependabot/npm_and_yarn/multi-456d42d8d4",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:59:06Z"
+    },
+    {
+      "id": "26296113264",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homekit-automator"
+      },
+      "payload": {
+        "ref": "renovate/apple-swift-log-1.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:58:51Z"
+    },
+    {
+      "id": "26296080906",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/network"
+      },
+      "payload": {
+        "ref": "renovate/fastapi-0.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:58:34Z"
+    },
+    {
+      "id": "26295745041",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/hack"
+      },
+      "payload": {
+        "ref": "dependabot/cargo/minor-and-patch-426fff3dd6",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:54:59Z"
+    },
+    {
+      "id": "26294404074",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/minecraft"
+      },
+      "payload": {
+        "ref": "renovate/flask-socketio-5.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:42:34Z"
+    },
+    {
+      "id": "26294054521",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "renovate/node-24.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-05T20:39:16Z"
+    },
+    {
+      "id": "26293905431",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/net-traffic"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6e0513fad4cb7c78bdaeef5569dd05a814104c26",
+            "message": "chore(deps): update dependency geoip2 to v4.8.1 (#123)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-05T20:37:50Z"
+    },
     {
       "id": "26292665106",
       "type": "PushEvent",
@@ -1611,834 +2470,6 @@
         "ref_type": "branch"
       },
       "created_at": "2026-11-05T21:00:36Z"
-    },
-    {
-      "id": "26288444020",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "ref": "renovate/dnspython-2.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:42:39Z"
-    },
-    {
-      "id": "26288401090",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/docker-playground"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/humanfs/node-0.16.8",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:00:09Z"
-    },
-    {
-      "id": "26288367952",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/workspace-tools"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7caa4eca2098cfbd36e9946dbe0c03e21089049c",
-            "message": "feat(workflow): implement repo CI workflow filtering and add tests"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T21:21:11Z"
-    },
-    {
-      "id": "26288318685",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "ref": "renovate/input-otp-1.x-lockfile",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:41:30Z"
-    },
-    {
-      "id": "26288226605",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/fastlane"
-      },
-      "payload": {
-        "ref": "renovate/react",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:40:43Z"
-    },
-    {
-      "id": "26288196264",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d61000c17834401dbd581d80575aa043142a1e3c",
-            "message": "chore(deps): update pnpm to v11.28.11 (#114)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:40:28Z"
-    },
-    {
-      "id": "26287773174",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/huggingface"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/multi-ad9b34e941",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:54:32Z"
-    },
-    {
-      "id": "26287381072",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "042e3303e71cc76bb9979f19cefda89859f9e2a6",
-            "message": "fix(ci): build iOS with Xcode 26.2, the toolchain the app and runner image match\n\nThe app uses iOS 26 APIs (Glass), so Xcode 16.x cannot compile it. 26.2\npairs with the iOS 26.2 simulator runtime on the macos-15 image; 26.3\n(what latest-stable resolves to) has no runtime there yet, so no\nsimulator destination exists. Also rename the iPad simulator to\n'iPad Pro 13-inch (M4)', and print xcodebuild errors in Build Performance.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/ci-failures"
-      },
-      "created_at": "2026-11-05T21:46:36Z"
-    },
-    {
-      "id": "26287037669",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "23f70521083481d06defe46ac476ee8fc8adcfeb",
-            "message": "fix(android): call super.onCreate() before using the Hilt-injected PerformanceMonitor\n\nWeatherApplication.onCreate() used performanceMonitor before super.onCreate(),\nbut Hilt injects @Inject fields inside super.onCreate(), so the app crashed on\nevery launch with UninitializedPropertyAccessException. This is what made the\nAndroid instrumented tests report 'Process crashed'.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/ci-failures"
-      },
-      "created_at": "2026-11-05T23:09:51Z"
-    },
-    {
-      "id": "26286903872",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/dad-jokes"
-      },
-      "payload": {
-        "ref": "renovate/configure",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:06:09Z"
-    },
-    {
-      "id": "26286776622",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/kids-comic-creator"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/lucide-react-0.542.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:04:57Z"
-    },
-    {
-      "id": "26286665117",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/weather"
-      },
-      "payload": {
-        "ref": "renovate/actions-github-script-8.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:03:30Z"
-    },
-    {
-      "id": "26286595190",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/minecraft"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8852073c74fb3d7291757e6f2e97704a48e30b02",
-            "message": "chore(deps): update dependency flask-socketio to v5.7.2 (#125)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:42:32Z"
-    },
-    {
-      "id": "26286489703",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/couple-connect"
-      },
-      "payload": {
-        "ref": "dependabot/github_actions/actions/upload-artifact-7",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:01:21Z"
-    },
-    {
-      "id": "26286432557",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/posture"
-      },
-      "payload": {
-        "ref": "renovate/tailwind-merge-3.x-lockfile",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:00:49Z"
-    },
-    {
-      "id": "19289771045",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/react-router-nationalparks"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T21:05:42Z"
-    },
-    {
-      "id": "26286402463",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/fastlane"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "ea0f7d5d4e0e53cfd8b0cb4000676f7f10e6d121",
-            "message": "chore(deps): update react to v19.3.0 (#74)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:40:41Z"
-    },
-    {
-      "id": "26286401163",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/posture"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/marked-18.0.5",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:00:33Z"
-    },
-    {
-      "id": "19289736514",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/kids-comic-creator"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T21:05:08Z"
-    },
-    {
-      "id": "19289729687",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/kids-comic-creator"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T21:05:01Z"
-    },
-    {
-      "id": "26286222808",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/homekit-automator"
-      },
-      "payload": {
-        "ref": "renovate/and3rn3t-.github-digest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:58:54Z"
-    },
-    {
-      "id": "19289562986",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/couple-connect"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T21:01:31Z"
-    },
-    {
-      "id": "19289552307",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/couple-connect"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T21:01:18Z"
-    },
-    {
-      "id": "19289495359",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/docker-playground"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T21:00:06Z"
-    },
-    {
-      "id": "19289461055",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/flipper"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T20:59:23Z"
-    },
-    {
-      "id": "19289457245",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/flipper"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T20:59:21Z"
-    },
-    {
-      "id": "19289444064",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/flipper"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T20:59:06Z"
-    },
-    {
-      "id": "19289236964",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/vac"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T20:55:02Z"
-    },
-    {
-      "id": "19289232075",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/hack"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T20:54:56Z"
-    },
-    {
-      "id": "19289205024",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/huggingface"
-      },
-      "payload": {},
-      "created_at": "2026-11-05T20:54:26Z"
-    },
-    {
-      "id": "26285782362",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/vac"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/ip-address-10.7.5",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:55:06Z"
-    },
-    {
-      "id": "26285756888",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/eslint-config"
-      },
-      "payload": {
-        "ref": "renovate/node-24.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:16:16Z"
-    },
-    {
-      "id": "26285747695",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/huggingface"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/humanfs/node-0.16.8",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:54:45Z"
-    },
-    {
-      "id": "26285307080",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homekit-automator"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "0674347a6b32e7e0c2500cde2774030bf8e11f34",
-            "message": "chore: add initial Claude code settings configuration"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:12:11Z"
-    },
-    {
-      "id": "26285156590",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/birds"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "1975cf819563864eca82dc48abba061e09a2e224",
-            "message": "feat: add initial Claude code settings with permissions configuration"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:10:37Z"
-    },
-    {
-      "id": "26285087698",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/amiibo"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c760218d6ab1b0d61fc2f53b619972a0fe45e00d",
-            "message": "feat: add initial Claude code settings with permissions configuration"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:09:44Z"
-    },
-    {
-      "id": "26284998867",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/net-traffic"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "822ad608ebe1a119d626f6855918ac7bd0090954",
-            "message": "Merge branch 'main' into renovate/node-24.x"
-          }
-        ],
-        "ref": "refs/heads/renovate/node-24.x"
-      },
-      "created_at": "2026-11-05T20:26:37Z"
-    },
-    {
-      "id": "26284795955",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/remote"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d30c2be2fa5d4024898b84d34a51aec0f265d727",
-            "message": "fix(ci): grant contents:write to the release-drafter caller\n\nThe reusable release-drafter job needs contents: write to create and\nupdate draft releases. A caller cannot grant less than the called job\nrequests, so with contents: read every run ended in startup_failure.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/release-drafter-permissions"
-      },
-      "created_at": "2026-11-05T21:19:03Z"
-    },
-    {
-      "id": "26284686585",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b0e294d228abff96bf741f9ce24f308e06f0a980",
-            "message": "Merge pull request #117 from and3rn3t/chore/claude-settings\n\nchore: add shared Claude Code settings"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:23:17Z"
-    },
-    {
-      "id": "26284660362",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/minecraft"
-      },
-      "payload": {
-        "ref": "renovate/requests-2.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:42:05Z"
-    },
-    {
-      "id": "26284619909",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "ref": "renovate/tailwind-css",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:41:41Z"
-    },
-    {
-      "id": "26284505883",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "renovate/pnpm-11.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:40:29Z"
-    },
-    {
-      "id": "26284487648",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5d18c3d3cb16088342437d93ee9041e9575c71a2",
-            "message": "fix(deps): update dependency mypy to v2.4.1 (#134)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:40:15Z"
-    },
-    {
-      "id": "26284464687",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "4d1eb0028a1322f296b508d6b9ba036480a621c0",
-            "message": "chore(deps): pin and3rn3t/.github action to 99fae92 (#165)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:39:58Z"
-    },
-    {
-      "id": "26284437337",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "06bc4db42517e3d57a4ed638c730e6ce3202ab36",
-            "message": "chore(deps): update dependency wrangler to v4.156.2 (#178)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:39:36Z"
-    },
-    {
-      "id": "26283559887",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/fastlane"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "cfab4097843b775a1f13a408b3f729ab2138cdff",
-            "message": "chore: add shared ESLint configuration settings"
-          }
-        ],
-        "ref": "refs/heads/chore/shared-eslint-config"
-      },
-      "created_at": "2026-11-05T20:11:18Z"
-    },
-    {
-      "id": "26283520251",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/dbt"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b1ee170e009bdf1374ec75267f4f572c8640c881",
-            "message": "feat: add initial Claude code settings with permissions configuration"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:10:54Z"
-    },
-    {
-      "id": "26283140173",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "27db9bd1660eeb16cc5206ac4f7dc75609f364cd",
-            "message": "Merge pull request #116 from and3rn3t/renovate/and3rn3t-.github-digest\n\nchore(deps): update and3rn3t/.github digest to 99fae92"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:23:37Z"
-    },
-    {
-      "id": "26282815871",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/posture"
-      },
-      "payload": {
-        "ref": "renovate/tanstack-query-monorepo",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:01:09Z"
-    },
-    {
-      "id": "26282806704",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/posture"
-      },
-      "payload": {
-        "ref": "renovate/lucide-monorepo",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T21:01:03Z"
-    },
-    {
-      "id": "26282638012",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "ref": "renovate/three-0.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:59:41Z"
-    },
-    {
-      "id": "26282516086",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-shortcuts-doctor"
-      },
-      "payload": {
-        "ref": "chore/claude-settings",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:18:22Z"
-    },
-    {
-      "id": "26282117583",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/eslint-config"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "79f1e50b053e1384c75e58111b16787f4cf3122f",
-            "message": "fix(ci): grant contents:write to the release-drafter caller (#16)\n\nThe reusable release-drafter job needs contents: write to create and\nupdate draft releases. A caller can't grant less than the called job\nrequests, so with contents: read every run ended in startup_failure.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:15:40Z"
-    },
-    {
-      "id": "26282093298",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/vac"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/proxy-addr-2.0.8",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:55:15Z"
-    },
-    {
-      "id": "26282014057",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/huggingface"
-      },
-      "payload": {
-        "ref": "dependabot/npm_and_yarn/vite-7.3.7",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:54:38Z"
-    },
-    {
-      "id": "26281644318",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/family"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "76dbc415aa6ea174c21de7f511375c87a5bbb64d",
-            "message": "feat: add initial Claude code settings configuration"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:11:12Z"
-    },
-    {
-      "id": "26281621327",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/docker-playground"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d653aa1bccc15b105ed266d7dd13b3baa111ee9c",
-            "message": "chore: add initial Claude code settings configuration"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:11:00Z"
-    },
-    {
-      "id": "26281544872",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/ai-template-repo"
-      },
-      "payload": {
-        "ref": "fix/release-drafter-permissions",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:10:16Z"
-    },
-    {
-      "id": "26280953008",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "2ee20d78e170342446122ad5a6aab845963af34d",
-            "message": "fix(ci): give Android Quick Lint enough time on a cold cache\n\nCold-cache lintDebug takes ~3 minutes; the step timeout was exactly 3.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/ci-failures"
-      },
-      "created_at": "2026-11-05T22:07:11Z"
-    },
-    {
-      "id": "26280605047",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/workspace-tools"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "10586347ca33e4e1088159b0a7c0e2fb89745e2f",
-            "message": "feat(workspace): add new entries for workspace activity and history on 2026-10-28 and 2026-10-29"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T19:59:45Z"
-    },
-    {
-      "id": "26280354355",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "renovate/and3rn3t-.github-digest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-05T20:39:49Z"
-    },
-    {
-      "id": "26280308314",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "f2da11496964fd9ea07031bb0516c827f13a6842",
-            "message": "chore(deps): update pnpm to v11.28.11 (#180)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-05T20:39:25Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -4513,6 +4544,11 @@
             "date": "2026-11-06",
             "count": 0,
             "level": 0
+          },
+          {
+            "date": "2026-11-07",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -4541,6 +4577,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-06T03:07:34Z",
+  "lastUpdated": "2026-11-07T03:07:03Z",
   "totalRepos": 54
 }

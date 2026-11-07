@@ -34,23 +34,17 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
-
 ### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
 > Unifying network information on a RPi 5
 >
 > **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
 
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** Python, arm64, docker, docker-compose, flask
+> **Tech:** TypeScript
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -65,6 +59,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 >
 > **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
 > 🔗 [Live](https://homehub.andernet.dev)
+
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
