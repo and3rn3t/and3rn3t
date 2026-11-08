@@ -34,24 +34,23 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
 
-### 🌐 [guess](https://github.com/and3rn3t/guess)
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> A guessing game like "Akinator", but with more visibility to the user how it works.
+> Unifying network information on a RPi 5
 >
-> **Tech:** TypeScript, cloudflare-workers, game, react, tailwindcss
-> 🔗 [Live](https://andernator.com)
+> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
+
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
@@ -60,11 +59,12 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, cloudflare-workers, react, smart-home, tailwindcss
 > 🔗 [Live](https://homehub.andernet.dev)
 
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+### 🌐 [guess](https://github.com/and3rn3t/guess)
 
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
 >
-> **Tech:** Python, arm64, docker, docker-compose, flask
+> **Tech:** TypeScript, akinator, bayesian, cloudflare-d1, cloudflare-pages
+> 🔗 [Live](https://andernator.com)
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
@@ -75,9 +75,9 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
-> Tinkering with Apple HealthKit and the LiDAR sensors in Apple iPhones.
+> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
 >
-> **Tech:** TypeScript, ai, gait-analysis, health, healthkit
+> **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
 > 🔗 [Live](https://health.andernet.dev)
 
 <!-- FEATURED-PROJECTS:END -->
