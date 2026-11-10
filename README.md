@@ -41,11 +41,18 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, arlo, cloudflare-pages, cloudflare-workers, dashboard
 > 🔗 [Live](https://homehub.andernet.dev)
 
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> Unifying network information on a RPi 5
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
+> **Tech:** TypeScript
+
+### 🌐 [guess](https://github.com/and3rn3t/guess)
+
+> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
+>
+> **Tech:** TypeScript, akinator, bayesian, cloudflare-d1, cloudflare-pages
+> 🔗 [Live](https://andernator.com)
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -54,24 +61,17 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
 > 🔗 [Live](https://health.andernet.dev)
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> Unifying network information on a RPi 5
 >
-> **Tech:** TypeScript
+> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
 > **Tech:** Python, arm64, docker, docker-compose, flask
-
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
->
-> **Tech:** TypeScript, akinator, bayesian, cloudflare-d1, cloudflare-pages
-> 🔗 [Live](https://andernator.com)
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
