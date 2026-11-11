@@ -27,6 +27,15 @@ const LANGUAGE_COLORS = {
 };
 
 /**
+ * The path of a project's page.
+ * @param {string} pageSlug - the lowercase slug
+ * @returns {string}
+ */
+export function projectPagePath(pageSlug) {
+    return `/projects/${encodeURIComponent(pageSlug)}/`;
+}
+
+/**
  * @param {string} language
  * @returns {string | null} the language's GitHub colour, if it has one
  */
@@ -136,8 +145,15 @@ export function projectView(repo, metadata) {
     const highlights = metadata?.highlights ?? [];
     const slug = repo?.name || metadata?.name || metadata?.github_repo?.split('/').pop();
 
+    const hasCaseStudy = Boolean(slug && (metadata?.longDescription || highlights.length > 1));
+    // Lowercase, so the URL is the same however the repo happens to be capitalised
+    const pageSlug = slug?.toLowerCase();
+
     return {
         slug,
+        pageSlug,
+        // Where this project's write-up lives (scripts/templates/project-page.mjs), if it has one
+        pageUrl: hasCaseStudy ? projectPagePath(pageSlug) : null,
         // The file-name prefix of the project's images (see images/projects/)
         name: metadata?.name ?? slug,
         displayName,
@@ -161,7 +177,10 @@ export function projectView(repo, metadata) {
             ? { name: metadata.name, alt: metadata.screenshot.alt ?? '' }
             : null,
         featured: Boolean(metadata?.featured),
-        hasCaseStudy: Boolean(slug && (metadata?.longDescription || highlights.length > 1)),
+        hasCaseStudy,
+        // Curated impact figures: [{ value: '30 fps', label: 'LiDAR depth stream' }]. Nothing is
+        // ever invented here; with none, the page simply has no metrics block.
+        metrics: (metadata?.metrics ?? []).filter(metric => metric?.value && metric?.label),
     };
 }
 

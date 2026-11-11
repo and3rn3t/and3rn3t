@@ -1,6 +1,6 @@
 /**
- * Selected work: a lead card, a grid of cards, and a compact list, all pre-rendered; the browser
- * only makes their case studies work.
+ * Selected work: a lead card, a grid of cards, and a compact list, all pre-rendered, each linking
+ * to the project's own page (see project-pages.spec.js).
  */
 import { test, expect } from './fixtures.js';
 
@@ -22,42 +22,35 @@ test('shows the lead card, the grid and the compact list, with nothing hidden', 
     await expect(page.locator('#projects-more-btn, [data-extra]')).toHaveCount(0);
 });
 
-test('every project with a write-up gets a working case-study button', async ({ page }) => {
+test('every project with a write-up links to its own page', async ({ page }) => {
     await page.goto('/');
-    await page.waitForSelector('#projects [data-case-study]:not([data-pending])');
-    await expect(page.locator('#projects [data-case-study][data-pending]')).toHaveCount(0);
+    const hrefs = await page
+        .locator('#projects [data-project] a[href^="/projects/"]')
+        .evaluateAll(links => [...new Set(links.map(link => link.getAttribute('href')))]);
+    expect(hrefs.length).toBeGreaterThan(3);
 
-    const slugs = await page
-        .locator('#projects [data-case-study]')
-        .evaluateAll(buttons => buttons.map(button => button.dataset.caseStudy));
-    expect(slugs.length).toBeGreaterThan(3);
-
-    // One from each shape opens its study
-    for (const selector of [
-        '.lead-card [data-case-study]',
-        '.work-card [data-case-study]',
-        '.project-list__row [data-case-study]',
-    ]) {
-        const button = page.locator(`#projects ${selector}`).first();
-        await button.scrollIntoViewIfNeeded();
-        await button.click();
-        await expect(page.locator('#project-modal')).toHaveClass(/visible/);
-        await page.keyboard.press('Escape');
-        await expect(page.locator('#project-modal')).not.toHaveClass(/visible/);
+    // One from each shape leads to a page that exists, in this tab: a plain link, no script
+    for (const selector of ['.lead-card', '.work-card', '.project-list__row']) {
+        const link = page.locator(`#projects ${selector} a[href^="/projects/"]`).first();
+        const href = await link.getAttribute('href');
+        const response = await page.request.get(href);
+        expect(response.status(), href).toBe(200);
+        expect(await link.getAttribute('target'), href).toBeNull();
     }
 });
 
-test('a deep link to a project in the compact list opens its case study', async ({ page }) => {
+test('a project card opens its page and the pager brings you back', async ({ page }) => {
     await page.goto('/');
-    const slug = await page
-        .locator('#projects-more [data-case-study]')
-        .first()
-        .getAttribute('data-case-study');
+    const card = page.locator('#projects .lead-card');
+    const title = card.locator('a[href^="/projects/"]').first();
+    const href = await title.getAttribute('href');
+    await title.click();
+    await page.waitForURL(`**${href}`);
+    await expect(page.locator('h1')).toBeVisible();
 
-    // Leave the page first so this is a fresh load, not a same-document hash change.
-    await page.goto('about:blank');
-    await page.goto(`/#project/${slug}`);
-    await expect(page.locator('body')).toHaveClass(/modal-open/);
+    await page.getByRole('link', { name: 'All projects' }).first().click();
+    await page.waitForURL('**/#projects');
+    await expect(page.locator('#projects')).toBeVisible();
 });
 
 test.describe('on a phone', () => {

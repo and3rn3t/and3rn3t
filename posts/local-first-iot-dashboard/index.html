@@ -36,6 +36,8 @@
 
     <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
+    <!-- Opts in to view transitions; see VIEW_TRANSITION_CSS. Moves to core.css in Phase 10.5. -->
+    <style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }</style>
 
     <script type="application/ld+json">
 {

@@ -1,5 +1,6 @@
 /**
- * Focus traps in the modal dialogs.
+ * Focus traps in the modal dialogs (the keyboard shortcuts panel here, the command palette in
+ * palette.spec.js).
  *
  * Regressions: the trap code treated every `[href]` as focusable, and an icon is
  * <svg><use href="...">, so the "last focusable element" was an invisible icon and Tab off
@@ -54,40 +55,5 @@ test.describe('keyboard shortcuts panel', () => {
         await page.keyboard.press('Escape');
         await expect(page.locator('#keyboard-help')).not.toHaveClass(/visible/);
         await expect(page.locator('body')).toBeFocused();
-    });
-});
-
-test.describe('project case-study modal', () => {
-    test.beforeEach(async ({ page }) => {
-        await page.goto('/');
-        const card = page.locator('[data-case-study]').first();
-        await card.waitFor();
-        test.skip((await card.count()) === 0, 'no project with a case study in current data');
-        await card.click();
-        await expect(page.locator('#project-modal')).toHaveClass(/visible/);
-        // Focus moves to the close button a frame after opening, and the footer links stay
-        // visibility:hidden (so not focusable) until the open transition has run.
-        await expect(page.locator('.project-modal-close')).toBeFocused();
-        await expect(page.locator('.project-modal-links a').first()).toBeVisible();
-        await page.waitForFunction(
-            () =>
-                getComputedStyle(document.querySelector('.project-modal-links a')).visibility ===
-                'visible'
-        );
-    });
-
-    test('Tab cycles through the dialog and wraps from the last link to the close button', async ({
-        page,
-    }) => {
-        const links = await page.locator('.project-modal-links a').count();
-        const seen = await expectTrapped(page, '#project-modal', 'Tab', (links + 1) * 2);
-        // After a full lap it is back on the close button.
-        expect(seen.slice(0, links + 1).at(-1)).toMatch(/project-modal-close/);
-    });
-
-    test('Shift+Tab from the close button wraps to the last link', async ({ page }) => {
-        await page.keyboard.press('Shift+Tab');
-        const lastLink = page.locator('.project-modal-links a').last();
-        await expect(lastLink).toBeFocused();
     });
 });

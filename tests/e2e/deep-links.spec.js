@@ -16,11 +16,20 @@ test('legacy #post/<slug> links redirect to the post page', async ({ page }) => 
     expect(errors).toEqual([]);
 });
 
-test('#project/<slug> opens the case study without page errors', async ({ page }) => {
+test('legacy #project/<slug> links redirect to the project page', async ({ page }) => {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
 
     await page.goto('/#project/health');
-    await expect(page.getByRole('dialog')).toBeVisible();
+    await page.waitForURL('**/projects/health/');
+    await expect(page.locator('h1')).toBeVisible();
     expect(errors).toEqual([]);
+});
+
+test('legacy #project/<slug> links are case-insensitive (old modal slugs kept repo case)', async ({
+    page,
+}) => {
+    await page.goto('/#project/HealthKitBridge');
+    await page.waitForURL('**/projects/healthkitbridge/');
+    await expect(page.locator('h1')).toBeVisible();
 });
