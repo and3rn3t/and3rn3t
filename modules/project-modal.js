@@ -10,15 +10,8 @@
  */
 
 import { debug } from './debug.js';
-import { WORKER_BASE } from './config.js';
 import { escapeHtml, safeUrl } from './utils/html.js';
 import { icon } from './utils/icon.js';
-
-/** Worker endpoint for OG image generation. */
-const OG_WORKER_URL = `${WORKER_BASE}/og`;
-
-/** The og:image meta value set at page load (restored on modal close). */
-let defaultOgImage = '';
 
 export class ProjectModal {
     registry = new Map();
@@ -68,10 +61,6 @@ export class ProjectModal {
 
         // Restore a deep-linked study on first load (after registration).
         this.handleHash();
-
-        // Cache the initial og:image so we can restore it on close.
-        defaultOgImage =
-            document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '';
 
         debug.log('[ProjectModal] Initialized');
     }
@@ -128,11 +117,6 @@ export class ProjectModal {
         document.body.classList.add('modal-open');
         document.addEventListener('keydown', this.trapFocus);
 
-        // Update og:image so apps that check at paste-time see the project card.
-        document
-            .querySelector('meta[property="og:image"]')
-            ?.setAttribute('content', `${OG_WORKER_URL}?project=${encodeURIComponent(slug)}`);
-
         requestAnimationFrame(() => {
             const closeBtn = this.modal.querySelector('.project-modal-close');
             closeBtn?.focus();
@@ -158,13 +142,6 @@ export class ProjectModal {
 
         if (this.lastFocused instanceof HTMLElement) {
             this.lastFocused.focus();
-        }
-
-        // Restore default og:image.
-        if (defaultOgImage) {
-            document
-                .querySelector('meta[property="og:image"]')
-                ?.setAttribute('content', defaultOgImage);
         }
     }
 

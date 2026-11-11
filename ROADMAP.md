@@ -17,11 +17,11 @@ Status legend: ⬜ not started · 🟡 in progress · ✅ done · ❌ dropped
 
 ## Phase 2 — Signature wow features
 
-| #   | Item                                                                                                         | Status        |
-| --- | ------------------------------------------------------------------------------------------------------------ | ------------- |
-| 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ✅ 2026-06-13 |
-| 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback)                                     | ✅ 2026-06-13 |
-| 2.3 | Dynamic OG images (Worker SVG — portfolio + per-project cards)                                               | ✅ 2026-06-13 |
+| #   | Item                                                                                                         | Status          |
+| --- | ------------------------------------------------------------------------------------------------------------ | --------------- |
+| 2.1 | Case-study deep dives — long-form in `projects-data.json` + accessible modal in `projects.js`, deep-linkable | ✅ 2026-06-13   |
+| 2.2 | Live "currently coding" widget (Worker + GitHub events, static fallback)                                     | ✅ 2026-06-13   |
+| 2.3 | Dynamic OG images (Worker SVG — portfolio + per-project cards)                                               | ❌ removed #228 |
 
 ## Phase 3 — Content & credibility
 
@@ -63,7 +63,7 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
 | 6.2 | Hero particle flow-field compute core in WASM (`assembly/hero-sim.ts` + `modules/wasm/hero-sim.js`)                                                                                                 | ✅ 2026-06-28 |
 | 6.3 | `wasm-lab.html` interactive showcase + live FPS/particle HUD (measured: 3.5k particles @ 120fps)                                                                                                    | ✅ 2026-06-28 |
 | 6.4 | WASM hero shipped live: `initHeroEnhancements` mounts the flow-field first, falling back to the WebGL shader then CSS (`main.js`); transparent `destination-out` trails composite over the gradient | ✅ 2026-06-28 |
-| 6.5 | Edge OG images via a Rust WASM rasterizer (port `worker/og.js` → PNG), SVG kept as fallback                                                                                                         | ⬜            |
+| 6.5 | Edge OG images via a Rust WASM rasterizer (port `worker/og.js` → PNG), SVG kept as fallback                                                                                                         | ❌ dropped    |
 
 ## Phase 7 — Streamline
 
@@ -211,3 +211,10 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   change). Left for a human: 22 `@media (max-width: 768px)` blocks that
   can't be merged without choosing which conflicting rule is intended. Also not done: per-post OG
   cards (6.5) and project screenshots in cards.
+- **2026-11-11** — Removed the unused OG pipeline (#228). The Worker `/og` route and the 16
+  per-project `og/<repo>.png` cards had no consumer: only `og/default.png` is referenced, and the
+  case-study modal's client-side `og:image` swap does nothing because scrapers (Slack, iMessage,
+  X, LinkedIn, Facebook) do not run JavaScript. The portfolio card renderer moved to
+  `scripts/og-card.mjs`; `pnpm generate:og` renders just `og/default.png`. Per-project share
+  cards would need real, crawlable `/projects/<slug>/` pages first (like the blog posts), so 6.5
+  (a Rust WASM rasterizer for `/og`) is dropped with the route.

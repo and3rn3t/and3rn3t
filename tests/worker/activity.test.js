@@ -6,8 +6,6 @@
  */
 import { test, expect, vi, beforeEach, afterEach } from 'vitest';
 
-vi.mock('../../worker/og.js', () => ({ handleOgRequest: vi.fn() }));
-
 vi.mock('../../worker/engagement.js', () => ({
     handleViewsRequest: vi.fn(),
     handleGuestbookRequest: vi.fn(),

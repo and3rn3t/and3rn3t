@@ -1,8 +1,6 @@
 /**
  * Cloudflare Worker — and3rn3t portfolio backend
  *
- * GET /og               → dynamic OG image SVG card (1200×630)
- * GET /og?project=slug  → per-project OG image card
  * GET /activity
  *   Returns the most recent meaningful GitHub activity as a small JSON object.
  *   Results are cached at the CF edge for 5 minutes so the GitHub API is never
@@ -26,7 +24,6 @@
  * Workers-compatible: uses only standard fetch + Response; no Node built-ins.
  */
 
-import { handleOgRequest } from './og.js';
 import { pickEvent, buildActivity } from '../modules/utils/activity.js';
 import {
     handleViewsRequest,
@@ -60,10 +57,6 @@ async function route(request, env) {
         return new Response(JSON.stringify({ ok: true }), {
             headers: { 'Content-Type': 'application/json' },
         });
-    }
-
-    if (url.pathname === '/og') {
-        return handleOgRequest(request);
     }
 
     if (url.pathname === '/views') {
