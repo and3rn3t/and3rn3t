@@ -86,12 +86,23 @@ test.describe('offline page', () => {
         expect(loads).toBe(1);
     });
 
+    test('does not promise a reload when it loads while the browser says it is online', async ({
+        page,
+    }) => {
+        await page.goto('/offline.html');
+        const status = page.getByRole('status');
+        await expect(status).toHaveText('Connected, but the site did not load');
+        await expect(status).not.toContainText('reloading');
+    });
+
     test('reloads once the connection returns', async ({ page, context }) => {
         await page.goto('/offline.html');
         await context.setOffline(true);
         await expect(page.getByRole('status')).toHaveText('No connection');
         const reloaded = page.waitForEvent('load');
         await context.setOffline(false);
+        // It says so before it does it
+        await expect(page.getByRole('status')).toHaveText('Back online, reloading…');
         await reloaded;
     });
 

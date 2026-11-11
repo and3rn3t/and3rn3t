@@ -183,7 +183,9 @@
       function show() {
         const online = navigator.onLine;
         status.dataset.online = String(online);
-        status.textContent = online ? 'Back online, reloading…' : 'No connection';
+        // Online here means the browser has a connection, not that the site is reachable, so
+        // don't promise a reload that nothing has scheduled
+        status.textContent = online ? 'Connected, but the site did not load' : 'No connection';
       }
 
       document.getElementById('retry').addEventListener('click', () => location.reload());
@@ -192,6 +194,7 @@
       // would loop forever when the browser says it is online but the site is unreachable.
       window.addEventListener('online', () => {
         show();
+        status.textContent = 'Back online, reloading…';
         setTimeout(() => location.reload(), 1000);
       });
       window.addEventListener('offline', show);
