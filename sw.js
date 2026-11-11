@@ -1,11 +1,12 @@
 // Service Worker for Matthew Anderson's Portfolio
-// BUILD_ID is stamped with the commit SHA by pages.yml at deploy time, so every
-// deploy gets a new cache name and the browser sees a byte-different worker.
+// BUILD_ID is stamped by pages.yml at deploy time with a hash of the shipped code and
+// assets (not the commit SHA), so a deploy that changes only data (github-data.json,
+// og/, posts/) keeps the same worker and caches, while any code change gets new caches
+// and a byte-different worker.
 const BUILD_ID = '__BUILD_SHA__';
 
 const CACHE_NAME = `portfolio-${BUILD_ID}`;
 const RUNTIME_CACHE = `portfolio-runtime-${BUILD_ID}`;
-const API_CACHE = `portfolio-api-${BUILD_ID}`;
 
 // Assets to cache immediately on install
 const PRECACHE_ASSETS = [
@@ -59,8 +60,7 @@ self.addEventListener('activate', event => {
                             return (
                                 cacheName.startsWith('portfolio-') &&
                                 cacheName !== CACHE_NAME &&
-                                cacheName !== RUNTIME_CACHE &&
-                                cacheName !== API_CACHE
+                                cacheName !== RUNTIME_CACHE
                             );
                         })
                         .map(cacheName => {
@@ -87,23 +87,11 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Skip external analytics (Cloudflare, Google Analytics, etc.)
-    const externalAnalytics = [
-        'cloudflareinsights.com',
-        'cloudflare.com/beacon',
-        'google-analytics.com',
-        'googletagmanager.com',
-        'analytics.google.com',
-    ];
-
-    if (externalAnalytics.some(domain => url.hostname.includes(domain))) {
-        // Let browser handle these directly, no caching
-        return;
-    }
-
-    // API requests - Network First strategy
-    if (isAPIRequest(url)) {
-        event.respondWith(networkFirstStrategy(request, API_CACHE));
+    // Only handle this site's own files. Cross-origin requests go straight to the
+    // network: the Turnstile script must never be served from a cache, and the Worker's
+    // /guestbook and /activity responses must not be shown stale. This also covers
+    // analytics beacons and api.github.com.
+    if (url.origin !== self.location.origin) {
         return;
     }
 
@@ -128,11 +116,6 @@ self.addEventListener('fetch', event => {
     // Default - Stale While Revalidate strategy
     event.respondWith(staleWhileRevalidateStrategy(request, RUNTIME_CACHE));
 });
-
-// Check if request is to an API endpoint
-function isAPIRequest(url) {
-    return url.hostname === 'api.github.com' || url.pathname.includes('/api/');
-}
 
 // Pages and JSON data (github-data.json, posts-data.json, ...) must stay fresh
 function isFreshContent(request, url) {
