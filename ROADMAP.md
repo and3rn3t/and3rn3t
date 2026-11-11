@@ -98,8 +98,8 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247                     | ✅ 2026-11-11 |
 | 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card                  | 🟡            |
 | 10.3 | Home sections on the new system: work, about/experience/writing, contact + footer; inline contact form (#231) | ✅ 2026-11-11 |
-| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | 🟡            |
-| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | ⬜            |
+| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | ✅ 2026-11-11 |
+| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | 🟡            |
 | 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | ⬜            |
 
 ## Decision Log
@@ -329,3 +329,21 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   browser), iOS Safari (no cross-document view transitions, so it cross-fades nothing and just navigates), and
   the real share cards in a social debugger. **Known flake, not from this phase:** `palette.spec.js` "'/' key
   opens the palette" fails about 1 in 15 under parallel load without `CI=1` (also on the pre-phase commit).
+- **2026-11-11** — Phase 10.5a (post pages, 404, offline, on `redesign`): the three remaining pages that were not on
+  the new system. Post pages (`scripts/templates/post-page.mjs`) use the same head, nav, footer and pager as the
+  project pages, with a `.prose` block in `styles/article.css` for the post's own HTML (headings, links, inline
+  and block code, lists, quotes, images, tables; a code block or table scrolls inside the reading width), a
+  BreadcrumbList beside the BlogPosting data, and a CSS-only reading-progress bar (`animation-timeline: scroll()`,
+  no script; browsers without it just have no bar). `404.html` is now generated (`not-found.mjs`) from the same
+  parts, `noindex`, with no canonical, and every URL absolute because GitHub Pages serves it at whatever address
+  was missing; a test serves it at a deep address. `offline.html` stays hand-written and self-contained (the
+  service worker shows it when nothing else is available) with the design tokens copied in, and a test fails if
+  those values drift from `core.css`. Its old claims ("GitHub statistics", "contact information") are replaced
+  by what the precache really holds, and it now reloads only when the browser reports the connection coming
+  back: the old five-second poll looped forever whenever the browser said it was online but the site was not
+  reachable. About 6 KB of legacy CSS (`.blog-*`, `.post-nav`, `.post-pager`, the old `.skip-link`) is deleted;
+  a pixel diff of every home section, in both themes at 1440 and 390, is identical before and after. The post
+  pages lose their inline view-transition block (the shared head carries it). **The post "How This Site Works"
+  still describes the old stack (one `styles.css`, dark mode as a class on `body`, the modal); it is Matt's
+  copy to update.** Still to do in 10.5: the palette, keyboard help and toasts on `<dialog>` (10.5b), and the
+  OG card and `manifest.json` colours (10.5c).
