@@ -170,8 +170,10 @@ export class ProjectModal {
 
     trapFocus = e => {
         if (e.key !== 'Tab') return;
+        // `a[href]`, not `[href]`: the icons are <svg><use href="...">, which would count as
+        // focusable (an SVG element's offsetParent is undefined, not null) and end up "last".
         const focusable = this.dialog.querySelectorAll(
-            'button, input, [href], [tabindex]:not([tabindex="-1"])'
+            'button, input, a[href], [tabindex]:not([tabindex="-1"])'
         );
         const list = Array.from(focusable).filter(el => el.offsetParent !== null);
         if (list.length === 0) return;
