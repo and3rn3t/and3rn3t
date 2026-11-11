@@ -93,13 +93,6 @@ async function initializeApp() {
         uiManager.hideLoadingProgress('content');
         debug.log('[App] Phase 3: Content loaded');
 
-        // Micro-interactions on the freshly-rendered content (count-up, tilt, magnetic).
-        await startOptional(
-            'Interactions',
-            () => import('./modules/interactions.js'),
-            m => m.initInteractions()
-        );
-
         // Contact tabs (the guestbook and Turnstile load when its tab opens), the command
         // palette (Cmd/Ctrl-K) and keyboard help (?, g h/a/p/c) are purely local, so wire
         // them before any network-bound widget so they respond at once.

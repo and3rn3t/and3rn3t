@@ -1,9 +1,10 @@
 /**
  * Blog Module
  *
- * The writing cards are pre-rendered into index.html by scripts/generate-site.mjs and each
- * links to its generated page under /posts/<slug>/. This module makes the whole card
- * clickable and redirects legacy #post/<slug> links.
+ * The writing rows are pre-rendered into index.html by scripts/generate-site.mjs and each
+ * links to its generated page under /posts/<slug>/. The whole row is that link (a stretched
+ * link in CSS), so nothing here is needed for it to work. This module only redirects legacy
+ * #post/<slug> links to the real pages.
  */
 
 import { debug } from './debug.js';
@@ -14,15 +15,6 @@ class BlogManager {
     init() {
         this.#listEl = document.querySelector('#blog-posts');
         if (!this.#listEl) return;
-
-        // Whole card is clickable; the "Read post" link handles keyboard and middle-click
-        this.#listEl.addEventListener('click', e => {
-            if (e.target.closest('a')) return;
-            const card = e.target.closest('[data-slug]');
-            if (card) {
-                globalThis.location.assign(`/posts/${encodeURIComponent(card.dataset.slug)}/`);
-            }
-        });
 
         this.#handleHash();
         globalThis.addEventListener('hashchange', () => this.#handleHash());

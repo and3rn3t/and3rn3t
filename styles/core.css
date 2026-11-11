@@ -318,6 +318,11 @@
     text-wrap: balance;
   }
 
+  /* A link inside the lede is the same size as the words around it */
+  .section-heading__lede .link {
+    font-size: inherit;
+  }
+
   .section-heading__lede {
     margin: 0;
     color: var(--muted);

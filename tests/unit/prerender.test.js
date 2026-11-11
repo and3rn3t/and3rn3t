@@ -5,7 +5,13 @@ import {
     relativeTime,
     selectProjects,
 } from '../../modules/utils/projects.js';
-import { formatDateRange, renderTimeline } from '../../scripts/templates/experience.mjs';
+import {
+    formatDateRange,
+    renderEducation,
+    renderFacts,
+    renderJobs,
+} from '../../scripts/templates/experience.mjs';
+import { shortDate } from '../../scripts/templates/shared.mjs';
 import { renderCover } from '../../scripts/templates/cover.mjs';
 import {
     coverFiles,
@@ -14,7 +20,7 @@ import {
     renderProjects,
     renderWorkCard,
 } from '../../scripts/templates/projects.mjs';
-import { renderBlogCards } from '../../scripts/templates/writing.mjs';
+import { renderPostRows } from '../../scripts/templates/writing.mjs';
 
 const REPOS = [
     {
@@ -349,46 +355,130 @@ describe('generated covers', () => {
 });
 
 describe('experience', () => {
+    const job = (overrides = {}) => ({
+        role: 'Dev <script>',
+        company: 'Acme & Sons',
+        companyUrl: 'https://acme.example',
+        startDate: '2020-01',
+        endDate: '2022-06',
+        summary: 'Did "things"',
+        highlights: ['One', 'Two'],
+        technologies: ['Java', 'SAP'],
+        ...overrides,
+    });
+
     it('formats date ranges', () => {
         expect(formatDateRange('2021-06', undefined, true)).toBe('Jun 2021 – Present');
         expect(formatDateRange('2013', '2021', false)).toBe('2013 – 2021');
         expect(formatDateRange(undefined, '2009', false)).toBe('2009');
     });
 
-    it('renders work and education entries, escaping their text', () => {
-        const work = renderTimeline(
-            [{ role: 'Dev <script>', company: 'Acme', startDate: '2020-01', current: true }],
-            'work'
-        );
-        expect(work).toContain('timeline-item--current');
-        expect(work).toContain('Dev &lt;script&gt;');
-        expect(work).toContain('Current');
+    describe('jobs', () => {
+        it('puts role, company and dates on one row, and escapes the text', () => {
+            const html = renderJobs([job()]);
+            expect(html).toContain('Dev &lt;script&gt;');
+            expect(html).not.toContain('<script>');
+            expect(html).toContain('Acme &amp; Sons');
+            expect(html).toContain('Jan 2020 – Jun 2022');
+            expect(html).toMatch(
+                /<header class="job__head">[\s\S]*job__role[\s\S]*job__company[\s\S]*job__dates/
+            );
+        });
 
-        const edu = renderTimeline(
-            [{ degree: 'B.A.', institution: 'State U', endDate: '2009' }],
-            'edu'
-        );
-        expect(edu).toContain('B.A.');
-        expect(edu).toContain('State U');
+        it('folds highlights and technologies into a <details>, open only for the current role', () => {
+            const past = renderJobs([job()]);
+            expect(past).toContain('<details class="job__more">');
+            expect(past).toContain('Highlights <span class="job__count">2</span>');
+            expect(past).toContain('<li class="tag">Java</li>');
+
+            const current = renderJobs([job({ current: true })]);
+            expect(current).toContain('<details class="job__more" open>');
+            expect(current).toContain('job--current');
+            expect(current).toContain('Current');
+        });
+
+        it('has no <details> when there is nothing to fold away', () => {
+            expect(renderJobs([job({ highlights: [], technologies: [] })])).not.toContain(
+                '<details'
+            );
+        });
+
+        it('links the company only when it has a URL', () => {
+            expect(renderJobs([job()])).toContain('href="https://acme.example"');
+            expect(renderJobs([job({ companyUrl: undefined })])).not.toContain(
+                '<a class="job__company-link"'
+            );
+        });
+    });
+
+    describe('education', () => {
+        it('is a compact list: what, where, when, and a note if there is one', () => {
+            const html = renderEducation([
+                {
+                    degree: 'B.A.',
+                    institution: 'State U',
+                    institutionUrl: 'https://u.example',
+                    endDate: '2009',
+                },
+                {
+                    degree: 'Bootcamp',
+                    institution: 'GA',
+                    startDate: '2021',
+                    endDate: '2021',
+                    highlights: ['12 weeks'],
+                },
+            ]);
+            expect(html.match(/class="edu-row"/g)).toHaveLength(2);
+            expect(html).toContain('href="https://u.example"');
+            expect(html).toContain('12 weeks');
+        });
+    });
+
+    describe('facts (About, at a glance)', () => {
+        it('come from the current role: what, where, since when', () => {
+            const html = renderFacts([job({ current: true, startDate: '2021-06' }), job()]);
+            expect(html).toContain('Dev &lt;script&gt;');
+            expect(html).toContain('Acme &amp; Sons');
+            expect(html).toMatch(/<dt>Since<\/dt><dd>2021<\/dd>/);
+        });
+
+        it('are empty when no role is current, rather than describing an old job as the present', () => {
+            expect(renderFacts([job()])).toBe('');
+            expect(renderFacts([])).toBe('');
+        });
     });
 });
 
 describe('writing', () => {
-    it('renders a card per post that links to its page', () => {
-        const html = renderBlogCards([
-            {
-                slug: 'a-post',
-                title: 'A & B',
-                date: '2026-07-12',
-                summary: 'Sum',
-                tags: ['x'],
-                content: '<p>words</p>',
-                readingMinutes: 7,
-            },
-        ]);
+    const post = (overrides = {}) => ({
+        slug: 'a-post',
+        title: 'A & B',
+        date: '2026-07-12',
+        summary: 'Sum <b>',
+        tags: ['x'],
+        content: '<p>words</p>',
+        readingMinutes: 7,
+        ...overrides,
+    });
+
+    it('formats a compact date, in UTC', () => {
+        expect(shortDate('2026-07-12')).toBe('Jul 12, 2026');
+        expect(shortDate('2026-01-01')).toBe('Jan 1, 2026');
+    });
+
+    it('is a row per post: date, title and summary, reading time, linking to its page', () => {
+        const html = renderPostRows([post()]);
+        expect(html).toContain('class="post-row" data-slug="a-post"');
         expect(html).toContain('href="/posts/a-post/"');
         expect(html).toContain('A &amp; B');
-        expect(html).toContain('July 12, 2026');
+        expect(html).toContain('Sum &lt;b&gt;');
+        expect(html).toContain('Jul 12, 2026');
         expect(html).toContain('7 min read');
+        expect(html).toContain('datetime="2026-07-12"');
+    });
+
+    it('renders posts in the order given', () => {
+        const html = renderPostRows([post({ slug: 'new' }), post({ slug: 'old' })]);
+        expect(html.indexOf('data-slug="new"')).toBeLessThan(html.indexOf('data-slug="old"'));
     });
 });

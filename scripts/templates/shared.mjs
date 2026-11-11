@@ -37,3 +37,18 @@ export const longDate = dateStr => {
     timeZone: 'UTC',
   });
 };
+
+/**
+ * "Jul 12, 2026" from a "2026-07-12" date: the compact form for lists. UTC, like longDate.
+ * @param {string} dateStr
+ * @returns {string}
+ */
+export const shortDate = dateStr => {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+};
