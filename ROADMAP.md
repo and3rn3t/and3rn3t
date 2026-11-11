@@ -405,3 +405,27 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   layout shift of 0.01, or if a shortcut used before its module loads stops working (mutation-checked: disabling
   the shim fails three tests). **Still to do in 10.6:** retire `styles.css` (94 KB, the largest remaining cost),
   then docs and the cut-over to `main`.
+- **2026-11-11** — Phase 10.6b (retire `styles.css`; stacked on 10.6a): the 94 KB legacy stylesheet is deleted, and
+  with it the `legacy` cascade layer, the inline "legacy critical CSS" block in `index.html`, the
+  `<link rel="preload">`, the body `dark-theme` script, `body.dark-theme` in `theme.js`, and the service-worker,
+  Pages and ref-check entries. Method: **delete, then diff.** I removed the import and compared 54 screenshots
+  (sections, full page and the interactive states: mobile menu, palette, help, toast, form errors, guestbook; both
+  themes at 1440 and 390), then used CSS coverage on the old tree to list which legacy rules the home page really
+  used: **50 of 568**. What the page still needed moved into `home.css` in explicit layers: the
+  margin-and-padding reset, the body's type, `scroll-behavior`, coarse-pointer tap targets, the phone-sized
+  scale (still pinned by a test), and the "currently" widget, which now owns its own structure instead of
+  patching the old rules. **Differences that remain are legacy rules leaking into new components, and each now
+  follows the design system:** dark-mode paragraphs use the `--text` token (they were a dimmer grey from
+  `body.dark-theme p`); the footer uses `--muted`; phone screenshots render smoothly (legacy forced
+  `image-rendering: crisp-edges`, which is jagged when downscaled); an empty form or guestbook status no longer
+  carries 20 px of padding and a border, so Contact is 24-44 px shorter; and a mouse click no longer draws a
+  3 px focus ring (`:focus-visible` only). `check-refs` now also validates the `url()`s in every file in
+  `styles/` (the font paths in `core.css` were unchecked). **Result at app-ready on the home page: 14 requests and
+  184 KB (was 21 / 362 KB after 10.6a, 41 / 582 KB originally); settled 41 requests and 495 KB (was 587 KB).**
+  **The "known flake" is fixed, and it was never a flake in the product.** `page.locator('body').click()` clicks the
+  centre of the whole document, which on a page this long can land inside the contact form's textarea; the `/`
+  or `?` key is then correctly typed into the field and the test fails. It showed up as roughly 1 run in 15
+  under load (and in my new early-shortcut test, which exposed it at 2 to 4 in 40). Eleven tests now blur the
+  focused element instead (`document.activeElement?.blur()`); the old flaky test passes 60 of 60 and the new one
+  40 of 40 under 8 workers. **Still to do in 10.6:** the cut-over (docs pass, removing `redesign` from the CI
+  branch list, the final `redesign` to `main` PR, a Lighthouse mobile run).

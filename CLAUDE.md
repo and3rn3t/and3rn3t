@@ -32,7 +32,7 @@
 ### Colour (new design system, `styles/`)
 
 - Use the semantic tokens from `styles/core.css`: `--surface`, `--surface-raised`, `--text`, `--muted`, `--border`, `--accent`, `--accent-contrast`. Each is defined once with `light-dark()`.
-- Never write a hex, `rgb()` or named colour in `styles/`; Stylelint fails it. Only the token block in `core.css` may, behind a `stylelint-disable` comment. Legacy `styles.css` is exempt until retired.
+- Never write a hex, `rgb()` or named colour in `styles/`; Stylelint fails it. Only the token block in `core.css` may, behind a `stylelint-disable` comment.
 - Layer order and new-class-name rules are in `AGENTS.md`.
 
 ### Validation
