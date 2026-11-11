@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <style>
+      @layer scale, legacy, reset, tokens, base, components, sections, utilities;
+      @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+    </style>
     <title>How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker | Matthew Anderson</title>
     <meta name="description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
     <meta name="author" content="Matthew Anderson" />
@@ -11,17 +15,22 @@
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://andernet.dev/posts/how-this-site-works/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/posts/how-this-site-works/" />
-    <meta property="og:title" content="How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker" />
+    <meta property="og:title" content="How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker | Matthew Anderson" />
     <meta property="og:description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker | Matthew Anderson" />
+    <meta name="twitter:description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
     <meta property="article:published_time" content="2026-07-12" />
     <meta property="article:author" content="Matthew Anderson" />
     <meta property="article:tag" content="JavaScript" />
@@ -29,16 +38,31 @@
     <meta property="article:tag" content="Cloudflare Workers" />
     <meta property="article:tag" content="CSS" />
     <meta property="article:tag" content="Architecture" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker" />
-    <meta name="twitter:description" content="A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts." />
-    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <!-- Names a project's image and title for the transition between its card and its page.
+         A classic script in the head: it must listen before the page first renders. -->
+    <script src="/modules/page-transitions.js"></script>
     <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/styles.css" />
-    <!-- Opts in to view transitions; see VIEW_TRANSITION_CSS. Moves to core.css in Phase 10.5. -->
-    <style>@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }</style>
-
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/styles/core.css" />
+    <link rel="stylesheet" href="/styles/article.css" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,30 +86,44 @@
   }
 }
     </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://andernet.dev/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Writing",
+      "item": "https://andernet.dev/#writing"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker",
+      "item": "https://andernet.dev/posts/how-this-site-works/"
+    }
+  ]
+}
+    </script>
   </head>
   <body>
-    <script>
-      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
-      (function () {
-        var t = null;
-        try {
-          t = localStorage.getItem('theme');
-        } catch (e) {}
-        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.body.classList.add('dark-theme');
-        }
-      })();
-    </script>
+    <div class="reading-progress" aria-hidden="true"></div>
     <a href="#main" class="skip-link">Skip to main content</a>
-
-    <header class="post-nav">
-      <div class="post-nav-inner">
-        <a href="/" class="nav-logo">@and3rn3t</a>
-        <div class="post-nav-actions">
-          <a href="/#writing" class="post-nav-link">All posts</a>
+    <nav class="site-nav scrolled" aria-label="Main navigation">
+      <div class="wrap site-nav__inner">
+        <a href="/" class="site-nav__logo">@and3rn3t</a>
+        <div class="site-nav__actions">
+          <a class="link site-nav__back" href="/#writing">All posts</a>
           <button
             type="button"
-            class="theme-toggle"
+            class="icon-button"
             id="theme-toggle"
             aria-label="Switch to dark theme"
             title="Switch to dark theme (T)"
@@ -94,22 +132,28 @@
           </button>
         </div>
       </div>
-    </header>
+    </nav>
+    <main id="main" class="article">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#writing">Writing</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</span>
+        </nav>
 
-    <main id="main" class="post-page">
-      <div class="container">
-        <div class="blog-article-inner">
-          <a href="/#writing" class="blog-back-link"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-left"></use></svg> Back to writing</a>
-          <article class="blog-article-body">
-            <header class="blog-article-header">
-              <div class="blog-card-meta">
-                <time datetime="2026-07-12">July 12, 2026</time>
-                <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 7 min read</span>
-              </div>
-              <h1 class="blog-article-title">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</h1>
-              <div class="blog-card-tags"><span class="blog-tag">JavaScript</span><span class="blog-tag">WebAssembly</span><span class="blog-tag">Cloudflare Workers</span><span class="blog-tag">CSS</span><span class="blog-tag">Architecture</span></div>
-            </header>
-            <div class="blog-article-content"><p>This portfolio looks like a typical modern web app, but there is no framework underneath — no React, no Vue, no build-time magic required to run it. The production site is plain ES modules served straight from GitHub Pages. This post walks through the architecture and the reasoning behind it.</p>
+        <article class="post">
+          <header class="post-head">
+            <p class="eyebrow">
+              <time datetime="2026-07-12">July 12, 2026</time>
+              <span aria-hidden="true">&middot;</span>
+              <span class="post-head__reading"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 7 min read</span>
+            </p>
+            <h1 class="post-head__title">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</h1>
+            <ul class="tag-list" aria-label="Tags"><li class="tag">JavaScript</li><li class="tag">WebAssembly</li><li class="tag">Cloudflare Workers</li><li class="tag">CSS</li><li class="tag">Architecture</li></ul>
+          </header>
+          <div class="prose"><p>This portfolio looks like a typical modern web app, but there is no framework underneath — no React, no Vue, no build-time magic required to run it. The production site is plain ES modules served straight from GitHub Pages. This post walks through the architecture and the reasoning behind it.</p>
 
 <h3>Vanilla ES modules, loaded in phases</h3>
 <p>The entry point, <code>main.js</code>, orchestrates a four-phase startup: theme and mobile detection first (to prevent flash and layout shift), then navigation and UI, then content, then deferred extras like analytics. Everything beyond the critical path is a dynamic <code>import()</code>, so the first paint only pays for what it needs. There are about 25 modules — projects, GitHub stats, a Cmd-K command palette, a guestbook — and each one lazy-loads independently.</p>
@@ -130,24 +174,29 @@
 <p>Every change runs through ESLint, Prettier, Vitest unit tests, and Playwright end-to-end tests including an axe-core accessibility audit. Lighthouse CI enforces budgets — accessibility is a hard gate, and color-contrast failures block the build. The site is also an installable PWA with a service worker and a full offline page.</p>
 
 <p>Could a framework do all this? Absolutely. But for a site this size, the browser platform alone turned out to be plenty — and every byte shipped is a byte I can explain.</p></div>
-          </article>
-          <nav class="post-pager" aria-label="More posts">
-          
-          <a class="post-pager-link post-pager-next" href="/posts/lidar-gait-analysis-iphone/" rel="next">
-            <span class="post-pager-label">Older post</span>
-            <span class="post-pager-title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</span>
+        </article>
+
+        <nav class="pager" aria-label="More posts">
+          <span></span>
+          <a class="pager__link pager__link--next" href="/posts/lidar-gait-analysis-iphone/" rel="next">
+            <span class="eyebrow">Older post</span>
+            <span class="pager__title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</span>
           </a>
-          </nav>
-        </div>
+        </nav>
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="container footer-inner">
-        <p>Matthew Anderson · <a href="/">andernet.dev</a></p>
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <p class="site-footer__note">Matthew Anderson &middot; <a class="link" href="/">andernet.dev</a></p>
+        <ul class="site-footer__links">
+          <li><a class="link" href="/#projects">All projects</a></li>
+          <li>
+            <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
+          </li>
+          <li><a class="link" href="/feed.xml">RSS</a></li>
+        </ul>
       </div>
     </footer>
-
     <script type="module" src="/modules/post-page.js"></script>
     <script
       defer

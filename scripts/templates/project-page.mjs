@@ -9,7 +9,15 @@
 
 import { escapeHtml as esc } from '../../modules/utils/html.js';
 import { icon } from '../../modules/utils/icon.js';
-import { AUTHOR, PAGE_SCRIPTS, SITE, renderFooter, renderHead, renderNav } from './chrome.mjs';
+import {
+  AUTHOR,
+  PAGE_SCRIPTS,
+  SITE,
+  renderFooter,
+  renderHead,
+  renderNav,
+  renderPagerLink,
+} from './chrome.mjs';
 import { renderMedia } from './projects.mjs';
 
 /**
@@ -23,15 +31,8 @@ export function shareImage(view, exists) {
   return own && exists(own) ? `${SITE}${own}` : `${SITE}/og/default.png`;
 }
 
-/** The previous or next project, as a link. */
-function renderPagerLink(view, direction) {
-  if (!view) return '<span></span>';
-  const label = direction === 'prev' ? 'Previous project' : 'Next project';
-  return `<a class="pager__link pager__link--${direction}" href="${esc(view.pageUrl)}" rel="${direction === 'prev' ? 'prev' : 'next'}">
-            <span class="eyebrow">${label}</span>
-            <span class="pager__title">${esc(view.displayName)}</span>
-          </a>`;
-}
+/** A project as one side of the pager. */
+const pagerLink = (view, label) => view && { href: view.pageUrl, title: view.displayName, label };
 
 /**
  * @param {object} args
@@ -173,8 +174,8 @@ export function renderProjectPage({ view, prev, next, image }) {
         </div>
 
         <nav class="pager" aria-label="More projects">
-          ${renderPagerLink(prev, 'prev')}
-          ${renderPagerLink(next, 'next')}
+          ${renderPagerLink(pagerLink(prev, 'Previous project'), 'prev')}
+          ${renderPagerLink(pagerLink(next, 'Next project'), 'next')}
         </nav>
       </div>
     </main>

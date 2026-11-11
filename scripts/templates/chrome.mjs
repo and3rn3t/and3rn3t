@@ -1,6 +1,6 @@
 /**
  * The parts every generated page shares: the <head>, the navigation bar and the footer.
- * Used by the project pages (project-page.mjs); the post pages move onto it in Phase 10.5.
+ * Used by the project pages, the post pages and the 404 page.
  */
 
 import { escapeHtml as esc } from '../../modules/utils/html.js';
@@ -44,10 +44,12 @@ export const VIEW_TRANSITION_CSS =
  * @param {object} page
  * @param {string} page.title - the full <title>
  * @param {string} page.description
- * @param {string} page.path - the page's path on the site, e.g. "/projects/health/"
+ * @param {string | null} page.path - the page's path on the site, e.g. "/projects/health/"; null for none
  * @param {string} [page.image] - an absolute URL for the share card
  * @param {'website' | 'article'} [page.type]
  * @param {object[]} [page.structuredData] - JSON-LD objects
+ * @param {string} [page.robots] - the robots meta content
+ * @param {string} [page.extraMeta] - more <meta> tags (an article's date, author and tags)
  * @returns {string} a complete <head> element
  */
 export function renderHead({
@@ -57,8 +59,11 @@ export function renderHead({
   image = `${SITE}/og/default.png`,
   type = 'website',
   structuredData = [],
+  robots = 'index, follow, max-image-preview:large',
+  extraMeta = '',
 }) {
-  const url = `${SITE}${path}`;
+  // A page with no address of its own (the 404 page) has no canonical or og:url
+  const url = path ? `${SITE}${path}` : null;
   return `<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -71,17 +76,15 @@ export function renderHead({
     <meta name="author" content="${AUTHOR}" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="${url}" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="${robots}" />
+${url ? `    <link rel="canonical" href="${url}" />\n` : ''}    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="alternate" type="application/rss+xml" title="${AUTHOR}'s Blog" href="/feed.xml" />
 
     <meta property="og:type" content="${type}" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:title" content="${esc(title)}" />
+${url ? `    <meta property="og:url" content="${url}" />\n` : ''}    <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
     <meta property="og:image" content="${image}" />
     <meta property="og:image:width" content="1200" />
@@ -90,7 +93,7 @@ export function renderHead({
     <meta name="twitter:title" content="${esc(title)}" />
     <meta name="twitter:description" content="${esc(description)}" />
     <meta name="twitter:image" content="${image}" />
-
+${extraMeta ? `${extraMeta}\n` : ''}
     <script>
       ${THEME_SCRIPT}
     </script>
@@ -140,6 +143,20 @@ export function renderNav({ backHref, backLabel }) {
         </div>
       </div>
     </nav>`;
+}
+
+/**
+ * One side of a previous/next pager, or an empty cell that keeps the other side in its column.
+ * @param {{ href: string, title: string, label: string } | null} link
+ * @param {'prev' | 'next'} direction
+ * @returns {string}
+ */
+export function renderPagerLink(link, direction) {
+  if (!link) return '<span></span>';
+  return `<a class="pager__link pager__link--${direction}" href="${esc(link.href)}" rel="${direction}">
+            <span class="eyebrow">${esc(link.label)}</span>
+            <span class="pager__title">${esc(link.title)}</span>
+          </a>`;
 }
 
 /** @returns {string} */
