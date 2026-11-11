@@ -115,6 +115,67 @@ test.describe('Accessibility — main page', () => {
         });
     }
 
+    // The contribution chart is drawn after the page, from data, so the scans above can run before
+    // it exists: a figure with role=img (not an allowed combination) went unnoticed until Lighthouse
+    // found it. Wait for it, then scan the band.
+    for (const theme of ['light', 'dark']) {
+        test(`the contribution chart has no axe violations in the ${theme} theme`, async ({
+            page,
+        }) => {
+            await page.addInitScript(t => localStorage.setItem('theme', t), theme);
+            await page.goto('/');
+            await page.locator('#github-band').scrollIntoViewIfNeeded();
+            await page.waitForSelector('.contrib__grid', { state: 'attached' });
+            const results = await new AxeBuilder({ page })
+                .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'])
+                .include('#github-band')
+                .analyze();
+            expect(results.violations).toEqual([]);
+        });
+    }
+
+    test('the chart is an image with a text caption, and the caption stays readable', async ({
+        page,
+    }) => {
+        await page.goto('/');
+        await page.locator('#github-band').scrollIntoViewIfNeeded();
+        await page.waitForSelector('.contrib__grid', { state: 'attached' });
+        // role=img is on the grid, not the figure: on the figure it would hide the caption
+        await expect(page.locator('.contrib__figure')).not.toHaveAttribute('role');
+        await expect(page.locator('.contrib__grid')).toHaveAttribute('role', 'img');
+        await expect(page.locator('.contrib__foot')).toBeVisible();
+    });
+
+    test('the search button is named "Search the site", and its visible text is in that name', async ({
+        page,
+    }) => {
+        await page.setViewportSize({ width: 1280, height: 800 });
+        await page.goto('/');
+        const button = page.getByRole('button', { name: 'Search the site' });
+        await expect(button).toBeVisible();
+        // The only text a visitor can read in it is "Search"; the shortcut is generated content
+        expect((await button.innerText()).trim()).toBe('Search');
+        await expect(button.locator('kbd')).toHaveCount(0);
+        const hint = await button.evaluate(el => getComputedStyle(el, '::after').content);
+        expect(hint).toMatch(/^"(Ctrl K|⌘K)"$/);
+    });
+
+    test('the shortcut hint follows the platform once the palette has started', async ({
+        page,
+    }) => {
+        await page.addInitScript(() => {
+            Object.defineProperty(globalThis.navigator, 'platform', { get: () => 'MacIntel' });
+        });
+        await page.setViewportSize({ width: 1280, height: 800 });
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.managers?.palette);
+        await expect(page.locator('.site-nav__search')).toHaveAttribute('data-shortcut', '⌘K');
+        const hint = await page
+            .locator('.site-nav__search')
+            .evaluate(el => getComputedStyle(el, '::after').content);
+        expect(hint).toBe('"⌘K"');
+    });
+
     test('command palette modal is accessible when open', async ({ page }) => {
         await page.goto('/');
         // Ensure the palette manager has attached its global shortcut before pressing.

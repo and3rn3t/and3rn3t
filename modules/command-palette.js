@@ -76,7 +76,7 @@ class CommandPalette {
             : 'Ctrl K';
         for (const trigger of document.querySelectorAll('[data-open-palette]')) {
             trigger.addEventListener('click', () => this.open());
-            for (const hint of trigger.querySelectorAll('kbd')) hint.textContent = shortcut;
+            trigger.dataset.shortcut = shortcut; // shown by CSS (see .site-nav__search::after)
         }
 
         this.input.addEventListener('input', () => this.render());

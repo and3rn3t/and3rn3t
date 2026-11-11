@@ -827,11 +827,16 @@
   }
 
   .site-nav__search-label,
-  .site-nav__search kbd {
+  .site-nav__search::after {
     display: none;
   }
 
-  .site-nav__search kbd {
+  /* The shortcut hint is generated content from data-shortcut (set for the platform by
+     command-palette.js), not text in the page: the button's visible text is just "Search",
+     which its accessible name ("Search the site") contains. A hint written as text would be
+     visible text the name does not include (WCAG 2.5.3, label in name). */
+  .site-nav__search::after {
+    content: attr(data-shortcut);
     padding: 0 var(--space-1);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-sm);
@@ -923,7 +928,7 @@
     }
 
     .site-nav__search-label,
-    .site-nav__search kbd {
+    .site-nav__search::after {
       display: inline;
     }
   }

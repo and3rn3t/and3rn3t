@@ -95,8 +95,8 @@ test.describe('the GitHub band', () => {
         for (const width of [390, 1280]) {
             await page.setViewportSize({ width, height: 900 });
             await page.goto('/');
-            await page.waitForSelector('.contrib__figure', { state: 'attached' });
-            const label = await page.locator('.contrib__figure').getAttribute('aria-label');
+            await page.waitForSelector('.contrib__grid', { state: 'attached' });
+            const label = await page.locator('.contrib__grid').getAttribute('aria-label');
             expect(label, `at ${width}px`).not.toMatch(/year|\d+ weeks|[\d,]{3,}/i);
         }
     });

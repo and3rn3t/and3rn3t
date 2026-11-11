@@ -185,8 +185,8 @@ export class UIManager {
         });
 
         container.innerHTML = `
-            <figure class="contrib__figure" role="img" aria-label="Contribution activity, week by week">
-                <div class="contrib__grid">${cells.join('')}</div>
+            <figure class="contrib__figure">
+                <div class="contrib__grid" role="img" aria-label="Contribution activity, week by week">${cells.join('')}</div>
                 <figcaption class="contrib__foot">
                     <span class="contrib__range contrib__range--year">The last year, week by week</span>
                     <span class="contrib__range contrib__range--recent">The last ${MOBILE_HEATMAP_WEEKS} weeks</span>
