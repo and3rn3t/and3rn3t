@@ -266,7 +266,8 @@ async function initHeroEnhancements() {
 }
 
 /**
- * Initialize mobile menu toggle
+ * Initialize mobile menu toggle. The toggle button reports its state through
+ * aria-expanded; Escape and a click outside the menu close it.
  */
 function initMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
@@ -274,19 +275,32 @@ function initMobileMenu() {
 
     if (!mobileMenu || !navMenu) return;
 
-    mobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    const isOpen = () => navMenu.classList.contains('active');
+    const setOpen = open => {
+        mobileMenu.classList.toggle('active', open);
+        navMenu.classList.toggle('active', open);
+        mobileMenu.setAttribute('aria-expanded', String(open));
+    };
+
+    mobileMenu.addEventListener('click', () => setOpen(!isOpen()));
 
     // Close mobile menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav-link');
-    for (const link of navLinks) {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
+    for (const link of document.querySelectorAll('.nav-link')) {
+        link.addEventListener('click', () => setOpen(false));
     }
+
+    document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape' || !isOpen()) return;
+        setOpen(false);
+        mobileMenu.focus();
+    });
+
+    document.addEventListener('click', event => {
+        if (!isOpen() || navMenu.contains(event.target) || mobileMenu.contains(event.target)) {
+            return;
+        }
+        setOpen(false);
+    });
 }
 
 /**
