@@ -24,7 +24,7 @@ pnpm validate        # lint + lint:css + format:check + test:unit + check:refs â
 pnpm lint:css        # stylelint: spacing/type must use design-system tokens
 pnpm check:refs      # every file the site references exists and is in the pages.yml publish allowlist
 pnpm test            # unit + e2e
-pnpm worker:dev      # wrangler dev worker/index.js
+pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars; there is no Turnstile secret locally)
 pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked
 ```

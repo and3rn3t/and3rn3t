@@ -22,6 +22,10 @@ build/
 .env.test.local
 .env.production.local
 
+# Wrangler local secrets/vars (e.g. ALLOW_UNVERIFIED_GUESTBOOK=1 for `pnpm worker:dev`)
+.dev.vars
+.dev.vars.*
+
 # IDE and editor files
 .vscode/
 .idea/
