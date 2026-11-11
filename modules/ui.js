@@ -48,7 +48,7 @@ export class UIManager {
         if (!notification) {
             notification = document.createElement('div');
             notification.id = 'app-notification';
-            notification.className = 'app-toast';
+            notification.className = 'toast toast--info';
             notification.setAttribute('role', 'status');
             notification.setAttribute('aria-live', 'polite');
             document.body.appendChild(notification);
@@ -64,7 +64,7 @@ export class UIManager {
 
         const variant = TOAST_TYPES.has(type) ? type : 'info';
         const wasVisible = notification.classList.contains('visible');
-        notification.className = `app-toast app-toast--${variant}`;
+        notification.className = `toast toast--${variant}`;
         notification.textContent = message;
         if (wasVisible) {
             notification.classList.add('visible'); // swapped in place, no flicker

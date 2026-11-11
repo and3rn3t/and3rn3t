@@ -114,7 +114,7 @@ test.describe('navigation chrome', () => {
         await page.goto('/');
         await page.waitForFunction(() => Boolean(globalThis.appState?.managers?.palette));
         await page.locator('.site-nav__search').click();
-        await expect(page.locator('#global-search-modal')).toHaveClass(/visible/);
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
         await expect(page.locator('#global-search-input')).toBeFocused();
     });
 
