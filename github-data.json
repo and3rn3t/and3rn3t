@@ -9,6 +9,96 @@
   },
   "repositories": [
     {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "caregiver",
+        "cloudflare-workers",
+        "fall-detection",
+        "featured",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "react",
+        "swift",
+        "swiftui",
+        "typescript",
+        "wellness"
+      ],
+      "stargazers_count": 5,
+      "forks_count": 1,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-11T02:11:39Z",
+      "updated_at": "2026-11-10T23:01:35Z",
+      "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "akinator",
+        "bayesian",
+        "cloudflare-d1",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "expo",
+        "featured",
+        "game",
+        "guessing-game",
+        "openai",
+        "pnpm-monorepo",
+        "pwa",
+        "react",
+        "react-native",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 3,
+      "pushed_at": "2026-11-10T22:06:05Z",
+      "updated_at": "2026-11-10T23:01:52Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 1,
+      "open_issues_count": 3,
+      "pushed_at": "2026-11-10T22:04:18Z",
+      "updated_at": "2026-11-10T23:01:34Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
       "id": 1047182978,
       "name": "homehub",
       "full_name": "and3rn3t/homehub",
@@ -36,10 +126,32 @@
       ],
       "stargazers_count": 2,
       "forks_count": 1,
-      "open_issues_count": 50,
-      "pushed_at": "2026-11-10T02:21:38Z",
-      "updated_at": "2026-11-08T20:12:42Z",
+      "open_issues_count": 47,
+      "pushed_at": "2026-11-10T22:02:00Z",
+      "updated_at": "2026-11-10T23:01:51Z",
       "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1074099968,
+      "name": "catastrophe",
+      "full_name": "and3rn3t/catastrophe",
+      "description": "CATastrophe: A Mischief Simulator (Experimenting with Unreal Engine)",
+      "html_url": "https://github.com/and3rn3t/catastrophe",
+      "homepage": null,
+      "language": "C++",
+      "topics": [
+        "cpp",
+        "gamedev",
+        "unreal-engine"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 0,
+      "pushed_at": "2026-11-10T22:01:32Z",
+      "updated_at": "2026-11-10T23:01:34Z",
+      "created_at": "2025-10-11T06:29:44Z",
       "fork": false,
       "archived": false
     },
@@ -83,96 +195,6 @@
       "pushed_at": "2026-11-09T22:28:55Z",
       "updated_at": "2026-11-07T21:40:19Z",
       "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 1,
-      "open_issues_count": 5,
-      "pushed_at": "2026-11-09T20:44:21Z",
-      "updated_at": "2026-11-09T03:09:11Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "akinator",
-        "bayesian",
-        "cloudflare-d1",
-        "cloudflare-pages",
-        "cloudflare-workers",
-        "expo",
-        "featured",
-        "game",
-        "guessing-game",
-        "openai",
-        "pnpm-monorepo",
-        "pwa",
-        "react",
-        "react-native",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-11-09T19:00:47Z",
-      "updated_at": "2026-11-07T21:40:24Z",
-      "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "caregiver",
-        "cloudflare-workers",
-        "fall-detection",
-        "featured",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "react",
-        "swift",
-        "swiftui",
-        "typescript",
-        "wellness"
-      ],
-      "stargazers_count": 5,
-      "forks_count": 1,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-09T18:47:42Z",
-      "updated_at": "2026-11-08T20:14:44Z",
-      "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
     },
@@ -1167,28 +1189,6 @@
       "archived": true
     },
     {
-      "id": 1074099968,
-      "name": "catastrophe",
-      "full_name": "and3rn3t/catastrophe",
-      "description": "CATastrophe: A Mischief Simulator (Experimenting with Unreal Engine)",
-      "html_url": "https://github.com/and3rn3t/catastrophe",
-      "homepage": null,
-      "language": "C++",
-      "topics": [
-        "cpp",
-        "gamedev",
-        "unreal-engine"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-11-05T20:10:28Z",
-      "updated_at": "2026-11-05T20:10:33Z",
-      "created_at": "2025-10-11T06:29:44Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1416205905,
       "name": "awesome-claude-skills",
       "full_name": "and3rn3t/awesome-claude-skills",
@@ -1275,6 +1275,255 @@
     }
   ],
   "events": [
+    {
+      "id": "26744352064",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "83edfdc90b97eaf8b487d82ee692b265a4b4d9d4",
+            "message": "Merge branch 'main' into fix/launch-crash"
+          }
+        ],
+        "ref": "refs/heads/fix/launch-crash"
+      },
+      "created_at": "2026-11-08T20:23:42Z"
+    },
+    {
+      "id": "26743591258",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "fix/arlo-proxy-token-custody",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T20:12:41Z"
+    },
+    {
+      "id": "26734879844",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "chore/workers-typecheck",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T19:52:34Z"
+    },
+    {
+      "id": "26734626065",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "fix/arlo-proxy-token-custody",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T19:48:57Z"
+    },
+    {
+      "id": "26733014528",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/react-resizable-panels-4.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T17:47:23Z"
+    },
+    {
+      "id": "26732457168",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e5375dbea2aad804f19f086fa11a0ac719477425",
+            "message": "Merge branch 'main' into renovate/react-hook-form-7.x-lockfile"
+          }
+        ],
+        "ref": "refs/heads/renovate/react-hook-form-7.x-lockfile"
+      },
+      "created_at": "2026-11-08T17:39:40Z"
+    },
+    {
+      "id": "26730846283",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "ref": "chore/stubbed-tests-keychain",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T17:17:43Z"
+    },
+    {
+      "id": "26729232161",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "ci/relax-tier1-coverage-gate",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T18:34:54Z"
+    },
+    {
+      "id": "26727855024",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "663c42e8d2a076baade2ccd27a1cec5a22af739c",
+            "message": "Merge pull request #148 from and3rn3t/ci/slim-pr-checks\n\nci: compile-only iOS check on PRs; faster make test"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-08T16:37:03Z"
+    },
+    {
+      "id": "26727502102",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "e43e61e499b03a630c80275e2ef9f61b370c6b82",
+            "message": "ci: remove coverage, build-performance, nightly and android-enhanced workflows\n\nPortfolio project: these only produced reports/red runs nobody acted on.\nCoverage is still available locally via make test-coverage.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/ci/slim-pr-checks"
+      },
+      "created_at": "2026-11-08T16:31:40Z"
+    },
+    {
+      "id": "26727374065",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "cb165e164f4d55d399c102e151de4bb5aaa13ad2",
+            "message": "chore: consolidate root docs and config (#362)\n\n* chore(github): sync labels.yml with live labels and fix CODEOWNERS paths\n\nAdd frontend, backend, ci, good first issue, help wanted, invalid, roadmap\nand moonshot so label-sync maintains them. Drop the stale root PRD.md entry\n(covered by /docs/) and extend security ownership to Security*.tsx and\nservices/auth.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: consolidate the two PRDs into docs/PRD.md\n\ndocs/PRD.md was the 109-line generic template; src/prd.md (376 lines) is\nthe real one. Replace the former with the latter and update references.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: remove GitHub boilerplate docs/deployment/SECURITY.md\n\nIt was GitHub's generic security template and misleading for this repo.\nThe real policy is the root SECURITY.md, which docs/README.md now links to.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* docs: slim copilot-instructions from 1416 to ~80 lines\n\nRemove stale content (Spark imports, Phosphor icons, framer-motion, inline\ndata models duplicating src/types, and the roadmap now tracked in GitHub\nissues). Point to AGENTS.md as the source of truth and repoint the README\nroadmap link to issue #361.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* chore: tidy .gitignore\n\nDrop the duplicate node_modules entry, unused packages and .file-manifest\nentries, and the commented-out lockfile block.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-08T18:10:34Z"
+    },
+    {
+      "id": "26725470821",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9eebbdc48add4332b30abae2e8af521d20918a05",
+            "message": "chore(deps): update dependency vite to v8.3.6 (#307)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>\nCo-authored-by: Matthew Anderson <and3rn3t@icloud.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-08T17:42:19Z"
+    },
+    {
+      "id": "26724498668",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5740caf5b4d1f96028825d9befcffa6255860e31",
+            "message": "docs: address review - accurate data-sharing, retention, beta-migration and contrast\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/fix/restore-pages-docs"
+      },
+      "created_at": "2026-11-08T15:53:55Z"
+    },
+    {
+      "id": "26723213886",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "ref": "dependabot/gradle/android-app/androidx-475cfb9a14",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T15:37:19Z"
+    },
+    {
+      "id": "26723212073",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5ecc9abfcc24f3bad31c8c7e7214230d86af7a3f",
+            "message": "Merge pull request #145 from and3rn3t/dependabot/gradle/android-app/androidx-475cfb9a14\n\ndeps(deps): bump the androidx group across 1 directory with 6 updates"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-08T15:37:18Z"
+    },
+    {
+      "id": "26721745888",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "ref": "chore/android-toolchain",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-08T15:17:53Z"
+    },
+    {
+      "id": "26720402626",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/weather-app"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9bad51ad97105e424b3436fbb4e804f04eab0797",
+            "message": "Merge pull request #91 from and3rn3t/fix/ci-failures\n\nfix: repair Android build, iOS CI and the app's startup crash"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-08T14:58:20Z"
+    },
     {
       "id": "26684146616",
       "type": "PushEvent",
@@ -2380,255 +2629,6 @@
         "ref": "refs/heads/fix/same-origin-kv-client"
       },
       "created_at": "2026-11-08T19:14:51Z"
-    },
-    {
-      "id": "26617038711",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "ref": "renovate/radix-ui-primitives-monorepo",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T19:08:19Z"
-    },
-    {
-      "id": "26615164809",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5b27b79015872f3f70d0e3a58d6ffada6b5c7ef8",
-            "message": "Merge pull request #149 from and3rn3t/fix/fetch-pipeline\n\nfix: wrong-location forecasts in the fetch pipeline (#96 #97 #98 #104 #107 #108)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T16:43:07Z"
-    },
-    {
-      "id": "26614909194",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "ref": "fix/swiftlint",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T14:58:23Z"
-    },
-    {
-      "id": "26614760248",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "ref": "fix/release-build-preview-92",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T16:38:14Z"
-    },
-    {
-      "id": "26614668602",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "ref": "ci/slim-pr-checks",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T16:37:04Z"
-    },
-    {
-      "id": "26614043291",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "ref": "fix/use-kv-test-determinism",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T18:29:33Z"
-    },
-    {
-      "id": "26613034632",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/health"
-      },
-      "payload": {
-        "ref": "renovate/smol-toml-1.7.1-1.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T20:14:12Z"
-    },
-    {
-      "id": "26611269327",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "ref": "fix/restore-pages-docs",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T15:57:11Z"
-    },
-    {
-      "id": "26611267251",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b5247204ec98e0338bb18aea98686a3b1eb31ddb",
-            "message": "Merge pull request #146 from and3rn3t/fix/restore-pages-docs\n\nfix(pages): restore docs/ site (privacy policy, support)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T15:57:10Z"
-    },
-    {
-      "id": "26610095476",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9dd31015148dcbfac7c0f78b38fda91c1c1069eb",
-            "message": "Merge branch 'main' into renovate/dashjs-5.x-lockfile"
-          }
-        ],
-        "ref": "refs/heads/renovate/dashjs-5.x-lockfile"
-      },
-      "created_at": "2026-11-08T17:39:32Z"
-    },
-    {
-      "id": "26609873026",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "701bbbfcb2ec68df20b12a3004d4bc8427df6d95",
-            "message": "Merge pull request #85 from and3rn3t/dependabot/gradle/android-app/com.squareup.okhttp3-okhttp-5.5.1\n\ndeps(deps): bump com.squareup.okhttp3:okhttp from 4.12.0 to 5.5.1 in /android-app"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T15:40:12Z"
-    },
-    {
-      "id": "26608816024",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "6322365f682599df1f001ac4e1606837f30c1217",
-            "message": "fix(worker): fail closed on KV worker auth and restrict CORS (#368)\n\n* fix(worker): fail closed on KV worker auth and restrict CORS\n\nThe KV worker accepted every request when AUTH_TOKEN was unset and sent\nwildcard CORS, so anyone could list, overwrite or wipe home state.\n\n- Reject everything except /health unless the request has a valid\n  Cloudflare Access JWT (RS256, aud/iss/exp checked) or the AUTH_TOKEN\n  service token (constant-time compare)\n- Send CORS headers only for origins in ALLOWED_ORIGINS\n- Rate-limit POST/DELETE via a WRITE_LIMITER binding\n- Disable the public workers.dev URL\n- Document required secrets and rollout order in SECURITY.md\n\nCloses #321\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(worker): address review - workers_dev scope and JWKS refresh throttling\n\n- Move workers_dev = false above the first [[kv_namespaces]] table; TOML had\n  scoped it to the LOGS_KV entry, leaving the public workers.dev URL enabled\n- Document that only the default environment is a supported deployment\n  (named envs do not inherit vars or bindings)\n- Throttle JWKS refreshes for unknown key IDs to one per minute, coalesce\n  concurrent refreshes, and back off after a failed fetch\n- Add tests for throttling, coalescing, failure backoff and key rotation\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T19:17:24Z"
-    },
-    {
-      "id": "26606176849",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8e892a1ba8f4ef8fef5bdd4da0f524c89818d862",
-            "message": "Merge pull request #150 from and3rn3t/fix/notifications\n\nfix: notifications actually fire (#100 #101 #102)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T16:49:26Z"
-    },
-    {
-      "id": "26606148321",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/weather-app"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "97b51c1e6da6b969d709f6b567a40883c36d69a9",
-            "message": "docs: address Copilot review (radar, make examples, APIConfig, release notes)\n\n- Document RainViewer radar on both iOS and Android\n- Make make-target examples copy-safe (no implicit clean)\n- README: APIConfig.swift copy is required to compile; only the key is optional\n- changelog.yml: preserve Release Drafter notes instead of overwriting them\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/fix/launch-crash"
-      },
-      "created_at": "2026-11-08T20:29:12Z"
-    },
-    {
-      "id": "26603185019",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5fd519303784f1e7fff725252908ce18df7964c0",
-            "message": "chore(worker): fix strict type errors, bump workers-types, typecheck in CI (#371)\n\nFirst `tsc` run inside workers/ (deps were not installable) found 8 strict\nerrors from noUncheckedIndexedAccess and loose WebCrypto typings; runtime\nbehaviour is unchanged and the esbuild build and tests already passed.\n\n- Guard JWT segment destructuring and the timing-safe compare loop\n- Cast generateKey/exportKey results in the worker tests\n- Bump @cloudflare/workers-types to ^5 to satisfy wrangler's optional peer\n  so `npm install` works without --legacy-peer-deps\n- Add a `Type check workers` step to CI so worker types cannot regress\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T19:52:32Z"
-    },
-    {
-      "id": "26602040549",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "162243b418304810619dc1a414adb54a4484d18d",
-            "message": "chore(deps): update dependency tailwind-merge to v3.7.0 (#314)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-08T17:47:42Z"
-    },
-    {
-      "id": "26601592472",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "ref": "renovate/mqtt-5.x-lockfile",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-08T17:42:33Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2642,7 +2642,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4607,
+    "total": 4613,
     "weeks": [
       {
         "days": [
@@ -4686,6 +4686,11 @@
           },
           {
             "date": "2026-11-10",
+            "count": 6,
+            "level": 1
+          },
+          {
+            "date": "2026-11-11",
             "count": 0,
             "level": 0
           }
@@ -4716,6 +4721,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-10T03:07:51Z",
+  "lastUpdated": "2026-11-11T03:07:30Z",
   "totalRepos": 54
 }

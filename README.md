@@ -34,6 +34,20 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
+>
+> **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
+> 🔗 [Live](https://health.andernet.dev)
+
+### 🌐 [guess](https://github.com/and3rn3t/guess)
+
+> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
+>
+> **Tech:** TypeScript, akinator, bayesian, cloudflare-d1, cloudflare-pages
+> 🔗 [Live](https://andernator.com)
+
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
 > iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
@@ -46,20 +60,6 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
-
-### 🌐 [guess](https://github.com/and3rn3t/guess)
-
-> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
->
-> **Tech:** TypeScript, akinator, bayesian, cloudflare-d1, cloudflare-pages
-> 🔗 [Live](https://andernator.com)
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
->
-> **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
-> 🔗 [Live](https://health.andernet.dev)
 
 ### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
