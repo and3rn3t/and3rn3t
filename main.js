@@ -38,14 +38,214 @@ if (typeof globalThis !== 'undefined') {
  */
 async function startOptional(label, load, start) {
     try {
-        await start(await load());
+        return await start(await load());
     } catch (err) {
         debug.warn(`[App] ${label} skipped:`, err);
+        return undefined;
     }
 }
 
+/** Run `task` when the browser is idle, at the latest after `timeout` ms. */
+const whenIdle = (task, timeout = 1500) => globalThis.requestIdleCallback(task, { timeout });
+
 /**
- * Initialize all application modules
+ * Run `task` once, as soon as `element` is within `margin` of the viewport, or when the browser
+ * has been idle for a while (`timeout`), whichever comes first. For features that serve a part of
+ * the page the visitor may never scroll to.
+ */
+function whenNear(element, task, { margin = '800px', timeout = 4000 } = {}) {
+    let done = false;
+    const run = () => {
+        if (done) return;
+        done = true;
+        observer?.disconnect();
+        task();
+    };
+    const observer =
+        element && 'IntersectionObserver' in globalThis
+            ? new IntersectionObserver(entries => entries.some(e => e.isIntersecting) && run(), {
+                  rootMargin: margin,
+              })
+            : null;
+    observer?.observe(element);
+    whenIdle(run, timeout);
+}
+
+/**
+ * Features that are not needed to read the page, each started on its own once the page is up.
+ * Nothing here waits for anything else, so a slow one (the Worker, a font) holds up nothing.
+ */
+function startFeatures(uiManager) {
+    // The live numbers (the projects, experience and writing are already in the page): only
+    // when the About band is close, or after a while
+    whenNear(document.getElementById('github-band'), () => uiManager.loadGitHubStats());
+
+    // Contact tabs and the form (the guestbook and Turnstile load when its tab opens). Until
+    // the form's script runs it is a plain POST, which works.
+    whenNear(document.getElementById('contact'), () => {
+        startOptional(
+            'Contact tabs',
+            () => import('./modules/contact-tabs.js'),
+            m => {
+                m.contactTabs.init();
+                appState.managers.contactTabs = m.contactTabs;
+            }
+        );
+        startOptional(
+            'Contact form',
+            () => import('./modules/contact-form.js'),
+            m => {
+                m.contactForm.init();
+                appState.managers.contactForm = m.contactForm;
+            }
+        );
+    });
+
+    // The hero's flow field: decorative, so it starts after the page is up
+    whenIdle(initHeroEnhancements, 1000);
+
+    // The command palette (Cmd/Ctrl-K, "/") and keyboard help (?, g h/a/p/c) are purely local,
+    // so there is no network to wait for; the shim makes a key pressed before they load work
+    whenIdle(() => {
+        loadPalette();
+        loadKeyboardHelp();
+    }, 1000);
+    installEarlyShortcuts();
+
+    // "Currently coding" and the view counter call the Worker; both fall back on their own
+    whenIdle(() => {
+        startOptional(
+            'Currently widget',
+            () => import('./modules/currently.js'),
+            async m => {
+                await m.currentlyWidget.init('#currently-coding');
+                appState.managers.currently = m.currentlyWidget;
+            }
+        );
+        startOptional(
+            'View counter',
+            () => import('./modules/views.js'),
+            async m => {
+                await m.viewCounter.init();
+                appState.managers.views = m.viewCounter;
+            }
+        );
+    }, 2000);
+
+    // Old #post/<slug> and #project/<slug> links: only load the redirect when there is one
+    watchLegacyLinks();
+
+    // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
+    whenIdle(
+        () =>
+            startOptional(
+                'Easter egg',
+                () => import('./modules/easter-egg.js'),
+                m => m.easterEgg.init()
+            ),
+        3000
+    );
+
+    // Periodically drop expired GitHub API cache entries
+    setInterval(
+        async () => {
+            const { githubAPI } = await import('./modules/github-api.js');
+            githubAPI.clearExpiredCache();
+        },
+        10 * 60 * 1000
+    );
+}
+
+let palettePromise;
+/** Load and start the command palette (once), resolving to it. */
+function loadPalette() {
+    palettePromise ??= startOptional(
+        'Command palette',
+        () => import('./modules/command-palette.js'),
+        m => {
+            m.commandPalette.init();
+            appState.managers.palette = m.commandPalette;
+            return m.commandPalette;
+        }
+    );
+    return palettePromise;
+}
+
+let keyboardHelpPromise;
+/** Load and start keyboard help (once), resolving to it. */
+function loadKeyboardHelp() {
+    keyboardHelpPromise ??= startOptional(
+        'Keyboard help',
+        () => import('./modules/keyboard-help.js'),
+        m => {
+            m.keyboardHelp.init();
+            appState.managers.keyboardHelp = m.keyboardHelp;
+            return m.keyboardHelp;
+        }
+    );
+    return keyboardHelpPromise;
+}
+
+/**
+ * The palette and keyboard help start when the browser is idle, a moment after first paint. A
+ * shortcut or click in that gap still works: this loads the module on demand and then opens it.
+ * Once a module is up it handles its own keys, so this steps aside for it.
+ */
+function installEarlyShortcuts() {
+    const isTyping = target =>
+        /^(input|textarea|select)$/i.test(target?.tagName ?? '') || target?.isContentEditable;
+
+    document.addEventListener('keydown', event => {
+        if (event.defaultPrevented || event.isComposing || event.altKey) return;
+        const mod = event.metaKey || event.ctrlKey;
+
+        if (!appState.managers.palette) {
+            const opens = mod ? event.key.toLowerCase() === 'k' : event.key === '/';
+            if (opens && (mod || !isTyping(event.target))) {
+                event.preventDefault();
+                loadPalette().then(palette => palette?.open());
+                return;
+            }
+        }
+        if (
+            !appState.managers.keyboardHelp &&
+            !mod &&
+            event.key === '?' &&
+            !isTyping(event.target)
+        ) {
+            event.preventDefault();
+            loadKeyboardHelp().then(help => help?.open());
+        }
+    });
+
+    document.addEventListener('click', event => {
+        if (appState.managers.palette || !event.target.closest?.('[data-open-palette]')) return;
+        loadPalette().then(palette => palette?.open());
+    });
+}
+
+/** Load the redirect for old hash links only if the address has one. */
+function watchLegacyLinks() {
+    let started = false;
+    const check = () => {
+        if (started || !/^#(post|project)\//.test(globalThis.location.hash)) return;
+        started = true;
+        startOptional(
+            'Legacy links',
+            () => import('./modules/legacy-links.js'),
+            m => {
+                m.legacyLinks.init();
+                appState.managers.legacyLinks = m.legacyLinks;
+            }
+        );
+    };
+    check();
+    globalThis.addEventListener('hashchange', check);
+}
+
+/**
+ * Initialize the application. Only what the page needs to be usable runs before `app:ready`
+ * (the theme, the menu, navigation and the UI shell); every other feature starts on its own after.
  */
 async function initializeApp() {
     if (appState.isInitialized) {
@@ -57,17 +257,15 @@ async function initializeApp() {
     debug.log(`[App] Initializing ${APP_CONFIG.name} v${APP_CONFIG.version}...`);
 
     try {
-        // Phase 1: Critical path - theme (prevents flash)
-        const themeManager = initThemeManager();
-        appState.managers.theme = themeManager;
+        // The service worker and the global handlers first: they do not depend on anything
+        setupGlobalEvents();
 
-        debug.log('[App] Phase 1: Theme initialized');
-
-        // Phase 2: Navigation and UI setup
+        // Critical path: the theme (prevents a flash), the menu and the scroll effect
+        appState.managers.theme = initThemeManager();
         initMobileMenu();
         initNavigation();
 
-        // Load UI module
+        // The UI shell and navigation
         const { uiManager } = await import('./modules/ui.js');
         uiManager.init();
         appState.managers.ui = uiManager;
@@ -75,119 +273,14 @@ async function initializeApp() {
         navigationManager.init();
         appState.managers.navigation = navigationManager;
 
-        debug.log('[App] Phase 2: Navigation & UI initialized');
-
-        // Hero flow field: dynamically imported, and self-gates on device capability.
-        initHeroEnhancements();
-
-        // Phase 3: the live numbers (the projects, experience and writing are already in the page)
-        await uiManager.loadGitHubStats();
-
-        debug.log('[App] Phase 3: Content loaded');
-
-        // Contact tabs (the guestbook and Turnstile load when its tab opens), the command
-        // palette (Cmd/Ctrl-K) and keyboard help (?, g h/a/p/c) are purely local, so wire
-        // them before any network-bound widget so they respond at once.
-        await startOptional(
-            'Contact tabs',
-            () => import('./modules/contact-tabs.js'),
-            m => {
-                m.contactTabs.init();
-                appState.managers.contactTabs = m.contactTabs;
-            }
-        );
-        await startOptional(
-            'Contact form',
-            () => import('./modules/contact-form.js'),
-            m => {
-                m.contactForm.init();
-                appState.managers.contactForm = m.contactForm;
-            }
-        );
-        await startOptional(
-            'Command palette',
-            () => import('./modules/command-palette.js'),
-            m => {
-                m.commandPalette.init();
-                appState.managers.palette = m.commandPalette;
-            }
-        );
-        await startOptional(
-            'Keyboard help',
-            () => import('./modules/keyboard-help.js'),
-            m => {
-                m.keyboardHelp.init();
-                appState.managers.keyboardHelp = m.keyboardHelp;
-            }
-        );
-
-        // Network-bound widgets are independent of each other: run them together so one
-        // slow request (e.g. the Worker) doesn't hold up the rest.
-        await Promise.all([
-            // "Currently coding" — calls the CF Worker with static fallback.
-            startOptional(
-                'Currently widget',
-                () => import('./modules/currently.js'),
-                async m => {
-                    await m.currentlyWidget.init('#currently-coding');
-                    appState.managers.currently = m.currentlyWidget;
-                }
-            ),
-            startOptional(
-                'Legacy links',
-                () => import('./modules/legacy-links.js'),
-                m => {
-                    m.legacyLinks.init();
-                    appState.managers.legacyLinks = m.legacyLinks;
-                }
-            ),
-            // View counter — calls the Worker, updates the footer count.
-            startOptional(
-                'View counter',
-                () => import('./modules/views.js'),
-                async m => {
-                    await m.viewCounter.init();
-                    appState.managers.views = m.viewCounter;
-                }
-            ),
-        ]);
-
-        // Phase 4: Non-critical features (deferred)
-        // Hidden Konami-code dev-mode easter egg (opt-in, dismissible).
-        requestIdleCallback(
-            () =>
-                startOptional(
-                    'Easter egg',
-                    () => import('./modules/easter-egg.js'),
-                    m => m.easterEgg.init()
-                ),
-            { timeout: 2000 }
-        );
-
-        // Setup global event handlers
-        setupGlobalEvents();
-
-        // Periodically drop expired GitHub API cache entries
-        setInterval(
-            async () => {
-                const { githubAPI } = await import('./modules/github-api.js');
-                githubAPI.clearExpiredCache();
-            },
-            10 * 60 * 1000
-        );
-
-        // Mark initialization complete
         appState.isInitialized = true;
-
         const initTime = performance.now() - appState.initStartTime;
-        debug.log(`[App] Initialization complete in ${initTime.toFixed(2)}ms`);
-
-        // Dispatch ready event
+        debug.log(`[App] Ready in ${initTime.toFixed(2)}ms`);
         globalThis.dispatchEvent(
-            new CustomEvent('app:ready', {
-                detail: { initTime, version: APP_CONFIG.version },
-            })
+            new CustomEvent('app:ready', { detail: { initTime, version: APP_CONFIG.version } })
         );
+
+        startFeatures(uiManager);
     } catch (error) {
         debug.error('[App] Initialization error:', error);
         handleInitError(error);
@@ -272,19 +365,11 @@ function initMobileMenu() {
  */
 function initNavigation() {
     const navbar = document.getElementById('navbar');
-    const progressBar = document.getElementById('scroll-progress-bar');
 
-    // Navbar scroll effect + reading-progress bar
+    // Navbar scroll effect
     globalThis.addEventListener(
         'scroll',
-        () => {
-            navbar?.classList.toggle('scrolled', globalThis.scrollY > 50);
-            if (progressBar) {
-                const max = document.documentElement.scrollHeight - globalThis.innerHeight;
-                const pct = max > 0 ? Math.min(100, (globalThis.scrollY / max) * 100) : 0;
-                progressBar.style.width = `${pct}%`;
-            }
-        },
+        () => navbar?.classList.toggle('scrolled', globalThis.scrollY > 50),
         { passive: true }
     );
 }
