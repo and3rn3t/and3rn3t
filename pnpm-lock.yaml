@@ -54,6 +54,9 @@ importers:
       prettier:
         specifier: ^3.9.9
         version: 3.9.10
+      sharp:
+        specifier: 0.35.5
+        version: 0.35.5(@types/node@26.1.2)
       stylelint:
         specifier: ^17.16.0
         version: 17.16.0(supports-color@10.2.2)(typescript@7.0.2)

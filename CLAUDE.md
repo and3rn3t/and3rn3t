@@ -29,6 +29,12 @@
 - Hero/display text may use `clamp()` for responsive scaling (documented exceptions only)
 - Example: `font-size: clamp(2.75rem, 6.5vw, 4.5rem);`
 
+### Colour (new design system, `styles/`)
+
+- Use the semantic tokens from `styles/core.css`: `--surface`, `--surface-raised`, `--text`, `--muted`, `--border`, `--accent`, `--accent-contrast`. Each is defined once with `light-dark()`.
+- Never write a hex, `rgb()` or named colour in `styles/`; Stylelint fails it. Only the token block in `core.css` may, behind a `stylelint-disable` comment. Legacy `styles.css` is exempt until retired.
+- Layer order and new-class-name rules are in `AGENTS.md`.
+
 ### Validation
 
 - `pnpm validate` will catch linting, formatting, failing unit tests, and broken or unpublished file references (`pnpm check:refs`).

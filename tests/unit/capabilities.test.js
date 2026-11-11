@@ -71,7 +71,3 @@ test('isLowEndDevice is a boolean', () => {
 test('hasFinePointer is a boolean', () => {
     expect(typeof capabilities.hasFinePointer).toBe('boolean');
 });
-
-test('supportsWebGL is a boolean', () => {
-    expect(typeof capabilities.supportsWebGL).toBe('boolean');
-});

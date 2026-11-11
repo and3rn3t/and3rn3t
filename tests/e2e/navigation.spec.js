@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('nav link scrolls the section just below the navbar', async ({ page }) => {
-    await page.locator('.nav-links a[href="#projects"]').click();
+    await page.locator('#nav-menu a[href="#projects"]').click();
 
     const { navBottom, sectionTop } = await page.evaluate(() => ({
         navBottom: document.getElementById('navbar').getBoundingClientRect().bottom,
@@ -37,8 +37,8 @@ test('skip link targets the main landmark', async ({ page }) => {
 
 for (const id of ['about', 'projects', 'experience', 'writing', 'contact']) {
     test(`scroll-spy marks #${id} with aria-current="location"`, async ({ page }) => {
-        await page.locator(`.nav-links a[href="#${id}"]`).click();
-        await expect(page.locator(`.nav-links a[href="#${id}"]`)).toHaveAttribute(
+        await page.locator(`#nav-menu a[href="#${id}"]`).click();
+        await expect(page.locator(`#nav-menu a[href="#${id}"]`)).toHaveAttribute(
             'aria-current',
             'location'
         );
@@ -56,7 +56,7 @@ test.describe('mobile navbar', () => {
 
         const [t, h, nav] = await Promise.all([
             toggle.boundingBox(),
-            page.locator('.nav-toggle').boundingBox(),
+            page.locator('#mobile-menu').boundingBox(),
             page.locator('#navbar').boundingBox(),
         ]);
         expect(t.x + t.width).toBeLessThanOrEqual(h.x);

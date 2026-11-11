@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Cascade layer order, lowest priority first. Layers are ordered by first appearance, so
+         this must come before any other style (the critical CSS below uses `legacy`). Keep it
+         identical to the statement at the top of styles/core.css. -->
+    <style>
+      @layer scale, legacy, reset, tokens, base, components, sections, utilities;
+    </style>
     <meta
       name="description"
       content="Matthew Anderson (@and3rn3t) — Software engineer at Deere &amp; Company. Building health tech, home automation, and data projects in my spare time."
@@ -203,6 +209,22 @@
     </script>
     <title>Matthew Anderson | Software Engineer</title>
 
+    <!-- The theme before first paint: sets color-scheme through <html data-theme>, which the
+         design tokens in styles/core.css resolve with light-dark(). With no script, the OS
+         preference applies on its own. -->
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          theme === 'dark' ||
+          (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+
     <!-- Critical Resource Preloads -->
     <link rel="modulepreload" href="main.js" />
     <link rel="modulepreload" href="modules/debug.js" />
@@ -213,6 +235,16 @@
     <link rel="modulepreload" href="modules/github-api.js" />
     <!-- Non-critical modules loaded lazily on-demand -->
     <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="fonts/jetbrains-mono-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- styles/core.css imports the legacy stylesheet into a low-priority layer; fetch it in
+         parallel instead of after core.css arrives. Remove with styles.css. -->
+    <link rel="preload" href="styles.css" as="style" />
 
     <!-- Cloudflare Web Analytics, loaded after first paint. Failure is harmless. -->
     <script>
@@ -233,106 +265,63 @@
     <link rel="preconnect" href="https://and3rn3t-portfolio.andernet.workers.dev" crossorigin />
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
 
-    <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
+    <!-- Legacy critical CSS. It sits in the legacy layer, below styles/, like styles.css. -->
     <style>
-      /* Base styles that load before styles.css. Some rules here (e.g. .loading-spinner)
-         are not repeated in styles.css, so don't drop this block wholesale. */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family:
-          'Inter',
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          sans-serif;
-        line-height: 1.6;
-        color: #1e293b;
-        background: #ffffff;
-      }
-      body.dark-theme {
-        background: #0a0a0a; /* --bg-primary in styles.css */
-        color: #f1f5f9;
-      }
-      .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 70px;
-        background: rgba(255, 255, 255, 0.95);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-      }
-      /* Above-the-fold hero shell. styles.css is render-blocking and loads after this
-         block, so it wins on any conflict; keep these values in line with it. */
-      .hero {
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-        background:
-          radial-gradient(60% 60% at 25% 30%, rgba(74, 222, 128, 0.4), transparent 60%),
-          radial-gradient(70% 70% at 60% 90%, rgba(22, 163, 74, 0.35), transparent 65%), #111827;
-        color: #ffffff;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero-title,
-      .hero-subtitle,
-      .hero-description {
-        color: #ffffff;
-      }
-      .highlight {
-        background: linear-gradient(120deg, #86efac 0%, #4ade80 45%, #22c55e 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      body {
-        overflow-x: hidden;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-      /* Loading spinner */
-      .loading-spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid #f3f3f3;
-        border-top: 3px solid #2563eb;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
+      @layer legacy {
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
         }
-        100% {
-          transform: rotate(360deg);
+        html {
+          scroll-behavior: smooth;
+        }
+        body {
+          font-family:
+            'Inter',
+            -apple-system,
+            BlinkMacSystemFont,
+            'Segoe UI',
+            sans-serif;
+          line-height: 1.6;
+          color: #1e293b;
+          background: #ffffff;
+          overflow-x: hidden;
+        }
+        body.dark-theme {
+          background: #0a0a0a; /* --bg-primary in styles.css */
+          color: #f1f5f9;
+        }
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
+        }
+        /* Loading spinner */
+        .loading-spinner {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border: 3px solid #f3f3f3;
+          border-top: 3px solid #2563eb;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       }
     </style>
 
-    <!-- Time-of-day hero accent: set early to avoid a tint flash -->
-    <script>
-      (function () {
-        var h = new Date().getHours();
-        var t = h < 6 ? 'night' : h < 9 ? 'dawn' : h < 18 ? 'day' : h < 21 ? 'dusk' : 'night';
-        document.documentElement.dataset.timeOfDay = t;
-      })();
-    </script>
-
-    <!-- Load main stylesheet after critical CSS -->
-    <link rel="stylesheet" href="styles.css" />
+    <!-- The design system (layers, tokens, chrome) and the home page. core.css also pulls in
+         the legacy styles.css as the lowest cascade layer. -->
+    <link rel="stylesheet" href="styles/core.css" />
+    <link rel="stylesheet" href="styles/home.css" />
 
     <noscript>
       <style>
@@ -340,7 +329,8 @@
           display: block;
         }
         #projects-more-btn,
-        #projects-grid .project-case-study-btn {
+        #projects [data-case-study],
+        [data-open-palette] {
           display: none;
         }
       </style>
@@ -362,36 +352,44 @@
     <!-- Skip to main content link for keyboard users -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
-      <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar" aria-label="Main navigation">
-      <div class="nav-container">
-        <a href="#home" class="nav-logo">@and3rn3t</a>
-        <ul class="nav-menu nav-links" id="nav-menu">
-          <li class="nav-item">
-            <a href="#about" class="nav-link touch-target">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#projects" class="nav-link touch-target">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a href="#experience" class="nav-link touch-target">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a href="#writing" class="nav-link touch-target">Writing</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contact" class="nav-link touch-target">Contact</a>
+    <!-- Navigation. On narrow screens #nav-menu is a sheet; main.js toggles .active on it and on
+         #mobile-menu, and .scrolled on #navbar. -->
+    <nav class="site-nav" id="navbar" aria-label="Main navigation">
+      <div class="wrap site-nav__inner">
+        <a href="#home" class="site-nav__logo">@and3rn3t</a>
+        <ul class="site-nav__links" id="nav-menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#writing">Writing</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="site-nav__socials">
+            <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer"
+              >GitHub</a
+            >
+            <a href="https://linkedin.com/in/and3rn3t" target="_blank" rel="noopener noreferrer"
+              >LinkedIn</a
+            >
+            <a href="mailto:and3rn3t@icloud.com">Email</a>
           </li>
         </ul>
-        <div class="nav-actions">
+        <div class="site-nav__actions">
           <button
             type="button"
-            class="theme-toggle"
+            class="icon-button site-nav__search"
+            data-open-palette
+            aria-label="Search the site"
+            aria-keyshortcuts="Control+K Meta+K"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#search"></use>
+            </svg>
+            <span class="site-nav__search-label" aria-hidden="true">Search</span>
+            <kbd aria-hidden="true">Ctrl K</kbd>
+          </button>
+          <button
+            type="button"
+            class="icon-button"
             id="theme-toggle"
             aria-label="Switch to dark theme"
             title="Switch to dark theme (T)"
@@ -401,15 +399,14 @@
             </svg>
           </button>
           <button
-            class="nav-toggle hamburger"
+            type="button"
+            class="icon-button site-nav__menu"
             id="mobile-menu"
             aria-label="Toggle navigation menu"
             aria-expanded="false"
             aria-controls="nav-menu"
           >
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span class="site-nav__menu-bars" aria-hidden="true"></span>
           </button>
         </div>
       </div>
@@ -566,70 +563,58 @@
     </div>
 
     <main id="main">
-      <!-- Hero Section -->
-      <section class="hero" id="home">
-        <div class="hero-canvas-wrap" aria-hidden="true">
-          <div class="hero-canvas-fallback"></div>
-          <canvas class="hero-canvas" id="hero-canvas"></canvas>
+      <!-- Intro. Draft copy: edit freely. -->
+      <section class="intro" id="home">
+        <div class="intro__field" aria-hidden="true">
+          <canvas class="intro__canvas" id="hero-canvas"></canvas>
         </div>
-        <div class="hero-container">
-          <div class="hero-content">
-            <h1 class="hero-title">Hi, I'm <span class="highlight">Matthew Anderson</span></h1>
-            <h2 class="hero-subtitle">
-              <span
-                class="hero-role"
-                data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd"
-                >Software Engineer at Deere &amp; Company</span
-              ><span class="hero-caret" aria-hidden="true"></span>
-            </h2>
-            <p class="hero-description">
-              Software engineer at John Deere. Building things at the intersection of health tech,
-              home automation, and data in my spare time.
+        <div class="wrap">
+          <div class="intro__copy">
+            <h1 class="intro__title">
+              <span class="intro__name">Matthew Anderson</span>
+              <span class="intro__headline"
+                >I build health tech, home automation and data tools.</span
+              >
+            </h1>
+            <p class="intro__lede">
+              Software engineer at Deere &amp; Company. Recent side projects: an iPhone app that
+              measures gait with LiDAR, a home dashboard that runs without the cloud, and a
+              20-questions game that shows its reasoning as you play.
             </p>
-            <div class="hero-buttons">
-              <a href="#projects" class="btn btn-primary">View My Work</a>
-              <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-              <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
+            <div class="intro__actions">
+              <a href="#projects" class="button button--primary">
+                See the work
                 <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#file-pdf"></use>
+                  <use href="/icons/sprite.svg#arrow-right"></use>
                 </svg>
-                Resume
               </a>
+              <ul class="intro__links">
+                <li><a class="link" href="/resume.pdf" download>R&eacute;sum&eacute;</a></li>
+                <li>
+                  <a
+                    class="link"
+                    href="https://github.com/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GitHub</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="link"
+                    href="https://linkedin.com/in/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >LinkedIn</a
+                  >
+                </li>
+                <li><a class="link" href="mailto:and3rn3t@icloud.com">Email</a></li>
+              </ul>
             </div>
-            <div class="hero-social">
-              <a
-                href="https://github.com/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link"
-                title="GitHub Profile"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#github"></use>
-                </svg>
-              </a>
-              <a
-                href="https://linkedin.com/in/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link"
-                title="LinkedIn Profile"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#linkedin"></use>
-                </svg>
-              </a>
-              <a href="mailto:and3rn3t@icloud.com" class="social-link" title="Send Email">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#envelope"></use>
-                </svg>
-              </a>
-            </div>
+            <!-- Filled in by modules/currently.js -->
+            <div class="intro__status" id="currently-coding" aria-live="polite"></div>
           </div>
         </div>
-        <a href="#about" class="hero-scroll-cue" aria-label="Scroll to About section">
-          <span class="hero-scroll-cue-chevron" aria-hidden="true"></span>
-        </a>
       </section>
 
       <!-- About Section -->
@@ -644,8 +629,6 @@
                 reasoning as you play. I care about the unglamorous parts too: tests, accessibility,
                 and being able to explain every byte I ship.
               </p>
-              <!-- Currently coding widget — populated by modules/currently.js -->
-              <div id="currently-coding" aria-live="polite"></div>
               <ul class="tech-strip" aria-label="Tools I work with most">
                 <li class="tech-chip">TypeScript</li>
                 <li class="tech-chip">Swift</li>
@@ -693,51 +676,40 @@
           <!-- Top Starred Projects -->
           <div class="top-projects-section">
             <!-- prettier-ignore -->
+            <div id="projects-lead">
+              <!-- gen:lead -->
+              <article class="lead-card" data-project="health">
+          <div class="lead-card__media">
+            <picture class="shot shot--light">
+            <source type="image/avif" srcset="/images/projects/health-light-640.avif 640w, /images/projects/health-light-1200.avif 1200w" sizes="(min-width: 64rem) 46rem, 100vw" />
+            <img src="/images/projects/health-light-1200.webp" srcset="/images/projects/health-light-640.webp 640w, /images/projects/health-light-1200.webp 1200w" sizes="(min-width: 64rem) 46rem, 100vw" width="1200" height="750" alt="The gait analysis page of the Health Analytics Platform: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis." loading="lazy" decoding="async" />
+          </picture>
+            <picture class="shot shot--dark">
+            <source type="image/avif" srcset="/images/projects/health-dark-640.avif 640w, /images/projects/health-dark-1200.avif 1200w" sizes="(min-width: 64rem) 46rem, 100vw" />
+            <img src="/images/projects/health-dark-1200.webp" srcset="/images/projects/health-dark-640.webp 640w, /images/projects/health-dark-1200.webp 1200w" sizes="(min-width: 64rem) 46rem, 100vw" width="1200" height="750" alt="The gait analysis page of the Health Analytics Platform: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis." loading="lazy" decoding="async" />
+          </picture>
+          </div>
+          <div class="lead-card__body">
+            <p class="eyebrow">Health &amp; Wellness</p>
+            <h3 class="lead-card__title"><a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Health Analytics Platform</a></h3>
+            <p class="lead-card__desc">A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.</p>
+            <p class="lead-card__lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">HealthKit</li><li class="tag">LiDAR</li><li class="tag">iOS</li></ul>
+            <div class="lead-card__actions">
+              <button type="button" class="button button--primary" data-case-study="health" data-pending>
+              Read the case study <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg>
+            </button>
+              <a class="button" href="https://health.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
+              <a class="link" href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+              <!-- /gen:lead -->
+            </div>
+            <!-- prettier-ignore -->
             <div class="projects-grid" id="projects-grid">
               <!-- gen:projects -->
-              <div class="project-card" data-project="health" style="--lang-color: #2b7489">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Health &amp; Wellness</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Health Analytics Platform</a></h3>
-                <p class="project-description">A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.</p>
-                <p class="project-highlight-lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
-                <button type="button" class="project-case-study-btn" data-case-study="health" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">HealthKit</span><span class="language-tag">LiDAR</span><span class="language-tag">iOS</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://health.andernet.dev" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="homehub" style="--lang-color: #2b7489">
+              <div class="project-card" data-project="homehub" style="--lang-color: #2b7489">
             <div class="project-header">
                 <div class="project-card-badges">
                     <span class="project-category">IoT &amp; Home Automation</span>

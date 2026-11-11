@@ -59,18 +59,18 @@ test.describe('JavaScript disabled', () => {
 
 test('the pre-rendered cards come alive once JavaScript runs', async ({ page }) => {
     await page.goto('/');
-    const health = page.locator('#projects-grid [data-project="health"]');
-    await expect(health).toBeVisible();
+    const card = page.locator('#projects-grid [data-project="homehub"]');
+    await expect(card).toBeVisible();
 
     // Stars start as a placeholder and are filled in from the cached GitHub data
-    await expect(health.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
-    await expect(health.locator('[data-live-stat="pushed"]')).toBeVisible();
-    await expect(health.locator('[data-live="pushed"]')).toHaveText(/ago$/);
+    await expect(card.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
+    await expect(card.locator('[data-live-stat="pushed"]')).toBeVisible();
+    await expect(card.locator('[data-live="pushed"]')).toHaveText(/ago$/);
 });
 
 test('a case-study button is enabled only once its study is registered', async ({ page }) => {
     await page.goto('/');
-    const button = page.locator('#projects-grid [data-project="health"] [data-case-study]');
+    const button = page.locator('#projects [data-project="health"] [data-case-study]');
     await expect(button).toBeVisible();
     await expect(button).not.toHaveAttribute('data-pending');
     await button.click();

@@ -304,10 +304,11 @@ const views = selectProjects(
   githubData.repositories,
   githubData.selfStarredRepoNames
 ).map(({ repo, metadata }) => projectView(repo, metadata));
-const { cards, moreButton, extraCount } = renderProjects(views);
+const { lead, cards, moreButton, extraCount } = renderProjects(views);
 
 const indexPath = join(ROOT, 'index.html');
 let index = readFileSync(indexPath, 'utf8');
+index = fillBlock(index, 'lead', lead);
 index = fillBlock(index, 'projects', cards);
 index = fillBlock(index, 'projects-more', moreButton);
 index = fillBlock(index, 'experience', renderTimeline(experienceData.experience, 'work'));

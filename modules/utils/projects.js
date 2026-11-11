@@ -155,6 +155,10 @@ export function projectView(repo, metadata) {
         secondaryTags: (metadata?.technologies ?? repo?.topics ?? [])
             .filter(tag => tag.toLowerCase() !== language.toLowerCase())
             .slice(0, 3),
+        // Captured by scripts/capture-screenshots.mjs into images/projects/<name>-*
+        screenshot: metadata?.screenshot?.url
+            ? { name: metadata.name, alt: metadata.screenshot.alt ?? '' }
+            : null,
         featured: Boolean(metadata?.featured),
         hasCaseStudy: Boolean(slug && (metadata?.longDescription || highlights.length > 1)),
     };

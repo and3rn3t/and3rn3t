@@ -68,6 +68,15 @@ class CommandPalette {
             }
         });
 
+        // Visible triggers (the nav's search button), with the shortcut shown for this platform
+        const shortcut = /Mac|iPhone|iPad/i.test(globalThis.navigator?.platform ?? '')
+            ? '⌘K'
+            : 'Ctrl K';
+        for (const trigger of document.querySelectorAll('[data-open-palette]')) {
+            trigger.addEventListener('click', () => this.open());
+            for (const hint of trigger.querySelectorAll('kbd')) hint.textContent = shortcut;
+        }
+
         this.input.addEventListener('input', () => this.render());
         this.input.addEventListener('keydown', e => this.onInputKeydown(e));
 

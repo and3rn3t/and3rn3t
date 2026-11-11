@@ -1,0 +1,373 @@
+/*
+ * Home page: the intro (hero), the live status line and the lead project card.
+ * Chrome, tokens and primitives are in core.css.
+ */
+
+@layer sections {
+  /* ==========================================================================
+     Intro
+     Left-aligned and typographic. The flow field is the only decoration: it fills the
+     right of the section and fades out toward the text, so the headline is always calm.
+     ========================================================================== */
+  .intro {
+    font-family: var(--font-sans);
+    position: relative;
+    isolation: isolate;
+    /* Top-aligned, not centred: centring would move all of the copy whenever its height
+       changes (a font swapping in, the status line arriving). */
+    min-height: min(100svh, 56rem);
+    padding: calc(var(--nav-h) + var(--space-16)) 0 var(--space-16);
+    overflow: clip;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .intro__field {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    /* Narrow screens: the text spans the width, so keep the field to the top and fade it out
+       before the copy starts. */
+    mask-image: linear-gradient(to bottom, CanvasText 8%, transparent 52%);
+  }
+
+  @media (min-width: 48rem) {
+    .intro__field {
+      /* Wide screens: the field fills the right; fade it out toward the text on the left
+         and toward the bottom. */
+      mask-image:
+        linear-gradient(to bottom, CanvasText 55%, transparent),
+        linear-gradient(to right, transparent, CanvasText 55%);
+      mask-composite: intersect;
+    }
+  }
+
+  /* What shows before the canvas starts, and when it never does */
+  .intro__field::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 75% at 82% 30%, var(--accent-wash), transparent 70%);
+  }
+
+  .intro__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    /* wasm/hero-sim.js paints with this colour */
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 800ms var(--ease-out);
+  }
+
+  .intro__canvas.is-active {
+    opacity: 0.6;
+  }
+
+  @media (min-width: 48rem) {
+    .intro__canvas.is-active {
+      opacity: 1;
+    }
+  }
+
+  .intro__canvas.is-fallback {
+    display: none;
+  }
+
+  .intro__copy {
+    max-width: 48rem;
+  }
+
+  .intro__title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin: 0;
+    font: inherit;
+  }
+
+  .intro__name {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .intro__headline {
+    font-family: var(--font-display);
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-display);
+    line-height: var(--line-height-display);
+    text-wrap: balance;
+  }
+
+  .intro__lede {
+    max-width: var(--measure);
+    margin: var(--space-6) 0 0;
+    color: var(--muted);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+  }
+
+  /* "Currently pushing to ..." is filled in by modules/currently.js. It comes last, so it
+     can arrive late without pushing anything above it. */
+  .intro__status {
+    margin: var(--space-8) 0 0;
+  }
+
+  .intro__status[hidden] {
+    display: none;
+  }
+
+  /* The widget's markup is shared with the old design; restyle it as a quiet mono line.
+     Every property the old rules set is reset here, so none of them show through. */
+  .intro__status .currently-widget {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+
+  .intro__status .currently-dot {
+    background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent-wash);
+    animation: intro-pulse 2.4s var(--ease-out) infinite;
+  }
+
+  .intro__status .currently-label,
+  .intro__status .currently-message,
+  .intro__status .currently-meta {
+    color: var(--muted);
+  }
+
+  .intro__status .currently-label .icon {
+    color: var(--muted);
+  }
+
+  .intro__status .currently-repo {
+    color: var(--text);
+    font-weight: var(--font-weight-medium);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .intro__status .currently-repo:hover {
+    color: var(--accent);
+    text-decoration-color: currentcolor;
+  }
+
+  .intro__status .currently-message {
+    font-style: normal;
+  }
+
+  .intro__status .currently-meta {
+    margin-left: 0;
+  }
+
+  @keyframes intro-pulse {
+    0% {
+      box-shadow: 0 0 0 0 var(--accent-wash);
+    }
+
+    70% {
+      box-shadow: 0 0 0 0.5rem transparent;
+    }
+
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+
+  .intro__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .intro__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* ==========================================================================
+     Lead project card
+     The first featured project, large, with a screenshot of the running thing.
+     ========================================================================== */
+  .lead-card {
+    font-family: var(--font-sans);
+    display: grid;
+    gap: var(--space-6);
+    margin: 0 0 var(--space-8);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--surface-raised);
+    color: var(--text);
+  }
+
+  .lead-card__media {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-sunken);
+  }
+
+  .lead-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  /* One screenshot per theme. The visitor's explicit choice (data-theme) wins; otherwise
+     the OS preference decides, which also covers a page with no script. */
+  .shot {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Same specificity as .shot and later, so these win. Keep the two kept together. */
+  .shot--dark {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .shot--light {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .shot--dark {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .shot--light {
+      display: none;
+    }
+
+    :root:not([data-theme]) .shot--dark {
+      display: block;
+    }
+  }
+
+  .lead-card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+
+  .lead-card__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    text-wrap: balance;
+  }
+
+  .lead-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .lead-card__title a:hover {
+    color: var(--accent);
+  }
+
+  .lead-card__desc,
+  .lead-card__lead {
+    max-width: var(--measure);
+    margin: 0;
+    color: var(--muted);
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+  }
+
+  .lead-card__lead {
+    color: var(--text);
+    font-size: var(--font-size-sm);
+  }
+
+  .lead-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+    margin-top: var(--space-2);
+  }
+
+  @media (min-width: 64rem) {
+    .lead-card {
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-12);
+      padding: var(--space-6);
+    }
+  }
+
+  /* ==========================================================================
+     Legacy patches. Dark-theme contrast bugs in the old project cards and buttons, found by
+     the per-theme axe scan (tests/e2e/a11y.spec.js). They exist today, in the old design
+     too. Delete this block when those elements are replaced.
+     ========================================================================== */
+
+  /* Card "View Code": light text on the dark theme's #22c55e (2.2:1). The legacy hover
+     darkens the background to #166534, which the dark text can't read on, so lighten it. */
+  :root[data-theme='dark'] .project-link:not(.live, .secondary) {
+    color: var(--accent-contrast);
+  }
+
+  :root[data-theme='dark'] .project-link:not(.live, .secondary):hover {
+    background: var(--accent-strong);
+  }
+
+  /* "Show more projects" and "View all on GitHub": #15803d on near-black (3.9:1). The legacy
+     hover fills with the primary colour, which is the same green as this text (1:1). */
+  :root[data-theme='dark'] .projects-cta .btn-outline {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  :root[data-theme='dark'] .projects-cta .btn-outline:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro__status .currently-dot {
+      animation: none;
+    }
+
+    .intro__canvas {
+      transition: none;
+    }
+  }
+}
