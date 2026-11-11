@@ -338,15 +338,27 @@
      too. Delete this block when those elements are replaced.
      ========================================================================== */
 
-  /* Card "View Code": light text on the dark theme's #22c55e (2.2:1) */
+  /* Card "View Code": light text on the dark theme's #22c55e (2.2:1). The legacy hover
+     darkens the background to #166534, which the dark text can't read on, so lighten it. */
   :root[data-theme='dark'] .project-link:not(.live, .secondary) {
     color: var(--accent-contrast);
   }
 
-  /* "Show more projects" and "View all on GitHub": #15803d on near-black (3.9:1) */
+  :root[data-theme='dark'] .project-link:not(.live, .secondary):hover {
+    background: var(--accent-strong);
+  }
+
+  /* "Show more projects" and "View all on GitHub": #15803d on near-black (3.9:1). The legacy
+     hover fills with the primary colour, which is the same green as this text (1:1). */
   :root[data-theme='dark'] .projects-cta .btn-outline {
     border-color: var(--accent);
     color: var(--accent);
+  }
+
+  :root[data-theme='dark'] .projects-cta .btn-outline:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-contrast);
   }
 
   @media (prefers-reduced-motion: reduce) {
