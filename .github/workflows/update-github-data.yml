@@ -6,9 +6,17 @@ on:
     - cron: '0 3 * * *'
   workflow_dispatch:
 
+# Queue, never cancel: a run cancelled between `git push` and `gh pr merge` would leave
+# the automation branch half-published.
+concurrency:
+  group: update-github-data
+  cancel-in-progress: false
+
 jobs:
   update-github-data:
     runs-on: ubuntu-latest
+    # A hung API call or Chromium install must fail the run, not hold it for the 6 h default.
+    timeout-minutes: 20
     permissions:
       contents: write
       pull-requests: write
@@ -35,7 +43,7 @@ jobs:
 
           def gh_get(url):
               req = urllib.request.Request(url, headers=headers)
-              with urllib.request.urlopen(req) as resp:
+              with urllib.request.urlopen(req, timeout=30) as resp:
                   return json.loads(resp.read().decode())
 
           def gh_get_all(url):
@@ -45,7 +53,7 @@ jobs:
                   sep = '&' if '?' in url else '?'
                   paged = f'{url}{sep}page={page}'
                   req = urllib.request.Request(paged, headers=headers)
-                  with urllib.request.urlopen(req) as resp:
+                  with urllib.request.urlopen(req, timeout=30) as resp:
                       chunk = json.loads(resp.read().decode())
                   if not chunk:
                       break
@@ -63,7 +71,7 @@ jobs:
                   headers={**headers, 'Content-Type': 'application/json'},
                   method='POST',
               )
-              with urllib.request.urlopen(req) as resp:
+              with urllib.request.urlopen(req, timeout=30) as resp:
                   return json.loads(resp.read().decode())
 
           print('Fetching user data...')
@@ -405,6 +413,7 @@ jobs:
   # exempt from that rule) so the refreshed data actually goes live.
   deploy-pages:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: update-github-data
     permissions:
       actions: write
