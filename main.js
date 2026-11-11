@@ -81,7 +81,6 @@ async function initializeApp() {
         initHeroEnhancements();
 
         // Phase 3: Content loading (show progress)
-        uiManager.showLoadingProgress('content');
 
         const { projectsManager } = await import('./modules/projects.js');
 
@@ -90,7 +89,6 @@ async function initializeApp() {
 
         appState.managers.projects = projectsManager;
 
-        uiManager.hideLoadingProgress('content');
         debug.log('[App] Phase 3: Content loaded');
 
         // Contact tabs (the guestbook and Turnstile load when its tab opens), the command
@@ -102,6 +100,14 @@ async function initializeApp() {
             m => {
                 m.contactTabs.init();
                 appState.managers.contactTabs = m.contactTabs;
+            }
+        );
+        await startOptional(
+            'Contact form',
+            () => import('./modules/contact-form.js'),
+            m => {
+                m.contactForm.init();
+                appState.managers.contactForm = m.contactForm;
             }
         );
         await startOptional(

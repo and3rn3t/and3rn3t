@@ -5,7 +5,6 @@
 
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
-import { icon } from './utils/icon.js';
 
 const TOAST_TYPES = new Set(['success', 'error', 'warning', 'info']);
 const TOAST_FADE_MS = 300; // a little longer than the CSS transition
@@ -15,8 +14,6 @@ const ACTIVE_WINDOW_MS = 180 * 24 * 60 * 60 * 1000; // "active" = pushed to in t
 export class UIManager {
     constructor() {
         this.isInitialized = false;
-        this.loadingBar = null;
-        this.activeTasks = new Set();
         this.toastHideTimer = 0;
         this.toastClearTimer = 0;
     }
@@ -28,70 +25,8 @@ export class UIManager {
 
         this.ensureNotificationRegion();
 
-        this.initBackToTop();
-
         this.isInitialized = true;
         debug.log('[UI] UI manager initialized');
-    }
-
-    // ========================================
-    // Loading Progress
-    // ========================================
-
-    showLoadingProgress(taskName = 'global') {
-        this.activeTasks.add(taskName);
-
-        if (!this.loadingBar) {
-            this.loadingBar = document.createElement('div');
-            this.loadingBar.id = 'global-loading-progress';
-            this.loadingBar.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 3px;
-                background: var(--primary-color);
-                background-size: 200% 100%;
-                animation: loading-gradient 2s ease-in-out infinite;
-                z-index: 9999;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            `;
-
-            if (!document.querySelector('#loading-keyframes')) {
-                const style = document.createElement('style');
-                style.id = 'loading-keyframes';
-                style.textContent = `
-                    @keyframes loading-gradient {
-                        0% { background-position: 200% 0; }
-                        100% { background-position: -200% 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-
-            document.body.appendChild(this.loadingBar);
-        }
-
-        setTimeout(() => {
-            if (this.loadingBar) {
-                this.loadingBar.style.opacity = '1';
-            }
-        }, 100);
-    }
-
-    hideLoadingProgress(taskName = 'global') {
-        this.activeTasks.delete(taskName);
-
-        if (this.activeTasks.size === 0 && this.loadingBar) {
-            this.loadingBar.style.opacity = '0';
-            setTimeout(() => {
-                if (this.loadingBar?.parentNode) {
-                    this.loadingBar.parentNode.removeChild(this.loadingBar);
-                    this.loadingBar = null;
-                }
-            }, 300);
-        }
     }
 
     // ========================================
@@ -145,38 +80,6 @@ export class UIManager {
                 notification.textContent = '';
             }, TOAST_FADE_MS);
         }, duration);
-    }
-
-    // ========================================
-    // Back to Top
-    // ========================================
-
-    initBackToTop() {
-        let backToTopBtn = document.querySelector('.back-to-top');
-
-        if (!backToTopBtn) {
-            backToTopBtn = document.createElement('button');
-            backToTopBtn.className = 'back-to-top';
-            backToTopBtn.innerHTML = icon('arrow-up');
-            backToTopBtn.setAttribute('aria-label', 'Back to top');
-            document.body.appendChild(backToTopBtn);
-        }
-
-        globalThis.addEventListener(
-            'scroll',
-            () => {
-                if (globalThis.pageYOffset > 400) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            },
-            { passive: true }
-        );
-
-        backToTopBtn.addEventListener('click', () => {
-            globalThis.scrollTo({ top: 0 });
-        });
     }
 
     // ========================================
@@ -285,7 +188,6 @@ export class UIManager {
 
     destroy() {
         this.isInitialized = false;
-        this.activeTasks.clear();
     }
 }
 

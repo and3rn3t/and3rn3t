@@ -76,6 +76,7 @@ test.describe('Accessibility — main page', () => {
             const buttons = {
                 'hero action': '#home .button--primary',
                 'lead card action': '#projects .lead-card .button--primary',
+                'contact submit': '#contact-form .button--primary',
             };
             for (const [name, selector] of Object.entries(buttons)) {
                 const button = page.locator(selector).first();
@@ -96,6 +97,25 @@ test.describe('Accessibility — main page', () => {
                     `${name}: ${color} on ${background}`
                 ).toBeGreaterThanOrEqual(4.5);
             }
+        });
+    }
+
+    // The error colour is its own token, so check it with errors on screen, in both themes
+    for (const theme of ['light', 'dark']) {
+        test(`the contact form is accessible with its errors showing, in the ${theme} theme`, async ({
+            page,
+        }) => {
+            await page.addInitScript(t => localStorage.setItem('theme', t), theme);
+            await page.goto('/');
+            await page.waitForFunction(() => Boolean(globalThis.appState?.managers?.contactForm));
+            await page.locator('#submit-button').click();
+            await expect(page.locator('#name-error')).toBeVisible();
+
+            const results = await new AxeBuilder({ page })
+                .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+                .include('#contact')
+                .analyze();
+            expect(results.violations).toEqual([]);
         });
     }
 

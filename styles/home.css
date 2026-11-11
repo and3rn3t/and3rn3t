@@ -973,6 +973,211 @@
   }
 
   /* ==========================================================================
+     Contact: ways to reach me directly, and a panel with the form and the guestbook
+     ========================================================================== */
+  .contact__grid {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  .direct-list {
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .direct-list__row {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .direct-list__label {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  .direct-list__value {
+    color: var(--text);
+    overflow-wrap: anywhere;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .direct-list__value:hover {
+    color: var(--accent);
+    text-decoration-color: currentcolor;
+  }
+
+  .contact__panel {
+    padding: var(--space-5);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+  }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-6);
+    margin-bottom: var(--space-6);
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .tab {
+    margin-bottom: calc(var(--border-width) * -1);
+    padding: var(--space-3) 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .tab:hover {
+    color: var(--text);
+  }
+
+  .tab[aria-selected='true'] {
+    border-bottom-color: var(--accent);
+    color: var(--text);
+  }
+
+  /* Where a no-JS submit lands: Formspree redirects to #message-sent, and :target shows this */
+  .notice {
+    display: none;
+    margin: 0 0 var(--space-5);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--accent);
+    border-radius: var(--radius-base);
+    background: var(--accent-wash);
+    font-size: var(--font-size-sm);
+  }
+
+  .notice:target {
+    display: block;
+  }
+
+  .guestbook__intro {
+    margin: 0 0 var(--space-5);
+    color: var(--muted);
+  }
+
+  .guestbook__entries {
+    margin-top: var(--space-8);
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .guestbook__entry {
+    padding: var(--space-4) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .guestbook__entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .guestbook__name {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .guestbook__date {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .guestbook__message {
+    margin: var(--space-2) 0 0;
+    color: var(--muted);
+    line-height: var(--line-height-relaxed);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  .guestbook__empty {
+    margin: 0;
+    padding: var(--space-4) 0;
+    color: var(--muted);
+  }
+
+  @media (min-width: 48rem) {
+    .contact__panel {
+      padding: var(--space-8);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .contact__grid {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-16);
+    }
+  }
+
+  /* ==========================================================================
+     Footer
+     ========================================================================== */
+  .site-footer {
+    padding-block: var(--space-8);
+    border-top: var(--border-width) solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4) var(--space-8);
+  }
+
+  .site-footer__note {
+    margin: 0;
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__views {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .site-footer__views[hidden] {
+    display: none;
+  }
+
+  /* ==========================================================================
      Legacy patch: the case-study modal
      Its "View Code" action is still the old .project-link (modules/project-modal.js), which in
      the dark theme is light text on #22c55e (2.2:1). Axe doesn't catch it: the modal's backdrop
