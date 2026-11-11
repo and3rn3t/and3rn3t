@@ -32,6 +32,7 @@ class GuestbookManager {
     #statusEl = null;
     #token = '';
     #widgetId = null;
+    #captchaBlocked = false;
 
     async init() {
         this.#form = document.querySelector('#guestbook-form');
@@ -98,11 +99,19 @@ class GuestbookManager {
         script.addEventListener('load', () => this.#renderWidget());
         // Blocked by an ad/tracker blocker or the network: say so instead of leaving a
         // form that can never be completed and only asks for a captcha that isn't there.
-        script.addEventListener('error', () => this.#setStatus(CAPTCHA_BLOCKED, 'error'));
+        script.addEventListener('error', () => this.#blockSubmitting());
         document.head.appendChild(script);
 
         // The widget's theme is fixed when it is rendered, so draw it again on a switch.
         document.addEventListener('themeChanged', () => this.#renderWidget());
+    }
+
+    /** The captcha can't load, so the form can't be completed: say so and stop offering it. */
+    #blockSubmitting() {
+        this.#captchaBlocked = true;
+        const btn = this.#form?.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        this.#setStatus(CAPTCHA_BLOCKED, 'error');
     }
 
     #renderWidget() {
@@ -137,6 +146,8 @@ class GuestbookManager {
 
     async #handleSubmit(e) {
         e.preventDefault();
+        // Keep the explanation on screen instead of asking for a captcha that can't appear.
+        if (this.#captchaBlocked) return;
         const data = new FormData(this.#form);
         const nameVal = data.get('name');
         const messageVal = data.get('message');
@@ -190,7 +201,7 @@ class GuestbookManager {
             this.#setStatus('Network error. Please try again.', 'error');
         } finally {
             if (btn) {
-                btn.disabled = false;
+                btn.disabled = this.#captchaBlocked;
                 btn.textContent = 'Sign guestbook';
             }
         }

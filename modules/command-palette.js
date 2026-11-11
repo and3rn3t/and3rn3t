@@ -47,6 +47,7 @@ class CommandPalette {
         }
 
         this.buildItems();
+        this.ensureToast();
 
         // Global open shortcut.
         document.addEventListener('keydown', e => {
@@ -207,6 +208,10 @@ class CommandPalette {
         if (!section) {
             return;
         }
+        // An open case study is a modal with its own focus trap and scroll lock. Setting the
+        // URL with pushState below doesn't fire hashchange (the event that normally closes
+        // it), so close it here, or focus would move to a section hidden behind the dialog.
+        projectModal.close({ updateHash: false });
         const navigation = globalThis.appState?.managers?.navigation;
         if (navigation) {
             navigation.scrollToElement(section);
@@ -334,6 +339,11 @@ class CommandPalette {
             this.close();
         }
         item.run?.();
+        // Clicking an option focuses it, but options are arrow-key-only and outside the Tab
+        // trap, so leaving focus there would let the next Tab walk out of the open dialog.
+        if (keepOpen) {
+            this.input.focus();
+        }
     }
 
     /** Subsequence fuzzy score; higher is better, -1 = no match. */
@@ -441,7 +451,12 @@ class CommandPalette {
         });
     }
 
-    flash(message) {
+    /**
+     * The toast is a live region, and a screen reader only announces changes to one that was
+     * already in the page: created and filled in the same moment, the first message can be
+     * missed. So init() creates it empty, and flash() only ever changes its text.
+     */
+    ensureToast() {
         let toast = document.getElementById('palette-toast');
         if (!toast) {
             toast = document.createElement('div');
@@ -450,6 +465,11 @@ class CommandPalette {
             toast.setAttribute('role', 'status');
             document.body.appendChild(toast);
         }
+        return toast;
+    }
+
+    flash(message) {
+        const toast = this.ensureToast();
         toast.textContent = message;
         toast.classList.add('visible');
         clearTimeout(this._toastTimer);

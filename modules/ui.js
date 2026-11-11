@@ -25,6 +25,8 @@ export class UIManager {
 
         debug.log('[UI] Initializing UI manager...');
 
+        this.ensureNotificationRegion();
+
         this.initScrollAnimations();
         this.initBackToTop();
         this.initParallax();
@@ -102,15 +104,26 @@ export class UIManager {
      * current one and restarts the timer, so an earlier call can't hide a later one. The
      * element stays in the page as an (empty) live region so screen readers announce changes.
      */
-    showNotification(message, type = 'info', duration = 5000) {
+    /**
+     * The toast is a live region, and a screen reader only announces changes to one that was
+     * already in the page. init() creates it, empty, up front so even the first message is
+     * announced; showNotification() falls back to creating it if init() hasn't run.
+     */
+    ensureNotificationRegion() {
         let notification = document.getElementById('app-notification');
         if (!notification) {
             notification = document.createElement('div');
             notification.id = 'app-notification';
+            notification.className = 'app-toast';
             notification.setAttribute('role', 'status');
             notification.setAttribute('aria-live', 'polite');
             document.body.appendChild(notification);
         }
+        return notification;
+    }
+
+    showNotification(message, type = 'info', duration = 5000) {
+        const notification = this.ensureNotificationRegion();
 
         clearTimeout(this.toastHideTimer);
         clearTimeout(this.toastClearTimer);

@@ -22,6 +22,22 @@ describe('showNotification', () => {
         vi.useRealTimers();
     });
 
+    it('creates an empty live region up front, so the first message is announced', () => {
+        const region = ui.ensureNotificationRegion();
+
+        // In the page, empty and hidden before any message is sent...
+        expect(region.getAttribute('role')).toBe('status');
+        expect(region.getAttribute('aria-live')).toBe('polite');
+        expect(region.textContent).toBe('');
+        expect(isVisible()).toBe(false);
+
+        // ...and the same element is filled in afterwards, not replaced.
+        ui.showNotification('You are offline', 'warning');
+        expect(toast()).toBe(region);
+        expect(region.textContent).toBe('You are offline');
+        expect(document.querySelectorAll('#app-notification')).toHaveLength(1);
+    });
+
     it('shows a message in a polite live region and hides it after the duration', () => {
         ui.showNotification('You are offline', 'warning', 5000);
 

@@ -235,3 +235,52 @@ test('a project result opens its case study on the site instead of leaving for G
     await expect(page.locator('#project-modal')).toHaveClass(/visible/);
     await expect(page).toHaveURL(new RegExp(`#project/${target.slug}$`));
 });
+
+// ── Review follow-ups ─────────────────────────────────────────────────────────
+
+test('"Go to" from the palette closes an open case study before navigating', async ({ page }) => {
+    const card = page.locator('[data-case-study]').first();
+    await card.waitFor();
+    test.skip((await card.count()) === 0, 'no project with a case study in current data');
+    await card.click();
+    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+
+    await openPalette(page);
+    await page.locator('.search-category[data-category="content"]').click();
+    await page.fill('#global-search-input', 'contact');
+    await page.keyboard.press('Enter');
+
+    // The case study's trap and scroll lock must not outlive the navigation.
+    await expect(page.locator('#project-modal')).not.toHaveClass(/visible/);
+    await expect(page.locator('body')).not.toHaveClass(/modal-open/);
+    await expect(page).toHaveURL(/#contact$/);
+    await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+});
+
+test('running "Toggle theme" with the mouse hands focus back to the input', async ({ page }) => {
+    await openPalette(page);
+    await page.fill('#global-search-input', 'toggle theme');
+    await page.locator('.palette-item', { hasText: 'Toggle theme' }).first().click();
+
+    await expect(page.locator('#global-search-modal')).toHaveClass(/visible/); // stays open
+    await expect(page.locator('#global-search-input')).toBeFocused();
+
+    // Focus is back inside the trap, so Tab cannot walk out of the open dialog.
+    for (let i = 0; i < 4; i++) {
+        await page.keyboard.press('Tab');
+        expect(
+            await page.evaluate(() =>
+                Boolean(document.activeElement?.closest('#global-search-modal'))
+            )
+        ).toBe(true);
+    }
+});
+
+test('the toast live regions are in the page, empty, before any message', async ({ page }) => {
+    for (const id of ['app-notification', 'palette-toast']) {
+        const region = page.locator(`#${id}`);
+        await expect(region).toBeAttached();
+        await expect(region).toHaveAttribute('role', 'status');
+        await expect(region).toHaveText('');
+    }
+});

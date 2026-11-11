@@ -158,6 +158,25 @@ describe('guestbook form', () => {
         expect(turnstile.render).not.toHaveBeenCalled();
     });
 
+    it('disables the form and keeps the explanation when the script is blocked', async () => {
+        await setup();
+        turnstileScript().dispatchEvent(new Event('error'));
+        const explanation = status();
+        expect(explanation).toMatch(/ad blocker/i);
+        expect(button().disabled).toBe(true);
+
+        // Pressing Enter in a field can still submit the form; it must not replace the message
+        // with a request to complete a captcha that can never appear.
+        document.querySelector('[name="name"]').value = 'Alice';
+        document.querySelector('[name="message"]').value = 'Hello';
+        document.getElementById('guestbook-form').requestSubmit();
+        await Promise.resolve();
+
+        expect(status()).toBe(explanation);
+        expect(button().disabled).toBe(true);
+        expect(posts()).toBe(0);
+    });
+
     it('redraws the widget with the new theme when the site theme changes', async () => {
         await setup();
         loadWidget().callback('token-1');
