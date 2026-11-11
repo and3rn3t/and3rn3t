@@ -142,7 +142,14 @@ jobs:
               print(f'  {len(self_starred)} own repos self-starred: {self_starred}')
           except Exception as exc:
               print(f'  Starred fetch unavailable: {exc}')
-              self_starred = []
+              # Keep the last known list. An empty one makes the site fall back to the whole
+              # curated list, and this run would publish that as a home-page change.
+              try:
+                  with open('github-data.json', encoding='utf-8') as fh:
+                      self_starred = json.load(fh).get('selfStarredRepoNames', [])
+              except (OSError, ValueError):
+                  self_starred = []
+              print(f'  keeping previous list: {self_starred}')
 
           print('Fetching contribution calendar (GraphQL)...')
           CONTRIB_QUERY = """

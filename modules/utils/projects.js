@@ -5,6 +5,8 @@
  * each card says. Keep this file free of DOM and Node APIs.
  */
 
+import { safeUrl } from './html.js';
+
 const LANGUAGE_COLORS = {
     TypeScript: '#2b7489',
     JavaScript: '#f1e05a',
@@ -60,6 +62,23 @@ export function orderProjects(projects) {
 }
 
 /**
+ * Curated metadata keyed by project name and by the basename of its `github_repo`
+ * (e.g. "and3rn3t/health" -> "health"), so a repo name finds its write-up either way.
+ *
+ * @param {object[]} curated - projects-data.json's `projects`
+ * @returns {Map<string, object>}
+ */
+export function buildMetaMap(curated) {
+    const metaMap = new Map();
+    for (const metadata of curated) {
+        metaMap.set(metadata.name, metadata);
+        const basename = metadata.github_repo?.split('/').pop();
+        if (basename && basename !== metadata.name) metaMap.set(basename, metadata);
+    }
+    return metaMap;
+}
+
+/**
  * Which projects to show, in display order.
  *
  * Starred repos are the primary curation signal; projects-data.json supplies the write-ups.
@@ -75,13 +94,7 @@ export function selectProjects(projectsData, repositories, starredNames) {
     const repoMap = new Map((repositories ?? []).map(repo => [repo.name, repo]));
     const curated = projectsData?.projects ?? [];
 
-    const metaMap = new Map();
-    for (const metadata of curated) {
-        metaMap.set(metadata.name, metadata);
-        // Also index by the repo's basename (e.g. "and3rn3t/health" -> "health")
-        const basename = metadata.github_repo?.split('/').pop();
-        if (basename && basename !== metadata.name) metaMap.set(basename, metadata);
-    }
+    const metaMap = buildMetaMap(curated);
 
     let projects;
     if (starredNames?.length) {
@@ -136,13 +149,13 @@ export function projectView(repo, metadata) {
         technologies: metadata?.technologies ?? [],
         highlights,
         htmlUrl: repo?.html_url || `https://github.com/${metadata?.github_repo || 'and3rn3t'}`,
-        homepage: metadata?.homepage ?? repo?.homepage,
+        // Only http(s) links reach the page: HTML escaping doesn't stop a javascript: URL
+        homepage: safeUrl(metadata?.homepage ?? repo?.homepage),
         // Up to three tags beyond the primary language, curated first
         secondaryTags: (metadata?.technologies ?? repo?.topics ?? [])
             .filter(tag => tag.toLowerCase() !== language.toLowerCase())
             .slice(0, 3),
         featured: Boolean(metadata?.featured),
-        hasRepo: Boolean(repo),
         hasCaseStudy: Boolean(slug && (metadata?.longDescription || highlights.length > 1)),
     };
 }

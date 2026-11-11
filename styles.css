@@ -1440,6 +1440,12 @@ section {
   display: none;
 }
 
+/* Held until the case study is registered: still takes up its space (so enabling it moves
+   nothing) but can't be seen, focused or clicked. Hidden outright without JS (see index.html). */
+.project-case-study-btn[data-pending] {
+  visibility: hidden;
+}
+
 /* btn-outline in light contexts (projects section, etc.) */
 .projects-cta .btn-outline {
   color: #15803d;

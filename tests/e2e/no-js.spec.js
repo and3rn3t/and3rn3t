@@ -25,6 +25,12 @@ test.describe('JavaScript disabled', () => {
         await expect(page.locator('#education-timeline .timeline-item').first()).toBeVisible();
     });
 
+    test('case-study buttons are not offered, since they need JS to open', async ({ page }) => {
+        const buttons = page.locator('#projects-grid [data-case-study]');
+        expect(await buttons.count()).toBeGreaterThan(0);
+        for (const button of await buttons.all()) await expect(button).toBeHidden();
+    });
+
     test('writing links to the post pages', async ({ page }) => {
         const link = page.locator('#blog-posts a[href^="/posts/"]').first();
         await expect(link).toBeVisible();
@@ -60,4 +66,28 @@ test('the pre-rendered cards come alive once JavaScript runs', async ({ page }) 
     await expect(health.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
     await expect(health.locator('[data-live-stat="pushed"]')).toBeVisible();
     await expect(health.locator('[data-live="pushed"]')).toHaveText(/ago$/);
+});
+
+test('a case-study button is enabled only once its study is registered', async ({ page }) => {
+    await page.goto('/');
+    const button = page.locator('#projects-grid [data-project="health"] [data-case-study]');
+    await expect(button).toBeVisible();
+    await expect(button).not.toHaveAttribute('data-pending');
+    await button.click();
+    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+});
+
+test('cards stay live when newer data no longer stars their repo', async ({ page }) => {
+    // The HTML and the JSON are cached separately, so an older page can meet newer data.
+    await page.route('**/github-data.json', async route => {
+        const response = await route.fetch();
+        const data = await response.json();
+        data.selfStarredRepoNames = data.selfStarredRepoNames.filter(name => name !== 'fastlane');
+        await route.fulfill({ response, json: data });
+    });
+    await page.goto('/');
+
+    const card = page.locator('#projects-grid [data-project="fastlane"]');
+    await expect(card.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
+    await expect(card.locator('[data-live="pushed"]')).toHaveText(/ago$/);
 });

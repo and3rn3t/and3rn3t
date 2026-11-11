@@ -169,6 +169,38 @@ describe('project cards', () => {
         expect(renderProjectCard(view)).toContain('/blob/main/README.md');
     });
 
+    it('never writes an unsafe homepage into the page', () => {
+        for (const homepage of [
+            'javascript:alert(1)',
+            'data:text/html,<b>x</b>',
+            'vbscript:msgbox(1)',
+        ]) {
+            const html = renderProjectCard(projectView(REPOS[0], { homepage }));
+            expect(html, homepage).not.toMatch(/javascript:|data:text/);
+            expect(html, homepage).toContain('Documentation');
+            expect(html, homepage).not.toContain('Live Demo');
+        }
+        // A repo's own homepage field is checked the same way
+        const fromRepo = renderProjectCard(
+            projectView({ ...REPOS[0], homepage: 'javascript:alert(1)' }, null)
+        );
+        expect(fromRepo).not.toContain('javascript:');
+    });
+
+    it('always has a place for the push time, even if the repo was unknown at build time', () => {
+        const withoutRepo = renderProjectCard(
+            projectView(null, { name: 'solo', displayName: 'Solo' })
+        );
+        expect(withoutRepo).toContain('data-live-stat="pushed"');
+        expect(withoutRepo).toContain('data-live="pushed"');
+    });
+
+    it('holds the case-study button until its study is registered', () => {
+        const withStudy = renderProjectCard(projectView(REPOS[0], { longDescription: 'Long' }));
+        expect(withStudy).toMatch(/<button[^>]*data-case-study="alpha"[^>]*data-pending/);
+        expect(renderProjectCard(projectView(REPOS[0], null))).not.toContain('data-case-study');
+    });
+
     it('hides extra cards and counts them on the "Show more" button', () => {
         const featured = projectView(REPOS[0], { featured: 1 });
         const rest = [REPOS[1], REPOS[2]].map(repo => projectView(repo, null));

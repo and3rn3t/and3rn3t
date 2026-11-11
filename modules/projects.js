@@ -12,7 +12,7 @@ import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { projectModal } from './project-modal.js';
 import { loadJSON } from './utils/data.js';
-import { isRecentlyPushed, projectView, relativeTime, selectProjects } from './utils/projects.js';
+import { buildMetaMap, isRecentlyPushed, projectView, relativeTime } from './utils/projects.js';
 
 const DATA_PATH = '/projects-data.json';
 
@@ -67,53 +67,65 @@ export class ProjectsManager {
                 projectsData,
                 repositories:
                     cachedData?.repositories ?? (await githubAPI.getRepositories('pushed', 100)),
-                starredNames: cachedData?.selfStarredRepoNames,
             };
         } catch (error) {
             debug.warn(
                 '[Projects] GitHub data unavailable, cards keep their static content:',
                 error
             );
-            return { projectsData, repositories: [], starredNames: null };
+            return { projectsData, repositories: [] };
         }
     }
 
     /**
-     * Fill in the live parts of the pre-rendered cards and register their case studies.
+     * Make the pre-rendered cards live: register each card's case study and fill in its
+     * star count and push time.
+     *
+     * This walks the cards that are on the page, not the current starred list. The HTML and
+     * the JSON are cached independently, so a card can outlive its repo's star (or arrive
+     * before the data that describes it); it should still work.
      */
     async hydrate() {
-        const { projectsData, repositories, starredNames } = await this.loadSources();
+        const { projectsData, repositories } = await this.loadSources();
+        const repoMap = new Map(repositories.map(repo => [repo.name, repo]));
+        const metaMap = buildMetaMap(projectsData?.projects ?? []);
 
-        for (const { repo, metadata } of selectProjects(projectsData, repositories, starredNames)) {
-            const view = projectView(repo, metadata);
-            const pushedAt = repo?.pushed_at;
-            const pushedRelative = pushedAt ? relativeTime(new Date(pushedAt)) : null;
-
-            if (view.hasCaseStudy) {
-                projectModal.register(view.slug, {
-                    ...view,
-                    stars: repo?.stargazers_count ?? null,
-                    forks: repo?.forks_count ?? null,
-                    openIssues: repo?.open_issues_count ?? null,
-                    pushedRelative,
-                });
-            }
-
-            const card = this.container.querySelector(`[data-project="${CSS.escape(view.slug)}"]`);
-            if (card) this.hydrateCard(card, repo, pushedRelative);
+        for (const card of this.container.querySelectorAll('[data-project]')) {
+            const slug = card.dataset.project;
+            const metadata = metaMap.get(slug) ?? null;
+            const repo =
+                repoMap.get(slug) ?? repoMap.get(metadata?.github_repo?.split('/').pop()) ?? null;
+            this.hydrateCard(card, projectView(repo, metadata), repo);
         }
     }
 
-    hydrateCard(card, repo, pushedRelative) {
+    hydrateCard(card, view, repo) {
+        const pushedAt = repo?.pushed_at;
+        const pushedRelative = pushedAt ? relativeTime(new Date(pushedAt)) : null;
+
+        if (view.hasCaseStudy) {
+            projectModal.register(view.slug, {
+                ...view,
+                stars: repo?.stargazers_count ?? null,
+                forks: repo?.forks_count ?? null,
+                openIssues: repo?.open_issues_count ?? null,
+                pushedRelative,
+            });
+            // Only now does the button have something to open
+            card.querySelector('[data-case-study]')?.removeAttribute('data-pending');
+        }
+
         const stars = card.querySelector('[data-live="stars"]');
         if (stars && repo) stars.textContent = String(repo.stargazers_count ?? '—');
 
-        if (pushedRelative) {
-            card.querySelector('[data-live="pushed"]').textContent = pushedRelative;
-            card.querySelector('[data-live-stat="pushed"]').hidden = false;
+        const pushed = card.querySelector('[data-live="pushed"]');
+        const pushedStat = card.querySelector('[data-live-stat="pushed"]');
+        if (pushedRelative && pushed && pushedStat) {
+            pushed.textContent = pushedRelative;
+            pushedStat.hidden = false;
         }
 
-        if (isRecentlyPushed(repo?.pushed_at)) {
+        if (isRecentlyPushed(pushedAt)) {
             card.classList.add('project-card--recent');
             card.querySelector('.project-card-badges')?.insertAdjacentHTML(
                 'beforeend',

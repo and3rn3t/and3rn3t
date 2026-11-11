@@ -4,7 +4,9 @@
  * Only stable facts are baked in (see projectView in modules/utils/projects.js). The live
  * parts are empty slots that modules/projects.js fills in the browser:
  *   [data-live="stars"]        star count
- *   [data-live-stat="pushed"]  "last pushed" stat, hidden until there is a value
+ *   [data-live-stat="pushed"]  "last pushed" stat, hidden until there is a value (always
+ *                              present: a repo can show up in the data after the page was built)
+ *   [data-pending]             case-study button, enabled once its study is registered
  *   .project-card--recent      "Active" badge for repos pushed to in the last 180 days
  *   [data-status-active]       the status badge that "Active" makes redundant
  */
@@ -29,9 +31,11 @@ export function renderProjectCard(view, { extra = false } = {}) {
     .filter(Boolean)
     .join(' ');
 
+  // data-pending keeps the button's space but hides and disables it: it has no action
+  // without JS, and a click before modules/projects.js registers the study would be lost.
   const caseStudy = view.hasCaseStudy
     ? `
-                <button type="button" class="project-case-study-btn" data-case-study="${esc(view.slug)}">
+                <button type="button" class="project-case-study-btn" data-case-study="${esc(view.slug)}" data-pending>
                     ${icon('book-open')}
                     Read case study
                 </button>`
@@ -67,14 +71,10 @@ export function renderProjectCard(view, { extra = false } = {}) {
                         ${icon('star')}
                         <span data-live="stars">—</span>
                     </div>
-                    ${
-                      view.hasRepo
-                        ? `<div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
+                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
                         ${icon('code-commit')}
                         <span data-live="pushed"></span>
-                    </div>`
-                        : ''
-                    }
+                    </div>
                 </div>
 
                 <div class="project-languages">

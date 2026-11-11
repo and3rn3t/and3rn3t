@@ -339,7 +339,8 @@
         #projects-grid .project-card[hidden] {
           display: block;
         }
-        #projects-more-btn {
+        #projects-more-btn,
+        #projects-grid .project-case-study-btn {
           display: none;
         }
       </style>
@@ -702,7 +703,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Health Analytics Platform</a></h3>
                 <p class="project-description">A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.</p>
                 <p class="project-highlight-lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
-                <button type="button" class="project-case-study-btn" data-case-study="health">
+                <button type="button" class="project-case-study-btn" data-case-study="health" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -744,7 +745,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Home Automation Hub</a></h3>
                 <p class="project-description">A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.</p>
                 <p class="project-highlight-lead">→ WebSocket-driven real-time control — device state updates without polling</p>
-                <button type="button" class="project-case-study-btn" data-case-study="homehub">
+                <button type="button" class="project-case-study-btn" data-case-study="homehub" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -786,7 +787,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Guess — Transparent Akinator</a></h3>
                 <p class="project-description">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
                 <p class="project-highlight-lead">→ Live at andernator.com — playable in any browser, no install required</p>
-                <button type="button" class="project-case-study-btn" data-case-study="guess">
+                <button type="button" class="project-case-study-btn" data-case-study="guess" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -828,7 +829,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">andernet.dev — This Portfolio</a></h3>
                 <p class="project-description">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
                 <p class="project-highlight-lead">→ Framework-free ES modules with a phased, lazy-loaded startup</p>
-                <button type="button" class="project-case-study-btn" data-case-study="and3rn3t">
+                <button type="button" class="project-case-study-btn" data-case-study="and3rn3t" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -870,7 +871,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Self-Hosted Minecraft Server</a></h3>
                 <p class="project-description">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
                 <p class="project-highlight-lead">→ One-command provisioning: fresh host to fully-configured server via shell script</p>
-                <button type="button" class="project-case-study-btn" data-case-study="minecraft">
+                <button type="button" class="project-case-study-btn" data-case-study="minecraft" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -912,7 +913,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">iOS 26 Weather App</a></h3>
                 <p class="project-description">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
                 <p class="project-highlight-lead">→ Built during the iOS 26 beta — tracking live API and design system changes</p>
-                <button type="button" class="project-case-study-btn" data-case-study="weather-app">
+                <button type="button" class="project-case-study-btn" data-case-study="weather-app" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -992,7 +993,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer">Apple Music DJ</a></h3>
                 <p class="project-description">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
                 <p class="project-highlight-lead">→ Daily-use tool: keyboard-only Apple Music control from any app via OpenClaw shortcut</p>
-                <button type="button" class="project-case-study-btn" data-case-study="apple-music-dj">
+                <button type="button" class="project-case-study-btn" data-case-study="apple-music-dj" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
@@ -1034,7 +1035,7 @@
                 <h3 class="project-title"><a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer">Network Traffic Analyzer</a></h3>
                 <p class="project-description">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
                 <p class="project-highlight-lead">→ Runs continuously on a Raspberry Pi 5 as a persistent home network sensor</p>
-                <button type="button" class="project-case-study-btn" data-case-study="net-traffic">
+                <button type="button" class="project-case-study-btn" data-case-study="net-traffic" data-pending>
                     <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
                     Read case study
                 </button>
