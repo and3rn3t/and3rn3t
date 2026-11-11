@@ -8,17 +8,24 @@ import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { icon } from './utils/icon.js';
 
+const TOAST_TYPES = new Set(['success', 'error', 'warning', 'info']);
+const TOAST_FADE_MS = 300; // a little longer than the CSS transition
+
 export class UIManager {
     constructor() {
         this.isInitialized = false;
         this.loadingBar = null;
         this.activeTasks = new Set();
+        this.toastHideTimer = 0;
+        this.toastClearTimer = 0;
     }
 
     init() {
         if (this.isInitialized) return;
 
         debug.log('[UI] Initializing UI manager...');
+
+        this.ensureNotificationRegion();
 
         this.initScrollAnimations();
         this.initBackToTop();
@@ -92,50 +99,52 @@ export class UIManager {
     // Notifications
     // ========================================
 
-    showNotification(message, type = 'info', duration = 5000) {
+    /**
+     * Show a transient message. One toast element is reused: a newer message replaces the
+     * current one and restarts the timer, so an earlier call can't hide a later one. The
+     * element stays in the page as an (empty) live region so screen readers announce changes.
+     */
+    /**
+     * The toast is a live region, and a screen reader only announces changes to one that was
+     * already in the page. init() creates it, empty, up front so even the first message is
+     * announced; showNotification() falls back to creating it if init() hasn't run.
+     */
+    ensureNotificationRegion() {
         let notification = document.getElementById('app-notification');
         if (!notification) {
             notification = document.createElement('div');
             notification.id = 'app-notification';
+            notification.className = 'app-toast';
             notification.setAttribute('role', 'status');
             notification.setAttribute('aria-live', 'polite');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 12px 20px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                z-index: 1000;
-                max-width: 350px;
-                font-size: 14px;
-                opacity: 0;
-                transform: translateX(100%);
-                transition: all 0.3s ease;
-            `;
             document.body.appendChild(notification);
         }
+        return notification;
+    }
 
-        const colors = {
-            success: '#10b981',
-            error: '#ef4444',
-            warning: '#f59e0b',
-            info: '#3b82f6',
-        };
+    showNotification(message, type = 'info', duration = 5000) {
+        const notification = this.ensureNotificationRegion();
 
-        notification.style.background = colors[type] || colors.info;
-        notification.style.color = 'white';
+        clearTimeout(this.toastHideTimer);
+        clearTimeout(this.toastClearTimer);
+
+        const variant = TOAST_TYPES.has(type) ? type : 'info';
+        const wasVisible = notification.classList.contains('visible');
+        notification.className = `app-toast app-toast--${variant}`;
         notification.textContent = message;
+        if (wasVisible) {
+            notification.classList.add('visible'); // swapped in place, no flicker
+        } else {
+            void notification.offsetWidth; // commit the hidden state so the slide-in animates
+            notification.classList.add('visible');
+        }
 
-        setTimeout(() => {
-            notification.style.opacity = '1';
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => notification.remove(), 300);
+        this.toastHideTimer = setTimeout(() => {
+            notification.classList.remove('visible');
+            // Drop the text once it has faded so it can't be read out of a hidden toast.
+            this.toastClearTimer = setTimeout(() => {
+                notification.textContent = '';
+            }, TOAST_FADE_MS);
         }, duration);
     }
 

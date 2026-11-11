@@ -467,7 +467,7 @@
             id="mobile-menu"
             aria-label="Toggle navigation menu"
             aria-expanded="false"
-            aria-controls="nav-links"
+            aria-controls="nav-menu"
           >
             <span class="bar"></span>
             <span class="bar"></span>
@@ -478,8 +478,13 @@
     </nav>
 
     <!-- Global Search Modal -->
-    <div class="global-search-modal" id="global-search-modal">
-      <div class="global-search-content">
+    <div class="global-search-modal" id="global-search-modal" aria-hidden="true">
+      <div
+        class="global-search-content"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Command palette"
+      >
         <div class="global-search-header">
           <div class="global-search-input-container">
             <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
@@ -492,6 +497,11 @@
               class="global-search-input"
               autocomplete="off"
               spellcheck="false"
+              role="combobox"
+              aria-label="Search the portfolio"
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-controls="search-results-content"
             />
             <button
               class="global-search-close"
@@ -505,25 +515,25 @@
             </button>
           </div>
           <div class="search-categories">
-            <button class="search-category active" data-category="all">
+            <button class="search-category active" data-category="all" aria-pressed="true">
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#globe"></use>
               </svg>
               All
             </button>
-            <button class="search-category" data-category="projects">
+            <button class="search-category" data-category="projects" aria-pressed="false">
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#code"></use>
               </svg>
               Projects
             </button>
-            <button class="search-category" data-category="skills">
+            <button class="search-category" data-category="skills" aria-pressed="false">
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#cogs"></use>
               </svg>
               Skills
             </button>
-            <button class="search-category" data-category="content">
+            <button class="search-category" data-category="content" aria-pressed="false">
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#file-alt"></use>
               </svg>
@@ -544,7 +554,13 @@
               <div class="search-tip"><kbd>Esc</kbd> Close search</div>
             </div>
           </div>
-          <div class="search-results-content" id="search-results-content"></div>
+          <div class="sr-only" id="search-results-status" role="status" aria-live="polite"></div>
+          <div
+            class="search-results-content"
+            id="search-results-content"
+            role="listbox"
+            aria-label="Search results"
+          ></div>
         </div>
       </div>
     </div>

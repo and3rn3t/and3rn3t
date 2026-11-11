@@ -12,9 +12,12 @@
  */
 
 import { debug } from './debug.js';
+import { projectModal } from './project-modal.js';
 import { loadJSON } from './utils/data.js';
 import { escapeHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
+
+const optionId = index => `palette-option-${index}`;
 
 const EMAIL = 'and3rn3t@icloud.com';
 const GITHUB = 'https://github.com/and3rn3t';
@@ -25,6 +28,7 @@ class CommandPalette {
         this.input = document.getElementById('global-search-input');
         this.resultsContent = document.getElementById('search-results-content');
         this.emptyState = document.getElementById('search-results-empty');
+        this.statusEl = document.getElementById('search-results-status');
         this.closeBtn = document.getElementById('global-search-close');
         this.categoryBtns = Array.from(document.querySelectorAll('.search-category'));
 
@@ -43,6 +47,7 @@ class CommandPalette {
         }
 
         this.buildItems();
+        this.ensureToast();
 
         // Global open shortcut.
         document.addEventListener('keydown', e => {
@@ -78,6 +83,7 @@ class CommandPalette {
                 this.activeCategory = btn.dataset.category || 'all';
                 for (const b of this.categoryBtns) {
                     b.classList.toggle('active', b === btn);
+                    b.setAttribute('aria-pressed', String(b === btn));
                 }
                 this.render();
                 this.input.focus();
@@ -150,9 +156,7 @@ class CommandPalette {
                 icon: 'arrow-right',
                 title: `Go to ${label}`,
                 subtitle: `#${section.id}`,
-                run: () => {
-                    section.scrollIntoView({ block: 'start' });
-                },
+                run: () => this.goToSection(section),
             };
         });
 
@@ -165,9 +169,7 @@ class CommandPalette {
                 icon: 'cog',
                 title: name,
                 subtitle: 'Skill',
-                run: () => {
-                    document.getElementById('about')?.scrollIntoView({ block: 'start' });
-                },
+                run: () => this.goToSection(document.getElementById('about')),
             };
         });
 
@@ -190,10 +192,7 @@ class CommandPalette {
                 title: p.displayName || p.name,
                 subtitle: (p.technologies || []).slice(0, 3).join(' · ') || p.description,
                 keywords: [p.name, ...(p.technologies || [])].join(' ').toLowerCase(),
-                run: () => {
-                    const url = p.github_repo ? `https://github.com/${p.github_repo}` : `${GITHUB}`;
-                    globalThis.open(url, '_blank', 'noopener');
-                },
+                run: () => this.openProject(p),
             }));
             this.items = [...this.items, ...projects];
             if (this.isOpen) {
@@ -202,6 +201,35 @@ class CommandPalette {
         } catch (err) {
             debug.warn('[Palette] Could not load projects:', err);
         }
+    }
+
+    /** Scroll to a section, update the URL and move focus there, like a nav link does. */
+    goToSection(section) {
+        if (!section) {
+            return;
+        }
+        // An open case study is a modal with its own focus trap and scroll lock. Setting the
+        // URL with pushState below doesn't fire hashchange (the event that normally closes
+        // it), so close it here, or focus would move to a section hidden behind the dialog.
+        projectModal.close({ updateHash: false });
+        const navigation = globalThis.appState?.managers?.navigation;
+        if (navigation) {
+            navigation.scrollToElement(section);
+        } else {
+            section.scrollIntoView({ block: 'start' });
+        }
+        globalThis.history.pushState(null, '', `#${section.id}`);
+    }
+
+    /** Open a project's on-site case study when it has one, otherwise its GitHub repo. */
+    openProject(project) {
+        const slug = project.github_repo?.split('/').pop() ?? project.name;
+        if (projectModal.registry.has(slug)) {
+            projectModal.open(slug);
+            return;
+        }
+        const url = project.github_repo ? `https://github.com/${project.github_repo}` : GITHUB;
+        globalThis.open(url, '_blank', 'noopener');
     }
 
     toggle() {
@@ -221,7 +249,7 @@ class CommandPalette {
         this.render();
         // Focus after the open transition begins.
         requestAnimationFrame(() => this.input.focus());
-        document.addEventListener('keydown', this.trapFocus);
+        document.addEventListener('keydown', this.onDialogKeydown);
     }
 
     close() {
@@ -231,19 +259,33 @@ class CommandPalette {
         this.isOpen = false;
         this.modal.classList.remove('visible');
         this.modal.setAttribute('aria-hidden', 'true');
-        document.removeEventListener('keydown', this.trapFocus);
+        this.input.setAttribute('aria-expanded', 'false');
+        this.input.removeAttribute('aria-activedescendant');
+        document.removeEventListener('keydown', this.onDialogKeydown);
         if (this.lastFocused instanceof HTMLElement) {
             this.lastFocused.focus();
         }
     }
 
-    /** Bound focus-trap handler. */
-    trapFocus = e => {
+    /**
+     * Keys that apply to the whole dialog while it is open: Escape closes it wherever focus
+     * is (category button, close button, a result), and Tab stays inside it.
+     */
+    onDialogKeydown = e => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            this.close();
+            return;
+        }
         if (e.key !== 'Tab') {
             return;
         }
+        // Results are reached with the arrow keys (tabindex -1), so they are not tab stops.
+        // `a[href]`, not `[href]`: every icon is <svg><use href="..."></svg>, and an SVG
+        // element reports offsetParent undefined, so it would pass the visibility filter below
+        // and become the "last" element, which means Tab off the real last button never wraps.
         const focusable = this.modal.querySelectorAll(
-            'button, input, [href], [tabindex]:not([tabindex="-1"])'
+            'button:not([tabindex="-1"]), input, a[href], [tabindex]:not([tabindex="-1"])'
         );
         const list = Array.from(focusable).filter(el => el.offsetParent !== null);
         if (list.length === 0) {
@@ -274,10 +316,6 @@ class CommandPalette {
                 e.preventDefault();
                 this.runActive();
                 break;
-            case 'Escape':
-                e.preventDefault();
-                this.close();
-                break;
         }
     }
 
@@ -295,9 +333,16 @@ class CommandPalette {
             return;
         }
         const keepOpen = item.type === 'action' && /toggle theme/i.test(item.title);
-        item.run?.();
+        // Close first: it hands focus back to where the visitor was, and an item that
+        // navigates then moves it on to its target instead of having it stolen back.
         if (!keepOpen) {
             this.close();
+        }
+        item.run?.();
+        // Clicking an option focuses it, but options are arrow-key-only and outside the Tab
+        // trap, so leaving focus there would let the next Tab walk out of the open dialog.
+        if (keepOpen) {
+            this.input.focus();
         }
     }
 
@@ -344,16 +389,32 @@ class CommandPalette {
                 query.trim() === '' && this.activeCategory === 'all' ? '' : 'none';
         }
 
+        // Say how many results there are, but only once the visitor has asked for something:
+        // announcing a full unfiltered list every time the palette opens is just noise.
+        const searching = query.trim() !== '' || this.activeCategory !== 'all';
+        if (this.statusEl) {
+            const count = this.filtered.length;
+            this.statusEl.textContent = searching
+                ? count === 0
+                    ? 'No matches found'
+                    : `${count} result${count === 1 ? '' : 's'}`
+                : '';
+        }
+
+        this.input.setAttribute('aria-expanded', String(this.filtered.length > 0));
+
         if (this.filtered.length === 0) {
+            this.input.removeAttribute('aria-activedescendant');
             this.resultsContent.innerHTML =
                 query.trim() === '' ? '' : '<div class="palette-no-results">No matches found</div>';
             return;
         }
 
+        this.input.setAttribute('aria-activedescendant', optionId(0));
         this.resultsContent.innerHTML = this.filtered
             .map((item, i) => {
                 return `
-                <button class="palette-item${i === 0 ? ' is-active' : ''}" data-index="${i}" type="button">
+                <button class="palette-item${i === 0 ? ' is-active' : ''}" id="${optionId(i)}" role="option" aria-selected="${i === 0}" tabindex="-1" data-index="${i}" type="button">
                     <span class="palette-item-icon">${icon(item.icon)}</span>
                     <span class="palette-item-text">
                         <span class="palette-item-title">${escapeHtml(item.title)}</span>
@@ -381,20 +442,34 @@ class CommandPalette {
         items.forEach((el, i) => {
             const active = i === this.activeIndex;
             el.classList.toggle('is-active', active);
+            el.setAttribute('aria-selected', String(active));
             if (active) {
                 el.scrollIntoView({ block: 'nearest' });
+                // Focus stays in the input; this tells assistive tech which option is current.
+                this.input.setAttribute('aria-activedescendant', el.id);
             }
         });
     }
 
-    flash(message) {
+    /**
+     * The toast is a live region, and a screen reader only announces changes to one that was
+     * already in the page: created and filled in the same moment, the first message can be
+     * missed. So init() creates it empty, and flash() only ever changes its text.
+     */
+    ensureToast() {
         let toast = document.getElementById('palette-toast');
         if (!toast) {
             toast = document.createElement('div');
             toast.id = 'palette-toast';
             toast.className = 'palette-toast';
+            toast.setAttribute('role', 'status');
             document.body.appendChild(toast);
         }
+        return toast;
+    }
+
+    flash(message) {
+        const toast = this.ensureToast();
         toast.textContent = message;
         toast.classList.add('visible');
         clearTimeout(this._toastTimer);

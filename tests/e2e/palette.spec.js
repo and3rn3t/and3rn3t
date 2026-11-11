@@ -75,3 +75,212 @@ test('search returns no-matches message for gibberish', async ({ page }) => {
     const noResults = page.locator('.palette-no-results');
     await expect(noResults).toBeVisible();
 });
+
+// ── Accessibility and navigation (#220) ───────────────────────────────────────
+
+const openPalette = async page => {
+    await page.keyboard.press('Control+k');
+    await page.waitForSelector('#global-search-modal.visible');
+    // Focus moves to the input a frame after the modal opens; wait so Tab starts inside it.
+    await expect(page.locator('#global-search-input')).toBeFocused();
+};
+
+test('Escape closes the palette from a category button, not only from the input', async ({
+    page,
+}) => {
+    await openPalette(page);
+    await page.locator('.search-category[data-category="projects"]').focus();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+});
+
+test('Escape closes the palette from the close button', async ({ page }) => {
+    await openPalette(page);
+    await page.locator('#global-search-close').focus();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+});
+
+test('the palette is a named dialog with a combobox wired to a listbox', async ({ page }) => {
+    await openPalette(page);
+
+    const dialog = page.locator('#global-search-modal [role="dialog"]');
+    await expect(dialog).toHaveAttribute('aria-modal', 'true');
+    await expect(dialog).toHaveAttribute('aria-label', 'Command palette');
+
+    const input = page.locator('#global-search-input');
+    await expect(input).toHaveAttribute('role', 'combobox');
+    await expect(input).toHaveAttribute('aria-label', 'Search the portfolio');
+    const controls = await input.getAttribute('aria-controls');
+    await expect(page.locator(`#${controls}`)).toHaveAttribute('role', 'listbox');
+    await expect(input).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#search-results-content [role="option"]').first()).toBeVisible();
+});
+
+test('arrow keys move aria-activedescendant and aria-selected together', async ({ page }) => {
+    await openPalette(page);
+    await page.fill('#global-search-input', 'o');
+    const options = page.locator('#search-results-content [role="option"]');
+    await expect(options.nth(1)).toBeAttached();
+    const input = page.locator('#global-search-input');
+
+    await expect(input).toHaveAttribute('aria-activedescendant', /^palette-option-0$/);
+    await expect(options.nth(0)).toHaveAttribute('aria-selected', 'true');
+
+    await page.keyboard.press('ArrowDown');
+
+    await expect(input).toHaveAttribute('aria-activedescendant', 'palette-option-1');
+    await expect(options.nth(1)).toHaveAttribute('aria-selected', 'true');
+    await expect(options.nth(0)).toHaveAttribute('aria-selected', 'false');
+    // The option the input points at really exists.
+    expect(await page.locator('#palette-option-1').count()).toBe(1);
+});
+
+test('no results clears the active option and collapses the combobox', async ({ page }) => {
+    await openPalette(page);
+    await page.fill('#global-search-input', 'xqzwfbnm');
+    const input = page.locator('#global-search-input');
+    await expect(input).toHaveAttribute('aria-expanded', 'false');
+    await expect(input).not.toHaveAttribute('aria-activedescendant', /.+/);
+    await expect(page.locator('#search-results-status')).toHaveText('No matches found');
+});
+
+test('the result count is announced once the visitor searches', async ({ page }) => {
+    await openPalette(page);
+    const status = page.locator('#search-results-status');
+    await expect(status).toHaveText(''); // nothing announced just for opening
+    await page.fill('#global-search-input', 'theme');
+    await expect(status).toHaveText(/^\d+ results?$/);
+});
+
+test('category buttons expose which one is selected', async ({ page }) => {
+    await openPalette(page);
+    const all = page.locator('.search-category[data-category="all"]');
+    const projects = page.locator('.search-category[data-category="projects"]');
+    await expect(all).toHaveAttribute('aria-pressed', 'true');
+    await expect(projects).toHaveAttribute('aria-pressed', 'false');
+
+    await projects.click();
+
+    await expect(projects).toHaveAttribute('aria-pressed', 'true');
+    await expect(all).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('closing the palette removes its combobox state', async ({ page }) => {
+    await openPalette(page);
+    await page.keyboard.press('Escape');
+    const input = page.locator('#global-search-input');
+    await expect(input).toHaveAttribute('aria-expanded', 'false');
+    await expect(input).not.toHaveAttribute('aria-activedescendant', /.+/);
+    await expect(page.locator('#global-search-modal')).toHaveAttribute('aria-hidden', 'true');
+});
+
+test('Tab stays inside the dialog and skips the arrow-key-only options', async ({ page }) => {
+    await openPalette(page);
+    const focused = () =>
+        page.evaluate(() => {
+            const el = document.activeElement;
+            return {
+                inside: Boolean(el?.closest('#global-search-modal')),
+                role: el?.getAttribute('role'),
+                label: `${el?.tagName?.toLowerCase()}#${el?.id}.${el?.className}`,
+            };
+        });
+
+    const seen = [];
+    for (let i = 1; i <= 12; i++) {
+        await page.keyboard.press('Tab');
+        const now = await focused();
+        seen.push(now.label);
+        expect(
+            now.inside,
+            `Tab press ${i} moved focus outside the dialog. Order so far: ${seen.join(' -> ')}`
+        ).toBe(true);
+        expect(now.role, `Tab press ${i} landed on an option (${now.label})`).not.toBe('option');
+    }
+});
+
+test('a "Go to" result scrolls to the section, updates the URL and moves focus there', async ({
+    page,
+}) => {
+    await openPalette(page);
+    await page.locator('.search-category[data-category="content"]').click();
+    await page.fill('#global-search-input', 'contact');
+    await page.keyboard.press('Enter');
+
+    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+    await expect(page).toHaveURL(/#contact$/);
+    // Focus lands on the section, not back on whatever opened the palette.
+    await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+});
+
+test('a project result opens its case study on the site instead of leaving for GitHub', async ({
+    page,
+}) => {
+    const target = await page.evaluate(async () => {
+        const slug = document.querySelector('[data-case-study]')?.dataset.caseStudy;
+        const data = await (await fetch('/projects-data.json')).json();
+        const project = data.projects.find(
+            p => (p.github_repo?.split('/').pop() ?? p.name) === slug
+        );
+        return slug && project ? { slug, title: project.displayName || project.name } : null;
+    });
+    test.skip(!target, 'no project with a case study in current data');
+
+    await openPalette(page);
+    await page.locator('.search-category[data-category="projects"]').click();
+    await page.fill('#global-search-input', target.title);
+    await page.keyboard.press('Enter');
+
+    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+    await expect(page).toHaveURL(new RegExp(`#project/${target.slug}$`));
+});
+
+// ── Review follow-ups ─────────────────────────────────────────────────────────
+
+test('"Go to" from the palette closes an open case study before navigating', async ({ page }) => {
+    const card = page.locator('[data-case-study]').first();
+    await card.waitFor();
+    test.skip((await card.count()) === 0, 'no project with a case study in current data');
+    await card.click();
+    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+
+    await openPalette(page);
+    await page.locator('.search-category[data-category="content"]').click();
+    await page.fill('#global-search-input', 'contact');
+    await page.keyboard.press('Enter');
+
+    // The case study's trap and scroll lock must not outlive the navigation.
+    await expect(page.locator('#project-modal')).not.toHaveClass(/visible/);
+    await expect(page.locator('body')).not.toHaveClass(/modal-open/);
+    await expect(page).toHaveURL(/#contact$/);
+    await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+});
+
+test('running "Toggle theme" with the mouse hands focus back to the input', async ({ page }) => {
+    await openPalette(page);
+    await page.fill('#global-search-input', 'toggle theme');
+    await page.locator('.palette-item', { hasText: 'Toggle theme' }).first().click();
+
+    await expect(page.locator('#global-search-modal')).toHaveClass(/visible/); // stays open
+    await expect(page.locator('#global-search-input')).toBeFocused();
+
+    // Focus is back inside the trap, so Tab cannot walk out of the open dialog.
+    for (let i = 0; i < 4; i++) {
+        await page.keyboard.press('Tab');
+        expect(
+            await page.evaluate(() =>
+                Boolean(document.activeElement?.closest('#global-search-modal'))
+            )
+        ).toBe(true);
+    }
+});
+
+test('the toast live regions are in the page, empty, before any message', async ({ page }) => {
+    for (const id of ['app-notification', 'palette-toast']) {
+        const region = page.locator(`#${id}`);
+        await expect(region).toBeAttached();
+        await expect(region).toHaveAttribute('role', 'status');
+        await expect(region).toHaveText('');
+    }
+});

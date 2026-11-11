@@ -158,9 +158,15 @@ class KeyboardHelp {
         if (e.key !== 'Tab') {
             return;
         }
-        const focusable = this.panel.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
+        // `a[href]`, not `[href]`: the icons are <svg><use href="...">, which would count as
+        // focusable and end up "last", so Tab off the real last control never wrapped.
+        // An array, not the NodeList: NodeList has no .at(), so calling it threw on every Tab
+        // and the browser simply tabbed out of the dialog.
+        const focusable = [
+            ...this.panel.querySelectorAll(
+                'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            ),
+        ];
         if (focusable.length === 0) {
             return;
         }

@@ -11,8 +11,28 @@
  */
 
 import { motion } from './capabilities.js';
+import { whileVisible } from './utils/while-visible.js';
 
 const SCRAMBLE_CHARS = String.raw`!<>-_/[]{}—=+*^?#________`;
+
+/**
+ * Hide animated text from assistive technology and offer the real text in its place, so a
+ * screen reader never reads random glyphs or half-typed words.
+ * @param {HTMLElement} el - the element whose text animates
+ * @param {string} text - what it should read as
+ * @returns {() => void} undo, for when the animation has settled on the real text
+ */
+function hideFromScreenReaders(el, text) {
+    const stable = document.createElement('span');
+    stable.className = 'sr-only';
+    stable.textContent = text;
+    el.setAttribute('aria-hidden', 'true');
+    el.after(stable);
+    return () => {
+        el.removeAttribute('aria-hidden');
+        stable.remove();
+    };
+}
 
 /**
  * Animate a scramble→settle reveal of an element's text.
@@ -22,6 +42,7 @@ const SCRAMBLE_CHARS = String.raw`!<>-_/[]{}—=+*^?#________`;
  */
 function scrambleReveal(el, finalText, duration = 1100) {
     const chars = Array.from(finalText);
+    const restoreA11y = hideFromScreenReaders(el, finalText);
     // Scramble glyphs are narrower than the real name, which would reflow the
     // centred heading every frame (layout shift). Give each glyph a fixed-width
     // cell measured from the final text, hold the heading's height, and restore
@@ -73,6 +94,7 @@ function scrambleReveal(el, finalText, duration = 1100) {
         } else {
             el.textContent = finalText;
             block.style.minHeight = '';
+            restoreA11y();
         }
     }
     requestAnimationFrame(frame);
@@ -107,41 +129,70 @@ function reserveRoleHeight(container, roleEl, roles) {
 }
 
 /**
- * Rotating typewriter for a list of roles.
+ * Typewriter pass through a list of roles: type each, hold, delete it, and finally type the
+ * first role again and stop there. It runs once, not forever, so it never becomes a
+ * permanently moving element; it can be paused and resumed (see whileVisible below).
  * @param {HTMLElement} el
- * @param {string[]} roles
+ * @param {string[]} roles - at least two
+ * @param {{ onDone?: () => void }} [options]
+ * @returns {{ start: () => void, stop: () => void }}
  */
-function rotateRoles(el, roles) {
+function rotateRoles(el, roles, { onDone } = {}) {
     let roleIndex = 0;
     let charIndex = 0;
     let deleting = false;
+    let finishedRoles = 0; // roles typed and deleted so far
+    let timer = 0;
+    let started = false;
+    let done = false;
 
     const TYPE_SPEED = 55;
     const DELETE_SPEED = 30;
     const HOLD = 1800;
+    const GAP = 400;
 
     function tick() {
+        timer = 0;
         const current = roles[roleIndex];
-        if (deleting) {
-            charIndex--;
-        } else {
-            charIndex++;
-        }
+        charIndex += deleting ? -1 : 1;
         el.textContent = current.slice(0, charIndex);
 
         let delay = deleting ? DELETE_SPEED : TYPE_SPEED;
 
         if (!deleting && charIndex === current.length) {
+            if (finishedRoles === roles.length) {
+                // Back on the first role after one full pass: leave it on screen.
+                done = true;
+                onDone?.();
+                return;
+            }
             delay = HOLD;
             deleting = true;
         } else if (deleting && charIndex === 0) {
             deleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
-            delay = 400;
+            finishedRoles++;
+            delay = GAP;
         }
-        setTimeout(tick, delay);
+        timer = setTimeout(tick, delay);
     }
-    tick();
+
+    return {
+        start() {
+            if (done || timer) return;
+            if (started) {
+                timer = setTimeout(tick, TYPE_SPEED); // resume where it left off
+                return;
+            }
+            started = true;
+            el.textContent = '';
+            tick();
+        },
+        stop() {
+            clearTimeout(timer);
+            timer = 0;
+        },
+    };
 }
 
 /**
@@ -170,12 +221,22 @@ export function initHeroText({
         if (roles.length === 0) {
             return;
         }
-        if (motion.reduced) {
+        if (motion.reduced || roles.length < 2) {
             roleEl.textContent = roles[0];
         } else {
             reserveRoleHeight(roleEl.parentElement ?? roleEl, roleEl, roles);
-            roleEl.textContent = '';
-            rotateRoles(roleEl, roles);
+            const restoreA11y = hideFromScreenReaders(roleEl, roles[0]);
+            const caret = roleEl.parentElement?.querySelector('.hero-caret');
+            let stopWatching = () => {};
+            const rotation = rotateRoles(roleEl, roles, {
+                onDone: () => {
+                    restoreA11y();
+                    caret?.classList.add('is-done'); // an endlessly blinking caret is motion too
+                    stopWatching();
+                },
+            });
+            // Only animate while the hero is on screen and the tab is visible.
+            stopWatching = whileVisible(roleEl, rotation.start, rotation.stop);
         }
     }
 }
