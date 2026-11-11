@@ -1,10 +1,10 @@
 /**
- * Keyboard Help & Go-To Navigation
+ * Keyboard Help
  *
- * Drives the #keyboard-help <dialog> and makes its advertised shortcuts honest:
- *   - `?`            toggle this help dialog
- *   - `g` then h/a/p/c   jump to home / about / projects / contact
- * (Theme `t` and the `/` palette are wired elsewhere.)
+ * Drives the #keyboard-help <dialog>: `?` toggles it.
+ * (`g` then h/a/p/c, which the dialog lists, is handled in main.js: it needs nothing from this
+ * module, so it works before the module has loaded. Theme `t` and the `/` palette are wired
+ * elsewhere.)
  *
  * It is a native modal dialog, so the browser traps focus, closes it on Esc and puts focus back
  * where it was; this adds the close button and a click on the backdrop.
@@ -12,21 +12,9 @@
  * @author Matthew Anderson
  */
 
-const GO_TO = {
-    h: 'home',
-    a: 'about',
-    p: 'projects',
-    c: 'contact',
-};
-
-// How long a `g` prefix stays "armed" before it expires (ms).
-const GO_TO_WINDOW = 1200;
-
 class KeyboardHelp {
     panel = null;
     closeBtn = null;
-    goToArmed = false;
-    goToTimer = 0;
 
     init() {
         this.panel = document.getElementById('keyboard-help');
@@ -63,51 +51,7 @@ class KeyboardHelp {
         if (e.key === '?') {
             e.preventDefault();
             this.toggle();
-            return;
         }
-
-        // `g` then a letter → jump to a section.
-        if (this.goToArmed) {
-            const sectionId = GO_TO[e.key.toLowerCase()];
-            this.disarmGoTo();
-            if (sectionId) {
-                e.preventDefault();
-                // The page behind a modal dialog is inert and cannot take focus, so hand the
-                // keyboard back to the page before jumping
-                this.close();
-                this.goToSection(sectionId);
-            }
-            return;
-        }
-
-        if (e.key === 'g' || e.key === 'G') {
-            this.armGoTo();
-        }
-    }
-
-    armGoTo() {
-        this.goToArmed = true;
-        clearTimeout(this.goToTimer);
-        this.goToTimer = setTimeout(() => {
-            this.goToArmed = false;
-        }, GO_TO_WINDOW);
-    }
-
-    disarmGoTo() {
-        this.goToArmed = false;
-        clearTimeout(this.goToTimer);
-    }
-
-    goToSection(id) {
-        const section = document.getElementById(id);
-        if (!section) {
-            return;
-        }
-        const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-        section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-        // Move focus for keyboard/screen-reader users without forcing a visible outline.
-        section.setAttribute('tabindex', '-1');
-        section.focus({ preventScroll: true });
     }
 
     isOpen() {

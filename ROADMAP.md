@@ -100,7 +100,7 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | 10.3 | Home sections on the new system: work, about/experience/writing, contact + footer; inline contact form (#231) | ✅ 2026-11-11 |
 | 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | ✅ 2026-11-11 |
 | 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | ✅ 2026-11-11 |
-| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | ⬜            |
+| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | 🟡            |
 
 ## Decision Log
 
@@ -385,3 +385,32 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   **Not changed:** the app icons (`icons/icon-*.png|svg`) still use the old green; redrawing them is a design
   task, not a refactor. **10.5 is done; next is 10.6** (slim JS and CSS, performance budgets, delete `styles.css`,
   docs, cut over to `main`).
+- **2026-11-11** — Phase 10.6a (start sooner, load less up front; stacked on 10.5c). Measured first, on the home
+  page at 1440 and 390: **41 requests, 646 KB, 24 script files and 111 KB fetched before the app was ready**, and
+  `styles.css` is 94 KB of which about 11% matches anything on the home page (after opening the palette and help
+  and scrolling everything). No module is dead (every file is imported), so this is deferral, not deletion.
+  `main.js` awaited its optional modules one after another and registered the service worker last (#225); it
+  now runs a short critical path (service worker and global handlers first, then the theme, menu, navigation and
+  UI shell), fires `app:ready`, and starts every other feature on its own: the About stats when that band is near
+  (or after 4 s), the contact tabs and form when Contact is near (until then the form is a plain POST, which
+  works), the hero flow field, palette and keyboard help at idle, the Worker widgets at idle, and the old-link
+  redirect only when the address has a `#post/` or `#project/` hash. **Result: app ready at about 29 ms instead of
+  69; 9 script files and 49 KB fetched by then (was 24 and 111 KB); 21 requests and 362 KB by then (was 41 and
+  582 KB).** After everything has settled the totals are unchanged (42 requests, 25 files), because nothing was
+  removed: the saving is what a first visit has to wait for. A key pressed before the palette or help has loaded
+  still works: a small shim in `main.js` loads the module on demand and then opens it (Ctrl/Cmd+K, `/`, `?`, and
+  the nav search button), and steps aside once the module's own handlers exist. The dead scroll-progress code in
+  `initNavigation` is removed. `budgets.spec.js` fails if more than 12 script files or 70 KB are needed to be
+  ready, if an optional feature is fetched before ready, if the settled page exceeds 28 files, 130 KB or a
+  layout shift of 0.01, or if a shortcut used before its module loads stops working (mutation-checked: disabling
+  the shim fails three tests). **Still to do in 10.6:** retire `styles.css` (94 KB, the largest remaining cost),
+  then docs and the cut-over to `main`.
+- **2026-11-11** — Review follow-ups on 10.6a (three Copilot comments, all valid). **`whenNear`** used
+  `requestIdleCallback`'s `timeout` as its fallback, but that is a deadline: the contact form and About stats
+  started at the first idle moment whatever the page showed. It is a real timer now, and a test fails if the form's
+  script loads while Contact is far away. **`g` then h/a/p/c** lived in the deferred keyboard-help module, so a
+  `g c` pressed while it downloaded lost both keys (or the prefix, if the module landed between them). It needs
+  nothing from the module, so it moved to `main.js` (`installGlobalShortcuts`) and works from the first moment; the
+  1.2 s prefix window is tested, including a module arriving between the two keys. **`?` over the palette:** a `?`
+  pressed while help loaded could open it on top of the palette; the shim now checks for an open dialog before
+  requesting help and again when it arrives (a mutation without the second check fails a test).
