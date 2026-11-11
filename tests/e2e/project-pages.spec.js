@@ -246,3 +246,97 @@ test('the project page does not need the legacy stylesheet: icons, skip link and
     expect(iconSize).toBeGreaterThan(0);
     expect(iconSize).toBeLessThan(40);
 });
+
+test.describe('card-to-page transition names', () => {
+    /** The names `[data-vt]` elements have right now. */
+    const currentNames = page =>
+        page.evaluate(() =>
+            [...document.querySelectorAll('[data-vt]')]
+                .map(el => getComputedStyle(el).viewTransitionName)
+                .filter(name => name !== 'none')
+        );
+
+    // Records, per arriving page, the names it had once its transition was ready to run (or
+    // 'skipped'). sessionStorage carries it across the navigations.
+    test.beforeEach(async ({ page }) => {
+        await page.addInitScript(() => {
+            const record = value => {
+                const seen = JSON.parse(sessionStorage.getItem('vt') ?? '[]');
+                sessionStorage.setItem('vt', JSON.stringify([...seen, value]));
+            };
+            globalThis.addEventListener('pagereveal', event => {
+                if (!event.viewTransition) return;
+                event.viewTransition.ready.then(
+                    () =>
+                        record(
+                            [...document.querySelectorAll('[data-vt]')]
+                                .map(el => getComputedStyle(el).viewTransitionName)
+                                .filter(name => name !== 'none')
+                                .sort()
+                        ),
+                    () => record('skipped')
+                );
+            });
+        });
+    });
+
+    const recorded = page => page.evaluate(() => JSON.parse(sessionStorage.getItem('vt') ?? '[]'));
+
+    test('are given for the morph, then taken off again', async ({ page }) => {
+        await page.goto('/');
+        await page
+            .locator('.lead-card[data-project="health"] a[href="/projects/health/"]')
+            .first()
+            .click();
+        await page.waitForURL('**/projects/health/');
+
+        // While the transition ran, the page's image and title were named...
+        await expect
+            .poll(async () => (await recorded(page)).at(-1))
+            .toEqual(['project-media', 'project-title']);
+        // ...and once it is over nothing keeps a name (a theme switch would split it out)
+        await expect.poll(() => currentNames(page)).toEqual([]);
+    });
+
+    test('never leave two cards sharing a name after going back and opening another', async ({
+        page,
+    }) => {
+        const errors = [];
+        page.on('pageerror', error => errors.push(error.message));
+
+        await page.goto('/');
+        const links = page.locator('#projects [data-project] a[href^="/projects/"]');
+        const first = await links.nth(0).getAttribute('href');
+        const second = (
+            await links.evaluateAll(anchors => anchors.map(a => a.getAttribute('href')))
+        ).find(href => href !== first);
+
+        await page.locator(`#projects a[href="${first}"]`).first().click();
+        await page.waitForURL(`**${first}`);
+        await page.goBack();
+        await page.waitForURL('**/');
+        await expect.poll(() => currentNames(page)).toEqual([]);
+
+        await page.locator(`#projects a[href="${second}"]`).first().click();
+        await page.waitForURL(`**${second}`);
+        await expect
+            .poll(async () => (await recorded(page)).at(-1))
+            .toEqual(['project-media', 'project-title']);
+        expect(await recorded(page)).not.toContain('skipped');
+        expect(errors).toEqual([]);
+    });
+
+    test('are cleared when a page comes back from the back/forward cache', async ({ page }) => {
+        await page.goto('/');
+        await page.evaluate(() => {
+            document.querySelector('[data-vt="media"]').style.viewTransitionName = 'project-media';
+        });
+        expect(await currentNames(page)).toEqual(['project-media']);
+
+        await page.evaluate(() => {
+            const restored = new globalThis.PageTransitionEvent('pageshow', { persisted: true });
+            globalThis.dispatchEvent(restored);
+        });
+        expect(await currentNames(page)).toEqual([]);
+    });
+});

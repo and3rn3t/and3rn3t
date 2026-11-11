@@ -27,12 +27,32 @@
         }
     };
 
-    /** Name the image and title inside `root` for the transition. */
+    /** Take every name off, so nothing outside a navigation is captured separately. */
+    const clearNames = () => {
+        for (const element of document.querySelectorAll('[data-vt]')) {
+            element.style.viewTransitionName = '';
+        }
+    };
+
+    /**
+     * Name the image and title inside `root` for the transition. Two elements must never share a
+     * name (the browser skips the whole transition), so start from none.
+     */
     const nameWithin = root => {
+        clearNames();
         for (const element of root.querySelectorAll('[data-vt]')) {
             const name = NAMES[element.dataset.vt];
             if (name) element.style.viewTransitionName = name;
         }
+    };
+
+    /**
+     * Take the names off once `transition` is over, however it ends. Handlers go on both sides of
+     * `then` because `finished` rejects when a transition is skipped, and a rejection nobody
+     * handles is an error in the console.
+     */
+    const clearWhenSettled = transition => {
+        transition.finished.then(clearNames, clearNames);
     };
 
     /**
@@ -56,6 +76,7 @@
         // Only a project's card <-> its page; any other navigation just cross-fades
         if (projectSlug(from) ? !projectSlug(to) : projectSlug(to)) {
             nameFor(projectSlug(to) ?? projectSlug(from));
+            clearWhenSettled(event.viewTransition);
         }
     });
 
@@ -66,6 +87,12 @@
         if (!from) return;
         if (projectSlug(location.href) ? !projectSlug(from) : projectSlug(from)) {
             nameFor(projectSlug(from) ?? projectSlug(location.href));
+            clearWhenSettled(event.viewTransition);
         }
+    });
+
+    // Coming back to a page from the back/forward cache: it was frozen with its names on
+    addEventListener('pageshow', event => {
+        if (event.persisted) clearNames();
     });
 })();
