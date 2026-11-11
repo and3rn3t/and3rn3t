@@ -3431,6 +3431,53 @@ body.dark-theme .palette-item-icon {
   transform: translateX(-50%) translateY(0);
 }
 
+/* App notification toast (ui.js showNotification: "You are offline", "Site updated", ...).
+   Backgrounds use the -dark semantic tokens: white text is 9:1 or better on each, where
+   the old inline colours were 2.2-3.8:1 (WCAG AA needs 4.5:1). */
+.app-toast {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  z-index: var(--z-tooltip);
+  max-width: min(22rem, calc(100vw - var(--space-8)));
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--info-dark);
+  color: var(--text-white);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--font-size-sm);
+  opacity: 0;
+  transform: translateX(100%);
+  pointer-events: none;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.app-toast.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.app-toast--success {
+  background: var(--success-dark);
+}
+
+.app-toast--error {
+  background: var(--error-dark);
+}
+
+.app-toast--warning {
+  background: var(--warning-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-toast {
+    transform: none;
+    transition: opacity var(--transition-fast);
+  }
+}
+
 .search-results-empty {
   text-align: center;
   padding: var(--space-12) var(--space-8);
