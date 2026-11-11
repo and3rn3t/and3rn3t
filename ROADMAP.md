@@ -92,15 +92,15 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
 Plan: pre-render the curated content, then a new visual identity, real project pages and a
 slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesign` branch.
 
-| #    | Item                                                                                         | Status        |
-| ---- | -------------------------------------------------------------------------------------------- | ------------- |
-| 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                  | ✅ 2026-11-11 |
-| 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247    | ✅ 2026-11-11 |
-| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card | 🟡            |
-| 10.3 | Home sections on the new system: work ✅, about/experience/writing ✅, contact + footer next | 🟡            |
-| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                      | ⬜            |
-| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                    | ⬜            |
-| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                               | ⬜            |
+| #    | Item                                                                                                          | Status        |
+| ---- | ------------------------------------------------------------------------------------------------------------- | ------------- |
+| 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                                   | ✅ 2026-11-11 |
+| 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247                     | ✅ 2026-11-11 |
+| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card                  | 🟡            |
+| 10.3 | Home sections on the new system: work, about/experience/writing, contact + footer; inline contact form (#231) | ✅ 2026-11-11 |
+| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | ⬜            |
+| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | ⬜            |
+| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | ⬜            |
 
 ## Decision Log
 
@@ -285,3 +285,22 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   no-data case caught; a missing number must stay a dash, because "0 active repositories" would be a false
   statement; the API client retries with backoff, so "no data" takes a few seconds to show. The phone chart
   caption now says "the last 20 weeks" to match what it shows.
+- **2026-11-11** — Phase 10.3c (Contact + footer, on `redesign`): finishes 10.3, so the home page's own markup is
+  entirely the new system. Contact is direct ways to reach me (email with a copy button, GitHub, LinkedIn,
+  résumé) beside a panel with the message form and the guestbook tab. The form is now a progressive
+  enhancement (`modules/contact-form.js`, closes #231): without JS it is a plain POST that redirects to
+  `#message-sent`, which CSS `:target` turns into a confirmation; with JS it validates inline, posts with
+  `fetch` and `Accept: application/json`, shows the outcome in place, and marks the button busy. The button
+  uses `aria-disabled`, not `disabled`, so a keyboard user keeps focus, and a second submit in flight is
+  ignored (a test fails with three requests if the guard is removed). A failed send keeps what was typed and
+  offers the email address. `_next` is the production URL (Formspree needs an absolute one), so a no-JS submit
+  from a preview redirects to production; that is accepted. The footer replaces the floating back-to-top
+  button and the top loading bar (deleted) with a "Back to top" link, view count, source and RSS links; its
+  line says "Plain HTML, CSS and JavaScript, and a Cloudflare Worker" because the old "Vite" was dev-only.
+  The guestbook's JS-rendered classes moved to the new names, and its Turnstile theme now reads
+  `<html data-theme>`. New `--danger` token (6:1+ in both themes). The per-theme axe scans now also cover the
+  form with its errors showing, and the submit button's hover. **Still on legacy CSS (the 10.4-10.6 list):**
+  the project case-study modal and its `.project-link` buttons (10.4, replaced by project pages), the command
+  palette, keyboard help and toasts (10.5), and the `.skip-link` and `.sr-only` utilities, which must be
+  ported into `core.css` before `styles.css` is deleted in 10.6. Playwright note: `locator.click()` waits out
+  an `aria-disabled` element, so tests that click a busy button use `force: true`.
