@@ -71,6 +71,64 @@ test.describe('the GitHub band', () => {
         await expect(page.locator('#contribution-graph')).toBeHidden();
     });
 
+    test('a user with no repositories has zero active, not a dash', async ({ page }) => {
+        // An empty list is known data (getRepositories() throws when it is unavailable), so
+        // the count is a real zero; only the missing calendar stays a dash.
+        await page.route('**/github-data.json', async route => {
+            const response = await route.fetch();
+            const data = await response.json();
+            data.repositories = [];
+            data.contributions = null;
+            await route.fulfill({ response, json: data });
+        });
+        await page.goto('/');
+        await expect(page.locator('#github-band')).toBeVisible();
+        await expect(page.locator('[data-stat="active-repos"]')).toHaveText('0');
+        await expect(page.locator('[data-stat="contributions"]')).toHaveText('\u2014');
+    });
+
+    test('names the chart without claiming a time range, since the range depends on the screen', async ({
+        page,
+    }) => {
+        // A phone shows 20 weeks and a wide screen a year; an explicit label overrides the
+        // visible caption for screen readers, so it must be true of both.
+        for (const width of [390, 1280]) {
+            await page.setViewportSize({ width, height: 900 });
+            await page.goto('/');
+            await page.waitForSelector('.contrib__figure', { state: 'attached' });
+            const label = await page.locator('.contrib__figure').getAttribute('aria-label');
+            expect(label, `at ${width}px`).not.toMatch(/year|\d+ weeks|[\d,]{3,}/i);
+        }
+    });
+
+    // The chart arrives after the page, from data that can be late. Its space has to be
+    // reserved from its own geometry (rows of square cells), which depends on the width, so
+    // check across widths, including those just under the 40rem breakpoint where a fixed
+    // reservation was too small.
+    for (const width of [360, 480, 540, 600, 639, 640, 1024, 1440]) {
+        test(`the band does not change height when late data arrives, at ${width}px`, async ({
+            page,
+        }) => {
+            await page.setViewportSize({ width, height: 900 });
+            await page.route('**/github-data.json', async route => {
+                await new Promise(resolve => setTimeout(resolve, 1200));
+                await route.continue();
+            });
+            await page.goto('/', { waitUntil: 'domcontentloaded' });
+            const height = () =>
+                page.evaluate(() =>
+                    Math.round(
+                        document.getElementById('github-band').getBoundingClientRect().height
+                    )
+                );
+            await page.waitForTimeout(400);
+            const before = await height();
+            await page.waitForSelector('#contribution-graph .contrib__cell', { state: 'attached' });
+            await page.waitForTimeout(200);
+            expect(await height()).toBe(before);
+        });
+    }
+
     test('the numbers arriving does not move anything below them', async ({ page }) => {
         // The slots and the chart's space are reserved in the markup, so filling them in
         // changes no layout.

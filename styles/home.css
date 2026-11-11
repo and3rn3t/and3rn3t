@@ -607,9 +607,22 @@
     line-height: var(--line-height-snug);
   }
 
-  /* Reserved, so the chart arriving doesn't move what is below it */
+  /* The chart's space is reserved from the chart's own geometry, so it arriving moves nothing.
+     The wrapper is the size container (a container unit can't size the element that is the
+     container), and the chart reserves seven rows of square cells plus the caption:
+     rows / columns of the width, plus a fixed allowance for the caption line. A phone shows 20
+     weeks, a wide screen 53 (see .contrib__cell--older); keep those numbers in step with
+     MOBILE_HEATMAP_WEEKS in modules/ui.js. */
+  .github-band__chart {
+    container-type: inline-size;
+  }
+
+  .github-band__chart[hidden] {
+    display: none;
+  }
+
   .contrib {
-    min-height: 10rem;
+    min-height: calc(35cqi + 2rem); /* 7 / 20 of the width */
   }
 
   .contrib__figure {
@@ -682,6 +695,10 @@
   }
 
   @media (min-width: 40rem) {
+    .contrib {
+      min-height: calc(13.2cqi + 2rem); /* 7 / 53 of the width */
+    }
+
     .contrib__grid .contrib__cell {
       grid-column: var(--week);
     }

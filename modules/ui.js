@@ -198,32 +198,24 @@ export class UIManager {
                 githubAPI.getContributions(),
             ]);
 
-            // Show only what we actually have: "0 active repositories" for missing data would be
-            // a false statement, so a missing number stays a dash, and no data at all hides the band.
-            let hasData = false;
-
-            if (repos.length > 0) {
-                // Forks and archived repos aren't "active": they aren't mine to push to
-                const active = repos.filter(
-                    repo =>
-                        !repo.fork &&
-                        !repo.archived &&
-                        Date.now() - new Date(repo.pushed_at).getTime() < ACTIVE_WINDOW_MS
-                ).length;
-                this.setStat('active-repos', active);
-                hasData = true;
-            }
+            // getRepositories() throws when the data is unavailable, so an array, even an empty
+            // one, is known data: a user with no public repositories really has none active.
+            // The contribution calendar is the part that can be missing, and stays a dash.
+            const active = repos.filter(
+                repo =>
+                    !repo.fork &&
+                    !repo.archived &&
+                    Date.now() - new Date(repo.pushed_at).getTime() < ACTIVE_WINDOW_MS
+            ).length;
+            this.setStat('active-repos', active);
 
             if (Number.isFinite(contributions?.total)) {
                 this.setStat('contributions', contributions.total);
-                hasData = true;
             }
             this.renderContributionHeatmap(
                 contributions,
                 document.getElementById('contribution-graph')
             );
-
-            if (!hasData) band.hidden = true;
             debug.log('[UI] GitHub stats loaded');
         } catch (error) {
             debug.warn('[UI] Failed to load GitHub stats:', error);
@@ -245,7 +237,8 @@ export class UIManager {
         if (!container) return;
 
         if (!Array.isArray(contributions?.weeks) || contributions.weeks.length === 0) {
-            container.hidden = true;
+            // Hide the wrapper that reserves the chart's space too, so no empty gap is left
+            (container.closest('.github-band__chart') ?? container).hidden = true;
             return;
         }
 
@@ -270,9 +263,8 @@ export class UIManager {
             }
         });
 
-        const total = (contributions.total ?? 0).toLocaleString();
         container.innerHTML = `
-            <figure class="contrib__figure" role="img" aria-label="${total} contributions in the last year, week by week">
+            <figure class="contrib__figure" role="img" aria-label="Contribution activity, week by week">
                 <div class="contrib__grid">${cells.join('')}</div>
                 <figcaption class="contrib__foot">
                     <span class="contrib__range contrib__range--year">The last year, week by week</span>
