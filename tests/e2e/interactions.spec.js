@@ -66,14 +66,14 @@ test('body does not have dark-theme class after switching to light', async ({ pa
 // ── `?` keyboard help ─────────────────────────────────────────────────────────
 
 test('pressing "?" opens the keyboard help panel', async ({ page }) => {
-    await page.locator('body').click();
+    await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
     await page.keyboard.press('?');
     const panel = page.locator('#keyboard-help');
     await expect(panel).toBeVisible({ timeout: 2000 });
 });
 
 test('Esc closes the keyboard help panel', async ({ page }) => {
-    await page.locator('body').click();
+    await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
     await page.keyboard.press('?');
     const panel = page.locator('#keyboard-help');
     await expect(panel).toBeVisible({ timeout: 2000 });
@@ -86,7 +86,7 @@ test('Esc closes the keyboard help panel', async ({ page }) => {
 test('"g" then "h" scrolls to the hero/home section', async ({ page }) => {
     // First scroll down so we're not already at top.
     await page.evaluate(() => window.scrollTo(0, 500));
-    await page.locator('body').click();
+    await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
     await page.keyboard.press('g');
     await page.keyboard.press('h');
     // Wait a tick for smooth scroll to begin.

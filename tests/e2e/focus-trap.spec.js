@@ -44,7 +44,7 @@ test.describe('keyboard shortcuts panel', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
         await page.waitForFunction(() => Boolean(globalThis.appState?.managers?.keyboardHelp));
-        await page.locator('body').click();
+        await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
         await page.keyboard.press('?');
         await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '');
         await expect(page.locator('#keyboard-help-close')).toBeFocused();
