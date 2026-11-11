@@ -779,6 +779,11 @@ body {
   }
 }
 
+/* The role typewriter stops after one pass; its caret stops with it. */
+.hero-caret.is-done {
+  display: none;
+}
+
 .hero-description {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
