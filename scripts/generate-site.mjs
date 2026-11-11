@@ -1,26 +1,40 @@
 /**
- * Generate static post pages from posts-data.json.
+ * Generate the site's pre-rendered content from its data files.
  *
- *   posts/<slug>/index.html  — one indexable page per post (own title, description,
+ *   index.html               - the project cards, experience timelines and writing cards
+ *                              are written between <!-- gen:NAME --> markers, so the page
+ *                              reads fine before (or without) JavaScript
+ *   posts/<slug>/index.html  - one indexable page per post (own title, description,
  *                              canonical, Open Graph, BlogPosting JSON-LD)
- *   feed.xml                 — RSS feed (links and ids point at the post pages)
- *   sitemap.xml              — the "Blog Posts" block is rewritten; the rest is left alone
+ *   feed.xml                 - RSS feed (links and ids point at the post pages)
+ *   sitemap.xml              - the "Blog Posts" block is rewritten; the rest is left alone
  *
- * Production serves raw source from GitHub Pages, so the output is committed. CI runs
- * this script and fails if it produces a diff (see quality.yml).
+ * Inputs: projects-data.json, experience-data.json, posts-data.json and, for which repos are
+ * starred, github-data.json. Live numbers (stars, last push, stats) are NOT baked in: the
+ * service worker's build id hashes every *.html file, so a page that changed daily would
+ * evict every visitor's cache daily. The browser fills those in (modules/projects.js).
  *
- * Usage: pnpm generate:posts
+ * Production serves raw source from GitHub Pages, so the output is committed. CI runs this
+ * script and fails if it produces a diff (see quality.yml); the daily data workflow runs it
+ * too, because a newly starred repo changes the project list.
+ *
+ * Usage: pnpm generate:site
  */
 
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml } from '../modules/utils/html.js';
+import { icon } from '../modules/utils/icon.js';
+import { projectView, selectProjects } from '../modules/utils/projects.js';
+import { renderTimeline } from './templates/experience.mjs';
+import { renderProjects } from './templates/projects.mjs';
+import { longDate, minutes } from './templates/shared.mjs';
+import { renderBlogCards } from './templates/writing.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://andernet.dev';
 const AUTHOR = 'Matthew Anderson';
-const READING_SPEED_WPM = 200;
 const CF_BEACON_TOKEN = '883fb1c6a2c744d4b745475d92f474bf';
 
 const { posts } = JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'));
@@ -32,32 +46,7 @@ const esc = escapeHtml;
 const postUrl = post => `${SITE}/posts/${post.slug}/`;
 const postPath = post => `/posts/${post.slug}/`;
 
-const minutes = post =>
-  post.readingMinutes ??
-  Math.max(
-    1,
-    Math.round(
-      post.content
-        .replace(/<[^>]*>/g, ' ')
-        .trim()
-        .split(/\s+/).length / READING_SPEED_WPM
-    )
-  );
-
-const longDate = dateStr => {
-  const [year, month, day] = dateStr.split('-').map(Number);
-  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC',
-  });
-};
-
 const rfc822 = dateStr => new Date(`${dateStr}T00:00:00Z`).toUTCString().replace('GMT', '+0000');
-
-const icon = name =>
-  `<svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#${name}"></use></svg>`;
 
 // JSON for an inline <script>: keep "<" from ever closing the tag
 const jsonLd = data => JSON.stringify(data, null, 2).replaceAll('<', '\\u003c');
@@ -286,3 +275,46 @@ const urls = posts
   .join('\n');
 writeFileSync(sitemapPath, `${sitemap.slice(0, from)}${start}${urls}\n${sitemap.slice(to)}`);
 console.log('  wrote sitemap.xml');
+
+// ── index.html (pre-rendered sections) ───────────────────────────────────────
+const readJson = file => JSON.parse(readFileSync(join(ROOT, file), 'utf8'));
+
+/**
+ * Replace what sits between `<!-- gen:NAME -->` and `<!-- /gen:NAME -->`, keeping the markers
+ * (and their indentation) so the next run finds them again.
+ */
+function fillBlock(html, name, content) {
+  const open = `<!-- gen:${name} -->`;
+  const close = `<!-- /gen:${name} -->`;
+  const from = html.indexOf(open);
+  const to = html.indexOf(close);
+  if (from === -1 || to === -1 || to < from) {
+    throw new Error(`index.html is missing the ${open} / ${close} markers`);
+  }
+  const indent = html.slice(html.lastIndexOf('\n', from) + 1, from);
+  return `${html.slice(0, from)}${open}\n${indent}${content}\n${indent}${close}${html.slice(to + close.length)}`;
+}
+
+const projectsData = readJson('projects-data.json');
+const experienceData = readJson('experience-data.json');
+const githubData = readJson('github-data.json');
+
+const views = selectProjects(
+  projectsData,
+  githubData.repositories,
+  githubData.selfStarredRepoNames
+).map(({ repo, metadata }) => projectView(repo, metadata));
+const { cards, moreButton, extraCount } = renderProjects(views);
+
+const indexPath = join(ROOT, 'index.html');
+let index = readFileSync(indexPath, 'utf8');
+index = fillBlock(index, 'projects', cards);
+index = fillBlock(index, 'projects-more', moreButton);
+index = fillBlock(index, 'experience', renderTimeline(experienceData.experience, 'work'));
+index = fillBlock(index, 'education', renderTimeline(experienceData.education, 'edu'));
+index = fillBlock(index, 'writing', renderBlogCards(posts));
+writeFileSync(indexPath, index);
+console.log(
+  `  wrote index.html (${views.length} projects, ${extraCount} behind "Show more", ` +
+    `${posts.length} posts)`
+);

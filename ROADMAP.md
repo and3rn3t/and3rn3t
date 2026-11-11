@@ -87,6 +87,21 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
 | 8.5 | Static post pages (`/posts/<slug>/`), feed and sitemap generated from `posts-data.json`                       | ✅ 2026-10-09 |
 | 8.6 | Project screenshots in cards/case studies; View Transitions for modal and post navigation                     | ⬜            |
 
+## Phase 10 — Signature redesign
+
+Plan: pre-render the curated content, then a new visual identity, real project pages and a
+slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesign` branch.
+
+| #    | Item                                                                                         | Status        |
+| ---- | -------------------------------------------------------------------------------------------- | ------------- |
+| 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                  | ✅ 2026-11-11 |
+| 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS           | 🟡            |
+| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card | ⬜            |
+| 10.3 | Home sections on the new system; inline contact form                                         | ⬜            |
+| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                      | ⬜            |
+| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                    | ⬜            |
+| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                               | ⬜            |
+
 ## Decision Log
 
 - **2026-06-13** — Static-first: prefer extending `update-github-data.yml` over a Worker
@@ -218,3 +233,14 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
   `scripts/og-card.mjs`; `pnpm generate:og` renders just `og/default.png`. Per-project share
   cards would need real, crawlable `/projects/<slug>/` pages first (like the blog posts), so 6.5
   (a Rust WASM rasterizer for `/og`) is dropped with the route.
+- **2026-11-11** — Phase 10.1: the home page's curated content (project cards, experience,
+  education, writing) is pre-rendered into `index.html` by `scripts/generate-site.mjs` (formerly
+  `generate-posts.mjs`), so it no longer waits on JavaScript or shows spinners. Only stable facts
+  are baked in; stars, last push and the "Active" badge are slots filled by `modules/projects.js`,
+  because `pages.yml` hashes `*.html` into the service worker's cache id and a page that changed
+  daily would evict every visitor's cache daily. Project order is now curated (`featured: <rank>`
+  in `projects-data.json`) instead of "last pushed", for the same reason. The scroll-reveal
+  `.animate-on-scroll` gate (sections started at `opacity: 0` until a script ran) is gone;
+  desktop keeps the CSS `animation-timeline: view()` reveal, phones get none beyond the card
+  entrance. The daily data workflow re-runs the generator, because a newly starred repo changes
+  the list.

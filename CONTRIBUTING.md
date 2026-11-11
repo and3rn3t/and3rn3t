@@ -45,7 +45,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`
 - CSS uses the design tokens in `styles.css`; `pnpm lint:css` rejects raw spacing and type values.
   Details are in [`CLAUDE.md`](CLAUDE.md#css-guidelines).
 - Generated files (`github-data.json`, `og/default.png`, `posts/`, `feed.xml`) are produced by scripts and
-  CI. To add or edit a post, change `posts-data.json` and run `pnpm generate:posts`.
+  CI. To add or edit a post, change `posts-data.json` and run `pnpm generate:site`.
 
 ## Conduct
 
