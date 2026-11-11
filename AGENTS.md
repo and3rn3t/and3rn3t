@@ -66,3 +66,13 @@ pnpm deploy:worker   # only when asked
 - `ROADMAP.md` tracks planned work.
 - Conventional commits: `type(scope): description`.
 - Don't commit or deploy unless explicitly asked.
+
+## Startup and budgets
+
+- `main.js` runs a short critical path (service worker and global handlers, theme, menu, navigation, the UI
+  shell), fires `app:ready`, then starts every other feature on its own: near-viewport features with
+  `whenNear`, the rest with `whenIdle`. **Do not `await` one optional feature before starting another**, and
+  do not import a feature statically from `main.js`. A feature must also work, or degrade, before its module has
+  loaded (the contact form is a plain POST; palette and help keys go through `installEarlyShortcuts`).
+- `tests/e2e/budgets.spec.js` holds the budgets: by `app:ready`, at most 12 script files and 70 KB; settled, at
+  most 28 files, 130 KB and 0.01 CLS. Measure before changing them (the history is in `ROADMAP.md`).
