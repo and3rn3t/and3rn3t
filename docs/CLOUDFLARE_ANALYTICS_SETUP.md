@@ -35,5 +35,5 @@ started during page parse, not the `load` event):
 - **No beacon request:** an ad or tracking blocker is the usual cause. Test in a clean profile.
 - **No data in the dashboard:** the token is tied to the registered hostname. `localhost` and
   preview URLs report nothing.
-- **Changing the token:** edit it in `index.html` and in `scripts/generate-posts.mjs`
-  (`CF_BEACON_TOKEN`), run `pnpm generate:posts`, and update the two allowlists above.
+- **Changing the token:** edit it in `index.html` and in `scripts/generate-site.mjs`
+  (`CF_BEACON_TOKEN`), run `pnpm generate:site`, and update the two allowlists above.

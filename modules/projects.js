@@ -1,44 +1,23 @@
 /**
  * Projects Module
- * Project loading, display, filtering, and project card management
+ *
+ * The project cards are pre-rendered into index.html by scripts/generate-site.mjs, so they
+ * are on the page before any JavaScript runs. This module makes them live:
+ *   - fills in the star count, "last pushed" time and "Active" badge from the cached GitHub data
+ *   - registers each project's case study with the modal and opens it from the card button
+ *   - runs the "Show more" expander
  */
 
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { projectModal } from './project-modal.js';
 import { loadJSON } from './utils/data.js';
-import { escapeHtml } from './utils/html.js';
-import { icon } from './utils/icon.js';
+import { isRecentlyPushed, projectView, relativeTime, selectProjects } from './utils/projects.js';
 
-// Project display configuration
-const CONFIG = {
-    cardAnimationDelay: 100,
-    fallbackDataPath: '/projects-data.json',
-};
-
-const LANGUAGE_COLORS = {
-    TypeScript: '#2b7489',
-    JavaScript: '#f1e05a',
-    Swift: '#ffac45',
-    Python: '#3572A5',
-    HTML: '#e34c26',
-    CSS: '#563d7c',
-    Shell: '#89e051',
-    Go: '#00ADD8',
-    Rust: '#dea584',
-    Java: '#b07219',
-    Kotlin: '#F18E33',
-    Ruby: '#701516',
-    'C++': '#f34b7d',
-    'C#': '#178600',
-    SCSS: '#c6538c',
-    Vue: '#41b883',
-};
+const DATA_PATH = '/projects-data.json';
 
 export class ProjectsManager {
     constructor() {
-        this.projects = [];
-        this.projectsData = null;
         this.container = null;
         this.moreButton = null;
         this.extraCount = 0;
@@ -65,141 +44,85 @@ export class ProjectsManager {
             projectModal.open(trigger.dataset.caseStudy);
         });
 
-        // Load projects metadata
-        await this.loadProjectsMetadata();
+        this.setupShowMore();
+        this.expandForDeepLink();
 
-        // Load and render projects
-        await this.loadProjects();
+        await this.hydrate();
 
         this.isInitialized = true;
         debug.log('[Projects] Projects manager initialized');
     }
 
-    async loadProjectsMetadata() {
-        this.projectsData = await loadJSON(CONFIG.fallbackDataPath);
-        if (!this.projectsData) {
-            debug.warn('[Projects] Could not load projects-data.json');
-        }
-    }
-
-    async loadProjects() {
-        if (!this.container) return;
-
-        // Build a map of all repos from the GitHub data cache
-        const repoMap = new Map();
-        let selfStarredNames = null;
+    /**
+     * The curated write-ups plus the cached GitHub data. Either can be missing; the cards
+     * keep their pre-rendered content when it is.
+     */
+    async loadSources() {
+        const projectsData = await loadJSON(DATA_PATH);
+        if (!projectsData) debug.warn('[Projects] Could not load projects-data.json');
 
         try {
             const cachedData = await githubAPI.loadCachedGitHubData();
-            const repos =
-                cachedData?.repositories ?? (await githubAPI.getRepositories('pushed', 100));
-            for (const repo of repos) {
-                repoMap.set(repo.name, repo);
-            }
-            // Starred list from workflow — the primary curation signal
-            if (
-                Array.isArray(cachedData?.selfStarredRepoNames) &&
-                cachedData.selfStarredRepoNames.length
-            ) {
-                selfStarredNames = new Set(cachedData.selfStarredRepoNames);
-            }
-            debug.log(
-                `[Projects] ${repoMap.size} repos loaded, starred signal: ${selfStarredNames ? [...selfStarredNames].join(', ') : 'unavailable (fallback to curated list)'}`
-            );
+            return {
+                projectsData,
+                repositories:
+                    cachedData?.repositories ?? (await githubAPI.getRepositories('pushed', 100)),
+                starredNames: cachedData?.selfStarredRepoNames,
+            };
         } catch (error) {
-            debug.warn('[Projects] GitHub API unavailable, falling back to metadata only:', error);
+            debug.warn(
+                '[Projects] GitHub data unavailable, cards keep their static content:',
+                error
+            );
+            return { projectsData, repositories: [], starredNames: null };
         }
-
-        // Build metadata lookup from projects-data.json
-        const metaMap = new Map();
-        for (const m of this.projectsData?.projects ?? []) {
-            metaMap.set(m.name, m);
-            // Also index by github_repo basename (e.g. "and3rn3t/health" → "health")
-            if (m.github_repo) {
-                const basename = m.github_repo.split('/').pop();
-                if (basename !== m.name) metaMap.set(basename, m);
-            }
-        }
-
-        if (selfStarredNames?.size) {
-            // PRIMARY PATH: self-starred repos drive the list
-            this.projects = [...selfStarredNames]
-                .map(name => ({
-                    metadata: metaMap.get(name) ?? null,
-                    repo: repoMap.get(name) ?? null,
-                }))
-                .filter(({ repo, metadata }) => repo || metadata); // drop ghosts
-        } else {
-            // FALLBACK: static curated list from projects-data.json
-            const curatedProjects = this.projectsData?.projects;
-            if (!curatedProjects?.length) {
-                debug.warn('[Projects] No curated projects found in metadata');
-                return;
-            }
-            this.projects = curatedProjects.map(metadata => ({
-                metadata,
-                repo: repoMap.get(metadata.name) ?? null,
-            }));
-        }
-
-        // Featured projects are pinned from projects-data.json even when not starred.
-        const listed = new Set(this.projects.map(p => p.metadata?.name ?? p.repo?.name));
-        for (const metadata of this.projectsData?.projects ?? []) {
-            if (metadata.featured && !listed.has(metadata.name)) {
-                this.projects.push({ metadata, repo: repoMap.get(metadata.name) ?? null });
-            }
-        }
-
-        this.renderProjects();
-        debug.log(`[Projects] Rendered ${this.projects.length} projects`);
     }
 
-    renderProjects() {
-        if (!this.container) return;
+    /**
+     * Fill in the live parts of the pre-rendered cards and register their case studies.
+     */
+    async hydrate() {
+        const { projectsData, repositories, starredNames } = await this.loadSources();
 
-        this.container.innerHTML = '';
+        for (const { repo, metadata } of selectProjects(projectsData, repositories, starredNames)) {
+            const view = projectView(repo, metadata);
+            const pushedAt = repo?.pushed_at;
+            const pushedRelative = pushedAt ? relativeTime(new Date(pushedAt)) : null;
 
-        // Sort by pushed_at descending; curated-only entries (no repo) go last
-        const byPushed = (a, b) => {
-            const aDate = a.repo?.pushed_at ? new Date(a.repo.pushed_at) : new Date(0);
-            const bDate = b.repo?.pushed_at ? new Date(b.repo.pushed_at) : new Date(0);
-            return bDate - aDate;
-        };
-
-        // Featured cards show first; the rest stay hidden behind "Show more".
-        // With no featured flags (e.g. metadata failed to load) everything shows.
-        const featured = this.projects.filter(p => p.metadata?.featured).sort(byPushed);
-        const rest = this.projects.filter(p => !p.metadata?.featured).sort(byPushed);
-        const hideRest = featured.length > 0;
-
-        for (const { metadata, repo } of featured) {
-            this.container.appendChild(this.createProjectCard(repo, metadata));
-        }
-        for (const { metadata, repo } of rest) {
-            const card = this.createProjectCard(repo, metadata);
-            if (hideRest) {
-                card.dataset.extra = '';
-                card.hidden = true;
+            if (view.hasCaseStudy) {
+                projectModal.register(view.slug, {
+                    ...view,
+                    stars: repo?.stargazers_count ?? null,
+                    forks: repo?.forks_count ?? null,
+                    openIssues: repo?.open_issues_count ?? null,
+                    pushedRelative,
+                });
             }
-            this.container.appendChild(card);
+
+            const card = this.container.querySelector(`[data-project="${CSS.escape(view.slug)}"]`);
+            if (card) this.hydrateCard(card, repo, pushedRelative);
+        }
+    }
+
+    hydrateCard(card, repo, pushedRelative) {
+        const stars = card.querySelector('[data-live="stars"]');
+        if (stars && repo) stars.textContent = String(repo.stargazers_count ?? '—');
+
+        if (pushedRelative) {
+            card.querySelector('[data-live="pushed"]').textContent = pushedRelative;
+            card.querySelector('[data-live-stat="pushed"]').hidden = false;
         }
 
-        this.extraCount = hideRest ? rest.length : 0;
-        this.setupShowMore();
-
-        // A deep link to a hidden project's case study expands the grid, so the
-        // modal can return focus to a visible card when it closes.
-        const slug = globalThis.location.hash.startsWith('#project/')
-            ? decodeURIComponent(globalThis.location.hash.slice('#project/'.length))
-            : null;
-        const deepLinked = slug
-            ? [...this.container.querySelectorAll('[data-case-study]')].find(
-                  el => el.dataset.caseStudy === slug
-              )
-            : null;
-        if (deepLinked?.closest('[data-extra]')) this.setExpanded(true);
-
-        this.animateCards();
+        if (isRecentlyPushed(repo?.pushed_at)) {
+            card.classList.add('project-card--recent');
+            card.querySelector('.project-card-badges')?.insertAdjacentHTML(
+                'beforeend',
+                '<span class="project-recent-badge"><span class="recent-dot"></span>Active</span>'
+            );
+            // The "Active" badge already says so; don't repeat it as a status tag
+            const status = card.querySelector('[data-status-active]');
+            if (status) status.hidden = true;
+        }
     }
 
     setupShowMore() {
@@ -207,6 +130,7 @@ export class ProjectsManager {
         const btn = this.moreButton;
         if (!btn) return;
 
+        this.extraCount = this.container.querySelectorAll('[data-extra]').length;
         btn.hidden = this.extraCount === 0;
         this.setExpanded(false);
 
@@ -224,6 +148,20 @@ export class ProjectsManager {
         }
     }
 
+    /**
+     * A deep link to a hidden project's case study expands the grid, so the modal can
+     * return focus to a visible card when it closes.
+     */
+    expandForDeepLink() {
+        const { hash } = globalThis.location;
+        if (!hash.startsWith('#project/')) return;
+        const slug = decodeURIComponent(hash.slice('#project/'.length));
+        const deepLinked = [...this.container.querySelectorAll('[data-case-study]')].find(
+            el => el.dataset.caseStudy === slug
+        );
+        if (deepLinked?.closest('[data-extra]')) this.setExpanded(true);
+    }
+
     setExpanded(expand) {
         for (const card of this.container?.querySelectorAll('[data-extra]') ?? []) {
             card.hidden = !expand;
@@ -237,182 +175,7 @@ export class ProjectsManager {
             : `Show ${this.extraCount} more project${plural}`;
     }
 
-    createProjectCard(repo, metadata) {
-        const card = document.createElement('div');
-
-        const displayName = metadata?.displayName || repo?.name || 'Untitled';
-        const description =
-            metadata?.description ||
-            repo?.description ||
-            'A coding project showcasing development skills.';
-        const longDescription = metadata?.longDescription;
-        const category = metadata?.category;
-        const status = metadata?.status;
-        const language = repo?.language || metadata?.technologies?.[0] || 'Code';
-        const htmlUrl =
-            repo?.html_url || `https://github.com/${metadata?.github_repo || 'and3rn3t'}`;
-        const homepage = metadata?.homepage ?? repo?.homepage;
-        const highlights = metadata?.highlights ?? [];
-        // Up to three tags beyond the primary language, curated first; skip
-        // whichever one is already shown as the primary tag.
-        const secondaryTags = (metadata?.technologies ?? repo?.topics ?? [])
-            .filter(tag => tag.toLowerCase() !== language.toLowerCase())
-            .slice(0, 3);
-
-        // Relative push time ("3 days ago", "2 months ago")
-        const pushedAt = repo?.pushed_at;
-        const relativePush = pushedAt ? this._relativeTime(new Date(pushedAt)) : null;
-
-        // Mark cards pushed within the last 180 days as recently active
-        const SIX_MONTHS_MS = 180 * 24 * 60 * 60 * 1000;
-        const isRecent = pushedAt
-            ? Date.now() - new Date(pushedAt).getTime() < SIX_MONTHS_MS
-            : false;
-
-        card.className = isRecent ? 'project-card project-card--recent' : 'project-card';
-        const langColor = LANGUAGE_COLORS[language];
-        if (langColor) card.style.setProperty('--lang-color', langColor);
-
-        // First highlight shown inline; the full write-up opens in the case-study modal.
-        const [firstHighlight] = highlights;
-        const slug = repo?.name || metadata?.name || metadata?.github_repo?.split('/').pop();
-        const hasCaseStudy = Boolean(slug && (longDescription || highlights.length > 1));
-
-        if (hasCaseStudy) {
-            projectModal.register(slug, {
-                slug,
-                displayName,
-                description,
-                longDescription,
-                category,
-                status,
-                language,
-                technologies: metadata?.technologies ?? [],
-                highlights,
-                htmlUrl,
-                homepage,
-                stars: repo?.stargazers_count ?? null,
-                forks: repo?.forks_count ?? null,
-                openIssues: repo?.open_issues_count ?? null,
-                pushedRelative: relativePush,
-            });
-        }
-
-        // The "Active" badge already says so; don't repeat it as a status tag
-        const showStatus = Boolean(status) && !(isRecent && /^active\b/i.test(status));
-
-        const caseStudyHtml = hasCaseStudy
-            ? `
-            <button type="button" class="project-case-study-btn" data-case-study="${escapeHtml(slug)}">
-                ${icon('book-open')}
-                Read case study
-            </button>
-        `
-            : '';
-
-        card.innerHTML = `
-            <div class="project-header">
-                <div class="project-card-badges">
-                    ${category ? `<span class="project-category">${escapeHtml(category)}</span>` : ''}
-                    ${isRecent ? `<span class="project-recent-badge"><span class="recent-dot"></span>Active</span>` : ''}
-                </div>
-                <h3 class="project-title"><a href="${escapeHtml(htmlUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(displayName)}</a></h3>
-                <p class="project-description">${escapeHtml(description)}</p>
-                ${firstHighlight ? `<p class="project-highlight-lead">→ ${escapeHtml(firstHighlight)}</p>` : ''}
-                ${caseStudyHtml}
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        ${icon('star')}
-                        <span>${repo?.stargazers_count ?? '—'}</span>
-                    </div>
-                    ${
-                        relativePush
-                            ? `
-                    <div class="project-stat" title="Last pushed">
-                        ${icon('code-commit')}
-                        <span>${relativePush}</span>
-                    </div>`
-                            : ''
-                    }
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">${escapeHtml(language)}</span>
-                    ${secondaryTags
-                        .map(tag => `<span class="language-tag">${escapeHtml(tag)}</span>`)
-                        .join('')}
-                    ${showStatus ? `<span class="status-badge ${escapeHtml(status.toLowerCase().replace(/\s+/g, '-'))}">${escapeHtml(status)}</span>` : ''}
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="${escapeHtml(htmlUrl)}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    ${icon('github')}
-                    View Code
-                </a>
-                ${
-                    homepage
-                        ? `
-                    <a href="${escapeHtml(homepage)}" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        ${icon('external-link-alt')}
-                        Live Demo
-                    </a>
-                `
-                        : `
-                    <a href="${escapeHtml(htmlUrl)}/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        ${icon('file-alt')}
-                        Documentation
-                    </a>
-                `
-                }
-            </div>
-        `;
-
-        return card;
-    }
-
-    _relativeTime(date) {
-        const diff = Date.now() - date.getTime();
-        const minutes = Math.floor(diff / 60000);
-        const hours = Math.floor(diff / 3600000);
-        const days = Math.floor(diff / 86400000);
-        const weeks = Math.floor(days / 7);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(days / 365);
-        if (minutes < 60) return `${minutes}m ago`;
-        if (hours < 24) return `${hours}h ago`;
-        if (days < 7) return `${days}d ago`;
-        if (weeks < 5) return `${weeks}w ago`;
-        if (months < 12) return `${months}mo ago`;
-        return `${years}y ago`;
-    }
-
-    animateCards() {
-        const cards = this.container?.querySelectorAll('.project-card');
-        if (!cards) return;
-        // Respect reduced-motion: show the cards without the staggered fade.
-        if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-
-        cards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-
-            setTimeout(() => {
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * CONFIG.cardAnimationDelay);
-        });
-    }
-
-    async refresh() {
-        debug.log('[Projects] Refreshing projects...');
-        await this.loadProjects();
-    }
-
     destroy() {
-        this.projects = [];
         this.isInitialized = false;
     }
 }

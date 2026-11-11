@@ -19,8 +19,9 @@ lists what review and completion tools most often get wrong.
 - **Reuse the shared helpers** in `modules/utils/` (`activity.js`, `data.js` `loadJSON()`,
   `while-visible.js`) instead of copying logic. The Worker imports `activity.js` too.
 - **Generated files** (`github-data.json`, `og/default.png`, `posts/`, `feed.xml`, the sitemap blog
-  block) come from scripts and CI. Edit `posts-data.json` and run `pnpm generate:posts`; don't
-  hand-edit the output.
+  block, and the `<!-- gen:NAME -->` blocks in `index.html`) come from scripts and CI. Edit the
+  `*-data.json` files or `scripts/templates/` and run `pnpm generate:site`; don't hand-edit the
+  output.
 - **Done means** `pnpm validate` passes (lint, Stylelint, format, unit tests, `check:refs`) and,
   for UI changes, `pnpm test:e2e`.
 - Conventional commits: `type(scope): description`. Don't commit or deploy unless asked.

@@ -145,18 +145,10 @@ async function initializeApp() {
                 }
             ),
             startOptional(
-                'Experience module',
-                () => import('./modules/experience.js'),
-                async m => {
-                    await m.experienceManager.init();
-                    appState.managers.experience = m.experienceManager;
-                }
-            ),
-            startOptional(
                 'Blog module',
                 () => import('./modules/blog.js'),
-                async m => {
-                    await m.blogManager.init();
+                m => {
+                    m.blogManager.init();
                     appState.managers.blog = m.blogManager;
                 }
             ),

@@ -28,7 +28,6 @@ export class UIManager {
 
         this.ensureNotificationRegion();
 
-        this.initScrollAnimations();
         this.initBackToTop();
         this.initParallax();
 
@@ -147,38 +146,6 @@ export class UIManager {
                 notification.textContent = '';
             }, TOAST_FADE_MS);
         }, duration);
-    }
-
-    // ========================================
-    // Scroll Animations
-    // ========================================
-
-    initScrollAnimations() {
-        const animationElements = document.querySelectorAll(
-            '.hero-content, .about-text, .animate-on-scroll'
-        );
-
-        const animationObserver = new IntersectionObserver(
-            entries => {
-                for (const entry of entries) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                }
-            },
-            { threshold: 0.1 }
-        );
-
-        for (const el of animationElements) {
-            const rect = el.getBoundingClientRect();
-            const isInViewport = rect.top < globalThis.innerHeight;
-
-            if (isInViewport) {
-                el.classList.add('animate-in');
-            }
-
-            animationObserver.observe(el);
-        }
     }
 
     // ========================================

@@ -382,6 +382,17 @@ jobs:
         if: steps.og.outputs.changed == 'true'
         run: pnpm generate:og
 
+      # The project cards in index.html are pre-rendered from the starred-repo list in
+      # github-data.json, so a newly starred repo changes the page. The generator needs
+      # only Node (no packages), and most days it leaves index.html untouched.
+      - name: Setup Node (site generator)
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+
+      - name: Pre-render index.html
+        run: node scripts/generate-site.mjs
+
       - name: Commit GitHub data via PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -389,7 +400,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add github-data.json README.md og/ .github/og-inputs.sha256
+          git add github-data.json README.md og/ .github/og-inputs.sha256 index.html
           if git diff --cached --quiet; then
             echo "No changes to GitHub data"
             exit 0
@@ -407,7 +418,7 @@ jobs:
           if [ -z "$PR" ]; then
             PR=$(gh pr create --base main --head "$BRANCH" \
               --title "chore: update GitHub data - $(date -u +%Y-%m-%d)" \
-              --body "Automated daily refresh of github-data.json, README featured projects, and OG images." \
+              --body "Automated daily refresh of github-data.json, README featured projects, OG images, and the pre-rendered project list in index.html." \
               | grep -oE '[0-9]+$')
           fi
           gh pr merge "$PR" --merge --delete-branch
