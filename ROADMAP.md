@@ -98,7 +98,7 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247                     | ✅ 2026-11-11 |
 | 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card                  | 🟡            |
 | 10.3 | Home sections on the new system: work, about/experience/writing, contact + footer; inline contact form (#231) | ✅ 2026-11-11 |
-| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | ⬜            |
+| 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | 🟡            |
 | 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | ⬜            |
 | 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | ⬜            |
 
@@ -304,3 +304,28 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   palette, keyboard help and toasts (10.5), and the `.skip-link` and `.sr-only` utilities, which must be
   ported into `core.css` before `styles.css` is deleted in 10.6. Playwright note: `locator.click()` waits out
   an `aria-disabled` element, so tests that click a busy button use `force: true`.
+- **2026-11-11** — Phase 10.4 (project pages, on `redesign`): every curated project with a write-up now has a
+  generated page at `/projects/<slug>/` (17 of them), and the case-study modal is gone
+  (`modules/project-modal.js`, `modules/projects.js`, `modules/blog.js` and the modal CSS and tests deleted).
+  Cards link to the page in the same tab; without JS they are plain links. A page has a breadcrumb, header
+  with Live demo and Source buttons, the screenshot (or the generated cover), overview, highlights, curated
+  metrics only when the data has them, a facts and stack aside, and a previous/next pager; JSON-LD is
+  `SoftwareSourceCode` plus `BreadcrumbList`, and `og:image` is the project's own crop when one exists, else
+  `og/default.png`. Slugs are lowercased (`HealthKitBridge` is `/projects/healthkitbridge/`), and a unit test
+  checks the slug is the same with and without the repo. Old `#project/<slug>` links redirect
+  (`modules/legacy-links.js`, which replaces `blog.js`). The pages load only `core.css` + `article.css`: 13
+  requests and about 150-175 KB, CLS 0 (the home page is still 41 requests and 650 KB until 10.6). To make that
+  possible `core.css` gained the `.icon`, `.sr-only` and `.skip-link` primitives, the footer, `.facts` and
+  `.shot` picture rules, and a minimal reset (box-sizing, `body` margin); the legacy `@import` moved from
+  `core.css` to `home.css`. **View transitions:** the card's image and title morph into the page's
+  (`modules/page-transitions.js` names them only during a navigation, in `pageswap`/`pagereveal`, so a theme
+  switch is unaffected; reduced motion turns it all off). **The `@view-transition` opt-in must be an inline
+  `<style>` in every page's `<head>`, not in `core.css`:** with the rule in the external stylesheet Chrome
+  aborted 8 of 15 card-to-page navigations with "opt-in disabled" (an unhandled rejection that fails
+  `pageerror` tests); inline it was 0 of 15. `VIEW_TRANSITION_CSS` in `scripts/templates/chrome.mjs` is the
+  single source, `index.html` carries a copy, post pages get it from the generator, and a unit test keeps them
+  identical. Both pages of a navigation must opt in, so post pages (still on `styles.css`) carry it until 10.5.
+  **Not verified:** the morph itself (only that no transition errors; I have not watched it in a headed
+  browser), iOS Safari (no cross-document view transitions, so it cross-fades nothing and just navigates), and
+  the real share cards in a social debugger. **Known flake, not from this phase:** `palette.spec.js` "'/' key
+  opens the palette" fails about 1 in 15 under parallel load without `CI=1` (also on the pre-phase commit).
