@@ -115,9 +115,9 @@ test.describe('startup budgets', () => {
 
 test.describe('shortcuts used before their module has loaded', () => {
     // Hold a module back, so the page is ready but the feature is not, then use it
-    const delay = (page, file) =>
+    const delay = (page, file, ms = 1500) =>
         page.route(`**/modules/${file}`, async route => {
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            await new Promise(resolve => setTimeout(resolve, ms));
             await route.continue();
         });
 
@@ -161,6 +161,119 @@ test.describe('shortcuts used before their module has loaded', () => {
         });
     });
 
+    test('g then c jumps to Contact without waiting for keyboard help to load', async ({
+        page,
+    }) => {
+        await delay(page, 'keyboard-help.js');
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.isInitialized);
+        expect(await page.evaluate(() => Boolean(globalThis.appState.managers.keyboardHelp))).toBe(
+            false
+        );
+        await page.evaluate(() => document.activeElement?.blur());
+
+        await page.keyboard.press('g');
+        await page.keyboard.press('c');
+        await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+        // ...and it was not waiting for the module
+        expect(await page.evaluate(() => Boolean(globalThis.appState.managers.keyboardHelp))).toBe(
+            false
+        );
+    });
+
+    test('the g prefix survives the module loading between the two keys', async ({ page }) => {
+        // Short enough that the module arrives inside the 1.2 s window after the g
+        await delay(page, 'keyboard-help.js', 300);
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.isInitialized);
+        await page.evaluate(() => document.activeElement?.blur());
+
+        await page.keyboard.press('g');
+        // Wait until the module has loaded and started, then finish the sequence
+        await page.waitForFunction(() => globalThis.appState.managers.keyboardHelp, undefined, {
+            timeout: 8000,
+        });
+        await page.keyboard.press('c');
+        await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+    });
+
+    test('the g prefix expires, so a later c does nothing', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.isInitialized);
+        await page.evaluate(() => document.activeElement?.blur());
+        await page.keyboard.press('g');
+        await page.waitForTimeout(1500); // longer than the 1.2 s window
+        await page.keyboard.press('c');
+        await page.waitForTimeout(300);
+        expect(await page.evaluate(() => document.activeElement?.id ?? '')).not.toBe('contact');
+    });
+
+    test('g is left alone while the palette is open', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.managers?.palette);
+        await page.keyboard.press('Control+k');
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
+        await page.locator('.search-category[data-category="all"]').focus(); // not a text field
+        await page.keyboard.press('g');
+        await page.keyboard.press('c');
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
+        expect(await page.evaluate(() => document.activeElement?.id ?? '')).not.toBe('contact');
+    });
+
+    test('? while the palette is open does not open help on top of it, even after help loads', async ({
+        page,
+    }) => {
+        await delay(page, 'keyboard-help.js');
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.managers?.palette);
+        expect(await page.evaluate(() => Boolean(globalThis.appState.managers.keyboardHelp))).toBe(
+            false
+        );
+        await page.keyboard.press('Control+k');
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
+        await page.locator('.search-category[data-category="all"]').focus();
+        await page.keyboard.press('?');
+
+        // Give the delayed module time to arrive and be asked to open
+        await page.waitForFunction(() => globalThis.appState.managers.keyboardHelp, undefined, {
+            timeout: 8000,
+        });
+        await page.waitForTimeout(300);
+        await expect(page.locator('#keyboard-help')).not.toHaveAttribute('open');
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
+    });
+
+    test('a palette opened while help is loading wins: help does not open over it on arrival', async ({
+        page,
+    }) => {
+        await delay(page, 'keyboard-help.js', 1200);
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.managers?.palette);
+        await page.evaluate(() => document.activeElement?.blur());
+
+        await page.keyboard.press('?'); // nothing is open yet, so help is requested...
+        await page.keyboard.press('Control+k'); // ...and the palette opens before it arrives
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
+
+        await page.waitForFunction(() => globalThis.appState.managers.keyboardHelp, undefined, {
+            timeout: 8000,
+        });
+        await page.waitForTimeout(300);
+        await expect(page.locator('#keyboard-help')).not.toHaveAttribute('open');
+        await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
+    });
+
+    test('a ? pressed while help is still loading opens it once it has, when nothing else is open', async ({
+        page,
+    }) => {
+        await delay(page, 'keyboard-help.js');
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.isInitialized);
+        await page.evaluate(() => document.activeElement?.blur());
+        await page.keyboard.press('?');
+        await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '', { timeout: 8000 });
+    });
+
     test('a shortcut typed in a text field is left alone', async ({ page }) => {
         await delay(page, 'command-palette.js');
         await page.goto('/');
@@ -188,5 +301,46 @@ test.describe('legacy links still redirect', () => {
             globalThis.location.hash = '#project/homehub';
         });
         await page.waitForURL('**/projects/homehub/');
+    });
+});
+
+test.describe('features that wait for their section', () => {
+    // The fallback must be a real delay: requestIdleCallback's timeout is a deadline, so using it
+    // would start the contact form's script at the first idle moment whatever the page showed.
+    test('the contact form is not loaded just because the browser is idle', async ({ page }) => {
+        await page.setViewportSize({ width: 1440, height: 900 });
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.isInitialized);
+        await page.waitForTimeout(1500); // many idle periods, well inside the 4 s fallback
+        const loaded = (await scripts(page)).some(([name]) => name.endsWith('/contact-form.js'));
+        const near = await page.evaluate(() => {
+            const rect = document.getElementById('contact').getBoundingClientRect();
+            return rect.top < globalThis.innerHeight + 800;
+        });
+        // Only started if Contact really is within 800px of the first screen
+        expect(loaded).toBe(near);
+    });
+
+    test('and it does load once the section is near, without waiting out the fallback', async ({
+        page,
+    }) => {
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState?.isInitialized);
+        const started = Date.now();
+        await page.locator('#contact').scrollIntoViewIfNeeded();
+        await page.waitForFunction(() => globalThis.appState.managers.contactForm, undefined, {
+            timeout: 3000,
+        });
+        expect(Date.now() - started).toBeLessThan(3500);
+    });
+
+    test('and it still loads if the visitor never scrolls there, after the fallback', async ({
+        page,
+    }) => {
+        await page.setViewportSize({ width: 390, height: 600 });
+        await page.goto('/');
+        await page.waitForFunction(() => globalThis.appState.managers.contactForm, undefined, {
+            timeout: 10000,
+        });
     });
 });

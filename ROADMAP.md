@@ -405,6 +405,15 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   layout shift of 0.01, or if a shortcut used before its module loads stops working (mutation-checked: disabling
   the shim fails three tests). **Still to do in 10.6:** retire `styles.css` (94 KB, the largest remaining cost),
   then docs and the cut-over to `main`.
+- **2026-11-11** — Review follow-ups on 10.6a (three Copilot comments, all valid). **`whenNear`** used
+  `requestIdleCallback`'s `timeout` as its fallback, but that is a deadline: the contact form and About stats
+  started at the first idle moment whatever the page showed. It is a real timer now, and a test fails if the form's
+  script loads while Contact is far away. **`g` then h/a/p/c** lived in the deferred keyboard-help module, so a
+  `g c` pressed while it downloaded lost both keys (or the prefix, if the module landed between them). It needs
+  nothing from the module, so it moved to `main.js` (`installGlobalShortcuts`) and works from the first moment; the
+  1.2 s prefix window is tested, including a module arriving between the two keys. **`?` over the palette:** a `?`
+  pressed while help loaded could open it on top of the palette; the shim now checks for an open dialog before
+  requesting help and again when it arrives (a mutation without the second check fails a test).
 - **2026-11-11** — Phase 10.6b (retire `styles.css`; stacked on 10.6a): the 94 KB legacy stylesheet is deleted, and
   with it the `legacy` cascade layer, the inline "legacy critical CSS" block in `index.html`, the
   `<link rel="preload">`, the body `dark-theme` script, `body.dark-theme` in `theme.js`, and the service-worker,

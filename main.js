@@ -49,9 +49,9 @@ async function startOptional(label, load, start) {
 const whenIdle = (task, timeout = 1500) => globalThis.requestIdleCallback(task, { timeout });
 
 /**
- * Run `task` once, as soon as `element` is within `margin` of the viewport, or when the browser
- * has been idle for a while (`timeout`), whichever comes first. For features that serve a part of
- * the page the visitor may never scroll to.
+ * Run `task` once, as soon as `element` is within `margin` of the viewport, or after `timeout` ms,
+ * whichever comes first. For features that serve a part of the page the visitor may never scroll
+ * to.
  */
 function whenNear(element, task, { margin = '800px', timeout = 4000 } = {}) {
     let done = false;
@@ -68,7 +68,9 @@ function whenNear(element, task, { margin = '800px', timeout = 4000 } = {}) {
               })
             : null;
     observer?.observe(element);
-    whenIdle(run, timeout);
+    // A real timer, not requestIdleCallback's `timeout`: that is a deadline, so the task would run
+    // at the first idle moment even with the section nowhere near. `done` stops a second run.
+    setTimeout(run, timeout);
 }
 
 /**
@@ -110,7 +112,7 @@ function startFeatures(uiManager) {
         loadPalette();
         loadKeyboardHelp();
     }, 1000);
-    installEarlyShortcuts();
+    installGlobalShortcuts();
 
     // "Currently coding" and the view counter call the Worker; both fall back on their own
     whenIdle(() => {
@@ -186,18 +188,66 @@ function loadKeyboardHelp() {
     return keyboardHelpPromise;
 }
 
+// `g` then a letter jumps to a section, within this long of the `g`
+const GO_TO = { h: 'home', a: 'about', p: 'projects', c: 'contact' };
+const GO_TO_WINDOW = 1200;
+
+/** Scroll to a section and move focus there, without forcing a visible outline. */
+function goToSection(id) {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    section.setAttribute('tabindex', '-1');
+    section.focus({ preventScroll: true });
+}
+
 /**
+ * The keyboard shortcuts that must work from the first moment.
+ *
+ * `g` then h/a/p/c is handled here, always: it needs nothing but the page, so it is not tied to
+ * a module that may still be loading (which would lose both keys, or the prefix).
+ *
  * The palette and keyboard help start when the browser is idle, a moment after first paint. A
  * shortcut or click in that gap still works: this loads the module on demand and then opens it.
  * Once a module is up it handles its own keys, so this steps aside for it.
  */
-function installEarlyShortcuts() {
+function installGlobalShortcuts() {
     const isTyping = target =>
         /^(input|textarea|select)$/i.test(target?.tagName ?? '') || target?.isContentEditable;
+    const dialogOpen = () => Boolean(document.querySelector('dialog[open]'));
+
+    let goToArmed = false;
+    let goToTimer = 0;
+    const disarm = () => {
+        goToArmed = false;
+        clearTimeout(goToTimer);
+    };
 
     document.addEventListener('keydown', event => {
         if (event.defaultPrevented || event.isComposing || event.altKey) return;
         const mod = event.metaKey || event.ctrlKey;
+
+        // `g` then a letter. Only the help dialog may be open: any other dialog keeps its keys.
+        if (!mod && !isTyping(event.target)) {
+            const helpIsTheOnlyDialog = !document.querySelector('dialog[open]:not(#keyboard-help)');
+            if (goToArmed) {
+                const sectionId = GO_TO[event.key.toLowerCase()];
+                disarm();
+                if (sectionId && helpIsTheOnlyDialog) {
+                    event.preventDefault();
+                    // The page behind a modal is inert and cannot take focus: close help first
+                    appState.managers.keyboardHelp?.close();
+                    goToSection(sectionId);
+                }
+                return;
+            }
+            if ((event.key === 'g' || event.key === 'G') && helpIsTheOnlyDialog) {
+                goToArmed = true;
+                clearTimeout(goToTimer);
+                goToTimer = setTimeout(() => (goToArmed = false), GO_TO_WINDOW);
+            }
+        }
 
         if (!appState.managers.palette) {
             const opens = mod ? event.key.toLowerCase() === 'k' : event.key === '/';
@@ -211,10 +261,14 @@ function installEarlyShortcuts() {
             !appState.managers.keyboardHelp &&
             !mod &&
             event.key === '?' &&
-            !isTyping(event.target)
+            !isTyping(event.target) &&
+            !dialogOpen()
         ) {
             event.preventDefault();
-            loadKeyboardHelp().then(help => help?.open());
+            // Checked again when the module arrives: a dialog may have opened while it loaded
+            loadKeyboardHelp().then(help => {
+                if (!dialogOpen()) help?.open();
+            });
         }
     });
 
