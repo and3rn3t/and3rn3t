@@ -457,7 +457,8 @@
     display: none;
   }
 
-  /* Where a form says what happened. An <output>, so it is announced as it changes. */
+  /* Where a form says what happened. An <output> with an explicit role="status" (a polite live
+   region), so a change to its text is announced; the markup carries the role, not this rule. */
   .form-status {
     margin: 0;
     color: var(--muted);

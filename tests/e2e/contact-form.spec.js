@@ -256,6 +256,23 @@ test.describe('with JavaScript', () => {
             await expect(copy).toHaveText('Copy', { timeout: 5000 });
         });
 
+        test('goes back to saying Copy after a second click while it still says Copied', async ({
+            page,
+            context,
+        }) => {
+            await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+            const copy = page.locator('[data-copy]');
+            await copy.click();
+            await expect(copy).toHaveText('Copied');
+            // The second click lands inside the first one's two-second window
+            await copy.click();
+            await expect(copy).toHaveText('Copied');
+            await expect(copy).toHaveText('Copy', { timeout: 5000 });
+            // ...and stays that way: the first click's timer must not fire late and change it
+            await page.waitForTimeout(2500);
+            await expect(copy).toHaveText('Copy');
+        });
+
         test('selects the address when the clipboard is refused', async ({ page }) => {
             await page.evaluate(() => {
                 navigator.clipboard.writeText = () => Promise.reject(new Error('refused'));
@@ -268,6 +285,20 @@ test.describe('with JavaScript', () => {
     });
 
     test.describe('the guestbook, in its new markup', () => {
+        test('both status messages are live regions, so changes are announced', async ({
+            page,
+        }) => {
+            for (const id of ['form-status', 'guestbook-status']) {
+                const status = page.locator(`#${id}`);
+                await expect(status, id).toHaveAttribute('role', 'status');
+                // role=status is aria-live=polite and atomic by default; say it where it is read
+                expect(
+                    await status.evaluate(el => el.getAttribute('aria-live') ?? 'polite'),
+                    id
+                ).toBe('polite');
+            }
+        });
+
         test('renders entries as text, never as markup', async ({ page }) => {
             await page.route(`${WORKER_BASE}/guestbook`, route =>
                 route.fulfill({

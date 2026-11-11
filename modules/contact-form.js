@@ -214,20 +214,29 @@ class ContactForm {
         }
     }
 
+    /** The restore timer of each copy button, so a second click replaces the first one's. */
+    #copyTimers = new WeakMap();
+
     async #copy(button) {
         const value = button.dataset.copy ?? '';
         try {
             await navigator.clipboard.writeText(value);
-            const original = button.textContent;
+            // Remember the label once. Reading it on every click would capture "Copied" when the
+            // button is clicked again before the first click's timer restores it.
+            const label = (button.dataset.copyLabel ??= button.textContent);
             button.textContent = 'Copied';
             globalThis.appState?.managers?.ui?.showNotification?.(
                 'Email address copied',
                 'success',
                 2500
             );
-            setTimeout(() => {
-                button.textContent = original;
-            }, 2000);
+            clearTimeout(this.#copyTimers.get(button));
+            this.#copyTimers.set(
+                button,
+                setTimeout(() => {
+                    button.textContent = label;
+                }, 2000)
+            );
         } catch {
             // The clipboard can be refused (older app views, some browsers): select the address
             // so the visitor can copy it themselves.
