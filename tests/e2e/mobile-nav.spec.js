@@ -4,7 +4,7 @@
  * Regression: a `translateZ(0)` rule once overrode the closed menu's
  * off-screen transform, leaving an invisible overlay that caught every tap.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 

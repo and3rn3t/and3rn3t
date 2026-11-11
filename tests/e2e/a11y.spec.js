@@ -4,7 +4,7 @@
  * Scans the main page, the open Cmd-K palette modal, and the key sections
  * for WCAG 2.1 AA violations.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Accessibility — main page', () => {

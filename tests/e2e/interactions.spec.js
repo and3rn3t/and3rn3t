@@ -3,7 +3,7 @@
  *
  * Covers: dark/light theme switch, `?` keyboard help panel, `g h` navigation.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');

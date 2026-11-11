@@ -4,7 +4,7 @@
  * Covers: Cmd/Ctrl-K opens, Esc closes, "/" opens, arrow navigation,
  * Enter runs, category filter tabs.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('/');

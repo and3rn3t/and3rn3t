@@ -4,7 +4,7 @@
  * Loading the page with #post/<slug> or #project/<slug> must reach the right view
  * without throwing (navigation.js used to run querySelector on these hashes).
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 test('legacy #post/<slug> links redirect to the post page', async ({ page }) => {
     const errors = [];
