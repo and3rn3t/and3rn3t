@@ -22,6 +22,34 @@ test.describe('Accessibility — main page', () => {
         expect(results.violations).toEqual([]);
     });
 
+    // The design tokens have a light and a dark value each, so contrast is a per-theme question.
+    for (const theme of ['light', 'dark']) {
+        test(`has no axe violations in the ${theme} theme, with the mobile menu open and closed`, async ({
+            page,
+        }) => {
+            await page.addInitScript(t => localStorage.setItem('theme', t), theme);
+            await page.goto('/');
+            await page.waitForSelector(
+                '#projects .lead-card [data-case-study]:not([data-pending])'
+            );
+            await page.waitForTimeout(500);
+
+            const scan = () =>
+                new AxeBuilder({ page })
+                    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+                    .exclude('iframe[src*="cloudflare"]')
+                    .analyze();
+            expect((await scan()).violations).toEqual([]);
+
+            // The sheet only exists on narrow screens
+            await page.setViewportSize({ width: 390, height: 844 });
+            await page.locator('#mobile-menu').click();
+            await expect(page.locator('#nav-menu')).toHaveClass(/active/);
+            await page.waitForTimeout(400); // let the sheet finish fading in
+            expect((await scan()).violations).toEqual([]);
+        });
+    }
+
     test('command palette modal is accessible when open', async ({ page }) => {
         await page.goto('/');
         // Ensure the palette manager has attached its global shortcut before pressing.

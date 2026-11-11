@@ -24,7 +24,7 @@ export class ProjectsManager {
         this.isInitialized = false;
     }
 
-    async init(containerSelector = '#projects-grid') {
+    async init(containerSelector = '#projects') {
         if (this.isInitialized) return;
 
         debug.log('[Projects] Initializing projects manager...');

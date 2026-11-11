@@ -113,6 +113,9 @@ export class ThemeManager {
 
     commitTheme(theme) {
         const isDark = theme === 'dark';
+        // <html data-theme> drives color-scheme (see styles/core.css). The body class is kept
+        // for the legacy stylesheet until it is retired.
+        document.documentElement.dataset.theme = theme;
         document.body.classList.toggle('dark-theme', isDark);
         this.currentTheme = theme;
         this.updateButton(isDark);

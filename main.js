@@ -77,8 +77,7 @@ async function initializeApp() {
 
         debug.log('[App] Phase 2: Navigation & UI initialized');
 
-        // Hero enhancements: text reveal runs immediately; WebGL gradient is
-        // dynamically imported and self-gates on device capability.
+        // Hero flow field: dynamically imported, and self-gates on device capability.
         initHeroEnhancements();
 
         // Phase 3: Content loading (show progress)
@@ -87,10 +86,7 @@ async function initializeApp() {
         const { projectsManager } = await import('./modules/projects.js');
 
         // Load content in parallel
-        await Promise.allSettled([
-            projectsManager.init('#projects-grid'),
-            uiManager.loadGitHubStats(),
-        ]);
+        await Promise.allSettled([projectsManager.init('#projects'), uiManager.loadGitHubStats()]);
 
         appState.managers.projects = projectsManager;
 
@@ -206,21 +202,13 @@ async function initializeApp() {
 }
 
 /**
- * Initialize hero text reveal + (capability-gated) animated background.
- * Text effect is cheap and runs right away. For the background we try the
+ * Start the hero's (capability-gated) animated background. We try the
  * WebAssembly particle flow-field first (compute in WASM, paint in JS); if WASM
  * is unavailable we fall back to the WebGL mesh-gradient shader, and if that
  * also fails the static CSS gradient stays visible. Everything is lazy-loaded
  * and only runs when device capability allows, so first paint is untouched.
  */
 async function initHeroEnhancements() {
-    try {
-        const { initHeroText } = await import('./modules/hero-text.js');
-        initHeroText();
-    } catch (err) {
-        debug.warn('[App] Hero text effect skipped:', err);
-    }
-
     try {
         const { canRunHeavyEffects, motion } = await import('./modules/capabilities.js');
         if (!canRunHeavyEffects()) {
@@ -231,26 +219,17 @@ async function initHeroEnhancements() {
             return;
         }
 
-        // Primary: WASM particle flow-field (transparent 2D canvas over the
-        // gradient). loadSim() throws before touching the canvas context if WASM
-        // can't load, so the element stays clean for the WebGL fallback below.
+        // WASM particle flow-field on a transparent 2D canvas. If WASM can't load, the
+        // stylesheet's static glow stays and nothing else is needed.
         try {
             const { mountHeroSim } = await import('./modules/wasm/hero-sim.js');
-            const wasmHandle = await mountHeroSim(canvas, { reducedMotion: motion.reduced });
-            if (wasmHandle) {
-                appState.managers.heroCanvas = wasmHandle;
+            const handle = await mountHeroSim(canvas, { reducedMotion: motion.reduced });
+            if (handle) {
+                appState.managers.heroCanvas = handle;
                 canvas.classList.add('is-active');
-                return;
             }
         } catch (err) {
-            debug.warn('[App] WASM hero core skipped, trying WebGL shader:', err);
-        }
-
-        // Fallback: WebGL mesh-gradient shader.
-        const { initHeroCanvas } = await import('./modules/hero-canvas.js');
-        const handle = initHeroCanvas(canvas);
-        if (handle) {
-            appState.managers.heroCanvas = handle;
+            debug.warn('[App] WASM hero core skipped:', err);
         }
     } catch (err) {
         debug.warn('[App] Hero canvas skipped:', err);
@@ -277,7 +256,7 @@ function initMobileMenu() {
     mobileMenu.addEventListener('click', () => setOpen(!isOpen()));
 
     // Close mobile menu when clicking on a link
-    for (const link of document.querySelectorAll('.nav-link')) {
+    for (const link of navMenu.querySelectorAll('a')) {
         link.addEventListener('click', () => setOpen(false));
     }
 

@@ -101,13 +101,18 @@ export function renderProjectCard(view, { extra = false } = {}) {
  * (e.g. the curated file is empty) everything shows.
  *
  * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} views
- * @returns {{ cards: string, moreButton: string, extraCount: number }}
+ * @returns {{ lead: string, cards: string, moreButton: string, extraCount: number }}
  */
 export function renderProjects(views) {
   const hideRest = views.some(view => view.featured);
   const extraCount = hideRest ? views.filter(view => !view.featured).length : 0;
 
+  // The first project, if it has a screenshot, is shown large above the grid
+  const leadView = views[0]?.screenshot ? views[0] : null;
+  const lead = leadView ? renderLeadCard(leadView) : '';
+
   const cards = views
+    .filter(view => view !== leadView)
     .map(view => renderProjectCard(view, { extra: hideRest && !view.featured }))
     .join('\n        ');
 
@@ -125,5 +130,63 @@ export function renderProjects(views) {
               ${label}
             </button>`;
 
-  return { cards, moreButton, extraCount };
+  return { lead, cards, moreButton, extraCount };
+}
+
+/**
+ * One <picture> of a project's screenshot for a colour scheme. The light and dark pictures
+ * are both in the page and CSS shows one (see .shot--* in styles/home.css); the hidden one is
+ * never fetched because it is lazy and display: none.
+ */
+function renderShot({ name, alt }, scheme) {
+  const path = width => `/images/projects/${name}-${scheme}-${width}`;
+  const set = format => `${path(640)}.${format} 640w, ${path(1200)}.${format} 1200w`;
+  const sizes = '(min-width: 64rem) 46rem, 100vw';
+  return `<picture class="shot shot--${scheme}">
+            <source type="image/avif" srcset="${set('avif')}" sizes="${sizes}" />
+            <img src="${path(1200)}.webp" srcset="${set('webp')}" sizes="${sizes}" width="1200" height="750" alt="${esc(alt)}" loading="lazy" decoding="async" />
+          </picture>`;
+}
+
+/**
+ * The large card for a project that has a screenshot. It sits above the grid, and carries the
+ * same data-project / data-case-study hooks as the small cards, so modules/projects.js makes
+ * it live in the same way. It deliberately has no star count or "Active" badge.
+ *
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>} view
+ * @returns {string}
+ */
+export function renderLeadCard(view) {
+  const [firstHighlight] = view.highlights;
+  const tags = [view.language, ...view.secondaryTags]
+    .map(tag => `<li class="tag">${esc(tag)}</li>`)
+    .join('');
+
+  const caseStudy = view.hasCaseStudy
+    ? `<button type="button" class="button button--primary" data-case-study="${esc(view.slug)}" data-pending>
+              Read the case study ${icon('arrow-right')}
+            </button>`
+    : '';
+  const demo = view.homepage
+    ? `<a class="button" href="${esc(view.homepage)}" target="_blank" rel="noopener noreferrer">Live demo ${icon('external-link-alt')}</a>`
+    : '';
+
+  return `<article class="lead-card" data-project="${esc(view.slug)}">
+          <div class="lead-card__media">
+            ${renderShot(view.screenshot, 'light')}
+            ${renderShot(view.screenshot, 'dark')}
+          </div>
+          <div class="lead-card__body">
+            ${view.category ? `<p class="eyebrow">${esc(view.category)}</p>` : ''}
+            <h3 class="lead-card__title"><a href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer">${esc(view.displayName)}</a></h3>
+            <p class="lead-card__desc">${esc(view.description)}</p>
+            ${firstHighlight ? `<p class="lead-card__lead">→ ${esc(firstHighlight)}</p>` : ''}
+            <ul class="tag-list">${tags}</ul>
+            <div class="lead-card__actions">
+              ${caseStudy}
+              ${demo}
+              <a class="link" href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>`;
 }

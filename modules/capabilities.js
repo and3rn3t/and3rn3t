@@ -2,7 +2,7 @@
  * Device Capabilities & Motion Preferences
  *
  * Single source of truth for deciding whether to run "heavy" visual effects
- * (WebGL, parallax, tilt, particle/aurora overlays). Every enhancement module
+ * (the flow field, tilt, particle overlays). Every enhancement module
  * should gate itself through `canRunHeavyEffects()` and honour `motion.reduced`.
  *
  * @author Matthew Anderson
@@ -55,22 +55,6 @@ export const isLowEndDevice = (() => {
  * @type {boolean}
  */
 export const hasFinePointer = matchMediaSafe('(hover: hover) and (pointer: fine)');
-
-/**
- * Detect WebGL support once.
- * @type {boolean}
- */
-export const supportsWebGL = (() => {
-    try {
-        const canvas = document.createElement('canvas');
-        return Boolean(
-            globalThis.WebGLRenderingContext &&
-            (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
-        );
-    } catch {
-        return false;
-    }
-})();
 
 /**
  * Master gate for expensive, continuously-animating effects.

@@ -12,8 +12,19 @@
 
 import { whileVisible } from '../utils/while-visible.js';
 
-const GREEN_LIGHT = '34, 197, 94'; // #22c55e
-const GREEN_DARK = '74, 222, 128'; // #4ade80
+// Used only if the canvas's computed colour can't be read
+const FALLBACK_RGB = '21, 128, 61'; // #15803d
+
+/**
+ * The canvas's CSS `color` as "r, g, b". The stylesheet sets it from the accent token, so the
+ * field follows the theme (getComputedStyle resolves light-dark() for us).
+ * @param {HTMLCanvasElement} canvas
+ * @returns {string}
+ */
+function flowRgb(canvas) {
+    const match = getComputedStyle(canvas).color.match(/\d+(?:\.\d+)?/g);
+    return match && match.length >= 3 ? match.slice(0, 3).join(', ') : FALLBACK_RGB;
+}
 
 // Resolve the wasm asset relative to this module. `new URL(..., import.meta.url)`
 // is the Vite-recommended form (emits the wasm as a build asset) and also works
@@ -136,9 +147,16 @@ export async function mountHeroSim(canvas, opts = {}) {
     let running = false;
     let startTime = performance.now();
 
+    // Dark backgrounds take additive strokes; on paper they would wash out, so draw normally.
     function isDark() {
-        return document.body.classList.contains('dark-theme');
+        return document.documentElement.dataset.theme === 'dark';
     }
+
+    let rgb = flowRgb(canvas);
+    const onThemeChange = () => {
+        rgb = flowRgb(canvas);
+    };
+    document.addEventListener('themeChanged', onThemeChange);
 
     function frame(now) {
         const elapsed = (now - startTime) / 1000;
@@ -162,9 +180,9 @@ export async function mountHeroSim(canvas, opts = {}) {
         ctx.fillStyle = `rgba(0, 0, 0, ${trailFade})`;
         ctx.fillRect(0, 0, width, height);
 
-        ctx.globalCompositeOperation = 'lighter';
+        ctx.globalCompositeOperation = isDark() ? 'lighter' : 'source-over';
         ctx.lineWidth = dpr;
-        ctx.strokeStyle = `rgba(${isDark() ? GREEN_DARK : GREEN_LIGHT}, 0.85)`;
+        ctx.strokeStyle = `rgba(${rgb}, ${isDark() ? 0.7 : 0.55})`;
         ctx.beginPath();
         for (let i = 0; i < count; i++) {
             const b = i * stride;
@@ -217,6 +235,7 @@ export async function mountHeroSim(canvas, opts = {}) {
             unobserve();
             globalThis.removeEventListener('pointermove', onPointerMove);
             globalThis.removeEventListener('resize', onResize);
+            document.removeEventListener('themeChanged', onThemeChange);
             clearTimeout(resizeTimer);
         },
     };

@@ -3,7 +3,6 @@
  * Handles all DOM manipulation, animations, and UI components
  */
 
-import { motion } from './capabilities.js';
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { icon } from './utils/icon.js';
@@ -29,7 +28,6 @@ export class UIManager {
         this.ensureNotificationRegion();
 
         this.initBackToTop();
-        this.initParallax();
 
         this.isInitialized = true;
         debug.log('[UI] UI manager initialized');
@@ -178,23 +176,6 @@ export class UIManager {
         backToTopBtn.addEventListener('click', () => {
             globalThis.scrollTo({ top: 0 });
         });
-    }
-
-    // ========================================
-    // Parallax Effect
-    // ========================================
-
-    initParallax() {
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-        globalThis.addEventListener(
-            'scroll',
-            () => {
-                if (motion.reduced) return;
-                hero.style.backgroundPositionY = `${globalThis.scrollY * 0.5}px`;
-            },
-            { passive: true }
-        );
     }
 
     // ========================================
