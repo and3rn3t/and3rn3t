@@ -69,13 +69,13 @@ test.describe('Accessibility — main page', () => {
         test(`buttons stay readable on hover in the ${theme} theme`, async ({ page }) => {
             await page.addInitScript(t => localStorage.setItem('theme', t), theme);
             await page.goto('/');
-            await page.waitForSelector('#projects-grid .project-card');
+            await page.waitForSelector(
+                '#projects .lead-card [data-case-study]:not([data-pending])'
+            );
 
             const buttons = {
                 'hero action': '#home .button--primary',
-                'card "View Code"': '#projects-grid .project-link:not(.live, .secondary)',
-                '"Show more projects"': '#projects-more-btn',
-                '"View all on GitHub"': '.projects-cta a.btn-outline',
+                'lead card action': '#projects .lead-card .button--primary',
             };
             for (const [name, selector] of Object.entries(buttons)) {
                 const button = page.locator(selector).first();

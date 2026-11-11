@@ -11,13 +11,16 @@ test.describe('JavaScript disabled', () => {
         await page.goto('/');
     });
 
-    test('projects, including those behind "Show more", are visible', async ({ page }) => {
-        const cards = page.locator('#projects-grid .project-card');
-        expect(await cards.count()).toBeGreaterThan(0);
-        for (const card of await cards.all()) await expect(card).toBeVisible();
-
-        // The button can't do anything without JS, so it is not offered
-        await expect(page.locator('#projects-more-btn')).toBeHidden();
+    test('every project is visible, in all three shapes', async ({ page }) => {
+        for (const selector of [
+            '#projects .lead-card',
+            '#projects-grid .work-card',
+            '#projects-more .project-list__row',
+        ]) {
+            const items = page.locator(selector);
+            expect(await items.count(), selector).toBeGreaterThan(0);
+            for (const item of await items.all()) await expect(item).toBeVisible();
+        }
     });
 
     test('experience and education are visible', async ({ page }) => {
@@ -57,17 +60,6 @@ test.describe('JavaScript disabled', () => {
     });
 });
 
-test('the pre-rendered cards come alive once JavaScript runs', async ({ page }) => {
-    await page.goto('/');
-    const card = page.locator('#projects-grid [data-project="homehub"]');
-    await expect(card).toBeVisible();
-
-    // Stars start as a placeholder and are filled in from the cached GitHub data
-    await expect(card.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
-    await expect(card.locator('[data-live-stat="pushed"]')).toBeVisible();
-    await expect(card.locator('[data-live="pushed"]')).toHaveText(/ago$/);
-});
-
 test('a case-study button is enabled only once its study is registered', async ({ page }) => {
     await page.goto('/');
     const button = page.locator('#projects [data-project="health"] [data-case-study]');
@@ -77,17 +69,20 @@ test('a case-study button is enabled only once its study is registered', async (
     await expect(page.locator('#project-modal')).toHaveClass(/visible/);
 });
 
-test('cards stay live when newer data no longer stars their repo', async ({ page }) => {
+test('a project stays live when newer data no longer stars its repo', async ({ page }) => {
     // The HTML and the JSON are cached separately, so an older page can meet newer data.
     await page.route('**/github-data.json', async route => {
         const response = await route.fetch();
         const data = await response.json();
-        data.selfStarredRepoNames = data.selfStarredRepoNames.filter(name => name !== 'fastlane');
+        data.selfStarredRepoNames = data.selfStarredRepoNames.filter(
+            name => name !== 'apple-music-dj'
+        );
         await route.fulfill({ response, json: data });
     });
     await page.goto('/');
 
-    const card = page.locator('#projects-grid [data-project="fastlane"]');
-    await expect(card.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
-    await expect(card.locator('[data-live="pushed"]')).toHaveText(/ago$/);
+    const button = page.locator('#projects [data-project="apple-music-dj"] [data-case-study]');
+    await expect(button).toBeVisible();
+    await button.click();
+    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
 });

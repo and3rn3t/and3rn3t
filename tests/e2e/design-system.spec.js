@@ -76,7 +76,8 @@ test.describe('navigation chrome', () => {
         const top = await border();
         await page.evaluate(() => globalThis.scrollTo(0, 600));
         await expect(page.locator('#navbar')).toHaveClass(/scrolled/);
-        expect(await border()).not.toBe(top);
+        // Polled: the colour transitions, so it settles a frame after the class lands
+        await expect.poll(border).not.toBe(top);
     });
 });
 
@@ -122,14 +123,39 @@ test.describe('lead project card', () => {
         }
     });
 
-    test('has no star count or "Active" badge, and opens its case study', async ({ page }) => {
+    test('opens its case study', async ({ page }) => {
         await page.goto('/');
         const lead = page.locator('.lead-card[data-project="health"]');
-        await expect(lead.locator('[data-live="stars"], .project-recent-badge')).toHaveCount(0);
 
         const open = lead.locator('[data-case-study]');
         await expect(open).toBeVisible();
         await open.click();
         await expect(page.locator('#project-modal')).toHaveClass(/visible/);
     });
+});
+
+test.describe('images', () => {
+    // Both themes' pictures are in the page and CSS hides one. If a rule ever un-hides it
+    // (specificity), it is fetched for nothing, which is a real cost on a phone.
+    for (const theme of ['light', 'dark']) {
+        const other = theme === 'light' ? 'dark' : 'light';
+        test(`the ${theme} theme never downloads the ${other} theme's project images`, async ({
+            page,
+        }) => {
+            const requested = [];
+            page.on('request', request => {
+                if (request.url().includes('/images/projects/')) requested.push(request.url());
+            });
+            await page.addInitScript(t => localStorage.setItem('theme', t), theme);
+            await page.goto('/');
+            // Bring every card into view so every lazy image that is going to load, loads
+            for (const card of await page.locator('#projects [data-project]').all()) {
+                await card.scrollIntoViewIfNeeded();
+            }
+            await page.waitForLoadState('networkidle');
+
+            expect(requested.filter(url => url.includes(`-${theme}`)).length).toBeGreaterThan(0);
+            expect(requested.filter(url => url.includes(`-${other}`))).toEqual([]);
+        });
+    }
 });

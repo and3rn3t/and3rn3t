@@ -1,13 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import {
-    isRecentlyPushed,
     orderProjects,
     projectView,
     relativeTime,
     selectProjects,
 } from '../../modules/utils/projects.js';
 import { formatDateRange, renderTimeline } from '../../scripts/templates/experience.mjs';
-import { renderProjectCard, renderProjects } from '../../scripts/templates/projects.mjs';
+import { renderCover } from '../../scripts/templates/cover.mjs';
+import {
+    renderLeadCard,
+    renderListRow,
+    renderProjects,
+    renderWorkCard,
+} from '../../scripts/templates/projects.mjs';
 import { renderBlogCards } from '../../scripts/templates/writing.mjs';
 
 const REPOS = [
@@ -92,6 +97,11 @@ describe('orderProjects', () => {
 });
 
 describe('projectView', () => {
+    it('leaves the "featured" repo topic out of the tags: it is not a technology', () => {
+        const v = projectView({ ...REPOS[0], topics: ['featured', 'swiftui'] }, null);
+        expect(v.secondaryTags).toEqual(['swiftui']);
+    });
+
     it('prefers curated text over the repo and falls back to sensible defaults', () => {
         expect(projectView(REPOS[0], { displayName: 'Alpha!' }).displayName).toBe('Alpha!');
         expect(projectView(REPOS[0], null).displayName).toBe('alpha');
@@ -112,7 +122,7 @@ describe('projectView', () => {
     });
 });
 
-describe('time helpers', () => {
+describe('relativeTime', () => {
     const now = Date.parse('2026-11-11T12:00:00Z');
 
     it('formats relative times compactly', () => {
@@ -121,53 +131,60 @@ describe('time helpers', () => {
         expect(relativeTime(new Date(now - 2 * 86400000), now)).toBe('2d ago');
         expect(relativeTime(new Date(now - 400 * 86400000), now)).toBe('1y ago');
     });
-
-    it('treats the last 180 days as recent', () => {
-        expect(isRecentlyPushed(new Date(now - 179 * 86400000), now)).toBe(true);
-        expect(isRecentlyPushed(new Date(now - 181 * 86400000), now)).toBe(false);
-        expect(isRecentlyPushed(undefined, now)).toBe(false);
-    });
 });
 
-describe('project cards', () => {
-    const view = projectView(REPOS[0], {
+// The shape in projects-data.json; the image file names come from the project's name
+const SCREENSHOT = { url: 'https://demo.example', alt: 'The alpha dashboard' };
+
+/** A project view with just what the templates read, plus any overrides. */
+const view = (overrides = {}) =>
+    projectView(REPOS[0], {
+        name: 'alpha',
         displayName: 'A <b>bold</b> name',
         description: 'Does "things"',
         category: 'Tools',
-        status: 'Active Development',
         highlights: ['First', 'Second'],
         longDescription: 'Long',
+        featured: 1,
+        ...overrides,
     });
 
-    it('escapes curated text', () => {
-        const html = renderProjectCard(view);
-        expect(html).toContain('A &lt;b&gt;bold&lt;/b&gt; name');
-        expect(html).not.toContain('<b>bold</b>');
-        expect(html).toContain('Does &quot;things&quot;');
-    });
+describe('project templates (all three shapes)', () => {
+    const shapes = {
+        'lead card': v => renderLeadCard(v),
+        'work card': v => renderWorkCard(v),
+        'list row': v => renderListRow(v),
+    };
 
-    it('leaves empty slots for the live data instead of baking it in', () => {
-        const html = renderProjectCard(view);
-        expect(html).toContain('<span data-live="stars">—</span>');
-        expect(html).toContain('data-live-stat="pushed" hidden');
-        expect(html).not.toContain('>9<'); // the repo's star count
-        expect(html).not.toMatch(/\d+[mhdw]o? ago/);
-    });
+    for (const [name, render] of Object.entries(shapes)) {
+        describe(name, () => {
+            const v = view({ screenshot: SCREENSHOT });
 
-    it('marks the status badge that the live "Active" badge makes redundant', () => {
-        expect(renderProjectCard(view)).toContain(
-            'status-badge active-development" data-status-active'
-        );
-        const other = projectView(REPOS[0], { status: 'Archived' });
-        expect(renderProjectCard(other)).not.toContain('data-status-active');
-    });
+            it('escapes curated text', () => {
+                const html = render(v);
+                expect(html).toContain('A &lt;b&gt;bold&lt;/b&gt; name');
+                expect(html).not.toContain('<b>bold</b>');
+            });
 
-    it('links to the demo when there is one and to the README otherwise', () => {
-        expect(
-            renderProjectCard(projectView(REPOS[0], { homepage: 'https://demo.example' }))
-        ).toContain('Live Demo');
-        expect(renderProjectCard(view)).toContain('/blob/main/README.md');
-    });
+            it('bakes in nothing that changes from day to day', () => {
+                const html = render(v);
+                expect(html).not.toContain('data-live');
+                expect(html).not.toMatch(/\d+[mhdw]o? ago/);
+                expect(html).not.toContain('>9<'); // the repo's star count
+            });
+
+            it('holds the case-study button until its study is registered', () => {
+                expect(render(v)).toMatch(/<button[^>]*data-case-study="alpha"[^>]*data-pending/);
+                expect(render(view({ longDescription: undefined, highlights: [] }))).not.toContain(
+                    'data-case-study'
+                );
+            });
+
+            it('carries data-project so the browser can find it', () => {
+                expect(render(v)).toContain('data-project="alpha"');
+            });
+        });
+    }
 
     it('never writes an unsafe homepage into the page', () => {
         for (const homepage of [
@@ -175,50 +192,115 @@ describe('project cards', () => {
             'data:text/html,<b>x</b>',
             'vbscript:msgbox(1)',
         ]) {
-            const html = renderProjectCard(projectView(REPOS[0], { homepage }));
-            expect(html, homepage).not.toMatch(/javascript:|data:text/);
-            expect(html, homepage).toContain('Documentation');
-            expect(html, homepage).not.toContain('Live Demo');
+            for (const render of [renderLeadCard, renderWorkCard]) {
+                const html = render(view({ homepage, screenshot: SCREENSHOT }));
+                expect(html, homepage).not.toMatch(/javascript:|data:text|vbscript:/);
+                expect(html, homepage).not.toContain('Live demo');
+            }
         }
-        // A repo's own homepage field is checked the same way
-        const fromRepo = renderProjectCard(
+        const fromRepo = renderWorkCard(
             projectView({ ...REPOS[0], homepage: 'javascript:alert(1)' }, null)
         );
         expect(fromRepo).not.toContain('javascript:');
     });
 
-    it('always has a place for the push time, even if the repo was unknown at build time', () => {
-        const withoutRepo = renderProjectCard(
-            projectView(null, { name: 'solo', displayName: 'Solo' })
+    it('offers a live demo only when there is a safe one', () => {
+        expect(renderWorkCard(view({ homepage: 'https://demo.example' }))).toContain('Live demo');
+        expect(renderWorkCard(view({ homepage: undefined }))).not.toContain('Live demo');
+    });
+});
+
+describe('project pictures', () => {
+    it('a screenshot is AVIF with a WebP fallback, per theme, with its alt text and dimensions', () => {
+        const html = renderWorkCard(view({ screenshot: SCREENSHOT }));
+        for (const scheme of ['light', 'dark']) {
+            expect(html).toContain(`/images/projects/alpha-${scheme}-640.avif 640w`);
+            expect(html).toContain(`/images/projects/alpha-${scheme}-1200.webp`);
+        }
+        expect(html.match(/alt="The alpha dashboard"/g)).toHaveLength(2);
+        expect(html.match(/width="1200" height="750"/g)).toHaveLength(2);
+    });
+
+    it('without one, the card shows its generated cover, as decoration', () => {
+        const html = renderWorkCard(view({ screenshot: undefined }));
+        expect(html).toContain('/images/projects/alpha-cover-light.svg');
+        expect(html).toContain('/images/projects/alpha-cover-dark.svg');
+        expect(html).not.toContain('<picture');
+        expect(html.match(/ alt=""/g)).toHaveLength(2);
+    });
+
+    it('is lazy, so the picture for the other theme is never fetched', () => {
+        expect(renderWorkCard(view())).toMatch(/loading="lazy"/);
+    });
+});
+
+describe('renderProjects', () => {
+    const shot = { screenshot: SCREENSHOT };
+    const named = (name, extra = {}) =>
+        projectView(
+            { name, language: 'Go', html_url: `https://github.com/o/${name}` },
+            { name, displayName: name, ...extra }
         );
-        expect(withoutRepo).toContain('data-live-stat="pushed"');
-        expect(withoutRepo).toContain('data-live="pushed"');
+
+    it('leads with the first project when it has a screenshot', () => {
+        const out = renderProjects([
+            named('a', { ...shot, featured: 1 }),
+            named('b', { featured: 2 }),
+        ]);
+        expect(out.counts).toEqual({ lead: 1, cards: 1, more: 0 });
+        expect(out.lead).toContain('lead-card');
     });
 
-    it('holds the case-study button until its study is registered', () => {
-        const withStudy = renderProjectCard(projectView(REPOS[0], { longDescription: 'Long' }));
-        expect(withStudy).toMatch(/<button[^>]*data-case-study="alpha"[^>]*data-pending/);
-        expect(renderProjectCard(projectView(REPOS[0], null))).not.toContain('data-case-study');
+    it('has no lead when the first project has no screenshot', () => {
+        const out = renderProjects([
+            named('a', { featured: 1 }),
+            named('b', { ...shot, featured: 2 }),
+        ]);
+        expect(out.counts.lead).toBe(0);
+        expect(out.lead).toBe('');
+        expect(out.counts.cards).toBe(2);
     });
 
-    it('hides extra cards and counts them on the "Show more" button', () => {
-        const featured = projectView(REPOS[0], { featured: 1 });
-        const rest = [REPOS[1], REPOS[2]].map(repo => projectView(repo, null));
-        const { cards, moreButton, extraCount } = renderProjects([featured, ...rest]);
-
-        expect(extraCount).toBe(2);
-        expect(cards.match(/data-extra hidden/g)).toHaveLength(2);
-        expect(moreButton).toContain('Show 2 more projects');
-        expect(moreButton).not.toContain(' hidden');
+    it('puts featured projects in the grid and the rest in a compact list', () => {
+        const out = renderProjects([
+            named('a', { ...shot, featured: 1 }),
+            named('b', { featured: 2 }),
+            named('c'),
+            named('d'),
+        ]);
+        expect(out.counts).toEqual({ lead: 1, cards: 1, more: 2 });
+        expect(out.more).toContain('project-list');
+        expect(out.more.match(/project-list__row/g)).toHaveLength(2);
     });
 
-    it('shows everything, and hides the button, when nothing is featured', () => {
-        const { cards, moreButton, extraCount } = renderProjects(
-            REPOS.map(repo => projectView(repo, null))
-        );
-        expect(extraCount).toBe(0);
-        expect(cards).not.toContain('data-extra');
-        expect(moreButton).toContain('hidden');
+    it('shows everything as cards when nothing is featured, so the section is never only a list', () => {
+        const out = renderProjects([named('a'), named('b'), named('c')]);
+        expect(out.counts).toEqual({ lead: 0, cards: 3, more: 0 });
+        expect(out.more).toBe('');
+    });
+});
+
+describe('generated covers', () => {
+    it('are deterministic: the same name always draws the same picture', () => {
+        expect(renderCover('homehub', 'light')).toBe(renderCover('homehub', 'light'));
+    });
+
+    it('differ by name, and share their lines across themes', () => {
+        expect(renderCover('homehub', 'light')).not.toBe(renderCover('minecraft', 'light'));
+        const lines = svg => svg.match(/<g[^>]*>(.*)<\/g>/s)[1];
+        expect(lines(renderCover('homehub', 'light'))).toBe(lines(renderCover('homehub', 'dark')));
+    });
+
+    it('are valid, themed SVG documents of a sensible size', () => {
+        const light = renderCover('homehub', 'light');
+        const dark = renderCover('homehub', 'dark');
+        for (const svg of [light, dark]) {
+            const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
+            expect(doc.querySelector('parsererror')).toBeNull();
+            expect(doc.documentElement.getAttribute('viewBox')).toBe('0 0 1200 750');
+            expect(svg.length).toBeLessThan(20_000);
+        }
+        expect(light).not.toBe(dark);
     });
 });
 

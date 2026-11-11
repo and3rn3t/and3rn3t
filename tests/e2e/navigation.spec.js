@@ -14,7 +14,7 @@ test.use({ reducedMotion: 'reduce', viewport: { width: 1280, height: 800 } });
 test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
-    await expect(page.locator('#projects-grid .project-card').first()).toBeVisible();
+    await expect(page.locator('#projects-grid .work-card').first()).toBeVisible();
     await expect(page.locator('#blog-posts .blog-card').first()).toBeVisible();
 });
 

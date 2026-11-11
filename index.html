@@ -325,10 +325,6 @@
 
     <noscript>
       <style>
-        #projects-grid .project-card[hidden] {
-          display: block;
-        }
-        #projects-more-btn,
         #projects [data-case-study],
         [data-open-palette] {
           display: none;
@@ -668,17 +664,22 @@
         </div>
       </section>
 
-      <!-- Projects Section -->
-      <section class="projects" id="projects">
-        <div class="container">
-          <h2 class="section-title">Featured Projects</h2>
+      <!-- Projects Section. The blocks between gen: markers are written by
+           scripts/generate-site.mjs; see scripts/templates/projects.mjs. -->
+      <section class="section work" id="projects" aria-labelledby="work-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">01 &mdash; Projects</p>
+            <h2 class="section-heading__title" id="work-title">Selected work</h2>
+            <p class="section-heading__lede">
+              Side projects, each with a short write-up of how it works.
+            </p>
+          </header>
 
-          <!-- Top Starred Projects -->
-          <div class="top-projects-section">
-            <!-- prettier-ignore -->
-            <div id="projects-lead">
-              <!-- gen:lead -->
-              <article class="lead-card" data-project="health">
+          <!-- prettier-ignore -->
+          <div id="projects-lead">
+            <!-- gen:lead -->
+            <article class="lead-card" data-project="health">
           <div class="lead-card__media">
             <picture class="shot shot--light">
             <source type="image/avif" srcset="/images/projects/health-light-640.avif 640w, /images/projects/health-light-1200.avif 1200w" sizes="(min-width: 64rem) 46rem, 100vw" />
@@ -696,380 +697,146 @@
             <p class="lead-card__lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
             <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">HealthKit</li><li class="tag">LiDAR</li><li class="tag">iOS</li></ul>
             <div class="lead-card__actions">
-              <button type="button" class="button button--primary" data-case-study="health" data-pending>
-              Read the case study <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg>
-            </button>
+              <button type="button" class="button button--primary" data-case-study="health" data-pending>Read the case study <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></button>
               <a class="button" href="https://health.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
               <a class="link" href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </div>
         </article>
-              <!-- /gen:lead -->
-            </div>
-            <!-- prettier-ignore -->
-            <div class="projects-grid" id="projects-grid">
-              <!-- gen:projects -->
-              <div class="project-card" data-project="homehub" style="--lang-color: #2b7489">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">IoT &amp; Home Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Home Automation Hub</a></h3>
-                <p class="project-description">A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.</p>
-                <p class="project-highlight-lead">→ WebSocket-driven real-time control — device state updates without polling</p>
-                <button type="button" class="project-case-study-btn" data-case-study="homehub" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">WebSockets</span><span class="language-tag">IoT Protocols</span><span class="language-tag">React</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://homehub.andernet.dev" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="guess" style="--lang-color: #2b7489">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Tools &amp; Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Guess — Transparent Akinator</a></h3>
-                <p class="project-description">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
-                <p class="project-highlight-lead">→ Live at andernator.com — playable in any browser, no install required</p>
-                <button type="button" class="project-case-study-btn" data-case-study="guess" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">Algorithms</span><span class="language-tag">Decision Trees</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://andernator.com" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="and3rn3t" style="--lang-color: #f1e05a">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Tools &amp; Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">andernet.dev — This Portfolio</a></h3>
-                <p class="project-description">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
-                <p class="project-highlight-lead">→ Framework-free ES modules with a phased, lazy-loaded startup</p>
-                <button type="button" class="project-case-study-btn" data-case-study="and3rn3t" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">JavaScript</span>
-                    <span class="language-tag">WebAssembly</span><span class="language-tag">Cloudflare Workers</span><span class="language-tag">Vite</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://andernet.dev" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="minecraft" style="--lang-color: #3572A5">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">DevOps &amp; Infrastructure</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Self-Hosted Minecraft Server</a></h3>
-                <p class="project-description">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
-                <p class="project-highlight-lead">→ One-command provisioning: fresh host to fully-configured server via shell script</p>
-                <button type="button" class="project-case-study-btn" data-case-study="minecraft" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">Python</span>
-                    <span class="language-tag">Shell</span><span class="language-tag">JavaScript</span><span class="language-tag">HTML</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/minecraft/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="weather-app" style="--lang-color: #ffac45">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Mobile Applications</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">iOS 26 Weather App</a></h3>
-                <p class="project-description">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
-                <p class="project-highlight-lead">→ Built during the iOS 26 beta — tracking live API and design system changes</p>
-                <button type="button" class="project-case-study-btn" data-case-study="weather-app" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">Swift</span>
-                    <span class="language-tag">SwiftUI</span><span class="language-tag">WeatherKit</span><span class="language-tag">iOS 26</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/weather-app/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="fastlane" style="--lang-color: #2b7489" data-extra hidden>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer">fastlane</a></h3>
-                <p class="project-description">A recreation of the 90s SIERRA game &quot;Jones in the Fast Lane&quot; - modernized.</p>
-                
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">featured</span>
-                    
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/fastlane/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="apple-music-dj" style="--lang-color: #3572A5" data-extra hidden>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Tools &amp; Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer">Apple Music DJ</a></h3>
-                <p class="project-description">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
-                <p class="project-highlight-lead">→ Daily-use tool: keyboard-only Apple Music control from any app via OpenClaw shortcut</p>
-                <button type="button" class="project-case-study-btn" data-case-study="apple-music-dj" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">Python</span>
-                    <span class="language-tag">AppleScript</span><span class="language-tag">Apple Music API</span><span class="language-tag">macOS</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://clawhub.ai/and3rn3t/skills/apple-music-dj" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="net-traffic" style="--lang-color: #e34c26" data-extra hidden>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Networking &amp; Security</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer">Network Traffic Analyzer</a></h3>
-                <p class="project-description">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
-                <p class="project-highlight-lead">→ Runs continuously on a Raspberry Pi 5 as a persistent home network sensor</p>
-                <button type="button" class="project-case-study-btn" data-case-study="net-traffic" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">HTML</span>
-                    <span class="language-tag">TypeScript</span><span class="language-tag">WebSockets</span><span class="language-tag">Raspberry Pi</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/net-traffic/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-              <!-- /gen:projects -->
+            <!-- /gen:lead -->
+          </div>
+          <!-- prettier-ignore -->
+          <div class="work-grid" id="projects-grid">
+            <!-- gen:projects -->
+            <article class="work-card" data-project="homehub">
+          <div class="work-card__media">
+            <img class="shot shot--light" src="/images/projects/homehub-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/homehub-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">IoT &amp; Home Automation</p>
+            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Home Automation Hub</a></h3>
+            <p class="work-card__desc">A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.</p>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">WebSockets</li><li class="tag">IoT Protocols</li><li class="tag">React</li></ul>
+            <div class="work-card__actions">
+              <button type="button" class="link" data-case-study="homehub" data-pending>Case study</button>
+              <a class="link" href="https://homehub.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo</a>
+              <a class="link" href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </div>
-
+        </article>
+        <article class="work-card" data-project="guess">
+          <div class="work-card__media">
+            <picture class="shot shot--light">
+            <source type="image/avif" srcset="/images/projects/guess-light-640.avif 640w, /images/projects/guess-light-1200.avif 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" />
+            <img src="/images/projects/guess-light-1200.webp" srcset="/images/projects/guess-light-640.webp 640w, /images/projects/guess-light-1200.webp 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="lazy" decoding="async" />
+          </picture>
+            <picture class="shot shot--dark">
+            <source type="image/avif" srcset="/images/projects/guess-dark-640.avif 640w, /images/projects/guess-dark-1200.avif 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" />
+            <img src="/images/projects/guess-dark-1200.webp" srcset="/images/projects/guess-dark-640.webp 640w, /images/projects/guess-dark-1200.webp 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="lazy" decoding="async" />
+          </picture>
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">Tools &amp; Automation</p>
+            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Guess — Transparent Akinator</a></h3>
+            <p class="work-card__desc">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">Algorithms</li><li class="tag">Decision Trees</li></ul>
+            <div class="work-card__actions">
+              <button type="button" class="link" data-case-study="guess" data-pending>Case study</button>
+              <a class="link" href="https://andernator.com" target="_blank" rel="noopener noreferrer">Live demo</a>
+              <a class="link" href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="and3rn3t">
+          <div class="work-card__media">
+            <img class="shot shot--light" src="/images/projects/and3rn3t-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/and3rn3t-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">Tools &amp; Automation</p>
+            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">andernet.dev — This Portfolio</a></h3>
+            <p class="work-card__desc">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
+            <ul class="tag-list"><li class="tag">JavaScript</li><li class="tag">WebAssembly</li><li class="tag">Cloudflare Workers</li><li class="tag">Vite</li></ul>
+            <div class="work-card__actions">
+              <button type="button" class="link" data-case-study="and3rn3t" data-pending>Case study</button>
+              <a class="link" href="https://andernet.dev" target="_blank" rel="noopener noreferrer">Live demo</a>
+              <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="minecraft">
+          <div class="work-card__media">
+            <img class="shot shot--light" src="/images/projects/minecraft-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/minecraft-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">DevOps &amp; Infrastructure</p>
+            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Self-Hosted Minecraft Server</a></h3>
+            <p class="work-card__desc">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
+            <ul class="tag-list"><li class="tag">Python</li><li class="tag">Shell</li><li class="tag">JavaScript</li><li class="tag">HTML</li></ul>
+            <div class="work-card__actions">
+              <button type="button" class="link" data-case-study="minecraft" data-pending>Case study</button>
+              
+              <a class="link" href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="weather-app">
+          <div class="work-card__media">
+            <img class="shot shot--light" src="/images/projects/weather-app-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/weather-app-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">Mobile Applications</p>
+            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">iOS 26 Weather App</a></h3>
+            <p class="work-card__desc">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
+            <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">WeatherKit</li><li class="tag">iOS 26</li></ul>
+            <div class="work-card__actions">
+              <button type="button" class="link" data-case-study="weather-app" data-pending>Case study</button>
+              
+              <a class="link" href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+            <!-- /gen:projects -->
+          </div>
           <!-- prettier-ignore -->
-          <div class="projects-cta">
-            <!-- gen:projects-more -->
-            <button
-              type="button"
-              class="btn btn-outline projects-more-btn"
-              id="projects-more-btn"
-              aria-expanded="false"
-              aria-controls="projects-grid"
-            >
-              Show 3 more projects
-            </button>
-            <!-- /gen:projects-more -->
+          <div class="work-more" id="projects-more">
+            <!-- gen:more -->
+            <p class="eyebrow">More</p>
+        <ul class="project-list">
+          <li class="project-list__row" data-project="fastlane">
+            <h3 class="project-list__name"><a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer">fastlane</a></h3>
+            <p class="project-list__desc">A recreation of the 90s SIERRA game &quot;Jones in the Fast Lane&quot; - modernized.</p>
+            <p class="project-list__stack">TypeScript</p>
+            
+          </li>
+          <li class="project-list__row" data-project="apple-music-dj">
+            <h3 class="project-list__name"><a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer">Apple Music DJ</a></h3>
+            <p class="project-list__desc">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
+            <p class="project-list__stack">Python · AppleScript · Apple Music API</p>
+            <button type="button" class="link project-list__case-study" data-case-study="apple-music-dj" data-pending>Case study</button>
+          </li>
+          <li class="project-list__row" data-project="net-traffic">
+            <h3 class="project-list__name"><a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer">Network Traffic Analyzer</a></h3>
+            <p class="project-list__desc">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
+            <p class="project-list__stack">HTML · TypeScript · WebSockets</p>
+            <button type="button" class="link project-list__case-study" data-case-study="net-traffic" data-pending>Case study</button>
+          </li>
+        </ul>
+            <!-- /gen:more -->
+          </div>
+
+          <p class="work-footer">
             <a
+              class="link"
               href="https://github.com/and3rn3t"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-outline"
+              >All repositories on GitHub</a
             >
-              View All Projects on GitHub
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#github"></use>
-              </svg>
-            </a>
-          </div>
+          </p>
         </div>
       </section>
 
