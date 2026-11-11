@@ -42,6 +42,22 @@ pnpm deploy:worker   # only when asked
   re-runs it. Edit the data files or `scripts/templates/`, not the generated HTML. Only stable
   facts are baked in: live numbers (stars, last push) are empty slots that `modules/projects.js`
   fills in, because `pages.yml` hashes every `*.html` into the service worker's cache id.
+- **CSS is moving to a new design system** (Phase 10, `ROADMAP.md`): `styles/core.css` (cascade layers,
+  tokens, nav and primitives) and `styles/home.css`. The old `styles.css` is `@import`ed into the
+  lowest layer, `legacy`, so new rules win without specificity fights, and is deleted at cut-over.
+  Rules for `styles/`:
+  - The layer order (`scale, legacy, reset, tokens, …`) is declared first in `index.html`'s `<head>`
+    **and** at the top of `core.css`; keep them identical. Layers are ordered by first appearance, so
+    any `@layer legacy` that comes earlier (e.g. inline critical CSS) silently fixes the wrong order.
+  - New components get new class names (`.site-nav`, `.intro`, `.lead-card`, `.button`), never the old
+    ones, so no legacy rule leaks in. Don't redefine a shared token (`--space-*`, `--font-size-*`) in
+    the `tokens` layer: that would override legacy's mobile scale. Use a new name instead.
+  - Colour comes from semantic tokens (`--surface`, `--text`, `--muted`, `--border`, `--accent`, …) defined once
+    with `light-dark()`. Stylelint rejects hex/`rgb()`/named colours in `styles/` outside the token block.
+  - `<html data-theme>` is the theme (set before first paint); `body.dark-theme` is kept only for legacy.
+- Project screenshots are captured by hand: `pnpm capture:screenshots [name]` opens each project's
+  `screenshot.url` (in `projects-data.json`) and writes `images/projects/`. Look at the result before
+  committing; a demo behind a login (homehub) or showing an empty state needs another URL or none.
 - Icons come from an SVG sprite: edit `scripts/build-icons.mjs`, run `pnpm build:icons`, use `icon('name')`.
 - `CNAME`, `feed.xml`, `manifest.json` are deploy-sensitive; touch with care.
 - `ROADMAP.md` tracks planned work.

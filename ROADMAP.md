@@ -95,8 +95,8 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | #    | Item                                                                                         | Status        |
 | ---- | -------------------------------------------------------------------------------------------- | ------------- |
 | 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                  | ✅ 2026-11-11 |
-| 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS           | 🟡            |
-| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card | ⬜            |
+| 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247    | ✅ 2026-11-11 |
+| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card | 🟡            |
 | 10.3 | Home sections on the new system; inline contact form                                         | ⬜            |
 | 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                      | ⬜            |
 | 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                    | ⬜            |
@@ -244,3 +244,19 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   desktop keeps the CSS `animation-timeline: view()` reveal, phones get none beyond the card
   entrance. The daily data workflow re-runs the generator, because a newly starred repo changes
   the list.
+- **2026-11-11** — Phase 10.2 (on the `redesign` branch): design-system core and the checkpoint spike. New
+  `styles/core.css` (layers, `light-dark()` tokens, nav, primitives) and `styles/home.css` (intro, lead card);
+  the old `styles.css` is `@import`ed into a low `legacy` layer so it keeps rendering unchanged (verified by
+  pixel-diffing 36 legacy surfaces before and after). Three traps worth knowing: (1) cascade layers are ordered
+  by first appearance, so the inline critical CSS's `@layer legacy` had silently fixed the order and put the
+  shared spacing scale above legacy's mobile override; the order is now declared first in `<head>`. (2)
+  `backdrop-filter` on a bar makes it the containing block of a `position: fixed` child, which shrank the
+  mobile menu sheet; the blur lives on a pseudo-element. (3) A web-font swap re-centred the hero (CLS 0.010); the
+  hero is now top-aligned and text uses metric-matched fallback fonts (CLS 0.0004 on desktop, 0 on mobile).
+  Removed: the typewriter (`hero-text.js`), the WebGL hero fallback and `supportsWebGL` (also closes #230's
+  eager WebGL context), parallax, the scroll-progress bar markup. Screenshots: health is captured from its
+  populated `/gait-analysis` page (its home shows "Offline"); homehub is behind Cloudflare Access so it gets a
+  generated cover later; the portfolio's own screenshot is deferred until after cut-over so it doesn't capture
+  the old design. The per-theme axe scan also exposed two pre-existing dark-theme contrast bugs in the old
+  project buttons (2.2:1 and 3.9:1), patched in `home.css` until those elements are replaced. Generated SVG
+  covers (`scripts/generate-covers.mjs`) move to 10.3, where the other cards are redesigned.
