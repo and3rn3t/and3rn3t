@@ -72,14 +72,20 @@ describe('renderPortfolioCard', () => {
         expect(widths[0]).toBeGreaterThan(widths[1]); // ordered by size
     });
 
-    it('uses the known colour for a language and a fallback for an unknown one', () => {
-        const svg = renderPortfolioCard({
-            languageBytes: { TypeScript: 10, 'Made-Up Lang': 5 },
-        });
+    it('colours a known language with its own colour and an unknown one with the neutral fallback', () => {
+        const doc = parse(
+            renderPortfolioCard({ languageBytes: { TypeScript: 10, 'Made-Up Lang': 5 } })
+        );
+        // Largest first, so TypeScript is the first bar segment / legend dot and the unknown
+        // language is the second. Check each element's own fill: the muted label text happens
+        // to share the fallback colour, so a loose "svg contains this colour" can't tell.
+        const bars = [...doc.querySelectorAll('rect[height="16"]')].map(r =>
+            r.getAttribute('fill')
+        );
+        const dots = [...doc.querySelectorAll('circle[r="6"]')].map(c => c.getAttribute('fill'));
 
-        expect(svg).toContain('fill="#2b7489"'); // TypeScript
-        expect(svg).toContain('fill="#6b7280"'); // fallback, also used for muted text
-        expect(parse(svg).querySelectorAll('circle[r="6"]')).toHaveLength(2);
+        expect(bars).toEqual(['#2b7489', '#6b7280']);
+        expect(dots).toEqual(['#2b7489', '#6b7280']);
     });
 
     it('escapes language names, so markup in the data cannot break or inject into the SVG', () => {
