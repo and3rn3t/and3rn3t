@@ -441,6 +441,51 @@
     }
   }
 
+  /* --- Sections: a hairline above, generous air, and a heading that sits left ------- */
+  .section {
+    padding-block: var(--space-16);
+    border-top: var(--border-width) solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-sans);
+  }
+
+  @media (min-width: 48rem) {
+    .section {
+      padding-block: var(--space-24);
+    }
+  }
+
+  .section-heading {
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--measure);
+    margin-bottom: var(--space-10);
+  }
+
+  .section-heading__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    text-wrap: balance;
+  }
+
+  /* A link inside the lede is the same size as the words around it */
+  .section-heading__lede .link {
+    font-size: inherit;
+  }
+
+  .section-heading__lede {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+  }
+
   /* --- Text link with an arrow ------------------------------------------------ */
   .link {
     padding: 0;

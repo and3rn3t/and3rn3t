@@ -62,6 +62,53 @@ test.describe('theme', () => {
     });
 });
 
+test.describe('home sections', () => {
+    test.use({ viewport: { width: 1280, height: 800 } });
+
+    // Every home section is built from .section and .section-heading*, which core.css owns. If
+    // those rules go missing the sections fall back to browser defaults and nothing else fails.
+    test('keep the design system spacing, hairline and heading type', async ({ page }) => {
+        await page.goto('/');
+        const sections = await page.locator('main section.section').count();
+        expect(sections).toBeGreaterThanOrEqual(5);
+
+        const expected = await page.evaluate(() => {
+            const probe = (property, value) => {
+                const el = document.createElement('div');
+                el.style[property] = value;
+                document.body.append(el);
+                const resolved = getComputedStyle(el)[property];
+                el.remove();
+                return resolved;
+            };
+            return {
+                padding: probe('paddingTop', 'var(--space-24)'),
+                title: probe('fontSize', 'var(--font-size-title)'),
+                lede: probe('fontSize', 'var(--font-size-lg)'),
+            };
+        });
+
+        const actual = await page.evaluate(() => {
+            const style = (selector, ...properties) => {
+                const computed = getComputedStyle(document.querySelector(selector));
+                return Object.fromEntries(properties.map(name => [name, computed[name]]));
+            };
+            return {
+                section: style('#about.section', 'paddingTop', 'paddingBottom', 'borderTopWidth'),
+                title: style('#about .section-heading__title', 'fontSize', 'marginTop'),
+                lede: style('#projects .section-heading__lede', 'fontSize'),
+            };
+        });
+
+        expect(actual.section.paddingTop).toBe(expected.padding);
+        expect(actual.section.paddingBottom).toBe(expected.padding);
+        expect(actual.section.borderTopWidth).toBe('1px');
+        expect(actual.title.fontSize).toBe(expected.title);
+        expect(actual.title.marginTop).toBe('0px');
+        expect(actual.lede.fontSize).toBe(expected.lede);
+    });
+});
+
 test.describe('navigation chrome', () => {
     test('the search button opens the command palette', async ({ page }) => {
         await page.goto('/');
