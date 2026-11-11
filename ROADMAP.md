@@ -97,7 +97,7 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                  | ✅ 2026-11-11 |
 | 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247    | ✅ 2026-11-11 |
 | 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card | 🟡            |
-| 10.3 | Home sections on the new system; inline contact form                                         | 🟡            |
+| 10.3 | Home sections on the new system: work ✅, about/experience/writing ✅, contact + footer next | 🟡            |
 | 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                      | ⬜            |
 | 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                    | ⬜            |
 | 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                               | ⬜            |
@@ -271,3 +271,17 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   downloaded); a new test asserts a theme never requests the other theme's images. Also: the `featured` GitHub
   topic was leaking into project tags, and a nav test needed to poll because colour transitions settle a frame
   late. The legacy dark-theme button patch is deleted along with the buttons it patched.
+- **2026-11-11** — Phase 10.3b (About, Experience, Writing, on `redesign`): About is a statement on the left and
+  an at-a-glance panel on the right (role, company, since: generated from the current role in
+  `experience-data.json`, so it can't go stale; tools as tags). The GitHub strip became a band with two honest
+  numbers (contributions in the last year; repositories active in the last six months, now excluding forks and
+  archived repos, which took the count from 52 to 24) and a token-coloured chart. "Total stars" and the
+  hard-coded "5+ years on GitHub" are gone (#236), and so is the third-party `ghchart.rshah.org` fallback image.
+  Experience is one column: role, company and dates on a row, the summary, and the highlights and technologies
+  in a native `<details>` (open for the current role, working without JavaScript). Education is compact rows.
+  Writing is rows, not cards. Sections are numbered 01-04 by their real page order. The micro-interactions
+  module (count-up, tilt, magnetic) is deleted: its targets no longer exist. Traps: a `display: grid` on the
+  band silently overrode the `hidden` attribute (the same bug class as `.intro__status`), which a test for the
+  no-data case caught; a missing number must stay a dash, because "0 active repositories" would be a false
+  statement; the API client retries with backoff, so "no data" takes a few seconds to show. The phone chart
+  caption now says "the last 20 weeks" to match what it shows.
