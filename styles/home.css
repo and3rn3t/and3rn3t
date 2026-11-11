@@ -236,7 +236,6 @@
   }
 
   .lead-card__media img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -249,6 +248,13 @@
     display: block;
     width: 100%;
     height: 100%;
+  }
+
+  /* The <img> inside a <picture>. A bare <img class="shot"> must NOT get display from a rule
+     like this one: it would out-rank .shot--dark below (more specific) and un-hide the other
+     theme's image, which is then still downloaded. */
+  .shot img {
+    display: block;
   }
 
   /* Same specificity as .shot and later, so these win. Keep the two kept together. */
@@ -333,32 +339,164 @@
   }
 
   /* ==========================================================================
-     Legacy patches. Dark-theme contrast bugs in the old project cards and buttons, found by
-     the per-theme axe scan (tests/e2e/a11y.spec.js). They exist today, in the old design
-     too. Delete this block when those elements are replaced.
+     Selected work: a grid of cards, then a compact list for the rest
      ========================================================================== */
 
-  /* Card "View Code": light text on the dark theme's #22c55e (2.2:1). The legacy hover
-     darkens the background to #166534, which the dark text can't read on, so lighten it. */
-  :root[data-theme='dark'] .project-link:not(.live, .secondary) {
-    color: var(--accent-contrast);
+  /* Flex, not grid: the last row stretches to fill, so five cards sit as three over two */
+  .work-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
   }
 
-  :root[data-theme='dark'] .project-link:not(.live, .secondary):hover {
-    background: var(--accent-strong);
+  .work-card {
+    display: flex;
+    flex: 1 1 22rem;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    transition: border-color var(--dur-base) var(--ease-out);
   }
 
-  /* "Show more projects" and "View all on GitHub": #15803d on near-black (3.9:1). The legacy
-     hover fills with the primary colour, which is the same green as this text (1:1). */
-  :root[data-theme='dark'] .projects-cta .btn-outline {
-    border-color: var(--accent);
+  .work-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .work-card__media {
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    /* The last row's cards stretch wider; cap the image so they don't tower over the rest */
+    max-height: 16rem;
+    border-bottom: var(--border-width) solid var(--border);
+    background: var(--surface-sunken);
+  }
+
+  .work-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  .work-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+  }
+
+  .work-card__title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+  }
+
+  .work-card__title a,
+  .project-list__name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .work-card__title a:hover,
+  .project-list__name a:hover {
     color: var(--accent);
   }
 
-  :root[data-theme='dark'] .projects-cta .btn-outline:hover {
-    border-color: var(--accent);
-    background: var(--accent);
+  .work-card__desc,
+  .project-list__desc {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .work-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+
+  .work-more:has(.project-list) {
+    margin-top: var(--space-16);
+  }
+
+  .project-list {
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .project-list__row {
+    display: grid;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-6);
+    padding: var(--space-5) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .project-list__name {
+    margin: 0;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .project-list__desc {
+    -webkit-line-clamp: 2;
+  }
+
+  .project-list__stack {
+    margin: 0;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .project-list__case-study {
+    justify-self: start;
+  }
+
+  @media (min-width: 48rem) {
+    .project-list__row {
+      grid-template-columns: 13rem minmax(0, 1fr) 11rem 6.5rem;
+    }
+
+    .project-list__case-study {
+      justify-self: end;
+    }
+  }
+
+  .work-footer {
+    margin: var(--space-10) 0 0;
+  }
+
+  /* ==========================================================================
+     Legacy patch: the case-study modal
+     Its "View Code" action is still the old .project-link (modules/project-modal.js), which in
+     the dark theme is light text on #22c55e (2.2:1). Axe doesn't catch it: the modal's backdrop
+     overlaps it, so axe can't work out the background and reports "incomplete", not a violation.
+     The legacy hover darkens the background to #166534, which dark text can't read on, so the
+     hover is patched too. Delete this block with the modal (Phase 10.4).
+     ========================================================================== */
+  :root[data-theme='dark'] .project-modal .project-link:not(.live, .secondary) {
     color: var(--accent-contrast);
+  }
+
+  :root[data-theme='dark'] .project-modal .project-link:not(.live, .secondary):hover {
+    background: var(--accent-strong);
   }
 
   @media (prefers-reduced-motion: reduce) {

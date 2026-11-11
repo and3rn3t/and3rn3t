@@ -97,7 +97,7 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                  | ✅ 2026-11-11 |
 | 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247    | ✅ 2026-11-11 |
 | 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card | 🟡            |
-| 10.3 | Home sections on the new system; inline contact form                                         | ⬜            |
+| 10.3 | Home sections on the new system; inline contact form                                         | 🟡            |
 | 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                      | ⬜            |
 | 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                    | ⬜            |
 | 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                               | ⬜            |
@@ -260,3 +260,14 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   the old design. The per-theme axe scan also exposed two pre-existing dark-theme contrast bugs in the old
   project buttons (2.2:1 and 3.9:1), patched in `home.css` until those elements are replaced. Generated SVG
   covers (`scripts/generate-covers.mjs`) move to 10.3, where the other cards are redesigned.
+- **2026-11-11** — Phase 10.3a (Selected work, on `redesign`): the section is now a left-aligned heading, the lead
+  card, a flex grid of the other featured projects (three over two, no empty cells) and an always-visible
+  compact list for the rest. This replaces the "Show more" expander and the mobile carousel, so `data-extra`,
+  the live star/push slots and the "Active" badge are gone and `modules/projects.js` only registers case studies
+  (cards no longer show stars, as planned). Featured projects without a screenshot get a generated cover
+  (`scripts/templates/cover.mjs`: seeded flow lines, one SVG per theme, written by `generate-site`). Found while
+  building it: the same specificity trap as the lead card, this time on cover `<img>`s (a `display: block` on
+  `.work-card__media img` out-ranked `.shot--dark` and un-hid the other theme's image, which was still
+  downloaded); a new test asserts a theme never requests the other theme's images. Also: the `featured` GitHub
+  topic was leaking into project tags, and a nav test needed to poll because colour transitions settle a frame
+  late. The legacy dark-theme button patch is deleted along with the buttons it patched.

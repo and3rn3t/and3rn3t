@@ -19,8 +19,8 @@ jobs:
       # visible to `git diff`, which otherwise ignores untracked files.
       command: >-
         pnpm validate &&
-        pnpm generate:site && git add -N posts feed.xml sitemap.xml index.html &&
-        git diff --exit-code -- posts feed.xml sitemap.xml index.html
+        pnpm generate:site && git add -N posts feed.xml sitemap.xml index.html images &&
+        git diff --exit-code -- posts feed.xml sitemap.xml index.html images
       package-manager: pnpm
 
   e2e:

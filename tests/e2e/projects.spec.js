@@ -1,51 +1,91 @@
 /**
- * Featured projects + "Show more" expander e2e tests
- *
- * Covers: featured cards render first, the expander reveals/hides the rest,
- * and a deep link to a hidden project's case study expands the grid.
+ * Selected work: a lead card, a grid of cards, and a compact list, all pre-rendered; the browser
+ * only makes their case studies work.
  */
 import { test, expect } from './fixtures.js';
 
-const visibleCards = '#projects-grid .project-card:not([hidden])';
-const hiddenCards = '#projects-grid .project-card[hidden]';
-
-test('shows only featured projects until expanded', async ({ page }) => {
+test('shows the lead card, the grid and the compact list, with nothing hidden', async ({
+    page,
+}) => {
     await page.goto('/');
-    const btn = page.locator('#projects-more-btn');
-    await expect(page.locator(visibleCards).first()).toBeVisible();
+    await expect(page.locator('#projects .lead-card')).toBeVisible();
 
-    const featured = await page.locator(visibleCards).count();
-    const extras = await page.locator(hiddenCards).count();
-    expect(featured).toBeGreaterThan(0);
-    test.skip(extras === 0, 'no non-featured projects in current data');
+    const cards = page.locator('#projects-grid .work-card');
+    expect(await cards.count()).toBeGreaterThan(0);
+    for (const card of await cards.all()) await expect(card).toBeVisible();
 
-    await expect(btn).toBeVisible();
-    await expect(btn).toHaveAttribute('aria-expanded', 'false');
-    await expect(btn).toHaveText(new RegExp(`Show ${extras} more project`));
+    const rows = page.locator('#projects-more .project-list__row');
+    expect(await rows.count()).toBeGreaterThan(0);
+    for (const row of await rows.all()) await expect(row).toBeVisible();
 
-    await btn.click();
-    await expect(btn).toHaveAttribute('aria-expanded', 'true');
-    await expect(page.locator(visibleCards)).toHaveCount(featured + extras);
-    // Focus moves to the first newly revealed card.
-    await expect(page.locator('[data-extra] .project-title a').first()).toBeFocused();
-
-    await btn.click();
-    await expect(btn).toHaveAttribute('aria-expanded', 'false');
-    await expect(page.locator(visibleCards)).toHaveCount(featured);
+    // The old "Show more" expander is gone: everything starred is on the page
+    await expect(page.locator('#projects-more-btn, [data-extra]')).toHaveCount(0);
 });
 
-test('deep link to a hidden case study expands the grid', async ({ page }) => {
+test('every project with a write-up gets a working case-study button', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForSelector('#projects [data-case-study]:not([data-pending])');
+    await expect(page.locator('#projects [data-case-study][data-pending]')).toHaveCount(0);
+
+    const slugs = await page
+        .locator('#projects [data-case-study]')
+        .evaluateAll(buttons => buttons.map(button => button.dataset.caseStudy));
+    expect(slugs.length).toBeGreaterThan(3);
+
+    // One from each shape opens its study
+    for (const selector of [
+        '.lead-card [data-case-study]',
+        '.work-card [data-case-study]',
+        '.project-list__row [data-case-study]',
+    ]) {
+        const button = page.locator(`#projects ${selector}`).first();
+        await button.scrollIntoViewIfNeeded();
+        await button.click();
+        await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+        await page.keyboard.press('Escape');
+        await expect(page.locator('#project-modal')).not.toHaveClass(/visible/);
+    }
+});
+
+test('a deep link to a project in the compact list opens its case study', async ({ page }) => {
     await page.goto('/');
     const slug = await page
-        .locator('[data-extra] [data-case-study]')
+        .locator('#projects-more [data-case-study]')
         .first()
-        .getAttribute('data-case-study', { timeout: 5000 })
-        .catch(() => null);
-    test.skip(!slug, 'no hidden project with a case study in current data');
+        .getAttribute('data-case-study');
 
     // Leave the page first so this is a fresh load, not a same-document hash change.
     await page.goto('about:blank');
     await page.goto(`/#project/${slug}`);
-    await expect(page.locator('#projects-more-btn')).toHaveAttribute('aria-expanded', 'true');
     await expect(page.locator('body')).toHaveClass(/modal-open/);
+});
+
+test.describe('on a phone', () => {
+    test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+
+    test('cards stack in one column; there is no sideways carousel', async ({ page }) => {
+        await page.goto('/');
+        const cards = await page.locator('#projects-grid .work-card').evaluateAll(els =>
+            els.map(el => {
+                const { left, width, top } = el.getBoundingClientRect();
+                return { left: Math.round(left), width: Math.round(width), top: Math.round(top) };
+            })
+        );
+        expect(cards.length).toBeGreaterThan(1);
+        // Same left edge and width, and each below the one before
+        expect(new Set(cards.map(card => card.left)).size).toBe(1);
+        expect(new Set(cards.map(card => card.width)).size).toBe(1);
+        expect(cards.map(card => card.top)).toEqual(
+            [...cards.map(card => card.top)].sort((a, b) => a - b)
+        );
+
+        const overflows = await page.evaluate(() => {
+            const grid = document.getElementById('projects-grid');
+            return (
+                grid.scrollWidth > grid.clientWidth ||
+                document.documentElement.scrollWidth > globalThis.innerWidth
+            );
+        });
+        expect(overflows).toBe(false);
+    });
 });

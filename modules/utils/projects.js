@@ -26,8 +26,6 @@ const LANGUAGE_COLORS = {
     Vue: '#41b883',
 };
 
-const RECENT_WINDOW_MS = 180 * 24 * 60 * 60 * 1000;
-
 /**
  * @param {string} language
  * @returns {string | null} the language's GitHub colour, if it has one
@@ -140,6 +138,8 @@ export function projectView(repo, metadata) {
 
     return {
         slug,
+        // The file-name prefix of the project's images (see images/projects/)
+        name: metadata?.name ?? slug,
         displayName,
         description,
         longDescription: metadata?.longDescription,
@@ -153,7 +153,8 @@ export function projectView(repo, metadata) {
         homepage: safeUrl(metadata?.homepage ?? repo?.homepage),
         // Up to three tags beyond the primary language, curated first
         secondaryTags: (metadata?.technologies ?? repo?.topics ?? [])
-            .filter(tag => tag.toLowerCase() !== language.toLowerCase())
+            // "featured" is a repo topic the workspace tooling sets, not a technology
+            .filter(tag => !['featured', language.toLowerCase()].includes(tag.toLowerCase()))
             .slice(0, 3),
         // Captured by scripts/capture-screenshots.mjs into images/projects/<name>-*
         screenshot: metadata?.screenshot?.url
@@ -162,16 +163,6 @@ export function projectView(repo, metadata) {
         featured: Boolean(metadata?.featured),
         hasCaseStudy: Boolean(slug && (metadata?.longDescription || highlights.length > 1)),
     };
-}
-
-/**
- * @param {string | number | Date | null | undefined} pushedAt
- * @param {number} [now]
- * @returns {boolean} whether the repo was pushed to within the last 180 days
- */
-export function isRecentlyPushed(pushedAt, now = Date.now()) {
-    if (!pushedAt) return false;
-    return now - new Date(pushedAt).getTime() < RECENT_WINDOW_MS;
 }
 
 /**

@@ -32,11 +32,13 @@ test.describe('theme', () => {
     test('sets <html data-theme> before first paint, from the saved choice', async ({ page }) => {
         await page.addInitScript(() => localStorage.setItem('theme', 'dark'));
         await page.goto('/', { waitUntil: 'commit' });
-        // The head script runs before the body exists
+        // The head script runs before the body exists, so the attribute is there at commit
         await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-        expect(
-            await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)
-        ).toBe('dark');
+        // color-scheme comes from the stylesheet, which is render-blocking: it resolves once
+        // that arrives, still before anything is painted. Polled, because at commit it has not.
+        await expect
+            .poll(() => page.evaluate(() => getComputedStyle(document.documentElement).colorScheme))
+            .toBe('dark');
     });
 
     test('follows the OS when nothing is saved', async ({ page }) => {
@@ -76,7 +78,8 @@ test.describe('navigation chrome', () => {
         const top = await border();
         await page.evaluate(() => globalThis.scrollTo(0, 600));
         await expect(page.locator('#navbar')).toHaveClass(/scrolled/);
-        expect(await border()).not.toBe(top);
+        // Polled: the colour transitions, so it settles a frame after the class lands
+        await expect.poll(border).not.toBe(top);
     });
 });
 
@@ -122,14 +125,39 @@ test.describe('lead project card', () => {
         }
     });
 
-    test('has no star count or "Active" badge, and opens its case study', async ({ page }) => {
+    test('opens its case study', async ({ page }) => {
         await page.goto('/');
         const lead = page.locator('.lead-card[data-project="health"]');
-        await expect(lead.locator('[data-live="stars"], .project-recent-badge')).toHaveCount(0);
 
         const open = lead.locator('[data-case-study]');
         await expect(open).toBeVisible();
         await open.click();
         await expect(page.locator('#project-modal')).toHaveClass(/visible/);
     });
+});
+
+test.describe('images', () => {
+    // Both themes' pictures are in the page and CSS hides one. If a rule ever un-hides it
+    // (specificity), it is fetched for nothing, which is a real cost on a phone.
+    for (const theme of ['light', 'dark']) {
+        const other = theme === 'light' ? 'dark' : 'light';
+        test(`the ${theme} theme never downloads the ${other} theme's project images`, async ({
+            page,
+        }) => {
+            const requested = [];
+            page.on('request', request => {
+                if (request.url().includes('/images/projects/')) requested.push(request.url());
+            });
+            await page.addInitScript(t => localStorage.setItem('theme', t), theme);
+            await page.goto('/');
+            // Bring every card into view so every lazy image that is going to load, loads
+            for (const card of await page.locator('#projects [data-project]').all()) {
+                await card.scrollIntoViewIfNeeded();
+            }
+            await page.waitForLoadState('networkidle');
+
+            expect(requested.filter(url => url.includes(`-${theme}`)).length).toBeGreaterThan(0);
+            expect(requested.filter(url => url.includes(`-${other}`))).toEqual([]);
+        });
+    }
 });

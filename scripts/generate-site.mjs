@@ -21,14 +21,15 @@
  * Usage: pnpm generate:site
  */
 
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml } from '../modules/utils/html.js';
 import { icon } from '../modules/utils/icon.js';
 import { projectView, selectProjects } from '../modules/utils/projects.js';
 import { renderTimeline } from './templates/experience.mjs';
-import { renderProjects } from './templates/projects.mjs';
+import { renderCover } from './templates/cover.mjs';
+import { coverFiles, renderProjects } from './templates/projects.mjs';
 import { longDate, minutes } from './templates/shared.mjs';
 import { renderBlogCards } from './templates/writing.mjs';
 
@@ -304,18 +305,32 @@ const views = selectProjects(
   githubData.repositories,
   githubData.selfStarredRepoNames
 ).map(({ repo, metadata }) => projectView(repo, metadata));
-const { lead, cards, moreButton, extraCount } = renderProjects(views);
+const { lead, cards, more, counts } = renderProjects(views);
 
 const indexPath = join(ROOT, 'index.html');
 let index = readFileSync(indexPath, 'utf8');
 index = fillBlock(index, 'lead', lead);
 index = fillBlock(index, 'projects', cards);
-index = fillBlock(index, 'projects-more', moreButton);
+index = fillBlock(index, 'more', more);
 index = fillBlock(index, 'experience', renderTimeline(experienceData.experience, 'work'));
 index = fillBlock(index, 'education', renderTimeline(experienceData.education, 'edu'));
 index = fillBlock(index, 'writing', renderBlogCards(posts));
 writeFileSync(indexPath, index);
 console.log(
-  `  wrote index.html (${views.length} projects, ${extraCount} behind "Show more", ` +
+  `  wrote index.html (${counts.lead} lead, ${counts.cards} cards, ${counts.more} in the list, ` +
     `${posts.length} posts)`
 );
+
+// ── images/projects/<name>-cover-*.svg (every card without a screenshot; see coverFiles) ───────
+const coverDir = join(ROOT, 'images', 'projects');
+mkdirSync(coverDir, { recursive: true });
+const covers = new Set();
+for (const { file, name, scheme } of coverFiles(views)) {
+  writeFileSync(join(coverDir, file), renderCover(name, scheme));
+  covers.add(file);
+}
+// A project that gained a screenshot, or is no longer a card, no longer needs its cover
+for (const file of readdirSync(coverDir)) {
+  if (/-cover-(light|dark)\.svg$/.test(file) && !covers.has(file)) rmSync(join(coverDir, file));
+}
+console.log(`  wrote ${covers.size} cover images`);

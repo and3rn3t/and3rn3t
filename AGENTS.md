@@ -40,8 +40,9 @@ pnpm deploy:worker   # only when asked
   `pnpm generate:site` from `posts-data.json`, `projects-data.json`, `experience-data.json` and
   the starred-repo list in `github-data.json`; CI fails on a diff and the daily data workflow
   re-runs it. Edit the data files or `scripts/templates/`, not the generated HTML. Only stable
-  facts are baked in: live numbers (stars, last push) are empty slots that `modules/projects.js`
-  fills in, because `pages.yml` hashes every `*.html` into the service worker's cache id.
+  facts are baked in (the cards show no live numbers; `modules/projects.js` only registers case studies),
+  because `pages.yml` hashes every `*.html` into the service worker's cache id. The same run writes
+  `images/projects/<name>-cover-{light,dark}.svg` for featured projects without a screenshot.
 - **CSS is moving to a new design system** (Phase 10, `ROADMAP.md`): `styles/core.css` (cascade layers,
   tokens, nav and primitives) and `styles/home.css`. The old `styles.css` is `@import`ed into the
   lowest layer, `legacy`, so new rules win without specificity fights, and is deleted at cut-over.
