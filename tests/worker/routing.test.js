@@ -21,6 +21,7 @@ vi.mock('../../worker/engagement.js', () => ({
 }));
 
 const { default: worker } = await import('../../worker/index.js');
+const engagement = await import('../../worker/engagement.js');
 const env = {};
 
 function req(method, path) {
@@ -70,4 +71,23 @@ test('OPTIONS /activity returns 200 with CORS headers', async () => {
     const res = await worker.fetch(req('OPTIONS', '/activity'), env);
     expect(res.status).toBe(200);
     expect(res.headers.get('Access-Control-Allow-Origin')).toBeDefined();
+});
+
+// ── Unexpected failures ───────────────────────────────────────────────────────
+
+test('an exception in a handler becomes a JSON 500, not a bare runtime error', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    engagement.handleViewsRequest.mockRejectedValueOnce(new Error('KV exploded'));
+
+    const res = await worker.fetch(req('POST', '/views?page=home'), env);
+
+    expect(res.status).toBe(500);
+    expect(await res.json()).toEqual({ error: 'internal' }); // no message or stack leaks out
+    expect(error).toHaveBeenCalled(); // but it is logged
+    error.mockRestore();
+});
+
+test('the worker keeps serving after a handler failure', async () => {
+    const res = await worker.fetch(req('GET', '/health'), env);
+    expect(res.status).toBe(200);
 });
