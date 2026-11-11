@@ -151,13 +151,19 @@
       }
     </style>
     <script>
-      // The saved theme, before first paint (same as every other page)
+      // The saved theme, before first paint (same as every other page). The browser-bar colour
+      // follows it too: the two theme-color tags are keyed to the OS setting, which a saved
+      // choice can contradict, so point both at the colour of the theme actually shown.
       (function () {
         var theme = null;
         try {
           theme = localStorage.getItem('theme');
         } catch (e) {}
-        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+        if (theme !== 'light' && theme !== 'dark') return;
+        document.documentElement.dataset.theme = theme;
+        var colour = theme === 'dark' ? '#0b0d0b' : '#fbfbf8';
+        var tags = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < tags.length; i++) tags[i].content = colour;
       })();
     </script>
   </head>
