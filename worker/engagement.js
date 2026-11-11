@@ -104,50 +104,83 @@ function entryKey(dateIso, suffix) {
 
 /**
  * Entries used to live in one JSON array under `entries`. Move them to per-entry keys.
- * Keys are deterministic, so a run interrupted before the final delete simply repeats.
+ *
+ * This must never fail a read. KV allows one write per key per second, so two overlapping
+ * first reads can collide, and a stale read of the legacy key can show up after it was
+ * deleted. So: keys are deterministic, a key that already exists is not rewritten, every
+ * failure is tolerated, and the legacy key is deleted only when everything was moved.
+ *
+ * @returns the legacy entries that could not be moved this time ([] when done), so the
+ *   caller can still show them while the migration is retried on a later read.
  */
 async function migrateLegacyEntries(env) {
     const raw = await env.GUESTBOOK_KV.get(LEGACY_ENTRIES_KEY);
-    if (raw === null) return;
+    if (raw === null) return [];
 
-    let legacy;
+    let parsed;
     try {
-        legacy = JSON.parse(raw);
+        parsed = JSON.parse(raw);
     } catch {
-        legacy = null;
+        parsed = null;
     }
-    if (!Array.isArray(legacy)) {
+    if (!Array.isArray(parsed)) {
         console.warn('[guestbook] legacy "entries" value is not a JSON array; leaving it in place');
-        return;
+        return [];
+    }
+    const legacy = parsed.filter(entry => entry && typeof entry === 'object');
+
+    const results = await Promise.allSettled(
+        legacy.map(async (entry, index) => {
+            const key = entryKey(entry.date, `legacy-${String(index).padStart(3, '0')}`);
+            if ((await env.GUESTBOOK_KV.get(key)) !== null) return;
+            await env.GUESTBOOK_KV.put(key, JSON.stringify(entry));
+        })
+    );
+    if (results.some(result => result.status === 'rejected')) {
+        console.warn('[guestbook] legacy migration incomplete; retrying on a later read');
+        return legacy;
     }
 
-    await Promise.all(
-        legacy
-            .filter(entry => entry && typeof entry === 'object')
-            .map((entry, index) =>
-                env.GUESTBOOK_KV.put(
-                    entryKey(entry.date, `legacy-${String(index).padStart(3, '0')}`),
-                    JSON.stringify(entry)
-                )
-            )
-    );
-    await env.GUESTBOOK_KV.delete(LEGACY_ENTRIES_KEY);
+    try {
+        await env.GUESTBOOK_KV.delete(LEGACY_ENTRIES_KEY);
+    } catch (err) {
+        console.warn(
+            '[guestbook] could not delete the legacy key; will retry:',
+            err?.message ?? err
+        );
+    }
+    return [];
 }
 
-async function handleGuestbookGet(request, env) {
-    await migrateLegacyEntries(env);
+const entrySignature = entry => `${entry.date}|${entry.name}|${entry.message}`;
+
+async function readStoredEntries(env) {
     const { keys } = await env.GUESTBOOK_KV.list({
         prefix: ENTRY_PREFIX,
         limit: MAX_GUESTBOOK_ENTRIES,
     });
     const values = await Promise.all(keys.map(({ name }) => env.GUESTBOOK_KV.get(name)));
-    const entries = values.flatMap(raw => {
+    return values.flatMap(raw => {
         try {
             return raw ? [JSON.parse(raw)] : [];
         } catch {
             return []; // skip a value that isn't valid JSON rather than failing the list
         }
     });
+}
+
+async function handleGuestbookGet(request, env) {
+    const pending = await migrateLegacyEntries(env);
+    const stored = await readStoredEntries(env);
+
+    let entries = stored;
+    if (pending.length) {
+        // Migration is still being retried: keep showing the entries it hasn't moved yet.
+        const seen = new Set(stored.map(entrySignature));
+        entries = [...stored, ...pending.filter(entry => !seen.has(entrySignature(entry)))]
+            .sort((a, b) => String(b.date ?? '').localeCompare(String(a.date ?? '')))
+            .slice(0, MAX_GUESTBOOK_ENTRIES);
+    }
     return jsonResponse(entries, request, 200);
 }
 
@@ -185,14 +218,21 @@ async function handleGuestbookPost(request, env) {
         return jsonResponse({ error: 'captcha_unconfigured' }, request, 503);
     }
 
-    // One post per IP per minute. Checked before the captcha so a flood can't make us call
-    // siteverify for every request. Cloudflare always sets this header in production.
+    // One attempt per IP per minute. Every attempt that gets this far counts, including ones
+    // whose captcha then fails, and the marker is written *before* the captcha is verified,
+    // so a flood of bad tokens can't make us call siteverify for each request. Cloudflare
+    // always sets CF-Connecting-IP in production. KV has no atomic increment, so requests
+    // that overlap within a moment can still slip through: this is best-effort, and a hard
+    // limit would need a Durable Object or the Workers Rate Limiting binding.
     const ip = request.headers.get('CF-Connecting-IP');
     const throttleKey = ip ? `rl:${ip}` : null;
-    if (throttleKey && (await env.GUESTBOOK_KV.get(throttleKey)) !== null) {
-        const res = jsonResponse({ error: 'rate_limited' }, request, 429);
-        res.headers.set('Retry-After', String(THROTTLE_SECONDS));
-        return res;
+    if (throttleKey) {
+        if ((await env.GUESTBOOK_KV.get(throttleKey)) !== null) {
+            const res = jsonResponse({ error: 'rate_limited' }, request, 429);
+            res.headers.set('Retry-After', String(THROTTLE_SECONDS));
+            return res;
+        }
+        await env.GUESTBOOK_KV.put(throttleKey, '1', { expirationTtl: THROTTLE_SECONDS });
     }
 
     if (env.TURNSTILE_SECRET) {
@@ -213,10 +253,14 @@ async function handleGuestbookPost(request, env) {
         entryKey(entry.date, crypto.randomUUID().slice(0, 8)),
         JSON.stringify(entry)
     );
-    if (throttleKey) {
-        await env.GUESTBOOK_KV.put(throttleKey, '1', { expirationTtl: THROTTLE_SECONDS });
+
+    // Cleanup is best-effort: the entry is already saved, and reporting an error now would
+    // make the client treat a successful post as failed and invite a duplicate.
+    try {
+        await pruneEntries(env);
+    } catch (err) {
+        console.warn('[guestbook] pruning failed (the entry was saved):', err?.message ?? err);
     }
-    await pruneEntries(env);
 
     return jsonResponse({ ok: true, entry }, request, 201);
 }

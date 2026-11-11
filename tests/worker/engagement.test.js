@@ -14,14 +14,20 @@ import {
 
 // ── KV mock ──────────────────────────────────────────────────────────────────
 
-function makeKV() {
+function makeKV({ strictWrites = false } = {}) {
     const store = new Map();
     const putOptions = new Map();
+    const written = new Set();
     return {
         store,
         putOptions,
         get: k => Promise.resolve(store.get(k) ?? null),
         put: (k, v, options) => {
+            if (strictWrites) {
+                // Workers KV: a second write to the same key within a second is rejected (429).
+                if (written.has(k)) return Promise.reject(new Error(`KV PUT failed: 429 (${k})`));
+                written.add(k);
+            }
             store.set(k, v);
             if (options) putOptions.set(k, options);
             return Promise.resolve();
@@ -325,15 +331,36 @@ test('a throttled request never reaches the Turnstile verification', async () =>
     expect(fetchMock).not.toHaveBeenCalled();
 });
 
-test('a failed captcha does not start the throttle window', async () => {
+test('a failed captcha still counts, so repeated bad tokens call siteverify only once', async () => {
     const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's' };
-    globalThis.fetch = turnstileSays(false);
-    const res = await handleGuestbookRequest(
-        post({ name: 'A', message: 'B', token: 'bad' }, { 'CF-Connecting-IP': '203.0.113.7' }),
-        env
-    );
-    expect(res.status).toBe(403);
+    const fetchMock = turnstileSays(false);
+    globalThis.fetch = fetchMock;
+    const attempt = () =>
+        handleGuestbookRequest(
+            post({ name: 'A', message: 'B', token: 'bad' }, { 'CF-Connecting-IP': '203.0.113.7' }),
+            env
+        );
+
+    expect((await attempt()).status).toBe(403);
+    expect((await attempt()).status).toBe(429);
+    expect((await attempt()).status).toBe(429);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(entryKeys(env)).toHaveLength(0);
+});
+
+test('requests rejected before the captcha (bad input) do not use up the throttle window', async () => {
+    const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's' };
+    globalThis.fetch = turnstileSays(true);
+    const headers = { 'CF-Connecting-IP': '203.0.113.7' };
+
+    expect(
+        (await handleGuestbookRequest(post({ name: '', message: '' }, headers), env)).status
+    ).toBe(400);
     expect(env.GUESTBOOK_KV.store.has('rl:203.0.113.7')).toBe(false);
+    expect(
+        (await handleGuestbookRequest(post({ name: 'A', message: 'B', token: 't' }, headers), env))
+            .status
+    ).toBe(201);
 });
 
 // ── /guestbook storage: one key per entry ─────────────────────────────────────
@@ -441,8 +468,13 @@ test('a migration interrupted before the delete is safely repeated', async () =>
     await list(env);
     await env.GUESTBOOK_KV.put('entries', JSON.stringify(legacyEntries)); // as if delete had failed
 
+    const realPut = env.GUESTBOOK_KV.put;
+    const put = vi.fn(realPut);
+    env.GUESTBOOK_KV.put = put;
     expect(await list(env)).toEqual(['Bob', 'Alice']); // no duplicates
     expect(entryKeys(env)).toHaveLength(2);
+    expect(put).not.toHaveBeenCalled(); // keys that already exist are not rewritten
+    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false); // and the legacy key is gone again
 });
 
 test('a corrupt legacy value is left in place and does not break the guestbook', async () => {
@@ -457,4 +489,111 @@ test('a corrupt legacy value is left in place and does not break the guestbook',
     expect(await list(env)).toEqual(['ok']);
     expect(env.GUESTBOOK_KV.store.get('entries')).toBe('{not json');
     expect(warn).toHaveBeenCalled();
+});
+
+// ── /guestbook migration must never fail a read ───────────────────────────────
+
+const seedLegacy = env => env.GUESTBOOK_KV.store.set('entries', JSON.stringify(legacyEntries));
+
+test('two overlapping first reads both succeed even when KV rejects the repeated writes', async () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const env = { GUESTBOOK_KV: makeKV({ strictWrites: true }) };
+    seedLegacy(env);
+    const read = () => handleGuestbookRequest(makeRequest('GET', 'https://w.dev/guestbook'), env);
+
+    const [a, b] = await Promise.all([read(), read()]);
+
+    expect(a.status).toBe(200);
+    expect(b.status).toBe(200);
+    expect((await a.json()).map(e => e.name)).toEqual(['Bob', 'Alice']);
+    expect((await b.json()).map(e => e.name)).toEqual(['Bob', 'Alice']); // no duplicates, none missing
+    expect(entryKeys(env)).toHaveLength(2);
+    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
+});
+
+test('if the migration cannot write at all, the read still succeeds and shows the legacy entries', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const env = { GUESTBOOK_KV: makeKV() };
+    seedLegacy(env);
+    const realPut = env.GUESTBOOK_KV.put;
+    env.GUESTBOOK_KV.put = () => Promise.reject(new Error('KV PUT failed: 429'));
+
+    const res = await handleGuestbookRequest(makeRequest('GET', 'https://w.dev/guestbook'), env);
+
+    expect(res.status).toBe(200);
+    expect((await res.json()).map(e => e.name)).toEqual(['Bob', 'Alice']);
+    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(true); // kept so the migration can retry
+    expect(warn).toHaveBeenCalledWith(expect.stringMatching(/migration incomplete/));
+
+    env.GUESTBOOK_KV.put = realPut; // KV recovers
+    expect(await list(env)).toEqual(['Bob', 'Alice']);
+    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
+    expect(entryKeys(env)).toHaveLength(2);
+});
+
+test('a partly failed migration shows every entry exactly once', async () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const env = { GUESTBOOK_KV: makeKV() };
+    seedLegacy(env);
+    const realPut = env.GUESTBOOK_KV.put;
+    env.GUESTBOOK_KV.put = (key, value, options) =>
+        key.endsWith('legacy-001')
+            ? Promise.reject(new Error('KV PUT failed: 429'))
+            : realPut(key, value, options);
+
+    expect(await list(env)).toEqual(['Bob', 'Alice']); // one stored, one served from the legacy copy
+    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(true);
+
+    env.GUESTBOOK_KV.put = realPut;
+    expect(await list(env)).toEqual(['Bob', 'Alice']);
+    expect(entryKeys(env)).toHaveLength(2);
+});
+
+test('failing to delete the legacy key does not fail the read, and is retried', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const env = { GUESTBOOK_KV: makeKV() };
+    seedLegacy(env);
+    const realDelete = env.GUESTBOOK_KV.delete;
+    env.GUESTBOOK_KV.delete = () => Promise.reject(new Error('KV DELETE failed'));
+
+    expect(await list(env)).toEqual(['Bob', 'Alice']);
+    expect(warn).toHaveBeenCalledWith(
+        expect.stringMatching(/could not delete the legacy key/),
+        'KV DELETE failed'
+    );
+
+    env.GUESTBOOK_KV.delete = realDelete;
+    expect(await list(env)).toEqual(['Bob', 'Alice']);
+    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
+});
+
+// ── pruning is best-effort ────────────────────────────────────────────────────
+
+test.each([
+    ['listing', kv => (kv.list = () => Promise.reject(new Error('KV LIST failed')))],
+    ['deleting', kv => (kv.delete = () => Promise.reject(new Error('KV DELETE failed')))],
+])('a saved post is still a 201 when pruning fails while %s', async (_what, breakIt) => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.useFakeTimers();
+    const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's' };
+    globalThis.fetch = turnstileSays(true);
+    // enough existing entries that pruning has something to delete
+    for (let i = 0; i < 52; i++) {
+        env.GUESTBOOK_KV.store.set(
+            `entry:${String(8000000000000 + i)}:seed`,
+            JSON.stringify({ name: `s${i}` })
+        );
+    }
+    breakIt(env.GUESTBOOK_KV);
+
+    vi.setSystemTime(new Date('2026-08-01T00:00:00Z'));
+    const res = await handleGuestbookRequest(
+        post({ name: 'Alice', message: 'hi', token: 't' }),
+        env
+    );
+
+    expect(res.status).toBe(201);
+    expect((await res.json()).entry.name).toBe('Alice');
+    expect(entryKeys(env).length).toBeGreaterThan(50); // the entry was saved
+    expect(warn).toHaveBeenCalledWith(expect.stringMatching(/pruning failed/), expect.any(String));
 });
