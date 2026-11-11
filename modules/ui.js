@@ -250,7 +250,7 @@ export class UIManager {
                 const sixMonths = Date.now() - 180 * 24 * 60 * 60 * 1000;
                 return new Date(r.pushed_at) > sixMonths;
             }).length;
-            const yearsSince = new Date().getFullYear() - 2021;
+            const yearsSince = new Date().getFullYear() - new Date(userData.created_at).getFullYear();
 
             statsGrid.innerHTML = `
                 <div class="stat-card">

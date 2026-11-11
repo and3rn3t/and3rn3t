@@ -10,7 +10,7 @@ const SECTION_HASH = /^#[A-Za-z][\w-]*$/;
 
 // Navigation configuration
 const CONFIG = {
-    scrollOffset: 80, // roughly the fixed navbar; keep in step with --nav-height in styles.css
+    scrollOffset: 80, // roughly the fixed navbar height; mirrors --nav-height in styles.css, but nothing links the two — update both by hand
     activeClass: 'active',
 };
 
