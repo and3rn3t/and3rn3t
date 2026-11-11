@@ -39,6 +39,40 @@ test('the home page needs no stylesheet but core.css and home.css', async ({ pag
     expect((await page.request.get('/styles.css')).status()).toBe(404);
 });
 
+test.describe('a display cutout (a notched phone held sideways)', () => {
+    // The pages use viewport-fit=cover, so without this the content runs under the notch.
+    // Chromium can emulate the insets, so this tests the real behaviour.
+    const withInsets = async (page, context, insets) => {
+        const client = await context.newCDPSession(page);
+        await client.send('Emulation.setSafeAreaInsetsOverride', {
+            insets: { top: 0, bottom: 0, ...insets },
+        });
+    };
+    const bodyPadding = page =>
+        page.evaluate(() => {
+            const style = getComputedStyle(document.body);
+            return [style.paddingLeft, style.paddingRight];
+        });
+
+    for (const path of ['/', '/projects/health/', '/posts/how-this-site-works/', '/404.html']) {
+        test(`${path} keeps its content out of the cutout`, async ({ page, context }) => {
+            await page.setViewportSize({ width: 844, height: 390 });
+            await page.goto(path);
+            expect(await bodyPadding(page)).toEqual(['0px', '0px']); // no cutout, no padding
+
+            await withInsets(page, context, { left: 44, right: 34 });
+            await expect.poll(() => bodyPadding(page)).toEqual(['44px', '34px']);
+
+            // The first visible content starts clear of the left inset
+            const left = await page.evaluate(() => {
+                const el = document.querySelector('main h1, main .wrap, main');
+                return el.getBoundingClientRect().left;
+            });
+            expect(left).toBeGreaterThanOrEqual(44);
+        });
+    }
+});
+
 test('the layer order is declared before any layer is used', async ({ page }) => {
     await page.goto('/');
     const first = await page.evaluate(() => document.querySelector('head style').textContent);

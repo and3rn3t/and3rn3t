@@ -218,6 +218,15 @@
 }
 
 @layer base {
+  /* The pages use viewport-fit=cover, so on a notched phone held sideways the page would run under
+     the cutout. Keep the content out of it; where there is no inset this is zero. */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
