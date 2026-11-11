@@ -161,30 +161,35 @@ for (const theme of ['light', 'dark']) {
 
         test('the current palette option and its icon stay readable', async ({ page }) => {
             await openPalette(page);
-            const read = async selector =>
-                page
-                    .locator(selector)
-                    .first()
-                    .evaluate(el => {
-                        const style = getComputedStyle(el);
-                        return { color: style.color, background: style.backgroundColor };
-                    });
-            const item = await read('.palette-item.is-active .palette-item-title');
-            const icon = await read('.palette-item.is-active .palette-item-icon');
+            // One evaluate, so every read is of the same moment: the palette re-renders its list
+            // when the projects data arrives while it is open, which would detach an element
+            // between separate reads and give an empty computed style.
+            const read = await page.evaluate(() => {
+                const style = (selector, property) => {
+                    const el = document.querySelector(selector);
+                    return el ? getComputedStyle(el)[property] : null;
+                };
+                return {
+                    iconColor: style('.palette-item.is-active .palette-item-icon', 'color'),
+                    iconBackground: style(
+                        '.palette-item.is-active .palette-item-icon',
+                        'backgroundColor'
+                    ),
+                    subtitle: style('.palette-item-subtitle', 'color'),
+                    surface: style('#global-search-modal', 'backgroundColor'),
+                };
+            });
+            for (const [name, value] of Object.entries(read)) {
+                expect(value, `${name} was not readable`).toMatch(/\d/);
+            }
             // The title sits on a translucent wash over the dialog surface; measure the icon tile
             // (solid) and the muted subtitle against the dialog's own surface
-            const surface = await page
-                .locator('#global-search-modal')
-                .evaluate(el => getComputedStyle(el).backgroundColor);
-            const subtitle = await page
-                .locator('.palette-item-subtitle')
-                .first()
-                .evaluate(el => getComputedStyle(el).color);
             expect(
-                contrast(channels(icon.color), channels(icon.background))
+                contrast(channels(read.iconColor), channels(read.iconBackground))
             ).toBeGreaterThanOrEqual(4.5);
-            expect(contrast(channels(subtitle), channels(surface))).toBeGreaterThanOrEqual(4.5);
-            expect(item.color).not.toBe('');
+            expect(
+                contrast(channels(read.subtitle), channels(read.surface))
+            ).toBeGreaterThanOrEqual(4.5);
         });
 
         for (const variant of ['info', 'success', 'error', 'warning']) {
