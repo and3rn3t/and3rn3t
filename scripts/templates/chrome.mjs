@@ -74,8 +74,8 @@ export function renderHead({
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
     <meta name="author" content="${AUTHOR}" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
     <meta name="robots" content="${robots}" />
 ${url ? `    <link rel="canonical" href="${url}" />\n` : ''}    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
