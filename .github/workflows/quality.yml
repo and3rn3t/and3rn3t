@@ -24,7 +24,7 @@ jobs:
 
   e2e:
     name: E2E + a11y (Playwright + axe)
-    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
+    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@0e27d97868d6affd1355ca25ce77c2c139a9647e # verify .github PR 22
     with:
       command: pnpm test:e2e
       package-manager: pnpm
