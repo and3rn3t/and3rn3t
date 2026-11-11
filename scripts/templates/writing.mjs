@@ -1,28 +1,25 @@
 /**
- * The Writing section's post cards for index.html, pre-rendered by scripts/generate-site.mjs
- * from posts-data.json.
+ * The Writing section's rows for index.html, pre-rendered by scripts/generate-site.mjs from
+ * posts-data.json. One row per post: date, title and summary, reading time.
  */
 
 import { escapeHtml as esc } from '../../modules/utils/html.js';
-import { icon } from '../../modules/utils/icon.js';
-import { longDate, minutes } from './shared.mjs';
+import { minutes, shortDate } from './shared.mjs';
 
 /**
  * @param {object[]} posts - newest first
  * @returns {string}
  */
-export function renderBlogCards(posts) {
+export function renderPostRows(posts) {
   return posts
     .map(
-      post => `<article class="blog-card" data-slug="${esc(post.slug)}">
-          <div class="blog-card-meta">
-            <time datetime="${esc(post.date)}" class="blog-date">${longDate(post.date)}</time>
-            <span class="blog-reading-time">${icon('clock')} ${minutes(post)} min read</span>
+      post => `<article class="post-row" data-slug="${esc(post.slug)}">
+          <time class="post-row__date" datetime="${esc(post.date)}">${shortDate(post.date)}</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/${encodeURIComponent(post.slug)}/">${esc(post.title)}</a></h3>
+            <p class="post-row__summary">${esc(post.summary)}</p>
           </div>
-          <h3 class="blog-card-title">${esc(post.title)}</h3>
-          <p class="blog-card-summary">${esc(post.summary)}</p>
-          <div class="blog-card-tags">${(post.tags ?? []).map(tag => `<span class="blog-tag">${esc(tag)}</span>`).join('')}</div>
-          <a href="/posts/${encodeURIComponent(post.slug)}/" class="blog-read-more" aria-label="Read ${esc(post.title)}">Read post ${icon('arrow-right')}</a>
+          <p class="post-row__time">${minutes(post)} min read</p>
         </article>`
     )
     .join('\n        ');

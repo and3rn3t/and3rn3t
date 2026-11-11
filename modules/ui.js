@@ -10,6 +10,7 @@ import { icon } from './utils/icon.js';
 const TOAST_TYPES = new Set(['success', 'error', 'warning', 'info']);
 const TOAST_FADE_MS = 300; // a little longer than the CSS transition
 const MOBILE_HEATMAP_WEEKS = 20;
+const ACTIVE_WINDOW_MS = 180 * 24 * 60 * 60 * 1000; // "active" = pushed to in the last six months
 
 export class UIManager {
     constructor() {
@@ -179,101 +180,82 @@ export class UIManager {
     }
 
     // ========================================
-    // GitHub Stats Display
+    // GitHub band (About): two stats and a contribution chart
     // ========================================
 
+    /**
+     * Fill in the live numbers and the chart. The band's markup is in index.html (the stats are
+     * static slots, so nothing moves when the numbers arrive); with no data the band is hidden
+     * rather than showing a blank or a third-party image.
+     */
     async loadGitHubStats() {
-        const statsGrid = document.getElementById('stats-grid');
-        const contributionGraph = document.getElementById('contribution-graph');
-
-        if (!statsGrid) return;
+        const band = document.getElementById('github-band');
+        if (!band) return;
 
         try {
-            const [userData, repos] = await Promise.all([
-                githubAPI.getUserData(),
+            const [repos, contributions] = await Promise.all([
                 githubAPI.getRepositories('updated', 100),
+                githubAPI.getContributions(),
             ]);
 
-            const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-            const activeRepos = repos.filter(r => {
-                const sixMonths = Date.now() - 180 * 24 * 60 * 60 * 1000;
-                return new Date(r.pushed_at) > sixMonths;
-            }).length;
-            const yearsSince = new Date().getFullYear() - 2021;
+            // Show only what we actually have: "0 active repositories" for missing data would be
+            // a false statement, so a missing number stays a dash, and no data at all hides the band.
+            let hasData = false;
 
-            statsGrid.innerHTML = `
-                <div class="stat-card">
-                    ${icon('code-branch')}
-                    <div class="stat-content">
-                        <h3>${userData.public_repos}</h3>
-                        <p>Public Repos</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    ${icon('bolt')}
-                    <div class="stat-content">
-                        <h3>${activeRepos}</h3>
-                        <p>Active (6 mo)</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    ${icon('star')}
-                    <div class="stat-content">
-                        <h3>${totalStars}</h3>
-                        <p>Total Stars</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    ${icon('calendar')}
-                    <div class="stat-content">
-                        <h3>${yearsSince}+</h3>
-                        <p>Years on GitHub</p>
-                    </div>
-                </div>
-            `;
-
-            if (contributionGraph) {
-                const contributions = await githubAPI.getContributions();
-                this.renderContributionHeatmap(contributions, contributionGraph);
+            if (repos.length > 0) {
+                // Forks and archived repos aren't "active": they aren't mine to push to
+                const active = repos.filter(
+                    repo =>
+                        !repo.fork &&
+                        !repo.archived &&
+                        Date.now() - new Date(repo.pushed_at).getTime() < ACTIVE_WINDOW_MS
+                ).length;
+                this.setStat('active-repos', active);
+                hasData = true;
             }
 
+            if (Number.isFinite(contributions?.total)) {
+                this.setStat('contributions', contributions.total);
+                hasData = true;
+            }
+            this.renderContributionHeatmap(
+                contributions,
+                document.getElementById('contribution-graph')
+            );
+
+            if (!hasData) band.hidden = true;
             debug.log('[UI] GitHub stats loaded');
         } catch (error) {
             debug.warn('[UI] Failed to load GitHub stats:', error);
-            if (statsGrid) {
-                statsGrid.innerHTML =
-                    '<p class="error-message show">Unable to load GitHub statistics at this time.</p>';
-            }
+            band.hidden = true;
         }
     }
 
-    // Render a GitHub-style contribution heatmap from pre-fetched calendar data.
-    // Falls back to the third-party chart image when data isn't available yet.
+    setStat(name, value) {
+        const slot = document.querySelector(`[data-stat="${name}"]`);
+        if (slot) slot.textContent = Number(value).toLocaleString();
+    }
+
+    /**
+     * A week-by-week chart from the pre-fetched contribution calendar. Phones show only the
+     * last MOBILE_HEATMAP_WEEKS weeks (the cells outside them are hidden by CSS), so each cell
+     * carries its column for both layouts.
+     */
     renderContributionHeatmap(contributions, container) {
         if (!container) return;
 
-        if (
-            !contributions ||
-            !Array.isArray(contributions.weeks) ||
-            contributions.weeks.length === 0
-        ) {
-            container.innerHTML = `
-                <div class="contribution-widget">
-                    <img src="https://ghchart.rshah.org/16a34a/and3rn3t" alt="GitHub contribution graph" loading="lazy" />
-                </div>
-            `;
+        if (!Array.isArray(contributions?.weeks) || contributions.weeks.length === 0) {
+            container.hidden = true;
             return;
         }
 
-        // Phones show only the last MOBILE_HEATMAP_WEEKS weeks (see the heatmap rules in
-        // styles.css), so each cell carries its column for both layouts.
         const firstRecentWeek = Math.max(0, contributions.weeks.length - MOBILE_HEATMAP_WEEKS);
         const cells = [];
         contributions.weeks.forEach((week, weekIndex) => {
             const isOlder = weekIndex < firstRecentWeek;
             for (const day of week.days) {
-                const weekday = new Date(`${day.date}T00:00:00`).getDay();
-                const dateLabel = new Date(`${day.date}T00:00:00`).toLocaleDateString(undefined, {
+                const date = new Date(`${day.date}T00:00:00`);
+                const dateLabel = date.toLocaleDateString(undefined, {
                     weekday: 'short',
                     year: 'numeric',
                     month: 'short',
@@ -281,27 +263,28 @@ export class UIManager {
                 });
                 const plural = day.count === 1 ? '' : 's';
                 cells.push(
-                    `<div class="heatmap-cell${isOlder ? ' heatmap-cell--older' : ''}" data-level="${day.level}" ` +
-                        `style="--week:${weekIndex + 1};--recent-week:${weekIndex - firstRecentWeek + 1};grid-row:${weekday + 1}" ` +
-                        `title="${day.count} contribution${plural} on ${dateLabel}"></div>`
+                    `<i class="contrib__cell${isOlder ? ' contrib__cell--older' : ''}" data-level="${day.level}" ` +
+                        `style="--week:${weekIndex + 1};--recent-week:${weekIndex - firstRecentWeek + 1};grid-row:${date.getDay() + 1}" ` +
+                        `title="${day.count} contribution${plural} on ${dateLabel}"></i>`
                 );
             }
         });
 
         const total = (contributions.total ?? 0).toLocaleString();
         container.innerHTML = `
-            <figure class="contribution-widget" role="img" aria-label="${total} contributions in the last year">
-                <div class="heatmap-grid">${cells.join('')}</div>
-                <figcaption class="heatmap-footer">
-                    <span class="heatmap-total">${total} contributions in the last year</span>
-                    <span class="heatmap-legend" aria-hidden="true">
-                        <span class="heatmap-legend-label">Less</span>
-                        <span class="heatmap-cell" data-level="0"></span>
-                        <span class="heatmap-cell" data-level="1"></span>
-                        <span class="heatmap-cell" data-level="2"></span>
-                        <span class="heatmap-cell" data-level="3"></span>
-                        <span class="heatmap-cell" data-level="4"></span>
-                        <span class="heatmap-legend-label">More</span>
+            <figure class="contrib__figure" role="img" aria-label="${total} contributions in the last year, week by week">
+                <div class="contrib__grid">${cells.join('')}</div>
+                <figcaption class="contrib__foot">
+                    <span class="contrib__range contrib__range--year">The last year, week by week</span>
+                    <span class="contrib__range contrib__range--recent">The last ${MOBILE_HEATMAP_WEEKS} weeks</span>
+                    <span class="contrib__legend" aria-hidden="true">
+                        Less
+                        <i class="contrib__cell" data-level="0"></i>
+                        <i class="contrib__cell" data-level="1"></i>
+                        <i class="contrib__cell" data-level="2"></i>
+                        <i class="contrib__cell" data-level="3"></i>
+                        <i class="contrib__cell" data-level="4"></i>
+                        More
                     </span>
                 </figcaption>
             </figure>

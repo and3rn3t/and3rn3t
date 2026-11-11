@@ -1,10 +1,13 @@
 /**
- * Work and education timelines for index.html, pre-rendered by scripts/generate-site.mjs
- * from experience-data.json.
+ * The Experience section of index.html and the About "at a glance" facts, pre-rendered by
+ * scripts/generate-site.mjs from experience-data.json.
+ *
+ * A job is one block: role, company and dates on a row, a summary, and the highlights and
+ * technologies in a <details> (open for the current role). That is native HTML, so it works
+ * without JavaScript. Education is a compact list of rows.
  */
 
 import { escapeHtml as esc } from '../../modules/utils/html.js';
-import { icon } from '../../modules/utils/icon.js';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -26,59 +29,82 @@ export function formatDateRange(startDate, endDate, current) {
   return start ? `${start} – ${end}` : end;
 }
 
+/** A link to the organisation when we have its URL, otherwise just its name. */
+const renderOrganisation = (name, url, className) =>
+  url
+    ? `<a class="${className}" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(name)}</a>`
+    : `<span class="${className}">${esc(name)}</span>`;
+
 /**
- * @param {object} entry - a job (type "work") or a school (type "edu")
- * @param {'work' | 'edu'} type
+ * @param {object} job
  * @returns {string}
  */
-function renderEntry(entry, type) {
-  const isWork = type === 'work';
-  const dateRange = formatDateRange(entry.startDate, entry.endDate, isWork && entry.current);
-  const name = isWork ? entry.company : entry.institution;
-  const nameUrl = isWork ? entry.companyUrl : entry.institutionUrl;
-  const title = isWork ? entry.role : entry.degree;
+function renderJob(job) {
+  const dates = formatDateRange(job.startDate, job.endDate, Boolean(job.current));
+  const highlights = job.highlights ?? [];
+  const technologies = job.technologies ?? [];
 
-  const nameHtml = nameUrl
-    ? `<a href="${esc(nameUrl)}" target="_blank" rel="noopener noreferrer" class="timeline-company-link">${esc(name)}</a>`
-    : esc(name);
-  const location = entry.location
-    ? `<span class="timeline-location">${icon('map-marker-alt')} ${esc(entry.location)}</span>`
-    : '';
-  const highlights = entry.highlights?.length
-    ? `<ul class="timeline-highlights">${entry.highlights.map(text => `<li>${esc(text)}</li>`).join('')}</ul>`
-    : '';
-  const tech = entry.technologies?.length
-    ? `<div class="timeline-tech">${entry.technologies.map(text => `<span class="timeline-tech-tag">${esc(text)}</span>`).join('')}</div>`
-    : '';
-  const summary = entry.summary ? `<p class="timeline-summary">${esc(entry.summary)}</p>` : '';
-  const currentBadge = entry.current ? '<span class="timeline-current-badge">Current</span>' : '';
+  const more =
+    highlights.length || technologies.length
+      ? `
+          <details class="job__more"${job.current ? ' open' : ''}>
+            <summary class="job__toggle">Highlights${highlights.length ? ` <span class="job__count">${highlights.length}</span>` : ''}</summary>
+            ${highlights.length ? `<ul class="job__highlights">${highlights.map(text => `<li>${esc(text)}</li>`).join('')}</ul>` : ''}
+            ${technologies.length ? `<ul class="tag-list">${technologies.map(tag => `<li class="tag">${esc(tag)}</li>`).join('')}</ul>` : ''}
+          </details>`
+      : '';
 
-  return `<article class="timeline-item${entry.current ? ' timeline-item--current' : ''}">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">${esc(title)}</h3>
-                ${currentBadge}
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company">${nameHtml}</span>
-                ${location}
-                <span class="timeline-dates">${icon('calendar-alt')} ${esc(dateRange)}</span>
-              </div>
-            </header>
-            ${summary}
-            ${highlights}
-            ${tech}
-          </div>
+  return `<article class="job${job.current ? ' job--current' : ''}">
+          <header class="job__head">
+            <h3 class="job__role">${esc(job.role)}</h3>
+            <p class="job__company">${renderOrganisation(job.company, job.companyUrl, 'job__company-link')}</p>
+            <p class="job__dates">${esc(dates)}${job.current ? ' <span class="job__now">Current</span>' : ''}</p>
+          </header>
+          ${job.summary ? `<p class="job__summary">${esc(job.summary)}</p>` : ''}${more}
         </article>`;
 }
 
 /**
- * @param {object[]} entries
- * @param {'work' | 'edu'} type
+ * @param {object[] | undefined} jobs
  * @returns {string}
  */
-export function renderTimeline(entries, type) {
-  return (entries ?? []).map(entry => renderEntry(entry, type)).join('\n        ');
+export function renderJobs(jobs) {
+  return (jobs ?? []).map(renderJob).join('\n        ');
+}
+
+/**
+ * Education as compact rows: what, where, when, and a note if there is one.
+ * @param {object[] | undefined} entries
+ * @returns {string}
+ */
+export function renderEducation(entries) {
+  const rows = (entries ?? []).map(entry => {
+    const dates = formatDateRange(entry.startDate, entry.endDate, false);
+    const [note] = entry.highlights ?? [];
+    return `<li class="edu-row">
+            <h4 class="edu-row__degree">${esc(entry.degree)}</h4>
+            <p class="edu-row__school">${renderOrganisation(entry.institution, entry.institutionUrl, 'edu-row__school-link')}</p>
+            <p class="edu-row__dates">${esc(dates)}</p>
+            ${note ? `<p class="edu-row__note">${esc(note)}</p>` : ''}
+          </li>`;
+  });
+  return `<ul class="edu-list">
+          ${rows.join('\n          ')}
+        </ul>`;
+}
+
+/**
+ * The About "at a glance" facts, from the current role: what, where, since when.
+ * @param {object[] | undefined} jobs
+ * @returns {string} empty if no role is marked current
+ */
+export function renderFacts(jobs) {
+  const current = (jobs ?? []).find(job => job.current);
+  if (!current) return '';
+  const since = current.startDate?.split('-')[0];
+  return `<dl class="facts">
+            <div class="facts__row"><dt>Role</dt><dd>${esc(current.role)}</dd></div>
+            <div class="facts__row"><dt>At</dt><dd>${renderOrganisation(current.company, current.companyUrl, 'link')}</dd></div>
+            ${since ? `<div class="facts__row"><dt>Since</dt><dd>${esc(since)}</dd></div>` : ''}
+          </dl>`;
 }

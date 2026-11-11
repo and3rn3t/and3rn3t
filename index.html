@@ -326,6 +326,7 @@
     <noscript>
       <style>
         #projects [data-case-study],
+        #github-band,
         [data-open-palette] {
           display: none;
         }
@@ -614,52 +615,71 @@
       </section>
 
       <!-- About Section -->
-      <section class="about" id="about">
-        <div class="container">
-          <h2 class="section-title">About</h2>
-          <div class="about-content">
-            <div class="about-text">
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">01 &mdash; About</p>
+            <h2 class="section-heading__title" id="about-title">How I work</h2>
+          </header>
+
+          <div class="about__grid">
+            <div class="about__prose">
               <p>
                 Recent side projects include an iPhone app that measures gait with LiDAR, a home
                 dashboard that runs without the cloud, and a 20-questions game that shows its
                 reasoning as you play. I care about the unglamorous parts too: tests, accessibility,
                 and being able to explain every byte I ship.
               </p>
-              <ul class="tech-strip" aria-label="Tools I work with most">
-                <li class="tech-chip">TypeScript</li>
-                <li class="tech-chip">Swift</li>
-                <li class="tech-chip">Python</li>
-                <li class="tech-chip">React</li>
-                <li class="tech-chip">Cloudflare Workers</li>
-                <li class="tech-chip">HealthKit</li>
-                <li class="tech-chip">dbt</li>
-                <li class="tech-chip">Docker</li>
+            </div>
+            <aside class="about__aside" aria-label="At a glance">
+              <!-- prettier-ignore -->
+              <div id="about-facts">
+                <!-- gen:facts -->
+                <dl class="facts">
+            <div class="facts__row"><dt>Role</dt><dd>Software Engineer</dd></div>
+            <div class="facts__row"><dt>At</dt><dd><a class="link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></dd></div>
+            <div class="facts__row"><dt>Since</dt><dd>2021</dd></div>
+          </dl>
+                <!-- /gen:facts -->
+              </div>
+              <h3 class="eyebrow about__tools-label">Tools I use most</h3>
+              <ul class="tag-list">
+                <li class="tag">TypeScript</li>
+                <li class="tag">Swift</li>
+                <li class="tag">Python</li>
+                <li class="tag">React</li>
+                <li class="tag">Cloudflare Workers</li>
+                <li class="tag">HealthKit</li>
+                <li class="tag">dbt</li>
+                <li class="tag">Docker</li>
               </ul>
-            </div>
+            </aside>
           </div>
-          <div class="github-strip">
-            <h3 class="github-strip-title">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#github"></use>
-              </svg>
-              On GitHub
-            </h3>
-            <div class="stats-grid" id="stats-grid">
-              <div class="loading">
-                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#spinner"></use>
-                </svg>
-                <p>Loading stats...</p>
-              </div>
+
+          <!-- The numbers and the chart are live: modules/ui.js fills them in. Without it
+               there is nothing to show, so the band is hidden (see the noscript style). -->
+          <div class="github-band" id="github-band">
+            <div class="github-band__head">
+              <h3 class="eyebrow">On GitHub</h3>
+              <a
+                class="link"
+                href="https://github.com/and3rn3t"
+                target="_blank"
+                rel="noopener noreferrer"
+                >@and3rn3t</a
+              >
             </div>
-            <div class="contribution-graph" id="contribution-graph">
-              <div class="loading">
-                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#spinner"></use>
-                </svg>
-                <p>Loading contributions...</p>
+            <dl class="stat-list" id="stats-grid">
+              <div class="stat">
+                <dt class="stat__label">Contributions in the last year</dt>
+                <dd class="stat__value" data-stat="contributions">&mdash;</dd>
               </div>
-            </div>
+              <div class="stat">
+                <dt class="stat__label">Repositories active in the last six months</dt>
+                <dd class="stat__value" data-stat="active-repos">&mdash;</dd>
+              </div>
+            </dl>
+            <div class="contrib" id="contribution-graph"></div>
           </div>
         </div>
       </section>
@@ -669,7 +689,7 @@
       <section class="section work" id="projects" aria-labelledby="work-title">
         <div class="wrap">
           <header class="section-heading">
-            <p class="eyebrow">01 &mdash; Projects</p>
+            <p class="eyebrow">02 &mdash; Projects</p>
             <h2 class="section-heading__title" id="work-title">Selected work</h2>
             <p class="section-heading__lede">
               Side projects, each with a short write-up of how it works.
@@ -840,202 +860,130 @@
         </div>
       </section>
 
-      <!-- Experience Section -->
-      <section class="experience" id="experience">
-        <div class="container">
-          <h2 class="section-title">Experience</h2>
-          <div class="experience-layout">
-            <div class="timeline-column">
-              <h3 class="timeline-group-heading">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#briefcase"></use>
-                </svg>
-                Work
-              </h3>
-              <!-- prettier-ignore -->
-              <div class="timeline" id="experience-timeline" role="group" aria-label="Work history">
-                <!-- gen:experience -->
-                <article class="timeline-item timeline-item--current">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Software Engineer</h3>
-                <span class="timeline-current-badge">Current</span>
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.deere.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Deere &amp; Company</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2021 – Present</span>
-              </div>
-            </header>
-            <p class="timeline-summary">Aftermarket &amp; Customer Support, Global Parts Information Technology — Parts Order Management Legacy &amp; Dealer Business System Integrations Team. Support Java and SAP service parts order management applications, developing solutions for complex business challenges and partnering with the product manager to prioritize work that delivers clear value to the company and its dealers.</p>
-            <ul class="timeline-highlights"><li>Converting legacy Java processes into APIs and microservices to make applications more scalable and easier to maintain</li><li>Building front-end interfaces in TypeScript and React to improve the user experience</li><li>Partnering directly with the Parts Order Management product manager to identify and prioritize work that delivers clear value to the company and its dealers</li></ul>
-            <div class="timeline-tech"><span class="timeline-tech-tag">Java</span><span class="timeline-tech-tag">SAP</span><span class="timeline-tech-tag">SAP ABAP</span><span class="timeline-tech-tag">SAP CPI</span><span class="timeline-tech-tag">TypeScript</span><span class="timeline-tech-tag">React</span></div>
-          </div>
+      <!-- Experience Section. The blocks between gen: markers are written by
+           scripts/generate-site.mjs from experience-data.json. -->
+      <section class="section experience" id="experience" aria-labelledby="experience-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">03 &mdash; Experience</p>
+            <h2 class="section-heading__title" id="experience-title">Where I've worked</h2>
+            <p class="section-heading__lede">
+              The short version.
+              <a class="link" href="/resume.pdf" download>The r&eacute;sum&eacute;</a>
+              has the rest.
+            </p>
+          </header>
+
+          <!-- prettier-ignore -->
+          <div class="jobs" id="experience-timeline" role="group" aria-label="Work history">
+            <!-- gen:experience -->
+            <article class="job job--current">
+          <header class="job__head">
+            <h3 class="job__role">Software Engineer</h3>
+            <p class="job__company"><a class="job__company-link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></p>
+            <p class="job__dates">2021 – Present <span class="job__now">Current</span></p>
+          </header>
+          <p class="job__summary">Aftermarket &amp; Customer Support, Global Parts Information Technology — Parts Order Management Legacy &amp; Dealer Business System Integrations Team. Support Java and SAP service parts order management applications, developing solutions for complex business challenges and partnering with the product manager to prioritize work that delivers clear value to the company and its dealers.</p>
+          <details class="job__more" open>
+            <summary class="job__toggle">Highlights <span class="job__count">3</span></summary>
+            <ul class="job__highlights"><li>Converting legacy Java processes into APIs and microservices to make applications more scalable and easier to maintain</li><li>Building front-end interfaces in TypeScript and React to improve the user experience</li><li>Partnering directly with the Parts Order Management product manager to identify and prioritize work that delivers clear value to the company and its dealers</li></ul>
+            <ul class="tag-list"><li class="tag">Java</li><li class="tag">SAP</li><li class="tag">SAP ABAP</li><li class="tag">SAP CPI</li><li class="tag">TypeScript</li><li class="tag">React</li></ul>
+          </details>
         </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Business Analyst</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.deere.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Deere &amp; Company</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2013 – 2021</span>
-              </div>
-            </header>
-            <p class="timeline-summary">Global Information Technology, Human Resources &amp; Corporate Functions Domain — Corporate Functions &amp; John Deere University Teams. Acting co-product manager for the Corporate Functions team, supporting Corporate Social Responsibility, Brand Management &amp; Licensing, Public Affairs, Environmental Health &amp; Safety, Aviation, and Facilities through the company&#39;s Agile reorganization.</p>
-            <ul class="timeline-highlights"><li>2021 — Provided direction as co-product manager during the transition to Agile, developing task boards, reports, and processes to guide daily standups and sprint planning</li><li>2018 — Built a Tableau project combining multiple CSR and HR data sources into a community scorecard used by facility leadership across 20+ global locations; all unit campaigns saw a marked percentage increase in giving in 2019</li><li>2016 — Led a development team building automated payroll deduction processes for charitable giving, significantly reducing manual processing time</li></ul>
-            <div class="timeline-tech"><span class="timeline-tech-tag">SAP</span><span class="timeline-tech-tag">Tableau</span><span class="timeline-tech-tag">SQL</span><span class="timeline-tech-tag">Excel</span></div>
-          </div>
+        <article class="job">
+          <header class="job__head">
+            <h3 class="job__role">Business Analyst</h3>
+            <p class="job__company"><a class="job__company-link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></p>
+            <p class="job__dates">2013 – 2021</p>
+          </header>
+          <p class="job__summary">Global Information Technology, Human Resources &amp; Corporate Functions Domain — Corporate Functions &amp; John Deere University Teams. Acting co-product manager for the Corporate Functions team, supporting Corporate Social Responsibility, Brand Management &amp; Licensing, Public Affairs, Environmental Health &amp; Safety, Aviation, and Facilities through the company&#39;s Agile reorganization.</p>
+          <details class="job__more">
+            <summary class="job__toggle">Highlights <span class="job__count">3</span></summary>
+            <ul class="job__highlights"><li>2021 — Provided direction as co-product manager during the transition to Agile, developing task boards, reports, and processes to guide daily standups and sprint planning</li><li>2018 — Built a Tableau project combining multiple CSR and HR data sources into a community scorecard used by facility leadership across 20+ global locations; all unit campaigns saw a marked percentage increase in giving in 2019</li><li>2016 — Led a development team building automated payroll deduction processes for charitable giving, significantly reducing manual processing time</li></ul>
+            <ul class="tag-list"><li class="tag">SAP</li><li class="tag">Tableau</li><li class="tag">SQL</li><li class="tag">Excel</li></ul>
+          </details>
         </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">IT Early Development Program</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.deere.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Deere &amp; Company</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2009 – 2013</span>
-              </div>
-            </header>
-            <p class="timeline-summary">Global Information Technology, Datacenter 24x7 Support &amp; Dealer Systems Go-Live Support. A rotational program helping recent computer science graduates navigate different roles and business units within the company.</p>
-            <ul class="timeline-highlights"><li>2012 — Administered training for more than 50 dealer employees during a systems migration at two of the company&#39;s largest Construction &amp; Forestry dealers, in Orlando, Florida and Bangor, Maine</li></ul>
+        <article class="job">
+          <header class="job__head">
+            <h3 class="job__role">IT Early Development Program</h3>
+            <p class="job__company"><a class="job__company-link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></p>
+            <p class="job__dates">2009 – 2013</p>
+          </header>
+          <p class="job__summary">Global Information Technology, Datacenter 24x7 Support &amp; Dealer Systems Go-Live Support. A rotational program helping recent computer science graduates navigate different roles and business units within the company.</p>
+          <details class="job__more">
+            <summary class="job__toggle">Highlights <span class="job__count">1</span></summary>
+            <ul class="job__highlights"><li>2012 — Administered training for more than 50 dealer employees during a systems migration at two of the company&#39;s largest Construction &amp; Forestry dealers, in Orlando, Florida and Bangor, Maine</li></ul>
             
-          </div>
+          </details>
         </article>
-                <!-- /gen:experience -->
-              </div>
-            </div>
-            <div class="timeline-column">
-              <h3 class="timeline-group-heading">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#graduation-cap"></use>
-                </svg>
-                Education
-              </h3>
-              <!-- prettier-ignore -->
-              <div class="timeline" id="education-timeline" role="group" aria-label="Education history">
-                <!-- gen:education -->
-                <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">B.A. Information Systems</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.sau.edu" target="_blank" rel="noopener noreferrer" class="timeline-company-link">St. Ambrose University</a></span>
-                <span class="timeline-location"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#map-marker-alt"></use></svg> Davenport, IA</span>
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2009</span>
-              </div>
-            </header>
-            
-            
-            
+            <!-- /gen:experience -->
           </div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Graduate-level coursework, Computer Science</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.sau.edu" target="_blank" rel="noopener noreferrer" class="timeline-company-link">St. Ambrose University</a></span>
-                <span class="timeline-location"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#map-marker-alt"></use></svg> Davenport, IA</span>
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2009 – 2012</span>
-              </div>
-            </header>
+
+          <h3 class="subheading">Education</h3>
+          <!-- prettier-ignore -->
+          <div id="education-timeline" role="group" aria-label="Education history">
+            <!-- gen:education -->
+            <ul class="edu-list">
+          <li class="edu-row">
+            <h4 class="edu-row__degree">B.A. Information Systems</h4>
+            <p class="edu-row__school"><a class="edu-row__school-link" href="https://www.sau.edu" target="_blank" rel="noopener noreferrer">St. Ambrose University</a></p>
+            <p class="edu-row__dates">2009</p>
             
+          </li>
+          <li class="edu-row">
+            <h4 class="edu-row__degree">Graduate-level coursework, Computer Science</h4>
+            <p class="edu-row__school"><a class="edu-row__school-link" href="https://www.sau.edu" target="_blank" rel="noopener noreferrer">St. Ambrose University</a></p>
+            <p class="edu-row__dates">2009 – 2012</p>
             
-            
-          </div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Software Engineering Immersive</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://generalassemb.ly" target="_blank" rel="noopener noreferrer" class="timeline-company-link">General Assembly</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2021 – 2021</span>
-              </div>
-            </header>
-            
-            <ul class="timeline-highlights"><li>12-week immersive program sharpening full-stack development skills, including React, Node, and Express</li></ul>
-            
-          </div>
-        </article>
-                <!-- /gen:education -->
-              </div>
-              <!-- Resume CTA -->
-              <div class="resume-cta">
-                <p class="resume-cta-label">Want the full picture?</p>
-                <a href="/resume.pdf" download class="btn btn-primary resume-btn">
-                  <svg class="icon" aria-hidden="true" focusable="false">
-                    <use href="/icons/sprite.svg#file-pdf"></use>
-                  </svg>
-                  Download Resume
-                </a>
-              </div>
-            </div>
+          </li>
+          <li class="edu-row">
+            <h4 class="edu-row__degree">Software Engineering Immersive</h4>
+            <p class="edu-row__school"><a class="edu-row__school-link" href="https://generalassemb.ly" target="_blank" rel="noopener noreferrer">General Assembly</a></p>
+            <p class="edu-row__dates">2021 – 2021</p>
+            <p class="edu-row__note">12-week immersive program sharpening full-stack development skills, including React, Node, and Express</p>
+          </li>
+        </ul>
+            <!-- /gen:education -->
           </div>
         </div>
       </section>
 
-      <!-- Writing / Blog Section -->
-      <section class="writing" id="writing">
-        <div class="container">
-          <h2 class="section-title">Writing</h2>
-          <p class="section-intro">How these projects work, and what I learned building them.</p>
+      <!-- Writing / Blog Section. Rows are written by scripts/generate-site.mjs. -->
+      <section class="section writing" id="writing" aria-labelledby="writing-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">04 &mdash; Writing</p>
+            <h2 class="section-heading__title" id="writing-title">Writing</h2>
+            <p class="section-heading__lede">
+              How these projects work, and what I learned building them.
+            </p>
+          </header>
           <!-- prettier-ignore -->
-          <div id="blog-posts" class="blog-posts-grid" role="group" aria-label="Blog posts">
+          <div class="post-list" id="blog-posts" role="group" aria-label="Blog posts">
             <!-- gen:writing -->
-            <article class="blog-card" data-slug="how-this-site-works">
-          <div class="blog-card-meta">
-            <time datetime="2026-07-12" class="blog-date">July 12, 2026</time>
-            <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 7 min read</span>
+            <article class="post-row" data-slug="how-this-site-works">
+          <time class="post-row__date" datetime="2026-07-12">Jul 12, 2026</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/how-this-site-works/">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</a></h3>
+            <p class="post-row__summary">A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts.</p>
           </div>
-          <h3 class="blog-card-title">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</h3>
-          <p class="blog-card-summary">A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts.</p>
-          <div class="blog-card-tags"><span class="blog-tag">JavaScript</span><span class="blog-tag">WebAssembly</span><span class="blog-tag">Cloudflare Workers</span><span class="blog-tag">CSS</span><span class="blog-tag">Architecture</span></div>
-          <a href="/posts/how-this-site-works/" class="blog-read-more" aria-label="Read How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker">Read post <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+          <p class="post-row__time">7 min read</p>
         </article>
-        <article class="blog-card" data-slug="lidar-gait-analysis-iphone">
-          <div class="blog-card-meta">
-            <time datetime="2026-05-12" class="blog-date">May 12, 2026</time>
-            <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 6 min read</span>
+        <article class="post-row" data-slug="lidar-gait-analysis-iphone">
+          <time class="post-row__date" datetime="2026-05-12">May 12, 2026</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/lidar-gait-analysis-iphone/">On-Device Gait Analysis with iPhone LiDAR and HealthKit</a></h3>
+            <p class="post-row__summary">How I used the iPhone&#39;s LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</p>
           </div>
-          <h3 class="blog-card-title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</h3>
-          <p class="blog-card-summary">How I used the iPhone&#39;s LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</p>
-          <div class="blog-card-tags"><span class="blog-tag">iOS</span><span class="blog-tag">Swift</span><span class="blog-tag">HealthKit</span><span class="blog-tag">LiDAR</span><span class="blog-tag">Health Tech</span></div>
-          <a href="/posts/lidar-gait-analysis-iphone/" class="blog-read-more" aria-label="Read On-Device Gait Analysis with iPhone LiDAR and HealthKit">Read post <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+          <p class="post-row__time">6 min read</p>
         </article>
-        <article class="blog-card" data-slug="local-first-iot-dashboard">
-          <div class="blog-card-meta">
-            <time datetime="2026-04-03" class="blog-date">April 3, 2026</time>
-            <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 5 min read</span>
+        <article class="post-row" data-slug="local-first-iot-dashboard">
+          <time class="post-row__date" datetime="2026-04-03">Apr 3, 2026</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/local-first-iot-dashboard/">Building a Local-First IoT Dashboard Without the Cloud</a></h3>
+            <p class="post-row__summary">Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down.</p>
           </div>
-          <h3 class="blog-card-title">Building a Local-First IoT Dashboard Without the Cloud</h3>
-          <p class="blog-card-summary">Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down.</p>
-          <div class="blog-card-tags"><span class="blog-tag">IoT</span><span class="blog-tag">Home Automation</span><span class="blog-tag">TypeScript</span><span class="blog-tag">MQTT</span><span class="blog-tag">Self-Hosted</span></div>
-          <a href="/posts/local-first-iot-dashboard/" class="blog-read-more" aria-label="Read Building a Local-First IoT Dashboard Without the Cloud">Read post <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+          <p class="post-row__time">5 min read</p>
         </article>
             <!-- /gen:writing -->
           </div>

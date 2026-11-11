@@ -24,8 +24,24 @@ test.describe('JavaScript disabled', () => {
     });
 
     test('experience and education are visible', async ({ page }) => {
-        await expect(page.locator('#experience-timeline .timeline-item').first()).toBeVisible();
-        await expect(page.locator('#education-timeline .timeline-item').first()).toBeVisible();
+        await expect(page.locator('#experience-timeline .job').first()).toBeVisible();
+        await expect(page.locator('#education-timeline .edu-row').first()).toBeVisible();
+    });
+
+    test('a job folds open and shut without any script (it is a native <details>)', async ({
+        page,
+    }) => {
+        const past = page
+            .locator('#experience-timeline .job:not(.job--current) .job__more')
+            .first();
+        await expect(past).not.toHaveAttribute('open');
+        await past.locator('summary').click();
+        await expect(past).toHaveAttribute('open');
+        await expect(past.locator('.job__highlights')).toBeVisible();
+    });
+
+    test('the live GitHub band is hidden, since it has nothing to show', async ({ page }) => {
+        await expect(page.locator('#github-band')).toBeHidden();
     });
 
     test('case-study buttons are not offered, since they need JS to open', async ({ page }) => {

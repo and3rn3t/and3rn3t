@@ -1,7 +1,7 @@
 /**
  * Generate the site's pre-rendered content from its data files.
  *
- *   index.html               - the project cards, experience timelines and writing cards
+ *   index.html               - the project cards, jobs, education, facts and post rows
  *                              are written between <!-- gen:NAME --> markers, so the page
  *                              reads fine before (or without) JavaScript
  *   posts/<slug>/index.html  - one indexable page per post (own title, description,
@@ -27,11 +27,11 @@ import { fileURLToPath } from 'node:url';
 import { escapeHtml } from '../modules/utils/html.js';
 import { icon } from '../modules/utils/icon.js';
 import { projectView, selectProjects } from '../modules/utils/projects.js';
-import { renderTimeline } from './templates/experience.mjs';
+import { renderEducation, renderFacts, renderJobs } from './templates/experience.mjs';
 import { renderCover } from './templates/cover.mjs';
 import { coverFiles, renderProjects } from './templates/projects.mjs';
 import { longDate, minutes } from './templates/shared.mjs';
-import { renderBlogCards } from './templates/writing.mjs';
+import { renderPostRows } from './templates/writing.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://andernet.dev';
@@ -312,9 +312,10 @@ let index = readFileSync(indexPath, 'utf8');
 index = fillBlock(index, 'lead', lead);
 index = fillBlock(index, 'projects', cards);
 index = fillBlock(index, 'more', more);
-index = fillBlock(index, 'experience', renderTimeline(experienceData.experience, 'work'));
-index = fillBlock(index, 'education', renderTimeline(experienceData.education, 'edu'));
-index = fillBlock(index, 'writing', renderBlogCards(posts));
+index = fillBlock(index, 'facts', renderFacts(experienceData.experience));
+index = fillBlock(index, 'experience', renderJobs(experienceData.experience));
+index = fillBlock(index, 'education', renderEducation(experienceData.education));
+index = fillBlock(index, 'writing', renderPostRows(posts));
 writeFileSync(indexPath, index);
 console.log(
   `  wrote index.html (${counts.lead} lead, ${counts.cards} cards, ${counts.more} in the list, ` +

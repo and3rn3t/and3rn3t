@@ -484,6 +484,459 @@
   }
 
   /* ==========================================================================
+     About: a statement on the left, facts and tools on the right
+     ========================================================================== */
+  .about__grid {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .about__prose {
+    max-width: var(--measure);
+  }
+
+  .about__prose p {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+  }
+
+  .about__aside {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+
+  .about__tools-label {
+    margin-top: var(--space-4);
+  }
+
+  .facts {
+    margin: 0;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .facts__row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .facts dt {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  .facts dd {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-align: right;
+  }
+
+  @media (min-width: 64rem) {
+    .about__grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: var(--space-16);
+    }
+  }
+
+  /* ==========================================================================
+     The GitHub band: two honest numbers and a chart, both live
+     ========================================================================== */
+  .github-band {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-16);
+    padding: var(--space-6);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+  }
+
+  /* display: grid above would otherwise win over the hidden attribute */
+  .github-band[hidden] {
+    display: none;
+  }
+
+  .github-band__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .github-band__head .eyebrow {
+    margin: 0;
+  }
+
+  .stat-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6) var(--space-12);
+    margin: 0;
+  }
+
+  /* The label comes first in the source (so it reads first), the number first on screen */
+  .stat {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--space-2);
+  }
+
+  .stat__value {
+    margin: 0;
+    font-size: var(--font-size-4xl);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-display);
+  }
+
+  .stat__label {
+    max-width: 14rem;
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-snug);
+  }
+
+  /* Reserved, so the chart arriving doesn't move what is below it */
+  .contrib {
+    min-height: 10rem;
+  }
+
+  .contrib__figure {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .contrib__grid {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, 1fr);
+    gap: var(--space-1);
+  }
+
+  .contrib__cell {
+    display: block;
+    aspect-ratio: 1;
+    border-radius: 0.125rem;
+    background: color-mix(in srgb, var(--text) 9%, transparent);
+  }
+
+  .contrib__cell[data-level='1'] {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .contrib__cell[data-level='2'] {
+    background: color-mix(in srgb, var(--accent) 52%, transparent);
+  }
+
+  .contrib__cell[data-level='3'] {
+    background: color-mix(in srgb, var(--accent) 76%, transparent);
+  }
+
+  .contrib__cell[data-level='4'] {
+    background: var(--accent);
+  }
+
+  /* Phones show the last twenty weeks: a year at that width is cells you can't see */
+  .contrib__grid .contrib__cell {
+    grid-column: var(--recent-week);
+  }
+
+  .contrib__cell--older,
+  .contrib__range--year {
+    display: none;
+  }
+
+  .contrib__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .contrib__legend {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .contrib__legend .contrib__cell {
+    width: 0.75rem;
+  }
+
+  @media (min-width: 40rem) {
+    .contrib__grid .contrib__cell {
+      grid-column: var(--week);
+    }
+
+    .contrib__cell--older {
+      display: block;
+    }
+
+    .contrib__range--year {
+      display: inline;
+    }
+
+    .contrib__range--recent {
+      display: none;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .github-band {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      column-gap: var(--space-12);
+      padding: var(--space-8);
+    }
+
+    .github-band__head {
+      grid-column: 1 / -1;
+    }
+
+    .stat-list {
+      flex-direction: column;
+      align-content: start;
+      gap: var(--space-6);
+    }
+  }
+
+  /* ==========================================================================
+     Experience: one column. Role, company and dates on a row; the detail folds away.
+     ========================================================================== */
+  .job {
+    padding: var(--space-8) 0;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .job__head,
+  .edu-row {
+    display: grid;
+    gap: var(--space-1) var(--space-6);
+  }
+
+  .job__role {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+  }
+
+  .job__company,
+  .job__dates,
+  .edu-row__school,
+  .edu-row__dates,
+  .edu-row__note {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .job__company-link,
+  .edu-row__school-link {
+    color: inherit;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .job__company-link:hover,
+  .edu-row__school-link:hover {
+    color: var(--accent);
+    text-decoration-color: currentcolor;
+  }
+
+  .job__dates,
+  .edu-row__dates {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .job__now {
+    margin-left: var(--space-2);
+    color: var(--accent);
+  }
+
+  .job__summary {
+    max-width: var(--measure);
+    margin: var(--space-4) 0 0;
+    color: var(--muted);
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+  }
+
+  .job__more {
+    margin-top: var(--space-4);
+  }
+
+  .job__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    list-style: none;
+    text-transform: uppercase;
+  }
+
+  .job__toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .job__toggle::before {
+    content: '+';
+    color: var(--accent);
+  }
+
+  .job__more[open] > .job__toggle::before {
+    content: '\2212';
+  }
+
+  .job__count {
+    color: var(--muted);
+  }
+
+  .job__highlights {
+    display: grid;
+    gap: var(--space-2);
+    max-width: var(--measure);
+    margin: var(--space-4) 0 0;
+    padding-left: var(--space-5);
+    color: var(--muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .job__more .tag-list {
+    margin-top: var(--space-4);
+  }
+
+  .subheading {
+    margin: var(--space-16) 0 var(--space-4);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  .edu-list,
+  .post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .edu-row {
+    padding: var(--space-4) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .edu-row__degree {
+    margin: 0;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .edu-row__note {
+    font-size: var(--font-size-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .job__head,
+    .edu-row {
+      /* A fixed last column, so the company lines up from row to row whatever the dates say */
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 11rem;
+      align-items: baseline;
+    }
+
+    .job__dates,
+    .edu-row__dates {
+      justify-self: end;
+    }
+
+    .edu-row__note {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ==========================================================================
+     Writing: rows, not cards. Date, title and summary, reading time.
+     ========================================================================== */
+  .post-row {
+    display: grid;
+    gap: var(--space-1) var(--space-6);
+    padding: var(--space-6) 0;
+    border-bottom: var(--border-width) solid var(--border);
+    cursor: pointer;
+  }
+
+  .post-row__date,
+  .post-row__time {
+    margin: 0;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .post-row__title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    text-wrap: balance;
+  }
+
+  .post-row__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post-row:hover .post-row__title a {
+    color: var(--accent);
+  }
+
+  .post-row__summary {
+    max-width: var(--measure);
+    margin: var(--space-2) 0 0;
+    color: var(--muted);
+    line-height: var(--line-height-relaxed);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 48rem) {
+    .post-row {
+      grid-template-columns: 8rem minmax(0, 1fr) auto;
+      align-items: baseline;
+    }
+  }
+
+  /* ==========================================================================
      Legacy patch: the case-study modal
      Its "View Code" action is still the old .project-link (modules/project-modal.js), which in
      the dark theme is light text on #22c55e (2.2:1). Axe doesn't catch it: the modal's backdrop

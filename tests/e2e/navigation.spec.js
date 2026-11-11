@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
     await expect(page.locator('#projects-grid .work-card').first()).toBeVisible();
-    await expect(page.locator('#blog-posts .blog-card').first()).toBeVisible();
+    await expect(page.locator('#blog-posts .post-row').first()).toBeVisible();
 });
 
 test('nav link scrolls the section just below the navbar', async ({ page }) => {
