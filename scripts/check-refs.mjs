@@ -49,6 +49,7 @@ function walk(dir, ext, out = []) {
 const pages = [
   ...readdirSync(ROOT).filter(name => name.endsWith('.html')), // every root page
   ...walk('posts', '.html'),
+  ...walk('projects', '.html'),
 ];
 for (const page of pages) {
   for (const [, url] of read(page).matchAll(/\s(?:src|href)="([^"]+)"/g)) addRef(url, page);

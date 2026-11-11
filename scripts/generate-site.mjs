@@ -4,6 +4,8 @@
  *   index.html               - the project cards, jobs, education, facts and post rows
  *                              are written between <!-- gen:NAME --> markers, so the page
  *                              reads fine before (or without) JavaScript
+ *   projects/<slug>/index.html - one page per curated project: its write-up, at a URL that
+ *                              can be shared and indexed (replaces the case-study modal)
  *   posts/<slug>/index.html  - one indexable page per post (own title, description,
  *                              canonical, Open Graph, BlogPosting JSON-LD)
  *   feed.xml                 - RSS feed (links and ids point at the post pages)
@@ -21,22 +23,21 @@
  * Usage: pnpm generate:site
  */
 
-import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml } from '../modules/utils/html.js';
 import { icon } from '../modules/utils/icon.js';
 import { projectView, selectProjects } from '../modules/utils/projects.js';
 import { renderEducation, renderFacts, renderJobs } from './templates/experience.mjs';
+import { AUTHOR, CF_BEACON_TOKEN, SITE, VIEW_TRANSITION_CSS } from './templates/chrome.mjs';
 import { renderCover } from './templates/cover.mjs';
-import { coverFiles, renderProjects } from './templates/projects.mjs';
+import { renderProjectPage, shareImage } from './templates/project-page.mjs';
+import { coverFiles, renderProjects, splitProjects } from './templates/projects.mjs';
 import { longDate, minutes } from './templates/shared.mjs';
 import { renderPostRows } from './templates/writing.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = 'https://andernet.dev';
-const AUTHOR = 'Matthew Anderson';
-const CF_BEACON_TOKEN = '883fb1c6a2c744d4b745475d92f474bf';
 
 const { posts } = JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'));
 // Newest first, whatever order the data file is in
@@ -119,6 +120,8 @@ ${(post.tags ?? []).map(t => `    <meta property="article:tag" content="${esc(t)
 
     <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
+    <!-- Opts in to view transitions; see VIEW_TRANSITION_CSS. Moves to core.css in Phase 10.5. -->
+    <style>${VIEW_TRANSITION_CSS}</style>
 
     <script type="application/ld+json">
 ${jsonLd(structuredData)}
@@ -307,6 +310,70 @@ const views = selectProjects(
 ).map(({ repo, metadata }) => projectView(repo, metadata));
 const { lead, cards, more, counts } = renderProjects(views);
 
+// ── projects/<slug>/index.html (every curated project with a write-up) ───────────────────────
+// The projects on the home page come first, in their order, then the rest of the curated file,
+// so the previous/next links follow what a visitor has just seen.
+const repoByName = new Map(githubData.repositories.map(repo => [repo.name, repo]));
+const shown = new Set(views.map(view => view.name));
+const others = projectsData.projects
+  .filter(metadata => !shown.has(metadata.name))
+  .map(metadata =>
+    projectView(
+      repoByName.get(metadata.name) ??
+        repoByName.get(metadata.github_repo?.split('/').pop()) ??
+        null,
+      metadata
+    )
+  );
+const pageViews = [...views, ...others].filter(view => view.pageUrl);
+
+const slugs = pageViews.map(view => view.pageSlug);
+if (new Set(slugs).size !== slugs.length) {
+  throw new Error(`Two projects share a page slug: ${slugs.join(', ')}`);
+}
+
+rmSync(join(ROOT, 'projects'), { recursive: true, force: true });
+pageViews.forEach((view, index) => {
+  const dir = join(ROOT, 'projects', view.pageSlug);
+  mkdirSync(dir, { recursive: true });
+  const image = shareImage(view, path => existsSync(join(ROOT, path)));
+  writeFileSync(
+    join(dir, 'index.html'),
+    renderProjectPage({
+      view,
+      prev: pageViews[index - 1] ?? null,
+      next: pageViews[index + 1] ?? null,
+      image,
+    })
+  );
+});
+console.log(`  wrote ${pageViews.length} project pages`);
+
+// The sitemap's "Project Pages" block
+{
+  const sitemap = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
+  const from = sitemap.indexOf('  <!-- Project Pages -->\n');
+  const to = sitemap.indexOf('  <!-- Blog Posts -->');
+  if (from === -1 || to === -1 || to < from) {
+    throw new Error('sitemap.xml is missing the "Project Pages" / "Blog Posts" markers');
+  }
+  const entries = pageViews
+    .map(
+      view => `  <url>
+    <loc>${SITE}${view.pageUrl}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+`
+    )
+    .join('\n');
+  const heading = '  <!-- Project Pages -->\n';
+  writeFileSync(
+    join(ROOT, 'sitemap.xml'),
+    `${sitemap.slice(0, from)}${heading}${entries}\n${sitemap.slice(to)}`
+  );
+}
+
 const indexPath = join(ROOT, 'index.html');
 let index = readFileSync(indexPath, 'utf8');
 index = fillBlock(index, 'lead', lead);
@@ -326,7 +393,7 @@ console.log(
 const coverDir = join(ROOT, 'images', 'projects');
 mkdirSync(coverDir, { recursive: true });
 const covers = new Set();
-for (const { file, name, scheme } of coverFiles(views)) {
+for (const { file, name, scheme } of coverFiles(splitProjects(views).grid, pageViews)) {
   writeFileSync(join(coverDir, file), renderCover(name, scheme));
   covers.add(file);
 }

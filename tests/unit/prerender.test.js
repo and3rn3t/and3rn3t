@@ -19,6 +19,7 @@ import {
     renderListRow,
     renderProjects,
     renderWorkCard,
+    splitProjects,
 } from '../../scripts/templates/projects.mjs';
 import { renderPostRows } from '../../scripts/templates/writing.mjs';
 
@@ -180,11 +181,26 @@ describe('project templates (all three shapes)', () => {
                 expect(html).not.toContain('>9<'); // the repo's star count
             });
 
-            it('holds the case-study button until its study is registered', () => {
-                expect(render(v)).toMatch(/<button[^>]*data-case-study="alpha"[^>]*data-pending/);
-                expect(render(view({ longDescription: undefined, highlights: [] }))).not.toContain(
-                    'data-case-study'
-                );
+            it('links to the project page, not a modal', () => {
+                const html = render(v);
+                expect(html).toContain('href="/projects/alpha/"');
+                expect(html).not.toContain('data-case-study');
+                expect(html).not.toContain('data-pending');
+                expect(html).not.toContain('<button');
+            });
+
+            it('links to the repo when there is no case study to read', () => {
+                const html = render(view({ longDescription: undefined, highlights: [] }));
+                expect(html).not.toContain('href="/projects/');
+                expect(html).toContain('href="https://github.com/o/alpha"');
+            });
+
+            it('names the card for the page transition', () => {
+                const html = render(v);
+                expect(html).toContain('data-page="alpha"');
+                expect(html).toContain('data-vt="title"');
+                // A list row is text only, so it has no image to morph
+                if (name !== 'list row') expect(html).toContain('data-vt="media"');
             });
 
             it('carries data-project so the browser can find it', () => {
@@ -321,13 +337,33 @@ describe('covers match what the cards reference', () => {
 
     for (const [label, views] of Object.entries(arrangements)) {
         it(`${label}`, () => {
-            const written = new Set(coverFiles(views).map(cover => cover.file));
+            const written = new Set(coverFiles(splitProjects(views).grid).map(cover => cover.file));
             const pointedAt = referenced(renderProjects(views));
             expect([...pointedAt].filter(file => !written.has(file))).toEqual([]);
             // ...and nothing is written that no card uses
             expect([...written].filter(file => !pointedAt.has(file))).toEqual([]);
         });
     }
+});
+
+describe('covers for project pages', () => {
+    const named = (name, extra = {}) =>
+        projectView(
+            { name, language: 'Go', html_url: `https://github.com/o/${name}` },
+            { name, displayName: name, longDescription: 'text', ...extra }
+        );
+
+    it('are written for page projects that are not on the home grid and lack a screenshot', () => {
+        const onPage = named('only-on-page');
+        const withShot = named('has-shot', { screenshot: { url: 'https://x', alt: 'x' } });
+        const files = coverFiles([], [onPage, withShot]).map(cover => cover.file);
+        expect(files).toEqual(['only-on-page-cover-light.svg', 'only-on-page-cover-dark.svg']);
+    });
+
+    it('are not written twice for a project on both the grid and the pages', () => {
+        const both = named('both');
+        expect(coverFiles([both], [both])).toHaveLength(2);
+    });
 });
 
 describe('generated covers', () => {

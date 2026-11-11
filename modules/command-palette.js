@@ -12,8 +12,8 @@
  */
 
 import { debug } from './debug.js';
-import { projectModal } from './project-modal.js';
 import { loadJSON } from './utils/data.js';
+import { projectView } from './utils/projects.js';
 import { escapeHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
 
@@ -217,10 +217,6 @@ class CommandPalette {
         if (!section) {
             return;
         }
-        // An open case study is a modal with its own focus trap and scroll lock. Setting the
-        // URL with pushState below doesn't fire hashchange (the event that normally closes
-        // it), so close it here, or focus would move to a section hidden behind the dialog.
-        projectModal.close({ updateHash: false });
         const navigation = globalThis.appState?.managers?.navigation;
         if (navigation) {
             navigation.scrollToElement(section);
@@ -230,11 +226,11 @@ class CommandPalette {
         globalThis.history.pushState(null, '', `#${section.id}`);
     }
 
-    /** Open a project's on-site case study when it has one, otherwise its GitHub repo. */
+    /** Go to a project's page when it has one, otherwise to its GitHub repo. */
     openProject(project) {
-        const slug = project.github_repo?.split('/').pop() ?? project.name;
-        if (projectModal.registry.has(slug)) {
-            projectModal.open(slug);
+        const { pageUrl } = projectView(null, project);
+        if (pageUrl) {
+            globalThis.location.assign(pageUrl);
             return;
         }
         const url = project.github_repo ? `https://github.com/${project.github_repo}` : GITHUB;

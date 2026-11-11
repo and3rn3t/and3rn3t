@@ -42,9 +42,7 @@ test.describe('Accessibility — main page', () => {
         }) => {
             await page.addInitScript(t => localStorage.setItem('theme', t), theme);
             await page.goto('/');
-            await page.waitForSelector(
-                '#projects .lead-card [data-case-study]:not([data-pending])'
-            );
+            await page.waitForSelector('#projects .lead-card');
             await page.waitForTimeout(500);
 
             const scan = () =>
@@ -69,9 +67,7 @@ test.describe('Accessibility — main page', () => {
         test(`buttons stay readable on hover in the ${theme} theme`, async ({ page }) => {
             await page.addInitScript(t => localStorage.setItem('theme', t), theme);
             await page.goto('/');
-            await page.waitForSelector(
-                '#projects .lead-card [data-case-study]:not([data-pending])'
-            );
+            await page.waitForSelector('#projects .lead-card');
 
             const buttons = {
                 'hero action': '#home .button--primary',
@@ -116,62 +112,6 @@ test.describe('Accessibility — main page', () => {
                 .include('#contact')
                 .analyze();
             expect(results.violations).toEqual([]);
-        });
-    }
-
-    // The case-study modal sits under a backdrop, so axe cannot determine its background and
-    // reports contrast as "incomplete" rather than failing it. Measure the buttons directly.
-    for (const theme of ['light', 'dark']) {
-        test(`the case-study modal's buttons are readable at rest and on hover in the ${theme} theme`, async ({
-            page,
-        }) => {
-            await page.addInitScript(t => localStorage.setItem('theme', t), theme);
-            await page.goto('/');
-            await page.waitForSelector(
-                '#projects .lead-card [data-case-study]:not([data-pending])'
-            );
-            await page.locator('#projects .lead-card [data-case-study]').click();
-            await page.waitForSelector('#project-modal.visible');
-            await page.waitForTimeout(600); // past the modal's own transition
-
-            const read = async button => {
-                const { color, background } = await button.evaluate(el => {
-                    const style = getComputedStyle(el);
-                    return { color: style.color, background: style.backgroundColor };
-                });
-                const [fg, bg] = [color, background].map(c => c.match(/[\d.]+/g).map(Number));
-                return { fg, bg, text: `${color} on ${background}` };
-            };
-
-            const buttons = {
-                'View Code': '#project-modal .project-link:not(.live)',
-                'Live Demo': '#project-modal .project-link.live',
-            };
-            for (const [name, selector] of Object.entries(buttons)) {
-                const button = page.locator(selector).first();
-                await expect(button, `${name} is in the modal`).toBeVisible();
-
-                await page.mouse.move(0, 0);
-                await page.waitForTimeout(350);
-                const rest = await read(button);
-                // A transparent button sits on the modal's own background, which is not
-                // measurable here; the solid ones are.
-                if ((rest.bg[3] ?? 1) === 1) {
-                    expect(
-                        contrast(rest.fg, rest.bg),
-                        `${name} at rest: ${rest.text}`
-                    ).toBeGreaterThanOrEqual(4.5);
-                }
-
-                await button.hover();
-                await page.waitForTimeout(350);
-                const hover = await read(button);
-                expect(hover.bg[3] ?? 1, `${name} has a solid hover background`).toBe(1);
-                expect(
-                    contrast(hover.fg, hover.bg),
-                    `${name} on hover: ${hover.text}`
-                ).toBeGreaterThanOrEqual(4.5);
-            }
         });
     }
 

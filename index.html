@@ -8,6 +8,18 @@
          identical to the statement at the top of styles/core.css. -->
     <style>
       @layer scale, legacy, reset, tokens, base, components, sections, utilities;
+      /* Opts in to view transitions. Identical to VIEW_TRANSITION_CSS in scripts/templates/chrome.mjs
+         (a unit test checks); it must be inline, see the note there. */
+      @view-transition {
+        navigation: auto;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-group(*),
+        ::view-transition-old(*),
+        ::view-transition-new(*) {
+          animation: none !important;
+        }
+      }
     </style>
     <meta
       name="description"
@@ -225,13 +237,16 @@
       })();
     </script>
 
+    <!-- Names a project card's image and title for the transition to its page. A classic
+         script in the head: it must listen before the page first renders. -->
+    <script src="modules/page-transitions.js"></script>
+
     <!-- Critical Resource Preloads -->
     <link rel="modulepreload" href="main.js" />
     <link rel="modulepreload" href="modules/debug.js" />
     <link rel="modulepreload" href="modules/theme.js" />
     <link rel="modulepreload" href="modules/navigation.js" />
     <link rel="modulepreload" href="modules/ui.js" />
-    <link rel="modulepreload" href="modules/projects.js" />
     <link rel="modulepreload" href="modules/github-api.js" />
     <!-- Non-critical modules loaded lazily on-demand -->
     <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
@@ -242,8 +257,8 @@
       type="font/woff2"
       crossorigin
     />
-    <!-- styles/core.css imports the legacy stylesheet into a low-priority layer; fetch it in
-         parallel instead of after core.css arrives. Remove with styles.css. -->
+    <!-- styles/home.css imports the legacy stylesheet into a low-priority layer; fetch it in
+         parallel instead of after home.css arrives. Remove with styles.css. -->
     <link rel="preload" href="styles.css" as="style" />
 
     <!-- Cloudflare Web Analytics, loaded after first paint. Failure is harmless. -->
@@ -318,7 +333,7 @@
       }
     </style>
 
-    <!-- The design system (layers, tokens, chrome) and the home page. core.css also pulls in
+    <!-- The design system (layers, tokens, chrome) and the home page. home.css also pulls in
          the legacy styles.css as the lowest cascade layer. -->
     <link rel="stylesheet" href="styles/core.css" />
     <link rel="stylesheet" href="styles/home.css" />
@@ -702,8 +717,8 @@
           <!-- prettier-ignore -->
           <div id="projects-lead">
             <!-- gen:lead -->
-            <article class="lead-card" data-project="health">
-          <div class="lead-card__media">
+            <article class="lead-card" data-project="health" data-page="health">
+          <div class="lead-card__media" data-vt="media">
             <picture class="shot shot--light">
             <source type="image/avif" srcset="/images/projects/health-light-640.avif 640w, /images/projects/health-light-1200.avif 1200w" sizes="(min-width: 64rem) 46rem, 100vw" />
             <img src="/images/projects/health-light-1200.webp" srcset="/images/projects/health-light-640.webp 640w, /images/projects/health-light-1200.webp 1200w" sizes="(min-width: 64rem) 46rem, 100vw" width="1200" height="750" alt="The gait analysis page of the Health Analytics Platform: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis." loading="lazy" decoding="async" />
@@ -715,12 +730,12 @@
           </div>
           <div class="lead-card__body">
             <p class="eyebrow">Health &amp; Wellness</p>
-            <h3 class="lead-card__title"><a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Health Analytics Platform</a></h3>
+            <h3 class="lead-card__title" data-vt="title"><a href="/projects/health/">Health Analytics Platform</a></h3>
             <p class="lead-card__desc">A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.</p>
             <p class="lead-card__lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
             <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">HealthKit</li><li class="tag">LiDAR</li><li class="tag">iOS</li></ul>
             <div class="lead-card__actions">
-              <button type="button" class="button button--primary" data-case-study="health" data-pending>Read the case study <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></button>
+              <a class="button button--primary" href="/projects/health/">Read the case study <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
               <a class="button" href="https://health.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
               <a class="link" href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
@@ -731,25 +746,25 @@
           <!-- prettier-ignore -->
           <div class="work-grid" id="projects-grid">
             <!-- gen:projects -->
-            <article class="work-card" data-project="homehub">
-          <div class="work-card__media">
+            <article class="work-card" data-project="homehub" data-page="homehub">
+          <div class="work-card__media" data-vt="media">
             <img class="shot shot--light" src="/images/projects/homehub-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
             <img class="shot shot--dark" src="/images/projects/homehub-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
           </div>
           <div class="work-card__body">
             <p class="eyebrow">IoT &amp; Home Automation</p>
-            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Home Automation Hub</a></h3>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/homehub/">Home Automation Hub</a></h3>
             <p class="work-card__desc">A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.</p>
             <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">WebSockets</li><li class="tag">IoT Protocols</li><li class="tag">React</li></ul>
             <div class="work-card__actions">
-              <button type="button" class="link" data-case-study="homehub" data-pending>Case study</button>
+              <a class="link" href="/projects/homehub/">Case study</a>
               <a class="link" href="https://homehub.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo</a>
               <a class="link" href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </div>
         </article>
-        <article class="work-card" data-project="guess">
-          <div class="work-card__media">
+        <article class="work-card" data-project="guess" data-page="guess">
+          <div class="work-card__media" data-vt="media">
             <picture class="shot shot--light">
             <source type="image/avif" srcset="/images/projects/guess-light-640.avif 640w, /images/projects/guess-light-1200.avif 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" />
             <img src="/images/projects/guess-light-1200.webp" srcset="/images/projects/guess-light-640.webp 640w, /images/projects/guess-light-1200.webp 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="lazy" decoding="async" />
@@ -761,62 +776,62 @@
           </div>
           <div class="work-card__body">
             <p class="eyebrow">Tools &amp; Automation</p>
-            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Guess — Transparent Akinator</a></h3>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/guess/">Guess — Transparent Akinator</a></h3>
             <p class="work-card__desc">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
             <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">Algorithms</li><li class="tag">Decision Trees</li></ul>
             <div class="work-card__actions">
-              <button type="button" class="link" data-case-study="guess" data-pending>Case study</button>
+              <a class="link" href="/projects/guess/">Case study</a>
               <a class="link" href="https://andernator.com" target="_blank" rel="noopener noreferrer">Live demo</a>
               <a class="link" href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </div>
         </article>
-        <article class="work-card" data-project="and3rn3t">
-          <div class="work-card__media">
+        <article class="work-card" data-project="and3rn3t" data-page="and3rn3t">
+          <div class="work-card__media" data-vt="media">
             <img class="shot shot--light" src="/images/projects/and3rn3t-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
             <img class="shot shot--dark" src="/images/projects/and3rn3t-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
           </div>
           <div class="work-card__body">
             <p class="eyebrow">Tools &amp; Automation</p>
-            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">andernet.dev — This Portfolio</a></h3>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/and3rn3t/">andernet.dev — This Portfolio</a></h3>
             <p class="work-card__desc">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
             <ul class="tag-list"><li class="tag">JavaScript</li><li class="tag">WebAssembly</li><li class="tag">Cloudflare Workers</li><li class="tag">Vite</li></ul>
             <div class="work-card__actions">
-              <button type="button" class="link" data-case-study="and3rn3t" data-pending>Case study</button>
+              <a class="link" href="/projects/and3rn3t/">Case study</a>
               <a class="link" href="https://andernet.dev" target="_blank" rel="noopener noreferrer">Live demo</a>
               <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </div>
         </article>
-        <article class="work-card" data-project="minecraft">
-          <div class="work-card__media">
+        <article class="work-card" data-project="minecraft" data-page="minecraft">
+          <div class="work-card__media" data-vt="media">
             <img class="shot shot--light" src="/images/projects/minecraft-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
             <img class="shot shot--dark" src="/images/projects/minecraft-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
           </div>
           <div class="work-card__body">
             <p class="eyebrow">DevOps &amp; Infrastructure</p>
-            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Self-Hosted Minecraft Server</a></h3>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/minecraft/">Self-Hosted Minecraft Server</a></h3>
             <p class="work-card__desc">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
             <ul class="tag-list"><li class="tag">Python</li><li class="tag">Shell</li><li class="tag">JavaScript</li><li class="tag">HTML</li></ul>
             <div class="work-card__actions">
-              <button type="button" class="link" data-case-study="minecraft" data-pending>Case study</button>
+              <a class="link" href="/projects/minecraft/">Case study</a>
               
               <a class="link" href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </div>
         </article>
-        <article class="work-card" data-project="weather-app">
-          <div class="work-card__media">
+        <article class="work-card" data-project="weather-app" data-page="weather-app">
+          <div class="work-card__media" data-vt="media">
             <img class="shot shot--light" src="/images/projects/weather-app-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
             <img class="shot shot--dark" src="/images/projects/weather-app-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
           </div>
           <div class="work-card__body">
             <p class="eyebrow">Mobile Applications</p>
-            <h3 class="work-card__title"><a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">iOS 26 Weather App</a></h3>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/weather-app/">iOS 26 Weather App</a></h3>
             <p class="work-card__desc">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
             <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">WeatherKit</li><li class="tag">iOS 26</li></ul>
             <div class="work-card__actions">
-              <button type="button" class="link" data-case-study="weather-app" data-pending>Case study</button>
+              <a class="link" href="/projects/weather-app/">Case study</a>
               
               <a class="link" href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
@@ -829,23 +844,20 @@
             <!-- gen:more -->
             <p class="eyebrow">More</p>
         <ul class="project-list">
-          <li class="project-list__row" data-project="fastlane">
-            <h3 class="project-list__name"><a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer">fastlane</a></h3>
+          <li class="project-list__row" data-project="fastlane" data-page="fastlane">
+            <h3 class="project-list__name" data-vt="title"><a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer">fastlane</a></h3>
             <p class="project-list__desc">A recreation of the 90s SIERRA game &quot;Jones in the Fast Lane&quot; - modernized.</p>
             <p class="project-list__stack">TypeScript</p>
-            
           </li>
-          <li class="project-list__row" data-project="apple-music-dj">
-            <h3 class="project-list__name"><a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer">Apple Music DJ</a></h3>
+          <li class="project-list__row" data-project="apple-music-dj" data-page="apple-music-dj">
+            <h3 class="project-list__name" data-vt="title"><a href="/projects/apple-music-dj/">Apple Music DJ</a></h3>
             <p class="project-list__desc">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
             <p class="project-list__stack">Python · AppleScript · Apple Music API</p>
-            <button type="button" class="link project-list__case-study" data-case-study="apple-music-dj" data-pending>Case study</button>
           </li>
-          <li class="project-list__row" data-project="net-traffic">
-            <h3 class="project-list__name"><a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer">Network Traffic Analyzer</a></h3>
+          <li class="project-list__row" data-project="net-traffic" data-page="net-traffic">
+            <h3 class="project-list__name" data-vt="title"><a href="/projects/net-traffic/">Network Traffic Analyzer</a></h3>
             <p class="project-list__desc">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
             <p class="project-list__stack">HTML · TypeScript · WebSockets</p>
-            <button type="button" class="link project-list__case-study" data-case-study="net-traffic" data-pending>Case study</button>
           </li>
         </ul>
             <!-- /gen:more -->

@@ -44,10 +44,13 @@ test.describe('JavaScript disabled', () => {
         await expect(page.locator('#github-band')).toBeHidden();
     });
 
-    test('case-study buttons are not offered, since they need JS to open', async ({ page }) => {
-        const buttons = page.locator('#projects-grid [data-case-study]');
-        expect(await buttons.count()).toBeGreaterThan(0);
-        for (const button of await buttons.all()) await expect(button).toBeHidden();
+    test('every project with a write-up links to its page, which needs no script', async ({
+        page,
+    }) => {
+        const links = page.locator('#projects [data-project] a[href^="/projects/"]');
+        expect(await links.count()).toBeGreaterThan(3);
+        await expect(links.first()).toBeVisible();
+        await expect(page.locator('#projects button')).toHaveCount(0);
     });
 
     test('writing links to the post pages', async ({ page }) => {
@@ -76,16 +79,18 @@ test.describe('JavaScript disabled', () => {
     });
 });
 
-test('a case-study button is enabled only once its study is registered', async ({ page }) => {
+test('a project card reaches its page with a click', async ({ page }) => {
     await page.goto('/');
-    const button = page.locator('#projects [data-project="health"] [data-case-study]');
-    await expect(button).toBeVisible();
-    await expect(button).not.toHaveAttribute('data-pending');
-    await button.click();
-    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+    const link = page
+        .locator('#projects [data-project="health"] a[href="/projects/health/"]')
+        .first();
+    await expect(link).toBeVisible();
+    await link.click();
+    await page.waitForURL('**/projects/health/');
+    await expect(page.locator('h1')).toContainText('Health');
 });
 
-test('a project stays live when newer data no longer stars its repo', async ({ page }) => {
+test('a project stays linked when newer data no longer stars its repo', async ({ page }) => {
     // The HTML and the JSON are cached separately, so an older page can meet newer data.
     await page.route('**/github-data.json', async route => {
         const response = await route.fetch();
@@ -97,8 +102,10 @@ test('a project stays live when newer data no longer stars its repo', async ({ p
     });
     await page.goto('/');
 
-    const button = page.locator('#projects [data-project="apple-music-dj"] [data-case-study]');
-    await expect(button).toBeVisible();
-    await button.click();
-    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+    const link = page
+        .locator('#projects [data-project="apple-music-dj"] a[href^="/projects/"]')
+        .first();
+    await expect(link).toBeVisible();
+    await link.click();
+    await page.waitForURL('**/projects/apple-music-dj/');
 });

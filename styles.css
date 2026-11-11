@@ -49,21 +49,23 @@ section[id] {
 
 /* Theme switch — circular reveal via the View Transitions API.
    Origin (--theme-x/--theme-y) is set in JS from the theme toggle button. */
-::view-transition-old(root),
-::view-transition-new(root) {
+/* Only while the theme is switching (theme.js sets [data-switching-theme]); a page navigation
+   that uses view transitions must not inherit a circular reveal. */
+:root[data-switching-theme]::view-transition-old(root),
+:root[data-switching-theme]::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-::view-transition-new(root) {
+:root[data-switching-theme]::view-transition-new(root) {
   animation: theme-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-::view-transition-old(root) {
+:root[data-switching-theme]::view-transition-old(root) {
   z-index: 1;
 }
 
-::view-transition-new(root) {
+:root[data-switching-theme]::view-transition-new(root) {
   z-index: 2;
 }
 
@@ -77,8 +79,8 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  :root[data-switching-theme]::view-transition-old(root),
+  :root[data-switching-theme]::view-transition-new(root) {
     animation: none !important;
   }
 }

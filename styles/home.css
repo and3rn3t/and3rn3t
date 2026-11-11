@@ -3,6 +3,12 @@
  * Chrome, tokens and primitives are in core.css.
  */
 
+/* The page that still renders legacy markup (the palette, keyboard help, toasts) pulls the old
+   stylesheet in as the lowest layer. Temporary: delete with styles.css, and with the matching
+   <link rel="preload"> in index.html. The layer order is declared first in index.html's <head>. */
+@layer scale, legacy, reset, tokens, base, components, sections, utilities;
+@import url('../styles.css') layer(legacy);
+
 @layer sections {
   /* ==========================================================================
      Intro
@@ -242,44 +248,6 @@
     object-position: top left;
   }
 
-  /* One screenshot per theme. The visitor's explicit choice (data-theme) wins; otherwise
-     the OS preference decides, which also covers a page with no script. */
-  .shot {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* The <img> inside a <picture>. A bare <img class="shot"> must NOT get display from a rule
-     like this one: it would out-rank .shot--dark below (more specific) and un-hide the other
-     theme's image, which is then still downloaded. */
-  .shot img {
-    display: block;
-  }
-
-  /* Same specificity as .shot and later, so these win. Keep the two kept together. */
-  .shot--dark {
-    display: none;
-  }
-
-  :root[data-theme='dark'] .shot--light {
-    display: none;
-  }
-
-  :root[data-theme='dark'] .shot--dark {
-    display: block;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) .shot--light {
-      display: none;
-    }
-
-    :root:not([data-theme]) .shot--dark {
-      display: block;
-    }
-  }
-
   .lead-card__body {
     display: flex;
     flex-direction: column;
@@ -510,35 +478,6 @@
 
   .about__tools-label {
     margin-top: var(--space-4);
-  }
-
-  .facts {
-    margin: 0;
-    border-top: var(--border-width) solid var(--border);
-  }
-
-  .facts__row {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-4);
-    padding: var(--space-3) 0;
-    border-bottom: var(--border-width) solid var(--border);
-  }
-
-  .facts dt {
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
-  }
-
-  .facts dd {
-    margin: 0;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    text-align: right;
   }
 
   @media (min-width: 64rem) {
@@ -1130,67 +1069,6 @@
       align-items: start;
       gap: var(--space-16);
     }
-  }
-
-  /* ==========================================================================
-     Footer
-     ========================================================================== */
-  .site-footer {
-    padding-block: var(--space-8);
-    border-top: var(--border-width) solid var(--border);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
-  }
-
-  .site-footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4) var(--space-8);
-  }
-
-  .site-footer__note {
-    margin: 0;
-  }
-
-  .site-footer__links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-2) var(--space-5);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .site-footer__views {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-xs);
-    font-variant-numeric: tabular-nums;
-    font-weight: var(--font-weight-medium);
-  }
-
-  .site-footer__views[hidden] {
-    display: none;
-  }
-
-  /* ==========================================================================
-     Legacy patch: the case-study modal
-     Its "View Code" action is still the old .project-link (modules/project-modal.js), which in
-     the dark theme is light text on #22c55e (2.2:1). Axe doesn't catch it: the modal's backdrop
-     overlaps it, so axe can't work out the background and reports "incomplete", not a violation.
-     The legacy hover darkens the background to #166534, which dark text can't read on, so the
-     hover is patched too. Delete this block with the modal (Phase 10.4).
-     ========================================================================== */
-  :root[data-theme='dark'] .project-modal .project-link:not(.live, .secondary) {
-    color: var(--accent-contrast);
-  }
-
-  :root[data-theme='dark'] .project-modal .project-link:not(.live, .secondary):hover {
-    background: var(--accent-strong);
   }
 
   @media (prefers-reduced-motion: reduce) {

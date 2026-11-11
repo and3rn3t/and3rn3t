@@ -80,14 +80,8 @@ async function initializeApp() {
         // Hero flow field: dynamically imported, and self-gates on device capability.
         initHeroEnhancements();
 
-        // Phase 3: Content loading (show progress)
-
-        const { projectsManager } = await import('./modules/projects.js');
-
-        // Load content in parallel
-        await Promise.allSettled([projectsManager.init('#projects'), uiManager.loadGitHubStats()]);
-
-        appState.managers.projects = projectsManager;
+        // Phase 3: the live numbers (the projects, experience and writing are already in the page)
+        await uiManager.loadGitHubStats();
 
         debug.log('[App] Phase 3: Content loaded');
 
@@ -140,11 +134,11 @@ async function initializeApp() {
                 }
             ),
             startOptional(
-                'Blog module',
-                () => import('./modules/blog.js'),
+                'Legacy links',
+                () => import('./modules/legacy-links.js'),
                 m => {
-                    m.blogManager.init();
-                    appState.managers.blog = m.blogManager;
+                    m.legacyLinks.init();
+                    appState.managers.legacyLinks = m.legacyLinks;
                 }
             ),
             // View counter — calls the Worker, updates the footer count.

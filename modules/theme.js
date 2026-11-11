@@ -101,7 +101,13 @@ export class ThemeManager {
         }
 
         this.setTransitionOrigin();
-        document.startViewTransition(commit);
+        // The reveal animation is styled only under this attribute, so a page navigation that
+        // also uses view transitions doesn't get it (see styles/core.css and styles.css).
+        const root = document.documentElement;
+        root.dataset.switchingTheme = '';
+        document.startViewTransition(commit).finished.finally(() => {
+            delete root.dataset.switchingTheme;
+        });
     }
 
     setTransitionOrigin() {

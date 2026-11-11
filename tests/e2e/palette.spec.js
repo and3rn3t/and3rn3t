@@ -214,47 +214,29 @@ test('a "Go to" result scrolls to the section, updates the URL and moves focus t
     await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
 });
 
-test('a project result opens its case study on the site instead of leaving for GitHub', async ({
+test('a project result opens its page on the site instead of leaving for GitHub', async ({
     page,
 }) => {
     const target = await page.evaluate(async () => {
-        const slug = document.querySelector('[data-case-study]')?.dataset.caseStudy;
+        const slug = document
+            .querySelector('#projects [data-project] a[href^="/projects/"]')
+            ?.getAttribute('href')
+            .split('/')[2];
         const data = await (await fetch('/projects-data.json')).json();
         const project = data.projects.find(
-            p => (p.github_repo?.split('/').pop() ?? p.name) === slug
+            p => (p.github_repo?.split('/').pop() ?? p.name).toLowerCase() === slug
         );
         return slug && project ? { slug, title: project.displayName || project.name } : null;
     });
-    test.skip(!target, 'no project with a case study in current data');
+    test.skip(!target, 'no project with a page in current data');
 
     await openPalette(page);
     await page.locator('.search-category[data-category="projects"]').click();
     await page.fill('#global-search-input', target.title);
     await page.keyboard.press('Enter');
 
-    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
-    await expect(page).toHaveURL(new RegExp(`#project/${target.slug}$`));
-});
-
-// ── Review follow-ups ─────────────────────────────────────────────────────────
-
-test('"Go to" from the palette closes an open case study before navigating', async ({ page }) => {
-    const card = page.locator('[data-case-study]').first();
-    await card.waitFor();
-    test.skip((await card.count()) === 0, 'no project with a case study in current data');
-    await card.click();
-    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
-
-    await openPalette(page);
-    await page.locator('.search-category[data-category="content"]').click();
-    await page.fill('#global-search-input', 'contact');
-    await page.keyboard.press('Enter');
-
-    // The case study's trap and scroll lock must not outlive the navigation.
-    await expect(page.locator('#project-modal')).not.toHaveClass(/visible/);
-    await expect(page.locator('body')).not.toHaveClass(/modal-open/);
-    await expect(page).toHaveURL(/#contact$/);
-    await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+    await page.waitForURL(`**/projects/${target.slug}/`);
+    await expect(page.locator('h1')).toBeVisible();
 });
 
 test('running "Toggle theme" with the mouse hands focus back to the input', async ({ page }) => {

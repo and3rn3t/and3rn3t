@@ -125,14 +125,14 @@ test.describe('lead project card', () => {
         }
     });
 
-    test('opens its case study', async ({ page }) => {
+    test('leads to its project page', async ({ page }) => {
         await page.goto('/');
         const lead = page.locator('.lead-card[data-project="health"]');
 
-        const open = lead.locator('[data-case-study]');
+        const open = lead.locator('a[href="/projects/health/"]').first();
         await expect(open).toBeVisible();
         await open.click();
-        await expect(page.locator('#project-modal')).toHaveClass(/visible/);
+        await page.waitForURL('**/projects/health/');
     });
 });
 

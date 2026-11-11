@@ -56,6 +56,7 @@ jobs:
             /modules/
             /og/
             /posts/
+            /projects/
           sparse-checkout-cone-mode: false
 
       - name: Check published files
