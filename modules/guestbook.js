@@ -63,25 +63,25 @@ class GuestbookManager {
             this.#renderEntries(entries);
         } catch (err) {
             debug.warn('[Guestbook] Load failed:', err.message);
-            this.#entriesEl.innerHTML = '<p class="guestbook-error">Could not load entries.</p>';
+            this.#entriesEl.innerHTML = '<p class="guestbook__empty">Could not load entries.</p>';
         }
     }
 
     #renderEntries(entries) {
         if (!entries.length) {
             this.#entriesEl.innerHTML =
-                '<p class="guestbook-empty">No entries yet — be the first!</p>';
+                '<p class="guestbook__empty">No entries yet. Be the first.</p>';
             return;
         }
         this.#entriesEl.innerHTML = entries
             .map(
                 e => `
-            <article class="guestbook-entry">
-                <header class="guestbook-entry-header">
-                    <strong class="guestbook-name">${escapeHtml(e.name)}</strong>
-                    <time class="guestbook-date" datetime="${escapeHtml(e.date)}">${this.#formatDate(e.date)}</time>
+            <article class="guestbook__entry">
+                <header class="guestbook__entry-head">
+                    <strong class="guestbook__name">${escapeHtml(e.name)}</strong>
+                    <time class="guestbook__date" datetime="${escapeHtml(e.date)}">${this.#formatDate(e.date)}</time>
                 </header>
-                <p class="guestbook-message">${escapeHtml(e.message)}</p>
+                <p class="guestbook__message">${escapeHtml(e.message)}</p>
             </article>`
             )
             .join('');
@@ -132,7 +132,7 @@ class GuestbookManager {
                 'error-callback': () => {
                     this.#token = '';
                 },
-                theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
+                theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
                 // The normal widget is a fixed 300px; use compact on very narrow screens.
                 size: container.clientWidth < 300 ? 'compact' : 'normal',
             }) ?? null;
@@ -182,15 +182,15 @@ class GuestbookManager {
                 // Prepend new entry to the list without a full reload.
                 const { entry } = result;
                 const newEl = document.createElement('article');
-                newEl.className = 'guestbook-entry guestbook-entry--new';
+                newEl.className = 'guestbook__entry guestbook__entry--new';
                 newEl.innerHTML = `
-                    <header class="guestbook-entry-header">
-                        <strong class="guestbook-name">${escapeHtml(entry.name)}</strong>
-                        <time class="guestbook-date" datetime="${escapeHtml(entry.date)}">${this.#formatDate(entry.date)}</time>
+                    <header class="guestbook__entry-head">
+                        <strong class="guestbook__name">${escapeHtml(entry.name)}</strong>
+                        <time class="guestbook__date" datetime="${escapeHtml(entry.date)}">${this.#formatDate(entry.date)}</time>
                     </header>
-                    <p class="guestbook-message">${escapeHtml(entry.message)}</p>`;
+                    <p class="guestbook__message">${escapeHtml(entry.message)}</p>`;
                 this.#entriesEl.prepend(newEl);
-                const emptyMsg = this.#entriesEl.querySelector('.guestbook-empty');
+                const emptyMsg = this.#entriesEl.querySelector('.guestbook__empty');
                 emptyMsg?.remove();
             } else {
                 this.#resetCaptcha();
@@ -202,7 +202,7 @@ class GuestbookManager {
         } finally {
             if (btn) {
                 btn.disabled = this.#captchaBlocked;
-                btn.textContent = 'Sign guestbook';
+                btn.textContent = 'Sign the guestbook';
             }
         }
     }
@@ -210,8 +210,9 @@ class GuestbookManager {
     #setStatus(msg, type) {
         if (!this.#statusEl) return;
         this.#statusEl.textContent = msg;
-        const cls = type ? `guestbook-status guestbook-status--${type}` : 'guestbook-status';
-        this.#statusEl.className = cls;
+        // .form-status (styles/core.css) colours itself from data-state
+        if (type) this.#statusEl.dataset.state = type;
+        else delete this.#statusEl.dataset.state;
     }
 
     #formatDate(iso) {

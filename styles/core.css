@@ -99,6 +99,9 @@
     --accent-contrast: light-dark(#ffffff, #052e16);
     --accent-wash: color-mix(in srgb, var(--accent) 10%, transparent);
 
+    /* Errors. 6:1 or better on every surface, in both themes. */
+    --danger: light-dark(#b91c1c, #f87171);
+
     --scrim: light-dark(rgb(15 20 17 / 0.45), rgb(0 0 0 / 0.65));
   }
   /* stylelint-enable color-no-hex, function-disallowed-list */
@@ -379,6 +382,138 @@
     line-height: var(--line-height-normal);
   }
 
+  /* --- Forms: fields, errors, status, and the busy state of a button ---------------- */
+  .form {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .form__row {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 40rem) {
+    .form__row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .field {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .field__label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* 16px: iOS zooms into a smaller field on focus. The border is the field's edge, so it
+     needs 3:1 against the surface (the token borders are for hairlines, not controls). */
+  .input,
+  .textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: var(--border-width) solid color-mix(in srgb, var(--text) 55%, var(--surface-raised));
+    border-radius: var(--radius-base);
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .textarea {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  .input:hover,
+  .textarea:hover {
+    border-color: var(--text);
+  }
+
+  .input[aria-invalid='true'],
+  .textarea[aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+
+  .field__error {
+    margin: 0;
+    color: var(--danger);
+    font-size: var(--font-size-sm);
+  }
+
+  .field__error[hidden] {
+    display: none;
+  }
+
+  /* Where a form says what happened. An <output> with an explicit role="status" (a polite live
+   region), so a change to its text is announced; the markup carries the role, not this rule. */
+  .form-status {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .form-status[data-state='success'] {
+    color: var(--accent);
+  }
+
+  .form-status[data-state='error'] {
+    color: var(--danger);
+  }
+
+  .form-status a {
+    color: inherit;
+    text-underline-offset: 0.25em;
+  }
+
+  /* A honeypot: out of sight and out of the tab order, but present for bots to fill in */
+  .trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .spinner {
+    display: none;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentcolor;
+    border-inline-end-color: transparent;
+    border-radius: var(--radius-full);
+    animation: spinner-rotate 700ms linear infinite;
+  }
+
+  .button[aria-busy='true'] .spinner {
+    display: inline-block;
+  }
+
+  /* Busy, not disabled: a disabled button drops keyboard focus. The script ignores the click. */
+  .button[aria-disabled='true'] {
+    cursor: progress;
+    opacity: 0.75;
+  }
+
+  @keyframes spinner-rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
   /* --- Icon-only button (theme, menu, search) --------------------------------- */
   .icon-button {
     display: inline-flex;
@@ -641,8 +776,14 @@
     .site-nav__menu-bars::before,
     .site-nav__menu-bars::after,
     .button,
-    .button .icon {
+    .button .icon,
+    .input,
+    .textarea {
       transition: none;
+    }
+
+    .spinner {
+      animation: none;
     }
   }
 }

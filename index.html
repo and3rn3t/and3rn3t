@@ -327,6 +327,7 @@
       <style>
         #projects [data-case-study],
         #github-band,
+        [data-copy],
         [data-open-palette] {
           display: none;
         }
@@ -993,268 +994,228 @@
       </section>
 
       <!-- Contact Section -->
-      <section class="contact" id="contact">
-        <div class="container">
-          <h2 class="section-title">Get In Touch</h2>
-          <div class="contact-content">
-            <p class="contact-description">
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">05 &mdash; Contact</p>
+            <h2 class="section-heading__title" id="contact-title">Get in touch</h2>
+            <p class="section-heading__lede">
               Open to a new role, a side-project collaboration, or just a good conversation about
               something you're building.
             </p>
+          </header>
 
-            <div class="contact-tabs" role="tablist" aria-label="Ways to get in touch">
-              <button
-                type="button"
-                class="contact-tab"
-                role="tab"
-                id="contact-tab-message"
-                aria-controls="contact-panel-message"
-                aria-selected="true"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#paper-plane"></use>
-                </svg>
-                Send a message
-              </button>
-              <button
-                type="button"
-                class="contact-tab"
-                role="tab"
-                id="contact-tab-guestbook"
-                aria-controls="contact-panel-guestbook"
-                aria-selected="false"
-                tabindex="-1"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#pen"></use>
-                </svg>
-                Sign the guestbook
-              </button>
+          <div class="contact__grid">
+            <div class="contact__direct">
+              <h3 class="eyebrow">Directly</h3>
+              <ul class="direct-list">
+                <li class="direct-list__row">
+                  <span class="direct-list__label">Email</span>
+                  <a class="direct-list__value" href="mailto:and3rn3t@icloud.com"
+                    >and3rn3t@icloud.com</a
+                  >
+                  <!-- Filled in by modules/contact-form.js; the address is right there to select -->
+                  <button type="button" class="link" data-copy="and3rn3t@icloud.com">Copy</button>
+                </li>
+                <li class="direct-list__row">
+                  <span class="direct-list__label">GitHub</span>
+                  <a
+                    class="direct-list__value"
+                    href="https://github.com/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >@and3rn3t</a
+                  >
+                </li>
+                <li class="direct-list__row">
+                  <span class="direct-list__label">LinkedIn</span>
+                  <a
+                    class="direct-list__value"
+                    href="https://linkedin.com/in/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >in/and3rn3t</a
+                  >
+                </li>
+                <li class="direct-list__row">
+                  <span class="direct-list__label">R&eacute;sum&eacute;</span>
+                  <a class="direct-list__value" href="/resume.pdf" download>PDF</a>
+                </li>
+              </ul>
             </div>
 
-            <div
-              class="contact-panel"
-              role="tabpanel"
-              id="contact-panel-message"
-              aria-labelledby="contact-tab-message"
-            >
-              <form
-                class="contact-form"
-                action="https://formspree.io/f/xqagvdrq"
-                method="POST"
-                id="contact-form"
-              >
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      class="form-input"
-                      placeholder="Your full name"
-                      aria-describedby="name-error"
-                      autocomplete="name"
-                      minlength="2"
-                      maxlength="100"
-                    />
-                    <span
-                      class="error-message"
-                      id="name-error"
-                      role="alert"
-                      aria-live="polite"
-                    ></span>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      class="form-input"
-                      placeholder="your.email@example.com"
-                      aria-describedby="email-error"
-                      autocomplete="email"
-                      maxlength="254"
-                    />
-                    <span
-                      class="error-message"
-                      id="email-error"
-                      role="alert"
-                      aria-live="polite"
-                    ></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="subject">Subject *</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    class="form-input"
-                    placeholder="What would you like to discuss?"
-                    aria-describedby="subject-error"
-                    minlength="3"
-                    maxlength="200"
-                  />
-                  <span
-                    class="error-message"
-                    id="subject-error"
-                    role="alert"
-                    aria-live="polite"
-                  ></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Message *</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="6"
-                    required
-                    class="form-textarea"
-                    placeholder="Tell me about your project, idea, or how we can work together..."
-                    aria-describedby="message-error"
-                    minlength="10"
-                    maxlength="5000"
-                  ></textarea>
-                  <span
-                    class="error-message"
-                    id="message-error"
-                    role="alert"
-                    aria-live="polite"
-                  ></span>
-                </div>
-
-                <!-- Honeypot for spam protection -->
-                <input
-                  type="text"
-                  name="_gotcha"
-                  class="honeypot"
-                  tabindex="-1"
-                  aria-hidden="true"
-                />
-
+            <div class="contact__panel">
+              <div class="tabs" role="tablist" aria-label="Ways to get in touch">
                 <button
-                  type="submit"
-                  class="btn btn-primary submit-button"
-                  id="submit-button"
-                  aria-describedby="form-status"
+                  type="button"
+                  class="tab"
+                  role="tab"
+                  id="contact-tab-message"
+                  aria-controls="contact-panel-message"
+                  aria-selected="true"
                 >
-                  <span class="submit-text">Send Message</span>
-                  <svg class="icon submit-icon" aria-hidden="true" focusable="false">
-                    <use href="/icons/sprite.svg#paper-plane"></use>
-                  </svg>
-                  <div class="loading-spinner">
-                    <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                      <use href="/icons/sprite.svg#spinner"></use>
-                    </svg>
-                  </div>
+                  Send a message
                 </button>
+                <button
+                  type="button"
+                  class="tab"
+                  role="tab"
+                  id="contact-tab-guestbook"
+                  aria-controls="contact-panel-guestbook"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  Sign the guestbook
+                </button>
+              </div>
 
-                <output class="form-status" id="form-status" aria-live="polite"></output>
-              </form>
-            </div>
-
-            <div
-              class="contact-panel guestbook-card"
-              role="tabpanel"
-              id="contact-panel-guestbook"
-              aria-labelledby="contact-tab-guestbook"
-              hidden
-            >
-              <p class="guestbook-intro">
-                Leave a public note. Say hello, or tell me what you're building.
-              </p>
-              <div class="guestbook-layout">
-                <div class="guestbook-form-col">
-                  <form id="guestbook-form" class="guestbook-form" novalidate>
-                    <div class="form-group">
-                      <label for="gb-name">Name</label>
+              <div role="tabpanel" id="contact-panel-message" aria-labelledby="contact-tab-message">
+                <!-- Where a no-JS submit lands (Formspree redirects to #message-sent): :target shows it -->
+                <p class="notice" id="message-sent" tabindex="-1">
+                  Thanks, your message was sent. I'll reply to the address you gave.
+                </p>
+                <form
+                  class="form"
+                  action="https://formspree.io/f/xqagvdrq"
+                  method="POST"
+                  id="contact-form"
+                >
+                  <input type="hidden" name="_next" value="https://andernet.dev/#message-sent" />
+                  <div class="form__row">
+                    <div class="field">
+                      <label class="field__label" for="name">Name</label>
                       <input
                         type="text"
-                        id="gb-name"
+                        id="name"
                         name="name"
                         required
-                        class="form-input"
-                        placeholder="Your name"
-                        maxlength="60"
+                        class="input"
+                        aria-describedby="name-error"
                         autocomplete="name"
+                        minlength="2"
+                        maxlength="100"
                       />
+                      <p class="field__error" id="name-error" hidden></p>
                     </div>
-                    <div class="form-group">
-                      <label for="gb-message">Message</label>
-                      <textarea
-                        id="gb-message"
-                        name="message"
-                        rows="4"
+                    <div class="field">
+                      <label class="field__label" for="email">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
                         required
-                        class="form-textarea"
-                        placeholder="What's on your mind?"
-                        maxlength="500"
-                      ></textarea>
-                    </div>
-                    <div id="turnstile-container" class="turnstile-container"></div>
-                    <button type="submit" class="btn btn-primary" disabled>
-                      <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="/icons/sprite.svg#pen"></use>
-                      </svg>
-                      Sign guestbook
-                    </button>
-                    <output
-                      id="guestbook-status"
-                      class="guestbook-status"
-                      aria-live="polite"
-                    ></output>
-                  </form>
-                </div>
-                <div class="guestbook-entries-col">
-                  <div id="guestbook-entries" role="group" aria-label="Guestbook entries">
-                    <div class="loading">
-                      <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                        <use href="/icons/sprite.svg#spinner"></use>
-                      </svg>
-                      <p>Loading entries...</p>
+                        class="input"
+                        aria-describedby="email-error"
+                        autocomplete="email"
+                        maxlength="254"
+                      />
+                      <p class="field__error" id="email-error" hidden></p>
                     </div>
                   </div>
+                  <div class="field">
+                    <label class="field__label" for="subject">Subject</label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      class="input"
+                      aria-describedby="subject-error"
+                      minlength="3"
+                      maxlength="200"
+                    />
+                    <p class="field__error" id="subject-error" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="message">Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="6"
+                      required
+                      class="textarea"
+                      aria-describedby="message-error"
+                      minlength="10"
+                      maxlength="5000"
+                    ></textarea>
+                    <p class="field__error" id="message-error" hidden></p>
+                  </div>
+                  <!-- Honeypot: people never see it, bots fill it in -->
+                  <div class="trap" aria-hidden="true">
+                    <label for="website-url">Leave this empty</label>
+                    <input
+                      type="text"
+                      id="website-url"
+                      name="_gotcha"
+                      tabindex="-1"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="form__actions">
+                    <button type="submit" class="button button--primary" id="submit-button">
+                      <span class="button__label">Send message</span>
+                      <span class="spinner" aria-hidden="true"></span>
+                    </button>
+                    <output
+                      class="form-status"
+                      id="form-status"
+                      role="status"
+                      for="name email subject message"
+                    ></output>
+                  </div>
+                </form>
+              </div>
+
+              <div
+                role="tabpanel"
+                id="contact-panel-guestbook"
+                aria-labelledby="contact-tab-guestbook"
+                hidden
+              >
+                <p class="guestbook__intro">
+                  Leave a public note. Say hello, or tell me what you're building.
+                </p>
+                <form id="guestbook-form" class="form" novalidate>
+                  <div class="field">
+                    <label class="field__label" for="gb-name">Name</label>
+                    <input
+                      type="text"
+                      id="gb-name"
+                      name="name"
+                      required
+                      class="input"
+                      maxlength="60"
+                      autocomplete="name"
+                    />
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gb-message">Message</label>
+                    <textarea
+                      id="gb-message"
+                      name="message"
+                      rows="4"
+                      required
+                      class="textarea"
+                      maxlength="500"
+                    ></textarea>
+                  </div>
+                  <div id="turnstile-container" class="turnstile"></div>
+                  <div class="form__actions">
+                    <button type="submit" class="button button--primary" disabled>
+                      Sign the guestbook
+                    </button>
+                    <output id="guestbook-status" class="form-status" role="status"></output>
+                  </div>
+                </form>
+                <div
+                  class="guestbook__entries"
+                  id="guestbook-entries"
+                  role="group"
+                  aria-label="Guestbook entries"
+                >
+                  <p class="guestbook__empty">Loading entries&hellip;</p>
                 </div>
               </div>
-            </div>
-
-            <div class="contact-methods">
-              <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#envelope"></use>
-                </svg>
-                <span>and3rn3t@icloud.com</span>
-              </a>
-              <a
-                href="https://github.com/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-method touch-target"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#github"></use>
-                </svg>
-                <span>@and3rn3t</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-method touch-target"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#linkedin"></use>
-                </svg>
-                <span>LinkedIn</span>
-              </a>
             </div>
           </div>
         </div>
@@ -1262,20 +1223,30 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <p>
-            &copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS,
-            Vite, and a Cloudflare Worker.
-          </p>
-          <span class="view-count-widget" hidden aria-label="Page views">
-            <svg class="icon" aria-hidden="true" focusable="false">
-              <use href="/icons/sprite.svg#eye"></use>
-            </svg>
-            <span data-view-count>0</span> views
-          </span>
-        </div>
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <p class="site-footer__note">
+          &copy; <span id="current-year">2026</span> Matthew Anderson. Plain HTML, CSS and
+          JavaScript, and a Cloudflare Worker.
+        </p>
+        <ul class="site-footer__links">
+          <li>
+            <span class="site-footer__views" data-view-widget hidden>
+              <span data-view-count>0</span> views
+            </span>
+          </li>
+          <li>
+            <a
+              class="link"
+              href="https://github.com/and3rn3t/and3rn3t"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Source</a
+            >
+          </li>
+          <li><a class="link" href="/feed.xml">RSS</a></li>
+          <li><a class="link" href="#home">Back to top</a></li>
+        </ul>
       </div>
     </footer>
     <script>

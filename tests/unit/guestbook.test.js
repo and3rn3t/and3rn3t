@@ -22,6 +22,7 @@ describe('guestbook form', () => {
     async function setup() {
         vi.resetModules();
         document.body.className = '';
+        delete document.documentElement.dataset.theme;
         document.body.innerHTML = FORM_HTML;
 
         turnstile = { render: vi.fn(() => 'widget-1'), reset: vi.fn(), remove: vi.fn() };
@@ -182,7 +183,7 @@ describe('guestbook form', () => {
         loadWidget().callback('token-1');
         expect(turnstile.render.mock.calls[0][1].theme).toBe('light');
 
-        document.body.classList.add('dark-theme');
+        document.documentElement.dataset.theme = 'dark';
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: 'dark' } }));
 
         expect(turnstile.remove).toHaveBeenCalledWith('widget-1');

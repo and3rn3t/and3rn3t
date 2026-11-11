@@ -9,7 +9,7 @@ describe('view counter', () => {
     beforeEach(() => {
         sessionStorage.clear();
         document.body.innerHTML =
-            '<span class="view-count-widget" hidden><span data-view-count>0</span> views</span>';
+            '<span data-view-widget hidden><span data-view-count>0</span> views</span>';
         fetchMock = vi.fn(async () => Response.json({ page: 'home', views: 1234 }));
         vi.stubGlobal('fetch', fetchMock);
     });
@@ -24,7 +24,7 @@ describe('view counter', () => {
 
         expect(methodsCalled(fetchMock)).toEqual(['POST']);
         expect(document.querySelector('[data-view-count]').textContent).toBe('1,234');
-        expect(document.querySelector('.view-count-widget').hidden).toBe(false);
+        expect(document.querySelector('[data-view-widget]').hidden).toBe(false);
     });
 
     it('only reads the total on later loads in the same session', async () => {
