@@ -23,7 +23,7 @@ Check out my **portfolio**: featured projects with in-depth case studies, techni
 
 **Under the hood:** hand-rolled vanilla-JS ES modules (no framework), a WebAssembly particle
 simulation (AssemblyScript) powering the hero, a single design-token-driven stylesheet, and a
-Cloudflare Worker serving dynamic OG images, view counts, and the guestbook. Installable as a PWA
+Cloudflare Worker serving the live activity feed, view counts, and the guestbook. Installable as a PWA
 with full offline support.
 
 ---

@@ -1,17 +1,9 @@
 /**
  * Worker routing tests — exercises worker/index.js without deploying.
  *
- * og.js and engagement.js are mocked to avoid their network calls.
+ * engagement.js is mocked to avoid its KV and network calls.
  */
 import { test, expect, vi } from 'vitest';
-
-vi.mock('../../worker/og.js', () => ({
-    handleOgRequest: vi
-        .fn()
-        .mockResolvedValue(
-            new Response('<svg/>', { headers: { 'Content-Type': 'image/svg+xml' } })
-        ),
-}));
 
 vi.mock('../../worker/engagement.js', () => ({
     handleViewsRequest: vi.fn().mockResolvedValue(new Response('{}', { status: 200 })),
@@ -44,11 +36,11 @@ test('GET /unknown returns 404', async () => {
     expect(res.status).toBe(404);
 });
 
-// ── /og ───────────────────────────────────────────────────────────────────────
+// ── /og (removed: the OG image is a static file now) ──────────────────────────
 
-test('GET /og delegates to handleOgRequest', async () => {
-    const res = await worker.fetch(req('GET', '/og'), env);
-    expect(res.headers.get('Content-Type')).toMatch(/svg/);
+test.each(['/og', '/og?project=health'])('GET %s is gone (404)', async path => {
+    const res = await worker.fetch(req('GET', path), env);
+    expect(res.status).toBe(404);
 });
 
 // ── /views ────────────────────────────────────────────────────────────────────

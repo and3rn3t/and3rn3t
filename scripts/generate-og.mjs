@@ -1,16 +1,15 @@
 /**
- * Generate static PNG Open Graph images from the Worker's SVG card renderers.
+ * Generate the static PNG Open Graph image from the portfolio card (scripts/og-card.mjs).
  *
- * Twitter/X and Facebook do not render SVG og:image URLs, so we rasterize the
- * same 1200×630 cards to PNG at build time and serve them as static files:
+ * Twitter/X and Facebook do not render SVG og:image URLs, so the 1200×630 card is
+ * rasterized to PNG at build time and served as a static file:
  *
- *   og/default.png     — portfolio overview card (used by index.html metas)
- *   og/<repo>.png      — per-project case-study cards
+ *   og/default.png     — portfolio overview card (used by index.html and the post pages)
  *
  * Rasterization uses Playwright's bundled Chromium (already a devDependency
- * for e2e tests) with the site's own Inter variable font, so the cards match
- * across local and CI runs. Data comes from the local github-data.json and
- * projects-data.json — no network access needed.
+ * for e2e tests) with the site's own Inter variable font, so the card matches
+ * across local and CI runs. Data comes from the local github-data.json — no
+ * network access needed.
  *
  * Usage: pnpm generate:og
  */
@@ -19,7 +18,7 @@ import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from '@playwright/test';
-import { findRepoStats, renderPortfolioCard, renderProjectCard } from '../worker/og.js';
+import { renderPortfolioCard } from './og-card.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = join(ROOT, 'og');
@@ -27,7 +26,6 @@ const WIDTH = 1200;
 const HEIGHT = 630;
 
 const ghData = JSON.parse(readFileSync(join(ROOT, 'github-data.json'), 'utf8'));
-const projectsData = JSON.parse(readFileSync(join(ROOT, 'projects-data.json'), 'utf8'));
 const interWoff2 = readFileSync(join(ROOT, 'fonts', 'inter-variable.woff2')).toString('base64');
 
 /** Wrap a card SVG in a page that swaps system-ui for the site's Inter font. */
@@ -63,12 +61,6 @@ const page = await browser.newPage({
 
 console.log('Generating OG images...');
 await renderPng(page, renderPortfolioCard(ghData), join(OUT_DIR, 'default.png'));
-
-for (const project of projectsData.projects ?? []) {
-  const slug = project.github_repo?.split('/').pop() ?? project.name;
-  const repoStats = findRepoStats(ghData, slug);
-  await renderPng(page, renderProjectCard(project, repoStats), join(OUT_DIR, `${slug}.png`));
-}
 
 await browser.close();
 console.log('Done.');

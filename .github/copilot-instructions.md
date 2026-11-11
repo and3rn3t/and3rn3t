@@ -18,7 +18,7 @@ lists what review and completion tools most often get wrong.
   `safeUrl()` (both in `modules/utils/html.js`).
 - **Reuse the shared helpers** in `modules/utils/` (`activity.js`, `data.js` `loadJSON()`,
   `while-visible.js`) instead of copying logic. The Worker imports `activity.js` too.
-- **Generated files** (`github-data.json`, `og/*.png`, `posts/`, `feed.xml`, the sitemap blog
+- **Generated files** (`github-data.json`, `og/default.png`, `posts/`, `feed.xml`, the sitemap blog
   block) come from scripts and CI. Edit `posts-data.json` and run `pnpm generate:posts`; don't
   hand-edit the output.
 - **Done means** `pnpm validate` passes (lint, Stylelint, format, unit tests, `check:refs`) and,

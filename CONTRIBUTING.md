@@ -16,7 +16,7 @@ pnpm test:e2e       # Playwright + axe, served from the raw source like producti
 ```
 
 The site is vanilla JS served as raw source by GitHub Pages; there is no build step. A Cloudflare
-Worker (`worker/`) handles view counts, the guestbook, live activity and dynamic OG cards
+Worker (`worker/`) handles view counts, the guestbook and live activity
 (`pnpm worker:dev` to run it locally). See [`AGENTS.md`](AGENTS.md) for the full layout and
 commands.
 
@@ -44,7 +44,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `ci`
 - Prettier formats everything (`pnpm format`), ESLint checks JS (`pnpm lint`).
 - CSS uses the design tokens in `styles.css`; `pnpm lint:css` rejects raw spacing and type values.
   Details are in [`CLAUDE.md`](CLAUDE.md#css-guidelines).
-- Generated files (`github-data.json`, `og/*.png`, `posts/`, `feed.xml`) are produced by scripts and
+- Generated files (`github-data.json`, `og/default.png`, `posts/`, `feed.xml`) are produced by scripts and
   CI. To add or edit a post, change `posts-data.json` and run `pnpm generate:posts`.
 
 ## Conduct
