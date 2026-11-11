@@ -7,10 +7,6 @@
       name="description"
       content="Matthew Anderson (@and3rn3t) — Software engineer at Deere &amp; Company. Building health tech, home automation, and data projects in my spare time."
     />
-    <meta
-      name="keywords"
-      content="Matthew Anderson, Software Engineer, TypeScript, Python, Swift, dbt, IoT, Home Automation, Health Technology, Data Engineering, React, Node.js, Game Development"
-    />
     <meta name="author" content="Matthew Anderson" />
 
     <!-- PWA Meta Tags -->
@@ -19,9 +15,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="M. Anderson" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#16a34a" />
-    <meta name="msapplication-TileColor" content="#16a34a" />
-    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- Browser chrome matches the page background: --bg-primary in styles.css (light and
+         body.dark-theme). modules/theme.js rewrites both when the visitor picks a theme. -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
@@ -36,56 +33,9 @@
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/icons/icon-72x72.svg" />
-    <link rel="shortcut icon" href="/favicon.svg" />
 
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.svg" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.svg" />
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-128x128.svg" />
-    <link rel="apple-touch-icon" href="/icons/icon-180x180.svg" />
-
-    <!-- iOS Splash Screens -->
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-      href="/icons/splash-iphone5-640x1136.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-      href="/icons/splash-iphone6-750x1334.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)"
-      href="/icons/splash-iphone6plus-1242x2208.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
-      href="/icons/splash-iphonex-1125x2436.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
-      href="/icons/splash-iphonexsmax-1242x2688.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
-      href="/icons/splash-iphonexr-828x1792.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
-      href="/icons/splash-ipadpro10-1536x2048.svg"
-    />
-    <link
-      rel="apple-touch-startup-image"
-      media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
-      href="/icons/splash-ipadpro12-2048x2732.svg"
-    />
+    <!-- iOS ignores SVG touch icons, so this one is a PNG -->
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -116,14 +66,6 @@
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
-    <meta name="rating" content="General" />
-    <meta name="distribution" content="Global" />
-    <meta name="coverage" content="Worldwide" />
-    <meta name="target" content="all" />
-    <meta name="HandheldFriendly" content="True" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="canonical" href="https://andernet.dev/" />
     <link rel="alternate" hreflang="en" href="https://andernet.dev/" />
@@ -139,9 +81,10 @@
             "name": "Matthew Anderson",
             "alternateName": "and3rn3t",
             "url": "https://andernet.dev/",
+            "email": "and3rn3t@icloud.com",
             "image": {
               "@type": "ImageObject",
-              "url": "https://andernet.dev/icons/icon-512x512.svg",
+              "url": "https://andernet.dev/icons/icon-512x512.png",
               "width": 512,
               "height": 512
             },
@@ -149,7 +92,8 @@
             "jobTitle": "Software Engineer",
             "worksFor": {
               "@type": "Organization",
-              "name": "Deere & Company"
+              "name": "Deere & Company",
+              "url": "https://www.deere.com"
             },
             "knowsAbout": [
               {
@@ -221,7 +165,6 @@
               "@id": "https://andernet.dev/#person"
             },
             "datePublished": "2023-01-01T00:00:00+00:00",
-            "dateModified": "2026-02-04T00:00:00+00:00",
             "breadcrumb": {
               "@id": "https://andernet.dev/#breadcrumb"
             },
@@ -285,12 +228,10 @@
       }, 500);
     </script>
 
-    <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="//api.github.com" />
+    <!-- The Worker (views, activity) is called on every load; keep in step with
+         WORKER_BASE in modules/config.js. Its requests are CORS fetches, hence crossorigin. -->
+    <link rel="preconnect" href="https://and3rn3t-portfolio.andernet.workers.dev" crossorigin />
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
-
-    <!-- Preconnect for critical third-party domains -->
-    <link rel="preconnect" href="https://api.github.com" />
 
     <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
     <style>
@@ -316,7 +257,7 @@
         background: #ffffff;
       }
       body.dark-theme {
-        background: #1a0e0a;
+        background: #0a0a0a; /* --bg-primary in styles.css */
         color: #f1f5f9;
       }
       .navbar {
@@ -493,7 +434,7 @@
             <input
               type="text"
               id="global-search-input"
-              placeholder="Search entire portfolio... (Ctrl+K)"
+              placeholder="Search projects, skills and writing…"
               class="global-search-input"
               autocomplete="off"
               spellcheck="false"
@@ -546,8 +487,8 @@
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/icons/sprite.svg#search-plus"></use>
             </svg>
-            <h3>Search Your Portfolio</h3>
-            <p>Find projects, skills, technologies, and content across the entire portfolio.</p>
+            <h3>Search this site</h3>
+            <p>Find projects, skills and writing.</p>
             <div class="search-tips">
               <div class="search-tip"><kbd>↑</kbd><kbd>↓</kbd> Navigate results</div>
               <div class="search-tip"><kbd>Enter</kbd> Open result</div>
@@ -1143,33 +1084,6 @@
     </footer>
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
-
-    <!-- Schema.org Person structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Matthew Anderson",
-        "url": "https://andernet.dev",
-        "email": "and3rn3t@icloud.com",
-        "jobTitle": "Software Engineer",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Deere & Company",
-          "url": "https://www.deere.com"
-        },
-        "sameAs": ["https://github.com/and3rn3t", "https://linkedin.com/in/and3rn3t"],
-        "knowsAbout": [
-          "TypeScript",
-          "Swift",
-          "Python",
-          "IoT",
-          "Health Technology",
-          "Data Engineering",
-          "Home Automation"
-        ]
-      }
     </script>
 
     <!-- Main application script (ES6 modules) -->

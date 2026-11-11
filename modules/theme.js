@@ -8,7 +8,8 @@ import { debug } from './debug.js';
 import { SPRITE_URL } from './utils/icon.js';
 
 const STORAGE_KEY = 'theme';
-const META_COLORS = { light: '#fefefe', dark: '#1a0e0a' };
+// The page background: --bg-primary in styles.css (light, and body.dark-theme)
+const META_COLORS = { light: '#ffffff', dark: '#0a0a0a' };
 
 function readSaved() {
     try {
@@ -119,14 +120,19 @@ export class ThemeManager {
         // Trigger custom event for other components
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
 
-        // Update meta theme-color
-        let metaTheme = document.querySelector('meta[name="theme-color"]');
-        if (!metaTheme) {
-            metaTheme = document.createElement('meta');
+        // The pages ship one theme-color per OS colour scheme. The applied theme can differ
+        // from the OS setting, so point every one of them at the colour now on screen.
+        const themeColor = META_COLORS[theme] ?? META_COLORS.light;
+        const metaThemes = document.querySelectorAll('meta[name="theme-color"]');
+        for (const metaTheme of metaThemes) {
+            metaTheme.content = themeColor;
+        }
+        if (metaThemes.length === 0) {
+            const metaTheme = document.createElement('meta');
             metaTheme.name = 'theme-color';
+            metaTheme.content = themeColor;
             document.head.appendChild(metaTheme);
         }
-        metaTheme.content = META_COLORS[theme] ?? META_COLORS.light;
 
         debug.log('[Theme] Applied theme:', theme);
     }
