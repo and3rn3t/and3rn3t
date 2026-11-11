@@ -106,6 +106,31 @@ test.describe('offline page', () => {
         await reloaded;
     });
 
+    test.describe('the browser-bar colour', () => {
+        const barColours = page =>
+            page
+                .locator('meta[name="theme-color"]')
+                .evaluateAll(tags => tags.map(tag => tag.content.toLowerCase()));
+
+        test('follows a saved theme that differs from the OS setting', async ({ page }) => {
+            await page.emulateMedia({ colorScheme: 'light' });
+            await page.addInitScript(() => localStorage.setItem('theme', 'dark'));
+            await page.goto('/offline.html');
+            // Both tags, whichever the browser reads, are the dark surface
+            expect(await barColours(page)).toEqual(['#0b0d0b', '#0b0d0b']);
+
+            await page.emulateMedia({ colorScheme: 'dark' });
+            await page.addInitScript(() => localStorage.setItem('theme', 'light'));
+            await page.goto('/offline.html');
+            expect(await barColours(page)).toEqual(['#fbfbf8', '#fbfbf8']);
+        });
+
+        test('keeps the OS-specific pair when nothing is saved', async ({ page }) => {
+            await page.goto('/offline.html');
+            expect(await barColours(page)).toEqual(['#fbfbf8', '#0b0d0b']);
+        });
+    });
+
     for (const theme of ['light', 'dark']) {
         test(`has no axe violations in the ${theme} theme, with the same colours as the site`, async ({
             page,
