@@ -23,6 +23,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # Not the triggering SHA: a run queued behind another one (see `concurrency`) would
+          # otherwise start from the commit before that run's merge and conflict with it.
+          ref: main
 
       - name: Fetch GitHub Data
         env:
