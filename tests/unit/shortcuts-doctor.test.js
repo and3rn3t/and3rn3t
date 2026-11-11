@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -241,6 +241,33 @@ describe('standalone CLI', () => {
         expect(readFileSync(join(installed, 'SKILL.md'), 'utf8')).toContain(
             'name: shortcuts-doctor'
         );
+    });
+
+    // The entry-point guard compares argv[1] with the module's realpath. Without an
+    // explicit symlink this only fails where tmpdir() is itself a symlink (macOS), so
+    // Linux CI would not notice a regression.
+    it.each([
+        ['a symlinked skill directory', 'directory'],
+        ['a symlinked script file', 'file'],
+    ])('runs when invoked through %s', (_label, kind) => {
+        const directory = temporaryDirectory();
+        const file = join(directory, 'export.json');
+        writeFileSync(file, JSON.stringify(workflow(action('getclipboard'), action('share'))));
+        const linkedSkill = join(directory, 'linked-skill');
+        const linkedScript = join(directory, 'linked-inspect.mjs');
+        symlinkSync(skillDirectory, linkedSkill, 'dir');
+        symlinkSync(script, linkedScript, 'file');
+        const entry =
+            kind === 'directory'
+                ? join(linkedSkill, 'scripts', 'inspect-shortcut.mjs')
+                : linkedScript;
+        const result = spawnSync(process.execPath, [entry, '--', file], {
+            encoding: 'utf8',
+            timeout: 10000,
+        });
+        expect(result.status).toBe(0);
+        expect(result.stderr).toBe('');
+        expect(JSON.parse(result.stdout).actionCount).toBe(2);
     });
 
     it('fails without exposing a missing file path', () => {
