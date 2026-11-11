@@ -8,6 +8,7 @@ import {
 import { formatDateRange, renderTimeline } from '../../scripts/templates/experience.mjs';
 import { renderCover } from '../../scripts/templates/cover.mjs';
 import {
+    coverFiles,
     renderLeadCard,
     renderListRow,
     renderProjects,
@@ -278,6 +279,49 @@ describe('renderProjects', () => {
         expect(out.counts).toEqual({ lead: 0, cards: 3, more: 0 });
         expect(out.more).toBe('');
     });
+});
+
+describe('covers match what the cards reference', () => {
+    const named = (name, extra = {}) =>
+        projectView(
+            { name, language: 'Go', html_url: `https://github.com/o/${name}` },
+            { name, displayName: name, ...extra }
+        );
+    const referenced = out =>
+        new Set(
+            [
+                ...(out.lead + out.cards).matchAll(
+                    /\/images\/projects\/([^"\s]+-cover-(?:light|dark)\.svg)/g
+                ),
+            ].map(match => match[1])
+        );
+
+    // The generator writes coverFiles(views); every cover a card points at must be in that set,
+    // whichever way the projects are arranged. This includes the fallback where nothing is
+    // featured and every project becomes a card.
+    const arrangements = {
+        'one featured card': [named('a', { featured: 1 }), named('b')],
+        'nothing featured, so everything is a card': [named('a'), named('b'), named('c')],
+        'a screenshot lead and plain cards': [
+            named('a', { featured: 1, screenshot: { url: 'https://x', alt: 'x' } }),
+            named('b', { featured: 2 }),
+            named('c'),
+        ],
+        'featured cards that already have screenshots': [
+            named('a', { featured: 1, screenshot: { url: 'https://x', alt: 'x' } }),
+            named('b', { featured: 2, screenshot: { url: 'https://y', alt: 'y' } }),
+        ],
+    };
+
+    for (const [label, views] of Object.entries(arrangements)) {
+        it(`${label}`, () => {
+            const written = new Set(coverFiles(views).map(cover => cover.file));
+            const pointedAt = referenced(renderProjects(views));
+            expect([...pointedAt].filter(file => !written.has(file))).toEqual([]);
+            // ...and nothing is written that no card uses
+            expect([...written].filter(file => !pointedAt.has(file))).toEqual([]);
+        });
+    }
 });
 
 describe('generated covers', () => {

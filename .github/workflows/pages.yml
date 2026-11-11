@@ -72,13 +72,14 @@ jobs:
 
       # The id names the service worker's caches and changes the worker file, which makes
       # every visitor's browser re-download everything. So hash what the worker caches
-      # (code, styles, pages, fonts, icons) and not the commit SHA: the daily data-only
+      # (code, styles, pages, fonts, icons, images: the worker serves those cache-first, so a
+      # changed one must change the id) and not the commit SHA: the daily data-only
       # deploys (*.json, og/, posts/, feed.xml) then keep the same worker and caches.
       - name: Stamp service worker build id
         run: |
           BUILD_ID=$(find . -path ./.git -prune -o -type f \
               \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.wasm' \
-                 -o -path './fonts/*' -o -path './icons/*' \) \
+                 -o -path './fonts/*' -o -path './icons/*' -o -path './images/*' \) \
               ! -path './posts/*' ! -path './og/*' -print \
             | LC_ALL=C sort | xargs sha256sum | sha256sum | cut -c1-12)
           echo "service worker build id: $BUILD_ID"

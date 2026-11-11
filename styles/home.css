@@ -483,6 +483,22 @@
     margin: var(--space-10) 0 0;
   }
 
+  /* ==========================================================================
+     Legacy patch: the case-study modal
+     Its "View Code" action is still the old .project-link (modules/project-modal.js), which in
+     the dark theme is light text on #22c55e (2.2:1). Axe doesn't catch it: the modal's backdrop
+     overlaps it, so axe can't work out the background and reports "incomplete", not a violation.
+     The legacy hover darkens the background to #166534, which dark text can't read on, so the
+     hover is patched too. Delete this block with the modal (Phase 10.4).
+     ========================================================================== */
+  :root[data-theme='dark'] .project-modal .project-link:not(.live, .secondary) {
+    color: var(--accent-contrast);
+  }
+
+  :root[data-theme='dark'] .project-modal .project-link:not(.live, .secondary):hover {
+    background: var(--accent-strong);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .intro__status .currently-dot {
       animation: none;

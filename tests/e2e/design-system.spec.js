@@ -32,11 +32,13 @@ test.describe('theme', () => {
     test('sets <html data-theme> before first paint, from the saved choice', async ({ page }) => {
         await page.addInitScript(() => localStorage.setItem('theme', 'dark'));
         await page.goto('/', { waitUntil: 'commit' });
-        // The head script runs before the body exists
+        // The head script runs before the body exists, so the attribute is there at commit
         await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-        expect(
-            await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)
-        ).toBe('dark');
+        // color-scheme comes from the stylesheet, which is render-blocking: it resolves once
+        // that arrives, still before anything is painted. Polled, because at commit it has not.
+        await expect
+            .poll(() => page.evaluate(() => getComputedStyle(document.documentElement).colorScheme))
+            .toBe('dark');
     });
 
     test('follows the OS when nothing is saved', async ({ page }) => {

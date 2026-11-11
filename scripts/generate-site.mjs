@@ -29,7 +29,7 @@ import { icon } from '../modules/utils/icon.js';
 import { projectView, selectProjects } from '../modules/utils/projects.js';
 import { renderTimeline } from './templates/experience.mjs';
 import { renderCover } from './templates/cover.mjs';
-import { renderProjects } from './templates/projects.mjs';
+import { coverFiles, renderProjects } from './templates/projects.mjs';
 import { longDate, minutes } from './templates/shared.mjs';
 import { renderBlogCards } from './templates/writing.mjs';
 
@@ -321,18 +321,15 @@ console.log(
     `${posts.length} posts)`
 );
 
-// ── images/projects/<name>-cover-*.svg (projects shown as cards without a screenshot) ───────
+// ── images/projects/<name>-cover-*.svg (every card without a screenshot; see coverFiles) ───────
 const coverDir = join(ROOT, 'images', 'projects');
 mkdirSync(coverDir, { recursive: true });
 const covers = new Set();
-for (const view of views.filter(view => view.featured && !view.screenshot)) {
-  for (const scheme of ['light', 'dark']) {
-    const file = `${view.name}-cover-${scheme}.svg`;
-    writeFileSync(join(coverDir, file), renderCover(view.name, scheme));
-    covers.add(file);
-  }
+for (const { file, name, scheme } of coverFiles(views)) {
+  writeFileSync(join(coverDir, file), renderCover(name, scheme));
+  covers.add(file);
 }
-// A project that gained a screenshot, or lost its featured flag, no longer needs its cover
+// A project that gained a screenshot, or is no longer a card, no longer needs its cover
 for (const file of readdirSync(coverDir)) {
   if (/-cover-(light|dark)\.svg$/.test(file) && !covers.has(file)) rmSync(join(coverDir, file));
 }

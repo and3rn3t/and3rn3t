@@ -148,14 +148,42 @@ export function renderListRow(view) {
  * so the section is never just a list.
  *
  * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} views
- * @returns {{ lead: string, cards: string, more: string, counts: { lead: number, cards: number, more: number } }}
+ * @returns {{ lead: object | null, grid: object[], rest: object[] }}
  */
-export function renderProjects(views) {
+export function splitProjects(views) {
   const lead = views[0]?.screenshot ? views[0] : null;
   const hasFeatured = views.some(view => view.featured);
 
   const grid = views.filter(view => view !== lead && (view.featured || !hasFeatured));
   const rest = views.filter(view => view !== lead && !grid.includes(view));
+  return { lead, grid, rest };
+}
+
+/**
+ * The cover images the section needs: one per theme for every card that has no screenshot.
+ * The generator writes exactly these, so a card can never point at a cover that wasn't made.
+ *
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} views
+ * @returns {{ file: string, name: string, scheme: 'light' | 'dark' }[]}
+ */
+export function coverFiles(views) {
+  return splitProjects(views)
+    .grid.filter(view => !view.screenshot)
+    .flatMap(view =>
+      ['light', 'dark'].map(scheme => ({
+        file: `${view.name}-cover-${scheme}.svg`,
+        name: view.name,
+        scheme,
+      }))
+    );
+}
+
+/**
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} views
+ * @returns {{ lead: string, cards: string, more: string, counts: { lead: number, cards: number, more: number } }}
+ */
+export function renderProjects(views) {
+  const { lead, grid, rest } = splitProjects(views);
 
   return {
     lead: lead ? renderLeadCard(lead) : '',
