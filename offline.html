@@ -3,202 +3,199 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Offline - Matthew Anderson</title>
+    <meta name="robots" content="noindex" />
+    <title>Offline | Matthew Anderson</title>
+    <!--
+      Self-contained on purpose: the service worker shows this page when the network is down, so
+      it can't count on any other file being cached. The colours are the design tokens in
+      styles/core.css (same values, same light-dark() resolution), copied here.
+    -->
     <style>
+      :root {
+        color-scheme: light dark;
+        --surface: light-dark(#fbfbf8, #0b0d0b);
+        --surface-raised: light-dark(#ffffff, #131613);
+        --text: light-dark(#15181a, #eef1ee);
+        --muted: light-dark(#4a524d, #a4aba6);
+        --border: light-dark(#dcdfd7, #252a25);
+        --border-strong: light-dark(#b9beb4, #3a403a);
+        --accent: light-dark(#15803d, #4ade80);
+        --accent-contrast: light-dark(#ffffff, #052e16);
+      }
+
+      :root[data-theme='light'] {
+        color-scheme: light;
+      }
+
+      :root[data-theme='dark'] {
+        color-scheme: dark;
+      }
+
       * {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
       }
 
       body {
+        display: grid;
+        min-height: 100svh;
+        margin: 0;
+        padding: 1.5rem;
+        place-items: center;
+        background: var(--surface);
+        color: var(--text);
         font-family:
-          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+          Inter,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
           sans-serif;
-        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-        color: #ffffff;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
+        line-height: 1.6;
       }
 
-      .offline-container {
-        text-align: center;
-        max-width: 600px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        padding: 60px 40px;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      main {
+        width: min(100%, 34rem);
       }
 
-      .offline-icon {
-        font-size: 80px;
-        margin-bottom: 20px;
-        animation: float 3s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
+      .eyebrow {
+        margin: 0 0 1rem;
+        color: var(--muted);
+        font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
       }
 
       h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        font-weight: 700;
+        margin: 0 0 1rem;
+        font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        text-wrap: balance;
       }
 
       p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        line-height: 1.6;
-        opacity: 0.9;
+        margin: 0 0 1.5rem;
+        color: var(--muted);
+        font-size: 1.125rem;
+        text-wrap: pretty;
       }
 
-      .retry-button {
-        background: #ffffff;
-        color: #16a34a;
-        border: none;
-        padding: 15px 40px;
-        font-size: 1.1rem;
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.75rem;
+        padding: 0.5rem 1.25rem;
+        border: 1px solid var(--border-strong);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+        font-size: 0.875rem;
         font-weight: 600;
-        border-radius: 50px;
+        text-decoration: none;
         cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       }
 
-      .retry-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      .button:hover {
+        border-color: var(--text);
       }
 
-      .cached-content {
-        margin-top: 40px;
-        padding-top: 40px;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      .button--primary {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: var(--accent-contrast);
       }
 
-      .cached-content h2 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
+      .button--primary:hover {
+        border-color: var(--accent);
+        filter: brightness(1.08);
       }
 
-      .cached-list {
-        list-style: none;
-        text-align: left;
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .status {
+        margin: 0;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        font-size: 0.875rem;
+      }
+
+      .status::before {
+        content: '';
         display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-right: 0.5rem;
+        border-radius: 50%;
+        background: var(--muted);
       }
 
-      .cached-list li {
-        margin-bottom: 10px;
-        padding-left: 25px;
-        position: relative;
-      }
-
-      .cached-list li:before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: #4ade80;
-        font-weight: bold;
-      }
-
-      .connection-status {
-        margin-top: 20px;
-        padding: 15px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        font-size: 0.9rem;
-      }
-
-      .online {
-        color: #4ade80;
-      }
-
-      .offline {
-        color: #fbbf24;
-      }
-
-      @media (max-width: 768px) {
-        .offline-container {
-          padding: 40px 30px;
-        }
-
-        h1 {
-          font-size: 2rem;
-        }
-
-        p {
-          font-size: 1rem;
-        }
-
-        .offline-icon {
-          font-size: 60px;
-        }
+      .status[data-online='true']::before {
+        background: var(--accent);
       }
     </style>
+    <script>
+      // The saved theme, before first paint (same as every other page)
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      })();
+    </script>
   </head>
   <body>
-    <div class="offline-container">
-      <div class="offline-icon">📡</div>
-      <h1>You're Offline</h1>
+    <main>
+      <p class="eyebrow">Offline</p>
+      <h1>You're offline right now.</h1>
       <p>
-        It looks like you've lost your internet connection. Don't worry, some content is still
-        available from your last visit!
+        This page couldn't be loaded because there's no connection. If you've visited before, the
+        home page and the projects you opened are saved on this device. Otherwise, try again once
+        you're back online.
       </p>
 
-      <button class="retry-button" onclick="location.reload()">Try Again</button>
-
-      <div class="connection-status">
-        <strong>Connection Status:</strong> <span id="status" class="offline">Offline</span>
+      <div class="actions">
+        <button type="button" class="button button--primary" id="retry">Try again</button>
+        <a class="button" href="/">Go to the home page</a>
       </div>
 
-      <div class="cached-content">
-        <h2>Available Cached Content</h2>
-        <ul class="cached-list">
-          <li>Portfolio homepage</li>
-          <li>Project listings</li>
-          <li>GitHub statistics</li>
-          <li>Contact information</li>
-        </ul>
-      </div>
-    </div>
+      <p class="status" id="status" role="status" data-online="false">No connection</p>
+    </main>
 
     <script>
-      // Check connection status
-      function updateConnectionStatus() {
-        const statusElement = document.getElementById('status');
-        if (navigator.onLine) {
-          statusElement.textContent = 'Online';
-          statusElement.className = 'online';
-          // Auto-reload if connection restored
-          setTimeout(() => {
-            location.reload();
-          }, 1000);
-        } else {
-          statusElement.textContent = 'Offline';
-          statusElement.className = 'offline';
-        }
+      const status = document.getElementById('status');
+
+      function show() {
+        const online = navigator.onLine;
+        status.dataset.online = String(online);
+        status.textContent = online ? 'Back online, reloading…' : 'No connection';
       }
 
-      // Listen for connection changes
-      window.addEventListener('online', updateConnectionStatus);
-      window.addEventListener('offline', updateConnectionStatus);
+      document.getElementById('retry').addEventListener('click', () => location.reload());
 
-      // Check on load
-      updateConnectionStatus();
-
-      // Periodic check
-      setInterval(updateConnectionStatus, 5000);
+      // Reload when the connection comes back. Only on that change: a reload on every check
+      // would loop forever when the browser says it is online but the site is unreachable.
+      window.addEventListener('online', () => {
+        show();
+        setTimeout(() => location.reload(), 1000);
+      });
+      window.addEventListener('offline', show);
+      show();
     </script>
   </body>
 </html>

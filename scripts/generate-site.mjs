@@ -8,6 +8,7 @@
  *                              can be shared and indexed (replaces the case-study modal)
  *   posts/<slug>/index.html  - one indexable page per post (own title, description,
  *                              canonical, Open Graph, BlogPosting JSON-LD)
+ *   404.html                 - the not-found page, on the same head, nav and footer
  *   feed.xml                 - RSS feed (links and ids point at the post pages)
  *   sitemap.xml              - the "Blog Posts" block is rewritten; the rest is left alone
  *
@@ -27,14 +28,14 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { escapeHtml } from '../modules/utils/html.js';
-import { icon } from '../modules/utils/icon.js';
 import { projectView, selectProjects } from '../modules/utils/projects.js';
 import { renderEducation, renderFacts, renderJobs } from './templates/experience.mjs';
-import { AUTHOR, CF_BEACON_TOKEN, SITE, VIEW_TRANSITION_CSS } from './templates/chrome.mjs';
+import { AUTHOR, SITE } from './templates/chrome.mjs';
 import { renderCover } from './templates/cover.mjs';
+import { renderNotFoundPage } from './templates/not-found.mjs';
+import { renderPostPage } from './templates/post-page.mjs';
 import { renderProjectPage, shareImage } from './templates/project-page.mjs';
 import { coverFiles, renderProjects, splitProjects } from './templates/projects.mjs';
-import { longDate, minutes } from './templates/shared.mjs';
 import { renderPostRows } from './templates/writing.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -46,172 +47,24 @@ posts.sort((a, b) => b.date.localeCompare(a.date));
 const esc = escapeHtml;
 
 const postUrl = post => `${SITE}/posts/${post.slug}/`;
-const postPath = post => `/posts/${post.slug}/`;
 
 const rfc822 = dateStr => new Date(`${dateStr}T00:00:00Z`).toUTCString().replace('GMT', '+0000');
-
-// JSON for an inline <script>: keep "<" from ever closing the tag
-const jsonLd = data => JSON.stringify(data, null, 2).replaceAll('<', '\\u003c');
-
-function pagerLink(post, direction) {
-  if (!post) return '';
-  const label = direction === 'prev' ? 'Newer post' : 'Older post';
-  return `<a class="post-pager-link post-pager-${direction}" href="${postPath(post)}" rel="${direction === 'prev' ? 'prev' : 'next'}">
-            <span class="post-pager-label">${label}</span>
-            <span class="post-pager-title">${esc(post.title)}</span>
-          </a>`;
-}
-
-function renderPost(post, index) {
-  const url = postUrl(post);
-  const newer = posts[index - 1];
-  const older = posts[index + 1];
-  const title = `${post.title} | ${AUTHOR}`;
-  const image = `${SITE}/og/default.png`;
-  const tags = (post.tags ?? []).map(t => `<span class="blog-tag">${esc(t)}</span>`).join('');
-
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.summary,
-    datePublished: post.date,
-    dateModified: post.date,
-    url,
-    mainEntityOfPage: url,
-    image,
-    keywords: (post.tags ?? []).join(', '),
-    inLanguage: 'en-US',
-    author: { '@type': 'Person', name: AUTHOR, url: SITE },
-    publisher: { '@id': `${SITE}/#person` },
-  };
-
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>${esc(title)}</title>
-    <meta name="description" content="${esc(post.summary)}" />
-    <meta name="author" content="${AUTHOR}" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="${url}" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="alternate" type="application/rss+xml" title="${AUTHOR}'s Blog" href="/feed.xml" />
-
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:title" content="${esc(post.title)}" />
-    <meta property="og:description" content="${esc(post.summary)}" />
-    <meta property="og:image" content="${image}" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="article:published_time" content="${post.date}" />
-    <meta property="article:author" content="${AUTHOR}" />
-${(post.tags ?? []).map(t => `    <meta property="article:tag" content="${esc(t)}" />`).join('\n')}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${esc(post.title)}" />
-    <meta name="twitter:description" content="${esc(post.summary)}" />
-    <meta name="twitter:image" content="${image}" />
-
-    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/styles.css" />
-    <!-- Opts in to view transitions; see VIEW_TRANSITION_CSS. Moves to core.css in Phase 10.5. -->
-    <style>${VIEW_TRANSITION_CSS}</style>
-
-    <script type="application/ld+json">
-${jsonLd(structuredData)}
-    </script>
-  </head>
-  <body>
-    <script>
-      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
-      (function () {
-        var t = null;
-        try {
-          t = localStorage.getItem('theme');
-        } catch (e) {}
-        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.body.classList.add('dark-theme');
-        }
-      })();
-    </script>
-    <a href="#main" class="skip-link">Skip to main content</a>
-
-    <header class="post-nav">
-      <div class="post-nav-inner">
-        <a href="/" class="nav-logo">@and3rn3t</a>
-        <div class="post-nav-actions">
-          <a href="/#writing" class="post-nav-link">All posts</a>
-          <button
-            type="button"
-            class="theme-toggle"
-            id="theme-toggle"
-            aria-label="Switch to dark theme"
-            title="Switch to dark theme (T)"
-          >
-            ${icon('moon')}
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main id="main" class="post-page">
-      <div class="container">
-        <div class="blog-article-inner">
-          <a href="/#writing" class="blog-back-link">${icon('arrow-left')} Back to writing</a>
-          <article class="blog-article-body">
-            <header class="blog-article-header">
-              <div class="blog-card-meta">
-                <time datetime="${post.date}">${longDate(post.date)}</time>
-                <span class="blog-reading-time">${icon('clock')} ${minutes(post)} min read</span>
-              </div>
-              <h1 class="blog-article-title">${esc(post.title)}</h1>
-              <div class="blog-card-tags">${tags}</div>
-            </header>
-            <div class="blog-article-content">${post.content}</div>
-          </article>
-${
-  newer || older
-    ? `          <nav class="post-pager" aria-label="More posts">
-          ${pagerLink(newer, 'prev')}
-          ${pagerLink(older, 'next')}
-          </nav>
-`
-    : ''
-}        </div>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-inner">
-        <p>${AUTHOR} · <a href="/">andernet.dev</a></p>
-      </div>
-    </footer>
-
-    <script type="module" src="/modules/post-page.js"></script>
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "${CF_BEACON_TOKEN}"}'
-    ></script>
-  </body>
-</html>
-`;
-}
 
 // ── posts/<slug>/index.html ──────────────────────────────────────────────────
 rmSync(join(ROOT, 'posts'), { recursive: true, force: true });
 posts.forEach((post, index) => {
   const dir = join(ROOT, 'posts', post.slug);
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), renderPost(post, index));
+  writeFileSync(
+    join(dir, 'index.html'),
+    renderPostPage({ post, newer: posts[index - 1], older: posts[index + 1] })
+  );
   console.log(`  wrote posts/${post.slug}/index.html`);
 });
+
+// ── 404.html ─────────────────────────────────────────────────────────────────
+writeFileSync(join(ROOT, '404.html'), renderNotFoundPage());
+console.log('  wrote 404.html');
 
 // ── feed.xml ─────────────────────────────────────────────────────────────────
 const feedItems = posts

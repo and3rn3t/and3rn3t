@@ -24,7 +24,7 @@ const stagedPaths = () => {
 describe('generated files', () => {
     it('Quality checks the generator output', () => {
         expect(checkedPaths()).toEqual(
-            expect.arrayContaining(['posts', 'projects', 'sitemap.xml', 'index.html'])
+            expect.arrayContaining(['posts', 'projects', 'sitemap.xml', 'index.html', '404.html'])
         );
     });
 
