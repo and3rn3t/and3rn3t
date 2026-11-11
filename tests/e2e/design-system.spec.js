@@ -9,23 +9,40 @@ const rootVar = (page, name) =>
 test.describe('cascade layers', () => {
     test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
 
-    // The legacy stylesheet shrinks the spacing scale on phones. It sits in a layer, and the
-    // shared scale in core.css sits in a layer *below* it; if the layer order were ever
-    // fixed after the legacy layer first appeared, the scale would win and every legacy
-    // section would grow.
-    test('legacy keeps its mobile spacing override', async ({ page }) => {
+    // The home page makes the shared scale a step tighter on phones (home.css, in the `scale`
+    // layer). The values are what the page was designed and reviewed at, so they are pinned.
+    test("the home page's phone scale is a step tighter than the desktop scale", async ({
+        page,
+    }) => {
         await page.goto('/');
         expect(await rootVar(page, '--space-10')).toBe('2rem');
         expect(await rootVar(page, '--space-8')).toBe('1.5rem');
+        expect(await rootVar(page, '--space-24')).toBe('5rem');
+        expect(await rootVar(page, '--font-size-base')).toMatch(/^clamp\(/);
     });
+
+    test('a page that loads only core.css keeps the desktop scale on a phone', async ({ page }) => {
+        await page.goto('/projects/health/');
+        expect(await rootVar(page, '--space-10')).toBe('2.5rem');
+        expect(await rootVar(page, '--font-size-base')).toBe('1rem');
+    });
+});
+
+test('the home page needs no stylesheet but core.css and home.css', async ({ page }) => {
+    const sheets = [];
+    page.on('request', request => {
+        if (request.resourceType() === 'stylesheet') sheets.push(new URL(request.url()).pathname);
+    });
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+    expect(sheets.sort()).toEqual(['/styles/core.css', '/styles/home.css']);
+    expect((await page.request.get('/styles.css')).status()).toBe(404);
 });
 
 test('the layer order is declared before any layer is used', async ({ page }) => {
     await page.goto('/');
     const first = await page.evaluate(() => document.querySelector('head style').textContent);
-    expect(first).toMatch(
-        /@layer scale, legacy, reset, tokens, base, components, sections, utilities;/
-    );
+    expect(first).toMatch(/@layer scale, reset, tokens, base, components, sections, utilities;/);
 });
 
 test.describe('theme', () => {
@@ -56,7 +73,7 @@ test.describe('theme', () => {
 
         await page.locator('#theme-toggle').click();
         await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-        // Polled: under reduced motion the legacy stylesheet makes colour changes a
+        // Polled: a colour change can take a frame to settle, so read it until it does
         // one-frame transition, so the value settles on the next frame.
         await expect.poll(background).toBe('rgb(11, 13, 11)'); // --surface, dark
     });

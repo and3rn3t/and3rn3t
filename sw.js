@@ -12,7 +12,6 @@ const RUNTIME_CACHE = `portfolio-runtime-${BUILD_ID}`;
 const PRECACHE_ASSETS = [
     '/',
     '/index.html',
-    '/styles.css',
     '/styles/core.css',
     '/styles/home.css',
     '/fonts/jetbrains-mono-500.woff2',

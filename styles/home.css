@@ -3,11 +3,119 @@
  * Chrome, tokens and primitives are in core.css.
  */
 
-/* The page that still renders legacy markup (the palette, keyboard help, toasts) pulls the old
-   stylesheet in as the lowest layer. Temporary: delete with styles.css, and with the matching
-   <link rel="preload"> in index.html. The layer order is declared first in index.html's <head>. */
-@layer scale, legacy, reset, tokens, base, components, sections, utilities;
-@import url('../styles.css') layer(legacy);
+/* The layer order is declared first in index.html's <head> and at the top of core.css. */
+@layer scale, reset, tokens, base, components, sections, utilities;
+
+/* ==========================================================================
+   The home page's base
+   What the retired styles.css supplied to every element, and which the sections and components
+   below still assume: a margin-and-padding reset, the body's type, and the phone-sized scale.
+   Only this page carries it; the generated pages (core.css + article.css) were written without.
+   ========================================================================== */
+
+/* On a phone the shared scale is a step tighter and the type is fluid. This is the same scale
+   core.css defines, adjusted: tests/e2e/design-system.spec.js pins the values. */
+@layer scale {
+  @media (max-width: 768px) {
+    :root {
+      --font-size-xs: clamp(0.7rem, 2vw, 0.75rem);
+      --font-size-sm: clamp(0.8rem, 2.5vw, 0.875rem);
+      --font-size-base: clamp(0.9rem, 3vw, 1rem);
+      --font-size-lg: clamp(1rem, 3.5vw, 1.125rem);
+      --font-size-xl: clamp(1.1rem, 4vw, 1.25rem);
+      --font-size-2xl: clamp(1.25rem, 5vw, 1.5rem);
+      --font-size-3xl: clamp(1.5rem, 6vw, 1.875rem);
+      --font-size-4xl: clamp(1.75rem, 7vw, 2.25rem);
+      --font-size-5xl: clamp(2rem, 8vw, 3rem);
+      --font-size-6xl: clamp(2.25rem, 9vw, 3.75rem);
+
+      --space-8: 1.5rem;
+      --space-10: 2rem;
+      --space-12: 2.5rem;
+      --space-16: 3rem;
+      --space-20: 4rem;
+      --space-24: 5rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    :root {
+      --space-4: 0.75rem;
+      --space-6: 1rem;
+      --space-8: 1.25rem;
+    }
+  }
+}
+
+@layer reset {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    html {
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+  }
+}
+
+@layer base {
+  /* An in-page link lands below the fixed nav */
+  section[id] {
+    scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+  }
+
+  body {
+    background-color: var(--surface);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 768px) {
+    body {
+      line-height: var(--line-height-loose);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  /* The links in the phone menu are a little taller than their text, to be easy to hit */
+  @media (max-width: 768px) {
+    .site-nav__links a {
+      padding-block: var(--space-1);
+    }
+  }
+
+  /* Touch: a control is at least a finger wide, and a field is not zoomed into on focus */
+  @media (pointer: coarse) {
+    button {
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    input,
+    textarea,
+    select {
+      font-size: max(1rem, 16px);
+    }
+  }
+}
 
 @layer sections {
   /* ==========================================================================
@@ -130,17 +238,12 @@
     display: none;
   }
 
-  /* The widget's markup is shared with the old design; restyle it as a quiet mono line.
-     Every property the old rules set is reset here, so none of them show through. */
+  /* The widget (markup from modules/currently.js): a quiet mono line. */
   .intro__status .currently-widget {
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-1) var(--space-3);
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
     color: var(--muted);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);
@@ -148,23 +251,22 @@
     line-height: var(--line-height-normal);
   }
 
-  .intro__status .currently-dot {
+  .currently-dot {
+    flex-shrink: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
     background: var(--accent);
-    box-shadow: 0 0 0 0 var(--accent-wash);
     animation: intro-pulse 2.4s var(--ease-out) infinite;
   }
 
-  .intro__status .currently-label,
-  .intro__status .currently-message,
-  .intro__status .currently-meta {
-    color: var(--muted);
+  .currently-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
   }
 
-  .intro__status .currently-label .icon {
-    color: var(--muted);
-  }
-
-  .intro__status .currently-repo {
+  .currently-repo {
     color: var(--text);
     font-weight: var(--font-weight-medium);
     text-decoration: underline;
@@ -172,17 +274,39 @@
     text-underline-offset: 0.25em;
   }
 
-  .intro__status .currently-repo:hover {
+  .currently-repo:hover {
     color: var(--accent);
     text-decoration-color: currentcolor;
   }
 
-  .intro__status .currently-message {
-    font-style: normal;
+  /* The commit message is cut to one line; on a phone it is left out */
+  .currently-message {
+    max-width: 32ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .intro__status .currently-meta {
-    margin-left: 0;
+  .currently-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .currently-branch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .currently-time {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .currently-message {
+      display: none;
+    }
   }
 
   @keyframes intro-pulse {
@@ -1072,7 +1196,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .intro__status .currently-dot {
+    .currently-dot {
       animation: none;
     }
 

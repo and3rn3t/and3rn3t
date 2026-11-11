@@ -76,9 +76,9 @@ for (const url of manifestUrls.filter(Boolean)) addRef(url, 'manifest.json');
 const precache = read('sw.js').match(/PRECACHE_ASSETS = \[([\s\S]*?)\]/)?.[1] ?? '';
 for (const [, url] of precache.matchAll(/'([^']+)'/g)) addRef(url, 'sw.js');
 
-// CSS url()s.
-for (const [, url] of read('styles.css').matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
-  addRef(url, 'styles.css');
+// CSS url()s (resolved from the stylesheet's own folder).
+for (const file of walk('styles', '.css')) {
+  for (const [, url] of read(file).matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) addRef(url, file);
 }
 
 // JS: static imports, dynamic imports and literal fetch() paths in the browser code.

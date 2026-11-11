@@ -154,7 +154,7 @@ test.describe('shortcuts used before their module has loaded', () => {
         await delay(page, 'keyboard-help.js');
         await page.goto('/');
         await page.waitForFunction(() => globalThis.appState?.isInitialized);
-        await page.locator('body').click();
+        await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
         await page.keyboard.press('?');
         await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '', {
             timeout: 8000,
