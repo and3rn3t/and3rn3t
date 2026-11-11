@@ -30,7 +30,7 @@ test('Esc closes the command palette', async ({ page }) => {
 
 test('"/" key opens the palette when not in a text field', async ({ page }) => {
     // Ensure focus is on the body (not an input).
-    await page.locator('body').click();
+    await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
     await page.keyboard.press('/');
     await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
 });

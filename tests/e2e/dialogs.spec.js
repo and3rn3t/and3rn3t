@@ -89,7 +89,7 @@ test.describe('keyboard help as a native dialog', () => {
         page,
     }) => {
         const help = page.locator('#keyboard-help');
-        await page.locator('body').click();
+        await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
         await page.keyboard.press('?');
         await expect(help).toHaveAttribute('open', '');
         expect(await help.evaluate(el => el.matches(':modal'))).toBe(true);
@@ -118,7 +118,7 @@ test.describe('keyboard help as a native dialog', () => {
     });
 
     test('lists its shortcuts as a description list', async ({ page }) => {
-        await page.locator('body').click();
+        await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
         await page.keyboard.press('?');
         await expect(page.getByRole('heading', { name: 'Keyboard shortcuts' })).toBeVisible();
         expect(await page.locator('#keyboard-help dt').count()).toBeGreaterThanOrEqual(8);
@@ -152,7 +152,7 @@ for (const theme of ['light', 'dark']) {
         });
 
         test('the open keyboard help has no axe violations', async ({ page }) => {
-            await page.locator('body').click();
+            await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
             await page.keyboard.press('?');
             await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '');
             await page.waitForTimeout(400);
@@ -244,7 +244,7 @@ test.describe('messages while a dialog is open', () => {
         [
             'keyboard help',
             async page => {
-                await page.locator('body').click();
+                await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
                 await page.keyboard.press('?');
             },
             '#keyboard-help',
@@ -278,7 +278,7 @@ test.describe('keyboard help: jumping to a section', () => {
     test.beforeEach(async ({ page }) => ready(page));
 
     test('g then c closes the help and lands on Contact', async ({ page }) => {
-        await page.locator('body').click();
+        await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
         await page.keyboard.press('?');
         await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '');
 
