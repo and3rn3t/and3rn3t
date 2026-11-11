@@ -1544,7 +1544,8 @@
   }
 
   .palette kbd,
-  .help kbd {
+  .help kbd,
+  .dev-terminal kbd {
     display: inline-block;
     min-width: 1.5rem;
     padding: var(--space-1) var(--space-2);
@@ -1596,6 +1597,95 @@
   .toast--error {
     background: var(--danger);
     color: var(--accent-contrast);
+  }
+
+  /* --- Developer-mode terminal (the Konami code; modules/easter-egg.js) -------------------- */
+  /* Always a dark terminal, whatever the page theme: color-scheme: dark makes the tokens below
+     resolve to their dark values, so no colour is written here. */
+  .dev-terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--scrim);
+    backdrop-filter: blur(var(--space-1));
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+
+  .dev-terminal-overlay.visible {
+    opacity: 1;
+  }
+
+  .dev-terminal {
+    width: min(100% - 2 * var(--gutter), 35rem);
+    overflow: hidden;
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--surface-sunken);
+    box-shadow: var(--shadow-overlay);
+    color: var(--text);
+    color-scheme: dark;
+    transform: translateY(var(--space-3)) scale(0.98);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .dev-terminal-overlay.visible .dev-terminal {
+    transform: none;
+  }
+
+  .dev-terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width) solid var(--border);
+    background: var(--surface-raised);
+  }
+
+  /* Window-chrome dots, neutral: colour is reserved for what is live or actionable */
+  .dev-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: var(--radius-full);
+    background: var(--border-strong);
+  }
+
+  .dev-terminal-title {
+    margin-left: var(--space-2);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+
+  .dev-terminal-body {
+    min-height: 14rem;
+    padding: var(--space-6);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-loose);
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  .dev-terminal-hint {
+    padding: 0 var(--space-6) var(--space-4);
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dev-terminal-overlay,
+    .dev-terminal {
+      transition: none;
+    }
+
+    .dev-terminal {
+      transform: none;
+    }
   }
 
   @media (max-width: 40rem) {
