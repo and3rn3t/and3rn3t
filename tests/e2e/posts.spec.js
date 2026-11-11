@@ -4,7 +4,7 @@
  * Each post has its own indexable page: real <title>, canonical, Open Graph and
  * BlogPosting JSON-LD, and the writing list links to it.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 import AxeBuilder from '@axe-core/playwright';
 
 const SLUG = 'lidar-gait-analysis-iphone';

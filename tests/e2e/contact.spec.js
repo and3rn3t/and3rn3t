@@ -4,7 +4,7 @@
  * Covers: message/guestbook tabs (ARIA tabs pattern), lazy guestbook +
  * Turnstile loading, and old `#guestbook` links opening the guestbook tab.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 const waitForTabs = page =>
     page.waitForFunction(() => Boolean(globalThis.appState?.managers?.contactTabs), {

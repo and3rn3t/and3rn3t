@@ -4,7 +4,7 @@
  * Covers: featured cards render first, the expander reveals/hides the rest,
  * and a deep link to a hidden project's case study expands the grid.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 const visibleCards = '#projects-grid .project-card:not([hidden])';
 const hiddenCards = '#projects-grid .project-card[hidden]';

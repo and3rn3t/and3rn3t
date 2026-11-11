@@ -4,7 +4,7 @@
  * Section links must land the section just below the fixed navbar (CSS
  * scroll-margin-top), and the skip link must target a <main> landmark.
  */
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.js';
 
 // Instant scrolling keeps the assertion deterministic
 test.use({ reducedMotion: 'reduce', viewport: { width: 1280, height: 800 } });
