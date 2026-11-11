@@ -16,11 +16,22 @@ import { escapeHtml } from './utils/html.js';
 // Public sitekey — safe to commit. Get from dash.cloudflare.com → Turnstile.
 const TURNSTILE_SITEKEY = '0x4AAAAAAFNonLuoeiwThp5v';
 
+// What the Worker's error codes mean to a visitor; anything else gets the generic message.
+const SUBMIT_ERRORS = {
+    invalid_captcha: 'Captcha verification failed — please try again.',
+    rate_limited: 'Please wait a minute before signing again.',
+    captcha_unconfigured: 'The guestbook is temporarily unavailable. Please try again later.',
+};
+const GENERIC_ERROR = 'Something went wrong. Please try again.';
+const CAPTCHA_BLOCKED =
+    "The captcha couldn't load (an ad blocker may be blocking it). Use the message form instead.";
+
 class GuestbookManager {
     #form = null;
     #entriesEl = null;
     #statusEl = null;
     #token = '';
+    #widgetId = null;
 
     async init() {
         this.#form = document.querySelector('#guestbook-form');
@@ -84,8 +95,23 @@ class GuestbookManager {
         script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
         script.async = true;
         script.defer = true;
-        script.addEventListener('load', () => {
-            if (!globalThis.turnstile) return;
+        script.addEventListener('load', () => this.#renderWidget());
+        // Blocked by an ad/tracker blocker or the network: say so instead of leaving a
+        // form that can never be completed and only asks for a captcha that isn't there.
+        script.addEventListener('error', () => this.#setStatus(CAPTCHA_BLOCKED, 'error'));
+        document.head.appendChild(script);
+
+        // The widget's theme is fixed when it is rendered, so draw it again on a switch.
+        document.addEventListener('themeChanged', () => this.#renderWidget());
+    }
+
+    #renderWidget() {
+        const container = document.querySelector('#turnstile-container');
+        if (!container || !globalThis.turnstile) return;
+
+        if (this.#widgetId !== null) globalThis.turnstile.remove?.(this.#widgetId);
+        this.#token = '';
+        this.#widgetId =
             globalThis.turnstile.render('#turnstile-container', {
                 sitekey: TURNSTILE_SITEKEY,
                 callback: token => {
@@ -100,9 +126,13 @@ class GuestbookManager {
                 theme: document.body.classList.contains('dark-theme') ? 'dark' : 'light',
                 // The normal widget is a fixed 300px; use compact on very narrow screens.
                 size: container.clientWidth < 300 ? 'compact' : 'normal',
-            });
-        });
-        document.head.appendChild(script);
+            }) ?? null;
+    }
+
+    /** A Turnstile token works once, so after any submit attempt the visitor needs a new one. */
+    #resetCaptcha() {
+        this.#token = '';
+        globalThis.turnstile?.reset?.(this.#widgetId ?? '#turnstile-container');
     }
 
     async #handleSubmit(e) {
@@ -133,12 +163,11 @@ class GuestbookManager {
                 body: JSON.stringify({ name, message, token: this.#token }),
                 signal: AbortSignal.timeout(8000),
             });
-            const result = await resp.json();
+            const result = await resp.json().catch(() => ({}));
             if (resp.ok && result.ok) {
                 this.#setStatus('Thanks! Your message was added.', 'success');
                 this.#form.reset();
-                this.#token = '';
-                globalThis.turnstile?.reset?.('#turnstile-container');
+                this.#resetCaptcha();
                 // Prepend new entry to the list without a full reload.
                 const { entry } = result;
                 const newEl = document.createElement('article');
@@ -146,21 +175,18 @@ class GuestbookManager {
                 newEl.innerHTML = `
                     <header class="guestbook-entry-header">
                         <strong class="guestbook-name">${escapeHtml(entry.name)}</strong>
-                        <time class="guestbook-date">${this.#formatDate(entry.date)}</time>
+                        <time class="guestbook-date" datetime="${escapeHtml(entry.date)}">${this.#formatDate(entry.date)}</time>
                     </header>
                     <p class="guestbook-message">${escapeHtml(entry.message)}</p>`;
                 this.#entriesEl.prepend(newEl);
                 const emptyMsg = this.#entriesEl.querySelector('.guestbook-empty');
                 emptyMsg?.remove();
             } else {
-                this.#setStatus(
-                    result.error === 'invalid_captcha'
-                        ? 'Captcha verification failed — please try again.'
-                        : 'Something went wrong. Please try again.',
-                    'error'
-                );
+                this.#resetCaptcha();
+                this.#setStatus(SUBMIT_ERRORS[result.error] ?? GENERIC_ERROR, 'error');
             }
         } catch {
+            this.#resetCaptcha();
             this.#setStatus('Network error. Please try again.', 'error');
         } finally {
             if (btn) {
