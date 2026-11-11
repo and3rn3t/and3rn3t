@@ -347,3 +347,24 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   still describes the old stack (one `styles.css`, dark mode as a class on `body`, the modal); it is Matt's
   copy to update.** Still to do in 10.5: the palette, keyboard help and toasts on `<dialog>` (10.5b), and the
   OG card and `manifest.json` colours (10.5c).
+- **2026-11-11** — Phase 10.5b (dialogs and toasts, stacked on 10.5a): the command palette and keyboard help are native
+  `<dialog>`s opened with `showModal()`. The browser now supplies what two hand-written traps did badly: focus
+  containment, Esc, an inert page behind, and focus restore (the old traps had already shipped two bugs: an icon
+  counted as the last focusable element, and `.at()` on a `NodeList`). About 130 lines of trap and visibility
+  code are deleted from `command-palette.js` and `keyboard-help.js`. **Behaviour change:** Tab past the last
+  control hands focus to the browser's own UI instead of wrapping to the first, which is how every native modal
+  dialog works; the tests now assert that focus never reaches the page behind (and that the page is inert)
+  rather than that it wraps. The page also no longer scrolls behind an open dialog (`:root:has(dialog[open])`).
+  `?` and `g` are ignored while the palette is open, so help cannot open on top of it. The palette now indexes the
+  posts (read from the Writing rows, so there is no second source), and the empty state's `<h3>` and the help
+  title's emoji are gone (a dialog needs no heading level of the page's, and an emoji in a heading is read out).
+  The two toasts (the page's and the palette's) are one `.toast` style on the tokens, bottom-centre, inverted
+  in both themes with `--accent` and `--danger` variants whose contrast is measured in a test per theme. The
+  toast is deliberately _not_ a popover: a hidden popover is `display: none`, and a live region that appears
+  with its text already in it is not announced. A new `--shadow-overlay` token replaces the legacy shadows.
+  Deleted from `styles.css`: 95 rules and about 13 KB (the palette, keyboard help and both toasts); a pixel
+  diff of every home section in both themes at 1440 and 390 is identical. **Not verified:** the open/close
+  animation (`@starting-style`, `allow-discrete`) in a headed browser or Safari (browsers without it just
+  appear and disappear), and `::backdrop` picking up `--scrim` in older Safari (an unset custom property there
+  means no tint, though the dialog is still modal). Still to do in 10.5: the OG card and `manifest.json` colours
+  (10.5c).

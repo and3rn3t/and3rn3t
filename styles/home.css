@@ -1081,3 +1081,417 @@
     }
   }
 }
+
+/* ==========================================================================
+   Dialogs and toasts
+   The command palette and keyboard help are native <dialog>s opened with showModal(), so the
+   browser supplies the focus trap, Esc, the inert page behind and focus restore. This is only
+   how they look. The two toasts (a message from the page, and from the palette) are one style.
+   ========================================================================== */
+@layer components {
+  /* The page does not scroll behind a modal dialog */
+  :root:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  .palette,
+  .help {
+    box-sizing: border-box;
+    padding: 0;
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-xl);
+    background: var(--surface-raised);
+    color: var(--text);
+    font-family: var(--font-sans);
+    box-shadow: var(--shadow-overlay);
+    overflow: hidden;
+    /* Fade and rise in; closing runs the same in reverse (progressive: a browser without
+       @starting-style just appears and disappears) */
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--space-4)));
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out),
+      overlay var(--dur-base) allow-discrete,
+      display var(--dur-base) allow-discrete;
+  }
+
+  .palette[open],
+  .help[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    .palette[open],
+    .help[open] {
+      opacity: 0;
+      transform: translateY(calc(-1 * var(--space-4)));
+    }
+  }
+
+  .palette::backdrop,
+  .help::backdrop {
+    background: var(--scrim);
+    backdrop-filter: blur(var(--space-1));
+  }
+
+  /* --- Command palette ------------------------------------------------------------------ */
+  .palette {
+    width: min(44rem, 100% - 2 * var(--gutter));
+    max-height: 80svh;
+    margin: 10svh auto auto;
+  }
+
+  .palette[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .palette__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .global-search-header {
+    padding: var(--space-4);
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .global-search-input-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    padding: var(--space-1) var(--space-2) var(--space-1) var(--space-4);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--surface-sunken);
+  }
+
+  .global-search-input-container:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .global-search-icon {
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+
+  .global-search-input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-2) 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: var(--font-size-lg);
+  }
+
+  /* The container shows the focus ring, so the input itself has none */
+  .global-search-input:focus-visible {
+    outline: none;
+  }
+
+  .global-search-input::placeholder {
+    color: var(--muted);
+  }
+
+  .search-categories {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+  }
+
+  .search-category {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border: var(--border-width) solid var(--border-strong);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+
+  .search-category:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  .search-category[aria-pressed='true'] {
+    border-color: var(--accent);
+    background: var(--accent-wash);
+    color: var(--text);
+  }
+
+  .global-search-results {
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-2);
+    overflow-y: auto;
+  }
+
+  .search-results-empty {
+    padding: var(--space-8) var(--space-4);
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .search-results-empty .icon {
+    margin-bottom: var(--space-3);
+    color: var(--border-strong);
+    font-size: var(--font-size-3xl);
+  }
+
+  .search-results-empty p {
+    margin: 0;
+  }
+
+  .search-results-empty__title {
+    margin-bottom: var(--space-1);
+    color: var(--text);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .search-tips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-5);
+    margin-top: var(--space-5);
+    font-size: var(--font-size-sm);
+  }
+
+  .search-tip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .search-results-content {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .palette-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  /* The current option: a wash and a bar, so it reads without relying on colour alone */
+  .palette-item.is-active {
+    background: var(--accent-wash);
+    box-shadow: inset var(--space-1) 0 0 var(--accent);
+  }
+
+  .palette-item-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-md);
+    background: var(--surface-sunken);
+    color: var(--accent-strong);
+  }
+
+  .palette-item.is-active .palette-item-icon {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .palette-item-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .palette-item-title,
+  .palette-item-subtitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .palette-item-title {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .palette-item-subtitle {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .palette-item-type {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  .palette-no-results {
+    padding: var(--space-8);
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* --- Keyboard help -------------------------------------------------------------------- */
+  .help {
+    width: min(38rem, 100% - 2 * var(--gutter));
+    margin: auto;
+    /* On a short screen (a phone on its side) the list is taller than the dialog may be: scroll
+       it instead of clipping the shortcuts at the bottom */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .help__body {
+    position: relative;
+    padding: var(--space-6);
+  }
+
+  .help__title {
+    margin: 0 var(--space-10) var(--space-5) 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+  }
+
+  .help__close {
+    position: absolute;
+    inset: var(--space-4) var(--space-4) auto auto;
+  }
+
+  .shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 0 var(--space-8);
+    margin: 0;
+  }
+
+  .shortcut-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-2) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .shortcut-item dt,
+  .shortcut-item dd {
+    margin: 0;
+  }
+
+  .shortcut-item dd {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    text-align: right;
+  }
+
+  .palette kbd,
+  .help kbd {
+    display: inline-block;
+    min-width: 1.5rem;
+    padding: var(--space-1) var(--space-2);
+    border: var(--border-width) solid var(--border-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-sunken);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-tight);
+    text-align: center;
+  }
+
+  /* --- Toasts: a short message from the page or the palette ----------------------------- */
+  .toast {
+    position: fixed;
+    inset: auto auto var(--space-8) 50%;
+    z-index: var(--z-modal);
+    max-width: min(26rem, 100% - 2 * var(--gutter));
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-lg);
+    background: var(--text);
+    color: var(--surface);
+    box-shadow: var(--shadow-overlay);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, var(--space-4));
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  .toast.visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* The same pair as the primary button (accent on its contrast colour) is AA in both themes;
+     errors use --danger, which is AA against the page surface */
+  .toast--success {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .toast--error {
+    background: var(--danger);
+    color: var(--accent-contrast);
+  }
+
+  @media (max-width: 40rem) {
+    .palette {
+      margin-top: var(--space-4);
+      max-height: 90svh;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .palette,
+    .help,
+    .toast,
+    .search-category {
+      transition: none;
+    }
+
+    .toast,
+    .toast.visible {
+      transform: translate(-50%, 0);
+    }
+  }
+}

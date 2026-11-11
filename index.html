@@ -425,14 +425,11 @@
       </div>
     </nav>
 
-    <!-- Global Search Modal -->
-    <div class="global-search-modal" id="global-search-modal" aria-hidden="true">
-      <div
-        class="global-search-content"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Command palette"
-      >
+    <!-- Command palette. A native <dialog>: showModal() gives the focus trap, Esc, an inert page
+         behind it and focus restore, so modules/command-palette.js has none of that to do. -->
+    <dialog class="palette" id="global-search-modal" aria-label="Command palette">
+      <div class="palette__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
         <div class="global-search-header">
           <div class="global-search-input-container">
             <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
@@ -452,7 +449,8 @@
               aria-controls="search-results-content"
             />
             <button
-              class="global-search-close"
+              type="button"
+              class="icon-button global-search-close"
               id="global-search-close"
               aria-label="Close global search"
               title="Close search (Esc)"
@@ -463,25 +461,45 @@
             </button>
           </div>
           <div class="search-categories">
-            <button class="search-category active" data-category="all" aria-pressed="true">
+            <button
+              type="button"
+              class="search-category active"
+              data-category="all"
+              aria-pressed="true"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#globe"></use>
               </svg>
               All
             </button>
-            <button class="search-category" data-category="projects" aria-pressed="false">
+            <button
+              type="button"
+              class="search-category"
+              data-category="projects"
+              aria-pressed="false"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#code"></use>
               </svg>
               Projects
             </button>
-            <button class="search-category" data-category="skills" aria-pressed="false">
+            <button
+              type="button"
+              class="search-category"
+              data-category="skills"
+              aria-pressed="false"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#cogs"></use>
               </svg>
               Skills
             </button>
-            <button class="search-category" data-category="content" aria-pressed="false">
+            <button
+              type="button"
+              class="search-category"
+              data-category="content"
+              aria-pressed="false"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#file-alt"></use>
               </svg>
@@ -494,7 +512,7 @@
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/icons/sprite.svg#search-plus"></use>
             </svg>
-            <h3>Search this site</h3>
+            <p class="search-results-empty__title">Search this site</p>
             <p>Find projects, skills and sections.</p>
             <div class="search-tips">
               <div class="search-tip"><kbd>↑</kbd><kbd>↓</kbd> Navigate results</div>
@@ -511,69 +529,63 @@
           ></div>
         </div>
       </div>
-    </div>
+    </dialog>
 
-    <!-- Keyboard Shortcuts Help -->
-    <div
-      class="keyboard-help"
-      id="keyboard-help"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Keyboard shortcuts"
-      aria-hidden="true"
-    >
-      <div class="keyboard-help-content">
-        <h3>⌨️ Keyboard Shortcuts</h3>
-        <div class="shortcut-grid">
+    <!-- Keyboard shortcuts. A native <dialog>, like the palette. -->
+    <dialog class="help" id="keyboard-help" aria-labelledby="keyboard-help-title">
+      <div class="help__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
+        <h2 class="help__title" id="keyboard-help-title">Keyboard shortcuts</h2>
+        <dl class="shortcut-grid">
           <div class="shortcut-item">
-            <kbd>?</kbd>
-            <span>Show/hide this help</span>
+            <dt><kbd>?</kbd></dt>
+            <dd>Show or hide this help</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>T</kbd>
-            <span>Toggle theme</span>
+            <dt><kbd>T</kbd></dt>
+            <dd>Toggle theme</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd>
-            <span>Command palette</span>
+            <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd></dt>
+            <dd>Command palette</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>J</kbd>
-            <span>Scroll down</span>
+            <dt><kbd>J</kbd></dt>
+            <dd>Scroll down</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>K</kbd>
-            <span>Scroll up</span>
+            <dt><kbd>K</kbd></dt>
+            <dd>Scroll up</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>H</kbd>
-            <span>Go to home</span>
+            <dt><kbd>G</kbd> + <kbd>H</kbd></dt>
+            <dd>Go to home</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>A</kbd>
-            <span>Go to about</span>
+            <dt><kbd>G</kbd> + <kbd>A</kbd></dt>
+            <dd>Go to about</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>P</kbd>
-            <span>Go to projects</span>
+            <dt><kbd>G</kbd> + <kbd>P</kbd></dt>
+            <dd>Go to projects</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>C</kbd>
-            <span>Go to contact</span>
+            <dt><kbd>G</kbd> + <kbd>C</kbd></dt>
+            <dd>Go to contact</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>Esc</kbd>
-            <span>Close dialogs</span>
+            <dt><kbd>Esc</kbd></dt>
+            <dd>Close a dialog</dd>
           </div>
-        </div>
-        <button class="keyboard-help-close" id="keyboard-help-close">
+        </dl>
+        <button type="button" class="icon-button help__close" id="keyboard-help-close">
           <svg class="icon" aria-hidden="true" focusable="false">
             <use href="/icons/sprite.svg#times"></use>
           </svg>
           <span class="sr-only">Close help</span>
         </button>
       </div>
-    </div>
+    </dialog>
 
     <main id="main">
       <!-- Intro. Draft copy: edit freely. -->

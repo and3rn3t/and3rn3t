@@ -124,11 +124,11 @@ test.describe('Accessibility — main page', () => {
             })
             .catch(() => {});
         await page.keyboard.press('Control+k');
-        await page.waitForSelector('#global-search-modal.visible');
+        await page.waitForSelector('#global-search-modal[open]');
         // Wait out the fade/slide-in (250ms modal fade + 350ms content slide) —
         // axe blends mid-transition opacity into composited colors and reports
         // false contrast failures. The fixed wait covers the transition window
-        // even when the transition engages a frame after .visible lands.
+        // even when the transition engages a frame after the dialog opens.
         await page.waitForTimeout(700);
         await page.waitForFunction(() => {
             const modal = document.querySelector('#global-search-modal');

@@ -16,6 +16,7 @@ export class UIManager {
         this.isInitialized = false;
         this.toastHideTimer = 0;
         this.toastClearTimer = 0;
+        this.dialogStatusTimer = 0;
     }
 
     init() {
@@ -48,12 +49,27 @@ export class UIManager {
         if (!notification) {
             notification = document.createElement('div');
             notification.id = 'app-notification';
-            notification.className = 'app-toast';
+            notification.className = 'toast toast--info';
             notification.setAttribute('role', 'status');
             notification.setAttribute('aria-live', 'polite');
             document.body.appendChild(notification);
         }
         return notification;
+    }
+
+    /**
+     * While a modal dialog is open, everything outside it is inert, so the toast (which lives in
+     * the page) is not announced and z-index cannot change that. Each dialog carries its own
+     * empty live region, [data-dialog-status]; say the message there too.
+     */
+    announceInOpenDialog(message, duration) {
+        const region = document.querySelector('dialog[open] [data-dialog-status]');
+        if (!region) return;
+        region.textContent = message;
+        clearTimeout(this.dialogStatusTimer);
+        this.dialogStatusTimer = setTimeout(() => {
+            region.textContent = '';
+        }, duration);
     }
 
     showNotification(message, type = 'info', duration = 5000) {
@@ -62,9 +78,11 @@ export class UIManager {
         clearTimeout(this.toastHideTimer);
         clearTimeout(this.toastClearTimer);
 
+        this.announceInOpenDialog(message, duration);
+
         const variant = TOAST_TYPES.has(type) ? type : 'info';
         const wasVisible = notification.classList.contains('visible');
-        notification.className = `app-toast app-toast--${variant}`;
+        notification.className = `toast toast--${variant}`;
         notification.textContent = message;
         if (wasVisible) {
             notification.classList.add('visible'); // swapped in place, no flicker

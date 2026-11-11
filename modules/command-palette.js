@@ -1,12 +1,13 @@
 /**
  * Command Palette
  *
- * Brings the existing #global-search-modal markup to life as a full
- * Cmd/Ctrl-K command palette: fuzzy search across projects, skills, sections
- * and quick actions (toggle theme, copy email, download résumé, open socials).
+ * Brings the #global-search-modal <dialog> to life as a full Cmd/Ctrl-K command
+ * palette: fuzzy search across projects, posts, skills, sections and quick actions
+ * (toggle theme, copy email, download résumé, open socials).
  *
  * Keyboard: Cmd/Ctrl-K or "/" opens · ↑/↓ navigate · Enter runs · Esc closes.
- * Implements a focus trap and restores focus to the previously-active element.
+ * The browser does the rest: showModal() traps focus in the dialog, makes the page
+ * behind it inert, closes on Esc and puts focus back where it was.
  *
  * @author Matthew Anderson
  */
@@ -36,8 +37,10 @@ class CommandPalette {
         this.filtered = [];
         this.activeIndex = 0;
         this.activeCategory = 'all';
-        this.lastFocused = null;
-        this.isOpen = false;
+    }
+
+    get isOpen() {
+        return Boolean(this.modal?.open);
     }
 
     init() {
@@ -47,7 +50,6 @@ class CommandPalette {
         }
 
         this.buildItems();
-        this.ensureToast();
 
         // Global open shortcut.
         document.addEventListener('keydown', e => {
@@ -81,6 +83,9 @@ class CommandPalette {
         this.input.addEventListener('keydown', e => this.onInputKeydown(e));
 
         this.closeBtn?.addEventListener('click', () => this.close());
+        this.modal.addEventListener('close', this.onClosed);
+        // The dialog has no padding and its content fills it, so a click that lands on the
+        // dialog itself is a click on the backdrop.
         this.modal.addEventListener('click', e => {
             if (e.target === this.modal) {
                 this.close();
@@ -169,6 +174,18 @@ class CommandPalette {
             };
         });
 
+        // Posts: the rows in the Writing section are the posts there are
+        const posts = Array.from(document.querySelectorAll('#blog-posts [data-slug]')).map(row => ({
+            type: 'post',
+            category: 'content',
+            icon: 'file-alt',
+            title: row.querySelector('a')?.textContent?.trim() || row.dataset.slug,
+            subtitle: row.querySelector('time')?.textContent?.trim() || 'Post',
+            keywords: 'post writing blog article',
+            run: () =>
+                globalThis.location.assign(`/posts/${encodeURIComponent(row.dataset.slug)}/`),
+        }));
+
         // Skills from the DOM.
         const skills = Array.from(document.querySelectorAll('.tech-chip')).map(el => {
             const name = el.textContent.trim();
@@ -182,7 +199,7 @@ class CommandPalette {
             };
         });
 
-        this.items = [...actions, ...sections, ...skills];
+        this.items = [...actions, ...sections, ...posts, ...skills];
 
         // Projects are loaded async; fetch the static data for richer entries.
         this.loadProjects();
@@ -245,66 +262,27 @@ class CommandPalette {
         if (this.isOpen) {
             return;
         }
-        this.lastFocused = document.activeElement;
-        this.isOpen = true;
-        this.modal.classList.add('visible');
-        this.modal.setAttribute('aria-hidden', 'false');
+        this.modal.showModal();
         this.input.value = '';
         this.activeIndex = 0;
         this.render();
-        // Focus after the open transition begins.
-        requestAnimationFrame(() => this.input.focus());
-        document.addEventListener('keydown', this.onDialogKeydown);
+        this.input.focus();
     }
 
     close() {
-        if (!this.isOpen) {
-            return;
-        }
-        this.isOpen = false;
-        this.modal.classList.remove('visible');
-        this.modal.setAttribute('aria-hidden', 'true');
-        this.input.setAttribute('aria-expanded', 'false');
-        this.input.removeAttribute('aria-activedescendant');
-        document.removeEventListener('keydown', this.onDialogKeydown);
-        if (this.lastFocused instanceof HTMLElement) {
-            this.lastFocused.focus();
+        if (this.isOpen) {
+            this.modal.close();
         }
     }
 
     /**
-     * Keys that apply to the whole dialog while it is open: Escape closes it wherever focus
-     * is (category button, close button, a result), and Tab stays inside it.
+     * Runs however the dialog closed (Esc, the close button, a click on the backdrop, or a
+     * result): reset what the combobox points at. Focus has already gone back to where the
+     * visitor was; that is the browser's job for a modal dialog.
      */
-    onDialogKeydown = e => {
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            this.close();
-            return;
-        }
-        if (e.key !== 'Tab') {
-            return;
-        }
-        // Results are reached with the arrow keys (tabindex -1), so they are not tab stops.
-        // `a[href]`, not `[href]`: every icon is <svg><use href="..."></svg>, and an SVG
-        // element reports offsetParent undefined, so it would pass the visibility filter below
-        // and become the "last" element, which means Tab off the real last button never wraps.
-        const focusable = this.modal.querySelectorAll(
-            'button:not([tabindex="-1"]), input, a[href], [tabindex]:not([tabindex="-1"])'
-        );
-        const list = Array.from(focusable).filter(el => el.offsetParent !== null);
-        if (list.length === 0) {
-            return;
-        }
-        const first = list[0];
-        const last = list.at(-1);
-        if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-        }
+    onClosed = () => {
+        this.input.setAttribute('aria-expanded', 'false');
+        this.input.removeAttribute('aria-activedescendant');
     };
 
     onInputKeydown(e) {
@@ -456,29 +434,9 @@ class CommandPalette {
         });
     }
 
-    /**
-     * The toast is a live region, and a screen reader only announces changes to one that was
-     * already in the page: created and filled in the same moment, the first message can be
-     * missed. So init() creates it empty, and flash() only ever changes its text.
-     */
-    ensureToast() {
-        let toast = document.getElementById('palette-toast');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'palette-toast';
-            toast.className = 'palette-toast';
-            toast.setAttribute('role', 'status');
-            document.body.appendChild(toast);
-        }
-        return toast;
-    }
-
+    /** A short confirmation, through the page's one toast (so two can never overlap). */
     flash(message) {
-        const toast = this.ensureToast();
-        toast.textContent = message;
-        toast.classList.add('visible');
-        clearTimeout(this._toastTimer);
-        this._toastTimer = setTimeout(() => toast.classList.remove('visible'), 2000);
+        globalThis.appState?.managers?.ui?.showNotification?.(message, 'success', 2000);
     }
 }
 

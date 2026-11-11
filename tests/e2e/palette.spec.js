@@ -18,37 +18,37 @@ test.beforeEach(async ({ page }) => {
 
 test('Ctrl+K opens the command palette', async ({ page }) => {
     await page.keyboard.press('Control+k');
-    await expect(page.locator('#global-search-modal')).toHaveClass(/visible/);
+    await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
 });
 
 test('Esc closes the command palette', async ({ page }) => {
     await page.keyboard.press('Control+k');
-    await page.waitForSelector('#global-search-modal.visible');
+    await page.waitForSelector('#global-search-modal[open]');
     await page.keyboard.press('Escape');
-    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+    await expect(page.locator('#global-search-modal')).not.toHaveAttribute('open');
 });
 
 test('"/" key opens the palette when not in a text field', async ({ page }) => {
     // Ensure focus is on the body (not an input).
     await page.locator('body').click();
     await page.keyboard.press('/');
-    await expect(page.locator('#global-search-modal')).toHaveClass(/visible/);
+    await expect(page.locator('#global-search-modal')).toHaveAttribute('open', '');
 });
 
 test('palette closes when backdrop is clicked', async ({ page }) => {
     await page.keyboard.press('Control+k');
-    await page.waitForSelector('#global-search-modal.visible');
+    await page.waitForSelector('#global-search-modal[open]');
     // Click outside the inner dialog (on the modal backdrop).
     const modal = page.locator('#global-search-modal');
     const box = await modal.boundingBox();
     // Click top-left corner — outside the inner dialog.
     await page.mouse.click(box.x + 5, box.y + 5);
-    await expect(modal).not.toHaveClass(/visible/);
+    await expect(modal).not.toHaveAttribute('open');
 });
 
 test('typing filters results', async ({ page }) => {
     await page.keyboard.press('Control+k');
-    await page.waitForSelector('#global-search-modal.visible');
+    await page.waitForSelector('#global-search-modal[open]');
     await page.fill('#global-search-input', 'theme');
     const items = page.locator('.palette-item');
     await expect(items).not.toHaveCount(0);
@@ -58,7 +58,7 @@ test('typing filters results', async ({ page }) => {
 
 test('ArrowDown + Enter runs the highlighted action', async ({ page }) => {
     await page.keyboard.press('Control+k');
-    await page.waitForSelector('#global-search-modal.visible');
+    await page.waitForSelector('#global-search-modal[open]');
     // Navigate to first result.
     await page.keyboard.press('ArrowDown');
     // Pressing Enter should execute the action without throwing.
@@ -70,7 +70,7 @@ test('ArrowDown + Enter runs the highlighted action', async ({ page }) => {
 
 test('search returns no-matches message for gibberish', async ({ page }) => {
     await page.keyboard.press('Control+k');
-    await page.waitForSelector('#global-search-modal.visible');
+    await page.waitForSelector('#global-search-modal[open]');
     await page.fill('#global-search-input', 'xqzwfbnm');
     const noResults = page.locator('.palette-no-results');
     await expect(noResults).toBeVisible();
@@ -80,7 +80,7 @@ test('search returns no-matches message for gibberish', async ({ page }) => {
 
 const openPalette = async page => {
     await page.keyboard.press('Control+k');
-    await page.waitForSelector('#global-search-modal.visible');
+    await page.waitForSelector('#global-search-modal[open]');
     // Focus moves to the input a frame after the modal opens; wait so Tab starts inside it.
     await expect(page.locator('#global-search-input')).toBeFocused();
 };
@@ -91,21 +91,22 @@ test('Escape closes the palette from a category button, not only from the input'
     await openPalette(page);
     await page.locator('.search-category[data-category="projects"]').focus();
     await page.keyboard.press('Escape');
-    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+    await expect(page.locator('#global-search-modal')).not.toHaveAttribute('open');
 });
 
 test('Escape closes the palette from the close button', async ({ page }) => {
     await openPalette(page);
     await page.locator('#global-search-close').focus();
     await page.keyboard.press('Escape');
-    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+    await expect(page.locator('#global-search-modal')).not.toHaveAttribute('open');
 });
 
 test('the palette is a named dialog with a combobox wired to a listbox', async ({ page }) => {
     await openPalette(page);
 
-    const dialog = page.locator('#global-search-modal [role="dialog"]');
-    await expect(dialog).toHaveAttribute('aria-modal', 'true');
+    // A native <dialog> opened with showModal(): that is what makes it modal (and inert behind)
+    const dialog = page.locator('dialog#global-search-modal');
+    expect(await dialog.evaluate(el => el.matches(':modal'))).toBe(true);
     await expect(dialog).toHaveAttribute('aria-label', 'Command palette');
 
     const input = page.locator('#global-search-input');
@@ -172,16 +173,17 @@ test('closing the palette removes its combobox state', async ({ page }) => {
     const input = page.locator('#global-search-input');
     await expect(input).toHaveAttribute('aria-expanded', 'false');
     await expect(input).not.toHaveAttribute('aria-activedescendant', /.+/);
-    await expect(page.locator('#global-search-modal')).toHaveAttribute('aria-hidden', 'true');
+    await expect(page.locator('#global-search-modal')).not.toHaveAttribute('open');
 });
 
-test('Tab stays inside the dialog and skips the arrow-key-only options', async ({ page }) => {
+test('Tab skips the arrow-key-only options and never reaches the page behind', async ({ page }) => {
     await openPalette(page);
     const focused = () =>
         page.evaluate(() => {
             const el = document.activeElement;
             return {
-                inside: Boolean(el?.closest('#global-search-modal')),
+                // Inside the dialog, or on nothing in the page (the browser's own UI has focus)
+                ok: !el || el === document.body || Boolean(el.closest('#global-search-modal')),
                 role: el?.getAttribute('role'),
                 label: `${el?.tagName?.toLowerCase()}#${el?.id}.${el?.className}`,
             };
@@ -193,8 +195,8 @@ test('Tab stays inside the dialog and skips the arrow-key-only options', async (
         const now = await focused();
         seen.push(now.label);
         expect(
-            now.inside,
-            `Tab press ${i} moved focus outside the dialog. Order so far: ${seen.join(' -> ')}`
+            now.ok,
+            `Tab press ${i} reached the page behind. Order so far: ${seen.join(' -> ')}`
         ).toBe(true);
         expect(now.role, `Tab press ${i} landed on an option (${now.label})`).not.toBe('option');
     }
@@ -208,7 +210,7 @@ test('a "Go to" result scrolls to the section, updates the URL and moves focus t
     await page.fill('#global-search-input', 'contact');
     await page.keyboard.press('Enter');
 
-    await expect(page.locator('#global-search-modal')).not.toHaveClass(/visible/);
+    await expect(page.locator('#global-search-modal')).not.toHaveAttribute('open');
     await expect(page).toHaveURL(/#contact$/);
     // Focus lands on the section, not back on whatever opened the palette.
     await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
@@ -244,7 +246,7 @@ test('running "Toggle theme" with the mouse hands focus back to the input', asyn
     await page.fill('#global-search-input', 'toggle theme');
     await page.locator('.palette-item', { hasText: 'Toggle theme' }).first().click();
 
-    await expect(page.locator('#global-search-modal')).toHaveClass(/visible/); // stays open
+    await expect(page.locator('#global-search-modal')).toHaveAttribute('open', ''); // stays open
     await expect(page.locator('#global-search-input')).toBeFocused();
 
     // Focus is back inside the trap, so Tab cannot walk out of the open dialog.
@@ -258,11 +260,11 @@ test('running "Toggle theme" with the mouse hands focus back to the input', asyn
     }
 });
 
-test('the toast live regions are in the page, empty, before any message', async ({ page }) => {
-    for (const id of ['app-notification', 'palette-toast']) {
-        const region = page.locator(`#${id}`);
-        await expect(region).toBeAttached();
-        await expect(region).toHaveAttribute('role', 'status');
-        await expect(region).toHaveText('');
-    }
+test('the toast live region is in the page, empty, before any message', async ({ page }) => {
+    const region = page.locator('#app-notification');
+    await expect(region).toBeAttached();
+    await expect(region).toHaveAttribute('role', 'status');
+    await expect(region).toHaveText('');
+    // The palette has no toast of its own: it uses this one
+    await expect(page.locator('#palette-toast')).toHaveCount(0);
 });

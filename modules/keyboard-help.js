@@ -1,14 +1,13 @@
 /**
  * Keyboard Help & Go-To Navigation
  *
- * Activates the pre-existing (but previously dead) #keyboard-help panel and
- * makes its advertised shortcuts honest:
- *   - `?`            toggle this help panel
+ * Drives the #keyboard-help <dialog> and makes its advertised shortcuts honest:
+ *   - `?`            toggle this help dialog
  *   - `g` then h/a/p/c   jump to home / about / projects / contact
- * (Theme `t`, the `/` palette, and `Esc` are wired elsewhere.)
+ * (Theme `t` and the `/` palette are wired elsewhere.)
  *
- * Fully keyboard-driven with a focus trap, and dismissible via Esc, the close
- * button, or a click on the backdrop.
+ * It is a native modal dialog, so the browser traps focus, closes it on Esc and puts focus back
+ * where it was; this adds the close button and a click on the backdrop.
  *
  * @author Matthew Anderson
  */
@@ -26,10 +25,8 @@ const GO_TO_WINDOW = 1200;
 class KeyboardHelp {
     panel = null;
     closeBtn = null;
-    lastFocused = null;
     goToArmed = false;
     goToTimer = 0;
-    trapFocus = null;
 
     init() {
         this.panel = document.getElementById('keyboard-help');
@@ -39,6 +36,8 @@ class KeyboardHelp {
         this.closeBtn = document.getElementById('keyboard-help-close');
 
         this.closeBtn?.addEventListener('click', () => this.close());
+        // The dialog has no padding and its content fills it, so a click that lands on the
+        // dialog itself is a click on the backdrop.
         this.panel.addEventListener('click', e => {
             if (e.target === this.panel) {
                 this.close();
@@ -56,15 +55,14 @@ class KeyboardHelp {
         if (e.ctrlKey || e.metaKey || e.altKey) {
             return;
         }
+        // Another dialog (the palette) is open: its keys are its own
+        if (!this.isOpen() && document.querySelector('dialog[open]')) {
+            return;
+        }
 
         if (e.key === '?') {
             e.preventDefault();
             this.toggle();
-            return;
-        }
-
-        if (this.isOpen() && e.key === 'Escape') {
-            this.close();
             return;
         }
 
@@ -74,6 +72,9 @@ class KeyboardHelp {
             this.disarmGoTo();
             if (sectionId) {
                 e.preventDefault();
+                // The page behind a modal dialog is inert and cannot take focus, so hand the
+                // keyboard back to the page before jumping
+                this.close();
                 this.goToSection(sectionId);
             }
             return;
@@ -110,7 +111,7 @@ class KeyboardHelp {
     }
 
     isOpen() {
-        return this.panel?.classList.contains('visible');
+        return Boolean(this.panel?.open);
     }
 
     toggle() {
@@ -122,63 +123,14 @@ class KeyboardHelp {
     }
 
     open() {
-        if (!this.panel || this.isOpen()) {
-            return;
+        if (this.panel && !this.isOpen()) {
+            this.panel.showModal();
         }
-        this.lastFocused = document.activeElement;
-        this.panel.classList.add('visible');
-        this.panel.setAttribute('aria-hidden', 'false');
-
-        this.trapFocus = e => this.handleTrap(e);
-        document.addEventListener('keydown', this.trapFocus);
-
-        // Focus the close button so Esc/Tab work immediately.
-        this.closeBtn?.focus();
     }
 
     close() {
-        if (!this.panel || !this.isOpen()) {
-            return;
-        }
-        this.panel.classList.remove('visible');
-        this.panel.setAttribute('aria-hidden', 'true');
-
-        if (this.trapFocus) {
-            document.removeEventListener('keydown', this.trapFocus);
-            this.trapFocus = null;
-        }
-
-        if (this.lastFocused instanceof HTMLElement) {
-            this.lastFocused.focus();
-        }
-        this.lastFocused = null;
-    }
-
-    handleTrap(e) {
-        if (e.key !== 'Tab') {
-            return;
-        }
-        // `a[href]`, not `[href]`: the icons are <svg><use href="...">, which would count as
-        // focusable and end up "last", so Tab off the real last control never wrapped.
-        // An array, not the NodeList: NodeList has no .at(), so calling it threw on every Tab
-        // and the browser simply tabbed out of the dialog.
-        const focusable = [
-            ...this.panel.querySelectorAll(
-                'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            ),
-        ];
-        if (focusable.length === 0) {
-            return;
-        }
-        const first = focusable[0];
-        const last = focusable.at(-1);
-
-        if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
+        if (this.isOpen()) {
+            this.panel.close();
         }
     }
 }
