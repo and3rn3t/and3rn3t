@@ -438,3 +438,16 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   focused element instead (`document.activeElement?.blur()`); the old flaky test passes 60 of 60 and the new one
   40 of 40 under 8 workers. **Still to do in 10.6:** the cut-over (docs pass, removing `redesign` from the CI
   branch list, the final `redesign` to `main` PR, a Lighthouse mobile run).
+- **2026-11-11** — Review follow-ups on 10.6b (two Copilot comments, both valid, both my misses). **The Konami-code
+  terminal** (`modules/easter-egg.js`) lost all its styling with `styles.css`: it only exists after the code is
+  entered, so my coverage run never rendered it and nothing tested it (an unstyled block appeared under the
+  footer). Its styles are now in `home.css` on tokens, with `color-scheme: dark` on the panel so it stays a dark
+  terminal on a light page without writing a colour, and it has its first test (overlay geometry, dark panel and
+  green text in both themes, Esc and backdrop close, axe, phone fit; 7 of 11 fail without the styles). **Safe-area
+  padding:** legacy padded `body` by the left and right safe-area insets, and the pages use `viewport-fit=cover`, so
+  on a notched phone held sideways content ran under the cutout. It was in my coverage list and I skimmed past it.
+  It is now in `core.css`, so the generated pages (which never had it) get it too, and Chromium's inset emulation
+  tests it on the home, project, post and 404 pages (4 of 4 fail without it). **Lesson recorded:** coverage only sees
+  what a run renders. After deleting a stylesheet, also list every class JS creates and every class in the markup
+  and check each still has a rule in the new CSS; I did that sweep after this review and the terminal was the
+  only gap.
