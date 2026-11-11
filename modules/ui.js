@@ -16,6 +16,7 @@ export class UIManager {
         this.isInitialized = false;
         this.toastHideTimer = 0;
         this.toastClearTimer = 0;
+        this.dialogStatusTimer = 0;
     }
 
     init() {
@@ -56,11 +57,28 @@ export class UIManager {
         return notification;
     }
 
+    /**
+     * While a modal dialog is open, everything outside it is inert, so the toast (which lives in
+     * the page) is not announced and z-index cannot change that. Each dialog carries its own
+     * empty live region, [data-dialog-status]; say the message there too.
+     */
+    announceInOpenDialog(message, duration) {
+        const region = document.querySelector('dialog[open] [data-dialog-status]');
+        if (!region) return;
+        region.textContent = message;
+        clearTimeout(this.dialogStatusTimer);
+        this.dialogStatusTimer = setTimeout(() => {
+            region.textContent = '';
+        }, duration);
+    }
+
     showNotification(message, type = 'info', duration = 5000) {
         const notification = this.ensureNotificationRegion();
 
         clearTimeout(this.toastHideTimer);
         clearTimeout(this.toastClearTimer);
+
+        this.announceInOpenDialog(message, duration);
 
         const variant = TOAST_TYPES.has(type) ? type : 'info';
         const wasVisible = notification.classList.contains('visible');

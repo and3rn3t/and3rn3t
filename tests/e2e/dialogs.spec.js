@@ -214,13 +214,80 @@ for (const theme of ['light', 'dark']) {
     });
 }
 
-test('both toasts are the same component', async ({ page }) => {
+test('the palette confirms through the page toast, so two never overlap', async ({
+    page,
+    context,
+}) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await ready(page);
-    await page.evaluate(() => globalThis.appState.managers.ui.showNotification('Hello', 'info'));
-    await expect(page.locator('#app-notification')).toHaveClass(/\btoast\b/);
-    expect(
-        await page.locator('#palette-toast').evaluate(el => el.classList.contains('toast'))
-    ).toBe(true);
+    // A message from the page is already showing when the palette copies the address
+    await page.evaluate(() =>
+        globalThis.appState.managers.ui.showNotification('You are offline', 'warning', 60000)
+    );
+    await openPalette(page);
+    await page.fill('#global-search-input', 'copy email');
+    await page.keyboard.press('Enter');
+
+    // One toast element, now saying the newer message: nothing is painted over anything
+    await expect(page.locator('.toast.visible')).toHaveCount(1);
+    await expect(page.locator('#app-notification')).toHaveText('Email copied to clipboard');
+    await expect(page.locator('#palette-toast')).toHaveCount(0);
+});
+
+test.describe('messages while a dialog is open', () => {
+    test.beforeEach(async ({ page }) => ready(page));
+
+    // The page behind a modal dialog is inert, so the toast there is not announced. Each dialog
+    // has its own live region, which gets the message too.
+    for (const [name, open, dialog] of [
+        ['the palette', page => openPalette(page), '#global-search-modal'],
+        [
+            'keyboard help',
+            async page => {
+                await page.locator('body').click();
+                await page.keyboard.press('?');
+            },
+            '#keyboard-help',
+        ],
+    ]) {
+        test(`are announced inside ${name}, then cleared`, async ({ page }) => {
+            await open(page);
+            await expect(page.locator(dialog)).toHaveAttribute('open', '');
+            const region = page.locator(`${dialog} [data-dialog-status]`);
+            await expect(region).toHaveAttribute('role', 'status');
+            await expect(region).toHaveText('');
+
+            await page.evaluate(() =>
+                globalThis.appState.managers.ui.showNotification('You are offline', 'warning', 1500)
+            );
+            await expect(region).toHaveText('You are offline');
+            await expect(region).toHaveText('', { timeout: 4000 });
+        });
+    }
+
+    test('are announced in the page when no dialog is open', async ({ page }) => {
+        await page.evaluate(() =>
+            globalThis.appState.managers.ui.showNotification('Site updated', 'info', 60000)
+        );
+        await expect(page.locator('#app-notification')).toHaveText('Site updated');
+        await expect(page.locator('[data-dialog-status]').first()).toHaveText('');
+    });
+});
+
+test.describe('keyboard help: jumping to a section', () => {
+    test.beforeEach(async ({ page }) => ready(page));
+
+    test('g then c closes the help and lands on Contact', async ({ page }) => {
+        await page.locator('body').click();
+        await page.keyboard.press('?');
+        await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '');
+
+        await page.keyboard.press('g');
+        await page.keyboard.press('c');
+
+        await expect(page.locator('#keyboard-help')).not.toHaveAttribute('open');
+        await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('contact');
+    });
 });
 
 test.describe('on a phone', () => {
@@ -245,5 +312,30 @@ test.describe('on a phone', () => {
         const box = await page.locator('#keyboard-help').boundingBox();
         expect(box.x).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width).toBeLessThanOrEqual(390);
+    });
+});
+
+test.describe('on a very short screen (a phone on its side with a keyboard up)', () => {
+    test.use({ viewport: { width: 844, height: 240 }, hasTouch: true, isMobile: true });
+
+    test('every keyboard shortcut can be reached', async ({ page }) => {
+        await ready(page);
+        await page.evaluate(() => globalThis.appState.managers.keyboardHelp.open());
+        const help = page.locator('#keyboard-help');
+        await expect(help).toHaveAttribute('open', '');
+
+        const { scrolls, overflowY } = await help.evaluate(el => ({
+            scrolls: el.scrollHeight > el.clientHeight,
+            overflowY: getComputedStyle(el).overflowY,
+        }));
+        expect(scrolls, 'the list is taller than the dialog, so it must scroll').toBe(true);
+        expect(overflowY).toBe('auto');
+
+        // The last shortcut can be scrolled to and is then inside the dialog
+        const last = page.locator('#keyboard-help .shortcut-item').last();
+        await last.scrollIntoViewIfNeeded();
+        const [box, dialog] = await Promise.all([last.boundingBox(), help.boundingBox()]);
+        expect(box.y + box.height).toBeLessThanOrEqual(dialog.y + dialog.height + 1);
+        expect(box.y).toBeGreaterThanOrEqual(dialog.y);
     });
 });

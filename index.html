@@ -429,6 +429,7 @@
          behind it and focus restore, so modules/command-palette.js has none of that to do. -->
     <dialog class="palette" id="global-search-modal" aria-label="Command palette">
       <div class="palette__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
         <div class="global-search-header">
           <div class="global-search-input-container">
             <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
@@ -533,6 +534,7 @@
     <!-- Keyboard shortcuts. A native <dialog>, like the palette. -->
     <dialog class="help" id="keyboard-help" aria-labelledby="keyboard-help-title">
       <div class="help__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
         <h2 class="help__title" id="keyboard-help-title">Keyboard shortcuts</h2>
         <dl class="shortcut-grid">
           <div class="shortcut-item">

@@ -1368,6 +1368,10 @@
   .help {
     width: min(38rem, 100% - 2 * var(--gutter));
     margin: auto;
+    /* On a short screen (a phone on its side) the list is taller than the dialog may be: scroll
+       it instead of clipping the shortcuts at the bottom */
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .help__body {

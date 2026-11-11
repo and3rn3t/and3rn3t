@@ -260,11 +260,11 @@ test('running "Toggle theme" with the mouse hands focus back to the input', asyn
     }
 });
 
-test('the toast live regions are in the page, empty, before any message', async ({ page }) => {
-    for (const id of ['app-notification', 'palette-toast']) {
-        const region = page.locator(`#${id}`);
-        await expect(region).toBeAttached();
-        await expect(region).toHaveAttribute('role', 'status');
-        await expect(region).toHaveText('');
-    }
+test('the toast live region is in the page, empty, before any message', async ({ page }) => {
+    const region = page.locator('#app-notification');
+    await expect(region).toBeAttached();
+    await expect(region).toHaveAttribute('role', 'status');
+    await expect(region).toHaveText('');
+    // The palette has no toast of its own: it uses this one
+    await expect(page.locator('#palette-toast')).toHaveCount(0);
 });

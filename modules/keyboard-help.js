@@ -72,6 +72,9 @@ class KeyboardHelp {
             this.disarmGoTo();
             if (sectionId) {
                 e.preventDefault();
+                // The page behind a modal dialog is inert and cannot take focus, so hand the
+                // keyboard back to the page before jumping
+                this.close();
                 this.goToSection(sectionId);
             }
             return;

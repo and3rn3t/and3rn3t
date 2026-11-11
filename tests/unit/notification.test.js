@@ -116,3 +116,46 @@ describe('showNotification', () => {
         expect(toast().textContent).toBe('<img src=x onerror=alert(1)>');
     });
 });
+
+describe('messages while a modal dialog is open', () => {
+    let ui;
+
+    beforeEach(() => {
+        vi.useFakeTimers();
+        document.body.innerHTML =
+            '<dialog id="d" open><div role="status" data-dialog-status></div></dialog>';
+        ui = new UIManager();
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    const region = () => document.querySelector('[data-dialog-status]');
+
+    it('says the message in the open dialog too, because the page behind it is inert', () => {
+        ui.showNotification('You are offline', 'warning', 3000);
+        expect(region().textContent).toBe('You are offline');
+        expect(toast().textContent).toBe('You are offline');
+    });
+
+    it('clears it when the toast is due to go', () => {
+        ui.showNotification('You are offline', 'warning', 3000);
+        vi.advanceTimersByTime(3100);
+        expect(region().textContent).toBe('');
+    });
+
+    it('does not let an older message clear a newer one', () => {
+        ui.showNotification('first', 'info', 1000);
+        vi.advanceTimersByTime(500);
+        ui.showNotification('second', 'info', 5000);
+        vi.advanceTimersByTime(1500);
+        expect(region().textContent).toBe('second');
+    });
+
+    it('does nothing when no dialog is open', () => {
+        document.getElementById('d').removeAttribute('open');
+        ui.showNotification('hello', 'info');
+        expect(region().textContent).toBe('');
+    });
+});

@@ -50,7 +50,6 @@ class CommandPalette {
         }
 
         this.buildItems();
-        this.ensureToast();
 
         // Global open shortcut.
         document.addEventListener('keydown', e => {
@@ -435,29 +434,9 @@ class CommandPalette {
         });
     }
 
-    /**
-     * The toast is a live region, and a screen reader only announces changes to one that was
-     * already in the page: created and filled in the same moment, the first message can be
-     * missed. So init() creates it empty, and flash() only ever changes its text.
-     */
-    ensureToast() {
-        let toast = document.getElementById('palette-toast');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'palette-toast';
-            toast.className = 'toast toast--success';
-            toast.setAttribute('role', 'status');
-            document.body.appendChild(toast);
-        }
-        return toast;
-    }
-
+    /** A short confirmation, through the page's one toast (so two can never overlap). */
     flash(message) {
-        const toast = this.ensureToast();
-        toast.textContent = message;
-        toast.classList.add('visible');
-        clearTimeout(this._toastTimer);
-        this._toastTimer = setTimeout(() => toast.classList.remove('visible'), 2000);
+        globalThis.appState?.managers?.ui?.showNotification?.(message, 'success', 2000);
     }
 }
 
