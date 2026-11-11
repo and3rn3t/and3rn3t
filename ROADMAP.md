@@ -99,7 +99,7 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
 | 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card                  | 🟡            |
 | 10.3 | Home sections on the new system: work, about/experience/writing, contact + footer; inline contact form (#231) | ✅ 2026-11-11 |
 | 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | ✅ 2026-11-11 |
-| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | 🟡            |
+| 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | ✅ 2026-11-11 |
 | 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | ⬜            |
 
 ## Decision Log
@@ -368,3 +368,20 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   appear and disappear), and `::backdrop` picking up `--scrim` in older Safari (an unset custom property there
   means no tint, though the dialog is still modal). Still to do in 10.5: the OG card and `manifest.json` colours
   (10.5c).
+- **2026-11-11** — Phase 10.5c (share card and colours; finishes 10.5): `scripts/og-card.mjs` draws the card in the
+  site's dark tokens (surface, text, muted, border) with green as the one accent (a short rule and the handle),
+  Inter for the name and numbers and JetBrains Mono for labels, a rule across the full width and the language
+  panel aligned to the stats. The old card had green numerals, a green edge, and secondary text at
+  `#4b5563`/`#6b7280`, which is dim; the new one uses the muted token throughout. The language colours stay
+  GitHub's (they are data). `generate-og.mjs` embeds the mono font, and the daily workflow's input hash now
+  covers it, so a font change regenerates the card. **The committed `og/default.png` is not changed here** (CI
+  renders the committed card, and a local render differs by anti-aliasing): the next daily data run sees the
+  changed inputs and regenerates it. Run the workflow by hand to get it sooner. The browser-bar colour
+  (`theme-color`) was `#ffffff`/`#0a0a0a` against surfaces of `#fbfbf8`/`#0b0d0b`, so the bar did not match the
+  page; it now matches in `index.html`, the generated pages, `offline.html` and the theme switch in `theme.js`.
+  `manifest.json` `background_color` and `theme_color` move from white and the old green to the light surface.
+  A manifest has one theme colour, so an installed app opened in the OS dark mode still starts on the light
+  surface for a moment. `brand-colours.test.js` reads `core.css` and fails if any of these copies drifts.
+  **Not changed:** the app icons (`icons/icon-*.png|svg`) still use the old green; redrawing them is a design
+  task, not a refactor. **10.5 is done; next is 10.6** (slim JS and CSS, performance budgets, delete `styles.css`,
+  docs, cut over to `main`).
