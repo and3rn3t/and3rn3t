@@ -9,7 +9,9 @@ import { SPRITE_URL } from './utils/icon.js';
 
 const STORAGE_KEY = 'theme';
 // The page background: --bg-primary in styles.css (light, and body.dark-theme)
-const META_COLORS = { light: '#ffffff', dark: '#0a0a0a' };
+// The page surfaces (--surface in styles/core.css; a test keeps them equal), so the browser's
+// own bar matches the page behind it
+const META_COLORS = { light: '#fbfbf8', dark: '#0b0d0b' };
 
 function readSaved() {
     try {

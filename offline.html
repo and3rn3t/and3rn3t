@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
     <title>Offline | Matthew Anderson</title>
     <!--
       Self-contained on purpose: the service worker shows this page when the network is down, so
@@ -149,13 +151,19 @@
       }
     </style>
     <script>
-      // The saved theme, before first paint (same as every other page)
+      // The saved theme, before first paint (same as every other page). The browser-bar colour
+      // follows it too: the two theme-color tags are keyed to the OS setting, which a saved
+      // choice can contradict, so point both at the colour of the theme actually shown.
       (function () {
         var theme = null;
         try {
           theme = localStorage.getItem('theme');
         } catch (e) {}
-        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+        if (theme !== 'light' && theme !== 'dark') return;
+        document.documentElement.dataset.theme = theme;
+        var colour = theme === 'dark' ? '#0b0d0b' : '#fbfbf8';
+        var tags = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < tags.length; i++) tags[i].content = colour;
       })();
     </script>
   </head>
