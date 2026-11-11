@@ -45,19 +45,20 @@ pnpm deploy:worker   # only when asked
   `images/projects/<name>-cover-{light,dark}.svg` for projects without a screenshot. `projects/<slug>/` pages
   are pre-rendered by `scripts/templates/project-page.mjs`; the `@view-transition` opt-in must stay an inline
   `<style>` in each page's `<head>` (`VIEW_TRANSITION_CSS`, see `scripts/templates/chrome.mjs`).
-- **CSS is moving to a new design system** (Phase 10, `ROADMAP.md`): `styles/core.css` (cascade layers,
-  tokens, nav and primitives) and `styles/home.css`. The old `styles.css` is `@import`ed into the
-  lowest layer, `legacy`, so new rules win without specificity fights, and is deleted at cut-over.
-  Rules for `styles/`:
-  - The layer order (`scale, legacy, reset, tokens, …`) is declared first in `index.html`'s `<head>`
-    **and** at the top of `core.css`; keep them identical. Layers are ordered by first appearance, so
-    any `@layer legacy` that comes earlier (e.g. inline critical CSS) silently fixes the wrong order.
-  - New components get new class names (`.site-nav`, `.intro`, `.lead-card`, `.button`), never the old
-    ones, so no legacy rule leaks in. Don't redefine a shared token (`--space-*`, `--font-size-*`) in
-    the `tokens` layer: that would override legacy's mobile scale. Use a new name instead.
+- **CSS** is the design system in `styles/` (Phase 10, `ROADMAP.md`): `core.css` (cascade layers, tokens,
+  nav, footer and primitives; every page), `article.css` (project, post and 404 pages) and `home.css` (the
+  home page, including its base: the reset, body type and the phone-sized scale). The old `styles.css` is
+  gone. Rules for `styles/`:
+  - The layer order (`scale, reset, tokens, base, components, sections, utilities`) is declared first in
+    `index.html`'s `<head>`, in `scripts/templates/chrome.mjs` **and** at the top of `core.css`; keep them
+    identical. Layers are ordered by first appearance, so an `@layer` that comes earlier (e.g. inline
+    critical CSS) silently fixes the wrong order.
+  - The shared scale (`--space-*`, `--font-size-*`) is in the `scale` layer so a page can adjust it:
+    `home.css` makes it a step tighter on phones (a test pins the values), and a page without that
+    (project, post, 404) keeps the desktop scale. Don't redefine a scale token in `tokens`; use a new name.
   - Colour comes from semantic tokens (`--surface`, `--text`, `--muted`, `--border`, `--accent`, …) defined once
     with `light-dark()`. Stylelint rejects hex/`rgb()`/named colours in `styles/` outside the token block.
-  - `<html data-theme>` is the theme (set before first paint); `body.dark-theme` is kept only for legacy.
+  - `<html data-theme>` is the theme (set before first paint); there is no `body.dark-theme` class.
 - Project screenshots are captured by hand: `pnpm capture:screenshots [name]` opens each project's
   `screenshot.url` (in `projects-data.json`) and writes `images/projects/`. Look at the result before
   committing; a demo behind a login (homehub) or showing an empty state needs another URL or none.

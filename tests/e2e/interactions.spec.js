@@ -31,36 +31,38 @@ test('clicking the theme toggle flips the theme and remembers it', async ({ page
     await expect(toggle).toHaveAttribute('aria-label', 'Switch to dark theme');
 
     await toggle.click();
-    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await expect(toggle).toHaveAttribute('aria-label', 'Switch to light theme');
     expect(await page.evaluate(() => localStorage.getItem('theme'))).toBe('dark');
 
     await page.reload();
-    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
 test('with no saved choice the theme follows the system preference', async ({ page }) => {
     await page.emulateMedia({ colorScheme: 'dark' });
     await page.evaluate(() => localStorage.removeItem('theme'));
     await page.reload();
-    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
-test('body gets dark-theme class when dark mode is applied', async ({ page }) => {
+test('the dark theme is applied from a saved choice', async ({ page }) => {
     // Force dark via localStorage so we control the state.
     await page.evaluate(() => {
         localStorage.setItem('theme', 'dark');
     });
     await page.reload();
-    await expect(page.locator('body')).toHaveClass(/dark-theme/);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    // The old body.dark-theme class is gone: the theme is <html data-theme> and nothing else
+    await expect(page.locator('body')).not.toHaveClass(/dark-theme/);
 });
 
-test('body does not have dark-theme class after switching to light', async ({ page }) => {
+test('the light theme is applied from a saved choice', async ({ page }) => {
     await page.evaluate(() => {
         localStorage.setItem('theme', 'light');
     });
     await page.reload();
-    await expect(page.locator('body')).not.toHaveClass(/dark-theme/);
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
 // ── `?` keyboard help ─────────────────────────────────────────────────────────

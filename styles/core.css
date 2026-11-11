@@ -4,11 +4,11 @@
  * Direction: "technical editorial". Neutral paper and ink; one green accent; Inter for
  * reading and display, JetBrains Mono for metadata (dates, tags, status, section numbers).
  *
- * Cascade layers, lowest to highest priority. `legacy` is the old styles.css, kept below
- * everything new until it is deleted, so a new component never has to out-shout an old rule.
- * `scale` sits under it and holds the shared token scale (see "Shared scale" below).
+ * Cascade layers, lowest to highest priority. `scale` holds the shared token scale (see "Shared
+ * scale" below), so a page can adjust it (the home page's phone scale) without out-shouting it.
+ * The order is also declared inline in each page's <head>, which must come before any style.
  */
-@layer scale, legacy, reset, tokens, base, components, sections, utilities;
+@layer scale, reset, tokens, base, components, sections, utilities;
 
 /* ==========================================================================
    Fonts
@@ -138,9 +138,9 @@
 
 /* ==========================================================================
    Shared scale
-   The same values as the legacy :root, in a layer *below* legacy, so a page that loads only
-   this file still has them while a page that loads both keeps legacy's (including its mobile
-   spacing override). Move these into `tokens` when styles.css is retired.
+   The type, spacing and radius scales. A layer of their own, below everything else, so a page
+   can adjust a value for its own needs (home.css makes the scale a step tighter on phones)
+   without a more specific rule.
    ========================================================================== */
 @layer scale {
   :root {
@@ -203,8 +203,7 @@
 
 /* ==========================================================================
    Base
-   Only what the new components need. The page's own element defaults are still set by the
-   legacy layer until it is retired.
+   Only what the shared components need. A page sets its own element defaults (home.css does).
    ========================================================================== */
 @layer reset {
   *,
@@ -219,6 +218,15 @@
 }
 
 @layer base {
+  /* The pages use viewport-fit=cover, so on a notched phone held sideways the page would run under
+     the cutout. Keep the content out of it; where there is no inset this is zero. */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
@@ -294,7 +302,7 @@
     transform: translateX(0.125rem);
   }
 
-  /* --- Utilities the new pages need (ported from the legacy stylesheet) ------------ */
+  /* --- Utilities the new pages need  ------------ */
   .icon {
     flex-shrink: 0;
     width: 1em;

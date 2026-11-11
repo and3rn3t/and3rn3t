@@ -68,7 +68,7 @@ export function renderHead({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <style>
-      @layer scale, legacy, reset, tokens, base, components, sections, utilities;
+      @layer scale, reset, tokens, base, components, sections, utilities;
       ${VIEW_TRANSITION_CSS}
     </style>
     <title>${esc(title)}</title>

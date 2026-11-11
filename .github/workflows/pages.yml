@@ -35,7 +35,6 @@ jobs:
           # leading `/` so they can't match config, tests or Worker source in subfolders.
           sparse-checkout: |
             /*.html
-            /styles.css
             /main.js
             /sw.js
             /manifest.json
@@ -62,7 +61,7 @@ jobs:
       - name: Check published files
         run: |
           missing=0
-          for f in index.html 404.html offline.html styles.css main.js sw.js manifest.json \
+          for f in index.html 404.html offline.html main.js sw.js manifest.json \
                    favicon.svg og/default.png icons/sprite.svg fonts/inter-variable.woff2 CNAME; do
             [ -e "$f" ] || { echo "::error::missing from deploy: $f"; missing=1; }
           done

@@ -8,7 +8,6 @@ import { debug } from './debug.js';
 import { SPRITE_URL } from './utils/icon.js';
 
 const STORAGE_KEY = 'theme';
-// The page background: --bg-primary in styles.css (light, and body.dark-theme)
 // The page surfaces (--surface in styles/core.css; a test keeps them equal), so the browser's
 // own bar matches the page behind it
 const META_COLORS = { light: '#fbfbf8', dark: '#0b0d0b' };
@@ -104,7 +103,7 @@ export class ThemeManager {
 
         this.setTransitionOrigin();
         // The reveal animation is styled only under this attribute, so a page navigation that
-        // also uses view transitions doesn't get it (see styles/core.css and styles.css).
+        // also uses view transitions doesn't get it (see styles/core.css).
         const root = document.documentElement;
         root.dataset.switchingTheme = '';
         document.startViewTransition(commit).finished.finally(() => {
@@ -121,10 +120,8 @@ export class ThemeManager {
 
     commitTheme(theme) {
         const isDark = theme === 'dark';
-        // <html data-theme> drives color-scheme (see styles/core.css). The body class is kept
-        // for the legacy stylesheet until it is retired.
+        // <html data-theme> drives color-scheme (see styles/core.css)
         document.documentElement.dataset.theme = theme;
-        document.body.classList.toggle('dark-theme', isDark);
         this.currentTheme = theme;
         this.updateButton(isDark);
 

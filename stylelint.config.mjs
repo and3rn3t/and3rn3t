@@ -20,8 +20,7 @@ export default {
   overrides: [
     {
       // The new design system (styles/): colour comes from tokens only. The token block in
-      // core.css disables these rules around its literals; styles.css (legacy) is exempt
-      // until it is retired.
+      // core.css disables these rules around its literals.
       files: ['styles/**/*.css'],
       rules: {
         'color-no-hex': true,
