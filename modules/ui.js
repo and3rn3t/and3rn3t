@@ -10,6 +10,7 @@ import { icon } from './utils/icon.js';
 
 const TOAST_TYPES = new Set(['success', 'error', 'warning', 'info']);
 const TOAST_FADE_MS = 300; // a little longer than the CSS transition
+const MOBILE_HEATMAP_WEEKS = 20;
 
 export class UIManager {
     constructor() {
@@ -316,8 +317,12 @@ export class UIManager {
             return;
         }
 
+        // Phones show only the last MOBILE_HEATMAP_WEEKS weeks (see the heatmap rules in
+        // styles.css), so each cell carries its column for both layouts.
+        const firstRecentWeek = Math.max(0, contributions.weeks.length - MOBILE_HEATMAP_WEEKS);
         const cells = [];
         contributions.weeks.forEach((week, weekIndex) => {
+            const isOlder = weekIndex < firstRecentWeek;
             for (const day of week.days) {
                 const weekday = new Date(`${day.date}T00:00:00`).getDay();
                 const dateLabel = new Date(`${day.date}T00:00:00`).toLocaleDateString(undefined, {
@@ -328,8 +333,8 @@ export class UIManager {
                 });
                 const plural = day.count === 1 ? '' : 's';
                 cells.push(
-                    `<div class="heatmap-cell" data-level="${day.level}" ` +
-                        `style="grid-column:${weekIndex + 1};grid-row:${weekday + 1}" ` +
+                    `<div class="heatmap-cell${isOlder ? ' heatmap-cell--older' : ''}" data-level="${day.level}" ` +
+                        `style="--week:${weekIndex + 1};--recent-week:${weekIndex - firstRecentWeek + 1};grid-row:${weekday + 1}" ` +
                         `title="${day.count} contribution${plural} on ${dateLabel}"></div>`
                 );
             }

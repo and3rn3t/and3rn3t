@@ -103,7 +103,8 @@ function renderPost(post, index) {
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(post.summary)}" />
     <meta name="author" content="${AUTHOR}" />
-    <meta name="theme-color" content="#16a34a" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="${url}" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

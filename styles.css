@@ -1146,6 +1146,11 @@ section {
   background: rgba(127, 127, 127, 0.15);
 }
 
+/* The column comes from --week (set per cell in modules/ui.js) so phones can re-place cells */
+.heatmap-grid .heatmap-cell {
+  grid-column: var(--week);
+}
+
 .heatmap-cell[data-level='1'] {
   background: #0e4429;
 }
@@ -5136,6 +5141,8 @@ body.modal-open {
 }
 
 .project-modal-section {
+  /* These are <section> elements, so undo the page-section padding from `section { … }` */
+  padding: 0;
   margin-bottom: var(--space-6);
 }
 
@@ -5210,11 +5217,13 @@ body.modal-open {
 }
 
 @media (max-width: 640px) {
-  .contribution-widget .heatmap-grid {
-    gap: var(--space-1);
+  /* A year of weeks leaves each cell about 1px wide on a phone, so show only the most
+     recent weeks (the cells modules/ui.js doesn't mark as older), re-placed from column 1 */
+  .heatmap-cell--older {
+    display: none;
   }
-  .heatmap-cell {
-    border-radius: 1px;
+  .heatmap-grid .heatmap-cell {
+    grid-column: var(--recent-week);
   }
   .currently-message {
     display: none;
