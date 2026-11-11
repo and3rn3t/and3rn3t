@@ -157,6 +157,16 @@ test.describe('Experience', () => {
     });
 });
 
+/**
+ * Click where a person would click: on the element's own spot. locator.click() refuses when
+ * another element covers it, but a stretched link covering its row is exactly what is being tested.
+ */
+async function clickOnSpot(page, locator) {
+    await locator.scrollIntoViewIfNeeded();
+    const box = await locator.boundingBox();
+    await page.mouse.click(box.x + 12, box.y + box.height / 2);
+}
+
 test.describe('Writing', () => {
     test('is a row per post, newest first', async ({ page }) => {
         await page.goto('/');
@@ -170,8 +180,37 @@ test.describe('Writing', () => {
     test('the whole row opens the post, not only its title', async ({ page }) => {
         await page.goto('/');
         const row = page.locator('#blog-posts .post-row').first();
-        await row.locator('.post-row__summary').click();
+        await clickOnSpot(page, row.locator('.post-row__summary'));
         await page.waitForURL(/\/posts\/[^/]+\/$/);
         await expect(page.locator('h1')).toBeVisible();
+    });
+
+    // The row is a plain stretched link, so it must not wait for any script. This failed in CI
+    // when the row's click handler (in blog.js) had not loaded yet by the time the test clicked.
+    test('opens the post even before blog.js has loaded', async ({ page }) => {
+        await page.route('**/modules/blog.js', route => route.abort());
+        await page.goto('/');
+        await clickOnSpot(page, page.locator('#blog-posts .post-row__summary').first());
+        await page.waitForURL(/\/posts\/[^/]+\/$/);
+    });
+
+    test.describe('with JavaScript disabled', () => {
+        test.use({ javaScriptEnabled: false });
+
+        test('clicking anywhere on a row opens the post', async ({ page }) => {
+            await page.goto('/');
+            await clickOnSpot(page, page.locator('#blog-posts .post-row__date').first());
+            await page.waitForURL(/\/posts\/[^/]+\/$/);
+        });
+    });
+
+    test('keyboard focus shows a ring around the whole row it covers', async ({ page }) => {
+        await page.goto('/');
+        const row = page.locator('#blog-posts .post-row').first();
+        await row.locator('.post-row__title a').focus();
+        await page.keyboard.press('Shift+Tab'); // move off and back so :focus-visible applies
+        await page.keyboard.press('Tab');
+        const outline = await row.evaluate(el => getComputedStyle(el).outlineStyle);
+        expect(outline).toBe('solid');
     });
 });

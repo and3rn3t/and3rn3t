@@ -886,6 +886,7 @@
      Writing: rows, not cards. Date, title and summary, reading time.
      ========================================================================== */
   .post-row {
+    position: relative;
     display: grid;
     gap: var(--space-1) var(--space-6);
     padding: var(--space-6) 0;
@@ -915,6 +916,24 @@
   .post-row__title a {
     color: inherit;
     text-decoration: none;
+  }
+
+  /* A stretched link: the title's anchor covers the whole row, so the row is the link. It is
+     plain HTML, so it works at once and without JavaScript. */
+  .post-row__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  /* The focus ring goes round the row the link now covers */
+  .post-row__title a:focus-visible {
+    outline: none;
+  }
+
+  .post-row:has(.post-row__title a:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: var(--space-1);
   }
 
   .post-row:hover .post-row__title a {
