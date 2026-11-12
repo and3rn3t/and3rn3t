@@ -10,11 +10,12 @@
  * Usage: pnpm check:agent-ready [url]
  */
 
-import { appendFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 const SCANNER = 'https://isitagentready.com/mcp';
 const DEFAULT_URL = 'https://andernet.dev';
+// Well under the workflow's five-minute limit, so a stalled scanner ends in the error handler below
+const DEADLINE_MS = 60_000;
 
 /** Checks that do not apply here: nothing on the site needs OAuth, an agent card or DNS-AID. */
 export const NOT_APPLICABLE = [
@@ -27,12 +28,17 @@ export const NOT_APPLICABLE = [
 
 /**
  * @param {string} report - the scanner's Markdown answer
- * @returns {{ level: string | null, passing: string[], failing: string[] }}
+ * @returns {{ level: string, passing: string[], failing: string[] }}
+ * @throws when the text is not a report (a tool error, or a format that changed), so that is
+ *   shown as "could not scan" rather than as an all-clear
  */
 export function parseReport(report) {
-  const level = report.match(/\*\*Level (\d+\/\d+)/)?.[1] ?? null;
+  const level = report.match(/\*\*Level (\d+\/\d+)/)?.[1];
   const passing = [...report.matchAll(/^- PASS (\w+)/gm)].map(match => match[1]);
   const failing = [...report.matchAll(/^- FAIL (\w+)/gm)].map(match => match[1]);
+  if (!level || passing.length + failing.length === 0) {
+    throw new Error(`not a report it recognises: ${report.slice(0, 80).replaceAll(/\s+/g, ' ')}`);
+  }
   return { level, passing, failing };
 }
 
@@ -46,6 +52,8 @@ export const surprises = ({ failing }) => failing.filter(name => !NOT_APPLICABLE
  */
 export async function scan(url, fetchImpl = fetch) {
   const response = await fetchImpl(SCANNER, {
+    // The deadline covers reading the body too, which a stream the scanner leaves open would not end
+    signal: AbortSignal.timeout(DEADLINE_MS),
     method: 'POST',
     headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' },
     body: JSON.stringify({
@@ -56,23 +64,29 @@ export async function scan(url, fetchImpl = fetch) {
     }),
   });
   if (!response.ok) throw new Error(`scanner answered HTTP ${response.status}`);
-  const lastData = (await response.text())
-    .split('\n')
-    .filter(line => line.startsWith('data:'))
-    .pop();
-  if (!lastData) throw new Error('scanner sent no result');
-  const text = JSON.parse(lastData.slice('data:'.length)).result?.content?.[0]?.text;
-  if (typeof text !== 'string') throw new Error('scanner result had no text');
+  // Either a plain JSON reply or an event stream, whichever the scanner chooses
+  const body = (await response.text()).trim();
+  const payload = response.headers.get('content-type')?.includes('text/event-stream')
+    ? body
+        .split('\n')
+        .filter(line => line.startsWith('data:'))
+        .pop()
+        ?.slice('data:'.length)
+    : body;
+  if (!payload) throw new Error('scanner sent no result');
+  const { result } = JSON.parse(payload);
+  const text = result?.content?.[0]?.text;
+  if (result?.isError || typeof text !== 'string') throw new Error('scanner returned an error');
   return text;
 }
 
-/** The summary, as Markdown (also written to the job summary on GitHub Actions). */
+/** The summary. Only the level and check names (letters and digits) from the scanner reach it. */
 export function summarise(url, result) {
   const unexpected = surprises(result);
   return [
     `### Agent readiness: ${url}`,
     '',
-    `Level **${result.level ?? 'unknown'}**, ${result.passing.length} checks passing.`,
+    `Level **${result.level}**, ${result.passing.length} checks passing.`,
     '',
     unexpected.length
       ? `Failing, and worth a look: ${unexpected.map(name => `\`${name}\``).join(', ')}`
@@ -86,8 +100,6 @@ async function main() {
   try {
     const summary = summarise(url, parseReport(await scan(url)));
     console.log(summary);
-    if (process.env.GITHUB_STEP_SUMMARY)
-      appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${summary}\n`);
   } catch (error) {
     // A scanner outage is not a problem with the site
     console.log(`Could not scan ${url}: ${error.message}`);
