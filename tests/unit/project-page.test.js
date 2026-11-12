@@ -147,6 +147,18 @@ describe('project slugs', () => {
         expect(view({ name: 'HealthKitBridge' }).pageSlug).toBe('healthkitbridge');
     });
 
+    it('come from the repository name, not the display key, with or without live data', () => {
+        const meta = {
+            name: 'Pretty Name',
+            github_repo: 'o/Alpha',
+            longDescription: 'A write-up.',
+        };
+        const repo = { name: 'Alpha', language: 'x', html_url: 'https://github.com/o/Alpha' };
+        expect(projectView(null, meta).pageSlug).toBe('alpha');
+        expect(projectView(repo, meta).pageSlug).toBe('alpha');
+        expect(projectView(null, meta).pageUrl).toBe('/projects/alpha/');
+    });
+
     it('come out the same with or without the repo, for every curated project', () => {
         const { projects } = JSON.parse(readFileSync('projects-data.json', 'utf8'));
         const slugs = projects.map(meta => projectView(null, meta).pageSlug);

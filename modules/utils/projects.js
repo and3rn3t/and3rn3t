@@ -143,7 +143,9 @@ export function projectView(repo, metadata) {
         'A coding project showcasing development skills.';
     const language = repo?.language || metadata?.technologies?.[0] || 'Code';
     const highlights = metadata?.highlights ?? [];
-    const slug = repo?.name || metadata?.name || metadata?.github_repo?.split('/').pop();
+    // The repository's name, from the live data or else the curated github_repo, so the page URL
+    // doesn't change with whether live data loaded (metadata.name is only a display key)
+    const slug = repo?.name || metadata?.github_repo?.split('/').pop() || metadata?.name;
 
     const hasCaseStudy = Boolean(slug && (metadata?.longDescription || highlights.length > 1));
     // Lowercase, so the URL is the same however the repo happens to be capitalised

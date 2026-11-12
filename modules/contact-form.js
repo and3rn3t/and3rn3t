@@ -194,6 +194,9 @@ class ContactForm {
         this.#sending = sending;
         // aria-disabled, not disabled: a disabled button drops keyboard focus, which would
         // leave a keyboard user stranded. The #sending guard is what stops a second submit.
+        // Read-only while the request is out (disabled fields would drop out of FormData, and
+        // an edit now would be thrown away by reset() on success)
+        for (const field of this.#fields()) field.readOnly = sending;
         this.#button?.setAttribute('aria-busy', String(sending));
         this.#button?.setAttribute('aria-disabled', String(sending));
         if (this.#label) this.#label.textContent = sending ? 'Sending…' : 'Send message';

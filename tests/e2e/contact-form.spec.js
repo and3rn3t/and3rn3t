@@ -5,7 +5,8 @@
 import { test, expect } from './fixtures.js';
 import { WORKER_BASE } from '../../modules/config.js';
 
-const FORMSPREE = /formspree\.io/;
+// A host check, not a pattern on the whole URL: `formspree.io` could match anywhere in one
+const FORMSPREE = url => url.hostname === 'formspree.io';
 
 const fill = async (page, overrides = {}) => {
     const values = {
@@ -92,6 +93,31 @@ test.describe('with JavaScript', () => {
             expect(requests).toHaveLength(1);
             await expect(button).toHaveAttribute('aria-busy', 'false');
             await expect(button).toContainText('Send message');
+        });
+
+        test('the fields are read-only while sending, so no edit is lost to the reset', async ({
+            page,
+        }) => {
+            await stubFormspree(page, async route => {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                return ok(route);
+            });
+            await fill(page);
+            await page.locator('#submit-button').click();
+            await expect(page.locator('#submit-button')).toHaveAttribute('aria-busy', 'true');
+
+            const readOnly = () =>
+                page
+                    .locator('#contact-form')
+                    .evaluate(form =>
+                        [...form.querySelectorAll('.input[required], .textarea[required]')].map(
+                            el => el.readOnly
+                        )
+                    );
+            expect((await readOnly()).every(Boolean)).toBe(true);
+
+            await expect(page.locator('#form-status')).toContainText('Thanks');
+            expect((await readOnly()).some(Boolean)).toBe(false);
         });
 
         test('keeps keyboard focus on the button while it is busy', async ({ page }) => {
