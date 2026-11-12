@@ -51,6 +51,20 @@ export function projectUrl(view) {
     return view.pageUrl ? `${SITE_ORIGIN}${view.pageUrl}` : view.htmlUrl;
 }
 
+/**
+ * Remove every tag. One pass is not enough: stripping "<b>" from "<scr<b>ipt>" can leave a
+ * new tag behind, so repeat until nothing changes.
+ */
+function stripTags(html) {
+    let previous;
+    let text = html;
+    do {
+        previous = text;
+        text = text.replaceAll(/<[^>]+>/g, '');
+    } while (text !== previous);
+    return text;
+}
+
 const ENTITIES = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'" };
 
 /**
@@ -61,7 +75,7 @@ const ENTITIES = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;
  * @returns {string}
  */
 export function htmlToText(html) {
-    return html
+    const structured = html
         .replaceAll(
             /<pre[^>]*>([\s\S]*?)<\/pre>/g,
             (_match, code) => `\n\n\`\`\`\n${code}\n\`\`\`\n\n`
@@ -70,8 +84,10 @@ export function htmlToText(html) {
         .replaceAll(/<li[^>]*>/g, '\n- ')
         .replaceAll(/<\/(p|ul|ol|blockquote|div|table)>/g, '\n\n')
         .replaceAll(/<br\s*\/?>/g, '\n')
-        .replaceAll(/<a [^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g, '$2 ($1)')
-        .replaceAll(/<[^>]+>/g, '')
+        // Either quote style: the posts' own anchors use single quotes
+        .replaceAll(/<a\s[^>]*?href=(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a>/g, '$3 ($2)');
+    // Tags first, entities after: "&lt;b&gt;" in a post is text about a tag, and stays text
+    return stripTags(structured)
         .replaceAll(/&(amp|lt|gt|quot|#39);/g, entity => ENTITIES[entity])
         .replaceAll(/[ \t]+\n/g, '\n')
         .replaceAll(/\n{3,}/g, '\n\n')

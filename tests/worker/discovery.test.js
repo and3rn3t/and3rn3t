@@ -173,7 +173,24 @@ describe('agent skills index', () => {
         expect(response.headers.get('Content-Type')).toMatch(/^text\/markdown/);
         const text = await response.text();
         expect(text).toBe(SKILL_MD);
-        expect(text).toMatch(/^---\nname: andernet-portfolio\ndescription: .+\n---\n/);
+        expect(text).toMatch(/^---\nname: andernet-portfolio\ndescription: ".+"\n---\n/);
+    });
+
+    // A skill loader parses the front matter as YAML. A plain scalar cannot contain ": ", and
+    // the description does, so it must be quoted (a JSON string is a valid YAML scalar).
+    it('SKILL.md front matter is valid YAML: a quoted description', () => {
+        const [, front] = SKILL_MD.match(/^---\n([\s\S]*?)\n---\n/);
+        const fields = Object.fromEntries(
+            front
+                .split('\n')
+                .map(line => [line.slice(0, line.indexOf(':')), line.slice(line.indexOf(': ') + 2)])
+        );
+        expect(fields.name).toBe('andernet-portfolio');
+        expect(fields.description.startsWith('"')).toBe(true);
+        const description = JSON.parse(fields.description);
+        expect(description).toContain('(andernet.dev): ');
+        expect(description.length).toBeGreaterThan(40);
+        expect(Object.keys(fields).sort()).toEqual(['description', 'name']);
     });
 
     it('SKILL.md mentions every tool', () => {

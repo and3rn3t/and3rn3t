@@ -2,6 +2,8 @@
  * The MCP server (worker/mcp.js) and the site data it reads (worker/site-data.js), driven the
  * way a client does: JSON-RPC over POST. fetch is replaced, so no test touches the network.
  */
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { handleMcp } from '../../worker/mcp.js';
 import { htmlToText, loadJson } from '../../worker/site-data.js';
@@ -317,7 +319,45 @@ describe('site data', () => {
         ],
         ['<p>a</p>\n\n\n\n<p>b</p>', 'a\n\nb'],
         ['<span>no blocks</span>', 'no blocks'],
+        // The posts write their anchors with single quotes; keep the destination either way
+        ["<a href='https://x.dev/a'>single</a>", 'single (https://x.dev/a)'],
+        ['<a class="k" href="/p/" target="_blank">double</a>', 'double (/p/)'],
+        ["<a target='_blank' href='/q/'>attrs first</a>", 'attrs first (/q/)'],
+        ['<a name="anchor">no href</a>', 'no href'],
     ])('htmlToText(%j)', (html, expected) => {
         expect(htmlToText(html)).toBe(expected);
+    });
+
+    // Removing a tag can leave a new one behind: strip until nothing changes
+    it.each([
+        '<<b>script>alert(1)<</b>/script>',
+        '<scr<b></b>ipt src=x>hi',
+        '<<<i>b>i>x</i>',
+        '<img src=x onerror=alert(1)//',
+        '<scr<scr<b>ipt>ipt>alert(1)',
+    ])('htmlToText leaves no tag behind for %j', html => {
+        expect(htmlToText(html)).not.toMatch(/<[^>]+>/);
+    });
+
+    it('keeps entity-escaped markup as text, because it is text about markup', () => {
+        expect(htmlToText('<p>use &lt;script&gt; sparingly, and &amp;lt; is an entity</p>')).toBe(
+            'use <script> sparingly, and &lt; is an entity'
+        );
+    });
+
+    // The real posts: every link in the source survives into the text, whatever its quotes
+    it('keeps every link in the published posts', () => {
+        const { posts } = JSON.parse(
+            readFileSync(join(import.meta.dirname, '..', '..', 'posts-data.json'), 'utf8')
+        );
+        let links = 0;
+        for (const post of posts) {
+            const text = htmlToText(post.content);
+            for (const [, , href] of post.content.matchAll(/<a\s[^>]*?href=(["'])(.*?)\1/g)) {
+                links++;
+                expect(text, `${post.slug}: ${href}`).toContain(`(${href})`);
+            }
+        }
+        expect(links).toBeGreaterThan(0);
     });
 });

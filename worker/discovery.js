@@ -23,9 +23,14 @@ const SKILL_PATH = `/.well-known/agent-skills/${SKILL_NAME}/SKILL.md`;
 
 const OPENAPI_TYPE = 'application/vnd.oai.openapi+json;version=3.1';
 
+// Quoted (as a JSON string, which is valid YAML): the text has ": " in it, which a plain YAML
+// scalar cannot contain, and a skill loader that parses the front matter would reject the file
+const SKILL_DESCRIPTION =
+    "Read Matthew Anderson's portfolio (andernet.dev): his projects, writing, work history and recent GitHub activity. Use when you need facts about Matthew Anderson or one of his projects.";
+
 export const SKILL_MD = `---
 name: ${SKILL_NAME}
-description: Read Matthew Anderson's portfolio (andernet.dev): his projects, writing, work history and recent GitHub activity. Use when you need facts about Matthew Anderson or one of his projects.
+description: ${JSON.stringify(SKILL_DESCRIPTION)}
 ---
 
 # andernet.dev
