@@ -49,14 +49,14 @@ const RUNS = /^(module|(text|application)\/javascript)$/i;
 export function inlineBlocks(html) {
   const scripts = [];
   for (const [, attributes = '', body] of html.matchAll(
-    /<script(\s[^>]*)?>([\s\S]*?)<\/script>/gi
+    /<script(\s[^>]*)?>([\s\S]*?)<\/script\b[^>]*>/gi
   )) {
     if (/\ssrc\s*=/i.test(attributes)) continue;
     const type = attributes.match(/\stype\s*=\s*["']?([^"'\s>]+)/i)?.[1];
     if (type && !RUNS.test(type)) continue;
     scripts.push(body);
   }
-  const styles = [...html.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)].map(
+  const styles = [...html.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style\b[^>]*>/gi)].map(
     match => match[1]
   );
   return { scripts, styles };

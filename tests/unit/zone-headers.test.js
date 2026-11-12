@@ -53,6 +53,16 @@ describe('inlineBlocks', () => {
         expect(inlineBlocks(html).scripts).toEqual(['one()', 'two()', 'three()']);
     });
 
+    // A browser accepts whitespace and even attributes in an end tag: "</script >" ends a script
+    it('finds blocks whose end tag has spaces or attributes', () => {
+        const odd =
+            '<script>one()</script ><script>two()</script\n><style>a{}</style foo="1"><script>three()</SCRIPT x>';
+        expect(inlineBlocks(odd)).toEqual({
+            scripts: ['one()', 'two()', 'three()'],
+            styles: ['a{}'],
+        });
+    });
+
     it('finds every style element', () => {
         expect(inlineBlocks(html).styles).toEqual(['a{}', 'b{}']);
     });
