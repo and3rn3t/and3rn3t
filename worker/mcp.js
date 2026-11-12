@@ -18,6 +18,7 @@ import {
     loadProjects,
     projectUrl,
 } from './site-data.js';
+import { recordTool } from './telemetry.js';
 
 const SERVER_NAME = 'andernet-portfolio';
 export const SERVER_VERSION = '1.0.0';
@@ -58,7 +59,22 @@ export function createServer(env, deps) {
         version: SERVER_VERSION,
     });
 
-    server.registerTool(
+    // Every tool goes through here, so each call is timed and recorded once (a tool that
+    // throws, or returns isError, counts as an error). Handlers get the SDK's arguments as is.
+    const registerTool = (name, config, handler) =>
+        server.registerTool(name, config, async (...args) => {
+            const started = Date.now();
+            let ok = false;
+            try {
+                const result = await handler(...args);
+                ok = !result?.isError;
+                return result;
+            } finally {
+                recordTool(env, { tool: name, ok, ms: Date.now() - started });
+            }
+        });
+
+    registerTool(
         'get_profile',
         {
             description:
@@ -81,7 +97,7 @@ export function createServer(env, deps) {
         }
     );
 
-    server.registerTool(
+    registerTool(
         'list_projects',
         {
             description:
@@ -113,7 +129,7 @@ export function createServer(env, deps) {
         }
     );
 
-    server.registerTool(
+    registerTool(
         'get_project',
         {
             description:
@@ -142,7 +158,7 @@ export function createServer(env, deps) {
         }
     );
 
-    server.registerTool(
+    registerTool(
         'list_experience',
         {
             description:
@@ -171,7 +187,7 @@ export function createServer(env, deps) {
         }
     );
 
-    server.registerTool(
+    registerTool(
         'list_posts',
         {
             description:
@@ -204,7 +220,7 @@ export function createServer(env, deps) {
         }
     );
 
-    server.registerTool(
+    registerTool(
         'get_post',
         {
             description:
@@ -232,7 +248,7 @@ export function createServer(env, deps) {
         }
     );
 
-    server.registerTool(
+    registerTool(
         'get_recent_activity',
         {
             description:

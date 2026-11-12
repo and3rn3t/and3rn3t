@@ -19,8 +19,29 @@ routes = [
   { pattern = "andernet.dev/.well-known/agent-skills/*", zone_name = "andernet.dev" },
 ]
 
+# Source maps make stack traces in logs, traces and Issues point at worker/*.js lines.
+upload_source_maps = true
+
 [observability]
 enabled = true
+
+  # Traces: spans for every fetch, KV and cache call. 100% is fine at this traffic.
+  [observability.traces]
+  enabled = true
+
+  # Issues (open beta): groups exceptions and 5xx responses, no SDK.
+  [observability.issues]
+  enabled = true
+
+# The deployed version, for /api/edge and the status page: { id, tag, timestamp }.
+[version_metadata]
+binding = "CF_VERSION"
+
+# What the Worker reports about itself (worker/telemetry.js documents the layout). Queried
+# through the SQL API; data is kept three months.
+[[analytics_engine_datasets]]
+binding = "METRICS"
+dataset = "portfolio_metrics"
 
 # Workers Rate Limiting (approximate, counted per Cloudflare location). The namespace ids are
 # arbitrary integers that only have to be unique on the account; bindings that share one
