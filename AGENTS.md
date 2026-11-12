@@ -6,6 +6,9 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 
 - Vanilla JS modules (not React); Vite is only the local dev server (`pnpm dev`); **pnpm** (`pnpm@11`, Node `^24.15.0 || >=26` (jsdom 30 / Vitest 5), `.nvmrc` pinned)
 - Cloudflare Worker `and3rn3t-portfolio` (`wrangler.toml`; KV bindings `VIEWS_KV` and `GUESTBOOK_KV`): `/views`, `/guestbook` and `/activity`
+  The Worker answers at `andernet.dev/api/*` (a route in `wrangler.toml`, so the page calls it same-origin) and at its
+  `workers.dev` address, where the same paths have no `/api` prefix. `modules/config.js` picks the base by hostname, and
+  `sw.js` never caches `/api/`, `/mcp` or `/.well-known/`
 - Tests: Vitest unit + worker (`tests/unit`, `tests/worker`) and Playwright e2e + axe (`tests/e2e`, served from the raw source like production)
 - Shared browser/Worker helpers live in `modules/utils/` (`html.js` escaping, `activity.js`, `data.js`, `icon.js`, `while-visible.js`); the Worker imports them too
 - CI workflows (`.github/workflows/`):

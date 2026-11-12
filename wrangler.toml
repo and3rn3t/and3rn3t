@@ -2,12 +2,14 @@ name = "and3rn3t-portfolio"
 main = "worker/index.js"
 compatibility_date = "2026-10-01"
 
-# Workers are deployed to: https://and3rn3t-portfolio.<subdomain>.workers.dev
-# or a custom route (add below once a Cloudflare zone is attached).
-#
-# [routes]
-# pattern = "api.andernet.dev/*"
-# zone_name = "andernet.dev"
+# The Worker answers on the site's own origin, andernet.dev/api/*, so the page calls it
+# same-origin. A route only runs the Worker for matching paths; every other request still
+# goes to GitHub Pages. workers_dev stays on: visitors with an older cached copy of the
+# site still call the workers.dev address, and local tools use it.
+workers_dev = true
+routes = [
+  { pattern = "andernet.dev/api/*", zone_name = "andernet.dev" },
+]
 
 [observability]
 enabled = true

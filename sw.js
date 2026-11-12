@@ -97,6 +97,12 @@ self.addEventListener('fetch', event => {
         return;
     }
 
+    // The Worker's API and the agent-discovery documents it serves on this origin: live data,
+    // so never from a cache (without this they would fall through to stale-while-revalidate)
+    if (isWorkerPath(url)) {
+        return;
+    }
+
     // Our own data files and pages change without a code deploy - always try the network
     if (isFreshContent(request, url)) {
         event.respondWith(networkFirstStrategy(request, RUNTIME_CACHE));
@@ -118,6 +124,15 @@ self.addEventListener('fetch', event => {
     // Default - Stale While Revalidate strategy
     event.respondWith(staleWhileRevalidateStrategy(request, RUNTIME_CACHE));
 });
+
+// Paths the Cloudflare Worker serves on andernet.dev (see the routes in wrangler.toml)
+function isWorkerPath(url) {
+    return (
+        url.pathname.startsWith('/api/') ||
+        url.pathname === '/mcp' ||
+        url.pathname.startsWith('/.well-known/')
+    );
+}
 
 // Pages and JSON data (github-data.json, posts-data.json, ...) must stay fresh
 function isFreshContent(request, url) {

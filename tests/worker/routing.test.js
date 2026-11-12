@@ -12,7 +12,7 @@ vi.mock('../../worker/engagement.js', () => ({
     corsHeaders: () => ({ 'Access-Control-Allow-Origin': '*' }),
 }));
 
-const { default: worker } = await import('../../worker/index.js');
+const { default: worker, routePath } = await import('../../worker/index.js');
 const engagement = await import('../../worker/engagement.js');
 const env = {};
 
@@ -35,6 +35,33 @@ test('GET /unknown returns 404', async () => {
     const res = await worker.fetch(req('GET', '/unknown'), env);
     expect(res.status).toBe(404);
 });
+
+// ── /api prefix (the Worker's route on andernet.dev) ─────────────────────────
+
+test('GET /api/health reaches the health check', async () => {
+    const res = await worker.fetch(req('GET', '/api/health'), env);
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+});
+
+test.each([
+    ['/api/views?page=home', 'handleViewsRequest'],
+    ['/api/guestbook', 'handleGuestbookRequest'],
+])('GET %s reaches the same handler as the bare path', async (path, handler) => {
+    engagement[handler].mockClear();
+    const res = await worker.fetch(req('GET', path), env);
+    expect(res.status).toBe(200);
+    expect(engagement[handler]).toHaveBeenCalledOnce();
+});
+
+// Only "/api/" is a prefix: these are not the Worker's routes, so they must stay 404
+test.each(['/api', '/api/', '/apiviews', '/api/api/views', '/api/unknown', '/x/api/views'])(
+    'GET %s is a 404',
+    async path => {
+        const res = await worker.fetch(req('GET', path), env);
+        expect(res.status).toBe(404);
+    }
+);
 
 // ── /og (removed: the OG image is a static file now) ──────────────────────────
 
@@ -82,4 +109,14 @@ test('an exception in a handler becomes a JSON 500, not a bare runtime error', a
 test('the worker keeps serving after a handler failure', async () => {
     const res = await worker.fetch(req('GET', '/health'), env);
     expect(res.status).toBe(200);
+});
+
+test.each([
+    ['/api/views', '/views'],
+    ['/views', '/views'],
+    ['/api/', '/'],
+    ['/api', '/api'],
+    ['/apiviews', '/apiviews'],
+])('routePath(%s) is %s', (input, expected) => {
+    expect(routePath(input)).toBe(expected);
 });

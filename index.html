@@ -271,9 +271,8 @@
       }, 500);
     </script>
 
-    <!-- The Worker (views, activity) is called on every load; keep in step with
-         WORKER_BASE in modules/config.js. Its requests are CORS fetches, hence crossorigin. -->
-    <link rel="preconnect" href="https://and3rn3t-portfolio.andernet.workers.dev" crossorigin />
+    <!-- No preconnect for the Worker: on andernet.dev it is same-origin (/api), so the connection
+         is already open. See WORKER_BASE in modules/config.js. -->
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
 
     <!-- The design system (layers, tokens, chrome) and the home page -->
