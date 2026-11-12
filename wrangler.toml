@@ -29,3 +29,4 @@ id      = "470f1e368c014affaac0b2bab91a3f8f"
 # Secrets set via wrangler secret put:
 #   wrangler secret put GH_TOKEN          (fine-grained PAT, read:user scope)
 #   wrangler secret put TURNSTILE_SECRET  (from dash.cloudflare.com → Turnstile)
+# Local only: ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars (see AGENTS.md).

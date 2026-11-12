@@ -24,7 +24,6 @@
     "build:icons": "node scripts/build-icons.mjs",
     "generate:site": "node scripts/generate-site.mjs",
     "capture:screenshots": "node scripts/capture-screenshots.mjs",
-    "generate:posts": "pnpm generate:site",
     "check:refs": "node scripts/check-refs.mjs",
     "zone": "node scripts/cloudflare-zone.mjs",
     "lint": "eslint .",
