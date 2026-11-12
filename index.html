@@ -355,168 +355,6 @@
       </div>
     </nav>
 
-    <!-- Command palette. A native <dialog>: showModal() gives the focus trap, Esc, an inert page
-         behind it and focus restore, so modules/command-palette.js has none of that to do. -->
-    <dialog class="palette" id="global-search-modal" aria-label="Command palette">
-      <div class="palette__body">
-        <div class="sr-only" role="status" data-dialog-status></div>
-        <div class="global-search-header">
-          <div class="global-search-input-container">
-            <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
-              <use href="/icons/sprite.svg#search"></use>
-            </svg>
-            <input
-              type="text"
-              id="global-search-input"
-              placeholder="Search projects, skills and sections…"
-              class="global-search-input"
-              autocomplete="off"
-              spellcheck="false"
-              role="combobox"
-              aria-label="Search the portfolio"
-              aria-autocomplete="list"
-              aria-expanded="false"
-              aria-controls="search-results-content"
-            />
-            <button
-              type="button"
-              class="icon-button global-search-close"
-              id="global-search-close"
-              aria-label="Close global search"
-              title="Close search (Esc)"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#times"></use>
-              </svg>
-            </button>
-          </div>
-          <div class="search-categories">
-            <button
-              type="button"
-              class="search-category active"
-              data-category="all"
-              aria-pressed="true"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#globe"></use>
-              </svg>
-              All
-            </button>
-            <button
-              type="button"
-              class="search-category"
-              data-category="projects"
-              aria-pressed="false"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#code"></use>
-              </svg>
-              Projects
-            </button>
-            <button
-              type="button"
-              class="search-category"
-              data-category="skills"
-              aria-pressed="false"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#cogs"></use>
-              </svg>
-              Skills
-            </button>
-            <button
-              type="button"
-              class="search-category"
-              data-category="content"
-              aria-pressed="false"
-            >
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#file-alt"></use>
-              </svg>
-              Content
-            </button>
-          </div>
-        </div>
-        <div class="global-search-results" id="global-search-results">
-          <div class="search-results-empty" id="search-results-empty">
-            <svg class="icon" aria-hidden="true" focusable="false">
-              <use href="/icons/sprite.svg#search-plus"></use>
-            </svg>
-            <p class="search-results-empty__title">Search this site</p>
-            <p>Find projects, skills and sections.</p>
-            <div class="search-tips">
-              <div class="search-tip"><kbd>↑</kbd><kbd>↓</kbd> Navigate results</div>
-              <div class="search-tip"><kbd>Enter</kbd> Open result</div>
-              <div class="search-tip"><kbd>Esc</kbd> Close search</div>
-            </div>
-          </div>
-          <div class="sr-only" id="search-results-status" role="status" aria-live="polite"></div>
-          <div
-            class="search-results-content"
-            id="search-results-content"
-            role="listbox"
-            aria-label="Search results"
-          ></div>
-        </div>
-      </div>
-    </dialog>
-
-    <!-- Keyboard shortcuts. A native <dialog>, like the palette. -->
-    <dialog class="help" id="keyboard-help" aria-labelledby="keyboard-help-title">
-      <div class="help__body">
-        <div class="sr-only" role="status" data-dialog-status></div>
-        <h2 class="help__title" id="keyboard-help-title">Keyboard shortcuts</h2>
-        <dl class="shortcut-grid">
-          <div class="shortcut-item">
-            <dt><kbd>?</kbd></dt>
-            <dd>Show or hide this help</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>T</kbd></dt>
-            <dd>Toggle theme</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd></dt>
-            <dd>Command palette</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>J</kbd></dt>
-            <dd>Scroll down</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>K</kbd></dt>
-            <dd>Scroll up</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>G</kbd> + <kbd>H</kbd></dt>
-            <dd>Go to home</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>G</kbd> + <kbd>A</kbd></dt>
-            <dd>Go to about</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>G</kbd> + <kbd>P</kbd></dt>
-            <dd>Go to projects</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>G</kbd> + <kbd>C</kbd></dt>
-            <dd>Go to contact</dd>
-          </div>
-          <div class="shortcut-item">
-            <dt><kbd>Esc</kbd></dt>
-            <dd>Close a dialog</dd>
-          </div>
-        </dl>
-        <button type="button" class="icon-button help__close" id="keyboard-help-close">
-          <svg class="icon" aria-hidden="true" focusable="false">
-            <use href="/icons/sprite.svg#times"></use>
-          </svg>
-          <span class="sr-only">Close help</span>
-        </button>
-      </div>
-    </dialog>
-
     <main id="main">
       <!-- Intro. Draft copy: edit freely. -->
       <section class="intro" id="home">
@@ -1203,6 +1041,173 @@
         </ul>
       </div>
     </footer>
+
+    <!-- The dialogs come after the content on purpose. Cloudflare serves this page as Markdown
+         to agents that ask for it (Accept: text/markdown) and converts it in source order, so
+         up here they would put the palette and the key list ahead of the page itself. A modal
+         dialog works the same wherever it sits. -->
+
+    <!-- Command palette. A native <dialog>: showModal() gives the focus trap, Esc, an inert page
+         behind it and focus restore, so modules/command-palette.js has none of that to do. -->
+    <dialog class="palette" id="global-search-modal" aria-label="Command palette">
+      <div class="palette__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
+        <div class="global-search-header">
+          <div class="global-search-input-container">
+            <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#search"></use>
+            </svg>
+            <input
+              type="text"
+              id="global-search-input"
+              placeholder="Search projects, skills and sections…"
+              class="global-search-input"
+              autocomplete="off"
+              spellcheck="false"
+              role="combobox"
+              aria-label="Search the portfolio"
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-controls="search-results-content"
+            />
+            <button
+              type="button"
+              class="icon-button global-search-close"
+              id="global-search-close"
+              aria-label="Close global search"
+              title="Close search (Esc)"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#times"></use>
+              </svg>
+            </button>
+          </div>
+          <div class="search-categories">
+            <button
+              type="button"
+              class="search-category active"
+              data-category="all"
+              aria-pressed="true"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#globe"></use>
+              </svg>
+              All
+            </button>
+            <button
+              type="button"
+              class="search-category"
+              data-category="projects"
+              aria-pressed="false"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#code"></use>
+              </svg>
+              Projects
+            </button>
+            <button
+              type="button"
+              class="search-category"
+              data-category="skills"
+              aria-pressed="false"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#cogs"></use>
+              </svg>
+              Skills
+            </button>
+            <button
+              type="button"
+              class="search-category"
+              data-category="content"
+              aria-pressed="false"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/icons/sprite.svg#file-alt"></use>
+              </svg>
+              Content
+            </button>
+          </div>
+        </div>
+        <div class="global-search-results" id="global-search-results">
+          <div class="search-results-empty" id="search-results-empty">
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#search-plus"></use>
+            </svg>
+            <p class="search-results-empty__title">Search this site</p>
+            <p>Find projects, skills and sections.</p>
+            <div class="search-tips">
+              <div class="search-tip"><kbd>↑</kbd><kbd>↓</kbd> Navigate results</div>
+              <div class="search-tip"><kbd>Enter</kbd> Open result</div>
+              <div class="search-tip"><kbd>Esc</kbd> Close search</div>
+            </div>
+          </div>
+          <div class="sr-only" id="search-results-status" role="status" aria-live="polite"></div>
+          <div
+            class="search-results-content"
+            id="search-results-content"
+            role="listbox"
+            aria-label="Search results"
+          ></div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Keyboard shortcuts. A native <dialog>, like the palette. -->
+    <dialog class="help" id="keyboard-help" aria-labelledby="keyboard-help-title">
+      <div class="help__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
+        <h2 class="help__title" id="keyboard-help-title">Keyboard shortcuts</h2>
+        <dl class="shortcut-grid">
+          <div class="shortcut-item">
+            <dt><kbd>?</kbd></dt>
+            <dd>Show or hide this help</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>T</kbd></dt>
+            <dd>Toggle theme</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd></dt>
+            <dd>Command palette</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>J</kbd></dt>
+            <dd>Scroll down</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>K</kbd></dt>
+            <dd>Scroll up</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>G</kbd> + <kbd>H</kbd></dt>
+            <dd>Go to home</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>G</kbd> + <kbd>A</kbd></dt>
+            <dd>Go to about</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>G</kbd> + <kbd>P</kbd></dt>
+            <dd>Go to projects</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>G</kbd> + <kbd>C</kbd></dt>
+            <dd>Go to contact</dd>
+          </div>
+          <div class="shortcut-item">
+            <dt><kbd>Esc</kbd></dt>
+            <dd>Close a dialog</dd>
+          </div>
+        </dl>
+        <button type="button" class="icon-button help__close" id="keyboard-help-close">
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/icons/sprite.svg#times"></use>
+          </svg>
+          <span class="sr-only">Close help</span>
+        </button>
+      </div>
+    </dialog>
     <script>
       document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>

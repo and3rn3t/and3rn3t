@@ -11,6 +11,8 @@
  *   404.html                 - the not-found page, on the same head, nav and footer
  *   feed.xml                 - RSS feed (links and ids point at the post pages)
  *   sitemap.xml              - the "Blog Posts" block is rewritten; the rest is left alone
+ *   llms.txt                 - the projects, posts and work history as a Markdown link list,
+ *                              for language models and agents (https://llmstxt.org)
  *
  * Inputs: projects-data.json, experience-data.json, posts-data.json and, for which repos are
  * starred, github-data.json. Live numbers (stars, last push, stats) are NOT baked in: the
@@ -32,6 +34,7 @@ import { projectView, selectProjects } from '../modules/utils/projects.js';
 import { renderEducation, renderFacts, renderJobs } from './templates/experience.mjs';
 import { AUTHOR, SITE } from './templates/chrome.mjs';
 import { renderCover } from './templates/cover.mjs';
+import { renderLlmsTxt } from './templates/llms.mjs';
 import { renderNotFoundPage } from './templates/not-found.mjs';
 import { renderPostPage } from './templates/post-page.mjs';
 import { renderProjectPage, shareImage } from './templates/project-page.mjs';
@@ -226,6 +229,18 @@ console.log(`  wrote ${pageViews.length} project pages`);
     `${sitemap.slice(0, from)}${heading}${entries}\n${sitemap.slice(to)}`
   );
 }
+
+// ── llms.txt (the site, described for language models) ───────────────────────────────────────
+writeFileSync(
+  join(ROOT, 'llms.txt'),
+  renderLlmsTxt({
+    projects: pageViews,
+    posts,
+    experience: experienceData.experience,
+    education: experienceData.education,
+  })
+);
+console.log('  wrote llms.txt');
 
 const indexPath = join(ROOT, 'index.html');
 let index = readFileSync(indexPath, 'utf8');

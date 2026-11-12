@@ -26,6 +26,10 @@ build/
 .dev.vars
 .dev.vars.*
 
+# The Cloudflare API token for zone settings. Kept out of .dev.vars on purpose: wrangler
+# loads that file into the local Worker's environment.
+.cloudflare.env
+
 # IDE and editor files
 .vscode/
 .idea/

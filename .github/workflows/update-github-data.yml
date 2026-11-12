@@ -410,7 +410,7 @@ jobs:
           # Everything generate-site.mjs writes from this data, matching the generated-files check
           # in quality.yml (tests/unit/generated-files.test.js keeps the two in step)
           git add github-data.json README.md og/ .github/og-inputs.sha256 \
-            posts projects feed.xml sitemap.xml index.html 404.html images/projects
+            posts projects feed.xml sitemap.xml llms.txt index.html 404.html images/projects
           if git diff --cached --quiet; then
             echo "No changes to GitHub data"
             exit 0

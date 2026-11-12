@@ -1,0 +1,56 @@
+# Matthew Anderson
+
+> Software Engineer at Deere & Company. Side projects in health tech, home automation and data tools. This site is the portfolio: a write-up of each project, a few technical posts, and a work history.
+
+Every page on this site is also available as Markdown: request it with `Accept: text/markdown`.
+
+Work history:
+
+- Software Engineer, Deere & Company, 2021 to present
+- Business Analyst, Deere & Company, 2013 to 2021
+- IT Early Development Program, Deere & Company, 2009 to 2013
+
+Education:
+
+- B.A. Information Systems, St. Ambrose University, 2009
+- Graduate-level coursework, Computer Science, St. Ambrose University, 2009 to 2012
+- Software Engineering Immersive, General Assembly, 2021
+
+## Projects
+
+- [Health Analytics Platform](https://andernet.dev/projects/health/): A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.
+- [Home Automation Hub](https://andernet.dev/projects/homehub/): A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.
+- [Guess — Transparent Akinator](https://andernet.dev/projects/guess/): A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.
+- [andernet.dev — This Portfolio](https://andernet.dev/projects/and3rn3t/): The site you're on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.
+- [Self-Hosted Minecraft Server](https://andernet.dev/projects/minecraft/): A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.
+- [iOS 26 Weather App](https://andernet.dev/projects/weather-app/): A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple's updated design system, WeatherKit, and Dynamic Island integration.
+- [Apple Music DJ](https://andernet.dev/projects/apple-music-dj/): A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.
+- [Network Traffic Analyzer](https://andernet.dev/projects/net-traffic/): A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.
+- [HealthKit Bridge](https://andernet.dev/projects/healthkitbridge/): Native iOS app that bridges Apple HealthKit data to web applications via a local on-device HTTP server.
+- [Cross-Platform Weather App](https://andernet.dev/projects/weather/): Playing around with weather app features and Android app integration using Capacitor.
+- [Couple Connect](https://andernet.dev/projects/couple-connect/): Accountability app for couples to identify areas for improvement and track shared goals.
+- [Network Analytics Tool](https://andernet.dev/projects/network/): A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes.
+- [Hugging Face API Sandbox](https://andernet.dev/projects/huggingface/): A TypeScript sandbox for the Hugging Face Inference API, comparing text generation, sentence embeddings, and zero-shot classification across open-source model families.
+- [Hacking Simulator](https://andernet.dev/projects/hack/): A hacking simulator built in Rust for learning cybersecurity concepts.
+- [dbt Data Models](https://andernet.dev/projects/dbt/): Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources.
+- [CATastrophe Game](https://andernet.dev/projects/catastrophe/): CATastrophe: A Mischief Simulator - experimenting with Unreal Engine and C++ game development.
+- [Denon AVR Remote](https://andernet.dev/projects/remote/): A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable.
+
+## Writing
+
+- [How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker](https://andernet.dev/posts/how-this-site-works/): A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts. (2026-07-12)
+- [On-Device Gait Analysis with iPhone LiDAR and HealthKit](https://andernet.dev/posts/lidar-gait-analysis-iphone/): How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary. (2026-05-12)
+- [Building a Local-First IoT Dashboard Without the Cloud](https://andernet.dev/posts/local-first-iot-dashboard/): Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down. (2026-04-03)
+
+## Contact
+
+- [Email](mailto:and3rn3t@icloud.com): the most direct way to get in touch
+- [GitHub](https://github.com/and3rn3t): source for every project here
+- [LinkedIn](https://linkedin.com/in/and3rn3t)
+
+## Optional
+
+- [Home page](https://andernet.dev/): the same content, laid out for people
+- [RSS feed](https://andernet.dev/feed.xml): the posts, in full
+- [Sitemap](https://andernet.dev/sitemap.xml)
+- [Résumé](https://andernet.dev/resume.pdf): PDF

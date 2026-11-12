@@ -42,6 +42,7 @@ jobs:
             /robots.txt
             /sitemap.xml
             /feed.xml
+            /llms.txt
             /resume.pdf
             /CNAME
             /experience-data.json
