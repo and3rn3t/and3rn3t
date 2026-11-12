@@ -26,6 +26,7 @@
     "capture:screenshots": "node scripts/capture-screenshots.mjs",
     "generate:posts": "pnpm generate:site",
     "check:refs": "node scripts/check-refs.mjs",
+    "zone": "node scripts/cloudflare-zone.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:css": "stylelint \"**/*.css\" --report-needless-disables",
