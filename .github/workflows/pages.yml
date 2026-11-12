@@ -17,9 +17,12 @@ permissions:
   pages: write
   id-token: write
 
+# Runs queue, they are never cancelled: a run cancelled after its deploy published would skip the
+# purge-cache job below, and Cloudflare would keep the old pages for up to an hour. GitHub holds one
+# pending run and replaces it with the newest, so a burst of pushes still ends on the latest commit.
 concurrency:
   group: 'pages'
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:

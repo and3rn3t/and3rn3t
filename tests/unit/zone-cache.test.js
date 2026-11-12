@@ -87,6 +87,13 @@ describe('purging the cache on deploy (pages.yml)', () => {
         expect(purge).toMatch(/sleep 60/);
     });
 
+    // A run cancelled after its deploy published would skip the purge, and the edge would keep
+    // the old pages for up to an hour
+    it('is never cancelled by a newer run', () => {
+        expect(workflow).toMatch(/concurrency:\s+group: 'pages'\s+cancel-in-progress: false/);
+        expect(workflow).not.toContain('cancel-in-progress: true');
+    });
+
     it('makes Lighthouse wait for it, so it measures what visitors get', () => {
         expect(workflow.match(/needs: \[deploy, purge-cache\]/g)).toHaveLength(2);
     });
