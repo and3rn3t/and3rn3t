@@ -258,6 +258,76 @@ describe('the MCP server', () => {
         });
     });
 
+    // Every tool goes through one wrapper in createServer; these drive real calls (the reply is
+    // read to the end by rpc) so removing the wrapper, or counting a failure as a success, fails
+    describe('metrics', () => {
+        const withMetrics = () => {
+            const METRICS = { writeDataPoint: vi.fn() };
+            return { METRICS, options: { env: { METRICS } } };
+        };
+        const points = METRICS => METRICS.writeDataPoint.mock.calls.map(([point]) => point);
+
+        it('records exactly one ok point for a tool call that succeeds', async () => {
+            const { METRICS, options } = withMetrics();
+            await call('list_posts', {}, options);
+            expect(points(METRICS)).toEqual([
+                {
+                    indexes: ['list_posts'],
+                    blobs: ['tool', 'ok'],
+                    doubles: [0, expect.any(Number)],
+                },
+            ]);
+        });
+
+        it('records an error point when the tool returns isError', async () => {
+            const { METRICS, options } = withMetrics();
+            const { isError } = await call('get_project', { name: 'nope' }, options);
+            expect(isError).toBe(true);
+            expect(points(METRICS)).toHaveLength(1);
+            expect(points(METRICS)[0]).toMatchObject({
+                indexes: ['get_project'],
+                blobs: ['tool', 'error'],
+            });
+        });
+
+        it('records an error point, once, when the handler throws', async () => {
+            const { METRICS, options } = withMetrics();
+            const dependencies = {
+                getActivity: async () => {
+                    throw new Error('boom');
+                },
+            };
+            await rpc(
+                'tools/call',
+                { name: 'get_recent_activity', arguments: {} },
+                {
+                    ...options,
+                    dependencies,
+                }
+            );
+            expect(points(METRICS)).toHaveLength(1);
+            expect(points(METRICS)[0]).toMatchObject({
+                indexes: ['get_recent_activity'],
+                blobs: ['tool', 'error'],
+            });
+        });
+
+        it('records nothing for initialize or tools/list', async () => {
+            const { METRICS, options } = withMetrics();
+            await rpc(
+                'initialize',
+                {
+                    protocolVersion: '2025-06-18',
+                    capabilities: {},
+                    clientInfo: { name: 't', version: '1' },
+                },
+                options
+            );
+            await rpc('tools/list', undefined, options);
+            expect(METRICS.writeDataPoint).not.toHaveBeenCalled();
+        });
+    });
+
     it('reports a content outage as a JSON-RPC error rather than hanging or returning junk', async () => {
         vi.stubGlobal('fetch', async () => new Response('down', { status: 503 }));
         const request = new Request('https://andernet.dev/mcp', {
