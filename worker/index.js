@@ -49,25 +49,36 @@ export default {
     },
 };
 
+/**
+ * The Worker answers at the site's own /api (a route on the zone) and at its workers.dev
+ * address, where the same paths have no prefix. Both reach the same handlers.
+ * @param {string} pathname
+ * @returns {string}
+ */
+export function routePath(pathname) {
+    return pathname.startsWith('/api/') ? pathname.slice('/api'.length) : pathname;
+}
+
 async function route(request, env) {
     const url = new URL(request.url);
+    const path = routePath(url.pathname);
 
     // Health check
-    if (url.pathname === '/health') {
+    if (path === '/health') {
         return new Response(JSON.stringify({ ok: true }), {
             headers: { 'Content-Type': 'application/json' },
         });
     }
 
-    if (url.pathname === '/views') {
+    if (path === '/views') {
         return handleViewsRequest(request, env);
     }
 
-    if (url.pathname === '/guestbook') {
+    if (path === '/guestbook') {
         return handleGuestbookRequest(request, env);
     }
 
-    if (url.pathname !== '/activity') {
+    if (path !== '/activity') {
         return new Response('Not found', { status: 404 });
     }
 

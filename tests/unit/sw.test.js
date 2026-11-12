@@ -87,6 +87,31 @@ describe('service worker routing', () => {
         expect(handled).toBe(true);
     });
 
+    // The Worker answers on this origin now: its data is live, and a JSON path would otherwise
+    // hit the network-first or stale-while-revalidate handlers and could be served stale
+    it.each([
+        ['the views API', `${ORIGIN}/api/views?page=home`],
+        ['the guestbook API', `${ORIGIN}/api/guestbook`],
+        ['the OpenAPI document', `${ORIGIN}/api/openapi.json`],
+        ['the MCP endpoint', `${ORIGIN}/mcp`],
+        ['an agent-discovery document', `${ORIGIN}/.well-known/api-catalog`],
+        ['the MCP server card', `${ORIGIN}/.well-known/mcp/server-card.json`],
+    ])('leaves the Worker paths to the network: %s', async (_label, url) => {
+        const { listeners, fetchMock } = loadServiceWorker();
+        const { handled } = await dispatch(listeners, url);
+        expect(handled).toBe(false);
+        expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it.each([
+        ['a page that merely starts with /api', `${ORIGIN}/apiary/`],
+        ['a page under /mcp-notes', `${ORIGIN}/mcp-notes/`],
+    ])('still handles %s', async (_label, url) => {
+        const { listeners } = loadServiceWorker();
+        const { handled } = await dispatch(listeners, url);
+        expect(handled).toBe(true);
+    });
+
     it('ignores non-GET requests', async () => {
         const { listeners } = loadServiceWorker();
         const { handled } = await dispatch(listeners, `${ORIGIN}/modules/ui.js`, {
