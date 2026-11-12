@@ -3,7 +3,7 @@
  * them to the zone (scripts/cloudflare-zone.mjs). The API is replaced by a fake that behaves
  * like the real one where it matters: a PUT replaces every rule in the phase.
  */
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { WORKER_ORIGIN } from '../../modules/config.js';
@@ -12,9 +12,11 @@ import {
     GROUPS,
     KINDS,
     desiredValues,
+    mergeRules,
     describeRule,
     diffValues,
     securityTxtExpiry,
+    unintendedChanges,
     stable,
 } from '../../scripts/cloudflare-zone.mjs';
 import {
@@ -54,6 +56,14 @@ describe('inlineBlocks', () => {
     it('finds every style element', () => {
         expect(inlineBlocks(html).styles).toEqual(['a{}', 'b{}']);
     });
+
+    // HTML tag and attribute names are case-insensitive: <SCRIPT> is a script
+    it('finds scripts and styles written in capitals, and reads their attributes in any case', () => {
+        const shouting = `<SCRIPT>one()</SCRIPT><Script TYPE="module">two()</Script>
+            <SCRIPT SRC="/x.js"></SCRIPT><SCRIPT TYPE="application/LD+JSON">{}</SCRIPT>
+            <STYLE>a{}</STYLE>`;
+        expect(inlineBlocks(shouting)).toEqual({ scripts: ['one()', 'two()'], styles: ['a{}'] });
+    });
 });
 
 describe('cspHash', () => {
@@ -71,6 +81,14 @@ describe('the published pages', () => {
     const files = pageFiles(ROOT);
     const hashes = inlineHashes(ROOT);
 
+    // pages.yml publishes /*.html: a page left out would get the CSP header but no hashes for
+    // its own inline code
+    it('covers every .html file at the root, as pages.yml publishes them', () => {
+        const root = readdirSync(ROOT).filter(name => name.endsWith('.html'));
+        expect(root).toContain('offline.html');
+        for (const name of root) expect(files, name).toContain(name);
+    });
+
     it('covers the home page, 404, and every project and post page', () => {
         expect(files).toContain('index.html');
         expect(files).toContain('404.html');
@@ -82,13 +100,13 @@ describe('the published pages', () => {
     // extraction missed one, the real CSP would be missing its hash.
     it.each(files)('%s: every <script> and <style> is accounted for', file => {
         const html = read(file);
-        const opened = (html.match(/<script[\s>]/g) ?? []).length;
-        const external = (html.match(/<script[^>]*\ssrc\s*=/g) ?? []).length;
-        const data = (html.match(/<script[^>]*type=["']application\/(ld\+)?json["']/g) ?? [])
+        const opened = (html.match(/<script[\s>]/gi) ?? []).length;
+        const external = (html.match(/<script[^>]*\ssrc\s*=/gi) ?? []).length;
+        const data = (html.match(/<script[^>]*type=["']application\/(ld\+)?json["']/gi) ?? [])
             .length;
         const { scripts, styles } = inlineBlocks(html);
         expect(scripts.length + external + data).toBe(opened);
-        expect(styles.length).toBe((html.match(/<style[\s>]/g) ?? []).length);
+        expect(styles.length).toBe((html.match(/<style[\s>]/gi) ?? []).length);
         for (const text of scripts) expect(hashes.scripts).toContain(cspHash(text));
         for (const text of styles) expect(hashes.styles).toContain(cspHash(text));
     });
@@ -242,6 +260,21 @@ describe('security.txt expiry', () => {
         }
     );
 
+    // The API adds `enabled` to what it returns. If it is not in the desired state, the first
+    // publication writes fine and is then reported as having changed something unasked, and a
+    // file that exists but is switched off is not seen as different
+    it('tracks `enabled` as desired state, so first publication and re-enabling both work', () => {
+        const desired = desiredValues(GROUPS['security-txt'], {});
+        expect(desired.enabled).toBe(true);
+        const changes = diffValues({}, desired).map(change => change.name);
+        expect(changes).toContain('enabled');
+        expect(unintendedChanges({}, { ...desired }, changes)).toEqual([]);
+        expect(diffValues({ ...desired, enabled: false }, desired).map(c => c.name)).toEqual([
+            'enabled',
+        ]);
+        expect(diffValues(desired, desired)).toEqual([]);
+    });
+
     it('is a valid file for the group: a contact, a canonical address and an expiry', () => {
         const values = desiredValues(GROUPS['security-txt'], {});
         expect(values.contact[0]).toMatch(/^mailto:/);
@@ -275,6 +308,41 @@ function fakeRulesetApi(initialRules, { dropForeign = false } = {}) {
     );
     return state;
 }
+
+describe('mergeRules', () => {
+    const ours = (ref, extra = {}) => ({ ref: `${RULE_PREFIX}${ref}`, ...extra });
+    const wanted = {
+        [`${RULE_PREFIX}a`]: { expression: 'new-a' },
+        [`${RULE_PREFIX}c`]: { expression: 'new-c' },
+    };
+
+    it('keeps the rules in place, replaces ours there, drops stale ones, appends new ones', () => {
+        const merged = mergeRules(
+            [
+                ours('a', { expression: 'old' }),
+                { id: 'x', ref: 'theirs' },
+                ours('stale'),
+                { id: 'y' },
+            ],
+            wanted
+        );
+        expect(merged.map(rule => rule.ref ?? rule.id)).toEqual([
+            `${RULE_PREFIX}a`,
+            'theirs',
+            'y',
+            `${RULE_PREFIX}c`,
+        ]);
+        expect(merged[0].expression).toBe('new-a');
+        expect(merged[1]).toEqual({ id: 'x', ref: 'theirs' });
+    });
+
+    it('with no rules in the phase yet, is just ours in the order wanted', () => {
+        expect(mergeRules([], wanted).map(rule => rule.ref)).toEqual([
+            `${RULE_PREFIX}a`,
+            `${RULE_PREFIX}c`,
+        ]);
+    });
+});
 
 describe('writing the ruleset', () => {
     const group = { phase: 'http_response_headers_transform' };
@@ -334,11 +402,49 @@ describe('writing the ruleset', () => {
         expect(diffValues(after, desired, { prune: true })).toEqual([]);
     });
 
+    // Response header rules run in order and a later one overwrites an earlier one, so a
+    // dashboard exception placed after one of our rules has to stay after it
+    it('replaces our rules where they stand and keeps the others between them', async () => {
+        const ours = ref => ({
+            id: ref,
+            ref: `${RULE_PREFIX}${ref}`,
+            description: 'old',
+            expression: 'old',
+            action: 'rewrite',
+        });
+        const exception = { ...handRolled, id: 'exception' };
+        const state = fakeRulesetApi([ours('link-header'), exception, ours('security-headers')]);
+        await KINDS.ruleset.write('t', 'z', [], group, desired);
+        expect(
+            state.rules.map(rule => (rule.ref.startsWith(RULE_PREFIX) ? rule.ref : rule.id))
+        ).toEqual([
+            `${RULE_PREFIX}link-header`,
+            'exception',
+            `${RULE_PREFIX}security-headers`,
+            `${RULE_PREFIX}csp-report-only`,
+        ]);
+        // and the old definitions were replaced by the new ones
+        expect(state.rules[0].expression).toBe(desired[`${RULE_PREFIX}link-header`].expression);
+    });
+
     // The failure that would hurt: the API drops a rule we did not write
     it('fails loudly if a rule that is not ours disappears', async () => {
         fakeRulesetApi([handRolled], { dropForeign: true });
         await expect(KINDS.ruleset.write('t', 'z', [], group, desired)).rejects.toThrow(
-            /rules that are not ours changed/
+            /not in the order that was sent/
+        );
+    });
+
+    it('fails loudly if the API reorders the rules it was sent', async () => {
+        const state = fakeRulesetApi([handRolled]);
+        const fetchWas = globalThis.fetch;
+        vi.stubGlobal('fetch', async (url, options) => {
+            const response = await fetchWas(url, options);
+            if (options.method === 'PUT') state.rules.reverse();
+            return response;
+        });
+        await expect(KINDS.ruleset.write('t', 'z', [], group, desired)).rejects.toThrow(
+            /not in the order that was sent/
         );
     });
 });

@@ -73,6 +73,9 @@ export const GROUPS = {
     kind: 'security_txt',
     why: "Publish /.well-known/security.txt (Cloudflare serves it, GitHub Pages can't be told to).",
     values: current => ({
+      // Part of the desired state, not only of the PUT body: otherwise the field the API adds
+      // reads as an unintended change, and a file that is switched off is not seen as different
+      enabled: true,
       contact: ['mailto:and3rn3t@icloud.com'],
       canonical: ['https://andernet.dev/.well-known/security.txt'],
       policy: ['https://github.com/and3rn3t/and3rn3t/security/policy'],
@@ -243,17 +246,18 @@ export const KINDS = {
     },
     async write(token, zoneId, _changes, group, desired) {
       const { rules } = await readEntrypoint(token, zoneId, group.phase);
-      const foreign = rules.filter(item => !isOurs(item));
-      // A PUT replaces every rule in the phase, so the rules that are not ours go back as they were
-      const body = {
-        rules: [...foreign, ...Object.entries(desired).map(([ref, item]) => ({ ref, ...item }))],
-      };
-      await api(token, 'PUT', `/zones/${zoneId}/rulesets/phases/${group.phase}/entrypoint`, body);
+      const sent = mergeRules(rules, desired);
+      await api(token, 'PUT', `/zones/${zoneId}/rulesets/phases/${group.phase}/entrypoint`, {
+        rules: sent,
+      });
+      // Header rules run in order and a later one overwrites an earlier one, so the whole
+      // sequence is checked, not only that the rules that are not ours survived
       const after = await readEntrypoint(token, zoneId, group.phase);
-      const kept = after.rules.filter(item => !isOurs(item)).map(item => item.id);
-      if (stable(kept) !== stable(foreign.map(item => item.id))) {
+      const expected = ruleSequence(sent);
+      const actual = ruleSequence(after.rules);
+      if (stable(actual) !== stable(expected)) {
         throw new Error(
-          `${group.phase}: rules that are not ours changed. Before: ${foreign.map(i => i.id)}; after: ${kept}`
+          `${group.phase}: the rules are not in the order that was sent. Sent: ${expected}; found: ${actual}`
         );
       }
     },
@@ -271,13 +275,38 @@ export const KINDS = {
       return current && typeof current === 'object' ? current : {};
     },
     async write(token, zoneId, _changes, _group, desired) {
-      await api(token, 'PUT', `/zones/${zoneId}/security-center/securitytxt`, {
-        enabled: true,
-        ...desired,
-      });
+      await api(token, 'PUT', `/zones/${zoneId}/security-center/securitytxt`, desired);
     },
   },
 };
+
+/**
+ * The rules to send: the ones in the phase now, with each of ours replaced where it stands, any
+ * of ours that is no longer wanted dropped, and new ones added at the end. A PUT replaces the
+ * whole phase, so rules that are not ours go back exactly as they were, in the same places: a
+ * dashboard exception that sits after one of our rules must stay after it.
+ * @param {object[]} current - the rules in the phase now
+ * @param {Record<string, object>} desired - our rules by ref
+ * @returns {object[]}
+ */
+export function mergeRules(current, desired) {
+  const merged = [];
+  const placed = new Set();
+  for (const item of current) {
+    if (!isOurs(item)) merged.push(item);
+    else if (item.ref in desired) {
+      merged.push({ ref: item.ref, ...desired[item.ref] });
+      placed.add(item.ref);
+    }
+  }
+  for (const [ref, item] of Object.entries(desired)) {
+    if (!placed.has(ref)) merged.push({ ref, ...item });
+  }
+  return merged;
+}
+
+/** Each rule by name: its ref when it is ours, else its id (the rules that are not ours have an id). */
+const ruleSequence = rules => rules.map(item => (isOurs(item) ? item.ref : item.id));
 
 const isOurs = item => typeof item.ref === 'string' && item.ref.startsWith(RULE_PREFIX);
 

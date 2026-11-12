@@ -49,14 +49,14 @@ const RUNS = /^(module|(text|application)\/javascript)$/i;
 export function inlineBlocks(html) {
   const scripts = [];
   for (const [, attributes = '', body] of html.matchAll(
-    /<script(\s[^>]*)?>([\s\S]*?)<\/script>/g
+    /<script(\s[^>]*)?>([\s\S]*?)<\/script>/gi
   )) {
-    if (/\ssrc\s*=/.test(attributes)) continue;
-    const type = attributes.match(/\stype\s*=\s*["']?([^"'\s>]+)/)?.[1];
+    if (/\ssrc\s*=/i.test(attributes)) continue;
+    const type = attributes.match(/\stype\s*=\s*["']?([^"'\s>]+)/i)?.[1];
     if (type && !RUNS.test(type)) continue;
     scripts.push(body);
   }
-  const styles = [...html.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/g)].map(
+  const styles = [...html.matchAll(/<style(?:\s[^>]*)?>([\s\S]*?)<\/style>/gi)].map(
     match => match[1]
   );
   return { scripts, styles };
@@ -64,9 +64,14 @@ export function inlineBlocks(html) {
 
 export const cspHash = text => `'sha256-${createHash('sha256').update(text).digest('base64')}'`;
 
-/** The pages the site publishes: the home page, 404, every project and every post. */
+/**
+ * The pages the site publishes: every .html file at the root (index, 404 and offline; pages.yml
+ * publishes `/*.html`), and every project and post page.
+ */
 export function pageFiles(root) {
-  const files = ['index.html', '404.html'];
+  const files = readdirSync(root)
+    .filter(name => name.endsWith('.html'))
+    .sort();
   for (const folder of ['projects', 'posts']) {
     const dir = join(root, folder);
     if (!existsSync(dir)) continue;
