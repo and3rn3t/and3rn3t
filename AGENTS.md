@@ -10,8 +10,8 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 - Shared browser/Worker helpers live in `modules/utils/` (`html.js` escaping, `activity.js`, `data.js`, `icon.js`, `while-visible.js`); the Worker imports them too
 - CI workflows (`.github/workflows/`):
   - `quality.yml`: `pnpm validate` + the generated-files check in one job, and e2e + a11y
-  - `pages.yml`: deploys the allowlisted source to GitHub Pages, then runs Lighthouse (push only). Add any new root asset to its `sparse-checkout` list or it 404s in production
-  - `lighthouse.yml`: weekly and manual Lighthouse runs
+  - `pages.yml`: deploys the allowlisted source to GitHub Pages, then runs Lighthouse, desktop and mobile (push only). Add any new root asset to its `sparse-checkout` list or it 404s in production
+  - `lighthouse.yml`: weekly and manual Lighthouse runs. Configs: `.lighthouserc.cjs` (desktop) and `.lighthouserc.mobile.cjs`; performance is an `error` at 0.9. Measure with the build served gzipped (an uncompressed static server under-scores mobile badly).
   - `update-github-data.yml`: daily refresh of `github-data.json`, the README featured projects and the OG card (it renders only when `.github/og-inputs.sha256` changes), then dispatches `pages.yml`
   - `snake.yml` (README snake on the `output` branch), `codeql.yml`, `gitleaks.yml`, `dependency-review.yml`, `actionlint.yml`, `consistency.yml`, `labeler.yml`, `label-sync.yml`, `release-drafter.yml`, `stale.yml`
 
@@ -77,5 +77,5 @@ pnpm deploy:worker   # only when asked
   loaded (the contact form is a plain POST; palette and help keys go through `installGlobalShortcuts`, which also owns
   `g` then h/a/p/c because that needs no module). Use `whenNear` (a real timer, not `requestIdleCallback`'s
   `timeout`, which is a deadline) for features that serve a section the visitor may never reach.
-- `tests/e2e/budgets.spec.js` holds the budgets: by `app:ready`, at most 12 script files and 70 KB; settled, at
+- `tests/e2e/budgets.spec.js` holds the budgets: by `app:ready`, at most 10 script files and 60 KB; settled, at
   most 28 files, 130 KB and 0.01 CLS. Measure before changing them (the history is in `ROADMAP.md`).

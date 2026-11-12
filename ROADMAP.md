@@ -90,17 +90,18 @@ and every feature keeps its existing JS/CSS fallback. See `assembly/`, `modules/
 ## Phase 10 — Signature redesign
 
 Plan: pre-render the curated content, then a new visual identity, real project pages and a
-slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesign` branch.
+slimmer stylesheet. Phases 0–1 shipped on `main`; 2–6 landed on a `redesign` branch and went to `main`
+in one cut-over (10.6c below).
 
 | #    | Item                                                                                                          | Status        |
 | ---- | ------------------------------------------------------------------------------------------------------------- | ------------- |
 | 10.0 | Quick fixes: modal gaps, mobile heatmap, theme colours, head cleanup — #246                                   | ✅ 2026-11-11 |
 | 10.1 | Pre-render projects, experience and writing into `index.html`; readable without JS — #247                     | ✅ 2026-11-11 |
-| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card                  | 🟡            |
+| 10.2 | Design system (tokens, type, `light-dark()`), screenshot capture, new nav + hero + lead card                  | ✅ 2026-11-11 |
 | 10.3 | Home sections on the new system: work, about/experience/writing, contact + footer; inline contact form (#231) | ✅ 2026-11-11 |
 | 10.4 | Generated `/projects/<slug>/` pages replace the modal; View Transitions                                       | ✅ 2026-11-11 |
 | 10.5 | Post pages, 404, palette and keyboard help on `<dialog>`; OG card restyle                                     | ✅ 2026-11-11 |
-| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | 🟡            |
+| 10.6 | Slim JS and CSS, performance budgets, docs, cut over to `main`                                                | ✅ 2026-11-11 |
 
 ## Decision Log
 
@@ -451,3 +452,35 @@ slimmer stylesheet. Phases 0–1 ship on `main`; later phases land on a `redesig
   what a run renders. After deleting a stylesheet, also list every class JS creates and every class in the markup
   and check each still has a rule in the new CSS; I did that sweep after this review and the terminal was the
   only gap.
+- **2026-11-11** — Phase 10.6c (the cut-over, `redesign` to `main`). **Checked before opening the PR:**
+  _Returning visitors._ A visitor's old service worker serves JS and CSS stale-while-revalidate, so on the first
+  visit after deploy they get the new HTML with their cached old `main.js`. I simulated it: installed the old
+  site's worker (`main`, stamped build id), swapped the server to the new build on the same origin, and reloaded.
+  First visit: the new CSS and shell render, no errors, cards not duplicated, a project-card click reaches its
+  page (the old code runs one last time and is harmless). Second visit: fully clean, because the background
+  revalidation refreshed the cache. The new worker then installs and deletes the old caches (only `newbuild`
+  remained). One simulation artifact worth knowing: Python's static server answers `If-Modified-Since` at
+  one-second granularity, so two `sw.js` files stamped within the same second looked "unchanged"; GitHub Pages
+  uses ETags and does not have that problem. _Lighthouse_, run locally against the build served with gzip and
+  `max-age=600` like Pages (an uncompressed server scored mobile 86, which was the server and not the site):
+  **mobile 99 / 100 / 96 / 100 (performance, accessibility, best practices, SEO) in four runs, LCP 1.8 s, FCP 1.1 s,
+  TBT 0, CLS 0; desktop 100 / 100 / 96 / 100, LCP 0.4 s.** The 96 is only the Cloudflare analytics beacon being
+  blocked by CORS from `127.0.0.1`, which cannot happen in production. Lighthouse also found two real
+  accessibility issues the axe scans had missed, both fixed and now tested: the contribution chart was
+  `<figure role="img">` (not an allowed role; it also hid the caption), and the desktop search button's visible
+  text included its `<kbd>` hint, which its accessible name did not contain (WCAG 2.5.3); the hint is now
+  generated content from `data-shortcut`. The chart is drawn after load, so the axe scans ran before it existed;
+  new scans wait for it. **Changed:** Lighthouse CI now audits mobile as well as desktop
+  (`.lighthouserc.mobile.cjs`, a second job in `lighthouse.yml` and `pages.yml`), performance is an `error` at
+  0.9 (was `warn` at 0.8), accessibility an `error` at 0.95, layout shift an `error` over 0.1, and
+  `aria-allowed-role` is an `error`; both configs were validated with `lhci collect` and `assert` against the
+  build, and the threshold fires on a slow server. `redesign` is removed from `quality.yml`'s PR branches.
+  **Budgets ratcheted:** by `app:ready`, 10 script files and 60 KB (was 12 and 70; it is 9 and 48). **Where the
+  plan was not met:** the home page's CSS is 66.5 KB raw (13.5 KB gzipped), down from 113 KB, but the plan said
+  under 50 KB raw; `css-budget.test.js` pins it at 72 KB so it can only go down. **Phase 10 outcome:** home
+  page at app-ready 14 requests and 184 KB (was 41 and 582 KB); no spinners for curated content; readable
+  without JS; CLS 0; one stylesheet pair per page type; the case-study modal, three hand-rolled focus traps and
+  the 94 KB legacy stylesheet are gone. **Not done, and for Matt:** the post "How This Site Works" still
+  describes the old stack (his copy); the app icons still use the old green; `og/default.png` regenerates on the
+  next daily data run (or run the workflow by hand); homehub's cover is generated because its demo is behind
+  Cloudflare Access; and a capture of the new portfolio for its own card needs the site live first.
