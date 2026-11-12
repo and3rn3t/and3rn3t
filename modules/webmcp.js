@@ -126,9 +126,10 @@ const text = (name, min, max) => ({
  * @param {(path: string) => Promise<any>} deps.load - reads a published JSON file
  * @param {(url: string) => void} deps.navigate - go to a page of the site
  * @param {() => { isDark(): boolean, toggle(): void } | undefined} deps.theme - the theme manager, once it is up
+ * @param {() => void} [deps.showMessageTab] - make the "Send a message" tab the visible one
  * @returns {object[]} WebMCP tool definitions
  */
-export function createTools({ doc, load, navigate, theme }) {
+export function createTools({ doc, load, navigate, theme, showMessageTab = () => {} }) {
     const projects = async () => {
         // loadJSON gives null, not an error, when the file cannot be had
         const data = await load('/projects-data.json');
@@ -288,6 +289,7 @@ export function createTools({ doc, load, navigate, theme }) {
                 for (const [field, value] of Object.entries(values)) {
                     fill(form.elements[field], value);
                 }
+                showMessageTab();
                 form.scrollIntoView?.({ block: 'center' });
                 return {
                     drafted: true,
@@ -309,7 +311,14 @@ export function createTools({ doc, load, navigate, theme }) {
  */
 export async function registerWebMcp(modelContext, deps, lifetime = globalThis) {
     const controller = new AbortController();
-    lifetime.addEventListener('pagehide', () => controller.abort(), { once: true });
+    // pagehide also fires when the page enters the back/forward cache, and Back then restores this
+    // same document without running main.js again: only a page that is really going takes them back
+    const onPageHide = event => {
+        if (event.persisted) return;
+        controller.abort();
+        lifetime.removeEventListener('pagehide', onPageHide);
+    };
+    lifetime.addEventListener('pagehide', onPageHide);
     const registered = [];
     for (const tool of createTools(deps)) {
         try {
@@ -323,6 +332,25 @@ export async function registerWebMcp(modelContext, deps, lifetime = globalThis) 
     return registered;
 }
 
+/**
+ * Bring the message tab forward, so a drafted message is not left in a hidden panel behind the
+ * guestbook tab. Before the tabs have started, a pending `#guestbook` link would select the
+ * guestbook when they do, so that link is dropped.
+ *
+ * @param {{ doc: Document, tabs?: { select(tab: Element): void }, win?: Window }} context
+ */
+export function revealMessageTab({ doc, tabs, win = globalThis }) {
+    const tab = doc.getElementById('contact-tab-message');
+    if (!tab) return;
+    if (tabs) {
+        tabs.select(tab);
+        return;
+    }
+    if (win.location.hash === '#guestbook') {
+        win.history.replaceState(null, '', win.location.pathname + win.location.search);
+    }
+}
+
 /** The real dependencies: this page, its published data, and the app's theme manager. */
 export function pageDeps() {
     return {
@@ -330,5 +358,7 @@ export function pageDeps() {
         load: loadJSON,
         navigate: url => globalThis.location.assign(url),
         theme: () => globalThis.appState?.managers?.theme,
+        showMessageTab: () =>
+            revealMessageTab({ doc: document, tabs: globalThis.appState?.managers?.contactTabs }),
     };
 }

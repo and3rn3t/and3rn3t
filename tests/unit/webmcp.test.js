@@ -11,6 +11,7 @@ import {
     createTools,
     findModelContext,
     registerWebMcp,
+    revealMessageTab,
     searchItems,
 } from '../../modules/webmcp.js';
 
@@ -300,6 +301,22 @@ describe('draft_contact_message', () => {
         expect(field('message').value).toBe('');
     });
 
+    it('brings the message tab forward before scrolling to the form', async () => {
+        const order = [];
+        const form = document.getElementById('contact-form');
+        form.scrollIntoView = () => order.push('scroll');
+        const showMessageTab = () => order.push('tab');
+        const drafting = createTools({
+            doc: document,
+            load,
+            navigate,
+            theme: () => manager,
+            showMessageTab,
+        }).find(candidate => candidate.name === 'draft_contact_message');
+        await drafting.execute(good);
+        expect(order).toEqual(['tab', 'scroll']);
+    });
+
     it('says so on a page with no contact form', async () => {
         document.getElementById('contact-form').remove();
         await expect(tool('draft_contact_message').execute(good)).rejects.toThrow(
@@ -346,6 +363,20 @@ describe('registerWebMcp', () => {
         expect(signal.aborted).toBe(true);
     });
 
+    // Back/forward cache: the same document comes back without main.js running again
+    it('keeps the tools when the page only enters the back/forward cache', async () => {
+        const registerTool = vi.fn(async () => undefined);
+        const lifetime = new EventTarget();
+        await registerWebMcp({ registerTool }, deps(), lifetime);
+        const { signal } = registerTool.mock.calls[0][1];
+        const cached = new Event('pagehide');
+        cached.persisted = true;
+        lifetime.dispatchEvent(cached);
+        expect(signal.aborted).toBe(false);
+        lifetime.dispatchEvent(new Event('pagehide')); // a later, real unload still takes them back
+        expect(signal.aborted).toBe(true);
+    });
+
     it('keeps going when one tool is refused (a name already taken, say)', async () => {
         const registerTool = vi.fn(async definition => {
             if (definition.name === 'open_project')
@@ -358,5 +389,45 @@ describe('registerWebMcp', () => {
             'set_theme',
             'draft_contact_message',
         ]);
+    });
+});
+
+describe('revealMessageTab', () => {
+    const tabs = () => {
+        document.body.insertAdjacentHTML(
+            'beforeend',
+            '<button role="tab" id="contact-tab-message"></button>'
+        );
+        return { select: vi.fn() };
+    };
+
+    it('selects the message tab once the tabs are running', () => {
+        const contactTabs = tabs();
+        revealMessageTab({ doc: document, tabs: contactTabs });
+        expect(contactTabs.select).toHaveBeenCalledWith(
+            document.getElementById('contact-tab-message')
+        );
+    });
+
+    it('drops a pending #guestbook link before the tabs start, so it cannot hide the draft later', () => {
+        tabs();
+        const replaceState = vi.fn();
+        const win = {
+            location: { hash: '#guestbook', pathname: '/', search: '?a=1' },
+            history: { replaceState },
+        };
+        revealMessageTab({ doc: document, win });
+        expect(replaceState).toHaveBeenCalledWith(null, '', '/?a=1');
+    });
+
+    it('leaves any other link alone', () => {
+        tabs();
+        const replaceState = vi.fn();
+        const win = {
+            location: { hash: '#projects', pathname: '/', search: '' },
+            history: { replaceState },
+        };
+        revealMessageTab({ doc: document, win });
+        expect(replaceState).not.toHaveBeenCalled();
     });
 });
