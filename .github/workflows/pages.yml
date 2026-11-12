@@ -35,7 +35,6 @@ jobs:
           # leading `/` so they can't match config, tests or Worker source in subfolders.
           sparse-checkout: |
             /*.html
-            /styles.css
             /main.js
             /sw.js
             /manifest.json
@@ -51,15 +50,18 @@ jobs:
             /projects-data.json
             /fonts/
             /icons/
+            /images/
+            /styles/
             /modules/
             /og/
             /posts/
+            /projects/
           sparse-checkout-cone-mode: false
 
       - name: Check published files
         run: |
           missing=0
-          for f in index.html 404.html offline.html styles.css main.js sw.js manifest.json \
+          for f in index.html 404.html offline.html main.js sw.js manifest.json \
                    favicon.svg og/default.png icons/sprite.svg fonts/inter-variable.woff2 CNAME; do
             [ -e "$f" ] || { echo "::error::missing from deploy: $f"; missing=1; }
           done
@@ -70,13 +72,14 @@ jobs:
 
       # The id names the service worker's caches and changes the worker file, which makes
       # every visitor's browser re-download everything. So hash what the worker caches
-      # (code, styles, pages, fonts, icons) and not the commit SHA: the daily data-only
+      # (code, styles, pages, fonts, icons, images: the worker serves those cache-first, so a
+      # changed one must change the id) and not the commit SHA: the daily data-only
       # deploys (*.json, og/, posts/, feed.xml) then keep the same worker and caches.
       - name: Stamp service worker build id
         run: |
           BUILD_ID=$(find . -path ./.git -prune -o -type f \
               \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.wasm' \
-                 -o -path './fonts/*' -o -path './icons/*' \) \
+                 -o -path './fonts/*' -o -path './icons/*' -o -path './images/*' \) \
               ! -path './posts/*' ! -path './og/*' -print \
             | LC_ALL=C sort | xargs sha256sum | sha256sum | cut -c1-12)
           echo "service worker build id: $BUILD_ID"
@@ -105,3 +108,13 @@ jobs:
     with:
       url: https://andernet.dev
       config-path: .lighthouserc.cjs
+
+  lighthouse-mobile:
+    if: github.event_name == 'push'
+    needs: deploy
+    permissions:
+      contents: read
+    uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
+    with:
+      url: https://andernet.dev
+      config-path: .lighthouserc.mobile.cjs

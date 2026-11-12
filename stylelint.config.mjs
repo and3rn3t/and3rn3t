@@ -17,6 +17,28 @@ const message =
 /** @type {import('stylelint').Config} */
 export default {
   ignoreFiles: ['dist/**', 'dist-worker/**', 'node_modules/**'],
+  overrides: [
+    {
+      // The new design system (styles/): colour comes from tokens only. The token block in
+      // core.css disables these rules around its literals.
+      files: ['styles/**/*.css'],
+      rules: {
+        'color-no-hex': true,
+        'color-named': 'never',
+        'function-disallowed-list': [
+          'rgb',
+          'rgba',
+          'hsl',
+          'hsla',
+          'hwb',
+          'lab',
+          'lch',
+          'oklab',
+          'oklch',
+        ],
+      },
+    },
+  ],
   rules: {
     'declaration-property-value-disallowed-list': [
       {

@@ -3,6 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Cascade layer order, lowest priority first. Layers are ordered by first appearance, so
+         this must come before any other style. Keep it identical to the statement at the top of
+         styles/core.css and in scripts/templates/chrome.mjs. -->
+    <style>
+      @layer scale, reset, tokens, base, components, sections, utilities;
+      /* Opts in to view transitions. Identical to VIEW_TRANSITION_CSS in scripts/templates/chrome.mjs
+         (a unit test checks); it must be inline, see the note there. */
+      @view-transition {
+        navigation: auto;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-group(*),
+        ::view-transition-old(*),
+        ::view-transition-new(*) {
+          animation: none !important;
+        }
+      }
+    </style>
     <meta
       name="description"
       content="Matthew Anderson (@and3rn3t) — Software engineer at Deere &amp; Company. Building health tech, home automation, and data projects in my spare time."
@@ -15,10 +33,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="M. Anderson" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <!-- Browser chrome matches the page background: --bg-primary in styles.css (light and
-         body.dark-theme). modules/theme.js rewrites both when the visitor picks a theme. -->
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
+    <!-- Browser chrome matches the page surface (--surface in styles/core.css, light and dark).
+         modules/theme.js rewrites both when the visitor picks a theme. -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
@@ -203,17 +221,42 @@
     </script>
     <title>Matthew Anderson | Software Engineer</title>
 
+    <!-- The theme before first paint: sets color-scheme through <html data-theme>, which the
+         design tokens in styles/core.css resolve with light-dark(). With no script, the OS
+         preference applies on its own. -->
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          theme === 'dark' ||
+          (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+
+    <!-- Names a project card's image and title for the transition to its page. A classic
+         script in the head: it must listen before the page first renders. -->
+    <script src="modules/page-transitions.js"></script>
+
     <!-- Critical Resource Preloads -->
     <link rel="modulepreload" href="main.js" />
     <link rel="modulepreload" href="modules/debug.js" />
     <link rel="modulepreload" href="modules/theme.js" />
     <link rel="modulepreload" href="modules/navigation.js" />
     <link rel="modulepreload" href="modules/ui.js" />
-    <link rel="modulepreload" href="modules/projects.js" />
     <link rel="modulepreload" href="modules/github-api.js" />
     <!-- Non-critical modules loaded lazily on-demand -->
     <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-
+    <link
+      rel="preload"
+      href="fonts/jetbrains-mono-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <!-- Cloudflare Web Analytics, loaded after first paint. Failure is harmless. -->
     <script>
       setTimeout(() => {
@@ -233,165 +276,63 @@
     <link rel="preconnect" href="https://and3rn3t-portfolio.andernet.workers.dev" crossorigin />
     <link rel="dns-prefetch" href="//static.cloudflareinsights.com" />
 
-    <!-- Critical CSS (inline minimal styles for above-the-fold content) -->
-    <style>
-      /* Base styles that load before styles.css. Some rules here (e.g. .loading-spinner)
-         are not repeated in styles.css, so don't drop this block wholesale. */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family:
-          'Inter',
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          sans-serif;
-        line-height: 1.6;
-        color: #1e293b;
-        background: #ffffff;
-      }
-      body.dark-theme {
-        background: #0a0a0a; /* --bg-primary in styles.css */
-        color: #f1f5f9;
-      }
-      .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 70px;
-        background: rgba(255, 255, 255, 0.95);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-      }
-      /* Above-the-fold hero shell. styles.css is render-blocking and loads after this
-         block, so it wins on any conflict; keep these values in line with it. */
-      .hero {
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-        background:
-          radial-gradient(60% 60% at 25% 30%, rgba(74, 222, 128, 0.4), transparent 60%),
-          radial-gradient(70% 70% at 60% 90%, rgba(22, 163, 74, 0.35), transparent 65%), #111827;
-        color: #ffffff;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero-title,
-      .hero-subtitle,
-      .hero-description {
-        color: #ffffff;
-      }
-      .highlight {
-        background: linear-gradient(120deg, #86efac 0%, #4ade80 45%, #22c55e 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      body {
-        overflow-x: hidden;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-      /* Loading spinner */
-      .loading-spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid #f3f3f3;
-        border-top: 3px solid #2563eb;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-
-    <!-- Time-of-day hero accent: set early to avoid a tint flash -->
-    <script>
-      (function () {
-        var h = new Date().getHours();
-        var t = h < 6 ? 'night' : h < 9 ? 'dawn' : h < 18 ? 'day' : h < 21 ? 'dusk' : 'night';
-        document.documentElement.dataset.timeOfDay = t;
-      })();
-    </script>
-
-    <!-- Load main stylesheet after critical CSS -->
-    <link rel="stylesheet" href="styles.css" />
+    <!-- The design system (layers, tokens, chrome) and the home page -->
+    <link rel="stylesheet" href="styles/core.css" />
+    <link rel="stylesheet" href="styles/home.css" />
 
     <noscript>
       <style>
-        #projects-grid .project-card[hidden] {
-          display: block;
-        }
-        #projects-more-btn,
-        #projects-grid .project-case-study-btn {
+        #projects [data-case-study],
+        #github-band,
+        [data-copy],
+        [data-open-palette] {
           display: none;
         }
       </style>
     </noscript>
   </head>
   <body>
-    <script>
-      // Apply the saved/system theme before first paint so dark visitors never see a white flash.
-      (function () {
-        var t = null;
-        try {
-          t = localStorage.getItem('theme');
-        } catch (e) {}
-        if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)) {
-          document.body.classList.add('dark-theme');
-        }
-      })();
-    </script>
     <!-- Skip to main content link for keyboard users -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
-      <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar" aria-label="Main navigation">
-      <div class="nav-container">
-        <a href="#home" class="nav-logo">@and3rn3t</a>
-        <ul class="nav-menu nav-links" id="nav-menu">
-          <li class="nav-item">
-            <a href="#about" class="nav-link touch-target">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#projects" class="nav-link touch-target">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a href="#experience" class="nav-link touch-target">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a href="#writing" class="nav-link touch-target">Writing</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contact" class="nav-link touch-target">Contact</a>
+    <!-- Navigation. On narrow screens #nav-menu is a sheet; main.js toggles .active on it and on
+         #mobile-menu, and .scrolled on #navbar. -->
+    <nav class="site-nav" id="navbar" aria-label="Main navigation">
+      <div class="wrap site-nav__inner">
+        <a href="#home" class="site-nav__logo">@and3rn3t</a>
+        <ul class="site-nav__links" id="nav-menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#writing">Writing</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="site-nav__socials">
+            <a href="https://github.com/and3rn3t" target="_blank" rel="noopener noreferrer"
+              >GitHub</a
+            >
+            <a href="https://linkedin.com/in/and3rn3t" target="_blank" rel="noopener noreferrer"
+              >LinkedIn</a
+            >
+            <a href="mailto:and3rn3t@icloud.com">Email</a>
           </li>
         </ul>
-        <div class="nav-actions">
+        <div class="site-nav__actions">
           <button
             type="button"
-            class="theme-toggle"
+            class="icon-button site-nav__search"
+            data-open-palette
+            data-shortcut="Ctrl K"
+            aria-label="Search the site"
+            aria-keyshortcuts="Control+K Meta+K"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/icons/sprite.svg#search"></use>
+            </svg>
+            <span class="site-nav__search-label" aria-hidden="true">Search</span>
+          </button>
+          <button
+            type="button"
+            class="icon-button"
             id="theme-toggle"
             aria-label="Switch to dark theme"
             title="Switch to dark theme (T)"
@@ -401,28 +342,24 @@
             </svg>
           </button>
           <button
-            class="nav-toggle hamburger"
+            type="button"
+            class="icon-button site-nav__menu"
             id="mobile-menu"
             aria-label="Toggle navigation menu"
             aria-expanded="false"
             aria-controls="nav-menu"
           >
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span class="site-nav__menu-bars" aria-hidden="true"></span>
           </button>
         </div>
       </div>
     </nav>
 
-    <!-- Global Search Modal -->
-    <div class="global-search-modal" id="global-search-modal" aria-hidden="true">
-      <div
-        class="global-search-content"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Command palette"
-      >
+    <!-- Command palette. A native <dialog>: showModal() gives the focus trap, Esc, an inert page
+         behind it and focus restore, so modules/command-palette.js has none of that to do. -->
+    <dialog class="palette" id="global-search-modal" aria-label="Command palette">
+      <div class="palette__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
         <div class="global-search-header">
           <div class="global-search-input-container">
             <svg class="icon global-search-icon" aria-hidden="true" focusable="false">
@@ -442,7 +379,8 @@
               aria-controls="search-results-content"
             />
             <button
-              class="global-search-close"
+              type="button"
+              class="icon-button global-search-close"
               id="global-search-close"
               aria-label="Close global search"
               title="Close search (Esc)"
@@ -453,25 +391,45 @@
             </button>
           </div>
           <div class="search-categories">
-            <button class="search-category active" data-category="all" aria-pressed="true">
+            <button
+              type="button"
+              class="search-category active"
+              data-category="all"
+              aria-pressed="true"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#globe"></use>
               </svg>
               All
             </button>
-            <button class="search-category" data-category="projects" aria-pressed="false">
+            <button
+              type="button"
+              class="search-category"
+              data-category="projects"
+              aria-pressed="false"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#code"></use>
               </svg>
               Projects
             </button>
-            <button class="search-category" data-category="skills" aria-pressed="false">
+            <button
+              type="button"
+              class="search-category"
+              data-category="skills"
+              aria-pressed="false"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#cogs"></use>
               </svg>
               Skills
             </button>
-            <button class="search-category" data-category="content" aria-pressed="false">
+            <button
+              type="button"
+              class="search-category"
+              data-category="content"
+              aria-pressed="false"
+            >
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/icons/sprite.svg#file-alt"></use>
               </svg>
@@ -484,7 +442,7 @@
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/icons/sprite.svg#search-plus"></use>
             </svg>
-            <h3>Search this site</h3>
+            <p class="search-results-empty__title">Search this site</p>
             <p>Find projects, skills and sections.</p>
             <div class="search-tips">
               <div class="search-tip"><kbd>↑</kbd><kbd>↓</kbd> Navigate results</div>
@@ -501,802 +459,488 @@
           ></div>
         </div>
       </div>
-    </div>
+    </dialog>
 
-    <!-- Keyboard Shortcuts Help -->
-    <div
-      class="keyboard-help"
-      id="keyboard-help"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Keyboard shortcuts"
-      aria-hidden="true"
-    >
-      <div class="keyboard-help-content">
-        <h3>⌨️ Keyboard Shortcuts</h3>
-        <div class="shortcut-grid">
+    <!-- Keyboard shortcuts. A native <dialog>, like the palette. -->
+    <dialog class="help" id="keyboard-help" aria-labelledby="keyboard-help-title">
+      <div class="help__body">
+        <div class="sr-only" role="status" data-dialog-status></div>
+        <h2 class="help__title" id="keyboard-help-title">Keyboard shortcuts</h2>
+        <dl class="shortcut-grid">
           <div class="shortcut-item">
-            <kbd>?</kbd>
-            <span>Show/hide this help</span>
+            <dt><kbd>?</kbd></dt>
+            <dd>Show or hide this help</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>T</kbd>
-            <span>Toggle theme</span>
+            <dt><kbd>T</kbd></dt>
+            <dd>Toggle theme</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd>
-            <span>Command palette</span>
+            <dt><kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd></dt>
+            <dd>Command palette</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>J</kbd>
-            <span>Scroll down</span>
+            <dt><kbd>J</kbd></dt>
+            <dd>Scroll down</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>K</kbd>
-            <span>Scroll up</span>
+            <dt><kbd>K</kbd></dt>
+            <dd>Scroll up</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>H</kbd>
-            <span>Go to home</span>
+            <dt><kbd>G</kbd> + <kbd>H</kbd></dt>
+            <dd>Go to home</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>A</kbd>
-            <span>Go to about</span>
+            <dt><kbd>G</kbd> + <kbd>A</kbd></dt>
+            <dd>Go to about</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>P</kbd>
-            <span>Go to projects</span>
+            <dt><kbd>G</kbd> + <kbd>P</kbd></dt>
+            <dd>Go to projects</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>G</kbd> + <kbd>C</kbd>
-            <span>Go to contact</span>
+            <dt><kbd>G</kbd> + <kbd>C</kbd></dt>
+            <dd>Go to contact</dd>
           </div>
           <div class="shortcut-item">
-            <kbd>Esc</kbd>
-            <span>Close dialogs</span>
+            <dt><kbd>Esc</kbd></dt>
+            <dd>Close a dialog</dd>
           </div>
-        </div>
-        <button class="keyboard-help-close" id="keyboard-help-close">
+        </dl>
+        <button type="button" class="icon-button help__close" id="keyboard-help-close">
           <svg class="icon" aria-hidden="true" focusable="false">
             <use href="/icons/sprite.svg#times"></use>
           </svg>
           <span class="sr-only">Close help</span>
         </button>
       </div>
-    </div>
+    </dialog>
 
     <main id="main">
-      <!-- Hero Section -->
-      <section class="hero" id="home">
-        <div class="hero-canvas-wrap" aria-hidden="true">
-          <div class="hero-canvas-fallback"></div>
-          <canvas class="hero-canvas" id="hero-canvas"></canvas>
+      <!-- Intro. Draft copy: edit freely. -->
+      <section class="intro" id="home">
+        <div class="intro__field" aria-hidden="true">
+          <canvas class="intro__canvas" id="hero-canvas"></canvas>
         </div>
-        <div class="hero-container">
-          <div class="hero-content">
-            <h1 class="hero-title">Hi, I'm <span class="highlight">Matthew Anderson</span></h1>
-            <h2 class="hero-subtitle">
-              <span
-                class="hero-role"
-                data-roles="Software Engineer at Deere &amp; Company|Health-Tech Tinkerer|Home-Automation Enthusiast|Data Engineering Nerd"
-                >Software Engineer at Deere &amp; Company</span
-              ><span class="hero-caret" aria-hidden="true"></span>
-            </h2>
-            <p class="hero-description">
-              Software engineer at John Deere. Building things at the intersection of health tech,
-              home automation, and data in my spare time.
+        <div class="wrap">
+          <div class="intro__copy">
+            <h1 class="intro__title">
+              <span class="intro__name">Matthew Anderson</span>
+              <span class="intro__headline"
+                >I build health tech, home automation and data tools.</span
+              >
+            </h1>
+            <p class="intro__lede">
+              Software engineer at Deere &amp; Company. Recent side projects: an iPhone app that
+              measures gait with LiDAR, a home dashboard that runs without the cloud, and a
+              20-questions game that shows its reasoning as you play.
             </p>
-            <div class="hero-buttons">
-              <a href="#projects" class="btn btn-primary">View My Work</a>
-              <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-              <a href="/resume.pdf" download class="btn btn-outline" title="Download Resume">
+            <div class="intro__actions">
+              <a href="#projects" class="button button--primary">
+                See the work
                 <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#file-pdf"></use>
+                  <use href="/icons/sprite.svg#arrow-right"></use>
                 </svg>
-                Resume
               </a>
+              <ul class="intro__links">
+                <li><a class="link" href="/resume.pdf" download>R&eacute;sum&eacute;</a></li>
+                <li>
+                  <a
+                    class="link"
+                    href="https://github.com/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GitHub</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="link"
+                    href="https://linkedin.com/in/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >LinkedIn</a
+                  >
+                </li>
+                <li><a class="link" href="mailto:and3rn3t@icloud.com">Email</a></li>
+              </ul>
             </div>
-            <div class="hero-social">
-              <a
-                href="https://github.com/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link"
-                title="GitHub Profile"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#github"></use>
-                </svg>
-              </a>
-              <a
-                href="https://linkedin.com/in/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link"
-                title="LinkedIn Profile"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#linkedin"></use>
-                </svg>
-              </a>
-              <a href="mailto:and3rn3t@icloud.com" class="social-link" title="Send Email">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#envelope"></use>
-                </svg>
-              </a>
-            </div>
+            <!-- Filled in by modules/currently.js -->
+            <div class="intro__status" id="currently-coding" aria-live="polite"></div>
           </div>
         </div>
-        <a href="#about" class="hero-scroll-cue" aria-label="Scroll to About section">
-          <span class="hero-scroll-cue-chevron" aria-hidden="true"></span>
-        </a>
       </section>
 
       <!-- About Section -->
-      <section class="about" id="about">
-        <div class="container">
-          <h2 class="section-title">About</h2>
-          <div class="about-content">
-            <div class="about-text">
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">01 &mdash; About</p>
+            <h2 class="section-heading__title" id="about-title">How I work</h2>
+          </header>
+
+          <div class="about__grid">
+            <div class="about__prose">
               <p>
                 Recent side projects include an iPhone app that measures gait with LiDAR, a home
                 dashboard that runs without the cloud, and a 20-questions game that shows its
                 reasoning as you play. I care about the unglamorous parts too: tests, accessibility,
                 and being able to explain every byte I ship.
               </p>
-              <!-- Currently coding widget — populated by modules/currently.js -->
-              <div id="currently-coding" aria-live="polite"></div>
-              <ul class="tech-strip" aria-label="Tools I work with most">
-                <li class="tech-chip">TypeScript</li>
-                <li class="tech-chip">Swift</li>
-                <li class="tech-chip">Python</li>
-                <li class="tech-chip">React</li>
-                <li class="tech-chip">Cloudflare Workers</li>
-                <li class="tech-chip">HealthKit</li>
-                <li class="tech-chip">dbt</li>
-                <li class="tech-chip">Docker</li>
+            </div>
+            <aside class="about__aside" aria-label="At a glance">
+              <!-- prettier-ignore -->
+              <div id="about-facts">
+                <!-- gen:facts -->
+                <dl class="facts">
+            <div class="facts__row"><dt>Role</dt><dd>Software Engineer</dd></div>
+            <div class="facts__row"><dt>At</dt><dd><a class="link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></dd></div>
+            <div class="facts__row"><dt>Since</dt><dd>2021</dd></div>
+          </dl>
+                <!-- /gen:facts -->
+              </div>
+              <h3 class="eyebrow about__tools-label">Tools I use most</h3>
+              <ul class="tag-list">
+                <li class="tag">TypeScript</li>
+                <li class="tag">Swift</li>
+                <li class="tag">Python</li>
+                <li class="tag">React</li>
+                <li class="tag">Cloudflare Workers</li>
+                <li class="tag">HealthKit</li>
+                <li class="tag">dbt</li>
+                <li class="tag">Docker</li>
               </ul>
-            </div>
+            </aside>
           </div>
-          <div class="github-strip">
-            <h3 class="github-strip-title">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#github"></use>
-              </svg>
-              On GitHub
-            </h3>
-            <div class="stats-grid" id="stats-grid">
-              <div class="loading">
-                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#spinner"></use>
-                </svg>
-                <p>Loading stats...</p>
-              </div>
+
+          <!-- The numbers and the chart are live: modules/ui.js fills them in. Without it
+               there is nothing to show, so the band is hidden (see the noscript style). -->
+          <div class="github-band" id="github-band">
+            <div class="github-band__head">
+              <h3 class="eyebrow">On GitHub</h3>
+              <a
+                class="link"
+                href="https://github.com/and3rn3t"
+                target="_blank"
+                rel="noopener noreferrer"
+                >@and3rn3t</a
+              >
             </div>
-            <div class="contribution-graph" id="contribution-graph">
-              <div class="loading">
-                <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#spinner"></use>
-                </svg>
-                <p>Loading contributions...</p>
+            <dl class="stat-list" id="stats-grid">
+              <div class="stat">
+                <dt class="stat__label">Contributions in the last year</dt>
+                <dd class="stat__value" data-stat="contributions">&mdash;</dd>
               </div>
+              <div class="stat">
+                <dt class="stat__label">Repositories active in the last six months</dt>
+                <dd class="stat__value" data-stat="active-repos">&mdash;</dd>
+              </div>
+            </dl>
+            <div class="github-band__chart">
+              <div class="contrib" id="contribution-graph"></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Projects Section -->
-      <section class="projects" id="projects">
-        <div class="container">
-          <h2 class="section-title">Featured Projects</h2>
-
-          <!-- Top Starred Projects -->
-          <div class="top-projects-section">
-            <!-- prettier-ignore -->
-            <div class="projects-grid" id="projects-grid">
-              <!-- gen:projects -->
-              <div class="project-card" data-project="health" style="--lang-color: #2b7489">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Health &amp; Wellness</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Health Analytics Platform</a></h3>
-                <p class="project-description">A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.</p>
-                <p class="project-highlight-lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
-                <button type="button" class="project-case-study-btn" data-case-study="health" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">HealthKit</span><span class="language-tag">LiDAR</span><span class="language-tag">iOS</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://health.andernet.dev" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="homehub" style="--lang-color: #2b7489">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">IoT &amp; Home Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Home Automation Hub</a></h3>
-                <p class="project-description">A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.</p>
-                <p class="project-highlight-lead">→ WebSocket-driven real-time control — device state updates without polling</p>
-                <button type="button" class="project-case-study-btn" data-case-study="homehub" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">WebSockets</span><span class="language-tag">IoT Protocols</span><span class="language-tag">React</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://homehub.andernet.dev" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="guess" style="--lang-color: #2b7489">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Tools &amp; Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Guess — Transparent Akinator</a></h3>
-                <p class="project-description">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
-                <p class="project-highlight-lead">→ Live at andernator.com — playable in any browser, no install required</p>
-                <button type="button" class="project-case-study-btn" data-case-study="guess" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">Algorithms</span><span class="language-tag">Decision Trees</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://andernator.com" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="and3rn3t" style="--lang-color: #f1e05a">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Tools &amp; Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">andernet.dev — This Portfolio</a></h3>
-                <p class="project-description">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
-                <p class="project-highlight-lead">→ Framework-free ES modules with a phased, lazy-loaded startup</p>
-                <button type="button" class="project-case-study-btn" data-case-study="and3rn3t" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">JavaScript</span>
-                    <span class="language-tag">WebAssembly</span><span class="language-tag">Cloudflare Workers</span><span class="language-tag">Vite</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://andernet.dev" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="minecraft" style="--lang-color: #3572A5">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">DevOps &amp; Infrastructure</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Self-Hosted Minecraft Server</a></h3>
-                <p class="project-description">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
-                <p class="project-highlight-lead">→ One-command provisioning: fresh host to fully-configured server via shell script</p>
-                <button type="button" class="project-case-study-btn" data-case-study="minecraft" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">Python</span>
-                    <span class="language-tag">Shell</span><span class="language-tag">JavaScript</span><span class="language-tag">HTML</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/minecraft/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="weather-app" style="--lang-color: #ffac45">
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Mobile Applications</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">iOS 26 Weather App</a></h3>
-                <p class="project-description">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
-                <p class="project-highlight-lead">→ Built during the iOS 26 beta — tracking live API and design system changes</p>
-                <button type="button" class="project-case-study-btn" data-case-study="weather-app" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">Swift</span>
-                    <span class="language-tag">SwiftUI</span><span class="language-tag">WeatherKit</span><span class="language-tag">iOS 26</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/weather-app/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="fastlane" style="--lang-color: #2b7489" data-extra hidden>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer">fastlane</a></h3>
-                <p class="project-description">A recreation of the 90s SIERRA game &quot;Jones in the Fast Lane&quot; - modernized.</p>
-                
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">TypeScript</span>
-                    <span class="language-tag">featured</span>
-                    
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/fastlane/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="apple-music-dj" style="--lang-color: #3572A5" data-extra hidden>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Tools &amp; Automation</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer">Apple Music DJ</a></h3>
-                <p class="project-description">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
-                <p class="project-highlight-lead">→ Daily-use tool: keyboard-only Apple Music control from any app via OpenClaw shortcut</p>
-                <button type="button" class="project-case-study-btn" data-case-study="apple-music-dj" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">Python</span>
-                    <span class="language-tag">AppleScript</span><span class="language-tag">Apple Music API</span><span class="language-tag">macOS</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://clawhub.ai/and3rn3t/skills/apple-music-dj" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg>
-                        Live Demo
-                    </a>
-            </div>
-        </div>
-        <div class="project-card" data-project="net-traffic" style="--lang-color: #e34c26" data-extra hidden>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    <span class="project-category">Networking &amp; Security</span>
-                </div>
-                <h3 class="project-title"><a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer">Network Traffic Analyzer</a></h3>
-                <p class="project-description">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
-                <p class="project-highlight-lead">→ Runs continuously on a Raspberry Pi 5 as a persistent home network sensor</p>
-                <button type="button" class="project-case-study-btn" data-case-study="net-traffic" data-pending>
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#book-open"></use></svg>
-                    Read case study
-                </button>
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#star"></use></svg>
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#code-commit"></use></svg>
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">HTML</span>
-                    <span class="language-tag">TypeScript</span><span class="language-tag">WebSockets</span><span class="language-tag">Raspberry Pi</span>
-                    <span class="status-badge active-development" data-status-active>Active Development</span>
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg>
-                    View Code
-                </a>
-                <a href="https://github.com/and3rn3t/net-traffic/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#file-alt"></use></svg>
-                        Documentation
-                    </a>
-            </div>
-        </div>
-              <!-- /gen:projects -->
-            </div>
-          </div>
+      <!-- Projects Section. The blocks between gen: markers are written by
+           scripts/generate-site.mjs; see scripts/templates/projects.mjs. -->
+      <section class="section work" id="projects" aria-labelledby="work-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">02 &mdash; Projects</p>
+            <h2 class="section-heading__title" id="work-title">Selected work</h2>
+            <p class="section-heading__lede">
+              Side projects, each with a short write-up of how it works.
+            </p>
+          </header>
 
           <!-- prettier-ignore -->
-          <div class="projects-cta">
-            <!-- gen:projects-more -->
-            <button
-              type="button"
-              class="btn btn-outline projects-more-btn"
-              id="projects-more-btn"
-              aria-expanded="false"
-              aria-controls="projects-grid"
-            >
-              Show 3 more projects
-            </button>
-            <!-- /gen:projects-more -->
+          <div id="projects-lead">
+            <!-- gen:lead -->
+            <article class="lead-card" data-project="health" data-page="health">
+          <div class="lead-card__media" data-vt="media">
+            <picture class="shot shot--light">
+            <source type="image/avif" srcset="/images/projects/health-light-640.avif 640w, /images/projects/health-light-1200.avif 1200w" sizes="(min-width: 64rem) 46rem, 100vw" />
+            <img src="/images/projects/health-light-1200.webp" srcset="/images/projects/health-light-640.webp 640w, /images/projects/health-light-1200.webp 1200w" sizes="(min-width: 64rem) 46rem, 100vw" width="1200" height="750" alt="The gait analysis page of the Health Analytics Platform: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis." loading="lazy" decoding="async" />
+          </picture>
+            <picture class="shot shot--dark">
+            <source type="image/avif" srcset="/images/projects/health-dark-640.avif 640w, /images/projects/health-dark-1200.avif 1200w" sizes="(min-width: 64rem) 46rem, 100vw" />
+            <img src="/images/projects/health-dark-1200.webp" srcset="/images/projects/health-dark-640.webp 640w, /images/projects/health-dark-1200.webp 1200w" sizes="(min-width: 64rem) 46rem, 100vw" width="1200" height="750" alt="The gait analysis page of the Health Analytics Platform: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis." loading="lazy" decoding="async" />
+          </picture>
+          </div>
+          <div class="lead-card__body">
+            <p class="eyebrow">Health &amp; Wellness</p>
+            <h3 class="lead-card__title" data-vt="title"><a href="/projects/health/">Health Analytics Platform</a></h3>
+            <p class="lead-card__desc">A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.</p>
+            <p class="lead-card__lead">→ Live at health.andernet.dev — real iOS sensor data driving a web dashboard</p>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">HealthKit</li><li class="tag">LiDAR</li><li class="tag">iOS</li></ul>
+            <div class="lead-card__actions">
+              <a class="button button--primary" href="/projects/health/">Read the case study <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+              <a class="button" href="https://health.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
+              <a class="link" href="https://github.com/and3rn3t/health" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+            <!-- /gen:lead -->
+          </div>
+          <!-- prettier-ignore -->
+          <div class="work-grid" id="projects-grid">
+            <!-- gen:projects -->
+            <article class="work-card" data-project="homehub" data-page="homehub">
+          <div class="work-card__media" data-vt="media">
+            <img class="shot shot--light" src="/images/projects/homehub-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/homehub-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">IoT &amp; Home Automation</p>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/homehub/">Home Automation Hub</a></h3>
+            <p class="work-card__desc">A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.</p>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">WebSockets</li><li class="tag">IoT Protocols</li><li class="tag">React</li></ul>
+            <div class="work-card__actions">
+              <a class="link" href="/projects/homehub/">Case study</a>
+              <a class="link" href="https://homehub.andernet.dev" target="_blank" rel="noopener noreferrer">Live demo</a>
+              <a class="link" href="https://github.com/and3rn3t/homehub" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="guess" data-page="guess">
+          <div class="work-card__media" data-vt="media">
+            <picture class="shot shot--light">
+            <source type="image/avif" srcset="/images/projects/guess-light-640.avif 640w, /images/projects/guess-light-1200.avif 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" />
+            <img src="/images/projects/guess-light-1200.webp" srcset="/images/projects/guess-light-640.webp 640w, /images/projects/guess-light-1200.webp 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="lazy" decoding="async" />
+          </picture>
+            <picture class="shot shot--dark">
+            <source type="image/avif" srcset="/images/projects/guess-dark-640.avif 640w, /images/projects/guess-dark-1200.avif 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" />
+            <img src="/images/projects/guess-dark-1200.webp" srcset="/images/projects/guess-dark-640.webp 640w, /images/projects/guess-dark-1200.webp 1200w" sizes="(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="lazy" decoding="async" />
+          </picture>
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">Tools &amp; Automation</p>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/guess/">Guess — Transparent Akinator</a></h3>
+            <p class="work-card__desc">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">Algorithms</li><li class="tag">Decision Trees</li></ul>
+            <div class="work-card__actions">
+              <a class="link" href="/projects/guess/">Case study</a>
+              <a class="link" href="https://andernator.com" target="_blank" rel="noopener noreferrer">Live demo</a>
+              <a class="link" href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="and3rn3t" data-page="and3rn3t">
+          <div class="work-card__media" data-vt="media">
+            <img class="shot shot--light" src="/images/projects/and3rn3t-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/and3rn3t-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">Tools &amp; Automation</p>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/and3rn3t/">andernet.dev — This Portfolio</a></h3>
+            <p class="work-card__desc">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
+            <ul class="tag-list"><li class="tag">JavaScript</li><li class="tag">WebAssembly</li><li class="tag">Cloudflare Workers</li><li class="tag">Vite</li></ul>
+            <div class="work-card__actions">
+              <a class="link" href="/projects/and3rn3t/">Case study</a>
+              <a class="link" href="https://andernet.dev" target="_blank" rel="noopener noreferrer">Live demo</a>
+              <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="minecraft" data-page="minecraft">
+          <div class="work-card__media" data-vt="media">
+            <img class="shot shot--light" src="/images/projects/minecraft-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/minecraft-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">DevOps &amp; Infrastructure</p>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/minecraft/">Self-Hosted Minecraft Server</a></h3>
+            <p class="work-card__desc">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
+            <ul class="tag-list"><li class="tag">Python</li><li class="tag">Shell</li><li class="tag">JavaScript</li><li class="tag">HTML</li></ul>
+            <div class="work-card__actions">
+              <a class="link" href="/projects/minecraft/">Case study</a>
+              
+              <a class="link" href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card" data-project="weather-app" data-page="weather-app">
+          <div class="work-card__media" data-vt="media">
+            <img class="shot shot--light" src="/images/projects/weather-app-cover-light.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/weather-app-cover-dark.svg" width="1200" height="750" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="work-card__body">
+            <p class="eyebrow">Mobile Applications</p>
+            <h3 class="work-card__title" data-vt="title"><a href="/projects/weather-app/">iOS 26 Weather App</a></h3>
+            <p class="work-card__desc">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
+            <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">WeatherKit</li><li class="tag">iOS 26</li></ul>
+            <div class="work-card__actions">
+              <a class="link" href="/projects/weather-app/">Case study</a>
+              
+              <a class="link" href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>
+            <!-- /gen:projects -->
+          </div>
+          <!-- prettier-ignore -->
+          <div class="work-more" id="projects-more">
+            <!-- gen:more -->
+            <p class="eyebrow">More</p>
+        <ul class="project-list">
+          <li class="project-list__row" data-project="fastlane" data-page="fastlane">
+            <h3 class="project-list__name" data-vt="title"><a href="https://github.com/and3rn3t/fastlane" target="_blank" rel="noopener noreferrer">fastlane</a></h3>
+            <p class="project-list__desc">A recreation of the 90s SIERRA game &quot;Jones in the Fast Lane&quot; - modernized.</p>
+            <p class="project-list__stack">TypeScript</p>
+          </li>
+          <li class="project-list__row" data-project="apple-music-dj" data-page="apple-music-dj">
+            <h3 class="project-list__name" data-vt="title"><a href="/projects/apple-music-dj/">Apple Music DJ</a></h3>
+            <p class="project-list__desc">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
+            <p class="project-list__stack">Python · AppleScript · Apple Music API</p>
+          </li>
+          <li class="project-list__row" data-project="net-traffic" data-page="net-traffic">
+            <h3 class="project-list__name" data-vt="title"><a href="/projects/net-traffic/">Network Traffic Analyzer</a></h3>
+            <p class="project-list__desc">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
+            <p class="project-list__stack">HTML · TypeScript · WebSockets</p>
+          </li>
+        </ul>
+            <!-- /gen:more -->
+          </div>
+
+          <p class="work-footer">
             <a
+              class="link"
               href="https://github.com/and3rn3t"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-outline"
+              >All repositories on GitHub</a
             >
-              View All Projects on GitHub
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/icons/sprite.svg#github"></use>
-              </svg>
-            </a>
-          </div>
+          </p>
         </div>
       </section>
 
-      <!-- Experience Section -->
-      <section class="experience" id="experience">
-        <div class="container">
-          <h2 class="section-title">Experience</h2>
-          <div class="experience-layout">
-            <div class="timeline-column">
-              <h3 class="timeline-group-heading">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#briefcase"></use>
-                </svg>
-                Work
-              </h3>
-              <!-- prettier-ignore -->
-              <div class="timeline" id="experience-timeline" role="group" aria-label="Work history">
-                <!-- gen:experience -->
-                <article class="timeline-item timeline-item--current">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Software Engineer</h3>
-                <span class="timeline-current-badge">Current</span>
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.deere.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Deere &amp; Company</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2021 – Present</span>
-              </div>
-            </header>
-            <p class="timeline-summary">Aftermarket &amp; Customer Support, Global Parts Information Technology — Parts Order Management Legacy &amp; Dealer Business System Integrations Team. Support Java and SAP service parts order management applications, developing solutions for complex business challenges and partnering with the product manager to prioritize work that delivers clear value to the company and its dealers.</p>
-            <ul class="timeline-highlights"><li>Converting legacy Java processes into APIs and microservices to make applications more scalable and easier to maintain</li><li>Building front-end interfaces in TypeScript and React to improve the user experience</li><li>Partnering directly with the Parts Order Management product manager to identify and prioritize work that delivers clear value to the company and its dealers</li></ul>
-            <div class="timeline-tech"><span class="timeline-tech-tag">Java</span><span class="timeline-tech-tag">SAP</span><span class="timeline-tech-tag">SAP ABAP</span><span class="timeline-tech-tag">SAP CPI</span><span class="timeline-tech-tag">TypeScript</span><span class="timeline-tech-tag">React</span></div>
-          </div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Business Analyst</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.deere.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Deere &amp; Company</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2013 – 2021</span>
-              </div>
-            </header>
-            <p class="timeline-summary">Global Information Technology, Human Resources &amp; Corporate Functions Domain — Corporate Functions &amp; John Deere University Teams. Acting co-product manager for the Corporate Functions team, supporting Corporate Social Responsibility, Brand Management &amp; Licensing, Public Affairs, Environmental Health &amp; Safety, Aviation, and Facilities through the company&#39;s Agile reorganization.</p>
-            <ul class="timeline-highlights"><li>2021 — Provided direction as co-product manager during the transition to Agile, developing task boards, reports, and processes to guide daily standups and sprint planning</li><li>2018 — Built a Tableau project combining multiple CSR and HR data sources into a community scorecard used by facility leadership across 20+ global locations; all unit campaigns saw a marked percentage increase in giving in 2019</li><li>2016 — Led a development team building automated payroll deduction processes for charitable giving, significantly reducing manual processing time</li></ul>
-            <div class="timeline-tech"><span class="timeline-tech-tag">SAP</span><span class="timeline-tech-tag">Tableau</span><span class="timeline-tech-tag">SQL</span><span class="timeline-tech-tag">Excel</span></div>
-          </div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">IT Early Development Program</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.deere.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Deere &amp; Company</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2009 – 2013</span>
-              </div>
-            </header>
-            <p class="timeline-summary">Global Information Technology, Datacenter 24x7 Support &amp; Dealer Systems Go-Live Support. A rotational program helping recent computer science graduates navigate different roles and business units within the company.</p>
-            <ul class="timeline-highlights"><li>2012 — Administered training for more than 50 dealer employees during a systems migration at two of the company&#39;s largest Construction &amp; Forestry dealers, in Orlando, Florida and Bangor, Maine</li></ul>
-            
-          </div>
-        </article>
-                <!-- /gen:experience -->
-              </div>
-            </div>
-            <div class="timeline-column">
-              <h3 class="timeline-group-heading">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#graduation-cap"></use>
-                </svg>
-                Education
-              </h3>
-              <!-- prettier-ignore -->
-              <div class="timeline" id="education-timeline" role="group" aria-label="Education history">
-                <!-- gen:education -->
-                <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">B.A. Information Systems</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.sau.edu" target="_blank" rel="noopener noreferrer" class="timeline-company-link">St. Ambrose University</a></span>
-                <span class="timeline-location"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#map-marker-alt"></use></svg> Davenport, IA</span>
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2009</span>
-              </div>
-            </header>
-            
-            
-            
-          </div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Graduate-level coursework, Computer Science</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://www.sau.edu" target="_blank" rel="noopener noreferrer" class="timeline-company-link">St. Ambrose University</a></span>
-                <span class="timeline-location"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#map-marker-alt"></use></svg> Davenport, IA</span>
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2009 – 2012</span>
-              </div>
-            </header>
-            
-            
-            
-          </div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="timeline-content">
-            <header class="timeline-header">
-              <div class="timeline-title-row">
-                <h3 class="timeline-role">Software Engineering Immersive</h3>
-                
-              </div>
-              <div class="timeline-meta">
-                <span class="timeline-company"><a href="https://generalassemb.ly" target="_blank" rel="noopener noreferrer" class="timeline-company-link">General Assembly</a></span>
-                
-                <span class="timeline-dates"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#calendar-alt"></use></svg> 2021 – 2021</span>
-              </div>
-            </header>
-            
-            <ul class="timeline-highlights"><li>12-week immersive program sharpening full-stack development skills, including React, Node, and Express</li></ul>
-            
-          </div>
-        </article>
-                <!-- /gen:education -->
-              </div>
-              <!-- Resume CTA -->
-              <div class="resume-cta">
-                <p class="resume-cta-label">Want the full picture?</p>
-                <a href="/resume.pdf" download class="btn btn-primary resume-btn">
-                  <svg class="icon" aria-hidden="true" focusable="false">
-                    <use href="/icons/sprite.svg#file-pdf"></use>
-                  </svg>
-                  Download Resume
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <!-- Experience Section. The blocks between gen: markers are written by
+           scripts/generate-site.mjs from experience-data.json. -->
+      <section class="section experience" id="experience" aria-labelledby="experience-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">03 &mdash; Experience</p>
+            <h2 class="section-heading__title" id="experience-title">Where I've worked</h2>
+            <p class="section-heading__lede">
+              The short version.
+              <a class="link" href="/resume.pdf" download>The r&eacute;sum&eacute;</a>
+              has the rest.
+            </p>
+          </header>
 
-      <!-- Writing / Blog Section -->
-      <section class="writing" id="writing">
-        <div class="container">
-          <h2 class="section-title">Writing</h2>
-          <p class="section-intro">How these projects work, and what I learned building them.</p>
           <!-- prettier-ignore -->
-          <div id="blog-posts" class="blog-posts-grid" role="group" aria-label="Blog posts">
+          <div class="jobs" id="experience-timeline" role="group" aria-label="Work history">
+            <!-- gen:experience -->
+            <article class="job job--current">
+          <header class="job__head">
+            <h3 class="job__role">Software Engineer</h3>
+            <p class="job__company"><a class="job__company-link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></p>
+            <p class="job__dates">2021 – Present <span class="job__now">Current</span></p>
+          </header>
+          <p class="job__summary">Aftermarket &amp; Customer Support, Global Parts Information Technology — Parts Order Management Legacy &amp; Dealer Business System Integrations Team. Support Java and SAP service parts order management applications, developing solutions for complex business challenges and partnering with the product manager to prioritize work that delivers clear value to the company and its dealers.</p>
+          <details class="job__more" open>
+            <summary class="job__toggle">Highlights <span class="job__count">3</span></summary>
+            <ul class="job__highlights"><li>Converting legacy Java processes into APIs and microservices to make applications more scalable and easier to maintain</li><li>Building front-end interfaces in TypeScript and React to improve the user experience</li><li>Partnering directly with the Parts Order Management product manager to identify and prioritize work that delivers clear value to the company and its dealers</li></ul>
+            <ul class="tag-list"><li class="tag">Java</li><li class="tag">SAP</li><li class="tag">SAP ABAP</li><li class="tag">SAP CPI</li><li class="tag">TypeScript</li><li class="tag">React</li></ul>
+          </details>
+        </article>
+        <article class="job">
+          <header class="job__head">
+            <h3 class="job__role">Business Analyst</h3>
+            <p class="job__company"><a class="job__company-link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></p>
+            <p class="job__dates">2013 – 2021</p>
+          </header>
+          <p class="job__summary">Global Information Technology, Human Resources &amp; Corporate Functions Domain — Corporate Functions &amp; John Deere University Teams. Acting co-product manager for the Corporate Functions team, supporting Corporate Social Responsibility, Brand Management &amp; Licensing, Public Affairs, Environmental Health &amp; Safety, Aviation, and Facilities through the company&#39;s Agile reorganization.</p>
+          <details class="job__more">
+            <summary class="job__toggle">Highlights <span class="job__count">3</span></summary>
+            <ul class="job__highlights"><li>2021 — Provided direction as co-product manager during the transition to Agile, developing task boards, reports, and processes to guide daily standups and sprint planning</li><li>2018 — Built a Tableau project combining multiple CSR and HR data sources into a community scorecard used by facility leadership across 20+ global locations; all unit campaigns saw a marked percentage increase in giving in 2019</li><li>2016 — Led a development team building automated payroll deduction processes for charitable giving, significantly reducing manual processing time</li></ul>
+            <ul class="tag-list"><li class="tag">SAP</li><li class="tag">Tableau</li><li class="tag">SQL</li><li class="tag">Excel</li></ul>
+          </details>
+        </article>
+        <article class="job">
+          <header class="job__head">
+            <h3 class="job__role">IT Early Development Program</h3>
+            <p class="job__company"><a class="job__company-link" href="https://www.deere.com" target="_blank" rel="noopener noreferrer">Deere &amp; Company</a></p>
+            <p class="job__dates">2009 – 2013</p>
+          </header>
+          <p class="job__summary">Global Information Technology, Datacenter 24x7 Support &amp; Dealer Systems Go-Live Support. A rotational program helping recent computer science graduates navigate different roles and business units within the company.</p>
+          <details class="job__more">
+            <summary class="job__toggle">Highlights <span class="job__count">1</span></summary>
+            <ul class="job__highlights"><li>2012 — Administered training for more than 50 dealer employees during a systems migration at two of the company&#39;s largest Construction &amp; Forestry dealers, in Orlando, Florida and Bangor, Maine</li></ul>
+            
+          </details>
+        </article>
+            <!-- /gen:experience -->
+          </div>
+
+          <h3 class="subheading">Education</h3>
+          <!-- prettier-ignore -->
+          <div id="education-timeline" role="group" aria-label="Education history">
+            <!-- gen:education -->
+            <ul class="edu-list">
+          <li class="edu-row">
+            <h4 class="edu-row__degree">B.A. Information Systems</h4>
+            <p class="edu-row__school"><a class="edu-row__school-link" href="https://www.sau.edu" target="_blank" rel="noopener noreferrer">St. Ambrose University</a></p>
+            <p class="edu-row__dates">2009</p>
+            
+          </li>
+          <li class="edu-row">
+            <h4 class="edu-row__degree">Graduate-level coursework, Computer Science</h4>
+            <p class="edu-row__school"><a class="edu-row__school-link" href="https://www.sau.edu" target="_blank" rel="noopener noreferrer">St. Ambrose University</a></p>
+            <p class="edu-row__dates">2009 – 2012</p>
+            
+          </li>
+          <li class="edu-row">
+            <h4 class="edu-row__degree">Software Engineering Immersive</h4>
+            <p class="edu-row__school"><a class="edu-row__school-link" href="https://generalassemb.ly" target="_blank" rel="noopener noreferrer">General Assembly</a></p>
+            <p class="edu-row__dates">2021 – 2021</p>
+            <p class="edu-row__note">12-week immersive program sharpening full-stack development skills, including React, Node, and Express</p>
+          </li>
+        </ul>
+            <!-- /gen:education -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Writing / Blog Section. Rows are written by scripts/generate-site.mjs. -->
+      <section class="section writing" id="writing" aria-labelledby="writing-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">04 &mdash; Writing</p>
+            <h2 class="section-heading__title" id="writing-title">Writing</h2>
+            <p class="section-heading__lede">
+              How these projects work, and what I learned building them.
+            </p>
+          </header>
+          <!-- prettier-ignore -->
+          <div class="post-list" id="blog-posts" role="group" aria-label="Blog posts">
             <!-- gen:writing -->
-            <article class="blog-card" data-slug="how-this-site-works">
-          <div class="blog-card-meta">
-            <time datetime="2026-07-12" class="blog-date">July 12, 2026</time>
-            <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 7 min read</span>
+            <article class="post-row" data-slug="how-this-site-works">
+          <time class="post-row__date" datetime="2026-07-12">Jul 12, 2026</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/how-this-site-works/">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</a></h3>
+            <p class="post-row__summary">A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts.</p>
           </div>
-          <h3 class="blog-card-title">How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</h3>
-          <p class="blog-card-summary">A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts.</p>
-          <div class="blog-card-tags"><span class="blog-tag">JavaScript</span><span class="blog-tag">WebAssembly</span><span class="blog-tag">Cloudflare Workers</span><span class="blog-tag">CSS</span><span class="blog-tag">Architecture</span></div>
-          <a href="/posts/how-this-site-works/" class="blog-read-more" aria-label="Read How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker">Read post <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+          <p class="post-row__time">7 min read</p>
         </article>
-        <article class="blog-card" data-slug="lidar-gait-analysis-iphone">
-          <div class="blog-card-meta">
-            <time datetime="2026-05-12" class="blog-date">May 12, 2026</time>
-            <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 6 min read</span>
+        <article class="post-row" data-slug="lidar-gait-analysis-iphone">
+          <time class="post-row__date" datetime="2026-05-12">May 12, 2026</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/lidar-gait-analysis-iphone/">On-Device Gait Analysis with iPhone LiDAR and HealthKit</a></h3>
+            <p class="post-row__summary">How I used the iPhone&#39;s LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</p>
           </div>
-          <h3 class="blog-card-title">On-Device Gait Analysis with iPhone LiDAR and HealthKit</h3>
-          <p class="blog-card-summary">How I used the iPhone&#39;s LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary.</p>
-          <div class="blog-card-tags"><span class="blog-tag">iOS</span><span class="blog-tag">Swift</span><span class="blog-tag">HealthKit</span><span class="blog-tag">LiDAR</span><span class="blog-tag">Health Tech</span></div>
-          <a href="/posts/lidar-gait-analysis-iphone/" class="blog-read-more" aria-label="Read On-Device Gait Analysis with iPhone LiDAR and HealthKit">Read post <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+          <p class="post-row__time">6 min read</p>
         </article>
-        <article class="blog-card" data-slug="local-first-iot-dashboard">
-          <div class="blog-card-meta">
-            <time datetime="2026-04-03" class="blog-date">April 3, 2026</time>
-            <span class="blog-reading-time"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#clock"></use></svg> 5 min read</span>
+        <article class="post-row" data-slug="local-first-iot-dashboard">
+          <time class="post-row__date" datetime="2026-04-03">Apr 3, 2026</time>
+          <div class="post-row__main">
+            <h3 class="post-row__title"><a href="/posts/local-first-iot-dashboard/">Building a Local-First IoT Dashboard Without the Cloud</a></h3>
+            <p class="post-row__summary">Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down.</p>
           </div>
-          <h3 class="blog-card-title">Building a Local-First IoT Dashboard Without the Cloud</h3>
-          <p class="blog-card-summary">Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down.</p>
-          <div class="blog-card-tags"><span class="blog-tag">IoT</span><span class="blog-tag">Home Automation</span><span class="blog-tag">TypeScript</span><span class="blog-tag">MQTT</span><span class="blog-tag">Self-Hosted</span></div>
-          <a href="/posts/local-first-iot-dashboard/" class="blog-read-more" aria-label="Read Building a Local-First IoT Dashboard Without the Cloud">Read post <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#arrow-right"></use></svg></a>
+          <p class="post-row__time">5 min read</p>
         </article>
             <!-- /gen:writing -->
           </div>
@@ -1304,268 +948,228 @@
       </section>
 
       <!-- Contact Section -->
-      <section class="contact" id="contact">
-        <div class="container">
-          <h2 class="section-title">Get In Touch</h2>
-          <div class="contact-content">
-            <p class="contact-description">
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <header class="section-heading">
+            <p class="eyebrow">05 &mdash; Contact</p>
+            <h2 class="section-heading__title" id="contact-title">Get in touch</h2>
+            <p class="section-heading__lede">
               Open to a new role, a side-project collaboration, or just a good conversation about
               something you're building.
             </p>
+          </header>
 
-            <div class="contact-tabs" role="tablist" aria-label="Ways to get in touch">
-              <button
-                type="button"
-                class="contact-tab"
-                role="tab"
-                id="contact-tab-message"
-                aria-controls="contact-panel-message"
-                aria-selected="true"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#paper-plane"></use>
-                </svg>
-                Send a message
-              </button>
-              <button
-                type="button"
-                class="contact-tab"
-                role="tab"
-                id="contact-tab-guestbook"
-                aria-controls="contact-panel-guestbook"
-                aria-selected="false"
-                tabindex="-1"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#pen"></use>
-                </svg>
-                Sign the guestbook
-              </button>
+          <div class="contact__grid">
+            <div class="contact__direct">
+              <h3 class="eyebrow">Directly</h3>
+              <ul class="direct-list">
+                <li class="direct-list__row">
+                  <span class="direct-list__label">Email</span>
+                  <a class="direct-list__value" href="mailto:and3rn3t@icloud.com"
+                    >and3rn3t@icloud.com</a
+                  >
+                  <!-- Filled in by modules/contact-form.js; the address is right there to select -->
+                  <button type="button" class="link" data-copy="and3rn3t@icloud.com">Copy</button>
+                </li>
+                <li class="direct-list__row">
+                  <span class="direct-list__label">GitHub</span>
+                  <a
+                    class="direct-list__value"
+                    href="https://github.com/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >@and3rn3t</a
+                  >
+                </li>
+                <li class="direct-list__row">
+                  <span class="direct-list__label">LinkedIn</span>
+                  <a
+                    class="direct-list__value"
+                    href="https://linkedin.com/in/and3rn3t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >in/and3rn3t</a
+                  >
+                </li>
+                <li class="direct-list__row">
+                  <span class="direct-list__label">R&eacute;sum&eacute;</span>
+                  <a class="direct-list__value" href="/resume.pdf" download>PDF</a>
+                </li>
+              </ul>
             </div>
 
-            <div
-              class="contact-panel"
-              role="tabpanel"
-              id="contact-panel-message"
-              aria-labelledby="contact-tab-message"
-            >
-              <form
-                class="contact-form"
-                action="https://formspree.io/f/xqagvdrq"
-                method="POST"
-                id="contact-form"
-              >
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      class="form-input"
-                      placeholder="Your full name"
-                      aria-describedby="name-error"
-                      autocomplete="name"
-                      minlength="2"
-                      maxlength="100"
-                    />
-                    <span
-                      class="error-message"
-                      id="name-error"
-                      role="alert"
-                      aria-live="polite"
-                    ></span>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      class="form-input"
-                      placeholder="your.email@example.com"
-                      aria-describedby="email-error"
-                      autocomplete="email"
-                      maxlength="254"
-                    />
-                    <span
-                      class="error-message"
-                      id="email-error"
-                      role="alert"
-                      aria-live="polite"
-                    ></span>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="subject">Subject *</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    class="form-input"
-                    placeholder="What would you like to discuss?"
-                    aria-describedby="subject-error"
-                    minlength="3"
-                    maxlength="200"
-                  />
-                  <span
-                    class="error-message"
-                    id="subject-error"
-                    role="alert"
-                    aria-live="polite"
-                  ></span>
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Message *</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="6"
-                    required
-                    class="form-textarea"
-                    placeholder="Tell me about your project, idea, or how we can work together..."
-                    aria-describedby="message-error"
-                    minlength="10"
-                    maxlength="5000"
-                  ></textarea>
-                  <span
-                    class="error-message"
-                    id="message-error"
-                    role="alert"
-                    aria-live="polite"
-                  ></span>
-                </div>
-
-                <!-- Honeypot for spam protection -->
-                <input
-                  type="text"
-                  name="_gotcha"
-                  class="honeypot"
-                  tabindex="-1"
-                  aria-hidden="true"
-                />
-
+            <div class="contact__panel">
+              <div class="tabs" role="tablist" aria-label="Ways to get in touch">
                 <button
-                  type="submit"
-                  class="btn btn-primary submit-button"
-                  id="submit-button"
-                  aria-describedby="form-status"
+                  type="button"
+                  class="tab"
+                  role="tab"
+                  id="contact-tab-message"
+                  aria-controls="contact-panel-message"
+                  aria-selected="true"
                 >
-                  <span class="submit-text">Send Message</span>
-                  <svg class="icon submit-icon" aria-hidden="true" focusable="false">
-                    <use href="/icons/sprite.svg#paper-plane"></use>
-                  </svg>
-                  <div class="loading-spinner">
-                    <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                      <use href="/icons/sprite.svg#spinner"></use>
-                    </svg>
-                  </div>
+                  Send a message
                 </button>
+                <button
+                  type="button"
+                  class="tab"
+                  role="tab"
+                  id="contact-tab-guestbook"
+                  aria-controls="contact-panel-guestbook"
+                  aria-selected="false"
+                  tabindex="-1"
+                >
+                  Sign the guestbook
+                </button>
+              </div>
 
-                <output class="form-status" id="form-status" aria-live="polite"></output>
-              </form>
-            </div>
-
-            <div
-              class="contact-panel guestbook-card"
-              role="tabpanel"
-              id="contact-panel-guestbook"
-              aria-labelledby="contact-tab-guestbook"
-              hidden
-            >
-              <p class="guestbook-intro">
-                Leave a public note. Say hello, or tell me what you're building.
-              </p>
-              <div class="guestbook-layout">
-                <div class="guestbook-form-col">
-                  <form id="guestbook-form" class="guestbook-form" novalidate>
-                    <div class="form-group">
-                      <label for="gb-name">Name</label>
+              <div role="tabpanel" id="contact-panel-message" aria-labelledby="contact-tab-message">
+                <!-- Where a no-JS submit lands (Formspree redirects to #message-sent): :target shows it -->
+                <p class="notice" id="message-sent" tabindex="-1">
+                  Thanks, your message was sent. I'll reply to the address you gave.
+                </p>
+                <form
+                  class="form"
+                  action="https://formspree.io/f/xqagvdrq"
+                  method="POST"
+                  id="contact-form"
+                >
+                  <input type="hidden" name="_next" value="https://andernet.dev/#message-sent" />
+                  <div class="form__row">
+                    <div class="field">
+                      <label class="field__label" for="name">Name</label>
                       <input
                         type="text"
-                        id="gb-name"
+                        id="name"
                         name="name"
                         required
-                        class="form-input"
-                        placeholder="Your name"
-                        maxlength="60"
+                        class="input"
+                        aria-describedby="name-error"
                         autocomplete="name"
+                        minlength="2"
+                        maxlength="100"
                       />
+                      <p class="field__error" id="name-error" hidden></p>
                     </div>
-                    <div class="form-group">
-                      <label for="gb-message">Message</label>
-                      <textarea
-                        id="gb-message"
-                        name="message"
-                        rows="4"
+                    <div class="field">
+                      <label class="field__label" for="email">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
                         required
-                        class="form-textarea"
-                        placeholder="What's on your mind?"
-                        maxlength="500"
-                      ></textarea>
-                    </div>
-                    <div id="turnstile-container" class="turnstile-container"></div>
-                    <button type="submit" class="btn btn-primary" disabled>
-                      <svg class="icon" aria-hidden="true" focusable="false">
-                        <use href="/icons/sprite.svg#pen"></use>
-                      </svg>
-                      Sign guestbook
-                    </button>
-                    <output
-                      id="guestbook-status"
-                      class="guestbook-status"
-                      aria-live="polite"
-                    ></output>
-                  </form>
-                </div>
-                <div class="guestbook-entries-col">
-                  <div id="guestbook-entries" role="group" aria-label="Guestbook entries">
-                    <div class="loading">
-                      <svg class="icon icon-spin" aria-hidden="true" focusable="false">
-                        <use href="/icons/sprite.svg#spinner"></use>
-                      </svg>
-                      <p>Loading entries...</p>
+                        class="input"
+                        aria-describedby="email-error"
+                        autocomplete="email"
+                        maxlength="254"
+                      />
+                      <p class="field__error" id="email-error" hidden></p>
                     </div>
                   </div>
+                  <div class="field">
+                    <label class="field__label" for="subject">Subject</label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      class="input"
+                      aria-describedby="subject-error"
+                      minlength="3"
+                      maxlength="200"
+                    />
+                    <p class="field__error" id="subject-error" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="message">Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="6"
+                      required
+                      class="textarea"
+                      aria-describedby="message-error"
+                      minlength="10"
+                      maxlength="5000"
+                    ></textarea>
+                    <p class="field__error" id="message-error" hidden></p>
+                  </div>
+                  <!-- Honeypot: people never see it, bots fill it in -->
+                  <div class="trap" aria-hidden="true">
+                    <label for="website-url">Leave this empty</label>
+                    <input
+                      type="text"
+                      id="website-url"
+                      name="_gotcha"
+                      tabindex="-1"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="form__actions">
+                    <button type="submit" class="button button--primary" id="submit-button">
+                      <span class="button__label">Send message</span>
+                      <span class="spinner" aria-hidden="true"></span>
+                    </button>
+                    <output
+                      class="form-status"
+                      id="form-status"
+                      role="status"
+                      for="name email subject message"
+                    ></output>
+                  </div>
+                </form>
+              </div>
+
+              <div
+                role="tabpanel"
+                id="contact-panel-guestbook"
+                aria-labelledby="contact-tab-guestbook"
+                hidden
+              >
+                <p class="guestbook__intro">
+                  Leave a public note. Say hello, or tell me what you're building.
+                </p>
+                <form id="guestbook-form" class="form" novalidate>
+                  <div class="field">
+                    <label class="field__label" for="gb-name">Name</label>
+                    <input
+                      type="text"
+                      id="gb-name"
+                      name="name"
+                      required
+                      class="input"
+                      maxlength="60"
+                      autocomplete="name"
+                    />
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gb-message">Message</label>
+                    <textarea
+                      id="gb-message"
+                      name="message"
+                      rows="4"
+                      required
+                      class="textarea"
+                      maxlength="500"
+                    ></textarea>
+                  </div>
+                  <div id="turnstile-container" class="turnstile"></div>
+                  <div class="form__actions">
+                    <button type="submit" class="button button--primary" disabled>
+                      Sign the guestbook
+                    </button>
+                    <output id="guestbook-status" class="form-status" role="status"></output>
+                  </div>
+                </form>
+                <div
+                  class="guestbook__entries"
+                  id="guestbook-entries"
+                  role="group"
+                  aria-label="Guestbook entries"
+                >
+                  <p class="guestbook__empty">Loading entries&hellip;</p>
                 </div>
               </div>
-            </div>
-
-            <div class="contact-methods">
-              <a href="mailto:and3rn3t@icloud.com" class="contact-method touch-target">
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#envelope"></use>
-                </svg>
-                <span>and3rn3t@icloud.com</span>
-              </a>
-              <a
-                href="https://github.com/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-method touch-target"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#github"></use>
-                </svg>
-                <span>@and3rn3t</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/and3rn3t"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="contact-method touch-target"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false">
-                  <use href="/icons/sprite.svg#linkedin"></use>
-                </svg>
-                <span>LinkedIn</span>
-              </a>
             </div>
           </div>
         </div>
@@ -1573,20 +1177,30 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <p>
-            &copy; <span id="current-year">2026</span> Matthew Anderson. Built with vanilla JS,
-            Vite, and a Cloudflare Worker.
-          </p>
-          <span class="view-count-widget" hidden aria-label="Page views">
-            <svg class="icon" aria-hidden="true" focusable="false">
-              <use href="/icons/sprite.svg#eye"></use>
-            </svg>
-            <span data-view-count>0</span> views
-          </span>
-        </div>
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <p class="site-footer__note">
+          &copy; <span id="current-year">2026</span> Matthew Anderson. Plain HTML, CSS and
+          JavaScript, and a Cloudflare Worker.
+        </p>
+        <ul class="site-footer__links">
+          <li>
+            <span class="site-footer__views" data-view-widget hidden>
+              <span data-view-count>0</span> views
+            </span>
+          </li>
+          <li>
+            <a
+              class="link"
+              href="https://github.com/and3rn3t/and3rn3t"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Source</a
+            >
+          </li>
+          <li><a class="link" href="/feed.xml">RSS</a></li>
+          <li><a class="link" href="#home">Back to top</a></li>
+        </ul>
       </div>
     </footer>
     <script>

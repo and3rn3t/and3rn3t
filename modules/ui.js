@@ -3,22 +3,20 @@
  * Handles all DOM manipulation, animations, and UI components
  */
 
-import { motion } from './capabilities.js';
 import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
-import { icon } from './utils/icon.js';
 
 const TOAST_TYPES = new Set(['success', 'error', 'warning', 'info']);
 const TOAST_FADE_MS = 300; // a little longer than the CSS transition
 const MOBILE_HEATMAP_WEEKS = 20;
+const ACTIVE_WINDOW_MS = 180 * 24 * 60 * 60 * 1000; // "active" = pushed to in the last six months
 
 export class UIManager {
     constructor() {
         this.isInitialized = false;
-        this.loadingBar = null;
-        this.activeTasks = new Set();
         this.toastHideTimer = 0;
         this.toastClearTimer = 0;
+        this.dialogStatusTimer = 0;
     }
 
     init() {
@@ -28,71 +26,8 @@ export class UIManager {
 
         this.ensureNotificationRegion();
 
-        this.initBackToTop();
-        this.initParallax();
-
         this.isInitialized = true;
         debug.log('[UI] UI manager initialized');
-    }
-
-    // ========================================
-    // Loading Progress
-    // ========================================
-
-    showLoadingProgress(taskName = 'global') {
-        this.activeTasks.add(taskName);
-
-        if (!this.loadingBar) {
-            this.loadingBar = document.createElement('div');
-            this.loadingBar.id = 'global-loading-progress';
-            this.loadingBar.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 3px;
-                background: var(--primary-color);
-                background-size: 200% 100%;
-                animation: loading-gradient 2s ease-in-out infinite;
-                z-index: 9999;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            `;
-
-            if (!document.querySelector('#loading-keyframes')) {
-                const style = document.createElement('style');
-                style.id = 'loading-keyframes';
-                style.textContent = `
-                    @keyframes loading-gradient {
-                        0% { background-position: 200% 0; }
-                        100% { background-position: -200% 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-
-            document.body.appendChild(this.loadingBar);
-        }
-
-        setTimeout(() => {
-            if (this.loadingBar) {
-                this.loadingBar.style.opacity = '1';
-            }
-        }, 100);
-    }
-
-    hideLoadingProgress(taskName = 'global') {
-        this.activeTasks.delete(taskName);
-
-        if (this.activeTasks.size === 0 && this.loadingBar) {
-            this.loadingBar.style.opacity = '0';
-            setTimeout(() => {
-                if (this.loadingBar?.parentNode) {
-                    this.loadingBar.parentNode.removeChild(this.loadingBar);
-                    this.loadingBar = null;
-                }
-            }, 300);
-        }
     }
 
     // ========================================
@@ -114,12 +49,27 @@ export class UIManager {
         if (!notification) {
             notification = document.createElement('div');
             notification.id = 'app-notification';
-            notification.className = 'app-toast';
+            notification.className = 'toast toast--info';
             notification.setAttribute('role', 'status');
             notification.setAttribute('aria-live', 'polite');
             document.body.appendChild(notification);
         }
         return notification;
+    }
+
+    /**
+     * While a modal dialog is open, everything outside it is inert, so the toast (which lives in
+     * the page) is not announced and z-index cannot change that. Each dialog carries its own
+     * empty live region, [data-dialog-status]; say the message there too.
+     */
+    announceInOpenDialog(message, duration) {
+        const region = document.querySelector('dialog[open] [data-dialog-status]');
+        if (!region) return;
+        region.textContent = message;
+        clearTimeout(this.dialogStatusTimer);
+        this.dialogStatusTimer = setTimeout(() => {
+            region.textContent = '';
+        }, duration);
     }
 
     showNotification(message, type = 'info', duration = 5000) {
@@ -128,9 +78,11 @@ export class UIManager {
         clearTimeout(this.toastHideTimer);
         clearTimeout(this.toastClearTimer);
 
+        this.announceInOpenDialog(message, duration);
+
         const variant = TOAST_TYPES.has(type) ? type : 'info';
         const wasVisible = notification.classList.contains('visible');
-        notification.className = `app-toast app-toast--${variant}`;
+        notification.className = `toast toast--${variant}`;
         notification.textContent = message;
         if (wasVisible) {
             notification.classList.add('visible'); // swapped in place, no flicker
@@ -149,150 +101,75 @@ export class UIManager {
     }
 
     // ========================================
-    // Back to Top
+    // GitHub band (About): two stats and a contribution chart
     // ========================================
 
-    initBackToTop() {
-        let backToTopBtn = document.querySelector('.back-to-top');
-
-        if (!backToTopBtn) {
-            backToTopBtn = document.createElement('button');
-            backToTopBtn.className = 'back-to-top';
-            backToTopBtn.innerHTML = icon('arrow-up');
-            backToTopBtn.setAttribute('aria-label', 'Back to top');
-            document.body.appendChild(backToTopBtn);
-        }
-
-        globalThis.addEventListener(
-            'scroll',
-            () => {
-                if (globalThis.pageYOffset > 400) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            },
-            { passive: true }
-        );
-
-        backToTopBtn.addEventListener('click', () => {
-            globalThis.scrollTo({ top: 0 });
-        });
-    }
-
-    // ========================================
-    // Parallax Effect
-    // ========================================
-
-    initParallax() {
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-        globalThis.addEventListener(
-            'scroll',
-            () => {
-                if (motion.reduced) return;
-                hero.style.backgroundPositionY = `${globalThis.scrollY * 0.5}px`;
-            },
-            { passive: true }
-        );
-    }
-
-    // ========================================
-    // GitHub Stats Display
-    // ========================================
-
+    /**
+     * Fill in the live numbers and the chart. The band's markup is in index.html (the stats are
+     * static slots, so nothing moves when the numbers arrive); with no data the band is hidden
+     * rather than showing a blank or a third-party image.
+     */
     async loadGitHubStats() {
-        const statsGrid = document.getElementById('stats-grid');
-        const contributionGraph = document.getElementById('contribution-graph');
-
-        if (!statsGrid) return;
+        const band = document.getElementById('github-band');
+        if (!band) return;
 
         try {
-            const [userData, repos] = await Promise.all([
-                githubAPI.getUserData(),
+            const [repos, contributions] = await Promise.all([
                 githubAPI.getRepositories('updated', 100),
+                githubAPI.getContributions(),
             ]);
 
-            const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-            const activeRepos = repos.filter(r => {
-                const sixMonths = Date.now() - 180 * 24 * 60 * 60 * 1000;
-                return new Date(r.pushed_at) > sixMonths;
-            }).length;
-            const yearsSince = new Date().getFullYear() - 2021;
+            // getRepositories() throws when the data is unavailable, so an array, even an empty
+            // one, is known data: a user with no public repositories really has none active.
+            // The contribution calendar is the part that can be missing, and stays a dash.
+            const active = repos.filter(
+                repo =>
+                    !repo.fork &&
+                    !repo.archived &&
+                    Date.now() - new Date(repo.pushed_at).getTime() < ACTIVE_WINDOW_MS
+            ).length;
+            this.setStat('active-repos', active);
 
-            statsGrid.innerHTML = `
-                <div class="stat-card">
-                    ${icon('code-branch')}
-                    <div class="stat-content">
-                        <h3>${userData.public_repos}</h3>
-                        <p>Public Repos</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    ${icon('bolt')}
-                    <div class="stat-content">
-                        <h3>${activeRepos}</h3>
-                        <p>Active (6 mo)</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    ${icon('star')}
-                    <div class="stat-content">
-                        <h3>${totalStars}</h3>
-                        <p>Total Stars</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    ${icon('calendar')}
-                    <div class="stat-content">
-                        <h3>${yearsSince}+</h3>
-                        <p>Years on GitHub</p>
-                    </div>
-                </div>
-            `;
-
-            if (contributionGraph) {
-                const contributions = await githubAPI.getContributions();
-                this.renderContributionHeatmap(contributions, contributionGraph);
+            if (Number.isFinite(contributions?.total)) {
+                this.setStat('contributions', contributions.total);
             }
-
+            this.renderContributionHeatmap(
+                contributions,
+                document.getElementById('contribution-graph')
+            );
             debug.log('[UI] GitHub stats loaded');
         } catch (error) {
             debug.warn('[UI] Failed to load GitHub stats:', error);
-            if (statsGrid) {
-                statsGrid.innerHTML =
-                    '<p class="error-message show">Unable to load GitHub statistics at this time.</p>';
-            }
+            band.hidden = true;
         }
     }
 
-    // Render a GitHub-style contribution heatmap from pre-fetched calendar data.
-    // Falls back to the third-party chart image when data isn't available yet.
+    setStat(name, value) {
+        const slot = document.querySelector(`[data-stat="${name}"]`);
+        if (slot) slot.textContent = Number(value).toLocaleString();
+    }
+
+    /**
+     * A week-by-week chart from the pre-fetched contribution calendar. Phones show only the
+     * last MOBILE_HEATMAP_WEEKS weeks (the cells outside them are hidden by CSS), so each cell
+     * carries its column for both layouts.
+     */
     renderContributionHeatmap(contributions, container) {
         if (!container) return;
 
-        if (
-            !contributions ||
-            !Array.isArray(contributions.weeks) ||
-            contributions.weeks.length === 0
-        ) {
-            container.innerHTML = `
-                <div class="contribution-widget">
-                    <img src="https://ghchart.rshah.org/16a34a/and3rn3t" alt="GitHub contribution graph" loading="lazy" />
-                </div>
-            `;
+        if (!Array.isArray(contributions?.weeks) || contributions.weeks.length === 0) {
+            // Hide the wrapper that reserves the chart's space too, so no empty gap is left
+            (container.closest('.github-band__chart') ?? container).hidden = true;
             return;
         }
 
-        // Phones show only the last MOBILE_HEATMAP_WEEKS weeks (see the heatmap rules in
-        // styles.css), so each cell carries its column for both layouts.
         const firstRecentWeek = Math.max(0, contributions.weeks.length - MOBILE_HEATMAP_WEEKS);
         const cells = [];
         contributions.weeks.forEach((week, weekIndex) => {
             const isOlder = weekIndex < firstRecentWeek;
             for (const day of week.days) {
-                const weekday = new Date(`${day.date}T00:00:00`).getDay();
-                const dateLabel = new Date(`${day.date}T00:00:00`).toLocaleDateString(undefined, {
+                const date = new Date(`${day.date}T00:00:00`);
+                const dateLabel = date.toLocaleDateString(undefined, {
                     weekday: 'short',
                     year: 'numeric',
                     month: 'short',
@@ -300,27 +177,27 @@ export class UIManager {
                 });
                 const plural = day.count === 1 ? '' : 's';
                 cells.push(
-                    `<div class="heatmap-cell${isOlder ? ' heatmap-cell--older' : ''}" data-level="${day.level}" ` +
-                        `style="--week:${weekIndex + 1};--recent-week:${weekIndex - firstRecentWeek + 1};grid-row:${weekday + 1}" ` +
-                        `title="${day.count} contribution${plural} on ${dateLabel}"></div>`
+                    `<i class="contrib__cell${isOlder ? ' contrib__cell--older' : ''}" data-level="${day.level}" ` +
+                        `style="--week:${weekIndex + 1};--recent-week:${weekIndex - firstRecentWeek + 1};grid-row:${date.getDay() + 1}" ` +
+                        `title="${day.count} contribution${plural} on ${dateLabel}"></i>`
                 );
             }
         });
 
-        const total = (contributions.total ?? 0).toLocaleString();
         container.innerHTML = `
-            <figure class="contribution-widget" role="img" aria-label="${total} contributions in the last year">
-                <div class="heatmap-grid">${cells.join('')}</div>
-                <figcaption class="heatmap-footer">
-                    <span class="heatmap-total">${total} contributions in the last year</span>
-                    <span class="heatmap-legend" aria-hidden="true">
-                        <span class="heatmap-legend-label">Less</span>
-                        <span class="heatmap-cell" data-level="0"></span>
-                        <span class="heatmap-cell" data-level="1"></span>
-                        <span class="heatmap-cell" data-level="2"></span>
-                        <span class="heatmap-cell" data-level="3"></span>
-                        <span class="heatmap-cell" data-level="4"></span>
-                        <span class="heatmap-legend-label">More</span>
+            <figure class="contrib__figure">
+                <div class="contrib__grid" role="img" aria-label="Contribution activity, week by week">${cells.join('')}</div>
+                <figcaption class="contrib__foot">
+                    <span class="contrib__range contrib__range--year">The last year, week by week</span>
+                    <span class="contrib__range contrib__range--recent">The last ${MOBILE_HEATMAP_WEEKS} weeks</span>
+                    <span class="contrib__legend" aria-hidden="true">
+                        Less
+                        <i class="contrib__cell" data-level="0"></i>
+                        <i class="contrib__cell" data-level="1"></i>
+                        <i class="contrib__cell" data-level="2"></i>
+                        <i class="contrib__cell" data-level="3"></i>
+                        <i class="contrib__cell" data-level="4"></i>
+                        More
                     </span>
                 </figcaption>
             </figure>
@@ -329,7 +206,6 @@ export class UIManager {
 
     destroy() {
         this.isInitialized = false;
-        this.activeTasks.clear();
     }
 }
 

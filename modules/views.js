@@ -42,7 +42,7 @@ class ViewCounter {
             const { views } = await resp.json();
             for (const el of document.querySelectorAll('[data-view-count]')) {
                 el.textContent = views.toLocaleString('en-US');
-                el.closest('.view-count-widget')?.removeAttribute('hidden');
+                el.closest('[data-view-widget]')?.removeAttribute('hidden');
             }
             debug.log('[ViewCounter] Views:', views);
         } catch (err) {

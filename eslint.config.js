@@ -71,6 +71,7 @@ export default [
             '*.config.js',
             '*.config.mjs',
             '.lighthouserc.cjs',
+            '.lighthouserc.mobile.cjs',
             'scripts/**/*.{js,mjs}',
             'skills/*/scripts/*.mjs',
         ],

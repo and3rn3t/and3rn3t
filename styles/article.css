@@ -1,0 +1,508 @@
+/*
+ * Generated pages: a project's page (scripts/templates/project-page.mjs), a post
+ * (post-page.mjs) and the 404 page (not-found.mjs). Chrome, tokens and primitives are in core.css.
+ */
+
+@layer sections {
+  body {
+    background: var(--surface);
+  }
+
+  .article {
+    min-height: 100svh;
+    padding: calc(var(--nav-h) + var(--space-8)) 0 var(--space-16);
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* A theme switch fades the bar in place; the way back is a plain link */
+  .site-nav__back {
+    margin-right: var(--space-2);
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .breadcrumb a {
+    color: inherit;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.25em;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--accent);
+    text-decoration-color: currentcolor;
+  }
+
+  .breadcrumb [aria-current='page'] {
+    color: var(--text);
+  }
+
+  .project-head,
+  .post-head {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 52rem;
+    margin: var(--space-8) 0 var(--space-10);
+  }
+
+  .project-head .eyebrow,
+  .post-head .eyebrow {
+    margin: 0;
+  }
+
+  .project-head__title,
+  .post-head__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 3.6vw, 3.75rem);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-display);
+    line-height: var(--line-height-display);
+    text-wrap: balance;
+  }
+
+  .project-head__lede {
+    max-width: var(--measure);
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-xl);
+    text-wrap: pretty;
+  }
+
+  .project-head__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .project-hero {
+    overflow: hidden;
+    width: 100%; /* explicit, or max-height narrows the box instead of cropping the image */
+    aspect-ratio: 16 / 10;
+    max-height: 40rem;
+    margin-bottom: var(--space-12);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--surface-sunken);
+  }
+
+  .project-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  /* --- A post ------------------------------------------------------------------------- */
+  /* The header shares .project-head's width (a long title wants room); only the body is held
+     to the reading measure. */
+  .post-head .eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .post-head__reading {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  /* Where you are in the post: a bar along the top that fills as you scroll. Pure CSS, driven by
+     the page's scroll position, so it costs no script; a browser without scroll-driven
+     animations simply has no bar. */
+  .reading-progress {
+    display: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .reading-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: calc(var(--z-fixed) + 1);
+      height: var(--space-1);
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      animation: reading-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  @keyframes reading-progress {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* The post's own HTML (headings, paragraphs, code, lists, quotes, images). The measure is the
+     reading width; a code block or table scrolls inside it rather than widening the page. */
+  .prose {
+    max-width: var(--measure);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    overflow-wrap: break-word;
+  }
+
+  .prose > * {
+    margin-block: 0;
+  }
+
+  .prose > * + * {
+    margin-top: var(--space-5);
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    text-wrap: balance;
+  }
+
+  .prose h2 {
+    margin-top: var(--space-16);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .prose h3 {
+    margin-top: var(--space-12);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .prose h4 {
+    margin-top: var(--space-8);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .prose h2 + *,
+  .prose h3 + *,
+  .prose h4 + * {
+    margin-top: var(--space-4);
+  }
+
+  .prose a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      text-decoration-color var(--dur-fast) var(--ease-out);
+  }
+
+  .prose a:hover {
+    color: var(--accent);
+    text-decoration-color: currentcolor;
+  }
+
+  .prose strong {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-base);
+  }
+
+  .prose :not(pre) > code {
+    padding: var(--space-1) var(--space-2);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-sunken);
+  }
+
+  .prose pre {
+    overflow-x: auto;
+    padding: var(--space-4) var(--space-5);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-sunken);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+    tab-size: 2;
+  }
+
+  .prose pre code {
+    font-size: inherit;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: var(--space-6);
+  }
+
+  .prose li + li {
+    margin-top: var(--space-2);
+  }
+
+  .prose li::marker {
+    color: var(--muted);
+  }
+
+  .prose blockquote {
+    margin-inline: 0;
+    padding-left: var(--space-5);
+    border-left: var(--space-1) solid var(--accent);
+    color: var(--muted);
+  }
+
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .prose hr {
+    margin-block: var(--space-10);
+    border: 0;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: var(--font-size-base);
+  }
+
+  .prose th,
+  .prose td {
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-width) solid var(--border);
+    text-align: left;
+  }
+
+  .prose th {
+    background: var(--surface-sunken);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* --- The 404 page ------------------------------------------------------------------- */
+  .not-found {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: start;
+    max-width: 40rem;
+    padding-block: var(--space-16);
+  }
+
+  .not-found__code {
+    margin: 0;
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 3rem + 12vw, 10rem);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-display);
+    line-height: var(--line-height-tight);
+  }
+
+  .not-found__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    text-wrap: balance;
+  }
+
+  .not-found .eyebrow {
+    margin: 0;
+  }
+
+  .not-found__lede {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--font-size-lg);
+    text-wrap: pretty;
+  }
+
+  .not-found__actions {
+    margin-top: var(--space-2);
+  }
+
+  .not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-body {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  .project-body__main {
+    display: grid;
+    gap: var(--space-10);
+    min-width: 0;
+  }
+
+  .project-body h2 {
+    margin: 0 0 var(--space-4);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+  }
+
+  .project-body__aside h2 {
+    margin: var(--space-6) 0 var(--space-3);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .project-body__overview {
+    max-width: var(--measure);
+    margin: 0;
+    font-size: var(--font-size-lg);
+    text-wrap: pretty;
+  }
+
+  .highlights {
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--measure);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .highlights li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .highlights li::before {
+    content: '\2192';
+    color: var(--accent);
+  }
+
+  /* Curated figures only; the block is absent when the data has none */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+  }
+
+  .metric {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+  }
+
+  .metric__value {
+    margin: 0;
+    font-size: var(--font-size-3xl);
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+  }
+
+  .metric__label {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .project-body__aside {
+    align-self: start;
+    min-width: 0;
+  }
+
+  .pager {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .pager__link {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-5);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .pager__link:hover {
+    border-color: var(--border-strong);
+  }
+
+  .pager__link .eyebrow {
+    margin: 0;
+  }
+
+  .pager__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  .pager__link:hover .pager__title {
+    color: var(--accent);
+  }
+
+  @media (min-width: 40rem) {
+    .pager {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pager__link--next {
+      grid-column: 2;
+      text-align: right;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .project-body {
+      grid-template-columns: minmax(0, 1fr) 20rem;
+      gap: var(--space-16);
+    }
+
+    .project-body__aside {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--space-6));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pager__link {
+      transition: none;
+    }
+  }
+}

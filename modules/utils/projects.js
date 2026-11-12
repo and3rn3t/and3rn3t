@@ -26,7 +26,14 @@ const LANGUAGE_COLORS = {
     Vue: '#41b883',
 };
 
-const RECENT_WINDOW_MS = 180 * 24 * 60 * 60 * 1000;
+/**
+ * The path of a project's page.
+ * @param {string} pageSlug - the lowercase slug
+ * @returns {string}
+ */
+export function projectPagePath(pageSlug) {
+    return `/projects/${encodeURIComponent(pageSlug)}/`;
+}
 
 /**
  * @param {string} language
@@ -136,10 +143,21 @@ export function projectView(repo, metadata) {
         'A coding project showcasing development skills.';
     const language = repo?.language || metadata?.technologies?.[0] || 'Code';
     const highlights = metadata?.highlights ?? [];
-    const slug = repo?.name || metadata?.name || metadata?.github_repo?.split('/').pop();
+    // The repository's name, from the live data or else the curated github_repo, so the page URL
+    // doesn't change with whether live data loaded (metadata.name is only a display key)
+    const slug = repo?.name || metadata?.github_repo?.split('/').pop() || metadata?.name;
+
+    const hasCaseStudy = Boolean(slug && (metadata?.longDescription || highlights.length > 1));
+    // Lowercase, so the URL is the same however the repo happens to be capitalised
+    const pageSlug = slug?.toLowerCase();
 
     return {
         slug,
+        pageSlug,
+        // Where this project's write-up lives (scripts/templates/project-page.mjs), if it has one
+        pageUrl: hasCaseStudy ? projectPagePath(pageSlug) : null,
+        // The file-name prefix of the project's images (see images/projects/)
+        name: metadata?.name ?? slug,
         displayName,
         description,
         longDescription: metadata?.longDescription,
@@ -153,21 +171,19 @@ export function projectView(repo, metadata) {
         homepage: safeUrl(metadata?.homepage ?? repo?.homepage),
         // Up to three tags beyond the primary language, curated first
         secondaryTags: (metadata?.technologies ?? repo?.topics ?? [])
-            .filter(tag => tag.toLowerCase() !== language.toLowerCase())
+            // "featured" is a repo topic the workspace tooling sets, not a technology
+            .filter(tag => !['featured', language.toLowerCase()].includes(tag.toLowerCase()))
             .slice(0, 3),
+        // Captured by scripts/capture-screenshots.mjs into images/projects/<name>-*
+        screenshot: metadata?.screenshot?.url
+            ? { name: metadata.name, alt: metadata.screenshot.alt ?? '' }
+            : null,
         featured: Boolean(metadata?.featured),
-        hasCaseStudy: Boolean(slug && (metadata?.longDescription || highlights.length > 1)),
+        hasCaseStudy,
+        // Curated impact figures: [{ value: '30 fps', label: 'LiDAR depth stream' }]. Nothing is
+        // ever invented here; with none, the page simply has no metrics block.
+        metrics: (metadata?.metrics ?? []).filter(metric => metric?.value && metric?.label),
     };
-}
-
-/**
- * @param {string | number | Date | null | undefined} pushedAt
- * @param {number} [now]
- * @returns {boolean} whether the repo was pushed to within the last 180 days
- */
-export function isRecentlyPushed(pushedAt, now = Date.now()) {
-    if (!pushedAt) return false;
-    return now - new Date(pushedAt).getTime() < RECENT_WINDOW_MS;
 }
 
 /**

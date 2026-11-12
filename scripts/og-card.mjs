@@ -1,5 +1,7 @@
 /**
- * The portfolio's Open Graph card as a 1200×630 SVG string.
+ * The portfolio's Open Graph card as a 1200×630 SVG string, in the site's own look: the dark
+ * surface and text colours from styles/core.css, Inter for the name and numbers, JetBrains Mono for
+ * labels, and green as the one accent (the language colours are GitHub's, because they are data).
  *
  * Pure function of the daily GitHub data, shared by scripts/generate-og.mjs, which rasterizes
  * it to og/default.png (the only OG image the site references). Social platforms do not
@@ -30,6 +32,17 @@ const LANG_COLORS = {
 
 const FALLBACK_LANG_COLOR = '#6b7280';
 
+// The dark theme's tokens (--surface, --text, --muted, --border, --accent in styles/core.css)
+const SURFACE = '#0b0d0b';
+const TEXT = '#eef1ee';
+const MUTED = '#a4aba6';
+const BORDER = '#252a25';
+const ACCENT = '#4ade80';
+
+// SVG text takes its family from the page that rasterizes it (scripts/generate-og.mjs): the
+// class picks the monospace face for labels.
+const MONO = 'class="mono" font-family="ui-monospace,monospace"';
+
 /**
  * @param {{ repositories?: Array<{ stargazers_count?: number }>,
  *   contributions?: { total?: number }, languageBytes?: Record<string, number> } | null} ghData
@@ -51,7 +64,7 @@ export function renderPortfolioCard(ghData) {
 
   // Language bar segments (480px wide, starting at x=660).
   const BAR_X = 660;
-  const BAR_Y = 440;
+  const BAR_Y = 404;
   const BAR_W = 480;
   const BAR_H = 16;
   let barX = BAR_X;
@@ -68,12 +81,12 @@ export function renderPortfolioCard(ghData) {
   const langLegend = topLangs
     .map(({ name, pct }, i) => {
       const lx = BAR_X + (i >= 3 ? 240 : 0);
-      const ly = BAR_Y + 36 + (i % 3) * 28;
+      const ly = BAR_Y + 54 + (i % 3) * 30;
       const color = escapeHtml(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR);
       return `
             <circle cx="${lx + 6}" cy="${ly - 4}" r="6" fill="${color}"/>
-            <text x="${lx + 18}" y="${ly}" font-family="system-ui,sans-serif" font-size="20" fill="#9ca3af">
-                ${escapeHtml(name)} <tspan fill="#6b7280">${Math.round(pct * 100)}%</tspan>
+            <text x="${lx + 18}" y="${ly}" font-family="system-ui,sans-serif" font-size="22" fill="${TEXT}">
+                ${escapeHtml(name)} <tspan fill="${MUTED}">${Math.round(pct * 100)}%</tspan>
             </text>`;
     })
     .join('');
@@ -86,34 +99,36 @@ export function renderPortfolioCard(ghData) {
   ];
   const statBlocks = stats
     .map(({ value, label }, i) => {
-      const sx = 80 + i * 175;
+      const sx = 80 + i * 190;
       return `
-            <text x="${sx}" y="370" font-family="system-ui,sans-serif" font-size="44" font-weight="700" fill="#16a34a">${escapeHtml(String(value))}</text>
-            <text x="${sx}" y="398" font-family="system-ui,sans-serif" font-size="20" fill="#6b7280">${escapeHtml(label)}</text>`;
+            <text x="${sx}" y="424" font-family="system-ui,sans-serif" font-size="60" font-weight="700" letter-spacing="-2" fill="${TEXT}">${escapeHtml(String(value))}</text>
+            <text x="${sx}" y="458" ${MONO} font-size="18" fill="${MUTED}">${escapeHtml(label)}</text>`;
     })
     .join('');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="1" cy="1" r="1" fill="#1f2937"/>
+      <circle cx="1" cy="1" r="1" fill="${BORDER}"/>
     </pattern>
   </defs>
   <!-- Background -->
-  <rect width="1200" height="630" fill="#0d1117"/>
+  <rect width="1200" height="630" fill="${SURFACE}"/>
   <!-- Dot grid (right panel) -->
-  <rect x="620" y="0" width="580" height="630" fill="url(#dots)" opacity="0.6"/>
+  <rect x="620" y="0" width="580" height="630" fill="url(#dots)" opacity="0.7"/>
 
-        <rect x="0" y="0" width="8" height="630" fill="#16a34a"/>
+        <!-- The one accent: a short rule above the handle -->
+        <rect x="80" y="72" width="56" height="4" rx="2" fill="${ACCENT}"/>
+        <text x="80" y="118" ${MONO} font-size="22" fill="${ACCENT}" letter-spacing="1">@and3rn3t</text>
 
         <!-- Name -->
-        <text x="80" y="190" font-family="system-ui,sans-serif" font-size="58" font-weight="700" fill="#f9fafb" letter-spacing="-1">Matthew Anderson</text>
+        <text x="80" y="214" font-family="system-ui,sans-serif" font-size="76" font-weight="700" fill="${TEXT}" letter-spacing="-3">Matthew Anderson</text>
 
         <!-- Role -->
-        <text x="80" y="244" font-family="system-ui,sans-serif" font-size="28" fill="#9ca3af">Software Engineer · Deere &amp; Company</text>
+        <text x="80" y="266" font-family="system-ui,sans-serif" font-size="28" fill="${MUTED}">Software Engineer · Deere &amp; Company</text>
 
         <!-- Divider -->
-        <line x1="80" y1="275" x2="560" y2="275" stroke="#1f2937" stroke-width="1.5"/>
+        <line x1="80" y1="316" x2="1120" y2="316" stroke="${BORDER}" stroke-width="2"/>
 
         <!-- Stats -->
         ${statBlocks}
@@ -124,10 +139,10 @@ export function renderPortfolioCard(ghData) {
         <!-- Language legend -->
         ${langLegend}
 
-        <!-- Right watermark -->
-        <text x="660" y="275" font-family="system-ui,sans-serif" font-size="28" font-weight="600" fill="#6b7280" letter-spacing="1">Top languages</text>
+        <!-- Right panel label -->
+        <text x="660" y="380" ${MONO} font-size="18" fill="${MUTED}" letter-spacing="1">Top languages</text>
 
         <!-- Bottom -->
-        <text x="80" y="598" font-family="system-ui,sans-serif" font-size="22" fill="#4b5563">andernet.dev · github.com/and3rn3t</text>
+        <text x="80" y="590" ${MONO} font-size="20" fill="${MUTED}">andernet.dev · github.com/and3rn3t</text>
 </svg>`;
 }

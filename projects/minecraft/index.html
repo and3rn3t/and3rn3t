@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <style>
+      @layer scale, reset, tokens, base, components, sections, utilities;
+      @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+    </style>
+    <title>Self-Hosted Minecraft Server | Matthew Anderson</title>
+    <meta name="description" content="A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code." />
+    <meta name="author" content="Matthew Anderson" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://andernet.dev/projects/minecraft/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+    <meta property="og:url" content="https://andernet.dev/projects/minecraft/" />
+    <meta property="og:title" content="Self-Hosted Minecraft Server | Matthew Anderson" />
+    <meta property="og:description" content="A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code." />
+    <meta property="og:image" content="https://andernet.dev/og/default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Self-Hosted Minecraft Server | Matthew Anderson" />
+    <meta name="twitter:description" content="A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code." />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
+
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <!-- Names a project's image and title for the transition between its card and its page.
+         A classic script in the head: it must listen before the page first renders. -->
+    <script src="/modules/page-transitions.js"></script>
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/styles/core.css" />
+    <link rel="stylesheet" href="/styles/article.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Self-Hosted Minecraft Server",
+  "description": "A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.",
+  "url": "https://andernet.dev/projects/minecraft/",
+  "image": "https://andernet.dev/og/default.png",
+  "codeRepository": "https://github.com/and3rn3t/minecraft",
+  "programmingLanguage": "Python",
+  "keywords": "Shell, JavaScript, HTML, Linux",
+  "author": {
+    "@type": "Person",
+    "name": "Matthew Anderson",
+    "url": "https://andernet.dev",
+    "@id": "https://andernet.dev/#person"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://andernet.dev/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Projects",
+      "item": "https://andernet.dev/#projects"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Self-Hosted Minecraft Server",
+      "item": "https://andernet.dev/projects/minecraft/"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <nav class="site-nav scrolled" aria-label="Main navigation">
+      <div class="wrap site-nav__inner">
+        <a href="/" class="site-nav__logo">@and3rn3t</a>
+        <div class="site-nav__actions">
+          <a class="link site-nav__back" href="/#projects">All projects</a>
+          <button
+            type="button"
+            class="icon-button"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#moon"></use></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main id="main" class="article">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#projects">Projects</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Self-Hosted Minecraft Server</span>
+        </nav>
+
+        <header class="project-head">
+          <p class="eyebrow">DevOps &amp; Infrastructure</p>
+          <h1 class="project-head__title" data-vt="title">Self-Hosted Minecraft Server</h1>
+          <p class="project-head__lede">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
+          <div class="project-head__actions">
+            
+            <a class="button button--primary" href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
+          </div>
+        </header>
+
+        <div class="project-hero" data-vt="media">
+          <img class="shot shot--light" src="/images/projects/minecraft-cover-light.svg" width="1200" height="750" alt="" loading="eager" fetchpriority="high" decoding="async" />
+            <img class="shot shot--dark" src="/images/projects/minecraft-cover-dark.svg" width="1200" height="750" alt="" loading="eager" fetchpriority="high" decoding="async" />
+        </div>
+
+        <div class="project-body">
+          <article class="project-body__main">
+            <section aria-labelledby="overview-heading">
+              <h2 id="overview-heading">Overview</h2>
+              <p class="project-body__overview">The interesting part of this project isn&#39;t Minecraft — it&#39;s the operational layer around it. A single provisioning script takes a fresh Linux host to a fully-configured, plugin-loaded server. Scheduled backups run with rotation policies to protect world data. A lightweight vanilla JavaScript dashboard surfaces real-time player count, server TPS, and JVM resource usage without any framework overhead. Everything is version-controlled: configs, scripts, and plugin manifests. It&#39;s the same infrastructure-as-code mindset I apply to production systems, applied to something I actually use.</p>
+            </section>
+          <section aria-labelledby="highlights-heading">
+            <h2 id="highlights-heading">Highlights</h2>
+            <ul class="highlights">
+              <li>One-command provisioning: fresh host to fully-configured server via shell script</li>
+              <li>Automated backup pipeline with rotation — no manual intervention for world preservation</li>
+              <li>Vanilla JS monitoring dashboard: player count, TPS, and JVM metrics in real time</li>
+              <li>Config and plugin manifests version-controlled in git — fully reproducible</li>
+            </ul>
+          </section>
+          </article>
+          <aside class="project-body__aside" aria-label="Project facts">
+            <dl class="facts">
+              <div class="facts__row"><dt>Category</dt><dd>DevOps &amp; Infrastructure</dd></div>
+              <div class="facts__row"><dt>Status</dt><dd>Active Development</dd></div>
+              <div class="facts__row"><dt>Language</dt><dd>Python</dd></div>
+            </dl>
+            <h2 class="eyebrow">Stack</h2>
+            <ul class="tag-list"><li class="tag">Shell</li><li class="tag">JavaScript</li><li class="tag">HTML</li><li class="tag">Linux</li></ul>
+          </aside>
+        </div>
+
+        <nav class="pager" aria-label="More projects">
+          <a class="pager__link pager__link--prev" href="/projects/and3rn3t/" rel="prev">
+            <span class="eyebrow">Previous project</span>
+            <span class="pager__title">andernet.dev — This Portfolio</span>
+          </a>
+          <a class="pager__link pager__link--next" href="/projects/weather-app/" rel="next">
+            <span class="eyebrow">Next project</span>
+            <span class="pager__title">iOS 26 Weather App</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <p class="site-footer__note">Matthew Anderson &middot; <a class="link" href="/">andernet.dev</a></p>
+        <ul class="site-footer__links">
+          <li><a class="link" href="/#projects">All projects</a></li>
+          <li>
+            <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
+          </li>
+          <li><a class="link" href="/feed.xml">RSS</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module" src="/modules/post-page.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf"}'
+    ></script>
+  </body>
+</html>

@@ -1,129 +1,220 @@
 /**
- * Project cards for index.html, pre-rendered by scripts/generate-site.mjs.
+ * The Selected work section of index.html, pre-rendered by scripts/generate-site.mjs.
  *
- * Only stable facts are baked in (see projectView in modules/utils/projects.js). The live
- * parts are empty slots that modules/projects.js fills in the browser:
- *   [data-live="stars"]        star count
- *   [data-live-stat="pushed"]  "last pushed" stat, hidden until there is a value (always
- *                              present: a repo can show up in the data after the page was built)
- *   [data-pending]             case-study button, enabled once its study is registered
- *   .project-card--recent      "Active" badge for repos pushed to in the last 180 days
- *   [data-status-active]       the status badge that "Active" makes redundant
+ * Three shapes, by how much a project has to show:
+ *   lead card   the first project, if it has a screenshot: large
+ *   work card   the other featured projects: a screenshot or a generated cover, in a grid
+ *   list row    everything else that is starred: name, one line, stack
+ *
+ * Each links to the project's own page (see project-page.mjs), so there is no script involved
+ * in reading a case study. Only stable facts are baked in (see projectView in
+ * modules/utils/projects.js); the cards show no live numbers. Every shape carries data-project
+ * and data-page, and marks its image and title with data-vt so modules/page-transitions.js can
+ * morph them into the page.
  */
 
 import { escapeHtml as esc } from '../../modules/utils/html.js';
 import { icon } from '../../modules/utils/icon.js';
-import { languageColor } from '../../modules/utils/projects.js';
+
+const SHOT_SIZES = {
+  lead: '(min-width: 64rem) 46rem, 100vw',
+  card: '(min-width: 64rem) 24rem, (min-width: 40rem) 50vw, 100vw',
+  hero: '(min-width: 75rem) 70rem, 100vw',
+};
 
 /**
+ * One picture of a project for a colour scheme: its screenshot (AVIF with a WebP fallback) or,
+ * without one, its generated cover. The light and dark pictures are both in the page and CSS
+ * shows one (see .shot in styles/core.css); the hidden one is never fetched because it is lazy
+ * and display: none.
+ *
  * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>} view
- * @param {{ extra?: boolean }} [options] - extra cards start hidden behind "Show more"
+ * @param {'light' | 'dark'} scheme
+ * @param {string} sizes
+ * @param {boolean} [eager] - the page's main image: load it at once instead of lazily
  * @returns {string}
  */
-export function renderProjectCard(view, { extra = false } = {}) {
-  const color = languageColor(view.language);
-  const attributes = [
-    'class="project-card"',
-    `data-project="${esc(view.slug)}"`,
-    color ? `style="--lang-color: ${color}"` : '',
-    extra ? 'data-extra hidden' : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  // data-pending keeps the button's space but hides and disables it: it has no action
-  // without JS, and a click before modules/projects.js registers the study would be lost.
-  const caseStudy = view.hasCaseStudy
-    ? `
-                <button type="button" class="project-case-study-btn" data-case-study="${esc(view.slug)}" data-pending>
-                    ${icon('book-open')}
-                    Read case study
-                </button>`
-    : '';
-
-  const [firstHighlight] = view.highlights;
-  const statusClass = view.status ? view.status.toLowerCase().replaceAll(/\s+/g, '-') : '';
-  const statusBadge = view.status
-    ? `<span class="status-badge ${esc(statusClass)}"${/^active\b/i.test(view.status) ? ' data-status-active' : ''}>${esc(view.status)}</span>`
-    : '';
-
-  const docsOrDemo = view.homepage
-    ? `<a href="${esc(view.homepage)}" target="_blank" rel="noopener noreferrer" class="project-link live">
-                        ${icon('external-link-alt')}
-                        Live Demo
-                    </a>`
-    : `<a href="${esc(view.htmlUrl)}/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-                        ${icon('file-alt')}
-                        Documentation
-                    </a>`;
-
-  return `<div ${attributes}>
-            <div class="project-header">
-                <div class="project-card-badges">
-                    ${view.category ? `<span class="project-category">${esc(view.category)}</span>` : ''}
-                </div>
-                <h3 class="project-title"><a href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer">${esc(view.displayName)}</a></h3>
-                <p class="project-description">${esc(view.description)}</p>
-                ${firstHighlight ? `<p class="project-highlight-lead">→ ${esc(firstHighlight)}</p>` : ''}${caseStudy}
-
-                <div class="project-stats">
-                    <div class="project-stat" title="Stars">
-                        ${icon('star')}
-                        <span data-live="stars">—</span>
-                    </div>
-                    <div class="project-stat" title="Last pushed" data-live-stat="pushed" hidden>
-                        ${icon('code-commit')}
-                        <span data-live="pushed"></span>
-                    </div>
-                </div>
-
-                <div class="project-languages">
-                    <span class="language-tag primary">${esc(view.language)}</span>
-                    ${view.secondaryTags.map(tag => `<span class="language-tag">${esc(tag)}</span>`).join('')}
-                    ${statusBadge}
-                </div>
-            </div>
-
-            <div class="project-links">
-                <a href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    ${icon('github')}
-                    View Code
-                </a>
-                ${docsOrDemo}
-            </div>
-        </div>`;
+function renderPicture(view, scheme, sizes, eager = false) {
+  const loading = eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+  if (!view.screenshot) {
+    // A cover is decoration, not content: it has an empty alt
+    return `<img class="shot shot--${scheme}" src="/images/projects/${esc(view.name)}-cover-${scheme}.svg" width="1200" height="750" alt="" ${loading} decoding="async" />`;
+  }
+  const { name, alt } = view.screenshot;
+  const path = width => `/images/projects/${name}-${scheme}-${width}`;
+  const set = format => `${path(640)}.${format} 640w, ${path(1200)}.${format} 1200w`;
+  return `<picture class="shot shot--${scheme}">
+            <source type="image/avif" srcset="${set('avif')}" sizes="${sizes}" />
+            <img src="${path(1200)}.webp" srcset="${set('webp')}" sizes="${sizes}" width="1200" height="750" alt="${esc(alt)}" ${loading} decoding="async" />
+          </picture>`;
 }
 
 /**
- * The grid's cards and the "Show more" button.
+ * Both themes' pictures, as they appear in a card or on a page.
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>} view
+ * @param {keyof typeof SHOT_SIZES} size
+ * @param {boolean} [eager]
+ * @returns {string}
+ */
+export const renderMedia = (view, size, eager = false) =>
+  `${renderPicture(view, 'light', SHOT_SIZES[size], eager)}
+            ${renderPicture(view, 'dark', SHOT_SIZES[size], eager)}`;
+
+/** Language first, then up to three more, as neutral mono tags. */
+const renderTags = view =>
+  `<ul class="tag-list">${[view.language, ...view.secondaryTags]
+    .map(tag => `<li class="tag">${esc(tag)}</li>`)
+    .join('')}</ul>`;
+
+/**
+ * The project's title as a link: to its page, in the same tab, or, if it has no write-up, out
+ * to its repository.
+ */
+const renderTitleLink = view =>
+  view.pageUrl
+    ? `<a href="${esc(view.pageUrl)}">${esc(view.displayName)}</a>`
+    : `<a href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer">${esc(view.displayName)}</a>`;
+
+/** The attributes every shape carries. */
+const identify = view => `data-project="${esc(view.slug)}" data-page="${esc(view.pageSlug)}"`;
+
+/**
+ * The large card for a project that has a screenshot.
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>} view
+ * @returns {string}
+ */
+export function renderLeadCard(view) {
+  const [firstHighlight] = view.highlights;
+  const caseStudy = view.pageUrl
+    ? `<a class="button button--primary" href="${esc(view.pageUrl)}">Read the case study ${icon('arrow-right')}</a>`
+    : '';
+  const demo = view.homepage
+    ? `<a class="button" href="${esc(view.homepage)}" target="_blank" rel="noopener noreferrer">Live demo ${icon('external-link-alt')}</a>`
+    : '';
+
+  return `<article class="lead-card" ${identify(view)}>
+          <div class="lead-card__media" data-vt="media">
+            ${renderMedia(view, 'lead')}
+          </div>
+          <div class="lead-card__body">
+            ${view.category ? `<p class="eyebrow">${esc(view.category)}</p>` : ''}
+            <h3 class="lead-card__title" data-vt="title">${renderTitleLink(view)}</h3>
+            <p class="lead-card__desc">${esc(view.description)}</p>
+            ${firstHighlight ? `<p class="lead-card__lead">→ ${esc(firstHighlight)}</p>` : ''}
+            ${renderTags(view)}
+            <div class="lead-card__actions">
+              ${caseStudy}
+              ${demo}
+              <a class="link" href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>`;
+}
+
+/**
+ * A grid card: an image, what it is, what it is built with, and where to go next.
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>} view
+ * @returns {string}
+ */
+export function renderWorkCard(view) {
+  const caseStudy = view.pageUrl
+    ? `<a class="link" href="${esc(view.pageUrl)}">Case study</a>`
+    : '';
+  const demo = view.homepage
+    ? `<a class="link" href="${esc(view.homepage)}" target="_blank" rel="noopener noreferrer">Live demo</a>`
+    : '';
+
+  return `<article class="work-card" ${identify(view)}>
+          <div class="work-card__media" data-vt="media">
+            ${renderMedia(view, 'card')}
+          </div>
+          <div class="work-card__body">
+            ${view.category ? `<p class="eyebrow">${esc(view.category)}</p>` : ''}
+            <h3 class="work-card__title" data-vt="title">${renderTitleLink(view)}</h3>
+            <p class="work-card__desc">${esc(view.description)}</p>
+            ${renderTags(view)}
+            <div class="work-card__actions">
+              ${caseStudy}
+              ${demo}
+              <a class="link" href="${esc(view.htmlUrl)}" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </div>
+        </article>`;
+}
+
+/**
+ * A row of the compact list: for projects worth a line, not a card.
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>} view
+ * @returns {string}
+ */
+export function renderListRow(view) {
+  const stack = [view.language, ...view.secondaryTags.slice(0, 2)].map(esc).join(' · ');
+  return `<li class="project-list__row" ${identify(view)}>
+            <h3 class="project-list__name" data-vt="title">${renderTitleLink(view)}</h3>
+            <p class="project-list__desc">${esc(view.description)}</p>
+            <p class="project-list__stack">${stack}</p>
+          </li>`;
+}
+
+/**
+ * Sorts the projects into the three shapes.
  *
- * Featured projects show; the rest wait behind the button. With no featured flags at all
- * (e.g. the curated file is empty) everything shows.
+ * With no featured projects at all (e.g. the curated file is empty) everything is a work card,
+ * so the section is never just a list.
  *
  * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} views
- * @returns {{ cards: string, moreButton: string, extraCount: number }}
+ * @returns {{ lead: object | null, grid: object[], rest: object[] }}
+ */
+export function splitProjects(views) {
+  const lead = views[0]?.screenshot ? views[0] : null;
+  const hasFeatured = views.some(view => view.featured);
+
+  const grid = views.filter(view => view !== lead && (view.featured || !hasFeatured));
+  const rest = views.filter(view => view !== lead && !grid.includes(view));
+  return { lead, grid, rest };
+}
+
+/**
+ * The cover images that must exist: one per theme for every project that is shown as a card, or
+ * has a page of its own, and has no screenshot. The generator writes exactly these, so nothing
+ * can point at a cover that wasn't made.
+ *
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} cards - the
+ *   projects shown in the grid
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} pages - the
+ *   projects that have a page
+ * @returns {{ file: string, name: string, scheme: 'light' | 'dark' }[]}
+ */
+export function coverFiles(cards, pages = []) {
+  const needing = new Map();
+  for (const view of [...cards, ...pages]) {
+    if (!view.screenshot) needing.set(view.name, view);
+  }
+  return [...needing.values()].flatMap(view =>
+    ['light', 'dark'].map(scheme => ({
+      file: `${view.name}-cover-${scheme}.svg`,
+      name: view.name,
+      scheme,
+    }))
+  );
+}
+
+/**
+ * @param {ReturnType<typeof import('../../modules/utils/projects.js').projectView>[]} views
+ * @returns {{ lead: string, cards: string, more: string, counts: { lead: number, cards: number, more: number } }}
  */
 export function renderProjects(views) {
-  const hideRest = views.some(view => view.featured);
-  const extraCount = hideRest ? views.filter(view => !view.featured).length : 0;
+  const { lead, grid, rest } = splitProjects(views);
 
-  const cards = views
-    .map(view => renderProjectCard(view, { extra: hideRest && !view.featured }))
-    .join('\n        ');
-
-  const label =
-    extraCount > 0
-      ? `Show ${extraCount} more project${extraCount === 1 ? '' : 's'}`
-      : 'Show more projects';
-  const moreButton = `<button
-              type="button"
-              class="btn btn-outline projects-more-btn"
-              id="projects-more-btn"
-              aria-expanded="false"
-              aria-controls="projects-grid"${extraCount > 0 ? '' : '\n              hidden'}
-            >
-              ${label}
-            </button>`;
-
-  return { cards, moreButton, extraCount };
+  return {
+    lead: lead ? renderLeadCard(lead) : '',
+    cards: grid.map(renderWorkCard).join('\n        '),
+    more: rest.length
+      ? `<p class="eyebrow">More</p>
+        <ul class="project-list">
+          ${rest.map(renderListRow).join('\n          ')}
+        </ul>`
+      : '',
+    counts: { lead: lead ? 1 : 0, cards: grid.length, more: rest.length },
+  };
 }

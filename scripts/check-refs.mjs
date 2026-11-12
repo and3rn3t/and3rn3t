@@ -49,6 +49,7 @@ function walk(dir, ext, out = []) {
 const pages = [
   ...readdirSync(ROOT).filter(name => name.endsWith('.html')), // every root page
   ...walk('posts', '.html'),
+  ...walk('projects', '.html'),
 ];
 for (const page of pages) {
   for (const [, url] of read(page).matchAll(/\s(?:src|href)="([^"]+)"/g)) addRef(url, page);
@@ -75,9 +76,9 @@ for (const url of manifestUrls.filter(Boolean)) addRef(url, 'manifest.json');
 const precache = read('sw.js').match(/PRECACHE_ASSETS = \[([\s\S]*?)\]/)?.[1] ?? '';
 for (const [, url] of precache.matchAll(/'([^']+)'/g)) addRef(url, 'sw.js');
 
-// CSS url()s.
-for (const [, url] of read('styles.css').matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
-  addRef(url, 'styles.css');
+// CSS url()s (resolved from the stylesheet's own folder).
+for (const file of walk('styles', '.css')) {
+  for (const [, url] of read(file).matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) addRef(url, file);
 }
 
 // JS: static imports, dynamic imports and literal fetch() paths in the browser code.

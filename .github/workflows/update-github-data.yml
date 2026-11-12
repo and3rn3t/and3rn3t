@@ -355,7 +355,7 @@ jobs:
               contributions: .contributions.total
             }' github-data.json
             cat scripts/generate-og.mjs scripts/og-card.mjs \
-                modules/utils/html.js fonts/inter-variable.woff2
+                modules/utils/html.js fonts/inter-variable.woff2 fonts/jetbrains-mono-500.woff2
           } | sha256sum | cut -d' ' -f1)
           if [ "$HASH" = "$(cat .github/og-inputs.sha256 2>/dev/null)" ]; then
             echo "OG inputs unchanged"
@@ -407,7 +407,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add github-data.json README.md og/ .github/og-inputs.sha256 index.html
+          # Everything generate-site.mjs writes from this data, matching the generated-files check
+          # in quality.yml (tests/unit/generated-files.test.js keeps the two in step)
+          git add github-data.json README.md og/ .github/og-inputs.sha256 \
+            posts projects feed.xml sitemap.xml index.html 404.html images/projects
           if git diff --cached --quiet; then
             echo "No changes to GitHub data"
             exit 0

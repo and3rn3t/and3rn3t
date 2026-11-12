@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <style>
+      @layer scale, reset, tokens, base, components, sections, utilities;
+      @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+    </style>
+    <title>Guess — Transparent Akinator | Matthew Anderson</title>
+    <meta name="description" content="A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible." />
+    <meta name="author" content="Matthew Anderson" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://andernet.dev/projects/guess/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+    <meta property="og:url" content="https://andernet.dev/projects/guess/" />
+    <meta property="og:title" content="Guess — Transparent Akinator | Matthew Anderson" />
+    <meta property="og:description" content="A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible." />
+    <meta property="og:image" content="https://andernet.dev/images/projects/guess-og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guess — Transparent Akinator | Matthew Anderson" />
+    <meta name="twitter:description" content="A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible." />
+    <meta name="twitter:image" content="https://andernet.dev/images/projects/guess-og.jpg" />
+
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <!-- Names a project's image and title for the transition between its card and its page.
+         A classic script in the head: it must listen before the page first renders. -->
+    <script src="/modules/page-transitions.js"></script>
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/styles/core.css" />
+    <link rel="stylesheet" href="/styles/article.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Guess — Transparent Akinator",
+  "description": "A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.",
+  "url": "https://andernet.dev/projects/guess/",
+  "image": "https://andernet.dev/images/projects/guess-og.jpg",
+  "codeRepository": "https://github.com/and3rn3t/guess",
+  "programmingLanguage": "TypeScript",
+  "keywords": "TypeScript, Algorithms, Decision Trees",
+  "author": {
+    "@type": "Person",
+    "name": "Matthew Anderson",
+    "url": "https://andernet.dev",
+    "@id": "https://andernet.dev/#person"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://andernet.dev/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Projects",
+      "item": "https://andernet.dev/#projects"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Guess — Transparent Akinator",
+      "item": "https://andernet.dev/projects/guess/"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <nav class="site-nav scrolled" aria-label="Main navigation">
+      <div class="wrap site-nav__inner">
+        <a href="/" class="site-nav__logo">@and3rn3t</a>
+        <div class="site-nav__actions">
+          <a class="link site-nav__back" href="/#projects">All projects</a>
+          <button
+            type="button"
+            class="icon-button"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#moon"></use></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main id="main" class="article">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#projects">Projects</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Guess — Transparent Akinator</span>
+        </nav>
+
+        <header class="project-head">
+          <p class="eyebrow">Tools &amp; Automation</p>
+          <h1 class="project-head__title" data-vt="title">Guess — Transparent Akinator</h1>
+          <p class="project-head__lede">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
+          <div class="project-head__actions">
+            <a class="button button--primary" href="https://andernator.com" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
+            <a class="button" href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
+          </div>
+        </header>
+
+        <div class="project-hero" data-vt="media">
+          <picture class="shot shot--light">
+            <source type="image/avif" srcset="/images/projects/guess-light-640.avif 640w, /images/projects/guess-light-1200.avif 1200w" sizes="(min-width: 75rem) 70rem, 100vw" />
+            <img src="/images/projects/guess-light-1200.webp" srcset="/images/projects/guess-light-640.webp 640w, /images/projects/guess-light-1200.webp 1200w" sizes="(min-width: 75rem) 70rem, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="eager" fetchpriority="high" decoding="async" />
+          </picture>
+            <picture class="shot shot--dark">
+            <source type="image/avif" srcset="/images/projects/guess-dark-640.avif 640w, /images/projects/guess-dark-1200.avif 1200w" sizes="(min-width: 75rem) 70rem, 100vw" />
+            <img src="/images/projects/guess-dark-1200.webp" srcset="/images/projects/guess-dark-640.webp 640w, /images/projects/guess-dark-1200.webp 1200w" sizes="(min-width: 75rem) 70rem, 100vw" width="1200" height="750" alt="The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge." loading="eager" fetchpriority="high" decoding="async" />
+          </picture>
+        </div>
+
+        <div class="project-body">
+          <article class="project-body__main">
+            <section aria-labelledby="overview-heading">
+              <h2 id="overview-heading">Overview</h2>
+              <p class="project-body__overview">Guess is a TypeScript implementation of a 20-questions-style guessing game, with one key difference from Akinator: the algorithm is fully transparent. As you answer each question, the UI shows which candidates remain, the current confidence score, and why the next question was chosen — exposing the entropy-based selection logic in real time. The goal was to make constraint satisfaction feel intuitive rather than magical. It&#39;s live at andernator.com, works in any browser, and the decision tree logic is written from scratch with no external AI APIs.</p>
+            </section>
+          <section aria-labelledby="highlights-heading">
+            <h2 id="highlights-heading">Highlights</h2>
+            <ul class="highlights">
+              <li>Live at andernator.com — playable in any browser, no install required</li>
+              <li>Decision tree and confidence score rendered in real time as you answer</li>
+              <li>Entropy-based question selection written from scratch — no external AI APIs</li>
+              <li>Makes constraint-satisfaction search intuitive by showing the algorithm&#39;s reasoning</li>
+            </ul>
+          </section>
+          </article>
+          <aside class="project-body__aside" aria-label="Project facts">
+            <dl class="facts">
+              <div class="facts__row"><dt>Category</dt><dd>Tools &amp; Automation</dd></div>
+              <div class="facts__row"><dt>Status</dt><dd>Active Development</dd></div>
+              <div class="facts__row"><dt>Language</dt><dd>TypeScript</dd></div>
+            </dl>
+            <h2 class="eyebrow">Stack</h2>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">Algorithms</li><li class="tag">Decision Trees</li></ul>
+          </aside>
+        </div>
+
+        <nav class="pager" aria-label="More projects">
+          <a class="pager__link pager__link--prev" href="/projects/homehub/" rel="prev">
+            <span class="eyebrow">Previous project</span>
+            <span class="pager__title">Home Automation Hub</span>
+          </a>
+          <a class="pager__link pager__link--next" href="/projects/and3rn3t/" rel="next">
+            <span class="eyebrow">Next project</span>
+            <span class="pager__title">andernet.dev — This Portfolio</span>
+          </a>
+        </nav>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <p class="site-footer__note">Matthew Anderson &middot; <a class="link" href="/">andernet.dev</a></p>
+        <ul class="site-footer__links">
+          <li><a class="link" href="/#projects">All projects</a></li>
+          <li>
+            <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
+          </li>
+          <li><a class="link" href="/feed.xml">RSS</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module" src="/modules/post-page.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf"}'
+    ></script>
+  </body>
+</html>

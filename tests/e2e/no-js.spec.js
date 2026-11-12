@@ -11,24 +11,46 @@ test.describe('JavaScript disabled', () => {
         await page.goto('/');
     });
 
-    test('projects, including those behind "Show more", are visible', async ({ page }) => {
-        const cards = page.locator('#projects-grid .project-card');
-        expect(await cards.count()).toBeGreaterThan(0);
-        for (const card of await cards.all()) await expect(card).toBeVisible();
-
-        // The button can't do anything without JS, so it is not offered
-        await expect(page.locator('#projects-more-btn')).toBeHidden();
+    test('every project is visible, in all three shapes', async ({ page }) => {
+        for (const selector of [
+            '#projects .lead-card',
+            '#projects-grid .work-card',
+            '#projects-more .project-list__row',
+        ]) {
+            const items = page.locator(selector);
+            expect(await items.count(), selector).toBeGreaterThan(0);
+            for (const item of await items.all()) await expect(item).toBeVisible();
+        }
     });
 
     test('experience and education are visible', async ({ page }) => {
-        await expect(page.locator('#experience-timeline .timeline-item').first()).toBeVisible();
-        await expect(page.locator('#education-timeline .timeline-item').first()).toBeVisible();
+        await expect(page.locator('#experience-timeline .job').first()).toBeVisible();
+        await expect(page.locator('#education-timeline .edu-row').first()).toBeVisible();
     });
 
-    test('case-study buttons are not offered, since they need JS to open', async ({ page }) => {
-        const buttons = page.locator('#projects-grid [data-case-study]');
-        expect(await buttons.count()).toBeGreaterThan(0);
-        for (const button of await buttons.all()) await expect(button).toBeHidden();
+    test('a job folds open and shut without any script (it is a native <details>)', async ({
+        page,
+    }) => {
+        const past = page
+            .locator('#experience-timeline .job:not(.job--current) .job__more')
+            .first();
+        await expect(past).not.toHaveAttribute('open');
+        await past.locator('summary').click();
+        await expect(past).toHaveAttribute('open');
+        await expect(past.locator('.job__highlights')).toBeVisible();
+    });
+
+    test('the live GitHub band is hidden, since it has nothing to show', async ({ page }) => {
+        await expect(page.locator('#github-band')).toBeHidden();
+    });
+
+    test('every project with a write-up links to its page, which needs no script', async ({
+        page,
+    }) => {
+        const links = page.locator('#projects [data-project] a[href^="/projects/"]');
+        expect(await links.count()).toBeGreaterThan(3);
+        await expect(links.first()).toBeVisible();
+        await expect(page.locator('#projects button')).toHaveCount(0);
     });
 
     test('writing links to the post pages', async ({ page }) => {
@@ -57,37 +79,33 @@ test.describe('JavaScript disabled', () => {
     });
 });
 
-test('the pre-rendered cards come alive once JavaScript runs', async ({ page }) => {
+test('a project card reaches its page with a click', async ({ page }) => {
     await page.goto('/');
-    const health = page.locator('#projects-grid [data-project="health"]');
-    await expect(health).toBeVisible();
-
-    // Stars start as a placeholder and are filled in from the cached GitHub data
-    await expect(health.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
-    await expect(health.locator('[data-live-stat="pushed"]')).toBeVisible();
-    await expect(health.locator('[data-live="pushed"]')).toHaveText(/ago$/);
+    const link = page
+        .locator('#projects [data-project="health"] a[href="/projects/health/"]')
+        .first();
+    await expect(link).toBeVisible();
+    await link.click();
+    await page.waitForURL('**/projects/health/');
+    await expect(page.locator('h1')).toContainText('Health');
 });
 
-test('a case-study button is enabled only once its study is registered', async ({ page }) => {
-    await page.goto('/');
-    const button = page.locator('#projects-grid [data-project="health"] [data-case-study]');
-    await expect(button).toBeVisible();
-    await expect(button).not.toHaveAttribute('data-pending');
-    await button.click();
-    await expect(page.locator('#project-modal')).toHaveClass(/visible/);
-});
-
-test('cards stay live when newer data no longer stars their repo', async ({ page }) => {
+test('a project stays linked when newer data no longer stars its repo', async ({ page }) => {
     // The HTML and the JSON are cached separately, so an older page can meet newer data.
     await page.route('**/github-data.json', async route => {
         const response = await route.fetch();
         const data = await response.json();
-        data.selfStarredRepoNames = data.selfStarredRepoNames.filter(name => name !== 'fastlane');
+        data.selfStarredRepoNames = data.selfStarredRepoNames.filter(
+            name => name !== 'apple-music-dj'
+        );
         await route.fulfill({ response, json: data });
     });
     await page.goto('/');
 
-    const card = page.locator('#projects-grid [data-project="fastlane"]');
-    await expect(card.locator('[data-live="stars"]')).toHaveText(/^\d+$/);
-    await expect(card.locator('[data-live="pushed"]')).toHaveText(/ago$/);
+    const link = page
+        .locator('#projects [data-project="apple-music-dj"] a[href^="/projects/"]')
+        .first();
+    await expect(link).toBeVisible();
+    await link.click();
+    await page.waitForURL('**/projects/apple-music-dj/');
 });

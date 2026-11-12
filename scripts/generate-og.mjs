@@ -27,8 +27,9 @@ const HEIGHT = 630;
 
 const ghData = JSON.parse(readFileSync(join(ROOT, 'github-data.json'), 'utf8'));
 const interWoff2 = readFileSync(join(ROOT, 'fonts', 'inter-variable.woff2')).toString('base64');
+const monoWoff2 = readFileSync(join(ROOT, 'fonts', 'jetbrains-mono-500.woff2')).toString('base64');
 
-/** Wrap a card SVG in a page that swaps system-ui for the site's Inter font. */
+/** Wrap a card SVG in a page that swaps in the site's fonts: Inter, and JetBrains Mono for .mono. */
 function pageHtml(svg) {
   return `<!doctype html><meta charset="utf-8"><style>
       @font-face {
@@ -36,8 +37,14 @@ function pageHtml(svg) {
         src: url(data:font/woff2;base64,${interWoff2}) format('woff2');
         font-weight: 100 900;
       }
+      @font-face {
+        font-family: 'Mono Card';
+        src: url(data:font/woff2;base64,${monoWoff2}) format('woff2');
+        font-weight: 500;
+      }
       html, body { margin: 0; padding: 0; }
       svg text { font-family: 'Inter Card', system-ui, sans-serif; }
+      svg text.mono { font-family: 'Mono Card', ui-monospace, monospace; font-weight: 500; }
     </style>${svg}`;
 }
 
