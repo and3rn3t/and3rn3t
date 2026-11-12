@@ -1,6 +1,9 @@
 /**
  * Cloudflare Worker — and3rn3t portfolio backend
  *
+ * Also: /views and /guestbook (engagement.js), /mcp (the MCP server, mcp.js) and the
+ * discovery documents under /.well-known/ and /api/openapi.json (discovery.js).
+ *
  * GET /activity
  *   Returns the most recent meaningful GitHub activity as a small JSON object.
  *   Results are cached at the CF edge for 5 minutes so the GitHub API is never
@@ -25,23 +28,25 @@
  */
 
 import { pickEvent, buildActivity } from '../modules/utils/activity.js';
+import { discoveryResponse } from './discovery.js';
 import {
     handleViewsRequest,
     handleGuestbookRequest,
     jsonResponse,
     corsHeaders,
 } from './engagement.js';
+import { handleMcp } from './mcp.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
 const NEGATIVE_TTL_SECONDS = 60; // remember a failed lookup briefly so GitHub isn't hammered
 
 export default {
-    async fetch(request, env) {
+    async fetch(request, env, ctx) {
         // Any unexpected failure becomes a JSON 500 that still carries CORS headers; a bare
         // runtime 500 has none, and the browser then reports a misleading CORS error.
         try {
-            return await route(request, env);
+            return await route(request, env, ctx);
         } catch (err) {
             console.error('[worker] unhandled error:', err?.stack ?? err);
             return jsonResponse({ error: 'internal' }, request, 500);
@@ -59,9 +64,16 @@ export function routePath(pathname) {
     return pathname.startsWith('/api/') ? pathname.slice('/api'.length) : pathname;
 }
 
-async function route(request, env) {
+async function route(request, env, ctx) {
     const url = new URL(request.url);
     const path = routePath(url.pathname);
+
+    // The documents agents use to find the site's API and MCP server
+    const discovery = await discoveryResponse(url.pathname, request.method);
+    if (discovery) return discovery;
+
+    // The MCP server. Only /mcp: the zone route is andernet.dev/mcp, not under /api.
+    if (url.pathname === '/mcp') return serveMcp(request, env, ctx);
 
     // Health check
     if (path === '/health') {
@@ -91,16 +103,28 @@ async function route(request, env) {
         return new Response('Method not allowed', { status: 405 });
     }
 
+    const result = await loadActivity(env);
+    if (!result.ok) return jsonResponse({ error: result.error }, request, result.status);
+    return jsonResponse({ ...result.activity, cached: result.cached }, request, 200);
+}
+
+/**
+ * The latest meaningful GitHub activity: from the edge cache when it has it, else from GitHub.
+ * Shared by GET /activity and the MCP tool get_recent_activity.
+ * @param {object} env
+ * @returns {Promise<{ ok: true, activity: object, cached: boolean } | { ok: false, error: string, status: number }>}
+ */
+export async function loadActivity(env) {
     // Try the CF cache first.
     const cache = caches.default;
-    const cacheKey = new Request(`https://cache.internal/activity/${GITHUB_USERNAME}`, request);
+    const cacheKey = new Request(`https://cache.internal/activity/${GITHUB_USERNAME}`);
     const cached = await cache.match(cacheKey);
     if (cached) {
         const data = await cached.json();
         if (data.__negative) {
-            return jsonResponse({ error: data.__negative.error }, request, data.__negative.status);
+            return { ok: false, error: data.__negative.error, status: data.__negative.status };
         }
-        return jsonResponse({ ...data, cached: true }, request, 200);
+        return { ok: true, activity: data, cached: true };
     }
 
     // Fetch from GitHub.
@@ -132,13 +156,13 @@ async function route(request, env) {
         // The detail stays in the logs; clients only get a generic error.
         console.warn('[activity] GitHub events request failed:', err.message);
         await cacheFailure(cache, cacheKey, 'upstream_error', 502);
-        return jsonResponse({ error: 'upstream_error' }, request, 502);
+        return { ok: false, error: 'upstream_error', status: 502 };
     }
 
     const event = pickEvent(events);
     if (!event) {
         await cacheFailure(cache, cacheKey, 'no_activity', 404);
-        return jsonResponse({ error: 'no_activity' }, request, 404);
+        return { ok: false, error: 'no_activity', status: 404 };
     }
     await hydrateEvent(event, ghHeaders);
     const activity = buildActivity(event, event.repo?.name ?? '');
@@ -153,7 +177,7 @@ async function route(request, env) {
     });
     await cache.put(cacheKey, responseToCache.clone());
 
-    return jsonResponse({ ...activity, cached: false }, request, 200);
+    return { ok: true, activity, cached: false };
 }
 
 /**
@@ -212,4 +236,23 @@ export async function hydrateEvent(event, headers) {
         // Best effort — keep the generic fallback text, but leave a trace.
         console.warn(`[activity] hydration threw (${repo}):`, err?.message ?? err);
     }
+}
+
+/**
+ * MCP requests, limited per client address first: the tools fetch site data and GitHub, so an
+ * unthrottled endpoint would be a free way to make this Worker do work. The limiter is the
+ * Workers Rate Limiting binding (approximate and per location, which is enough here); without
+ * the binding (local dev, tests) requests pass.
+ */
+async function serveMcp(request, env, ctx) {
+    if (env.MCP_LIMITER) {
+        const key = `mcp:${request.headers.get('CF-Connecting-IP') ?? 'unknown'}`;
+        const { success } = await env.MCP_LIMITER.limit({ key });
+        if (!success) {
+            const limited = jsonResponse({ error: 'rate_limited' }, request, 429);
+            limited.headers.set('Retry-After', '60');
+            return limited;
+        }
+    }
+    return handleMcp(request, env, ctx, { getActivity: () => loadActivity(env) });
 }

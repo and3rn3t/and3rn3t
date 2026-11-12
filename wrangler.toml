@@ -9,10 +9,35 @@ compatibility_date = "2026-10-01"
 workers_dev = true
 routes = [
   { pattern = "andernet.dev/api/*", zone_name = "andernet.dev" },
+  # The MCP server, and the documents agents use to find it and the API. Each is an exact path
+  # or a narrow prefix, so the rest of /.well-known/ (security.txt, which Cloudflare manages)
+  # still goes where it did.
+  { pattern = "andernet.dev/mcp", zone_name = "andernet.dev" },
+  { pattern = "andernet.dev/.well-known/api-catalog", zone_name = "andernet.dev" },
+  { pattern = "andernet.dev/.well-known/ai-catalog.json", zone_name = "andernet.dev" },
+  { pattern = "andernet.dev/.well-known/mcp/*", zone_name = "andernet.dev" },
+  { pattern = "andernet.dev/.well-known/agent-skills/*", zone_name = "andernet.dev" },
 ]
 
 [observability]
 enabled = true
+
+# Workers Rate Limiting (approximate, counted per Cloudflare location). The namespace ids are
+# arbitrary integers that only have to be unique on the account; bindings that share one
+# share counters.
+[[ratelimits]]
+name = "MCP_LIMITER"
+namespace_id = "11301"
+  [ratelimits.simple]
+  limit = 60
+  period = 60
+
+[[ratelimits]]
+name = "GUESTBOOK_LIMITER"
+namespace_id = "11302"
+  [ratelimits.simple]
+  limit = 10
+  period = 60
 
 # KV namespaces — create with:
 #   wrangler kv namespace create VIEWS_KV
