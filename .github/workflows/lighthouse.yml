@@ -19,3 +19,10 @@ jobs:
     with:
       url: ${{ github.event.inputs.url || 'https://andernet.dev' }}
       config-path: .lighthouserc.cjs
+
+  # The phone: Lighthouse's default mobile emulation, which is the harder test
+  lighthouse-mobile:
+    uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
+    with:
+      url: ${{ github.event.inputs.url || 'https://andernet.dev' }}
+      config-path: .lighthouserc.mobile.cjs

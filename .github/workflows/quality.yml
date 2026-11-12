@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    # `redesign` is the integration branch for the Phase 10 redesign (ROADMAP.md)
-    branches: [main, redesign]
+    branches: [main]
 
 permissions:
   contents: read
