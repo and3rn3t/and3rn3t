@@ -33,10 +33,29 @@ describe('parseArgs', () => {
         expect(parseArgs(['--apply', '--only', 'tls'])).toEqual({ apply: true, only: ['tls'] });
     });
 
-    // A typo must not quietly become "every group"
-    it.each([[['--only', 'tsl']], [['--only']], [['--only', '']]])('rejects %j', argv => {
-        expect(() => parseArgs(argv)).toThrow(/--only takes group names/);
+    it('takes --only=tls as well as --only tls, and a comma-separated list', () => {
+        expect(parseArgs(['--only=tls'])).toEqual({ apply: false, only: ['tls'] });
+        expect(parseArgs(['--apply', '--only=tls,ai-crawlers'])).toEqual({
+            apply: true,
+            only: ['tls', 'ai-crawlers'],
+        });
     });
+
+    // Falling back to "every group" on a typo would write live settings under --apply
+    it.each([[['--ony', 'tls']], [['--apply', '--ony=tls']], [['tls']], [['--apply', '--aply']]])(
+        'rejects the unrecognised argument in %j',
+        argv => {
+            expect(() => parseArgs(argv)).toThrow(/Unknown argument/);
+        }
+    );
+
+    // A typo must not quietly become "every group"
+    it.each([[['--only', 'tsl']], [['--only=tsl']], [['--only']], [['--only=']], [['--only', '']]])(
+        'rejects %j',
+        argv => {
+            expect(() => parseArgs(argv)).toThrow(/--only takes group names/);
+        }
+    );
 });
 
 describe('diffValues', () => {

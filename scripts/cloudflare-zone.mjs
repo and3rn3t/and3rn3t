@@ -80,15 +80,27 @@ export function parseEnv(text) {
  * @returns {{ apply: boolean, only: string[] }}
  */
 export function parseArgs(argv) {
-  const at = argv.indexOf('--only');
-  const only = at === -1 ? Object.keys(GROUPS) : (argv[at + 1] ?? '').split(',').filter(Boolean);
-  const unknown = only.filter(name => !GROUPS[name]);
-  if (unknown.length || !only.length) {
-    throw new Error(
-      `--only takes group names (${Object.keys(GROUPS).join(', ')}); got "${argv[at + 1] ?? ''}"`
-    );
+  const groups = Object.keys(GROUPS);
+  let apply = false;
+  let only = null;
+  for (let at = 0; at < argv.length; at++) {
+    const arg = argv[at];
+    if (arg === '--apply') {
+      apply = true;
+    } else if (arg === '--only' || arg.startsWith('--only=')) {
+      // Both "--only tls" and "--only=tls"
+      const value = arg === '--only' ? (argv[++at] ?? '') : arg.slice('--only='.length);
+      only = value.split(',').filter(Boolean);
+      const unknown = only.filter(name => !GROUPS[name]);
+      if (unknown.length || !only.length) {
+        throw new Error(`--only takes group names (${groups.join(', ')}); got "${value}"`);
+      }
+    } else {
+      // A typo must not fall back to "every group": with --apply that writes live settings
+      throw new Error(`Unknown argument "${arg}". Use --apply and --only <${groups.join('|')}>`);
+    }
   }
-  return { apply: argv.includes('--apply'), only };
+  return { apply, only: only ?? groups };
 }
 
 /**
