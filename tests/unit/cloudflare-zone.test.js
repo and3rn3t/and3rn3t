@@ -5,6 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import {
     GROUPS,
+    KINDS,
     diffValues,
     parseArgs,
     parseEnv,
@@ -102,7 +103,7 @@ describe('the desired zone', () => {
     it('every group says why, and uses a kind the script knows', () => {
         for (const group of Object.values(GROUPS)) {
             expect(group.why).toMatch(/\w/);
-            expect(['settings', 'bot_management']).toContain(group.kind);
+            expect(Object.keys(KINDS)).toContain(group.kind);
         }
     });
 });
