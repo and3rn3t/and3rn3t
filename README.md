@@ -1,36 +1,45 @@
-👋 Hi, I'm @and3rn3t (Matthew Anderson)
-💼 Software Engineer at Deere & Company
-👀 I'm interested in technology, home automation and general gadgetry.
-🛠️ I build across the stack — web apps (TypeScript/React), iOS apps (Swift), Python tooling, and Cloudflare Workers
+# Hi, I'm Matt 👋
 
----
+[![Quality](https://github.com/and3rn3t/and3rn3t/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/quality.yml)
+[![Deploy](https://github.com/and3rn3t/and3rn3t/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/pages.yml)
+[![Lighthouse](https://github.com/and3rn3t/and3rn3t/actions/workflows/lighthouse.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/lighthouse.yml)
+[![CodeQL](https://github.com/and3rn3t/and3rn3t/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/codeql.yml)
+[![MIT license](https://img.shields.io/github/license/and3rn3t/and3rn3t)](LICENSE)
 
-## 🎯 Featured Portfolio Website
+I'm Matthew Anderson (@and3rn3t), a software engineer at Deere & Company. On my own time I build health tech, home automation and a lot of small tools, mostly in TypeScript, Swift and Python.
 
-Check out my **portfolio**: featured projects with in-depth case studies, technical writing, and a live look at what I'm working on:
+**[andernet.dev](https://andernet.dev)** is my portfolio. Each project has its own write-up, there are a few posts on how things are built, and the GitHub activity on the page is live.
 
-### 🔗 **[View My Portfolio →](https://andernet.dev)**
+[![Preview of andernet.dev](og/default.png)](https://andernet.dev)
 
-**Features:**
+## What's in this repo
 
-- 🌟 Featured projects with in-depth case studies
-- 📝 Technical writing on how they're built
-- 📊 Live GitHub activity and contribution heatmap
-- 🎨 Light/dark theme that follows your system
-- 📱 Fully responsive design
-- 🔍 SEO optimized for better discoverability
-- ⚡ Fast, modern, and accessible
+This repo is both my GitHub profile and the source of that site.
 
-**Under the hood:** hand-rolled vanilla-JS ES modules (no framework), a WebAssembly particle
-simulation (AssemblyScript) powering the hero, a single design-token-driven stylesheet, and a
-Cloudflare Worker serving the live activity feed, view counts, and the guestbook. Installable as a PWA
-with full offline support.
+- **No framework.** Plain ES modules, served as-is by GitHub Pages. There's no build step.
+- **A WebAssembly hero.** The particle background is written in AssemblyScript and compiled to WebAssembly.
+- **A small Cloudflare Worker** handles the parts a static site can't: view counts, the guestbook and the recent-activity feed.
+- **Pre-rendered pages.** The project and post pages are generated from JSON files, so they read fine without JavaScript.
+- **Light and dark themes** that follow your system, and it works offline as a PWA.
+- **Readable by machines too.** There's an [llms.txt](https://andernet.dev/llms.txt), and every page comes back as Markdown if you ask for it with `Accept: text/markdown`.
 
----
+## Run it locally
 
-## 🚀 Featured Projects
+You'll need Node 24.15 or newer (`.nvmrc` pins 24.22.2) and [pnpm](https://pnpm.io) 11.8 or newer. The repo enforces both with `engine-strict`, so an older Node makes `pnpm install` fail.
 
-_Auto-updated daily from live repo data — no more stale links or descriptions._
+```sh
+pnpm install
+pnpm dev          # local dev server at http://localhost:3000
+pnpm validate     # lint, formatting, unit tests and link checks
+pnpm test         # unit tests plus the browser tests
+pnpm worker:dev   # run the Cloudflare Worker locally
+```
+
+If you change a project, post or job, edit the JSON data files and run `pnpm generate:site`. The pages are generated, so don't edit the HTML by hand. [AGENTS.md](AGENTS.md) has the full set of conventions and [ROADMAP.md](ROADMAP.md) has what's planned.
+
+## Featured projects
+
+A workflow refreshes this list from my repos every day. The full write-ups are on the [portfolio](https://andernet.dev/#projects).
 
 <!-- FEATURED-PROJECTS:START -->
 
@@ -82,85 +91,16 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:END -->
 
-[**→ View All Projects**](https://andernet.dev/#projects)
+## Get in touch
 
----
+- Email: [and3rn3t@icloud.com](mailto:and3rn3t@icloud.com)
+- LinkedIn: [linkedin.com/in/and3rn3t](https://linkedin.com/in/and3rn3t)
+- GitHub: you're already here
 
-<div align="center">
-
-![Profile Views](https://komarev.com/ghpvc/?username=and3rn3t&style=for-the-badge&color=blueviolet)
-
-</div>
+The code is [MIT licensed](LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to suggest a change, and [SECURITY.md](SECURITY.md) to report a vulnerability.
 
 <div align="center">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=and3rn3t&show_icons=true&theme=radical&hide_border=true&count_private=true)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=and3rn3t&layout=compact&theme=radical&hide_border=true)
-
-</div>
-
-## 🔥 Contribution Streak
-
-<div align="center">
-
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=and3rn3t&theme=radical&hide_border=true)
-
-</div>
-
-## 📈 Contribution Activity
-
-<div align="center">
-
-![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=and3rn3t&theme=react-dark&hide_border=true&area=true)
-
-</div>
-
-## 🏆 GitHub Trophies
-
-<div align="center">
-
-![Trophies](https://github-profile-trophy.vercel.app/?username=and3rn3t&theme=radical&no-frame=true&no-bg=false&margin-w=4&column=7)
-
-</div>
-
-## 💻 Tech Stack
-
-### Frontend Development
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-
-### Backend Development
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-
-### Tools & Technologies
-
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-
-## 🌐 Connect With Me
-
-<div align="center">
-
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/and3rn3t)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/and3rn3t)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:and3rn3t@icloud.com)
-
-</div>
-
----
-
-<div align="center">
-
-### 💡 "Code is like humor. When you have to explain it, it's bad." – Cory House
-
-![Snake animation](https://github.com/and3rn3t/and3rn3t/blob/output/github-contribution-grid-snake.svg)
+![A snake eating my GitHub contributions](https://raw.githubusercontent.com/and3rn3t/and3rn3t/output/github-contribution-grid-snake.svg)
 
 </div>
