@@ -27,6 +27,8 @@ pnpm test            # unit + e2e
 pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars; there is no Turnstile secret locally)
 pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked
+pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
+pnpm zone --apply    # only when asked; `--only tls` limits it to one group
 ```
 
 ## Conventions
@@ -69,6 +71,11 @@ pnpm deploy:worker   # only when asked
   (`scripts/templates/llms.mjs`). Cloudflare serves every page as Markdown to `Accept: text/markdown`,
   converted in source order, so `index.html` keeps its `<dialog>`s after the footer.
   `tests/unit/agent-content.test.js` guards all three.
+- **Cloudflare zone settings** (SSL mode, minimum TLS, AI crawler policies) are written down in
+  `GROUPS` in `scripts/cloudflare-zone.mjs`; change them there, not in the dashboard. The token is
+  `token=<value>` in a gitignored `.cloudflare.env`. SSL mode is `full`, never `strict` (GitHub Pages
+  has no certificate for `andernet.dev`), and it applies to every hostname on the zone, so check the
+  other subdomains after changing it.
 - `ROADMAP.md` tracks planned work.
 - Conventional commits: `type(scope): description`.
 - Don't commit or deploy unless explicitly asked.
