@@ -34,12 +34,11 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [health](https://github.com/and3rn3t/health)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** TypeScript
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -55,23 +54,24 @@ _Auto-updated daily from live repo data — no more stale links or descriptions.
 > **Tech:** TypeScript, arlo, cloudflare-pages, cloudflare-workers, dashboard
 > 🔗 [Live](https://homehub.andernet.dev)
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** TypeScript
+> **Tech:** Python, arm64, docker, docker-compose, flask
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
+>
+> **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
 > Unifying network information on a RPi 5
 >
 > **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker, docker-compose, flask
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
