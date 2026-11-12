@@ -185,6 +185,33 @@ export const openApi = () => ({
                 },
             },
         },
+        '/edge': {
+            get: {
+                operationId: 'getEdge',
+                summary:
+                    'Where this request was served: the Cloudflare location and the Worker version',
+                responses: {
+                    200: {
+                        description: "Facts about the caller's own connection; nothing is stored",
+                        content: jsonBody({
+                            type: 'object',
+                            properties: {
+                                colo: {
+                                    type: ['string', 'null'],
+                                    description: 'IATA code of the Cloudflare location',
+                                },
+                                httpProtocol: { type: ['string', 'null'] },
+                                tlsVersion: { type: ['string', 'null'] },
+                                version: {
+                                    type: ['string', 'null'],
+                                    description: 'The deployed Worker version',
+                                },
+                            },
+                        }),
+                    },
+                },
+            },
+        },
         '/views': {
             get: {
                 operationId: 'getViews',

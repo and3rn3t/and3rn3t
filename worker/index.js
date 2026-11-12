@@ -105,6 +105,10 @@ async function route(request, env, ctx) {
         });
     }
 
+    if (path === '/edge') {
+        return handleEdge(request, env);
+    }
+
     if (path === '/views') {
         return handleViewsRequest(request, env);
     }
@@ -129,6 +133,30 @@ async function route(request, env, ctx) {
     const result = await loadActivity(env);
     if (!result.ok) return jsonResponse({ error: result.error }, request, result.status);
     return jsonResponse({ ...result.activity, cached: result.cached }, request, 200);
+}
+
+/**
+ * GET /edge: where this request was served, for the footer's "edge receipt". Nothing is stored,
+ * and the answer describes only the caller's own connection, so it is never cached.
+ */
+function handleEdge(request, env) {
+    if (request.method === 'OPTIONS') {
+        return new Response(null, { headers: corsHeaders(request) });
+    }
+    if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
+
+    const response = jsonResponse(
+        {
+            colo: request.cf?.colo ?? null,
+            httpProtocol: request.cf?.httpProtocol ?? null,
+            tlsVersion: request.cf?.tlsVersion ?? null,
+            version: env.CF_VERSION?.tag || env.CF_VERSION?.id?.slice(0, 8) || null,
+        },
+        request,
+        200
+    );
+    response.headers.set('Cache-Control', 'no-store');
+    return response;
 }
 
 /**

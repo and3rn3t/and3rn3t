@@ -173,3 +173,42 @@ describe('wrangler.toml', () => {
         expect(toml).toMatch(/\[observability\.traces\]\s+enabled = true/);
     });
 });
+
+describe('GET /edge', () => {
+    const cf = { colo: 'ORD', httpProtocol: 'HTTP/2', tlsVersion: 'TLSv1.3' };
+    const edge = (init = {}, env = {}) => {
+        const request = new Request('https://andernet.dev/api/edge', init);
+        Object.defineProperty(request, 'cf', { value: cf });
+        return worker.fetch(request, env, {});
+    };
+
+    it('reports the location and the version, and is never cached', async () => {
+        const response = await edge({}, { CF_VERSION: { id: 'abcdef0123456789', tag: '' } });
+        expect(response.status).toBe(200);
+        expect(response.headers.get('Cache-Control')).toBe('no-store');
+        expect(await response.json()).toEqual({
+            colo: 'ORD',
+            httpProtocol: 'HTTP/2',
+            tlsVersion: 'TLSv1.3',
+            version: 'abcdef01',
+        });
+    });
+
+    it('prefers the version tag, and reports nulls where there is nothing to report', async () => {
+        const tagged = await edge({}, { CF_VERSION: { id: 'abcdef0123', tag: 'v12' } });
+        expect((await tagged.json()).version).toBe('v12');
+
+        const local = await worker.fetch(get('/edge'), {}, {});
+        expect(await local.json()).toEqual({
+            colo: null,
+            httpProtocol: null,
+            tlsVersion: null,
+            version: null,
+        });
+    });
+
+    it('answers only GET and the CORS preflight', async () => {
+        expect((await edge({ method: 'POST' })).status).toBe(405);
+        expect((await edge({ method: 'OPTIONS' })).status).toBe(200);
+    });
+});

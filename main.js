@@ -125,6 +125,11 @@ function startFeatures(uiManager) {
             }
         );
         startOptional(
+            'Edge receipt',
+            () => import('./modules/edge.js'),
+            m => m.initEdgeReceipt()
+        );
+        startOptional(
             'View counter',
             () => import('./modules/views.js'),
             async m => {
