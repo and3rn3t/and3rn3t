@@ -110,19 +110,32 @@ item from `main`. Decisions (2026-11-11): AI training crawlers allowed; a read-o
 server on the Worker and WebMCP in-page tools; no AI "ask" feature; zone settings applied by a
 checked-in script.
 
-| #    | Item                                                                       | Status        |
-| ---- | -------------------------------------------------------------------------- | ------------- |
-| 11.0 | Zone settings as code (`scripts/cloudflare-zone.mjs`, `pnpm zone`) — #264  | ✅ 2026-11-12 |
-| 11.1 | Crawl policy, `robots.txt`, generated `llms.txt`, cleaner Markdown — #262  | ✅ 2026-11-12 |
-| 11.2 | Worker on `andernet.dev/api/*`, so the page calls it same-origin — #267    | ✅ 2026-11-12 |
-| 11.3 | Discovery documents and the read-only MCP server (`/mcp`, `/.well-known/`) | ⬜            |
-| 11.4 | Zone rules: `Link` headers, HSTS, security headers                         | ⬜            |
-| 11.5 | WebMCP in-page tools                                                       | ⬜            |
-| 11.6 | Measure against the baseline and document                                  | ⬜            |
+| #    | Item                                                                              | Status        |
+| ---- | --------------------------------------------------------------------------------- | ------------- |
+| 11.0 | Zone settings as code (`scripts/cloudflare-zone.mjs`, `pnpm zone`) — #264         | ✅ 2026-11-12 |
+| 11.1 | Crawl policy, `robots.txt`, generated `llms.txt`, cleaner Markdown — #262         | ✅ 2026-11-12 |
+| 11.2 | Worker on `andernet.dev/api/*`, so the page calls it same-origin — #267           | ✅ 2026-11-12 |
+| 11.3 | Discovery documents and the read-only MCP server (`/mcp`, `/.well-known/`) — #270 | ✅ 2026-11-12 |
+| 11.4 | Zone rules: `Link` headers, HSTS, security headers, report-only CSP — #272        | ✅ 2026-11-12 |
+| 11.5 | WebMCP in-page tools — #274                                                       | ✅ 2026-11-12 |
+| 11.6 | Scanner report in CI (`check:agent-ready`), document; compare crawler data        | 🟡 2026-11-12 |
 
 ## Decision Log
 
 Older entries (2026-06 to 2026-10) are in [docs/ROADMAP-archive.md](docs/ROADMAP-archive.md).
+
+- **2026-11-12** — Phase 11 (agent readiness) shipped: Agent Readiness scan went from level 3 to 4 of 5,
+  and `webMcp` passes. AI training crawlers are allowed (`robots.txt` carries the Content Signals, because
+  Cloudflare's managed block disappears once every AI policy is Allow). The Worker now answers on
+  `andernet.dev` (`/api/*`, `/mcp`, four `/.well-known/` documents) with a read-only MCP server; WebMCP tools
+  load only in browsers that have `document.modelContext`, and the contact tool drafts but never sends.
+  Zone settings are code (`pnpm zone`), and rules are scoped to the apex host because the zone also carries
+  about twenty other apps. SSL is `full`, never `strict` (GitHub Pages has no certificate for the domain).
+  The CSP is **report-only** with no report endpoint; enforcing it is a separate decision. Five scanner checks
+  stay failing on purpose (OAuth x2, auth.md, A2A agent card, DNS-AID): nothing here needs signing in. A daily
+  report-only CI job (`pnpm check:agent-ready`) prints the level and flags any other failure; it never fails
+  the build. **Still to do:** compare AI Crawl Control (crawler mix, bot 404s, referrals) with the
+  2026-11-11 baseline after two to four weeks, around 2026-12-09.
 
 - **2026-11-11** — Removed the unused OG pipeline (#228). The Worker `/og` route and the 16
   per-project `og/<repo>.png` cards had no consumer: only `og/default.png` is referenced, and the
