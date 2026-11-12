@@ -94,6 +94,14 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   templates, run `pnpm zone --only headers --apply`** or the page reports a violation. The script owns only rules
   whose ref starts with `andernet-`; a PUT replaces a whole phase, so it sends the others back unchanged.
   `security-txt` publishes `/.well-known/security.txt` through Cloudflare.
+  The `cache` group (`scripts/zone-cache.mjs`) makes the site cacheable at the edge for an hour (GitHub Pages
+  sends `max-age=600` and Cloudflare does not cache HTML or JSON by default). It skips `/api/`, `/mcp`,
+  `/.well-known/` and any request with `Accept: text/markdown`. **`pages.yml` purges `andernet.dev` by hostname
+  after every deploy** (job `purge-cache`, twice, 60 s apart, using the repository secret
+  `CLOUDFLARE_PURGE_TOKEN`, a token with only Zone > Cache Purge); a new deploy path must keep that job. After a
+  deploy that did not purge, a page can be an hour old. Check with `curl -sI https://andernet.dev/ | grep cf-cache-status`.
+  Zone tracing (Cloudflare Traces) is a dashboard toggle (Observability > Traces for the domain), not scripted:
+  set the default sample rate to about 10% and add a trace rule at 100% for `/api/*` and `/mcp`.
 - **WebMCP** (`modules/webmcp.js`): in a browser that has `document.modelContext`, `main.js` loads the module on idle
   and registers five tools (search, list and open projects, set the theme, draft a contact message). Other browsers are
   never sent it (`tests/e2e/webmcp.spec.js` asserts that). The contact tool fills the form and **never submits**, and

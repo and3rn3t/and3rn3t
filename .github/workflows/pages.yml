@@ -98,11 +98,49 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
 
+  # Cloudflare keeps the site at the edge for an hour (scripts/zone-cache.mjs), so every deploy,
+  # the daily data refresh included, purges this host's copies. By hostname, never "everything":
+  # the zone carries about twenty other apps. The second purge is a safety net: GitHub's own
+  # CDN can hand out the previous copy for a moment after a deploy, and Cloudflare would then
+  # keep that one. A separate job, so a failed purge is visible without undoing the deploy.
+  purge-cache:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Purge andernet.dev from the Cloudflare cache
+        env:
+          CLOUDFLARE_PURGE_TOKEN: ${{ secrets.CLOUDFLARE_PURGE_TOKEN }}
+          ZONE_ID: e2972feea910b8cfc6537b3f3f07ff5c
+        run: |
+          if [ -z "$CLOUDFLARE_PURGE_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_PURGE_TOKEN is not set, so the Cloudflare cache was not purged"
+            exit 0
+          fi
+          purge() {
+            for _ in 1 2 3; do
+              if curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+                   -H "Authorization: Bearer $CLOUDFLARE_PURGE_TOKEN" \
+                   -H 'Content-Type: application/json' \
+                   --data '{"hosts":["andernet.dev"]}' | grep -q '"success":true'; then
+                echo "purged andernet.dev"
+                return 0
+              fi
+              sleep 5
+            done
+            echo "::error::could not purge the Cloudflare cache for andernet.dev"
+            return 1
+          }
+          purge
+          sleep 60
+          purge
+
   # Audit the live site once the new build is up. Push deploys only: the daily
   # data-refresh dispatch changes JSON, not anything Lighthouse scores.
   lighthouse:
-    if: github.event_name == 'push'
-    needs: deploy
+    if: github.event_name == 'push' && !cancelled() && needs.deploy.result == 'success'
+    needs: [deploy, purge-cache]
     permissions:
       contents: read
     uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
@@ -111,8 +149,8 @@ jobs:
       config-path: .lighthouserc.cjs
 
   lighthouse-mobile:
-    if: github.event_name == 'push'
-    needs: deploy
+    if: github.event_name == 'push' && !cancelled() && needs.deploy.result == 'success'
+    needs: [deploy, purge-cache]
     permissions:
       contents: read
     uses: and3rn3t/.github/.github/workflows/reusable-lighthouse.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1

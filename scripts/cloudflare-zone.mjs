@@ -24,6 +24,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { RULE_PREFIX, headerRules, inlineHashes } from './zone-headers.mjs';
+import { cacheRules } from './zone-cache.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const API = 'https://api.cloudflare.com/client/v4';
@@ -33,7 +34,7 @@ export const ZONE_NAME = 'andernet.dev';
  * What the zone should be. `kind` says which API holds the values:
  *   settings        one PATCH /zones/:id/settings/<name> per value
  *   bot_management  one PUT /zones/:id/bot_management with only the changed fields
- *   ruleset         rules in a phase (scripts/zone-headers.mjs); only rules whose ref starts
+ *   ruleset         rules in a phase (scripts/zone-headers.mjs, zone-cache.mjs); only rules whose ref starts
  *                   with "andernet-" are ours, any other rule in the phase is kept as it is
  *   security_txt    the managed /.well-known/security.txt
  *
@@ -68,6 +69,12 @@ export const GROUPS = {
     phase: 'http_response_headers_transform',
     why: 'Send a Link header to agents, the security headers, and a report-only CSP (apex host only).',
     values: () => headerRules(inlineHashes(ROOT)),
+  },
+  cache: {
+    kind: 'ruleset',
+    phase: 'http_request_cache_settings',
+    why: 'Cache the site at the edge for an hour (apex host only); pages.yml purges it on every deploy.',
+    values: () => cacheRules(),
   },
   'security-txt': {
     kind: 'security_txt',
@@ -344,7 +351,12 @@ async function readEntrypoint(token, zoneId, phase) {
 
 /** A rule on one line: when it applies, and what it sets (the CSP itself is too long to print). */
 export function describeRule(item) {
-  const headers = Object.entries(item.action_parameters?.headers ?? {})
+  const parameters = item.action_parameters ?? {};
+  if (item.action === 'set_cache_settings') {
+    const { mode, default: seconds } = parameters.edge_ttl ?? {};
+    return `when ${item.expression} -> cache${mode ? `, edge TTL ${seconds}s (${mode})` : ''}`;
+  }
+  const headers = Object.entries(parameters.headers ?? {})
     .map(([name, { operation }]) => `${operation} ${name}`)
     .join(', ');
   return `when ${item.expression} -> ${headers}`;
