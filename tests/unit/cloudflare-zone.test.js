@@ -74,6 +74,39 @@ describe('diffValues', () => {
     });
 });
 
+describe('an unset field', () => {
+    // What Cloudflare returned after security.txt was first published: the optional fields it
+    // was not given come back as null. The script reported that as a change nobody asked for.
+    it('is not a change when an API reports an unset optional field as null', () => {
+        const before = {};
+        const after = {
+            contact: ['mailto:x@y.z'],
+            acknowledgments: null,
+            encryption: null,
+            hiring: null,
+        };
+        expect(unintendedChanges(before, after, ['contact'])).toEqual([]);
+        expect(unintendedChanges({ hiring: [] }, { hiring: null }, [])).toEqual([]);
+    });
+
+    it('is still a change when a field really has a value, or loses one', () => {
+        expect(unintendedChanges({}, { hiring: ['https://x.dev'] }, [])).toEqual(['hiring']);
+        expect(unintendedChanges({ hiring: ['https://x.dev'] }, { hiring: null }, [])).toEqual([
+            'hiring',
+        ]);
+        expect(unintendedChanges({ enabled: false }, { enabled: true }, [])).toEqual(['enabled']);
+    });
+
+    it('does not mistake false or 0 for unset', () => {
+        expect(unintendedChanges({ a: false, b: 0 }, { a: null, b: null }, [])).toEqual(['a', 'b']);
+    });
+
+    it('diffValues does not ask to set an empty value on a field that is already unset', () => {
+        expect(diffValues({ hiring: null }, { hiring: [] })).toEqual([]);
+        expect(diffValues({}, { hiring: ['https://x.dev'] })).toHaveLength(1);
+    });
+});
+
 describe('unintendedChanges', () => {
     it('names a field that changed without being asked to', () => {
         const before = { ai_training: 'disallow', crawler_protection: 'enabled', enable_js: false };

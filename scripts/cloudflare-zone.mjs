@@ -159,13 +159,24 @@ export function parseArgs(argv) {
  */
 export function diffValues(current, desired, { prune = false } = {}) {
   const changes = Object.entries(desired)
-    .filter(([name, to]) => stable(current[name]) !== stable(to))
+    .filter(([name, to]) => !same(current[name], to))
     .map(([name, to]) => ({ name, from: current[name], to }));
   if (!prune) return changes;
   // Entries we own that are no longer wanted
   const removed = Object.keys(current).filter(name => !(name in desired));
   return [...changes, ...removed.map(name => ({ name, from: current[name], to: undefined }))];
 }
+
+/** A field nobody set: absent, null, an empty string or an empty list. */
+const isUnset = value =>
+  value == null || value === '' || (Array.isArray(value) && value.length === 0);
+
+/**
+ * Whether two values are the same. An API reports an optional field it was never given as null
+ * (security.txt does, for acknowledgments, encryption and hiring), and that is not a change from
+ * the field being absent.
+ */
+export const same = (a, b) => (isUnset(a) && isUnset(b)) || stable(a) === stable(b);
 
 /** JSON with object keys in sorted order, so two equal objects compare equal whatever order an API used. */
 export function stable(value) {
@@ -185,7 +196,7 @@ export function stable(value) {
  */
 export function unintendedChanges(before, after, intended) {
   return Object.keys({ ...before, ...after }).filter(
-    name => !intended.includes(name) && stable(before[name]) !== stable(after[name])
+    name => !intended.includes(name) && !same(before[name], after[name])
   );
 }
 
