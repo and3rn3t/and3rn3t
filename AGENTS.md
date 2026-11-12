@@ -93,6 +93,10 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   templates, run `pnpm zone --only headers --apply`** or the page reports a violation. The script owns only rules
   whose ref starts with `andernet-`; a PUT replaces a whole phase, so it sends the others back unchanged.
   `security-txt` publishes `/.well-known/security.txt` through Cloudflare.
+- **WebMCP** (`modules/webmcp.js`): in a browser that has `document.modelContext`, `main.js` loads the module on idle
+  and registers five tools (search, list and open projects, set the theme, draft a contact message). Other browsers are
+  never sent it (`tests/e2e/webmcp.spec.js` asserts that). The contact tool fills the form and **never submits**, and
+  never touches the honeypot field; its limits are tested against the form's own attributes in `index.html`.
 - `ROADMAP.md` tracks planned work.
 - Conventional commits: `type(scope): description`.
 - Don't commit or deploy unless explicitly asked.
