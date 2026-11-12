@@ -36,6 +36,7 @@ import {
     corsHeaders,
 } from './engagement.js';
 import { handleMcp } from './mcp.js';
+import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
@@ -43,14 +44,36 @@ const NEGATIVE_TTL_SECONDS = 60; // remember a failed lookup briefly so GitHub i
 
 export default {
     async fetch(request, env, ctx) {
+        const started = Date.now();
+        const { pathname } = new URL(request.url);
+        const routeName = routeLabel(pathname);
+        nameRootSpan(ctx, request.method, routeName);
+
         // Any unexpected failure becomes a JSON 500 that still carries CORS headers; a bare
         // runtime 500 has none, and the browser then reports a misleading CORS error.
+        let response;
         try {
-            return await route(request, env, ctx);
+            response = await route(request, env, ctx);
         } catch (err) {
             console.error('[worker] unhandled error:', err?.stack ?? err);
-            return jsonResponse({ error: 'internal' }, request, 500);
+            response = jsonResponse({ error: 'internal' }, request, 500);
         }
+
+        const ms = Date.now() - started;
+        recordRequest(env, {
+            route: routeName,
+            method: request.method,
+            status: response.status,
+            ms,
+            colo: request.cf?.colo,
+            client: clientKind(request.headers.get('User-Agent')),
+        });
+        // A WebSocket upgrade (101) cannot be rebuilt, and has no use for a timing header
+        if (response.status === 101) return response;
+        // Copy first: a response from fetch() has immutable headers, and the MCP reply is a stream
+        const timed = new Response(response.body, response);
+        timed.headers.append('Server-Timing', `worker;dur=${ms}`);
+        return timed;
     },
 };
 
