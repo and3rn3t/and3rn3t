@@ -299,8 +299,14 @@ jobs:
               emoji = EMOJI_BY_LANGUAGE.get(r.get('language'), '⭐')
               name, desc = r['name'], r['description']
               homepage = (r.get('homepage') or '').strip()
-              tech_bits = [r['language']] if r.get('language') else []
-              tech_bits += [t for t in (r.get('topics') or []) if t != 'featured'][:4]
+              # The language, then at most two topics. Topics are free-form tags (`bayesian`,
+              # `cloudflare-d1`, ...), so showing five of them made the cards read like a tag dump.
+              language = r.get('language')
+              tech_bits = [language] if language else []
+              tech_bits += [
+                  t for t in (r.get('topics') or [])
+                  if t != 'featured' and t.lower() != (language or '').lower()
+              ][:2]
               tech_line = f"\n>\n> **Tech:** {', '.join(tech_bits)}" if tech_bits else ''
               link_line = f"\n> 🔗 [Live]({homepage})" if homepage else ''
               return (
