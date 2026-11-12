@@ -6,8 +6,8 @@ import { describe, expect, it } from 'vitest';
 import { WORKER_BASE, WORKER_ORIGIN, workerBase } from '../../modules/config.js';
 
 describe('workerBase', () => {
-    it.each(['andernet.dev', 'www.andernet.dev'])('is same-origin /api on %s', host => {
-        expect(workerBase(host)).toBe('/api');
+    it('is same-origin /api on the apex, the one host the Worker route covers', () => {
+        expect(workerBase('andernet.dev')).toBe('/api');
     });
 
     // Lookalike hosts must not get a relative URL that would call that host's own /api
@@ -18,6 +18,7 @@ describe('workerBase', () => {
         'andernet.dev.evil.com',
         'evilandernet.dev',
         'health.andernet.dev',
+        'www.andernet.dev',
         '',
         undefined,
     ])('is the Worker address on %s', host => {

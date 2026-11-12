@@ -9,7 +9,10 @@
  * developing against `pnpm worker:dev`.
  */
 
-const SITE_HOSTS = new Set(['andernet.dev', 'www.andernet.dev']);
+// Only the apex: the route in wrangler.toml matches andernet.dev/api/* and nothing else, and
+// www.andernet.dev redirects to the apex (GitHub Pages), so no page ever runs on www. A host
+// added here needs its own route first.
+const SITE_HOSTS = new Set(['andernet.dev']);
 
 export const WORKER_ORIGIN = 'https://and3rn3t-portfolio.andernet.workers.dev';
 
