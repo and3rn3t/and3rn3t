@@ -6,9 +6,9 @@
  * main.js). Everything else starts on its own afterwards, so the cost that matters for first paint
  * is what was fetched by then. "Settled" is after the deferred features have had time to start.
  *
- * Sizes are encoded body sizes from the Resource Timing API. The budgets are the plan's targets,
- * with room above today's numbers (9 files / 49 KB at ready), so they catch a regression and not
- * noise.
+ * Sizes are encoded body sizes from the Resource Timing API. The budgets sit just above today's
+ * numbers (9 files / 48 KB at ready; the plan's targets were 12 / 70), so they catch a regression and
+ * not noise. They can only go down.
  */
 import { test, expect } from './fixtures.js';
 
@@ -37,7 +37,7 @@ const recordAtReady = page =>
 const total = list => list.reduce((sum, [, bytes]) => sum + bytes, 0);
 
 test.describe('startup budgets', () => {
-    test('what is needed to be ready is small: at most 12 script files and 70 KB', async ({
+    test('what is needed to be ready is small: at most 10 script files and 60 KB', async ({
         page,
     }) => {
         await recordAtReady(page);
@@ -46,8 +46,8 @@ test.describe('startup budgets', () => {
         const atReady = await page.evaluate(() => globalThis.__atReady);
 
         const names = atReady.map(([name]) => name.split('/').pop());
-        expect(atReady.length, `at ready: ${names.join(' ')}`).toBeLessThanOrEqual(12);
-        expect(total(atReady), `at ready: ${names.join(' ')}`).toBeLessThanOrEqual(70 * KB);
+        expect(atReady.length, `at ready: ${names.join(' ')}`).toBeLessThanOrEqual(10);
+        expect(total(atReady), `at ready: ${names.join(' ')}`).toBeLessThanOrEqual(60 * KB);
     });
 
     test('the optional features are not part of getting ready', async ({ page }) => {
