@@ -25,7 +25,7 @@ This repo is both my GitHub profile and the source of that site.
 
 ## Run it locally
 
-You'll need Node 24 and [pnpm](https://pnpm.io).
+You'll need Node 24.15 or newer (`.nvmrc` pins 24.22.2) and [pnpm](https://pnpm.io) 11.8 or newer. The repo enforces both with `engine-strict`, so an older Node makes `pnpm install` fail.
 
 ```sh
 pnpm install
