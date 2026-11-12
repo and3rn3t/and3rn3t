@@ -134,6 +134,22 @@ function startFeatures(uiManager) {
         );
     }, 2000);
 
+    // WebMCP: the page's own actions, offered to an AI agent in the visitor's browser. Only a
+    // browser that supports it (document.modelContext) is sent the module at all.
+    whenIdle(() => {
+        if (!globalThis.document.modelContext && !globalThis.navigator.modelContext) return;
+        startOptional(
+            'WebMCP',
+            () => import('./modules/webmcp.js'),
+            async m => {
+                appState.managers.webmcp = await m.registerWebMcp(
+                    m.findModelContext(),
+                    m.pageDeps()
+                );
+            }
+        );
+    }, 1000);
+
     // Old #post/<slug> and #project/<slug> links: only load the redirect when there is one
     watchLegacyLinks();
 
