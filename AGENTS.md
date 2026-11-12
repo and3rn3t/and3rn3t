@@ -86,6 +86,13 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   `token=<value>` in a gitignored `.cloudflare.env`. SSL mode is `full`, never `strict` (GitHub Pages
   has no certificate for `andernet.dev`), and it applies to every hostname on the zone, so check the
   other subdomains after changing it.
+  The `headers` group (`scripts/zone-headers.mjs`) sets the `Link` header, the security headers and a
+  **report-only** CSP as response header rules, all scoped to `http.host eq "andernet.dev"` (the zone carries
+  ~20 other apps). The CSP allows inline scripts and `<style>` elements by hash, computed from the generated
+  pages when the script runs: **after changing an inline `<script>` or `<style>` in `index.html` or the
+  templates, run `pnpm zone --only headers --apply`** or the page reports a violation. The script owns only rules
+  whose ref starts with `andernet-`; a PUT replaces a whole phase, so it sends the others back unchanged.
+  `security-txt` publishes `/.well-known/security.txt` through Cloudflare.
 - `ROADMAP.md` tracks planned work.
 - Conventional commits: `type(scope): description`.
 - Don't commit or deploy unless explicitly asked.

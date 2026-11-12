@@ -13,7 +13,8 @@
  *
  * The API token comes from CLOUDFLARE_API_TOKEN or from a gitignored `.cloudflare.env`
  * (`token=<value>`). It needs, for this zone: Zone Read, Zone Settings Edit, Bot Management
- * Edit. Not `.dev.vars`: wrangler loads that file into the local Worker's environment.
+ * Edit and Transform Rules Edit. Not `.dev.vars`: wrangler loads that file into the local Worker's
+ * environment.
  *
  * SSL mode is zone-wide: it applies to every proxied hostname on andernet.dev, not only this
  * site. After changing it, check the other hostnames still answer.
@@ -22,6 +23,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { RULE_PREFIX, headerRules, inlineHashes } from './zone-headers.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const API = 'https://api.cloudflare.com/client/v4';
@@ -31,6 +33,12 @@ export const ZONE_NAME = 'andernet.dev';
  * What the zone should be. `kind` says which API holds the values:
  *   settings        one PATCH /zones/:id/settings/<name> per value
  *   bot_management  one PUT /zones/:id/bot_management with only the changed fields
+ *   ruleset         rules in a phase (scripts/zone-headers.mjs); only rules whose ref starts
+ *                   with "andernet-" are ours, any other rule in the phase is kept as it is
+ *   security_txt    the managed /.well-known/security.txt
+ *
+ * `values` is an object, or a function of what the zone has now (the CSP hashes come from the
+ * files on disk, and security.txt's expiry is kept until it is near).
  */
 export const GROUPS = {
   tls: {
@@ -55,7 +63,43 @@ export const GROUPS = {
       ai_training: 'disabled',
     },
   },
+  headers: {
+    kind: 'ruleset',
+    phase: 'http_response_headers_transform',
+    why: 'Send a Link header to agents, the security headers, and a report-only CSP (apex host only).',
+    values: () => headerRules(inlineHashes(ROOT)),
+  },
+  'security-txt': {
+    kind: 'security_txt',
+    why: "Publish /.well-known/security.txt (Cloudflare serves it, GitHub Pages can't be told to).",
+    values: current => ({
+      contact: ['mailto:and3rn3t@icloud.com'],
+      canonical: ['https://andernet.dev/.well-known/security.txt'],
+      policy: ['https://github.com/and3rn3t/and3rn3t/security/policy'],
+      preferred_languages: 'en',
+      expires: securityTxtExpiry(current.expires),
+    }),
+  },
 };
+
+const DAY = 86_400_000;
+
+/**
+ * security.txt must carry an expiry less than a year away. Keep the one in place until it is
+ * under 90 days off, so a run does not change the file for no reason; then give it a year.
+ * @param {string | undefined} current - the expiry now in the file
+ * @param {number} [now]
+ * @returns {string} an ISO date-time
+ */
+export function securityTxtExpiry(current, now = Date.now()) {
+  const left = Date.parse(current ?? '') - now;
+  if (Number.isFinite(left) && left > 90 * DAY) return current;
+  return new Date(now + 365 * DAY).toISOString().replace(/\.\d+Z$/, 'Z');
+}
+
+/** The desired values of a group, given what the zone has now. */
+export const desiredValues = (group, current) =>
+  typeof group.values === 'function' ? group.values(current) : group.values;
 
 /**
  * `key=value` lines, as in .cloudflare.env. Quotes around a value are dropped.
@@ -107,12 +151,26 @@ export function parseArgs(argv) {
  * The values that are not yet what they should be.
  * @param {Record<string, unknown>} current
  * @param {Record<string, unknown>} desired
+ * @param {{ prune?: boolean }} [options] - prune: also report entries in `current` that are not in `desired`
  * @returns {{ name: string, from: unknown, to: unknown }[]}
  */
-export function diffValues(current, desired) {
-  return Object.entries(desired)
-    .filter(([name, to]) => JSON.stringify(current[name]) !== JSON.stringify(to))
+export function diffValues(current, desired, { prune = false } = {}) {
+  const changes = Object.entries(desired)
+    .filter(([name, to]) => stable(current[name]) !== stable(to))
     .map(([name, to]) => ({ name, from: current[name], to }));
+  if (!prune) return changes;
+  // Entries we own that are no longer wanted
+  const removed = Object.keys(current).filter(name => !(name in desired));
+  return [...changes, ...removed.map(name => ({ name, from: current[name], to: undefined }))];
+}
+
+/** JSON with object keys in sorted order, so two equal objects compare equal whatever order an API used. */
+export function stable(value) {
+  return JSON.stringify(value, (_key, item) =>
+    item && typeof item === 'object' && !Array.isArray(item)
+      ? Object.fromEntries(Object.entries(item).sort(([a], [b]) => a.localeCompare(b)))
+      : item
+  );
 }
 
 /**
@@ -124,7 +182,7 @@ export function diffValues(current, desired) {
  */
 export function unintendedChanges(before, after, intended) {
   return Object.keys({ ...before, ...after }).filter(
-    name => !intended.includes(name) && JSON.stringify(before[name]) !== JSON.stringify(after[name])
+    name => !intended.includes(name) && stable(before[name]) !== stable(after[name])
   );
 }
 
@@ -140,13 +198,14 @@ function readToken() {
   return token;
 }
 
-async function api(token, method, path, body) {
+async function api(token, method, path, body, { missingIsNull = false } = {}) {
   const response = await fetch(`${API}${path}`, {
     method,
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const data = await response.json().catch(() => ({}));
+  if (missingIsNull && response.status === 404) return null;
   if (!response.ok || !data.success) {
     const detail = (data.errors ?? []).map(error => error.message).join('; ');
     throw new Error(`${method} ${path}: HTTP ${response.status}${detail ? ` (${detail})` : ''}`);
@@ -155,7 +214,7 @@ async function api(token, method, path, body) {
 }
 
 /** How each kind of group is read and written. */
-const KINDS = {
+export const KINDS = {
   settings: {
     async read(token, zoneId, names) {
       const values = await Promise.all(
@@ -176,6 +235,84 @@ const KINDS = {
       await api(token, 'PUT', `/zones/${zoneId}/bot_management`, body);
     },
   },
+  ruleset: {
+    prune: true,
+    async read(token, zoneId, _names, group) {
+      const { rules } = await readEntrypoint(token, zoneId, group.phase);
+      return Object.fromEntries(rules.filter(isOurs).map(item => [item.ref, ruleShape(item)]));
+    },
+    async write(token, zoneId, _changes, group, desired) {
+      const { rules } = await readEntrypoint(token, zoneId, group.phase);
+      const foreign = rules.filter(item => !isOurs(item));
+      // A PUT replaces every rule in the phase, so the rules that are not ours go back as they were
+      const body = {
+        rules: [...foreign, ...Object.entries(desired).map(([ref, item]) => ({ ref, ...item }))],
+      };
+      await api(token, 'PUT', `/zones/${zoneId}/rulesets/phases/${group.phase}/entrypoint`, body);
+      const after = await readEntrypoint(token, zoneId, group.phase);
+      const kept = after.rules.filter(item => !isOurs(item)).map(item => item.id);
+      if (stable(kept) !== stable(foreign.map(item => item.id))) {
+        throw new Error(
+          `${group.phase}: rules that are not ours changed. Before: ${foreign.map(i => i.id)}; after: ${kept}`
+        );
+      }
+    },
+  },
+  security_txt: {
+    async read(token, zoneId) {
+      // Nothing set yet reads as an empty string
+      const current = await api(
+        token,
+        'GET',
+        `/zones/${zoneId}/security-center/securitytxt`,
+        undefined,
+        { missingIsNull: true }
+      );
+      return current && typeof current === 'object' ? current : {};
+    },
+    async write(token, zoneId, _changes, _group, desired) {
+      await api(token, 'PUT', `/zones/${zoneId}/security-center/securitytxt`, {
+        enabled: true,
+        ...desired,
+      });
+    },
+  },
+};
+
+const isOurs = item => typeof item.ref === 'string' && item.ref.startsWith(RULE_PREFIX);
+
+/** A rule as the script defines it, without the fields the API adds (id, version, last_updated, ...). */
+const ruleShape = item => ({
+  description: item.description,
+  expression: item.expression,
+  action: item.action,
+  enabled: item.enabled ?? true,
+  action_parameters: item.action_parameters,
+});
+
+/** The rules in a phase; a phase nobody has put a rule in has no ruleset yet. */
+async function readEntrypoint(token, zoneId, phase) {
+  const ruleset = await api(
+    token,
+    'GET',
+    `/zones/${zoneId}/rulesets/phases/${phase}/entrypoint`,
+    undefined,
+    { missingIsNull: true }
+  );
+  return { rules: ruleset?.rules ?? [] };
+}
+
+/** A rule on one line: when it applies, and what it sets (the CSP itself is too long to print). */
+export function describeRule(item) {
+  const headers = Object.entries(item.action_parameters?.headers ?? {})
+    .map(([name, { operation }]) => `${operation} ${name}`)
+    .join(', ');
+  return `when ${item.expression} -> ${headers}`;
+}
+
+const show = value => {
+  const text = value === undefined ? '(none)' : stable(value);
+  return text.length > 150 ? `${text.slice(0, 147)}...` : text;
 };
 
 async function main() {
@@ -187,26 +324,32 @@ async function main() {
 
   let pending = 0;
   for (const name of only) {
-    const { kind, why, values } = GROUPS[name];
-    const { read, write } = KINDS[kind];
-    const before = await read(token, zone.id, Object.keys(values));
-    const changes = diffValues(before, values);
+    const group = GROUPS[name];
+    const { read, write, prune = false } = KINDS[group.kind];
+    const describe = value =>
+      group.kind === 'ruleset' && value ? describeRule(value) : show(value);
+    const { why } = group;
+    // Groups whose values depend on the zone's state read it whole; the others read what they set
+    const names = typeof group.values === 'function' ? [] : Object.keys(group.values);
+    const before = await read(token, zone.id, names, group);
+    const values = desiredValues(group, before);
+    const changes = diffValues(before, values, { prune });
     console.log(`\n${name}: ${why}`);
     if (!changes.length) {
       console.log('  as it should be');
       continue;
     }
     for (const { name: field, from, to } of changes) {
-      console.log(`  ${field}: ${JSON.stringify(from)} -> ${JSON.stringify(to)}`);
+      console.log(`  ${field}: ${describe(from)} -> ${describe(to)}`);
     }
     if (!apply) {
       pending += changes.length;
       continue;
     }
 
-    await write(token, zone.id, changes);
-    const after = await read(token, zone.id, Object.keys(values));
-    const left = diffValues(after, values);
+    await write(token, zone.id, changes, group, values);
+    const after = await read(token, zone.id, names, group);
+    const left = diffValues(after, desiredValues(group, after), { prune });
     if (left.length) {
       throw new Error(`${name}: still differs after writing: ${left.map(c => c.name).join(', ')}`);
     }
