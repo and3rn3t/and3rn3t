@@ -165,6 +165,11 @@ export function renderFooter() {
       <div class="wrap site-footer__inner">
         <p class="site-footer__note">${AUTHOR} &middot; <a class="link" href="/">andernet.dev</a></p>
         <ul class="site-footer__links">
+          <li>
+            <span class="site-footer__views" data-edge-widget hidden>
+              <span data-edge-receipt></span>
+            </span>
+          </li>
           <li><a class="link" href="/#projects">All projects</a></li>
           <li>
             <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>

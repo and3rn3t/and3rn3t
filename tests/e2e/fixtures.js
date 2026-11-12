@@ -20,6 +20,14 @@ export const test = base.extend({
             const request = route.request();
             const { pathname } = new URL(request.url());
             if (request.method() === 'OPTIONS') return json(route, {}, 204);
+            if (pathname === '/edge') {
+                return json(route, {
+                    colo: 'ORD',
+                    httpProtocol: 'h2',
+                    tlsVersion: 'TLSv1.3',
+                    version: 'abc1234',
+                });
+            }
             if (pathname === '/views') return json(route, { page: 'home', views: 1234 });
             if (pathname === '/guestbook') {
                 if (request.method() === 'POST') {
