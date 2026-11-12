@@ -15,3 +15,15 @@ jobs:
     uses: and3rn3t/.github/.github/workflows/reusable-site-check.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
     with:
       url: https://andernet.dev
+
+  # Report only: never fails. The scanner's checklist changes on its own, and five of its checks
+  # (OAuth, auth.md, A2A, DNS-AID) do not apply to a portfolio.
+  agent-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: scripts/check-agent-ready.mjs
+          persist-credentials: false
+      - run: node scripts/check-agent-ready.mjs https://andernet.dev

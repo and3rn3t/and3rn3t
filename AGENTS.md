@@ -37,6 +37,7 @@ pnpm test            # unit + e2e
 pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars; there is no Turnstile secret locally)
 pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked
+pnpm check:agent-ready # report-only scan of the live site (isitagentready.com); never fails
 pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
 pnpm zone --apply    # only when asked; `--only tls` limits it to one group
 ```
