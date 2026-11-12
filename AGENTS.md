@@ -9,6 +9,13 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   The Worker answers at `andernet.dev/api/*` (a route in `wrangler.toml`, so the page calls it same-origin) and at its
   `workers.dev` address, where the same paths have no `/api` prefix. `modules/config.js` picks the base by hostname, and
   `sw.js` never caches `/api/`, `/mcp` or `/.well-known/`
+  Also on the Worker: a read-only **MCP server** at `andernet.dev/mcp` (`worker/mcp.js`, built on `agents` and
+  `@modelcontextprotocol/server`, stateless; its tools read the published `*-data.json` files through
+  `worker/site-data.js`) and the **agent-discovery documents** (`worker/discovery.js`: `/.well-known/api-catalog`,
+  `mcp/server-card.json`, `agent-skills/`, `ai-catalog.json` and `/api/openapi.json`). Each needs its own route in
+  `wrangler.toml`; `tests/worker/discovery.test.js` fails when a document or `/mcp` is not routed. Adding a tool or an
+  API path means updating the server card, `SKILL_MD` and the OpenAPI document too (tests check they agree).
+  `MCP_LIMITER` and `GUESTBOOK_LIMITER` are Rate Limiting bindings (approximate, per location; absent locally)
 - Tests: Vitest unit + worker (`tests/unit`, `tests/worker`) and Playwright e2e + axe (`tests/e2e`, served from the raw source like production)
 - Shared browser/Worker helpers live in `modules/utils/` (`html.js` escaping, `activity.js`, `data.js`, `icon.js`, `while-visible.js`); the Worker imports them too
 - CI workflows (`.github/workflows/`):

@@ -318,6 +318,39 @@ test('POST /guestbook allows one post per IP per minute, then answers 429', asyn
     expect(env.GUESTBOOK_KV.putOptions.get('rl:203.0.113.7')).toEqual({ expirationTtl: 60 });
 });
 
+test('the rate limit binding caps posts per address before the KV throttle or the captcha', async () => {
+    const limit = vi.fn(async () => ({ success: false }));
+    const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's', GUESTBOOK_LIMITER: { limit } };
+    const fetchMock = vi.fn();
+    globalThis.fetch = fetchMock;
+    const res = await handleGuestbookRequest(
+        post({ name: 'A', message: 'B', token: 't' }, { 'CF-Connecting-IP': '203.0.113.7' }),
+        env
+    );
+    expect(res.status).toBe(429);
+    expect(res.headers.get('Retry-After')).toBe('60');
+    expect(limit).toHaveBeenCalledWith({ key: 'guestbook:203.0.113.7' });
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(env.GUESTBOOK_KV.store.size).toBe(0); // the KV throttle marker was not even written
+});
+
+test('a request the binding allows carries on to the captcha and is stored', async () => {
+    const limit = vi.fn(async () => ({ success: true }));
+    const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's', GUESTBOOK_LIMITER: { limit } };
+    globalThis.fetch = turnstileSays(true);
+    const res = await handleGuestbookRequest(post({ name: 'A', message: 'B', token: 't' }), env);
+    expect(res.status).toBe(201);
+    expect(limit).toHaveBeenCalledWith({ key: 'guestbook:unknown' });
+});
+
+test('bad input is rejected before it uses up the rate limit binding', async () => {
+    const limit = vi.fn(async () => ({ success: true }));
+    const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's', GUESTBOOK_LIMITER: { limit } };
+    const res = await handleGuestbookRequest(post({ name: '', message: '' }), env);
+    expect(res.status).toBe(400);
+    expect(limit).not.toHaveBeenCalled();
+});
+
 test('a throttled request never reaches the Turnstile verification', async () => {
     const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's' };
     await env.GUESTBOOK_KV.put('rl:203.0.113.7', '1');

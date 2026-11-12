@@ -218,6 +218,20 @@ async function handleGuestbookPost(request, env) {
         return jsonResponse({ error: 'captcha_unconfigured' }, request, 503);
     }
 
+    // A hard cap first, per address: the KV throttle below is best-effort (no atomic
+    // increment), so a burst could get past it and each pass costs a siteverify call. The
+    // binding is approximate and per location, but it is counted before anything else runs.
+    // Absent in local dev and tests, where requests pass.
+    if (env.GUESTBOOK_LIMITER) {
+        const key = `guestbook:${request.headers.get('CF-Connecting-IP') ?? 'unknown'}`;
+        const { success } = await env.GUESTBOOK_LIMITER.limit({ key });
+        if (!success) {
+            const res = jsonResponse({ error: 'rate_limited' }, request, 429);
+            res.headers.set('Retry-After', String(THROTTLE_SECONDS));
+            return res;
+        }
+    }
+
     // One attempt per IP per minute. Every attempt that gets this far counts, including ones
     // whose captcha then fails, and the marker is written *before* the captcha is verified,
     // so a flood of bad tokens can't make us call siteverify for each request. Cloudflare

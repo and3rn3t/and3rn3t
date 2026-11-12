@@ -1,5 +1,7 @@
 allowBuilds:
   '@fortawesome/fontawesome-free': false
+  # Reached through agents > mimetext; its postinstall only prints a donation message
+  core-js-pure: false
   esbuild: false
   workerd: true
 overrides:
