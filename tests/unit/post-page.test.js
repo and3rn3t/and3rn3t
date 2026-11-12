@@ -55,6 +55,8 @@ describe('post page', () => {
         expect(article['@type']).toBe('BlogPosting');
         expect(article.datePublished).toBe('2026-03-04');
         expect(article.keywords).toBe('CSS, <i>x</i>');
+        // The author is the Person the home page describes, not a second one with the same name
+        expect(article.author['@id']).toBe('https://andernet.dev/#person');
         expect(crumbs['@type']).toBe('BreadcrumbList');
         expect(crumbs.itemListElement.at(-1).item).toBe('https://andernet.dev/posts/a-post/');
     });

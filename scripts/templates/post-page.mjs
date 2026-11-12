@@ -50,7 +50,8 @@ export function renderPostPage({ post, newer, older }) {
       image,
       keywords: tags.join(', '),
       inLanguage: 'en-US',
-      author: { '@type': 'Person', name: AUTHOR, url: SITE },
+      // The same @id as the Person on the home page, so the two read as one entity
+      author: { '@type': 'Person', name: AUTHOR, url: SITE, '@id': `${SITE}/#person` },
       publisher: { '@id': `${SITE}/#person` },
     },
     {
