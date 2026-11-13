@@ -291,7 +291,7 @@ export const openApi = () => ({
                                 csp: {
                                     type: ['object', 'null'],
                                     description:
-                                        'last7d: reports that the report-only Content-Security-Policy would have blocked something, and byDirective. 0 is a measured zero; null means it could not be read',
+                                        'last7d: reports that the report-only Content-Security-Policy would have blocked something, byDirective, and since (the day reporting was switched on, or null while it has not been). 0 is a measured zero; null means it could not be read',
                                 },
                                 edge: {
                                     type: ['object', 'null'],

@@ -15,11 +15,6 @@ import { debug } from './debug.js';
 
 const DASH = '—';
 const REFRESH_MS = 5 * 60 * 1000;
-/**
- * The day the policy began reporting to the Worker. Before it, "0 reports" would only mean nobody
- * could report, so the page says collection began on this day while that is still a fair worry.
- */
-export const CSP_REPORTING_SINCE = '2026-11-13';
 /** A probe older than this means the check itself has stopped, which is worth saying. */
 const STALE_PROBE_MS = 15 * 60 * 1000;
 
@@ -202,14 +197,26 @@ export function formatDay(day) {
 }
 
 /**
- * The note under the report count: when collection began, for as long as the window still
- * reaches back before it.
- * @returns {string}
+ * What the report count says. The page never guesses when reporting began: the Worker says (`since`,
+ * a setting that is empty until someone has confirmed the policy is reporting). Before that a "0"
+ * would only mean nobody could report, so it is a dash and the page says so. Reports that are
+ * already arriving show whatever the setting says.
+ * @param {{ last7d: number, since: string | null } | null | undefined} csp
+ * @returns {{ value: string, note: string }}
  */
-export function cspNote(now = new Date(), since = CSP_REPORTING_SINCE) {
-    const began = parseTime(`${since}T00:00:00Z`);
-    if (!began || now.getTime() - began.getTime() >= 7 * 86_400_000) return '';
-    return `Collected since ${formatDay(since)}`;
+export function cspStatus(csp, now = new Date()) {
+    if (!csp) return { value: DASH, note: 'Not available right now.' };
+    const since = csp.since ? parseTime(`${csp.since}T00:00:00Z`) : null;
+    const started = since !== null && since.getTime() <= now.getTime();
+    if (!started && csp.last7d === 0) {
+        return { value: DASH, note: 'Reporting is not switched on yet.' };
+    }
+    // The note stays only while the 7-day window still reaches back before reporting began
+    const partial = started && now.getTime() - since.getTime() < 7 * 86_400_000;
+    return {
+        value: formatCount(csp.last7d),
+        note: partial ? `Collected since ${formatDay(csp.since)}` : '',
+    };
 }
 
 /** What the readout says for one cell. */
@@ -329,12 +336,9 @@ function renderVitals(root, vitals) {
 
 /** The report count, and which directives the reports are about (only those with reports). */
 function renderCsp(root, csp, now) {
-    setText(root, '[data-stat="csp-7d"]', csp ? formatCount(csp.last7d) : DASH);
-    setText(
-        root,
-        '[data-stat="csp-note"]',
-        csp ? cspNote(now) || '\u00a0' : 'Not available right now.'
-    );
+    const { value, note } = cspStatus(csp, now);
+    setText(root, '[data-stat="csp-7d"]', value);
+    setText(root, '[data-stat="csp-note"]', note || '\u00a0');
     const reports = csp?.byDirective ?? [];
     const list = $(root, '[data-rank="csp"]');
     if (!reports.length) {

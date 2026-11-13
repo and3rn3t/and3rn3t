@@ -51,7 +51,7 @@ export const QUERIES = {
     vitalsCls: vitalQuery('cumulativeLayoutShift'),
     vitalsTtfb: vitalQuery('timeToFirstByteUs'),
     crawlers: `SELECT verifiedBotCategory AS category, COUNT(*) AS requests FROM events.httpRequests WHERE clientRequestHttpHost = '${SITE_HOST}' AND verifiedBotCategory != '' AND ${window(7)} GROUP BY category ORDER BY requests DESC LIMIT 10`,
-    csp: `SELECT index1 AS directive, COUNT(*) AS n FROM ${DATASET} WHERE blob1 = 'csp' AND ${window(7)} GROUP BY directive ORDER BY n DESC LIMIT 10`,
+    csp: `SELECT index1 AS directive, COUNT(*) AS n FROM ${DATASET} WHERE blob1 = 'csp' AND ${window(7)} GROUP BY directive ORDER BY n DESC LIMIT 30`,
     edge: `SELECT CASE WHEN originResponseStatus = 0 THEN 'edge' ELSE 'origin' END AS served, COUNT(*) AS requests FROM events.httpRequests WHERE clientRequestHttpHost = '${SITE_HOST}' AND clientRequestPath NOT LIKE '/api/%' AND clientRequestPath NOT LIKE '/mcp%' AND requestSource = 'eyeball' AND ${window(1)} GROUP BY served LIMIT 5`,
 };
 
@@ -186,18 +186,27 @@ export function shapeCrawlers(rows) {
 
 /**
  * How many reports of "this would have been blocked" in 7 days, and by which directive. A query
- * that worked and found none is a measured 0; one that failed is null.
- * @returns {{ last7d: number, byDirective: { directive: string, count: number }[] } | null}
+ * that worked and found none is a measured 0; one that failed is null. `since` is the day
+ * reporting was switched on (the CSP_REPORTING_SINCE setting), or null while it has not been:
+ * the page must not guess it, since a zero before reporting existed proves nothing.
+ *
+ * The query returns every directive (there are fewer than 30), because the total is their sum.
+ * @returns {{ last7d: number, byDirective: { directive: string, count: number }[], since: string | null } | null}
  */
-export function shapeCsp(rows) {
+export function shapeCsp(rows, since) {
     if (!rows) return null;
     const byDirective = rows.map(({ directive, n }) => ({
         directive: String(directive),
         count: number(n) ?? 0,
     }));
+    const day =
+        typeof since === 'string' &&
+        !Number.isNaN(Date.parse(since)) &&
+        /^\d{4}-\d{2}-\d{2}$/.test(since);
     return {
         last7d: byDirective.reduce((sum, row) => sum + row.count, 0),
         byDirective: byDirective.filter(row => row.count > 0).slice(0, 5),
+        since: day ? since : null,
     };
 }
 
@@ -234,7 +243,7 @@ export async function buildStats(env) {
             ttfb: r.vitalsTtfb,
         }),
         crawlers: shapeCrawlers(r.crawlers),
-        csp: shapeCsp(r.csp),
+        csp: shapeCsp(r.csp, env.CSP_REPORTING_SINCE),
         edge: shapeEdge(r.edge),
     };
 }

@@ -23,7 +23,7 @@ const MAX_BODY_BYTES = 8192;
 const MAX_REPORTS = 5;
 const MAX_TEXT = 100;
 
-const DIRECTIVES = new Set([
+export const DIRECTIVES = new Set([
     'default-src',
     'script-src',
     'script-src-elem',
@@ -45,12 +45,12 @@ const DIRECTIVES = new Set([
     'frame-ancestors',
 ]);
 
+/** A report is JSON from a stranger: a field that is not text is no field at all. */
+const asText = value => (typeof value === 'string' ? value : '');
+
 /** Only the directives the policy has: a free-form name from the sender would be unbounded. */
 export function directiveName(raw) {
-    const name = String(raw ?? '')
-        .trim()
-        .split(/\s+/)[0]
-        .toLowerCase();
+    const name = asText(raw).trim().split(/\s+/)[0].toLowerCase();
     return DIRECTIVES.has(name) ? name : 'other';
 }
 
@@ -58,9 +58,7 @@ const KEYWORDS = new Set(['inline', 'eval', 'data', 'blob', 'about', 'self', 'wa
 
 /** What was blocked, as a host or a keyword. Never a path or a query, which can carry anything. */
 export function blockedSource(raw) {
-    const value = String(raw ?? '')
-        .trim()
-        .toLowerCase();
+    const value = asText(raw).trim().toLowerCase();
     if (!value) return 'unknown';
     if (KEYWORDS.has(value)) return value;
     try {
@@ -75,7 +73,7 @@ export function blockedSource(raw) {
 /** @returns {{ host: string, path: string }} the page's host, and its path without query or fragment */
 export function pageOf(documentUrl) {
     try {
-        const { hostname, pathname } = new URL(String(documentUrl));
+        const { hostname, pathname } = new URL(asText(documentUrl));
         return { host: hostname.toLowerCase(), path: pathname.slice(0, MAX_TEXT) };
     } catch {
         return { host: '', path: '' };
@@ -154,15 +152,20 @@ export async function handleCspReport(request, env) {
     const raw = await readCapped(request, MAX_BODY_BYTES);
     if (raw === null) return done();
 
-    for (const report of parseReports(raw)) {
-        const { host, path } = pageOf(report.documentUrl);
-        // A report about some other site, or about nothing, is not about this one
-        if (host !== SITE_HOST) continue;
-        recordCsp(env, {
-            directive: directiveName(report.directive),
-            blocked: blockedSource(report.blockedUrl),
-            path,
-        });
+    // Whatever a stranger sends, the answer is the same empty 204
+    try {
+        for (const report of parseReports(raw)) {
+            const { host, path } = pageOf(report.documentUrl);
+            // A report about some other site, or about nothing, is not about this one
+            if (host !== SITE_HOST) continue;
+            recordCsp(env, {
+                directive: directiveName(report.directive),
+                blocked: blockedSource(report.blockedUrl),
+                path,
+            });
+        }
+    } catch {
+        // Not a report we can read
     }
     return done();
 }

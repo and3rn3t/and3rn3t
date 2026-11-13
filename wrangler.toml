@@ -22,6 +22,13 @@ routes = [
 # Source maps make stack traces in logs, traces and Issues point at worker/*.js lines.
 upload_source_maps = true
 
+# Settings. CSP_REPORTING_SINCE is the day (YYYY-MM-DD) `pnpm zone --only headers --apply` added
+# report-uri to the Content-Security-Policy: set it once the live header is confirmed to have it,
+# then redeploy. While it is empty /status/ says reporting is not switched on and shows no zero,
+# which is the safe way to be wrong: "0 reports" before anything could report looks like assurance.
+[vars]
+CSP_REPORTING_SINCE = ""
+
 [observability]
 enabled = true
 

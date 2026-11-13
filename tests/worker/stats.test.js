@@ -5,6 +5,7 @@
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import worker from '../../worker/index.js';
+import { DIRECTIVES } from '../../worker/csp-report.js';
 import { runProbe } from '../../worker/probe.js';
 import {
     MIN_VITALS_SAMPLES,
@@ -186,22 +187,58 @@ describe('shaping', () => {
 
     // 0 is a measurement ("the query ran and nothing was reported"); null is "could not be read"
     it('shapeCsp is a measured zero for no reports, a total with the busiest directives, null on failure', () => {
-        expect(shapeCsp([])).toEqual({ last7d: 0, byDirective: [] });
+        expect(shapeCsp([])).toEqual({ last7d: 0, byDirective: [], since: null });
         expect(
-            shapeCsp([
-                { directive: 'img-src', n: 4 },
-                { directive: 'script-src-elem', n: 9 },
-            ])
+            shapeCsp(
+                [
+                    { directive: 'img-src', n: 4 },
+                    { directive: 'script-src-elem', n: 9 },
+                ],
+                '2026-11-13'
+            )
         ).toEqual({
             last7d: 13,
             byDirective: [
                 { directive: 'img-src', count: 4 },
                 { directive: 'script-src-elem', count: 9 },
             ],
+            since: '2026-11-13',
         });
         expect(shapeCsp(null)).toBeNull();
-        const seven = Array.from({ length: 7 }, (_, i) => ({ directive: `d${i}`, n: 1 }));
-        expect(shapeCsp(seven).byDirective).toHaveLength(5);
+        expect(shapeCsp(null, '2026-11-13')).toBeNull();
+    });
+
+    // The total is the sum of the rows, so a row left out is a report not counted
+    it('shapeCsp totals every directive, and only shows the busiest five', () => {
+        const twelve = Array.from({ length: 12 }, (_, i) => ({ directive: `d${i}`, n: 1 }));
+        const csp = shapeCsp(twelve);
+        expect(csp.last7d).toBe(12);
+        expect(csp.byDirective).toHaveLength(5);
+    });
+
+    it('the csp query does not cut the list short of every directive the parser accepts', () => {
+        const limit = Number(QUERIES.csp.match(/LIMIT (\d+)/)[1]);
+        // every directive in the list, plus "other"
+        expect(limit).toBeGreaterThanOrEqual(DIRECTIVES.size + 1);
+    });
+
+    // The page never guesses the day reporting began; only a real date from the setting counts
+    it.each([
+        ['2026-11-13', '2026-11-13'],
+        ['', null],
+        [undefined, null],
+        ['yesterday', null],
+        ['2026-13-45', null],
+        ['2026-11-13T00:00:00Z', null],
+        [20261113, null],
+    ])('shapeCsp reads the setting %j as %j', (setting, expected) => {
+        expect(shapeCsp([], setting).since).toBe(expected);
+    });
+
+    it("buildStats passes the setting through from the Worker's environment", async () => {
+        const env = { ANALYTICS_SQL: fakeBinding(), CSP_REPORTING_SINCE: '2026-11-14' };
+        expect((await buildStats(env)).csp.since).toBe('2026-11-14');
+        expect((await buildStats({ ANALYTICS_SQL: fakeBinding() })).csp.since).toBeNull();
     });
 
     it('shapeCrawlers and shapeEdge are aggregates', () => {

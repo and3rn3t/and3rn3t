@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
     VITALS,
-    cspNote,
+    cspStatus,
     dayReadout,
     dayState,
     formatMs,
@@ -203,19 +203,52 @@ describe('vitals', () => {
     });
 });
 
-describe('cspNote', () => {
-    it('names the day collection began while the 7-day window still reaches back before it', () => {
-        expect(cspNote(new Date('2026-11-13T10:00:00Z'), '2026-11-13')).toBe(
-            'Collected since Fri, Nov 13'
-        );
-        expect(cspNote(new Date('2026-11-19T23:00:00Z'), '2026-11-13')).toBe(
-            'Collected since Fri, Nov 13'
+describe('cspStatus', () => {
+    const now = new Date('2026-11-16T10:00:00Z');
+
+    // The page never guesses when reporting began: a zero before anything could report proves nothing
+    it('is a dash and "not switched on yet" while no reporting day is set and nothing has arrived', () => {
+        expect(cspStatus({ last7d: 0, since: null }, now)).toEqual({
+            value: '\u2014',
+            note: 'Reporting is not switched on yet.',
+        });
+    });
+
+    it('is also "not switched on yet" for a reporting day that has not come', () => {
+        expect(cspStatus({ last7d: 0, since: '2026-11-20' }, now).note).toBe(
+            'Reporting is not switched on yet.'
         );
     });
 
-    it('says nothing once the window is entirely after it, or for a date it cannot read', () => {
-        expect(cspNote(new Date('2026-11-20T00:00:00Z'), '2026-11-13')).toBe('');
-        expect(cspNote(new Date('2026-11-13T10:00:00Z'), 'not a date')).toBe('');
+    it('shows the count, and since when, while the 7-day window reaches back before it', () => {
+        expect(cspStatus({ last7d: 0, since: '2026-11-13' }, now)).toEqual({
+            value: '0',
+            note: 'Collected since Fri, Nov 13',
+        });
+        expect(cspStatus({ last7d: 4, since: '2026-11-13' }, now).value).toBe('4');
+    });
+
+    it('drops the note once the whole window is after the day it began', () => {
+        expect(
+            cspStatus({ last7d: 0, since: '2026-11-13' }, new Date('2026-11-20T00:00:00Z'))
+        ).toEqual({
+            value: '0',
+            note: '',
+        });
+    });
+
+    // Reports arriving prove it is on, whatever the setting says
+    it('shows reports that arrive even if the setting is not set', () => {
+        expect(cspStatus({ last7d: 3, since: null }, now)).toEqual({ value: '3', note: '' });
+    });
+
+    it('is a dash saying so when the count could not be read, or an older Worker sent none', () => {
+        for (const csp of [null, undefined]) {
+            expect(cspStatus(csp, now)).toEqual({
+                value: '\u2014',
+                note: 'Not available right now.',
+            });
+        }
     });
 });
 
@@ -322,21 +355,25 @@ describe('rendering', () => {
         expect(text('[data-uptime-readout]')).not.toContain('No checks recorded yet');
     });
 
-    // 0 is a measurement; before the policy reported anywhere it only meant nobody could report
-    it('shows the report count, and says since when it has been collected while that matters', () => {
-        renderStatus(root, { ...full, csp: { last7d: 0, byDirective: [] } }, NOW);
+    it('shows the report count with since when, and a dash while reporting is not switched on', () => {
+        renderStatus(
+            root,
+            { ...full, csp: { last7d: 0, byDirective: [], since: '2026-11-13' } },
+            NOW
+        );
         expect(text('[data-stat="csp-7d"]')).toBe('0');
         expect(text('[data-stat="csp-note"]')).toBe('Collected since Fri, Nov 13');
         expect(root.querySelectorAll('[data-rank="csp"] .rank__row')).toHaveLength(0);
 
-        const later = new Date('2026-11-25T12:00:00Z');
-        renderStatus(root, { ...full, csp: { last7d: 0, byDirective: [] } }, later);
-        expect(text('[data-stat="csp-note"]')).toBe('');
+        renderStatus(root, { ...full, csp: { last7d: 0, byDirective: [], since: null } }, NOW);
+        expect(text('[data-stat="csp-7d"]')).toBe('\u2014');
+        expect(text('[data-stat="csp-note"]')).toBe('Reporting is not switched on yet.');
     });
 
     it('lists the directives the reports are about, the busiest first', () => {
         const csp = {
             last7d: 13,
+            since: '2026-11-13',
             byDirective: [
                 { directive: 'script-src-elem', count: 9 },
                 { directive: 'img-src', count: 4 },

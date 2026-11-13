@@ -4,6 +4,8 @@
  */
 import { describe, expect, it, vi } from 'vitest';
 import worker from '../../worker/index.js';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import {
     blockedSource,
     directiveName,
@@ -107,6 +109,83 @@ describe('reading the parts', () => {
         }
         const many = modern(...Array.from({ length: 50 }, () => ({ blockedURL: 'inline' })));
         expect(parseReports(many)).toHaveLength(5);
+    });
+});
+
+// A report is JSON from a stranger, and these used to throw ("Cannot convert object to primitive
+// value"), turning the promised empty 204 into a 500
+describe('hostile field values', () => {
+    const hostile = [{ toString: null }, ['img-src'], [], {}, 5, true, null];
+
+    it.each(hostile.map(value => [JSON.stringify(value), value]))(
+        'the parts treat %s as no text at all',
+        (_label, value) => {
+            expect(directiveName(value)).toBe('other');
+            expect(blockedSource(value)).toBe('unknown');
+            expect(pageOf(value)).toEqual({ host: '', path: '' });
+        }
+    );
+
+    it.each(hostile.map(value => [JSON.stringify(value), value]))(
+        'a report with %s in each field gets a 204',
+        async (_label, value) => {
+            const env = envWithMetrics();
+            for (const field of ['effective-directive', 'blocked-uri', 'document-uri']) {
+                const body = JSON.stringify({
+                    'csp-report': {
+                        'document-uri': 'https://andernet.dev/',
+                        'blocked-uri': 'inline',
+                        'effective-directive': 'img-src',
+                        [field]: value,
+                    },
+                });
+                const response = await handleCspReport(post(body), env);
+                expect(response.status, field).toBe(204);
+            }
+        }
+    );
+
+    it('a hostile field still records what can be read of it, as "other" or "unknown"', async () => {
+        const env = envWithMetrics();
+        await handleCspReport(
+            post(
+                JSON.stringify({
+                    'csp-report': {
+                        'document-uri': 'https://andernet.dev/x/',
+                        'blocked-uri': { toString: null },
+                        'effective-directive': ['img-src'],
+                    },
+                })
+            ),
+            env
+        );
+        expect(points(env.METRICS)).toEqual([
+            { indexes: ['other'], blobs: ['csp', 'unknown', '/x/'], doubles: [1] },
+        ]);
+    });
+
+    it('survives odd shapes of the whole body', async () => {
+        const env = envWithMetrics();
+        for (const body of [
+            '{"csp-report": "text"}',
+            '{"csp-report": [1, 2]}',
+            '[{"type":"csp-violation","body":"text"}]',
+            '[{"type":"csp-violation","body":null},null,5,"x"]',
+            '[[[[[[[[[[]]]]]]]]]]',
+            '{"a":{"b":{"c":{"d":{}}}}}',
+            '"just a string"',
+        ]) {
+            expect((await handleCspReport(post(body), env)).status, body).toBe(204);
+        }
+    });
+});
+
+describe('the setting that says reporting is on', () => {
+    const toml = readFileSync(join(import.meta.dirname, '../../wrangler.toml'), 'utf8');
+
+    // Set only once someone has seen the live header carry report-uri; empty is the safe default
+    it('exists, and ships empty', () => {
+        expect(toml).toMatch(/^\[vars\]\s*\n(?:#.*\n)*CSP_REPORTING_SINCE = ""$/m);
     });
 });
 
