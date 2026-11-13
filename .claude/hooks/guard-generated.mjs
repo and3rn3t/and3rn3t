@@ -13,6 +13,7 @@
 
 import { readFileSync } from 'node:fs';
 import { isAbsolute, relative, sep } from 'node:path';
+import process from 'node:process';
 import { pathToFileURL } from 'node:url';
 
 /** Whole files and directories that are generated, with where the real source lives. */
@@ -110,7 +111,7 @@ async function main() {
   }
   const reason = blockedReason({ ...call, root: process.env.CLAUDE_PROJECT_DIR ?? process.cwd() });
   if (reason) {
-    console.error(reason);
+    process.stderr.write(`${reason}\n`);
     process.exit(2);
   }
 }
