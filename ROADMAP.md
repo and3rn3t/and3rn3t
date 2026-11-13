@@ -45,10 +45,52 @@ Pages as the origin.
 | 12.6 | Report-only CSP reports (#284), switched on and counted on `/status/` (#285)                                                        | ✅ 2026-11-13 |
 | 12.7 | Alerts: the silent-probe gate (`pnpm check:probe`, daily); the Monitors, a Health Check and an Issues automation are dashboard-only | 🟡 2026-11-13 |
 
+## Phase 13 — Claude (candidates)
+
+Ideas for Claude-specific work on the repo and the site, ranked. Nothing here is decided: Matt picks, then
+each pick gets its own plan and PR from `main`. Rules carried over: Claude may run in the editor, CI or a
+build script, but never when a visitor loads the site (the 2026-11-11 "no ask feature" decision), and
+nothing deploys or touches the zone without an explicit go. Effort: S under a day, M a day or two, L more.
+
+| #     | Idea                                                                                                                                                                                                                              | Effort | Needs                                         | Status |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------- | ------ |
+| 13.1  | MCP tool annotations: a `title` and `readOnlyHint` on all 8 tools in `worker/mcp.js` (none has them today), plus `outputSchema`. Claude auto-runs read-only tools; directory review requires them                                 | S      | A Worker deploy go                            | 🟡     |
+| 13.2  | Repo skills in `.claude/skills/`: `ship-worker` (dry run, diff, deploy on an explicit go, verify live, note the rollback id), `zone-apply`, `qa-live`; a checked-in `.mcp.json` with the site's `/mcp` and the Cloudflare API MCP | S      | Nothing                                       | 🟡     |
+| 13.3  | Use it from Claude: test `/mcp` as a No-sign-in custom connector, add a "Use with Claude" section, write the post "Making a portfolio agent-ready" as the public docs for a Community directory listing                           | S      | Matt adds the connector (his account)         | ⬜     |
+| 13.4  | Scheduled routines: the CSP enforce-or-not check (from 2026-11-27), the AI Crawl Control comparison (2026-12-09), a weekly `pnpm check:agent-ready` diff                                                                          | S      | Nothing                                       | ⬜     |
+| 13.5  | Subagents in `.claude/agents/`: `csp-reviewer` (inline script or style changes need new hashes), `lighthouse-triage` (runner flake or real regression); `numberOfRuns: 3` in `.lighthouserc*.cjs`                                 | S      | Matt's yes on the Lighthouse change           | ⬜     |
+| 13.6  | Hook: PreToolUse guard that blocks hand edits to files `pnpm check:generated` owns; optional Stop hook running `pnpm validate`                                                                                                    | S      | Nothing                                       | ⬜     |
+| 13.7  | Plugin marketplace in its own repo: the portfolio skill plus the `/mcp` config, installable with `claude plugin marketplace add`                                                                                                  | M      | A new repo                                    | ⬜     |
+| 13.8  | Eval suite for `/mcp` and the agent skill: does Claude answer portfolio questions correctly through the tools? CI, report only                                                                                                    | M      | `ANTHROPIC_API_KEY` or an OAuth token secret  | ⬜     |
+| 13.9  | Build-time generation in `update-github-data.yml`: image alt text, post TL;DRs, a copy lint against the style rules; output checked in and reviewed in the PR                                                                     | M      | The same secret; Matt's review of the output  | ⬜     |
+| 13.10 | MCP Apps: a project card and the status panel rendered inside Claude (`@modelcontextprotocol/ext-apps`, `ui.domain` for `/mcp`)                                                                                                   | M–L    | A bundle-size spike (Worker is 1.25 MiB)      | ⬜     |
+| 13.11 | `anthropics/claude-code-action@v1` for `@claude` on PRs and issues                                                                                                                                                                | S      | The secret; check overlap with Copilot review | ⬜     |
+
+Order: 13.1 first (cheap, and 13.3, 13.7 and 13.10 build on it), then 13.2 to 13.6, which need nothing from
+outside the repo. 13.8, 13.9 and 13.11 wait on a CI secret (the repo has only `CLOUDFLARE_PURGE_TOKEN`,
+`GHA_TOKEN` and `SONAR_TOKEN`).
+
+Cost of the build-time items (estimate, not measured): a full run of 13.9 over about 30 READMEs, the post
+TL;DRs and image alt text is roughly 150k input and 20k output tokens. At cached list prices that is about
+$0.03 on Haiku 5.5 ($0.10/$0.50 per MTok), $0.50 on Sonnet 5.5 ($2/$10) or $1.00 on Opus 5.5 ($4/$20).
+Runs are daily and only when inputs change, so most days cost cents. At this size neither Batches (50% off,
+asynchronous) nor prompt caching (the shared prompt is below the minimum cacheable prefix) is worth the
+complexity.
+
+Dropped: any Claude call at visitor time (conflicts with the 2026-11-11 decision), and per-visitor
+personalisation (conflicts with the Phase 12 "no visitor tracking" decision).
+
 ## Decision Log
 
 Older entries (2026-06 to 2026-11-11, including all of Phase 10) are in
 [docs/ROADMAP-archive.md](docs/ROADMAP-archive.md).
+
+- **2026-11-13** — Phase 13 (Claude candidates) drafted, not started. Findings that shaped it: the live
+  `/mcp` has 8 tools and none carries `title` or `readOnlyHint`; claude.ai accepts a No-sign-in remote MCP
+  server over Streamable HTTP, but one GitHub issue reports it forcing OAuth, so test it live before
+  promising it; the directory needs annotations, narrow tool descriptions and public docs, and test
+  credentials do not apply to an authless server; MCP Apps work in Claude, but embedded sites and entry
+  points need a Verified listing.
 
 - **2026-11-13** — Phase 12 (edge observability) shipped, except the dashboard alerts. The Worker writes
   one Analytics Engine point per API request and MCP tool call (a fixed route, status, time and a
