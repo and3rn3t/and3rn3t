@@ -214,6 +214,21 @@ export const openApi = () => ({
                 },
             },
         },
+        '/presence': {
+            get: {
+                operationId: 'connectPresence',
+                summary: 'A WebSocket that reports how many pages of this site are open right now',
+                description:
+                    'Browsers on this site only (the Origin header is checked). The server sends {"count": n} whenever it changes and answers the text "ping" with "pong". Nothing about the visitors is sent or stored.',
+                responses: {
+                    101: { description: 'Switching to WebSocket' },
+                    403: { description: 'Not a page of this site', content: jsonBody(errorSchema) },
+                    426: { description: 'Not a WebSocket upgrade' },
+                    429: { description: 'Too many connections from this address' },
+                    503: { description: 'Not available, or too many pages open' },
+                },
+            },
+        },
         '/stats': {
             get: {
                 operationId: 'getStats',

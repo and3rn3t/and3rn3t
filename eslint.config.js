@@ -53,7 +53,14 @@ export default [
     // Cloudflare Worker (bindings and secrets arrive on `env`, not as globals)
     {
         files: ['worker/**/*.js'],
-        languageOptions: { globals: globals.worker },
+        languageOptions: {
+            // WebSocketPair and the auto-response pair exist in the Workers runtime only
+            globals: {
+                ...globals.worker,
+                WebSocketPair: 'readonly',
+                WebSocketRequestResponsePair: 'readonly',
+            },
+        },
         rules: shippedRules,
     },
 

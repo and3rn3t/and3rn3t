@@ -168,6 +168,7 @@ describe('the Content-Security-Policy', () => {
         expect(directive('connect-src')).toContain('https://api.github.com');
         // The fallback address modules/config.js uses when the page is not on andernet.dev
         expect(directive('connect-src')).toContain(WORKER_ORIGIN);
+        expect(directive('connect-src')).toContain('wss://andernet.dev');
     });
 
     it('forbids plugins, framing and a changed <base>', () => {

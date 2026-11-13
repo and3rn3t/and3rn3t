@@ -4,7 +4,7 @@
  */
 import { readFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from './fixtures.js';
+import { test, expect, mockWorker } from './fixtures.js';
 
 const { projects } = JSON.parse(readFileSync('projects-data.json', 'utf8'));
 const SLUGS = projects
@@ -168,6 +168,7 @@ test('has no horizontal overflow on a phone', async ({ browser }) => {
         isMobile: true,
         hasTouch: true,
     });
+    await mockWorker(context);
     const page = await context.newPage();
     for (const slug of SLUGS) {
         await page.goto(`/projects/${slug}/`);

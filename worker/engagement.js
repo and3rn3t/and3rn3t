@@ -18,6 +18,8 @@
  *   POST /guestbook  body: { name, message, token } → validates Turnstile, stores entry
  */
 
+import { FALLBACK_ORIGIN, isAllowedOrigin } from './origin.js';
+
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const MAX_GUESTBOOK_ENTRIES = 50;
 const MAX_NAME_LENGTH = 60;
@@ -31,9 +33,6 @@ const LEGACY_ENTRIES_KEY = 'entries'; // the old single-array storage, migrated 
 const MAX_TIMESTAMP = 9_999_999_999_999;
 const KV_LIST_MAX = 1000;
 const THROTTLE_SECONDS = 60; // KV's minimum expirationTtl
-
-const ALLOWED_ORIGINS = new Set(['https://andernet.dev', 'https://and3rn3t.github.io']);
-const FALLBACK_ORIGIN = 'https://andernet.dev';
 
 // ── Views ──────────────────────────────────────────────────────────────────
 
@@ -306,19 +305,9 @@ export function jsonResponse(data, request, status = 200) {
     });
 }
 
-/** Exact match on the parsed origin: "http://localhost.evil.com" must not pass as localhost. */
-function isLocalOrigin(origin) {
-    try {
-        const { protocol, hostname } = new URL(origin);
-        return protocol === 'http:' && (hostname === 'localhost' || hostname === '127.0.0.1');
-    } catch {
-        return false;
-    }
-}
-
 export function corsHeaders(request) {
     const origin = request.headers.get('Origin') ?? '';
-    const allowed = ALLOWED_ORIGINS.has(origin) || isLocalOrigin(origin);
+    const allowed = isAllowedOrigin(origin);
     return {
         'Access-Control-Allow-Origin': allowed ? origin : FALLBACK_ORIGIN,
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',

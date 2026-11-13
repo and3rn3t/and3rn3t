@@ -27,6 +27,7 @@ const ROUTES = new Set([
     '/openapi.json',
     '/edge',
     '/stats',
+    '/presence',
 ]);
 
 /**
