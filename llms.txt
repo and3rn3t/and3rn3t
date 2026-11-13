@@ -38,6 +38,7 @@ Education:
 
 ## Writing
 
+- [Making a Portfolio Agent-Ready: llms.txt, MCP and WebMCP](https://andernet.dev/posts/making-a-portfolio-agent-ready/): What I changed so AI assistants can read and query this site: a generated llms.txt, a clear crawl policy, a read-only MCP server on the Worker, in-page tools, and the traps along the way. (2026-11-13)
 - [How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker](https://andernet.dev/posts/how-this-site-works/): A tour of the architecture behind this portfolio: framework-free ES modules, pages pre-rendered from JSON, a WASM particle hero, a token-based design system, and a Cloudflare Worker for the live parts. (2026-07-12)
 - [On-Device Gait Analysis with iPhone LiDAR and HealthKit](https://andernet.dev/posts/lidar-gait-analysis-iphone/): How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary. (2026-05-12)
 - [Building a Local-First IoT Dashboard Without the Cloud](https://andernet.dev/posts/local-first-iot-dashboard/): Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down. (2026-04-03)
