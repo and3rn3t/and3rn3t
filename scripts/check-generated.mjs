@@ -37,7 +37,8 @@ export function checkGenerated(run = runCommand) {
   run('node', ['scripts/generate-site.mjs']);
   // trimEnd, not trim: porcelain's leading space is part of the status column (" M file").
   const drift = run('git', ['status', '--porcelain', '--', ...GENERATED_PATHS]).trimEnd();
-  if (drift.trim() === '') return { ok: true, report: 'check-generated: generated files are up to date' };
+  if (drift.trim() === '')
+    return { ok: true, report: 'check-generated: generated files are up to date' };
   const stat = run('git', ['diff', '--stat', '--', ...GENERATED_PATHS]);
   return {
     ok: false,
