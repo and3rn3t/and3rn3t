@@ -2,3 +2,4 @@
 .github/release-drafter.yml
 .github/workflows/release-drafter.yml
 .github/workflows/stale.yml
+.nvmrc
