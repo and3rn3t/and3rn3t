@@ -5,7 +5,7 @@
     <link>https://andernet.dev/#writing</link>
     <description>Technical posts on health tech, IoT, data engineering, and whatever else captures my attention.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 00:00:00 +0000</lastBuildDate>
     <managingEditor>and3rn3t@icloud.com (Matthew Anderson)</managingEditor>
     <webMaster>and3rn3t@icloud.com (Matthew Anderson)</webMaster>
     <atom:link href="https://andernet.dev/feed.xml" rel="self" type="application/rss+xml"/>
@@ -14,6 +14,46 @@
       <title>Matthew Anderson</title>
       <link>https://andernet.dev</link>
     </image>
+
+    <item>
+      <title>Making a Portfolio Agent-Ready: llms.txt, MCP and WebMCP</title>
+      <link>https://andernet.dev/posts/making-a-portfolio-agent-ready/</link>
+      <guid isPermaLink="false">https://andernet.dev/posts/making-a-portfolio-agent-ready</guid>
+      <pubDate>Fri, 13 Nov 2026 00:00:00 +0000</pubDate>
+      <description>What I changed so AI assistants can read and query this site: a generated llms.txt, a clear crawl policy, a read-only MCP server on the Worker, in-page tools, and the traps along the way.</description>
+      <category>MCP</category>
+      <category>AI Agents</category>
+      <category>Cloudflare Workers</category>
+      <category>Architecture</category>
+      <content:encoded><![CDATA[
+        <p>A visitor to this site is no longer always a person with a browser. Sometimes it is an assistant that wants to answer "what has this engineer built?" without scraping a page. In November 2026 I spent a week making the site easier for those readers, and this is what changed and what surprised me.</p>
+
+<h3>Where it started</h3>
+<p>An agent-readiness scan scored the site 3 out of 5. The pages were fine for people; for software there was no map of the content, no way to ask a question, and the CDN was blocking AI crawlers before they reached a single file. A re-scan after the work scored 4. The checks that still fail are the ones that do not apply here, such as OAuth discovery, because nothing on the site needs a login.</p>
+
+<h3>What I built</h3>
+<ul>
+<li><strong>A map to read first.</strong> <code>/llms.txt</code> lists the projects, posts and work history as Markdown links. It is generated from the same JSON files as the pages, so it cannot drift.</li>
+<li><strong>A clear crawl policy.</strong> <code>robots.txt</code> says AI training crawlers are welcome, with Content Signals that state it in a machine-readable way. This was a decision, not a default: I would rather be in the answer than absent from it.</li>
+<li><strong>A read-only MCP server.</strong> The same Cloudflare Worker that serves the live widgets now answers at <code>/mcp</code>. Its tools return the profile, projects, work history, posts, recent GitHub activity and site health numbers. Every tool only reads, and each says so in its annotations.</li>
+<li><strong>In-page tools.</strong> Browsers that support WebMCP get five tools registered from the page itself. The contact tool fills in the form but never sends it.</li>
+<li><strong>Discovery documents.</strong> An API catalog, an MCP server card and an agent skill live under <code>/.well-known/</code>, so a client can find all of the above from the domain name alone.</li>
+</ul>
+
+<h3>What surprised me</h3>
+<ul>
+<li>Cloudflare adds its own <code>robots.txt</code> block only while some AI policy is set to block. Once every policy allowed training, the block disappeared, and so did my Content Signals until I moved them into the file in the repository.</li>
+<li>Adding an MCP handler took the Worker from about 15 KiB to about 1.25 MiB. It still starts fast, but it is a number I now watch.</li>
+<li>The service worker answered any unknown same-origin request from its cache, which would have served stale API and MCP responses. It needed an early return.</li>
+<li>GitHub Pages cannot send an extensionless file as <code>application/linkset+json</code>, so the Worker serves the discovery documents on narrow routes.</li>
+</ul>
+
+<h3>Use it from Claude</h3>
+<p>The server needs no sign-in. In Claude, add it as a custom connector (Settings, Connectors, Add custom connector) with the address <code>https://andernet.dev/mcp</code> and sign-in off. In Claude Code, run <code>claude mcp add --transport http portfolio https://andernet.dev/mcp</code>. Then ask it about the projects, the posts or how the site is doing.</p>
+
+<p>None of this uses a model at the moment a visitor loads a page. The site stays static where it can be, and the agents bring their own.</p>
+      ]]></content:encoded>
+    </item>
 
     <item>
       <title>How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker</title>
