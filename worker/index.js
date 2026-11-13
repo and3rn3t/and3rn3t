@@ -36,6 +36,7 @@ import {
     corsHeaders,
 } from './engagement.js';
 import { handleMcp } from './mcp.js';
+import { handleCspReport } from './csp-report.js';
 import { handlePresenceRequest } from './presence.js';
 import { runProbe } from './probe.js';
 import { loadStats } from './stats.js';
@@ -44,6 +45,11 @@ import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
 const NEGATIVE_TTL_SECONDS = 60; // remember a failed lookup briefly so GitHub isn't hammered
+
+// Routes whose requests are not written to portfolio_metrics: a data point would carry the
+// visitor's Cloudflare location and a browser/agent guess. Presence keeps nothing about who joined;
+// a policy report is recorded on its own, without either (csp-report.js).
+const UNRECORDED_ROUTES = new Set(['/presence', '/csp-report']);
 
 // The Durable Object class must be exported from the entry point
 export { Presence } from './presence.js';
@@ -68,7 +74,7 @@ export default {
         const ms = Date.now() - started;
         // A presence handshake is not recorded: "N here now" keeps nothing about who joined, and a
         // data point would carry the visitor's Cloudflare location and a browser/agent guess
-        if (routeName !== '/presence') {
+        if (!UNRECORDED_ROUTES.has(routeName)) {
             recordRequest(env, {
                 route: routeName,
                 method: request.method,
@@ -136,6 +142,10 @@ async function route(request, env, ctx) {
 
     if (path === '/presence') {
         return handlePresenceRequest(request, env);
+    }
+
+    if (path === '/csp-report') {
+        return handleCspReport(request, env);
     }
 
     if (path === '/views') {

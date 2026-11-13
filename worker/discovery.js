@@ -214,6 +214,22 @@ export const openApi = () => ({
                 },
             },
         },
+        '/csp-report': {
+            post: {
+                operationId: 'reportCspViolation',
+                summary:
+                    "Where browsers report what the site's Content-Security-Policy would have blocked",
+                description:
+                    "Used by browsers through the policy's report-uri; not for people or agents. Always answers 204 and keeps only a directive, a blocked host and a page path.",
+                requestBody: {
+                    content: {
+                        'application/csp-report': { schema: { type: 'object' } },
+                        'application/reports+json': { schema: { type: 'array' } },
+                    },
+                },
+                responses: { 204: { description: 'Received (or ignored)' } },
+            },
+        },
         '/presence': {
             get: {
                 operationId: 'connectPresence',
@@ -271,6 +287,11 @@ export const openApi = () => ({
                                     type: ['array', 'null'],
                                     description:
                                         'Verified crawler requests by category, 7 days; empty when none, null when it could not be read',
+                                },
+                                csp: {
+                                    type: ['object', 'null'],
+                                    description:
+                                        'last7d: reports that the report-only Content-Security-Policy would have blocked something, byDirective, and since (the day reporting was switched on, or null while it has not been). 0 is a measured zero; null means it could not be read',
                                 },
                                 edge: {
                                     type: ['object', 'null'],

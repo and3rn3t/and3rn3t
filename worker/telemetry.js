@@ -12,6 +12,7 @@
  * holds every kind):
  *   request: index1 route; blob1 "request", blob2 method, blob3 colo, blob4 client; double1 status, double2 ms
  *   tool:    index1 tool;  blob1 "tool",    blob2 "ok" | "error";                  double1 0,      double2 ms
+ *   csp:     index1 directive; blob1 "csp", blob2 blocked host or keyword, blob3 page path; double1 1
  *   probe:   index1 "home"; blob1 "probe",   blob2 "ok" | "fail";                  double1 status, double2 ms
  *
  * Workers-compatible: no Node built-ins.
@@ -28,6 +29,7 @@ const ROUTES = new Set([
     '/edge',
     '/stats',
     '/presence',
+    '/csp-report',
 ]);
 
 /**
@@ -95,6 +97,24 @@ export function recordProbe(env, { ok, status, ms }) {
             indexes: ['home'],
             blobs: ['probe', ok ? 'ok' : 'fail'],
             doubles: [status, Math.round(ms)],
+        });
+    } catch {
+        // Telemetry must never break a response.
+    }
+}
+
+/**
+ * One Content-Security-Policy report: what would have been blocked, and on which page. No
+ * address and no user agent: see csp-report.js.
+ * @param {{ METRICS?: { writeDataPoint: (point: object) => void } }} env
+ * @param {{ directive: string, blocked: string, path: string }} point
+ */
+export function recordCsp(env, { directive, blocked, path }) {
+    try {
+        env.METRICS?.writeDataPoint({
+            indexes: [directive],
+            blobs: ['csp', blocked, path],
+            doubles: [1],
         });
     } catch {
         // Telemetry must never break a response.

@@ -93,6 +93,15 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   pages when the script runs: **after changing an inline `<script>` or `<style>` in `index.html` or the
   templates, run `pnpm zone --only headers --apply`** or the page reports a violation. The script owns only rules
   whose ref starts with `andernet-`; a PUT replaces a whole phase, so it sends the others back unchanged.
+  The CSP is report-only and has `report-uri /api/csp-report`: browsers post what it would have blocked to
+  `worker/csp-report.js`, which keeps only a directive, a blocked host or keyword and a page path (no query,
+  address or user agent; reports about other sites are ignored; always a 204). `/status/` shows the count for the
+  last 7 days; a steady zero over a couple of weeks is the evidence for enforcing the policy (a separate decision).
+  **After `pnpm zone --only headers --apply` adds `report-uri`, set `CSP_REPORTING_SINCE` (`wrangler.toml` `[vars]`) to
+  that day (YYYY-MM-DD) and redeploy the Worker.** It ships empty on purpose: until it is set, `/status/` shows a dash and
+  "reporting is not switched on yet" instead of a zero, because a zero from before anything could report looks like
+  assurance. Check first: `curl -sI https://andernet.dev/ | grep -i report-only` must show `report-uri /api/csp-report`.
+  `tests/e2e/csp-report.spec.js` puts the real policy on the local pages, so a page that breaks it fails there.
   `security-txt` publishes `/.well-known/security.txt` through Cloudflare.
   The `cache` group (`scripts/zone-cache.mjs`) makes the site cacheable at the edge for an hour (GitHub Pages
   sends `max-age=600` and Cloudflare does not cache HTML or JSON by default). It skips `/api/`, `/mcp`,

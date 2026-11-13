@@ -106,6 +106,53 @@ test.describe('the status page', () => {
         await expect(page.locator('[data-vitals]')).not.toContainText(' ms');
     });
 
+    test('shows the report count, and the directives when there are reports', async ({ page }) => {
+        await page.goto('/status/');
+        await expect(page.locator('[data-stat="csp-7d"]')).toHaveText('0');
+        await expect(page.locator('[data-rank="csp"] .rank__row')).toHaveCount(0);
+
+        await page.route(STATS, route =>
+            route.fulfill({
+                contentType: 'application/json',
+                headers: { 'access-control-allow-origin': '*' },
+                body: JSON.stringify({
+                    ...STATS_FIXTURE,
+                    csp: {
+                        last7d: 7,
+                        since: null,
+                        byDirective: [
+                            { directive: 'script-src-elem', count: 5 },
+                            { directive: 'img-src', count: 2 },
+                        ],
+                    },
+                }),
+            })
+        );
+        await page.goto('/status/');
+        await expect(page.locator('[data-stat="csp-7d"]')).toHaveText('7');
+        await expect(page.locator('[data-rank="csp"] .rank__row')).toHaveCount(2);
+        await expect(page.locator('[data-rank="csp"]')).toContainText('script-src-elem');
+    });
+
+    // A zero before reporting existed proves nothing, so until the Worker says it is on, no zero
+    test('shows a dash, not a zero, while reporting is not switched on', async ({ page }) => {
+        await page.route(STATS, route =>
+            route.fulfill({
+                contentType: 'application/json',
+                headers: { 'access-control-allow-origin': '*' },
+                body: JSON.stringify({
+                    ...STATS_FIXTURE,
+                    csp: { last7d: 0, byDirective: [], since: null },
+                }),
+            })
+        );
+        await page.goto('/status/');
+        await expect(page.locator('[data-stat="csp-7d"]')).toHaveText('\u2014');
+        await expect(page.locator('[data-stat="csp-note"]')).toHaveText(
+            'Reporting is not switched on yet.'
+        );
+    });
+
     test('says the numbers are unavailable, rather than inventing any, when /stats fails', async ({
         page,
     }) => {

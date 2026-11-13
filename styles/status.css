@@ -318,6 +318,11 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* A list straight after the tiles (the policy reports) has no heading to give it room */
+  .stat-grid + .rank {
+    margin-top: var(--space-5);
+  }
+
   .rank__row {
     display: grid;
     grid-template-columns: minmax(9rem, 16rem) minmax(6rem, 1fr) minmax(5rem, auto);
