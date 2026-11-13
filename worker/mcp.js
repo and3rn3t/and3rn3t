@@ -50,7 +50,7 @@ const summarise = ({ metadata, view }) => ({
 
 /**
  * @param {object} env - the Worker's bindings (SITE_ORIGIN overrides where content is read)
- * @param {{ getActivity: () => Promise<{ ok: boolean, activity?: object, error?: string }> }} deps
+ * @param {{ getActivity: () => Promise<{ ok: boolean, activity?: object, error?: string }>, getStats: () => Promise<{ ok: boolean, stats?: object, error?: string }> }} deps
  */
 export function createServer(env, deps) {
     const server = new McpServer({
@@ -258,6 +258,19 @@ export function createServer(env, deps) {
             const result = await deps.getActivity();
             if (!result.ok) return asError(`Recent activity is not available (${result.error}).`);
             return asText(result.activity);
+        }
+    );
+
+    registerTool(
+        'get_site_stats',
+        {
+            description:
+                'How andernet.dev and its API are doing: API latency and error rate, uptime history, MCP tool use, real-visitor Web Vitals and verified crawler traffic, cached for five minutes. Aggregates only; any section can be null when there is nothing to report.',
+        },
+        async () => {
+            const result = await deps.getStats();
+            if (!result.ok) return asError(`Site stats are not available (${result.error}).`);
+            return asText(result.stats);
         }
     );
 

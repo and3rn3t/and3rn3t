@@ -12,6 +12,7 @@
  * holds every kind):
  *   request: index1 route; blob1 "request", blob2 method, blob3 colo, blob4 client; double1 status, double2 ms
  *   tool:    index1 tool;  blob1 "tool",    blob2 "ok" | "error";                  double1 0,      double2 ms
+ *   probe:   index1 "home"; blob1 "probe",   blob2 "ok" | "fail";                  double1 status, double2 ms
  *
  * Workers-compatible: no Node built-ins.
  */
@@ -77,6 +78,22 @@ export function recordTool(env, { tool, ok, ms }) {
             indexes: [tool],
             blobs: ['tool', ok ? 'ok' : 'error'],
             doubles: [0, Math.round(ms)],
+        });
+    } catch {
+        // Telemetry must never break a response.
+    }
+}
+
+/**
+ * @param {{ METRICS?: { writeDataPoint: (point: object) => void } }} env
+ * @param {{ ok: boolean, status: number, ms: number }} point
+ */
+export function recordProbe(env, { ok, status, ms }) {
+    try {
+        env.METRICS?.writeDataPoint({
+            indexes: ['home'],
+            blobs: ['probe', ok ? 'ok' : 'fail'],
+            doubles: [status, Math.round(ms)],
         });
     } catch {
         // Telemetry must never break a response.
