@@ -46,6 +46,7 @@ Connect an MCP client to \`${SITE_ORIGIN}/mcp\` (Streamable HTTP, no authenticat
 - \`list_experience\`: work history and education
 - \`list_posts\` (optional \`tag\`) and \`get_post\` (\`slug\`): the technical posts, full text
 - \`get_recent_activity\`: the latest public GitHub activity
+- \`get_site_stats\`: how the site and API are doing (latency, errors, uptime, Web Vitals, crawler traffic)
 
 ## Without MCP
 
@@ -101,6 +102,7 @@ export const serverCard = () => ({
         'list_posts',
         'get_post',
         'get_recent_activity',
+        'get_site_stats',
     ],
 });
 
@@ -209,6 +211,60 @@ export const openApi = () => ({
                             },
                         }),
                     },
+                },
+            },
+        },
+        '/stats': {
+            get: {
+                operationId: 'getStats',
+                summary: 'How the site and API are doing, cached for five minutes',
+                description:
+                    'Aggregates only. Every section may be null when there is nothing to report; a null is never a zero.',
+                responses: {
+                    200: {
+                        description: 'The numbers behind https://andernet.dev/status/',
+                        content: jsonBody({
+                            type: 'object',
+                            properties: {
+                                generatedAt: { type: 'string', format: 'date-time' },
+                                api: {
+                                    type: 'object',
+                                    description:
+                                        'last24h and last7d: requests, errorRate, p50Ms, p95Ms (each may be null)',
+                                },
+                                mcp: {
+                                    type: ['array', 'null'],
+                                    description:
+                                        'tool, calls, errors for each MCP tool used in 7 days',
+                                },
+                                clients: {
+                                    type: ['object', 'null'],
+                                    description:
+                                        'agentShare: the share of API calls made by agents',
+                                },
+                                uptime: {
+                                    type: ['object', 'null'],
+                                    description:
+                                        'lastProbeAt and one entry per day with probes and ok',
+                                },
+                                vitals: {
+                                    type: ['object', 'null'],
+                                    description:
+                                        'Real visitors only: lcpMs, inpMs, cls, ttfbMs at p75',
+                                },
+                                crawlers: {
+                                    type: ['array', 'null'],
+                                    description: 'Verified crawler requests by category, 7 days',
+                                },
+                                edge: {
+                                    type: ['object', 'null'],
+                                    description:
+                                        'answeredAtEdge: the share of page and file requests answered without asking GitHub',
+                                },
+                            },
+                        }),
+                    },
+                    503: { description: 'Stats are not available', content: jsonBody(errorSchema) },
                 },
             },
         },

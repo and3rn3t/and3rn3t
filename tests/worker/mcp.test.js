@@ -97,7 +97,11 @@ const fetchMock = vi.fn(async url => {
 });
 
 const activity = { repoName: 'guess', type: 'push', message: 'feat: a thing' };
-const deps = { getActivity: vi.fn(async () => ({ ok: true, activity, cached: false })) };
+const stats = { generatedAt: '2026-11-12T00:00:00Z', api: { last24h: null, last7d: null } };
+const deps = {
+    getActivity: vi.fn(async () => ({ ok: true, activity, cached: false })),
+    getStats: vi.fn(async () => ({ ok: true, stats, cached: false })),
+};
 
 afterEach(() => {
     vi.unstubAllGlobals();
@@ -143,6 +147,7 @@ const TOOLS = [
     'list_posts',
     'get_post',
     'get_recent_activity',
+    'get_site_stats',
 ];
 
 describe('the MCP server', () => {

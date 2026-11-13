@@ -96,7 +96,14 @@ describe('OpenAPI document', () => {
     it('documents every API path the Worker serves', () => {
         const source = read('worker/index.js');
         const served = [...source.matchAll(/path (?:===|!==) '(\/[a-z]+)'/g)].map(m => m[1]);
-        expect(served.sort()).toEqual(['/activity', '/edge', '/guestbook', '/health', '/views']);
+        expect(served.sort()).toEqual([
+            '/activity',
+            '/edge',
+            '/guestbook',
+            '/health',
+            '/stats',
+            '/views',
+        ]);
         expect(Object.keys(openApi().paths).sort()).toEqual(served.sort());
     });
 

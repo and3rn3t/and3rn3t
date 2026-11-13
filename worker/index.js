@@ -36,6 +36,8 @@ import {
     corsHeaders,
 } from './engagement.js';
 import { handleMcp } from './mcp.js';
+import { runProbe } from './probe.js';
+import { loadStats } from './stats.js';
 import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
@@ -75,6 +77,11 @@ export default {
         timed.headers.append('Server-Timing', `worker;dur=${ms}`);
         return timed;
     },
+
+    // The cron trigger in wrangler.toml: the uptime probe (see probe.js)
+    async scheduled(_controller, env, _ctx) {
+        await runProbe(env);
+    },
 };
 
 /**
@@ -100,13 +107,23 @@ async function route(request, env, ctx) {
 
     // Health check
     if (path === '/health') {
-        return new Response(JSON.stringify({ ok: true }), {
-            headers: { 'Content-Type': 'application/json' },
-        });
+        return new Response(
+            JSON.stringify({
+                ok: true,
+                version: env.CF_VERSION?.tag || env.CF_VERSION?.id?.slice(0, 8) || null,
+            }),
+            {
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
     }
 
     if (path === '/edge') {
         return handleEdge(request, env);
+    }
+
+    if (path === '/stats') {
+        return handleStats(request, env);
     }
 
     if (path === '/views') {
@@ -133,6 +150,20 @@ async function route(request, env, ctx) {
     const result = await loadActivity(env);
     if (!result.ok) return jsonResponse({ error: result.error }, request, result.status);
     return jsonResponse({ ...result.activity, cached: result.cached }, request, 200);
+}
+
+/** GET /stats: the numbers behind /status/, cached for five minutes (see stats.js). */
+async function handleStats(request, env) {
+    if (request.method === 'OPTIONS') {
+        return new Response(null, { headers: corsHeaders(request) });
+    }
+    if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
+
+    const result = await loadStats(env);
+    if (!result.ok) return jsonResponse({ error: result.error }, request, result.status);
+    const response = jsonResponse({ ...result.stats, cached: result.cached }, request, 200);
+    response.headers.set('Cache-Control', 'public, max-age=60');
+    return response;
 }
 
 /**
@@ -305,5 +336,8 @@ async function serveMcp(request, env, ctx) {
             return limited;
         }
     }
-    return handleMcp(request, env, ctx, { getActivity: () => loadActivity(env) });
+    return handleMcp(request, env, ctx, {
+        getActivity: () => loadActivity(env),
+        getStats: () => loadStats(env),
+    });
 }

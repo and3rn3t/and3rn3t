@@ -37,6 +37,14 @@ enabled = true
 [version_metadata]
 binding = "CF_VERSION"
 
+# Reads portfolio_metrics and the zone's analytics datasets for /api/stats, with no API token.
+[analytics]
+binding = "ANALYTICS_SQL"
+
+# The uptime probe (worker/probe.js) runs every five minutes.
+[triggers]
+crons = ["*/5 * * * *"]
+
 # What the Worker reports about itself (worker/telemetry.js documents the layout). Queried
 # through the SQL API; data is kept three months.
 [[analytics_engine_datasets]]
