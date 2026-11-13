@@ -60,7 +60,7 @@ test.describe('JavaScript disabled', () => {
         page,
     }) => {
         await page.goto('/projects/health/');
-        await expect(page.locator('h1')).toContainText('Health');
+        await expect(page.locator('h1')).toContainText('VitalSense');
         await expect(page.locator('.project-hero img').first()).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Highlights' })).toBeVisible();

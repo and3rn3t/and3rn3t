@@ -7,8 +7,8 @@
       @layer scale, reset, tokens, base, components, sections, utilities;
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
-    <title>Self-Hosted Minecraft Server | Matthew Anderson</title>
-    <meta name="description" content="A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code." />
+    <title>Minecraft Server for Raspberry Pi 5 | Matthew Anderson</title>
+    <meta name="description" content="A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/minecraft/" />
-    <meta property="og:title" content="Self-Hosted Minecraft Server | Matthew Anderson" />
-    <meta property="og:description" content="A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code." />
+    <meta property="og:title" content="Minecraft Server for Raspberry Pi 5 | Matthew Anderson" />
+    <meta property="og:description" content="A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Self-Hosted Minecraft Server | Matthew Anderson" />
-    <meta name="twitter:description" content="A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code." />
+    <meta name="twitter:title" content="Minecraft Server for Raspberry Pi 5 | Matthew Anderson" />
+    <meta name="twitter:description" content="A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -60,13 +60,13 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  "name": "Self-Hosted Minecraft Server",
-  "description": "A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.",
+  "name": "Minecraft Server for Raspberry Pi 5",
+  "description": "A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel.",
   "url": "https://andernet.dev/projects/minecraft/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/minecraft",
   "programmingLanguage": "Python",
-  "keywords": "Shell, JavaScript, HTML, Linux",
+  "keywords": "Python, Docker, React, Bash, Raspberry Pi",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -95,7 +95,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Self-Hosted Minecraft Server",
+      "name": "Minecraft Server for Raspberry Pi 5",
       "item": "https://andernet.dev/projects/minecraft/"
     }
   ]
@@ -128,13 +128,13 @@
           <span aria-hidden="true">/</span>
           <a href="/#projects">Projects</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">Self-Hosted Minecraft Server</span>
+          <span aria-current="page">Minecraft Server for Raspberry Pi 5</span>
         </nav>
 
         <header class="project-head">
           <p class="eyebrow">DevOps &amp; Infrastructure</p>
-          <h1 class="project-head__title" data-vt="title">Self-Hosted Minecraft Server</h1>
-          <p class="project-head__lede">A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.</p>
+          <h1 class="project-head__title" data-vt="title">Minecraft Server for Raspberry Pi 5</h1>
+          <p class="project-head__lede">A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel.</p>
           <div class="project-head__actions">
             
             <a class="button button--primary" href="https://github.com/and3rn3t/minecraft" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,15 +150,16 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">The interesting part of this project isn&#39;t Minecraft — it&#39;s the operational layer around it. A single provisioning script takes a fresh Linux host to a fully-configured, plugin-loaded server. Scheduled backups run with rotation policies to protect world data. A lightweight vanilla JavaScript dashboard surfaces real-time player count, server TPS, and JVM resource usage without any framework overhead. Everything is version-controlled: configs, scripts, and plugin manifests. It&#39;s the same infrastructure-as-code mindset I apply to production systems, applied to something I actually use.</p>
+              <p class="project-body__overview">The interesting part isn&#39;t Minecraft, it&#39;s the operations around it. The stack is tuned for the Pi 5 (ARM64): Docker Compose with systemd units, scheduled backups with retention plus offsite copies to R2, S3 or B2, multi-world management, and plugin and mod management across Vanilla, Paper, Spigot and Fabric. A Flask REST API and a React 19 admin panel (with roles, API keys and OAuth) manage it, and the Pi pulls the newest green commit on main every five minutes. On top sits a layer of family gameplay features, from graves and lucky blocks to a bedtime and a Claude-powered chat companion, driven by an event bus that reads the server log.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>One-command provisioning: fresh host to fully-configured server via shell script</li>
-              <li>Automated backup pipeline with rotation — no manual intervention for world preservation</li>
-              <li>Vanilla JS monitoring dashboard: player count, TPS, and JVM metrics in real time</li>
-              <li>Config and plugin manifests version-controlled in git — fully reproducible</li>
+              <li>Docker Compose on a Raspberry Pi 5, started at boot by systemd</li>
+              <li>Scheduled backups with retention, plus offsite copies to R2, S3 or B2</li>
+              <li>Flask REST API and React admin panel with roles, API keys and OAuth</li>
+              <li>Auto-deploys the newest green commit on main every five minutes</li>
+              <li>Family gameplay features on an event bus that reads the server log</li>
             </ul>
           </section>
           </article>
@@ -169,7 +170,7 @@
               <div class="facts__row"><dt>Language</dt><dd>Python</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">Shell</li><li class="tag">JavaScript</li><li class="tag">HTML</li><li class="tag">Linux</li></ul>
+            <ul class="tag-list"><li class="tag">Python</li><li class="tag">Docker</li><li class="tag">React</li><li class="tag">Bash</li><li class="tag">Raspberry Pi</li></ul>
           </aside>
         </div>
 
@@ -180,7 +181,7 @@
           </a>
           <a class="pager__link pager__link--next" href="/projects/weather-app/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">iOS 26 Weather App</span>
+            <span class="pager__title">Weather for iOS 26</span>
           </a>
         </nav>
       </div>

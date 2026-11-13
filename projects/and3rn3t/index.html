@@ -8,7 +8,7 @@
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
     <title>andernet.dev — This Portfolio | Matthew Anderson</title>
-    <meta name="description" content="The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts." />
+    <meta name="description" content="The site you&#39;re on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -23,13 +23,13 @@
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/and3rn3t/" />
     <meta property="og:title" content="andernet.dev — This Portfolio | Matthew Anderson" />
-    <meta property="og:description" content="The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts." />
+    <meta property="og:description" content="The site you&#39;re on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="andernet.dev — This Portfolio | Matthew Anderson" />
-    <meta name="twitter:description" content="The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts." />
+    <meta name="twitter:description" content="The site you&#39;re on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -61,12 +61,12 @@
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "andernet.dev — This Portfolio",
-  "description": "The site you're on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.",
+  "description": "The site you're on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts.",
   "url": "https://andernet.dev/projects/and3rn3t/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/and3rn3t",
   "programmingLanguage": "JavaScript",
-  "keywords": "JavaScript, WebAssembly, Cloudflare Workers, Vite, GitHub Actions",
+  "keywords": "JavaScript, WebAssembly, Cloudflare Workers, GitHub Actions, Playwright",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -134,7 +134,7 @@
         <header class="project-head">
           <p class="eyebrow">Tools &amp; Automation</p>
           <h1 class="project-head__title" data-vt="title">andernet.dev — This Portfolio</h1>
-          <p class="project-head__lede">The site you&#39;re on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.</p>
+          <p class="project-head__lede">The site you&#39;re on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts.</p>
           <div class="project-head__actions">
             <a class="button button--primary" href="https://andernet.dev" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
             <a class="button" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,16 +150,16 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">This portfolio is plain ES modules served straight from GitHub Pages: no framework, with a phased startup that lazy-loads everything beyond the critical path. The hero background is a particle flow-field written in AssemblyScript and compiled to WebAssembly. It falls back to a WebGL gradient, then to CSS, depending on what the device can handle. A small Cloudflare Worker covers what static hosting can&#39;t: Open Graph cards, a KV-backed view counter, a Turnstile-protected guestbook, and a cached feed of recent GitHub activity. A daily GitHub Actions workflow refreshes repository stats and the contribution calendar, so the numbers on the page stay current.</p>
+              <p class="project-body__overview">This portfolio is plain ES modules served straight from GitHub Pages, with no framework and no build step. The project and post pages are generated from JSON data files, so they read fine without JavaScript, and the home page runs a short critical path before starting each feature as it nears the viewport. The hero background is a particle flow-field written in AssemblyScript and compiled to WebAssembly, falling back to a WebGL gradient and then to CSS. A Cloudflare Worker on the same domain handles what static hosting can&#39;t: view counts, a Turnstile-protected guestbook, recent GitHub activity, a public status page fed by its own uptime probe, and a read-only MCP server so AI agents can query the portfolio. A daily GitHub Actions workflow refreshes the GitHub data and regenerates the pages.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Framework-free ES modules with a phased, lazy-loaded startup</li>
+              <li>Framework-free ES modules; project and post pages pre-rendered from JSON</li>
               <li>AssemblyScript → WebAssembly particle flow-field with WebGL and CSS fallbacks</li>
-              <li>Cloudflare Worker + KV for OG cards, view counts, guestbook and live activity</li>
-              <li>Daily Actions workflow keeps stats and the contribution heatmap fresh</li>
-              <li>ESLint, Vitest, Playwright + axe-core and Lighthouse CI on every change</li>
+              <li>Cloudflare Worker for view counts, the guestbook, live activity and the /status/ page</li>
+              <li>Agent-ready: llms.txt, Markdown responses and a read-only MCP server</li>
+              <li>Vitest, Playwright + axe and Lighthouse CI budgets (desktop and mobile) on every change</li>
             </ul>
           </section>
           </article>
@@ -170,18 +170,18 @@
               <div class="facts__row"><dt>Language</dt><dd>JavaScript</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">JavaScript</li><li class="tag">WebAssembly</li><li class="tag">Cloudflare Workers</li><li class="tag">Vite</li><li class="tag">GitHub Actions</li></ul>
+            <ul class="tag-list"><li class="tag">JavaScript</li><li class="tag">WebAssembly</li><li class="tag">Cloudflare Workers</li><li class="tag">GitHub Actions</li><li class="tag">Playwright</li></ul>
           </aside>
         </div>
 
         <nav class="pager" aria-label="More projects">
           <a class="pager__link pager__link--prev" href="/projects/guess/" rel="prev">
             <span class="eyebrow">Previous project</span>
-            <span class="pager__title">Guess — Transparent Akinator</span>
+            <span class="pager__title">Andernator</span>
           </a>
           <a class="pager__link pager__link--next" href="/projects/minecraft/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">Self-Hosted Minecraft Server</span>
+            <span class="pager__title">Minecraft Server for Raspberry Pi 5</span>
           </a>
         </nav>
       </div>

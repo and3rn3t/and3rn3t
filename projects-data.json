@@ -4,15 +4,21 @@
       "name": "and3rn3t",
       "featured": 4,
       "displayName": "andernet.dev — This Portfolio",
-      "description": "The site you're on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.",
-      "longDescription": "This portfolio is plain ES modules served straight from GitHub Pages: no framework, with a phased startup that lazy-loads everything beyond the critical path. The hero background is a particle flow-field written in AssemblyScript and compiled to WebAssembly. It falls back to a WebGL gradient, then to CSS, depending on what the device can handle. A small Cloudflare Worker covers what static hosting can't: Open Graph cards, a KV-backed view counter, a Turnstile-protected guestbook, and a cached feed of recent GitHub activity. A daily GitHub Actions workflow refreshes repository stats and the contribution calendar, so the numbers on the page stay current.",
-      "technologies": ["JavaScript", "WebAssembly", "Cloudflare Workers", "Vite", "GitHub Actions"],
+      "description": "The site you're on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts.",
+      "longDescription": "This portfolio is plain ES modules served straight from GitHub Pages, with no framework and no build step. The project and post pages are generated from JSON data files, so they read fine without JavaScript, and the home page runs a short critical path before starting each feature as it nears the viewport. The hero background is a particle flow-field written in AssemblyScript and compiled to WebAssembly, falling back to a WebGL gradient and then to CSS. A Cloudflare Worker on the same domain handles what static hosting can't: view counts, a Turnstile-protected guestbook, recent GitHub activity, a public status page fed by its own uptime probe, and a read-only MCP server so AI agents can query the portfolio. A daily GitHub Actions workflow refreshes the GitHub data and regenerates the pages.",
+      "technologies": [
+        "JavaScript",
+        "WebAssembly",
+        "Cloudflare Workers",
+        "GitHub Actions",
+        "Playwright"
+      ],
       "highlights": [
-        "Framework-free ES modules with a phased, lazy-loaded startup",
+        "Framework-free ES modules; project and post pages pre-rendered from JSON",
         "AssemblyScript → WebAssembly particle flow-field with WebGL and CSS fallbacks",
-        "Cloudflare Worker + KV for OG cards, view counts, guestbook and live activity",
-        "Daily Actions workflow keeps stats and the contribution heatmap fresh",
-        "ESLint, Vitest, Playwright + axe-core and Lighthouse CI on every change"
+        "Cloudflare Worker for view counts, the guestbook, live activity and the /status/ page",
+        "Agent-ready: llms.txt, Markdown responses and a read-only MCP server",
+        "Vitest, Playwright + axe and Lighthouse CI budgets (desktop and mobile) on every change"
       ],
       "category": "Tools & Automation",
       "status": "Active Development",
@@ -24,50 +30,36 @@
       "featured": 1,
       "screenshot": {
         "url": "https://health.andernet.dev/gait-analysis",
-        "alt": "The gait analysis page of the Health Analytics Platform: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis."
+        "alt": "The gait analysis page of VitalSense: gait quality, average speed, cadence and balance score, with a choice of LiDAR or walking-pattern analysis."
       },
-      "displayName": "Health Analytics Platform",
-      "description": "A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.",
-      "longDescription": "This project combines iPhone LiDAR depth sensing with Apple HealthKit to analyze gait patterns without any wearable hardware. The iPhone becomes the sensor; a TypeScript web dashboard consumes live health data through the companion HealthKitBridge local HTTP server. The platform identifies walking irregularities, tracks wellness trends over time, and surfaces personalized insights — all processed on-device with no cloud intermediary. It's a real system with a live deployment, not a prototype.",
-      "technologies": ["TypeScript", "HealthKit", "LiDAR", "iOS"],
+      "displayName": "VitalSense",
+      "description": "Apple Health insights, fall-risk scoring and caregiver alerts: a native iOS app feeding a web dashboard on Cloudflare Workers.",
+      "longDescription": "VitalSense turns Apple Health data into something a family can act on. A native SwiftUI app reads HealthKit and scores gait, balance and mobility for fall risk (using the iPhone's LiDAR sensor or its motion sensors), and when it detects a fall it alerts the people who look after you. The web side is a React 19 dashboard backed by Cloudflare Workers (Hono), with Durable Objects streaming live data between the phone and the browser over WebSockets, and a caregiver view for remote monitoring. It's live at health.andernet.dev.",
+      "technologies": ["TypeScript", "Swift", "HealthKit", "LiDAR", "Cloudflare Workers"],
       "highlights": [
-        "Live at health.andernet.dev — real iOS sensor data driving a web dashboard",
-        "LiDAR gait analysis without wearables: uses depth map data available on any modern iPhone",
-        "On-device HealthKit data pipeline — sensitive health data never leaves the local network",
-        "TypeScript frontend consuming live health data via the companion HealthKitBridge HTTP server"
+        "Live at health.andernet.dev",
+        "Fall-risk scoring from gait, balance and mobility, with fall detection and caregiver alerts",
+        "Gait analysis from iPhone LiDAR depth sensing or the motion sensors, no wearable needed",
+        "Native SwiftUI + HealthKit app, with CoreML on the device",
+        "Cloudflare Workers (Hono) and Durable Objects for real-time sync over WebSockets",
+        "Tested with Vitest, Playwright and XCTest"
       ],
       "category": "Health & Wellness",
       "status": "Active Development",
       "github_repo": "and3rn3t/health"
     },
     {
-      "name": "HealthKitBridge",
-      "displayName": "HealthKit Bridge",
-      "description": "Native iOS app that bridges Apple HealthKit data to web applications via a local on-device HTTP server.",
-      "longDescription": "HealthKitBridge is a lightweight Swift application that acts as a local data bridge between Apple's HealthKit framework and web-based dashboards. It exposes a local HTTP endpoint that web apps can query to access authorized health data in real time — no cloud intermediary required. This privacy-first approach keeps sensitive health data on-device while enabling rich visualizations in any browser. It serves as the data-access layer for the Health Analytics Platform.",
-      "technologies": ["Swift", "HealthKit", "iOS", "HTTP Server"],
-      "highlights": [
-        "On-device HTTP server for zero-cloud HealthKit access",
-        "Real-time streaming of heart rate, steps, and activity data",
-        "Privacy-first: health data never leaves the local network",
-        "Companion bridge for the Health Analytics Platform"
-      ],
-      "category": "Health & Wellness",
-      "status": "Active Development",
-      "github_repo": "and3rn3t/HealthKitBridge"
-    },
-    {
       "name": "homehub",
       "featured": 2,
-      "displayName": "Home Automation Hub",
-      "description": "A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.",
-      "longDescription": "HomeHub is a self-hosted TypeScript application that centralises control of lights, locks, thermostats, and sensors across different smart home ecosystems. It uses a WebSocket-driven architecture for sub-second device state updates without polling, and a custom rule engine for time- and state-based automations. Strong TypeScript typing is applied end-to-end — device state, event payloads, and automation rules all have explicit schemas — making the codebase maintainable as integrations grow. The project reflects how I approach personal infrastructure: I'd rather build a well-architected tool than configure someone else's SaaS.",
-      "technologies": ["TypeScript", "WebSockets", "IoT Protocols", "React"],
+      "displayName": "HomeHub",
+      "description": "An iOS-inspired smart home dashboard: Philips Hue control, live Arlo camera streaming, scenes and automations. A React 19 PWA on Cloudflare.",
+      "longDescription": "HomeHub is the control panel for my house, designed to feel like a native iOS app. It drives Philips Hue lights (colour included), streams Arlo cameras with DASH/HLS playback, and runs time-, condition- and geofence-based automations, which can also be built visually in a drag-and-drop flow designer. It's a React 19 PWA on Cloudflare Pages with Workers and KV behind it, and it keeps working offline from a local cache with optimistic updates.",
+      "technologies": ["TypeScript", "React", "Cloudflare Workers", "PWA"],
       "highlights": [
-        "WebSocket-driven real-time control — device state updates without polling",
-        "Custom automation rule engine for time- and state-based triggers",
-        "Strong TypeScript typing across device state, event payloads, and rule schemas",
-        "Self-hosted; no vendor cloud dependency for local device control"
+        "Philips Hue control with colour, and live Arlo camera streaming (DASH/HLS)",
+        "Automations with time, condition and geofence triggers, plus a drag-and-drop flow designer",
+        "Offline-first PWA: local cache, optimistic updates and a precaching service worker",
+        "Edge back end on Cloudflare Workers and KV"
       ],
       "category": "IoT & Home Automation",
       "status": "Active Development",
@@ -75,63 +67,60 @@
     },
     {
       "name": "weather",
-      "displayName": "Cross-Platform Weather App",
-      "description": "Playing around with weather app features and Android app integration using Capacitor.",
-      "longDescription": "This weather application showcases modern mobile development practices by building a single codebase that compiles to both Android and iOS using Capacitor. The app provides detailed weather information with an intuitive interface, demonstrating the power of cross-platform development while maintaining native performance and user experience. Features include location-based forecasts, severe weather alerts, and interactive weather maps.",
-      "technologies": ["TypeScript", "Capacitor", "Android", "iOS", "Weather APIs"],
+      "displayName": "Weather (web)",
+      "description": "A React and TypeScript weather web app with an iOS-style interface, Capacitor for mobile, deployed on Cloudflare.",
+      "longDescription": "The web predecessor to my native weather app: a React and TypeScript weather app with an iOS-style interface, built mobile-first, with Capacitor for native mobile features. It's still deployed at weather.andernet.dev. The repository is archived.",
+      "technologies": ["TypeScript", "React", "Capacitor", "Cloudflare Pages"],
       "highlights": [
-        "Single codebase for iOS and Android",
-        "Native performance with web technologies",
-        "Real-time weather updates and alerts",
-        "Beautiful, intuitive user interface"
+        "iOS-style interface, built mobile-first",
+        "Capacitor for native mobile features",
+        "Deployed on Cloudflare at weather.andernet.dev"
       ],
       "category": "Mobile Applications",
-      "status": "Active Development",
+      "status": "Archived",
       "github_repo": "and3rn3t/weather"
     },
     {
       "name": "couple-connect",
       "displayName": "Couple Connect",
-      "description": "Accountability app for couples to identify areas for improvement and track shared goals.",
-      "longDescription": "Couple Connect is a unique application that helps couples improve their relationships through accountability, goal tracking, and effective communication. The app provides tools for setting shared goals, tracking progress, and identifying areas for growth. Built with React and deployed on Cloudflare's edge network for global performance, it includes features like mood tracking, shared calendars, and communication exercises designed by relationship experts. The application prioritizes privacy and security for sensitive relationship data.",
-      "technologies": ["React", "JavaScript", "Vite", "Docker", "Cloudflare"],
+      "description": "A relationship app for couples: shared daily challenges, progress tracking and rewards. React 19 on Cloudflare Pages.",
+      "longDescription": "An app to help couples build habits together, by turning relationship activities into small challenges. Each partner has a profile, there are daily challenges, progress tracking and rewards for milestones, and it's designed mobile-first. Built with React 19, TypeScript, Tailwind CSS and Radix UI, deployed to Cloudflare Pages. The repository is archived.",
+      "technologies": ["TypeScript", "React", "Tailwind CSS", "Cloudflare Pages"],
       "highlights": [
-        "Shared goal tracking and accountability",
-        "Privacy-focused relationship tools",
-        "Expert-designed communication exercises",
-        "Global edge deployment for fast performance"
+        "Partner profiles, daily challenges and progress tracking",
+        "Rewards for milestones",
+        "Mobile-first design"
       ],
       "category": "Lifestyle & Relationships",
-      "status": "Active Development",
+      "status": "Archived",
       "github_repo": "and3rn3t/couple-connect"
     },
     {
       "name": "network",
-      "displayName": "Network Analytics Tool",
-      "description": "A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes.",
-      "longDescription": "The official UniFi dashboard shows you what Ubiquiti wants you to see. This Python tool queries the controller API directly to pull richer data: per-device traffic histories, client fingerprinting details, event logs, and WLAN association records. It provided the foundation for building custom alerting on unexpected devices and tracking bandwidth patterns over time. The project is also a useful template for working with any vendor REST API that exposes more than its official UI shows.",
-      "technologies": ["Python", "UniFi API", "Network Protocols", "Data Analytics"],
+      "displayName": "UniFi Network API Client",
+      "description": "A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting.",
+      "longDescription": "A Python library and collector for a local UniFi controller, tested against a UDM Pro. It polls devices and clients on a schedule into SQLite, scores network health, and raises rule-based alerts with notifications. A collection cycle of 6 devices and 38+ clients takes about three seconds. The repository is archived.",
+      "technologies": ["Python", "UniFi API", "SQLite"],
       "highlights": [
-        "Surfaces UniFi data not accessible in the official dashboard via direct API queries",
-        "Device fingerprinting and per-client traffic history across network segments",
-        "Security event monitoring with alerting on unexpected device connections",
-        "Reusable pattern for any managed network vendor with a REST API"
+        "Local UniFi controller client, tested on a UDM Pro",
+        "Scheduled collection into SQLite, about three seconds per cycle",
+        "Health scoring and rule-based alerts"
       ],
       "category": "Networking & Security",
-      "status": "Active Development",
+      "status": "Archived",
       "github_repo": "and3rn3t/network"
     },
     {
       "name": "net-traffic",
-      "displayName": "Network Traffic Analyzer",
-      "description": "A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.",
-      "longDescription": "Network Traffic Analyzer is a self-hosted TypeScript service deployed on a Raspberry Pi 5 as a persistent home network sensor. It captures traffic metadata, computes per-device bandwidth totals, and pushes updates to a live dashboard via WebSockets — with no database and no polling. The architecture is intentionally lightweight: an in-memory streaming pipeline that stays responsive even on the Pi's constrained hardware. Built to complement UniFi data with packet-level visibility that the controller API doesn't provide.",
-      "technologies": ["TypeScript", "WebSockets", "Raspberry Pi", "Network Protocols"],
+      "displayName": "NetInsight",
+      "description": "A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages.",
+      "longDescription": "NetInsight splits network monitoring in two. A Raspberry Pi 5 on the home network does the packet capture and storage and serves an API; the dashboard is a TypeScript front end on Cloudflare Pages that reaches the Pi through a tunnel. It shows traffic in real time, breaks it down by protocol, maps where connections go, and flags anomalies.",
+      "technologies": ["TypeScript", "React", "Raspberry Pi", "Cloudflare Pages"],
       "highlights": [
-        "Runs continuously on a Raspberry Pi 5 as a persistent home network sensor",
-        "Sub-second WebSocket updates — no polling, no database overhead",
-        "Top-talker detection and connection anomaly flagging without commercial tooling",
-        "In-memory streaming pipeline tuned to run on constrained Pi hardware"
+        "Packet capture, storage and API on a Raspberry Pi 5",
+        "Dashboard on Cloudflare Pages, connected to the Pi through a tunnel",
+        "Real-time traffic, protocol breakdown and geographic distribution",
+        "Anomaly detection"
       ],
       "category": "Networking & Security",
       "status": "Active Development",
@@ -139,47 +128,46 @@
     },
     {
       "name": "huggingface",
-      "displayName": "Hugging Face API Sandbox",
-      "description": "A TypeScript sandbox for the Hugging Face Inference API, comparing text generation, sentence embeddings, and zero-shot classification across open-source model families.",
-      "longDescription": "This project is a structured exploration of the Hugging Face Inference API, organised as a set of experiments rather than a single feature. Each module targets a different capability: text generation with instruction-tuned models, semantic search via sentence embeddings (without a vector database), and zero-shot classification for content tagging with no training data. A key focus is evaluating practical trade-offs — latency, output quality, and cost — between hosted inference and running models locally. The goal is to build enough hands-on intuition with open-source LLMs to make informed architectural decisions in production contexts.",
-      "technologies": ["TypeScript", "Hugging Face API", "LLMs", "Embeddings"],
+      "displayName": "HuggingFace Playground",
+      "description": "Browse Hugging Face datasets and models, compare them, and try the Inference API, in one interface.",
+      "longDescription": "A learning tool for the Hugging Face ecosystem. It has a dataset browser with filters by task, language and size; a model explorer with model cards and code snippets; an API playground that sends requests to the Inference API and shows formatted responses; and a side-by-side model comparison. Built with React 19, TypeScript and Tailwind CSS. The repository is archived.",
+      "technologies": ["TypeScript", "React", "Hugging Face API"],
       "highlights": [
-        "Semantic search via sentence embeddings — no vector DB required for small corpora",
-        "Zero-shot classification for content tagging with no labelled training data",
-        "Latency and quality benchmarks across hosted vs. local inference",
-        "Structured as reusable experiment modules, not a monolithic demo"
+        "Dataset browser and model explorer",
+        "Inference API playground with code examples",
+        "Side-by-side model comparison"
       ],
       "category": "AI & Machine Learning",
-      "status": "Active Development",
+      "status": "Archived",
       "github_repo": "and3rn3t/huggingface"
     },
     {
       "name": "hack",
-      "displayName": "Hacking Simulator",
-      "description": "A hacking simulator built in Rust for learning cybersecurity concepts.",
-      "longDescription": "This educational tool provides a safe, legal environment for learning about cybersecurity and ethical hacking concepts. Built in Rust for performance and safety, the simulator presents realistic hacking scenarios where users can learn about common vulnerabilities, security best practices, and penetration testing techniques. The project demonstrates advanced Rust programming concepts while making cybersecurity education accessible and engaging.",
-      "technologies": ["Rust", "Systems Programming", "Cybersecurity", "Game Development"],
+      "displayName": "The Hack: Ghost Protocol",
+      "description": "A horror-themed hacking simulator and capture-the-flag game in Rust, with 26+ challenges for beginners and up.",
+      "longDescription": "A terminal hacking game with a horror story wrapped around it. There are 26+ capture-the-flag challenges, from Base64 and Caesar ciphers through file-system exploration, network analysis and SQL injection to reverse engineering, with hints aimed at people who aren't security folks yet, and a sanity meter that drops as you go deeper. It's written in Rust, with difficulty variants, a practice mode that generates challenges, and several save slots. The repository is archived.",
+      "technologies": ["Rust", "Cybersecurity", "CTF"],
       "highlights": [
-        "Safe environment for learning security concepts",
-        "Realistic hacking scenarios",
-        "Built with Rust for performance and safety",
-        "Educational and engaging approach to cybersecurity"
+        "26+ CTF challenges, from encodings to SQL injection and reverse engineering",
+        "Beginner-friendly hints, with a horror story and a sanity meter",
+        "Difficulty variants and a practice mode with generated challenges",
+        "Written in Rust"
       ],
       "category": "Education & Security",
-      "status": "Active Development",
+      "status": "Archived",
       "github_repo": "and3rn3t/hack"
     },
     {
       "name": "dbt",
-      "displayName": "dbt Data Models",
-      "description": "Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources.",
-      "longDescription": "This project applies dbt as a framework for managing data transformation logic in SQL. It covers building layered data models (staging, intermediate, mart), writing schema tests for data-quality validation, and using Jinja templating to keep SQL DRY and reusable. The goal is to bring software engineering best practices — version control, automated testing, in-code documentation — into analytics engineering workflows, with Python used for orchestration and tooling around the dbt project.",
-      "technologies": ["Python", "dbt", "SQL", "Data Engineering"],
+      "displayName": "Data Science Workspace",
+      "description": "A data science workspace: Python analysis, dbt transformations and Jupyter notebooks.",
+      "longDescription": "A workspace for practising analytics engineering end to end. Python scripts fetch public data (including data.gov) into a raw, staging and processed layout, a dbt project models it in SQL, and Jupyter notebooks are where the exploring happens. It runs in Docker with a local database, and pytest covers the scripts.",
+      "technologies": ["Python", "dbt", "SQL", "Jupyter"],
       "highlights": [
-        "Layered model architecture: staging, intermediate, and mart layers",
-        "Schema tests for automated data-quality validation",
-        "Jinja templating for reusable, DRY transformation logic",
-        "Software engineering practices applied to analytics pipelines"
+        "Python fetchers for public data sources, including data.gov",
+        "dbt project for SQL transformations on top of the raw data",
+        "Jupyter notebooks for exploration",
+        "Docker setup with a local database; pytest for the scripts"
       ],
       "category": "Data Engineering",
       "status": "Active Development",
@@ -188,15 +176,16 @@
     {
       "name": "minecraft",
       "featured": 5,
-      "displayName": "Self-Hosted Minecraft Server",
-      "description": "A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.",
-      "longDescription": "The interesting part of this project isn't Minecraft — it's the operational layer around it. A single provisioning script takes a fresh Linux host to a fully-configured, plugin-loaded server. Scheduled backups run with rotation policies to protect world data. A lightweight vanilla JavaScript dashboard surfaces real-time player count, server TPS, and JVM resource usage without any framework overhead. Everything is version-controlled: configs, scripts, and plugin manifests. It's the same infrastructure-as-code mindset I apply to production systems, applied to something I actually use.",
-      "technologies": ["Shell", "JavaScript", "HTML", "Linux"],
+      "displayName": "Minecraft Server for Raspberry Pi 5",
+      "description": "A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel.",
+      "longDescription": "The interesting part isn't Minecraft, it's the operations around it. The stack is tuned for the Pi 5 (ARM64): Docker Compose with systemd units, scheduled backups with retention plus offsite copies to R2, S3 or B2, multi-world management, and plugin and mod management across Vanilla, Paper, Spigot and Fabric. A Flask REST API and a React 19 admin panel (with roles, API keys and OAuth) manage it, and the Pi pulls the newest green commit on main every five minutes. On top sits a layer of family gameplay features, from graves and lucky blocks to a bedtime and a Claude-powered chat companion, driven by an event bus that reads the server log.",
+      "technologies": ["Python", "Docker", "React", "Bash", "Raspberry Pi"],
       "highlights": [
-        "One-command provisioning: fresh host to fully-configured server via shell script",
-        "Automated backup pipeline with rotation — no manual intervention for world preservation",
-        "Vanilla JS monitoring dashboard: player count, TPS, and JVM metrics in real time",
-        "Config and plugin manifests version-controlled in git — fully reproducible"
+        "Docker Compose on a Raspberry Pi 5, started at boot by systemd",
+        "Scheduled backups with retention, plus offsite copies to R2, S3 or B2",
+        "Flask REST API and React admin panel with roles, API keys and OAuth",
+        "Auto-deploys the newest green commit on main every five minutes",
+        "Family gameplay features on an event bus that reads the server log"
       ],
       "category": "DevOps & Infrastructure",
       "status": "Active Development",
@@ -204,15 +193,15 @@
     },
     {
       "name": "catastrophe",
-      "displayName": "CATastrophe Game",
-      "description": "CATastrophe: A Mischief Simulator - experimenting with Unreal Engine and C++ game development.",
-      "longDescription": "CATastrophe is an experimental game development project using Unreal Engine and C++. Players control a curious cat navigating through detailed 3D environments, knocking objects off shelves, hiding in boxes, and generally causing adorable mayhem. The project serves as a learning experience in game development, 3D physics, and Unreal Engine's powerful capabilities. It showcases advanced C++ programming in a game development context and demonstrates skills in 3D modeling, physics simulation, and game design.",
-      "technologies": ["C++", "Unreal Engine", "3D Modeling", "Game Physics", "Game Design"],
+      "displayName": "CATastrophe",
+      "description": "CATastrophe: A Mischief Simulator. A 3D Unreal Engine 5 game where you play a cat causing havoc in a house without getting caught.",
+      "longDescription": "An experiment in Unreal Engine 5 and C++. You play a cat loose in a house: knock vases off shelves, scratch furniture, shred curtains and steal food for points, while people with vision cones patrol the rooms and catch you if they see you misbehaving. It's where I'm learning third-person character control, physics-driven interactions and stealth AI.",
+      "technologies": ["C++", "Unreal Engine 5", "Game AI", "Game Physics"],
       "highlights": [
-        "Built with industry-standard Unreal Engine",
-        "Advanced physics simulation for realistic interactions",
-        "Detailed 3D environments and animations",
-        "Fun, engaging gameplay mechanics"
+        "Third-person cat with sprint, jump and climb",
+        "Physics-driven objects, each worth points when knocked over or stolen",
+        "NPCs with vision cones and patrol routes",
+        "Gameplay written in C++ on Unreal Engine 5"
       ],
       "category": "Game Development",
       "status": "Experimental",
@@ -221,16 +210,17 @@
     {
       "name": "apple-music-dj",
       "displayName": "Apple Music DJ",
-      "description": "A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.",
-      "longDescription": "Apple Music DJ is a Python skill built for OpenClaw, a macOS automation and launcher framework similar to Alfred or Raycast. It bridges keyboard-driven workflows with Apple Music playback: one shortcut opens a search palette, another queues a track or album, another adjusts volume — all without touching the mouse or switching windows. The plugin uses an AppleScript bridge for library access where the Apple Music API doesn't reach, and demonstrates the composability of Python scripting with macOS platform APIs. It's a practical tool I use daily.",
-      "technologies": ["Python", "AppleScript", "Apple Music API", "macOS"],
+      "description": "An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw.",
+      "longDescription": "Apple Music DJ is an Agent Skill: you talk to Claude Code or OpenClaw, and it reads your listening history through Apple's MusicKit API (recently played, heavy rotation, library, ratings and Replay) to build a profile of your taste. From that it makes playlists straight into your Apple Music library with nine strategies, from deep cuts and decade throwbacks to songs-like-X and two-person blends, sequenced to build and wind down rather than shuffled. Nothing in your account changes until you approve it, and a built-in demo with a fictional listener lets anyone try it without an Apple Developer account. The core needs only Python 3.11, with no pip packages. It's published on ClawHub.",
+      "technologies": ["Python", "MusicKit", "Agent Skills", "Claude Code"],
       "highlights": [
-        "Daily-use tool: keyboard-only Apple Music control from any app via OpenClaw shortcut",
-        "AppleScript bridge for library access beyond what the Apple Music API exposes",
-        "Demonstrates Python + macOS platform scripting composability",
-        "Plugin architecture integrates cleanly with OpenClaw's skill system"
+        "Taste profiling from your real listening history through MusicKit",
+        "Nine playlist strategies, sequenced with an energy arc",
+        "Read-only until you approve a change",
+        "No-account demo mode against a fictional listener",
+        "Published on ClawHub; works in Claude Code and OpenClaw"
       ],
-      "category": "Tools & Automation",
+      "category": "AI & Machine Learning",
       "status": "Active Development",
       "github_repo": "and3rn3t/apple-music-dj"
     },
@@ -241,32 +231,33 @@
         "url": "https://andernator.com",
         "alt": "The Andernator start screen: a character-guessing game with three detective personalities and a daily challenge."
       },
-      "displayName": "Guess — Transparent Akinator",
-      "description": "A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.",
-      "longDescription": "Guess is a TypeScript implementation of a 20-questions-style guessing game, with one key difference from Akinator: the algorithm is fully transparent. As you answer each question, the UI shows which candidates remain, the current confidence score, and why the next question was chosen — exposing the entropy-based selection logic in real time. The goal was to make constraint satisfaction feel intuitive rather than magical. It's live at andernator.com, works in any browser, and the decision tree logic is written from scratch with no external AI APIs.",
-      "technologies": ["TypeScript", "Algorithms", "Decision Trees"],
+      "displayName": "Andernator",
+      "description": "An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained.",
+      "longDescription": "Think of a character and Andernator asks yes/no questions until it guesses. Unlike Akinator, it shows its work: each question is picked for information gain, every answer updates Bayesian probabilities over 53,000+ characters with 224 attributes each, and the UI explains why it asked what it asked. When it guesses wrong you can teach it the character. There's a daily challenge, three difficulty levels, category filters and a Wordle-style share card. The front end is React 19 on Cloudflare Pages; the engine runs on Workers against D1, and GPT-4o (through Cloudflare AI Gateway) reads free-text answers. It's live at andernator.com.",
+      "technologies": ["TypeScript", "React", "Cloudflare D1", "Cloudflare Workers"],
       "highlights": [
-        "Live at andernator.com — playable in any browser, no install required",
-        "Decision tree and confidence score rendered in real time as you answer",
-        "Entropy-based question selection written from scratch — no external AI APIs",
-        "Makes constraint-satisfaction search intuitive by showing the algorithm's reasoning"
+        "Live at andernator.com, playable in any browser",
+        "Bayesian scoring with information-gain question selection, explained as you play",
+        "53,000+ characters with 224 attributes each, in Cloudflare D1",
+        "Teaching mode, a daily challenge and a Wordle-style share card"
       ],
-      "category": "Tools & Automation",
+      "category": "Game Development",
       "status": "Active Development",
       "github_repo": "and3rn3t/guess"
     },
     {
       "name": "weather-app",
       "featured": 6,
-      "displayName": "iOS 26 Weather App",
-      "description": "A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple's updated design system, WeatherKit, and Dynamic Island integration.",
-      "longDescription": "Built to stay current with Apple's platform as it evolves, this app tracks the iOS 26 design system and API changes in real time during the beta cycle. It uses WeatherKit for location-aware forecasts — Apple's privacy-respecting alternative to third-party weather APIs — and adopts the updated SwiftUI component system and visual language introduced in iOS 26. Dynamic Island integration provides glanceable weather state without opening the app. The project is less about the weather data and more about developing fluency with the latest Apple SDK while it's still in flux.",
-      "technologies": ["Swift", "SwiftUI", "WeatherKit", "iOS 26"],
+      "displayName": "Weather for iOS 26",
+      "description": "A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose.",
+      "longDescription": "A native weather app built to keep up with Apple's platform as iOS 26 arrived. Forecasts come from Open-Meteo, US severe-weather alerts from the National Weather Service, and radar from RainViewer. It has hourly and 14-day forecasts, air quality and UV, Swift Charts graphs, favourites saved with SwiftData, home- and lock-screen widgets, Live Activities and Siri shortcuts, all in the Liquid Glass design. The architecture is MVVM with @Observable and async/await, and there's an Android companion written in Kotlin with Jetpack Compose.",
+      "technologies": ["Swift", "SwiftUI", "SwiftData", "Kotlin", "iOS 26"],
       "highlights": [
-        "Built during the iOS 26 beta — tracking live API and design system changes",
-        "WeatherKit integration: privacy-respecting forecasts with no third-party API",
-        "Dynamic Island glanceable weather state without opening the app",
-        "Adopts the updated iOS 26 SwiftUI component system and visual language"
+        "Liquid Glass design for iOS 26",
+        "Open-Meteo forecasts, NWS severe-weather alerts and RainViewer radar",
+        "Widgets, Live Activities and Siri shortcuts",
+        "Favourites in SwiftData; MVVM with @Observable and async/await",
+        "Android companion in Kotlin and Jetpack Compose"
       ],
       "category": "Mobile Applications",
       "status": "Active Development",
@@ -275,18 +266,34 @@
     {
       "name": "remote",
       "displayName": "Denon AVR Remote",
-      "description": "A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable.",
-      "longDescription": "The official Denon remote app routes commands through the cloud, adding noticeable latency to every volume change. This Swift app bypasses that entirely: it communicates directly with the receiver over the local network via the Denon HTTP API, giving near-instant response on every control. Built with Swift structured concurrency (async/await) for a responsive UI even under rapid input, and covers volume, input switching, power, and multi-zone control. The project involved reverse-engineering the Denon HTTP API beyond what the official documentation covers.",
-      "technologies": ["Swift", "SwiftUI", "iOS", "Denon HTTP API"],
+      "description": "A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing.",
+      "longDescription": "A native iOS app for Denon AV receivers that finds them on the local network with Bonjour and controls them directly. It covers power, volume (with a configurable safety limit), 13 inputs, 18 surround modes, tone and Dynamic EQ, a sleep timer, saved scenes, and independent control of Zones 2 and 3, with now-playing in the Dynamic Island. It's also my testbed for the iOS 26 design language: Liquid Glass controls, the customisable toolbar API, split view on iPad and haptics throughout.",
+      "technologies": ["Swift", "SwiftUI", "iOS 26", "Bonjour"],
       "highlights": [
-        "Direct LAN control bypasses cloud routing — near-instant response vs. vendor app",
-        "Reverse-engineered the Denon HTTP API for volume, input, power, and zone control",
-        "Swift structured concurrency (async/await) keeps UI responsive under rapid input",
-        "Built because the official app was frustrating — a pattern I apply to any bad tooling"
+        "Finds receivers on the local network with Bonjour",
+        "Power, volume, 13 inputs and 18 surround modes, plus Zones 2 and 3",
+        "Now-playing in the Dynamic Island",
+        "Liquid Glass UI, customisable toolbar, iPad split view and keyboard shortcuts"
       ],
       "category": "IoT & Home Automation",
       "status": "Active Development",
       "github_repo": "and3rn3t/remote"
+    },
+    {
+      "name": "fastlane",
+      "displayName": "Fast Lane",
+      "description": "A single-player life-sim board game where the rat race is the board: 60 hours a week to reach four life goals before your rival does.",
+      "longDescription": "You get 60 hours a week. Rent is due, the fridge is empty, your clothes are wearing out, and your rival Riley is already at work. Travel a twelve-stop city loop, take jobs, earn degrees and buy the things that make life bearable, and hit your wealth, happiness, education and career goals before Riley does. Riley plays by exactly the same rules: its AI calls the same engine actions the buttons do. Classic life-sim mechanics (weekly rent and eviction, a drifting economy, a lottery, street robbery) are kept, and the busywork is modernised away. Built with React, TypeScript and Vite, with the engine and UI tested in Vitest.",
+      "technologies": ["TypeScript", "React", "Vite", "Vitest"],
+      "highlights": [
+        "Four goals (wealth, happiness, education, career) with adjustable targets",
+        "A rival AI that uses the same engine actions as the player",
+        "Twelve-stop city loop with jobs, school, rent, shopping and random events",
+        "Engine and UI tested with Vitest"
+      ],
+      "category": "Game Development",
+      "status": "Active Development",
+      "github_repo": "and3rn3t/fastlane"
     }
   ],
   "categories": [

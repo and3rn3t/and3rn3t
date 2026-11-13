@@ -7,8 +7,8 @@
       @layer scale, reset, tokens, base, components, sections, utilities;
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
-    <title>Network Traffic Analyzer | Matthew Anderson</title>
-    <meta name="description" content="A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time." />
+    <title>NetInsight | Matthew Anderson</title>
+    <meta name="description" content="A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/net-traffic/" />
-    <meta property="og:title" content="Network Traffic Analyzer | Matthew Anderson" />
-    <meta property="og:description" content="A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time." />
+    <meta property="og:title" content="NetInsight | Matthew Anderson" />
+    <meta property="og:description" content="A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Network Traffic Analyzer | Matthew Anderson" />
-    <meta name="twitter:description" content="A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time." />
+    <meta name="twitter:title" content="NetInsight | Matthew Anderson" />
+    <meta name="twitter:description" content="A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -60,13 +60,13 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  "name": "Network Traffic Analyzer",
-  "description": "A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.",
+  "name": "NetInsight",
+  "description": "A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages.",
   "url": "https://andernet.dev/projects/net-traffic/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/net-traffic",
   "programmingLanguage": "HTML",
-  "keywords": "TypeScript, WebSockets, Raspberry Pi, Network Protocols",
+  "keywords": "TypeScript, React, Raspberry Pi, Cloudflare Pages",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -95,7 +95,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Network Traffic Analyzer",
+      "name": "NetInsight",
       "item": "https://andernet.dev/projects/net-traffic/"
     }
   ]
@@ -128,13 +128,13 @@
           <span aria-hidden="true">/</span>
           <a href="/#projects">Projects</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">Network Traffic Analyzer</span>
+          <span aria-current="page">NetInsight</span>
         </nav>
 
         <header class="project-head">
           <p class="eyebrow">Networking &amp; Security</p>
-          <h1 class="project-head__title" data-vt="title">Network Traffic Analyzer</h1>
-          <p class="project-head__lede">A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.</p>
+          <h1 class="project-head__title" data-vt="title">NetInsight</h1>
+          <p class="project-head__lede">A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages.</p>
           <div class="project-head__actions">
             
             <a class="button button--primary" href="https://github.com/and3rn3t/net-traffic" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,15 +150,15 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">Network Traffic Analyzer is a self-hosted TypeScript service deployed on a Raspberry Pi 5 as a persistent home network sensor. It captures traffic metadata, computes per-device bandwidth totals, and pushes updates to a live dashboard via WebSockets — with no database and no polling. The architecture is intentionally lightweight: an in-memory streaming pipeline that stays responsive even on the Pi&#39;s constrained hardware. Built to complement UniFi data with packet-level visibility that the controller API doesn&#39;t provide.</p>
+              <p class="project-body__overview">NetInsight splits network monitoring in two. A Raspberry Pi 5 on the home network does the packet capture and storage and serves an API; the dashboard is a TypeScript front end on Cloudflare Pages that reaches the Pi through a tunnel. It shows traffic in real time, breaks it down by protocol, maps where connections go, and flags anomalies.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Runs continuously on a Raspberry Pi 5 as a persistent home network sensor</li>
-              <li>Sub-second WebSocket updates — no polling, no database overhead</li>
-              <li>Top-talker detection and connection anomaly flagging without commercial tooling</li>
-              <li>In-memory streaming pipeline tuned to run on constrained Pi hardware</li>
+              <li>Packet capture, storage and API on a Raspberry Pi 5</li>
+              <li>Dashboard on Cloudflare Pages, connected to the Pi through a tunnel</li>
+              <li>Real-time traffic, protocol breakdown and geographic distribution</li>
+              <li>Anomaly detection</li>
             </ul>
           </section>
           </article>
@@ -169,7 +169,7 @@
               <div class="facts__row"><dt>Language</dt><dd>HTML</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">WebSockets</li><li class="tag">Raspberry Pi</li><li class="tag">Network Protocols</li></ul>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">React</li><li class="tag">Raspberry Pi</li><li class="tag">Cloudflare Pages</li></ul>
           </aside>
         </div>
 
@@ -178,9 +178,9 @@
             <span class="eyebrow">Previous project</span>
             <span class="pager__title">Apple Music DJ</span>
           </a>
-          <a class="pager__link pager__link--next" href="/projects/healthkitbridge/" rel="next">
+          <a class="pager__link pager__link--next" href="/projects/weather/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">HealthKit Bridge</span>
+            <span class="pager__title">Weather (web)</span>
           </a>
         </nav>
       </div>

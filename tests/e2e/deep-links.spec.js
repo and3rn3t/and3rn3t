@@ -29,7 +29,7 @@ test('legacy #project/<slug> links redirect to the project page', async ({ page 
 test('legacy #project/<slug> links are case-insensitive (old modal slugs kept repo case)', async ({
     page,
 }) => {
-    await page.goto('/#project/HealthKitBridge');
-    await page.waitForURL('**/projects/healthkitbridge/');
+    await page.goto('/#project/Minecraft');
+    await page.waitForURL('**/projects/minecraft/');
     await expect(page.locator('h1')).toBeVisible();
 });

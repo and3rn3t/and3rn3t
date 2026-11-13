@@ -18,27 +18,27 @@ Education:
 
 ## Projects
 
-- [Health Analytics Platform](https://andernet.dev/projects/health/): A TypeScript + HealthKit platform that performs real-time gait analysis using iPhone LiDAR sensors.
-- [Home Automation Hub](https://andernet.dev/projects/homehub/): A TypeScript home automation hub with real-time WebSocket device control, unifying multiple smart home platforms under one event-driven dashboard.
-- [Guess — Transparent Akinator](https://andernet.dev/projects/guess/): A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.
-- [andernet.dev — This Portfolio](https://andernet.dev/projects/and3rn3t/): The site you're on: framework-free ES modules on GitHub Pages, a WebAssembly particle hero, and a Cloudflare Worker for the dynamic parts.
-- [Self-Hosted Minecraft Server](https://andernet.dev/projects/minecraft/): A self-hosted Minecraft server with shell-scripted provisioning, automated backups, and a vanilla JS monitoring dashboard — infrastructure treated as reproducible code.
-- [iOS 26 Weather App](https://andernet.dev/projects/weather-app/): A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple's updated design system, WeatherKit, and Dynamic Island integration.
-- [Apple Music DJ](https://andernet.dev/projects/apple-music-dj/): A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.
-- [Network Traffic Analyzer](https://andernet.dev/projects/net-traffic/): A TypeScript dashboard running on a Raspberry Pi 5 that streams and visualizes live network traffic — top talkers, bandwidth trends, and anomalous connections in real time.
-- [HealthKit Bridge](https://andernet.dev/projects/healthkitbridge/): Native iOS app that bridges Apple HealthKit data to web applications via a local on-device HTTP server.
-- [Cross-Platform Weather App](https://andernet.dev/projects/weather/): Playing around with weather app features and Android app integration using Capacitor.
-- [Couple Connect](https://andernet.dev/projects/couple-connect/): Accountability app for couples to identify areas for improvement and track shared goals.
-- [Network Analytics Tool](https://andernet.dev/projects/network/): A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes.
-- [Hugging Face API Sandbox](https://andernet.dev/projects/huggingface/): A TypeScript sandbox for the Hugging Face Inference API, comparing text generation, sentence embeddings, and zero-shot classification across open-source model families.
-- [Hacking Simulator](https://andernet.dev/projects/hack/): A hacking simulator built in Rust for learning cybersecurity concepts.
-- [dbt Data Models](https://andernet.dev/projects/dbt/): Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources.
-- [CATastrophe Game](https://andernet.dev/projects/catastrophe/): CATastrophe: A Mischief Simulator - experimenting with Unreal Engine and C++ game development.
-- [Denon AVR Remote](https://andernet.dev/projects/remote/): A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable.
+- [VitalSense](https://andernet.dev/projects/health/): Apple Health insights, fall-risk scoring and caregiver alerts: a native iOS app feeding a web dashboard on Cloudflare Workers.
+- [HomeHub](https://andernet.dev/projects/homehub/): An iOS-inspired smart home dashboard: Philips Hue control, live Arlo camera streaming, scenes and automations. A React 19 PWA on Cloudflare.
+- [Andernator](https://andernet.dev/projects/guess/): An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained.
+- [andernet.dev — This Portfolio](https://andernet.dev/projects/and3rn3t/): The site you're on: plain ES modules on GitHub Pages, pages pre-rendered from JSON, a WebAssembly particle hero, and a Cloudflare Worker for the live parts.
+- [Minecraft Server for Raspberry Pi 5](https://andernet.dev/projects/minecraft/): A Minecraft server stack for the Raspberry Pi 5: Docker deployment, automated and offsite backups, a Flask REST API and a React admin panel.
+- [Weather for iOS 26](https://andernet.dev/projects/weather-app/): A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose.
+- [Fast Lane](https://andernet.dev/projects/fastlane/): A single-player life-sim board game where the rat race is the board: 60 hours a week to reach four life goals before your rival does.
+- [Apple Music DJ](https://andernet.dev/projects/apple-music-dj/): An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw.
+- [NetInsight](https://andernet.dev/projects/net-traffic/): A home network traffic dashboard: packet capture on a Raspberry Pi 5, with the dashboard served from Cloudflare Pages.
+- [Weather (web)](https://andernet.dev/projects/weather/): A React and TypeScript weather web app with an iOS-style interface, Capacitor for mobile, deployed on Cloudflare.
+- [Couple Connect](https://andernet.dev/projects/couple-connect/): A relationship app for couples: shared daily challenges, progress tracking and rewards. React 19 on Cloudflare Pages.
+- [UniFi Network API Client](https://andernet.dev/projects/network/): A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting.
+- [HuggingFace Playground](https://andernet.dev/projects/huggingface/): Browse Hugging Face datasets and models, compare them, and try the Inference API, in one interface.
+- [The Hack: Ghost Protocol](https://andernet.dev/projects/hack/): A horror-themed hacking simulator and capture-the-flag game in Rust, with 26+ challenges for beginners and up.
+- [Data Science Workspace](https://andernet.dev/projects/dbt/): A data science workspace: Python analysis, dbt transformations and Jupyter notebooks.
+- [CATastrophe](https://andernet.dev/projects/catastrophe/): CATastrophe: A Mischief Simulator. A 3D Unreal Engine 5 game where you play a cat causing havoc in a house without getting caught.
+- [Denon AVR Remote](https://andernet.dev/projects/remote/): A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing.
 
 ## Writing
 
-- [How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker](https://andernet.dev/posts/how-this-site-works/): A tour of the architecture behind this portfolio: framework-free ES modules, a WASM particle simulation, design tokens, and a Worker for the dynamic parts. (2026-07-12)
+- [How This Site Works: Vanilla JS, WebAssembly, and a Cloudflare Worker](https://andernet.dev/posts/how-this-site-works/): A tour of the architecture behind this portfolio: framework-free ES modules, pages pre-rendered from JSON, a WASM particle hero, a token-based design system, and a Cloudflare Worker for the live parts. (2026-07-12)
 - [On-Device Gait Analysis with iPhone LiDAR and HealthKit](https://andernet.dev/posts/lidar-gait-analysis-iphone/): How I used the iPhone's LiDAR depth sensor and Apple HealthKit to detect walking irregularities without any wearable hardware — all processed on-device with no cloud intermediary. (2026-05-12)
 - [Building a Local-First IoT Dashboard Without the Cloud](https://andernet.dev/posts/local-first-iot-dashboard/): Why I stopped routing smart home data through vendor clouds and what I built instead — a local-first dashboard that works even when the internet is down. (2026-04-03)
 

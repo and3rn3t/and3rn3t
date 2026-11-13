@@ -8,7 +8,7 @@
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
     <title>Apple Music DJ | Matthew Anderson</title>
-    <meta name="description" content="A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps." />
+    <meta name="description" content="An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -23,13 +23,13 @@
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/apple-music-dj/" />
     <meta property="og:title" content="Apple Music DJ | Matthew Anderson" />
-    <meta property="og:description" content="A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps." />
+    <meta property="og:description" content="An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Apple Music DJ | Matthew Anderson" />
-    <meta name="twitter:description" content="A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps." />
+    <meta name="twitter:description" content="An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -61,12 +61,12 @@
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "Apple Music DJ",
-  "description": "A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.",
+  "description": "An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw.",
   "url": "https://andernet.dev/projects/apple-music-dj/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/apple-music-dj",
   "programmingLanguage": "Python",
-  "keywords": "Python, AppleScript, Apple Music API, macOS",
+  "keywords": "Python, MusicKit, Agent Skills, Claude Code",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -132,9 +132,9 @@
         </nav>
 
         <header class="project-head">
-          <p class="eyebrow">Tools &amp; Automation</p>
+          <p class="eyebrow">AI &amp; Machine Learning</p>
           <h1 class="project-head__title" data-vt="title">Apple Music DJ</h1>
-          <p class="project-head__lede">A Python plugin for OpenClaw (a macOS automation launcher) that puts full Apple Music control in a keyboard shortcut — search, queue, and play without switching apps.</p>
+          <p class="project-head__lede">An AI Apple Music curator: it profiles your real listening history and builds playlists in your library. An Agent Skill for Claude Code and OpenClaw.</p>
           <div class="project-head__actions">
             <a class="button button--primary" href="https://clawhub.ai/and3rn3t/skills/apple-music-dj" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
             <a class="button" href="https://github.com/and3rn3t/apple-music-dj" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,37 +150,38 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">Apple Music DJ is a Python skill built for OpenClaw, a macOS automation and launcher framework similar to Alfred or Raycast. It bridges keyboard-driven workflows with Apple Music playback: one shortcut opens a search palette, another queues a track or album, another adjusts volume — all without touching the mouse or switching windows. The plugin uses an AppleScript bridge for library access where the Apple Music API doesn&#39;t reach, and demonstrates the composability of Python scripting with macOS platform APIs. It&#39;s a practical tool I use daily.</p>
+              <p class="project-body__overview">Apple Music DJ is an Agent Skill: you talk to Claude Code or OpenClaw, and it reads your listening history through Apple&#39;s MusicKit API (recently played, heavy rotation, library, ratings and Replay) to build a profile of your taste. From that it makes playlists straight into your Apple Music library with nine strategies, from deep cuts and decade throwbacks to songs-like-X and two-person blends, sequenced to build and wind down rather than shuffled. Nothing in your account changes until you approve it, and a built-in demo with a fictional listener lets anyone try it without an Apple Developer account. The core needs only Python 3.11, with no pip packages. It&#39;s published on ClawHub.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Daily-use tool: keyboard-only Apple Music control from any app via OpenClaw shortcut</li>
-              <li>AppleScript bridge for library access beyond what the Apple Music API exposes</li>
-              <li>Demonstrates Python + macOS platform scripting composability</li>
-              <li>Plugin architecture integrates cleanly with OpenClaw&#39;s skill system</li>
+              <li>Taste profiling from your real listening history through MusicKit</li>
+              <li>Nine playlist strategies, sequenced with an energy arc</li>
+              <li>Read-only until you approve a change</li>
+              <li>No-account demo mode against a fictional listener</li>
+              <li>Published on ClawHub; works in Claude Code and OpenClaw</li>
             </ul>
           </section>
           </article>
           <aside class="project-body__aside" aria-label="Project facts">
             <dl class="facts">
-              <div class="facts__row"><dt>Category</dt><dd>Tools &amp; Automation</dd></div>
+              <div class="facts__row"><dt>Category</dt><dd>AI &amp; Machine Learning</dd></div>
               <div class="facts__row"><dt>Status</dt><dd>Active Development</dd></div>
               <div class="facts__row"><dt>Language</dt><dd>Python</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">Python</li><li class="tag">AppleScript</li><li class="tag">Apple Music API</li><li class="tag">macOS</li></ul>
+            <ul class="tag-list"><li class="tag">Python</li><li class="tag">MusicKit</li><li class="tag">Agent Skills</li><li class="tag">Claude Code</li></ul>
           </aside>
         </div>
 
         <nav class="pager" aria-label="More projects">
-          <a class="pager__link pager__link--prev" href="/projects/weather-app/" rel="prev">
+          <a class="pager__link pager__link--prev" href="/projects/fastlane/" rel="prev">
             <span class="eyebrow">Previous project</span>
-            <span class="pager__title">iOS 26 Weather App</span>
+            <span class="pager__title">Fast Lane</span>
           </a>
           <a class="pager__link pager__link--next" href="/projects/net-traffic/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">Network Traffic Analyzer</span>
+            <span class="pager__title">NetInsight</span>
           </a>
         </nav>
       </div>

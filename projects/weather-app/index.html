@@ -7,8 +7,8 @@
       @layer scale, reset, tokens, base, components, sections, utilities;
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
-    <title>iOS 26 Weather App | Matthew Anderson</title>
-    <meta name="description" content="A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration." />
+    <title>Weather for iOS 26 | Matthew Anderson</title>
+    <meta name="description" content="A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/weather-app/" />
-    <meta property="og:title" content="iOS 26 Weather App | Matthew Anderson" />
-    <meta property="og:description" content="A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration." />
+    <meta property="og:title" content="Weather for iOS 26 | Matthew Anderson" />
+    <meta property="og:description" content="A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="iOS 26 Weather App | Matthew Anderson" />
-    <meta name="twitter:description" content="A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration." />
+    <meta name="twitter:title" content="Weather for iOS 26 | Matthew Anderson" />
+    <meta name="twitter:description" content="A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -60,13 +60,13 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  "name": "iOS 26 Weather App",
-  "description": "A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple's updated design system, WeatherKit, and Dynamic Island integration.",
+  "name": "Weather for iOS 26",
+  "description": "A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose.",
   "url": "https://andernet.dev/projects/weather-app/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/weather-app",
   "programmingLanguage": "Swift",
-  "keywords": "Swift, SwiftUI, WeatherKit, iOS 26",
+  "keywords": "Swift, SwiftUI, SwiftData, Kotlin, iOS 26",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -95,7 +95,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "iOS 26 Weather App",
+      "name": "Weather for iOS 26",
       "item": "https://andernet.dev/projects/weather-app/"
     }
   ]
@@ -128,13 +128,13 @@
           <span aria-hidden="true">/</span>
           <a href="/#projects">Projects</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">iOS 26 Weather App</span>
+          <span aria-current="page">Weather for iOS 26</span>
         </nav>
 
         <header class="project-head">
           <p class="eyebrow">Mobile Applications</p>
-          <h1 class="project-head__title" data-vt="title">iOS 26 Weather App</h1>
-          <p class="project-head__lede">A native SwiftUI weather app built concurrently with the iOS 26 beta — a testbed for Apple&#39;s updated design system, WeatherKit, and Dynamic Island integration.</p>
+          <h1 class="project-head__title" data-vt="title">Weather for iOS 26</h1>
+          <p class="project-head__lede">A SwiftUI weather app for iOS 26 with Liquid Glass design, widgets and Live Activities, plus an Android companion in Jetpack Compose.</p>
           <div class="project-head__actions">
             
             <a class="button button--primary" href="https://github.com/and3rn3t/weather-app" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,15 +150,16 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">Built to stay current with Apple&#39;s platform as it evolves, this app tracks the iOS 26 design system and API changes in real time during the beta cycle. It uses WeatherKit for location-aware forecasts — Apple&#39;s privacy-respecting alternative to third-party weather APIs — and adopts the updated SwiftUI component system and visual language introduced in iOS 26. Dynamic Island integration provides glanceable weather state without opening the app. The project is less about the weather data and more about developing fluency with the latest Apple SDK while it&#39;s still in flux.</p>
+              <p class="project-body__overview">A native weather app built to keep up with Apple&#39;s platform as iOS 26 arrived. Forecasts come from Open-Meteo, US severe-weather alerts from the National Weather Service, and radar from RainViewer. It has hourly and 14-day forecasts, air quality and UV, Swift Charts graphs, favourites saved with SwiftData, home- and lock-screen widgets, Live Activities and Siri shortcuts, all in the Liquid Glass design. The architecture is MVVM with @Observable and async/await, and there&#39;s an Android companion written in Kotlin with Jetpack Compose.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Built during the iOS 26 beta — tracking live API and design system changes</li>
-              <li>WeatherKit integration: privacy-respecting forecasts with no third-party API</li>
-              <li>Dynamic Island glanceable weather state without opening the app</li>
-              <li>Adopts the updated iOS 26 SwiftUI component system and visual language</li>
+              <li>Liquid Glass design for iOS 26</li>
+              <li>Open-Meteo forecasts, NWS severe-weather alerts and RainViewer radar</li>
+              <li>Widgets, Live Activities and Siri shortcuts</li>
+              <li>Favourites in SwiftData; MVVM with @Observable and async/await</li>
+              <li>Android companion in Kotlin and Jetpack Compose</li>
             </ul>
           </section>
           </article>
@@ -169,18 +170,18 @@
               <div class="facts__row"><dt>Language</dt><dd>Swift</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">WeatherKit</li><li class="tag">iOS 26</li></ul>
+            <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">SwiftData</li><li class="tag">Kotlin</li><li class="tag">iOS 26</li></ul>
           </aside>
         </div>
 
         <nav class="pager" aria-label="More projects">
           <a class="pager__link pager__link--prev" href="/projects/minecraft/" rel="prev">
             <span class="eyebrow">Previous project</span>
-            <span class="pager__title">Self-Hosted Minecraft Server</span>
+            <span class="pager__title">Minecraft Server for Raspberry Pi 5</span>
           </a>
-          <a class="pager__link pager__link--next" href="/projects/apple-music-dj/" rel="next">
+          <a class="pager__link pager__link--next" href="/projects/fastlane/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">Apple Music DJ</span>
+            <span class="pager__title">Fast Lane</span>
           </a>
         </nav>
       </div>
