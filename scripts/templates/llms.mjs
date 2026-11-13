@@ -74,6 +74,7 @@ ${postLines.join('\n')}
 
 - [Home page](${SITE}/): the same content, laid out for people
 - [RSS feed](${SITE}/feed.xml): the posts, in full
+- [Status](${SITE}/status/): live uptime, API speed, Web Vitals and crawler traffic for this site (aggregates only)
 - [Sitemap](${SITE}/sitemap.xml)
 - [Résumé](${SITE}/resume.pdf): PDF
 `;

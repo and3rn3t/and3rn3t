@@ -74,15 +74,20 @@ describe('the queries', () => {
 });
 
 describe('shaping', () => {
-    it('shapeWindow gives requests, error rate and percentiles; null when there were none', () => {
+    it('shapeWindow gives the error rate and percentiles; null when there were none', () => {
         expect(shapeWindow([{ requests: 200, p50: 3.4, p95: 120.6 }], [{ errors: 2 }])).toEqual({
-            requests: 200,
             errorRate: 0.01,
             p50Ms: 3,
             p95Ms: 121,
         });
         expect(shapeWindow([{ requests: 0 }], [{ errors: 0 }])).toBeNull();
         expect(shapeWindow(null, null)).toBeNull();
+    });
+
+    // How many people visit is not published; the API calls are mostly their browsers
+    it('shapeWindow never returns a request count', () => {
+        const window = shapeWindow([{ requests: 9999, p50: 1, p95: 2 }], [{ errors: 0 }]);
+        expect(Object.keys(window)).toEqual(['errorRate', 'p50Ms', 'p95Ms']);
     });
 
     it('shapeWindow does not claim an error rate it could not measure', () => {
@@ -121,13 +126,22 @@ describe('shaping', () => {
                 { day: '2026-11-12', outcome: 'fail', probes: 8 },
                 { day: '2026-11-11', outcome: 'ok', probes: 288 },
             ],
-            [{ at: '2026-11-12T20:00:00Z' }]
+            [{ at: '2026-11-12T20:00:00Z', outcome: 'ok' }]
         );
         expect(result.days).toEqual([
             { day: '2026-11-11', probes: 288, ok: 288 },
             { day: '2026-11-12', probes: 288, ok: 280 },
         ]);
-        expect(result.lastProbeAt).toBe('2026-11-12T20:00:00Z');
+        expect(result.lastProbe).toEqual({ at: '2026-11-12T20:00:00Z', ok: true });
+        expect(
+            shapeUptime(
+                [{ day: '2026-11-12', outcome: 'fail', probes: 1 }],
+                [{ at: '2026-11-12T20:05:00Z', outcome: 'fail' }]
+            ).lastProbe.ok
+        ).toBe(false);
+        expect(
+            shapeUptime([{ day: '2026-11-12', outcome: 'ok', probes: 1 }], []).lastProbe
+        ).toBeNull();
         expect(shapeUptime([], [])).toBeNull();
     });
 
@@ -235,7 +249,7 @@ describe('buildStats and loadStats', () => {
             ),
         };
         const stats = await buildStats(env);
-        expect(stats.api.last24h).toEqual({ requests: 10, errorRate: 0, p50Ms: 1, p95Ms: 5 });
+        expect(stats.api.last24h).toEqual({ errorRate: 0, p50Ms: 1, p95Ms: 5 });
         expect(stats.vitals).toBeNull();
         expect(stats.crawlers).toBeNull();
         expect(Date.parse(stats.generatedAt)).not.toBeNaN();

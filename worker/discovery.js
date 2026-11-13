@@ -230,7 +230,7 @@ export const openApi = () => ({
                                 api: {
                                     type: 'object',
                                     description:
-                                        'last24h and last7d: requests, errorRate, p50Ms, p95Ms (each may be null)',
+                                        'last24h and last7d: errorRate, p50Ms, p95Ms (each may be null). No request counts.',
                                 },
                                 mcp: {
                                     type: ['array', 'null'],
@@ -245,7 +245,7 @@ export const openApi = () => ({
                                 uptime: {
                                     type: ['object', 'null'],
                                     description:
-                                        'lastProbeAt and one entry per day with probes and ok',
+                                        'lastProbe ({ at, ok }) and one entry per day with probes and ok',
                                 },
                                 vitals: {
                                     type: ['object', 'null'],

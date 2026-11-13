@@ -106,6 +106,11 @@ describe('the published pages', () => {
         expect(files.filter(file => file.startsWith('posts/')).length).toBeGreaterThan(0);
     });
 
+    // The status page has its own file: a script added there later would be blocked by the CSP
+    it('covers the status page', () => {
+        expect(files).toContain('status/index.html');
+    });
+
     // An independent count: every <script> opening is a file, a data block or hashed. If the
     // extraction missed one, the real CSP would be missing its hash.
     it.each(files)('%s: every <script> and <style> is accounted for', file => {

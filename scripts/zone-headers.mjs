@@ -77,6 +77,8 @@ export function pageFiles(root) {
     if (!existsSync(dir)) continue;
     for (const name of readdirSync(dir)) files.push(`${folder}/${name}/index.html`);
   }
+  // The status page is one file in its own folder
+  files.push('status/index.html');
   return files.filter(file => existsSync(join(root, file)));
 }
 

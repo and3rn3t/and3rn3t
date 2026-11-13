@@ -1,0 +1,388 @@
+/*
+ * The status page (scripts/templates/status-page.mjs, modules/status-page.js). Chrome, tokens and
+ * primitives are in core.css; the page shell is in article.css. Colour is the site's tokens only:
+ * one accent hue for "good" and magnitude, --danger for failures, and every state also has a
+ * word or a shape, never colour alone.
+ */
+
+@layer sections {
+  .status-head {
+    max-width: 46rem;
+    margin-bottom: var(--space-8);
+  }
+
+  .status-title {
+    margin: var(--space-2) 0 var(--space-4);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  .status-lede,
+  .status-note {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .status-note {
+    margin-bottom: var(--space-5);
+    font-size: var(--font-size-sm);
+  }
+
+  .status-note--after {
+    margin: var(--space-3) 0 0;
+  }
+
+  /* --- The headline: is it answering? A word, plus a dot whose shape differs when it is not --- */
+  .status-verdict {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-4);
+    margin-bottom: var(--space-6);
+    padding: var(--space-4) var(--space-5);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+  }
+
+  .status-verdict__label,
+  .status-verdict__detail {
+    margin: 0;
+  }
+
+  .status-verdict__label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .status-verdict__label::before {
+    content: '';
+    flex: none;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    border-radius: var(--radius-full);
+    background: var(--muted);
+  }
+
+  .status-verdict[data-state='up'] .status-verdict__label::before {
+    background: var(--accent);
+  }
+
+  /* A square, not a circle: the shape says "not fine" without the colour */
+  .status-verdict[data-state='down'] .status-verdict__label::before {
+    border-radius: var(--radius-sm);
+    background: var(--danger);
+  }
+
+  .status-verdict__detail {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  /* --- Sections --- */
+  .status-section {
+    margin-top: var(--space-12);
+  }
+
+  .status-section__title {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-2xl);
+    line-height: var(--line-height-snug);
+  }
+
+  .status-subtitle {
+    margin: var(--space-8) 0 var(--space-3);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* --- Stat tiles --- */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+  }
+
+  .stat-grid--single {
+    grid-template-columns: minmax(13rem, 20rem);
+  }
+
+  .stat {
+    padding: var(--space-4) var(--space-5);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+  }
+
+  .stat dt {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .stat dd {
+    margin: 0;
+  }
+
+  .stat .stat__value {
+    margin-block: var(--space-1);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+  }
+
+  .stat__sub {
+    min-block-size: 1.5em;
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- Uptime strip: one cell per day, oldest on the left. Height as well as colour says the
+         state, so it reads without colour. --- */
+  .uptime {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    align-items: end;
+    block-size: 2.5rem;
+    padding: var(--space-1) 0;
+    border-radius: var(--radius-sm);
+    cursor: default;
+  }
+
+  .uptime:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .uptime__day {
+    /* The gap between days is the surface showing through, not a border drawn on the mark */
+    border-inline: 1px solid var(--surface);
+    border-radius: var(--radius-sm);
+    block-size: 100%;
+    background: var(--accent);
+  }
+
+  .uptime__day--partial {
+    block-size: 70%;
+    background: color-mix(in srgb, var(--danger) 55%, var(--surface));
+  }
+
+  .uptime__day--down {
+    block-size: 40%;
+    background: var(--danger);
+  }
+
+  .uptime__day--none {
+    block-size: 100%;
+    background: var(--surface-sunken);
+  }
+
+  .uptime__day.is-active {
+    box-shadow: 0 0 0 2px var(--text);
+  }
+
+  .uptime__readout {
+    min-block-size: 1.5em;
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+    list-style: none;
+  }
+
+  .legend__item::before {
+    content: '';
+    display: inline-block;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    margin-inline-end: var(--space-2);
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    vertical-align: -0.1em;
+  }
+
+  .legend__item--partial::before {
+    background: color-mix(in srgb, var(--danger) 55%, var(--surface));
+  }
+
+  .legend__item--down::before {
+    background: var(--danger);
+  }
+
+  .legend__item--none::before {
+    background: var(--surface-sunken);
+    box-shadow: inset 0 0 0 1px var(--border);
+  }
+
+  .status-table {
+    margin-top: var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  .status-table summary {
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .status-table__grid {
+    inline-size: 100%;
+    max-inline-size: 36rem;
+    margin-top: var(--space-3);
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .status-table__grid th,
+  .status-table__grid td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: var(--border-width) solid var(--border);
+    text-align: start;
+  }
+
+  .status-table__grid th {
+    color: var(--muted);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* --- Meters (vitals, edge) and ranked bars. A bar grows from one baseline; the figure and its
+         verdict are text beside it. --- */
+  .meter-list,
+  .rank {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .meter {
+    display: grid;
+    grid-template-columns: minmax(10rem, 17rem) minmax(8rem, 1fr) minmax(8rem, 12rem);
+    align-items: center;
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .meter__label,
+  .meter__figure {
+    display: grid;
+  }
+
+  .meter__name {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .meter__hint,
+  .meter__note {
+    color: var(--muted);
+    font-size: var(--font-size-xs);
+  }
+
+  .meter__track {
+    overflow: hidden;
+    block-size: 0.5rem;
+    border-radius: var(--radius-full);
+    /* A lighter step of the same hue as the fill, so the whole bar reads as one scale */
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface-sunken));
+  }
+
+  .meter__fill {
+    inline-size: var(--w, 0%);
+    block-size: 100%;
+    border-radius: var(--radius-full);
+    background: var(--accent);
+  }
+
+  .meter[data-rating='over'] .meter__fill {
+    background: var(--danger);
+  }
+
+  .meter__value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rank__row {
+    display: grid;
+    grid-template-columns: minmax(9rem, 16rem) minmax(6rem, 1fr) minmax(5rem, auto);
+    align-items: center;
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .rank__name {
+    overflow-wrap: anywhere;
+  }
+
+  .rank__bar {
+    display: block;
+    inline-size: var(--w, 0%);
+    block-size: 0.75rem;
+    /* 4px at the data end, square at the baseline */
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--accent);
+  }
+
+  .rank__track {
+    display: block;
+  }
+
+  .rank__value {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+  }
+
+  .rank__empty {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 40rem) {
+    .meter {
+      grid-template-columns: 1fr auto;
+    }
+
+    .meter__track {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+
+    .rank__row {
+      grid-template-columns: 1fr auto;
+    }
+
+    .rank__track {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+
+  /* --- Prose and the "updated" line --- */
+  .status-prose p {
+    max-width: 42rem;
+    color: var(--muted);
+  }
+
+  .status-updated {
+    min-block-size: 1.5em;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+  }
+}

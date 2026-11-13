@@ -25,6 +25,12 @@ describe('stylesheet budgets', () => {
         expect(raw, `${(raw / KB).toFixed(1)} KB raw`).toBeLessThanOrEqual(42 * KB);
     });
 
+    it('the status page: core.css + article.css + status.css stay under 48 KB raw and 11 KB gzipped', () => {
+        const { raw, gzip } = size(['styles/core.css', 'styles/article.css', 'styles/status.css']);
+        expect(raw, `${(raw / KB).toFixed(1)} KB raw`).toBeLessThanOrEqual(48 * KB);
+        expect(gzip, `${(gzip / KB).toFixed(1)} KB gzipped`).toBeLessThanOrEqual(11 * KB);
+    });
+
     it('there is one stylesheet per page type: no legacy file is back', () => {
         expect(() => readFileSync('styles.css')).toThrow();
     });
