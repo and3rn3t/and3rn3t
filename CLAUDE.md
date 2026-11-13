@@ -6,6 +6,8 @@
 
 - Run `pnpm validate` before declaring a change done.
 - Prefer the Cloudflare MCP connector (Cowork sessions) for inspecting the Worker/KV over guessing from config.
+- Repo skills live in `.claude/skills/`: `ship-worker` and `zone-apply` change production and only run when Matt names them ("deploy", "run pnpm zone --only headers --apply"); `qa-live` is read-only. Subagents in `.claude/agents/`: `csp-reviewer` (does a change need the CSP hashes re-applied?) and `lighthouse-triage` (runner noise or real regression?).
+- `.mcp.json` registers the site's own `/mcp` and the Cloudflare API MCP; Claude Code asks for approval the first time.
 
 ## CSS Guidelines
 
