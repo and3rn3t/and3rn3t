@@ -10,3 +10,8 @@ overrides:
   # (GHSA-wq5f-xc86-pv6w, fixed in 0.35.5). Drop this once wrangler ships a miniflare that
   # depends on sharp >= 0.35.5.
   sharp: '0.35.5'
+  # eslint (via @eslint/config-array) asks for minimatch ^10, which has a glob-expansion denial of
+  # service (GHSA-g3hv-75wg-m249, fixed in 11.0.1). It is dev-only and only reads this repo's own
+  # patterns, but the alert stays open until eslint moves. Drop this once eslint depends on
+  # minimatch >= 11.0.1.
+  minimatch: '>=11.0.1 <12'
