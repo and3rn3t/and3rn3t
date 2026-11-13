@@ -1,8 +1,8 @@
 name: Lighthouse CI
 
 on:
-  # Audits after each push-triggered deploy run from pages.yml, so they see the new build.
-  # Allow manual runs with an optional URL override.
+  # Weekly and manual audits of the live site. Audits after a deploy run from pages.yml.
+  # Manual runs accept an optional URL override.
   workflow_dispatch:
     inputs:
       url:
@@ -12,6 +12,9 @@ on:
   # Weekly scheduled audit to catch drift.
   schedule:
     - cron: '0 8 * * 1' # Mondays at 08:00 UTC
+
+permissions:
+  contents: read
 
 jobs:
   lighthouse:

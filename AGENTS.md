@@ -23,7 +23,7 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   - `pages.yml`: deploys the allowlisted source to GitHub Pages, then runs Lighthouse, desktop and mobile (push only). Add any new root asset to its `sparse-checkout` list or it 404s in production
   - `lighthouse.yml`: weekly and manual Lighthouse runs. Configs: `.lighthouserc.cjs` (desktop) and `.lighthouserc.mobile.cjs`; performance is an `error` at 0.9. Measure with the build served gzipped (an uncompressed static server under-scores mobile badly).
   - `update-github-data.yml`: daily refresh of `github-data.json`, the README featured projects and the OG card (it renders only when `.github/og-inputs.sha256` changes), then dispatches `pages.yml`
-  - `site-check.yml` (daily live-site checks, including the `uptime-probe` job), `snake.yml` (README snake on the `output` branch), `codeql.yml`, `gitleaks.yml`, `dependency-review.yml`, `actionlint.yml`, `consistency.yml`, `labeler.yml`, `label-sync.yml`, `release-drafter.yml`, `stale.yml`
+  - `site-check.yml` (daily live-site checks, including the `uptime-probe` job), `snake.yml` (README snake on the `output` branch), `codeql.yml`, `gitleaks.yml`, `dependency-review.yml`, `actionlint.yml`, `consistency.yml`, `labeler.yml`, `label-sync.yml`. Release Drafter and Stale were removed (listed in `.consistency-ignore` so workspace sync does not re-create them)
 
 ## Commands
 
