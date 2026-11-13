@@ -168,6 +168,21 @@ describe('the MCP server', () => {
         for (const tool of tools) expect(tool.description.length).toBeGreaterThan(20);
     });
 
+    it('gives every tool a title and read-only annotations (the directory requires both)', async () => {
+        const { message } = await rpc('tools/list');
+        for (const tool of message.result.tools) {
+            expect(tool.title, tool.name).toMatch(/\S/);
+            expect(tool.title.length, tool.name).toBeLessThanOrEqual(40);
+            expect(tool.name.length).toBeLessThanOrEqual(64);
+            expect(tool.annotations?.readOnlyHint, tool.name).toBe(true);
+            expect(tool.annotations?.destructiveHint, tool.name).toBe(false);
+        }
+        const open = message.result.tools
+            .filter(tool => tool.annotations.openWorldHint)
+            .map(tool => tool.name);
+        expect(open).toEqual(['get_recent_activity']);
+    });
+
     it('get_profile names the current role from the experience data', async () => {
         const { data } = await call('get_profile');
         expect(data.name).toBe('Matthew Anderson');
