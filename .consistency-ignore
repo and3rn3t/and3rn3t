@@ -3,3 +3,5 @@
 .github/workflows/release-drafter.yml
 .github/workflows/stale.yml
 .nvmrc
+.github/labeler.yml
+.github/workflows/consistency.yml
