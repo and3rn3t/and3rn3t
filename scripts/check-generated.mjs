@@ -22,19 +22,37 @@ export const GENERATED_PATHS = [
   'images',
 ];
 
-const run = (command, args) => execFileSync(command, args, { encoding: 'utf8', stdio: 'pipe' });
+/** @typedef {(command: string, args: string[]) => string} CommandRunner */
+
+/** @type {CommandRunner} */
+const runCommand = (command, args) =>
+  execFileSync(command, args, { encoding: 'utf8', stdio: 'pipe' });
+
+/**
+ * Regenerates the site, then reports whether any generated path differs from what is committed.
+ * @param {CommandRunner} run injected so tests can script git's answers
+ * @returns {{ ok: boolean, report: string }}
+ */
+export function checkGenerated(run = runCommand) {
+  run('node', ['scripts/generate-site.mjs']);
+  // trimEnd, not trim: porcelain's leading space is part of the status column (" M file").
+  const drift = run('git', ['status', '--porcelain', '--', ...GENERATED_PATHS]).trimEnd();
+  if (drift.trim() === '') return { ok: true, report: 'check-generated: generated files are up to date' };
+  const stat = run('git', ['diff', '--stat', '--', ...GENERATED_PATHS]);
+  return {
+    ok: false,
+    report: [
+      `check-generated: generated files are stale:\n${drift}\n`,
+      stat,
+      'Run `node scripts/generate-site.mjs` and commit the result.',
+    ].join('\n'),
+  };
+}
 
 function main() {
-  run('node', ['scripts/generate-site.mjs']);
-  const drift = run('git', ['status', '--porcelain', '--', ...GENERATED_PATHS]).trim();
-  if (drift === '') {
-    console.log('check-generated: generated files are up to date');
-    return;
-  }
-  console.error(`check-generated: generated files are stale:\n${drift}\n`);
-  console.error(run('git', ['diff', '--stat', '--', ...GENERATED_PATHS]));
-  console.error('Run `node scripts/generate-site.mjs` and commit the result.');
-  process.exitCode = 1;
+  const { ok, report } = checkGenerated();
+  (ok ? console.log : console.error)(report);
+  process.exitCode = ok ? 0 : 1;
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) main();
