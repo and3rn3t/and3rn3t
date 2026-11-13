@@ -22,8 +22,8 @@
       ],
       "stargazers_count": 0,
       "forks_count": 2,
-      "open_issues_count": 16,
-      "pushed_at": "2026-11-13T03:06:16Z",
+      "open_issues_count": 14,
+      "pushed_at": "2026-11-13T03:36:32Z",
       "updated_at": "2026-11-12T04:42:26Z",
       "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
@@ -1276,6 +1276,229 @@
   ],
   "events": [
     {
+      "id": "19974129657",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: move the data refresh script out of the workflow and tidy its setup",
+          "head": {
+            "ref": "ci/data-workflow-tidy"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:36:30Z"
+    },
+    {
+      "id": "19973957289",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: move the data refresh script out of the workflow and tidy its setup",
+          "head": {
+            "ref": "ci/data-workflow-tidy"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:33:04Z"
+    },
+    {
+      "id": "19973896908",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: move the data refresh script out of the workflow and tidy its setup",
+          "head": {
+            "ref": "ci/data-workflow-tidy"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:33:04Z"
+    },
+    {
+      "id": "26996689600",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "feat/home-work",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-11T19:57:34Z"
+    },
+    {
+      "id": "26996686874",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "d88a6ab2b7b5db00871c4f5791fa0b18b341a429",
+            "message": "Merge pull request #249 from and3rn3t/feat/home-work\n\nfeat(home): Selected work as a lead card, a card grid and a compact list (Phase 10.3a)"
+          }
+        ],
+        "ref": "refs/heads/redesign"
+      },
+      "created_at": "2026-11-11T19:57:33Z"
+    },
+    {
+      "id": "26996650790",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "eaf3b8371828d7963d9869e68a3c0df67fedfcbe",
+            "message": "Merge pull request #198 from and3rn3t/dependabot/npm_and_yarn/npm_and_yarn-20ddd8af92\n\nchore(deps): bump undici from 7.30.0 to 7.30.2 in the npm_and_yarn group across 1 directory"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-11T15:24:51Z"
+    },
+    {
+      "id": "19973591402",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: run E2E only when it can be affected, on two shards",
+          "head": {
+            "ref": "ci/e2e-paths-shard"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:28:13Z"
+    },
+    {
+      "id": "26996273948",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "6edcde958fd20cb1f5b99a4d2c03d758fbc0cafb",
+            "message": "fix(home): address review feedback on covers, cache busting and the modal\n\n- covers: the generator only wrote covers for featured cards, but with no\n  featured projects every project becomes a card, leaving broken image URLs.\n  Template and generator now share one split (splitProjects / coverFiles), and a\n  test checks the covers cards point at are exactly the ones written, across\n  four arrangements including that fallback.\n- service worker: SVGs are served cache-first under a cache named by the build\n  id, which did not hash images/, so a changed cover never reached returning\n  visitors. Include images/ in the hash, with a test.\n- modal: deleting the dark-button patch regressed the retained case-study modal,\n  whose View Code is still .project-link (2.18:1 at rest). Axe misses it because\n  the backdrop makes the background undeterminable, so restore the patch scoped\n  to the modal, including the hover background, and measure the buttons directly.\n- test: the first-paint theme test read color-scheme before the stylesheet had\n  loaded and failed 30-50% of repeats; it now polls.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/home-work"
+      },
+      "created_at": "2026-11-11T19:54:33Z"
+    },
+    {
+      "id": "19973138314",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: run E2E only when it can be affected, on two shards",
+          "head": {
+            "ref": "ci/e2e-paths-shard"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:19:45Z"
+    },
+    {
+      "id": "19973035789",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: run E2E only when it can be affected, on two shards",
+          "head": {
+            "ref": "ci/e2e-paths-shard"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:19:45Z"
+    },
+    {
+      "id": "19972789608",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: gate the deploy on the fast checks and deploy only published changes",
+          "head": {
+            "ref": "ci/deploy-gate"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:15:57Z"
+    },
+    {
+      "id": "19972744988",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: remove Release Drafter and Stale, tighten workflow hygiene",
+          "head": {
+            "ref": "ci/prune-and-hygiene"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:15:16Z"
+    },
+    {
+      "id": "19972432940",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/dialogs"
+          }
+        }
+      },
+      "created_at": "2026-11-11T22:10:20Z"
+    },
+    {
+      "id": "19972430731",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/dialogs"
+          }
+        }
+      },
+      "created_at": "2026-11-11T22:10:16Z"
+    },
+    {
       "id": "19972188466",
       "type": "PullRequestEvent",
       "repo": {
@@ -2482,230 +2705,6 @@
         }
       },
       "created_at": "2026-11-12T23:59:20Z"
-    },
-    {
-      "id": "19958899241",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(zone): edge-cache the site, purge on every deploy (Phase 12.3)",
-          "head": {
-            "ref": "feat/edge-cache"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:50:46Z"
-    },
-    {
-      "id": "19958745593",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/edge-cache"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:55:44Z"
-    },
-    {
-      "id": "19958621419",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "fix/worker-hardening"
-          }
-        }
-      },
-      "created_at": "2026-11-11T17:13:47Z"
-    },
-    {
-      "id": "19958374164",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(zone): edge-cache the site, purge on every deploy (Phase 12.3)",
-          "head": {
-            "ref": "feat/edge-cache"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:50:46Z"
-    },
-    {
-      "id": "19957692374",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(worker): trace and measure requests (Phase 12.1)",
-          "head": {
-            "ref": "feat/worker-telemetry"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:41:35Z"
-    },
-    {
-      "id": "19957447928",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(footer): edge receipt (Phase 12.2)",
-          "head": {
-            "ref": "feat/edge-receipt"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:38:18Z"
-    },
-    {
-      "id": "19957439005",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(footer): edge receipt (Phase 12.2)",
-          "head": {
-            "ref": "feat/edge-receipt"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:35:48Z"
-    },
-    {
-      "id": "19957410879",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/worker-telemetry"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:37:49Z"
-    },
-    {
-      "id": "19957410839",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/worker-telemetry"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:37:50Z"
-    },
-    {
-      "id": "19957258094",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(footer): edge receipt (Phase 12.2)",
-          "head": {
-            "ref": "feat/edge-receipt"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:35:48Z"
-    },
-    {
-      "id": "19957110789",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "ci/data-refresh"
-          }
-        }
-      },
-      "created_at": "2026-11-11T16:50:31Z"
-    },
-    {
-      "id": "19957090693",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(worker): trace and measure requests (Phase 12.1)",
-          "head": {
-            "ref": "feat/worker-telemetry"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:32:52Z"
-    },
-    {
-      "id": "19957035481",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(worker): trace and measure requests (Phase 12.1)",
-          "head": {
-            "ref": "feat/worker-telemetry"
-          }
-        }
-      },
-      "created_at": "2026-11-12T23:32:52Z"
-    },
-    {
-      "id": "19956968579",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/cutover"
-          }
-        }
-      },
-      "created_at": "2026-11-12T02:31:49Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2719,7 +2718,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4876,
+    "total": 4891,
     "weeks": [
       {
         "days": [
@@ -4773,7 +4772,7 @@
           },
           {
             "date": "2026-11-12",
-            "count": 74,
+            "count": 89,
             "level": 2
           },
           {
@@ -4808,6 +4807,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-13T03:07:17Z",
+  "lastUpdated": "2026-11-13T03:39:40Z",
   "totalRepos": 54
 }
