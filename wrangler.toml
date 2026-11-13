@@ -23,11 +23,12 @@ routes = [
 upload_source_maps = true
 
 # Settings. CSP_REPORTING_SINCE is the day (YYYY-MM-DD) `pnpm zone --only headers --apply` added
-# report-uri to the Content-Security-Policy: set it once the live header is confirmed to have it,
-# then redeploy. While it is empty /status/ says reporting is not switched on and shows no zero,
-# which is the safe way to be wrong: "0 reports" before anything could report looks like assurance.
+# report-uri to the Content-Security-Policy (confirmed in the live header that day). Empty means
+# reporting is not switched on: /status/ then shows a dash instead of a zero, which is the safe way
+# to be wrong, since "0 reports" before anything could report looks like assurance. If the policy
+# is ever taken off the zone, empty this again and redeploy.
 [vars]
-CSP_REPORTING_SINCE = ""
+CSP_REPORTING_SINCE = "2026-11-13"
 
 [observability]
 enabled = true

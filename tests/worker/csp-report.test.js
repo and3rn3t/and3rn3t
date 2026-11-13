@@ -183,9 +183,46 @@ describe('hostile field values', () => {
 describe('the setting that says reporting is on', () => {
     const toml = readFileSync(join(import.meta.dirname, '../../wrangler.toml'), 'utf8');
 
-    // Set only once someone has seen the live header carry report-uri; empty is the safe default
-    it('exists, and ships empty', () => {
-        expect(toml).toMatch(/^\[vars\]\s*\n(?:#.*\n)*CSP_REPORTING_SINCE = ""$/m);
+    /** The lines of one `[table]`, up to the next table header (or null if there is no such table). */
+    function tableBody(text, name) {
+        const lines = text.split('\n');
+        const start = lines.findIndex(line => line.trim() === `[${name}]`);
+        if (start === -1) return null;
+        const body = [];
+        for (const line of lines.slice(start + 1)) {
+            if (/^\s*\[/.test(line)) break;
+            body.push(line);
+        }
+        return body.join('\n');
+    }
+
+    // Only [vars] reaches the Worker as env.CSP_REPORTING_SINCE: under any other table it is
+    // ignored, and /status/ would show "not switched on" however it is set
+    it('is in [vars], once, where the Worker can read it', () => {
+        const vars = tableBody(toml, 'vars');
+        expect(vars, 'wrangler.toml has no [vars] table').not.toBeNull();
+        expect(vars).toMatch(/^CSP_REPORTING_SINCE = ".*"$/m);
+        expect(toml.match(/^CSP_REPORTING_SINCE\b/gm)).toHaveLength(1);
+    });
+
+    // Set only once someone has seen the live header carry report-uri: empty is the safe default,
+    // and a date must be a real one that has come (a future date would claim collection that has
+    // not started)
+    it('is empty, or the real day reporting was switched on', () => {
+        const [, day] = tableBody(toml, 'vars').match(/^CSP_REPORTING_SINCE = "(.*)"$/m);
+        if (day === '') return;
+        expect(day).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(Number.isNaN(Date.parse(day))).toBe(false);
+        expect(Date.parse(`${day}T00:00:00Z`)).toBeLessThanOrEqual(Date.now());
+        // The day the policy got report-uri: not before this feature existed
+        expect(day >= '2026-11-13').toBe(true);
+    });
+
+    it('reads a table up to the next header, not past it', () => {
+        const sample = '[a]\nx = 1\n# note\n[b]\ny = 2\n\n[[c]]\nz = 3\n';
+        expect(tableBody(sample, 'a')).toBe('x = 1\n# note');
+        expect(tableBody(sample, 'b')).toBe('y = 2\n');
+        expect(tableBody(sample, 'missing')).toBeNull();
     });
 });
 
