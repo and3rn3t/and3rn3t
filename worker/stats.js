@@ -27,6 +27,15 @@ const API_ROUTES = "('/health','/views','/guestbook','/activity','/edge','/stats
 
 const window = interval => `timestamp >= NOW() - INTERVAL '${interval}' DAY`;
 
+/**
+ * One Web Vital at p75 for real visitors. The API reports a metric it could not measure as -1
+ * (INP, for instance, for a visit with no interaction), and a percentile over those would be
+ * dragged down, so each metric is queried on its own with the missing values left out. `samples`
+ * is the number of visits that measured it, used for the minimum and never returned.
+ */
+const vitalQuery = column =>
+    `SELECT COUNT(*) AS samples, quantileExactWeighted(0.75)(${column}, sampleInterval) AS p75 FROM events.rumWebvitalsEvents WHERE requestHost = '${SITE_HOST}' AND bot = 0 AND ${column} >= 0 AND ${window(7)}`;
+
 /** The fixed queries, by name. Exported so tests can check them and a script can try them. */
 export const QUERIES = {
     totals24h: `SELECT COUNT(*) AS requests, quantileExactWeighted(0.5)(double2, sampleInterval) AS p50, quantileExactWeighted(0.95)(double2, sampleInterval) AS p95 FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND ${window(1)}`,
@@ -37,7 +46,10 @@ export const QUERIES = {
     clients: `SELECT blob4 AS client, COUNT(*) AS requests FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND ${window(7)} GROUP BY client LIMIT 5`,
     uptime: `SELECT toDate(timestamp) AS day, blob2 AS outcome, COUNT(*) AS probes FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(90)} GROUP BY day, outcome ORDER BY day LIMIT 400`,
     lastProbe: `SELECT timestamp AS at FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(1)} ORDER BY timestamp DESC LIMIT 1`,
-    vitals: `SELECT COUNT(*) AS samples, quantileExactWeighted(0.75)(largestContentfulPaintUs, sampleInterval) AS lcp, quantileExactWeighted(0.75)(interactionToNextPaintUs, sampleInterval) AS inp, quantileExactWeighted(0.75)(cumulativeLayoutShift, sampleInterval) AS cls, quantileExactWeighted(0.75)(timeToFirstByteUs, sampleInterval) AS ttfb FROM events.rumWebvitalsEvents WHERE requestHost = '${SITE_HOST}' AND bot = 0 AND ${window(7)}`,
+    vitalsLcp: vitalQuery('largestContentfulPaintUs'),
+    vitalsInp: vitalQuery('interactionToNextPaintUs'),
+    vitalsCls: vitalQuery('cumulativeLayoutShift'),
+    vitalsTtfb: vitalQuery('timeToFirstByteUs'),
     crawlers: `SELECT verifiedBotCategory AS category, COUNT(*) AS requests FROM events.httpRequests WHERE clientRequestHttpHost = '${SITE_HOST}' AND verifiedBotCategory != '' AND ${window(7)} GROUP BY category ORDER BY requests DESC LIMIT 10`,
     edge: `SELECT CASE WHEN originResponseStatus = 0 THEN 'edge' ELSE 'origin' END AS served, COUNT(*) AS requests FROM events.httpRequests WHERE clientRequestHttpHost = '${SITE_HOST}' AND clientRequestPath NOT LIKE '/api/%' AND clientRequestPath NOT LIKE '/mcp%' AND requestSource = 'eyeball' AND ${window(1)} GROUP BY served LIMIT 5`,
 };
@@ -129,17 +141,31 @@ export function shapeUptime(rows, lastProbe) {
     };
 }
 
-/** Real visitors only, and only when there are enough samples to say anything. Times in ms. */
-export function shapeVitals(rows) {
+/**
+ * One vital: its p75 when enough real visitors measured it, else null. `scale` converts the
+ * API's microseconds to milliseconds.
+ */
+function shapeVital(rows, scale, digits = 0) {
     const row = rows?.[0];
-    if (!row || (number(row.samples) ?? 0) < MIN_VITALS_SAMPLES) return null;
-    const ms = us => (number(us) === null || number(us) < 0 ? null : round(number(us) / 1000));
-    return {
-        lcpMs: ms(row.lcp),
-        inpMs: ms(row.inp),
-        cls: number(row.cls) === null || number(row.cls) < 0 ? null : round(row.cls, 3),
-        ttfbMs: ms(row.ttfb),
+    if ((number(row?.samples) ?? 0) < MIN_VITALS_SAMPLES) return null;
+    const value = number(row.p75);
+    return value === null || value < 0 ? null : round(value * scale, digits);
+}
+
+/**
+ * Real visitors only (bots are excluded in the queries). Each metric has its own minimum number
+ * of samples, so one that few visits measure (INP) is null while the others still show. The
+ * sample counts are never returned.
+ * @param {{ lcp?: object[] | null, inp?: object[] | null, cls?: object[] | null, ttfb?: object[] | null }} rows
+ */
+export function shapeVitals({ lcp, inp, cls, ttfb }) {
+    const vitals = {
+        lcpMs: shapeVital(lcp, 1 / 1000),
+        inpMs: shapeVital(inp, 1 / 1000),
+        cls: shapeVital(cls, 1, 3),
+        ttfbMs: shapeVital(ttfb, 1 / 1000),
     };
+    return Object.values(vitals).every(value => value === null) ? null : vitals;
 }
 
 /** Verified crawlers by category, busiest first. Aggregates only. */
@@ -174,10 +200,44 @@ export async function buildStats(env) {
         mcp: shapeTools(r.tools),
         clients: shapeClients(r.clients),
         uptime: shapeUptime(r.uptime, r.lastProbe),
-        vitals: shapeVitals(r.vitals),
+        vitals: shapeVitals({
+            lcp: r.vitalsLcp,
+            inp: r.vitalsInp,
+            cls: r.vitalsCls,
+            ttfb: r.vitalsTtfb,
+        }),
         crawlers: shapeCrawlers(r.crawlers),
         edge: shapeEdge(r.edge),
     };
+}
+
+// One refresh at a time per isolate: when the cache entry expires, a burst of requests shares
+// the queries already running instead of each starting its own scans. (Other isolates still
+// refresh on their own; this coalesces within one.) Cleared when the refresh ends, success or not.
+let refreshing = null;
+
+async function refresh(env, cache, key) {
+    const stats = await buildStats(env);
+    try {
+        await cache?.put(
+            key,
+            new Response(JSON.stringify(stats), {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cache-Control': `public, max-age=${CACHE_SECONDS}`,
+                },
+            })
+        );
+    } catch (err) {
+        // Not stored: the next request refreshes again. These stats are still good to return.
+        console.warn(
+            JSON.stringify({
+                event: 'stats_cache_put_failed',
+                message: String(err?.message ?? err),
+            })
+        );
+    }
+    return stats;
 }
 
 /**
@@ -192,15 +252,8 @@ export async function loadStats(env) {
     const hit = await cache?.match(key);
     if (hit) return { ok: true, stats: await hit.json(), cached: true };
 
-    const stats = await buildStats(env);
-    await cache?.put(
-        key,
-        new Response(JSON.stringify(stats), {
-            headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': `public, max-age=${CACHE_SECONDS}`,
-            },
-        })
-    );
-    return { ok: true, stats, cached: false };
+    refreshing ??= refresh(env, cache, key).finally(() => {
+        refreshing = null;
+    });
+    return { ok: true, stats: await refreshing, cached: false };
 }
