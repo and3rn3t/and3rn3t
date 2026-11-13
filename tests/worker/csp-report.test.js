@@ -183,9 +183,19 @@ describe('hostile field values', () => {
 describe('the setting that says reporting is on', () => {
     const toml = readFileSync(join(import.meta.dirname, '../../wrangler.toml'), 'utf8');
 
-    // Set only once someone has seen the live header carry report-uri; empty is the safe default
-    it('exists, and ships empty', () => {
-        expect(toml).toMatch(/^\[vars\]\s*\n(?:#.*\n)*CSP_REPORTING_SINCE = ""$/m);
+    // Set only once someone has seen the live header carry report-uri: empty is the safe default,
+    // and a date must be a real one that has come (a future date would claim collection that has
+    // not started)
+    it('is empty, or the real day reporting was switched on', () => {
+        const setting = toml.match(/^CSP_REPORTING_SINCE = "(.*)"$/m);
+        expect(setting, 'CSP_REPORTING_SINCE is missing from [vars]').not.toBeNull();
+        const [, day] = setting;
+        if (day === '') return;
+        expect(day).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(Number.isNaN(Date.parse(day))).toBe(false);
+        expect(Date.parse(`${day}T00:00:00Z`)).toBeLessThanOrEqual(Date.now());
+        // The day the policy got report-uri: not before this feature existed
+        expect(day >= '2026-11-13').toBe(true);
     });
 });
 
