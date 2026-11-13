@@ -230,12 +230,12 @@ export const openApi = () => ({
                                 api: {
                                     type: 'object',
                                     description:
-                                        'last24h and last7d: requests, errorRate, p50Ms, p95Ms (each may be null)',
+                                        'last24h and last7d: errorRate, p50Ms, p95Ms (each may be null). No request counts.',
                                 },
                                 mcp: {
                                     type: ['array', 'null'],
                                     description:
-                                        'tool, calls, errors for each MCP tool used in 7 days',
+                                        'tool, calls, errors for each MCP tool used in 7 days; empty when none, null when it could not be read',
                                 },
                                 clients: {
                                     type: ['object', 'null'],
@@ -245,7 +245,7 @@ export const openApi = () => ({
                                 uptime: {
                                     type: ['object', 'null'],
                                     description:
-                                        'lastProbeAt and one entry per day with probes and ok',
+                                        'lastProbe ({ at, ok }) and one entry per day with probes and ok',
                                 },
                                 vitals: {
                                     type: ['object', 'null'],
@@ -254,7 +254,8 @@ export const openApi = () => ({
                                 },
                                 crawlers: {
                                     type: ['array', 'null'],
-                                    description: 'Verified crawler requests by category, 7 days',
+                                    description:
+                                        'Verified crawler requests by category, 7 days; empty when none, null when it could not be read',
                                 },
                                 edge: {
                                     type: ['object', 'null'],

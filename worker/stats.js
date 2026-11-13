@@ -45,7 +45,7 @@ export const QUERIES = {
     tools: `SELECT index1 AS tool, blob2 AS outcome, COUNT(*) AS calls FROM ${DATASET} WHERE blob1 = 'tool' AND ${window(7)} GROUP BY tool, outcome ORDER BY calls DESC LIMIT 20`,
     clients: `SELECT blob4 AS client, COUNT(*) AS requests FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND ${window(7)} GROUP BY client LIMIT 5`,
     uptime: `SELECT toDate(timestamp) AS day, blob2 AS outcome, COUNT(*) AS probes FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(90)} GROUP BY day, outcome ORDER BY day LIMIT 400`,
-    lastProbe: `SELECT timestamp AS at FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(1)} ORDER BY timestamp DESC LIMIT 1`,
+    lastProbe: `SELECT timestamp AS at, blob2 AS outcome FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(90)} ORDER BY timestamp DESC LIMIT 1`,
     vitalsLcp: vitalQuery('largestContentfulPaintUs'),
     vitalsInp: vitalQuery('interactionToNextPaintUs'),
     vitalsCls: vitalQuery('cumulativeLayoutShift'),
@@ -87,14 +87,18 @@ async function run(env, name) {
 
 // ── Shaping: rows in, the published shape out ─────────────────────────────────
 
-/** @returns {{ requests: number, errorRate: number, p50Ms: number | null, p95Ms: number | null } | null} */
+/**
+ * The window's error rate and latency. The number of requests is deliberately not returned:
+ * these are mostly the browsers of people visiting, and a count over time would publish
+ * how many there are, which is not published (see the top of this file).
+ * @returns {{ errorRate: number | null, p50Ms: number | null, p95Ms: number | null } | null}
+ */
 export function shapeWindow(totals, errors) {
     const row = totals?.[0];
     const requests = number(row?.requests);
     if (requests === null || requests === 0) return null;
     const failed = number(errors?.[0]?.errors);
     return {
-        requests,
         // Without the error count there is no error rate to claim
         errorRate: failed === null ? null : round(failed / requests, 4),
         p50Ms: round(row.p50),
@@ -102,9 +106,12 @@ export function shapeWindow(totals, errors) {
     };
 }
 
-/** @returns {{ tool: string, calls: number, errors: number }[] | null} */
+/**
+ * null when the query failed; an empty list when it worked and there were no calls.
+ * @returns {{ tool: string, calls: number, errors: number }[] | null}
+ */
 export function shapeTools(rows) {
-    if (!rows?.length) return null;
+    if (!rows) return null;
     const byTool = new Map();
     for (const { tool, outcome, calls } of rows) {
         const entry = byTool.get(tool) ?? { tool, calls: 0, errors: 0 };
@@ -136,7 +143,9 @@ export function shapeUptime(rows, lastProbe) {
         days.set(key, entry);
     }
     return {
-        lastProbeAt: lastProbe?.[0]?.at ?? null,
+        lastProbe: lastProbe?.[0]?.at
+            ? { at: lastProbe[0].at, ok: lastProbe[0].outcome === 'ok' }
+            : null,
         days: [...days.values()].sort((a, b) => a.day.localeCompare(b.day)),
     };
 }
@@ -168,9 +177,9 @@ export function shapeVitals({ lcp, inp, cls, ttfb }) {
     return Object.values(vitals).every(value => value === null) ? null : vitals;
 }
 
-/** Verified crawlers by category, busiest first. Aggregates only. */
+/** Verified crawlers by category, busiest first. Aggregates only. null: the query failed; []: none. */
 export function shapeCrawlers(rows) {
-    if (!rows?.length) return null;
+    if (!rows) return null;
     return rows.map(({ category, requests }) => ({ category, requests: number(requests) ?? 0 }));
 }
 

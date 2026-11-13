@@ -36,6 +36,7 @@ import { AUTHOR, SITE } from './templates/chrome.mjs';
 import { renderCover } from './templates/cover.mjs';
 import { renderLlmsTxt } from './templates/llms.mjs';
 import { renderNotFoundPage } from './templates/not-found.mjs';
+import { renderStatusPage } from './templates/status-page.mjs';
 import { renderPostPage } from './templates/post-page.mjs';
 import { renderProjectPage, shareImage } from './templates/project-page.mjs';
 import { coverFiles, renderProjects, splitProjects } from './templates/projects.mjs';
@@ -68,6 +69,11 @@ posts.forEach((post, index) => {
 // ── 404.html ─────────────────────────────────────────────────────────────────
 writeFileSync(join(ROOT, '404.html'), renderNotFoundPage());
 console.log('  wrote 404.html');
+
+// ── status/index.html ────────────────────────────────────────────────────────
+mkdirSync(join(ROOT, 'status'), { recursive: true });
+writeFileSync(join(ROOT, 'status', 'index.html'), renderStatusPage());
+console.log('  wrote status/index.html');
 
 // ── feed.xml ─────────────────────────────────────────────────────────────────
 const feedItems = posts

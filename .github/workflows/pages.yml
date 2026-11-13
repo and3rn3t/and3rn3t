@@ -60,6 +60,7 @@ jobs:
             /og/
             /posts/
             /projects/
+            /status/
           sparse-checkout-cone-mode: false
 
       - name: Check published files

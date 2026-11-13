@@ -14,6 +14,38 @@ const json = (route, body, status = 200) =>
         body: JSON.stringify(body),
     });
 
+const dayOffset = offset => new Date(Date.now() + offset * 86_400_000).toISOString().slice(0, 10);
+
+/** What /stats answers in e2e runs: every section filled, INP missing (as it is in production now). */
+export const STATS_FIXTURE = {
+    generatedAt: new Date().toISOString(),
+    api: {
+        last24h: { errorRate: 0, p50Ms: 0, p95Ms: 2363 },
+        last7d: { errorRate: 0.0042, p50Ms: 0, p95Ms: 1800 },
+    },
+    mcp: [
+        { tool: 'list_posts', calls: 12, errors: 0 },
+        { tool: 'get_project', calls: 5, errors: 1 },
+    ],
+    clients: { agentShare: 0.216 },
+    uptime: {
+        lastProbe: { at: new Date().toISOString(), ok: true },
+        days: [
+            { day: dayOffset(-2), probes: 288, ok: 288 },
+            { day: dayOffset(-1), probes: 288, ok: 280 },
+            { day: dayOffset(0), probes: 40, ok: 40 },
+        ],
+    },
+    vitals: { lcpMs: 440, inpMs: null, cls: 0, ttfbMs: 247 },
+    crawlers: [
+        { category: 'AI Assistant', requests: 532 },
+        { category: 'Search Engine Crawler', requests: 337 },
+        { category: 'AI Crawler', requests: 5 },
+    ],
+    edge: { answeredAtEdge: 0.536 },
+    cached: false,
+};
+
 export const test = base.extend({
     page: async ({ page }, use) => {
         await page.route(`${WORKER_BASE}/**`, route => {
@@ -28,6 +60,7 @@ export const test = base.extend({
                     version: 'abc1234',
                 });
             }
+            if (pathname === '/stats') return json(route, STATS_FIXTURE);
             if (pathname === '/views') return json(route, { page: 'home', views: 1234 });
             if (pathname === '/guestbook') {
                 if (request.method() === 'POST') {

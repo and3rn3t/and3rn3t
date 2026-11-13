@@ -50,6 +50,7 @@ export const VIEW_TRANSITION_CSS =
  * @param {object[]} [page.structuredData] - JSON-LD objects
  * @param {string} [page.robots] - the robots meta content
  * @param {string} [page.extraMeta] - more <meta> tags (an article's date, author and tags)
+ * @param {string[]} [page.stylesheets] - more stylesheets, loaded after article.css
  * @returns {string} a complete <head> element
  */
 export function renderHead({
@@ -61,6 +62,7 @@ export function renderHead({
   structuredData = [],
   robots = 'index, follow, max-image-preview:large',
   extraMeta = '',
+  stylesheets = [],
 }) {
   // A page with no address of its own (the 404 page) has no canonical or og:url
   const url = path ? `${SITE}${path}` : null;
@@ -109,7 +111,9 @@ ${extraMeta ? `${extraMeta}\n` : ''}
       crossorigin
     />
     <link rel="stylesheet" href="/styles/core.css" />
-    <link rel="stylesheet" href="/styles/article.css" />
+    <link rel="stylesheet" href="/styles/article.css" />${stylesheets
+      .map(href => `\n    <link rel="stylesheet" href="${href}" />`)
+      .join('')}
 ${structuredData
   .map(
     data => `    <script type="application/ld+json">
@@ -167,9 +171,10 @@ export function renderFooter() {
         <ul class="site-footer__links">
           <li>
             <span class="site-footer__views" data-edge-widget hidden>
-              <span data-edge-receipt></span>
+              <a class="link" href="/status/" data-edge-receipt></a>
             </span>
           </li>
+          <li><a class="link" href="/status/">Status</a></li>
           <li><a class="link" href="/#projects">All projects</a></li>
           <li>
             <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>

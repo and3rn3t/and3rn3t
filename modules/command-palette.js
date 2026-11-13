@@ -136,6 +136,16 @@ class CommandPalette {
             {
                 type: 'action',
                 category: 'all',
+                icon: 'bolt',
+                title: 'Open the status page',
+                subtitle: 'Uptime, API speed and crawler traffic',
+                run: () => {
+                    globalThis.location.href = '/status/';
+                },
+            },
+            {
+                type: 'action',
+                category: 'all',
                 icon: 'file-pdf',
                 title: 'Download résumé',
                 subtitle: 'Open resume.pdf',

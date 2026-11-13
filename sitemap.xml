@@ -42,6 +42,14 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- Status Page -->
+  <url>
+    <loc>https://andernet.dev/status/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.4</priority>
+  </url>
+
   <!-- Project Pages -->
   <url>
     <loc>https://andernet.dev/projects/health/</loc>

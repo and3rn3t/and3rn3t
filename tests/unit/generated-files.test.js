@@ -27,6 +27,7 @@ describe('generated files', () => {
             expect.arrayContaining([
                 'posts',
                 'projects',
+                'status',
                 'sitemap.xml',
                 'llms.txt',
                 'index.html',
