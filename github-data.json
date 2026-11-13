@@ -23,9 +23,27 @@
       "stargazers_count": 0,
       "forks_count": 2,
       "open_issues_count": 16,
-      "pushed_at": "2026-11-12T03:02:29Z",
-      "updated_at": "2026-11-11T19:49:05Z",
+      "pushed_at": "2026-11-13T03:06:16Z",
+      "updated_at": "2026-11-12T04:42:26Z",
       "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1287619779,
+      "name": ".github",
+      "full_name": "and3rn3t/.github",
+      "description": null,
+      "html_url": "https://github.com/and3rn3t/.github",
+      "homepage": null,
+      "language": null,
+      "topics": [],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-11-13T03:04:26Z",
+      "updated_at": "2026-11-11T16:23:16Z",
+      "created_at": "2026-07-02T21:26:10Z",
       "fork": false,
       "archived": false
     },
@@ -43,9 +61,212 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 7,
-      "pushed_at": "2026-11-12T02:38:25Z",
+      "pushed_at": "2026-11-13T01:30:56Z",
       "updated_at": "2026-11-07T21:34:27Z",
       "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1166214014,
+      "name": "apple-music-dj",
+      "full_name": "and3rn3t/apple-music-dj",
+      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
+      "html_url": "https://github.com/and3rn3t/apple-music-dj",
+      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
+      "language": "Python",
+      "topics": [
+        "agent-skill",
+        "agent-skills",
+        "ai-dj",
+        "apple-music",
+        "claude-code",
+        "claude-skill",
+        "clawhub",
+        "cli",
+        "featured",
+        "music",
+        "music-discovery",
+        "music-recommendation",
+        "musickit",
+        "openclaw",
+        "playlist",
+        "playlist-generator",
+        "python",
+        "spotify-to-apple-music"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 5,
+      "open_issues_count": 24,
+      "pushed_at": "2026-11-12T23:11:53Z",
+      "updated_at": "2026-11-07T21:40:05Z",
+      "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "akinator",
+        "bayesian",
+        "cloudflare-d1",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "expo",
+        "featured",
+        "game",
+        "guessing-game",
+        "openai",
+        "pnpm-monorepo",
+        "pwa",
+        "react",
+        "react-native",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 1,
+      "pushed_at": "2026-11-12T22:09:47Z",
+      "updated_at": "2026-11-10T23:01:52Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "caregiver",
+        "cloudflare-workers",
+        "fall-detection",
+        "featured",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "react",
+        "swift",
+        "swiftui",
+        "typescript",
+        "wellness"
+      ],
+      "stargazers_count": 5,
+      "forks_count": 1,
+      "open_issues_count": 6,
+      "pushed_at": "2026-11-12T22:09:00Z",
+      "updated_at": "2026-11-10T23:01:35Z",
+      "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "arlo",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "dashboard",
+        "featured",
+        "home-automation",
+        "iot",
+        "mqtt",
+        "philips-hue",
+        "pwa",
+        "react",
+        "react19",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 1,
+      "open_issues_count": 48,
+      "pushed_at": "2026-11-12T22:07:58Z",
+      "updated_at": "2026-11-10T23:01:51Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
+      "language": "TypeScript",
+      "topics": [
+        "agent-skills",
+        "apple-shortcuts",
+        "cli",
+        "ios",
+        "macos",
+        "nodejs",
+        "privacy",
+        "security",
+        "shortcuts",
+        "static-analysis",
+        "typescript"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 26,
+      "pushed_at": "2026-11-12T18:32:01Z",
+      "updated_at": "2026-11-07T21:40:09Z",
+      "created_at": "2026-10-18T15:34:10Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "featured",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-12T15:02:48Z",
+      "updated_at": "2026-11-07T21:40:35Z",
+      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -91,190 +312,6 @@
       "pushed_at": "2026-11-11T21:57:24Z",
       "updated_at": "2026-11-07T21:40:19Z",
       "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
-      "language": "TypeScript",
-      "topics": [
-        "agent-skills",
-        "apple-shortcuts",
-        "cli",
-        "ios",
-        "macos",
-        "nodejs",
-        "privacy",
-        "security",
-        "shortcuts",
-        "static-analysis",
-        "typescript"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 26,
-      "pushed_at": "2026-11-11T19:47:32Z",
-      "updated_at": "2026-11-07T21:40:09Z",
-      "created_at": "2026-10-18T15:34:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "akinator",
-        "bayesian",
-        "cloudflare-d1",
-        "cloudflare-pages",
-        "cloudflare-workers",
-        "expo",
-        "featured",
-        "game",
-        "guessing-game",
-        "openai",
-        "pnpm-monorepo",
-        "pwa",
-        "react",
-        "react-native",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-11-11T19:02:15Z",
-      "updated_at": "2026-11-10T23:01:52Z",
-      "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "arlo",
-        "cloudflare-pages",
-        "cloudflare-workers",
-        "dashboard",
-        "featured",
-        "home-automation",
-        "iot",
-        "mqtt",
-        "philips-hue",
-        "pwa",
-        "react",
-        "react19",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 1,
-      "open_issues_count": 51,
-      "pushed_at": "2026-11-11T17:41:08Z",
-      "updated_at": "2026-11-10T23:01:51Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1287619779,
-      "name": ".github",
-      "full_name": "and3rn3t/.github",
-      "description": null,
-      "html_url": "https://github.com/and3rn3t/.github",
-      "homepage": null,
-      "language": null,
-      "topics": [],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 1,
-      "pushed_at": "2026-11-11T16:23:12Z",
-      "updated_at": "2026-11-11T16:23:16Z",
-      "created_at": "2026-07-02T21:26:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "featured",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-11T14:47:39Z",
-      "updated_at": "2026-11-07T21:40:35Z",
-      "created_at": "2025-11-22T17:31:12Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "caregiver",
-        "cloudflare-workers",
-        "fall-detection",
-        "featured",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "react",
-        "swift",
-        "swiftui",
-        "typescript",
-        "wellness"
-      ],
-      "stargazers_count": 5,
-      "forks_count": 1,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-11T11:42:03Z",
-      "updated_at": "2026-11-10T23:01:35Z",
-      "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
     },
@@ -471,43 +508,6 @@
       "updated_at": "2026-11-07T21:40:14Z",
       "created_at": "2026-09-19T01:50:31Z",
       "fork": true,
-      "archived": false
-    },
-    {
-      "id": 1166214014,
-      "name": "apple-music-dj",
-      "full_name": "and3rn3t/apple-music-dj",
-      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
-      "html_url": "https://github.com/and3rn3t/apple-music-dj",
-      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
-      "language": "Python",
-      "topics": [
-        "agent-skill",
-        "agent-skills",
-        "ai-dj",
-        "apple-music",
-        "claude-code",
-        "claude-skill",
-        "clawhub",
-        "cli",
-        "featured",
-        "music",
-        "music-discovery",
-        "music-recommendation",
-        "musickit",
-        "openclaw",
-        "playlist",
-        "playlist-generator",
-        "python",
-        "spotify-to-apple-music"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 5,
-      "open_issues_count": 23,
-      "pushed_at": "2026-11-07T21:40:02Z",
-      "updated_at": "2026-11-07T21:40:05Z",
-      "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
       "archived": false
     },
     {
@@ -1276,7 +1276,185 @@
   ],
   "events": [
     {
-      "id": "19852776505",
+      "id": "19972188466",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: gate the deploy on the fast checks and deploy only published changes",
+          "head": {
+            "ref": "ci/deploy-gate"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:06:19Z"
+    },
+    {
+      "id": "19972176975",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: remove Release Drafter and Stale, tighten workflow hygiene",
+          "head": {
+            "ref": "ci/prune-and-hygiene"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:01:47Z"
+    },
+    {
+      "id": "19972143358",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: gate the deploy on the fast checks and deploy only published changes",
+          "head": {
+            "ref": "ci/deploy-gate"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:06:19Z"
+    },
+    {
+      "id": "19971967142",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(e2e): add optional shard input for matrix runs",
+          "head": {
+            "ref": "feat/e2e-shard"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:03:41Z"
+    },
+    {
+      "id": "19971911404",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(e2e): add optional shard input for matrix runs",
+          "head": {
+            "ref": "feat/e2e-shard"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:02:53Z"
+    },
+    {
+      "id": "19971840121",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: remove Release Drafter and Stale, tighten workflow hygiene",
+          "head": {
+            "ref": "ci/prune-and-hygiene"
+          }
+        }
+      },
+      "created_at": "2026-11-13T03:01:47Z"
+    },
+    {
+      "id": "26994230162",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "45c0f18e2e9ddaef0e4063f6acae0cc0a5c957c4",
+            "message": "Merge pull request #286 from and3rn3t/fix/minimatch-advisory\n\nfix(deps): override minimatch to 11.0.8 (GHSA-g3hv-75wg-m249, Dependabot #50)"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-13T02:00:05Z"
+    },
+    {
+      "id": "19970970713",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs + content: archive finished roadmap phases, refresh project write-ups and the site post",
+          "head": {
+            "ref": "docs/consolidate"
+          }
+        }
+      },
+      "created_at": "2026-11-13T02:48:42Z"
+    },
+    {
+      "id": "19970758840",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs + content: archive finished roadmap phases, refresh project write-ups and the site post",
+          "head": {
+            "ref": "docs/consolidate"
+          }
+        }
+      },
+      "created_at": "2026-11-13T02:44:47Z"
+    },
+    {
+      "id": "19970705064",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs + content: archive finished roadmap phases, refresh project write-ups and the site post",
+          "head": {
+            "ref": "docs/consolidate"
+          }
+        }
+      },
+      "created_at": "2026-11-13T02:44:47Z"
+    },
+    {
+      "id": "26993260523",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "05fa635e61e5c18310d1d27db8b45d328e2e0278",
+            "message": "fix(design): keep the patched dark-theme buttons readable on hover\n\nReview feedback. The dark-theme contrast patch changed the buttons' text colour\nbut left the legacy hover backgrounds, which then failed in the hover state:\n\"View Code\" fell to 2.09:1 (hover fills #166534) and the two outline buttons\nto 1.00:1 (hover fills the same #4ade80 as their text, so the label vanished).\n\nAdd dark hover rules using the accent tokens (10.6:1 and 8.6:1), and a hover\ncontrast test for these buttons and the hero action in both themes, since axe\nchecks a page at rest and cannot hover. The test fails against the previous CSS.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/design-system"
+      },
+      "created_at": "2026-11-11T19:27:10Z"
+    },
+    {
+      "id": "19970442835",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1289,103 +1467,10 @@
           }
         }
       },
-      "created_at": "2026-11-11T21:22:01Z"
+      "created_at": "2026-11-11T21:21:59Z"
     },
     {
-      "id": "19852730192",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(seo): robots.txt, llms.txt and content-first source for AI agents (Phase 11.1)",
-          "head": {
-            "ref": "feat/agent-content"
-          }
-        }
-      },
-      "created_at": "2026-11-12T03:02:30Z"
-    },
-    {
-      "id": "19852626720",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(seo): robots.txt, llms.txt and content-first source for AI agents (Phase 11.1)",
-          "head": {
-            "ref": "feat/agent-content"
-          }
-        }
-      },
-      "created_at": "2026-11-12T03:02:30Z"
-    },
-    {
-      "id": "26898450806",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "chore/cutover",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-12T02:39:12Z"
-    },
-    {
-      "id": "26898447695",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "41bd5a6e73931fc6ad9ce37de05a2ac7c56d2b72",
-            "message": "Merge pull request #261 from and3rn3t/chore/cutover\n\nfeat: signature redesign, generated project pages and a slimmer site (Phase 10)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-12T02:39:11Z"
-    },
-    {
-      "id": "19851175540",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: signature redesign, generated project pages and a slimmer site (Phase 10)",
-          "head": {
-            "ref": "chore/cutover"
-          }
-        }
-      },
-      "created_at": "2026-11-12T02:39:09Z"
-    },
-    {
-      "id": "19850714086",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "chore/cutover"
-          }
-        }
-      },
-      "created_at": "2026-11-12T02:31:57Z"
-    },
-    {
-      "id": "19850711438",
+      "id": "19970440624",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1394,14 +1479,14 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/cutover"
+            "ref": "feat/home-contact"
           }
         }
       },
-      "created_at": "2026-11-12T02:31:53Z"
+      "created_at": "2026-11-11T21:21:57Z"
     },
     {
-      "id": "19850710256",
+      "id": "19970427100",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1410,15 +1495,15 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/cutover"
+            "ref": "feat/zone-headers"
           }
         }
       },
-      "created_at": "2026-11-12T02:31:51Z"
+      "created_at": "2026-11-12T18:27:06Z"
     },
     {
-      "id": "19850710232",
-      "type": "PullRequestReviewEvent",
+      "id": "19970426031",
+      "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
@@ -1426,15 +1511,15 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/cutover"
+            "ref": "feat/zone-headers"
           }
         }
       },
-      "created_at": "2026-11-12T02:31:52Z"
+      "created_at": "2026-11-12T18:27:04Z"
     },
     {
-      "id": "19850707712",
-      "type": "PullRequestReviewEvent",
+      "id": "19970423571",
+      "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
@@ -1442,30 +1527,46 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "chore/cutover"
+            "ref": "feat/zone-headers"
           }
         }
       },
-      "created_at": "2026-11-12T02:31:50Z"
+      "created_at": "2026-11-12T18:26:59Z"
     },
     {
-      "id": "19850554604",
+      "id": "19970201531",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: signature redesign, generated project pages and a slimmer site (Phase 10)",
+          "title": "feat(alerts): daily gate for a silent uptime probe, and the alerts written down (Phase 12.7)",
           "head": {
-            "ref": "chore/cutover"
+            "ref": "feat/alerts"
           }
         }
       },
-      "created_at": "2026-11-12T00:00:32Z"
+      "created_at": "2026-11-13T02:37:13Z"
     },
     {
-      "id": "19849558644",
+      "id": "19969697806",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/alerts"
+          }
+        }
+      },
+      "created_at": "2026-11-13T02:29:45Z"
+    },
+    {
+      "id": "19968680869",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1478,10 +1579,42 @@
           }
         }
       },
-      "created_at": "2026-11-11T20:30:51Z"
+      "created_at": "2026-11-11T20:30:49Z"
     },
     {
-      "id": "19849557185",
+      "id": "19968454825",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(alerts): daily gate for a silent uptime probe, and the alerts written down (Phase 12.7)",
+          "head": {
+            "ref": "feat/alerts"
+          }
+        }
+      },
+      "created_at": "2026-11-13T02:10:57Z"
+    },
+    {
+      "id": "19968418725",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(alerts): daily gate for a silent uptime probe, and the alerts written down (Phase 12.7)",
+          "head": {
+            "ref": "feat/alerts"
+          }
+        }
+      },
+      "created_at": "2026-11-13T02:10:57Z"
+    },
+    {
+      "id": "19968169892",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1490,89 +1623,46 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "feat/home-about"
+            "ref": "feat/mcp-server"
           }
         }
       },
-      "created_at": "2026-11-11T20:30:47Z"
+      "created_at": "2026-11-12T17:48:20Z"
     },
     {
-      "id": "26895138529",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/pnpm-11.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-10T22:02:08Z"
-    },
-    {
-      "id": "26895122857",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c3d4bb05fbd5dee7a644c658ceaa090dd52d627f",
-            "message": "chore(deps): update tailwind css to v4.3.5 (#290)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-10T22:02:01Z"
-    },
-    {
-      "id": "26895099542",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "697ef447a680c3ad76d1405e49501309294f6c5d",
-            "message": "chore(deps): update dependency @playwright/test to v1.65.0 (#293)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-10T22:01:52Z"
-    },
-    {
-      "id": "26895057588",
-      "type": "PushEvent",
+      "id": "19967822106",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "commits": [
-          {
-            "sha": "4a8522d352937ed8de29d1139fa09c5cdbe5c751",
-            "message": "Merge pull request #202 from and3rn3t/renovate/playwright\n\nchore(deps): update dependency @playwright/test to v1.65.0"
+        "pull_request": {
+          "title": "chore(csp): switch on the report count on /status (CSP_REPORTING_SINCE)",
+          "head": {
+            "ref": "chore/csp-reporting-since"
           }
-        ],
-        "ref": "refs/heads/main"
+        }
       },
-      "created_at": "2026-11-10T22:01:36Z"
+      "created_at": "2026-11-13T02:02:22Z"
     },
     {
-      "id": "26895048235",
-      "type": "DeleteEvent",
+      "id": "19967664019",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "renovate/cloudflare",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix(deps): override minimatch to 11.0.8 (GHSA-g3hv-75wg-m249, Dependabot #50)",
+          "head": {
+            "ref": "fix/minimatch-advisory"
+          }
+        }
       },
-      "created_at": "2026-11-10T22:01:32Z"
+      "created_at": "2026-11-13T02:00:04Z"
     },
     {
-      "id": "19847992954",
+      "id": "19967587839",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1581,14 +1671,235 @@
         "pull_request": {
           "title": null,
           "head": {
-            "ref": "feat/home-work"
+            "ref": "chore/csp-reporting-since"
           }
         }
       },
-      "created_at": "2026-11-11T19:54:42Z"
+      "created_at": "2026-11-13T01:59:01Z"
     },
     {
-      "id": "19846961003",
+      "id": "19967587832",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "chore/csp-reporting-since"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:59:01Z"
+    },
+    {
+      "id": "19967457566",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(deps): override minimatch to 11.0.8 (GHSA-g3hv-75wg-m249, Dependabot #50)",
+          "head": {
+            "ref": "fix/minimatch-advisory"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:56:41Z"
+    },
+    {
+      "id": "19967427140",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix(deps): override minimatch to 11.0.8 (GHSA-g3hv-75wg-m249, Dependabot #50)",
+          "head": {
+            "ref": "fix/minimatch-advisory"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:56:41Z"
+    },
+    {
+      "id": "19967331023",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(csp): switch on the report count on /status (CSP_REPORTING_SINCE)",
+          "head": {
+            "ref": "chore/csp-reporting-since"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:54:07Z"
+    },
+    {
+      "id": "19967250241",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore(csp): switch on the report count on /status (CSP_REPORTING_SINCE)",
+          "head": {
+            "ref": "chore/csp-reporting-since"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:54:07Z"
+    },
+    {
+      "id": "19966852206",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(csp): collect report-only policy reports and show the count (Phase 12.6)",
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:48:17Z"
+    },
+    {
+      "id": "26989373311",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "feat/prerender-content",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-11T18:49:01Z"
+    },
+    {
+      "id": "19966599418",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:44:34Z"
+    },
+    {
+      "id": "19966597411",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:44:32Z"
+    },
+    {
+      "id": "19966595100",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:44:30Z"
+    },
+    {
+      "id": "19966595078",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:44:31Z"
+    },
+    {
+      "id": "26989015480",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "377a0f0907e18cae97f577664116226d36625f9a",
+            "message": "fix(site): address review feedback on the pre-rendered project cards\n\n- reject non-http(s) homepages (e.g. javascript:) before they reach a generated\n  link; fall back to the Documentation link\n- keep the last known starred list when the starred fetch fails, so a transient\n  API error can't publish the whole curated list as a home-page change\n- hydrate the cards that are on the page (matched against all repos and curated\n  metadata) instead of re-selecting from the current starred list, so an older\n  cached page still works after a repo is unstarred\n- always emit the push-time slot, and guard the slots in the client, so a repo\n  that appears in the data after the page was built can't abort hydration\n- hold the case-study button (data-pending, visibility: hidden, so it keeps its\n  space) until the study is registered; hide it outright without JS\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/prerender-content"
+      },
+      "created_at": "2026-11-11T18:47:17Z"
+    },
+    {
+      "id": "19966010654",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(csp): collect report-only policy reports and show the count (Phase 12.6)",
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:35:49Z"
+    },
+    {
+      "id": "19965973271",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(csp): collect report-only policy reports and show the count (Phase 12.6)",
+          "head": {
+            "ref": "feat/csp-reports"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:35:49Z"
+    },
+    {
+      "id": "19965851789",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1601,10 +1912,146 @@
           }
         }
       },
-      "created_at": "2026-11-11T19:27:21Z"
+      "created_at": "2026-11-11T19:27:19Z"
     },
     {
-      "id": "19845355065",
+      "id": "26987626817",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/.github"
+      },
+      "payload": {
+        "ref": "fix/playwright-no-apt",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-11T16:17:55Z"
+    },
+    {
+      "id": "19964888803",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(presence): \"N here now\" over a hibernating Durable Object (Phase 12.5)",
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:20:31Z"
+    },
+    {
+      "id": "19964377344",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:13:25Z"
+    },
+    {
+      "id": "19964377113",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:13:26Z"
+    },
+    {
+      "id": "19964374788",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:13:24Z"
+    },
+    {
+      "id": "19964373320",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:13:23Z"
+    },
+    {
+      "id": "19964373310",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:13:22Z"
+    },
+    {
+      "id": "19964371470",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:13:21Z"
+    },
+    {
+      "id": "26986858310",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/phase-10-quick-fixes",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-11T18:26:08Z"
+    },
+    {
+      "id": "19963966041",
       "type": "PullRequestReviewCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1617,1076 +2064,648 @@
           }
         }
       },
-      "created_at": "2026-11-11T18:48:16Z"
+      "created_at": "2026-11-11T18:48:18Z"
     },
     {
-      "id": "19840082701",
+      "id": "19963651813",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: signature redesign, generated project pages and a slimmer site (Phase 10)",
+          "title": "feat(presence): \"N here now\" over a hibernating Durable Object (Phase 12.5)",
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:03:01Z"
+    },
+    {
+      "id": "19963629987",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(presence): \"N here now\" over a hibernating Durable Object (Phase 12.5)",
+          "head": {
+            "ref": "feat/presence"
+          }
+        }
+      },
+      "created_at": "2026-11-13T01:03:01Z"
+    },
+    {
+      "id": "19962988793",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(status): public /status/ page (Phase 12.4b)",
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:53:54Z"
+    },
+    {
+      "id": "19962817889",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:32Z"
+    },
+    {
+      "id": "19962816441",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:31Z"
+    },
+    {
+      "id": "19962816385",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:31Z"
+    },
+    {
+      "id": "19962814697",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:30Z"
+    },
+    {
+      "id": "19962813114",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:28Z"
+    },
+    {
+      "id": "19962813087",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:28Z"
+    },
+    {
+      "id": "19962811646",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:27Z"
+    },
+    {
+      "id": "19962811607",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:27Z"
+    },
+    {
+      "id": "19962810172",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:26Z"
+    },
+    {
+      "id": "19962808591",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:25Z"
+    },
+    {
+      "id": "19962806750",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:51:23Z"
+    },
+    {
+      "id": "19962100352",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(status): public /status/ page (Phase 12.4b)",
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:40:54Z"
+    },
+    {
+      "id": "19962058937",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(status): public /status/ page (Phase 12.4b)",
+          "head": {
+            "ref": "feat/status-page-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:40:54Z"
+    },
+    {
+      "id": "19960845896",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "refactor/og-cleanup"
+          }
+        }
+      },
+      "created_at": "2026-11-11T17:51:30Z"
+    },
+    {
+      "id": "19960810827",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): /api/stats, uptime probe, get_site_stats (Phase 12.4a)",
+          "head": {
+            "ref": "feat/status-page"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:23:24Z"
+    },
+    {
+      "id": "19960212238",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:15:18Z"
+    },
+    {
+      "id": "19960209847",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/status-page"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:15:16Z"
+    },
+    {
+      "id": "19960096319",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/a11y-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-11T17:40:25Z"
+    },
+    {
+      "id": "19960094115",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/a11y-ui"
+          }
+        }
+      },
+      "created_at": "2026-11-11T17:40:22Z"
+    },
+    {
+      "id": "19959653160",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): /api/stats, uptime probe, get_site_stats (Phase 12.4a)",
+          "head": {
+            "ref": "feat/status-page"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:06:50Z"
+    },
+    {
+      "id": "19959565408",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): /api/stats, uptime probe, get_site_stats (Phase 12.4a)",
+          "head": {
+            "ref": "feat/status-page"
+          }
+        }
+      },
+      "created_at": "2026-11-13T00:06:50Z"
+    },
+    {
+      "id": "26982319931",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "bfb2d7955adafb22a7c2684d9c0b16711c2b039e",
+            "message": "Merge pull request #243 from and3rn3t/fix/a11y-ui\n\nfix(a11y): menu, palette, toasts, hero text, guestbook captcha, and modal focus traps"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-11T17:42:01Z"
+    },
+    {
+      "id": "19959011548",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(zone): edge-cache the site, purge on every deploy (Phase 12.3)",
+          "head": {
+            "ref": "feat/edge-cache"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:59:20Z"
+    },
+    {
+      "id": "19958899241",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(zone): edge-cache the site, purge on every deploy (Phase 12.3)",
+          "head": {
+            "ref": "feat/edge-cache"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:50:46Z"
+    },
+    {
+      "id": "19958745593",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/edge-cache"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:55:44Z"
+    },
+    {
+      "id": "19958621419",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "fix/worker-hardening"
+          }
+        }
+      },
+      "created_at": "2026-11-11T17:13:47Z"
+    },
+    {
+      "id": "19958374164",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(zone): edge-cache the site, purge on every deploy (Phase 12.3)",
+          "head": {
+            "ref": "feat/edge-cache"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:50:46Z"
+    },
+    {
+      "id": "19957692374",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): trace and measure requests (Phase 12.1)",
+          "head": {
+            "ref": "feat/worker-telemetry"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:41:35Z"
+    },
+    {
+      "id": "19957447928",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(footer): edge receipt (Phase 12.2)",
+          "head": {
+            "ref": "feat/edge-receipt"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:38:18Z"
+    },
+    {
+      "id": "19957439005",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(footer): edge receipt (Phase 12.2)",
+          "head": {
+            "ref": "feat/edge-receipt"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:35:48Z"
+    },
+    {
+      "id": "19957410879",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/worker-telemetry"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:37:49Z"
+    },
+    {
+      "id": "19957410839",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/worker-telemetry"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:37:50Z"
+    },
+    {
+      "id": "19957258094",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(footer): edge receipt (Phase 12.2)",
+          "head": {
+            "ref": "feat/edge-receipt"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:35:48Z"
+    },
+    {
+      "id": "19957110789",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "ci/data-refresh"
+          }
+        }
+      },
+      "created_at": "2026-11-11T16:50:31Z"
+    },
+    {
+      "id": "19957090693",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): trace and measure requests (Phase 12.1)",
+          "head": {
+            "ref": "feat/worker-telemetry"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:32:52Z"
+    },
+    {
+      "id": "19957035481",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): trace and measure requests (Phase 12.1)",
+          "head": {
+            "ref": "feat/worker-telemetry"
+          }
+        }
+      },
+      "created_at": "2026-11-12T23:32:52Z"
+    },
+    {
+      "id": "19956968579",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
           "head": {
             "ref": "chore/cutover"
           }
         }
       },
-      "created_at": "2026-11-12T00:00:32Z"
-    },
-    {
-      "id": "26886468847",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/guess"
-      },
-      "payload": {
-        "ref": "renovate/radix-ui-primitives-monorepo",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-10T22:01:59Z"
-    },
-    {
-      "id": "26886425566",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/health"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "758beb930636bb51282144e93e682641f76e67ff",
-            "message": "Merge pull request #305 from and3rn3t/renovate/zod-4.x-lockfile\n\nchore(deps): update dependency zod to v4.6.7"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-10T22:01:36Z"
-    },
-    {
-      "id": "19838853652",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor(styles): retire styles.css (Phase 10.6b)",
-          "head": {
-            "ref": "feat/retire-legacy"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:43:20Z"
-    },
-    {
-      "id": "19837968580",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/retire-legacy"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:31:18Z"
-    },
-    {
-      "id": "19837967088",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/retire-legacy"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:31:16Z"
-    },
-    {
-      "id": "19837967049",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/retire-legacy"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:31:16Z"
-    },
-    {
-      "id": "19837575766",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf(startup): critical path first, every other feature on its own (Phase 10.6a)",
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:26:00Z"
-    },
-    {
-      "id": "19836873344",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(brand): share card, browser bar and manifest colours (Phase 10.5c)",
-          "head": {
-            "ref": "feat/og-manifest"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:16:55Z"
-    },
-    {
-      "id": "19836272377",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:08:59Z"
-    },
-    {
-      "id": "19836270324",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:08:58Z"
-    },
-    {
-      "id": "19836268131",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:08:55Z"
-    },
-    {
-      "id": "19836268099",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T23:08:56Z"
-    },
-    {
-      "id": "19835444098",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/og-manifest"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:58:09Z"
-    },
-    {
-      "id": "19835321588",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor(styles): retire styles.css (Phase 10.6b)",
-          "head": {
-            "ref": "feat/retire-legacy"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:54:43Z"
-    },
-    {
-      "id": "19835173186",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor(styles): retire styles.css (Phase 10.6b)",
-          "head": {
-            "ref": "feat/retire-legacy"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:54:43Z"
-    },
-    {
-      "id": "19833980956",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf(startup): critical path first, every other feature on its own (Phase 10.6a)",
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:34:03Z"
-    },
-    {
-      "id": "19833532105",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "perf(startup): critical path first, every other feature on its own (Phase 10.6a)",
-          "head": {
-            "ref": "feat/slim"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:34:03Z"
-    },
-    {
-      "id": "19832584944",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(brand): share card, browser bar and manifest colours (Phase 10.5c)",
-          "head": {
-            "ref": "feat/og-manifest"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:21:21Z"
-    },
-    {
-      "id": "19832498034",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(brand): share card, browser bar and manifest colours (Phase 10.5c)",
-          "head": {
-            "ref": "feat/og-manifest"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:21:21Z"
-    },
-    {
-      "id": "26879585607",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/homehub"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "c7e47685ea76bea7985aee2abab27bd60509b73a",
-            "message": "chore(deps): update dependency react-resizable-panels to v4.21.0 (#374)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-10T22:01:55Z"
-    },
-    {
-      "id": "19831942540",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(dialogs): command palette and keyboard help on native <dialog> (Phase 10.5b)",
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:14:34Z"
-    },
-    {
-      "id": "26879554868",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "renovate/playwright",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-10T22:01:38Z"
-    },
-    {
-      "id": "26879545302",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/catastrophe"
-      },
-      "payload": {
-        "ref": "dependabot/github_actions/DavidAnson/markdownlint-cli2-action-25.0.0",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-10T22:01:32Z"
-    },
-    {
-      "id": "26879542082",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/catastrophe"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "529e1b8028d51b540194ff4c4caf75dc19eacb34",
-            "message": "Merge pull request #22 from and3rn3t/dependabot/github_actions/DavidAnson/markdownlint-cli2-action-25.0.0\n\nci(deps): bump DavidAnson/markdownlint-cli2-action from 24.2.0 to 25.0.0"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-10T22:01:31Z"
-    },
-    {
-      "id": "26879494572",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/dialogs",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-11T21:57:12Z"
-    },
-    {
-      "id": "19831593438",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:10:21Z"
-    },
-    {
-      "id": "19831590784",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:10:19Z"
-    },
-    {
-      "id": "19831590752",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:10:19Z"
-    },
-    {
-      "id": "19831587730",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:10:17Z"
-    },
-    {
-      "id": "19831585213",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:10:15Z"
-    },
-    {
-      "id": "19830864598",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(dialogs): command palette and keyboard help on native <dialog> (Phase 10.5b)",
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:57:21Z"
-    },
-    {
-      "id": "19830852354",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(pages): post pages, 404 and offline on the design system (Phase 10.5a)",
-          "head": {
-            "ref": "feat/post-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T22:01:36Z"
-    },
-    {
-      "id": "19830617033",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/post-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:58:48Z"
-    },
-    {
-      "id": "19830616965",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/post-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:58:49Z"
-    },
-    {
-      "id": "19830497403",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(dialogs): command palette and keyboard help on native <dialog> (Phase 10.5b)",
-          "head": {
-            "ref": "feat/dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:57:21Z"
-    },
-    {
-      "id": "19829539212",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(pages): post pages, 404 and offline on the design system (Phase 10.5a)",
-          "head": {
-            "ref": "feat/post-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:45:33Z"
-    },
-    {
-      "id": "19829503972",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(pages): post pages, 404 and offline on the design system (Phase 10.5a)",
-          "head": {
-            "ref": "feat/post-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:45:33Z"
-    },
-    {
-      "id": "26877075259",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8cc8c8bde3649152a2fb5df170e87a7ee9a62be9",
-            "message": "fix(transitions): clear view-transition names once a transition is over\n\nThe names were set for a navigation and never removed, so a theme switch\ncaptured the named elements separately, and after going back and opening a\ndifferent project two cards could share a name, which makes the browser skip\nthe transition. Clear the names when the transition settles (skipped or\nfinished), clear leftovers before naming, and clear on a back/forward-cache\nrestore. Tests record the names during a real navigation and fail on the old\nscript.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/project-pages"
-      },
-      "created_at": "2026-11-11T21:32:07Z"
-    },
-    {
-      "id": "19828640867",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(projects): generated project pages replace the case-study modal (Phase 10.4)",
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:35:27Z"
-    },
-    {
-      "id": "19828480519",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(projects): generated project pages replace the case-study modal (Phase 10.4)",
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:16:13Z"
-    },
-    {
-      "id": "19828162318",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:29:50Z"
-    },
-    {
-      "id": "19828162273",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:29:51Z"
-    },
-    {
-      "id": "19828159750",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:29:48Z"
-    },
-    {
-      "id": "19828159657",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:29:49Z"
-    },
-    {
-      "id": "19828157523",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:29:47Z"
-    },
-    {
-      "id": "19827688121",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): Contact, the footer and an inline contact form (Phase 10.3c)",
-          "head": {
-            "ref": "feat/home-contact"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:24:13Z"
-    },
-    {
-      "id": "19827500517",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-contact"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:22:02Z"
-    },
-    {
-      "id": "19827498020",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-contact"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:22:00Z"
-    },
-    {
-      "id": "19827495307",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-contact"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:21:58Z"
-    },
-    {
-      "id": "19827015846",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(projects): generated project pages replace the case-study modal (Phase 10.4)",
-          "head": {
-            "ref": "feat/project-pages"
-          }
-        }
-      },
-      "created_at": "2026-11-11T21:16:13Z"
-    },
-    {
-      "id": "19824373717",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): Contact, the footer and an inline contact form (Phase 10.3c)",
-          "head": {
-            "ref": "feat/home-contact"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:42:25Z"
-    },
-    {
-      "id": "19824309310",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): Contact, the footer and an inline contact form (Phase 10.3c)",
-          "head": {
-            "ref": "feat/home-contact"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:42:25Z"
-    },
-    {
-      "id": "19823966424",
-      "type": "IssueCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {},
-      "created_at": "2026-11-11T17:56:21Z"
-    },
-    {
-      "id": "19823464869",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): About, Experience and Writing (Phase 10.3b)",
-          "head": {
-            "ref": "feat/home-about"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:31:52Z"
-    },
-    {
-      "id": "19823376853",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-about"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:30:51Z"
-    },
-    {
-      "id": "19823374289",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-about"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:30:50Z"
-    },
-    {
-      "id": "19823371756",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-about"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:30:48Z"
-    },
-    {
-      "id": "19823357948",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-work"
-          }
-        }
-      },
-      "created_at": "2026-11-11T19:54:44Z"
-    },
-    {
-      "id": "19822752088",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): About, Experience and Writing (Phase 10.3b)",
-          "head": {
-            "ref": "feat/home-about"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:07:40Z"
-    },
-    {
-      "id": "19821219672",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): About, Experience and Writing (Phase 10.3b)",
-          "head": {
-            "ref": "feat/home-about"
-          }
-        }
-      },
-      "created_at": "2026-11-11T20:07:40Z"
-    },
-    {
-      "id": "19820193040",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(home): Selected work as a lead card, a card grid and a compact list (Phase 10.3a)",
-          "head": {
-            "ref": "feat/home-work"
-          }
-        }
-      },
-      "created_at": "2026-11-11T19:57:32Z"
-    },
-    {
-      "id": "19820113006",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/prerender-content"
-          }
-        }
-      },
-      "created_at": "2026-11-11T18:48:15Z"
-    },
-    {
-      "id": "19820111731",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/prerender-content"
-          }
-        }
-      },
-      "created_at": "2026-11-11T18:48:13Z"
-    },
-    {
-      "id": "19820110338",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/prerender-content"
-          }
-        }
-      },
-      "created_at": "2026-11-11T18:48:10Z"
-    },
-    {
-      "id": "19819909107",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-work"
-          }
-        }
-      },
-      "created_at": "2026-11-11T19:54:46Z"
-    },
-    {
-      "id": "19819906523",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-work"
-          }
-        }
-      },
-      "created_at": "2026-11-11T19:54:44Z"
-    },
-    {
-      "id": "19819903839",
-      "type": "PullRequestReviewEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/home-work"
-          }
-        }
-      },
-      "created_at": "2026-11-11T19:54:43Z"
+      "created_at": "2026-11-12T02:31:49Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2700,7 +2719,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4768,
+    "total": 4876,
     "weeks": [
       {
         "days": [
@@ -2737,7 +2756,7 @@
           {
             "date": "2025-11-15",
             "count": 46,
-            "level": 2
+            "level": 1
           }
         ]
       },
@@ -3073,7 +3092,7 @@
           {
             "date": "2026-01-14",
             "count": 44,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-01-15",
@@ -3234,7 +3253,7 @@
           {
             "date": "2026-02-12",
             "count": 45,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-02-13",
@@ -3663,7 +3682,7 @@
           {
             "date": "2026-04-30",
             "count": 42,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-01",
@@ -3687,7 +3706,7 @@
           {
             "date": "2026-05-04",
             "count": 39,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-05",
@@ -3814,7 +3833,7 @@
           {
             "date": "2026-05-27",
             "count": 45,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-05-28",
@@ -4024,7 +4043,7 @@
           {
             "date": "2026-07-04",
             "count": 128,
-            "level": 4
+            "level": 3
           }
         ]
       },
@@ -4097,7 +4116,7 @@
           {
             "date": "2026-07-17",
             "count": 42,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-07-18",
@@ -4526,7 +4545,7 @@
           {
             "date": "2026-10-02",
             "count": 43,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-10-03",
@@ -4540,7 +4559,7 @@
           {
             "date": "2026-10-04",
             "count": 44,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-10-05",
@@ -4618,7 +4637,7 @@
           {
             "date": "2026-10-18",
             "count": 40,
-            "level": 2
+            "level": 1
           },
           {
             "date": "2026-10-19",
@@ -4716,7 +4735,7 @@
           {
             "date": "2026-11-05",
             "count": 86,
-            "level": 3
+            "level": 2
           },
           {
             "date": "2026-11-06",
@@ -4749,11 +4768,16 @@
           },
           {
             "date": "2026-11-11",
-            "count": 155,
+            "count": 189,
             "level": 4
           },
           {
             "date": "2026-11-12",
+            "count": 74,
+            "level": 2
+          },
+          {
+            "date": "2026-11-13",
             "count": 0,
             "level": 0
           }
@@ -4763,13 +4787,13 @@
   },
   "languageBytes": {
     "TypeScript": 10082841,
-    "HTML": 9260170,
+    "HTML": 9447995,
     "Swift": 4473277,
     "Python": 3363035,
-    "JavaScript": 2299671,
+    "JavaScript": 2844483,
     "Shell": 1021526,
     "R": 618546,
-    "CSS": 443154,
+    "CSS": 415705,
     "Kotlin": 301050,
     "C++": 202428,
     "PowerShell": 78381,
@@ -4784,6 +4808,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-12T03:07:25Z",
+  "lastUpdated": "2026-11-13T03:07:17Z",
   "totalRepos": 54
 }

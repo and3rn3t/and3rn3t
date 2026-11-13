@@ -49,45 +49,45 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 >
 > **Tech:** TypeScript
 
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
+
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
+>
+> **Tech:** Python, agent-skill, agent-skills
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
+
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
 > Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
 >
-> **Tech:** TypeScript, akinator, bayesian, cloudflare-d1, cloudflare-pages
+> **Tech:** TypeScript, akinator, bayesian
 > 🔗 [Live](https://andernator.com)
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
+>
+> **Tech:** TypeScript, ai, caregiver
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
 > iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
 >
-> **Tech:** TypeScript, arlo, cloudflare-pages, cloudflare-workers, dashboard
+> **Tech:** TypeScript, arlo, cloudflare-pages
 > 🔗 [Live](https://homehub.andernet.dev)
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
-> **Tech:** Python, arm64, docker, docker-compose, flask
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
->
-> **Tech:** TypeScript, ai, caregiver, cloudflare-workers, fall-detection
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** Python, arm64, docker
 
 ### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
 > Unifying network information on a RPi 5
 >
-> **Tech:** HTML, cloudflare-workers, networking, raspberry-pi, react
-
-### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
-
-> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
->
-> **Tech:** Python, agent-skill, agent-skills, ai-dj, apple-music
-> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
+> **Tech:** HTML, cloudflare-workers, networking
 
 <!-- FEATURED-PROJECTS:END -->
 
