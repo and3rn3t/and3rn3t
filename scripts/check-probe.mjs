@@ -30,6 +30,12 @@ export function parseUtc(text) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+/** "15 min 20 s": how long ago, to the second, so a message about the limit cannot read as 15 > 15. */
+export function formatAge(milliseconds) {
+  const seconds = Math.floor(milliseconds / 1000);
+  return `${Math.floor(seconds / 60)} min ${seconds % 60} s`;
+}
+
 /**
  * What is wrong with the probe, judging from the Worker's /api/stats.
  * @param {object | null | undefined} stats
@@ -53,11 +59,14 @@ export function evaluateProbe(stats, now = new Date()) {
     if (!at) {
       problems.push(`the last check has a time that cannot be read (${JSON.stringify(last.at)})`);
     } else {
-      const minutes = Math.round((now.getTime() - at.getTime()) / 60_000);
+      const elapsed = now.getTime() - at.getTime();
+      const minutes = Math.round(elapsed / 60_000);
       summary = `last check ${minutes} minute${minutes === 1 ? '' : 's'} ago, ${last.ok === true ? 'passed' : last.ok === false ? 'FAILED' : 'result unknown'}`;
-      if (minutes > MAX_AGE_MINUTES) {
+      // The exact time, not the rounded minutes: a check 15 minutes 20 seconds old rounds to 15 and
+      // would pass, which delays the gate and disagrees with the status page's own comparison
+      if (elapsed > MAX_AGE_MINUTES * 60_000) {
         problems.push(
-          `the last check was ${minutes} minutes ago (more than ${MAX_AGE_MINUTES}): the probe has stopped`
+          `the last check was ${formatAge(elapsed)} ago (more than ${MAX_AGE_MINUTES} minutes): the probe has stopped`
         );
       }
     }

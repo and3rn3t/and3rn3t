@@ -5,6 +5,7 @@ import {
     MAX_AGE_MINUTES,
     check,
     evaluateProbe,
+    formatAge,
     fetchStats,
     parseUtc,
 } from '../../scripts/check-probe.mjs';
@@ -45,10 +46,37 @@ describe('evaluateProbe', () => {
         expect(late.problems).toEqual([expect.stringContaining('the probe has stopped')]);
     });
 
+    // Rounded minutes would let a check 15 minutes 20 seconds old through (it rounds to 15)
+    it.each([
+        ['14 min 59 s', 899, false],
+        ['exactly 15 min', 900, false],
+        ['15 min 1 s', 901, true],
+        ['15 min 20 s', 920, true],
+        ['15 min 29 s', 929, true],
+        ['15 min 31 s', 931, true],
+    ])('a check %s old is %s', (_label, seconds, stale) => {
+        const at = new Date(NOW.getTime() - seconds * 1000)
+            .toISOString()
+            .replace('T', ' ')
+            .slice(0, 19);
+        const result = evaluateProbe(stats({ at, ok: true }), NOW);
+        expect(result.problems.length > 0).toBe(stale);
+    });
+
+    it('says how old to the second, so the message cannot read "15 minutes ago (more than 15)"', () => {
+        const at = new Date(NOW.getTime() - 920 * 1000)
+            .toISOString()
+            .replace('T', ' ')
+            .slice(0, 19);
+        expect(evaluateProbe(stats({ at, ok: true }), NOW).problems).toEqual([
+            'the last check was 15 min 20 s ago (more than 15 minutes): the probe has stopped',
+        ]);
+    });
+
     // The silent probe is the case Cloudflare's monitors cannot see: no rows, no signal
     it('fails when the probe has been quiet for hours, naming how long', () => {
         const result = evaluateProbe(stats({ at: minutesAgo(180), ok: true }), NOW);
-        expect(result.problems).toEqual([expect.stringMatching(/180 minutes ago .* has stopped/)]);
+        expect(result.problems).toEqual([expect.stringMatching(/180 min 0 s ago .* has stopped/)]);
     });
 
     it('fails when the last check failed, even a fresh one', () => {
@@ -79,6 +107,15 @@ describe('evaluateProbe', () => {
     it('fails on a time it cannot read rather than treating it as fresh', () => {
         const result = evaluateProbe(stats({ at: 'garbage', ok: true }), NOW);
         expect(result.problems).toEqual([expect.stringContaining('cannot be read')]);
+    });
+});
+
+describe('formatAge', () => {
+    it('is minutes and seconds, rounding down', () => {
+        expect(formatAge(0)).toBe('0 min 0 s');
+        expect(formatAge(59_999)).toBe('0 min 59 s');
+        expect(formatAge(920_000)).toBe('15 min 20 s');
+        expect(formatAge(180 * 60_000)).toBe('180 min 0 s');
     });
 });
 
