@@ -27,3 +27,16 @@ jobs:
           sparse-checkout: scripts/check-agent-ready.mjs
           persist-credentials: false
       - run: node scripts/check-agent-ready.mjs https://andernet.dev
+
+  # A gate, unlike the report above: it fails, and so alerts, when the uptime probe has stopped or its
+  # last check failed. Cloudflare Monitors cannot do this, because a query that returns no rows gives
+  # them nothing to evaluate. The probe is the cron trigger in wrangler.toml (worker/probe.js).
+  uptime-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: scripts/check-probe.mjs
+          persist-credentials: false
+      - run: node scripts/check-probe.mjs https://andernet.dev
