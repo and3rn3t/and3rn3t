@@ -6,6 +6,9 @@
 
 - Run `pnpm validate` before declaring a change done.
 - Prefer the Cloudflare MCP connector (Cowork sessions) for inspecting the Worker/KV over guessing from config.
+- Repo skills live in `.claude/skills/`: `ship-worker` and `zone-apply` change production and only run when Matt names them ("deploy", "run pnpm zone --only headers --apply"); `qa-live` is read-only. Subagents in `.claude/agents/`: `csp-reviewer` (does a change need the CSP hashes re-applied?) and `lighthouse-triage` (runner noise or real regression?).
+- A PreToolUse hook (`.claude/hooks/guard-generated.mjs`) blocks Edit/Write on generated files (`posts/`, `projects/`, `status/`, `feed.xml`, `llms.txt`, `404.html`, `github-data.json`, the cover SVGs, and the `gen:` regions of `index.html` and the project/blog entries of `sitemap.xml`) and names the data file or template to edit instead. Run `pnpm generate:site` from Bash to regenerate; that is not blocked.
+- `.mcp.json` registers the site's own `/mcp` and the Cloudflare API MCP; Claude Code asks for approval the first time.
 
 ## CSS Guidelines
 
