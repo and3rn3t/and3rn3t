@@ -1,7 +1,8 @@
 name: Lighthouse CI
 
 on:
-  # Weekly and manual audits of the live site. Audits after a deploy run from pages.yml.
+  # This workflow runs only on the weekly schedule and by hand, against the live site. The audits
+  # that follow each deploy are separate jobs in pages.yml, not runs of this workflow.
   # Manual runs accept an optional URL override.
   workflow_dispatch:
     inputs:
