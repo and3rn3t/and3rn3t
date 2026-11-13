@@ -1,0 +1,66 @@
+name: E2E
+
+# Runs only when something the browser tests can see has changed: the published site, the specs and
+# their config, the dependencies, and the few non-site files the specs import. They mock the whole
+# Worker (tests/e2e/fixtures.js), so a change under worker/ cannot alter a result, except
+# worker/csp-report.js, which csp-report.spec.js imports.
+# tests/unit/pages-workflow.test.js keeps this list in step with pages.yml's publish allowlist and
+# with what the specs import.
+#
+# Path-filtered, so a skipped run never reports a status: do not make this a required check on
+# `main` (it would block every PR that does not touch these paths).
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '*.html'
+      - 'main.js'
+      - 'sw.js'
+      - 'manifest.json'
+      - 'favicon.svg'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'feed.xml'
+      - 'llms.txt'
+      - 'resume.pdf'
+      - 'CNAME'
+      - 'experience-data.json'
+      - 'github-data.json'
+      - 'posts-data.json'
+      - 'projects-data.json'
+      - 'fonts/**'
+      - 'icons/**'
+      - 'images/**'
+      - 'styles/**'
+      - 'modules/**'
+      - 'og/**'
+      - 'posts/**'
+      - 'projects/**'
+      - 'status/**'
+      - 'tests/e2e/**'
+      - 'scripts/zone-headers.mjs'
+      - 'worker/csp-report.js'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.nvmrc'
+      - '.github/workflows/e2e.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: E2E + a11y (Playwright + axe), shard ${{ matrix.shard }}/2
+    # Two runners: the 292 specs take about 2 minutes on one, about 1 on each of two.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ['1', '2']
+    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@bee3d0a11a39b66867b89dddc0306362587aa011 # v1
+    with:
+      command: pnpm test:e2e --shard=${{ matrix.shard }}/2
+      package-manager: pnpm
+      shard: ${{ matrix.shard }}

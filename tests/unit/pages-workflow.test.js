@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -42,6 +42,72 @@ describe('deploy trigger (pages.yml)', () => {
 
     it('gates the deploy on the fast checks', () => {
         expect(read('.github/workflows/pages.yml')).toMatch(/deploy:\n\s+needs: verify/);
+    });
+});
+
+/** True when a trigger glob list would fire for this repo-relative file path. */
+const triggeredBy = (globs, file) =>
+    globs.some(glob => {
+        if (glob === file) return true;
+        if (glob.endsWith('/**')) return file.startsWith(glob.slice(0, -2));
+        if (glob.startsWith('*.')) return !file.includes('/') && file.endsWith(glob.slice(1));
+        return false;
+    });
+
+/** Files outside tests/e2e that the specs import, as repo-relative paths. */
+const filesImportedBySpecs = () => {
+    const specs = readdirSync(join(import.meta.dirname, '..', 'e2e')).filter(f =>
+        f.endsWith('.js')
+    );
+    return [
+        ...new Set(
+            specs.flatMap(spec =>
+                [...read(`tests/e2e/${spec}`).matchAll(/from '\.\.\/\.\.\/([^']+)'/g)].map(
+                    m => m[1]
+                )
+            )
+        ),
+    ];
+};
+
+describe('E2E trigger (e2e.yml)', () => {
+    const triggers = pushPaths('.github/workflows/e2e.yml');
+
+    it('reads the trigger list', () => {
+        expect(triggers.length).toBeGreaterThan(10);
+    });
+
+    // A published file the trigger misses would reach production with no browser test run.
+    it('runs on a change to every published path', () => {
+        for (const glob of publishedGlobs()) {
+            expect(triggers, `${glob} is published but does not trigger E2E`).toContain(glob);
+        }
+    });
+
+    // The specs mock the Worker, but a few import its helpers directly: a change to those must run.
+    it('runs on a change to every file the specs import', () => {
+        const imported = filesImportedBySpecs();
+        expect(imported.length).toBeGreaterThan(0);
+        for (const file of imported) {
+            expect(triggeredBy(triggers, file), `${file} is imported by a spec`).toBe(true);
+        }
+    });
+
+    it('runs on a change to the specs, their config and the dependencies', () => {
+        for (const file of ['tests/e2e/a11y.spec.js', 'playwright.config.js', 'pnpm-lock.yaml']) {
+            expect(triggeredBy(triggers, file), file).toBe(true);
+        }
+    });
+
+    it('does not run for a worker-only change', () => {
+        expect(triggeredBy(triggers, 'worker/mcp.js')).toBe(false);
+    });
+
+    it('runs every shard it declares, and Quality no longer runs E2E', () => {
+        const workflow = read('.github/workflows/e2e.yml');
+        const shards = [...workflow.matchAll(/shard: \[([^\]]+)\]/g)][0][1].split(',').length;
+        expect(workflow).toContain(`--shard=\${{ matrix.shard }}/${shards}`);
+        expect(read('.github/workflows/quality.yml')).not.toMatch(/playwright|test:e2e/);
     });
 });
 

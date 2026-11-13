@@ -2,6 +2,7 @@ name: Quality
 
 # Pull requests only: main is PR-only, so a push run would repeat the PR's. The deploy re-runs
 # the fast checks itself (pages.yml `verify`), so a direct push to main is still gated.
+# The browser tests are e2e.yml: they run only when a change can affect them.
 on:
   pull_request:
     branches: [main]
@@ -17,11 +18,4 @@ jobs:
     with:
       # One install for all the fast checks. Keep this command identical to pages.yml `verify`.
       command: pnpm validate && pnpm check:generated
-      package-manager: pnpm
-
-  e2e:
-    name: E2E + a11y (Playwright + axe)
-    uses: and3rn3t/.github/.github/workflows/reusable-playwright-e2e.yml@1c3373749e2b150f32a971f7b20f98d198133da0 # and3rn3t/.github#22 (not yet in tag v1)
-    with:
-      command: pnpm test:e2e
       package-manager: pnpm
