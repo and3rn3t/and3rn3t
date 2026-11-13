@@ -101,6 +101,7 @@ describe('OpenAPI document', () => {
             '/edge',
             '/guestbook',
             '/health',
+            '/presence',
             '/stats',
             '/views',
         ]);

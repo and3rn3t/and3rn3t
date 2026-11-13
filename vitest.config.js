@@ -1,6 +1,17 @@
 import { defineConfig } from 'vitest/config';
 
+import { join } from 'node:path';
+
 export default defineConfig({
+    // "cloudflare:workers" only exists inside the Workers runtime; tests get a stub
+    resolve: {
+        alias: {
+            'cloudflare:workers': join(
+                import.meta.dirname,
+                'tests/worker/stubs/cloudflare-workers.js'
+            ),
+        },
+    },
     test: {
         projects: [
             {

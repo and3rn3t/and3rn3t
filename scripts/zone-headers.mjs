@@ -129,6 +129,8 @@ export function buildCsp({ scripts, styles }) {
       'https://cloudflareinsights.com',
       'https://api.github.com',
       'https://and3rn3t-portfolio.andernet.workers.dev',
+      // The "N here now" WebSocket. Not left to 'self': older browsers do not match ws: to it
+      'wss://andernet.dev',
       'https://formspree.io',
     ],
     'frame-src': ['https://challenges.cloudflare.com'],

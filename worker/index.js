@@ -36,6 +36,7 @@ import {
     corsHeaders,
 } from './engagement.js';
 import { handleMcp } from './mcp.js';
+import { handlePresenceRequest } from './presence.js';
 import { runProbe } from './probe.js';
 import { loadStats } from './stats.js';
 import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry.js';
@@ -43,6 +44,9 @@ import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
 const NEGATIVE_TTL_SECONDS = 60; // remember a failed lookup briefly so GitHub isn't hammered
+
+// The Durable Object class must be exported from the entry point
+export { Presence } from './presence.js';
 
 export default {
     async fetch(request, env, ctx) {
@@ -124,6 +128,10 @@ async function route(request, env, ctx) {
 
     if (path === '/stats') {
         return handleStats(request, env);
+    }
+
+    if (path === '/presence') {
+        return handlePresenceRequest(request, env);
     }
 
     if (path === '/views') {

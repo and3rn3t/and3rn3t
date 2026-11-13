@@ -48,6 +48,9 @@ export const STATS_FIXTURE = {
 
 export const test = base.extend({
     page: async ({ page }, use) => {
+        // The "N here now" socket: answered here, never the deployed Worker. One page is not "here
+        // now", so by default nothing shows; a test that wants a crowd registers its own.
+        await page.routeWebSocket(/\/presence$/, ws => ws.send(JSON.stringify({ count: 1 })));
         await page.route(`${WORKER_BASE}/**`, route => {
             const request = route.request();
             const { pathname } = new URL(request.url());
