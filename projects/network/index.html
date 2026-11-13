@@ -7,8 +7,8 @@
       @layer scale, reset, tokens, base, components, sections, utilities;
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
-    <title>Network Analytics Tool | Matthew Anderson</title>
-    <meta name="description" content="A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes." />
+    <title>UniFi Network API Client | Matthew Anderson</title>
+    <meta name="description" content="A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/network/" />
-    <meta property="og:title" content="Network Analytics Tool | Matthew Anderson" />
-    <meta property="og:description" content="A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes." />
+    <meta property="og:title" content="UniFi Network API Client | Matthew Anderson" />
+    <meta property="og:description" content="A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Network Analytics Tool | Matthew Anderson" />
-    <meta name="twitter:description" content="A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes." />
+    <meta name="twitter:title" content="UniFi Network API Client | Matthew Anderson" />
+    <meta name="twitter:description" content="A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -60,13 +60,13 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  "name": "Network Analytics Tool",
-  "description": "A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes.",
+  "name": "UniFi Network API Client",
+  "description": "A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting.",
   "url": "https://andernet.dev/projects/network/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/network",
   "programmingLanguage": "Python",
-  "keywords": "Python, UniFi API, Network Protocols, Data Analytics",
+  "keywords": "Python, UniFi API, SQLite",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -95,7 +95,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Network Analytics Tool",
+      "name": "UniFi Network API Client",
       "item": "https://andernet.dev/projects/network/"
     }
   ]
@@ -128,13 +128,13 @@
           <span aria-hidden="true">/</span>
           <a href="/#projects">Projects</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">Network Analytics Tool</span>
+          <span aria-current="page">UniFi Network API Client</span>
         </nav>
 
         <header class="project-head">
           <p class="eyebrow">Networking &amp; Security</p>
-          <h1 class="project-head__title" data-vt="title">Network Analytics Tool</h1>
-          <p class="project-head__lede">A Python tool that queries the UniFi API directly to surface network-wide visibility — device inventory, traffic patterns, and security events beyond what the vendor dashboard exposes.</p>
+          <h1 class="project-head__title" data-vt="title">UniFi Network API Client</h1>
+          <p class="project-head__lede">A Python client for the UniFi Network controller API, with automated data collection, analytics and alerting.</p>
           <div class="project-head__actions">
             
             <a class="button button--primary" href="https://github.com/and3rn3t/network" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,26 +150,25 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">The official UniFi dashboard shows you what Ubiquiti wants you to see. This Python tool queries the controller API directly to pull richer data: per-device traffic histories, client fingerprinting details, event logs, and WLAN association records. It provided the foundation for building custom alerting on unexpected devices and tracking bandwidth patterns over time. The project is also a useful template for working with any vendor REST API that exposes more than its official UI shows.</p>
+              <p class="project-body__overview">A Python library and collector for a local UniFi controller, tested against a UDM Pro. It polls devices and clients on a schedule into SQLite, scores network health, and raises rule-based alerts with notifications. A collection cycle of 6 devices and 38+ clients takes about three seconds. The repository is archived.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Surfaces UniFi data not accessible in the official dashboard via direct API queries</li>
-              <li>Device fingerprinting and per-client traffic history across network segments</li>
-              <li>Security event monitoring with alerting on unexpected device connections</li>
-              <li>Reusable pattern for any managed network vendor with a REST API</li>
+              <li>Local UniFi controller client, tested on a UDM Pro</li>
+              <li>Scheduled collection into SQLite, about three seconds per cycle</li>
+              <li>Health scoring and rule-based alerts</li>
             </ul>
           </section>
           </article>
           <aside class="project-body__aside" aria-label="Project facts">
             <dl class="facts">
               <div class="facts__row"><dt>Category</dt><dd>Networking &amp; Security</dd></div>
-              <div class="facts__row"><dt>Status</dt><dd>Active Development</dd></div>
+              <div class="facts__row"><dt>Status</dt><dd>Archived</dd></div>
               <div class="facts__row"><dt>Language</dt><dd>Python</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">Python</li><li class="tag">UniFi API</li><li class="tag">Network Protocols</li><li class="tag">Data Analytics</li></ul>
+            <ul class="tag-list"><li class="tag">Python</li><li class="tag">UniFi API</li><li class="tag">SQLite</li></ul>
           </aside>
         </div>
 
@@ -180,7 +179,7 @@
           </a>
           <a class="pager__link pager__link--next" href="/projects/huggingface/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">Hugging Face API Sandbox</span>
+            <span class="pager__title">HuggingFace Playground</span>
           </a>
         </nav>
       </div>

@@ -8,7 +8,7 @@
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
     <title>Denon AVR Remote | Matthew Anderson</title>
-    <meta name="description" content="A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable." />
+    <meta name="description" content="A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -23,13 +23,13 @@
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/remote/" />
     <meta property="og:title" content="Denon AVR Remote | Matthew Anderson" />
-    <meta property="og:description" content="A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable." />
+    <meta property="og:description" content="A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Denon AVR Remote | Matthew Anderson" />
-    <meta name="twitter:description" content="A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable." />
+    <meta name="twitter:description" content="A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -61,12 +61,12 @@
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "Denon AVR Remote",
-  "description": "A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable.",
+  "description": "A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing.",
   "url": "https://andernet.dev/projects/remote/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/remote",
   "programmingLanguage": "Swift",
-  "keywords": "Swift, SwiftUI, iOS, Denon HTTP API",
+  "keywords": "Swift, SwiftUI, iOS 26, Bonjour",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -134,7 +134,7 @@
         <header class="project-head">
           <p class="eyebrow">IoT &amp; Home Automation</p>
           <h1 class="project-head__title" data-vt="title">Denon AVR Remote</h1>
-          <p class="project-head__lede">A Swift app that replaces the sluggish official Denon remote with a faster, local-network-only controller — built because the vendor app was too slow to be usable.</p>
+          <p class="project-head__lede">A SwiftUI remote for Denon AV receivers, built to iOS 26 design guidelines: Liquid Glass, multi-zone control and Dynamic Island now-playing.</p>
           <div class="project-head__actions">
             
             <a class="button button--primary" href="https://github.com/and3rn3t/remote" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,15 +150,15 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">The official Denon remote app routes commands through the cloud, adding noticeable latency to every volume change. This Swift app bypasses that entirely: it communicates directly with the receiver over the local network via the Denon HTTP API, giving near-instant response on every control. Built with Swift structured concurrency (async/await) for a responsive UI even under rapid input, and covers volume, input switching, power, and multi-zone control. The project involved reverse-engineering the Denon HTTP API beyond what the official documentation covers.</p>
+              <p class="project-body__overview">A native iOS app for Denon AV receivers that finds them on the local network with Bonjour and controls them directly. It covers power, volume (with a configurable safety limit), 13 inputs, 18 surround modes, tone and Dynamic EQ, a sleep timer, saved scenes, and independent control of Zones 2 and 3, with now-playing in the Dynamic Island. It&#39;s also my testbed for the iOS 26 design language: Liquid Glass controls, the customisable toolbar API, split view on iPad and haptics throughout.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Direct LAN control bypasses cloud routing — near-instant response vs. vendor app</li>
-              <li>Reverse-engineered the Denon HTTP API for volume, input, power, and zone control</li>
-              <li>Swift structured concurrency (async/await) keeps UI responsive under rapid input</li>
-              <li>Built because the official app was frustrating — a pattern I apply to any bad tooling</li>
+              <li>Finds receivers on the local network with Bonjour</li>
+              <li>Power, volume, 13 inputs and 18 surround modes, plus Zones 2 and 3</li>
+              <li>Now-playing in the Dynamic Island</li>
+              <li>Liquid Glass UI, customisable toolbar, iPad split view and keyboard shortcuts</li>
             </ul>
           </section>
           </article>
@@ -169,14 +169,14 @@
               <div class="facts__row"><dt>Language</dt><dd>Swift</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">iOS</li><li class="tag">Denon HTTP API</li></ul>
+            <ul class="tag-list"><li class="tag">Swift</li><li class="tag">SwiftUI</li><li class="tag">iOS 26</li><li class="tag">Bonjour</li></ul>
           </aside>
         </div>
 
         <nav class="pager" aria-label="More projects">
           <a class="pager__link pager__link--prev" href="/projects/catastrophe/" rel="prev">
             <span class="eyebrow">Previous project</span>
-            <span class="pager__title">CATastrophe Game</span>
+            <span class="pager__title">CATastrophe</span>
           </a>
           <span></span>
         </nav>

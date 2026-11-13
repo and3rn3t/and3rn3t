@@ -7,8 +7,8 @@
       @layer scale, reset, tokens, base, components, sections, utilities;
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
-    <title>dbt Data Models | Matthew Anderson</title>
-    <meta name="description" content="Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources." />
+    <title>Data Science Workspace | Matthew Anderson</title>
+    <meta name="description" content="A data science workspace: Python analysis, dbt transformations and Jupyter notebooks." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/dbt/" />
-    <meta property="og:title" content="dbt Data Models | Matthew Anderson" />
-    <meta property="og:description" content="Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources." />
+    <meta property="og:title" content="Data Science Workspace | Matthew Anderson" />
+    <meta property="og:description" content="A data science workspace: Python analysis, dbt transformations and Jupyter notebooks." />
     <meta property="og:image" content="https://andernet.dev/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="dbt Data Models | Matthew Anderson" />
-    <meta name="twitter:description" content="Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources." />
+    <meta name="twitter:title" content="Data Science Workspace | Matthew Anderson" />
+    <meta name="twitter:description" content="A data science workspace: Python analysis, dbt transformations and Jupyter notebooks." />
     <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
 
     <script>
@@ -60,13 +60,13 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  "name": "dbt Data Models",
-  "description": "Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources.",
+  "name": "Data Science Workspace",
+  "description": "A data science workspace: Python analysis, dbt transformations and Jupyter notebooks.",
   "url": "https://andernet.dev/projects/dbt/",
   "image": "https://andernet.dev/og/default.png",
   "codeRepository": "https://github.com/and3rn3t/dbt",
   "programmingLanguage": "Python",
-  "keywords": "Python, dbt, SQL, Data Engineering",
+  "keywords": "Python, dbt, SQL, Jupyter",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -95,7 +95,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "dbt Data Models",
+      "name": "Data Science Workspace",
       "item": "https://andernet.dev/projects/dbt/"
     }
   ]
@@ -128,13 +128,13 @@
           <span aria-hidden="true">/</span>
           <a href="/#projects">Projects</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">dbt Data Models</span>
+          <span aria-current="page">Data Science Workspace</span>
         </nav>
 
         <header class="project-head">
           <p class="eyebrow">Data Engineering</p>
-          <h1 class="project-head__title" data-vt="title">dbt Data Models</h1>
-          <p class="project-head__lede">Experimenting with dbt (data build tool) for building modular, tested SQL transformation pipelines on top of raw data sources.</p>
+          <h1 class="project-head__title" data-vt="title">Data Science Workspace</h1>
+          <p class="project-head__lede">A data science workspace: Python analysis, dbt transformations and Jupyter notebooks.</p>
           <div class="project-head__actions">
             
             <a class="button button--primary" href="https://github.com/and3rn3t/dbt" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -150,15 +150,15 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">This project applies dbt as a framework for managing data transformation logic in SQL. It covers building layered data models (staging, intermediate, mart), writing schema tests for data-quality validation, and using Jinja templating to keep SQL DRY and reusable. The goal is to bring software engineering best practices — version control, automated testing, in-code documentation — into analytics engineering workflows, with Python used for orchestration and tooling around the dbt project.</p>
+              <p class="project-body__overview">A workspace for practising analytics engineering end to end. Python scripts fetch public data (including data.gov) into a raw, staging and processed layout, a dbt project models it in SQL, and Jupyter notebooks are where the exploring happens. It runs in Docker with a local database, and pytest covers the scripts.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Layered model architecture: staging, intermediate, and mart layers</li>
-              <li>Schema tests for automated data-quality validation</li>
-              <li>Jinja templating for reusable, DRY transformation logic</li>
-              <li>Software engineering practices applied to analytics pipelines</li>
+              <li>Python fetchers for public data sources, including data.gov</li>
+              <li>dbt project for SQL transformations on top of the raw data</li>
+              <li>Jupyter notebooks for exploration</li>
+              <li>Docker setup with a local database; pytest for the scripts</li>
             </ul>
           </section>
           </article>
@@ -169,18 +169,18 @@
               <div class="facts__row"><dt>Language</dt><dd>Python</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">Python</li><li class="tag">dbt</li><li class="tag">SQL</li><li class="tag">Data Engineering</li></ul>
+            <ul class="tag-list"><li class="tag">Python</li><li class="tag">dbt</li><li class="tag">SQL</li><li class="tag">Jupyter</li></ul>
           </aside>
         </div>
 
         <nav class="pager" aria-label="More projects">
           <a class="pager__link pager__link--prev" href="/projects/hack/" rel="prev">
             <span class="eyebrow">Previous project</span>
-            <span class="pager__title">Hacking Simulator</span>
+            <span class="pager__title">The Hack: Ghost Protocol</span>
           </a>
           <a class="pager__link pager__link--next" href="/projects/catastrophe/" rel="next">
             <span class="eyebrow">Next project</span>
-            <span class="pager__title">CATastrophe Game</span>
+            <span class="pager__title">CATastrophe</span>
           </a>
         </nav>
       </div>

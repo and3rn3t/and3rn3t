@@ -87,7 +87,7 @@ test('a project card reaches its page with a click', async ({ page }) => {
     await expect(link).toBeVisible();
     await link.click();
     await page.waitForURL('**/projects/health/');
-    await expect(page.locator('h1')).toContainText('Health');
+    await expect(page.locator('h1')).toContainText('VitalSense');
 });
 
 test('a project stays linked when newer data no longer stars its repo', async ({ page }) => {

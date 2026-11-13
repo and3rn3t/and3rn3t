@@ -7,8 +7,8 @@
       @layer scale, reset, tokens, base, components, sections, utilities;
       @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
     </style>
-    <title>Guess — Transparent Akinator | Matthew Anderson</title>
-    <meta name="description" content="A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible." />
+    <title>Andernator | Matthew Anderson</title>
+    <meta name="description" content="An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained." />
     <meta name="author" content="Matthew Anderson" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
@@ -22,14 +22,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Matthew Anderson Portfolio" />
     <meta property="og:url" content="https://andernet.dev/projects/guess/" />
-    <meta property="og:title" content="Guess — Transparent Akinator | Matthew Anderson" />
-    <meta property="og:description" content="A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible." />
+    <meta property="og:title" content="Andernator | Matthew Anderson" />
+    <meta property="og:description" content="An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained." />
     <meta property="og:image" content="https://andernet.dev/images/projects/guess-og.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Guess — Transparent Akinator | Matthew Anderson" />
-    <meta name="twitter:description" content="A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible." />
+    <meta name="twitter:title" content="Andernator | Matthew Anderson" />
+    <meta name="twitter:description" content="An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained." />
     <meta name="twitter:image" content="https://andernet.dev/images/projects/guess-og.jpg" />
 
     <script>
@@ -60,13 +60,13 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
-  "name": "Guess — Transparent Akinator",
-  "description": "A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.",
+  "name": "Andernator",
+  "description": "An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained.",
   "url": "https://andernet.dev/projects/guess/",
   "image": "https://andernet.dev/images/projects/guess-og.jpg",
   "codeRepository": "https://github.com/and3rn3t/guess",
   "programmingLanguage": "TypeScript",
-  "keywords": "TypeScript, Algorithms, Decision Trees",
+  "keywords": "TypeScript, React, Cloudflare D1, Cloudflare Workers",
   "author": {
     "@type": "Person",
     "name": "Matthew Anderson",
@@ -95,7 +95,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Guess — Transparent Akinator",
+      "name": "Andernator",
       "item": "https://andernet.dev/projects/guess/"
     }
   ]
@@ -128,13 +128,13 @@
           <span aria-hidden="true">/</span>
           <a href="/#projects">Projects</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">Guess — Transparent Akinator</span>
+          <span aria-current="page">Andernator</span>
         </nav>
 
         <header class="project-head">
-          <p class="eyebrow">Tools &amp; Automation</p>
-          <h1 class="project-head__title" data-vt="title">Guess — Transparent Akinator</h1>
-          <p class="project-head__lede">A 20-questions game that makes its decision tree fully visible as you play. Built to make information-theoretic narrowing tangible.</p>
+          <p class="eyebrow">Game Development</p>
+          <h1 class="project-head__title" data-vt="title">Andernator</h1>
+          <p class="project-head__lede">An Akinator-style guessing game that shows its reasoning: Bayesian scoring over 53,000+ characters, with every question explained.</p>
           <div class="project-head__actions">
             <a class="button button--primary" href="https://andernator.com" target="_blank" rel="noopener noreferrer">Live demo <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#external-link-alt"></use></svg></a>
             <a class="button" href="https://github.com/and3rn3t/guess" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#github"></use></svg> Source on GitHub</a>
@@ -156,33 +156,33 @@
           <article class="project-body__main">
             <section aria-labelledby="overview-heading">
               <h2 id="overview-heading">Overview</h2>
-              <p class="project-body__overview">Guess is a TypeScript implementation of a 20-questions-style guessing game, with one key difference from Akinator: the algorithm is fully transparent. As you answer each question, the UI shows which candidates remain, the current confidence score, and why the next question was chosen — exposing the entropy-based selection logic in real time. The goal was to make constraint satisfaction feel intuitive rather than magical. It&#39;s live at andernator.com, works in any browser, and the decision tree logic is written from scratch with no external AI APIs.</p>
+              <p class="project-body__overview">Think of a character and Andernator asks yes/no questions until it guesses. Unlike Akinator, it shows its work: each question is picked for information gain, every answer updates Bayesian probabilities over 53,000+ characters with 224 attributes each, and the UI explains why it asked what it asked. When it guesses wrong you can teach it the character. There&#39;s a daily challenge, three difficulty levels, category filters and a Wordle-style share card. The front end is React 19 on Cloudflare Pages; the engine runs on Workers against D1, and GPT-4o (through Cloudflare AI Gateway) reads free-text answers. It&#39;s live at andernator.com.</p>
             </section>
           <section aria-labelledby="highlights-heading">
             <h2 id="highlights-heading">Highlights</h2>
             <ul class="highlights">
-              <li>Live at andernator.com — playable in any browser, no install required</li>
-              <li>Decision tree and confidence score rendered in real time as you answer</li>
-              <li>Entropy-based question selection written from scratch — no external AI APIs</li>
-              <li>Makes constraint-satisfaction search intuitive by showing the algorithm&#39;s reasoning</li>
+              <li>Live at andernator.com, playable in any browser</li>
+              <li>Bayesian scoring with information-gain question selection, explained as you play</li>
+              <li>53,000+ characters with 224 attributes each, in Cloudflare D1</li>
+              <li>Teaching mode, a daily challenge and a Wordle-style share card</li>
             </ul>
           </section>
           </article>
           <aside class="project-body__aside" aria-label="Project facts">
             <dl class="facts">
-              <div class="facts__row"><dt>Category</dt><dd>Tools &amp; Automation</dd></div>
+              <div class="facts__row"><dt>Category</dt><dd>Game Development</dd></div>
               <div class="facts__row"><dt>Status</dt><dd>Active Development</dd></div>
               <div class="facts__row"><dt>Language</dt><dd>TypeScript</dd></div>
             </dl>
             <h2 class="eyebrow">Stack</h2>
-            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">Algorithms</li><li class="tag">Decision Trees</li></ul>
+            <ul class="tag-list"><li class="tag">TypeScript</li><li class="tag">React</li><li class="tag">Cloudflare D1</li><li class="tag">Cloudflare Workers</li></ul>
           </aside>
         </div>
 
         <nav class="pager" aria-label="More projects">
           <a class="pager__link pager__link--prev" href="/projects/homehub/" rel="prev">
             <span class="eyebrow">Previous project</span>
-            <span class="pager__title">Home Automation Hub</span>
+            <span class="pager__title">HomeHub</span>
           </a>
           <a class="pager__link pager__link--next" href="/projects/and3rn3t/" rel="next">
             <span class="eyebrow">Next project</span>
