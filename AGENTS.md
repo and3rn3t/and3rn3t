@@ -38,6 +38,7 @@ pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_
 pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked
 pnpm check:agent-ready # report-only scan of the live site (isitagentready.com); never fails
+pnpm check:probe     # FAILS if the uptime probe has been quiet for 15+ minutes or its last check failed (daily in site-check.yml)
 pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
 pnpm zone --apply    # only when asked; `--only tls` limits it to one group
 ```
@@ -115,6 +116,32 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   and registers five tools (search, list and open projects, set the theme, draft a contact message). Other browsers are
   never sent it (`tests/e2e/webmcp.spec.js` asserts that). The contact tool fills the form and **never submits**, and
   never touches the honeypot field; its limits are tested against the form's own attributes in `index.html`.
+- **Observability and alerts** (Phase 12). The Worker writes one Analytics Engine point per API request and MCP tool
+  call to `portfolio_metrics` (layout in `worker/telemetry.js`: a fixed route, status, time and a browser/agent
+  guess; no address, no user agent, and presence and CSP-report requests are not recorded), probes the home page every
+  five minutes (`worker/probe.js`, the cron in `wrangler.toml`), and has traces and Issues on. `/api/stats`
+  (`worker/stats.js`, cached five minutes, fixed queries, any section `null` when it cannot be read) feeds `/status/` and
+  the MCP tool `get_site_stats`. Nothing published counts visitors over time or says where they are.
+  - **Zone queries must filter `requestSource = 'eyeball'`.** About 8% of the site's logged requests are Cloudflare's own
+    Early Hints probing (`earlyHintsCache`), mostly logged as 504s with no origin: a query that counts them reports a
+    constant outage that no visitor sees.
+  - **`pnpm check:probe`** (the `uptime-probe` job in `site-check.yml`, daily) fails when the probe has been quiet for
+    over 15 minutes or its last check failed. Cloudflare Monitors cannot do that: a query with no rows gives them nothing
+    to evaluate.
+  - **Dashboard-only alerts** (Observability > Alerts > Monitors has no API, so they are not in the repo: recreate them
+    from here if they are lost), each emailing Matt. Every query below was run against the live data:
+    1. _Site availability_, SLO 99.5%, dataset `events.httpRequests`: bad =
+       `clientRequestHttpHost = 'andernet.dev' AND requestSource = 'eyeball' AND edgeResponseStatus >= 500`, total = the
+       same without the status. It includes the GitHub Pages origin failing (503, 522), which the Worker's numbers
+       never see; the last 24 h were 99.91%.
+    2. _API latency_, anomaly, dataset `events.analyticsEngine.portfolio_metrics`:
+       `SELECT quantileExactWeighted(0.95)(double2, sampleInterval) AS p95 FROM events.analyticsEngine.portfolio_metrics WHERE blob1 = 'request' AND index1 IN ('/health','/views','/edge') AND timestamp >= NOW() - INTERVAL '1' HOUR`
+       (not `/activity`: a cache miss waits for GitHub and takes seconds).
+    3. _Probe failing_, threshold of 3 or more, same dataset:
+       `SELECT COUNT(*) AS failed FROM events.analyticsEngine.portfolio_metrics WHERE blob1 = 'probe' AND blob2 = 'fail' AND timestamp >= NOW() - INTERVAL '15' MINUTE`.
+       If the dashboard does not offer the Analytics Engine dataset to Monitors, skip 2 and 3: `check:probe` covers 3.
+       Also: a Health Check on the GitHub Pages origin (Pro includes 10) with its notification on, and a Workers Issues
+       automation that emails new issues.
 - `ROADMAP.md` tracks planned work.
 - Conventional commits: `type(scope): description`.
 - Don't commit or deploy unless explicitly asked.

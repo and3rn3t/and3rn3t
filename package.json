@@ -26,6 +26,7 @@
     "capture:screenshots": "node scripts/capture-screenshots.mjs",
     "check:refs": "node scripts/check-refs.mjs",
     "check:agent-ready": "node scripts/check-agent-ready.mjs",
+    "check:probe": "node scripts/check-probe.mjs",
     "zone": "node scripts/cloudflare-zone.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
