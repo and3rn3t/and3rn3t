@@ -1,5 +1,5 @@
-import { readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join, posix } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 // jsdom replaces URL, so build the path with join rather than fileURLToPath(new URL(...))
@@ -54,20 +54,29 @@ const triggeredBy = (globs, file) =>
         return false;
     });
 
-/** Files outside tests/e2e that the specs import, as repo-relative paths. */
-const filesImportedBySpecs = () => {
-    const specs = readdirSync(join(import.meta.dirname, '..', 'e2e')).filter(f =>
-        f.endsWith('.js')
-    );
-    return [
-        ...new Set(
-            specs.flatMap(spec =>
-                [...read(`tests/e2e/${spec}`).matchAll(/from '\.\.\/\.\.\/([^']+)'/g)].map(
-                    m => m[1]
-                )
-            )
-        ),
-    ];
+/**
+ * Every repo file the specs load, directly or through other files' static imports, outside
+ * tests/e2e, as repo-relative paths. Following the imports matters: csp-report.spec.js imports
+ * worker/csp-report.js, which imports worker/telemetry.js.
+ */
+const filesLoadedBySpecs = () => {
+    const root = join(import.meta.dirname, '..', '..');
+    const pending = readdirSync(join(root, 'tests', 'e2e'))
+        .filter(file => file.endsWith('.js'))
+        .map(file => `tests/e2e/${file}`);
+    const seen = new Set();
+    while (pending.length > 0) {
+        const file = pending.pop();
+        if (seen.has(file)) continue;
+        seen.add(file);
+        for (const [, specifier] of read(file).matchAll(
+            /(?:from|import)\s*\(?\s*'(\.{1,2}\/[^']+)'/g
+        )) {
+            const target = posix.normalize(posix.join(posix.dirname(file), specifier));
+            if (/\.m?js$/.test(target) && existsSync(join(root, target))) pending.push(target);
+        }
+    }
+    return [...seen].filter(file => !file.startsWith('tests/e2e/'));
 };
 
 describe('E2E trigger (e2e.yml)', () => {
@@ -84,12 +93,13 @@ describe('E2E trigger (e2e.yml)', () => {
         }
     });
 
-    // The specs mock the Worker, but a few import its helpers directly: a change to those must run.
-    it('runs on a change to every file the specs import', () => {
-        const imported = filesImportedBySpecs();
-        expect(imported.length).toBeGreaterThan(0);
-        for (const file of imported) {
-            expect(triggeredBy(triggers, file), `${file} is imported by a spec`).toBe(true);
+    // The specs mock the Worker, but a few import its helpers directly: a change to those, or to
+    // anything they import in turn, must run.
+    it('runs on a change to every file the specs load', () => {
+        const loaded = filesLoadedBySpecs();
+        expect(loaded).toContain('worker/telemetry.js'); // the transitive case, so the walk is proven
+        for (const file of loaded) {
+            expect(triggeredBy(triggers, file), `${file} is loaded by a spec`).toBe(true);
         }
     });
 

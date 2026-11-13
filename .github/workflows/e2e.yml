@@ -1,11 +1,11 @@
 name: E2E
 
 # Runs only when something the browser tests can see has changed: the published site, the specs and
-# their config, the dependencies, and the few non-site files the specs import. They mock the whole
-# Worker (tests/e2e/fixtures.js), so a change under worker/ cannot alter a result, except
-# worker/csp-report.js, which csp-report.spec.js imports.
+# their config, the dependencies, and the few non-site files the specs load. They mock the whole
+# Worker (tests/e2e/fixtures.js), so a change under worker/ cannot alter a result, except the
+# files csp-report.spec.js imports: worker/csp-report.js and, through it, worker/telemetry.js.
 # tests/unit/pages-workflow.test.js keeps this list in step with pages.yml's publish allowlist and
-# with what the specs import.
+# with everything the specs import, directly or transitively.
 #
 # Path-filtered, so a skipped run never reports a status: do not make this a required check on
 # `main` (it would block every PR that does not touch these paths).
@@ -40,6 +40,7 @@ on:
       - 'tests/e2e/**'
       - 'scripts/zone-headers.mjs'
       - 'worker/csp-report.js'
+      - 'worker/telemetry.js'
       - 'playwright.config.js'
       - 'package.json'
       - 'pnpm-lock.yaml'
