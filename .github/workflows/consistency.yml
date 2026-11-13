@@ -1,5 +1,5 @@
-# Consistency guard — warns on PRs when baseline config files drift from
-# ai-template-repo. Switch mode to "fail" once the repo is clean to block drift.
+# Consistency guard — fails a PR when baseline config files drift from
+# ai-template-repo. Intentional drift goes in .consistency-ignore.
 name: Consistency
 
 on:
@@ -13,4 +13,4 @@ jobs:
   guard:
     uses: and3rn3t/.github/.github/workflows/reusable-consistency-guard.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
     with:
-      mode: warn
+      mode: fail
