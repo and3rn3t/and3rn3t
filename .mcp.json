@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "portfolio": {
+      "type": "http",
+      "url": "https://andernet.dev/mcp"
+    },
+    "cloudflare-api": {
+      "type": "http",
+      "url": "https://mcp.cloudflare.com/mcp"
+    }
+  }
+}
