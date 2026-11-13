@@ -17,9 +17,12 @@ started during page parse, not the `load` event):
 ```
 
 - `spa: true` tells the beacon the page updates its URL without full reloads.
-- The generated `posts/*/index.html` pages load the same script, with the token only.
+- The generated pages (projects, posts, 404, `/status/`) load the same script from the shared head in
+  `scripts/templates/chrome.mjs`, with the token only.
 - The site token is public by design: it is served in every page. It is allowlisted by exact value
   in `.gitleaks.toml` and `.gitguardian.yaml`, so any other token is still reported.
+- The zone's CSP (`scripts/zone-headers.mjs`) allows `static.cloudflareinsights.com` and
+  `cloudflareinsights.com`; a new analytics host needs adding there too.
 
 ## Verify it works
 
@@ -35,5 +38,5 @@ started during page parse, not the `load` event):
 - **No beacon request:** an ad or tracking blocker is the usual cause. Test in a clean profile.
 - **No data in the dashboard:** the token is tied to the registered hostname. `localhost` and
   preview URLs report nothing.
-- **Changing the token:** edit it in `index.html` and in `scripts/generate-site.mjs`
+- **Changing the token:** edit it in `index.html` and in `scripts/templates/chrome.mjs`
   (`CF_BEACON_TOKEN`), run `pnpm generate:site`, and update the two allowlists above.

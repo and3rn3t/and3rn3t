@@ -1,11 +1,11 @@
 # AGENTS.md — and3rn3t portfolio
 
-Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`, `index.html`), served as raw source by GitHub Pages (no bundler), plus a Cloudflare Worker (`worker/index.js`) for dynamic bits (view counts via KV).
+Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`, `index.html`), served as raw source by GitHub Pages (no bundler), plus a Cloudflare Worker (`worker/index.js`) for the dynamic parts (API, MCP server, uptime probe, telemetry).
 
 ## Stack
 
 - Vanilla JS modules (not React); Vite is only the local dev server (`pnpm dev`); **pnpm** (`pnpm@11`, Node `^24.15.0 || >=26` (jsdom 30 / Vitest 5), `.nvmrc` pinned)
-- Cloudflare Worker `and3rn3t-portfolio` (`wrangler.toml`; KV bindings `VIEWS_KV` and `GUESTBOOK_KV`): `/views`, `/guestbook` and `/activity`
+- Cloudflare Worker `and3rn3t-portfolio` (`wrangler.toml`; KV bindings `VIEWS_KV` and `GUESTBOOK_KV`): `/views`, `/guestbook`, `/activity`, `/health`, `/edge`, `/stats`, `/presence` (a Durable Object) and `/csp-report`
   The Worker answers at `andernet.dev/api/*` (a route in `wrangler.toml`, so the page calls it same-origin) and at its
   `workers.dev` address, where the same paths have no `/api` prefix. `modules/config.js` picks the base by hostname, and
   `sw.js` never caches `/api/`, `/mcp` or `/.well-known/`
@@ -23,7 +23,7 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   - `pages.yml`: deploys the allowlisted source to GitHub Pages, then runs Lighthouse, desktop and mobile (push only). Add any new root asset to its `sparse-checkout` list or it 404s in production
   - `lighthouse.yml`: weekly and manual Lighthouse runs. Configs: `.lighthouserc.cjs` (desktop) and `.lighthouserc.mobile.cjs`; performance is an `error` at 0.9. Measure with the build served gzipped (an uncompressed static server under-scores mobile badly).
   - `update-github-data.yml`: daily refresh of `github-data.json`, the README featured projects and the OG card (it renders only when `.github/og-inputs.sha256` changes), then dispatches `pages.yml`
-  - `snake.yml` (README snake on the `output` branch), `codeql.yml`, `gitleaks.yml`, `dependency-review.yml`, `actionlint.yml`, `consistency.yml`, `labeler.yml`, `label-sync.yml`, `release-drafter.yml`, `stale.yml`
+  - `site-check.yml` (daily live-site checks, including the `uptime-probe` job), `snake.yml` (README snake on the `output` branch), `codeql.yml`, `gitleaks.yml`, `dependency-review.yml`, `actionlint.yml`, `consistency.yml`, `labeler.yml`, `label-sync.yml`, `release-drafter.yml`, `stale.yml`
 
 ## Commands
 
@@ -59,7 +59,7 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   `images/projects/<name>-cover-{light,dark}.svg` for projects without a screenshot. `projects/<slug>/` pages
   are pre-rendered by `scripts/templates/project-page.mjs`; the `@view-transition` opt-in must stay an inline
   `<style>` in each page's `<head>` (`VIEW_TRANSITION_CSS`, see `scripts/templates/chrome.mjs`).
-- **CSS** is the design system in `styles/` (Phase 10, `ROADMAP.md`): `core.css` (cascade layers, tokens,
+- **CSS** is the design system in `styles/` (Phase 10, `docs/ROADMAP-archive.md`): `core.css` (cascade layers, tokens,
   nav, footer and primitives; every page), `article.css` (project, post and 404 pages) and `home.css` (the
   home page, including its base: the reset, body type and the phone-sized scale). The old `styles.css` is
   gone. Rules for `styles/`:
@@ -142,7 +142,7 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
        If the dashboard does not offer the Analytics Engine dataset to Monitors, skip 2 and 3: `check:probe` covers 3.
        Also: a Health Check on the GitHub Pages origin (Pro includes 10) with its notification on, and a Workers Issues
        automation that emails new issues.
-- `ROADMAP.md` tracks planned work.
+- `ROADMAP.md` tracks open phases and recent decisions; finished phases move to `docs/ROADMAP-archive.md`.
 - Conventional commits: `type(scope): description`.
 - Don't commit or deploy unless explicitly asked.
 
@@ -156,4 +156,4 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   `g` then h/a/p/c because that needs no module). Use `whenNear` (a real timer, not `requestIdleCallback`'s
   `timeout`, which is a deadline) for features that serve a section the visitor may never reach.
 - `tests/e2e/budgets.spec.js` holds the budgets: by `app:ready`, at most 10 script files and 60 KB; settled, at
-  most 28 files, 130 KB and 0.01 CLS. Measure before changing them (the history is in `ROADMAP.md`).
+  most 28 files, 130 KB and 0.01 CLS. Measure before changing them (the history is in `docs/ROADMAP-archive.md`, Phase 10.6).
