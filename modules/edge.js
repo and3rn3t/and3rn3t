@@ -104,7 +104,17 @@ export function initPresence() {
 
     const open = () => {
         if (socket || document.hidden || stopped) return;
-        const ws = new WebSocket(presenceUrl());
+        let ws;
+        try {
+            ws = new WebSocket(presenceUrl());
+        } catch (err) {
+            // A browser policy can refuse the constructor outright. That will not change when the
+            // tab is shown again, so presence stops for good instead of failing on every visit
+            debug.warn('[Presence] Skipped:', err.message);
+            stopped = true;
+            document.removeEventListener('visibilitychange', onVisibility);
+            return;
+        }
         socket = ws;
         ws.onopen = () => {
             retries = 0;
@@ -139,8 +149,16 @@ export function initPresence() {
     };
 }
 
-/** The footer's two live parts: where this was served, and how many are here. */
+/**
+ * The footer's two live parts: where this was served, and how many are here. The receipt starts
+ * first, and presence can fail without taking it down.
+ */
 export function initEdge() {
-    initPresence();
-    return initEdgeReceipt();
+    const receipt = initEdgeReceipt();
+    try {
+        initPresence();
+    } catch (err) {
+        debug.warn('[Presence] Skipped:', err.message);
+    }
+    return receipt;
 }

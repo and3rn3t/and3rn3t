@@ -66,14 +66,18 @@ export default {
         }
 
         const ms = Date.now() - started;
-        recordRequest(env, {
-            route: routeName,
-            method: request.method,
-            status: response.status,
-            ms,
-            colo: request.cf?.colo,
-            client: clientKind(request.headers.get('User-Agent')),
-        });
+        // A presence handshake is not recorded: "N here now" keeps nothing about who joined, and a
+        // data point would carry the visitor's Cloudflare location and a browser/agent guess
+        if (routeName !== '/presence') {
+            recordRequest(env, {
+                route: routeName,
+                method: request.method,
+                status: response.status,
+                ms,
+                colo: request.cf?.colo,
+                client: clientKind(request.headers.get('User-Agent')),
+            });
+        }
         // A WebSocket upgrade (101) cannot be rebuilt, and has no use for a timing header
         if (response.status === 101) return response;
         // Copy first: a response from fetch() has immutable headers, and the MCP reply is a stream

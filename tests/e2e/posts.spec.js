@@ -4,7 +4,7 @@
  * Each post has its own indexable page: real <title>, canonical, Open Graph and
  * BlogPosting JSON-LD, and the writing list links to it.
  */
-import { test, expect } from './fixtures.js';
+import { test, expect, mockWorker } from './fixtures.js';
 import AxeBuilder from '@axe-core/playwright';
 
 const SLUG = 'lidar-gait-analysis-iphone';
@@ -110,6 +110,7 @@ test.describe('the post body styles', () => {
             isMobile: true,
             hasTouch: true,
         });
+        await mockWorker(context);
         const page = await context.newPage();
         await page.goto(`/posts/${SLUG}/`);
         await page.evaluate(() => {

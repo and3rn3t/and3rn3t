@@ -113,19 +113,19 @@ describe('the Presence object', () => {
         expect(ctx.acceptWebSocket).not.toHaveBeenCalled();
     });
 
-    it('closes a socket that sends anything but a short text, and leaves "pings" alone', () => {
+    // The runtime answers "ping" itself, so a real ping never reaches the object: anything that
+    // does would wake it (and bill it) each time, and is closed at the first one
+    it.each([
+        ['a short text', 'hi'],
+        ['an empty text', ''],
+        ['a long text', 'x'.repeat(65)],
+        ['the word the runtime would have answered', 'ping'],
+        ['binary', new ArrayBuffer(4)],
+    ])('closes a socket on the first message that reaches the object: %s', (_name, message) => {
         const { presence } = makePresence();
-        const long = socket();
-        presence.webSocketMessage(long, 'x'.repeat(65));
-        expect(long.close).toHaveBeenCalledWith(1009, expect.any(String));
-
-        const binary = socket();
-        presence.webSocketMessage(binary, new ArrayBuffer(4));
-        expect(binary.close).toHaveBeenCalled();
-
-        const fine = socket();
-        presence.webSocketMessage(fine, 'hi');
-        expect(fine.close).not.toHaveBeenCalled();
+        const ws = socket();
+        presence.webSocketMessage(ws, message);
+        expect(ws.close).toHaveBeenCalledWith(1008, expect.any(String));
     });
 
     it('sends the count and nothing else: no address, place or identity', async () => {
@@ -214,6 +214,23 @@ describe('through the Worker', () => {
             );
         expect((await noOrigin('/api/presence')).status).toBe(403);
         expect((await noOrigin('/presence')).status).toBe(403);
+    });
+
+    // "N here now" keeps nothing about who joined: a data point would carry the visitor's
+    // Cloudflare location and a browser/agent guess
+    it('writes no data point for a handshake, successful or refused, but does for other routes', async () => {
+        const METRICS = { writeDataPoint: vi.fn() };
+        const env = { METRICS };
+        const handshake = headers =>
+            new Request('https://andernet.dev/api/presence', {
+                headers: { Upgrade: 'websocket', ...headers },
+            });
+        await worker.fetch(handshake({}), env, {}); // refused: no Origin
+        await worker.fetch(handshake({ Origin: 'https://evil.example' }), env, {});
+        expect(METRICS.writeDataPoint).not.toHaveBeenCalled();
+
+        await worker.fetch(new Request('https://andernet.dev/api/health'), env, {});
+        expect(METRICS.writeDataPoint).toHaveBeenCalledTimes(1);
     });
 
     it('exports the Durable Object class from its entry point, as Cloudflare requires', async () => {

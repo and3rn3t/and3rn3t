@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { initPresence, parseCount, presenceText, presenceUrl } from '../../modules/edge.js';
+import {
+    initEdge,
+    initPresence,
+    parseCount,
+    presenceText,
+    presenceUrl,
+} from '../../modules/edge.js';
 
 describe('presenceUrl', () => {
     it("is the Worker's /presence over a secure socket", () => {
@@ -102,6 +108,57 @@ describe('initPresence', () => {
         vi.useRealTimers();
         vi.unstubAllGlobals();
         delete document.hidden;
+    });
+
+    // A browser policy can refuse the constructor outright (a SecurityError, say)
+    it('does not throw when the browser refuses to build the socket, and does not retry', () => {
+        vi.stubGlobal(
+            'WebSocket',
+            class {
+                constructor() {
+                    throw new Error('SecurityError');
+                }
+            }
+        );
+        expect(() => start()).not.toThrow();
+        vi.advanceTimersByTime(600_000);
+        expect(slot().hidden).toBe(true);
+
+        // ...and it does not try again each time the tab is shown
+        const attempts = vi.fn();
+        vi.stubGlobal(
+            'WebSocket',
+            class {
+                constructor() {
+                    attempts();
+                }
+            }
+        );
+        setHidden(true);
+        setHidden(false);
+        expect(attempts).not.toHaveBeenCalled();
+    });
+
+    it('still loads the receipt when presence cannot start', async () => {
+        document.body.innerHTML =
+            '<span data-edge-widget hidden><a data-edge-receipt></a><span data-presence hidden></span></span>';
+        vi.stubGlobal(
+            'WebSocket',
+            class {
+                constructor() {
+                    throw new Error('SecurityError');
+                }
+            }
+        );
+        vi.stubGlobal(
+            'fetch',
+            vi.fn(async () => Response.json({ colo: 'ORD', version: 'abc1234' }))
+        );
+        vi.useRealTimers();
+        await expect(initEdge()).resolves.toBeUndefined();
+        expect(document.querySelector('[data-edge-receipt]').textContent).toMatch(
+            /^Served from ORD/
+        );
     });
 
     it('opens nothing on a page with no slot', () => {

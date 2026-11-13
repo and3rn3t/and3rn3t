@@ -46,45 +46,56 @@ export const STATS_FIXTURE = {
     cached: false,
 };
 
+/**
+ * Answer the Worker's endpoints and its presence socket here, so a run never reaches the deployed
+ * Worker (it would inflate the live view count and make tests depend on the network).
+ * `target` is a page or a browser context: a test that builds its own context must call this on
+ * it before opening a page (tests/unit/e2e-isolation.test.js checks that every one does).
+ * @param {import('@playwright/test').Page | import('@playwright/test').BrowserContext} target
+ */
+export async function mockWorker(target) {
+    // The "N here now" socket: answered here, never the deployed Worker. One page is not "here
+    // now", so by default nothing shows; a test that wants a crowd registers its own.
+    await target.routeWebSocket(/\/presence$/, ws => ws.send(JSON.stringify({ count: 1 })));
+    await target.route(`${WORKER_BASE}/**`, route => {
+        const request = route.request();
+        const { pathname } = new URL(request.url());
+        if (request.method() === 'OPTIONS') return json(route, {}, 204);
+        if (pathname === '/edge') {
+            return json(route, {
+                colo: 'ORD',
+                httpProtocol: 'h2',
+                tlsVersion: 'TLSv1.3',
+                version: 'abc1234',
+            });
+        }
+        if (pathname === '/stats') return json(route, STATS_FIXTURE);
+        if (pathname === '/views') return json(route, { page: 'home', views: 1234 });
+        if (pathname === '/guestbook') {
+            if (request.method() === 'POST') {
+                const entry = { name: 'Test', message: 'Hello', date: '2026-01-01T00:00:00Z' };
+                return json(route, { ok: true, entry }, 201);
+            }
+            return json(route, []);
+        }
+        if (pathname === '/activity') {
+            return json(route, {
+                repo: 'and3rn3t/example',
+                repoName: 'example',
+                repoUrl: 'https://github.com/and3rn3t/example',
+                type: 'push',
+                message: 'feat: fixture commit',
+                branch: 'main',
+                pushedAt: '2026-01-01T00:00:00Z',
+            });
+        }
+        return json(route, { error: 'not_stubbed' }, 404);
+    });
+}
+
 export const test = base.extend({
     page: async ({ page }, use) => {
-        // The "N here now" socket: answered here, never the deployed Worker. One page is not "here
-        // now", so by default nothing shows; a test that wants a crowd registers its own.
-        await page.routeWebSocket(/\/presence$/, ws => ws.send(JSON.stringify({ count: 1 })));
-        await page.route(`${WORKER_BASE}/**`, route => {
-            const request = route.request();
-            const { pathname } = new URL(request.url());
-            if (request.method() === 'OPTIONS') return json(route, {}, 204);
-            if (pathname === '/edge') {
-                return json(route, {
-                    colo: 'ORD',
-                    httpProtocol: 'h2',
-                    tlsVersion: 'TLSv1.3',
-                    version: 'abc1234',
-                });
-            }
-            if (pathname === '/stats') return json(route, STATS_FIXTURE);
-            if (pathname === '/views') return json(route, { page: 'home', views: 1234 });
-            if (pathname === '/guestbook') {
-                if (request.method() === 'POST') {
-                    const entry = { name: 'Test', message: 'Hello', date: '2026-01-01T00:00:00Z' };
-                    return json(route, { ok: true, entry }, 201);
-                }
-                return json(route, []);
-            }
-            if (pathname === '/activity') {
-                return json(route, {
-                    repo: 'and3rn3t/example',
-                    repoName: 'example',
-                    repoUrl: 'https://github.com/and3rn3t/example',
-                    type: 'push',
-                    message: 'feat: fixture commit',
-                    branch: 'main',
-                    pushedAt: '2026-01-01T00:00:00Z',
-                });
-            }
-            return json(route, { error: 'not_stubbed' }, 404);
-        });
+        await mockWorker(page);
         await use(page);
     },
 });

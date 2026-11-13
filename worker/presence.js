@@ -15,8 +15,6 @@ import { isAllowedOrigin } from './origin.js';
 
 /** More than this many open pages and new ones are turned away: the object is one thread. */
 export const MAX_SOCKETS = 500;
-/** The browser only ever sends "ping". Anything longer is not our client. */
-const MAX_MESSAGE_CHARS = 64;
 const OPEN = 1;
 
 export class Presence extends DurableObject {
@@ -44,11 +42,13 @@ export class Presence extends DurableObject {
         return this.upgrade(client);
     }
 
-    webSocketMessage(ws, message) {
-        // "ping" is auto-answered and never gets here; nothing else is expected
-        if (typeof message !== 'string' || message.length > MAX_MESSAGE_CHARS) {
-            ws.close(1009, 'unexpected message');
-        }
+    /**
+     * The browser only ever sends "ping", and the runtime answers that itself (see the
+     * constructor) without calling this. Whatever gets here is not our client, and each message
+     * would wake this billed object, so the connection is closed at the first one.
+     */
+    webSocketMessage(ws) {
+        ws.close(1008, 'unexpected message');
     }
 
     webSocketClose(ws) {
