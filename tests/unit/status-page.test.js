@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
     VITALS,
+    cspNote,
     dayReadout,
     dayState,
     formatMs,
@@ -202,6 +203,22 @@ describe('vitals', () => {
     });
 });
 
+describe('cspNote', () => {
+    it('names the day collection began while the 7-day window still reaches back before it', () => {
+        expect(cspNote(new Date('2026-11-13T10:00:00Z'), '2026-11-13')).toBe(
+            'Collected since Fri, Nov 13'
+        );
+        expect(cspNote(new Date('2026-11-19T23:00:00Z'), '2026-11-13')).toBe(
+            'Collected since Fri, Nov 13'
+        );
+    });
+
+    it('says nothing once the window is entirely after it, or for a date it cannot read', () => {
+        expect(cspNote(new Date('2026-11-20T00:00:00Z'), '2026-11-13')).toBe('');
+        expect(cspNote(new Date('2026-11-13T10:00:00Z'), 'not a date')).toBe('');
+    });
+});
+
 describe('rendering', () => {
     const full = {
         generatedAt: '2026-11-13T00:38:00Z',
@@ -303,6 +320,52 @@ describe('rendering', () => {
         renderStatus(root, legacy, NOW);
         expect(text('[data-verdict-label]')).toBe('Checks are running');
         expect(text('[data-uptime-readout]')).not.toContain('No checks recorded yet');
+    });
+
+    // 0 is a measurement; before the policy reported anywhere it only meant nobody could report
+    it('shows the report count, and says since when it has been collected while that matters', () => {
+        renderStatus(root, { ...full, csp: { last7d: 0, byDirective: [] } }, NOW);
+        expect(text('[data-stat="csp-7d"]')).toBe('0');
+        expect(text('[data-stat="csp-note"]')).toBe('Collected since Fri, Nov 13');
+        expect(root.querySelectorAll('[data-rank="csp"] .rank__row')).toHaveLength(0);
+
+        const later = new Date('2026-11-25T12:00:00Z');
+        renderStatus(root, { ...full, csp: { last7d: 0, byDirective: [] } }, later);
+        expect(text('[data-stat="csp-note"]')).toBe('');
+    });
+
+    it('lists the directives the reports are about, the busiest first', () => {
+        const csp = {
+            last7d: 13,
+            byDirective: [
+                { directive: 'script-src-elem', count: 9 },
+                { directive: 'img-src', count: 4 },
+            ],
+        };
+        renderStatus(root, { ...full, csp }, NOW);
+        expect(text('[data-stat="csp-7d"]')).toBe('13');
+        const rows = [...root.querySelectorAll('[data-rank="csp"] .rank__row')];
+        expect(rows.map(row => row.textContent)).toEqual(['script-src-elem9', 'img-src4']);
+        // Drawn again with none, the list is emptied, not left standing
+        renderStatus(root, { ...full, csp: { last7d: 0, byDirective: [] } }, NOW);
+        expect(root.querySelectorAll('[data-rank="csp"] .rank__row')).toHaveLength(0);
+    });
+
+    it('is a dash, not a zero, when the report count could not be read', () => {
+        renderStatus(root, { ...full, csp: null }, NOW);
+        expect(text('[data-stat="csp-7d"]')).toBe('\u2014');
+        expect(text('[data-stat="csp-note"]')).toBe('Not available right now.');
+        renderStatus(root, full, NOW); // an older Worker sent no csp at all
+        expect(text('[data-stat="csp-7d"]')).toBe('\u2014');
+    });
+
+    it('writes a directive name as text', () => {
+        const csp = {
+            last7d: 1,
+            byDirective: [{ directive: '<img src=x onerror=alert(1)>', count: 1 }],
+        };
+        renderStatus(root, { ...full, csp }, NOW);
+        expect(root.querySelector('[data-rank="csp"] img')).toBeNull();
     });
 
     it('writes values as text: a hostile tool name does not become markup', () => {

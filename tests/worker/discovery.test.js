@@ -95,9 +95,10 @@ describe('OpenAPI document', () => {
     // Every path the Worker routes under /api must be documented, and nothing else
     it('documents every API path the Worker serves', () => {
         const source = read('worker/index.js');
-        const served = [...source.matchAll(/path (?:===|!==) '(\/[a-z]+)'/g)].map(m => m[1]);
+        const served = [...source.matchAll(/path (?:===|!==) '(\/[a-z-]+)'/g)].map(m => m[1]);
         expect(served.sort()).toEqual([
             '/activity',
+            '/csp-report',
             '/edge',
             '/guestbook',
             '/health',

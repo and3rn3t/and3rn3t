@@ -171,6 +171,11 @@ describe('the Content-Security-Policy', () => {
         expect(directive('connect-src')).toContain('wss://andernet.dev');
     });
 
+    // The policy is report-only: this is the whole point of it
+    it('sends its reports to the Worker, on this origin', () => {
+        expect(directive('report-uri')).toBe('report-uri /api/csp-report');
+    });
+
     it('forbids plugins, framing and a changed <base>', () => {
         expect(directive('object-src')).toBe("object-src 'none'");
         expect(directive('frame-ancestors')).toBe("frame-ancestors 'none'");

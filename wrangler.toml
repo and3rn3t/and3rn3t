@@ -75,6 +75,13 @@ namespace_id = "11303"
   limit = 20
   period = 60
 
+[[ratelimits]]
+name = "CSP_LIMITER"
+namespace_id = "11304"
+  [ratelimits.simple]
+  limit = 60
+  period = 60
+
 # "N here now" (worker/presence.js): one Durable Object that holds the open pages' WebSockets.
 # SQLite-backed, as new classes should be, though it stores nothing.
 [[durable_objects.bindings]]

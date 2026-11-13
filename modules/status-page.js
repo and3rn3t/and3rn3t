@@ -15,6 +15,11 @@ import { debug } from './debug.js';
 
 const DASH = '—';
 const REFRESH_MS = 5 * 60 * 1000;
+/**
+ * The day the policy began reporting to the Worker. Before it, "0 reports" would only mean nobody
+ * could report, so the page says collection began on this day while that is still a fair worry.
+ */
+export const CSP_REPORTING_SINCE = '2026-11-13';
 /** A probe older than this means the check itself has stopped, which is worth saying. */
 const STALE_PROBE_MS = 15 * 60 * 1000;
 
@@ -196,6 +201,17 @@ export function formatDay(day) {
           });
 }
 
+/**
+ * The note under the report count: when collection began, for as long as the window still
+ * reaches back before it.
+ * @returns {string}
+ */
+export function cspNote(now = new Date(), since = CSP_REPORTING_SINCE) {
+    const began = parseTime(`${since}T00:00:00Z`);
+    if (!began || now.getTime() - began.getTime() >= 7 * 86_400_000) return '';
+    return `Collected since ${formatDay(since)}`;
+}
+
 /** What the readout says for one cell. */
 export function dayReadout(cell) {
     if (!cell) return 'No data for this day.';
@@ -307,6 +323,38 @@ function renderVitals(root, vitals) {
                         : `Needs work (limit ${limitText})`,
                 rating,
             });
+        })
+    );
+}
+
+/** The report count, and which directives the reports are about (only those with reports). */
+function renderCsp(root, csp, now) {
+    setText(root, '[data-stat="csp-7d"]', csp ? formatCount(csp.last7d) : DASH);
+    setText(
+        root,
+        '[data-stat="csp-note"]',
+        csp ? cspNote(now) || '\u00a0' : 'Not available right now.'
+    );
+    const reports = csp?.byDirective ?? [];
+    const list = $(root, '[data-rank="csp"]');
+    if (!reports.length) {
+        list.replaceChildren();
+        return;
+    }
+    const max = Math.max(...reports.map(row => row.count));
+    list.replaceChildren(
+        ...reports.map(row => {
+            const item = el('li', 'rank__row');
+            const bar = el('span', 'rank__bar');
+            bar.style.setProperty('--w', `${Math.max(2, (row.count / max) * 100)}%`);
+            const track = el('span', 'rank__track');
+            track.append(bar);
+            item.append(
+                el('span', 'rank__name', row.directive),
+                track,
+                el('span', 'rank__value', formatCount(row.count))
+            );
+            return item;
         })
     );
 }
@@ -495,6 +543,7 @@ export function renderStatus(root, stats, now = new Date()) {
     renderApi(root, stats.api);
     renderVitals(root, stats.vitals);
     renderEdge(root, stats.edge);
+    renderCsp(root, stats.csp, now);
     renderAgents(root, stats);
     const generated = parseTime(stats.generatedAt);
     setText(
@@ -511,6 +560,7 @@ const NO_STATS = {
     uptime: null,
     vitals: null,
     crawlers: null,
+    csp: null,
     edge: null,
 };
 

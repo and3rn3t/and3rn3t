@@ -119,6 +119,23 @@ export function renderStatusPage() {
           <ul class="meter-list" data-edge></ul>
         </section>
 
+        <section class="status-section" aria-labelledby="csp-title">
+          <h2 class="status-section__title" id="csp-title">Security policy</h2>
+          <p class="status-note">
+            The site sends a Content-Security-Policy in report-only mode: browsers tell it what the
+            policy <em>would</em> have blocked, and nothing is actually blocked. A steady zero is
+            the evidence for switching it to enforcing.
+          </p>
+          <dl class="stat-grid stat-grid--single">
+            <div class="stat">
+              <dt>Reports, last 7 days</dt>
+              <dd class="stat__value" data-stat="csp-7d">—</dd>
+              <dd class="stat__sub" data-stat="csp-note">&nbsp;</dd>
+            </div>
+          </dl>
+          <ol class="rank" data-rank="csp"></ol>
+        </section>
+
         <section class="status-section" aria-labelledby="agents-title">
           <h2 class="status-section__title" id="agents-title">Crawlers and AI agents</h2>
           <p class="status-note">

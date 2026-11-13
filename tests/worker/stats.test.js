@@ -13,6 +13,7 @@ import {
     loadStats,
     shapeClients,
     shapeCrawlers,
+    shapeCsp,
     shapeEdge,
     shapeTools,
     shapeUptime,
@@ -181,6 +182,26 @@ describe('shaping', () => {
         expect(
             shapeVitals({ lcp: vital(3, 400000), inp: [], cls: null, ttfb: undefined })
         ).toBeNull();
+    });
+
+    // 0 is a measurement ("the query ran and nothing was reported"); null is "could not be read"
+    it('shapeCsp is a measured zero for no reports, a total with the busiest directives, null on failure', () => {
+        expect(shapeCsp([])).toEqual({ last7d: 0, byDirective: [] });
+        expect(
+            shapeCsp([
+                { directive: 'img-src', n: 4 },
+                { directive: 'script-src-elem', n: 9 },
+            ])
+        ).toEqual({
+            last7d: 13,
+            byDirective: [
+                { directive: 'img-src', count: 4 },
+                { directive: 'script-src-elem', count: 9 },
+            ],
+        });
+        expect(shapeCsp(null)).toBeNull();
+        const seven = Array.from({ length: 7 }, (_, i) => ({ directive: `d${i}`, n: 1 }));
+        expect(shapeCsp(seven).byDirective).toHaveLength(5);
     });
 
     it('shapeCrawlers and shapeEdge are aggregates', () => {

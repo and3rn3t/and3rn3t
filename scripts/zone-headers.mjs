@@ -140,6 +140,8 @@ export function buildCsp({ scripts, styles }) {
     'base-uri': ["'self'"],
     'object-src': ["'none'"],
     'frame-ancestors': ["'none'"],
+    // Where the browser says what this policy would have blocked (worker/csp-report.js)
+    'report-uri': ['/api/csp-report'],
   };
   return Object.entries(directives)
     .map(([name, sources]) => `${name} ${sources.join(' ')}`)

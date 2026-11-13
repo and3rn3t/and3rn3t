@@ -42,6 +42,7 @@ export const STATS_FIXTURE = {
         { category: 'Search Engine Crawler', requests: 337 },
         { category: 'AI Crawler', requests: 5 },
     ],
+    csp: { last7d: 0, byDirective: [] },
     edge: { answeredAtEdge: 0.536 },
     cached: false,
 };
