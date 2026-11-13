@@ -23,6 +23,7 @@
     "generate:og": "node scripts/generate-og.mjs",
     "build:icons": "node scripts/build-icons.mjs",
     "generate:site": "node scripts/generate-site.mjs",
+    "check:generated": "node scripts/check-generated.mjs",
     "capture:screenshots": "node scripts/capture-screenshots.mjs",
     "check:refs": "node scripts/check-refs.mjs",
     "check:agent-ready": "node scripts/check-agent-ready.mjs",

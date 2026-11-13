@@ -4,12 +4,35 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - '.github/workflows/update-github-data.yml'
-      - 'README.md'
-      - 'LICENSE'
-      - 'renovate.json'
+    # Only what the site publishes: the sparse-checkout allowlist below, as push-trigger globs.
+    # tests/unit/pages-workflow.test.js keeps the two lists in step. A merge that touches none of
+    # these (worker, tests, tooling, docs, dependencies) has nothing to deploy.
+    paths:
+      - '*.html'
+      - 'main.js'
+      - 'sw.js'
+      - 'manifest.json'
+      - 'favicon.svg'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'feed.xml'
+      - 'llms.txt'
+      - 'resume.pdf'
+      - 'CNAME'
+      - 'experience-data.json'
+      - 'github-data.json'
+      - 'posts-data.json'
+      - 'projects-data.json'
+      - 'fonts/**'
+      - 'icons/**'
+      - 'images/**'
+      - 'styles/**'
+      - 'modules/**'
+      - 'og/**'
+      - 'posts/**'
+      - 'projects/**'
+      - 'status/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -25,7 +48,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # The deploy waits for the fast checks (about a minute): a red merge, a direct push or the
+  # nightly data refresh cannot ship stale generated files or a broken reference. E2E runs on the
+  # PR (e2e.yml) and is not repeated here.
+  verify:
+    name: Lint, unit tests, refs, generated files
+    uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
+    with:
+      command: pnpm validate && pnpm check:generated
+      package-manager: pnpm
+
   deploy:
+    needs: verify
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

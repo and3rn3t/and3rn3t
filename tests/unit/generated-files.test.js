@@ -1,18 +1,17 @@
 /**
- * The daily data workflow runs the generator and commits what it writes; Quality fails the build
- * if the generator leaves a diff. If the workflow stages less than Quality checks, the data PR
- * commits stale generated files and the next PR's check fails.
+ * The daily data workflow runs the generator and commits what it writes; `pnpm check:generated`
+ * (Quality on PRs, the `verify` job in pages.yml) fails the build if the generator leaves a diff.
+ * If the workflow stages less than the check covers, the data PR commits stale generated files
+ * and the next check fails.
  */
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
+import { GENERATED_PATHS } from '../../scripts/check-generated.mjs';
+
 const read = file => readFileSync(file, 'utf8');
 
-/** Paths named by Quality's `git diff --exit-code -- <paths>`. */
-const checkedPaths = () => {
-    const match = read('.github/workflows/quality.yml').match(/git diff --exit-code -- ([^\n]+)/);
-    return match[1].trim().split(/\s+/);
-};
+const checkedPaths = () => GENERATED_PATHS;
 
 /** Paths staged by the data workflow's `git add`, with its line continuations joined. */
 const stagedPaths = () => {
@@ -22,7 +21,7 @@ const stagedPaths = () => {
 };
 
 describe('generated files', () => {
-    it('Quality checks the generator output', () => {
+    it('the check covers the generator output', () => {
         expect(checkedPaths()).toEqual(
             expect.arrayContaining([
                 'posts',
@@ -36,13 +35,19 @@ describe('generated files', () => {
         );
     });
 
-    it('the data workflow stages every path Quality checks (or a folder inside it)', () => {
+    it('Quality and the deploy gate run the same check', () => {
+        const command = /command: (?:>-\s*)?(pnpm validate && pnpm check:generated)\s*$/m;
+        expect(read('.github/workflows/quality.yml')).toMatch(command);
+        expect(read('.github/workflows/pages.yml')).toMatch(command);
+    });
+
+    it('the data workflow stages every path the check covers (or a folder inside it)', () => {
         const staged = stagedPaths();
         for (const path of checkedPaths()) {
             const covered = staged.some(
                 entry => entry === path || entry.replace(/\/$/, '').startsWith(`${path}/`)
             );
-            expect(covered, `${path} is checked by quality.yml but not staged`).toBe(true);
+            expect(covered, `${path} is checked by check-generated.mjs but not staged`).toBe(true);
         }
     });
 });

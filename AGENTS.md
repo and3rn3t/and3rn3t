@@ -19,8 +19,8 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 - Tests: Vitest unit + worker (`tests/unit`, `tests/worker`) and Playwright e2e + axe (`tests/e2e`, served from the raw source like production)
 - Shared browser/Worker helpers live in `modules/utils/` (`html.js` escaping, `activity.js`, `data.js`, `icon.js`, `while-visible.js`); the Worker imports them too
 - CI workflows (`.github/workflows/`):
-  - `quality.yml`: `pnpm validate` + the generated-files check in one job, and e2e + a11y
-  - `pages.yml`: deploys the allowlisted source to GitHub Pages, then runs Lighthouse, desktop and mobile (push only). Add any new root asset to its `sparse-checkout` list or it 404s in production
+  - `quality.yml` (PRs only): `pnpm validate && pnpm check:generated` in one job, and e2e + a11y. `check:generated` (`scripts/check-generated.mjs`) is the single list of generated paths
+  - `pages.yml`: a `verify` job (the same command as Quality) gates the deploy, which then publishes the allowlisted source to GitHub Pages and runs Lighthouse, desktop and mobile (push only). It triggers only on a change to a published path (`on.push.paths`, kept in step with `sparse-checkout` by `tests/unit/pages-workflow.test.js`), so worker, test, tooling and dependency merges do not redeploy or purge the cache. Add any new root asset to both lists or it 404s in production (or never deploys)
   - `lighthouse.yml`: weekly and manual Lighthouse runs. Configs: `.lighthouserc.cjs` (desktop) and `.lighthouserc.mobile.cjs`; performance is an `error` at 0.9. Measure with the build served gzipped (an uncompressed static server under-scores mobile badly).
   - `update-github-data.yml`: daily refresh of `github-data.json`, the README featured projects and the OG card (it renders only when `.github/og-inputs.sha256` changes), then dispatches `pages.yml`
   - `site-check.yml` (daily live-site checks, including the `uptime-probe` job), `snake.yml` (README snake on the `output` branch), `codeql.yml`, `gitleaks.yml`, `dependency-review.yml`, `actionlint.yml`, `consistency.yml`, `labeler.yml`, `label-sync.yml`, `release-drafter.yml`, `stale.yml`

@@ -1,10 +1,11 @@
 name: Quality
 
+# Pull requests only: main is PR-only, so a push run would repeat the PR's. The deploy re-runs
+# the fast checks itself (pages.yml `verify`), so a direct push to main is still gated.
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,12 +15,8 @@ jobs:
     name: Lint, unit tests, refs, generated files
     uses: and3rn3t/.github/.github/workflows/reusable-node-verify.yml@99fae926f05867cc98ec7007b9fce8c1fd125b53 # v1
     with:
-      # One install for all the fast checks. `git add -N` makes brand-new generated files
-      # visible to `git diff`, which otherwise ignores untracked files.
-      command: >-
-        pnpm validate &&
-        pnpm generate:site && git add -N posts projects status feed.xml sitemap.xml llms.txt index.html 404.html images &&
-        git diff --exit-code -- posts projects status feed.xml sitemap.xml llms.txt index.html 404.html images
+      # One install for all the fast checks. Keep this command identical to pages.yml `verify`.
+      command: pnpm validate && pnpm check:generated
       package-manager: pnpm
 
   e2e:

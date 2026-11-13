@@ -1,6 +1,6 @@
 # Hi, I'm Matt 👋
 
-[![Quality](https://github.com/and3rn3t/and3rn3t/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/quality.yml)
+[![Quality](https://github.com/and3rn3t/and3rn3t/actions/workflows/quality.yml/badge.svg?event=pull_request)](https://github.com/and3rn3t/and3rn3t/actions/workflows/quality.yml)
 [![Deploy](https://github.com/and3rn3t/and3rn3t/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/pages.yml)
 [![Lighthouse](https://github.com/and3rn3t/and3rn3t/actions/workflows/lighthouse.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/lighthouse.yml)
 [![CodeQL](https://github.com/and3rn3t/and3rn3t/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/and3rn3t/and3rn3t/actions/workflows/codeql.yml)
