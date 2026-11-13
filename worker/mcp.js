@@ -59,24 +59,38 @@ export function createServer(env, deps) {
         version: SERVER_VERSION,
     });
 
+    // Every tool only reads, so Claude can run them without asking each time. A tool that
+    // reaches outside this site's own data sets openWorldHint in its own config.
+    const READ_ONLY = {
+        readOnlyHint: true,
+        destructiveHint: false,
+        idempotentHint: true,
+        openWorldHint: false,
+    };
+
     // Every tool goes through here, so each call is timed and recorded once (a tool that
     // throws, or returns isError, counts as an error). Handlers get the SDK's arguments as is.
     const registerTool = (name, config, handler) =>
-        server.registerTool(name, config, async (...args) => {
-            const started = Date.now();
-            let ok = false;
-            try {
-                const result = await handler(...args);
-                ok = !result?.isError;
-                return result;
-            } finally {
-                recordTool(env, { tool: name, ok, ms: Date.now() - started });
+        server.registerTool(
+            name,
+            { ...config, annotations: { ...READ_ONLY, ...config.annotations } },
+            async (...args) => {
+                const started = Date.now();
+                let ok = false;
+                try {
+                    const result = await handler(...args);
+                    ok = !result?.isError;
+                    return result;
+                } finally {
+                    recordTool(env, { tool: name, ok, ms: Date.now() - started });
+                }
             }
-        });
+        );
 
     registerTool(
         'get_profile',
         {
+            title: 'About Matthew Anderson',
             description:
                 'Who Matthew Anderson (and3rn3t) is: current role, what he builds, and where to find him online and on this site.',
         },
@@ -100,6 +114,7 @@ export function createServer(env, deps) {
     registerTool(
         'list_projects',
         {
+            title: 'List projects',
             description:
                 'List the portfolio projects with a one-line description, category, status, technologies and links. Use get_project for the full write-up.',
             inputSchema: {
@@ -132,6 +147,7 @@ export function createServer(env, deps) {
     registerTool(
         'get_project',
         {
+            title: 'Get a project',
             description:
                 'The full write-up of one project: overview, highlights, technologies, metrics where there are any, and links to the page, the source and a live demo.',
             inputSchema: {
@@ -161,6 +177,7 @@ export function createServer(env, deps) {
     registerTool(
         'list_experience',
         {
+            title: 'Work history and education',
             description:
                 "Matthew Anderson's work history and education, newest first, with what each role involved.",
         },
@@ -190,6 +207,7 @@ export function createServer(env, deps) {
     registerTool(
         'list_posts',
         {
+            title: 'List posts',
             description:
                 'The technical posts on the site, newest first, with date, summary and tags. Use get_post to read one.',
             inputSchema: {
@@ -223,6 +241,7 @@ export function createServer(env, deps) {
     registerTool(
         'get_post',
         {
+            title: 'Read a post',
             description:
                 'The full text of one post, as plain text with its headings and lists kept.',
             inputSchema: {
@@ -251,6 +270,8 @@ export function createServer(env, deps) {
     registerTool(
         'get_recent_activity',
         {
+            title: 'Recent GitHub activity',
+            annotations: { openWorldHint: true },
             description:
                 "Matthew Anderson's most recent public GitHub activity (a push, pull request, release or new repository), cached for five minutes.",
         },
@@ -264,6 +285,7 @@ export function createServer(env, deps) {
     registerTool(
         'get_site_stats',
         {
+            title: 'Site health and traffic',
             description:
                 'How andernet.dev and its API are doing: API latency and error rate, uptime history, MCP tool use, real-visitor Web Vitals and verified crawler traffic, cached for five minutes. Aggregates only; any section can be null when there is nothing to report.',
         },
