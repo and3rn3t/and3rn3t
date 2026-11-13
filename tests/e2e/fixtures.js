@@ -14,6 +14,8 @@ const json = (route, body, status = 200) =>
         body: JSON.stringify(body),
     });
 
+const dayOffset = offset => new Date(Date.now() + offset * 86_400_000).toISOString().slice(0, 10);
+
 /** What /stats answers in e2e runs: every section filled, INP missing (as it is in production now). */
 export const STATS_FIXTURE = {
     generatedAt: new Date().toISOString(),
@@ -29,9 +31,9 @@ export const STATS_FIXTURE = {
     uptime: {
         lastProbe: { at: new Date().toISOString(), ok: true },
         days: [
-            { day: '2026-11-11', probes: 288, ok: 288 },
-            { day: '2026-11-12', probes: 288, ok: 280 },
-            { day: '2026-11-13', probes: 40, ok: 40 },
+            { day: dayOffset(-2), probes: 288, ok: 288 },
+            { day: dayOffset(-1), probes: 288, ok: 280 },
+            { day: dayOffset(0), probes: 40, ok: 40 },
         ],
     },
     vitals: { lcpMs: 440, inpMs: null, cls: 0, ttfbMs: 247 },

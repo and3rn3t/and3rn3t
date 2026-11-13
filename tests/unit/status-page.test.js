@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
     VITALS,
     dayReadout,
@@ -7,6 +7,7 @@ import {
     formatPercent,
     formatUptime,
     formatVital,
+    loadStatus,
     parseTime,
     rateVital,
     relativeTime,
@@ -88,9 +89,31 @@ describe('verdict', () => {
         });
     });
 
-    it('is unknown with no data at all', () => {
-        expect(verdict(null, NOW).state).toBe('unknown');
-        expect(verdict({ lastProbe: null, days: [] }, NOW).state).toBe('unknown');
+    it('keeps saying "no recent check" for a long outage, as long as there is history', () => {
+        expect(verdict(uptime(true, '2026-10-20 08:00:00'), NOW).state).toBe('stale');
+    });
+
+    // An older Worker reported only when the last check ran, not whether it passed
+    it("uses the older Worker's timestamp for freshness without assuming success", () => {
+        const legacy = { lastProbeAt: '2026-11-13 00:35:00', days: uptime(true).days };
+        expect(verdict(legacy, NOW)).toMatchObject({
+            state: 'unknown',
+            label: 'Checks are running',
+            detail: expect.stringContaining('result is not available yet'),
+        });
+        expect(verdict({ ...legacy, lastProbeAt: '2026-11-12 22:00:00' }, NOW).state).toBe('stale');
+    });
+
+    it('says the latest check is unavailable, not that there are none, when history exists', () => {
+        expect(verdict({ lastProbe: null, days: uptime(true).days }, NOW)).toMatchObject({
+            state: 'unknown',
+            label: 'Latest check unavailable',
+        });
+    });
+
+    it('is "no checks recorded yet" only with no history at all', () => {
+        expect(verdict(null, NOW).label).toBe('No checks recorded yet');
+        expect(verdict({ lastProbe: null, days: [] }, NOW).label).toBe('No checks recorded yet');
     });
 });
 
@@ -109,17 +132,45 @@ describe('the uptime strip', () => {
         expect(dayState({ day: 'x', probes: 0, ok: 0 })).toBe('none');
     });
 
-    it('stripCells fills from the right, so a young history is not stretched across the strip', () => {
-        const cells = stripCells(days, 7);
-        expect(cells).toHaveLength(7);
-        expect(cells.slice(0, 4)).toEqual([null, null, null, null]);
-        expect(cells.slice(4)).toEqual(days);
-        expect(stripCells(days, 2)).toEqual(days.slice(1)); // only the newest fit
-        expect(stripCells(undefined, 3)).toEqual([null, null, null]);
+    it('stripCells is one cell per calendar day ending today, with measurements on their own dates', () => {
+        const cells = stripCells(days, 5, NOW);
+        expect(cells.map(cell => cell.day)).toEqual([
+            '2026-11-09',
+            '2026-11-10',
+            '2026-11-11',
+            '2026-11-12',
+            '2026-11-13',
+        ]);
+        expect(cells.slice(2)).toEqual(days);
+        expect(cells.slice(0, 2).every(cell => cell.probes === 0)).toBe(true);
     });
 
-    it('dayReadout names the day and the share, and says so when there is no data', () => {
+    it('leaves a gap where a day had no checks, instead of closing it up', () => {
+        const cells = stripCells([days[0], days[2]], 3, NOW); // nothing on Nov 12
+        expect(cells.map(dayState)).toEqual(['ok', 'none', 'down']);
+        expect(cells[1].day).toBe('2026-11-12');
+    });
+
+    it('shows a stopped probe as empty cells at the right, not the last recorded day at the edge', () => {
+        const cells = stripCells([days[0]], 4, NOW); // last check Nov 11; it is Nov 13
+        expect(cells.map(dayState)).toEqual(['none', 'ok', 'none', 'none']);
+        expect(cells.at(-1).day).toBe('2026-11-13');
+    });
+
+    it('follows the reference date it is given, not the clock', () => {
+        const later = new Date('2026-12-01T10:00:00Z');
+        expect(stripCells(days, 2, later).map(cell => cell.day)).toEqual([
+            '2026-11-30',
+            '2026-12-01',
+        ]);
+        expect(stripCells(undefined, 2, later)).toHaveLength(2);
+    });
+
+    it('dayReadout names the day and the share, and says so when there were no checks', () => {
         expect(dayReadout(days[1])).toBe('Thu, Nov 12: 280 of 288 checks passed (97.22%).');
+        expect(dayReadout({ day: '2026-11-12', probes: 0, ok: 0 })).toBe(
+            'Thu, Nov 12: no checks recorded.'
+        );
         expect(dayReadout(null)).toBe('No data for this day.');
     });
 
@@ -211,25 +262,47 @@ describe('rendering', () => {
         expect(text('[data-stat="p95-24h"]')).toBe('—');
         expect(text('[data-stat="agent-share"]')).toBe('—');
         expect(text('[data-verdict-label]')).toBe('No checks recorded yet');
-        expect(text('[data-rank="crawlers"]')).toBe(
-            'No verified crawler traffic in the last 7 days.'
-        );
-        expect(text('[data-rank="tools"]')).toBe('No MCP tool calls in the last 7 days.');
+        expect(text('[data-rank="crawlers"]')).toBe('Not available right now.');
+        expect(text('[data-rank="tools"]')).toBe('Not available right now.');
         expect(text('[data-table="uptime"]')).toBe('No checks recorded yet.');
     });
 
-    it('says "not enough visits yet" for a vital with no figure, and rates one that has it', () => {
+    it('says "not available yet" for a vital with no figure, and rates one that has it', () => {
         renderStatus(root, full, NOW);
         const rows = [...root.querySelectorAll('[data-vitals] .meter')];
         expect(rows[0].textContent).toContain('440 ms');
         expect(rows[0].textContent).toContain('Good (limit 2.5 s)');
-        expect(rows[1].textContent).toContain('Not enough visits yet');
+        expect(rows[1].textContent).toContain('Not available yet');
+        expect(rows[1].textContent).not.toContain('visits');
         expect(rows[1].textContent).not.toContain('Good');
 
         renderStatus(root, { ...full, vitals: { ...full.vitals, lcpMs: 4000 } }, NOW);
         const over = root.querySelector('[data-vitals] .meter');
         expect(over.dataset.rating).toBe('over');
         expect(over.textContent).toContain('Needs work');
+    });
+
+    // The Worker sends [] when a query worked and found none, and null when it could not be read
+    it('says "none" for an empty list and "not available" for a missing one', () => {
+        renderStatus(root, { ...full, crawlers: [], mcp: [] }, NOW);
+        expect(text('[data-rank="crawlers"]')).toBe(
+            'No verified crawler traffic in the last 7 days.'
+        );
+        expect(text('[data-rank="tools"]')).toBe('No MCP tool calls in the last 7 days.');
+
+        renderStatus(root, { ...full, crawlers: null, mcp: undefined }, NOW);
+        expect(text('[data-rank="crawlers"]')).toBe('Not available right now.');
+        expect(text('[data-rank="tools"]')).toBe('Not available right now.');
+    });
+
+    it("reads an older Worker's answer (a time, no outcome) without claiming success", () => {
+        const legacy = {
+            ...full,
+            uptime: { lastProbeAt: '2026-11-13 00:35:00', days: full.uptime.days },
+        };
+        renderStatus(root, legacy, NOW);
+        expect(text('[data-verdict-label]')).toBe('Checks are running');
+        expect(text('[data-uptime-readout]')).not.toContain('No checks recorded yet');
     });
 
     it('writes values as text: a hostile tool name does not become markup', () => {
@@ -250,13 +323,75 @@ describe('rendering', () => {
     });
 });
 
+describe('refreshing', () => {
+    let root;
+    const now = new Date();
+    const good = () =>
+        new Response(
+            JSON.stringify({
+                generatedAt: now.toISOString(),
+                api: { last24h: { errorRate: 0.01, p50Ms: 3, p95Ms: 40 }, last7d: null },
+                mcp: [],
+                clients: { agentShare: 0.2 },
+                uptime: {
+                    lastProbe: { at: now.toISOString(), ok: true },
+                    days: [{ day: now.toISOString().slice(0, 10), probes: 4, ok: 4 }],
+                },
+                vitals: { lcpMs: 440, inpMs: null, cls: 0, ttfbMs: 247 },
+                crawlers: [],
+                edge: { answeredAtEdge: 0.5 },
+            }),
+            { status: 200 }
+        );
+
+    beforeEach(() => {
+        document.body.innerHTML = renderStatusPage().match(/<body>([\s\S]*)<\/body>/)[1];
+        root = document.querySelector('[data-status-root]');
+    });
+    afterEach(() => vi.unstubAllGlobals());
+
+    const label = () => root.querySelector('[data-verdict-label]').textContent;
+
+    it('replaces an old "Responding" with the unavailable state when a refresh fails', async () => {
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(good()));
+        await loadStatus(root);
+        expect(label()).toBe('Responding');
+        expect(root.querySelector('[data-stat="error-24h"]').textContent).toBe('1%');
+
+        vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status: 503 })));
+        await loadStatus(root);
+        expect(label()).toBe('Numbers unavailable');
+        expect(root.querySelector('[data-verdict]').dataset.state).toBe('unknown');
+        // Nothing from the earlier answer is left standing behind it
+        expect(root.querySelector('[data-stat="error-24h"]').textContent).toBe('—');
+        expect(root.querySelector('[data-stat="agent-share"]').textContent).toBe('—');
+        expect(root.querySelector('[data-uptime-readout]').textContent).toBe(
+            'No checks recorded yet.'
+        );
+        expect(root.querySelector('[data-updated]').textContent).toContain('Could not update');
+    });
+
+    it('also does so when the request itself fails, and recovers on the next good answer', async () => {
+        vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+        await loadStatus(root);
+        expect(label()).toBe('Numbers unavailable');
+
+        vi.stubGlobal(
+            'fetch',
+            vi.fn().mockImplementation(async () => good())
+        );
+        await loadStatus(root);
+        expect(label()).toBe('Responding');
+    });
+});
+
 describe('the page', () => {
     const html = renderStatusPage();
 
+    // Parsed, not pattern-matched: it is the browser's own view of the page that matters
     it('has no inline script of its own (the CSP lists inline scripts by hash)', () => {
-        const inline = [...html.matchAll(/<script(?![^>]*\ssrc=)[^>]*>/g)].filter(
-            ([tag]) => !/application\/ld\+json/.test(tag)
-        );
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const inline = doc.querySelectorAll('script:not([src]):not([type="application/ld+json"])');
         // The theme script in the shared head is the only one, as on every generated page
         expect(inline).toHaveLength(1);
     });
@@ -274,8 +409,9 @@ describe('the page', () => {
     });
 
     it('promises nothing it does not publish: no visitor counts, no locations', () => {
-        const visible = html.replaceAll(/<script[\s\S]*?<\/script>/g, '');
-        expect(visible).not.toMatch(
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        for (const script of doc.querySelectorAll('script')) script.remove();
+        expect(doc.body.textContent).not.toMatch(
             /visitors? (today|this week)|unique visitors|page views|countries/i
         );
     });

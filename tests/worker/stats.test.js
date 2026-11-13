@@ -67,6 +67,12 @@ describe('the queries', () => {
         expect(QUERIES.vitalsTtfb).toContain('timeToFirstByteUs >= 0');
     });
 
+    // A probe outage longer than a day must still read as "no recent check", not "no checks"
+    it('look for the last probe across the whole history, not only the last day', () => {
+        expect(QUERIES.lastProbe).toContain("INTERVAL '90' DAY");
+        expect(QUERIES.uptime).toContain("INTERVAL '90' DAY");
+    });
+
     it('never ask for a visitor country, address or user agent', () => {
         const all = Object.values(QUERIES).join(' ');
         expect(all).not.toMatch(/clientCountry|clientAsn|ja4|userAgent\b|ipAddress/i);
@@ -105,7 +111,9 @@ describe('shaping', () => {
             { tool: 'get_project', calls: 10, errors: 1 },
             { tool: 'list_posts', calls: 5, errors: 0 },
         ]);
-        expect(shapeTools([])).toBeNull();
+        // null: the query failed. []: it worked and nothing was called.
+        expect(shapeTools(null)).toBeNull();
+        expect(shapeTools([])).toEqual([]);
     });
 
     it('shapeClients is the agents share of API calls', () => {
@@ -176,6 +184,8 @@ describe('shaping', () => {
     });
 
     it('shapeCrawlers and shapeEdge are aggregates', () => {
+        expect(shapeCrawlers(null)).toBeNull();
+        expect(shapeCrawlers([])).toEqual([]);
         expect(shapeCrawlers([{ category: 'AI Assistant', requests: 532 }])).toEqual([
             { category: 'AI Assistant', requests: 532 },
         ]);

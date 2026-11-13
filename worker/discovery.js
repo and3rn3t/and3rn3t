@@ -235,7 +235,7 @@ export const openApi = () => ({
                                 mcp: {
                                     type: ['array', 'null'],
                                     description:
-                                        'tool, calls, errors for each MCP tool used in 7 days',
+                                        'tool, calls, errors for each MCP tool used in 7 days; empty when none, null when it could not be read',
                                 },
                                 clients: {
                                     type: ['object', 'null'],
@@ -254,7 +254,8 @@ export const openApi = () => ({
                                 },
                                 crawlers: {
                                     type: ['array', 'null'],
-                                    description: 'Verified crawler requests by category, 7 days',
+                                    description:
+                                        'Verified crawler requests by category, 7 days; empty when none, null when it could not be read',
                                 },
                                 edge: {
                                     type: ['object', 'null'],

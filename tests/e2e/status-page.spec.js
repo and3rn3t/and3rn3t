@@ -16,11 +16,13 @@ test.describe('the status page', () => {
         await expect(page.locator('[data-rank="tools"]')).toContainText('1 failed');
     });
 
-    test('INP, which few visits measure, says so instead of showing a number', async ({ page }) => {
+    test('INP, which few visits measure, shows no number rather than an invented one', async ({
+        page,
+    }) => {
         await page.goto('/status/');
         const inp = page.locator('[data-vitals] .meter').nth(1);
         await expect(inp).toContainText('Interaction to Next Paint');
-        await expect(inp).toContainText('Not enough visits yet');
+        await expect(inp).toContainText('Not available yet');
     });
 
     test('the uptime strip can be read with the keyboard, day by day', async ({ page }) => {
@@ -29,14 +31,20 @@ test.describe('the status page', () => {
         const readout = page.locator('[data-uptime-readout]');
         await expect(readout).toContainText('checks passed over the 3 days shown');
 
+        // The days sit on their real dates, ending today
         await strip.focus();
-        await expect(readout).toHaveText('Fri, Nov 13: 40 of 40 checks passed (100%).');
+        await expect(readout).toContainText('40 of 40 checks passed (100%).');
         await page.keyboard.press('ArrowLeft');
-        await expect(readout).toHaveText('Thu, Nov 12: 280 of 288 checks passed (97.22%).');
+        await expect(readout).toContainText('280 of 288 checks passed (97.22%).');
+        await page.keyboard.press('ArrowLeft');
+        await expect(readout).toContainText('288 of 288 checks passed (100%).');
+        await page.keyboard.press('ArrowLeft');
+        await expect(readout).toContainText('no checks recorded'); // the day before had none
+
         await page.keyboard.press('Home');
-        await expect(readout).toHaveText('No data for this day.'); // the oldest slot is empty
+        await expect(readout).toContainText('no checks recorded'); // the oldest slot is empty
         await page.keyboard.press('End');
-        await expect(readout).toContainText('Nov 13');
+        await expect(readout).toContainText('40 of 40 checks passed');
     });
 
     test('hovering a day reads it out too, and the table view carries every day', async ({
@@ -45,7 +53,7 @@ test.describe('the status page', () => {
         await page.goto('/status/');
         const days = page.locator('.uptime__day');
         await days.last().hover();
-        await expect(page.locator('[data-uptime-readout]')).toContainText('Nov 13');
+        await expect(page.locator('[data-uptime-readout]')).toContainText('40 of 40 checks passed');
 
         await page.locator('.status-table summary').click();
         await expect(page.locator('[data-table="uptime"] tbody tr')).toHaveCount(3);

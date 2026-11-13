@@ -109,32 +109,51 @@ export function uptimeTotals(days) {
 /**
  * The headline: is the site answering? Says "no recent check" when the checks themselves have
  * stopped, since silence is not the same as being up.
+ *
+ * An older Worker reported only when the last check ran (`lastProbeAt`), not whether it passed.
+ * That time is used for freshness; success is never inferred from it.
  * @returns {{ state: 'up' | 'down' | 'stale' | 'unknown', label: string, detail: string }}
  */
 export function verdict(uptime, now = new Date()) {
-    const at = parseTime(uptime?.lastProbe?.at);
-    if (!uptime?.lastProbe || !at) {
-        return {
-            state: 'unknown',
-            label: 'No checks recorded yet',
-            detail: 'The first check runs within five minutes of a deploy.',
-        };
+    const latest = uptime?.lastProbe ?? (uptime?.lastProbeAt ? { at: uptime.lastProbeAt } : null);
+    const at = parseTime(latest?.at);
+    const { ok, probes } = uptimeTotals(uptime?.days ?? []);
+    if (!at) {
+        // History without a latest check is not "no checks": say what is missing
+        return probes
+            ? {
+                  state: 'unknown',
+                  label: 'Latest check unavailable',
+                  detail: 'Earlier checks are shown below; the most recent one could not be read.',
+              }
+            : {
+                  state: 'unknown',
+                  label: 'No checks recorded yet',
+                  detail: 'The first check runs within five minutes of a deploy.',
+              };
     }
     const when = relativeTime(at, now);
     if (now.getTime() - at.getTime() > STALE_PROBE_MS) {
         return { state: 'stale', label: 'No recent check', detail: `The last check was ${when}.` };
     }
-    const { ok, probes } = uptimeTotals(uptime.days ?? []);
     const overall = probes
         ? ` ${formatUptime(ok, probes)} of checks passed over the days shown.`
         : '';
-    return uptime.lastProbe.ok
-        ? { state: 'up', label: 'Responding', detail: `Last check ${when}.${overall}` }
-        : {
-              state: 'down',
-              label: 'Not responding',
-              detail: `The last check ${when} failed.${overall}`,
-          };
+    if (latest.ok === true) {
+        return { state: 'up', label: 'Responding', detail: `Last check ${when}.${overall}` };
+    }
+    if (latest.ok === false) {
+        return {
+            state: 'down',
+            label: 'Not responding',
+            detail: `The last check ${when} failed.${overall}`,
+        };
+    }
+    return {
+        state: 'unknown',
+        label: 'Checks are running',
+        detail: `Last check ${when}; its result is not available yet.${overall}`,
+    };
 }
 
 /** One cell of the uptime strip. */
@@ -144,16 +163,24 @@ export function dayState(day) {
     return day.ok === 0 ? 'down' : 'partial';
 }
 
+const DAY_MS = 86_400_000;
+
 /**
- * The strip's cells, oldest to newest, filling from the right: a young history leaves empty
- * slots on the left instead of stretching a few days across the whole strip.
- * @param {{ day: string, probes: number, ok: number }[] | undefined} days
+ * The strip's cells: one per UTC calendar day, oldest to newest, ending today. A day with no
+ * checks is an empty cell on its own date, so a gap shows as a gap and a stopped probe shows as
+ * empty cells at the right instead of leaving the last recorded day at the edge.
+ * @param {{ day: string, probes: number, ok: number }[] | undefined} days - only days that had checks
  * @param {number} slots
- * @returns {({ day: string, probes: number, ok: number } | null)[]}
+ * @param {Date} now
+ * @returns {{ day: string, probes: number, ok: number }[]}
  */
-export function stripCells(days, slots) {
-    const recent = (days ?? []).slice(-slots);
-    return [...Array.from({ length: slots - recent.length }, () => null), ...recent];
+export function stripCells(days, slots, now = new Date()) {
+    const byDay = new Map((days ?? []).map(entry => [entry.day, entry]));
+    const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    return Array.from({ length: slots }, (_, index) => {
+        const day = new Date(today - (slots - 1 - index) * DAY_MS).toISOString().slice(0, 10);
+        return byDay.get(day) ?? { day, probes: 0, ok: 0 };
+    });
 }
 
 /** A day's date as "Thu, Nov 12". @param {string} day "2026-11-12" */
@@ -172,6 +199,7 @@ export function formatDay(day) {
 /** What the readout says for one cell. */
 export function dayReadout(cell) {
     if (!cell) return 'No data for this day.';
+    if (!cell.probes) return `${formatDay(cell.day)}: no checks recorded.`;
     const noun = cell.probes === 1 ? 'check' : 'checks';
     return `${formatDay(cell.day)}: ${formatCount(cell.ok)} of ${formatCount(cell.probes)} ${noun} passed (${formatUptime(cell.ok, cell.probes)}).`;
 }
@@ -264,7 +292,7 @@ function renderVitals(root, vitals) {
                     hint: vital.hint,
                     fill: 0,
                     figure: DASH,
-                    note: 'Not enough visits yet',
+                    note: 'Not available yet',
                 });
             }
             const { rating, fill } = rateVital(value, vital.limit);
@@ -305,7 +333,12 @@ function renderEdge(root, edge) {
 /** A ranked list: the largest first, each bar scaled to the largest, the value at its tip. */
 function renderRank(root, name, rows, empty) {
     const list = $(root, `[data-rank="${name}"]`);
-    if (!rows?.length) {
+    // null means the Worker could not read it; only an empty list means there was none
+    if (!Array.isArray(rows)) {
+        list.replaceChildren(el('li', 'rank__empty', 'Not available right now.'));
+        return;
+    }
+    if (!rows.length) {
         list.replaceChildren(el('li', 'rank__empty', empty));
         return;
     }
@@ -358,11 +391,11 @@ function renderAgents(root, stats) {
 }
 
 /** The uptime strip, its readout, and the table view. Returns nothing; wires pointer and keys. */
-function renderUptime(root, uptime) {
+function renderUptime(root, uptime, now) {
     const strip = $(root, '[data-uptime]');
     const readout = $(root, '[data-uptime-readout]');
     const slots = globalThis.matchMedia?.('(max-width: 40rem)').matches ? 30 : 90;
-    const cells = stripCells(uptime?.days, slots);
+    const cells = stripCells(uptime?.days, slots, now);
     const totals = uptimeTotals(uptime?.days ?? []);
 
     const idle = uptime?.days?.length
@@ -458,7 +491,7 @@ function renderUptime(root, uptime) {
  */
 export function renderStatus(root, stats, now = new Date()) {
     renderVerdict(root, stats.uptime, now);
-    renderUptime(root, stats.uptime);
+    renderUptime(root, stats.uptime, now);
     renderApi(root, stats.api);
     renderVitals(root, stats.vitals);
     renderEdge(root, stats.edge);
@@ -471,19 +504,35 @@ export function renderStatus(root, stats, now = new Date()) {
     );
 }
 
-/** What the page shows when the numbers cannot be had: dashes, and the reason. */
-function renderUnavailable(root) {
-    const box = $(root, '[data-verdict]');
-    box.dataset.state = 'unknown';
+const NO_STATS = {
+    api: { last24h: null, last7d: null },
+    mcp: null,
+    clients: null,
+    uptime: null,
+    vitals: null,
+    crawlers: null,
+    edge: null,
+};
+
+/**
+ * What the page shows when the numbers cannot be had: dashes, and the reason. Used for a failed
+ * refresh as well as a failed first load: an old "Responding, last check just now" left on the
+ * screen after the data stopped coming would be a claim nothing is backing any more.
+ */
+function renderUnavailable(root, now = new Date()) {
+    renderStatus(root, NO_STATS, now);
+    $(root, '[data-verdict]').dataset.state = 'unknown';
     setText(root, '[data-verdict-label]', 'Numbers unavailable');
     setText(
         root,
         '[data-verdict-detail]',
         'The stats could not be loaded just now. They are not made up: try again in a minute.'
     );
+    setText(root, '[data-updated]', 'Could not update. Trying again in five minutes.');
 }
 
-async function load(root) {
+/** Fetch the stats and draw them; on any failure, draw the unavailable state. */
+export async function loadStatus(root) {
     try {
         const response = await fetch(`${WORKER_BASE}/stats`, {
             signal: AbortSignal.timeout(15_000),
@@ -492,8 +541,7 @@ async function load(root) {
         renderStatus(root, await response.json());
     } catch (err) {
         debug.warn('[Status] Could not load stats:', err.message);
-        // Leave what is already drawn if there is something; say so only on a first failure
-        if ($(root, '[data-verdict]').dataset.state === 'loading') renderUnavailable(root);
+        renderUnavailable(root);
     }
 }
 
@@ -501,10 +549,10 @@ export async function initStatusPage() {
     const root = document.querySelector('[data-status-root]');
     if (!root) return;
     root.setAttribute('aria-busy', 'true');
-    await load(root);
+    await loadStatus(root);
     root.removeAttribute('aria-busy');
     setInterval(() => {
-        if (!document.hidden) load(root);
+        if (!document.hidden) loadStatus(root);
     }, REFRESH_MS);
 }
 
