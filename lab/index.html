@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <style>
+      @layer scale, reset, tokens, base, components, sections, utilities;
+      @view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+    </style>
+    <title>Lab | Matthew Anderson</title>
+    <meta name="description" content="Experiments on andernet.dev that are off unless you ask for them: what each one is, what it needs from your browser, and what was measured." />
+    <meta name="author" content="Matthew Anderson" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfbf8" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0d0b" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://andernet.dev/lab/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title="Matthew Anderson's Blog" href="/feed.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Matthew Anderson Portfolio" />
+    <meta property="og:url" content="https://andernet.dev/lab/" />
+    <meta property="og:title" content="Lab | Matthew Anderson" />
+    <meta property="og:description" content="Experiments on andernet.dev that are off unless you ask for them: what each one is, what it needs from your browser, and what was measured." />
+    <meta property="og:image" content="https://andernet.dev/og/default.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lab | Matthew Anderson" />
+    <meta name="twitter:description" content="Experiments on andernet.dev that are off unless you ask for them: what each one is, what it needs from your browser, and what was measured." />
+    <meta name="twitter:image" content="https://andernet.dev/og/default.png" />
+
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem('theme');
+        } catch (e) {}
+        var dark =
+          theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <script type="speculationrules">
+      {"prerender":[{"where":{"href_matches":["/projects/*","/posts/*"]},"eagerness":"moderate"}]}
+    </script>
+    <!-- Names a project's image and title for the transition between its card and its page.
+         A classic script in the head: it must listen before the page first renders. -->
+    <script src="/modules/page-transitions.js"></script>
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/styles/core.css" />
+    <link rel="stylesheet" href="/styles/article.css" />
+    <link rel="stylesheet" href="/styles/lab.css" />
+
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <nav class="site-nav scrolled" aria-label="Main navigation">
+      <div class="wrap site-nav__inner">
+        <a href="/" class="site-nav__logo">@and3rn3t</a>
+        <div class="site-nav__actions">
+          <a class="link site-nav__back" href="/">Home</a>
+          <button
+            type="button"
+            class="icon-button"
+            id="theme-toggle"
+            aria-label="Switch to dark theme"
+            title="Switch to dark theme (T)"
+          >
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="/icons/sprite.svg#moon"></use></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main id="main" class="article lab" data-lab-root>
+      <div class="wrap">
+        <header class="lab-head">
+          <p class="eyebrow">Lab</p>
+          <h1 class="lab-title">Things to try</h1>
+          <p class="lab-lede">
+            Experiments that are off unless you ask for them. The ordinary page never loads one, and a
+            switch here is saved only in this browser: nothing is sent anywhere. Each entry says what
+            it needs from the browser and what was measured, including the ones that were dropped.
+          </p>
+        </header>
+        <ul class="lab-list">
+          <li class="lab-item" data-lab-item="hero-gpu" data-needs="WebGPU">
+            <div class="lab-item__head">
+              <h2 class="lab-item__title">GPU flow field</h2>
+              <span class="lab-item__status" data-status="kept">In the lab</span>
+            </div>
+            <p class="lab-item__summary">The hero&#39;s flow field runs on the GPU (WebGPU compute shader) instead of WebAssembly, so it can draw fifty to a hundred times as many particles.</p>
+            <dl class="lab-item__facts">
+              <div><dt>Needs</dt><dd>WebGPU <span data-lab-support></span></dd></div>
+              <div><dt>Measured</dt><dd>Holds 60 fps from 3,000 to 1,000,000 particles on an Apple GPU (Metal); the WebAssembly field reaches its limit near 150,000. At the site&#39;s own density there is no gain, which is why it is off by default.</dd></div>
+            </dl>
+            <p class="lab-item__actions">
+              <label class="lab-switch" hidden data-lab-switch>
+                <input type="checkbox" data-lab-toggle="hero-gpu" />
+                <span>Keep on for this browser</span>
+              </label>
+              <a class="link" href="/?lab=hero-gpu&amp;particles=60000">Try it once</a>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap site-footer__inner">
+        <p class="site-footer__note">Matthew Anderson &middot; <a class="link" href="/">andernet.dev</a></p>
+        <ul class="site-footer__links">
+          <li>
+            <span class="site-footer__views" data-edge-widget hidden>
+              <a class="link" href="/status/" data-edge-receipt></a>
+              <span data-presence hidden></span>
+            </span>
+          </li>
+          <li><a class="link" href="/status/">Status</a></li>
+          <li><a class="link" href="/#projects">All projects</a></li>
+          <li>
+            <a class="link" href="https://github.com/and3rn3t/and3rn3t" target="_blank" rel="noopener noreferrer">Source</a>
+          </li>
+          <li><a class="link" href="/feed.xml">RSS</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module" src="/modules/post-page.js"></script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "883fb1c6a2c744d4b745475d92f474bf"}'
+    ></script>
+    <script type="module" src="/modules/lab-page.js"></script>
+  </body>
+</html>

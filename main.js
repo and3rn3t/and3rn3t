@@ -358,7 +358,7 @@ async function initializeApp() {
  */
 async function initHeroEnhancements() {
     try {
-        const { canRunHeavyEffects } = await import('./modules/capabilities.js');
+        const { canRunHeavyEffects, lab } = await import('./modules/capabilities.js');
         if (!canRunHeavyEffects()) {
             return; // CSS fallback gradient remains visible.
         }
@@ -372,9 +372,10 @@ async function initHeroEnhancements() {
         try {
             const heroOptions = { reducedMotion: motion.reduced };
             let handle = null;
-            // An experiment, off unless asked for: `?hero=gpu` runs the same field on the GPU
+            // An experiment, off unless asked for (`?hero=gpu`, `?lab=hero-gpu` or the switch on /lab/):
+            // the same field on the GPU
             const query = new URLSearchParams(location.search);
-            if (query.get('hero') === 'gpu') {
+            if (lab('hero-gpu')) {
                 try {
                     const { mountHeroGpu } = await import('./modules/hero-gpu.js');
                     // `&particles=60000` asks for that many (the field's own density gives about a thousand)

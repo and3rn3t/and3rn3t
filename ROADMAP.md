@@ -117,10 +117,49 @@ How each is checked, since a number is the point of most of them:
 Not planned, because each reverses a decision: moving the GitHub data out of git (a Worker cron in place of
 the daily commit and deploy) and replacing the GitHub Pages origin with Workers Static Assets.
 
+## Phase 15 — Lab
+
+Experimental and cutting-edge work, each experiment off by default behind a flag and listed on `/lab/` with
+what it needs and what was measured. One PR per item from `main`. Decisions (2026-11-15): all four tracks
+(agent frontier, live and shared, platform-native, on-device AI); the browser's own built-in model is allowed
+as an opt-in experiment, no server-side model runs for visitors; platform-native items are refactors with a
+fallback, not flags. Every row needs a measure and a drop condition before code, and a support check in real
+browsers first (several statuses changed this year and sources disagree). Nothing deploys or touches the
+zone without an explicit go. Effort: S under a day, M a day or two.
+
+| #     | Item                                                                                                 | Effort | Needs         | Status |
+| ----- | ---------------------------------------------------------------------------------------------------- | ------ | ------------- | ------ |
+| 15.0  | Lab scaffold: `lab()` flag helper, `lab-data.json`, generated `/lab/` page with switches             | S      | Nothing       | 🟡     |
+| 15.1  | MCP prompts and resources                                                                            | S      | Worker deploy | ⬜     |
+| 15.2  | Signed agents (Web Bot Auth) as one more field on `/status/`; check `request.cf` first               | M      | Worker deploy | ⬜     |
+| 15.3  | "View as agent" switch (the service worker must never cache Markdown under an HTML URL)              | S–M    | Nothing       | ⬜     |
+| 15.4  | `show_project` and `show_status` in ChatGPT, VS Code and Goose; matrix in the agent-ready post       | S      | Matt          | ⬜     |
+| 15.5  | Shared flow field over the presence socket (a deliberate change: sockets may now send, rate-limited) | M      | Worker deploy | ⬜     |
+| 15.6  | Hero of the day: seed from the date and newest commit, `?seed=` permalink                            | S      | Nothing       | ⬜     |
+| 15.7  | HDR for the GPU hero (`rgba16float`, extended tone mapping)                                          | S      | Nothing       | ⬜     |
+| 15.8  | Sound, only if 15.5 or 15.6 lands well                                                               | S–M    | Nothing       | ⬜     |
+| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | ⬜     |
+| 15.10 | Trusted Types in the report-only CSP                                                                 | S–M    | Zone apply    | ⬜     |
+| 15.11 | CSS in place of script (anchor positioning, scroll-driven animation, `interpolate-size`)             | S–M    | Nothing       | ⬜     |
+| 15.12 | Back/forward cache: close the presence socket on `pagehide`                                          | S      | Nothing       | ⬜     |
+| 15.13 | On-device post tools: Summarizer, Translator                                                         | S–M    | Nothing       | ⬜     |
+| 15.14 | On-device "ask the portfolio": the model picks slugs, the site shows its own copy                    | M      | Nothing       | ⬜     |
+
+Order: 15.0, then the site-only wins (15.6, 15.7, 15.3, 15.13), one Worker deploy (15.1, 15.5, 15.2), one zone
+apply (15.10), the refactors (15.9, 15.11, 15.12), and 15.14 last. Parked: import-map integrity (an inline
+import map means a CSP hash per module edit; Safari 26.6 has an open blank-page bug), anything with a
+server-side model at visitor time, paid or OAuth agent protocols, ActivityPub or AT Protocol identity.
+
 ## Decision Log
 
 Older entries (2026-06 to 2026-11-11, including all of Phase 10) are in
 [docs/ROADMAP-archive.md](docs/ROADMAP-archive.md).
+
+- **2026-11-15** — Phase 15 (Lab) planned, 15.0 built. The 2026-11-11 "no ask feature" decision is narrowed: the
+  browser's own built-in model may run as an opt-in experiment (nothing leaves the device, no cost); no
+  server-side model runs for visitors, and Claude still never runs at visitor time. Experiments live behind
+  `?lab=<name>` or a switch on `/lab/` (saved in `localStorage` only); `?hero=gpu` stays as an alias of
+  `hero-gpu`. The default page never loads one, and an e2e test checks.
 
 - **2026-11-15** — Phase 14 planned from a re-audit, not started. Matt's brief: whatever the audit recommends
   that fits the project. The audit re-checked the nine open issues against `main` (most shrank after Phase

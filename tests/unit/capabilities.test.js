@@ -71,3 +71,43 @@ test('isLowEndDevice is a boolean', () => {
 test('hasFinePointer is a boolean', () => {
     expect(typeof capabilities.hasFinePointer).toBe('boolean');
 });
+
+// ── lab flags ────────────────────────────────────────────────────────────────
+
+test('parseLabFlags is empty by default: every experiment is off unless asked for', () => {
+    expect([...capabilities.parseLabFlags('', null)]).toEqual([]);
+    expect([...capabilities.parseLabFlags('?utm_source=x', '')]).toEqual([]);
+});
+
+test('parseLabFlags reads ?lab=, the saved names and the older ?hero=gpu alias', () => {
+    expect([...capabilities.parseLabFlags('?lab=a-b,C', 'saved')].sort()).toEqual([
+        'a-b',
+        'c',
+        'saved',
+    ]);
+    expect(capabilities.parseLabFlags('?hero=gpu', null).has('hero-gpu')).toBe(true);
+    expect(capabilities.parseLabFlags('?hero=other', null).size).toBe(0);
+});
+
+test('parseLabFlags drops names that are not plain flags', () => {
+    expect(capabilities.parseLabFlags('?lab=<script>,ok,' + 'x'.repeat(40), null)).toEqual(
+        new Set(['ok'])
+    );
+});
+
+test('setLab saves a switch that lab() then sees, and removes it again', () => {
+    localStorage.clear();
+    expect(capabilities.lab('demo')).toBe(false);
+    expect(capabilities.setLab('demo', true)).toBe(true);
+    expect(capabilities.lab('demo')).toBe(true);
+    capabilities.setLab('demo', false);
+    expect(capabilities.lab('demo')).toBe(false);
+});
+
+test('setLab reports false when storage refuses', () => {
+    const spy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        throw new Error('blocked');
+    });
+    expect(capabilities.setLab('demo', true)).toBe(false);
+    spy.mockRestore();
+});

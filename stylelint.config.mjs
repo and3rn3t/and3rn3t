@@ -26,6 +26,7 @@ export default {
     'posts/**',
     'projects/**',
     'status/**',
+    'lab/**',
   ],
   overrides: [
     {

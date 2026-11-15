@@ -61,6 +61,7 @@ jobs:
             posts/**
             projects/**
             status/**
+            lab/**
             tests/e2e/**
             scripts/zone-headers.mjs
             worker/csp-report.js

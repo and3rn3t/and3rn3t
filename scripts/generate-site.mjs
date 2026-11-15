@@ -36,6 +36,7 @@ import { AUTHOR, SITE } from './templates/chrome.mjs';
 import { renderCover } from './templates/cover.mjs';
 import { renderLlmsTxt } from './templates/llms.mjs';
 import { renderNotFoundPage } from './templates/not-found.mjs';
+import { renderLabPage } from './templates/lab-page.mjs';
 import { renderStatusPage } from './templates/status-page.mjs';
 import { renderPostPage } from './templates/post-page.mjs';
 import { renderProjectPage, shareImage } from './templates/project-page.mjs';
@@ -74,6 +75,14 @@ console.log('  wrote 404.html');
 mkdirSync(join(ROOT, 'status'), { recursive: true });
 writeFileSync(join(ROOT, 'status', 'index.html'), renderStatusPage());
 console.log('  wrote status/index.html');
+
+// ── lab/index.html ───────────────────────────────────────────────────────────
+mkdirSync(join(ROOT, 'lab'), { recursive: true });
+writeFileSync(
+  join(ROOT, 'lab', 'index.html'),
+  renderLabPage(JSON.parse(readFileSync(join(ROOT, 'lab-data.json'), 'utf8')).experiments)
+);
+console.log('  wrote lab/index.html');
 
 // ── feed.xml ─────────────────────────────────────────────────────────────────
 const feedItems = posts

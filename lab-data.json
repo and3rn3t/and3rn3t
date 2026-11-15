@@ -1,0 +1,13 @@
+{
+  "experiments": [
+    {
+      "flag": "hero-gpu",
+      "title": "GPU flow field",
+      "status": "kept",
+      "summary": "The hero's flow field runs on the GPU (WebGPU compute shader) instead of WebAssembly, so it can draw fifty to a hundred times as many particles.",
+      "needs": "WebGPU",
+      "measure": "Holds 60 fps from 3,000 to 1,000,000 particles on an Apple GPU (Metal); the WebAssembly field reaches its limit near 150,000. At the site's own density there is no gain, which is why it is off by default.",
+      "try": "/?lab=hero-gpu&particles=60000"
+    }
+  ]
+}

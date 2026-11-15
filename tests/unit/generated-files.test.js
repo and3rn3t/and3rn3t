@@ -27,6 +27,7 @@ describe('generated files', () => {
                 'posts',
                 'projects',
                 'status',
+                'lab',
                 'sitemap.xml',
                 'llms.txt',
                 'index.html',

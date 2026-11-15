@@ -15,6 +15,7 @@ export const GENERATED_PATHS = [
   'posts',
   'projects',
   'status',
+  'lab',
   'feed.xml',
   'sitemap.xml',
   'llms.txt',

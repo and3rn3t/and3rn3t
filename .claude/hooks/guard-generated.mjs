@@ -27,6 +27,10 @@ export const GENERATED = [
     source: '`projects-data.json` or `scripts/templates/project-page.mjs`',
   },
   { test: p => p.startsWith('status/'), source: '`scripts/templates/status-page.mjs`' },
+  {
+    test: p => p.startsWith('lab/'),
+    source: '`lab-data.json` or `scripts/templates/lab-page.mjs`',
+  },
   { test: p => p === 'feed.xml', source: '`posts-data.json` and `scripts/generate-site.mjs`' },
   { test: p => p === 'llms.txt', source: '`scripts/templates/llms.mjs` and the data files' },
   { test: p => p === '404.html', source: '`scripts/templates/`' },

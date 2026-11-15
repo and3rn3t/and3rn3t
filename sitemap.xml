@@ -50,6 +50,14 @@
     <priority>0.4</priority>
   </url>
 
+  <!-- Lab Page -->
+  <url>
+    <loc>https://andernet.dev/lab/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <!-- Project Pages -->
   <url>
     <loc>https://andernet.dev/projects/health/</loc>
