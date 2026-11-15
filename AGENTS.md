@@ -35,7 +35,7 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 - Shared browser/Worker helpers live in `modules/utils/` (`html.js` escaping, `activity.js`, `data.js`, `icon.js`, `while-visible.js`); the Worker imports them too
 - CI workflows (`.github/workflows/`):
   - `e2e.yml` (PRs only): Playwright + axe on two shards, only when a change can affect it (published files, specs, config, dependencies, or a non-site file a spec loads: `scripts/zone-headers.mjs`, `worker/csp-report.js` and the `worker/telemetry.js` it imports). A spec, or a file it imports, that pulls in a new outside file needs that file added to `paths` (`tests/unit/pages-workflow.test.js` follows imports transitively and fails otherwise). Path-filtered, so never make it a required status check on `main`
-  - `quality.yml` (PRs only): `pnpm validate && pnpm check:generated` in one job. `check:generated` (`scripts/check-generated.mjs`) is the single list of generated paths
+  - `quality.yml` (PRs only): `pnpm validate && pnpm check:generated` in one job. `check:generated` (`scripts/check-generated.mjs`) is the single list of generated paths, and it also rebuilds `modules/wasm/hero-core.wasm` from `assembly/hero-sim.ts` (run `pnpm build:wasm` after editing the source)
   - `pages.yml`: a `verify` job (the same command as Quality) gates the deploy, which then publishes the allowlisted source to GitHub Pages and runs Lighthouse, desktop and mobile (push only). It triggers only on a change to a published path (`on.push.paths`, kept in step with `sparse-checkout` by `tests/unit/pages-workflow.test.js`), so worker, test, tooling and dependency merges do not redeploy or purge the cache. Add any new root asset to both lists or it 404s in production (or never deploys)
   - `lighthouse.yml`: weekly and manual Lighthouse runs. Configs: `.lighthouserc.cjs` (desktop) and `.lighthouserc.mobile.cjs`; performance is an `error` at 0.9. Measure with the build served gzipped (an uncompressed static server under-scores mobile badly).
   - `update-github-data.yml`: daily refresh of `github-data.json`, the README featured projects and the OG card (it renders only when `.github/og-inputs.sha256` changes), then dispatches `pages.yml`
@@ -51,6 +51,7 @@ pnpm lint:css        # stylelint: spacing/type must use design-system tokens
 pnpm check:refs      # every file the site references exists and is in the pages.yml publish allowlist
 pnpm check:copy      # copy rule: no gendered pronouns about Matt in the data files, worker text or llms.txt
 pnpm test            # unit + e2e
+pnpm test:coverage   # unit and worker coverage report (text summary + coverage/ html); a report, not a gate
 pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars; there is no Turnstile secret locally)
 pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked
