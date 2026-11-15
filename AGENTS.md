@@ -15,6 +15,11 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   `mcp/server-card.json`, `agent-skills/`, `ai-catalog.json` and `/api/openapi.json`). Each needs its own route in
   `wrangler.toml`; `tests/worker/discovery.test.js` fails when a document or `/mcp` is not routed. Adding a tool or an
   API path means updating the server card, `SKILL_MD` and the OpenAPI document too (tests check they agree).
+  The server also offers **prompts** (`brief-for-role`, `compare-projects`, `recent-work`) and **resources** (a post or a
+  project as Markdown, `portfolio://posts/{slug}` and `portfolio://projects/{name}`), both in `worker/mcp-content.js` (pure, so
+  tests run it directly). A prompt names the tools to use and quotes what was typed; it never states a fact about Matthew
+  itself. Adding or renaming one means updating the server card, `SKILL_MD` and `SERVER_VERSION` (a test pins the three lists
+  to the version). Prompt and resource calls are not timed on `/status/`: it counts tool calls, and `worker/telemetry.js` has a fixed layout.
   Every MCP tool declares a zod `outputSchema` (an object at the root) and returns `structuredContent` plus the same JSON as text;
   a "no such project or post" reply is `isError` for the model but recorded as a success on `/status/` (`asNotFound`).
   Two tools are MCP Apps, drawn inside Claude: `show_project` (`worker/mcp-app-view.js`) and `show_status`
