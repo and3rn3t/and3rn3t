@@ -9,6 +9,8 @@ import { lab, setLab } from './capabilities.js';
 /** What each "needs" value looks like in this browser. A name not listed is assumed to work. */
 const SUPPORT = {
     WebGPU: () => 'gpu' in globalThis.navigator,
+    'an HDR display': () =>
+        'gpu' in globalThis.navigator && globalThis.matchMedia?.('(dynamic-range: high)').matches,
     WebAssembly: () => typeof globalThis.WebAssembly === 'object',
 };
 
