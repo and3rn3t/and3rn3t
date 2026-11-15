@@ -1,5 +1,6 @@
 /**
- * Fails when the checked-in generated files differ from what `generate-site.mjs` writes.
+ * Fails when the checked-in generated files differ from what `generate-site.mjs` writes, or the
+ * committed WASM binary differs from what `assembly/hero-sim.ts` builds to.
  *
  * Run by Quality (pull requests) and by pages.yml before a deploy; also runnable locally with
  * `pnpm check:generated`. GENERATED_PATHS is the single list: update-github-data.yml stages the
@@ -20,6 +21,8 @@ export const GENERATED_PATHS = [
   'index.html',
   '404.html',
   'images',
+  // Built from assembly/hero-sim.ts by `pnpm build:wasm`; the check rebuilds it
+  'modules/wasm/hero-core.wasm',
 ];
 
 /** @typedef {(command: string, args: string[]) => string} CommandRunner */
@@ -35,6 +38,7 @@ const runCommand = (command, args) =>
  */
 export function checkGenerated(run = runCommand) {
   run('node', ['scripts/generate-site.mjs']);
+  run('pnpm', ['build:wasm']);
   // trimEnd, not trim: porcelain's leading space is part of the status column (" M file").
   const drift = run('git', ['status', '--porcelain', '--', ...GENERATED_PATHS]).trimEnd();
   if (drift.trim() === '')
@@ -45,7 +49,7 @@ export function checkGenerated(run = runCommand) {
     report: [
       `check-generated: generated files are stale:\n${drift}\n`,
       stat,
-      'Run `node scripts/generate-site.mjs` and commit the result.',
+      'Run `node scripts/generate-site.mjs` and `pnpm build:wasm`, and commit the result.',
     ].join('\n'),
   };
 }
