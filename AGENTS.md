@@ -46,7 +46,7 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 ```bash
 pnpm install
 pnpm dev             # vite dev server (production ships raw source, there is no build)
-pnpm validate        # lint + lint:css + format:check + test:unit + check:refs + check:copy ← done-gate
+pnpm validate        # lint + lint:css + format:check + test:unit + check:refs + check:copy + build:worker (dry run) ← done-gate
 pnpm lint:css        # stylelint: spacing/type must use design-system tokens
 pnpm check:refs      # every file the site references exists and is in the pages.yml publish allowlist
 pnpm check:copy      # copy rule: no gendered pronouns about Matt in the data files, worker text or llms.txt
@@ -54,8 +54,9 @@ pnpm test            # unit + e2e
 pnpm test:coverage   # unit and worker coverage report (text summary + coverage/ html); a report, not a gate
 pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars; there is no Turnstile secret locally)
 pnpm build:worker    # wrangler deploy --dry-run
-pnpm deploy:worker   # only when asked
+pnpm deploy:worker   # only when asked; tags the version with the short SHA, which /api/edge then reports
 pnpm check:agent-ready # report-only scan of the live site (isitagentready.com); never fails
+pnpm check:worker-deployed # report-only: is the live Worker's tagged commit at or past the last worker/ change? (daily in site-check.yml)
 pnpm check:probe     # FAILS if the uptime probe has been quiet for 15+ minutes or its last check failed (daily in site-check.yml)
 pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
 pnpm zone --apply    # only when asked; `--only tls` limits it to one group
