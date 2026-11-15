@@ -22,6 +22,10 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   (`resourceDomains` in `worker/mcp.js`) and puts data in with `textContent` only; `show_status`'s drawing code is a string
   (`STATUS_RENDER_SOURCE`) that `tests/unit/status-app.test.js` runs in jsdom. A new app tool needs its own `ui://` resource, an
   `outputSchema`, and an entry in the server card, `SKILL_MD` and `qa-live`'s tool count.
+  **Page views** are counted by the `Counter` Durable Object (`worker/counter.js`, binding `COUNTER`, migration `v2`): one
+  atomic SQLite row per slug, so overlapping visits cannot lose a count (the KV counter did, #211). The first read seeds the
+  row from the KV number, once; KV is then written every 10th count only, so a rollback stays close. Without the binding
+  (`pnpm worker:dev` has it; tests without it) `/views` falls back to the old KV read-modify-write.
   **Snapshots** (`worker/snapshot.js`): the five-minute cron (`scheduled()` in `worker/index.js`) refreshes `/activity` and
   `/stats` into `VIEWS_KV` under `snapshot:*`; requests read a snapshot up to 15 minutes old and only build the answer
   themselves when there is none (the Cache API alone was per location and almost always cold). A failed refresh never

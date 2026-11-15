@@ -55,6 +55,7 @@ const UNRECORDED_ROUTES = new Set(['/presence', '/csp-report']);
 
 // The Durable Object class must be exported from the entry point
 export { Presence } from './presence.js';
+export { Counter } from './counter.js';
 
 export default {
     async fetch(request, env, ctx) {
