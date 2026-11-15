@@ -28,7 +28,10 @@ import { STATUS_VIEW_HTML } from './mcp-app-status.js';
 import { recordTool } from './telemetry.js';
 
 const SERVER_NAME = 'andernet-portfolio';
-export const SERVER_VERSION = '1.1.0';
+// Bump it (minor) whenever a tool is added, removed or changes its schema: clients can keep a server's
+// tool list until its version changes, and a new tool at the same version may never reach them
+// (tests/worker/mcp.test.js pins the two together).
+export const SERVER_VERSION = '1.2.0';
 
 /**
  * A result for clients that read typed data (structuredContent, checked against the tool's

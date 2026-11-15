@@ -5,7 +5,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { handleMcp } from '../../worker/mcp.js';
+import { SERVER_VERSION, handleMcp } from '../../worker/mcp.js';
 import { htmlToText, loadJson } from '../../worker/site-data.js';
 
 const FILES = {
@@ -177,6 +177,15 @@ describe('the MCP server', () => {
         const tools = message.result.tools;
         expect(tools.map(tool => tool.name).sort()).toEqual([...TOOLS].sort());
         for (const tool of tools) expect(tool.description.length).toBeGreaterThan(20);
+    });
+
+    it('moves the server version whenever the tool list changes (clients can cache the list by version)', async () => {
+        const { message } = await rpc('tools/list');
+        const names = message.result.tools.map(tool => tool.name).sort();
+        // Changing the tools means changing this line, and so choosing the next version
+        expect(`${SERVER_VERSION}: ${names.join(' ')}`).toBe(
+            '1.2.0: get_post get_profile get_project get_recent_activity get_site_stats list_experience list_posts list_projects show_project show_status'
+        );
     });
 
     it('gives every tool a title and read-only annotations (the directory requires both)', async () => {
