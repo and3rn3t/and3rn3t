@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import * as ogCard from '../../scripts/og-card.mjs';
-import { renderPortfolioCard } from '../../scripts/og-card.mjs';
+import { formatContributions, renderPortfolioCard } from '../../scripts/og-card.mjs';
 
 const DATA = {
     repositories: [
@@ -42,7 +42,7 @@ describe('renderPortfolioCard', () => {
         expect(shown).toContain('Software Engineer · Deere & Company');
         expect(shown).toContain('3'); // repositories
         expect(shown).toContain('7'); // stars: 3 + 4 + (missing counts as 0)
-        expect(shown).toContain('4,613'); // contributions, with a thousands separator
+        expect(shown).toContain('4.6k'); // contributions, in thousands
         expect(shown).toContain('Repositories');
         expect(shown).toContain('Stars');
         expect(shown).toContain('Contributions');
@@ -113,7 +113,29 @@ describe('renderPortfolioCard', () => {
         expect(renderPortfolioCard(DATA)).toBe(renderPortfolioCard(structuredClone(DATA)));
     });
 
-    it('only exposes the portfolio card (the per-project cards were removed)', () => {
-        expect(Object.keys(ogCard)).toEqual(['renderPortfolioCard']);
+    it('only exposes the portfolio card and its number format (the per-project cards were removed)', () => {
+        expect(Object.keys(ogCard).toSorted()).toEqual([
+            'formatContributions',
+            'renderPortfolioCard',
+        ]);
+    });
+});
+
+describe('formatContributions', () => {
+    it.each([
+        [0, '0'],
+        [999, '999'],
+        [1000, '1.0k'],
+        [4613, '4.6k'],
+        [4699, '4.6k'], // rounds down, so the figure never overstates
+        [4700, '4.7k'],
+        [12345, '12.3k'],
+    ])('%i is shown as %s', (total, shown) => {
+        expect(formatContributions(total)).toBe(shown);
+    });
+
+    // The daily refresh skips the render while this is unchanged, so it must not move on every day's growth.
+    it('stays the same across a day of ordinary growth', () => {
+        expect(formatContributions(4613 + 40)).toBe(formatContributions(4613));
     });
 });

@@ -51,7 +51,9 @@ jobs:
                 | .languageBytes | to_entries | sort_by(-.value) | .[0:5]
                 | map({name: .key, pct: (100 * .value / $total | round), bar: (480 * .value / $total | round)})
               ),
-              contributions: .contributions.total
+              # The card prints this as "4.6k" (formatContributions in og-card.mjs): exact
+              # below 1000, else floored to a hundred. Hash the same value, not the exact total.
+              contributions: ((.contributions.total // 0) | if . < 1000 then . else (. / 100 | floor) end)
             }' github-data.json
             cat scripts/generate-og.mjs scripts/og-card.mjs \
                 modules/utils/html.js fonts/inter-variable.woff2 fonts/jetbrains-mono-500.woff2
