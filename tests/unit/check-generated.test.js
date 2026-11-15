@@ -10,11 +10,12 @@ const runner = (porcelain, stat = '') =>
     });
 
 describe('checkGenerated', () => {
-    it('regenerates first, then asks git about exactly the generated paths', () => {
+    it('regenerates the site and rebuilds the WASM, then asks git about exactly the generated paths', () => {
         const run = runner('');
         checkGenerated(run);
         expect(run.mock.calls[0]).toEqual(['node', ['scripts/generate-site.mjs']]);
-        expect(run.mock.calls[1]).toEqual([
+        expect(run.mock.calls[1]).toEqual(['pnpm', ['build:wasm']]);
+        expect(run.mock.calls[2]).toEqual([
             'git',
             ['status', '--porcelain', '--', ...GENERATED_PATHS],
         ]);
@@ -25,7 +26,7 @@ describe('checkGenerated', () => {
         const result = checkGenerated(run);
         expect(result.ok).toBe(true);
         expect(result.report).toContain('up to date');
-        expect(run).toHaveBeenCalledTimes(2);
+        expect(run).toHaveBeenCalledTimes(3);
     });
 
     it('fails on a tracked file that changed', () => {
@@ -42,6 +43,15 @@ describe('checkGenerated', () => {
         const result = checkGenerated(runner('?? posts/new-post/index.html\n'));
         expect(result.ok).toBe(false);
         expect(result.report).toContain('?? posts/new-post/index.html');
+    });
+
+    it('fails when the committed WASM differs from what the source builds to', () => {
+        const result = checkGenerated(
+            runner(' M modules/wasm/hero-core.wasm\n', ' modules/wasm/hero-core.wasm | Bin')
+        );
+        expect(result.ok).toBe(false);
+        expect(result.report).toContain('hero-core.wasm');
+        expect(result.report).toContain('pnpm build:wasm');
     });
 
     it('does not swallow a generator failure', () => {

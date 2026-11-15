@@ -40,6 +40,8 @@ on:
       - 'tests/e2e/**'
       - 'scripts/zone-headers.mjs'
       - 'worker/csp-report.js'
+      - 'worker/mcp-app-status.js'
+      - 'worker/mcp-app-view.js'
       - 'worker/telemetry.js'
       - 'playwright.config.js'
       - 'package.json'

@@ -33,5 +33,14 @@ export default defineConfig({
             },
         ],
         globals: false,
+        // `pnpm test:coverage`: a report to find what no test touches, not a gate (no thresholds).
+        // The browser code mostly runs in Playwright, which this does not see, so a low number for
+        // modules/ means "not unit-tested", and the e2e specs may well cover it.
+        coverage: {
+            provider: 'v8',
+            reporter: ['text-summary', 'html'],
+            include: ['main.js', 'sw.js', 'modules/**/*.js', 'worker/**/*.js', 'scripts/**/*.mjs'],
+            exclude: ['modules/wasm/hero-core.*'],
+        },
     },
 });

@@ -31,6 +31,7 @@ describe('generated files', () => {
                 'llms.txt',
                 'index.html',
                 '404.html',
+                'modules/wasm/hero-core.wasm',
             ])
         );
     });

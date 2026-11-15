@@ -16,7 +16,7 @@ const message =
 
 /** @type {import('stylelint').Config} */
 export default {
-  ignoreFiles: ['dist/**', 'dist-worker/**', 'node_modules/**'],
+  ignoreFiles: ['dist/**', 'dist-worker/**', 'node_modules/**', 'coverage/**'],
   overrides: [
     {
       // The new design system (styles/): colour comes from tokens only. The token block in
