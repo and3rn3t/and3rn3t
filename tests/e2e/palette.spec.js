@@ -230,7 +230,8 @@ test('a project result opens its page on the site instead of leaving for GitHub'
         );
         return slug && project ? { slug, title: project.displayName || project.name } : null;
     });
-    test.skip(!target, 'no project with a page in current data');
+    // Not a skip: the home page is generated and committed, so a project page missing here is a bug
+    expect(target, 'a project card on the home page links to a project page').not.toBeNull();
 
     await openPalette(page);
     await page.locator('.search-category[data-category="projects"]').click();
