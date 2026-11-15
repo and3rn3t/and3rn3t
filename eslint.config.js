@@ -97,7 +97,7 @@ export default [
 
     // E2E tests (Node; page.evaluate()/waitForFunction callbacks run in the browser)
     {
-        files: ['tests/e2e/**/*.js'],
+        files: ['tests/e2e/**/*.{js,mjs}'],
         languageOptions: {
             globals: {
                 ...globals.node,
