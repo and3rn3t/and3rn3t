@@ -177,6 +177,46 @@ function flowColor(canvas) {
 }
 
 /**
+ * Whether a canvas can show what this device draws. Some adapters work for compute and drawing
+ * but cannot present: Chromium's software one (SwiftShader, what a CI runner has) answers every
+ * canvas's `getCurrentTexture()` with an invalid texture. That only shows at the first frame, when
+ * the hero canvas has already given up its 2D context, so it is tried on a canvas of its own first.
+ * @param {GPUDevice} device
+ * @param {GPUTextureFormat} format
+ * @returns {Promise<boolean>}
+ */
+async function canPresent(device, format) {
+    device.pushErrorScope('validation');
+    let threw = false;
+    try {
+        const probe = document.createElement('canvas');
+        probe.width = probe.height = 16;
+        const context = probe.getContext('webgpu');
+        if (!context) throw new Error('no webgpu context');
+        context.configure({ device, format, alphaMode: 'premultiplied' });
+        const encoder = device.createCommandEncoder();
+        encoder
+            .beginRenderPass({
+                colorAttachments: [
+                    {
+                        view: context.getCurrentTexture().createView(),
+                        clearValue: { r: 0, g: 0, b: 0, a: 0 },
+                        loadOp: 'clear',
+                        storeOp: 'store',
+                    },
+                ],
+            })
+            .end();
+        device.queue.submit([encoder.finish()]);
+        context.unconfigure();
+    } catch {
+        threw = true;
+    }
+    const error = await device.popErrorScope();
+    return !threw && !error;
+}
+
+/**
  * @typedef {Object} HeroGpuHandle
  * @property {() => void} destroy
  * @property {() => { kind: 'gpu', particles: number, fps: number, frameMs: number }} stats
@@ -199,7 +239,16 @@ export async function mountHeroGpu(canvas, opts = {}) {
         return null;
     }
 
+    // A validation error would otherwise only reach the console as a browser warning
+    device.addEventListener('uncapturederror', event => {
+        console.error('[hero-gpu]', event.error?.message ?? event.error);
+    });
+
     const format = navigator.gpu.getPreferredCanvasFormat();
+    if (!(await canPresent(device, format))) {
+        device.destroy();
+        return null;
+    }
     const trailFormat = 'rgba8unorm';
     const reduced = Boolean(opts.reducedMotion);
     const dpr = Math.min(globalThis.devicePixelRatio || 1, 2);
@@ -508,11 +557,6 @@ export async function mountHeroGpu(canvas, opts = {}) {
         clearTimeout(resizeTimer);
         device.destroy();
     }
-
-    // A validation error would otherwise only reach the console as a browser warning
-    device.addEventListener('uncapturederror', event => {
-        console.error('[hero-gpu]', event.error?.message ?? event.error);
-    });
 
     // A lost device (a GPU reset, the driver being updated) cannot be recovered on this canvas:
     // stop, and let the page show its CSS fallback

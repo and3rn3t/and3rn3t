@@ -65,6 +65,34 @@ test.describe('with ?hero=gpu in a browser that has no usable adapter', () => {
     });
 });
 
+test.describe('with ?hero=gpu on an adapter that cannot present to a canvas', () => {
+    // Chromium's software WebGPU (what a CI runner has) has an adapter and a device, but every canvas's
+    // getCurrentTexture() is invalid, so a field mounted there would draw nothing. It must fall back.
+    test('falls back to the WASM field instead of mounting a hero that draws nothing', async ({
+        page,
+    }) => {
+        await page.addInitScript(() => {
+            if (!window.GPUCanvasContext) return; // no WebGPU here: the fallback test above covers it
+            window.GPUCanvasContext.prototype.getCurrentTexture = () => {
+                throw new DOMException('no swapchain', 'InvalidStateError');
+            };
+        });
+        await page.goto('/?hero=gpu');
+        await page.waitForFunction(() => globalThis.appState?.managers?.heroCanvas, null, {
+            timeout: 15000,
+        });
+        const state = await page.evaluate(() => {
+            const canvas = document.getElementById('hero-canvas');
+            return {
+                active: canvas.classList.contains('is-active'),
+                twoD: Boolean(canvas.getContext('2d')),
+                kind: globalThis.appState.managers.heroCanvas.stats?.().kind ?? 'wasm',
+            };
+        });
+        expect(state).toMatchObject({ active: true, twoD: true, kind: 'wasm' });
+    });
+});
+
 test.describe('with a GPU', () => {
     for (const theme of ['light', 'dark']) {
         test(`runs the field in the ${theme} theme with no WebGPU error`, async ({ page }) => {
