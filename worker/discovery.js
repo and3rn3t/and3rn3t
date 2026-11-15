@@ -44,6 +44,7 @@ Connect an MCP client to \`${SITE_ORIGIN}/mcp\` (Streamable HTTP, no authenticat
 - \`get_profile\`: who Matthew is, current role, links
 - \`list_projects\` (optional \`category\`, \`technology\`) and \`get_project\` (\`name\`): the projects and their write-ups
 - \`show_project\` (\`name\`): one project as a card, in clients that display MCP Apps
+- \`show_status\`: the site's health as a panel, in clients that display MCP Apps (same data as \`get_site_stats\`)
 - \`list_experience\`: work history and education
 - \`list_posts\` (optional \`tag\`) and \`get_post\` (\`slug\`): the technical posts, full text
 - \`get_recent_activity\`: the latest public GitHub activity
@@ -102,6 +103,7 @@ export const serverCard = () => ({
         'list_projects',
         'get_project',
         'show_project',
+        'show_status',
         'list_experience',
         'list_posts',
         'get_post',
