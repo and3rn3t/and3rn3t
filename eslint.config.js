@@ -80,7 +80,6 @@ export default [
             '.lighthouserc.cjs',
             '.lighthouserc.mobile.cjs',
             'scripts/**/*.{js,mjs}',
-            'skills/*/scripts/*.mjs',
         ],
         languageOptions: { globals: { ...globals.node, document: 'readonly' } },
     },

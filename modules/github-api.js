@@ -5,6 +5,9 @@
 
 import { debug } from './debug.js';
 
+// Longest rate-limit reset the direct-API fallback will sit out before failing instead.
+const MAX_RATE_LIMIT_WAIT_MS = 5000;
+
 export class GitHubAPIManager {
     static baseUrl = 'https://api.github.com';
     static username = 'and3rn3t';
@@ -49,15 +52,15 @@ export class GitHubAPIManager {
     // projects, stats and the currently-coding pill trigger a single request.
     loadCachedGitHubData() {
         this.cachedDataPromise ??= (async () => {
-            try {
-                const response = await fetch('/github-data.json');
-                if (response.ok) {
-                    this.cachedData = await response.json();
-                    return this.cachedData;
-                }
-            } catch (_error) {
-                debug.warn('[GitHub] Pre-fetched data not available, using direct API');
+            // Imported here, not at the top: this module loads before app:ready, which has a
+            // script-file budget (tests/e2e/budgets.spec.js), and the shared loader is not needed until now.
+            const { loadJSON } = await import('./utils/data.js');
+            const data = await loadJSON('/github-data.json');
+            if (data) {
+                this.cachedData = data;
+                return data;
             }
+            debug.warn('[GitHub] Pre-fetched data not available, using direct API');
             this.cachedDataPromise = null; // allow a later retry
             return null;
         })();
@@ -100,6 +103,11 @@ export class GitHubAPIManager {
     async waitForRateLimit() {
         if (this.rateLimitInfo.remaining <= 1) {
             const waitTime = Math.max(0, this.rateLimitInfo.reset - Date.now());
+            // A reset up to an hour away is not worth waiting for: a widget that never settles is
+            // worse than one that falls back. Wait only for a short one.
+            if (waitTime > MAX_RATE_LIMIT_WAIT_MS) {
+                throw Object.assign(new Error('GitHub API rate limit exceeded'), { status: 403 });
+            }
             if (waitTime > 0) {
                 debug.log('[GitHub] Rate limit reached, waiting', waitTime, 'ms');
                 await new Promise(resolve => setTimeout(resolve, waitTime));

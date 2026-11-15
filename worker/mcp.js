@@ -185,7 +185,7 @@ export function createServer(env, deps) {
         }
     );
 
-    // SPIKE (roadmap 13.10): the same data as get_project, drawn as a card inside Claude.
+    // An MCP App (roadmap 13.10): the same data as get_project, drawn as a card inside Claude.
     registerAppTool(
         { registerTool },
         'show_project',

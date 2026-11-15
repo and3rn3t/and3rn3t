@@ -5,6 +5,7 @@
  */
 
 import { debug } from './debug.js';
+import { motion } from './capabilities.js';
 import { SPRITE_URL } from './utils/icon.js';
 
 const STORAGE_KEY = 'theme';
@@ -93,10 +94,9 @@ export class ThemeManager {
         const commit = () => this.commitTheme(theme);
 
         const supportsViewTransitions = typeof document.startViewTransition === 'function';
-        const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
         // Animate only for user-initiated swaps on capable, motion-OK browsers
-        if (!this.ready || !supportsViewTransitions || reducedMotion) {
+        if (!this.ready || !supportsViewTransitions || motion.reduced) {
             commit();
             return;
         }

@@ -107,7 +107,7 @@ writeFileSync(
     <webMaster>and3rn3t@icloud.com (${AUTHOR})</webMaster>
     <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
-      <url>${SITE}/icons/icon-192.png</url>
+      <url>${SITE}/icons/icon-192x192.png</url>
       <title>${AUTHOR}</title>
       <link>${SITE}</link>
     </image>

@@ -203,10 +203,6 @@ export class UIManager {
             </figure>
         `;
     }
-
-    destroy() {
-        this.isInitialized = false;
-    }
 }
 
 export const uiManager = new UIManager();

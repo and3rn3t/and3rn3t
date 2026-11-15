@@ -65,6 +65,20 @@ async function loadSim() {
  */
 
 /**
+ * Whether a new canvas size needs the particles re-seeded, which also clears the trails. A change
+ * of width does (the layout changed); a height change alone, such as a phone's URL bar showing or
+ * hiding, does only when it changes the area by more than a fifth.
+ * @param {{ width: number, height: number }} from
+ * @param {{ width: number, height: number }} to
+ * @returns {boolean}
+ */
+export function needsReseed(from, to) {
+    if (Math.floor(from.width) !== Math.floor(to.width)) return true;
+    const area = from.width * from.height;
+    return area === 0 || Math.abs(to.width * to.height - area) / area > 0.2;
+}
+
+/**
  * Mount the WASM particle field onto a canvas.
  * @param {HTMLCanvasElement} canvas
  * @param {{ density?: number, speed?: number, reducedMotion?: boolean, trailFade?: number }} [opts]
@@ -112,9 +126,15 @@ export async function mountHeroSim(canvas, opts = {}) {
         view = new Float32Array(sim.memory.buffer, ptr, count * stride);
     }
 
+    function measure() {
+        return {
+            cssW: canvas.clientWidth || canvas.parentElement?.clientWidth || 800,
+            cssH: canvas.clientHeight || canvas.parentElement?.clientHeight || 400,
+        };
+    }
+
     function sizeAndSeed() {
-        const cssW = canvas.clientWidth || canvas.parentElement?.clientWidth || 800;
-        const cssH = canvas.clientHeight || canvas.parentElement?.clientHeight || 400;
+        const { cssW, cssH } = measure();
         width = Math.max(1, Math.floor(cssW * dpr));
         height = Math.max(1, Math.floor(cssH * dpr));
         canvas.width = width;
@@ -223,7 +243,13 @@ export async function mountHeroSim(canvas, opts = {}) {
     let resizeTimer = 0;
     function onResize() {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(sizeAndSeed, 150);
+        resizeTimer = setTimeout(() => {
+            const { cssW, cssH } = measure();
+            // A phone's URL bar showing or hiding changes only the height: keep the field.
+            if (needsReseed({ width, height }, { width: cssW * dpr, height: cssH * dpr })) {
+                sizeAndSeed();
+            }
+        }, 150);
     }
     globalThis.addEventListener('resize', onResize, { passive: true });
 
