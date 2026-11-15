@@ -129,6 +129,24 @@
               <a class="link" href="/?seed=flow">Try it once</a>
             </p>
           </li>
+          <li class="lab-item" data-lab-item="agent-view" data-needs="Nothing special">
+            <div class="lab-item__head">
+              <h2 class="lab-item__title">View as agent</h2>
+              <span class="lab-item__status" data-status="spike">Spike</span>
+            </div>
+            <p class="lab-item__summary">A button on every page that shows what a crawler or an AI agent gets there: the page as Markdown (Cloudflare converts it at the edge, with a token estimate), the read-only tools on the MCP server, and the documents agents start from.</p>
+            <dl class="lab-item__facts">
+              <div><dt>Needs</dt><dd>Nothing special <span data-lab-support></span></dd></div>
+              <div><dt>Measured</dt><dd>Not yet judged. It has to work on the home page, a project and a post, and must never leave Markdown cached under a page&#39;s address: the service worker skips any request that asks for Markdown (a unit test) and the fetch bypasses the browser cache.</dd></div>
+            </dl>
+            <p class="lab-item__actions">
+              <label class="lab-switch" hidden data-lab-switch>
+                <input type="checkbox" data-lab-toggle="agent-view" />
+                <span>Keep on for this browser</span>
+              </label>
+              <a class="link" href="/?lab=agent-view">Try it once</a>
+            </p>
+          </li>
         </ul>
       </div>
     </main>

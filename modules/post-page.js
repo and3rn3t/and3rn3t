@@ -10,3 +10,11 @@ initThemeManager();
 const whenIdle = task =>
     globalThis.requestIdleCallback ? globalThis.requestIdleCallback(task) : setTimeout(task, 2000);
 whenIdle(() => import('./edge.js').then(m => m.initEdge()).catch(() => {}));
+
+// A lab experiment, off unless switched on (see /lab/): the agent view, on every page
+whenIdle(() =>
+    import('./capabilities.js')
+        .then(({ lab }) => lab('agent-view') && import('./agent-view.js'))
+        .then(m => m?.initAgentView())
+        .catch(() => {})
+);

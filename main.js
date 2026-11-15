@@ -154,6 +154,17 @@ function startFeatures(uiManager) {
         );
     }, 1000);
 
+    // A lab experiment, off unless switched on (see /lab/): the agent view
+    whenIdle(async () => {
+        const { lab } = await import('./modules/capabilities.js');
+        if (!lab('agent-view')) return;
+        startOptional(
+            'Agent view',
+            () => import('./modules/agent-view.js'),
+            m => m.initAgentView()
+        );
+    }, 1500);
+
     // Old #post/<slug> and #project/<slug> links: only load the redirect when there is one
     watchLegacyLinks();
 

@@ -17,6 +17,15 @@
       "needs": "WebAssembly",
       "measure": "Not yet judged. A seed of 0 is the field the site has always drawn, so with the switch off nothing changes. Add ?seed=anything to any visit to pin one picture, for example /?seed=flow.",
       "try": "/?seed=flow"
+    },
+    {
+      "flag": "agent-view",
+      "title": "View as agent",
+      "status": "spike",
+      "summary": "A button on every page that shows what a crawler or an AI agent gets there: the page as Markdown (Cloudflare converts it at the edge, with a token estimate), the read-only tools on the MCP server, and the documents agents start from.",
+      "needs": "Nothing special",
+      "measure": "Not yet judged. It has to work on the home page, a project and a post, and must never leave Markdown cached under a page's address: the service worker skips any request that asks for Markdown (a unit test) and the fetch bypasses the browser cache.",
+      "try": "/?lab=agent-view"
     }
   ]
 }
