@@ -35,6 +35,15 @@
       "needs": "Nothing special",
       "measure": "Not yet judged. It has to work on the home page, a project and a post, and must never leave Markdown cached under a page's address: the service worker skips any request that asks for Markdown (a unit test) and the fetch bypasses the browser cache.",
       "try": "/?lab=agent-view"
+    },
+    {
+      "flag": "hero-shared",
+      "title": "Shared flow field",
+      "status": "spike",
+      "summary": "Everyone who has this switched on bends the same hero: move the pointer over it and the field moves for the other visitors who have it on, and theirs moves yours. Only a coarse pointer position is sent, only while at least two people have it on, nothing is stored, and nobody is named. It needs someone else to be here at the same time.",
+      "needs": "WebSocket",
+      "measure": "Not yet judged. Two browsers should see each other within about 150 ms, a day of use should add no visible Durable Object cost, and the object must still hibernate when nobody is moving. Dropped if cost or abuse limits get complicated. At most 25 pages take part at once.",
+      "try": "/?lab=hero-shared"
     }
   ]
 }

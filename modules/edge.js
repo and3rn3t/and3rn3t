@@ -70,6 +70,41 @@ export function parseCount(data) {
     }
 }
 
+// What else rides on the presence socket: the lab's shared hero (modules/hero-share.js) listens here
+// and sends through it, so a page holds one socket, and "N here now" counts it once.
+const messageListeners = new Set();
+const openListeners = new Set();
+let liveSocket = null;
+
+/**
+ * @param {(data: string) => void} listener - every message from the Worker
+ * @returns {() => void} stops listening
+ */
+export function onPresenceMessage(listener) {
+    messageListeners.add(listener);
+    return () => messageListeners.delete(listener);
+}
+
+/**
+ * @param {() => void} listener - each time a presence socket opens, and now if one is open already
+ * @returns {() => void} stops listening
+ */
+export function onPresenceOpen(listener) {
+    openListeners.add(listener);
+    if (liveSocket?.readyState === 1) listener();
+    return () => openListeners.delete(listener);
+}
+
+/**
+ * @param {string} text
+ * @returns {boolean} whether it was sent (false with no open socket)
+ */
+export function sendPresence(text) {
+    if (liveSocket?.readyState !== 1) return false;
+    liveSocket.send(text);
+    return true;
+}
+
 /** @returns {string} what to show for a count, or '' for none */
 export function presenceText(count) {
     return Number.isInteger(count) && count >= PRESENCE_MIN ? `· ${count} here now` : '';
@@ -101,6 +136,7 @@ export function initPresence() {
         clearInterval(pingTimer);
         const old = socket;
         socket = null; // so the old socket's own events are ignored from here on
+        liveSocket = null;
         old?.close();
         show(null);
     };
@@ -121,6 +157,8 @@ export function initPresence() {
         socket = ws;
         ws.onopen = () => {
             retries = 0;
+            liveSocket = ws;
+            for (const listener of openListeners) listener();
             // A ping does not wake the Worker's object; it only keeps idle connections from being dropped
             pingTimer = setInterval(() => ws.readyState === 1 && ws.send('ping'), PING_MS);
         };
@@ -128,11 +166,13 @@ export function initPresence() {
             if (socket !== ws) return;
             const count = parseCount(event.data);
             if (count !== null) show(count);
+            for (const listener of messageListeners) listener(event.data);
         };
         ws.onclose = () => {
             if (socket !== ws) return;
             clearInterval(pingTimer);
             socket = null;
+            liveSocket = null;
             show(null);
             if (!document.hidden && !stopped && retries < MAX_RETRIES) {
                 retryTimer = setTimeout(open, Math.min(30_000, 2000 * 2 ** retries++));
