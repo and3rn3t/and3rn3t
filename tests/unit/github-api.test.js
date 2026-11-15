@@ -149,3 +149,30 @@ test('loadCachedGitHubData memoises the result after first fetch', async () => {
     expect(second).toBe(first); // same reference — memoised
     expect(globalThis.fetch).toHaveBeenCalledTimes(1);
 });
+
+// ── waitForRateLimit ─────────────────────────────────────────────────────────
+
+test('waitForRateLimit fails fast with a 403 when the reset is far away', async () => {
+    const api = new GitHubAPIManager();
+    api.rateLimitInfo = { remaining: 0, reset: Date.now() + 3_600_000, limit: 60 };
+    await expect(api.waitForRateLimit()).rejects.toMatchObject({ status: 403 });
+});
+
+test('waitForRateLimit sits out a short reset', async () => {
+    vi.useFakeTimers();
+    try {
+        const api = new GitHubAPIManager();
+        api.rateLimitInfo = { remaining: 0, reset: Date.now() + 2000, limit: 60 };
+        let settled = false;
+        const wait = api.waitForRateLimit().then(() => {
+            settled = true;
+        });
+        await vi.advanceTimersByTimeAsync(1000);
+        expect(settled).toBe(false);
+        await vi.advanceTimersByTimeAsync(1100);
+        await wait;
+        expect(settled).toBe(true);
+    } finally {
+        vi.useRealTimers();
+    }
+});

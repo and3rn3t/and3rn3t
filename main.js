@@ -3,18 +3,17 @@
  * Coordinates all modules and handles initialization
  *
  * @author Matthew Anderson
- * @version 2.0.0
  */
 
 // Import critical modules only - others loaded dynamically
 import { debug } from './modules/debug.js';
+import { motion } from './modules/capabilities.js';
 import { errorHandler } from './modules/error-handler.js';
 import { initThemeManager } from './modules/theme.js';
 import { navigationManager } from './modules/navigation.js';
 
 // App configuration
 const APP_CONFIG = {
-    version: '2.0.0',
     name: 'Matthew Anderson Portfolio',
 };
 
@@ -168,15 +167,6 @@ function startFeatures(uiManager) {
             ),
         3000
     );
-
-    // Periodically drop expired GitHub API cache entries
-    setInterval(
-        async () => {
-            const { githubAPI } = await import('./modules/github-api.js');
-            githubAPI.clearExpiredCache();
-        },
-        10 * 60 * 1000
-    );
 }
 
 let palettePromise;
@@ -217,8 +207,7 @@ const GO_TO_WINDOW = 1200;
 function goToSection(id) {
     const section = document.getElementById(id);
     if (!section) return;
-    const reducedMotion = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    section.scrollIntoView({ behavior: motion.reduced ? 'auto' : 'smooth', block: 'start' });
     section.setAttribute('tabindex', '-1');
     section.focus({ preventScroll: true });
 }
@@ -329,7 +318,7 @@ async function initializeApp() {
     }
 
     appState.initStartTime = performance.now();
-    debug.log(`[App] Initializing ${APP_CONFIG.name} v${APP_CONFIG.version}...`);
+    debug.log(`[App] Initializing ${APP_CONFIG.name}...`);
 
     try {
         // The service worker and the global handlers first: they do not depend on anything
@@ -351,9 +340,7 @@ async function initializeApp() {
         appState.isInitialized = true;
         const initTime = performance.now() - appState.initStartTime;
         debug.log(`[App] Ready in ${initTime.toFixed(2)}ms`);
-        globalThis.dispatchEvent(
-            new CustomEvent('app:ready', { detail: { initTime, version: APP_CONFIG.version } })
-        );
+        globalThis.dispatchEvent(new CustomEvent('app:ready', { detail: { initTime } }));
 
         startFeatures(uiManager);
     } catch (error) {
@@ -371,7 +358,7 @@ async function initializeApp() {
  */
 async function initHeroEnhancements() {
     try {
-        const { canRunHeavyEffects, motion } = await import('./modules/capabilities.js');
+        const { canRunHeavyEffects } = await import('./modules/capabilities.js');
         if (!canRunHeavyEffects()) {
             return; // CSS fallback gradient remains visible.
         }
