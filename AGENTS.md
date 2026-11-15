@@ -95,6 +95,7 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   `screenshot.url` (in `projects-data.json`) and writes `images/projects/`. Look at the result before
   committing; a demo behind a login (homehub) or showing an empty state needs another URL or none.
 - Icons come from an SVG sprite: edit `scripts/build-icons.mjs`, run `pnpm build:icons`, use `icon('name')`.
+- The logo (favicon, PWA and touch icons, the MCP server's icon) is drawn once in `scripts/brand-mark.mjs`: edit it there, run `pnpm build:brand`, commit the SVGs and PNGs it writes. The dark tile is the site; the green `icons/agent.*` tile is for machine-facing endpoints.
 - `CNAME`, `feed.xml`, `manifest.json` are deploy-sensitive; touch with care.
 - **For crawlers and AI agents:** `robots.txt` allows everything and carries the Content Signals
   (`search`, `ai-input`, `ai-train`, all yes); keep one group per user agent. `llms.txt` is generated
