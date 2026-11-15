@@ -48,6 +48,42 @@
   color: '0366d6'
   description: Dependency updates
 
+# ---- Area (also applied by .github/labeler.yml where a path glob exists) ----
+
+- name: frontend
+  color: '5319e7'
+  description: Pages, modules and styles
+- name: backend
+  color: '1d76db'
+  description: Cloudflare Worker, endpoints and wrangler config
+- name: tests
+  color: 'bfdadc'
+  description: Unit, e2e and eval tests
+- name: ci
+  color: 'ededed'
+  description: Workflows and repo automation
+- name: mcp
+  color: '0b7285'
+  description: MCP server, WebMCP and agent-readiness (llms.txt, discovery)
+- name: content
+  color: 'c2e0c6'
+  description: Posts, projects and experience data
+- name: accessibility
+  color: '006b75'
+  description: Keyboard, screen reader, contrast and motion
+- name: automation
+  color: 'ededed'
+  description: Opened by a bot or scheduled workflow
+
+# ---- Community ----
+
+- name: good first issue
+  color: '7057ff'
+  description: Good for newcomers
+- name: help wanted
+  color: '008672'
+  description: Extra attention is needed
+
 # ---- Status ----
 
 - name: needs-triage

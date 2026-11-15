@@ -25,3 +25,13 @@ backend:
 tests:
   - changed-files:
       - any-glob-to-any-file: ['tests/**', '**/*.test.*', '**/*.spec.*']
+
+mcp:
+  - changed-files:
+      - any-glob-to-any-file:
+          ['worker/mcp*.js', 'worker/discovery.js', 'modules/webmcp.js', 'llms.txt']
+
+content:
+  - changed-files:
+      - any-glob-to-any-file:
+          ['posts-data.json', 'projects-data.json', 'experience-data.json', 'scripts/templates/**']
