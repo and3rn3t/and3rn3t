@@ -4,7 +4,6 @@
  */
 
 import { debug } from './debug.js';
-import { loadJSON } from './utils/data.js';
 
 // Longest rate-limit reset the direct-API fallback will sit out before failing instead.
 const MAX_RATE_LIMIT_WAIT_MS = 5000;
@@ -53,6 +52,9 @@ export class GitHubAPIManager {
     // projects, stats and the currently-coding pill trigger a single request.
     loadCachedGitHubData() {
         this.cachedDataPromise ??= (async () => {
+            // Imported here, not at the top: this module loads before app:ready, which has a
+            // script-file budget (tests/e2e/budgets.spec.js), and the shared loader is not needed until now.
+            const { loadJSON } = await import('./utils/data.js');
             const data = await loadJSON('/github-data.json');
             if (data) {
                 this.cachedData = data;
