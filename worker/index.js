@@ -22,7 +22,8 @@
  *   }
  *
  * Secrets / env vars (set via `wrangler secret put`):
- *   GH_TOKEN — a fine-grained PAT with read:user scope (boosts rate limit to 5000/h)
+ *   GH_TOKEN — a fine-grained PAT (public repositories, read-only, no extra permissions) that
+ *   boosts the GitHub rate limit to 5000/h
  *
  * Workers-compatible: uses only standard fetch + Response; no Node built-ins.
  */

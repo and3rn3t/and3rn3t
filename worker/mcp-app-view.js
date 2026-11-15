@@ -1,5 +1,5 @@
 /**
- * The HTML the show_project tool renders inside Claude (an MCP App, SPIKE: not deployed).
+ * The HTML the show_project tool renders inside Claude (an MCP App).
  *
  * The page imports the MCP Apps client from a pinned CDN URL instead of inlining it: the
  * self-contained build is 542 KB, which would grow this Worker by about 40%. Text from the
