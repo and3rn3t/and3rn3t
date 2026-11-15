@@ -6,6 +6,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { SERVER_VERSION, handleMcp } from '../../worker/mcp.js';
+import { PROMPTS } from '../../worker/mcp-content.js';
 import { htmlToText, loadJson } from '../../worker/site-data.js';
 
 const FILES = {
@@ -170,6 +171,8 @@ describe('the MCP server', () => {
         });
         expect(message.result.serverInfo.name).toBe('andernet-portfolio');
         expect(message.result.capabilities.tools).toBeDefined();
+        expect(message.result.capabilities.prompts).toBeDefined();
+        expect(message.result.capabilities.resources).toBeDefined();
     });
 
     it('advertises its icons as files the site ships', async () => {
@@ -193,12 +196,21 @@ describe('the MCP server', () => {
         for (const tool of tools) expect(tool.description.length).toBeGreaterThan(20);
     });
 
-    it('moves the server version whenever the tool list changes (clients can cache the list by version)', async () => {
-        const { message } = await rpc('tools/list');
-        const names = message.result.tools.map(tool => tool.name).sort();
-        // Changing the tools means changing this line, and so choosing the next version
-        expect(`${SERVER_VERSION}: ${names.join(' ')}`).toBe(
-            '1.2.0: get_post get_profile get_project get_recent_activity get_site_stats list_experience list_posts list_projects show_project show_status'
+    it('moves the server version whenever the tools, prompts or resources change (clients can cache the lists by version)', async () => {
+        const names = async (method, key, field = 'name') =>
+            (await rpc(method)).message.result[key].map(item => item[field]).sort();
+        const tools = await names('tools/list', 'tools');
+        const prompts = await names('prompts/list', 'prompts');
+        const templates = await names(
+            'resources/templates/list',
+            'resourceTemplates',
+            'uriTemplate'
+        );
+        // Changing any of them means changing this line, and so choosing the next version
+        expect(
+            `${SERVER_VERSION}: ${tools.join(' ')} | ${prompts.join(' ')} | ${templates.join(' ')}`
+        ).toBe(
+            '1.3.0: get_post get_profile get_project get_recent_activity get_site_stats list_experience list_posts list_projects show_project show_status | brief-for-role compare-projects recent-work | portfolio://posts/{slug} portfolio://projects/{name}'
         );
     });
 
@@ -287,10 +299,12 @@ describe('the MCP server', () => {
             expect(tool._meta['ui/resourceUri']).toBe(uri);
 
             const listed = (await rpc('resources/list')).message.result.resources;
-            expect(listed.map(resource => resource.uri).sort()).toEqual([
-                'ui://portfolio/project.html',
-                'ui://portfolio/status.html',
-            ]);
+            expect(
+                listed
+                    .map(resource => resource.uri)
+                    .filter(candidate => candidate.startsWith('ui://'))
+                    .sort()
+            ).toEqual(['ui://portfolio/project.html', 'ui://portfolio/status.html']);
             const resource = listed.find(candidate => candidate.uri === uri);
             expect(resource._meta.ui.domain).toMatch(/^[0-9a-f]{32}\.claudemcpcontent\.com$/);
 
@@ -301,6 +315,112 @@ describe('the MCP server', () => {
             expect(read.text).not.toContain('innerHTML');
         }
     );
+
+    describe('prompts', () => {
+        it('lists three prompts, each titled and described, with the arguments they take', async () => {
+            const { prompts } = (await rpc('prompts/list')).message.result;
+            expect(prompts.map(prompt => prompt.name).sort()).toEqual([
+                'brief-for-role',
+                'compare-projects',
+                'recent-work',
+            ]);
+            for (const prompt of prompts) {
+                expect(prompt.title).toMatch(/\S/);
+                expect(prompt.description.length).toBeGreaterThan(20);
+            }
+            const args = name =>
+                prompts.find(prompt => prompt.name === name).arguments?.map(arg => arg.name) ?? [];
+            expect(args('brief-for-role')).toEqual(['role']);
+            expect(args('compare-projects')).toEqual(['first', 'second']);
+            expect(args('recent-work')).toEqual([]);
+        });
+
+        it('returns a user message that names the tools to use and quotes what was typed', async () => {
+            const { message } = await rpc('prompts/get', {
+                name: 'brief-for-role',
+                arguments: { role: 'senior iOS engineer' },
+            });
+            const [first] = message.result.messages;
+            expect(first.role).toBe('user');
+            expect(first.content.text).toContain('"senior iOS engineer"');
+            for (const tool of ['get_profile', 'list_experience', 'get_project']) {
+                expect(first.content.text).toContain(tool);
+            }
+            expect(first.content.text).toContain('State nothing the tools did not return');
+        });
+
+        it('takes no arguments for recent-work, and refuses an argument that is too long', async () => {
+            const recent = await rpc('prompts/get', { name: 'recent-work' });
+            expect(recent.message.result.messages[0].content.text).toContain('get_recent_activity');
+            const long = await rpc('prompts/get', {
+                name: 'brief-for-role',
+                arguments: { role: 'x'.repeat(201) },
+            });
+            expect(long.message.error).toBeDefined();
+        });
+
+        it('every tool a prompt names is a tool the server has', async () => {
+            const { message } = await rpc('tools/list');
+            const real = new Set(message.result.tools.map(tool => tool.name));
+            for (const prompt of PROMPTS) {
+                const text = prompt.text({ role: 'r', first: 'a', second: 'b' });
+                for (const [name] of text.matchAll(/\b(?:get|list|show)_[a-z_]+\b/g)) {
+                    expect(real.has(name), `${prompt.name} names ${name}`).toBe(true);
+                }
+            }
+        });
+    });
+
+    describe('resources', () => {
+        it('lists every post and project as a Markdown resource', async () => {
+            const { resources } = (await rpc('resources/list')).message.result;
+            const content = resources.filter(resource => resource.uri.startsWith('portfolio://'));
+            expect(content.map(resource => resource.uri).sort()).toEqual([
+                'portfolio://posts/newer',
+                'portfolio://posts/older',
+                'portfolio://projects/health',
+                'portfolio://projects/minecraft',
+            ]);
+            for (const resource of content) expect(resource.mimeType).toBe('text/markdown');
+        });
+
+        it('reads a post as Markdown with its title, date, link and text', async () => {
+            const { message } = await rpc('resources/read', { uri: 'portfolio://posts/newer' });
+            const [content] = message.result.contents;
+            expect(content.mimeType).toBe('text/markdown');
+            expect(content.text).toMatch(/^# Newer & better\n/);
+            expect(content.text).toContain('https://andernet.dev/posts/newer/');
+            expect(content.text).toContain('Tags: Cloudflare Workers, CSS');
+            expect(content.text).toContain('Because');
+        });
+
+        it('reads a project as Markdown from the same data as get_project', async () => {
+            const { message } = await rpc('resources/read', { uri: 'portfolio://projects/health' });
+            const text = message.result.contents[0].text;
+            expect(text).toMatch(/^# Health Analytics Platform\n/);
+            expect(text).toContain('The long write-up.');
+            expect(text).toContain('Technologies: TypeScript, HealthKit');
+            expect(text).toContain('## Highlights');
+            expect(text).toContain('- 30 fps depth stream');
+        });
+
+        it.each([['portfolio://posts/nope'], ['portfolio://projects/nope']])(
+            'answers %s with an error, not an empty document',
+            async uri => {
+                const { message } = await rpc('resources/read', { uri });
+                expect(message.error).toBeDefined();
+                expect(message.result).toBeUndefined();
+            }
+        );
+
+        it('completes a slug from what is typed', async () => {
+            const { message } = await rpc('completion/complete', {
+                ref: { type: 'ref/resource', uri: 'portfolio://posts/{slug}' },
+                argument: { name: 'slug', value: 'ne' },
+            });
+            expect(message.result.completion.values).toEqual(['newer']);
+        });
+    });
 
     it('show_status returns the same data as get_site_stats', async () => {
         expect((await call('show_status')).data).toEqual((await call('get_site_stats')).data);

@@ -16,6 +16,7 @@
  */
 
 import { SERVER_ICONS, SERVER_VERSION } from './mcp.js';
+import { PROMPTS, postUri, projectUri } from './mcp-content.js';
 import { SITE_ORIGIN } from './site-data.js';
 
 const SKILL_NAME = 'andernet-portfolio';
@@ -49,6 +50,17 @@ Connect an MCP client to \`${SITE_ORIGIN}/mcp\` (Streamable HTTP, no authenticat
 - \`list_posts\` (optional \`tag\`) and \`get_post\` (\`slug\`): the technical posts, full text
 - \`get_recent_activity\`: the latest public GitHub activity
 - \`get_site_stats\`: how the site and API are doing (latency, errors, uptime, Web Vitals, crawler traffic)
+
+Prompts (starting points a person picks in the client; each tells the model which tools to use):
+
+- \`brief-for-role\` (\`role\`): whether Matthew fits a role you describe, with evidence
+- \`compare-projects\` (\`first\`, \`second\`): two projects side by side
+- \`recent-work\`: the newest post and the latest GitHub activity
+
+Resources (Markdown to attach to a conversation; \`resources/list\` names them all):
+
+- \`portfolio://posts/{slug}\`: one post
+- \`portfolio://projects/{name}\`: one project's write-up
 
 Every result is an object, returned as \`structuredContent\` (each tool advertises its \`outputSchema\`) and as the same JSON in a text block. A lookup for a project or post that does not exist is flagged \`isError\` and lists the valid names.
 
@@ -98,7 +110,9 @@ export const serverCard = () => ({
     homepage: `${SITE_ORIGIN}/`,
     transport: { type: 'streamable-http', endpoint: `${SITE_ORIGIN}/mcp` },
     authentication: { required: false },
-    capabilities: { tools: {} },
+    capabilities: { tools: {}, prompts: {}, resources: {} },
+    prompts: PROMPTS.map(prompt => prompt.name),
+    resourceTemplates: [postUri('{slug}'), projectUri('{name}')],
     tools: [
         'get_profile',
         'list_projects',
