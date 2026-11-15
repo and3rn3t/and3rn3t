@@ -4,7 +4,7 @@
  * renders it, and when its styles were lost in the move off the old stylesheet nothing failed.
  */
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from './fixtures.js';
+import { test, expect, settled } from './fixtures.js';
 
 const SEQUENCE = [
     'ArrowUp',
@@ -105,7 +105,7 @@ for (const theme of ['light', 'dark']) {
 
         test('has no axe violations', async ({ page }) => {
             await openTerminal(page);
-            await page.waitForTimeout(400);
+            await settled(page);
             const results = await new AxeBuilder({ page })
                 .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
                 .include('.dev-terminal-overlay')

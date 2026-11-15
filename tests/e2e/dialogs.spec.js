@@ -4,7 +4,7 @@
  * palette.spec.js and focus-trap.spec.js.
  */
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect } from './fixtures.js';
+import { test, expect, settled } from './fixtures.js';
 
 /** WCAG contrast ratio of two [r, g, b] colours. */
 function contrast(foreground, background) {
@@ -147,7 +147,7 @@ for (const theme of ['light', 'dark']) {
             await openPalette(page);
             await page.fill('#global-search-input', 'health');
             await expect(page.locator('.palette-item.is-active')).toHaveCount(1);
-            await page.waitForTimeout(400); // past the open transition
+            await settled(page); // past the open transition
             expect((await scan(page)).violations).toEqual([]);
         });
 
@@ -155,7 +155,7 @@ for (const theme of ['light', 'dark']) {
             await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
             await page.keyboard.press('?');
             await expect(page.locator('#keyboard-help')).toHaveAttribute('open', '');
-            await page.waitForTimeout(400);
+            await settled(page);
             expect((await scan(page)).violations).toEqual([]);
         });
 

@@ -4,7 +4,7 @@
  * Scans the main page, the open Cmd-K palette modal, and the key sections
  * for WCAG 2.1 AA violations.
  */
-import { test, expect } from './fixtures.js';
+import { test, expect, settled } from './fixtures.js';
 import AxeBuilder from '@axe-core/playwright';
 
 /** WCAG contrast ratio of two [r, g, b] colours. */
@@ -23,8 +23,9 @@ function contrast(foreground, background) {
 test.describe('Accessibility — main page', () => {
     test('has no critical axe violations on initial load', async ({ page }) => {
         await page.goto('/');
-        // Let deferred modules settle.
-        await page.waitForTimeout(1000);
+        // The app is up, and nothing is still animating in
+        await page.waitForFunction(() => globalThis.appState?.isInitialized === true);
+        await settled(page);
 
         const results = await new AxeBuilder({ page })
             .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
@@ -43,7 +44,7 @@ test.describe('Accessibility — main page', () => {
             await page.addInitScript(t => localStorage.setItem('theme', t), theme);
             await page.goto('/');
             await page.waitForSelector('#projects .lead-card');
-            await page.waitForTimeout(500);
+            await settled(page);
 
             const scan = () =>
                 new AxeBuilder({ page })
@@ -56,7 +57,7 @@ test.describe('Accessibility — main page', () => {
             await page.setViewportSize({ width: 390, height: 844 });
             await page.locator('#mobile-menu').click();
             await expect(page.locator('#nav-menu')).toHaveClass(/active/);
-            await page.waitForTimeout(400); // let the sheet finish fading in
+            await settled(page); // let the sheet finish fading in
             expect((await scan()).violations).toEqual([]);
         });
     }
@@ -78,7 +79,7 @@ test.describe('Accessibility — main page', () => {
                 const button = page.locator(selector).first();
                 await button.scrollIntoViewIfNeeded();
                 await button.hover();
-                await page.waitForTimeout(350); // past the hover transition
+                await settled(page); // past the hover transition
 
                 const { color, background } = await button.evaluate(el => {
                     const style = getComputedStyle(el);
@@ -186,11 +187,10 @@ test.describe('Accessibility — main page', () => {
             .catch(() => {});
         await page.keyboard.press('Control+k');
         await page.waitForSelector('#global-search-modal[open]');
-        // Wait out the fade/slide-in (250ms modal fade + 350ms content slide) —
-        // axe blends mid-transition opacity into composited colors and reports
-        // false contrast failures. The fixed wait covers the transition window
-        // even when the transition engages a frame after the dialog opens.
-        await page.waitForTimeout(700);
+        // Wait out the fade/slide-in: axe blends mid-transition opacity into composited
+        // colors and reports false contrast failures. settled() lets two frames pass first,
+        // so it also covers a transition that engages a frame after the dialog opens.
+        await settled(page);
         await page.waitForFunction(() => {
             const modal = document.querySelector('#global-search-modal');
             return modal && getComputedStyle(modal).opacity === '1';

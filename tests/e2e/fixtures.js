@@ -94,6 +94,33 @@ export async function mockWorker(target) {
     });
 }
 
+/**
+ * Wait until the page has stopped animating: no transition or finite animation is still running.
+ * For a test that reads a colour, or runs an axe scan, after something opened or changed, in place of
+ * a fixed sleep that is either too short (flaky) or longer than it needs to be. It lets two frames
+ * pass first, because a transition only exists from the frame after the style change that starts it.
+ * Animations that never end (a spinner, a scroll-driven effect) are not waited for.
+ * @param {import('@playwright/test').Page} page
+ * @param {number} [timeout] ms
+ */
+export async function settled(page, timeout = 5000) {
+    await page.evaluate(async limit => {
+        const nextFrame = () => new Promise(resolve => window.requestAnimationFrame(resolve));
+        await nextFrame();
+        await nextFrame();
+        const deadline = performance.now() + limit;
+        const running = () =>
+            document
+                .getAnimations()
+                .filter(animation => animation.effect?.getComputedTiming().iterations !== Infinity)
+                .filter(animation => animation.playState === 'running');
+        while (running().length) {
+            if (performance.now() > deadline) throw new Error('the page never stopped animating');
+            await nextFrame();
+        }
+    }, timeout);
+}
+
 export const test = base.extend({
     page: async ({ page }, use) => {
         await mockWorker(page);

@@ -91,8 +91,6 @@ test('"g" then "h" scrolls to the hero/home section', async ({ page }) => {
     await page.evaluate(() => document.activeElement?.blur()); // no field has focus (a click on the body's centre can land in the contact form)
     await page.keyboard.press('g');
     await page.keyboard.press('h');
-    // Wait a tick for smooth scroll to begin.
-    await page.waitForTimeout(400);
-    const scrollY = await page.evaluate(() => window.scrollY);
-    expect(scrollY).toBeLessThan(200);
+    // Smooth scrolling takes a moment to get there
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(200);
 });

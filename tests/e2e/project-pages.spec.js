@@ -4,7 +4,7 @@
  */
 import { readFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, mockWorker } from './fixtures.js';
+import { test, expect, mockWorker, settled } from './fixtures.js';
 
 const { projects } = JSON.parse(readFileSync('projects-data.json', 'utf8'));
 const SLUGS = projects
@@ -186,7 +186,7 @@ for (const theme of ['light', 'dark']) {
         for (const slug of ['health', SLUGS.at(-1)]) {
             await page.goto(`/projects/${slug}/`);
             await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
-            await page.waitForTimeout(400);
+            await settled(page);
             const results = await new AxeBuilder({ page })
                 .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
                 .exclude('iframe[src*="cloudflare"]')
@@ -207,7 +207,7 @@ for (const theme of ['light', 'dark']) {
             for (const state of ['rest', 'hover']) {
                 await page.mouse.move(0, 0);
                 if (state === 'hover') await button.hover();
-                await page.waitForTimeout(350); // past the colour transition
+                await settled(page); // past the colour transition
                 const { color, background } = await button.evaluate(el => {
                     const style = getComputedStyle(el);
                     return { color: style.color, background: style.backgroundColor };
