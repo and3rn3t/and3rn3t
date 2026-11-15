@@ -23,6 +23,8 @@ const CACHE_KEY = 'https://cache.internal/stats';
 
 /** Web Vitals are shown only with at least this many human samples in the window. */
 export const MIN_VITALS_SAMPLES = 20;
+/** Agent calls that must have been checked for a signature before the share is shown. */
+export const MIN_SIGNATURE_SAMPLES = 20;
 
 /** The API routes (not /mcp, which has its own section, nor discovery documents). */
 const API_ROUTES = "('/health','/views','/guestbook','/activity','/edge','/stats')";
@@ -45,7 +47,7 @@ export const QUERIES = {
     totals7d: `SELECT COUNT(*) AS requests, quantileExactWeighted(0.5)(double2, sampleInterval) AS p50, quantileExactWeighted(0.95)(double2, sampleInterval) AS p95 FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND ${window(7)}`,
     errors7d: `SELECT COUNT(*) AS errors FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND double1 >= 500 AND ${window(7)}`,
     tools: `SELECT index1 AS tool, blob2 AS outcome, COUNT(*) AS calls FROM ${DATASET} WHERE blob1 = 'tool' AND ${window(7)} GROUP BY tool, outcome ORDER BY calls DESC LIMIT 20`,
-    clients: `SELECT blob4 AS client, COUNT(*) AS requests FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND ${window(7)} GROUP BY client LIMIT 5`,
+    clients: `SELECT blob4 AS client, blob5 AS signature, COUNT(*) AS requests FROM ${DATASET} WHERE blob1 = 'request' AND index1 IN ${API_ROUTES} AND ${window(7)} GROUP BY blob4, blob5 LIMIT 20`,
     uptime: `SELECT toDate(timestamp) AS day, blob2 AS outcome, COUNT(*) AS probes FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(90)} GROUP BY day, outcome ORDER BY day LIMIT 400`,
     lastProbe: `SELECT timestamp AS at, blob2 AS outcome FROM ${DATASET} WHERE blob1 = 'probe' AND ${window(90)} ORDER BY timestamp DESC LIMIT 1`,
     vitalsLcp: vitalQuery('largestContentfulPaintUs'),
@@ -125,13 +127,29 @@ export function shapeTools(rows) {
     return [...byTool.values()].sort((a, b) => b.calls - a.calls);
 }
 
-/** The share of API calls made by agents (not browsers), 0 to 1. */
+/**
+ * The share of API calls made by agents (not browsers), 0 to 1, and the share of the agents' calls
+ * that carried a valid Web Bot Auth signature. The second needs MIN_SIGNATURE_SAMPLES agent calls
+ * that were checked (points from before the field existed, and calls that could not be checked,
+ * are left out) and is null until then, like a Web Vital: a share of three calls is not evidence.
+ */
 export function shapeClients(rows) {
     if (!rows?.length) return null;
     const total = rows.reduce((sum, row) => sum + (number(row.requests) ?? 0), 0);
     if (total === 0) return null;
-    const agents = rows.find(row => row.client === 'agent');
-    return { agentShare: round((number(agents?.requests) ?? 0) / total, 3) };
+    const agentRows = rows.filter(row => row.client === 'agent');
+    const agents = agentRows.reduce((sum, row) => sum + (number(row.requests) ?? 0), 0);
+    const checked = agentRows.filter(row =>
+        ['unsigned', 'valid', 'invalid'].includes(row.signature)
+    );
+    const checkedCalls = checked.reduce((sum, row) => sum + (number(row.requests) ?? 0), 0);
+    const valid = checked
+        .filter(row => row.signature === 'valid')
+        .reduce((sum, row) => sum + (number(row.requests) ?? 0), 0);
+    return {
+        agentShare: round(agents / total, 3),
+        signedShare: checkedCalls >= MIN_SIGNATURE_SAMPLES ? round(valid / checkedCalls, 3) : null,
+    };
 }
 
 /** One entry per day that had probes: the share of probes that succeeded. */

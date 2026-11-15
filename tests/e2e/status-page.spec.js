@@ -11,6 +11,10 @@ test.describe('the status page', () => {
         await expect(page.locator('[data-stat="error-7d"]')).toHaveText('Last 7 days: 0.42%');
         await expect(page.locator('[data-stat="p50-24h"]')).toHaveText('<1 ms');
         await expect(page.locator('[data-stat="agent-share"]')).toHaveText('22%');
+        await expect(page.locator('[data-stat="signed-share"]')).toHaveText('4%');
+        await expect(page.locator('[data-stat="signed-note"]')).toHaveText(
+            'of agent calls, last 7 days'
+        );
         await expect(page.locator('[data-vitals] .meter')).toHaveCount(4);
         await expect(page.locator('[data-rank="crawlers"] .rank__row')).toHaveCount(3);
         await expect(page.locator('[data-rank="tools"]')).toContainText('1 failed');
@@ -103,6 +107,7 @@ test.describe('the status page', () => {
         await expect(page.locator('[data-stat="error-24h"]')).toHaveText('—');
         await expect(page.locator('[data-stat="p95-24h"]')).toHaveText('—');
         await expect(page.locator('[data-stat="agent-share"]')).toHaveText('—');
+        await expect(page.locator('[data-stat="signed-share"]')).toHaveText('—');
         await expect(page.locator('[data-vitals]')).not.toContainText(' ms');
     });
 

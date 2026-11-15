@@ -165,6 +165,15 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   five minutes (`worker/probe.js`, the cron in `wrangler.toml`), and has traces and Issues on. `/api/stats`
   (`worker/stats.js`, cached five minutes, fixed queries, any section `null` when it cannot be read) feeds `/status/` and
   the MCP tool `get_site_stats`. Nothing published counts visitors over time or says where they are.
+  - **Signed agents** (`worker/web-bot-auth.js`): a request carrying a Web Bot Auth signature (RFC 9421, tag `web-bot-auth`,
+    `Signature-Agent` naming the agent's key directory) is checked after the response is sent and recorded as `blob5` of its
+    `request` point: `valid`, `invalid` or `unchecked` (`unsigned` for everything else; points before 2026-11 have none).
+    `/api/stats` and `/status/` show the share of agent calls that were valid once 20 were checked. It only counts: a valid
+    signature proves a held key, not who is behind it, and nothing is allowed or blocked on it. The directory is fetched from
+    a host the sender names, so the fetch is https-only, host-name-only, fixed path, 2 s, 16 KB, no redirects, cached an hour
+    and capped at 10 uncached fetches a minute per isolate. Neither the agent's host nor its address is recorded or logged
+    (an agent on a personal domain would identify a person); logs hold only the outcome and a reason code.
+    Cloudflare documents no field a Pro-plan Worker can read for its own verification result, which is why the Worker verifies.
   - **Zone queries must filter `requestSource = 'eyeball'`.** About 8% of the site's logged requests are Cloudflare's own
     Early Hints probing (`earlyHintsCache`), mostly logged as 504s with no origin: a query that counts them reports a
     constant outage that no visitor sees.

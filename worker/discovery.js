@@ -292,7 +292,7 @@ export const openApi = () => ({
                                 clients: {
                                     type: ['object', 'null'],
                                     description:
-                                        'agentShare: the share of API calls made by agents',
+                                        'agentShare: the share of API calls made by agents; signedShare: the share of those with a valid Web Bot Auth signature (null until enough were checked)',
                                 },
                                 uptime: {
                                     type: ['object', 'null'],

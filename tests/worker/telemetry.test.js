@@ -17,6 +17,9 @@ const { default: worker } = await import('../../worker/index.js');
 const { clientKind, recordRequest, recordTool, routeLabel, withSpan, nameRootSpan } =
     await import('../../worker/telemetry.js');
 
+const signing = await import('./sign-request.js');
+const webBotAuth = await import('../../worker/web-bot-auth.js');
+
 const metrics = () => ({ writeDataPoint: vi.fn() });
 const get = (path, headers = {}) =>
     new Request(`https://andernet.dev${path}`, { method: 'GET', headers });
@@ -60,7 +63,7 @@ describe('data points', () => {
         });
         expect(env.METRICS.writeDataPoint).toHaveBeenCalledWith({
             indexes: ['/views'],
-            blobs: ['request', 'GET', 'ORD', 'browser'],
+            blobs: ['request', 'GET', 'ORD', 'browser', 'unsigned'],
             doubles: [200, 13],
         });
     });
@@ -128,8 +131,68 @@ describe('the Worker', () => {
         expect(env.METRICS.writeDataPoint).toHaveBeenCalledTimes(1);
         const point = env.METRICS.writeDataPoint.mock.calls[0][0];
         expect(point.indexes).toEqual(['/health']);
-        expect(point.blobs).toEqual(['request', 'GET', 'unknown', 'browser']);
+        expect(point.blobs).toEqual(['request', 'GET', 'unknown', 'browser', 'unsigned']);
         expect(JSON.stringify(point)).not.toMatch(/203\.0\.113|Secret-Build/);
+    });
+
+    describe('Web Bot Auth signatures', () => {
+        const { makeAgent, signed, NOW } = signing;
+        const post = request =>
+            new Request('https://andernet.dev/api/health', {
+                method: 'GET',
+                headers: request.headers,
+            });
+
+        async function hit(request, agent) {
+            const env = { METRICS: metrics() };
+            const waiting = [];
+            vi.stubGlobal(
+                'fetch',
+                vi.fn(async () => Response.json(agent.directory))
+            );
+            vi.spyOn(Date, 'now').mockReturnValue(NOW * 1000);
+            const response = await worker.fetch(request, env, { waitUntil: p => waiting.push(p) });
+            await Promise.all(waiting);
+            vi.unstubAllGlobals();
+            vi.restoreAllMocks();
+            return { env, response, waited: waiting.length };
+        }
+
+        it('counts a valid signature, after the response, with no host in the data point', async () => {
+            webBotAuth.resetDirectoryCache();
+            const agent = await makeAgent();
+            const request = post(
+                await signed(agent, { url: 'https://andernet.dev/api/health', method: 'GET' })
+            );
+            const { env, response, waited } = await hit(request, agent);
+            expect(response.status).toBe(200);
+            expect(waited).toBe(1);
+            const point = env.METRICS.writeDataPoint.mock.calls[0][0];
+            expect(point.blobs.at(-1)).toBe('valid');
+            expect(JSON.stringify(point)).not.toMatch(/agent\.example/);
+        });
+
+        it('counts a signature that does not verify as invalid, and still answers', async () => {
+            webBotAuth.resetDirectoryCache();
+            const agent = await makeAgent();
+            const request = post(
+                await signed(agent, {
+                    url: 'https://andernet.dev/api/health',
+                    method: 'GET',
+                    expires: NOW - 5,
+                })
+            );
+            const { env, response } = await hit(request, agent);
+            expect(response.status).toBe(200);
+            expect(env.METRICS.writeDataPoint.mock.calls[0][0].blobs.at(-1)).toBe('invalid');
+        });
+
+        it('does no extra work for an ordinary request', async () => {
+            const agent = await makeAgent();
+            const { env, waited } = await hit(get('/api/health'), agent);
+            expect(waited).toBe(0);
+            expect(env.METRICS.writeDataPoint.mock.calls[0][0].blobs.at(-1)).toBe('unsigned');
+        });
     });
 
     it('keeps a streamed body intact when it adds the header', async () => {
