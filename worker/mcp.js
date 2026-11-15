@@ -24,6 +24,7 @@ import {
     projectUrl,
 } from './site-data.js';
 import { PROJECT_VIEW_HTML } from './mcp-app-view.js';
+import { STATUS_VIEW_HTML } from './mcp-app-status.js';
 import { recordTool } from './telemetry.js';
 
 const SERVER_NAME = 'andernet-portfolio';
@@ -63,6 +64,7 @@ function findProject(projects, wanted) {
 }
 
 const PROJECT_VIEW_URI = 'ui://portfolio/project.html';
+const STATUS_VIEW_URI = 'ui://portfolio/status.html';
 // Claude derives an app's origin from the server URL: first 32 hex of sha256("https://andernet.dev/mcp").
 const PROJECT_VIEW_DOMAIN = '71442e512ec275182b8e0b135be88382.claudemcpcontent.com';
 
@@ -468,6 +470,45 @@ export function createServer(env, deps) {
             if (!result.ok) return asError(`Site stats are not available (${result.error}).`);
             return asData(result.stats);
         }
+    );
+
+    // An MCP App too (roadmap 14.3): the same data as get_site_stats, drawn as a panel in Claude.
+    registerAppTool(
+        { registerTool },
+        'show_status',
+        {
+            title: 'Show the site status panel',
+            description:
+                'Show how andernet.dev and its API are doing (uptime, latency, Web Vitals, MCP tool use) as a panel in clients that can display MCP Apps. Same data as get_site_stats. Where the client displays the panel, the user already sees it, so do not repeat its numbers there; add at most one sentence. Where it does not, answer from the data.',
+            outputSchema: OUTPUT.stats,
+            _meta: { ui: { resourceUri: STATUS_VIEW_URI } },
+        },
+        async () => {
+            const result = await deps.getStats();
+            if (!result.ok) return asError(`Site stats are not available (${result.error}).`);
+            return asData(result.stats);
+        }
+    );
+    registerAppResource(
+        server,
+        'Status panel',
+        STATUS_VIEW_URI,
+        {
+            description:
+                'How the site and its API are doing: uptime, latency, Web Vitals and MCP tool use.',
+            _meta: {
+                ui: {
+                    csp: { resourceDomains: ['https://cdn.jsdelivr.net'] },
+                    domain: PROJECT_VIEW_DOMAIN,
+                    prefersBorder: true,
+                },
+            },
+        },
+        async () => ({
+            contents: [
+                { uri: STATUS_VIEW_URI, mimeType: RESOURCE_MIME_TYPE, text: STATUS_VIEW_HTML },
+            ],
+        })
     );
 
     return server;
