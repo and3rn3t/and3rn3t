@@ -2,7 +2,8 @@
  * Cloudflare Worker — Views & Guestbook handlers
  *
  * KV namespaces (set in wrangler.toml):
- *   VIEWS_KV     — page view counts (key = page slug, value = number string)
+ *   VIEWS_KV     — page view counts (key = page slug, value = number string) and the cron's
+ *                  `snapshot:*` keys (snapshot.js)
  *   GUESTBOOK_KV — one key per guestbook entry (`entry:<inverted timestamp>:<id>`, so a
  *                  plain `list` returns newest first) plus short-lived `rl:<ip>` throttle keys
  *
@@ -29,7 +30,6 @@ const MAX_MESSAGE_LENGTH = 500;
 const KNOWN_PAGES = new Set(['home']);
 
 const ENTRY_PREFIX = 'entry:';
-const LEGACY_ENTRIES_KEY = 'entries'; // the old single-array storage, migrated on first read
 const MAX_TIMESTAMP = 9_999_999_999_999;
 const KV_LIST_MAX = 1000;
 const THROTTLE_SECONDS = 60; // KV's minimum expirationTtl
@@ -101,58 +101,6 @@ function entryKey(dateIso, suffix) {
     return `${ENTRY_PREFIX}${String(inverted).padStart(13, '0')}:${suffix}`;
 }
 
-/**
- * Entries used to live in one JSON array under `entries`. Move them to per-entry keys.
- *
- * This must never fail a read. KV allows one write per key per second, so two overlapping
- * first reads can collide, and a stale read of the legacy key can show up after it was
- * deleted. So: keys are deterministic, a key that already exists is not rewritten, every
- * failure is tolerated, and the legacy key is deleted only when everything was moved.
- *
- * @returns the legacy entries that could not be moved this time ([] when done), so the
- *   caller can still show them while the migration is retried on a later read.
- */
-async function migrateLegacyEntries(env) {
-    const raw = await env.GUESTBOOK_KV.get(LEGACY_ENTRIES_KEY);
-    if (raw === null) return [];
-
-    let parsed;
-    try {
-        parsed = JSON.parse(raw);
-    } catch {
-        parsed = null;
-    }
-    if (!Array.isArray(parsed)) {
-        console.warn('[guestbook] legacy "entries" value is not a JSON array; leaving it in place');
-        return [];
-    }
-    const legacy = parsed.filter(entry => entry && typeof entry === 'object');
-
-    const results = await Promise.allSettled(
-        legacy.map(async (entry, index) => {
-            const key = entryKey(entry.date, `legacy-${String(index).padStart(3, '0')}`);
-            if ((await env.GUESTBOOK_KV.get(key)) !== null) return;
-            await env.GUESTBOOK_KV.put(key, JSON.stringify(entry));
-        })
-    );
-    if (results.some(result => result.status === 'rejected')) {
-        console.warn('[guestbook] legacy migration incomplete; retrying on a later read');
-        return legacy;
-    }
-
-    try {
-        await env.GUESTBOOK_KV.delete(LEGACY_ENTRIES_KEY);
-    } catch (err) {
-        console.warn(
-            '[guestbook] could not delete the legacy key; will retry:',
-            err?.message ?? err
-        );
-    }
-    return [];
-}
-
-const entrySignature = entry => `${entry.date}|${entry.name}|${entry.message}`;
-
 async function readStoredEntries(env) {
     const { keys } = await env.GUESTBOOK_KV.list({
         prefix: ENTRY_PREFIX,
@@ -169,18 +117,7 @@ async function readStoredEntries(env) {
 }
 
 async function handleGuestbookGet(request, env) {
-    const pending = await migrateLegacyEntries(env);
-    const stored = await readStoredEntries(env);
-
-    let entries = stored;
-    if (pending.length) {
-        // Migration is still being retried: keep showing the entries it hasn't moved yet.
-        const seen = new Set(stored.map(entrySignature));
-        entries = [...stored, ...pending.filter(entry => !seen.has(entrySignature(entry)))]
-            .sort((a, b) => String(b.date ?? '').localeCompare(String(a.date ?? '')))
-            .slice(0, MAX_GUESTBOOK_ENTRIES);
-    }
-    return jsonResponse(entries, request, 200);
+    return jsonResponse(await readStoredEntries(env), request, 200);
 }
 
 /** Keep only the newest MAX_GUESTBOOK_ENTRIES entries. */
