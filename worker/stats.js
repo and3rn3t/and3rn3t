@@ -14,6 +14,8 @@
  * Workers-compatible: no Node built-ins.
  */
 
+import { readSnapshot, writeSnapshot } from './snapshot.js';
+
 const DATASET = 'events.analyticsEngine.portfolio_metrics';
 const SITE_HOST = 'andernet.dev';
 const CACHE_SECONDS = 300;
@@ -253,8 +255,27 @@ export async function buildStats(env) {
 // refresh on their own; this coalesces within one.) Cleared when the refresh ends, success or not.
 let refreshing = null;
 
+/**
+ * Whether the queries returned anything at all. buildStats never throws: a query that fails
+ * leaves its section null, so a run during an outage is all nulls, and storing that as the
+ * snapshot would replace a good one.
+ */
+export function hasData(stats) {
+    return [
+        stats.api?.last24h,
+        stats.api?.last7d,
+        stats.mcp,
+        stats.uptime,
+        stats.vitals,
+        stats.crawlers,
+        stats.csp,
+        stats.edge,
+    ].some(section => section != null);
+}
+
 async function refresh(env, cache, key) {
     const stats = await buildStats(env);
+    if (hasData(stats)) await writeSnapshot(env, 'stats', stats);
     try {
         await cache?.put(
             key,
@@ -284,13 +305,28 @@ async function refresh(env, cache, key) {
 export async function loadStats(env) {
     if (!env?.ANALYTICS_SQL) return { ok: false, error: 'stats_unavailable', status: 503 };
 
+    // The cron's snapshot first: it is global, where the Cache API below is per location
+    const snapshot = await readSnapshot(env, 'stats');
+    if (snapshot) return { ok: true, stats: snapshot.value, cached: true };
+
     const cache = globalThis.caches?.default;
     const key = new Request(CACHE_KEY);
     const hit = await cache?.match(key);
     if (hit) return { ok: true, stats: await hit.json(), cached: true };
 
+    return { ok: true, stats: await refreshStats(env), cached: false };
+}
+
+/**
+ * Build the stats now and store them (the snapshot and the edge cache). The cron calls this; so
+ * does a request that found no fresh snapshot.
+ * @returns {Promise<object>}
+ */
+export function refreshStats(env) {
+    const cache = globalThis.caches?.default;
+    const key = new Request(CACHE_KEY);
     refreshing ??= refresh(env, cache, key).finally(() => {
         refreshing = null;
     });
-    return { ok: true, stats: await refreshing, cached: false };
+    return refreshing;
 }

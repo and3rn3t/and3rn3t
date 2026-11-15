@@ -154,12 +154,15 @@ test('GET /guestbook returns empty array when no entries', async () => {
 
 test('GET /guestbook returns stored entries in order', async () => {
     const env = { GUESTBOOK_KV: makeKV() };
-    // The handler stores a JSON array under the single 'entries' key.
-    const entries = [
-        { name: 'Bob', message: 'Hey', date: '2026-06-13T12:00:00Z' },
-        { name: 'Alice', message: 'Hi', date: '2026-06-01T00:00:00Z' },
-    ];
-    await env.GUESTBOOK_KV.put('entries', JSON.stringify(entries));
+    // One key per entry; the inverted timestamp makes a plain list newest first.
+    await env.GUESTBOOK_KV.put(
+        'entry:8000000000000:a',
+        JSON.stringify({ name: 'Bob', message: 'Hey', date: '2026-06-13T12:00:00Z' })
+    );
+    await env.GUESTBOOK_KV.put(
+        'entry:8000000000001:b',
+        JSON.stringify({ name: 'Alice', message: 'Hi', date: '2026-06-01T00:00:00Z' })
+    );
     const req = makeRequest('GET', 'https://w.dev/guestbook');
     const res = await handleGuestbookRequest(req, env);
     const body = await res.json();
@@ -465,139 +468,6 @@ test('GET /guestbook skips a stored value that is not valid JSON', async () => {
     );
     await env.GUESTBOOK_KV.put('entry:8000000000001:bad', 'not json');
     expect(await list(env)).toEqual(['ok']);
-});
-
-// ── /guestbook migration from the old single-array storage ────────────────────
-
-const legacyEntries = [
-    { name: 'Bob', message: 'Hey', date: '2026-06-13T12:00:00Z' },
-    { name: 'Alice', message: 'Hi', date: '2026-06-01T00:00:00Z' },
-];
-
-test('legacy "entries" array is migrated to per-entry keys on first read', async () => {
-    const env = { GUESTBOOK_KV: makeKV() };
-    await env.GUESTBOOK_KV.put('entries', JSON.stringify(legacyEntries));
-
-    expect(await list(env)).toEqual(['Bob', 'Alice']);
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
-    expect(entryKeys(env)).toHaveLength(2);
-    expect(await list(env)).toEqual(['Bob', 'Alice']); // reading again changes nothing
-    expect(entryKeys(env)).toHaveLength(2);
-});
-
-test('migrated entries interleave correctly with new signatures', async () => {
-    vi.useFakeTimers();
-    const env = { GUESTBOOK_KV: makeKV(), TURNSTILE_SECRET: 's' };
-    globalThis.fetch = turnstileSays(true);
-    await env.GUESTBOOK_KV.put('entries', JSON.stringify(legacyEntries));
-
-    await sign(env, 'newcomer', '2026-07-01T00:00:00Z');
-    expect(await list(env)).toEqual(['newcomer', 'Bob', 'Alice']);
-});
-
-test('a migration interrupted before the delete is safely repeated', async () => {
-    const env = { GUESTBOOK_KV: makeKV() };
-    await env.GUESTBOOK_KV.put('entries', JSON.stringify(legacyEntries));
-    await list(env);
-    await env.GUESTBOOK_KV.put('entries', JSON.stringify(legacyEntries)); // as if delete had failed
-
-    const realPut = env.GUESTBOOK_KV.put;
-    const put = vi.fn(realPut);
-    env.GUESTBOOK_KV.put = put;
-    expect(await list(env)).toEqual(['Bob', 'Alice']); // no duplicates
-    expect(entryKeys(env)).toHaveLength(2);
-    expect(put).not.toHaveBeenCalled(); // keys that already exist are not rewritten
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false); // and the legacy key is gone again
-});
-
-test('a corrupt legacy value is left in place and does not break the guestbook', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const env = { GUESTBOOK_KV: makeKV() };
-    await env.GUESTBOOK_KV.put('entries', '{not json');
-    await env.GUESTBOOK_KV.put(
-        'entry:8000000000000:ok',
-        JSON.stringify({ name: 'ok', message: 'm' })
-    );
-
-    expect(await list(env)).toEqual(['ok']);
-    expect(env.GUESTBOOK_KV.store.get('entries')).toBe('{not json');
-    expect(warn).toHaveBeenCalled();
-});
-
-// ── /guestbook migration must never fail a read ───────────────────────────────
-
-const seedLegacy = env => env.GUESTBOOK_KV.store.set('entries', JSON.stringify(legacyEntries));
-
-test('two overlapping first reads both succeed even when KV rejects the repeated writes', async () => {
-    vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const env = { GUESTBOOK_KV: makeKV({ strictWrites: true }) };
-    seedLegacy(env);
-    const read = () => handleGuestbookRequest(makeRequest('GET', 'https://w.dev/guestbook'), env);
-
-    const [a, b] = await Promise.all([read(), read()]);
-
-    expect(a.status).toBe(200);
-    expect(b.status).toBe(200);
-    expect((await a.json()).map(e => e.name)).toEqual(['Bob', 'Alice']);
-    expect((await b.json()).map(e => e.name)).toEqual(['Bob', 'Alice']); // no duplicates, none missing
-    expect(entryKeys(env)).toHaveLength(2);
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
-});
-
-test('if the migration cannot write at all, the read still succeeds and shows the legacy entries', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const env = { GUESTBOOK_KV: makeKV() };
-    seedLegacy(env);
-    const realPut = env.GUESTBOOK_KV.put;
-    env.GUESTBOOK_KV.put = () => Promise.reject(new Error('KV PUT failed: 429'));
-
-    const res = await handleGuestbookRequest(makeRequest('GET', 'https://w.dev/guestbook'), env);
-
-    expect(res.status).toBe(200);
-    expect((await res.json()).map(e => e.name)).toEqual(['Bob', 'Alice']);
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(true); // kept so the migration can retry
-    expect(warn).toHaveBeenCalledWith(expect.stringMatching(/migration incomplete/));
-
-    env.GUESTBOOK_KV.put = realPut; // KV recovers
-    expect(await list(env)).toEqual(['Bob', 'Alice']);
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
-    expect(entryKeys(env)).toHaveLength(2);
-});
-
-test('a partly failed migration shows every entry exactly once', async () => {
-    vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const env = { GUESTBOOK_KV: makeKV() };
-    seedLegacy(env);
-    const realPut = env.GUESTBOOK_KV.put;
-    env.GUESTBOOK_KV.put = (key, value, options) =>
-        key.endsWith('legacy-001')
-            ? Promise.reject(new Error('KV PUT failed: 429'))
-            : realPut(key, value, options);
-
-    expect(await list(env)).toEqual(['Bob', 'Alice']); // one stored, one served from the legacy copy
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(true);
-
-    env.GUESTBOOK_KV.put = realPut;
-    expect(await list(env)).toEqual(['Bob', 'Alice']);
-    expect(entryKeys(env)).toHaveLength(2);
-});
-
-test('failing to delete the legacy key does not fail the read, and is retried', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const env = { GUESTBOOK_KV: makeKV() };
-    seedLegacy(env);
-    const realDelete = env.GUESTBOOK_KV.delete;
-    env.GUESTBOOK_KV.delete = () => Promise.reject(new Error('KV DELETE failed'));
-
-    expect(await list(env)).toEqual(['Bob', 'Alice']);
-    expect(warn).toHaveBeenCalledWith(
-        expect.stringMatching(/could not delete the legacy key/),
-        'KV DELETE failed'
-    );
-
-    env.GUESTBOOK_KV.delete = realDelete;
-    expect(await list(env)).toEqual(['Bob', 'Alice']);
-    expect(env.GUESTBOOK_KV.store.has('entries')).toBe(false);
 });
 
 // ── pruning is best-effort ────────────────────────────────────────────────────

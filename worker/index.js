@@ -40,7 +40,8 @@ import { handleMcp } from './mcp.js';
 import { handleCspReport } from './csp-report.js';
 import { handlePresenceRequest } from './presence.js';
 import { runProbe } from './probe.js';
-import { loadStats } from './stats.js';
+import { loadStats, refreshStats } from './stats.js';
+import { readSnapshot, writeSnapshot } from './snapshot.js';
 import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
@@ -93,9 +94,21 @@ export default {
         return timed;
     },
 
-    // The cron trigger in wrangler.toml: the uptime probe (see probe.js)
+    // The cron trigger in wrangler.toml, every five minutes: the uptime probe (probe.js), then
+    // the snapshots of the two slow routes (snapshot.js). Each step has its own try, so one that
+    // fails does not stop the others, and a failed refresh leaves the last good snapshot in place.
     async scheduled(_controller, env, _ctx) {
         await runProbe(env);
+        await Promise.allSettled([refreshActivity(env), refreshStats(env)]).then(results => {
+            for (const result of results) {
+                if (result.status === 'rejected') {
+                    console.warn(
+                        '[cron] snapshot refresh failed:',
+                        result.reason?.message ?? result.reason
+                    );
+                }
+            }
+        });
     },
 };
 
@@ -220,7 +233,11 @@ function handleEdge(request, env) {
  * @returns {Promise<{ ok: true, activity: object, cached: boolean } | { ok: false, error: string, status: number }>}
  */
 export async function loadActivity(env) {
-    // Try the CF cache first.
+    // The cron's snapshot first: it is global, where the Cache API below is per location
+    const snapshot = await readSnapshot(env, 'activity');
+    if (snapshot) return { ok: true, activity: snapshot.value, cached: true };
+
+    // Then this location's cache.
     const cache = caches.default;
     const cacheKey = new Request(`https://cache.internal/activity/${GITHUB_USERNAME}`);
     const cached = await cache.match(cacheKey);
@@ -231,6 +248,20 @@ export async function loadActivity(env) {
         }
         return { ok: true, activity: data, cached: true };
     }
+
+    return refreshActivity(env);
+}
+
+/**
+ * Ask GitHub for the latest activity now, and store the answer (this location's cache and the
+ * snapshot). A failure is remembered for a minute and never replaces the snapshot. The cron calls
+ * this; so does a request that found no fresh snapshot and no cached answer.
+ * @param {object} env
+ * @returns {Promise<{ ok: true, activity: object, cached: boolean } | { ok: false, error: string, status: number }>}
+ */
+export async function refreshActivity(env) {
+    const cache = caches.default;
+    const cacheKey = new Request(`https://cache.internal/activity/${GITHUB_USERNAME}`);
 
     // Fetch from GitHub.
     const ghHeaders = {
@@ -281,6 +312,7 @@ export async function loadActivity(env) {
         },
     });
     await cache.put(cacheKey, responseToCache.clone());
+    await writeSnapshot(env, 'activity', activity);
 
     return { ok: true, activity, cached: false };
 }
