@@ -27,7 +27,7 @@ export const STATS_FIXTURE = {
         { tool: 'list_posts', calls: 12, errors: 0 },
         { tool: 'get_project', calls: 5, errors: 1 },
     ],
-    clients: { agentShare: 0.216 },
+    clients: { agentShare: 0.216, signedShare: 0.04 },
     uptime: {
         lastProbe: { at: new Date().toISOString(), ok: true },
         days: [

@@ -10,7 +10,9 @@
  *
  * Data point layout in the `portfolio_metrics` dataset (blob1 is the record kind, so one dataset
  * holds every kind):
- *   request: index1 route; blob1 "request", blob2 method, blob3 colo, blob4 client; double1 status, double2 ms
+ *   request: index1 route; blob1 "request", blob2 method, blob3 colo, blob4 client, blob5 signature; double1 status, double2 ms
+ *            (signature: "unsigned", or "valid" / "invalid" / "unchecked" for a request that claimed a Web
+ *            Bot Auth signature, see web-bot-auth.js; points from before it was added have none)
  *   tool:    index1 tool;  blob1 "tool",    blob2 "ok" | "error";                  double1 0,      double2 ms
  *   csp:     index1 directive; blob1 "csp", blob2 blocked host or keyword, blob3 page path; double1 1
  *   probe:   index1 "home"; blob1 "probe",   blob2 "ok" | "fail";                  double1 status, double2 ms
@@ -57,13 +59,17 @@ export function clientKind(userAgent) {
 
 /**
  * @param {{ METRICS?: { writeDataPoint: (point: object) => void } }} env
- * @param {{ route: string, method: string, status: number, ms: number, colo?: string, client: string }} point
+ * @param {{ route: string, method: string, status: number, ms: number, colo?: string, client: string,
+ *   signature?: 'unsigned' | 'valid' | 'invalid' | 'unchecked' }} point
  */
-export function recordRequest(env, { route, method, status, ms, colo, client }) {
+export function recordRequest(
+    env,
+    { route, method, status, ms, colo, client, signature = 'unsigned' }
+) {
     try {
         env.METRICS?.writeDataPoint({
             indexes: [route],
-            blobs: ['request', method, colo ?? 'unknown', client],
+            blobs: ['request', method, colo ?? 'unknown', client, signature],
             doubles: [status, Math.round(ms)],
         });
     } catch {

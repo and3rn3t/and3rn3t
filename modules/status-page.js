@@ -418,6 +418,19 @@ function renderAgents(root, stats) {
         '[data-stat="agent-share"]',
         stats.clients ? formatPercent(stats.clients.agentShare) : DASH
     );
+    const signed = stats.clients?.signedShare;
+    setText(
+        root,
+        '[data-stat="signed-share"]',
+        typeof signed === 'number' ? formatPercent(signed) : DASH
+    );
+    setText(
+        root,
+        '[data-stat="signed-note"]',
+        typeof signed === 'number'
+            ? 'of agent calls, last 7 days'
+            : 'shown once enough agent calls were checked'
+    );
     renderRank(
         root,
         'crawlers',

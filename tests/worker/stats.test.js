@@ -124,9 +124,53 @@ describe('shaping', () => {
                 { client: 'browser', requests: 75 },
                 { client: 'agent', requests: 25 },
             ])
-        ).toEqual({ agentShare: 0.25 });
-        expect(shapeClients([{ client: 'browser', requests: 4 }])).toEqual({ agentShare: 0 });
+        ).toEqual({ agentShare: 0.25, signedShare: null });
+        expect(shapeClients([{ client: 'browser', requests: 4 }])).toEqual({
+            agentShare: 0,
+            signedShare: null,
+        });
         expect(shapeClients([])).toBeNull();
+    });
+
+    describe('the signed share of agent calls', () => {
+        const rows = (valid, unsigned, extra = []) => [
+            { client: 'browser', signature: 'unsigned', requests: 100 },
+            { client: 'agent', signature: 'valid', requests: valid },
+            { client: 'agent', signature: 'unsigned', requests: unsigned },
+            ...extra,
+        ];
+
+        it('is valid over checked agent calls, once there are enough of them', () => {
+            expect(shapeClients(rows(10, 30)).signedShare).toBe(0.25);
+            expect(shapeClients(rows(0, 40)).signedShare).toBe(0);
+        });
+
+        it('counts an invalid signature as checked but not signed', () => {
+            const extra = [{ client: 'agent', signature: 'invalid', requests: 10 }];
+            expect(shapeClients(rows(10, 20, extra)).signedShare).toBe(0.25);
+        });
+
+        it('is null below the minimum, so three calls are not a percentage', () => {
+            expect(shapeClients(rows(2, 17)).signedShare).toBeNull();
+            expect(shapeClients(rows(1, 18)).agentShare).toBeGreaterThan(0);
+        });
+
+        it('leaves out calls from before the field existed and calls that could not be checked', () => {
+            const extra = [
+                { client: 'agent', signature: '', requests: 500 },
+                { client: 'agent', signature: 'unchecked', requests: 500 },
+            ];
+            expect(shapeClients(rows(10, 30, extra)).signedShare).toBe(0.25);
+        });
+
+        it('has no signed share when the rows predate the field entirely', () => {
+            expect(
+                shapeClients([
+                    { client: 'agent', requests: 50 },
+                    { client: 'browser', requests: 50 },
+                ])
+            ).toEqual({ agentShare: 0.5, signedShare: null });
+        });
     });
 
     it('shapeUptime makes one entry per day and counts the successes', () => {

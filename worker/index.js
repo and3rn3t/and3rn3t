@@ -42,7 +42,8 @@ import { handlePresenceRequest } from './presence.js';
 import { runProbe } from './probe.js';
 import { loadStats, refreshStats } from './stats.js';
 import { readSnapshot, writeSnapshot } from './snapshot.js';
-import { clientKind, nameRootSpan, recordRequest, routeLabel } from './telemetry.js';
+import { clientKind, log, nameRootSpan, recordRequest, routeLabel } from './telemetry.js';
+import { claimsSignature, classifySignature } from './web-bot-auth.js';
 
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
@@ -78,14 +79,25 @@ export default {
         // A presence handshake is not recorded: "N here now" keeps nothing about who joined, and a
         // data point would carry the visitor's Cloudflare location and a browser/agent guess
         if (!UNRECORDED_ROUTES.has(routeName)) {
-            recordRequest(env, {
+            const point = {
                 route: routeName,
                 method: request.method,
                 status: response.status,
                 ms,
                 colo: request.cf?.colo,
                 client: clientKind(request.headers.get('User-Agent')),
-            });
+            };
+            if (claimsSignature(request)) {
+                // Almost no request does. Checking one can fetch the agent's key directory, so it
+                // happens after the response is on its way and only ever counts: nothing is blocked
+                const counted = classifySignature(request).then(({ signature, reason }) => {
+                    if (reason) log('info', 'web-bot-auth', { signature, reason });
+                    recordRequest(env, { ...point, signature });
+                });
+                if (ctx?.waitUntil) ctx.waitUntil(counted);
+            } else {
+                recordRequest(env, point);
+            }
         }
         // A WebSocket upgrade (101) cannot be rebuilt, and has no use for a timing header
         if (response.status === 101) return response;
