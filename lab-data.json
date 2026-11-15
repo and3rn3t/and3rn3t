@@ -8,6 +8,15 @@
       "needs": "WebGPU",
       "measure": "Holds 60 fps from 3,000 to 1,000,000 particles on an Apple GPU (Metal); the WebAssembly field reaches its limit near 150,000. At the site's own density there is no gain, which is why it is off by default.",
       "try": "/?lab=hero-gpu&particles=60000"
+    },
+    {
+      "flag": "hero-seed",
+      "title": "Hero of the day",
+      "status": "spike",
+      "summary": "The hero's flow field is a different picture each UTC day: the noise field moves to a new place and the particles start somewhere new. The same seed draws the same field on the WebAssembly and GPU paths.",
+      "needs": "WebAssembly",
+      "measure": "Not yet judged. A seed of 0 is the field the site has always drawn, so with the switch off nothing changes. Add ?seed=anything to any visit to pin one picture, for example /?seed=flow.",
+      "try": "/?seed=flow"
     }
   ]
 }

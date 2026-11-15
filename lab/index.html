@@ -111,6 +111,24 @@
               <a class="link" href="/?lab=hero-gpu&amp;particles=60000">Try it once</a>
             </p>
           </li>
+          <li class="lab-item" data-lab-item="hero-seed" data-needs="WebAssembly">
+            <div class="lab-item__head">
+              <h2 class="lab-item__title">Hero of the day</h2>
+              <span class="lab-item__status" data-status="spike">Spike</span>
+            </div>
+            <p class="lab-item__summary">The hero&#39;s flow field is a different picture each UTC day: the noise field moves to a new place and the particles start somewhere new. The same seed draws the same field on the WebAssembly and GPU paths.</p>
+            <dl class="lab-item__facts">
+              <div><dt>Needs</dt><dd>WebAssembly <span data-lab-support></span></dd></div>
+              <div><dt>Measured</dt><dd>Not yet judged. A seed of 0 is the field the site has always drawn, so with the switch off nothing changes. Add ?seed=anything to any visit to pin one picture, for example /?seed=flow.</dd></div>
+            </dl>
+            <p class="lab-item__actions">
+              <label class="lab-switch" hidden data-lab-switch>
+                <input type="checkbox" data-lab-toggle="hero-seed" />
+                <span>Keep on for this browser</span>
+              </label>
+              <a class="link" href="/?seed=flow">Try it once</a>
+            </p>
+          </li>
         </ul>
       </div>
     </main>

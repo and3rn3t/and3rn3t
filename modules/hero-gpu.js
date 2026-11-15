@@ -15,6 +15,7 @@
 
 import { whileVisible } from './utils/while-visible.js';
 import { needsReseed } from './wasm/hero-sim.js';
+import { seedLayout, seededRandom } from './utils/hero-seed.js';
 
 const FALLBACK_RGB = '21, 128, 61'; // #15803d, when the canvas's colour cannot be read
 const WORKGROUP = 64;
@@ -31,6 +32,7 @@ struct Params {
   speed: f32,
   pointer: vec3f, // x and y in -1..1, then the strength
   count: u32,
+  offset: vec2f, // where the seed puts the noise field (0, 0 is the default)
 }
 struct Particle { pos: vec2f, prev: vec2f }
 
@@ -88,8 +90,8 @@ fn step(@builtin(global_invocation_id) id: vec3u) {
   let TAU = 6.2831853;
 
   var p = particles[i];
-  let nx = p.pos.x * inv * 2.2;
-  let ny = p.pos.y * inv * 2.2;
+  let nx = p.pos.x * inv * 2.2 + params.offset.x;
+  let ny = p.pos.y * inv * 2.2 + params.offset.y;
   let wx = fbm(nx + t, ny - t);
   let wy = fbm(nx + 5.2 - t, ny + 1.3 + t);
   let angle = fbm(nx + 2.0 * wx, ny + 2.0 * wy) * TAU * 2.0;
@@ -121,6 +123,7 @@ struct Params {
   speed: f32,
   pointer: vec3f,
   count: u32,
+  offset: vec2f,
 }
 struct Particle { pos: vec2f, prev: vec2f }
 struct Look { color: vec4f, fade: f32 }
@@ -259,6 +262,9 @@ export async function mountHeroGpu(canvas, opts = {}) {
         : 0.09;
     const density = opts.density ?? 0.0009;
     const maxParticles = opts.maxParticles ?? 14000;
+    // 0 is the field the site has always drawn; see modules/utils/hero-seed.js
+    const heroSeed = opts.seed ?? 0;
+    const layout = seedLayout(heroSeed);
 
     // ── Pipelines (before the canvas is touched: a shader that does not compile means "use WASM") ──
     const additive = { srcFactor: 'one', dstFactor: 'one', operation: 'add' };
@@ -341,14 +347,14 @@ export async function mountHeroGpu(canvas, opts = {}) {
 
     // ── State ────────────────────────────────────────────────────────────────────────────────────
     const paramsBuffer = device.createBuffer({
-        size: 32,
+        size: 48,
         usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
     });
     const lookBuffer = device.createBuffer({
         size: 32,
         usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
     });
-    const params = new Float32Array(8);
+    const params = new Float32Array(12);
     const paramsCount = new Uint32Array(params.buffer);
     const look = new Float32Array(8);
 
@@ -385,10 +391,11 @@ export async function mountHeroGpu(canvas, opts = {}) {
         canvas.height = height;
 
         count = Math.max(800, Math.min(maxParticles, Math.round(width * height * density)));
+        const random = seededRandom(heroSeed);
         const seed = new Float32Array(count * STRIDE);
         for (let i = 0; i < count; i++) {
-            const x = Math.random() * width;
-            const y = Math.random() * height;
+            const x = random() * width;
+            const y = random() * height;
             seed.set([x, y, x, y], i * STRIDE);
         }
         particleBuffer?.destroy();
@@ -408,6 +415,8 @@ export async function mountHeroGpu(canvas, opts = {}) {
         paramsCount[7] = count;
         params[0] = width;
         params[1] = height;
+        params[8] = layout.x;
+        params[9] = layout.y;
         device.queue.writeBuffer(paramsBuffer, 0, params);
 
         const common = [
@@ -574,6 +583,7 @@ export async function mountHeroGpu(canvas, opts = {}) {
             const span = frameTimes.at(-1) - frameTimes[0];
             return {
                 kind: 'gpu',
+                seed: heroSeed,
                 particles: count,
                 fps:
                     frameTimes.length > 1 ? Math.round(((frameTimes.length - 1) / span) * 1000) : 0,
