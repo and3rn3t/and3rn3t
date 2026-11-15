@@ -110,7 +110,7 @@ export function createServer(env, deps) {
         {
             title: 'About Matthew Anderson',
             description:
-                'Who Matthew Anderson (and3rn3t) is: current role, what he builds, and where to find him online and on this site.',
+                'Who Matthew Anderson (and3rn3t) is: current role, what Matthew builds, and where to find Matthew online and on this site.',
         },
         async () => {
             const { experience } = await loadExperience(env);
@@ -119,7 +119,7 @@ export function createServer(env, deps) {
                 name: 'Matthew Anderson',
                 handle: 'and3rn3t',
                 role: current ? `${current.role} at ${current.company}` : null,
-                about: 'A software engineer who builds health tech, home automation and data tools in his own time, mostly in TypeScript, Swift and Python.',
+                about: 'A software engineer who builds health tech, home automation and data tools in spare time, mostly in TypeScript, Swift and Python.',
                 site: `${SITE_ORIGIN}/`,
                 llms_txt: `${SITE_ORIGIN}/llms.txt`,
                 github: 'https://github.com/and3rn3t',

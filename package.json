@@ -35,7 +35,7 @@
     "lint:css": "stylelint \"**/*.css\" --report-needless-disables",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate": "pnpm lint && pnpm lint:css && pnpm format:check && pnpm test:unit && pnpm check:refs",
+    "validate": "pnpm lint && pnpm lint:css && pnpm format:check && pnpm test:unit && pnpm check:refs && pnpm check:copy",
     "test": "pnpm test:unit && pnpm test:e2e",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
