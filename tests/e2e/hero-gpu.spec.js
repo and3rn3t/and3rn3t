@@ -185,3 +185,65 @@ test.describe('the hero seed', () => {
         expect(problems).toEqual([]);
     });
 });
+
+test.describe('HDR (the `hero-hdr` switch)', () => {
+    /** Make the page believe the display is HDR: headless Chromium's never is. */
+    const pretendHdr = page =>
+        page.addInitScript(() => {
+            const real = window.matchMedia.bind(window);
+            window.matchMedia = query =>
+                query.includes('dynamic-range: high')
+                    ? {
+                          matches: true,
+                          media: query,
+                          addEventListener() {},
+                          removeEventListener() {},
+                      }
+                    : real(query);
+        });
+    const gpuStats = async (page, url) => {
+        await page.goto(url);
+        await page.waitForFunction(() => globalThis.appState?.managers?.heroCanvas, null, {
+            timeout: 15000,
+        });
+        const stats = await page.evaluate(() => globalThis.appState.managers.heroCanvas.stats?.());
+        test.skip(stats?.kind !== 'gpu', 'no WebGPU adapter here (CI has none)');
+        return stats;
+    };
+
+    test('stays off unless asked for, even on an HDR display', async ({ page }) => {
+        await pretendHdr(page);
+        expect((await gpuStats(page, '/?hero=gpu')).hdr).toBe(false);
+    });
+
+    test('stays off on an ordinary display even when asked for', async ({ page }) => {
+        expect((await gpuStats(page, '/?lab=hero-gpu,hero-hdr')).hdr).toBe(false);
+    });
+
+    test('on an HDR display it draws into a float canvas with extended tone mapping, no error', async ({
+        page,
+    }) => {
+        const problems = [];
+        page.on('console', message => {
+            if (/GPU|WebGPU|bind ?group|pipeline|uniform|buffer|texture/i.test(message.text())) {
+                problems.push(message.text().slice(0, 300));
+            }
+        });
+        await pretendHdr(page);
+        const stats = await gpuStats(page, '/?lab=hero-gpu,hero-hdr&particles=20000');
+        // A browser that cannot keep the tone mapping must say so by falling back, not draw clamped
+        test.skip(!stats.hdr, 'this browser does not keep extended tone mapping');
+        const config = await page.evaluate(() => {
+            const { format, toneMapping } = document
+                .getElementById('hero-canvas')
+                .getContext('webgpu')
+                .getConfiguration();
+            return { format, mode: toneMapping.mode };
+        });
+        expect(config).toEqual({ format: 'rgba16float', mode: 'extended' });
+        await expect
+            .poll(() => page.evaluate(() => globalThis.appState.managers.heroCanvas.stats().fps))
+            .toBeGreaterThan(20);
+        expect(problems).toEqual([]);
+    });
+});
