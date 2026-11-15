@@ -145,6 +145,16 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   counter and the edge receipt do; presence already waits for the tab to be visible). `tests/e2e/prerender.spec.js` cannot see a
   prerender succeed (Chromium turns prerendering off while DevTools is attached, which Playwright always is); it checks the browser
   accepts the rules under the real policy and that hovering a link tries one.
+- **Shared hero (lab experiment `hero-shared`)**: everyone with it on bends the same flow field. `modules/hero-share.js` rides
+  the presence socket the page already holds (`onPresenceMessage`, `onPresenceOpen` and `sendPresence` in `modules/edge.js`,
+  so "N here now" still counts a page once): it sends `share` to opt in, then `g <x> <y>` (a pointer position over the hero,
+  0 to 255 each) at most every 150 ms, only while at least two pages have opted in, only over the hero, only in a visible
+  tab. `worker/presence.js` relays a gust to the other opted-in pages and stores nothing (the opt-in is the socket's
+  attachment, which survives hibernation; the last-gust time is in memory only). Limits, because each incoming message wakes
+  the billed object: 25 pages take part (`MAX_SHARING`, the next gets `{share:false}`), a gust within 100 ms of the last is
+  dropped, anything else a page sends is closed with 1008 as before. A remote gust calls the hero's `nudge()`, the same input
+  as a local pointer at 0.7 strength, so the WASM and GPU sims are unchanged. Known and accepted: one address can fill the 25
+  seats (the object keeps no address), which only denies the experiment to others, never the count.
 - **GPU hero (experiment)**: `/?hero=gpu` runs the hero's flow field on the GPU (`modules/hero-gpu.js`, WebGPU: the
   `assembly/hero-sim.ts` step ported to a WGSL compute shader, a trail texture that fades, one line-list draw). It is off unless
   asked for (the default page never loads it; `tests/e2e/hero-gpu.spec.js` checks), and `&particles=60000` sets the count (800 to

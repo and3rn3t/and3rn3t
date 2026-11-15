@@ -419,6 +419,24 @@ async function initHeroEnhancements() {
             if (handle) {
                 appState.managers.heroCanvas = handle;
                 canvas.classList.add('is-active');
+                // A lab experiment, off unless switched on (see /lab/): everyone who has it on bends
+                // the same field, over the presence socket the page already holds
+                if (lab('hero-shared')) {
+                    startOptional(
+                        'Shared hero',
+                        async () => ({
+                            share: await import('./modules/hero-share.js'),
+                            edge: await import('./modules/edge.js'),
+                        }),
+                        ({ share, edge }) => {
+                            appState.managers.sharedHero = share.startSharedField(handle, canvas, {
+                                onMessage: edge.onPresenceMessage,
+                                onOpen: edge.onPresenceOpen,
+                                send: edge.sendPresence,
+                            });
+                        }
+                    );
+                }
             }
         } catch (err) {
             debug.warn('[App] WASM hero core skipped:', err);

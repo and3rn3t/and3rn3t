@@ -3,7 +3,8 @@
  * right now, and tells each of them how many there are.
  *
  * It stores nothing, not even in memory beyond the sockets themselves, and sends no one's
- * address, place or identity: only a number. It uses the WebSocket Hibernation API, so while
+ * address, place or identity: only a number (and, for pages that opted in to the lab's shared hero,
+ * where another visitor's pointer just was: see "Shared hero" below). It uses the WebSocket Hibernation API, so while
  * nobody is sending anything the object is evicted from memory and costs no duration; the
  * browser's "ping" is answered by the runtime without waking it.
  *
@@ -16,6 +17,32 @@ import { isAllowedOrigin } from './origin.js';
 /** More than this many open pages and new ones are turned away: the object is one thread. */
 export const MAX_SOCKETS = 500;
 const OPEN = 1;
+
+// ── Shared hero (lab experiment `hero-shared`, roadmap 15.5) ──────────────────
+// A page that opts in sends "share". It then sends "g <x> <y>" (a pointer position over the hero,
+// each 0 to 255) while its visitor moves the pointer, and receives the same from the other pages
+// that opted in. Nothing is stored or recorded, nobody is named, and a position is relayed once and
+// forgotten. Every incoming message wakes this billed object, so the limits are small: at most
+// MAX_SHARING pages take part, each gust faster than MIN_GUST_MS after the last is dropped, and a
+// page that sends anything else is closed, as before.
+export const MAX_SHARING = 25;
+export const MIN_GUST_MS = 100;
+const GUST = /^g (\d{1,3}) (\d{1,3})$/;
+
+/** The position in a gust message, or null for anything that is not one. */
+export function parseGust(message) {
+    const match = typeof message === 'string' ? GUST.exec(message) : null;
+    if (!match) return null;
+    const x = Number(match[1]);
+    const y = Number(match[2]);
+    return x <= 255 && y <= 255 ? [x, y] : null;
+}
+
+/** When each socket last sent a gust. In memory only, and lost when the object hibernates, which is fine: that takes seconds. */
+const lastGust = new WeakMap();
+
+/** Whether this socket opted in. The flag is its attachment, which survives hibernation. */
+const isSharing = ws => ws.deserializeAttachment?.()?.sharing === true;
 
 export class Presence extends DurableObject {
     constructor(ctx, env) {
@@ -43,12 +70,53 @@ export class Presence extends DurableObject {
     }
 
     /**
-     * The browser only ever sends "ping", and the runtime answers that itself (see the
-     * constructor) without calling this. Whatever gets here is not our client, and each message
-     * would wake this billed object, so the connection is closed at the first one.
+     * The browser's "ping" is answered by the runtime (see the constructor) without calling this.
+     * What does get here is the shared hero's "share" and "g x y", from a page that opted in. Whatever
+     * else arrives is not our client, and each message wakes this billed object, so that
+     * connection is closed at the first one.
      */
-    webSocketMessage(ws) {
+    webSocketMessage(ws, message) {
+        if (message === 'share') {
+            if (isSharing(ws)) return;
+            if (this.sharing().length >= MAX_SHARING) {
+                ws.send(JSON.stringify({ share: false }));
+                return;
+            }
+            ws.serializeAttachment({ sharing: true });
+            this.broadcast();
+            return;
+        }
+        const gust = parseGust(message);
+        if (gust && isSharing(ws)) {
+            this.relay(ws, gust);
+            return;
+        }
         ws.close(1008, 'unexpected message');
+    }
+
+    /** The open sockets that opted in to the shared hero. */
+    sharing(leaving) {
+        return this.ctx
+            .getWebSockets()
+            .filter(ws => ws !== leaving && ws.readyState === OPEN && isSharing(ws));
+    }
+
+    /**
+     * Pass one pointer position to every other page that opted in. A gust that comes sooner than
+     * MIN_GUST_MS after that page's last one is dropped, not an error: a fast pointer is not abuse.
+     */
+    relay(from, [x, y]) {
+        const now = Date.now();
+        if (now - (lastGust.get(from) ?? 0) < MIN_GUST_MS) return;
+        lastGust.set(from, now);
+        const message = JSON.stringify({ g: [x, y] });
+        for (const ws of this.sharing(from)) {
+            try {
+                ws.send(message);
+            } catch {
+                // Gone between the filter and the send: its close event follows
+            }
+        }
     }
 
     webSocketClose(ws) {
@@ -69,7 +137,8 @@ export class Presence extends DurableObject {
         const open = this.ctx
             .getWebSockets()
             .filter(ws => ws !== leaving && ws.readyState === OPEN);
-        const message = JSON.stringify({ count: open.length });
+        const sharing = open.filter(isSharing).length;
+        const message = JSON.stringify({ count: open.length, sharing });
         for (const ws of open) {
             try {
                 ws.send(message);
