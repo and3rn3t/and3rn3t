@@ -155,6 +155,11 @@ export function parseStream(stdout) {
   return { answer, toolsCalled };
 }
 
+/** Text safe inside one markdown table cell: one line, backslashes escaped first, then pipes. */
+export function tableCell(text) {
+  return text.replace(/\s+/g, ' ').replace(/\\/g, '\\\\').replace(/\|/g, '\\|');
+}
+
 /**
  * @param {Array<{ testCase: Case, answer: string, toolsCalled: string[], pass: boolean, problems: string[] }>} results
  * @returns {string} markdown
@@ -162,8 +167,8 @@ export function parseStream(stdout) {
 export function formatReport(results) {
   const passed = results.filter(result => result.pass).length;
   const rows = results.map(({ testCase, pass, problems, toolsCalled, answer }) => {
-    const note = pass ? '' : problems.join('; ');
-    const shortAnswer = answer.replace(/\s+/g, ' ').slice(0, 120).replace(/\|/g, '\\|');
+    const note = pass ? '' : tableCell(problems.join('; '));
+    const shortAnswer = tableCell(answer.slice(0, 120));
     return `| ${pass ? '✅' : '❌'} | ${testCase.id} | ${toolsCalled.join(', ') || '-'} | ${shortAnswer} | ${note} |`;
   });
   return [

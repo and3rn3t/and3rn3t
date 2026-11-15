@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { buildCases, formatReport, grade, parseStream } from '../../scripts/mcp-eval.mjs';
+import {
+    buildCases,
+    formatReport,
+    grade,
+    parseStream,
+    tableCell,
+} from '../../scripts/mcp-eval.mjs';
 
 const projects = {
     projects: [
@@ -100,5 +106,12 @@ describe('formatReport', () => {
         expect(report).toContain('0/1 passed');
         expect(report).toContain('x \\| y');
         expect(report).toContain('❌');
+    });
+});
+
+describe('tableCell', () => {
+    it('escapes backslashes before pipes so an answer cannot break out of its cell', () => {
+        expect(tableCell('a\\|b')).toBe('a\\\\\\|b');
+        expect(tableCell('one\n two')).toBe('one two');
     });
 });
