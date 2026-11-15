@@ -31,9 +31,10 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
 ```bash
 pnpm install
 pnpm dev             # vite dev server (production ships raw source, there is no build)
-pnpm validate        # lint + lint:css + format:check + test:unit + check:refs ← done-gate
+pnpm validate        # lint + lint:css + format:check + test:unit + check:refs + check:copy ← done-gate
 pnpm lint:css        # stylelint: spacing/type must use design-system tokens
 pnpm check:refs      # every file the site references exists and is in the pages.yml publish allowlist
+pnpm check:copy      # copy rule: no gendered pronouns about Matt in the data files, worker text or llms.txt
 pnpm test            # unit + e2e
 pnpm worker:dev      # wrangler dev worker/index.js (guestbook POSTs need ALLOW_UNVERIFIED_GUESTBOOK=1 in a gitignored .dev.vars; there is no Turnstile secret locally)
 pnpm build:worker    # wrangler deploy --dry-run

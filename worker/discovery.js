@@ -26,7 +26,7 @@ const OPENAPI_TYPE = 'application/vnd.oai.openapi+json;version=3.1';
 // Quoted (as a JSON string, which is valid YAML): the text has ": " in it, which a plain YAML
 // scalar cannot contain, and a skill loader that parses the front matter would reject the file
 const SKILL_DESCRIPTION =
-    "Read Matthew Anderson's portfolio (andernet.dev): his projects, writing, work history and recent GitHub activity. Use when you need facts about Matthew Anderson or one of his projects.";
+    "Read Matthew Anderson's portfolio (andernet.dev): projects, writing, work history and recent GitHub activity. Use when you need facts about Matthew Anderson or any project on the site.";
 
 export const SKILL_MD = `---
 name: ${SKILL_NAME}
@@ -41,7 +41,7 @@ Matthew Anderson's portfolio. Everything on it is public and read-only.
 
 Connect an MCP client to \`${SITE_ORIGIN}/mcp\` (Streamable HTTP, no authentication). Tools:
 
-- \`get_profile\`: who he is, current role, links
+- \`get_profile\`: who Matthew is, current role, links
 - \`list_projects\` (optional \`category\`, \`technology\`) and \`get_project\` (\`name\`): the projects and their write-ups
 - \`list_experience\`: work history and education
 - \`list_posts\` (optional \`tag\`) and \`get_post\` (\`slug\`): the technical posts, full text
@@ -113,7 +113,7 @@ export const skillsIndex = async () => ({
             name: SKILL_NAME,
             type: 'skill-md',
             description:
-                "Read Matthew Anderson's portfolio: his projects, writing, work history and recent GitHub activity.",
+                "Read Matthew Anderson's portfolio: projects, writing, work history and recent GitHub activity.",
             url: `${SITE_ORIGIN}${SKILL_PATH}`,
             digest: await sha256Digest(SKILL_MD),
         },
@@ -131,8 +131,8 @@ export const aiCatalog = () => ({
             url: `${SITE_ORIGIN}/.well-known/mcp/server-card.json`,
             representativeQueries: [
                 'What has Matthew Anderson built?',
-                'Which of his projects use TypeScript?',
-                'Where does Matthew Anderson work and what does he do?',
+                'Which projects use TypeScript?',
+                'Where does Matthew Anderson work, and on what?',
             ],
         },
         {
