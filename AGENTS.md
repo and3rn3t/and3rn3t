@@ -15,6 +15,12 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   `mcp/server-card.json`, `agent-skills/`, `ai-catalog.json` and `/api/openapi.json`). Each needs its own route in
   `wrangler.toml`; `tests/worker/discovery.test.js` fails when a document or `/mcp` is not routed. Adding a tool or an
   API path means updating the server card, `SKILL_MD` and the OpenAPI document too (tests check they agree).
+  Every MCP tool declares a zod `outputSchema` (an object at the root) and returns `structuredContent` plus the same JSON as text;
+  a "no such project or post" reply is `isError` for the model but recorded as a success on `/status/` (`asNotFound`).
+  **Snapshots** (`worker/snapshot.js`): the five-minute cron (`scheduled()` in `worker/index.js`) refreshes `/activity` and
+  `/stats` into `VIEWS_KV` under `snapshot:*`; requests read a snapshot up to 15 minutes old and only build the answer
+  themselves when there is none (the Cache API alone was per location and almost always cold). A failed refresh never
+  replaces a good snapshot.
   `MCP_LIMITER` and `GUESTBOOK_LIMITER` are Rate Limiting bindings (approximate, per location; absent locally)
 - Tests: Vitest unit + worker (`tests/unit`, `tests/worker`) and Playwright e2e + axe (`tests/e2e`, served from the raw source like production)
 - Shared browser/Worker helpers live in `modules/utils/` (`html.js` escaping, `activity.js`, `data.js`, `icon.js`, `while-visible.js`); the Worker imports them too
