@@ -1,7 +1,7 @@
 /**
  * About (facts and the live GitHub band), Experience (folding jobs) and Writing (rows).
  */
-import { test, expect } from './fixtures.js';
+import { test, expect, settled } from './fixtures.js';
 
 test.describe('About', () => {
     test('the facts come from the current role', async ({ page }) => {
@@ -121,10 +121,10 @@ test.describe('the GitHub band', () => {
                         document.getElementById('github-band').getBoundingClientRect().height
                     )
                 );
-            await page.waitForTimeout(400);
+            await settled(page);
             const before = await height();
             await page.waitForSelector('#contribution-graph .contrib__cell', { state: 'attached' });
-            await page.waitForTimeout(200);
+            await settled(page);
             expect(await height()).toBe(before);
         });
     }
