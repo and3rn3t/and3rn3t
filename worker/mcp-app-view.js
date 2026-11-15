@@ -33,11 +33,13 @@ export const PROJECT_VIEW_HTML = `<!doctype html>
 <script type="module">
   import { App } from '${APP_CLIENT_URL}';
   const app = new App({ name: 'andernet-project-card', version: '1.0.0' });
-  app.ontoolresult = ({ content }) => {
-    const text = content?.find(block => block.type === 'text')?.text;
-    if (!text) return;
-    let project;
-    try { project = JSON.parse(text); } catch { return; }
+  app.ontoolresult = ({ content, structuredContent }) => {
+    let project = structuredContent;
+    if (!project) {
+      const text = content?.find(block => block.type === 'text')?.text;
+      if (!text) return;
+      try { project = JSON.parse(text); } catch { return; }
+    }
     document.getElementById('title').textContent = project.title ?? project.name;
     document.getElementById('description').textContent = project.description ?? '';
     const tech = document.getElementById('tech');

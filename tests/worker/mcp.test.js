@@ -96,7 +96,15 @@ const fetchMock = vi.fn(async url => {
     return path in FILES ? Response.json(FILES[path]) : new Response('missing', { status: 404 });
 });
 
-const activity = { repoName: 'guess', type: 'push', message: 'feat: a thing' };
+const activity = {
+    repo: 'and3rn3t/guess',
+    repoName: 'guess',
+    repoUrl: 'https://github.com/and3rn3t/guess',
+    pushedAt: '2026-11-12T22:09:46Z',
+    type: 'push',
+    message: 'feat: a thing',
+    branch: 'main',
+};
 const stats = { generatedAt: '2026-11-12T00:00:00Z', api: { last24h: null, last7d: null } };
 const deps = {
     getActivity: vi.fn(async () => ({ ok: true, activity, cached: false })),
@@ -134,6 +142,7 @@ const call = async (name, args = {}, options) => {
     const text = message.result.content[0].text;
     return {
         isError: Boolean(message.result.isError),
+        structured: message.result.structuredContent,
         text,
         data: message.result.isError ? null : JSON.parse(text),
     };
@@ -184,6 +193,63 @@ describe('the MCP server', () => {
         expect(open).toEqual(['get_recent_activity']);
     });
 
+    it('gives every tool an outputSchema with an object at the root', async () => {
+        const { message } = await rpc('tools/list');
+        for (const tool of message.result.tools) {
+            expect(tool.outputSchema?.type, tool.name).toBe('object');
+        }
+    });
+
+    it.each([
+        ['get_profile', {}],
+        ['list_projects', {}],
+        ['get_project', { name: 'health' }],
+        ['show_project', { name: 'health' }],
+        ['list_experience', {}],
+        ['list_posts', {}],
+        ['get_post', { slug: 'newer' }],
+        ['get_recent_activity', {}],
+        ['get_site_stats', {}],
+    ])('%s returns structuredContent that is the same JSON as its text', async (name, args) => {
+        const { isError, structured, data } = await call(name, args);
+        expect(isError).toBe(false);
+        expect(structured).toEqual(data);
+    });
+
+    it("checks the real published content against every tool's outputSchema", async () => {
+        const root = join(import.meta.dirname, '..', '..');
+        const real = Object.fromEntries(
+            Object.keys(FILES).map(path => [
+                path,
+                JSON.parse(readFileSync(join(root, path.slice(1)), 'utf8')),
+            ])
+        );
+        const original = { ...FILES };
+        Object.assign(FILES, real);
+        try {
+            const calls = [
+                ['list_projects', {}],
+                ['list_experience', {}],
+                ['list_posts', {}],
+                ['get_profile', {}],
+            ];
+            for (const project of real['/projects-data.json'].projects) {
+                calls.push(['get_project', { name: project.name }]);
+            }
+            for (const post of real['/posts-data.json'].posts) {
+                calls.push(['get_post', { slug: post.slug }]);
+            }
+            for (const [name, args] of calls) {
+                const { isError, text } = await call(name, args);
+                expect(isError, `${name} ${JSON.stringify(args)}: ${text.slice(0, 200)}`).toBe(
+                    false
+                );
+            }
+        } finally {
+            Object.assign(FILES, original);
+        }
+    });
+
     it('show_project is an MCP App: its tool points at a ui:// view that the server can read', async () => {
         const { message } = await rpc('tools/list');
         const tool = message.result.tools.find(candidate => candidate.name === 'show_project');
@@ -198,6 +264,7 @@ describe('the MCP server', () => {
             .result.contents[0];
         expect(read.mimeType).toBe('text/html;profile=mcp-app');
         expect(read.text).toContain('app.ontoolresult');
+        expect(read.text).toContain('structuredContent');
         expect(read.text).not.toContain('innerHTML');
     });
 
@@ -217,19 +284,19 @@ describe('the MCP server', () => {
     describe('projects', () => {
         it('lists every project with links to its page or its source', async () => {
             const { data } = await call('list_projects');
-            expect(data.map(project => project.name)).toEqual(['health', 'minecraft']);
+            expect(data.projects.map(project => project.name)).toEqual(['health', 'minecraft']);
             // "health" has a long description, so it has a page; "minecraft" has neither it nor highlights
-            expect(data[0].url).toBe('https://andernet.dev/projects/health/');
-            expect(data[1].url).toBe('https://github.com/and3rn3t/minecraft');
+            expect(data.projects[0].url).toBe('https://andernet.dev/projects/health/');
+            expect(data.projects[1].url).toBe('https://github.com/and3rn3t/minecraft');
         });
 
         it('filters by category and by technology, ignoring case', async () => {
             expect(
-                (await call('list_projects', { category: 'health & wellness' })).data
+                (await call('list_projects', { category: 'health & wellness' })).data.projects
             ).toHaveLength(1);
-            const byTech = (await call('list_projects', { technology: 'docker' })).data;
+            const byTech = (await call('list_projects', { technology: 'docker' })).data.projects;
             expect(byTech.map(project => project.name)).toEqual(['minecraft']);
-            expect((await call('list_projects', { technology: 'Rust' })).data).toEqual([]);
+            expect((await call('list_projects', { technology: 'Rust' })).data.projects).toEqual([]);
         });
 
         it.each(['health', 'HEALTH', 'Health Analytics Platform'])(
@@ -265,10 +332,10 @@ describe('the MCP server', () => {
 
     describe('posts', () => {
         it('lists newest first, with a url, and filters by tag', async () => {
-            const all = (await call('list_posts')).data;
+            const all = (await call('list_posts')).data.posts;
             expect(all.map(post => post.slug)).toEqual(['newer', 'older']);
             expect(all[0].url).toBe('https://andernet.dev/posts/newer/');
-            const tagged = (await call('list_posts', { tag: 'cloudflare workers' })).data;
+            const tagged = (await call('list_posts', { tag: 'cloudflare workers' })).data.posts;
             expect(tagged.map(post => post.slug)).toEqual(['newer']);
         });
 
@@ -323,15 +390,21 @@ describe('the MCP server', () => {
             ]);
         });
 
-        it('records an error point when the tool returns isError', async () => {
+        it('records "no such project or post" as a success: the tool worked (#318)', async () => {
             const { METRICS, options } = withMetrics();
-            const { isError } = await call('get_project', { name: 'nope' }, options);
-            expect(isError).toBe(true);
-            expect(points(METRICS)).toHaveLength(1);
-            expect(points(METRICS)[0]).toMatchObject({
-                indexes: ['get_project'],
-                blobs: ['tool', 'error'],
-            });
+            for (const [tool, args] of [
+                ['get_project', { name: 'nope' }],
+                ['show_project', { name: 'nope' }],
+                ['get_post', { slug: 'nope' }],
+            ]) {
+                const { isError } = await call(tool, args, options);
+                expect(isError, tool).toBe(true); // the model is still told
+            }
+            expect(points(METRICS).map(point => point.blobs)).toEqual([
+                ['tool', 'ok'],
+                ['tool', 'ok'],
+                ['tool', 'ok'],
+            ]);
         });
 
         it('records an error point, once, when the handler throws', async () => {

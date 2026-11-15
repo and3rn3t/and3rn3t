@@ -27,10 +27,29 @@ import { PROJECT_VIEW_HTML } from './mcp-app-view.js';
 import { recordTool } from './telemetry.js';
 
 const SERVER_NAME = 'andernet-portfolio';
-export const SERVER_VERSION = '1.0.0';
+export const SERVER_VERSION = '1.1.0';
 
-const asText = data => ({ content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] });
+/**
+ * A result for clients that read typed data (structuredContent, checked against the tool's
+ * outputSchema) and for clients that only read text: the text is the same JSON.
+ */
+const asData = data => ({
+    content: [{ type: 'text', text: JSON.stringify(data, null, 2) }],
+    structuredContent: data,
+});
 const asError = text => ({ isError: true, content: [{ type: 'text', text }] });
+
+/**
+ * "There is no such project or post" is an answer, not a failure of the tool: the model is told
+ * (isError, so it retries with a listed name), but the call is recorded as a success, or a correct
+ * answer would show on /status/ as an error (the weekly eval asks for a project that does not exist).
+ */
+const notFoundResults = new WeakSet();
+const asNotFound = text => {
+    const result = asError(text);
+    notFoundResults.add(result);
+    return result;
+};
 
 /** The project matching a name, a page slug or a display name, ignoring case. */
 function findProject(projects, wanted) {
@@ -66,6 +85,97 @@ const projectDetail = found => ({
     live_demo: found.view.homepage ?? null,
 });
 
+// What each tool returns, as advertised in tools/list. Objects at the root (a list is wrapped),
+// because clients of the older protocol era cannot take a bare array as structured content.
+const text = z.string();
+const maybeText = z.string().nullish();
+const textList = z.array(z.string());
+const projectSummarySchema = z.object({
+    name: text,
+    title: text,
+    description: maybeText,
+    category: maybeText,
+    status: maybeText,
+    technologies: textList,
+    url: maybeText,
+    source: maybeText,
+});
+const projectDetailSchema = projectSummarySchema.extend({
+    overview: maybeText,
+    highlights: z.array(z.string()).nullish(),
+    metrics: z.array(z.object({ value: text, label: text })).nullish(),
+    live_demo: maybeText,
+});
+const OUTPUT = {
+    profile: z.object({
+        name: text,
+        handle: text,
+        role: maybeText,
+        about: text,
+        site: text,
+        llms_txt: text,
+        github: text,
+        linkedin: text,
+        email: text,
+    }),
+    projects: z.object({ projects: z.array(projectSummarySchema) }),
+    project: projectDetailSchema,
+    experience: z.object({
+        experience: z.array(
+            z.looseObject({
+                role: text,
+                company: text,
+                from: maybeText,
+                to: maybeText,
+                summary: maybeText,
+                highlights: z.array(z.string()).nullish(),
+                technologies: z.array(z.string()).nullish(),
+            })
+        ),
+        education: z.array(
+            z.looseObject({
+                degree: maybeText,
+                institution: maybeText,
+                from: maybeText,
+                to: maybeText,
+                highlights: z.array(z.string()).nullish(),
+            })
+        ),
+    }),
+    posts: z.object({
+        posts: z.array(
+            z.object({
+                slug: text,
+                title: text,
+                date: text,
+                summary: maybeText,
+                tags: textList,
+                reading_minutes: z.number().nullish(),
+                url: text,
+            })
+        ),
+    }),
+    post: z.object({
+        slug: text,
+        title: text,
+        date: text,
+        tags: textList,
+        url: text,
+        text,
+    }),
+    activity: z.looseObject({
+        repo: text,
+        repoName: text,
+        repoUrl: text,
+        pushedAt: maybeText,
+        type: text,
+        message: maybeText,
+        branch: maybeText,
+    }),
+    // The sections are documented in worker/stats.js; any can be null, so only the stamp is fixed.
+    stats: z.looseObject({ generatedAt: text }),
+};
+
 /**
  * @param {object} env - the Worker's bindings (SITE_ORIGIN overrides where content is read)
  * @param {{ getActivity: () => Promise<{ ok: boolean, activity?: object, error?: string }>, getStats: () => Promise<{ ok: boolean, stats?: object, error?: string }> }} deps
@@ -97,7 +207,7 @@ export function createServer(env, deps) {
                 let ok = false;
                 try {
                     const result = await handler(...args);
-                    ok = !result?.isError;
+                    ok = !result?.isError || notFoundResults.has(result);
                     return result;
                 } finally {
                     recordTool(env, { tool: name, ok, ms: Date.now() - started });
@@ -111,11 +221,12 @@ export function createServer(env, deps) {
             title: 'About Matthew Anderson',
             description:
                 'Who Matthew Anderson (and3rn3t) is: current role, what Matthew builds, and where to find Matthew online and on this site.',
+            outputSchema: OUTPUT.profile,
         },
         async () => {
             const { experience } = await loadExperience(env);
             const current = experience.find(job => job.current) ?? experience[0];
-            return asText({
+            return asData({
                 name: 'Matthew Anderson',
                 handle: 'and3rn3t',
                 role: current ? `${current.role} at ${current.company}` : null,
@@ -135,6 +246,7 @@ export function createServer(env, deps) {
             title: 'List projects',
             description:
                 'List the portfolio projects with a one-line description, category, status, technologies and links. Use get_project for the full write-up.',
+            outputSchema: OUTPUT.projects,
             inputSchema: {
                 category: z
                     .string()
@@ -158,7 +270,7 @@ export function createServer(env, deps) {
                     );
                 return inCategory && usesTech;
             });
-            return asText(matches.map(summarise));
+            return asData({ projects: matches.map(summarise) });
         }
     );
 
@@ -168,6 +280,7 @@ export function createServer(env, deps) {
             title: 'Get a project',
             description:
                 'The full write-up of one project: overview, highlights, technologies, metrics where there are any, and links to the page, the source and a live demo.',
+            outputSchema: OUTPUT.project,
             inputSchema: {
                 name: z
                     .string()
@@ -179,9 +292,9 @@ export function createServer(env, deps) {
             const found = findProject(projects, name);
             if (!found) {
                 const known = projects.map(({ metadata }) => metadata.name).join(', ');
-                return asError(`No project called "${name}". Projects: ${known}.`);
+                return asNotFound(`No project called "${name}". Projects: ${known}.`);
             }
-            return asText(projectDetail(found));
+            return asData(projectDetail(found));
         }
     );
 
@@ -193,6 +306,7 @@ export function createServer(env, deps) {
             title: 'Show a project card',
             description:
                 'Show one project as a card (title, description, technologies, links) in clients that can display MCP Apps. Same data as get_project. Where the client displays the card, the user already sees it, so do not repeat its contents there; add at most one sentence. Where it does not, answer from the data.',
+            outputSchema: OUTPUT.project,
             inputSchema: {
                 name: z.string().describe('The project name or page slug, e.g. "health"'),
             },
@@ -200,8 +314,8 @@ export function createServer(env, deps) {
         },
         async ({ name }) => {
             const found = findProject(await loadProjects(env), name);
-            if (!found) return asError(`No project called "${name}".`);
-            return asText(projectDetail(found));
+            if (!found) return asNotFound(`No project called "${name}".`);
+            return asData(projectDetail(found));
         }
     );
     registerAppResource(
@@ -235,10 +349,11 @@ export function createServer(env, deps) {
             title: 'Work history and education',
             description:
                 "Matthew Anderson's work history and education, newest first, with what each role involved.",
+            outputSchema: OUTPUT.experience,
         },
         async () => {
             const { experience, education } = await loadExperience(env);
-            return asText({
+            return asData({
                 experience: experience.map(job => ({
                     role: job.role,
                     company: job.company,
@@ -265,6 +380,7 @@ export function createServer(env, deps) {
             title: 'List posts',
             description:
                 'The technical posts on the site, newest first, with date, summary and tags. Use get_post to read one.',
+            outputSchema: OUTPUT.posts,
             inputSchema: {
                 tag: z
                     .string()
@@ -279,8 +395,8 @@ export function createServer(env, deps) {
                       (post.tags ?? []).some(t => t.toLowerCase() === tag.toLowerCase())
                   )
                 : posts;
-            return asText(
-                matches.map(post => ({
+            return asData({
+                posts: matches.map(post => ({
                     slug: post.slug,
                     title: post.title,
                     date: post.date,
@@ -288,8 +404,8 @@ export function createServer(env, deps) {
                     tags: post.tags ?? [],
                     reading_minutes: post.readingMinutes ?? null,
                     url: `${SITE_ORIGIN}/posts/${post.slug}/`,
-                }))
-            );
+                })),
+            });
         }
     );
 
@@ -299,6 +415,7 @@ export function createServer(env, deps) {
             title: 'Read a post',
             description:
                 'The full text of one post, as plain text with its headings and lists kept.',
+            outputSchema: OUTPUT.post,
             inputSchema: {
                 slug: z.string().describe('The post slug from list_posts'),
             },
@@ -307,11 +424,11 @@ export function createServer(env, deps) {
             const posts = await loadPosts(env);
             const post = posts.find(candidate => candidate.slug === slug.trim().toLowerCase());
             if (!post) {
-                return asError(
+                return asNotFound(
                     `No post with the slug "${slug}". Slugs: ${posts.map(p => p.slug).join(', ')}.`
                 );
             }
-            return asText({
+            return asData({
                 slug: post.slug,
                 title: post.title,
                 date: post.date,
@@ -327,13 +444,14 @@ export function createServer(env, deps) {
         {
             title: 'Recent GitHub activity',
             annotations: { openWorldHint: true },
+            outputSchema: OUTPUT.activity,
             description:
-                "Matthew Anderson's most recent public GitHub activity (a push, pull request, release or new repository), cached for five minutes.",
+                "Matthew Anderson's most recent public GitHub activity (a push, pull request, release or new repository), refreshed every five minutes.",
         },
         async () => {
             const result = await deps.getActivity();
             if (!result.ok) return asError(`Recent activity is not available (${result.error}).`);
-            return asText(result.activity);
+            return asData(result.activity);
         }
     );
 
@@ -343,11 +461,12 @@ export function createServer(env, deps) {
             title: 'Site health and traffic',
             description:
                 'How andernet.dev and its API are doing: API latency and error rate, uptime history, MCP tool use, real-visitor Web Vitals and verified crawler traffic, cached for five minutes. Aggregates only; any section can be null when there is nothing to report.',
+            outputSchema: OUTPUT.stats,
         },
         async () => {
             const result = await deps.getStats();
             if (!result.ok) return asError(`Site stats are not available (${result.error}).`);
-            return asText(result.stats);
+            return asData(result.stats);
         }
     );
 

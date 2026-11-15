@@ -49,6 +49,8 @@ Connect an MCP client to \`${SITE_ORIGIN}/mcp\` (Streamable HTTP, no authenticat
 - \`get_recent_activity\`: the latest public GitHub activity
 - \`get_site_stats\`: how the site and API are doing (latency, errors, uptime, Web Vitals, crawler traffic)
 
+Every result is an object, returned as \`structuredContent\` (each tool advertises its \`outputSchema\`) and as the same JSON in a text block. A lookup for a project or post that does not exist is flagged \`isError\` and lists the valid names.
+
 ## Without MCP
 
 - \`${SITE_ORIGIN}/llms.txt\`: a one-page guide that links every project and post
