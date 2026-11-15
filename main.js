@@ -370,8 +370,31 @@ async function initHeroEnhancements() {
         // WASM particle flow-field on a transparent 2D canvas. If WASM can't load, the
         // stylesheet's static glow stays and nothing else is needed.
         try {
-            const { mountHeroSim } = await import('./modules/wasm/hero-sim.js');
-            const handle = await mountHeroSim(canvas, { reducedMotion: motion.reduced });
+            const heroOptions = { reducedMotion: motion.reduced };
+            let handle = null;
+            // An experiment, off unless asked for: `?hero=gpu` runs the same field on the GPU
+            const query = new URLSearchParams(location.search);
+            if (query.get('hero') === 'gpu') {
+                try {
+                    const { mountHeroGpu } = await import('./modules/hero-gpu.js');
+                    // `&particles=60000` asks for that many (the field's own density gives about a thousand)
+                    const wanted = Number.parseInt(query.get('particles') ?? '', 10);
+                    const count = Number.isFinite(wanted)
+                        ? Math.min(1_000_000, Math.max(800, wanted))
+                        : 0;
+                    handle = await mountHeroGpu(canvas, {
+                        ...heroOptions,
+                        ...(count ? { density: 1, maxParticles: count } : {}),
+                        onLost: () => canvas.classList.remove('is-active'),
+                    });
+                } catch (err) {
+                    debug.warn('[App] GPU hero skipped:', err);
+                }
+            }
+            if (!handle) {
+                const { mountHeroSim } = await import('./modules/wasm/hero-sim.js');
+                handle = await mountHeroSim(canvas, heroOptions);
+            }
             if (handle) {
                 appState.managers.heroCanvas = handle;
                 canvas.classList.add('is-active');
