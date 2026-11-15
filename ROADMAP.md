@@ -67,8 +67,9 @@ nothing deploys or touches the zone without an explicit go. Effort: S under a da
 | 13.11 | `anthropics/claude-code-action@v1` for `@claude` on PRs and issues                                                                                                                                                                                                                | S      | Test on a PR; compare with Copilot           | 🟡            |
 
 Order: 13.1 first (cheap, and 13.3, 13.7 and 13.10 build on it), then 13.2 to 13.6, which need nothing from
-outside the repo. 13.8, 13.9 and 13.11 wait on a CI secret (the repo has only `CLOUDFLARE_PURGE_TOKEN`,
-`GHA_TOKEN` and `SONAR_TOKEN`).
+outside the repo. 13.8, 13.9 and 13.11 needed a CI secret: `CLAUDE_CODE_OAUTH_TOKEN` was added on
+2026-11-15 (the repo also has `CLOUDFLARE_PURGE_TOKEN`, `GHA_TOKEN` and `SONAR_TOKEN`), so only 13.7 and 13.10
+still wait on something else.
 
 Cost of the build-time items (estimate, not measured): a full run of 13.9 over about 30 READMEs, the post
 TL;DRs and image alt text is roughly 150k input and 20k output tokens. At cached list prices that is about
