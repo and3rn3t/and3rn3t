@@ -42,10 +42,10 @@ function loadServiceWorker() {
 }
 
 /** Dispatch a fetch event; report whether the worker took over the request. */
-async function dispatch(listeners, url, { method = 'GET', mode = 'cors' } = {}) {
+async function dispatch(listeners, url, { method = 'GET', mode = 'cors', headers = {} } = {}) {
     let response;
     const event = {
-        request: { method, url, mode },
+        request: { method, url, mode, headers: new Headers(headers) },
         respondWith: promise => {
             response = promise;
         },
@@ -101,6 +101,28 @@ describe('service worker routing', () => {
         const { handled } = await dispatch(listeners, url);
         expect(handled).toBe(false);
         expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    // The agent view fetches a page's own URL with `Accept: text/markdown`; cached by URL it would
+    // come back later as that page's HTML
+    it.each([
+        ['a page', `${ORIGIN}/posts/a-post/`],
+        ['the home page', `${ORIGIN}/`],
+    ])('never caches the Markdown version of %s', async (_label, url) => {
+        const { listeners, fetchMock } = loadServiceWorker();
+        const { handled } = await dispatch(listeners, url, {
+            headers: { Accept: 'text/markdown, text/html;q=0.1' },
+        });
+        expect(handled).toBe(false);
+        expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it('still handles a page asked for as HTML', async () => {
+        const { listeners } = loadServiceWorker();
+        const { handled } = await dispatch(listeners, `${ORIGIN}/posts/a-post/`, {
+            headers: { Accept: 'text/html,application/xhtml+xml' },
+        });
+        expect(handled).toBe(true);
     });
 
     it.each([

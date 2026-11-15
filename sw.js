@@ -103,6 +103,12 @@ self.addEventListener('fetch', event => {
         return;
     }
 
+    // A request for the Markdown version of a page (the agent view on /lab/) has the page's own URL.
+    // Cached by URL, it would later be served as that page's HTML, so it is never cached
+    if (wantsMarkdown(request)) {
+        return;
+    }
+
     // Our own data files and pages change without a code deploy - always try the network
     if (isFreshContent(request, url)) {
         event.respondWith(networkFirstStrategy(request, RUNTIME_CACHE));
@@ -124,6 +130,11 @@ self.addEventListener('fetch', event => {
     // Default - Stale While Revalidate strategy
     event.respondWith(staleWhileRevalidateStrategy(request, RUNTIME_CACHE));
 });
+
+// Cloudflare serves any page as Markdown to `Accept: text/markdown`, at the same URL as the HTML
+function wantsMarkdown(request) {
+    return (request.headers?.get('accept') ?? '').includes('text/markdown');
+}
 
 // Paths the Cloudflare Worker serves on andernet.dev (see the routes in wrangler.toml)
 function isWorkerPath(url) {

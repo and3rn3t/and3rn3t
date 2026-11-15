@@ -26,6 +26,15 @@
       "needs": "an HDR display",
       "measure": "Not yet judged: the glow has to be looked at on an HDR screen, and automated tests only check that the browser accepts it and falls back cleanly. Try it with the GPU field and a dense field: /?lab=hero-gpu,hero-hdr&particles=60000.",
       "try": "/?lab=hero-gpu,hero-hdr&particles=60000"
+    },
+    {
+      "flag": "agent-view",
+      "title": "View as agent",
+      "status": "spike",
+      "summary": "A button on every page that shows what a crawler or an AI agent gets there: the page as Markdown (Cloudflare converts it at the edge, with a token estimate), the read-only tools on the MCP server, and the documents agents start from.",
+      "needs": "Nothing special",
+      "measure": "Not yet judged. It has to work on the home page, a project and a post, and must never leave Markdown cached under a page's address: the service worker skips any request that asks for Markdown (a unit test) and the fetch bypasses the browser cache.",
+      "try": "/?lab=agent-view"
     }
   ]
 }
