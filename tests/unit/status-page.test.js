@@ -492,8 +492,8 @@ describe('the page', () => {
     it('has no inline script of its own (the CSP lists inline scripts by hash)', () => {
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const inline = doc.querySelectorAll('script:not([src]):not([type="application/ld+json"])');
-        // The theme script in the shared head is the only one, as on every generated page
-        expect(inline).toHaveLength(1);
+        // The theme script and the speculation rules in the shared head, as on every generated page
+        expect([...inline].map(script => script.type)).toEqual(['', 'speculationrules']);
     });
 
     it('is indexable, has its own canonical address, and loads its stylesheet and module', () => {
