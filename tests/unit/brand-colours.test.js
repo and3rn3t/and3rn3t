@@ -98,3 +98,24 @@ describe('regenerating the share card', () => {
         }
     });
 });
+
+describe('the offline page tokens (offline.html)', () => {
+    // The page can't load styles/core.css, so it copies the tokens it uses: a copy that drifts
+    // would make the offline page look different from the site.
+    const declared = (css, name) => css.match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1].trim();
+    const core = read('styles/core.css');
+    const offlineStyle = read('offline.html').match(/<style>([\s\S]*?)<\/style>/)[1];
+    const copied = [
+        ...offlineStyle.matchAll(
+            /^\s*--((?:space|font-size|font-weight|letter-spacing|line-height)-[\w-]+):/gm
+        ),
+    ].map(match => match[1]);
+
+    it('copies at least the spacing and type tokens its rules use', () => {
+        expect(copied.length).toBeGreaterThan(10);
+    });
+
+    it.each(copied)('--%s has the value it has in core.css', name => {
+        expect(declared(offlineStyle, name)).toBe(declared(core, name));
+    });
+});
