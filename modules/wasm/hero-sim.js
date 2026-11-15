@@ -81,7 +81,7 @@ export function needsReseed(from, to) {
 /**
  * Mount the WASM particle field onto a canvas.
  * @param {HTMLCanvasElement} canvas
- * @param {{ density?: number, speed?: number, reducedMotion?: boolean, trailFade?: number }} [opts]
+ * @param {{ density?: number, speed?: number, reducedMotion?: boolean, trailFade?: number, maxParticles?: number }} [opts]
  * @returns {Promise<HeroSimHandle | null>}
  */
 export async function mountHeroSim(canvas, opts = {}) {
@@ -112,6 +112,7 @@ export async function mountHeroSim(canvas, opts = {}) {
         : 0.09;
     // Particles scale with area but stay capped so low-power devices stay smooth.
     const density = opts.density ?? 0.0009;
+    const maxParticles = opts.maxParticles ?? 14000;
 
     let width = 0;
     let height = 0;
@@ -141,7 +142,7 @@ export async function mountHeroSim(canvas, opts = {}) {
         canvas.height = height;
 
         const target = Math.round(width * height * density);
-        const n = Math.max(800, Math.min(14000, target));
+        const n = Math.max(800, Math.min(maxParticles, target));
         sim.init(n, width, height);
         refreshView();
         ctx.clearRect(0, 0, width, height);

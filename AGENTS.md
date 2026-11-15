@@ -138,6 +138,16 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   counter and the edge receipt do; presence already waits for the tab to be visible). `tests/e2e/prerender.spec.js` cannot see a
   prerender succeed (Chromium turns prerendering off while DevTools is attached, which Playwright always is); it checks the browser
   accepts the rules under the real policy and that hovering a link tries one.
+- **GPU hero (experiment)**: `/?hero=gpu` runs the hero's flow field on the GPU (`modules/hero-gpu.js`, WebGPU: the
+  `assembly/hero-sim.ts` step ported to a WGSL compute shader, a trail texture that fades, one line-list draw). It is off unless
+  asked for (the default page never loads it; `tests/e2e/hero-gpu.spec.js` checks), and `&particles=60000` sets the count (800 to
+  1,000,000; the default density gives about a thousand). It resolves null **before touching the canvas** when there is no adapter
+  or a shader fails, so `main.js` falls back to the WASM field on the same canvas: a canvas keeps its first context type, so
+  once the WebGPU context is taken there is no way back to 2D (the context is created last). Stroke opacity falls with
+  `sqrt(2500 / count)` because additive strokes at tens of thousands of particles saturate to white through the headline.
+  `appState.managers.heroCanvas.stats()` reads `{ kind, particles, fps, frameMs }` in the console. Its e2e runs Chromium with the
+  WebGPU flags (real Metal adapter on a Mac) and skips where there is no adapter, as in CI. Numbers and the decision not to make
+  it the default are in the ROADMAP decision log.
 - **WebMCP** (`modules/webmcp.js`): in a browser that has `document.modelContext`, `main.js` loads the module on idle
   and registers five tools (search, list and open projects, set the theme, draft a contact message). Other browsers are
   never sent it (`tests/e2e/webmcp.spec.js` asserts that). The contact tool fills the form and **never submits**, and
