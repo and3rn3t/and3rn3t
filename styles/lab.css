@@ -1,0 +1,93 @@
+/*
+ * The lab page (scripts/templates/lab-page.mjs, modules/lab-page.js). Chrome, tokens and
+ * primitives are in core.css; the page shell is in article.css. Every state has a word.
+ */
+
+@layer sections {
+  .lab-head {
+    max-width: 46rem;
+    margin-bottom: var(--space-8);
+  }
+
+  .lab-title {
+    margin: var(--space-2) 0 var(--space-4);
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  .lab-lede,
+  .lab-item__summary {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .lab-list {
+    display: grid;
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lab-item {
+    display: grid;
+    gap: var(--space-4);
+    max-width: 46rem;
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md, 0.5rem);
+    background: var(--surface-raised);
+  }
+
+  .lab-item__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .lab-item__title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+  }
+
+  .lab-item__status {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .lab-item__facts {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .lab-item__facts dt {
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .lab-item__facts dd {
+    margin: 0;
+    line-height: var(--line-height-normal);
+  }
+
+  .lab-item__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+    margin: 0;
+  }
+
+  .lab-switch {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+  }
+}

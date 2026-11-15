@@ -32,6 +32,7 @@ on:
       - 'posts/**'
       - 'projects/**'
       - 'status/**'
+      - 'lab/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -96,6 +97,7 @@ jobs:
             /posts/
             /projects/
             /status/
+            /lab/
           sparse-checkout-cone-mode: false
 
       - name: Check published files

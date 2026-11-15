@@ -54,5 +54,6 @@ Education:
 - [Home page](https://andernet.dev/): the same content, laid out for people
 - [RSS feed](https://andernet.dev/feed.xml): the posts, in full
 - [Status](https://andernet.dev/status/): live uptime, API speed, Web Vitals and crawler traffic for this site (aggregates only)
+- [Lab](https://andernet.dev/lab/): opt-in browser experiments, what each needs and what was measured
 - [Sitemap](https://andernet.dev/sitemap.xml)
 - [Résumé](https://andernet.dev/resume.pdf): PDF
