@@ -38,7 +38,7 @@ export const SECURITY_HEADERS = {
 };
 
 /** Scripts that run (no src, and not a data block such as application/ld+json). */
-const RUNS = /^(module|(text|application)\/javascript)$/i;
+const RUNS = /^(module|speculationrules|(text|application)\/javascript)$/i;
 
 /**
  * The inline scripts and styles of one HTML page, exactly as a browser hashes them (the text
