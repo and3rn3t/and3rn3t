@@ -17,6 +17,11 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   API path means updating the server card, `SKILL_MD` and the OpenAPI document too (tests check they agree).
   Every MCP tool declares a zod `outputSchema` (an object at the root) and returns `structuredContent` plus the same JSON as text;
   a "no such project or post" reply is `isError` for the model but recorded as a success on `/status/` (`asNotFound`).
+  Two tools are MCP Apps, drawn inside Claude: `show_project` (`worker/mcp-app-view.js`) and `show_status`
+  (`worker/mcp-app-status.js`, the `/status/` numbers as a panel). Their HTML imports the MCP Apps client from a pinned jsDelivr URL
+  (`resourceDomains` in `worker/mcp.js`) and puts data in with `textContent` only; `show_status`'s drawing code is a string
+  (`STATUS_RENDER_SOURCE`) that `tests/unit/status-app.test.js` runs in jsdom. A new app tool needs its own `ui://` resource, an
+  `outputSchema`, and an entry in the server card, `SKILL_MD` and `qa-live`'s tool count.
   **Snapshots** (`worker/snapshot.js`): the five-minute cron (`scheduled()` in `worker/index.js`) refreshes `/activity` and
   `/stats` into `VIEWS_KV` under `snapshot:*`; requests read a snapshot up to 15 minutes old and only build the answer
   themselves when there is none (the Cache API alone was per location and almost always cold). A failed refresh never
