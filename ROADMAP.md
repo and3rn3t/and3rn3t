@@ -93,7 +93,7 @@ or two, L more.
 | 14.4 | State on the Durable Object: an atomic views counter in `Presence`'s SQLite, seeded from the KV value (closes #211)                                                                                                                                                                                                                                  | M      | A Worker deploy go                                                           | ✅ 2026-11-15                     |
 | 14.5 | Prerender on hover: the site's own speculation rules (`moderate`, project and post pages) on top of Speed Brain's prefetch, with the view count, presence and the edge receipt held back while `document.prerendering`                                                                                                                               | S      | `pnpm zone --only headers --apply` (the CSP must allow the rules)            | ✅ 2026-11-15                     |
 | 14.6 | WebGPU hero: the flow field as a compute shader, the WASM sim as the fallback, behind the same `canRunHeavyEffects()` gate. Kept only if it beats the WASM frame rate and stays inside the budgets                                                                                                                                                   | M–L    | Nothing                                                                      | ✅ opt-in `?hero=gpu`, 2026-11-15 |
-| 14.7 | First-party contact form: `POST /api/contact` with Turnstile and the `send_email` binding to a verified address; Formspree leaves the form and the CSP                                                                                                                                                                                               | M      | Matt: Email Routing on the zone and a verified address; a deploy; zone apply | ⬜                                |
+| 14.7 | First-party contact form: `POST /api/contact` with Turnstile and the `send_email` binding to a verified address; Formspree leaves the form and the CSP                                                                                                                                                                                               | M      | Matt: Email Routing on the zone and a verified address; a deploy; zone apply | ❌ dropped 2026-11-15             |
 | 14.8 | Test hygiene (#234): a coverage report, web-first waits in place of the short sleeps, a WASM drift check in `check:generated`, lint-staged on `.mjs`, `.cjs` and `.html`                                                                                                                                                                             | S–M    | Nothing                                                                      | ✅ 2026-11-15                     |
 
 Order: 14.0 first (no deploy, closes six issues), then 14.1 and 14.2 in one deploy, 14.3 and 14.4 in a
@@ -133,6 +133,17 @@ Older entries (2026-06 to 2026-11-11, including all of Phase 10) are in
   only), so 14.5 adds prerendering, not prefetching. **(4)** 14.4 changes the 2026-11-11 "views stay on KV"
   decision: that was made before the Worker had a Durable Object. **(5)** Sending to a verified destination
   address with `send_email` is free on any plan, but needs Email Routing on the zone.
+
+- **2026-11-15** — Phase 14 closed; 14.7 (first-party contact form) dropped. Its stop condition was met:
+  `andernet.dev` receives mail through an iCloud custom domain (MX `mx01` and `mx02.mail.icloud.com`, SPF
+  `include:icloud.com`, two `apple-domain=` records, no DMARC), and Cloudflare Email Routing needs its own MX records
+  on the root, which would replace those and break that mail. Cloudflare Email Sending on a subdomain (for example
+  `mail.andernet.dev`) would have avoided that, but it is Beta, and Formspree works: the gain was one fewer
+  third-party service, against a new beta dependency and an endpoint to keep spam-proof. If the form is ever
+  replaced, start from the subdomain route and do not touch the root's MX. Phase 14 in short: 14.0 to 14.5 and 14.8
+  shipped, 14.6 shipped opt-in (`?hero=gpu`), 14.7 dropped. Left open from the audit on purpose: #225, #226, #229,
+  #230, #234 (Stylelint for inline `<style>` blocks) and #236 (what remains of each is in its comments) and #5 (the
+  Renovate dashboard).
 
 - **2026-11-15** — 14.6 (WebGPU hero) built as an opt-in experiment, not made the default. Measured on an Apple
   GPU (Metal) in Chromium at 2x scale: the WASM field's main-thread cost per frame is 0.8 ms at 3,000 particles,
