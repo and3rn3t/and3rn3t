@@ -84,8 +84,8 @@ describe('renderPortfolioCard', () => {
         );
         const dots = [...doc.querySelectorAll('circle[r="6"]')].map(c => c.getAttribute('fill'));
 
-        expect(bars).toEqual(['#2b7489', '#6b7280']);
-        expect(dots).toEqual(['#2b7489', '#6b7280']);
+        expect(bars).toEqual(['#3178c6', '#6b7280']);
+        expect(dots).toEqual(['#3178c6', '#6b7280']);
     });
 
     it('escapes language names, so markup in the data cannot break or inject into the SVG', () => {

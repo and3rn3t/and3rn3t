@@ -10,25 +10,7 @@
  */
 
 import { escapeHtml } from '../modules/utils/html.js';
-
-// GitHub language colours (subset; add more as needed).
-const LANG_COLORS = {
-  TypeScript: '#2b7489',
-  JavaScript: '#f1e05a',
-  Swift: '#ffac45',
-  Python: '#3572a5',
-  HTML: '#e34c26',
-  CSS: '#563d7c',
-  Go: '#00add8',
-  Rust: '#dea584',
-  Java: '#b07219',
-  Kotlin: '#a97bff',
-  Ruby: '#701516',
-  'C#': '#178600',
-  'C++': '#f34b7d',
-  Shell: '#89e051',
-  Dockerfile: '#384d54',
-};
+import { languageColor } from '../modules/utils/languages.js';
 
 const FALLBACK_LANG_COLOR = '#6b7280';
 
@@ -71,7 +53,7 @@ export function renderPortfolioCard(ghData) {
   const barRects = topLangs
     .map(({ name, pct }) => {
       const w = Math.round(BAR_W * pct);
-      const rect = `<rect x="${barX}" y="${BAR_Y}" width="${w}" height="${BAR_H}" rx="3" fill="${escapeHtml(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR)}"/>`;
+      const rect = `<rect x="${barX}" y="${BAR_Y}" width="${w}" height="${BAR_H}" rx="3" fill="${escapeHtml(languageColor(name) ?? FALLBACK_LANG_COLOR)}"/>`;
       barX += w;
       return rect;
     })
@@ -82,7 +64,7 @@ export function renderPortfolioCard(ghData) {
     .map(({ name, pct }, i) => {
       const lx = BAR_X + (i >= 3 ? 240 : 0);
       const ly = BAR_Y + 54 + (i % 3) * 30;
-      const color = escapeHtml(LANG_COLORS[name] ?? FALLBACK_LANG_COLOR);
+      const color = escapeHtml(languageColor(name) ?? FALLBACK_LANG_COLOR);
       return `
             <circle cx="${lx + 6}" cy="${ly - 4}" r="6" fill="${color}"/>
             <text x="${lx + 18}" y="${ly}" font-family="system-ui,sans-serif" font-size="22" fill="${TEXT}">
