@@ -96,9 +96,18 @@ namespace_id = "11304"
 name = "PRESENCE"
 class_name = "Presence"
 
+# The page-view counter (worker/counter.js): atomic where KV was read-modify-write. SQLite-backed.
+[[durable_objects.bindings]]
+name = "COUNTER"
+class_name = "Counter"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Presence"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["Counter"]
 
 # KV namespaces — create with:
 #   wrangler kv namespace create VIEWS_KV

@@ -2,8 +2,10 @@
  * Cloudflare Worker — Views & Guestbook handlers
  *
  * KV namespaces (set in wrangler.toml):
- *   VIEWS_KV     — page view counts (key = page slug, value = number string) and the cron's
- *                  `snapshot:*` keys (snapshot.js)
+ *   COUNTER      — the Durable Object that counts page views (counter.js), where the count lives
+ *   VIEWS_KV     — the cron's `snapshot:*` keys (snapshot.js), the view count as it was before
+ *                  COUNTER (it seeds the counter, then mirrors every 10th count), and the local-dev
+ *                  fallback (key = page slug, value = number string)
  *   GUESTBOOK_KV — one key per guestbook entry (`entry:<inverted timestamp>:<id>`, so a
  *                  plain `list` returns newest first) plus short-lived `rl:<ip>` throttle keys
  *
@@ -48,24 +50,33 @@ export async function handleViewsRequest(request, env) {
         return jsonResponse({ error: 'unknown_page' }, request, 400);
     }
 
+    if (request.method !== 'POST' && request.method !== 'GET') {
+        return new Response('Method not allowed', { status: 405 });
+    }
+
+    // The Durable Object counts atomically. Without its binding (local dev) the old KV path
+    // is used: it can lose a count under overlap, which does not matter on one machine.
+    if (env.COUNTER) {
+        try {
+            const counter = env.COUNTER.get(env.COUNTER.idFromName('views'));
+            const views =
+                request.method === 'POST'
+                    ? await counter.increment(page)
+                    : await counter.read(page);
+            return jsonResponse({ page, views }, request, 200);
+        } catch (err) {
+            console.warn('[views] counter unavailable:', err?.message ?? err);
+            return jsonResponse({ error: 'counter_unavailable' }, request, 503);
+        }
+    }
+
     if (!env.VIEWS_KV) {
         return jsonResponse({ error: 'kv_unavailable' }, request, 503);
     }
-
-    if (request.method === 'POST') {
-        const raw = (await env.VIEWS_KV.get(page)) ?? '0';
-        const count = (Number.parseInt(raw, 10) || 0) + 1;
-        await env.VIEWS_KV.put(page, String(count));
-        return jsonResponse({ page, views: count }, request, 200);
-    }
-
-    if (request.method === 'GET') {
-        const raw = (await env.VIEWS_KV.get(page)) ?? '0';
-        const count = Number.parseInt(raw, 10) || 0;
-        return jsonResponse({ page, views: count }, request, 200);
-    }
-
-    return new Response('Method not allowed', { status: 405 });
+    const stored = Number.parseInt((await env.VIEWS_KV.get(page)) ?? '0', 10) || 0;
+    if (request.method === 'GET') return jsonResponse({ page, views: stored }, request, 200);
+    await env.VIEWS_KV.put(page, String(stored + 1));
+    return jsonResponse({ page, views: stored + 1 }, request, 200);
 }
 
 // ── Guestbook ──────────────────────────────────────────────────────────────
