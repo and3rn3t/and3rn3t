@@ -43,11 +43,12 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🌐 [guess](https://github.com/and3rn3t/guess)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, akinator, bayesian
+> 🔗 [Live](https://andernator.com)
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
@@ -56,19 +57,11 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** Python, agent-skill, agent-skills
 > 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
-### 🌐 [guess](https://github.com/and3rn3t/guess)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** TypeScript, akinator, bayesian
-> 🔗 [Live](https://andernator.com)
-
-### 🌐 [health](https://github.com/and3rn3t/health)
-
-> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
->
-> **Tech:** TypeScript, ai, caregiver
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** TypeScript
 
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
@@ -76,6 +69,13 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 >
 > **Tech:** TypeScript, arlo, cloudflare-pages
 > 🔗 [Live](https://homehub.andernet.dev)
+
+### 🌐 [health](https://github.com/and3rn3t/health)
+
+> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
+>
+> **Tech:** TypeScript, ai, caregiver
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 

@@ -40,3 +40,21 @@ jobs:
           sparse-checkout: scripts/check-probe.mjs
           persist-credentials: false
       - run: node scripts/check-probe.mjs https://andernet.dev
+
+  # Opens an issue once each dated decision is due (CSP enforcement from 2026-11-27, the crawler
+  # comparison from 2026-12-09), with the live numbers in it. Closing the issue means done.
+  follow-ups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: scripts/follow-ups.mjs
+          persist-credentials: false
+      - run: node scripts/follow-ups.mjs https://andernet.dev --create
