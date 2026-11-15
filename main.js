@@ -393,6 +393,7 @@ async function initHeroEnhancements() {
                         : 0;
                     handle = await mountHeroGpu(canvas, {
                         ...heroOptions,
+                        hdr: lab('hero-hdr'),
                         ...(count ? { density: 1, maxParticles: count } : {}),
                         onLost: () => canvas.classList.remove('is-active'),
                     });

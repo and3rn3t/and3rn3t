@@ -129,6 +129,24 @@
               <a class="link" href="/?seed=flow">Try it once</a>
             </p>
           </li>
+          <li class="lab-item" data-lab-item="hero-hdr" data-needs="an HDR display">
+            <div class="lab-item__head">
+              <h2 class="lab-item__title">HDR glow for the GPU field</h2>
+              <span class="lab-item__status" data-status="spike">Spike</span>
+            </div>
+            <p class="lab-item__summary">On a display that can show it, the GPU field draws into a floating-point canvas with extended tone mapping, so where trails pile up they glow brighter than the page&#39;s white. Works together with the GPU field; on any other display nothing changes.</p>
+            <dl class="lab-item__facts">
+              <div><dt>Needs</dt><dd>an HDR display <span data-lab-support></span></dd></div>
+              <div><dt>Measured</dt><dd>Not yet judged: the glow has to be looked at on an HDR screen, and automated tests only check that the browser accepts it and falls back cleanly. Try it with the GPU field and a dense field: /?lab=hero-gpu,hero-hdr&amp;particles=60000.</dd></div>
+            </dl>
+            <p class="lab-item__actions">
+              <label class="lab-switch" hidden data-lab-switch>
+                <input type="checkbox" data-lab-toggle="hero-hdr" />
+                <span>Keep on for this browser</span>
+              </label>
+              <a class="link" href="/?lab=hero-gpu,hero-hdr&amp;particles=60000">Try it once</a>
+            </p>
+          </li>
         </ul>
       </div>
     </main>

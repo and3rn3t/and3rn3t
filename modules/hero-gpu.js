@@ -19,6 +19,9 @@ import { seedLayout, seededRandom } from './utils/hero-seed.js';
 
 const FALLBACK_RGB = '21, 128, 61'; // #15803d, when the canvas's colour cannot be read
 const WORKGROUP = 64;
+/** How far past SDR white the brightest overlaps go on an HDR display (1 is white). */
+const HDR_HEADROOM = 2;
+const HDR_CONFIG = { format: 'rgba16float', toneMapping: { mode: 'extended' } };
 /** About how many particles the stroke opacity (0.7 dark, 0.55 light) was tuned for. */
 const TUNED_COUNT = 2500;
 /** Floats per particle: x, y, previous x, previous y. */
@@ -160,9 +163,16 @@ fn fadeFragment() -> @location(0) vec4f { return vec4f(0.0, 0.0, 0.0, look.fade)
 
 @group(0) @binding(3) var trail: texture_2d<f32>;
 
+// How far past SDR white the brightest overlaps may go. 1 on an ordinary display, so the boost is
+// then exactly 1; HDR_HEADROOM on a display that can show more (see mountHeroGpu's \`hdr\` option)
+override headroom: f32 = 1.0;
+
 @fragment
 fn presentFragment(@builtin(position) pos: vec4f) -> @location(0) vec4f {
-  return textureLoad(trail, vec2i(pos.xy), 0);
+  let c = textureLoad(trail, vec2i(pos.xy), 0);
+  let peak = max(c.r, max(c.g, c.b));
+  let boost = 1.0 + (headroom - 1.0) * smoothstep(0.3, 1.0, peak);
+  return vec4f(c.rgb * boost, c.a);
 }
 `;
 
@@ -186,9 +196,10 @@ function flowColor(canvas) {
  * the hero canvas has already given up its 2D context, so it is tried on a canvas of its own first.
  * @param {GPUDevice} device
  * @param {GPUTextureFormat} format
+ * @param {{ mode: 'extended' } | undefined} [toneMapping] - asked for HDR: the browser must confirm it kept it
  * @returns {Promise<boolean>}
  */
-async function canPresent(device, format) {
+async function canPresent(device, format, toneMapping) {
     device.pushErrorScope('validation');
     let threw = false;
     try {
@@ -196,7 +207,11 @@ async function canPresent(device, format) {
         probe.width = probe.height = 16;
         const context = probe.getContext('webgpu');
         if (!context) throw new Error('no webgpu context');
-        context.configure({ device, format, alphaMode: 'premultiplied' });
+        context.configure({ device, format, alphaMode: 'premultiplied', toneMapping });
+        // A browser that does not know toneMapping ignores it and clamps to SDR, which is not HDR
+        if (toneMapping && context.getConfiguration?.().toneMapping?.mode !== toneMapping.mode) {
+            throw new Error('tone mapping not kept');
+        }
         const encoder = device.createCommandEncoder();
         encoder
             .beginRenderPass({
@@ -222,13 +237,13 @@ async function canPresent(device, format) {
 /**
  * @typedef {Object} HeroGpuHandle
  * @property {() => void} destroy
- * @property {() => { kind: 'gpu', particles: number, fps: number, frameMs: number }} stats
+ * @property {() => { kind: 'gpu', seed: number, hdr: boolean, particles: number, fps: number, frameMs: number }} stats
  */
 
 /**
  * Mount the GPU flow field on a canvas, or resolve null (canvas untouched) when WebGPU cannot be used.
  * @param {HTMLCanvasElement} canvas
- * @param {{ density?: number, speed?: number, reducedMotion?: boolean, trailFade?: number, maxParticles?: number, onLost?: () => void }} [opts]
+ * @param {{ density?: number, speed?: number, reducedMotion?: boolean, trailFade?: number, maxParticles?: number, seed?: number, hdr?: boolean, onLost?: () => void }} [opts]
  * @returns {Promise<HeroGpuHandle | null>}
  */
 export async function mountHeroGpu(canvas, opts = {}) {
@@ -247,12 +262,25 @@ export async function mountHeroGpu(canvas, opts = {}) {
         console.error('[hero-gpu]', event.error?.message ?? event.error);
     });
 
-    const format = navigator.gpu.getPreferredCanvasFormat();
-    if (!(await canPresent(device, format))) {
+    let format = navigator.gpu.getPreferredCanvasFormat();
+    let trailFormat = 'rgba8unorm';
+    // HDR is an experiment on an experiment (`hero-hdr`): only on a display that reports it, and only if
+    // a canvas of its own keeps the extended tone mapping. Any doubt means the ordinary SDR field.
+    let toneMapping;
+    if (
+        opts.hdr &&
+        globalThis.matchMedia?.('(dynamic-range: high)').matches &&
+        (await canPresent(device, HDR_CONFIG.format, HDR_CONFIG.toneMapping))
+    ) {
+        ({ format, toneMapping } = HDR_CONFIG);
+        // Float, so overlapping strokes add past 1 instead of clamping at white
+        trailFormat = 'rgba16float';
+    }
+    if (!toneMapping && !(await canPresent(device, format))) {
         device.destroy();
         return null;
     }
-    const trailFormat = 'rgba8unorm';
+    const hdr = Boolean(toneMapping);
     const reduced = Boolean(opts.reducedMotion);
     const dpr = Math.min(globalThis.devicePixelRatio || 1, 2);
     const speed = (opts.speed ?? 1.4) * dpr;
@@ -328,7 +356,12 @@ export async function mountHeroGpu(canvas, opts = {}) {
             device.createRenderPipelineAsync({
                 layout: pipelineLayout(layouts.present),
                 vertex: { module: draw, entryPoint: 'fullVertex' },
-                fragment: { module: draw, entryPoint: 'presentFragment', targets: [{ format }] },
+                fragment: {
+                    module: draw,
+                    entryPoint: 'presentFragment',
+                    constants: { headroom: hdr ? HDR_HEADROOM : 1 },
+                    targets: [{ format }],
+                },
             }),
         ]);
         pipelines = { step, fade, lineDark, lineLight, present };
@@ -343,7 +376,7 @@ export async function mountHeroGpu(canvas, opts = {}) {
         device.destroy();
         return null;
     }
-    context.configure({ device, format, alphaMode: 'premultiplied' });
+    context.configure({ device, format, alphaMode: 'premultiplied', toneMapping });
 
     // ── State ────────────────────────────────────────────────────────────────────────────────────
     const paramsBuffer = device.createBuffer({
@@ -584,6 +617,7 @@ export async function mountHeroGpu(canvas, opts = {}) {
             return {
                 kind: 'gpu',
                 seed: heroSeed,
+                hdr,
                 particles: count,
                 fps:
                     frameTimes.length > 1 ? Math.round(((frameTimes.length - 1) / span) * 1000) : 0,
