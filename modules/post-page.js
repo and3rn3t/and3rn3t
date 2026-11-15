@@ -11,10 +11,23 @@ const whenIdle = task =>
     globalThis.requestIdleCallback ? globalThis.requestIdleCallback(task) : setTimeout(task, 2000);
 whenIdle(() => import('./edge.js').then(m => m.initEdge()).catch(() => {}));
 
-// A lab experiment, off unless switched on (see /lab/): the agent view, on every page
+// Lab experiments, off unless switched on (see /lab/). `labModule` loads a module only when its
+// switch is on, so a page without it never fetches the module.
+const labModule = async (flag, load) => {
+    const { lab } = await import('./capabilities.js');
+    return lab(flag) ? load() : null;
+};
+// The agent view, on every page
 whenIdle(() =>
-    import('./capabilities.js')
-        .then(({ lab }) => lab('agent-view') && import('./agent-view.js'))
+    labModule('agent-view', () => import('./agent-view.js'))
         .then(m => m?.initAgentView())
+        .catch(() => {})
+);
+// Key points and translation made on the device: posts only, and only where the browser has an API
+whenIdle(() =>
+    labModule('post-tools', async () =>
+        'Summarizer' in globalThis || 'Translator' in globalThis ? import('./post-tools.js') : null
+    )
+        .then(m => m?.initPostTools())
         .catch(() => {})
 );

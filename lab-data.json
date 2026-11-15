@@ -26,6 +26,15 @@
       "needs": "Nothing special",
       "measure": "Not yet judged. It has to work on the home page, a project and a post, and must never leave Markdown cached under a page's address: the service worker skips any request that asks for Markdown (a unit test) and the fetch bypasses the browser cache.",
       "try": "/?lab=agent-view"
+    },
+    {
+      "flag": "post-tools",
+      "title": "Post tools, on your device",
+      "status": "spike",
+      "summary": "On a post, two buttons that use the model built into the browser: key points, and the post read in Spanish, French, German or Japanese. Nothing is sent anywhere, the first use downloads a large model, and the result says it was made by the model and the post is the source.",
+      "needs": "the Summarizer or Translator API",
+      "measure": "Not yet judged. Only desktop Chrome and Edge have these APIs, and they need a lot of disk and a capable GPU, so most visitors will see nothing. Kept only if the key points of the posts are accurate; a post too long for the model is not summarised rather than cut short.",
+      "try": "/posts/making-a-portfolio-agent-ready/?lab=post-tools"
     }
   ]
 }
