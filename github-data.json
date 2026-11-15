@@ -9,6 +9,166 @@
   },
   "repositories": [
     {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Config files for my GitHub profile.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://github.com/and3rn3t",
+      "language": "JavaScript",
+      "topics": [
+        "config",
+        "github-config"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 2,
+      "open_issues_count": 8,
+      "pushed_at": "2026-11-15T03:05:57Z",
+      "updated_at": "2026-11-12T04:42:26Z",
+      "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "arlo",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "dashboard",
+        "featured",
+        "home-automation",
+        "iot",
+        "mqtt",
+        "philips-hue",
+        "pwa",
+        "react",
+        "react19",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 1,
+      "open_issues_count": 52,
+      "pushed_at": "2026-11-15T02:38:00Z",
+      "updated_at": "2026-11-10T23:01:51Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "featured",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-15T02:32:16Z",
+      "updated_at": "2026-11-07T21:40:35Z",
+      "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
+      "language": "TypeScript",
+      "topics": [
+        "agent-skills",
+        "apple-shortcuts",
+        "cli",
+        "ios",
+        "macos",
+        "nodejs",
+        "privacy",
+        "security",
+        "shortcuts",
+        "static-analysis",
+        "typescript"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 27,
+      "pushed_at": "2026-11-14T18:43:55Z",
+      "updated_at": "2026-11-07T21:40:09Z",
+      "created_at": "2026-10-18T15:34:10Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-14T15:24:42Z",
+      "updated_at": "2026-11-07T21:34:27Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1193029111,
+      "name": "ai-template-repo",
+      "full_name": "and3rn3t/ai-template-repo",
+      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
+      "html_url": "https://github.com/and3rn3t/ai-template-repo",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "ai-assisted-development",
+        "claude",
+        "template"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-11-14T03:41:24Z",
+      "updated_at": "2026-11-07T21:39:34Z",
+      "created_at": "2026-03-26T19:58:01Z",
+      "fork": false,
+      "archived": false
+    },
+    {
       "id": 1212957728,
       "name": "guess",
       "full_name": "and3rn3t/guess",
@@ -41,36 +201,6 @@
       "pushed_at": "2026-11-13T23:29:45Z",
       "updated_at": "2026-11-10T23:01:52Z",
       "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
-      "language": "TypeScript",
-      "topics": [
-        "agent-skills",
-        "apple-shortcuts",
-        "cli",
-        "ios",
-        "macos",
-        "nodejs",
-        "privacy",
-        "security",
-        "shortcuts",
-        "static-analysis",
-        "typescript"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 27,
-      "pushed_at": "2026-11-13T18:55:25Z",
-      "updated_at": "2026-11-07T21:40:09Z",
-      "created_at": "2026-10-18T15:34:10Z",
       "fork": false,
       "archived": false
     },
@@ -108,82 +238,6 @@
       "pushed_at": "2026-11-13T18:53:39Z",
       "updated_at": "2026-11-07T21:40:05Z",
       "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-13T16:50:28Z",
-      "updated_at": "2026-11-07T21:34:27Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Config files for my GitHub profile.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://github.com/and3rn3t",
-      "language": "JavaScript",
-      "topics": [
-        "config",
-        "github-config"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 2,
-      "open_issues_count": 12,
-      "pushed_at": "2026-11-13T15:42:13Z",
-      "updated_at": "2026-11-12T04:42:26Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "arlo",
-        "cloudflare-pages",
-        "cloudflare-workers",
-        "dashboard",
-        "featured",
-        "home-automation",
-        "iot",
-        "mqtt",
-        "philips-hue",
-        "pwa",
-        "react",
-        "react19",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 1,
-      "open_issues_count": 51,
-      "pushed_at": "2026-11-13T12:30:54Z",
-      "updated_at": "2026-11-10T23:01:51Z",
-      "created_at": "2025-08-29T22:05:27Z",
       "fork": false,
       "archived": false
     },
@@ -229,28 +283,6 @@
       "pushed_at": "2026-11-13T04:43:31Z",
       "updated_at": "2026-11-07T21:40:19Z",
       "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1193029111,
-      "name": "ai-template-repo",
-      "full_name": "and3rn3t/ai-template-repo",
-      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
-      "html_url": "https://github.com/and3rn3t/ai-template-repo",
-      "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "ai-assisted-development",
-        "claude",
-        "template"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-11-13T04:42:45Z",
-      "updated_at": "2026-11-07T21:39:34Z",
-      "created_at": "2026-03-26T19:58:01Z",
       "fork": false,
       "archived": false
     },
@@ -308,38 +340,6 @@
       "pushed_at": "2026-11-13T03:46:25Z",
       "updated_at": "2026-11-10T23:01:35Z",
       "created_at": "2025-08-30T21:38:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "featured",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-13T03:44:57Z",
-      "updated_at": "2026-11-07T21:40:35Z",
-      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -1276,19 +1276,31 @@
   ],
   "events": [
     {
-      "id": "27091088538",
+      "id": "27196609120",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "chore/readme-cards",
+        "ref": "feat/edge-cache",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-12T03:37:28Z"
+      "created_at": "2026-11-12T23:59:23Z"
     },
     {
-      "id": "27089424322",
+      "id": "27196450651",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "chore/e2e-workers",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-12T22:50:00Z"
+    },
+    {
+      "id": "27196432605",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1296,128 +1308,468 @@
       "payload": {
         "commits": [
           {
-            "sha": "0d96e168504db26febaf88a073abc7b8301438e1",
-            "message": "Merge pull request #269 from and3rn3t/chore/docs-config-cleanup\n\nchore: docs and config cleanup"
+            "sha": "ea22174255d0dfef92aabf265e38d895b1265a86",
+            "message": "chore: lint .mjs/.cjs and format .html on commit; palette test fails, not skips (#234)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/chore/phase-14-8b-tooling"
+      },
+      "created_at": "2026-11-15T02:43:41Z"
+    },
+    {
+      "id": "20155217004",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(hero): Phase 14.6: an opt-in WebGPU flow field (?hero=gpu)",
+          "head": {
+            "ref": "feat/phase-14-6-webgpu-hero"
+          }
+        }
+      },
+      "created_at": "2026-11-15T03:01:43Z"
+    },
+    {
+      "id": "20155187133",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(hero): Phase 14.6: an opt-in WebGPU flow field (?hero=gpu)",
+          "head": {
+            "ref": "feat/phase-14-6-webgpu-hero"
+          }
+        }
+      },
+      "created_at": "2026-11-15T03:01:43Z"
+    },
+    {
+      "id": "20154920696",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:38Z"
+    },
+    {
+      "id": "20154920429",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:34Z"
+    },
+    {
+      "id": "20154919855",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:36Z"
+    },
+    {
+      "id": "20154919038",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:35Z"
+    },
+    {
+      "id": "20154918037",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:32Z"
+    },
+    {
+      "id": "20154917994",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:33Z"
+    },
+    {
+      "id": "20154916744",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:31Z"
+    },
+    {
+      "id": "20154916471",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:29Z"
+    },
+    {
+      "id": "20154915327",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:27Z"
+    },
+    {
+      "id": "20154915293",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:54:28Z"
+    },
+    {
+      "id": "20154848176",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test(e2e): Phase 14.8c: settle, don't sleep (#234)",
+          "head": {
+            "ref": "test/web-first-waits"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:52:39Z"
+    },
+    {
+      "id": "20154695608",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test(e2e): Phase 14.8c: settle, don't sleep (#234)",
+          "head": {
+            "ref": "test/web-first-waits"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:47:45Z"
+    },
+    {
+      "id": "20154688815",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: Phase 14.8b: WASM drift check, coverage report, lint-staged scope (#234)",
+          "head": {
+            "ref": "chore/phase-14-8b-tooling"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:48:31Z"
+    },
+    {
+      "id": "20154685107",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: Phase 14.8b: WASM drift check, coverage report, lint-staged scope (#234)",
+          "head": {
+            "ref": "chore/phase-14-8b-tooling"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:43:33Z"
+    },
+    {
+      "id": "20154658642",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test(e2e): Phase 14.8c: settle, don't sleep (#234)",
+          "head": {
+            "ref": "test/web-first-waits"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:47:45Z"
+    },
+    {
+      "id": "20154527112",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test(e2e): Phase 14.8a: run the MCP Apps in the SDK's host (#234)",
+          "head": {
+            "ref": "test/mcp-apps-host"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:44:22Z"
+    },
+    {
+      "id": "20154493008",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: Phase 14.8b: WASM drift check, coverage report, lint-staged scope (#234)",
+          "head": {
+            "ref": "chore/phase-14-8b-tooling"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:43:33Z"
+    },
+    {
+      "id": "20154490751",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test(e2e): Phase 14.8a: run the MCP Apps in the SDK's host (#234)",
+          "head": {
+            "ref": "test/mcp-apps-host"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:41:43Z"
+    },
+    {
+      "id": "27194729929",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "aa696c3cdbecae86fe4bed50b5c22e74137ed8e7",
+            "message": "Merge pull request #278 from and3rn3t/feat/edge-receipt\n\nfeat(footer): edge receipt (Phase 12.2)"
+          }
+        ],
+        "ref": "refs/heads/feat/worker-telemetry"
+      },
+      "created_at": "2026-11-12T23:38:19Z"
+    },
+    {
+      "id": "20154417763",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "test(e2e): Phase 14.8a: run the MCP Apps in the SDK's host (#234)",
+          "head": {
+            "ref": "test/mcp-apps-host"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:41:43Z"
+    },
+    {
+      "id": "27194429139",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "c1d0ee5e1e919971bc3157bced874c25f7904435",
+            "message": "Merge pull request #316 from and3rn3t/docs/roadmap-phase-13-close\n\ndocs: close Phase 13 in the roadmap"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-11-12T04:01:08Z"
+      "created_at": "2026-11-15T01:18:27Z"
     },
     {
-      "id": "20082259330",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "27194217319",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "docs/roadmap-phase-13-close",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-15T01:15:00Z"
+    },
+    {
+      "id": "20153992588",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "fix(mcp): bump server version to 1.2.0 for show_status; pin version to tool list",
           "head": {
-            "ref": "feat/presence"
+            "ref": "fix/mcp-server-version"
           }
         }
       },
-      "created_at": "2026-11-13T01:13:24Z"
+      "created_at": "2026-11-15T02:30:52Z"
     },
     {
-      "id": "20081716594",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20153985383",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "fix(mcp): bump server version to 1.2.0 for show_status; pin version to tool list",
           "head": {
-            "ref": "feat/status-page-ui"
+            "ref": "fix/mcp-server-version"
           }
         }
       },
-      "created_at": "2026-11-13T00:51:32Z"
+      "created_at": "2026-11-15T02:29:15Z"
     },
     {
-      "id": "20081713735",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20153964993",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat: Phase 14.5: prerender project and post pages on hover",
           "head": {
-            "ref": "feat/status-page-ui"
+            "ref": "feat/phase-14-5-prerender"
           }
         }
       },
-      "created_at": "2026-11-13T00:51:22Z"
+      "created_at": "2026-11-15T02:30:12Z"
     },
     {
-      "id": "20081066489",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20153928213",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "fix(mcp): bump server version to 1.2.0 for show_status; pin version to tool list",
           "head": {
-            "ref": "feat/status-page"
+            "ref": "fix/mcp-server-version"
           }
         }
       },
-      "created_at": "2026-11-13T00:15:15Z"
+      "created_at": "2026-11-15T02:29:15Z"
     },
     {
-      "id": "20077540612",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20153668239",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat: Phase 14.5: prerender project and post pages on hover",
           "head": {
-            "ref": "feat/webmcp"
+            "ref": "feat/phase-14-5-prerender"
           }
         }
       },
-      "created_at": "2026-11-12T22:30:49Z"
+      "created_at": "2026-11-15T02:20:33Z"
     },
     {
-      "id": "20077539985",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20153595429",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat: Phase 14.5: prerender project and post pages on hover",
           "head": {
-            "ref": "feat/webmcp"
+            "ref": "feat/phase-14-5-prerender"
           }
         }
       },
-      "created_at": "2026-11-12T22:30:47Z"
+      "created_at": "2026-11-15T02:20:33Z"
     },
     {
-      "id": "20076364730",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "27192476987",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "renovate/vite-and-vitest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-12T22:09:36Z"
+    },
+    {
+      "id": "20153211295",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat(mcp): Phase 14.3: show_status, the status panel inside Claude",
           "head": {
-            "ref": "feat/alerts"
+            "ref": "feat/phase-14-3-status-app"
           }
         }
       },
-      "created_at": "2026-11-13T02:29:45Z"
+      "created_at": "2026-11-15T02:10:55Z"
     },
     {
-      "id": "27078900938",
+      "id": "20153078860",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(mcp): Phase 14.3: show_status, the status panel inside Claude",
+          "head": {
+            "ref": "feat/phase-14-3-status-app"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:05:00Z"
+    },
+    {
+      "id": "27191930096",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1425,140 +1777,173 @@
       "payload": {
         "commits": [
           {
-            "sha": "08be487ff1e86928065b2eb62086d4db81ffb69e",
-            "message": "Merge origin/main into feat/guard-generated\n\nResolves the ROADMAP.md conflict (13.5 row from main, 13.6 row from this\nbranch) and adds the guard-generated note to CLAUDE.md now that the\nsubagents PR has merged.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+            "sha": "53b58b509fbc48fceab2b8c08466f1b3a1a2eae6",
+            "message": "fix(csp): never throw on a hostile report, count every directive, do not guess \"since\"\n\n- A report field that is not text (for example {\"toString\": null}) made the\n  normalizers throw, so the promised empty 204 became a 500. Non-text is now\n  no text at all, and the processing is also wrapped so the answer is the\n  same 204 whatever arrives.\n- The stats query returned only the ten busiest directives although the total\n  is their sum, so reports for more than ten were undercounted. It returns\n  them all (the parser has 19 plus \"other\") and the display keeps five.\n- The page no longer carries a fixed \"collected since\" date. When reporting\n  began is a Worker setting (CSP_REPORTING_SINCE, empty until someone has\n  confirmed the live header has report-uri). While it is empty the page shows\n  a dash and \"reporting is not switched on yet\" instead of a zero, since a\n  zero from before anything could report looks like assurance; reports that\n  are arriving show regardless.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
           }
         ],
-        "ref": "refs/heads/feat/guard-generated"
+        "ref": "refs/heads/feat/csp-reports"
       },
-      "created_at": "2026-11-13T15:38:59Z"
+      "created_at": "2026-11-13T01:44:18Z"
     },
     {
-      "id": "27078450864",
-      "type": "CreateEvent",
+      "id": "27191900666",
+      "type": "DeleteEvent",
       "repo": {
-        "name": "and3rn3t/and3rn3t"
+        "name": "and3rn3t/homehub"
       },
       "payload": {
-        "ref": "feat/claude-agents",
+        "ref": "renovate/lucide-monorepo",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-13T15:35:09Z"
+      "created_at": "2026-11-12T22:04:05Z"
     },
     {
-      "id": "20074615537",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20152974659",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat(mcp): Phase 14.3: show_status, the status panel inside Claude",
           "head": {
-            "ref": "feat/csp-reports"
+            "ref": "feat/phase-14-3-status-app"
           }
         }
       },
-      "created_at": "2026-11-13T01:44:31Z"
+      "created_at": "2026-11-15T02:05:00Z"
     },
     {
-      "id": "27078020813",
+      "id": "27191827512",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "feat/follow-up-issues",
+        "ref": "fix/pronoun-free-worker-copy",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-13T15:30:27Z"
+      "created_at": "2026-11-15T00:45:02Z"
     },
     {
-      "id": "20073552925",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20152900363",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T02:03:09Z"
+    },
+    {
+      "id": "20152900361",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat(worker): Phase 14.4: atomic page-view counter on a Durable Object (#211)",
           "head": {
-            "ref": "feat/presence"
+            "ref": "feat/phase-14-4-views-counter"
           }
         }
       },
-      "created_at": "2026-11-13T01:13:20Z"
+      "created_at": "2026-11-15T02:03:06Z"
     },
     {
-      "id": "27074797160",
+      "id": "20152883377",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): Phase 14.4: atomic page-view counter on a Durable Object (#211)",
+          "head": {
+            "ref": "feat/phase-14-4-views-counter"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:00:59Z"
+    },
+    {
+      "id": "20152815809",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "feat(worker): Phase 14.4: atomic page-view counter on a Durable Object (#211)",
+          "head": {
+            "ref": "feat/phase-14-4-views-counter"
+          }
+        }
+      },
+      "created_at": "2026-11-15T02:00:59Z"
+    },
+    {
+      "id": "27191272840",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "chore/zone-script",
+        "ref": "feat/copy-lint",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-12T03:29:12Z"
+      "created_at": "2026-11-15T00:38:35Z"
     },
     {
-      "id": "20070967099",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20152596238",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat(worker): Phase 14.1 and 14.2: cron snapshots and typed MCP results (#318 #319 #320)",
           "head": {
-            "ref": "feat/status-page"
+            "ref": "feat/phase-14-1-snapshots"
           }
         }
       },
-      "created_at": "2026-11-13T00:15:17Z"
+      "created_at": "2026-11-15T01:55:15Z"
     },
     {
-      "id": "27073852928",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/retire-legacy",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-11T23:43:22Z"
-    },
-    {
-      "id": "20069844867",
-      "type": "PullRequestReviewCommentEvent",
+      "id": "20152530958",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": null,
+          "title": "feat(worker): Phase 14.1 and 14.2: cron snapshots and typed MCP results (#318 #319 #320)",
           "head": {
-            "ref": "feat/edge-cache"
+            "ref": "feat/phase-14-1-snapshots"
           }
         }
       },
-      "created_at": "2026-11-12T23:55:43Z"
+      "created_at": "2026-11-15T01:52:58Z"
     },
     {
-      "id": "27071067053",
-      "type": "CreateEvent",
+      "id": "20152504469",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "chore/docs-config-cleanup",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "feat(worker): Phase 14.1 and 14.2: cron snapshots and typed MCP results (#318 #319 #320)",
+          "head": {
+            "ref": "feat/phase-14-1-snapshots"
+          }
+        }
       },
-      "created_at": "2026-11-12T03:54:23Z"
+      "created_at": "2026-11-15T01:52:58Z"
     },
     {
-      "id": "27070749333",
+      "id": "27190927798",
       "type": "PushEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
@@ -1566,1067 +1951,478 @@
       "payload": {
         "commits": [
           {
-            "sha": "08d3b003c9d085af8d1845d6e497e2d415f186d5",
-            "message": "Merge pull request #292 from and3rn3t/ci/e2e-paths-shard\n\nci: run E2E only when it can be affected, on two shards"
+            "sha": "f176f886aa19e562cd61fc5339a5a76cc5dc0eda",
+            "message": "Merge pull request #309 from and3rn3t/docs/roadmap-13-8-13-11\n\ndocs: update roadmap items 13.8 and 13.11"
           }
         ],
         "ref": "refs/heads/main"
       },
-      "created_at": "2026-11-13T03:28:15Z"
+      "created_at": "2026-11-15T00:34:11Z"
     },
     {
-      "id": "27070241245",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "8e4750de1864292e10011908da744dac8a8c3859",
-            "message": "Merge pull request #265 from and3rn3t/docs/readme\n\ndocs: rewrite the README for people, with a preview and status badges"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-12T03:42:23Z"
-    },
-    {
-      "id": "20065885587",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/agent-ready-check"
-          }
-        }
-      },
-      "created_at": "2026-11-12T22:49:01Z"
-    },
-    {
-      "id": "20065881050",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/agent-ready-check"
-          }
-        }
-      },
-      "created_at": "2026-11-12T22:48:57Z"
-    },
-    {
-      "id": "27069277227",
+      "id": "27190734771",
       "type": "CreateEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "feat/retire-legacy",
+        "ref": "docs/roadmap-13-8-13-11",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-11T22:54:30Z"
+      "created_at": "2026-11-15T00:31:07Z"
     },
     {
-      "id": "27068685783",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "ci/deploy-gate",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T03:06:17Z"
-    },
-    {
-      "id": "20063419834",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/mcp-server"
-          }
-        }
-      },
-      "created_at": "2026-11-12T17:48:22Z"
-    },
-    {
-      "id": "27067939500",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "36e53954b84c41165c2e8b7563debf2fcece9992",
-            "message": "Merge pull request #268 from and3rn3t/ci/lighthouse-median\n\nci: run Lighthouse three times and assert the median performance score"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-12T04:00:53Z"
-    },
-    {
-      "id": "27067622726",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/slim",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-11T22:33:52Z"
-    },
-    {
-      "id": "27066772293",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/consolidate",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T02:44:04Z"
-    },
-    {
-      "id": "27066624279",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/agent-content",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-12T03:02:08Z"
-    },
-    {
-      "id": "27065755750",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "192e04451e26a9cda44642783790690411afc2cc",
-            "message": "Merge pull request #255 from and3rn3t/feat/dialogs\n\nfeat(dialogs): command palette and keyboard help on native <dialog> (Phase 10.5b)"
-          }
-        ],
-        "ref": "refs/heads/redesign"
-      },
-      "created_at": "2026-11-11T22:14:36Z"
-    },
-    {
-      "id": "27065642092",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9d434ec1cfa8423c5ed6b259913c4286e109230d",
-            "message": "Merge pull request #264 from and3rn3t/chore/zone-script\n\nchore(zone): keep the Cloudflare zone settings in a script (Phase 11.0)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-12T03:29:11Z"
-    },
-    {
-      "id": "27063852342",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d0ce4d5c9736080bbad9ca3cac85cd80f6fe7c36",
-            "message": "fix(startup): real fallback timer, g-then-letter always on, no help over a dialog\n\n- whenNear used requestIdleCallback's timeout as its fallback, which is a\n  deadline, so the contact form and About stats started at the first idle moment\n  whatever the page showed; use a real timer\n- g then h/a/p/c lived in the deferred keyboard-help module, so a g c pressed\n  while it downloaded lost both keys (or the prefix if the module landed\n  between them); it needs nothing from the module, so it moves to main.js\n- a ? pressed while help loaded could open it on top of the palette; check for\n  an open dialog before requesting help and again when the module arrives\n\nTests: g c and the 1.2 s prefix before the module loads, the module landing\nbetween the two keys, g ignored while the palette is open, a dialog opened\nwhile help loads, and the contact form not loading merely because the\nbrowser is idle (each mutation-checked).\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/slim"
-      },
-      "created_at": "2026-11-11T23:17:00Z"
-    },
-    {
-      "id": "27061815492",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "ci/consistency-ignore-intentional",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T03:45:39Z"
-    },
-    {
-      "id": "27060034497",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "66ee932a06449a0584b87023717615d792faa662",
-            "message": "Merge pull request #250 from and3rn3t/feat/home-about\n\nfeat(home): About, Experience and Writing (Phase 10.3b)"
-          }
-        ],
-        "ref": "refs/heads/redesign"
-      },
-      "created_at": "2026-11-11T20:31:54Z"
-    },
-    {
-      "id": "27059564404",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "ci/e2e-paths-shard",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T03:19:45Z"
-    },
-    {
-      "id": "27058443759",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "chore/cutover",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-12T00:00:12Z"
-    },
-    {
-      "id": "27058323873",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/og-manifest",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-11T22:21:12Z"
-    },
-    {
-      "id": "27057759294",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/.github"
-      },
-      "payload": {
-        "ref": "feat/e2e-shard",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T03:02:53Z"
-    },
-    {
-      "id": "27057255033",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "52c18e8d6880d5d84cca1b59878fd3a874ef57ac",
-            "message": "fix(dialogs): a section jump closes help; short screens scroll; one toast, announced inside a dialog\n\n- g then a letter, pressed while keyboard help is open, jumped to a section the\n  modal made inert, so focus could not land there and help stayed open: close\n  help first\n- the help dialog clipped its lower shortcuts on a very short screen: let it\n  scroll vertically\n- the palette had its own toast in the same place as the page's, so both could\n  paint over each other: the palette now uses the page's one toast\n- the toast is outside any open modal dialog, so it is inert there and its\n  messages (offline, site updated) were not announced: each dialog carries an\n  empty live region and the message is said there too while it is open\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/dialogs"
-      },
-      "created_at": "2026-11-11T22:10:39Z"
-    },
-    {
-      "id": "27055451939",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "f4f3d07376ae5cdb7a7d664a7fac7d2cac863acb",
-            "message": "fix(zone): reject unrecognised arguments instead of selecting every group\n\n--only=tls and a misspelt flag were ignored, so a scoped --apply wrote every group.\nparseArgs now walks the arguments, accepts both --only tls and --only=tls, and throws on\nanything else.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/zone-script"
-      },
-      "created_at": "2026-11-12T03:20:49Z"
-    },
-    {
-      "id": "27054507104",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "181fa237d668b998b4660d02964100468576960a",
-            "message": "Merge pull request #257 from and3rn3t/feat/og-manifest\n\nfeat(brand): share card, browser bar and manifest colours (Phase 10.5c)"
-          }
-        ],
-        "ref": "refs/heads/redesign"
-      },
-      "created_at": "2026-11-11T23:16:59Z"
-    },
-    {
-      "id": "20043203301",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/zone-headers"
-          }
-        }
-      },
-      "created_at": "2026-11-12T18:36:54Z"
-    },
-    {
-      "id": "20042229327",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/zone-headers"
-          }
-        }
-      },
-      "created_at": "2026-11-12T18:27:01Z"
-    },
-    {
-      "id": "27052095968",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/minimatch-advisory",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T01:56:32Z"
-    },
-    {
-      "id": "27051213941",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b462d7203f6e4f47c55612f620ce9724cc07556c",
-            "message": "fix: lock contact fields while sending, and derive slugs from the repo\n\n- contact-form: fields are read-only while the request is out, so an edit\n  can't be lost to reset()\n- projectView: slug comes from github_repo's basename before metadata.name,\n  so the palette and the generator agree\n- contact-form.spec: match Formspree by hostname (CodeQL regex anchor)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/chore/cutover"
-      },
-      "created_at": "2026-11-12T02:32:03Z"
-    },
-    {
-      "id": "27050315434",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/csp-reports",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T01:35:38Z"
-    },
-    {
-      "id": "20037597189",
-      "type": "PullRequestReviewCommentEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": null,
-          "head": {
-            "ref": "feat/mcp-server"
-          }
-        }
-      },
-      "created_at": "2026-11-12T17:48:19Z"
-    },
-    {
-      "id": "27048026942",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "3d43ad39709a97469f19f2f871661ff9bb7d993f",
-            "message": "fix(presence): review fixes - close on any message, no metrics, isolated e2e\n\n- The Presence object closes a socket at the first message that reaches it:\n  the runtime answers \"ping\" itself, so anything else is not our client, and\n  each message would wake the billed object.\n- A browser that refuses to build the WebSocket no longer breaks the page:\n  presence stops for good, and the edge receipt starts first regardless.\n- Presence handshakes are not written to portfolio_metrics (they carried the\n  visitor's Cloudflare location and a browser/agent guess).\n- e2e: the Worker mock is a function (mockWorker) usable on a page or a\n  context. The two specs that build their own contexts now use it, so no\n  run reaches the deployed Worker (they did: views, edge, presence), and a\n  unit test fails if a spec builds its own context without it.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/presence"
-      },
-      "created_at": "2026-11-13T01:13:07Z"
-    },
-    {
-      "id": "27046991766",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "44e590cee1c4afde315d8ccea47c9617fb88da43",
-            "message": "Merge pull request #260 from and3rn3t/feat/retire-legacy\n\nrefactor(styles): retire styles.css (Phase 10.6b)"
-          }
-        ],
-        "ref": "refs/heads/redesign"
-      },
-      "created_at": "2026-11-11T23:43:23Z"
-    },
-    {
-      "id": "27046911526",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/presence",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T01:02:50Z"
-    },
-    {
-      "id": "20031321874",
+      "id": "20152347809",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": "docs: mark roadmap items 13.4 to 13.6 done",
+          "title": "chore: Phase 14.0 backlog sweep (#217 #225 #226 #229 #230 #235 #236)",
           "head": {
-            "ref": "docs/phase-13-status"
+            "ref": "chore/phase-14-0-sweep"
           }
         }
       },
-      "created_at": "2026-11-13T15:42:25Z"
+      "created_at": "2026-11-15T01:48:52Z"
     },
     {
-      "id": "20031227631",
+      "id": "20152293520",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: block hand edits to generated files with a PreToolUse hook",
+          "title": "chore: Phase 14.0 backlog sweep (#217 #225 #226 #229 #230 #235 #236)",
           "head": {
-            "ref": "feat/guard-generated"
+            "ref": "chore/phase-14-0-sweep"
           }
         }
       },
-      "created_at": "2026-11-13T15:41:22Z"
+      "created_at": "2026-11-15T01:46:17Z"
     },
     {
-      "id": "20030924611",
+      "id": "20152249266",
       "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
         "pull_request": {
-          "title": "feat: block hand edits to generated files with a PreToolUse hook",
+          "title": "chore: Phase 14.0 backlog sweep (#217 #225 #226 #229 #230 #235 #236)",
           "head": {
-            "ref": "feat/guard-generated"
+            "ref": "chore/phase-14-0-sweep"
           }
         }
       },
-      "created_at": "2026-11-13T15:37:07Z"
+      "created_at": "2026-11-15T01:46:17Z"
     },
     {
-      "id": "20030901750",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: add csp-reviewer and lighthouse-triage subagents",
-          "head": {
-            "ref": "feat/claude-agents"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:37:49Z"
-    },
-    {
-      "id": "20030897939",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: add csp-reviewer and lighthouse-triage subagents",
-          "head": {
-            "ref": "feat/claude-agents"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:35:17Z"
-    },
-    {
-      "id": "20030834474",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: block hand edits to generated files with a PreToolUse hook",
-          "head": {
-            "ref": "feat/guard-generated"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:37:07Z"
-    },
-    {
-      "id": "20030662158",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: add csp-reviewer and lighthouse-triage subagents",
-          "head": {
-            "ref": "feat/claude-agents"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:35:17Z"
-    },
-    {
-      "id": "20030187404",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: open dated follow-up issues with the live numbers",
-          "head": {
-            "ref": "feat/follow-up-issues"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:30:25Z"
-    },
-    {
-      "id": "27044662542",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "005207d18ee86663ba29d9501c9be4e02fbf0059",
-            "message": "fix(transitions): clear view-transition names once a transition is over\n\nThe names were set for a navigation and never removed, so a theme switch\ncaptured the named elements separately, and after going back and opening a\ndifferent project two cards could share a name, which makes the browser skip\nthe transition. Clear the names when the transition settles (skipped or\nfinished), clear leftovers before naming, and clear on a back/forward-cache\nrestore. Tests record the names during a real navigation and fail on the old\nscript.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/project-pages"
-      },
-      "created_at": "2026-11-11T21:29:38Z"
-    },
-    {
-      "id": "20029985293",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: open dated follow-up issues with the live numbers",
-          "head": {
-            "ref": "feat/follow-up-issues"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:26:37Z"
-    },
-    {
-      "id": "20029826274",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: open dated follow-up issues with the live numbers",
-          "head": {
-            "ref": "feat/follow-up-issues"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:26:37Z"
-    },
-    {
-      "id": "20029116066",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(content): add the \"Making a Portfolio Agent-Ready\" post",
-          "head": {
-            "ref": "feat/agent-ready-post"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:18:20Z"
-    },
-    {
-      "id": "20029034719",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(content): add the \"Making a Portfolio Agent-Ready\" post",
-          "head": {
-            "ref": "feat/agent-ready-post"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:18:20Z"
-    },
-    {
-      "id": "20028780391",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: add repo skills and a project .mcp.json for Claude Code",
-          "head": {
-            "ref": "chore/repo-skills"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:15:41Z"
-    },
-    {
-      "id": "20028762723",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: add repo skills and a project .mcp.json for Claude Code",
-          "head": {
-            "ref": "chore/repo-skills"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:13:13Z"
-    },
-    {
-      "id": "20028744589",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: add titles and read-only annotations to the MCP tools",
-          "head": {
-            "ref": "feat/mcp-annotations"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:15:20Z"
-    },
-    {
-      "id": "20028710860",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: add Phase 13 (Claude candidates) to the roadmap",
-          "head": {
-            "ref": "docs/phase-13-ideas"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:15:00Z"
-    },
-    {
-      "id": "20028550744",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: add Phase 13 (Claude candidates) to the roadmap",
-          "head": {
-            "ref": "docs/phase-13-ideas"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:13:09Z"
-    },
-    {
-      "id": "20028538618",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: add repo skills and a project .mcp.json for Claude Code",
-          "head": {
-            "ref": "chore/repo-skills"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:13:13Z"
-    },
-    {
-      "id": "20028535496",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat: add titles and read-only annotations to the MCP tools",
-          "head": {
-            "ref": "feat/mcp-annotations"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:13:11Z"
-    },
-    {
-      "id": "20028532248",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs: add Phase 13 (Claude candidates) to the roadmap",
-          "head": {
-            "ref": "docs/phase-13-ideas"
-          }
-        }
-      },
-      "created_at": "2026-11-13T15:13:09Z"
-    },
-    {
-      "id": "27042910323",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "a28543d576a5bcd453f4b4f2a6bb0d8cb88cdb8f",
-            "message": "fix(offline): make the browser-bar colour follow a saved theme\n\nThe two theme-color tags are keyed to the OS colour scheme, and the page's\nbootstrap applied a saved theme only to data-theme, so a visitor whose saved\nchoice differed from their OS got a bar that did not match the page. The\nbootstrap now points both tags at the colour of the theme actually shown, and\nleaves the OS-specific pair alone when nothing is saved.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/og-manifest"
-      },
-      "created_at": "2026-11-11T22:58:08Z"
-    },
-    {
-      "id": "27042774468",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/prerender-content",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-11T18:35:02Z"
-    },
-    {
-      "id": "27042717834",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b037461c6b878f05b00eaf2d8d30ef17723eefea",
-            "message": "fix(webmcp): show the message tab for a draft, keep tools across bfcache\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/webmcp"
-      },
-      "created_at": "2026-11-12T22:30:47Z"
-    },
-    {
-      "id": "27042675716",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "de5e052c22b608c8c12c8c3e7fc681bd9f724660",
-            "message": "Merge pull request #280 from and3rn3t/feat/status-page\n\nfeat(worker): /api/stats, uptime probe, get_site_stats (Phase 12.4a)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-13T00:23:26Z"
-    },
-    {
-      "id": "27042480853",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7d3f814fc4663842307120e6d22bfa35266a2751",
-            "message": "Merge branch 'main' into feat/mcp-server"
-          }
-        ],
-        "ref": "refs/heads/feat/mcp-server"
-      },
-      "created_at": "2026-11-12T04:03:12Z"
-    },
-    {
-      "id": "27042363106",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/mcp-server",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-12T04:02:09Z"
-    },
-    {
-      "id": "27040336792",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9ae9c161b1071e761bb735f157dc16c619f6e90b",
-            "message": "docs: state the Node and pnpm versions the repo enforces\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/docs/readme"
-      },
-      "created_at": "2026-11-12T03:35:56Z"
-    },
-    {
-      "id": "27039899564",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "70b8fd28c3f5225e7fc8c66e08c3ee93649b52c2",
-            "message": "Merge branch 'main' into chore/readme-cards"
-          }
-        ],
-        "ref": "refs/heads/chore/readme-cards"
-      },
-      "created_at": "2026-11-12T03:31:08Z"
-    },
-    {
-      "id": "27039814962",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "96afc83a29e101786ddee3a0c9fdd24f3a0e3f79",
-            "message": "Merge branch 'main' into docs/readme"
-          }
-        ],
-        "ref": "refs/heads/docs/readme"
-      },
-      "created_at": "2026-11-12T03:30:17Z"
-    },
-    {
-      "id": "27039589502",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/health"
-      },
-      "payload": {
-        "ref": "renovate/minimatch-=9.0.0,-9.0.7-11.x",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-12T22:03:43Z"
-    },
-    {
-      "id": "27039023298",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "cd2f1d43c227ed6c3de834f2d0b1539e517cc979",
-            "message": "Merge branch 'main' into chore/zone-script"
-          }
-        ],
-        "ref": "refs/heads/chore/zone-script"
-      },
-      "created_at": "2026-11-12T03:21:55Z"
-    },
-    {
-      "id": "27038058586",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9d1a164ce230b3df36c99e63b76c75331001e85d",
-            "message": "Merge pull request #262 from and3rn3t/feat/agent-content\n\nfeat(seo): robots.txt, llms.txt and content-first source for AI agents (Phase 11.1)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-12T03:09:24Z"
-    },
-    {
-      "id": "27037999387",
+      "id": "27190409340",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "feat/home-contact",
+        "ref": "feat/webmcp",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-11T21:24:16Z"
+      "created_at": "2026-11-12T22:37:30Z"
     },
     {
-      "id": "27037499769",
+      "id": "20152022099",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(roadmap): plan Phase 14 from the 2026-11-15 re-audit",
+          "head": {
+            "ref": "docs/phase-14-plan"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:40:32Z"
+    },
+    {
+      "id": "20151994714",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(roadmap): plan Phase 14 from the 2026-11-15 re-audit",
+          "head": {
+            "ref": "docs/phase-14-plan"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:38:45Z"
+    },
+    {
+      "id": "20151950622",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs(roadmap): plan Phase 14 from the 2026-11-15 re-audit",
+          "head": {
+            "ref": "docs/phase-14-plan"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:38:45Z"
+    },
+    {
+      "id": "27189750326",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "feat/post-pages",
+        "ref": "feat/claude-action",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-11T22:01:39Z"
+      "created_at": "2026-11-15T00:17:11Z"
     },
     {
-      "id": "27037191612",
-      "type": "CreateEvent",
+      "id": "20151570230",
+      "type": "IssueCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
-      "payload": {
-        "ref": "feat/home-about",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-11T20:07:29Z"
+      "payload": {},
+      "created_at": "2026-11-15T01:29:26Z"
     },
     {
-      "id": "27036985644",
-      "type": "CreateEvent",
+      "id": "20151569457",
+      "type": "IssueCommentEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
-      "payload": {
-        "ref": "feat/same-origin-api",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-12T03:36:55Z"
+      "payload": {},
+      "created_at": "2026-11-15T01:29:25Z"
     },
     {
-      "id": "27034943213",
+      "id": "20151569090",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:23Z"
+    },
+    {
+      "id": "20151567927",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:23Z"
+    },
+    {
+      "id": "20151567606",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:22Z"
+    },
+    {
+      "id": "20151566728",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:21Z"
+    },
+    {
+      "id": "20151566396",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:20Z"
+    },
+    {
+      "id": "20151565616",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:19Z"
+    },
+    {
+      "id": "20151565035",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:29:18Z"
+    },
+    {
+      "id": "20151540080",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:41Z"
+    },
+    {
+      "id": "20151539956",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:41Z"
+    },
+    {
+      "id": "20151539858",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:41Z"
+    },
+    {
+      "id": "20151539752",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:41Z"
+    },
+    {
+      "id": "20151539613",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:41Z"
+    },
+    {
+      "id": "20151539350",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:40Z"
+    },
+    {
+      "id": "20151539215",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:40Z"
+    },
+    {
+      "id": "20151539065",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:40Z"
+    },
+    {
+      "id": "20151538939",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:40Z"
+    },
+    {
+      "id": "20151538832",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:39Z"
+    },
+    {
+      "id": "20151538366",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:39Z"
+    },
+    {
+      "id": "20151538243",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:39Z"
+    },
+    {
+      "id": "20151538073",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:38Z"
+    },
+    {
+      "id": "20151537875",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:38Z"
+    },
+    {
+      "id": "20151537729",
+      "type": "IssuesEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:28:38Z"
+    },
+    {
+      "id": "27188435579",
       "type": "DeleteEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "fix/worker-hardening",
+        "ref": "docs/phase-13-status",
         "ref_type": "branch"
       },
-      "created_at": "2026-11-11T17:15:44Z"
+      "created_at": "2026-11-14T23:59:57Z"
     },
     {
-      "id": "27034249618",
-      "type": "DeleteEvent",
+      "id": "20151222982",
+      "type": "PullRequestEvent",
       "repo": {
         "name": "and3rn3t/and3rn3t"
       },
       "payload": {
-        "ref": "feat/agent-ready-check",
-        "ref_type": "branch"
+        "pull_request": {
+          "title": "fix: tell Claude the project card is already shown to the user",
+          "head": {
+            "ref": "fix/show-project-description"
+          }
+        }
       },
-      "created_at": "2026-11-12T22:53:58Z"
+      "created_at": "2026-11-15T01:20:45Z"
+    },
+    {
+      "id": "20151143329",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: tell Claude the project card is already shown to the user",
+          "head": {
+            "ref": "fix/show-project-description"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:16:37Z"
+    },
+    {
+      "id": "20151128966",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: close Phase 13 in the roadmap",
+          "head": {
+            "ref": "docs/roadmap-phase-13-close"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:18:26Z"
+    },
+    {
+      "id": "20151125537",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: close Phase 13 in the roadmap",
+          "head": {
+            "ref": "docs/roadmap-phase-13-close"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:15:01Z"
+    },
+    {
+      "id": "20151058818",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-15T01:16:43Z"
+    },
+    {
+      "id": "20151054106",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: tell Claude the project card is already shown to the user",
+          "head": {
+            "ref": "fix/show-project-description"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:16:37Z"
+    },
+    {
+      "id": "20150988966",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "docs: close Phase 13 in the roadmap",
+          "head": {
+            "ref": "docs/roadmap-phase-13-close"
+          }
+        }
+      },
+      "created_at": "2026-11-15T01:15:01Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2640,47 +2436,8 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4916,
+    "total": 5015,
     "weeks": [
-      {
-        "days": [
-          {
-            "date": "2025-11-09",
-            "count": 23,
-            "level": 1
-          },
-          {
-            "date": "2025-11-10",
-            "count": 35,
-            "level": 1
-          },
-          {
-            "date": "2025-11-11",
-            "count": 19,
-            "level": 1
-          },
-          {
-            "date": "2025-11-12",
-            "count": 2,
-            "level": 1
-          },
-          {
-            "date": "2025-11-13",
-            "count": 1,
-            "level": 1
-          },
-          {
-            "date": "2025-11-14",
-            "count": 0,
-            "level": 0
-          },
-          {
-            "date": "2025-11-15",
-            "count": 46,
-            "level": 1
-          }
-        ]
-      },
       {
         "days": [
           {
@@ -4699,11 +4456,20 @@
           },
           {
             "date": "2026-11-13",
-            "count": 22,
+            "count": 24,
             "level": 1
           },
           {
             "date": "2026-11-14",
+            "count": 97,
+            "level": 3
+          }
+        ]
+      },
+      {
+        "days": [
+          {
+            "date": "2026-11-15",
             "count": 0,
             "level": 0
           }
@@ -4713,10 +4479,10 @@
   },
   "languageBytes": {
     "TypeScript": 10082841,
-    "HTML": 9447995,
+    "HTML": 9461269,
     "Swift": 4473277,
     "Python": 3373966,
-    "JavaScript": 2873477,
+    "JavaScript": 2916628,
     "Shell": 1021526,
     "R": 618546,
     "CSS": 415705,
@@ -4734,6 +4500,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-14T03:07:08Z",
+  "lastUpdated": "2026-11-15T03:07:27Z",
   "totalRepos": 54
 }
