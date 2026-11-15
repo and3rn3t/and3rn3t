@@ -10,9 +10,10 @@ Deploys change production for andernet.dev. Run this only when Matt has said "de
 2. `pnpm build:worker` (a dry run). Stop on any error.
 3. `pnpm test:unit` (includes `tests/worker`). Stop on any failure.
 4. Note the current version for rollback: `pnpm exec wrangler deployments list` and copy the newest id.
-5. `pnpm deploy:worker`. Copy the new version id from the output.
+5. `pnpm deploy:worker` (tags the version with the short SHA of `HEAD`, so `/api/edge` reports it). Copy the new version id from the output.
 6. Verify live, with the final status code only (`curl -s -o /dev/null -w '%{http_code}' <url>`; Early Hints can print a `103` first):
    - `https://andernet.dev/api/health` is 200
+   - `pnpm check:worker-deployed` says the live Worker is current
    - `https://andernet.dev/mcp` answers `tools/list` (POST JSON-RPC with `Accept: application/json, text/event-stream`; the reply is SSE `data:` lines)
    - `https://andernet.dev/.well-known/api-catalog` is 200
    - `pnpm check:probe` passes after a few minutes
