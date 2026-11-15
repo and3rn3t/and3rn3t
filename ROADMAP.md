@@ -77,10 +77,62 @@ was not built (13.9 found nothing to generate), so that estimate is moot.
 Dropped: any Claude call at visitor time (conflicts with the 2026-11-11 decision), and per-visitor
 personalisation (conflicts with the Phase 12 "no visitor tracking" decision).
 
+## Phase 14 — Faster, live, first-party
+
+What the 2026-11-15 re-audit recommended, in the order to do it. One PR per item from `main`. Rules carried
+over: nothing calls Claude at visitor time, nothing published counts or places visitors, GitHub Pages stays
+the origin, and nothing deploys or touches the zone without an explicit go. Effort: S under a day, M a day
+or two, L more.
+
+| #    | Item                                                                                                                                                                                                                                                                                                                                                 | Effort | Needs                                                                        | Status |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------------------------------------------------------- | ------ |
+| 14.0 | Backlog sweep, site and scripts only: the feed icon and `check:refs` reading `feed.xml` and `sitemap.xml` (#217), stale comments (#236), the `shortcuts-doctor` copy (#235), dead code and the hour-long rate-limit wait (#230, #225), the hero reseeding on a phone's URL bar (#226), one language-colour table and one relative-time helper (#229) | S      | Nothing                                                                      | ⬜     |
+| 14.1 | Cron-warmed snapshots (#319): the five-minute cron refreshes `/activity` and `/stats` into KV, requests only read. With it: a "no such project" answer stops counting as a tool error (#318), and the guestbook's legacy migration goes                                                                                                              | S      | A Worker deploy go                                                           | ⬜     |
+| 14.2 | Typed MCP results (#320): an `outputSchema` and `structuredContent` on all nine tools, the card reads the typed result, `SERVER_VERSION` moves                                                                                                                                                                                                       | S      | The same deploy as 14.1                                                      | ⬜     |
+| 14.3 | The status panel inside Claude: `show_status`, a second MCP App drawn from `get_site_stats` (uptime strip, Web Vitals, API latency). The half of 13.10 that did not ship                                                                                                                                                                             | M      | 14.2; a Worker deploy go                                                     | ⬜     |
+| 14.4 | State on the Durable Object: an atomic views counter in `Presence`'s SQLite, seeded from the KV value (closes #211), and the open pages told over the presence socket when a new version is live                                                                                                                                                     | M      | A Worker deploy go                                                           | ⬜     |
+| 14.5 | Prerender on hover: the site's own speculation rules (`moderate`, project and post pages) on top of Speed Brain's prefetch, with the view count, presence and the edge receipt held back while `document.prerendering`                                                                                                                               | S      | `pnpm zone --only headers --apply` (the CSP must allow the rules)            | ⬜     |
+| 14.6 | WebGPU hero: the flow field as a compute shader, the WASM sim as the fallback, behind the same `canRunHeavyEffects()` gate. Kept only if it beats the WASM frame rate and stays inside the budgets                                                                                                                                                   | M–L    | Nothing                                                                      | ⬜     |
+| 14.7 | First-party contact form: `POST /api/contact` with Turnstile and the `send_email` binding to a verified address; Formspree leaves the form and the CSP                                                                                                                                                                                               | M      | Matt: Email Routing on the zone and a verified address; a deploy; zone apply | ⬜     |
+| 14.8 | Test hygiene (#234): a coverage report, web-first waits in place of the short sleeps, a WASM drift check in `check:generated`, lint-staged on `.mjs`, `.cjs` and `.html`                                                                                                                                                                             | S–M    | Nothing                                                                      | ⬜     |
+
+Order: 14.0 first (no deploy, closes six issues), then 14.1 and 14.2 in one deploy, 14.3 and 14.4 in a
+second, 14.5 and 14.6 on the site alone, 14.7 last because it waits on the dashboard. 14.8 fits anywhere.
+
+How each is checked, since a number is the point of most of them:
+
+- **14.1**: `/activity` and `/stats` p95 under 100 ms in `portfolio_metrics` (2,876 ms and 4,396 ms over
+  the two days before), and a failed refresh never overwrites a good value. The eval's "zzz-not-a-project"
+  question no longer shows as an error on `/status/`.
+- **14.4**: two hundred overlapping `POST /views` in a test add exactly two hundred. The KV value is read
+  once to seed the counter and KV stays as it is until the count has matched for a week.
+- **14.5**: a prerendered page opens no socket and posts no view until it is shown (an e2e test with
+  `document.prerendering` stubbed). Speed Brain only prefetches from the cache and never runs the Worker, so
+  nothing is double-counted today; prerendering runs scripts, which is why the guards come first.
+- **14.6**: frames per second from the HUD on the same machine, both paths, and `budgets.spec.js` unchanged.
+- **14.7**: before anything, `dig MX andernet.dev`: turning on Email Routing adds MX records, so if the
+  domain already receives mail somewhere else this item stops there. The Formspree form stays as the
+  no-JavaScript path until a real message has arrived through the Worker.
+
+Not planned, because each reverses a decision: moving the GitHub data out of git (a Worker cron in place of
+the daily commit and deploy) and replacing the GitHub Pages origin with Workers Static Assets.
+
 ## Decision Log
 
 Older entries (2026-06 to 2026-11-11, including all of Phase 10) are in
 [docs/ROADMAP-archive.md](docs/ROADMAP-archive.md).
+
+- **2026-11-15** — Phase 14 planned from a re-audit, not started. Matt's brief: whatever the audit recommends
+  that fits the project. The audit re-checked the nine open issues against `main` (most shrank after Phase
+  10; each has a dated comment) and filed #318 to #320. Findings that shaped the plan: **(1)** `/activity`
+  and `/stats` p95 were 2.9 s and 4.4 s, because the Cache API is per location and at this traffic almost
+  every request is a miss; the cron already runs every five minutes. **(2)** The one CSP report so far is
+  `script-src` blocking `eval` on `/` (2026-11-13, once); the site has no `eval`, so it reads as an extension
+  or an old browser treating WASM as eval. One more input for the 2026-11-27 enforce-or-not issue. **(3)**
+  Speed Brain is already on (`Speculation-Rules: "/cdn-cgi/speculation"`, conservative prefetch from cache
+  only), so 14.5 adds prerendering, not prefetching. **(4)** 14.4 changes the 2026-11-11 "views stay on KV"
+  decision: that was made before the Worker had a Durable Object. **(5)** Sending to a verified destination
+  address with `send_email` is free on any plan, but needs Email Routing on the zone.
 
 - **2026-11-15** — Phase 13 (Claude) shipped, except 13.7 (dropped). Claude can now use the site three ways:
   as a claude.ai custom connector (`/mcp`, No sign-in; all 8 tools show as read-only with titles), through
