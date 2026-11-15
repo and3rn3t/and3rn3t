@@ -60,23 +60,19 @@ nothing deploys or touches the zone without an explicit go. Effort: S under a da
 | 13.4  | Dated follow-ups as issues opened by `scripts/follow-ups.mjs` from `site-check.yml`: the CSP enforce-or-not check (from 2026-11-27) and the AI Crawl Control comparison (2026-12-09), (the weekly scan diff was dropped: `site-check.yml` already runs `check:agent-ready` daily)   | S      | Nothing                            | ✅ 2026-11-13 |
 | 13.5  | Subagents in `.claude/agents/`: `csp-reviewer` (inline script or style changes need new hashes), `lighthouse-triage` (runner flake or real regression) (`numberOfRuns: 3` was already in `.lighthouserc*.cjs`)                                                                      | S      | Nothing                            | ✅ 2026-11-13 |
 | 13.6  | Hook: PreToolUse guard that blocks hand edits to files `pnpm check:generated` owns (the optional Stop hook running `pnpm validate` was left out: it would run the whole gate on every turn)                                                                                         | S      | Nothing                            | ✅ 2026-11-13 |
-| 13.7  | Plugin marketplace in its own repo: the portfolio skill plus the `/mcp` config, installable with `claude plugin marketplace add`                                                                                                                                                    | M      | A new repo                         | ⬜            |
+| 13.7  | Plugin marketplace in its own repo: the portfolio skill plus the `/mcp` config, installable with `claude plugin marketplace add` Dropped 2026-11-15: the skill and the connector already install from the site and `/mcp`, so a second repo to keep in step is not worth it         | M      | Nothing                            | ❌            |
 | 13.8  | Eval suite for `/mcp` and the agent skill: does Claude answer portfolio questions correctly through the tools? CI, report only                                                                                                                                                      | M      | Nothing                            | ✅ 2026-11-15 |
 | 13.9  | Copy lint: `pnpm check:copy` is in `validate` (no gendered pronouns about Matt). Alt text audited 2026-11-15: every screenshot has hand-written alt and the generated covers are decorative (`alt=""`), so nothing to generate. Post TL;DRs dropped: posts already have a `summary` | M      | Nothing                            | ✅ 2026-11-14 |
 | 13.10 | MCP Apps: a project card and the status panel rendered inside Claude (`@modelcontextprotocol/ext-apps`, `ui.domain` for `/mcp`) Live as `show_project` (#313): +4.3 KiB bundle, the card renders in claude.ai as Unverified, no directory listing needed                            | M–L    | Nothing                            | ✅ 2026-11-15 |
 | 13.11 | `anthropics/claude-code-action@v1` for `@claude` on PRs and issues                                                                                                                                                                                                                  | S      | Test on a PR; compare with Copilot | ✅ 2026-11-14 |
 
-Order: 13.1 first (cheap, and 13.3, 13.7 and 13.10 build on it), then 13.2 to 13.6, which need nothing from
-outside the repo. 13.8, 13.9 and 13.11 needed a CI secret: `CLAUDE_CODE_OAUTH_TOKEN` was added on
-2026-11-15 (the repo also has `CLOUDFLARE_PURGE_TOKEN`, `GHA_TOKEN` and `SONAR_TOKEN`), so only 13.7 and 13.10
-still wait on something else.
+Order: 13.1 first (cheap, and 13.3 and 13.10 build on it), then 13.2 to 13.6, which need nothing from outside the
+repo, then 13.8, 13.9 and 13.11 once `CLAUDE_CODE_OAUTH_TOKEN` was added on 2026-11-15 (the repo also has
+`CLOUDFLARE_PURGE_TOKEN`, `GHA_TOKEN` and `SONAR_TOKEN`).
 
-Cost of the build-time items (estimate, not measured): a full run of 13.9 over about 30 READMEs, the post
-TL;DRs and image alt text is roughly 150k input and 20k output tokens. At cached list prices that is about
-$0.03 on Haiku 5.5 ($0.10/$0.50 per MTok), $0.50 on Sonnet 5.5 ($2/$10) or $1.00 on Opus 5.5 ($4/$20).
-Runs are daily and only when inputs change, so most days cost cents. At this size neither Batches (50% off,
-asynchronous) nor prompt caching (the shared prompt is below the minimum cacheable prefix) is worth the
-complexity.
+Cost: nothing here calls Claude at visitor time. The only spend is on the Claude subscription: the weekly MCP
+eval (five short Haiku 5.5 sessions) and any `@claude` run. The build-time generation priced in the first draft
+was not built (13.9 found nothing to generate), so that estimate is moot.
 
 Dropped: any Claude call at visitor time (conflicts with the 2026-11-11 decision), and per-visitor
 personalisation (conflicts with the Phase 12 "no visitor tracking" decision).
@@ -85,6 +81,27 @@ personalisation (conflicts with the Phase 12 "no visitor tracking" decision).
 
 Older entries (2026-06 to 2026-11-11, including all of Phase 10) are in
 [docs/ROADMAP-archive.md](docs/ROADMAP-archive.md).
+
+- **2026-11-15** — Phase 13 (Claude) shipped, except 13.7 (dropped). Claude can now use the site three ways:
+  as a claude.ai custom connector (`/mcp`, No sign-in; all 8 tools show as read-only with titles), through
+  `show_project`, a ninth tool that draws a project card inside Claude (an MCP App; it renders marked
+  Unverified, no directory listing needed, +4.3 KiB on the Worker), and through the post "Making a portfolio
+  agent-ready". In the repo, Claude Code has three skills, two subagents, a hook that blocks hand edits to
+  generated files, and `.mcp.json`; GitHub has an `@claude` workflow (it answered on #309 in 26 seconds) and
+  a weekly MCP eval that checks portfolio answers and that the agent skill agrees with the live tools. Things
+  worth remembering: **(1)** nothing calls Claude at visitor time (the 2026-11-11 decision held); Claude runs
+  only in Matt's sessions and in CI on `CLAUDE_CODE_OAUTH_TOKEN`. **(2)** `@claude` uses the workflow's own
+  `GITHUB_TOKEN`, so no GitHub App is installed, and commits it pushes do not start other workflows. **(3)**
+  `wrangler deploy` can upload a version and then fail at the deployments step (Cloudflare error 10013 during
+  an incident, about 28 hours); `wrangler versions deploy <id>@100%` finishes it. **(4)** `/ship-worker` and
+  `zone-apply` only run when Matt types them: Claude cannot invoke them. **(5)** `pnpm check:copy` is part of
+  `validate`: no gendered pronouns about Matt anywhere visitors, crawlers or agents read. **(6)** 13.9 found
+  nothing to generate: every screenshot already has hand-written alt text, covers are decorative on purpose,
+  and posts have a `summary`. **Still to do:** the follow-up issues open themselves on 2026-11-27 (CSP
+  enforce-or-not) and 2026-12-09 (crawler comparison); check the one `script-src` CSP report's blocked URI
+  before the first; compare `@claude` with Copilot's review once there is more than one run; and, if wanted,
+  tell Claude in the `show_project` description that the card is shown to the user, so it stops repeating
+  the data (needs a Worker deploy).
 
 - **2026-11-13** — Phase 13 (Claude candidates) drafted, not started. Findings that shaped it: the live
   `/mcp` has 8 tools and none carries `title` or `readOnlyHint`; claude.ai accepts a No-sign-in remote MCP
