@@ -19,6 +19,16 @@ test.use({
     },
 });
 
+// The hero only starts on a device that passes capabilities.js's low-end check (more than 4 cores
+// and more than 4 GB), and a CI runner does not, so without this the field never mounts there and
+// every test below waits for nothing. These tests are about the field, not about that check.
+test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => 8 });
+        Object.defineProperty(navigator, 'deviceMemory', { get: () => 8 });
+    });
+});
+
 test.describe('without the flag', () => {
     test('the page never loads the GPU module', async ({ page }) => {
         const requested = [];
