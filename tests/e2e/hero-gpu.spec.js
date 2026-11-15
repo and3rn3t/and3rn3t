@@ -140,3 +140,48 @@ test.describe('with a GPU', () => {
         expect(stats.particles).toBe(250000);
     });
 });
+
+test.describe('the hero seed', () => {
+    const seedOf = page =>
+        page.evaluate(() => globalThis.appState.managers.heroCanvas.seed ?? null);
+    const ready = page =>
+        page.waitForFunction(() => globalThis.appState?.managers?.heroCanvas, null, {
+            timeout: 15000,
+        });
+
+    test('is 0, the field the site always drew, on a plain visit', async ({ page }) => {
+        await page.goto('/');
+        await ready(page);
+        expect(await seedOf(page)).toBe(0);
+    });
+
+    test('?seed= picks a picture, and the daily switch picks the UTC day', async ({ page }) => {
+        await page.goto('/?seed=flow');
+        await ready(page);
+        const flow = await seedOf(page);
+        expect(flow).toBeGreaterThan(0);
+
+        await page.addInitScript(() => localStorage.setItem('lab', 'hero-seed'));
+        await page.goto('/');
+        await ready(page);
+        expect(await seedOf(page)).toBe(Math.floor(Date.now() / 86_400_000) + 1);
+    });
+
+    test('the GPU field takes the same seed and runs with no WebGPU error', async ({ page }) => {
+        const problems = [];
+        page.on('console', message => {
+            if (/GPU|WebGPU|bind ?group|pipeline|uniform|buffer/i.test(message.text())) {
+                problems.push(message.text().slice(0, 300));
+            }
+        });
+        await page.goto('/?hero=gpu&seed=flow');
+        await ready(page);
+        const stats = await page.evaluate(() => globalThis.appState.managers.heroCanvas.stats?.());
+        test.skip(stats?.kind !== 'gpu', 'no WebGPU adapter here (CI has none)');
+        const wasm = await page
+            .goto('/?seed=flow')
+            .then(() => ready(page).then(() => seedOf(page)));
+        expect(stats.seed).toBe(wasm);
+        expect(problems).toEqual([]);
+    });
+});

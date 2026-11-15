@@ -143,6 +143,7 @@ export async function mountHeroSim(canvas, opts = {}) {
 
         const target = Math.round(width * height * density);
         const n = Math.max(800, Math.min(maxParticles, target));
+        sim.setSeed?.(opts.seed ?? 0); // an older cached binary has no seed: the default field
         sim.init(n, width, height);
         refreshView();
         ctx.clearRect(0, 0, width, height);
@@ -257,6 +258,7 @@ export async function mountHeroSim(canvas, opts = {}) {
     start();
 
     return {
+        seed: opts.seed ?? 0,
         destroy() {
             stop();
             unobserve();

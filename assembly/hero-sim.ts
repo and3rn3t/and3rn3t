@@ -31,6 +31,19 @@ function rnd(): f32 {
   return <f32>(seed & 0xffffff) / <f32>0xffffff;
 }
 
+// Where the noise field sits. 0, 0 is the field the site has always drawn; setSeed moves it.
+let offsetX: f32 = 0;
+let offsetY: f32 = 0;
+
+// Scramble a seed into 32 well-spread bits. Must match `mix` in modules/utils/hero-seed.js.
+function mix(value: u32): u32 {
+  let h: u32 = value * 2654435761;
+  h ^= h >> 15;
+  h *= 2246822519;
+  h ^= h >> 13;
+  return h;
+}
+
 // ── Value noise (matches the spirit of the GLSL fbm in hero-canvas.js) ──────
 function hash(x: f32, y: f32): f32 {
   let px: f32 = x * 123.34;
@@ -78,6 +91,34 @@ function fbm(x: f32, y: f32): f32 {
 }
 
 // ── Public API ──────────────────────────────────────────────────────────────
+
+/**
+ * Pick the picture: seed 0 is the default field, any other moves the noise field and fixes where
+ * the particles start. Call before `init`. Must match `seedLayout` in modules/utils/hero-seed.js.
+ */
+export function setSeed(value: u32): void {
+  if (value == 0) {
+    seed = 0x9e3779b9;
+    offsetX = 0;
+    offsetY = 0;
+    return;
+  }
+  const first: u32 = mix(value);
+  const second: u32 = mix(first);
+  offsetX = (<f32>(first & 0xffff) / 65536.0) * 32.0;
+  offsetY = (<f32>(second & 0xffff) / 65536.0) * 32.0;
+  seed = second | 1;
+}
+
+/** The noise field's horizontal offset (for tests). */
+export function seedOffsetX(): f32 {
+  return offsetX;
+}
+
+/** The noise field's vertical offset (for tests). */
+export function seedOffsetY(): f32 {
+  return offsetY;
+}
 
 /** Allocate `n` particles for a `w` x `h` field and scatter them randomly. */
 export function init(n: i32, w: f32, h: f32): void {
@@ -133,8 +174,8 @@ export function step(time: f32, speed: f32): void {
     const y: f32 = unchecked(particles[base + 1]);
 
     // Domain-warped noise → smooth flow angle.
-    const nx: f32 = x * inv * 2.2;
-    const ny: f32 = y * inv * 2.2;
+    const nx: f32 = x * inv * 2.2 + offsetX;
+    const ny: f32 = y * inv * 2.2 + offsetY;
     const wx: f32 = fbm(nx + t, ny - t);
     const wy: f32 = fbm(nx + 5.2 - t, ny + 1.3 + t);
     const angle: f32 = fbm(nx + 2.0 * wx, ny + 2.0 * wy) * TAU * 2.0;

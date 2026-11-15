@@ -359,6 +359,7 @@ async function initializeApp() {
 async function initHeroEnhancements() {
     try {
         const { canRunHeavyEffects, lab } = await import('./modules/capabilities.js');
+        const { heroSeed } = await import('./modules/utils/hero-seed.js');
         if (!canRunHeavyEffects()) {
             return; // CSS fallback gradient remains visible.
         }
@@ -370,7 +371,14 @@ async function initHeroEnhancements() {
         // WASM particle flow-field on a transparent 2D canvas. If WASM can't load, the
         // stylesheet's static glow stays and nothing else is needed.
         try {
-            const heroOptions = { reducedMotion: motion.reduced };
+            // `?seed=` (a permalink) or the `hero-seed` lab switch (a new field each UTC day) picks a
+            // different picture; with neither, the seed is 0 and the field is the one the site always drew
+            const seed = heroSeed({
+                search: location.search,
+                now: Date.now(),
+                daily: lab('hero-seed'),
+            });
+            const heroOptions = { reducedMotion: motion.reduced, seed };
             let handle = null;
             // An experiment, off unless asked for (`?hero=gpu`, `?lab=hero-gpu` or the switch on /lab/):
             // the same field on the GPU
