@@ -192,7 +192,7 @@ export function createServer(env, deps) {
         {
             title: 'Show a project card',
             description:
-                'Show one project as a card (title, description, technologies, links) in clients that can display MCP Apps. Same data as get_project.',
+                'Show one project as a card (title, description, technologies, links) in clients that can display MCP Apps. Same data as get_project. Where the client displays the card, the user already sees it, so do not repeat its contents there; add at most one sentence. Where it does not, answer from the data.',
             inputSchema: {
                 name: z.string().describe('The project name or page slug, e.g. "health"'),
             },
