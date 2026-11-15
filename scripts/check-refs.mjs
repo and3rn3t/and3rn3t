@@ -4,7 +4,7 @@
  *
  * GitHub Pages serves the raw source (no bundler), so a typo in an import path or a
  * file left out of the Pages sparse checkout only shows up as a 404 in production.
- * This walks the HTML pages, the manifest, the service-worker precache list, CSS
+ * This walks the HTML pages, feed.xml, sitemap.xml, the manifest, the service-worker precache list, CSS
  * url()s and the JS import graph, and fails if a target is missing on disk or isn't
  * matched by the publish allowlist in .github/workflows/pages.yml.
  *
@@ -56,6 +56,15 @@ for (const page of pages) {
   // Social cards etc. live in content="" (only absolute links to this site count).
   for (const [, url] of read(page).matchAll(/\scontent="(https:\/\/andernet\.dev\/[^"]+)"/g)) {
     addRef(url, page);
+  }
+}
+
+// The feed and the sitemap name this site's own files too (the feed's channel image once 404ed).
+for (const file of ['feed.xml', 'sitemap.xml']) {
+  for (const [, url] of read(file).matchAll(
+    /<(?:url|link|loc)>\s*(https:\/\/andernet\.dev\/[^<\s]+)\s*</g
+  )) {
+    addRef(url, file);
   }
 }
 
