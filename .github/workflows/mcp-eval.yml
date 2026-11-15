@@ -1,0 +1,26 @@
+# Weekly: ask Claude portfolio questions through the live /mcp server and report which answers
+# were right. Report only, so it never fails the run; the table lands in the job summary.
+# Each question is a real Claude Code run on the CLAUDE_CODE_OAUTH_TOKEN subscription.
+name: MCP eval
+
+on:
+  schedule:
+    - cron: '40 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          sparse-checkout: scripts/mcp-eval.mjs
+          persist-credentials: false
+      - run: npm install --global @anthropic-ai/claude-code@2.1.325
+      - run: node scripts/mcp-eval.mjs https://andernet.dev --run
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
