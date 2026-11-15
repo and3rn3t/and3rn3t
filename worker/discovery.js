@@ -15,7 +15,7 @@
  * Workers-compatible: standard fetch/Web Crypto only.
  */
 
-import { SERVER_VERSION } from './mcp.js';
+import { SERVER_ICONS, SERVER_VERSION } from './mcp.js';
 import { SITE_ORIGIN } from './site-data.js';
 
 const SKILL_NAME = 'andernet-portfolio';
@@ -91,6 +91,7 @@ export const serverCard = () => ({
         name: 'andernet-portfolio',
         title: "Matthew Anderson's portfolio",
         version: SERVER_VERSION,
+        icons: SERVER_ICONS,
     },
     description:
         "Read-only tools over Matthew Anderson's portfolio: projects, posts, work history and recent GitHub activity.",

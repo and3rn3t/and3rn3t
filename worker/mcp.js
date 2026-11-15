@@ -32,6 +32,12 @@ const SERVER_NAME = 'andernet-portfolio';
 // tool list until its version changes, and a new tool at the same version may never reach them
 // (tests/worker/mcp.test.js pins the two together).
 export const SERVER_VERSION = '1.2.0';
+// The mark a client shows beside the server's name: the green "agent" tile that
+// scripts/brand-mark.mjs draws (`pnpm build:brand`). PNG first, since SVG support is optional.
+export const SERVER_ICONS = [
+    { src: `${SITE_ORIGIN}/icons/agent-512.png`, mimeType: 'image/png', sizes: ['512x512'] },
+    { src: `${SITE_ORIGIN}/icons/agent.svg`, mimeType: 'image/svg+xml', sizes: ['any'] },
+];
 
 /**
  * A result for clients that read typed data (structuredContent, checked against the tool's
@@ -190,6 +196,8 @@ export function createServer(env, deps) {
         name: SERVER_NAME,
         title: "Matthew Anderson's portfolio",
         version: SERVER_VERSION,
+        websiteUrl: `${SITE_ORIGIN}/`,
+        icons: SERVER_ICONS,
     });
 
     // Every tool only reads, so Claude can run them without asking each time. A tool that

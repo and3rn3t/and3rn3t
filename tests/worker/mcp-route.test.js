@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('../../worker/mcp.js', () => ({
     SERVER_VERSION: '1.0.0',
+    SERVER_ICONS: [],
     handleMcp: vi.fn(async () => new Response('mcp-ok')),
 }));
 
