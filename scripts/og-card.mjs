@@ -26,6 +26,19 @@ const ACCENT = '#4ade80';
 const MONO = 'class="mono" font-family="ui-monospace,monospace"';
 
 /**
+ * The contribution total as the card prints it: exact below a thousand, else thousands to one
+ * decimal, rounded down ("4.6k"). The total grows by dozens a day, so the exact figure would make
+ * every daily refresh re-render the card; this changes about once in four days. The hash in
+ * update-github-data.yml rounds the same way (floor to a hundred), so keep the two in step.
+ * @param {number} total
+ * @returns {string}
+ */
+export function formatContributions(total) {
+  if (total < 1000) return String(total);
+  return `${(Math.floor(total / 100) / 10).toFixed(1)}k`;
+}
+
+/**
  * @param {{ repositories?: Array<{ stargazers_count?: number }>,
  *   contributions?: { total?: number }, languageBytes?: Record<string, number> } | null} ghData
  * @returns {string} SVG markup
@@ -77,7 +90,7 @@ export function renderPortfolioCard(ghData) {
   const stats = [
     { value: repoCount, label: 'Repositories' },
     { value: starCount, label: 'Stars' },
-    { value: contributions.toLocaleString('en-US'), label: 'Contributions' },
+    { value: formatContributions(contributions), label: 'Contributions' },
   ];
   const statBlocks = stats
     .map(({ value, label }, i) => {
