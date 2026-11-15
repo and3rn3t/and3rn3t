@@ -13,6 +13,13 @@ const pushPaths = file =>
         ),
     ].map(match => match[1]);
 
+/** The E2E_PATTERNS globs from e2e.yml's `changes` job, one per line of a block scalar. */
+const e2ePatterns = () =>
+    (read('.github/workflows/e2e.yml').match(/E2E_PATTERNS: \|\n([\s\S]*?)\n\s*run: \|/)?.[1] ?? '')
+        .split('\n')
+        .map(line => line.trim())
+        .filter(Boolean);
+
 /** The sparse-checkout allowlist, rewritten as the equivalent trigger globs. */
 const publishedGlobs = () =>
     (
@@ -80,7 +87,7 @@ const filesLoadedBySpecs = () => {
 };
 
 describe('E2E trigger (e2e.yml)', () => {
-    const triggers = pushPaths('.github/workflows/e2e.yml');
+    const triggers = e2ePatterns();
 
     it('reads the trigger list', () => {
         expect(triggers.length).toBeGreaterThan(10);
@@ -111,6 +118,15 @@ describe('E2E trigger (e2e.yml)', () => {
 
     it('does not run for a worker-only change', () => {
         expect(triggeredBy(triggers, 'worker/mcp.js')).toBe(false);
+    });
+
+    // A path filter on the trigger would skip the whole workflow and leave no status to require.
+    it('starts on every pull request and reports one result to require', () => {
+        const workflow = read('.github/workflows/e2e.yml');
+        expect(workflow.match(/^on:\n([\s\S]*?)\npermissions:/m)?.[1]).not.toContain('paths:');
+        expect(workflow).toMatch(
+            /result:\n\s+name: E2E result\n\s+needs: \[changes, e2e\]\n\s+if: always\(\)/
+        );
     });
 
     it('runs every shard it declares, and Quality no longer runs E2E', () => {
