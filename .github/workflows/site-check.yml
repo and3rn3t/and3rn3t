@@ -58,3 +58,17 @@ jobs:
           sparse-checkout: scripts/follow-ups.mjs
           persist-credentials: false
       - run: node scripts/follow-ups.mjs https://andernet.dev --create
+
+  # Report only: a Worker change is merged and the deploy waits for Matt's go, so "behind" is a
+  # normal state for a while. This makes it visible. The live version is tagged with the commit
+  # it was deployed from (pnpm deploy:worker); full history lets the script place that tag.
+  worker-deployed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          sparse-checkout: scripts/check-worker-deployed.mjs
+          persist-credentials: false
+      - run: node scripts/check-worker-deployed.mjs https://andernet.dev
