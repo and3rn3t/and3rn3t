@@ -17,6 +17,7 @@
  */
 
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { appendFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
@@ -58,7 +59,7 @@ export function buildCases(projectsData, postsData, experienceData) {
   if (newest) {
     cases.push({
       id: 'newest-post',
-      question: 'What is the title of the newest post on his site? Answer with the title only.',
+      question: 'What is the title of the newest post on the site? Answer with the title only.',
       expectAll: [newest.title],
       tools: ['list_posts'],
     });
@@ -66,7 +67,7 @@ export function buildCases(projectsData, postsData, experienceData) {
 
   cases.push({
     id: 'post-count',
-    question: 'How many posts are on his site? Answer with a number only.',
+    question: 'How many posts are on the site? Answer with a number only.',
     expectAll: [String(postsData.posts.length)],
     tools: ['list_posts'],
   });
@@ -83,7 +84,7 @@ export function buildCases(projectsData, postsData, experienceData) {
 
   cases.push({
     id: 'unknown-project',
-    question: 'Describe his project called "zzz-not-a-project". If there is none, say so.',
+    question: 'Describe the project called "zzz-not-a-project". If there is none, say so.',
     expectAll: [],
     expectAny: [
       'no project',
@@ -124,6 +125,42 @@ export function grade(testCase, run) {
     );
   }
   return { pass: problems.length === 0, problems };
+}
+
+/**
+ * Does the agent skill describe the tools the server really has? String checks, no model.
+ * @param {{ toolNames: string[], skillText: string, indexDigest: string, skillDigest: string }} input
+ * @returns {Array<{ id: string, pass: boolean, problems: string[] }>}
+ */
+export function checkSkill({ toolNames, skillText, indexDigest, skillDigest }) {
+  const mentioned = [...skillText.matchAll(/`([a-z]+(?:_[a-z]+)+)`/g)].map(match => match[1]);
+  const knownNames = new Set(toolNames);
+  // A snake_case word in backticks that is not a tool (an argument such as "category" has no underscore).
+  const invented = [...new Set(mentioned)].filter(
+    name => !knownNames.has(name) && /^(get|list|show)_/.test(name)
+  );
+  const missing = toolNames.filter(name => !skillText.includes(`\`${name}\``));
+
+  return [
+    {
+      id: 'skill-lists-every-tool',
+      pass: missing.length === 0,
+      problems: missing.map(name => `the skill does not mention \`${name}\``),
+    },
+    {
+      id: 'skill-names-no-unknown-tool',
+      pass: invented.length === 0,
+      problems: invented.map(name => `the skill names \`${name}\`, which the server does not have`),
+    },
+    {
+      id: 'skill-digest-matches-index',
+      pass: indexDigest === `sha256:${skillDigest}`,
+      problems:
+        indexDigest === `sha256:${skillDigest}`
+          ? []
+          : [`index says ${indexDigest}, the file hashes to sha256:${skillDigest}`],
+    },
+  ];
 }
 
 /**
@@ -217,6 +254,31 @@ async function loadJson(base, path) {
   return response.json();
 }
 
+/** Fetch the live tools list and skill, and check that they agree. */
+async function runSkillChecks(base) {
+  const rpc = await fetch(`${base}/mcp`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }),
+  });
+  const data = (await rpc.text()).split('\n').find(line => line.startsWith('data:'));
+  const toolNames = JSON.parse(data.slice(5)).result.tools.map(tool => tool.name);
+
+  const index = await loadJson(base, '/.well-known/agent-skills/index.json');
+  const skill = index.skills[0];
+  const skillText = await (await fetch(skill.url)).text();
+  const skillDigest = createHash('sha256').update(skillText).digest('hex');
+
+  return checkSkill({ toolNames, skillText, indexDigest: skill.digest, skillDigest }).map(
+    check => ({
+      testCase: { id: check.id },
+      answer: check.pass ? 'ok' : '',
+      toolsCalled: [],
+      ...check,
+    })
+  );
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const base = (args.find(arg => !arg.startsWith('--')) ?? DEFAULT_URL).replace(/\/$/, '');
@@ -228,8 +290,12 @@ async function main() {
     loadJson(base, '/experience-data.json'),
   ]);
   const cases = buildCases(projects, posts, experience);
+  const skillResults = await runSkillChecks(base);
 
   if (!shouldRun) {
+    for (const { testCase, pass, problems } of skillResults) {
+      console.log(`${testCase.id}: ${pass ? 'ok' : problems.join('; ')}`);
+    }
     for (const testCase of cases) {
       console.log(
         `${testCase.id}: ${testCase.question}\n  expects ${JSON.stringify(testCase.expectAll)} via ${testCase.tools.join(' | ')}`
@@ -243,7 +309,7 @@ async function main() {
     const run = askClaude(testCase.question, `${base}/mcp`);
     return { testCase, ...run, ...grade(testCase, run) };
   });
-  const report = formatReport(results);
+  const report = formatReport([...skillResults, ...results]);
   console.log(report);
   if (process.env.GITHUB_STEP_SUMMARY)
     appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${report}\n`);

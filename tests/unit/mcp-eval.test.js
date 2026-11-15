@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
     buildCases,
+    checkSkill,
     formatReport,
     grade,
     parseStream,
@@ -113,5 +114,34 @@ describe('tableCell', () => {
     it('escapes backslashes before pipes so an answer cannot break out of its cell', () => {
         expect(tableCell('a\\|b')).toBe('a\\\\\\|b');
         expect(tableCell('one\n two')).toBe('one two');
+    });
+});
+
+describe('checkSkill', () => {
+    const toolNames = ['get_profile', 'list_posts'];
+    const skillText = 'Tools:\n- `get_profile`: who\n- `list_posts` (optional `tag`): posts';
+    const ok = { toolNames, skillText, indexDigest: 'sha256:abc', skillDigest: 'abc' };
+    const byId = checks => Object.fromEntries(checks.map(check => [check.id, check]));
+
+    it('passes when the skill and the tools agree', () => {
+        expect(checkSkill(ok).every(check => check.pass)).toBe(true);
+    });
+
+    it('names a tool the skill leaves out', () => {
+        const checks = byId(checkSkill({ ...ok, toolNames: [...toolNames, 'show_project'] }));
+        expect(checks['skill-lists-every-tool'].problems).toEqual([
+            'the skill does not mention `show_project`',
+        ]);
+    });
+
+    it('catches a tool the server does not have, but not an argument name', () => {
+        const checks = byId(checkSkill({ ...ok, skillText: `${skillText}\n- \`get_nothing\`` }));
+        expect(checks['skill-names-no-unknown-tool'].problems).toHaveLength(1);
+        expect(byId(checkSkill(ok))['skill-names-no-unknown-tool'].pass).toBe(true);
+    });
+
+    it('catches a digest that no longer matches the file', () => {
+        const checks = byId(checkSkill({ ...ok, skillDigest: 'def' }));
+        expect(checks['skill-digest-matches-index'].pass).toBe(false);
     });
 });
