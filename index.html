@@ -221,6 +221,17 @@
     </script>
     <title>Matthew Anderson | Software Engineer</title>
 
+    <!-- Prerender a project or post page on hover. Identical to SPECULATION_RULES in
+         scripts/templates/chrome.mjs (a unit test checks); the policy lists its hash, so
+         a change needs `pnpm zone --only headers --apply`. -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          { "where": { "href_matches": ["/projects/*", "/posts/*"] }, "eagerness": "moderate" }
+        ]
+      }
+    </script>
+
     <!-- The theme before first paint: sets color-scheme through <html data-theme>, which the
          design tokens in styles/core.css resolve with light-dark(). With no script, the OS
          preference applies on its own. -->

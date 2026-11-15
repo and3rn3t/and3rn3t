@@ -50,6 +50,9 @@
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       })();
     </script>
+    <script type="speculationrules">
+      {"prerender":[{"where":{"href_matches":["/projects/*","/posts/*"]},"eagerness":"moderate"}]}
+    </script>
     <!-- Names a project's image and title for the transition between its card and its page.
          A classic script in the head: it must listen before the page first renders. -->
     <script src="/modules/page-transitions.js"></script>

@@ -129,6 +129,14 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   deploy that did not purge, a page can be an hour old. Check with `curl -sI https://andernet.dev/ | grep cf-cache-status`.
   Zone tracing (Cloudflare Traces) is a dashboard toggle (Observability > Traces for the domain), not scripted:
   set the default sample rate to about 10% and add a trace rule at 100% for `/api/*` and `/mcp`.
+- **Prerender on hover**: every generated page and `index.html` carry the same inline `<script type="speculationrules">`
+  (`SPECULATION_RULES` in `scripts/templates/chrome.mjs`, a unit test keeps `index.html` identical): hovering a project or post link
+  prerenders it in Chromium (Cloudflare's Speed Brain adds its own conservative prefetch). The rules are hashed into the CSP
+  like any inline script, so **after changing them run `pnpm zone --only headers --apply`**. A prerendered page runs its scripts
+  early: anything that counts a visit or times a request waits for `whenActivated()` (`modules/utils/activation.js`; the view
+  counter and the edge receipt do; presence already waits for the tab to be visible). `tests/e2e/prerender.spec.js` cannot see a
+  prerender succeed (Chromium turns prerendering off while DevTools is attached, which Playwright always is); it checks the browser
+  accepts the rules under the real policy and that hovering a link tries one.
 - **WebMCP** (`modules/webmcp.js`): in a browser that has `document.modelContext`, `main.js` loads the module on idle
   and registers five tools (search, list and open projects, set the theme, draft a contact message). Other browsers are
   never sent it (`tests/e2e/webmcp.spec.js` asserts that). The contact tool fills the form and **never submits**, and

@@ -41,6 +41,18 @@ export const VIEW_TRANSITION_CSS =
   '@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }';
 
 /**
+ * Prerender a project or post page when the visitor hovers its link (Chromium; other browsers
+ * ignore it). The script is inline, so the policy lists its hash like any inline script's: after a
+ * change to the rules, run `pnpm zone --only headers --apply`.
+ * Cloudflare's Speed Brain adds a conservative prefetch of every link on top. index.html carries an
+ * identical copy (a unit test keeps them the same). A prerendered page runs its scripts early:
+ * see modules/utils/activation.js.
+ */
+export const SPECULATION_RULES = {
+  prerender: [{ where: { href_matches: ['/projects/*', '/posts/*'] }, eagerness: 'moderate' }],
+};
+
+/**
  * @param {object} page
  * @param {string} page.title - the full <title>
  * @param {string} page.description
@@ -98,6 +110,9 @@ ${url ? `    <meta property="og:url" content="${url}" />\n` : ''}    <meta prope
 ${extraMeta ? `${extraMeta}\n` : ''}
     <script>
       ${THEME_SCRIPT}
+    </script>
+    <script type="speculationrules">
+      ${JSON.stringify(SPECULATION_RULES)}
     </script>
     <!-- Names a project's image and title for the transition between its card and its page.
          A classic script in the head: it must listen before the page first renders. -->

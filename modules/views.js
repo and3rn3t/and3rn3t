@@ -9,6 +9,7 @@
 
 import { debug } from './debug.js';
 import { WORKER_BASE } from './config.js';
+import { whenActivated } from './utils/activation.js';
 
 const COUNTED_KEY = 'viewCounted';
 
@@ -32,6 +33,8 @@ function markCounted() {
 class ViewCounter {
     async init() {
         try {
+            // A prerendered page is not a visit yet
+            await whenActivated();
             const counted = alreadyCounted();
             const resp = await fetch(`${WORKER_BASE}/views?page=home`, {
                 method: counted ? 'GET' : 'POST',

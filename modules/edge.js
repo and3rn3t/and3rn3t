@@ -9,6 +9,7 @@
  * failed call leaves the footer as it was.
  */
 
+import { whenActivated } from './utils/activation.js';
 import { debug } from './debug.js';
 import { WORKER_BASE } from './config.js';
 
@@ -28,6 +29,8 @@ export async function initEdgeReceipt() {
     const slot = document.querySelector('[data-edge-receipt]');
     if (!slot) return;
     try {
+        // The receipt times this visitor's own request: not from a page that is only prerendered
+        await whenActivated();
         const started = performance.now();
         const response = await fetch(`${WORKER_BASE}/edge`, {
             signal: AbortSignal.timeout(4000),
