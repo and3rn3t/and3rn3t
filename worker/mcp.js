@@ -11,6 +11,11 @@ import { McpServer } from '@modelcontextprotocol/server';
 import { createMcpHandler } from 'agents/mcp/server';
 import { z } from 'zod';
 import {
+    RESOURCE_MIME_TYPE,
+    registerAppResource,
+    registerAppTool,
+} from '@modelcontextprotocol/ext-apps/server';
+import {
     SITE_ORIGIN,
     htmlToText,
     loadExperience,
@@ -18,6 +23,7 @@ import {
     loadProjects,
     projectUrl,
 } from './site-data.js';
+import { PROJECT_VIEW_HTML } from './mcp-app-view.js';
 import { recordTool } from './telemetry.js';
 
 const SERVER_NAME = 'andernet-portfolio';
@@ -37,6 +43,10 @@ function findProject(projects, wanted) {
     );
 }
 
+const PROJECT_VIEW_URI = 'ui://portfolio/project.html';
+// Claude derives an app's origin from the server URL: first 32 hex of sha256("https://andernet.dev/mcp").
+const PROJECT_VIEW_DOMAIN = '71442e512ec275182b8e0b135be88382.claudemcpcontent.com';
+
 const summarise = ({ metadata, view }) => ({
     name: metadata.name,
     title: view.displayName,
@@ -46,6 +56,14 @@ const summarise = ({ metadata, view }) => ({
     technologies: view.technologies,
     url: projectUrl(view),
     source: view.htmlUrl,
+});
+
+const projectDetail = found => ({
+    ...summarise(found),
+    overview: found.view.longDescription ?? found.view.description,
+    highlights: found.view.highlights,
+    metrics: found.view.metrics,
+    live_demo: found.view.homepage ?? null,
 });
 
 /**
@@ -163,15 +181,52 @@ export function createServer(env, deps) {
                 const known = projects.map(({ metadata }) => metadata.name).join(', ');
                 return asError(`No project called "${name}". Projects: ${known}.`);
             }
-            const { view } = found;
-            return asText({
-                ...summarise(found),
-                overview: view.longDescription ?? view.description,
-                highlights: view.highlights,
-                metrics: view.metrics,
-                live_demo: view.homepage ?? null,
-            });
+            return asText(projectDetail(found));
         }
+    );
+
+    // SPIKE (roadmap 13.10): the same data as get_project, drawn as a card inside Claude.
+    registerAppTool(
+        { registerTool },
+        'show_project',
+        {
+            title: 'Show a project card',
+            description:
+                'Show one project as a card (title, description, technologies, links) in clients that can display MCP Apps. Same data as get_project.',
+            inputSchema: {
+                name: z.string().describe('The project name or page slug, e.g. "health"'),
+            },
+            _meta: { ui: { resourceUri: PROJECT_VIEW_URI } },
+        },
+        async ({ name }) => {
+            const found = findProject(await loadProjects(env), name);
+            if (!found) return asError(`No project called "${name}".`);
+            return asText(projectDetail(found));
+        }
+    );
+    registerAppResource(
+        server,
+        'Project card',
+        PROJECT_VIEW_URI,
+        {
+            description: 'A project as a card: title, description, technologies and links.',
+            _meta: {
+                ui: {
+                    csp: { resourceDomains: ['https://cdn.jsdelivr.net'] },
+                    domain: PROJECT_VIEW_DOMAIN,
+                    prefersBorder: true,
+                },
+            },
+        },
+        async () => ({
+            contents: [
+                {
+                    uri: PROJECT_VIEW_URI,
+                    mimeType: RESOURCE_MIME_TYPE,
+                    text: PROJECT_VIEW_HTML,
+                },
+            ],
+        })
     );
 
     registerTool(

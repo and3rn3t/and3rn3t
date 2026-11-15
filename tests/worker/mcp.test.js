@@ -143,6 +143,7 @@ const TOOLS = [
     'get_profile',
     'list_projects',
     'get_project',
+    'show_project',
     'list_experience',
     'list_posts',
     'get_post',
@@ -181,6 +182,29 @@ describe('the MCP server', () => {
             .filter(tool => tool.annotations.openWorldHint)
             .map(tool => tool.name);
         expect(open).toEqual(['get_recent_activity']);
+    });
+
+    it('show_project is an MCP App: its tool points at a ui:// view that the server can read', async () => {
+        const { message } = await rpc('tools/list');
+        const tool = message.result.tools.find(candidate => candidate.name === 'show_project');
+        expect(tool._meta.ui.resourceUri).toBe('ui://portfolio/project.html');
+        expect(tool._meta['ui/resourceUri']).toBe('ui://portfolio/project.html');
+
+        const listed = (await rpc('resources/list')).message.result.resources;
+        expect(listed.map(resource => resource.uri)).toEqual(['ui://portfolio/project.html']);
+        expect(listed[0]._meta.ui.domain).toMatch(/^[0-9a-f]{32}\.claudemcpcontent\.com$/);
+
+        const read = (await rpc('resources/read', { uri: 'ui://portfolio/project.html' })).message
+            .result.contents[0];
+        expect(read.mimeType).toBe('text/html;profile=mcp-app');
+        expect(read.text).toContain('app.ontoolresult');
+        expect(read.text).not.toContain('innerHTML');
+    });
+
+    it('show_project returns the same data as get_project', async () => {
+        const shown = await call('show_project', { name: 'health' });
+        const got = await call('get_project', { name: 'health' });
+        expect(shown.data).toEqual(got.data);
     });
 
     it('get_profile names the current role from the experience data', async () => {
