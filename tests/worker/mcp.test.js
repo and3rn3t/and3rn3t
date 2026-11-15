@@ -2,7 +2,7 @@
  * The MCP server (worker/mcp.js) and the site data it reads (worker/site-data.js), driven the
  * way a client does: JSON-RPC over POST. fetch is replaced, so no test touches the network.
  */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { SERVER_VERSION, handleMcp } from '../../worker/mcp.js';
@@ -170,6 +170,20 @@ describe('the MCP server', () => {
         });
         expect(message.result.serverInfo.name).toBe('andernet-portfolio');
         expect(message.result.capabilities.tools).toBeDefined();
+    });
+
+    it('advertises its icons as files the site ships', async () => {
+        const { message } = await rpc('initialize', {
+            protocolVersion: '2025-06-18',
+            capabilities: {},
+            clientInfo: { name: 'test', version: '1' },
+        });
+        const { icons } = message.result.serverInfo;
+        expect(icons.map(icon => icon.mimeType)).toEqual(['image/png', 'image/svg+xml']);
+        for (const { src } of icons) {
+            expect(src).toMatch(/^https:\/\/andernet\.dev\/icons\//);
+            expect(existsSync(new URL(src).pathname.slice(1)), src).toBe(true);
+        }
     });
 
     it('lists exactly the read-only tools, each with a description', async () => {

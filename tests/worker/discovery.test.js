@@ -131,6 +131,7 @@ describe('MCP server card', () => {
         const card = serverCard();
         expect(card.serverInfo.name).toBe('andernet-portfolio');
         expect(card.serverInfo.version).toMatch(/^\d+\.\d+\.\d+$/);
+        expect(card.serverInfo.icons[0].src).toBe('https://andernet.dev/icons/agent-512.png');
         expect(card.transport).toEqual({
             type: 'streamable-http',
             endpoint: 'https://andernet.dev/mcp',
