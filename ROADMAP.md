@@ -138,7 +138,7 @@ zone without an explicit go. Effort: S under a day, M a day or two.
 | 15.6  | Hero of the day: seed from the UTC day (lab switch `hero-seed`), `?seed=` permalink                  | S      | Nothing       | 🟡     |
 | 15.7  | HDR for the GPU hero (`rgba16float`, extended tone mapping)                                          | S      | Nothing       | 🟡     |
 | 15.8  | Sound, only if 15.5 or 15.6 lands well                                                               | S–M    | Nothing       | ⬜     |
-| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | ⬜     |
+| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | 🟡     |
 | 15.10 | Trusted Types in the report-only CSP                                                                 | S–M    | Zone apply    | ⬜     |
 | 15.11 | CSS in place of script (anchor positioning, scroll-driven animation, `interpolate-size`)             | S–M    | Nothing       | ⬜     |
 | 15.12 | Back/forward cache: close the presence socket on `pagehide`                                          | S      | Nothing       | ⬜     |

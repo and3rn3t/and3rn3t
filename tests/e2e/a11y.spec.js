@@ -56,7 +56,13 @@ test.describe('Accessibility — main page', () => {
             // The sheet only exists on narrow screens
             await page.setViewportSize({ width: 390, height: 844 });
             await page.locator('#mobile-menu').click();
-            await expect(page.locator('#nav-menu')).toHaveClass(/active/);
+            await expect
+                .poll(() =>
+                    page.evaluate(() =>
+                        document.getElementById('nav-menu').matches(':popover-open')
+                    )
+                )
+                .toBe(true);
             await settled(page); // let the sheet finish fading in
             expect((await scan()).violations).toEqual([]);
         });
