@@ -30,6 +30,7 @@
     "check:agent-ready": "node scripts/check-agent-ready.mjs",
     "check:copy": "node scripts/check-copy.mjs",
     "check:probe": "node scripts/check-probe.mjs",
+    "check:bfcache": "node scripts/check-bfcache.mjs",
     "check:worker-deployed": "node scripts/check-worker-deployed.mjs",
     "zone": "node scripts/cloudflare-zone.mjs",
     "lint": "eslint .",
