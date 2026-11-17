@@ -268,12 +268,23 @@
       type="font/woff2"
       crossorigin
     />
-    <!-- Cloudflare Web Analytics, loaded after first paint. Failure is harmless. -->
+    <!-- Cloudflare Web Analytics, loaded after first paint. Failure is harmless. Its address goes through
+         its own Trusted Types policy (named in the CSP): an inline script cannot import html.js without delay. -->
     <script>
       setTimeout(() => {
         const script = document.createElement('script');
+        const url = 'https://static.cloudflareinsights.com/beacon.min.js';
+        let policy = null;
+        try {
+          policy = window.trustedTypes?.createPolicy('andernet-loader', {
+            createScriptURL: u => {
+              if (u !== url) throw new TypeError('Unexpected script address');
+              return u;
+            },
+          });
+        } catch {}
         script.defer = true;
-        script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        script.src = policy ? policy.createScriptURL(url) : url;
         script.setAttribute(
           'data-cf-beacon',
           '{"token": "883fb1c6a2c744d4b745475d92f474bf", "spa": true}'

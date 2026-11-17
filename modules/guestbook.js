@@ -11,7 +11,7 @@
 
 import { debug } from './debug.js';
 import { WORKER_BASE } from './config.js';
-import { escapeHtml } from './utils/html.js';
+import { escapeHtml, trustedHtml, trustedScriptUrl } from './utils/html.js';
 
 // Public sitekey — safe to commit. Get from dash.cloudflare.com → Turnstile.
 const TURNSTILE_SITEKEY = '0x4AAAAAAFNonLuoeiwThp5v';
@@ -63,19 +63,23 @@ class GuestbookManager {
             this.#renderEntries(entries);
         } catch (err) {
             debug.warn('[Guestbook] Load failed:', err.message);
-            this.#entriesEl.innerHTML = '<p class="guestbook__empty">Could not load entries.</p>';
+            this.#entriesEl.innerHTML = trustedHtml(
+                '<p class="guestbook__empty">Could not load entries.</p>'
+            );
         }
     }
 
     #renderEntries(entries) {
         if (!entries.length) {
-            this.#entriesEl.innerHTML =
-                '<p class="guestbook__empty">No entries yet. Be the first.</p>';
+            this.#entriesEl.innerHTML = trustedHtml(
+                '<p class="guestbook__empty">No entries yet. Be the first.</p>'
+            );
             return;
         }
-        this.#entriesEl.innerHTML = entries
-            .map(
-                e => `
+        this.#entriesEl.innerHTML = trustedHtml(
+            entries
+                .map(
+                    e => `
             <article class="guestbook__entry">
                 <header class="guestbook__entry-head">
                     <strong class="guestbook__name">${escapeHtml(e.name)}</strong>
@@ -83,8 +87,9 @@ class GuestbookManager {
                 </header>
                 <p class="guestbook__message">${escapeHtml(e.message)}</p>
             </article>`
-            )
-            .join('');
+                )
+                .join('')
+        );
     }
 
     #initTurnstile() {
@@ -93,7 +98,9 @@ class GuestbookManager {
 
         // Load Turnstile script lazily.
         const script = document.createElement('script');
-        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        script.src = trustedScriptUrl(
+            'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+        );
         script.async = true;
         script.defer = true;
         script.addEventListener('load', () => this.#renderWidget());
@@ -183,12 +190,12 @@ class GuestbookManager {
                 const { entry } = result;
                 const newEl = document.createElement('article');
                 newEl.className = 'guestbook__entry guestbook__entry--new';
-                newEl.innerHTML = `
+                newEl.innerHTML = trustedHtml(`
                     <header class="guestbook__entry-head">
                         <strong class="guestbook__name">${escapeHtml(entry.name)}</strong>
                         <time class="guestbook__date" datetime="${escapeHtml(entry.date)}">${this.#formatDate(entry.date)}</time>
                     </header>
-                    <p class="guestbook__message">${escapeHtml(entry.message)}</p>`;
+                    <p class="guestbook__message">${escapeHtml(entry.message)}</p>`);
                 this.#entriesEl.prepend(newEl);
                 const emptyMsg = this.#entriesEl.querySelector('.guestbook__empty');
                 emptyMsg?.remove();

@@ -161,6 +161,9 @@ describe('the Content-Security-Policy', () => {
     });
 
     it('allows the services the page uses: Turnstile, analytics, Formspree, GitHub and the Worker', () => {
+        // Trusted Types: strings may not reach a sink, and only these two policies may be made
+        expect(directive('require-trusted-types-for')).toBe("require-trusted-types-for 'script'");
+        expect(directive('trusted-types')).toBe('trusted-types andernet andernet-loader');
         expect(directive('script-src')).toContain('https://challenges.cloudflare.com');
         expect(directive('script-src')).toContain('https://static.cloudflareinsights.com');
         expect(directive('frame-src')).toContain('https://challenges.cloudflare.com');

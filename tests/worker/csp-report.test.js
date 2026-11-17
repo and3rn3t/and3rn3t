@@ -12,6 +12,7 @@ import {
     handleCspReport,
     pageOf,
     parseReports,
+    sinkName,
 } from '../../worker/csp-report.js';
 
 const legacy = (overrides = {}) =>
@@ -223,6 +224,87 @@ describe('the setting that says reporting is on', () => {
         expect(tableBody(sample, 'a')).toBe('x = 1\n# note');
         expect(tableBody(sample, 'b')).toBe('y = 2\n');
         expect(tableBody(sample, 'missing')).toBeNull();
+    });
+});
+
+describe('Trusted Types reports', () => {
+    const trusted = (overrides = {}) =>
+        legacy({
+            'blocked-uri': 'trusted-types-sink',
+            'effective-directive': 'require-trusted-types-for',
+            'violated-directive': "require-trusted-types-for 'script'",
+            'script-sample': 'Element innerHTML|<img src=x onerror="steal(document.cookie)">',
+            ...overrides,
+        });
+
+    it('the two directives are known, so they are not folded into "other"', () => {
+        expect(directiveName('require-trusted-types-for')).toBe('require-trusted-types-for');
+        expect(directiveName("require-trusted-types-for 'script'")).toBe(
+            'require-trusted-types-for'
+        );
+        expect(directiveName('trusted-types')).toBe('trusted-types');
+    });
+
+    it('sinkName keeps the sink and never what was put into it', () => {
+        expect(sinkName('Element innerHTML|<b>secret page text</b>')).toBe(
+            'sink:element-innerhtml'
+        );
+        expect(sinkName('HTMLScriptElement src|https://x.example/a.js?token=abc')).toBe(
+            'sink:htmlscriptelement-src'
+        );
+        expect(sinkName('Function|alert(1)')).toBe('sink:function');
+        expect(sinkName('element innerhtml')).toBe('sink:element-innerhtml');
+    });
+
+    it.each([
+        ['an unknown sink', 'Brand New Sink|x'],
+        ['text that could be anything', '<script>alert(1)</script>'],
+        ['nothing', ''],
+        ['not text', undefined],
+        ['a very long name', `${'x'.repeat(500)}|y`],
+    ])('sinkName says "other" for %s', (_name, sample) => {
+        expect(sinkName(sample)).toBe('sink:other');
+    });
+
+    it('parseReports carries the sample in both formats', () => {
+        expect(parseReports(trusted())[0].sample).toContain('Element innerHTML');
+        const [modernReport] = parseReports(
+            modern({
+                blockedURL: 'trusted-types-sink',
+                effectiveDirective: 'require-trusted-types-for',
+                sample: 'Element outerHTML|x',
+            })
+        );
+        expect(modernReport.sample).toBe('Element outerHTML|x');
+    });
+
+    it('is recorded as the directive and the sink, with nothing from the value', async () => {
+        const env = envWithMetrics();
+        await handleCspReport(post(trusted()), env);
+        expect(points(env.METRICS)).toEqual([
+            {
+                indexes: ['require-trusted-types-for'],
+                blobs: ['csp', 'sink:element-innerhtml', '/status/'],
+                doubles: [1],
+            },
+        ]);
+        expect(JSON.stringify(points(env.METRICS))).not.toMatch(/steal|cookie|onerror|img/);
+    });
+
+    it('a policy that is not listed is recorded under its directive, with an ordinary blocked source', async () => {
+        const env = envWithMetrics();
+        await handleCspReport(
+            post(
+                legacy({
+                    'blocked-uri': 'trusted-types-policy',
+                    'effective-directive': 'trusted-types',
+                })
+            ),
+            env
+        );
+        const [point] = points(env.METRICS);
+        expect(point.indexes).toEqual(['trusted-types']);
+        expect(point.blobs[1]).toBe('other');
     });
 });
 
