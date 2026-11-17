@@ -44,6 +44,15 @@
       "needs": "WebSocket",
       "measure": "Not yet judged. Two browsers should see each other within about 150 ms, a day of use should add no visible Durable Object cost, and the object must still hibernate when nobody is moving. Dropped if cost or abuse limits get complicated. At most 25 pages take part at once.",
       "try": "/?lab=hero-shared"
+    },
+    {
+      "flag": "post-tools",
+      "title": "Post tools, on your device",
+      "status": "spike",
+      "summary": "On a post, two buttons that use the model built into the browser: key points, and the post read in Spanish, French, German or Japanese. Nothing is sent anywhere, the first use downloads a large model, and the result says it was made by the model and the post is the source.",
+      "needs": "the Summarizer or Translator API",
+      "measure": "Not yet judged. Only desktop Chrome and Edge have these APIs, and they need a lot of disk and a capable GPU, so most visitors will see nothing. Kept only if the key points of the posts are accurate; a post too long for the model is not summarised rather than cut short.",
+      "try": "/posts/making-a-portfolio-agent-ready/?lab=post-tools"
     }
   ]
 }

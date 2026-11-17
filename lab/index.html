@@ -183,6 +183,24 @@
               <a class="link" href="/?lab=hero-shared">Try it once</a>
             </p>
           </li>
+          <li class="lab-item" data-lab-item="post-tools" data-needs="the Summarizer or Translator API">
+            <div class="lab-item__head">
+              <h2 class="lab-item__title">Post tools, on your device</h2>
+              <span class="lab-item__status" data-status="spike">Spike</span>
+            </div>
+            <p class="lab-item__summary">On a post, two buttons that use the model built into the browser: key points, and the post read in Spanish, French, German or Japanese. Nothing is sent anywhere, the first use downloads a large model, and the result says it was made by the model and the post is the source.</p>
+            <dl class="lab-item__facts">
+              <div><dt>Needs</dt><dd>the Summarizer or Translator API <span data-lab-support></span></dd></div>
+              <div><dt>Measured</dt><dd>Not yet judged. Only desktop Chrome and Edge have these APIs, and they need a lot of disk and a capable GPU, so most visitors will see nothing. Kept only if the key points of the posts are accurate; a post too long for the model is not summarised rather than cut short.</dd></div>
+            </dl>
+            <p class="lab-item__actions">
+              <label class="lab-switch" hidden data-lab-switch>
+                <input type="checkbox" data-lab-toggle="post-tools" />
+                <span>Keep on for this browser</span>
+              </label>
+              <a class="link" href="/posts/making-a-portfolio-agent-ready/?lab=post-tools">Try it once</a>
+            </p>
+          </li>
         </ul>
       </div>
     </main>
