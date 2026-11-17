@@ -305,12 +305,14 @@
     <!-- Skip to main content link for keyboard users -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- Navigation. On narrow screens #nav-menu is a sheet; main.js toggles .active on it and on
-         #mobile-menu, and .scrolled on #navbar. -->
+    <!-- Navigation. On narrow screens #nav-menu is a sheet: a popover, opened by #mobile-menu with
+         no script (the browser also handles Escape, a click outside and returning focus). A browser
+         without popover gets the class-toggling version in modules/menu-fallback.js. main.js sets
+         .scrolled on #navbar. -->
     <nav class="site-nav" id="navbar" aria-label="Main navigation">
       <div class="wrap site-nav__inner">
         <a href="#home" class="site-nav__logo">@and3rn3t</a>
-        <ul class="site-nav__links" id="nav-menu">
+        <ul class="site-nav__links" id="nav-menu" popover>
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#experience">Experience</a></li>
@@ -356,8 +358,8 @@
             class="icon-button site-nav__menu"
             id="mobile-menu"
             aria-label="Toggle navigation menu"
-            aria-expanded="false"
             aria-controls="nav-menu"
+            popovertarget="nav-menu"
           >
             <span class="site-nav__menu-bars" aria-hidden="true"></span>
           </button>

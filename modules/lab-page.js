@@ -11,6 +11,7 @@ const SUPPORT = {
     WebGPU: () => 'gpu' in globalThis.navigator,
     'an HDR display': () =>
         'gpu' in globalThis.navigator && globalThis.matchMedia?.('(dynamic-range: high)').matches,
+    WebSocket: () => typeof globalThis.WebSocket === 'function',
     'the Summarizer or Translator API': () =>
         'Summarizer' in globalThis || 'Translator' in globalThis,
     WebAssembly: () => typeof globalThis.WebAssembly === 'object',

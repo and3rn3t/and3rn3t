@@ -419,6 +419,24 @@ async function initHeroEnhancements() {
             if (handle) {
                 appState.managers.heroCanvas = handle;
                 canvas.classList.add('is-active');
+                // A lab experiment, off unless switched on (see /lab/): everyone who has it on bends
+                // the same field, over the presence socket the page already holds
+                if (lab('hero-shared')) {
+                    startOptional(
+                        'Shared hero',
+                        async () => ({
+                            share: await import('./modules/hero-share.js'),
+                            edge: await import('./modules/edge.js'),
+                        }),
+                        ({ share, edge }) => {
+                            appState.managers.sharedHero = share.startSharedField(handle, canvas, {
+                                onMessage: edge.onPresenceMessage,
+                                onOpen: edge.onPresenceOpen,
+                                send: edge.sendPresence,
+                            });
+                        }
+                    );
+                }
             }
         } catch (err) {
             debug.warn('[App] WASM hero core skipped:', err);
@@ -429,41 +447,26 @@ async function initHeroEnhancements() {
 }
 
 /**
- * Initialize mobile menu toggle. The toggle button reports its state through
- * aria-expanded; Escape and a click outside the menu close it.
+ * The mobile menu is a popover (index.html): the button opens it, and the browser closes it on
+ * Escape or a click outside and returns focus, all before and without this script. What the
+ * browser cannot know is that a tapped link should close it too, and that widening the window to
+ * the desktop bar leaves nothing open. A browser without popover gets the class-toggling menu,
+ * fetched only then.
  */
 function initMobileMenu() {
-    const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
+    if (!navMenu) return;
 
-    if (!mobileMenu || !navMenu) return;
-
-    const isOpen = () => navMenu.classList.contains('active');
-    const setOpen = open => {
-        mobileMenu.classList.toggle('active', open);
-        navMenu.classList.toggle('active', open);
-        mobileMenu.setAttribute('aria-expanded', String(open));
-    };
-
-    mobileMenu.addEventListener('click', () => setOpen(!isOpen()));
-
-    // Close mobile menu when clicking on a link
-    for (const link of navMenu.querySelectorAll('a')) {
-        link.addEventListener('click', () => setOpen(false));
+    if (!('popover' in HTMLElement.prototype)) {
+        import('./modules/menu-fallback.js').then(m => m.initMenuFallback()).catch(() => {});
+        return;
     }
 
-    document.addEventListener('keydown', event => {
-        if (event.key !== 'Escape' || !isOpen()) return;
-        setOpen(false);
-        mobileMenu.focus();
-    });
-
-    document.addEventListener('click', event => {
-        if (!isOpen() || navMenu.contains(event.target) || mobileMenu.contains(event.target)) {
-            return;
-        }
-        setOpen(false);
-    });
+    const close = () => navMenu.matches(':popover-open') && navMenu.hidePopover();
+    navMenu.addEventListener('click', event => event.target.closest?.('a') && close());
+    globalThis
+        .matchMedia('(min-width: 48rem)')
+        .addEventListener('change', event => event.matches && close());
 }
 
 /**

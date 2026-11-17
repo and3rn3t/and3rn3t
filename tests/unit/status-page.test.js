@@ -260,7 +260,7 @@ describe('rendering', () => {
             last7d: { errorRate: 0.0042, p50Ms: 0, p95Ms: 1800 },
         },
         mcp: [{ tool: 'get_project', calls: 5, errors: 1 }],
-        clients: { agentShare: 0.216 },
+        clients: { agentShare: 0.216, signedShare: 0.04 },
         uptime: {
             lastProbe: { at: '2026-11-13 00:35:00', ok: true },
             days: [{ day: '2026-11-13', probes: 40, ok: 40 }],
@@ -296,6 +296,8 @@ describe('rendering', () => {
         expect(text('[data-stat="p50-24h"]')).toBe('<1 ms');
         expect(text('[data-stat="p95-24h"]')).toBe('2.4 s');
         expect(text('[data-stat="agent-share"]')).toBe('22%');
+        expect(text('[data-stat="signed-share"]')).toBe('4%');
+        expect(text('[data-stat="signed-note"]')).toBe('of agent calls, last 7 days');
         expect(root.querySelectorAll('[data-vitals] .meter')).toHaveLength(4);
         expect(text('[data-rank="crawlers"]')).toContain('AI Assistant');
         expect(text('[data-rank="tools"]')).toContain('get_project');
@@ -311,6 +313,10 @@ describe('rendering', () => {
         expect(text('[data-stat="error-24h"]')).toBe('—');
         expect(text('[data-stat="p95-24h"]')).toBe('—');
         expect(text('[data-stat="agent-share"]')).toBe('—');
+        expect(text('[data-stat="signed-share"]')).toBe('—');
+        expect(text('[data-stat="signed-note"]')).toBe(
+            'shown once enough agent calls were checked'
+        );
         expect(text('[data-verdict-label]')).toBe('No checks recorded yet');
         expect(text('[data-rank="crawlers"]')).toBe('Not available right now.');
         expect(text('[data-rank="tools"]')).toBe('Not available right now.');
@@ -333,6 +339,24 @@ describe('rendering', () => {
     });
 
     // The Worker sends [] when a query worked and found none, and null when it could not be read
+    it('shows a dash for the signed share until enough agent calls were checked, and a real 0% after', () => {
+        renderStatus(root, { ...full, clients: { agentShare: 0.3, signedShare: null } }, NOW);
+        expect(text('[data-stat="agent-share"]')).toBe('30%');
+        expect(text('[data-stat="signed-share"]')).toBe('—');
+        expect(text('[data-stat="signed-note"]')).toBe(
+            'shown once enough agent calls were checked'
+        );
+
+        renderStatus(root, { ...full, clients: { agentShare: 0.3, signedShare: 0 } }, NOW);
+        expect(text('[data-stat="signed-share"]')).toBe('0%');
+        expect(text('[data-stat="signed-note"]')).toBe('of agent calls, last 7 days');
+    });
+
+    it('still draws a Worker answer from before the signed share existed', () => {
+        renderStatus(root, { ...full, clients: { agentShare: 0.3 } }, NOW);
+        expect(text('[data-stat="signed-share"]')).toBe('—');
+    });
+
     it('says "none" for an empty list and "not available" for a missing one', () => {
         renderStatus(root, { ...full, crawlers: [], mcp: [] }, NOW);
         expect(text('[data-rank="crawlers"]')).toBe(

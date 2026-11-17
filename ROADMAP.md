@@ -130,15 +130,15 @@ zone without an explicit go. Effort: S under a day, M a day or two.
 | #     | Item                                                                                                 | Effort | Needs         | Status |
 | ----- | ---------------------------------------------------------------------------------------------------- | ------ | ------------- | ------ |
 | 15.0  | Lab scaffold: `lab()` flag helper, `lab-data.json`, generated `/lab/` page with switches             | S      | Nothing       | 🟡     |
-| 15.1  | MCP prompts and resources                                                                            | S      | Worker deploy | ⬜     |
-| 15.2  | Signed agents (Web Bot Auth) as one more field on `/status/`; check `request.cf` first               | M      | Worker deploy | ⬜     |
+| 15.1  | MCP prompts and resources                                                                            | S      | Worker deploy | 🟡     |
+| 15.2  | Signed agents (Web Bot Auth) as one more field on `/status/`; check `request.cf` first               | M      | Worker deploy | 🟡     |
 | 15.3  | "View as agent" switch (the service worker must never cache Markdown under an HTML URL)              | S–M    | Nothing       | 🟡     |
 | 15.4  | `show_project` and `show_status` in ChatGPT, VS Code and Goose; matrix in the agent-ready post       | S      | Matt          | ⬜     |
-| 15.5  | Shared flow field over the presence socket (a deliberate change: sockets may now send, rate-limited) | M      | Worker deploy | ⬜     |
+| 15.5  | Shared flow field over the presence socket (a deliberate change: sockets may now send, rate-limited) | M      | Worker deploy | 🟡     |
 | 15.6  | Hero of the day: seed from the UTC day (lab switch `hero-seed`), `?seed=` permalink                  | S      | Nothing       | 🟡     |
 | 15.7  | HDR for the GPU hero (`rgba16float`, extended tone mapping)                                          | S      | Nothing       | 🟡     |
 | 15.8  | Sound, only if 15.5 or 15.6 lands well                                                               | S–M    | Nothing       | ⬜     |
-| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | ⬜     |
+| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | 🟡     |
 | 15.10 | Trusted Types in the report-only CSP                                                                 | S–M    | Zone apply    | ⬜     |
 | 15.11 | CSS in place of script (anchor positioning, scroll-driven animation, `interpolate-size`)             | S–M    | Nothing       | ⬜     |
 | 15.12 | Back/forward cache: close the presence socket on `pagehide`                                          | S      | Nothing       | ⬜     |

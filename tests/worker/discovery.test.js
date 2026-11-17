@@ -154,6 +154,31 @@ describe('MCP server card', () => {
         vi.unstubAllGlobals();
         expect([...serverCard().tools].sort()).toEqual(real.sort());
     });
+
+    it('lists the prompts and resource templates the server really has', async () => {
+        vi.stubGlobal('fetch', vi.fn());
+        const ask = async method => {
+            const request = new Request('https://andernet.dev/mcp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json, text/event-stream',
+                },
+                body: JSON.stringify({ jsonrpc: '2.0', id: 1, method }),
+            });
+            const text = await (await handleMcp(request, {}, { waitUntil() {} }, {})).text();
+            const line = text.split('\n').find(l => l.startsWith('data:'));
+            return JSON.parse(line.slice(5)).result;
+        };
+        const prompts = (await ask('prompts/list')).prompts.map(prompt => prompt.name);
+        const templates = (await ask('resources/templates/list')).resourceTemplates.map(
+            template => template.uriTemplate
+        );
+        vi.unstubAllGlobals();
+        expect([...serverCard().prompts].sort()).toEqual(prompts.sort());
+        expect([...serverCard().resourceTemplates].sort()).toEqual(templates.sort());
+        expect(serverCard().capabilities).toEqual({ tools: {}, prompts: {}, resources: {} });
+    });
 });
 
 describe('agent skills index', () => {
@@ -203,8 +228,10 @@ describe('agent skills index', () => {
         expect(Object.keys(fields).sort()).toEqual(['description', 'name']);
     });
 
-    it('SKILL.md mentions every tool', () => {
+    it('SKILL.md mentions every tool, prompt and resource template', () => {
         for (const tool of serverCard().tools) expect(SKILL_MD).toContain(`\`${tool}\``);
+        for (const prompt of serverCard().prompts) expect(SKILL_MD).toContain(`\`${prompt}\``);
+        for (const uri of serverCard().resourceTemplates) expect(SKILL_MD).toContain(`\`${uri}\``);
     });
 
     it('sha256Digest of a known string matches the published test vector', async () => {

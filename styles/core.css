@@ -755,9 +755,16 @@
     margin: 0;
     padding: var(--space-4) var(--gutter) var(--space-8);
     list-style: none;
-    /* Narrow screens: a sheet under the bar. Closed, it is invisible and cannot be tapped. */
+    /* Narrow screens: a sheet under the bar. Closed, it is invisible and cannot be tapped. It is a
+       popover (index.html), so the browser's own box for one is reset here: it would otherwise be
+       sized to its content, centred, bordered and coloured as a pop-up. */
     position: fixed;
     inset: var(--nav-h) 0 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    border: 0;
+    color: inherit;
     overflow-y: auto;
     background: var(--surface);
     opacity: 0;
@@ -770,7 +777,9 @@
       visibility 0s linear var(--dur-base);
   }
 
-  .site-nav__links.active {
+  /* .active is for a browser without popover (modules/menu-fallback.js) */
+  .site-nav__links.active,
+  .site-nav__links:popover-open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -872,15 +881,18 @@
     transform: translateY(0.3125rem);
   }
 
-  .site-nav__menu.active .site-nav__menu-bars {
+  .site-nav__menu.active .site-nav__menu-bars,
+  .site-nav__inner:has(.site-nav__links:popover-open) .site-nav__menu-bars {
     background: transparent;
   }
 
-  .site-nav__menu.active .site-nav__menu-bars::before {
+  .site-nav__menu.active .site-nav__menu-bars::before,
+  .site-nav__inner:has(.site-nav__links:popover-open) .site-nav__menu-bars::before {
     transform: rotate(45deg);
   }
 
-  .site-nav__menu.active .site-nav__menu-bars::after {
+  .site-nav__menu.active .site-nav__menu-bars::after,
+  .site-nav__inner:has(.site-nav__links:popover-open) .site-nav__menu-bars::after {
     transform: rotate(-45deg);
   }
 

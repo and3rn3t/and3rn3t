@@ -198,13 +198,23 @@
             serves any page as Markdown, and runs an <a class="link" href="/.well-known/mcp/server-card.json">MCP server</a>.
             Counts are requests in the last 7 days from crawlers Cloudflare can verify, by what they are.
           </p>
-          <dl class="stat-grid stat-grid--single">
+          <dl class="stat-grid">
             <div class="stat">
               <dt>API calls made by agents</dt>
               <dd class="stat__value" data-stat="agent-share">—</dd>
               <dd class="stat__sub">the rest come from browsers</dd>
             </div>
+            <div class="stat">
+              <dt>Agent calls that were signed</dt>
+              <dd class="stat__value" data-stat="signed-share">—</dd>
+              <dd class="stat__sub" data-stat="signed-note">&nbsp;</dd>
+            </div>
           </dl>
+          <p class="status-note status-note--after">
+            A signed call carries a Web Bot Auth signature: the agent proves it holds a key it
+            publishes. This only counts them; it proves a key, not who is behind it, and nothing is
+            allowed or blocked because of it.
+          </p>
           <h3 class="status-subtitle">Verified crawlers</h3>
           <ol class="rank" data-rank="crawlers"></ol>
           <h3 class="status-subtitle">MCP tools used</h3>

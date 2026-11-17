@@ -165,6 +165,24 @@
               <a class="link" href="/?lab=agent-view">Try it once</a>
             </p>
           </li>
+          <li class="lab-item" data-lab-item="hero-shared" data-needs="WebSocket">
+            <div class="lab-item__head">
+              <h2 class="lab-item__title">Shared flow field</h2>
+              <span class="lab-item__status" data-status="spike">Spike</span>
+            </div>
+            <p class="lab-item__summary">Everyone who has this switched on bends the same hero: move the pointer over it and the field moves for the other visitors who have it on, and theirs moves yours. Only a coarse pointer position is sent, only while at least two people have it on, nothing is stored, and nobody is named. It needs someone else to be here at the same time.</p>
+            <dl class="lab-item__facts">
+              <div><dt>Needs</dt><dd>WebSocket <span data-lab-support></span></dd></div>
+              <div><dt>Measured</dt><dd>Not yet judged. Two browsers should see each other within about 150 ms, a day of use should add no visible Durable Object cost, and the object must still hibernate when nobody is moving. Dropped if cost or abuse limits get complicated. At most 25 pages take part at once.</dd></div>
+            </dl>
+            <p class="lab-item__actions">
+              <label class="lab-switch" hidden data-lab-switch>
+                <input type="checkbox" data-lab-toggle="hero-shared" />
+                <span>Keep on for this browser</span>
+              </label>
+              <a class="link" href="/?lab=hero-shared">Try it once</a>
+            </p>
+          </li>
           <li class="lab-item" data-lab-item="post-tools" data-needs="the Summarizer or Translator API">
             <div class="lab-item__head">
               <h2 class="lab-item__title">Post tools, on your device</h2>

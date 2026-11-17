@@ -259,6 +259,12 @@ export async function mountHeroSim(canvas, opts = {}) {
 
     return {
         seed: opts.seed ?? 0,
+        /** Pull the field toward a point (-1..1 on each axis) as a pointer would: the shared hero uses it. */
+        nudge(x, y, strength = 1) {
+            pointer.tx = Math.max(-1, Math.min(1, x));
+            pointer.ty = Math.max(-1, Math.min(1, y));
+            pointer.strength = Math.max(pointer.strength, strength);
+        },
         destroy() {
             stop();
             unobserve();

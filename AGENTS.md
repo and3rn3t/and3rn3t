@@ -15,6 +15,11 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   `mcp/server-card.json`, `agent-skills/`, `ai-catalog.json` and `/api/openapi.json`). Each needs its own route in
   `wrangler.toml`; `tests/worker/discovery.test.js` fails when a document or `/mcp` is not routed. Adding a tool or an
   API path means updating the server card, `SKILL_MD` and the OpenAPI document too (tests check they agree).
+  The server also offers **prompts** (`brief-for-role`, `compare-projects`, `recent-work`) and **resources** (a post or a
+  project as Markdown, `portfolio://posts/{slug}` and `portfolio://projects/{name}`), both in `worker/mcp-content.js` (pure, so
+  tests run it directly). A prompt names the tools to use and quotes what was typed; it never states a fact about Matthew
+  itself. Adding or renaming one means updating the server card, `SKILL_MD` and `SERVER_VERSION` (a test pins the three lists
+  to the version). Prompt and resource calls are not timed on `/status/`: it counts tool calls, and `worker/telemetry.js` has a fixed layout.
   Every MCP tool declares a zod `outputSchema` (an object at the root) and returns `structuredContent` plus the same JSON as text;
   a "no such project or post" reply is `isError` for the model but recorded as a success on `/status/` (`asNotFound`).
   Two tools are MCP Apps, drawn inside Claude: `show_project` (`worker/mcp-app-view.js`) and `show_status`
@@ -140,6 +145,16 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   counter and the edge receipt do; presence already waits for the tab to be visible). `tests/e2e/prerender.spec.js` cannot see a
   prerender succeed (Chromium turns prerendering off while DevTools is attached, which Playwright always is); it checks the browser
   accepts the rules under the real policy and that hovering a link tries one.
+- **Shared hero (lab experiment `hero-shared`)**: everyone with it on bends the same flow field. `modules/hero-share.js` rides
+  the presence socket the page already holds (`onPresenceMessage`, `onPresenceOpen` and `sendPresence` in `modules/edge.js`,
+  so "N here now" still counts a page once): it sends `share` to opt in, then `g <x> <y>` (a pointer position over the hero,
+  0 to 255 each) at most every 150 ms, only while at least two pages have opted in, only over the hero, only in a visible
+  tab. `worker/presence.js` relays a gust to the other opted-in pages and stores nothing (the opt-in is the socket's
+  attachment, which survives hibernation; the last-gust time is in memory only). Limits, because each incoming message wakes
+  the billed object: 25 pages take part (`MAX_SHARING`, the next gets `{share:false}`), a gust within 100 ms of the last is
+  dropped, anything else a page sends is closed with 1008 as before. A remote gust calls the hero's `nudge()`, the same input
+  as a local pointer at 0.7 strength, so the WASM and GPU sims are unchanged. Known and accepted: one address can fill the 25
+  seats (the object keeps no address), which only denies the experiment to others, never the count.
 - **GPU hero (experiment)**: `/?hero=gpu` runs the hero's flow field on the GPU (`modules/hero-gpu.js`, WebGPU: the
   `assembly/hero-sim.ts` step ported to a WGSL compute shader, a trail texture that fades, one line-list draw). It is off unless
   asked for (the default page never loads it; `tests/e2e/hero-gpu.spec.js` checks), and `&particles=60000` sets the count (800 to
@@ -160,6 +175,15 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   five minutes (`worker/probe.js`, the cron in `wrangler.toml`), and has traces and Issues on. `/api/stats`
   (`worker/stats.js`, cached five minutes, fixed queries, any section `null` when it cannot be read) feeds `/status/` and
   the MCP tool `get_site_stats`. Nothing published counts visitors over time or says where they are.
+  - **Signed agents** (`worker/web-bot-auth.js`): a request carrying a Web Bot Auth signature (RFC 9421, tag `web-bot-auth`,
+    `Signature-Agent` naming the agent's key directory) is checked after the response is sent and recorded as `blob5` of its
+    `request` point: `valid`, `invalid` or `unchecked` (`unsigned` for everything else; points before 2026-11 have none).
+    `/api/stats` and `/status/` show the share of agent calls that were valid once 20 were checked. It only counts: a valid
+    signature proves a held key, not who is behind it, and nothing is allowed or blocked on it. The directory is fetched from
+    a host the sender names, so the fetch is https-only, host-name-only, fixed path, 2 s, 16 KB, no redirects, cached an hour
+    and capped at 10 uncached fetches a minute per isolate. Neither the agent's host nor its address is recorded or logged
+    (an agent on a personal domain would identify a person); logs hold only the outcome and a reason code.
+    Cloudflare documents no field a Pro-plan Worker can read for its own verification result, which is why the Worker verifies.
   - **Zone queries must filter `requestSource = 'eyeball'`.** About 8% of the site's logged requests are Cloudflare's own
     Early Hints probing (`earlyHintsCache`), mostly logged as 504s with no origin: a query that counts them reports a
     constant outage that no visitor sees.

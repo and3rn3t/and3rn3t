@@ -5,7 +5,14 @@
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import worker from '../../worker/index.js';
-import { MAX_SOCKETS, Presence, handlePresenceRequest } from '../../worker/presence.js';
+import {
+    MAX_SHARING,
+    MAX_SOCKETS,
+    MIN_GUST_MS,
+    Presence,
+    handlePresenceRequest,
+    parseGust,
+} from '../../worker/presence.js';
 
 const OPEN = 1;
 const socket = (readyState = OPEN) => ({ readyState, send: vi.fn(), close: vi.fn() });
@@ -133,8 +140,150 @@ describe('the Presence object', () => {
         const { presence } = makePresence([existing]);
         await presence.fetch(upgrade({ 'CF-Connecting-IP': '203.0.113.9' }));
         const sent = existing.send.mock.calls[0][0];
-        expect(JSON.parse(sent)).toEqual({ count: 2 });
+        expect(JSON.parse(sent)).toEqual({ count: 2, sharing: 0 });
         expect(sent).not.toMatch(/203\.0\.113/);
+    });
+});
+
+describe('the shared hero (lab experiment hero-shared)', () => {
+    /** A socket with an attachment, which is how a real one remembers it opted in across hibernation. */
+    const attached = (state = null) => {
+        let attachment = state;
+        return {
+            ...socket(),
+            serializeAttachment: vi.fn(value => {
+                attachment = value;
+            }),
+            deserializeAttachment: () => attachment,
+        };
+    };
+    const sharer = () => attached({ sharing: true });
+    const sent = ws => ws.send.mock.calls.map(([message]) => JSON.parse(message));
+    const gusts = ws => sent(ws).filter(message => message.g);
+
+    afterEach(() => vi.useRealTimers());
+
+    it('parses "g x y" with two numbers from 0 to 255, and nothing else', () => {
+        expect(parseGust('g 0 255')).toEqual([0, 255]);
+        expect(parseGust('g 12 200')).toEqual([12, 200]);
+        for (const bad of [
+            'g 256 1',
+            'g 1',
+            'g 1 2 3',
+            'G 1 2',
+            'g -1 2',
+            'g 1.5 2',
+            'g  1 2',
+            'g 1 2\n',
+            '',
+            'share',
+            5,
+            null,
+            new ArrayBuffer(3),
+        ]) {
+            expect(parseGust(bad), String(bad)).toBeNull();
+        }
+    });
+
+    it('"share" opts a page in, remembers it in the attachment only, and tells everyone the count', () => {
+        const ws = attached();
+        const other = attached();
+        const { presence } = makePresence([ws, other]);
+        presence.webSocketMessage(ws, 'share');
+        expect(ws.serializeAttachment).toHaveBeenCalledWith({ sharing: true });
+        expect(ws.close).not.toHaveBeenCalled();
+        expect(sent(other)).toEqual([{ count: 2, sharing: 1 }]);
+    });
+
+    it('opting in twice changes nothing', () => {
+        const ws = sharer();
+        const { presence } = makePresence([ws]);
+        presence.webSocketMessage(ws, 'share');
+        expect(ws.serializeAttachment).not.toHaveBeenCalled();
+        expect(ws.send).not.toHaveBeenCalled();
+    });
+
+    it('relays a gust to the other pages that opted in, and to no one else', () => {
+        const from = sharer();
+        const sharing = sharer();
+        const watching = attached(); // open, but never opted in
+        const { presence } = makePresence([from, sharing, watching]);
+        presence.webSocketMessage(from, 'g 12 200');
+        expect(gusts(sharing)).toEqual([{ g: [12, 200] }]);
+        expect(from.send).not.toHaveBeenCalled(); // not echoed back
+        expect(watching.send).not.toHaveBeenCalled();
+    });
+
+    it('relays only a position: nothing about who sent it', () => {
+        const from = sharer();
+        const sharing = sharer();
+        const { presence } = makePresence([from, sharing]);
+        presence.webSocketMessage(from, 'g 1 2');
+        expect(sharing.send.mock.calls[0][0]).toBe('{"g":[1,2]}');
+        expect(from.serializeAttachment).not.toHaveBeenCalled();
+    });
+
+    it('closes a page that sends a gust without opting in, and one that sends a malformed gust', () => {
+        const { presence } = makePresence();
+        const outsider = attached();
+        presence.webSocketMessage(outsider, 'g 1 2');
+        expect(outsider.close).toHaveBeenCalledWith(1008, expect.any(String));
+        const sharing = sharer();
+        presence.webSocketMessage(sharing, 'g 999 2');
+        expect(sharing.close).toHaveBeenCalledWith(1008, expect.any(String));
+    });
+
+    it('drops a gust that follows the last one too soon, and relays the next one after the wait', () => {
+        vi.useFakeTimers();
+        vi.setSystemTime(1_000_000);
+        const from = sharer();
+        const sharing = sharer();
+        const { presence } = makePresence([from, sharing]);
+        presence.webSocketMessage(from, 'g 1 1');
+        vi.setSystemTime(1_000_000 + MIN_GUST_MS - 1);
+        presence.webSocketMessage(from, 'g 2 2');
+        expect(from.close).not.toHaveBeenCalled(); // a fast pointer is not abuse
+        vi.setSystemTime(1_000_000 + MIN_GUST_MS);
+        presence.webSocketMessage(from, 'g 3 3');
+        expect(gusts(sharing)).toEqual([{ g: [1, 1] }, { g: [3, 3] }]);
+    });
+
+    it('limits how many pages take part, and tells the one turned away', () => {
+        const crowd = Array.from({ length: MAX_SHARING }, sharer);
+        const late = attached();
+        const { presence } = makePresence([...crowd, late]);
+        presence.webSocketMessage(late, 'share');
+        expect(late.serializeAttachment).not.toHaveBeenCalled();
+        expect(sent(late)).toEqual([{ share: false }]);
+        expect(late.close).not.toHaveBeenCalled();
+    });
+
+    it('still knows who opted in after the object hibernates and wakes (the attachment is the memory)', () => {
+        const from = sharer();
+        const sharing = sharer();
+        const sockets = [from, sharing];
+        const first = makePresence(sockets).presence;
+        first.webSocketMessage(from, 'g 5 5');
+        const woken = makePresence(sockets).presence; // a new object over the same sockets
+        vi.useFakeTimers();
+        vi.setSystemTime(Date.now() + 1000);
+        woken.webSocketMessage(from, 'g 6 6');
+        expect(gusts(sharing).map(message => message.g)).toEqual([
+            [5, 5],
+            [6, 6],
+        ]);
+    });
+
+    it('survives a socket that dies while it is relaying', () => {
+        const from = sharer();
+        const dead = sharer();
+        dead.send.mockImplementation(() => {
+            throw new Error('gone');
+        });
+        const alive = sharer();
+        const { presence } = makePresence([from, dead, alive]);
+        expect(() => presence.webSocketMessage(from, 'g 1 1')).not.toThrow();
+        expect(gusts(alive)).toHaveLength(1);
     });
 });
 
