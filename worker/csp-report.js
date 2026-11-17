@@ -43,6 +43,9 @@ export const DIRECTIVES = new Set([
     'form-action',
     'base-uri',
     'frame-ancestors',
+    // Trusted Types: a string reached a sink without a policy, or a policy was made that is not listed
+    'require-trusted-types-for',
+    'trusted-types',
 ]);
 
 /** A report is JSON from a stranger: a field that is not text is no field at all. */
@@ -70,6 +73,44 @@ export function blockedSource(raw) {
     }
 }
 
+/**
+ * The sink a Trusted Types report names, from the front of its sample ("Element innerHTML|<first
+ * characters of the value>"). Only the name before the bar is read and only a known one is kept: what
+ * follows is page content, which is never stored.
+ */
+const SINKS = new Map(
+    [
+        'Element innerHTML',
+        'Element outerHTML',
+        'Element insertAdjacentHTML',
+        'ShadowRoot innerHTML',
+        'Document write',
+        'Document writeln',
+        'Range createContextualFragment',
+        'DOMParser parseFromString',
+        'HTMLIFrameElement srcdoc',
+        'HTMLScriptElement src',
+        'HTMLScriptElement text',
+        'HTMLScriptElement textContent',
+        'HTMLScriptElement innerText',
+        'Element setAttribute',
+        'Window setTimeout',
+        'Window setInterval',
+        'Window eval',
+        'Function',
+        'eval',
+    ].map(name => [name.toLowerCase(), `sink:${name.toLowerCase().replaceAll(' ', '-')}`])
+);
+
+/** @param {unknown} sample @returns {string} "sink:element-innerhtml", or "sink:other" */
+export function sinkName(sample) {
+    const name = asText(sample).split('|')[0].trim().toLowerCase();
+    return SINKS.get(name) ?? 'sink:other';
+}
+
+/** The marker a browser puts in blocked-uri for a Trusted Types violation. */
+export const TRUSTED_TYPES_SINK = 'trusted-types-sink';
+
 /** @returns {{ host: string, path: string }} the page's host, and its path without query or fragment */
 export function pageOf(documentUrl) {
     try {
@@ -83,7 +124,7 @@ export function pageOf(documentUrl) {
 /**
  * The reports in a request body, in either format, at most MAX_REPORTS.
  * @param {string} raw
- * @returns {{ documentUrl: unknown, blockedUrl: unknown, directive: unknown }[]}
+ * @returns {{ documentUrl: unknown, blockedUrl: unknown, directive: unknown, sample: unknown }[]}
  */
 export function parseReports(raw) {
     let data;
@@ -96,11 +137,13 @@ export function parseReports(raw) {
     if (Array.isArray(data)) {
         for (const entry of data) {
             if (entry?.type !== 'csp-violation' || !entry.body) continue;
-            const { documentURL, blockedURL, effectiveDirective, violatedDirective } = entry.body;
+            const { documentURL, blockedURL, effectiveDirective, violatedDirective, sample } =
+                entry.body;
             reports.push({
                 documentUrl: documentURL ?? entry.url,
                 blockedUrl: blockedURL,
                 directive: effectiveDirective ?? violatedDirective,
+                sample,
             });
         }
     } else if (data?.['csp-report']) {
@@ -109,6 +152,7 @@ export function parseReports(raw) {
             documentUrl: report['document-uri'],
             blockedUrl: report['blocked-uri'],
             directive: report['effective-directive'] ?? report['violated-directive'],
+            sample: report['script-sample'],
         });
     }
     return reports.slice(0, MAX_REPORTS);
@@ -160,7 +204,11 @@ export async function handleCspReport(request, env) {
             if (host !== SITE_HOST) continue;
             recordCsp(env, {
                 directive: directiveName(report.directive),
-                blocked: blockedSource(report.blockedUrl),
+                // A Trusted Types violation has no address: what matters is which sink was reached
+                blocked:
+                    asText(report.blockedUrl).trim().toLowerCase() === TRUSTED_TYPES_SINK
+                        ? sinkName(report.sample)
+                        : blockedSource(report.blockedUrl),
                 path,
             });
         }

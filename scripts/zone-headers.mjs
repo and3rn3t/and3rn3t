@@ -140,6 +140,13 @@ export function buildCsp({ scripts, styles }) {
     'base-uri': ["'self'"],
     'object-src': ["'none'"],
     'frame-ancestors': ["'none'"],
+    // Trusted Types (Phase 15.10): a string cannot reach innerHTML, a script's src or eval; only a value a
+    // policy made can, and only the policies named here may be created. Report-only like the rest, so this
+    // counts what would break: the site's own sinks all go through modules/utils/html.js, and what
+    // the reports still show comes from outside (Turnstile, Cloudflare's beacon, an extension).
+    'require-trusted-types-for': ["'script'"],
+    // andernet: modules/utils/html.js. andernet-loader: the inline analytics loader in index.html.
+    'trusted-types': ['andernet', 'andernet-loader'],
     // Where the browser says what this policy would have blocked (worker/csp-report.js)
     'report-uri': ['/api/csp-report'],
   };

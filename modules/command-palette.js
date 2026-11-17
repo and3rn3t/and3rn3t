@@ -15,7 +15,7 @@
 import { debug } from './debug.js';
 import { loadJSON } from './utils/data.js';
 import { projectView } from './utils/projects.js';
-import { escapeHtml } from './utils/html.js';
+import { escapeHtml, trustedHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
 
 const optionId = index => `palette-option-${index}`;
@@ -398,15 +398,17 @@ class CommandPalette {
 
         if (this.filtered.length === 0) {
             this.input.removeAttribute('aria-activedescendant');
-            this.resultsContent.innerHTML =
-                query.trim() === '' ? '' : '<div class="palette-no-results">No matches found</div>';
+            this.resultsContent.innerHTML = trustedHtml(
+                query.trim() === '' ? '' : '<div class="palette-no-results">No matches found</div>'
+            );
             return;
         }
 
         this.input.setAttribute('aria-activedescendant', optionId(0));
-        this.resultsContent.innerHTML = this.filtered
-            .map((item, i) => {
-                return `
+        this.resultsContent.innerHTML = trustedHtml(
+            this.filtered
+                .map((item, i) => {
+                    return `
                 <button class="palette-item${i === 0 ? ' is-active' : ''}" id="${optionId(i)}" role="option" aria-selected="${i === 0}" tabindex="-1" data-index="${i}" type="button">
                     <span class="palette-item-icon">${icon(item.icon)}</span>
                     <span class="palette-item-text">
@@ -415,8 +417,9 @@ class CommandPalette {
                     </span>
                     <span class="palette-item-type">${item.type}</span>
                 </button>`;
-            })
-            .join('');
+                })
+                .join('')
+        );
 
         for (const btn of this.resultsContent.querySelectorAll('.palette-item')) {
             btn.addEventListener('click', () => {

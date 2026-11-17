@@ -12,7 +12,7 @@ import { debug } from './debug.js';
 import { githubAPI } from './github-api.js';
 import { WORKER_BASE } from './config.js';
 import { SKIP_REPOS, pickEvent, buildActivity } from './utils/activity.js';
-import { escapeHtml } from './utils/html.js';
+import { escapeHtml, trustedHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
 
 const WORKER_URL = `${WORKER_BASE}/activity`;
@@ -107,7 +107,7 @@ class CurrentlyWidget {
             ? `<span class="currently-time" title="${escapeHtml(activity.pushedAt ?? '')}">${escapeHtml(relTime)}</span>`
             : '';
 
-        this.container.innerHTML = `
+        this.container.innerHTML = trustedHtml(`
             <div class="currently-widget" role="status" aria-live="polite">
                 <span class="currently-dot" aria-hidden="true"></span>
                 <span class="currently-label">
@@ -119,7 +119,7 @@ class CurrentlyWidget {
                 ${messageHtml}
                 <span class="currently-meta">${branchHtml}${timeHtml}</span>
             </div>
-        `;
+        `);
     }
 
     _relTime(date) {

@@ -164,7 +164,22 @@ export class UIManager {
         }
 
         const firstRecentWeek = Math.max(0, contributions.weeks.length - MOBILE_HEATMAP_WEEKS);
-        const cells = [];
+        // DOM calls, not markup: no string reaches a sink, and html.js stays out of app:ready
+        const element = (tag, className, text) => {
+            const node = document.createElement(tag);
+            if (className) node.className = className;
+            if (text !== undefined) node.textContent = text;
+            return node;
+        };
+        const cell = (level, extraClass = '') => {
+            const node = element('i', `contrib__cell${extraClass}`);
+            node.dataset.level = String(level);
+            return node;
+        };
+
+        const grid = element('div', 'contrib__grid');
+        grid.setAttribute('role', 'img');
+        grid.setAttribute('aria-label', 'Contribution activity, week by week');
         contributions.weeks.forEach((week, weekIndex) => {
             const isOlder = weekIndex < firstRecentWeek;
             for (const day of week.days) {
@@ -176,32 +191,33 @@ export class UIManager {
                     day: 'numeric',
                 });
                 const plural = day.count === 1 ? '' : 's';
-                cells.push(
-                    `<i class="contrib__cell${isOlder ? ' contrib__cell--older' : ''}" data-level="${day.level}" ` +
-                        `style="--week:${weekIndex + 1};--recent-week:${weekIndex - firstRecentWeek + 1};grid-row:${date.getDay() + 1}" ` +
-                        `title="${day.count} contribution${plural} on ${dateLabel}"></i>`
-                );
+                const node = cell(day.level, isOlder ? ' contrib__cell--older' : '');
+                node.style.setProperty('--week', String(weekIndex + 1));
+                node.style.setProperty('--recent-week', String(weekIndex - firstRecentWeek + 1));
+                node.style.gridRow = String(date.getDay() + 1);
+                node.title = `${day.count} contribution${plural} on ${dateLabel}`;
+                grid.append(node);
             }
         });
 
-        container.innerHTML = `
-            <figure class="contrib__figure">
-                <div class="contrib__grid" role="img" aria-label="Contribution activity, week by week">${cells.join('')}</div>
-                <figcaption class="contrib__foot">
-                    <span class="contrib__range contrib__range--year">The last year, week by week</span>
-                    <span class="contrib__range contrib__range--recent">The last ${MOBILE_HEATMAP_WEEKS} weeks</span>
-                    <span class="contrib__legend" aria-hidden="true">
-                        Less
-                        <i class="contrib__cell" data-level="0"></i>
-                        <i class="contrib__cell" data-level="1"></i>
-                        <i class="contrib__cell" data-level="2"></i>
-                        <i class="contrib__cell" data-level="3"></i>
-                        <i class="contrib__cell" data-level="4"></i>
-                        More
-                    </span>
-                </figcaption>
-            </figure>
-        `;
+        const legend = element('span', 'contrib__legend');
+        legend.setAttribute('aria-hidden', 'true');
+        legend.append('Less ', ...[0, 1, 2, 3, 4].map(level => cell(level)), ' More');
+        const foot = element('figcaption', 'contrib__foot');
+        foot.append(
+            element('span', 'contrib__range contrib__range--year', 'The last year, week by week'),
+            ' ',
+            element(
+                'span',
+                'contrib__range contrib__range--recent',
+                `The last ${MOBILE_HEATMAP_WEEKS} weeks`
+            ),
+            ' ',
+            legend
+        );
+        const figure = element('figure', 'contrib__figure');
+        figure.append(grid, foot);
+        container.replaceChildren(figure);
     }
 }
 

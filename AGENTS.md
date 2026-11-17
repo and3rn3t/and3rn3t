@@ -119,6 +119,15 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   pages when the script runs: **after changing an inline `<script>` or `<style>` in `index.html` or the
   templates, run `pnpm zone --only headers --apply`** or the page reports a violation. The script owns only rules
   whose ref starts with `andernet-`; a PUT replaces a whole phase, so it sends the others back unchanged.
+  **Trusted Types** (Phase 15.10, report-only like the rest): `require-trusted-types-for 'script'` and `trusted-types andernet
+andernet-loader`. Every first-party `innerHTML =` and script `src =` goes through `modules/utils/html.js`
+  (`trustedHtml`, `trustedScriptUrl`; its `createHTML` passes markup through, so the call sites must build it from
+  `escapeHtml`'d data, and its `createScriptURL` only allows this site and the two Cloudflare scripts); the inline analytics
+  loader in `index.html` makes its own `andernet-loader` policy. A new bare `innerHTML =` fails
+  `tests/e2e/csp-report.spec.js`, which browses every page in both themes plus the palette, guestbook, Turnstile loader and
+  easter egg under the real policy and expects zero reports. The Worker records a Trusted Types report as the directive and
+  `sink:<name>` (`sinkName`, a fixed list; never the value). Changing the inline loader or the directives means
+  `pnpm zone --only headers --apply`, and deploying the Worker first so the new directives are counted, not folded into "other".
   The CSP is report-only and has `report-uri /api/csp-report`: browsers post what it would have blocked to
   `worker/csp-report.js`, which keeps only a directive, a blocked host or keyword and a page path (no query,
   address or user agent; reports about other sites are ignored; always a 204). `/status/` shows the count for the

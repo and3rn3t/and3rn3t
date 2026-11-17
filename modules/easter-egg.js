@@ -10,6 +10,7 @@
  */
 
 import { motion } from './capabilities.js';
+import { trustedHtml } from './utils/html.js';
 
 const SEQUENCE = [
     'ArrowUp',
@@ -64,7 +65,7 @@ class EasterEgg {
 
         const overlay = document.createElement('div');
         overlay.className = 'dev-terminal-overlay';
-        overlay.innerHTML = `
+        overlay.innerHTML = trustedHtml(`
             <div class="dev-terminal" role="dialog" aria-label="Developer mode terminal">
                 <div class="dev-terminal-bar">
                     <span class="dev-dot dev-dot--red"></span>
@@ -74,7 +75,7 @@ class EasterEgg {
                 </div>
                 <pre class="dev-terminal-body" id="dev-terminal-body"></pre>
                 <p class="dev-terminal-hint">press <kbd>Esc</kbd> to close</p>
-            </div>`;
+            </div>`);
         document.body.appendChild(overlay);
         this.overlay = overlay;
 
