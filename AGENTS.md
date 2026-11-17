@@ -62,6 +62,7 @@ pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked; tags the version with the short SHA, which /api/edge then reports
 pnpm check:agent-ready # report-only scan of the live site (isitagentready.com); never fails
 pnpm check:worker-deployed # report-only: is the live Worker's tagged commit at or past the last worker/ change? (daily in site-check.yml)
+pnpm check:bfcache   # by hand: does each page come back from the back/forward cache? (needs `pnpm exec playwright install chromium`; targets the live site; exit 1 if not)
 pnpm check:probe     # FAILS if the uptime probe has been quiet for 15+ minutes or its last check failed (daily in site-check.yml)
 pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
 pnpm zone --apply    # only when asked; `--only tls` limits it to one group
@@ -161,6 +162,13 @@ andernet-loader`. Every first-party `innerHTML =` and script `src =` goes throug
   counter and the edge receipt do; presence already waits for the tab to be visible). `tests/e2e/prerender.spec.js` cannot see a
   prerender succeed (Chromium turns prerendering off while DevTools is attached, which Playwright always is); it checks the browser
   accepts the rules under the real policy and that hovering a link tries one.
+- **Back/forward cache** (Phase 15.12): the live pages are restored from it in Chromium, with the real presence socket open and the
+  Turnstile iframe loaded, because `initPresence` closes its socket on `visibilitychange` to hidden (before the page is frozen)
+  and opens a new one on visible; the shared hero and the edge widget ride that, so a restore needs no extra code.
+  `pnpm check:bfcache` measures it (full Chromium, not the headless shell, which opts out; Playwright's `goBack()` and
+  `waitForURL` wait for a `load` a restore never fires, so the script polls the URL). Chrome no longer refuses `unload` handlers
+  or `no-store`, but Firefox and Safari refuse `unload`, so `tests/unit/bfcache-guards.test.js` forbids one and checks the presence close.
+  Not tested: Safari and Firefox themselves.
 - **Shared hero (lab experiment `hero-shared`)**: everyone with it on bends the same flow field. `modules/hero-share.js` rides
   the presence socket the page already holds (`onPresenceMessage`, `onPresenceOpen` and `sendPresence` in `modules/edge.js`,
   so "N here now" still counts a page once): it sends `share` to opt in, then `g <x> <y>` (a pointer position over the hero,
