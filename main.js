@@ -516,34 +516,22 @@ function setupGlobalEvents() {
         }
     });
 
-    // Service worker registration
+    // Service worker registration: after startup, from its own module (it needs the Trusted Types policy)
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
-        navigator.serviceWorker
-            .register('/sw.js')
-            .then(registration => {
-                debug.log('[App] Service Worker registered:', registration.scope);
-                watchForServiceWorkerUpdate();
-            })
-            .catch(error => {
-                debug.warn('[App] Service Worker registration failed:', error);
-            });
+        whenIdle(() =>
+            import('./modules/sw-register.js')
+                .then(m =>
+                    m.registerServiceWorker(() =>
+                        appState.managers.ui?.showNotification?.(
+                            'Site updated. Refresh for the latest version.',
+                            'info',
+                            8000
+                        )
+                    )
+                )
+                .catch(() => {})
+        );
     }
-}
-
-/**
- * The worker takes over as soon as it installs, so a controller change means the
- * code behind this tab was replaced. Say so; don't reload under the visitor.
- */
-function watchForServiceWorkerUpdate() {
-    if (!navigator.serviceWorker.controller) return; // first install, nothing was replaced
-    navigator.serviceWorker.addEventListener(
-        'controllerchange',
-        () => {
-            const { ui } = appState.managers;
-            ui?.showNotification?.('Site updated. Refresh for the latest version.', 'info', 8000);
-        },
-        { once: true }
-    );
 }
 
 /**
