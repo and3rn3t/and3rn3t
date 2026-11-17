@@ -703,8 +703,8 @@
 
   /* --- Site navigation --------------------------------------------------------
      A top bar on wide screens; on narrow ones the link list becomes a sheet that drops
-     from the bar. State classes are set by main.js: .scrolled on the bar, .active on the
-     toggle and the list while the sheet is open. */
+     from the bar. main.js sets .active on the toggle and the list while the sheet is open, in a
+     browser without popover. */
   .site-nav {
     font-family: var(--font-sans);
     position: fixed;
@@ -712,7 +712,6 @@
     z-index: var(--z-fixed);
     height: var(--nav-h);
     border-bottom: var(--border-width) solid transparent;
-    transition: border-color var(--dur-base) var(--ease-out);
   }
 
   /* The frosted background is a layer of its own: backdrop-filter on the bar itself would
@@ -727,8 +726,26 @@
     backdrop-filter: blur(0.75rem) saturate(1.4);
   }
 
+  /* The hairline under the bar fills in over the first few rem of scrolling: a scroll timeline, no
+     script (it replaced a scroll listener). A browser without scroll timelines keeps the bar
+     borderless, the frosted background still marks it, as with .reading-progress in article.css.
+     A page that renders the bar already scrolled (the generated pages) has the class and the line. */
   .site-nav.scrolled {
     border-bottom-color: var(--border);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .site-nav:not(.scrolled) {
+      animation: nav-rule linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 var(--space-12);
+    }
+  }
+
+  @keyframes nav-rule {
+    to {
+      border-bottom-color: var(--border);
+    }
   }
 
   .site-nav__inner {

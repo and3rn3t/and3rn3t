@@ -97,6 +97,13 @@ pnpm zone --apply    # only when asked; `--only tls` limits it to one group
   - Colour comes from semantic tokens (`--surface`, `--text`, `--muted`, `--border`, `--accent`, …) defined once
     with `light-dark()`. Stylelint rejects hex/`rgb()`/named colours in `styles/` outside the token block.
   - `<html data-theme>` is the theme (set before first paint); there is no `body.dark-theme` class.
+  - **CSS before script** (Phase 15.11): where a CSS feature is Baseline and the effect is cosmetic, it replaces the script and
+    there is no fallback, as `.reading-progress` always did. The home bar's hairline is a scroll timeline (`nav-rule` in
+    `core.css`, `@supports (animation-timeline: scroll())`; the generated pages render the bar with `.scrolled` already on, so
+    they keep their line from the top). The dev terminal fades in from `@starting-style`. `settled()` in `tests/e2e/fixtures.js`
+    ignores scroll-driven animations, which never finish. Not worth doing, measured: a toast's slide-in (its element is always
+    rendered, so `@starting-style` does not fire), the scroll spy (`aria-current` is an attribute, CSS cannot set it), the theme
+    switch's view-transition origin and the uptime strip's readout (both need the pointer or a rect).
 - Project screenshots are captured by hand: `pnpm capture:screenshots [name]` opens each project's
   `screenshot.url` (in `projects-data.json`) and writes `images/projects/`. Look at the result before
   committing; a demo behind a login (homehub) or showing an empty state needs another URL or none.

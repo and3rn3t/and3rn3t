@@ -94,8 +94,6 @@ class EasterEgg {
         });
         document.addEventListener('keydown', onKey);
         this._onKey = onKey;
-
-        requestAnimationFrame(() => overlay.classList.add('visible'));
     }
 
     type(el, lines) {
@@ -135,7 +133,7 @@ class EasterEgg {
         document.removeEventListener('keydown', this._onKey);
         const { overlay } = this;
         this.overlay = null;
-        overlay.classList.remove('visible');
+        overlay.classList.add('closing');
         setTimeout(() => overlay.remove(), 300);
     }
 }

@@ -32,8 +32,44 @@ async function openTerminal(page) {
             { timeout: 12000 }
         )
         .toBe(1);
-    await expect(page.locator('.dev-terminal-overlay')).toHaveClass(/visible/);
+    // It fades in from @starting-style, with no script adding a class: wait for the fade to finish
+    await expect(page.locator('.dev-terminal-overlay')).toHaveCSS('opacity', '1');
 }
+
+test.describe('the fade-in is a CSS transition from @starting-style', () => {
+    test.use({ reducedMotion: 'no-preference' });
+    test('it runs an opacity transition as the overlay arrives, with no class added by a script', async ({
+        page,
+    }) => {
+        await page.addInitScript(() => {
+            window.__fade = null;
+            new window.MutationObserver(() => {
+                const overlay = document.querySelector('.dev-terminal-overlay');
+                if (!overlay || window.__fade) return;
+                window.__fade = { classes: overlay.className, transitions: null };
+                // After the first style update the transition from @starting-style is running
+                window.requestAnimationFrame(() =>
+                    window.requestAnimationFrame(() => {
+                        window.__fade.transitions = overlay
+                            .getAnimations()
+                            .map(animation => animation.transitionProperty);
+                    })
+                );
+            }).observe(document, { childList: true, subtree: true });
+        });
+        await openTerminal(page);
+        const fade = await page.evaluate(() => window.__fade);
+        expect(fade.classes).toBe('dev-terminal-overlay'); // nothing but the base class on arrival
+        expect(fade.transitions).toContain('opacity');
+    });
+});
+
+test('closing fades it out and then removes it', async ({ page }) => {
+    await openTerminal(page);
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.dev-terminal-overlay')).toHaveClass(/closing/);
+    await expect(page.locator('.dev-terminal-overlay')).toHaveCount(0);
+});
 
 const channels = colour => colour.match(/[\d.]+/g).map(Number);
 const luminance = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
