@@ -335,10 +335,9 @@ async function initializeApp() {
         // The service worker and the global handlers first: they do not depend on anything
         setupGlobalEvents();
 
-        // Critical path: the theme (prevents a flash), the menu and the scroll effect
+        // Critical path: the theme (prevents a flash) and the menu
         appState.managers.theme = initThemeManager();
         initMobileMenu();
-        initNavigation();
 
         // The UI shell and navigation
         const { uiManager } = await import('./modules/ui.js');
@@ -467,20 +466,6 @@ function initMobileMenu() {
     globalThis
         .matchMedia('(min-width: 48rem)')
         .addEventListener('change', event => event.matches && close());
-}
-
-/**
- * Initialize navigation behaviors
- */
-function initNavigation() {
-    const navbar = document.getElementById('navbar');
-
-    // Navbar scroll effect
-    globalThis.addEventListener(
-        'scroll',
-        () => navbar?.classList.toggle('scrolled', globalThis.scrollY > 50),
-        { passive: true }
-    );
 }
 
 /**

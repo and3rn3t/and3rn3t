@@ -169,15 +169,45 @@ test.describe('navigation chrome', () => {
         await expect(page.locator('#global-search-input')).toBeFocused();
     });
 
-    test('the nav gets a border once the page has scrolled', async ({ page }) => {
+    // A CSS scroll timeline (core.css `nav-rule`), not a class that a script toggles: the hairline
+    // fills in over the first few rem of scrolling, and is there whatever the scroll position was
+    test('the nav gets a border as the page scrolls, with no script', async ({ page }) => {
         await page.goto('/');
         const border = () =>
             page.locator('#navbar').evaluate(el => getComputedStyle(el).borderBottomColor);
+        const alpha = colour => Number(colour.match(/[\d.]+/g)[3] ?? 1);
         const top = await border();
+        expect(alpha(top)).toBe(0);
+        await page.evaluate(() => globalThis.scrollTo(0, 24));
+        await expect.poll(async () => alpha(await border())).toBeGreaterThan(0);
+        const halfway = alpha(await border());
         await page.evaluate(() => globalThis.scrollTo(0, 600));
-        await expect(page.locator('#navbar')).toHaveClass(/scrolled/);
-        // Polled: the colour transitions, so it settles a frame after the class lands
-        await expect.poll(border).not.toBe(top);
+        await expect.poll(async () => alpha(await border())).toBeGreaterThan(halfway);
+        // The class is no longer how it works
+        await expect(page.locator('#navbar')).not.toHaveClass(/scrolled/);
+        // Back at the top it is gone again
+        await page.evaluate(() => globalThis.scrollTo(0, 0));
+        await expect.poll(async () => alpha(await border())).toBe(0);
+    });
+
+    test('the same line is there after a reload part-way down the page', async ({ page }) => {
+        await page.goto('/#projects');
+        await page.waitForSelector('#projects .lead-card');
+        await page.waitForFunction(() => globalThis.scrollY > 300);
+        const colour = await page
+            .locator('#navbar')
+            .evaluate(el => getComputedStyle(el).borderBottomColor);
+        expect(Number(colour.match(/[\d.]+/g)[3] ?? 1)).toBeGreaterThan(0.5);
+    });
+
+    test('a generated page renders the bar already scrolled, with the line from the top', async ({
+        page,
+    }) => {
+        await page.goto('/404.html');
+        const colour = await page
+            .locator('.site-nav')
+            .evaluate(el => getComputedStyle(el).borderBottomColor);
+        expect(Number(colour.match(/[\d.]+/g)[3] ?? 1)).toBeGreaterThan(0.5);
     });
 });
 

@@ -113,6 +113,9 @@ export async function settled(page, timeout = 5000) {
             document
                 .getAnimations()
                 .filter(animation => animation.effect?.getComputedTiming().iterations !== Infinity)
+                // A scroll-driven animation (the nav's hairline, the reading bar) has a finite length but
+                // follows the scroll position, so it is "running" for as long as the page is open
+                .filter(animation => animation.timeline instanceof window.DocumentTimeline)
                 .filter(animation => animation.playState === 'running');
         while (running().length) {
             if (performance.now() > deadline) throw new Error('the page never stopped animating');
