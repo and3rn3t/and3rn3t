@@ -4,7 +4,7 @@ name: E2E
 # specs and their config, the dependencies, and the few non-site files the specs load (the list is
 # `E2E_PATTERNS` in the `changes` job). They mock the whole Worker (tests/e2e/fixtures.js), so a
 # change under worker/ cannot alter a result, except the files csp-report.spec.js imports:
-# worker/csp-report.js and, through it, worker/telemetry.js.
+# worker/csp-report.js and, through it, worker/telemetry.js, http.js, origin.js and site-data.js.
 # tests/unit/pages-workflow.test.js keeps that list in step with pages.yml's publish allowlist and
 # with everything the specs import, directly or transitively.
 #
@@ -65,8 +65,11 @@ jobs:
             tests/e2e/**
             scripts/zone-headers.mjs
             worker/csp-report.js
+            worker/http.js
             worker/mcp-app-status.js
             worker/mcp-app-view.js
+            worker/origin.js
+            worker/site-data.js
             worker/telemetry.js
             playwright.config.js
             package.json

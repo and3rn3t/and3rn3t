@@ -12,6 +12,7 @@
  */
 
 import { DurableObject } from 'cloudflare:workers';
+import { methodNotAllowed } from './http.js';
 import { isAllowedOrigin } from './origin.js';
 
 /** More than this many open pages and new ones are turned away: the object is one thread. */
@@ -157,7 +158,7 @@ export class Presence extends DurableObject {
  * @param {{ PRESENCE?: DurableObjectNamespace, PRESENCE_LIMITER?: { limit: Function } }} env
  */
 export async function handlePresenceRequest(request, env) {
-    if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
+    if (request.method !== 'GET') return methodNotAllowed(request, 'GET');
     if (request.headers.get('Upgrade')?.toLowerCase() !== 'websocket') {
         return new Response('Expected a WebSocket upgrade', { status: 426 });
     }

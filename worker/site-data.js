@@ -12,6 +12,7 @@
 import { projectView } from '../modules/utils/projects.js';
 
 export const SITE_ORIGIN = 'https://andernet.dev';
+export const SITE_HOST = new URL(SITE_ORIGIN).host;
 const CACHE_SECONDS = 300;
 
 /**

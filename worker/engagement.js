@@ -21,7 +21,7 @@
  *   POST /guestbook  body: { name, message, token } → validates Turnstile, stores entry
  */
 
-import { FALLBACK_ORIGIN, isAllowedOrigin } from './origin.js';
+import { jsonResponse, methodNotAllowed, preflight } from './http.js';
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const MAX_GUESTBOOK_ENTRIES = 50;
@@ -42,7 +42,7 @@ export async function handleViewsRequest(request, env) {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
-        return new Response(null, { headers: corsHeaders(request) });
+        return preflight(request);
     }
 
     const page = url.searchParams.get('page') ?? 'home';
@@ -51,7 +51,7 @@ export async function handleViewsRequest(request, env) {
     }
 
     if (request.method !== 'POST' && request.method !== 'GET') {
-        return new Response('Method not allowed', { status: 405 });
+        return methodNotAllowed(request, 'GET, POST, OPTIONS');
     }
 
     // The Durable Object counts atomically. Without its binding (local dev) the old KV path
@@ -83,7 +83,7 @@ export async function handleViewsRequest(request, env) {
 
 export async function handleGuestbookRequest(request, env) {
     if (request.method === 'OPTIONS') {
-        return new Response(null, { headers: corsHeaders(request) });
+        return preflight(request);
     }
 
     if (!env.GUESTBOOK_KV) {
@@ -98,7 +98,7 @@ export async function handleGuestbookRequest(request, env) {
         return handleGuestbookPost(request, env);
     }
 
-    return new Response('Method not allowed', { status: 405 });
+    return methodNotAllowed(request, 'GET, POST, OPTIONS');
 }
 
 /**
@@ -239,28 +239,4 @@ async function verifyTurnstile(token, secret, request) {
     } catch {
         return false;
     }
-}
-
-// ── Shared helpers (re-exported so index.js can use them) ──────────────────
-
-export function jsonResponse(data, request, status = 200) {
-    return new Response(JSON.stringify(data), {
-        status,
-        headers: {
-            'Content-Type': 'application/json',
-            ...corsHeaders(request),
-        },
-    });
-}
-
-export function corsHeaders(request) {
-    const origin = request.headers.get('Origin') ?? '';
-    const allowed = isAllowedOrigin(origin);
-    return {
-        'Access-Control-Allow-Origin': allowed ? origin : FALLBACK_ORIGIN,
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Max-Age': '86400',
-        Vary: 'Origin',
-    };
 }
