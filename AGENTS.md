@@ -206,7 +206,7 @@ andernet-loader`. Every first-party `innerHTML =` and script `src =` goes throug
   `sqrt(2500 / count)` because additive strokes at tens of thousands of particles saturate to white through the headline.
   `appState.managers.heroCanvas.stats()` reads `{ kind, particles, fps, frameMs }` in the console. Its e2e runs Chromium with the
   WebGPU flags (real Metal adapter on a Mac) and skips where there is no adapter, as in CI. Numbers and the decision not to make
-  it the default are in the ROADMAP decision log.
+  it the default are in the decision log of the roadmap archive (`docs/ROADMAP-archive.md`, 14.6).
 - **WebMCP** (`modules/webmcp.js`): in a browser that has `document.modelContext`, `main.js` loads the module on idle
   and registers five tools (search, list and open projects, set the theme, draft a contact message). Other browsers are
   never sent it (`tests/e2e/webmcp.spec.js` asserts that). The contact tool fills the form and **never submits**, and
