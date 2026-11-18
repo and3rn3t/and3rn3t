@@ -22,6 +22,7 @@ import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { extname, join, normalize } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { buildEntries } from '../modules/ask.js';
 
 const ROOT = join(import.meta.dirname, '..');
 const MIME = {
@@ -126,21 +127,48 @@ export function printable(value) {
     .replace(/[^\x20-\x7e]/g, '?');
 }
 
-const PICK_ID = /^(?:project|post):[a-z0-9][a-z0-9._-]{0,79}$/i;
-const STATUSES = new Set(['ok', 'unavailable', 'too-long', 'error', 'cancelled']);
 const MAX_PICKS = 3;
 const MAX_BODY_BYTES = 64 * 1024;
 
+// Nothing the page posts is ever printed. A posted number only chooses which entry of a fixed table is, a
+// posted id is replaced by the site's own id string, and a status by a constant: so a result cannot put text
+// of its own in the report (CodeQL's js/log-injection treats every value derived from a request as tainted,
+// so cleaning the value is not enough; not using it is).
+const MS_STEP = 10;
+const MS_LABELS = Array.from({ length: 600_000 / MS_STEP + 1 }, (_, index) =>
+  String(index * MS_STEP)
+);
+const COUNT_LABELS = Array.from({ length: 201 }, (_, index) => String(index));
+const STATUS_LABELS = {
+  ok: 'ok',
+  unavailable: 'unavailable',
+  'too-long': 'too-long',
+  error: 'error',
+  cancelled: 'cancelled',
+};
+
+/** @param {number} ms @returns {string} the time in milliseconds, to the nearest ten, as text from the table */
+export function msLabel(ms) {
+  const step = Math.round(ms / MS_STEP);
+  return MS_LABELS[step < 0 ? 0 : Math.min(step, MS_LABELS.length - 1)];
+}
+
+/** @param {number} count @returns {string} a small count as text from the table (200 and over read as 200) */
+export function countLabel(count) {
+  return COUNT_LABELS[count < 0 ? 0 : Math.min(count, COUNT_LABELS.length - 1)];
+}
+
 /**
  * The results the page posts back, checked. Anything that can reach localhost can post here, so nothing is
- * taken on trust: a result must name one of the questions, carry a known status, at most three page ids of
- * the shape `project:<name>` or `post:<slug>`, and numbers in range. A failure says only that a result is
- * malformed and never echoes what was posted.
+ * taken on trust: a result must name one of the questions, carry a known status, at most three page ids that
+ * are on the site, and numbers in range. What comes out holds the site's own strings and the question's, never
+ * the posted text. A failure says only that a result is malformed and never echoes what was posted.
  * @param {string} body
  * @param {{ id: string, expect: string[], none?: boolean }[]} questions
+ * @param {string[]} knownIds - every project and post id on the site
  * @returns {{ question: object, result: { status: string, ids: string[], invalid: number }, ms: number, top1: boolean, anywhere: boolean }[]}
  */
-export function readResults(body, questions) {
+export function readResults(body, questions, knownIds) {
   let posted;
   try {
     posted = JSON.parse(body);
@@ -151,19 +179,20 @@ export function readResults(body, questions) {
     throw new Error('the results are not a list of the expected length');
   }
   const whole = (value, max) => (Number.isInteger(value) && value >= 0 && value <= max ? value : 0);
+  const own = new Map(knownIds.map(id => [id, id]));
   return posted.map(row => {
     const question = questions.find(item => item.id === row?.id);
     const ids = row?.result?.ids ?? [];
     const valid =
       question &&
-      STATUSES.has(row.result?.status) &&
+      Object.hasOwn(STATUS_LABELS, row.result?.status) &&
       Array.isArray(ids) &&
       ids.length <= MAX_PICKS &&
-      ids.every(id => typeof id === 'string' && PICK_ID.test(id));
+      ids.every(id => typeof id === 'string' && own.has(id));
     if (!valid) throw new Error('a result is malformed');
     const result = {
-      status: row.result.status,
-      ids: [...ids],
+      status: STATUS_LABELS[row.result.status],
+      ids: ids.map(id => own.get(id)),
       invalid: whole(row.result.invalid, 10),
     };
     return { question, result, ms: whole(row.ms, 3_600_000), ...score(question, result) };
@@ -175,14 +204,16 @@ export function readResults(body, questions) {
  * @param {{ question: { id: string, none?: boolean }, result: { ids?: string[], status: string, invalid?: number }, ms: number, top1: boolean, anywhere: boolean }[]} rows
  * @returns {0 | 1} the exit code: 1 if any page id was not on the site
  */
-function summarize(rows) {
+export function summarize(rows) {
   for (const row of rows) {
     const mark = row.anywhere ? (row.top1 ? 'top' : 'in ') : 'MISS';
+    const shown = (row.result.ids ?? [row.result.status]).join(', ') || '(none)';
     console.log(
-      `${mark}  ${String(row.ms).padStart(5)} ms  ${printable(row.question.id).padEnd(34)} -> ${printable((row.result.ids ?? [row.result.status]).join(', ')) || '(none)'}`
+      `${mark}  ${msLabel(row.ms).padStart(5)} ms  ${row.question.id.padEnd(34)} -> ${shown}`
     );
   }
-  const invalid = rows.reduce((sum, row) => sum + (row.result.invalid ?? 0), 0);
+  // How many questions had a page id that is not on the site, as a count of rows, not a posted number
+  const withInvalid = rows.filter(row => row.result.invalid > 0).length;
   const asked = rows.filter(row => !row.question.none);
   const rate = (rowsIn, key) => `${rowsIn.filter(row => row[key]).length}/${rowsIn.length}`;
   const sorted = [...rows].sort((a, b) => a.ms - b.ms);
@@ -192,9 +223,9 @@ function summarize(rows) {
         rows.filter(row => row.question.none),
         'top1'
       )}` +
-      `   page ids not on the site: ${invalid}   median ${sorted[Math.floor(rows.length / 2)]?.ms ?? 0} ms`
+      `   questions with a page id not on the site: ${countLabel(withInvalid)}   median ${msLabel(sorted[Math.floor(rows.length / 2)]?.ms ?? 0)} ms`
   );
-  return invalid > 0 ? 1 : 0;
+  return withInvalid > 0 ? 1 : 0;
 }
 
 /** The repo's files over http on localhost, so the page is a secure context with the real modules. */
@@ -277,10 +308,10 @@ const EVAL_PAGE = `<!doctype html>
  * Prints the same report when the page posts its results back, then stops.
  */
 async function serveMode() {
-  const questions = buildQuestions(
-    JSON.parse(readFileSync(join(ROOT, 'projects-data.json'), 'utf8')),
-    JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'))
-  );
+  const projectsData = JSON.parse(readFileSync(join(ROOT, 'projects-data.json'), 'utf8'));
+  const postsData = JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'));
+  const questions = buildQuestions(projectsData, postsData);
+  const knownIds = buildEntries(projectsData, postsData).map(entry => entry.id);
   const finished = Promise.withResolvers();
   // Only the page this script printed the address of knows the token, so another tab cannot post results
   const base = `/__eval/${randomUUID()}/`;
@@ -309,7 +340,7 @@ async function serveMode() {
         response.writeHead(204).end();
         try {
           if (body.length > MAX_BODY_BYTES) throw new Error('the results are too large');
-          process.exitCode = summarize(readResults(body, questions));
+          process.exitCode = summarize(readResults(body, questions, knownIds));
         } catch (error) {
           console.error(`eval-ask: could not use the results (${printable(error.message)})`);
           process.exitCode = 2;

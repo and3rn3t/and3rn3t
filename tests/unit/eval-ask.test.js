@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { buildQuestions, printable, readResults, score } from '../../scripts/eval-ask.mjs';
+import { buildEntries } from '../../modules/ask.js';
+import {
+    buildQuestions,
+    countLabel,
+    msLabel,
+    printable,
+    readResults,
+    score,
+    summarize,
+} from '../../scripts/eval-ask.mjs';
 
 const PROJECTS = {
     projects: [
@@ -58,6 +67,7 @@ const POSTS = {
     ],
 };
 const questions = buildQuestions(PROJECTS, POSTS);
+const known = buildEntries(PROJECTS, POSTS).map(entry => entry.id);
 const byId = id => questions.find(question => question.id === id);
 
 describe('buildQuestions', () => {
@@ -159,7 +169,7 @@ describe('readResults: what the page posts back is checked, because anything on 
     const body = rows => JSON.stringify(rows);
 
     it('accepts a well-formed result and scores it against the question', () => {
-        const [row] = readResults(body([ok(first)]), questions);
+        const [row] = readResults(body([ok(first)]), questions, known);
         expect(row.question.id).toBe(first);
         expect(row.result).toEqual({ status: 'ok', ids: ['project:health'], invalid: 0 });
         expect(row.ms).toBe(120);
@@ -214,11 +224,11 @@ describe('readResults: what the page posts back is checked, because anything on 
             body(Array.from({ length: questions.length + 1 }, () => ok(first))),
         ],
     ])('rejects %s, without echoing it', (_name, posted) => {
-        expect(() => readResults(posted, questions)).toThrow(
+        expect(() => readResults(posted, questions, known)).toThrow(
             /^(the results|a result is malformed)/
         );
         try {
-            readResults(posted, questions);
+            readResults(posted, questions, known);
         } catch (error) {
             expect(error.message).not.toMatch(/etc\/passwd|PASS all|pwned/);
             expect(error.message.includes(String.fromCharCode(27))).toBe(false);
@@ -228,7 +238,8 @@ describe('readResults: what the page posts back is checked, because anything on 
     it('keeps numbers in range instead of passing them on', () => {
         const [row] = readResults(
             body([{ ...ok(first), ms: 1e12, result: { status: 'ok', ids: [], invalid: 9999 } }]),
-            questions
+            questions,
+            known
         );
         expect(row.ms).toBe(0);
         expect(row.result.invalid).toBe(0);
@@ -240,9 +251,80 @@ describe('readResults: what the page posts back is checked, because anything on 
                     result: { status: 'ok', ids: [], invalid: '1\n2' },
                 },
             ]),
-            questions
+            questions,
+            known
         );
         expect(text.ms).toBe(0);
         expect(text.result.invalid).toBe(0);
+    });
+});
+
+describe('what is printed never comes from the posted text', () => {
+    const lines = rows => {
+        const printed = [];
+        const log = console.log;
+        console.log = (...args) => printed.push(args.join(' '));
+        try {
+            summarize(rows);
+        } finally {
+            console.log = log;
+        }
+        return printed.join('\n').split('\n');
+    };
+    const post = (ms, invalid) =>
+        readResults(
+            JSON.stringify(
+                questions.map(question => ({
+                    id: question.id,
+                    result: { status: 'ok', ids: ['project:health'], invalid },
+                    ms,
+                }))
+            ),
+            questions,
+            known
+        );
+
+    it('msLabel and countLabel read from a fixed table, to the nearest ten and clamped', () => {
+        expect(msLabel(0)).toBe('0');
+        expect(msLabel(1537)).toBe('1540');
+        expect(msLabel(4)).toBe('0');
+        expect(msLabel(5)).toBe('10');
+        expect(msLabel(-50)).toBe('0');
+        expect(msLabel(9e9)).toBe('600000');
+        expect(countLabel(0)).toBe('0');
+        expect(countLabel(7)).toBe('7');
+        expect(countLabel(-3)).toBe('0');
+        expect(countLabel(1e6)).toBe('200');
+    });
+
+    it('a report is plain printable text whatever numbers were posted', () => {
+        for (const [ms, invalid] of [
+            [120, 0],
+            [1e12, 9999],
+            [-5, -5],
+            [599999, 10],
+        ]) {
+            const printed = lines(post(ms, invalid));
+            for (const line of printed) expect(line, line).toMatch(/^[\x20-\x7e]*$/);
+            expect(printed.some(line => line.startsWith('right page first'))).toBe(true);
+        }
+    });
+
+    it("the ids in the report are the site's own strings, and a result cannot add text of its own", () => {
+        const printed = lines(post(120, 0)).join('\n');
+        expect(printed).toContain('-> project:health');
+        expect(printed).toContain('name:health');
+    });
+
+    it('an id off the site makes the run fail (exit 1) and is counted, not shown', () => {
+        const rows = post(100, 2);
+        const log = console.log;
+        console.log = () => {};
+        const code = summarize(rows);
+        console.log = log;
+        expect(code).toBe(1);
+        expect(lines(rows).at(-1)).toContain(
+            `questions with a page id not on the site: ${questions.length}`
+        );
     });
 });
