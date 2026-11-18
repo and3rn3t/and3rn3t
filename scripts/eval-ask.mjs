@@ -10,7 +10,7 @@
  * The profile (where the model is kept) defaults to a folder in the system temp directory and is
  * reused between runs, so the download happens once; delete the folder to free the space.
  *
- * Usage: pnpm eval:ask [--download] [--profile <dir>] [--chrome <path>]
+ * Usage: pnpm eval:ask [--download] [--headed] [--profile <dir>] [--chrome <path>]
  * Exit: 0 ran; 1 the model named a page that is not on the site; 2 it could not run (say why).
  */
 
@@ -147,11 +147,18 @@ async function main() {
       '--no-first-run',
       '--no-default-browser-check',
       '--window-size=900,700',
+      // No window on your desktop (new headless is the real browser, with its GPU and model); --headed to watch
+      ...(process.argv.includes('--headed') ? [] : ['--headless=new']),
       'about:blank',
     ],
     { stdio: 'ignore' }
   );
+  process_.on('exit', (code, signal) => {
+    if (!finished)
+      console.error(`eval-ask: Chrome exited during the run (code ${code}, signal ${signal})`);
+  });
   let browser;
+  let finished = false;
   try {
     for (let tries = 0; tries < 40 && !browser; tries++) {
       try {
@@ -162,6 +169,8 @@ async function main() {
     }
     if (!browser) throw new Error('could not attach to Chrome');
     const page = browser.contexts()[0].pages()[0] ?? (await browser.contexts()[0].newPage());
+    page.on('crash', () => console.error('eval-ask: the page crashed'));
+    page.on('close', () => !finished && console.error('eval-ask: the page was closed'));
     await page.goto(`http://localhost:${port}/robots.txt`);
 
     const ask = await page.evaluate(async () => {
@@ -230,6 +239,7 @@ async function main() {
     );
     process.exitCode = invalid > 0 ? 1 : 0;
   } finally {
+    finished = true;
     await browser?.close().catch(() => {});
     process_.kill();
     server.close();
