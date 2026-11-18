@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-    orderProjects,
-    projectView,
-    relativeTime,
-    selectProjects,
-} from '../../modules/utils/projects.js';
+import { orderProjects, projectView, selectProjects } from '../../modules/utils/projects.js';
 import {
     formatDateRange,
     renderEducation,
@@ -127,17 +122,6 @@ describe('projectView', () => {
             technologies: ['Swift', 'SwiftUI', 'Combine', 'HealthKit', 'iOS'],
         });
         expect(view.secondaryTags).toEqual(['SwiftUI', 'Combine', 'HealthKit']);
-    });
-});
-
-describe('relativeTime', () => {
-    const now = Date.parse('2026-11-11T12:00:00Z');
-
-    it('formats relative times compactly', () => {
-        expect(relativeTime(new Date(now - 5 * 60000), now)).toBe('5m ago');
-        expect(relativeTime(new Date(now - 3 * 3600000), now)).toBe('3h ago');
-        expect(relativeTime(new Date(now - 2 * 86400000), now)).toBe('2d ago');
-        expect(relativeTime(new Date(now - 400 * 86400000), now)).toBe('1y ago');
     });
 });
 
@@ -407,6 +391,8 @@ describe('experience', () => {
         expect(formatDateRange('2021-06', undefined, true)).toBe('Jun 2021 – Present');
         expect(formatDateRange('2013', '2021', false)).toBe('2013 – 2021');
         expect(formatDateRange(undefined, '2009', false)).toBe('2009');
+        expect(formatDateRange('2021', '2021', false)).toBe('2021');
+        expect(formatDateRange('2021-06', '2021-06', false)).toBe('Jun 2021');
     });
 
     describe('jobs', () => {

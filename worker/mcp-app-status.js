@@ -20,8 +20,31 @@ function renderStatus(stats, doc) {
     return node;
   };
   const number = value => (typeof value === 'number' && Number.isFinite(value) ? value : null);
-  const ms = value => (number(value) === null ? '–' : value >= 1000 ? (value / 1000).toFixed(1) + ' s' : Math.round(value) + ' ms');
-  const percent = (value, digits) => (number(value) === null ? '–' : (value * 100).toFixed(digits) + '%');
+  // These four say a number the way modules/status-page.js does (tests/unit/status-app.test.js
+  // runs both on the same values): the panel lives in an iframe and cannot import them.
+  const DASH = '—';
+  const ms = value => {
+    if (number(value) === null) return DASH;
+    if (value < 1) return '<1 ms';
+    return value >= 1000 ? (value / 1000).toFixed(1) + ' s' : Math.round(value) + ' ms';
+  };
+  const percent = ratio => {
+    if (number(ratio) === null) return DASH;
+    const pct = ratio * 100;
+    if (pct === 0) return '0%';
+    return pct >= 10 ? Math.round(pct) + '%' : Number(pct.toFixed(2)) + '%';
+  };
+  // Never rounds up to 100% while a check has failed
+  const uptimePercent = (ok, total) => {
+    if (!total) return DASH;
+    return ok === total ? '100%' : (Math.floor((ok / total) * 10000) / 100).toFixed(2) + '%';
+  };
+  const dayState = day => {
+    if (!day || !day.probes) return 'none';
+    if (day.ok === day.probes) return 'ok';
+    return day.ok === 0 ? 'down' : 'partial';
+  };
+  const CELL = { ok: 'ok', partial: 'warn', down: 'bad', none: 'none' };
   const stat = (label, value) => {
     const box = el('div', null, 'stat');
     box.append(el('div', value, 'stat__value'), el('div', label, 'stat__label'));
@@ -44,7 +67,7 @@ function renderStatus(stats, doc) {
     head.append(el('p', 'Last check ' + String(last.at).slice(0, 16).replace('T', ' ') + ' UTC', 'sub'));
   }
   if (probes > 0) {
-    head.append(el('p', (passed / probes * 100).toFixed(2) + '% of ' + probes + ' checks passed over ' + days.length + ' days', 'sub'));
+    head.append(el('p', uptimePercent(passed, probes) + ' of ' + probes + ' checks passed over ' + days.length + (days.length === 1 ? ' day' : ' days'), 'sub'));
   }
   sections.push(head);
 
@@ -52,8 +75,7 @@ function renderStatus(stats, doc) {
     const strip = el('div', null, 'strip');
     for (const day of days) {
       const share = number(day.probes) > 0 ? day.ok / day.probes : null;
-      const level = share === null ? 'none' : share >= 0.999 ? 'ok' : share >= 0.99 ? 'warn' : 'bad';
-      const cell = el('span', null, 'cell cell--' + level);
+      const cell = el('span', null, 'cell cell--' + CELL[dayState(day)]);
       cell.title = day.day + (share === null ? '' : ': ' + (share * 100).toFixed(1) + '%');
       strip.append(cell);
     }
@@ -65,7 +87,7 @@ function renderStatus(stats, doc) {
   sections.push(heading('API, last 24 hours'));
   if (api) {
     const grid = el('div', null, 'grid');
-    grid.append(stat('median', ms(api.p50Ms)), stat('slowest 5%', ms(api.p95Ms)), stat('errors', percent(api.errorRate, 2)));
+    grid.append(stat('median', ms(api.p50Ms)), stat('slowest 5%', ms(api.p95Ms)), stat('errors', percent(api.errorRate)));
     sections.push(grid);
   } else {
     sections.push(el('p', 'Nothing measured yet.', 'sub'));
@@ -78,7 +100,7 @@ function renderStatus(stats, doc) {
     grid.append(
       stat('largest paint', ms(vitals.lcpMs)),
       stat('first byte', ms(vitals.ttfbMs)),
-      stat('layout shift', number(vitals.cls) === null ? '–' : vitals.cls.toFixed(2)),
+      stat('layout shift', number(vitals.cls) === null ? DASH : vitals.cls.toFixed(2)),
       stat('interaction', ms(vitals.inpMs))
     );
     sections.push(grid);
