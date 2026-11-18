@@ -74,24 +74,49 @@ export function systemPrompt(entries) {
     return [
         "You help a visitor find pages on a software developer's portfolio.",
         'Below is every project and post, one per line as: id | title | summary | tags.',
-        `Given the visitor's question, answer with the ids of up to ${MAX_PICKS} entries that best answer it, most relevant first.`,
-        'Answer with an empty list when nothing fits. Use only ids from the list. Do not answer the question yourself.',
+        `Given the visitor's question, first decide "fits": true only when at least one entry is really about what the visitor asks, false when none is.`,
+        `When fits is true, "picks" holds the ids of up to ${MAX_PICKS} entries that best answer it, most relevant first. When fits is false, "picks" is an empty list.`,
+        'Use only ids from the list. Do not answer the question yourself.',
         '',
         ...entries.map(indexLine),
     ].join('\n');
 }
 
 /**
- * The JSON Schema the answer must match: a list of ids, each one of the ids that exist.
+ * Two examples shown to the model before the visitor's question: one that fits, built from the first entry,
+ * and one that does not. The off-topic one is about a subject that no question in scripts/eval-ask.mjs
+ * uses, so the eval measures the model and not the example (tests/unit/ask.test.js keeps it so). A first
+ * version had no such example and the model picked a page for every question, even "What is the capital of
+ * Australia?".
+ * @param {{ id: string, title: string }[]} entries
+ */
+export function exampleTurns(entries) {
+    const [first] = entries;
+    return [
+        { role: 'user', content: 'Who won the football match last night?' },
+        { role: 'assistant', content: JSON.stringify({ fits: false, picks: [] }) },
+        ...(first
+            ? [
+                  { role: 'user', content: `Tell me about ${first.title}.` },
+                  { role: 'assistant', content: JSON.stringify({ fits: true, picks: [first.id] }) },
+              ]
+            : []),
+    ];
+}
+
+/**
+ * The JSON Schema the answer must match: whether anything fits, then a list of ids, each one of the ids
+ * that exist. `fits` comes first so that the model commits to it before it picks.
  * @param {string[]} ids
  */
 export function pickSchema(ids) {
     return {
         type: 'object',
         properties: {
+            fits: { type: 'boolean' },
             picks: { type: 'array', maxItems: MAX_PICKS, items: { type: 'string', enum: ids } },
         },
-        required: ['picks'],
+        required: ['fits', 'picks'],
         additionalProperties: false,
     };
 }
@@ -100,15 +125,18 @@ export function pickSchema(ids) {
  * The ids in the model's answer, checked against the list again whatever the schema promised.
  * @param {string} text - the model's answer
  * @param {string[]} ids - the ids that exist
- * @returns {{ ids: string[], invalid: number }} the valid ones in order, without repeats, and how many were not on the list
+ * @returns {{ ids: string[], invalid: number, declined?: true }} the valid ones in order, without repeats, how many
+ *   were not on the list, and `declined` when the model said nothing fits (any picks it still gave are ignored)
  */
 export function parsePicks(text, ids) {
-    let picks;
+    let answer;
     try {
-        picks = JSON.parse(text)?.picks;
+        answer = JSON.parse(text);
     } catch {
         return { ids: [], invalid: 0 };
     }
+    if (answer?.fits === false) return { ids: [], invalid: 0, declined: true };
+    const picks = answer?.picks;
     if (!Array.isArray(picks)) return { ids: [], invalid: 0 };
     const known = new Set(ids);
     const valid = [];
@@ -174,7 +202,10 @@ export async function askPortfolio({
     try {
         session = await languageModel.create({
             ...MODEL_OPTIONS,
-            initialPrompts: [{ role: 'system', content: systemPrompt(entries) }],
+            initialPrompts: [
+                { role: 'system', content: systemPrompt(entries) },
+                ...exampleTurns(entries),
+            ],
             signal,
             monitor(monitor) {
                 monitor.addEventListener('downloadprogress', event => onDownload?.(event.loaded));

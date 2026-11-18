@@ -127,23 +127,23 @@ fallback, not flags. Every row needs a measure and a drop condition before code,
 browsers first (several statuses changed this year and sources disagree). Nothing deploys or touches the
 zone without an explicit go. Effort: S under a day, M a day or two.
 
-| #     | Item                                                                                                 | Effort | Needs         | Status        |
-| ----- | ---------------------------------------------------------------------------------------------------- | ------ | ------------- | ------------- |
-| 15.0  | Lab scaffold: `lab()` flag helper, `lab-data.json`, generated `/lab/` page with switches             | S      | Nothing       | 🟡            |
-| 15.1  | MCP prompts and resources                                                                            | S      | Worker deploy | 🟡            |
-| 15.2  | Signed agents (Web Bot Auth) as one more field on `/status/`; check `request.cf` first               | M      | Worker deploy | 🟡            |
-| 15.3  | "View as agent" switch (the service worker must never cache Markdown under an HTML URL)              | S–M    | Nothing       | 🟡            |
-| 15.4  | `show_project` and `show_status` in ChatGPT, VS Code and Goose; matrix in the agent-ready post       | S      | Matt          | ⬜            |
-| 15.5  | Shared flow field over the presence socket (a deliberate change: sockets may now send, rate-limited) | M      | Worker deploy | 🟡            |
-| 15.6  | Hero of the day: seed from the UTC day (lab switch `hero-seed`), `?seed=` permalink                  | S      | Nothing       | 🟡            |
-| 15.7  | HDR for the GPU hero (`rgba16float`, extended tone mapping)                                          | S      | Nothing       | 🟡            |
-| 15.8  | Sound, only if 15.5 or 15.6 lands well                                                               | S–M    | Nothing       | ⬜            |
-| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | 🟡            |
-| 15.10 | Trusted Types in the report-only CSP                                                                 | S–M    | Zone apply    | 🟡            |
-| 15.11 | CSS in place of script (anchor positioning, scroll-driven animation, `interpolate-size`)             | S–M    | Nothing       | 🟡            |
-| 15.12 | Back/forward cache: close the presence socket on `pagehide`                                          | S      | Nothing       | ✅ 2026-11-17 |
-| 15.13 | On-device post tools: Summarizer, Translator                                                         | S–M    | Nothing       | 🟡            |
-| 15.14 | On-device "ask the portfolio": the model picks slugs, the site shows its own copy                    | M      | Nothing       | 🟡            |
+| #     | Item                                                                                                 | Effort | Needs         | Status              |
+| ----- | ---------------------------------------------------------------------------------------------------- | ------ | ------------- | ------------------- |
+| 15.0  | Lab scaffold: `lab()` flag helper, `lab-data.json`, generated `/lab/` page with switches             | S      | Nothing       | 🟡                  |
+| 15.1  | MCP prompts and resources                                                                            | S      | Worker deploy | 🟡                  |
+| 15.2  | Signed agents (Web Bot Auth) as one more field on `/status/`; check `request.cf` first               | M      | Worker deploy | 🟡                  |
+| 15.3  | "View as agent" switch (the service worker must never cache Markdown under an HTML URL)              | S–M    | Nothing       | 🟡                  |
+| 15.4  | `show_project` and `show_status` in ChatGPT, VS Code and Goose; matrix in the agent-ready post       | S      | Matt          | ⬜                  |
+| 15.5  | Shared flow field over the presence socket (a deliberate change: sockets may now send, rate-limited) | M      | Worker deploy | 🟡                  |
+| 15.6  | Hero of the day: seed from the UTC day (lab switch `hero-seed`), `?seed=` permalink                  | S      | Nothing       | 🟡                  |
+| 15.7  | HDR for the GPU hero (`rgba16float`, extended tone mapping)                                          | S      | Nothing       | 🟡                  |
+| 15.8  | Sound, only if 15.5 or 15.6 lands well                                                               | S–M    | Nothing       | ⬜                  |
+| 15.9  | Declarative dialogs and menus (`command` / `commandfor`, `popover`)                                  | S–M    | Nothing       | 🟡                  |
+| 15.10 | Trusted Types in the report-only CSP                                                                 | S–M    | Zone apply    | 🟡                  |
+| 15.11 | CSS in place of script (anchor positioning, scroll-driven animation, `interpolate-size`)             | S–M    | Nothing       | 🟡                  |
+| 15.12 | Back/forward cache: close the presence socket on `pagehide`                                          | S      | Nothing       | ✅ 2026-11-17       |
+| 15.13 | On-device post tools: Summarizer, Translator                                                         | S–M    | Nothing       | 🟡                  |
+| 15.14 | On-device "ask the portfolio": the model picks slugs, the site shows its own copy                    | M      | Nothing       | ✅ 2026-11-18 (lab) |
 
 Order: 15.0, then the site-only wins (15.6, 15.7, 15.3, 15.13), one Worker deploy (15.1, 15.5, 15.2), one zone
 apply (15.10), the refactors (15.9, 15.11, 15.12), and 15.14 last. Parked: import-map integrity (an inline
@@ -160,6 +160,21 @@ Older entries (2026-06 to 2026-11-11, including all of Phase 10) are in
   server-side model runs for visitors, and Claude still never runs at visitor time. Experiments live behind
   `?lab=<name>` or a switch on `/lab/` (saved in `localStorage` only); `?hero=gpu` stays as an alias of
   `hero-gpu`. The default page never loads one, and an e2e test checks.
+
+- **2026-11-18** — 15.14 (on-device ask) built, measured and kept in the lab. The model selects and the site speaks: the
+  browser's Prompt API gets the site's list of projects and posts, may only answer with ids from it (a JSON schema whose ids
+  are an enum), and the palette shows the picked pages' own copy with a note that a model chose them. Measured with the real
+  model on 15 questions made from the site data (desktop Chrome 157, one run each): right page first 12 of 13, among the picks
+  12 of 13, no page id that is not on the site in three runs, first answer about 9 s and later ones under 2 s. The plan's drop
+  conditions (an invented slug, or a context that does not fit: about 1,100 tokens) did not trigger. Things worth keeping: **(1)**
+  the first prompt never declined (a page for every question, "capital of Australia" included); having the answer start with
+  `fits` and showing the model one example that does not fit made it decline 2 of 2, at the cost of one right answer. **(2)** My
+  first negative question was about weather and the site has a weather app, so picking it was fair: a negative test has to be about
+  something the site is not. **(3)** The five `mcp-eval` questions ask for facts, not pages, so the eval is its own set (`pnpm
+eval:ask`). **(4)** The model could not be measured from automation: Playwright's launch flags switch it off
+  (`availability()` is `unavailable`), and a plain Chrome with a fresh profile sat at `downloading` for ten minutes with nothing
+  fetched; it installed and ran only when run in the owner's own Chrome from a real click, hence `pnpm eval:ask --serve`. **(5)**
+  Recall is measured, not precision, and the sample is small.
 
 - **2026-11-17** — 15.12 (back/forward cache): the premise was wrong, so the work is a check and a guard, not a fix. The
   plan assumed an open presence WebSocket kept pages out of the cache. Measured in full Chromium (the headless shell opts out
