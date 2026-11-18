@@ -35,4 +35,34 @@ describe('update-github-data.yml', () => {
         expect(uses.length).toBeGreaterThan(0);
         for (const action of uses) expect(action, action).toMatch(/@[0-9a-f]{40}$/);
     });
+
+    // main requires checks, and GitHub starts no workflow for anything GITHUB_TOKEN pushes or opens,
+    // so a PR made with it can never turn green (the refresh failed for three days this way).
+    describe('the pull request', () => {
+        it('is pushed and opened with DATA_REFRESH_TOKEN, never GITHUB_TOKEN', () => {
+            expect(workflow).toMatch(
+                /uses: actions\/checkout@[^\n]+\n\s+with:\n(?:[^\n]*\n)*?\s+token: \$\{\{ secrets\.DATA_REFRESH_TOKEN \}\}/
+            );
+            const commitStep = workflow.slice(workflow.indexOf('name: Commit GitHub data via PR'));
+            expect(commitStep).toContain('GH_TOKEN: ${{ secrets.DATA_REFRESH_TOKEN }}');
+            expect(commitStep).not.toContain('GITHUB_TOKEN');
+        });
+
+        it('runs the required checks: no [skip ci], and merges when they pass', () => {
+            expect(workflow).not.toContain('[skip ci]');
+            expect(workflow).toContain('gh pr merge "$PR" --auto --merge');
+        });
+
+        it('leaves the deploy to pages.yml, which the merge starts', () => {
+            // A dispatch here would deploy main before the PR has merged
+            expect(workflow).not.toContain('gh workflow run');
+            expect(workflow).not.toContain('actions: write');
+        });
+
+        it('fails first, in seconds, when the token is missing', () => {
+            const first = workflow.indexOf('- name:');
+            expect(workflow.slice(first, first + 60)).toContain('Check that the token is set');
+            expect(workflow).toContain('::error::DATA_REFRESH_TOKEN is not set');
+        });
+    });
 });
