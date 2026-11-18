@@ -26,7 +26,12 @@ describe('follow-ups', () => {
     it('is due only on or after its date', () => {
         expect(dueFollowUps('2026-11-26')).toEqual([]);
         expect(dueFollowUps('2026-11-27').map(item => item.due)).toEqual(['2026-11-27']);
-        expect(dueFollowUps('2026-12-09')).toHaveLength(FOLLOW_UPS.length);
+        expect(dueFollowUps('2026-12-09').map(item => item.due)).toEqual([
+            '2026-11-27',
+            '2026-12-09',
+        ]);
+        // The token reminder comes last, a month before the token's year is up
+        expect(dueFollowUps('2027-10-15')).toHaveLength(FOLLOW_UPS.length);
     });
 
     it('puts the live numbers in the issue bodies', () => {
@@ -58,7 +63,7 @@ describe('follow-ups', () => {
         const early = fakeGh([]);
         const before = openDueIssues({ today: '2026-11-20', stats, create: true, run: early.run });
         expect(before.opened).toEqual([]);
-        expect(before.notDue).toHaveLength(2);
+        expect(before.notDue).toHaveLength(FOLLOW_UPS.length);
         expect(early.creates()).toEqual([]);
     });
 });
