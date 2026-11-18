@@ -62,6 +62,7 @@ pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked; tags the version with the short SHA, which /api/edge then reports
 pnpm check:agent-ready # report-only scan of the live site (isitagentready.com); never fails
 pnpm check:worker-deployed # report-only: is the live Worker's tagged commit at or past the last worker/ change? (daily in site-check.yml)
+pnpm eval:ask        # by hand: runs the on-device ask over questions with known answers in real Chrome with its model; refuses to download the model (several GB) without --download
 pnpm check:bfcache   # by hand: does each page come back from the back/forward cache? (needs `pnpm exec playwright install chromium`; targets the live site; exit 1 if not)
 pnpm check:probe     # FAILS if the uptime probe has been quiet for 15+ minutes or its last check failed (daily in site-check.yml)
 pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
@@ -162,6 +163,17 @@ andernet-loader`. Every first-party `innerHTML =` and script `src =` goes throug
   counter and the edge receipt do; presence already waits for the tab to be visible). `tests/e2e/prerender.spec.js` cannot see a
   prerender succeed (Chromium turns prerendering off while DevTools is attached, which Playwright always is); it checks the browser
   accepts the rules under the real policy and that hovering a link tries one.
+- **Ask the portfolio, on device** (lab experiment `ask`, Phase 15.14; `modules/ask.js`, wired into `modules/command-palette.js`):
+  in the palette, a question of 4 or more characters adds an "Ask" option when the switch is on and Chrome's Prompt API
+  (`LanguageModel`, stable for web pages in Chrome 148) does not say it is unavailable. **The model selects, the site speaks:** it is
+  given the site's own list (id, title, summary, tags for every project and post, about 1,100 tokens) as the system message, the
+  question only as the user message, and a JSON schema whose ids are an `enum` of the real ones, so it can only answer with
+  pages that exist; `parsePicks` and the palette's own item lookup check that again. What is shown is the palette's own items
+  for the picked pages and a note that a model chose them and can be wrong; the model writes no sentence about anyone. Unavailable,
+  too long, failing and "nothing fits" each have their own note and fall back to the plain search. `pnpm eval:ask` is the measure
+  (right page first / among the picks / declines an unanswerable question / ids that are not on the site, which is the reason to
+  drop it). It needs Google Chrome attached over the debugging port: Playwright's own launch flags switch the model off
+  (`availability()` is `unavailable` under them, `downloadable` in plain Chrome).
 - **Back/forward cache** (Phase 15.12): the live pages are restored from it in Chromium, with the real presence socket open and the
   Turnstile iframe loaded, because `initPresence` closes its socket on `visibilitychange` to hidden (before the page is frozen)
   and opens a new one on visible; the shared hero and the edge widget ride that, so a restore needs no extra code.

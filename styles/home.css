@@ -1488,6 +1488,16 @@
     text-align: center;
   }
 
+  /* What the on-device model did (modules/ask.js): above the list, not an option in it */
+  .palette-note {
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width) solid var(--border);
+    color: var(--muted);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+  }
+
   /* --- Keyboard help -------------------------------------------------------------------- */
   .help {
     width: min(38rem, 100% - 2 * var(--gutter));

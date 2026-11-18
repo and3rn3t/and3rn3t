@@ -14,6 +14,7 @@ const SUPPORT = {
     WebSocket: () => typeof globalThis.WebSocket === 'function',
     'the Summarizer or Translator API': () =>
         'Summarizer' in globalThis || 'Translator' in globalThis,
+    'the Prompt API': () => 'LanguageModel' in globalThis,
     WebAssembly: () => typeof globalThis.WebAssembly === 'object',
 };
 

@@ -143,7 +143,7 @@ zone without an explicit go. Effort: S under a day, M a day or two.
 | 15.11 | CSS in place of script (anchor positioning, scroll-driven animation, `interpolate-size`)             | S–M    | Nothing       | 🟡            |
 | 15.12 | Back/forward cache: close the presence socket on `pagehide`                                          | S      | Nothing       | ✅ 2026-11-17 |
 | 15.13 | On-device post tools: Summarizer, Translator                                                         | S–M    | Nothing       | 🟡            |
-| 15.14 | On-device "ask the portfolio": the model picks slugs, the site shows its own copy                    | M      | Nothing       | ⬜            |
+| 15.14 | On-device "ask the portfolio": the model picks slugs, the site shows its own copy                    | M      | Nothing       | 🟡            |
 
 Order: 15.0, then the site-only wins (15.6, 15.7, 15.3, 15.13), one Worker deploy (15.1, 15.5, 15.2), one zone
 apply (15.10), the refactors (15.9, 15.11, 15.12), and 15.14 last. Parked: import-map integrity (an inline
