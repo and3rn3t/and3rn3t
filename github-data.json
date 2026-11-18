@@ -30,7 +30,7 @@
       "stargazers_count": 0,
       "forks_count": 2,
       "open_issues_count": 1,
-      "pushed_at": "2026-11-18T22:49:46Z",
+      "pushed_at": "2026-11-18T23:07:50Z",
       "updated_at": "2026-11-15T17:42:31Z",
       "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
@@ -1283,6 +1283,203 @@
   ],
   "events": [
     {
+      "id": "20577456798",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: open the data-refresh PR with a token whose checks can run",
+          "head": {
+            "ref": "ci/data-refresh-token-v2"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:05:38Z"
+    },
+    {
+      "id": "20577417517",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: open the data-refresh PR with a token whose checks can run",
+          "head": {
+            "ref": "ci/data-refresh-token-v2"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:04:05Z"
+    },
+    {
+      "id": "20577380816",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-18",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:51:06Z"
+    },
+    {
+      "id": "20577371200",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:04:40Z"
+    },
+    {
+      "id": "20577325538",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: open the data-refresh PR with a token whose checks can run",
+          "head": {
+            "ref": "ci/data-refresh-token"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:03:06Z"
+    },
+    {
+      "id": "20577323698",
+      "type": "IssueCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {},
+      "created_at": "2026-11-18T23:04:06Z"
+    },
+    {
+      "id": "20577320625",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: open the data-refresh PR with a token whose checks can run",
+          "head": {
+            "ref": "ci/data-refresh-token-v2"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:04:05Z"
+    },
+    {
+      "id": "20577197970",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: open the data-refresh PR with a token whose checks can run",
+          "head": {
+            "ref": "ci/data-refresh-token"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:00:27Z"
+    },
+    {
+      "id": "20577157909",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: make the status panel say numbers the way /status/ does",
+          "head": {
+            "ref": "refactor/shared-formatters"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:02:06Z"
+    },
+    {
+      "id": "20577016674",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "ci: open the data-refresh PR with a token whose checks can run",
+          "head": {
+            "ref": "ci/data-refresh-token"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:00:27Z"
+    },
+    {
+      "id": "20576637676",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: make the status panel say numbers the way /status/ does",
+          "head": {
+            "ref": "refactor/shared-formatters"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:54:59Z"
+    },
+    {
+      "id": "20576567225",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "fix: make the status panel say numbers the way /status/ does",
+          "head": {
+            "ref": "refactor/shared-formatters"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:54:59Z"
+    },
+    {
+      "id": "27571551384",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "feat/declarative-dialogs",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-17T16:47:41Z"
+    },
+    {
       "id": "20576121954",
       "type": "PullRequestEvent",
       "repo": {
@@ -2441,192 +2638,6 @@
         "ref_type": "branch"
       },
       "created_at": "2026-11-15T01:18:29Z"
-    },
-    {
-      "id": "27328878450",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "test/web-first-waits",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T02:52:42Z"
-    },
-    {
-      "id": "27328307604",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/mcp-eval-skill",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T01:04:28Z"
-    },
-    {
-      "id": "27325257927",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "15cc6c98f220bb6a57d6b61a9ec1b09fe5f75027",
-            "message": "fix: escape backslashes before pipes in the eval report table\n\nResolves the CodeQL js/incomplete-sanitization alert.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/mcp-eval"
-      },
-      "created_at": "2026-11-15T00:21:50Z"
-    },
-    {
-      "id": "27324819104",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/roadmap-13-3-done",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:16:30Z"
-    },
-    {
-      "id": "27324671979",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/roadmap-13-3-done",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:14:52Z"
-    },
-    {
-      "id": "27324338612",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/agent-ready-post",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:10:16Z"
-    },
-    {
-      "id": "27323804334",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "87397387d9c82c6a72267833a192b84175c53974",
-            "message": "Merge pull request #347 from and3rn3t/feat/mcp-prompts-resources\n\nfeat(mcp): prompts and resources (Phase 15.1)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-15T18:58:08Z"
-    },
-    {
-      "id": "27323603078",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "abe4a3159545ff191fac5ffa071c78f46a712785",
-            "message": "Merge pull request #303 from and3rn3t/docs/phase-13-status\n\ndocs: mark roadmap items 13.4 to 13.6 done"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-14T23:59:55Z"
-    },
-    {
-      "id": "27323027644",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "d081745b5d472ced4a1e9723f3a73844910a05bc",
-            "message": "Merge remote-tracking branch 'origin/main' into feat/agent-view\n\n# Conflicts:\n#\tlab-data.json\n#\tlab/index.html"
-          }
-        ],
-        "ref": "refs/heads/feat/agent-view"
-      },
-      "created_at": "2026-11-15T18:50:30Z"
-    },
-    {
-      "id": "27321734760",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/hero-of-the-day",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T18:36:49Z"
-    },
-    {
-      "id": "27321593245",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "54c64d470f40c030f02f731a52b9d2eec9595b74",
-            "message": "Merge origin/main into feat/mcp-eval-skill\n\nTake main's Phase 13 table and re-apply 13.8 done.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/mcp-eval-skill"
-      },
-      "created_at": "2026-11-15T01:12:45Z"
-    },
-    {
-      "id": "27321520973",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b3971d623865fed7e54c43630ade8f18332b2c76",
-            "message": "Merge pull request #314 from and3rn3t/docs/roadmap-13-10-done\n\ndocs: mark roadmap item 13.10 done"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-15T01:11:49Z"
-    },
-    {
-      "id": "27320293243",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "spike/mcp-apps",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:57:42Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2640,7 +2651,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4998,
+    "total": 5008,
     "weeks": [
       {
         "days": [
@@ -4689,7 +4700,7 @@
           },
           {
             "date": "2026-11-18",
-            "count": 30,
+            "count": 40,
             "level": 1
           }
         ]
@@ -4719,6 +4730,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-18T22:50:59Z",
+  "lastUpdated": "2026-11-18T23:11:41Z",
   "totalRepos": 54
 }
