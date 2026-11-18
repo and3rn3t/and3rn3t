@@ -15,9 +15,10 @@
  * Workers-compatible: no Node built-ins.
  */
 
+import { methodNotAllowed } from './http.js';
+import { SITE_HOST } from './site-data.js';
 import { recordCsp } from './telemetry.js';
 
-export const SITE_HOST = 'andernet.dev';
 const MAX_BODY_BYTES = 8192;
 /** A browser can batch several; more than this in one post is not worth reading. */
 const MAX_REPORTS = 5;
@@ -184,7 +185,7 @@ async function readCapped(request, max) {
  */
 export async function handleCspReport(request, env) {
     if (request.method !== 'POST') {
-        return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } });
+        return methodNotAllowed(request, 'POST');
     }
     const done = () => new Response(null, { status: 204 });
 

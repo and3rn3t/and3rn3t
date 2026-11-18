@@ -2,7 +2,8 @@
  * Cloudflare Worker — and3rn3t portfolio backend
  *
  * Also: /views and /guestbook (engagement.js), /mcp (the MCP server, mcp.js) and the
- * discovery documents under /.well-known/ and /api/openapi.json (discovery.js).
+ * discovery documents under /.well-known/ and /api/openapi.json (discovery.js). The routes
+ * under /api are the ROUTES table below; the response helpers they share are in http.js.
  *
  * GET /activity
  *   Returns the most recent meaningful GitHub activity as a small JSON object.
@@ -30,12 +31,8 @@
 
 import { pickEvent, buildActivity } from '../modules/utils/activity.js';
 import { discoveryResponse } from './discovery.js';
-import {
-    handleViewsRequest,
-    handleGuestbookRequest,
-    jsonResponse,
-    corsHeaders,
-} from './engagement.js';
+import { handleViewsRequest, handleGuestbookRequest } from './engagement.js';
+import { cacheableJson, guardGet, jsonResponse } from './http.js';
 import { handleMcp } from './mcp.js';
 import { handleCspReport } from './csp-report.js';
 import { handlePresenceRequest } from './presence.js';
@@ -48,6 +45,7 @@ import { claimsSignature, classifySignature } from './web-bot-auth.js';
 const GITHUB_USERNAME = 'and3rn3t';
 const CACHE_TTL_SECONDS = 300; // 5 min edge cache
 const NEGATIVE_TTL_SECONDS = 60; // remember a failed lookup briefly so GitHub isn't hammered
+const ACTIVITY_CACHE_KEY = `https://cache.internal/activity/${GITHUB_USERNAME}`;
 
 // Routes whose requests are not written to portfolio_metrics: a data point would carry the
 // visitor's Cloudflare location and a browser/agent guess. Presence keeps nothing about who joined;
@@ -146,55 +144,36 @@ async function route(request, env, ctx) {
     // The MCP server. Only /mcp: the zone route is andernet.dev/mcp, not under /api.
     if (url.pathname === '/mcp') return serveMcp(request, env, ctx);
 
-    // Health check
-    if (path === '/health') {
-        return new Response(
-            JSON.stringify({
-                ok: true,
-                version: env.CF_VERSION?.tag || env.CF_VERSION?.id?.slice(0, 8) || null,
-            }),
-            {
-                headers: { 'Content-Type': 'application/json' },
-            }
-        );
-    }
+    const handler = ROUTES.get(path);
+    return handler ? handler(request, env) : new Response('Not found', { status: 404 });
+}
 
-    if (path === '/edge') {
-        return handleEdge(request, env);
-    }
+/** The routes under /api (and at the same paths on workers.dev). Each takes (request, env). */
+const ROUTES = new Map([
+    ['/health', handleHealth],
+    ['/edge', handleEdge],
+    ['/stats', handleStats],
+    ['/activity', handleActivity],
+    ['/presence', handlePresenceRequest],
+    ['/csp-report', handleCspReport],
+    ['/views', handleViewsRequest],
+    ['/guestbook', handleGuestbookRequest],
+]);
 
-    if (path === '/stats') {
-        return handleStats(request, env);
-    }
+/** The deployed version's tag, else the start of its id, else null (local dev has none). */
+function deployedVersion(env) {
+    return env.CF_VERSION?.tag || env.CF_VERSION?.id?.slice(0, 8) || null;
+}
 
-    if (path === '/presence') {
-        return handlePresenceRequest(request, env);
-    }
+/** GET /health: the Worker is up, and which version. */
+function handleHealth(request, env) {
+    return jsonResponse({ ok: true, version: deployedVersion(env) }, request);
+}
 
-    if (path === '/csp-report') {
-        return handleCspReport(request, env);
-    }
-
-    if (path === '/views') {
-        return handleViewsRequest(request, env);
-    }
-
-    if (path === '/guestbook') {
-        return handleGuestbookRequest(request, env);
-    }
-
-    if (path !== '/activity') {
-        return new Response('Not found', { status: 404 });
-    }
-
-    // CORS pre-flight
-    if (request.method === 'OPTIONS') {
-        return new Response(null, { headers: corsHeaders(request) });
-    }
-
-    if (request.method !== 'GET') {
-        return new Response('Method not allowed', { status: 405 });
-    }
+/** GET /activity: the latest GitHub activity (see loadActivity). */
+async function handleActivity(request, env) {
+    const refused = guardGet(request);
+    if (refused) return refused;
 
     const result = await loadActivity(env);
     if (!result.ok) return jsonResponse({ error: result.error }, request, result.status);
@@ -203,10 +182,8 @@ async function route(request, env, ctx) {
 
 /** GET /stats: the numbers behind /status/, cached for five minutes (see stats.js). */
 async function handleStats(request, env) {
-    if (request.method === 'OPTIONS') {
-        return new Response(null, { headers: corsHeaders(request) });
-    }
-    if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
+    const refused = guardGet(request);
+    if (refused) return refused;
 
     const result = await loadStats(env);
     if (!result.ok) return jsonResponse({ error: result.error }, request, result.status);
@@ -220,17 +197,15 @@ async function handleStats(request, env) {
  * and the answer describes only the caller's own connection, so it is never cached.
  */
 function handleEdge(request, env) {
-    if (request.method === 'OPTIONS') {
-        return new Response(null, { headers: corsHeaders(request) });
-    }
-    if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
+    const refused = guardGet(request);
+    if (refused) return refused;
 
     const response = jsonResponse(
         {
             colo: request.cf?.colo ?? null,
             httpProtocol: request.cf?.httpProtocol ?? null,
             tlsVersion: request.cf?.tlsVersion ?? null,
-            version: env.CF_VERSION?.tag || env.CF_VERSION?.id?.slice(0, 8) || null,
+            version: deployedVersion(env),
         },
         request,
         200
@@ -252,7 +227,7 @@ export async function loadActivity(env) {
 
     // Then this location's cache.
     const cache = caches.default;
-    const cacheKey = new Request(`https://cache.internal/activity/${GITHUB_USERNAME}`);
+    const cacheKey = new Request(ACTIVITY_CACHE_KEY);
     const cached = await cache.match(cacheKey);
     if (cached) {
         const data = await cached.json();
@@ -274,7 +249,7 @@ export async function loadActivity(env) {
  */
 export async function refreshActivity(env) {
     const cache = caches.default;
-    const cacheKey = new Request(`https://cache.internal/activity/${GITHUB_USERNAME}`);
+    const cacheKey = new Request(ACTIVITY_CACHE_KEY);
 
     // Fetch from GitHub.
     const ghHeaders = {
@@ -317,14 +292,7 @@ export async function refreshActivity(env) {
     const activity = buildActivity(event, event.repo?.name ?? '');
 
     // Store in CF cache (honour CF Cache rules: only GET, 200 responses).
-    const responseToCache = new Response(JSON.stringify(activity), {
-        status: 200,
-        headers: {
-            'Content-Type': 'application/json',
-            'Cache-Control': `public, max-age=${CACHE_TTL_SECONDS}`,
-        },
-    });
-    await cache.put(cacheKey, responseToCache.clone());
+    await cache.put(cacheKey, cacheableJson(activity, CACHE_TTL_SECONDS));
     await writeSnapshot(env, 'activity', activity);
 
     return { ok: true, activity, cached: false };
@@ -337,13 +305,7 @@ export async function refreshActivity(env) {
 async function cacheFailure(cache, cacheKey, error, status) {
     await cache.put(
         cacheKey,
-        new Response(JSON.stringify({ __negative: { error, status } }), {
-            status: 200,
-            headers: {
-                'Content-Type': 'application/json',
-                'Cache-Control': `public, max-age=${NEGATIVE_TTL_SECONDS}`,
-            },
-        })
+        cacheableJson({ __negative: { error, status } }, NEGATIVE_TTL_SECONDS)
     );
 }
 

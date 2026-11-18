@@ -14,10 +14,11 @@
  * Workers-compatible: no Node built-ins.
  */
 
+import { cacheableJson } from './http.js';
 import { readSnapshot, writeSnapshot } from './snapshot.js';
+import { SITE_HOST } from './site-data.js';
 
 const DATASET = 'events.analyticsEngine.portfolio_metrics';
-const SITE_HOST = 'andernet.dev';
 const CACHE_SECONDS = 300;
 const CACHE_KEY = 'https://cache.internal/stats';
 
@@ -295,15 +296,7 @@ async function refresh(env, cache, key) {
     const stats = await buildStats(env);
     if (hasData(stats)) await writeSnapshot(env, 'stats', stats);
     try {
-        await cache?.put(
-            key,
-            new Response(JSON.stringify(stats), {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cache-Control': `public, max-age=${CACHE_SECONDS}`,
-                },
-            })
-        );
+        await cache?.put(key, cacheableJson(stats, CACHE_SECONDS));
     } catch (err) {
         // Not stored: the next request refreshes again. These stats are still good to return.
         console.warn(

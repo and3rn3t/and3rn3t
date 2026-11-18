@@ -5,12 +5,8 @@
  * KV namespaces are mocked with a simple Map wrapper.
  */
 import { test, expect, vi, afterEach } from 'vitest';
-import {
-    handleViewsRequest,
-    handleGuestbookRequest,
-    jsonResponse,
-    corsHeaders,
-} from '../../worker/engagement.js';
+import { handleViewsRequest, handleGuestbookRequest } from '../../worker/engagement.js';
+import { jsonResponse, corsHeaders } from '../../worker/http.js';
 
 // ── KV mock ──────────────────────────────────────────────────────────────────
 
