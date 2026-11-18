@@ -75,7 +75,7 @@ export function formatUptime(ok, total) {
     return `${(Math.floor((ok / total) * 10_000) / 100).toFixed(2)}%`;
 }
 
-/** @returns {number} a number with thousands separators, or a dash */
+/** @returns {string} a number with thousands separators, or a dash */
 export const formatCount = n => (Number.isFinite(n) ? Number(n).toLocaleString('en-US') : DASH);
 
 /** "2026-11-13 00:30:54" (UTC, no zone) or an ISO string, as a Date. @returns {Date | null} */

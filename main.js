@@ -305,6 +305,8 @@ function watchLegacyLinks() {
     const check = () => {
         if (started || !/^#(post|project)\//.test(globalThis.location.hash)) return;
         started = true;
+        // The module listens for later hash changes itself.
+        globalThis.removeEventListener('hashchange', check);
         startOptional(
             'Legacy links',
             () => import('./modules/legacy-links.js'),

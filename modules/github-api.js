@@ -168,17 +168,6 @@ export class GitHubAPIManager {
     }
 
     // Convenience methods for common endpoints
-    async getUserData() {
-        // Try cached data first
-        const cachedData = await this.loadCachedGitHubData();
-        if (cachedData && cachedData.user) {
-            return cachedData.user;
-        }
-
-        // Fall back to direct API
-        return this.fetchGitHubData(`/users/${GitHubAPIManager.username}`, {}, 600000); // 10 min cache
-    }
-
     async getRepositories(sort = 'stars', per_page = 100) {
         // Try cached data first
         const cachedData = await this.loadCachedGitHubData();
@@ -207,25 +196,6 @@ export class GitHubAPIManager {
     async getContributions() {
         const cachedData = await this.loadCachedGitHubData();
         return cachedData?.contributions ?? null;
-    }
-
-    // Clear expired cache entries
-    clearExpiredCache() {
-        const now = Date.now();
-        let removedCount = 0;
-
-        for (const [key, value] of this.cache.entries()) {
-            if (value.expiry < now) {
-                this.cache.delete(key);
-                removedCount++;
-            }
-        }
-
-        if (removedCount > 0) {
-            debug.log('[GitHub] Cleared', removedCount, 'expired cache entries');
-        }
-
-        return removedCount;
     }
 }
 
