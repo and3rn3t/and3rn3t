@@ -57,10 +57,10 @@
     {
       "flag": "ask",
       "title": "Ask the portfolio, on your device",
-      "status": "spike",
+      "status": "kept",
       "summary": "In the search palette (Ctrl or Cmd K), type a question in plain words and choose \"Ask\": the browser's built-in model picks the projects and posts that best answer it, from the site's own list, and the palette shows those pages. The model only chooses; everything you read is the site's own copy. Nothing leaves your device, the first use downloads a large model, and the choice can be wrong, which the palette says.",
       "needs": "the Prompt API",
-      "measure": "Not yet judged. Kept only if its picks are right on a set of questions with known answers and it never names a page that is not on the site. Only desktop Chrome has the Prompt API, and it needs a lot of disk and a capable GPU, so most visitors will not see the option.",
+      "measure": "Measured 2026-11-18 on desktop Chrome with its built-in model, on 15 questions with known answers made from this site's data: the right page came first on 12 of 13 and was among the picks on 12 of 13; it declined both questions the site cannot answer; and it never named a page that is not on the site (none in three runs). A first answer takes about 9 seconds while the model loads, later ones under 2. A first version picked a page for every question, even \"What is the capital of Australia?\"; asking the model to decide whether anything fits first, and showing it one example that does not, fixed that and cost one right answer. A small sample on one machine, one run each. Only desktop Chrome has the Prompt API, and it needs a lot of disk and a capable GPU, so most visitors will not see the option.",
       "try": "/?lab=ask"
     }
   ]

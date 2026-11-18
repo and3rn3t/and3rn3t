@@ -62,7 +62,8 @@ pnpm build:worker    # wrangler deploy --dry-run
 pnpm deploy:worker   # only when asked; tags the version with the short SHA, which /api/edge then reports
 pnpm check:agent-ready # report-only scan of the live site (isitagentready.com); never fails
 pnpm check:worker-deployed # report-only: is the live Worker's tagged commit at or past the last worker/ change? (daily in site-check.yml)
-pnpm eval:ask        # by hand: runs the on-device ask over questions with known answers in real Chrome with its model; refuses to download the model (several GB) without --download
+pnpm eval:ask --serve # by hand (recommended): prints a localhost page; open it in your own Chrome and click Run, to run the on-device ask over questions with known answers with your own model
+pnpm eval:ask        # by hand: the same, in a separate Chrome it launches over the debugging port (fresh profile: the model may never install there); refuses to download the model (several GB) without --download
 pnpm check:bfcache   # by hand: does each page come back from the back/forward cache? (needs `pnpm exec playwright install chromium`; targets the live site; exit 1 if not)
 pnpm check:probe     # FAILS if the uptime probe has been quiet for 15+ minutes or its last check failed (daily in site-check.yml)
 pnpm zone            # dry run: how the live Cloudflare zone differs from scripts/cloudflare-zone.mjs
@@ -172,8 +173,13 @@ andernet-loader`. Every first-party `innerHTML =` and script `src =` goes throug
   for the picked pages and a note that a model chose them and can be wrong; the model writes no sentence about anyone. Unavailable,
   too long, failing and "nothing fits" each have their own note and fall back to the plain search. `pnpm eval:ask` is the measure
   (right page first / among the picks / declines an unanswerable question / ids that are not on the site, which is the reason to
-  drop it). It needs Google Chrome attached over the debugging port: Playwright's own launch flags switch the model off
-  (`availability()` is `unavailable` under them, `downloadable` in plain Chrome).
+  drop it). **Measured 2026-11-18** (Chrome 157, 15 questions, one run each): right page first 12 of 13, among the picks 12 of 13, declines
+  2 of 2, ids not on the site 0, first answer about 9 s and later ones under 2 s. The first prompt never declined (a page for every question,
+  even "capital of Australia"); the answer now starts with `fits` and the model is shown one question that does not fit, which fixed that
+  and cost one right answer. A weather question was a bad negative (the site has a weather app), so the negatives are off-topic. Prefer `--serve`: it runs in your own Chrome, with your profile and a real click for the download's user gesture. The
+  launching mode needs plain Chrome attached over the debugging port (Playwright's own launch flags switch the model off:
+  `availability()` is `unavailable` under them, `downloadable` in plain Chrome) and a fresh profile there sat at `downloading`
+  with nothing fetched for ten minutes, so do not rely on it.
 - **Back/forward cache** (Phase 15.12): the live pages are restored from it in Chromium, with the real presence socket open and the
   Turnstile iframe loaded, because `initPresence` closes its socket on `visibilitychange` to hidden (before the page is frozen)
   and opens a new one on visible; the shared hero and the edge widget ride that, so a restore needs no extra code.

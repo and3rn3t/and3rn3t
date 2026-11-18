@@ -7,6 +7,7 @@ import {
     askPortfolio,
     buildEntries,
     cleanQuestion,
+    exampleTurns,
     downloadNote,
     indexLine,
     parsePicks,
@@ -76,7 +77,10 @@ describe('the answer is constrained to the ids that exist', () => {
         const schema = pickSchema(ids);
         expect(schema.properties.picks.items.enum).toEqual(ids);
         expect(schema.properties.picks.maxItems).toBe(MAX_PICKS);
-        expect(schema.required).toEqual(['picks']);
+        expect(schema.properties.fits.type).toBe('boolean');
+        // fits is decided first, so the model commits to it before it picks
+        expect(Object.keys(schema.properties)).toEqual(['fits', 'picks']);
+        expect(schema.required).toEqual(['fits', 'picks']);
         expect(schema.additionalProperties).toBe(false);
     });
 
@@ -184,6 +188,7 @@ describe('askPortfolio', () => {
         expect(options.expectedInputs).toEqual(MODEL_OPTIONS.expectedInputs);
         expect(options.initialPrompts).toEqual([
             { role: 'system', content: systemPrompt(entries) },
+            ...exampleTurns(entries),
         ]);
         const [text, promptOptions] = session.prompt.mock.calls[0];
         expect(text).toBe('which project measures gait?');
@@ -282,5 +287,68 @@ describe('askPortfolio', () => {
             ids: [],
             invalid: 0,
         });
+    });
+});
+
+describe('"nothing fits" (the first version picked a page for every question)', () => {
+    it('a fits:false answer is a decline, and any picks that came with it are ignored', () => {
+        expect(parsePicks(JSON.stringify({ fits: false, picks: ['project:health'] }), ids)).toEqual(
+            {
+                ids: [],
+                invalid: 0,
+                declined: true,
+            }
+        );
+    });
+
+    it('fits:true, or no fits at all (an older answer), still takes the picks', () => {
+        expect(
+            parsePicks(JSON.stringify({ fits: true, picks: ['project:health'] }), ids).ids
+        ).toEqual(['project:health']);
+        expect(parsePicks(JSON.stringify({ picks: ['project:health'] }), ids).ids).toEqual([
+            'project:health',
+        ]);
+    });
+
+    it('the instruction explains fits, and the model is shown one question that fits and one that does not', () => {
+        expect(systemPrompt(entries)).toMatch(/fits/);
+        const turns = exampleTurns(entries);
+        expect(turns.map(turn => turn.role)).toEqual(['user', 'assistant', 'user', 'assistant']);
+        expect(JSON.parse(turns[1].content)).toEqual({ fits: false, picks: [] });
+        // The fitting example names a real entry, built from the list
+        expect(JSON.parse(turns[3].content)).toEqual({ fits: true, picks: [ids[0]] });
+        expect(turns[2].content).toContain('Health Analytics Platform');
+        expect(exampleTurns([])).toHaveLength(2);
+    });
+
+    it('an askPortfolio call whose model declines reports no pages', async () => {
+        const { languageModel } = fakeModel({ answer: JSON.stringify({ fits: false, picks: [] }) });
+        expect(
+            await askPortfolio({
+                question: 'What is the capital of Australia?',
+                entries,
+                languageModel,
+            })
+        ).toEqual({
+            status: 'ok',
+            ids: [],
+            invalid: 0,
+            declined: true,
+        });
+    });
+
+    it('the off-topic example is not a question the eval asks, so the eval measures the model and not the example', async () => {
+        const { buildQuestions } = await import('../../scripts/eval-ask.mjs');
+        const asked = buildQuestions(PROJECTS, POSTS).map(question =>
+            question.question.toLowerCase()
+        );
+        const example = exampleTurns(entries)[0].content.toLowerCase();
+        expect(asked).not.toContain(example);
+        for (const word of ['football', 'match', 'won']) {
+            expect(
+                asked.some(question => question.includes(word)),
+                word
+            ).toBe(false);
+        }
     });
 });

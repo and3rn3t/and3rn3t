@@ -10,7 +10,8 @@
  * The profile (where the model is kept) defaults to a folder in the system temp directory and is
  * reused between runs, so the download happens once; delete the folder to free the space.
  *
- * Usage: pnpm eval:ask [--download] [--headed] [--profile <dir>] [--chrome <path>]
+ * Usage: pnpm eval:ask --serve                     (recommended: open the printed page in your own Chrome and click Run)
+ *        pnpm eval:ask [--download] [--headed] [--profile <dir>] [--chrome <path>]   (drive a separate Chrome)
  * Exit: 0 ran; 1 the model named a page that is not on the site; 2 it could not run (say why).
  */
 
@@ -20,7 +21,6 @@ import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { extname, join, normalize } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { chromium } from '@playwright/test';
 
 const ROOT = join(import.meta.dirname, '..');
 const MIME = {
@@ -76,22 +76,27 @@ export function buildQuestions(projectsData, postsData) {
       expect: slugs.map(slug => `post:${slug}`),
     });
   }
-  // The start of a project's description, without its name
-  for (const project of projects.filter(item => item.description).slice(3, 6)) {
-    const words = project.description.split(/\s+/).slice(0, 8).join(' ');
+  // The start of a project's description, for a project whose description does not give its name away
+  const start = project => project.description.split(/\s+/).slice(0, 8).join(' ');
+  const namesItself = project =>
+    [project.name, project.displayName]
+      .filter(Boolean)
+      .some(name => start(project).toLowerCase().includes(name.toLowerCase()));
+  for (const project of projects
+    .filter(item => item.description && !namesItself(item))
+    .slice(3, 6)) {
     questions.push({
       id: `description:${project.name}`,
-      question: `Which project is this: ${words}`,
+      question: `Which project is this: ${start(project)}`,
       expect: [`project:${project.name}`],
     });
   }
-  // Nothing on the site answers this: the right answer is no page
-  questions.push({
-    id: 'none:weather',
-    question: 'What is the weather in Paris tomorrow?',
-    expect: [],
-    none: true,
-  });
+  // Nothing on the site answers these, and nothing on it is about them (a first try asked about the
+  // weather, and the portfolio has a weather app: picking it was fair, so it proved nothing)
+  questions.push(
+    { id: 'none:geography', question: 'What is the capital of Australia?', expect: [], none: true },
+    { id: 'none:cooking', question: 'Give me a recipe for lasagna.', expect: [], none: true }
+  );
   return questions;
 }
 
@@ -108,11 +113,39 @@ export function score(question, result) {
   };
 }
 
+/**
+ * Print one line per question and the totals, and say whether the model named a page that is not on the site.
+ * @param {{ question: { id: string, none?: boolean }, result: { ids?: string[], status: string, invalid?: number }, ms: number, top1: boolean, anywhere: boolean }[]} rows
+ * @returns {0 | 1} the exit code: 1 if any page id was not on the site
+ */
+function summarize(rows) {
+  for (const row of rows) {
+    const mark = row.anywhere ? (row.top1 ? 'top' : 'in ') : 'MISS';
+    console.log(
+      `${mark}  ${String(row.ms).padStart(5)} ms  ${row.question.id.padEnd(34)} -> ${(row.result.ids ?? [row.result.status]).join(', ') || '(none)'}`
+    );
+  }
+  const invalid = rows.reduce((sum, row) => sum + (row.result.invalid ?? 0), 0);
+  const asked = rows.filter(row => !row.question.none);
+  const rate = (rowsIn, key) => `${rowsIn.filter(row => row[key]).length}/${rowsIn.length}`;
+  const sorted = [...rows].sort((a, b) => a.ms - b.ms);
+  console.log(
+    `\nright page first: ${rate(asked, 'top1')}   right page among the picks: ${rate(asked, 'anywhere')}` +
+      `   declines what the site cannot answer: ${rate(
+        rows.filter(row => row.question.none),
+        'top1'
+      )}` +
+      `   page ids not on the site: ${invalid}   median ${sorted[Math.floor(rows.length / 2)]?.ms ?? 0} ms`
+  );
+  return invalid > 0 ? 1 : 0;
+}
+
 /** The repo's files over http on localhost, so the page is a secure context with the real modules. */
-function serve() {
+function serve(extra) {
   const server = createServer((request, response) => {
     const path = normalize(decodeURIComponent(new URL(request.url, 'http://x').pathname));
     if (path.includes('..')) return response.writeHead(403).end();
+    if (extra?.(request, response, path)) return undefined;
     try {
       const body = readFileSync(join(ROOT, path === '/' ? 'index.html' : path));
       response.writeHead(200, {
@@ -131,7 +164,110 @@ function option(name, fallback) {
   return index === -1 ? fallback : process.argv[index + 1];
 }
 
+/** The page --serve shows: the same questions, run in the visitor's own Chrome by a click. */
+const EVAL_PAGE = `<!doctype html>
+<meta charset="utf-8" />
+<title>Ask the portfolio: eval</title>
+<style>
+  body { font: 15px/1.5 system-ui, sans-serif; margin: 2rem auto; max-width: 62rem; padding: 0 1rem; }
+  pre { background: #f0f0ec; padding: 1rem; overflow: auto; }
+  button { font: inherit; padding: 0.5rem 1rem; }
+</style>
+<h1>Ask the portfolio: eval</h1>
+<p id="status">Checking the model…</p>
+<button id="run" disabled>Run the questions</button>
+<pre id="out"></pre>
+<script type="module">
+  import { askAvailability, askPortfolio, buildEntries } from '/modules/ask.js';
+  const status = document.getElementById('status');
+  const out = document.getElementById('out');
+  const run = document.getElementById('run');
+  const state = await askAvailability();
+  status.textContent =
+    state === 'unavailable'
+      ? 'This browser cannot run the model here.'
+      : 'Model: ' + state + (state === 'available' ? '.' : ' (running will download it: several gigabytes).');
+  if (state !== 'unavailable') run.disabled = false;
+  run.onclick = async () => {
+    run.disabled = true;
+    const [questions, projects, posts] = await Promise.all([
+      fetch('/__eval/questions.json').then(r => r.json()),
+      fetch('/projects-data.json').then(r => r.json()),
+      fetch('/posts-data.json').then(r => r.json()),
+    ]);
+    const entries = buildEntries(projects, posts);
+    const rows = [];
+    for (const question of questions) {
+      const started = performance.now();
+      status.textContent = 'Asking: ' + question.question;
+      const result = await askPortfolio({
+        question: question.question,
+        entries,
+        onDownload: fraction => (status.textContent = 'Downloading the model... ' + Math.round(fraction * 100) + '%'),
+      });
+      const ms = Math.round(performance.now() - started);
+      rows.push({ id: question.id, result, ms });
+      out.textContent += question.id.padEnd(34) + ' -> ' + ((result.ids ?? [result.status]).join(', ') || '(none)') + '  (' + ms + ' ms)\\n';
+    }
+    await fetch('/__eval/result', { method: 'POST', body: JSON.stringify(rows) });
+    status.textContent = 'Done. The results are in the terminal; you can close this tab.';
+  };
+</script>
+`;
+
+/**
+ * Open the page in your own Chrome instead of driving one: your profile, your model, a real click.
+ * Prints the same report when the page posts its results back, then stops.
+ */
+async function serveMode() {
+  const questions = buildQuestions(
+    JSON.parse(readFileSync(join(ROOT, 'projects-data.json'), 'utf8')),
+    JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'))
+  );
+  const finished = Promise.withResolvers();
+  const server = await serve((request, response, path) => {
+    if (path === '/__eval/' || path === '/__eval') {
+      response.writeHead(200, { 'Content-Type': 'text/html' }).end(EVAL_PAGE);
+      return true;
+    }
+    if (path === '/__eval/questions.json') {
+      response
+        .writeHead(200, { 'Content-Type': 'application/json' })
+        .end(JSON.stringify(questions));
+      return true;
+    }
+    if (path === '/__eval/result' && request.method === 'POST') {
+      let body = '';
+      request.on('data', chunk => (body += chunk));
+      request.on('end', () => {
+        response.writeHead(204).end();
+        try {
+          const rows = JSON.parse(body).map(row => {
+            const question = questions.find(item => item.id === row.id);
+            return { question, result: row.result, ms: row.ms, ...score(question, row.result) };
+          });
+          process.exitCode = summarize(rows);
+        } catch (error) {
+          console.error(`eval-ask: could not read the results (${error.message})`);
+          process.exitCode = 2;
+        }
+        finished.resolve();
+      });
+      return true;
+    }
+    return false;
+  });
+  console.log(
+    `Open this in Google Chrome and click Run (Ctrl-C to give up):\n\n  http://localhost:${server.address().port}/__eval/\n`
+  );
+  await finished.promise;
+  server.close();
+}
+
 async function main() {
+  if (process.argv.includes('--serve')) return serveMode();
+  // Only the launching mode needs it, and loading it is slow
+  const { chromium } = await import('@playwright/test');
   const allowDownload = process.argv.includes('--download');
   const profile = option('--profile', join(tmpdir(), 'andernet-eval-ask-profile'));
   const chrome = option('--chrome', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
@@ -197,7 +333,6 @@ async function main() {
     const postsData = JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'));
     const questions = buildQuestions(projectsData, postsData);
     const rows = [];
-    let invalid = 0;
     for (const question of questions) {
       // A keypress first: the model's first download needs a user gesture
       await page.keyboard.press('Shift');
@@ -219,25 +354,10 @@ async function main() {
         },
         { text: question.question }
       );
-      invalid += result.invalid ?? 0;
       rows.push({ question, result, ms: Date.now() - started, ...score(question, result) });
-      const mark = rows.at(-1).anywhere ? (rows.at(-1).top1 ? 'top' : 'in ') : 'MISS';
-      console.log(
-        `${mark}  ${String(rows.at(-1).ms).padStart(5)} ms  ${question.id.padEnd(34)} -> ${(result.ids ?? [result.status]).join(', ') || '(none)'}`
-      );
     }
 
-    const asked = rows.filter(row => !row.question.none);
-    const rate = (rowsIn, key) => `${rowsIn.filter(row => row[key]).length}/${rowsIn.length}`;
-    console.log(
-      `\nright page first: ${rate(asked, 'top1')}   right page among the picks: ${rate(asked, 'anywhere')}` +
-        `   declines what the site cannot answer: ${rate(
-          rows.filter(row => row.question.none),
-          'top1'
-        )}` +
-        `   page ids not on the site: ${invalid}   median ${[...rows].sort((a, b) => a.ms - b.ms)[Math.floor(rows.length / 2)].ms} ms`
-    );
-    process.exitCode = invalid > 0 ? 1 : 0;
+    process.exitCode = summarize(rows);
   } finally {
     finished = true;
     await browser?.close().catch(() => {});
