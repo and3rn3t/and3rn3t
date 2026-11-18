@@ -30,9 +30,41 @@
       "stargazers_count": 0,
       "forks_count": 2,
       "open_issues_count": 1,
-      "pushed_at": "2026-11-18T20:27:42Z",
+      "pushed_at": "2026-11-18T22:49:46Z",
       "updated_at": "2026-11-15T17:42:31Z",
       "created_at": "2021-07-29T15:36:40Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1102030320,
+      "name": "minecraft",
+      "full_name": "and3rn3t/minecraft",
+      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
+      "html_url": "https://github.com/and3rn3t/minecraft",
+      "homepage": null,
+      "language": "Python",
+      "topics": [
+        "arm64",
+        "docker",
+        "docker-compose",
+        "featured",
+        "flask",
+        "home-server",
+        "minecraft",
+        "minecraft-server",
+        "python",
+        "raspberry-pi",
+        "rcon",
+        "react",
+        "self-hosted"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-18T21:21:09Z",
+      "updated_at": "2026-11-07T21:40:35Z",
+      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -62,8 +94,8 @@
       ],
       "stargazers_count": 5,
       "forks_count": 1,
-      "open_issues_count": 5,
-      "pushed_at": "2026-11-18T14:47:48Z",
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-18T20:59:01Z",
       "updated_at": "2026-11-10T23:01:35Z",
       "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
@@ -294,38 +326,6 @@
       "pushed_at": "2026-11-18T02:54:28Z",
       "updated_at": "2026-11-07T21:40:19Z",
       "created_at": "2026-07-03T19:42:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1102030320,
-      "name": "minecraft",
-      "full_name": "and3rn3t/minecraft",
-      "description": "Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.",
-      "html_url": "https://github.com/and3rn3t/minecraft",
-      "homepage": null,
-      "language": "Python",
-      "topics": [
-        "arm64",
-        "docker",
-        "docker-compose",
-        "featured",
-        "flask",
-        "home-server",
-        "minecraft",
-        "minecraft-server",
-        "python",
-        "raspberry-pi",
-        "rcon",
-        "react",
-        "self-hosted"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-18T02:35:02Z",
-      "updated_at": "2026-11-07T21:40:35Z",
-      "created_at": "2025-11-22T17:31:12Z",
       "fork": false,
       "archived": false
     },
@@ -1282,6 +1282,245 @@
     }
   ],
   "events": [
+    {
+      "id": "20576121954",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor(worker): split mcp.js into one file per tool group",
+          "head": {
+            "ref": "refactor/split-mcp"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:49:44Z"
+    },
+    {
+      "id": "20576065426",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor(worker): split mcp.js into one file per tool group",
+          "head": {
+            "ref": "refactor/split-mcp"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:47:42Z"
+    },
+    {
+      "id": "20575941670",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor(worker): split mcp.js into one file per tool group",
+          "head": {
+            "ref": "refactor/split-mcp"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:47:42Z"
+    },
+    {
+      "id": "20575454873",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor(worker): share response helpers in worker/http.js",
+          "head": {
+            "ref": "refactor/worker-http-helpers"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:42:08Z"
+    },
+    {
+      "id": "20575213101",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor(worker): share response helpers in worker/http.js",
+          "head": {
+            "ref": "refactor/worker-http-helpers"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:39:01Z"
+    },
+    {
+      "id": "20575188977",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor(worker): share response helpers in worker/http.js",
+          "head": {
+            "ref": "refactor/worker-http-helpers"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:39:01Z"
+    },
+    {
+      "id": "20573772381",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor: remove dead front-end code and preload what main.js needs",
+          "head": {
+            "ref": "refactor/frontend-dead-code"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:23:17Z"
+    },
+    {
+      "id": "27569289945",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "66806b48802d4f4a66b42ed56bf7be9b21f994cd",
+            "message": "Merge pull request #357 from and3rn3t/feat/bfcache\n\nchore(bfcache): a check and a guard (Phase 15.12)"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-17T18:00:08Z"
+    },
+    {
+      "id": "20573292374",
+      "type": "PullRequestReviewEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:17:54Z"
+    },
+    {
+      "id": "20573203232",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor: remove dead front-end code and preload what main.js needs",
+          "head": {
+            "ref": "refactor/frontend-dead-code"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:15:44Z"
+    },
+    {
+      "id": "20573154123",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-18",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-18T20:46:11Z"
+    },
+    {
+      "id": "20573092803",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "refactor: remove dead front-end code and preload what main.js needs",
+          "head": {
+            "ref": "refactor/frontend-dead-code"
+          }
+        }
+      },
+      "created_at": "2026-11-18T22:15:44Z"
+    },
+    {
+      "id": "27564740089",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9aa8834f77f2ce2bb58a4d7aa93e6cc148f4e256",
+            "message": "Merge pull request #355 from and3rn3t/fix/trusted-types-sw\n\nfix(csp): register the service worker through the Trusted Types policy"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-17T17:26:14Z"
+    },
+    {
+      "id": "27564495106",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "b097a6973bce23a5b564aefc31872f4384462032",
+            "message": "fix(eval): check what the page posts back before printing it (CodeQL js/log-injection)\n\nIn --serve mode the results posted to the local server went straight\ninto console.log, and anything that can reach localhost can post\nthere, so crafted newlines or terminal escape codes could forge report\nlines. Results are now validated (a known question, a known status,\nat most three project:/post: ids, numbers in range) and everything\nprinted passes through printable(); a failure says only that a result\nis malformed and never echoes it (a JSON parse error quoted the\ninput). The address also carries a per-run token, the body is capped\nand only one result is accepted.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/ask-fits-and-eval-serve"
+      },
+      "created_at": "2026-11-18T20:14:18Z"
+    },
+    {
+      "id": "27564294941",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "fix/trusted-types-sw",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-17T17:23:06Z"
+    },
     {
       "id": "27562652029",
       "type": "PushEvent",
@@ -2388,215 +2627,6 @@
         "ref_type": "branch"
       },
       "created_at": "2026-11-15T00:57:42Z"
-    },
-    {
-      "id": "27319446622",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/roadmap-13-9-done",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:45:24Z"
-    },
-    {
-      "id": "27318880053",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "26345e94c94dfce6590b884c202af04925aca052",
-            "message": "Merge pull request #341 from and3rn3t/ci/og-skip-rounded-contributions\n\nperf(og): show contributions as thousands so the daily OG render can be skipped"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-15T18:10:15Z"
-    },
-    {
-      "id": "27318637603",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/copy-lint",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:35:31Z"
-    },
-    {
-      "id": "27318543449",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/roadmap-13-8-13-11",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:34:13Z"
-    },
-    {
-      "id": "27318413268",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "75c5fbe226e7ad30f768c5db603d4a85c79d7f13",
-            "message": "Merge pull request #339 from and3rn3t/ci/worker-build-and-deploy-tag\n\nfeat(ci): build the Worker in validate; tag deploys and report deploy drift"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-15T18:06:28Z"
-    },
-    {
-      "id": "27317120258",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/claude-action",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:15:33Z"
-    },
-    {
-      "id": "27316185682",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "652febf5ae41a55088fdb88c488e42ec48fa4942",
-            "message": "Merge origin/main into feat/agent-ready-post\n\nTake main's Phase 13 table; 13.1 and 13.2 done, 13.3 in progress.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/agent-ready-post"
-      },
-      "created_at": "2026-11-15T00:05:06Z"
-    },
-    {
-      "id": "27312917579",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/brand-mark",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T17:12:45Z"
-    },
-    {
-      "id": "27302242795",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "5256033826e4e5b5777029367aece6c63a468120",
-            "message": "Merge pull request #302 from and3rn3t/feat/guard-generated\n\nfeat: block hand edits to generated files with a PreToolUse hook"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-13T15:41:24Z"
-    },
-    {
-      "id": "20219857949",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix: single history log + better constellation mixes",
-          "head": {
-            "ref": "fix/weekly-mix-quality-and-double-logging"
-          }
-        }
-      },
-      "created_at": "2026-11-16T02:12:57Z"
-    },
-    {
-      "id": "27298867658",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/mcp-annotations",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T15:12:55Z"
-    },
-    {
-      "id": "27287998715",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/follow-up-issues",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T15:26:24Z"
-    },
-    {
-      "id": "27286880757",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/agent-ready-post",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-13T15:18:12Z"
-    },
-    {
-      "id": "27283535562",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "95364bd92ac60b14b399a3963385d94c91b51c0f",
-            "message": "fix: satisfy eslint in the guard-generated hook\n\nThe hooks directory is linted with browser globals, so import process\nfrom node:process and write the message to stderr directly.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/guard-generated"
-      },
-      "created_at": "2026-11-13T15:36:59Z"
-    },
-    {
-      "id": "27279912418",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/signed-agents",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T19:07:05Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2610,7 +2640,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4985,
+    "total": 4998,
     "weeks": [
       {
         "days": [
@@ -4659,7 +4689,7 @@
           },
           {
             "date": "2026-11-18",
-            "count": 17,
+            "count": 30,
             "level": 1
           }
         ]
@@ -4689,6 +4719,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-18T20:41:27Z",
+  "lastUpdated": "2026-11-18T22:50:59Z",
   "totalRepos": 54
 }

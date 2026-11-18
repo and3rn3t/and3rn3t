@@ -43,6 +43,12 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker
+
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
 > VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
@@ -76,12 +82,6 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
 > **Tech:** TypeScript
-
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker
 
 ### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
