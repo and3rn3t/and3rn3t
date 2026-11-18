@@ -9,7 +9,8 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   The Worker answers at `andernet.dev/api/*` (a route in `wrangler.toml`, so the page calls it same-origin) and at its
   `workers.dev` address, where the same paths have no `/api` prefix. `modules/config.js` picks the base by hostname, and
   `sw.js` never caches `/api/`, `/mcp` or `/.well-known/`
-  Also on the Worker: a read-only **MCP server** at `andernet.dev/mcp` (`worker/mcp.js`, built on `agents` and
+  Also on the Worker: a read-only **MCP server** at `andernet.dev/mcp` (`worker/mcp.js` builds the server and `worker/mcp/` holds one file per tool group: profile,
+  projects, posts, site-health, prompts-resources and `shared.js` for the result shapes and output schemas; built on `agents` and
   `@modelcontextprotocol/server`, stateless; its tools read the published `*-data.json` files through
   `worker/site-data.js`) and the **agent-discovery documents** (`worker/discovery.js`: `/.well-known/api-catalog`,
   `mcp/server-card.json`, `agent-skills/`, `ai-catalog.json` and `/api/openapi.json`). Each needs its own route in
@@ -24,7 +25,7 @@ Matt's personal portfolio site. Static-first (vanilla JS `main.js` + `modules/`,
   a "no such project or post" reply is `isError` for the model but recorded as a success on `/status/` (`asNotFound`).
   Two tools are MCP Apps, drawn inside Claude: `show_project` (`worker/mcp-app-view.js`) and `show_status`
   (`worker/mcp-app-status.js`, the `/status/` numbers as a panel). Their HTML imports the MCP Apps client from a pinned jsDelivr URL
-  (`resourceDomains` in `worker/mcp.js`) and puts data in with `textContent` only; `show_status`'s drawing code is a string
+  (`resourceDomains` in `worker/mcp/shared.js`) and puts data in with `textContent` only; `show_status`'s drawing code is a string
   (`STATUS_RENDER_SOURCE`) that `tests/unit/status-app.test.js` runs in jsdom. `tests/e2e/mcp-apps.spec.js` runs both apps inside the MCP Apps SDK's own host (`AppBridge`, bundled with Vite at test time) with the client script served from the installed package, and fails if `APP_CLIENT_URL`'s pin and the installed `ext-apps` differ. A new app tool needs its own `ui://` resource, an
   `outputSchema`, and an entry in the server card, `SKILL_MD` and `qa-live`'s tool count.
   **Page views** are counted by the `Counter` Durable Object (`worker/counter.js`, binding `COUNTER`, migration `v2`): one

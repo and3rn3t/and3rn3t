@@ -29,7 +29,13 @@ tests:
 mcp:
   - changed-files:
       - any-glob-to-any-file:
-          ['worker/mcp*.js', 'worker/discovery.js', 'modules/webmcp.js', 'llms.txt']
+          [
+            'worker/mcp*.js',
+            'worker/mcp/**',
+            'worker/discovery.js',
+            'modules/webmcp.js',
+            'llms.txt',
+          ]
 
 content:
   - changed-files:
