@@ -21,6 +21,13 @@ export const SOURCES = [
   'projects-data.json',
   'experience-data.json',
   'worker/mcp.js',
+  'worker/mcp/profile.js',
+  'worker/mcp/projects.js',
+  'worker/mcp/posts.js',
+  'worker/mcp/site-health.js',
+  'worker/mcp/prompts-resources.js',
+  'worker/mcp/shared.js',
+  'worker/mcp-content.js',
   'worker/discovery.js',
   'llms.txt',
 ];
