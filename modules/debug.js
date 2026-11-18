@@ -1,12 +1,15 @@
 /**
- * Debug Utilities Module
- * Provides conditional logging based on DEBUG_MODE flag
+ * Debug logging is off unless the address has ?debug (and not ?debug=0). Errors always show.
+ * @param {string} search - location.search
+ * @returns {boolean}
  */
+export function parseDebugMode(search) {
+    const value = new URLSearchParams(search).get('debug');
+    return value !== null && value !== '0';
+}
 
-// Debug mode flag - set to true for testing, false for production
-const DEBUG_MODE = false;
+const DEBUG_MODE = parseDebugMode(globalThis.location?.search ?? '');
 
-// Debug logging wrapper - only logs when DEBUG_MODE is true
 export const debug = {
     log: (...args) => DEBUG_MODE && console.log(...args),
     warn: (...args) => DEBUG_MODE && console.warn(...args),

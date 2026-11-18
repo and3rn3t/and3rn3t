@@ -186,10 +186,6 @@
     }
   }
 
-  .intro__canvas.is-fallback {
-    display: none;
-  }
-
   .intro__copy {
     max-width: 48rem;
   }
@@ -557,17 +553,9 @@
     font-weight: var(--font-weight-medium);
   }
 
-  .project-list__case-study {
-    justify-self: start;
-  }
-
   @media (min-width: 48rem) {
     .project-list__row {
       grid-template-columns: 13rem minmax(0, 1fr) 11rem 6.5rem;
-    }
-
-    .project-list__case-study {
-      justify-self: end;
     }
   }
 

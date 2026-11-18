@@ -17,6 +17,8 @@ const PRECACHE_ASSETS = [
     '/fonts/jetbrains-mono-500.woff2',
     '/main.js',
     '/modules/debug.js',
+    '/modules/capabilities.js',
+    '/modules/utils/icon.js',
     '/modules/error-handler.js',
     '/modules/theme.js',
     '/modules/navigation.js',
