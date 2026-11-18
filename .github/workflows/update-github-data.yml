@@ -8,6 +8,14 @@ on:
 
 # Queue, never cancel: a run cancelled between `git push` and `gh pr merge` would leave
 # the automation branch half-published.
+#
+# The branch and the pull request are made with DATA_REFRESH_TOKEN (a fine-grained personal access
+# token: this repository only, Contents and Pull requests read/write), not GITHUB_TOKEN. main
+# requires the checks `verify`, `guard`, `scan` and `E2E result`, and GitHub does not start
+# workflows for anything GITHUB_TOKEN pushes or opens, so with it the PR could never turn green.
+# With the token the PR runs the same checks as any other, GitHub merges it when they pass
+# (`--auto`), and that merge is an ordinary push to main, which starts pages.yml by itself.
+# The token expires: scripts/follow-ups.mjs opens an issue a month before, to renew it.
 concurrency:
   group: update-github-data
   cancel-in-progress: false
@@ -18,12 +26,23 @@ jobs:
     # A hung API call or Chromium install must fail the run, not hold it for the 6 h default.
     timeout-minutes: 20
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
     steps:
+      # First, so a missing or expired token fails in seconds and not after the Chromium install.
+      - name: Check that the token is set
+        env:
+          DATA_REFRESH_TOKEN: ${{ secrets.DATA_REFRESH_TOKEN }}
+        run: |
+          if [ -z "$DATA_REFRESH_TOKEN" ]; then
+            echo "::error::DATA_REFRESH_TOKEN is not set. Create a fine-grained token for this repository (Contents and Pull requests: read and write) and add it with: gh secret set DATA_REFRESH_TOKEN"
+            exit 1
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          # The token for the push: a push made with GITHUB_TOKEN would not start the checks.
+          token: ${{ secrets.DATA_REFRESH_TOKEN }}
           # Not the triggering SHA: a run queued behind another one (see `concurrency`) would
           # otherwise start from the commit before that run's merge and conflict with it.
           ref: main
@@ -99,7 +118,7 @@ jobs:
 
       - name: Commit GitHub data via PR
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.DATA_REFRESH_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -117,9 +136,7 @@ jobs:
           # main is protected (PR required), so push a branch and merge a PR.
           BRANCH=automation/update-github-data
           git checkout -B "$BRANCH"
-          # [skip ci]: PR checks can't run on GITHUB_TOKEN-created PRs (GitHub blocks
-          # recursive triggers), so skip them rather than leave 7 failed runs per PR.
-          git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d") [skip ci]"
+          git commit -m "chore: update GitHub data, featured projects, and OG images - $(date -u +"%Y-%m-%d")"
           git push --force origin "$BRANCH"
 
           PR=$(gh pr list --head "$BRANCH" --base main --json number -q '.[0].number')
@@ -129,19 +146,6 @@ jobs:
               --body "Automated daily refresh of github-data.json, README featured projects, OG images, and the pre-rendered project list in index.html." \
               | grep -oE '[0-9]+$')
           fi
-          gh pr merge "$PR" --merge --delete-branch
-
-  # Merges made with GITHUB_TOKEN don't fire push events, so pages.yml never runs
-  # for these updates on its own. Dispatch it explicitly (workflow_dispatch is
-  # exempt from that rule) so the refreshed data actually goes live.
-  deploy-pages:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: update-github-data
-    permissions:
-      actions: write
-    steps:
-      - name: Trigger Pages deploy
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run pages.yml --repo "$GITHUB_REPOSITORY" --ref main
+          # Merge when the required checks pass (the branch is deleted on merge by the repo setting).
+          # Safe to repeat: a PR from an earlier run that is still waiting is updated by the push.
+          gh pr merge "$PR" --auto --merge

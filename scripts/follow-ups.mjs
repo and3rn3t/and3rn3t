@@ -48,6 +48,11 @@ export function crawlBody(stats) {
 const CRAWL_ADVICE =
   'Compare with the AI Crawl Control baseline taken on 2026-11-11 (crawler mix, bot 404s, referrals) in the Cloudflare dashboard. The point of allowing AI training crawlers was to be in the answers: look for AI referrals, not only crawler volume.';
 
+const RENEW_TOKEN_BODY = [
+  'The daily data refresh (`.github/workflows/update-github-data.yml`) opens its pull request with `DATA_REFRESH_TOKEN`, a fine-grained personal access token made 2026-11-18 with a one-year life. When it expires the refresh fails in its first step ("DATA_REFRESH_TOKEN is not set" or a 401) and the site stops getting new GitHub data.',
+  'To renew: GitHub, Settings, Developer settings, Fine-grained tokens, regenerate it (same repository, Contents and Pull requests read/write only), then `gh secret set DATA_REFRESH_TOKEN`. Run the workflow once by hand and check that its PR merges and Pages deploys. Then set the next reminder in this file.',
+].join('\n\n');
+
 export const FOLLOW_UPS = [
   {
     due: '2026-11-27',
@@ -58,6 +63,11 @@ export const FOLLOW_UPS = [
     due: '2026-12-09',
     title: 'Compare AI crawler traffic with the 2026-11-11 baseline',
     body: crawlBody,
+  },
+  {
+    due: '2027-10-15',
+    title: 'Renew DATA_REFRESH_TOKEN before it expires',
+    body: () => RENEW_TOKEN_BODY,
   },
 ];
 
