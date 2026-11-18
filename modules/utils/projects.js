@@ -161,25 +161,3 @@ export function projectView(repo, metadata) {
         metrics: (metadata?.metrics ?? []).filter(metric => metric?.value && metric?.label),
     };
 }
-
-/**
- * Compact relative time: "15m ago", "3d ago", "2mo ago".
- * @param {Date} date
- * @param {number} [now]
- * @returns {string}
- */
-export function relativeTime(date, now = Date.now()) {
-    const diff = now - date.getTime();
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(days / 365);
-    if (minutes < 60) return `${minutes}m ago`;
-    if (hours < 24) return `${hours}h ago`;
-    if (days < 7) return `${days}d ago`;
-    if (weeks < 5) return `${weeks}w ago`;
-    if (months < 12) return `${months}mo ago`;
-    return `${years}y ago`;
-}

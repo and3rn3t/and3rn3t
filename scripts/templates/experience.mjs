@@ -12,7 +12,7 @@ import { escapeHtml as esc } from '../../modules/utils/html.js';
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 /**
- * "Jun 2021 – Present" from "2021-06" style dates.
+ * "Jun 2021 – Present" from "2021-06" style dates; a start and end that read the same are one date.
  * @param {string | undefined} startDate
  * @param {string | undefined} endDate
  * @param {boolean} current
@@ -26,7 +26,8 @@ export function formatDateRange(startDate, endDate, current) {
   };
   const start = format(startDate);
   const end = current ? 'Present' : format(endDate);
-  return start ? `${start} – ${end}` : end;
+  // One date, not a range: "2021", not "2021 – 2021" (llms.txt already says it this way)
+  return start && start !== end ? `${start} – ${end}` : end;
 }
 
 /** A link to the organisation when we have its URL, otherwise just its name. */
