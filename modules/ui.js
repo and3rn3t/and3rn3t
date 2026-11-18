@@ -35,11 +35,6 @@ export class UIManager {
     // ========================================
 
     /**
-     * Show a transient message. One toast element is reused: a newer message replaces the
-     * current one and restarts the timer, so an earlier call can't hide a later one. The
-     * element stays in the page as an (empty) live region so screen readers announce changes.
-     */
-    /**
      * The toast is a live region, and a screen reader only announces changes to one that was
      * already in the page. init() creates it, empty, up front so even the first message is
      * announced; showNotification() falls back to creating it if init() hasn't run.
@@ -72,6 +67,11 @@ export class UIManager {
         }, duration);
     }
 
+    /**
+     * Show a transient message. One toast element is reused: a newer message replaces the
+     * current one and restarts the timer, so an earlier call can't hide a later one. The
+     * element stays in the page as an (empty) live region so screen readers announce changes.
+     */
     showNotification(message, type = 'info', duration = 5000) {
         const notification = this.ensureNotificationRegion();
 
