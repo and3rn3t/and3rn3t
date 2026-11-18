@@ -43,24 +43,12 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🌐 [health](https://github.com/and3rn3t/health)
 
-> iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
+> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
 >
-> **Tech:** TypeScript, arlo, cloudflare-pages
-> 🔗 [Live](https://homehub.andernet.dev)
-
-### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
-
-> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
->
-> **Tech:** Python, arm64, docker
-
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
+> **Tech:** TypeScript, ai, caregiver
+> 🔗 [Live](https://health.andernet.dev)
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -69,6 +57,13 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** TypeScript, akinator, bayesian
 > 🔗 [Live](https://andernator.com)
 
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
+>
+> **Tech:** TypeScript, arlo, cloudflare-pages
+> 🔗 [Live](https://homehub.andernet.dev)
+
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
 > AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
@@ -76,12 +71,17 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** Python, agent-skill, agent-skills
 > 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
-### 🌐 [health](https://github.com/and3rn3t/health)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** TypeScript, ai, caregiver
-> 🔗 [Live](https://health.andernet.dev)
+> **Tech:** TypeScript
+
+### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
+
+> Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
+>
+> **Tech:** Python, arm64, docker
 
 ### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
 
