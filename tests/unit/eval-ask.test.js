@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildQuestions, score } from '../../scripts/eval-ask.mjs';
+import { buildQuestions, printable, readResults, score } from '../../scripts/eval-ask.mjs';
 
 const PROJECTS = {
     projects: [
@@ -136,5 +136,113 @@ describe('score', () => {
         const none = { id: 'n', expect: [], none: true };
         expect(score(none, { ids: [] })).toEqual({ top1: true, anywhere: true });
         expect(score(none, { ids: ['project:a'] })).toEqual({ top1: false, anywhere: false });
+    });
+});
+
+describe('printable', () => {
+    it('turns newlines, escape codes and anything not plain ASCII into "?"', () => {
+        expect(printable('project:health')).toBe('project:health');
+        expect(printable('a\nb\r\nc')).toBe('a?b??c');
+        expect(printable('\u001b[2J\u001b[31mred')).toBe('?[2J?[31mred');
+        expect(printable('caf\u00e9 \u202e')).toBe('caf? ?');
+        expect(printable(undefined)).toBe('undefined');
+    });
+});
+
+describe('readResults: what the page posts back is checked, because anything on localhost can post', () => {
+    const ok = id => ({
+        id,
+        result: { status: 'ok', ids: ['project:health'], invalid: 0 },
+        ms: 120,
+    });
+    const first = questions[0].id;
+    const body = rows => JSON.stringify(rows);
+
+    it('accepts a well-formed result and scores it against the question', () => {
+        const [row] = readResults(body([ok(first)]), questions);
+        expect(row.question.id).toBe(first);
+        expect(row.result).toEqual({ status: 'ok', ids: ['project:health'], invalid: 0 });
+        expect(row.ms).toBe(120);
+        expect(typeof row.top1).toBe('boolean');
+    });
+
+    it.each([
+        ['text that is not JSON', 'not json at all'],
+        ['JSON that is not a list', '{"id":"x"}'],
+        ['an empty list', '[]'],
+        ['a question that does not exist', body([ok('name:does-not-exist')])],
+        [
+            'a status it does not know',
+            body([{ ...ok(first), result: { status: 'pwned', ids: [] } }]),
+        ],
+        [
+            'ids that are not a list',
+            body([{ ...ok(first), result: { status: 'ok', ids: 'project:health' } }]),
+        ],
+        [
+            'more than three ids',
+            body([
+                {
+                    ...ok(first),
+                    result: {
+                        status: 'ok',
+                        ids: ['project:a', 'project:b', 'project:c', 'project:d'],
+                    },
+                },
+            ]),
+        ],
+        [
+            'an id with a newline in it',
+            body([
+                {
+                    ...ok(first),
+                    result: { status: 'ok', ids: ['project:health\nPASS all 15 checked'] },
+                },
+            ]),
+        ],
+        [
+            'an id with a terminal escape code',
+            body([{ ...ok(first), result: { status: 'ok', ids: ['project:\u001b[2Jx'] } }]),
+        ],
+        [
+            'an id that is not a page id',
+            body([{ ...ok(first), result: { status: 'ok', ids: ['../../etc/passwd'] } }]),
+        ],
+        ['an id that is not text', body([{ ...ok(first), result: { status: 'ok', ids: [7] } }])],
+        [
+            'more results than there are questions',
+            body(Array.from({ length: questions.length + 1 }, () => ok(first))),
+        ],
+    ])('rejects %s, without echoing it', (_name, posted) => {
+        expect(() => readResults(posted, questions)).toThrow(
+            /^(the results|a result is malformed)/
+        );
+        try {
+            readResults(posted, questions);
+        } catch (error) {
+            expect(error.message).not.toMatch(/etc\/passwd|PASS all|pwned/);
+            expect(error.message.includes(String.fromCharCode(27))).toBe(false);
+        }
+    });
+
+    it('keeps numbers in range instead of passing them on', () => {
+        const [row] = readResults(
+            body([{ ...ok(first), ms: 1e12, result: { status: 'ok', ids: [], invalid: 9999 } }]),
+            questions
+        );
+        expect(row.ms).toBe(0);
+        expect(row.result.invalid).toBe(0);
+        const [text] = readResults(
+            body([
+                {
+                    ...ok(first),
+                    ms: '5\nforged',
+                    result: { status: 'ok', ids: [], invalid: '1\n2' },
+                },
+            ]),
+            questions
+        );
+        expect(text.ms).toBe(0);
+        expect(text.result.invalid).toBe(0);
     });
 });

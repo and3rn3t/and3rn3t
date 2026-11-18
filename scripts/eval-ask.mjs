@@ -16,6 +16,7 @@
  */
 
 import { spawn } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
@@ -114,6 +115,62 @@ export function score(question, result) {
 }
 
 /**
+ * Text that is safe to print: control characters (a newline that would forge a report line, an escape code that
+ * would drive the terminal; the second pattern catches those) become "?". Everything printed from a posted result goes through it.
+ * @param {unknown} value
+ * @returns {string}
+ */
+export function printable(value) {
+  return String(value)
+    .replace(/[\r\n]/g, '?')
+    .replace(/[^\x20-\x7e]/g, '?');
+}
+
+const PICK_ID = /^(?:project|post):[a-z0-9][a-z0-9._-]{0,79}$/i;
+const STATUSES = new Set(['ok', 'unavailable', 'too-long', 'error', 'cancelled']);
+const MAX_PICKS = 3;
+const MAX_BODY_BYTES = 64 * 1024;
+
+/**
+ * The results the page posts back, checked. Anything that can reach localhost can post here, so nothing is
+ * taken on trust: a result must name one of the questions, carry a known status, at most three page ids of
+ * the shape `project:<name>` or `post:<slug>`, and numbers in range. A failure says only that a result is
+ * malformed and never echoes what was posted.
+ * @param {string} body
+ * @param {{ id: string, expect: string[], none?: boolean }[]} questions
+ * @returns {{ question: object, result: { status: string, ids: string[], invalid: number }, ms: number, top1: boolean, anywhere: boolean }[]}
+ */
+export function readResults(body, questions) {
+  let posted;
+  try {
+    posted = JSON.parse(body);
+  } catch {
+    throw new Error('the results are not JSON');
+  }
+  if (!Array.isArray(posted) || posted.length === 0 || posted.length > questions.length) {
+    throw new Error('the results are not a list of the expected length');
+  }
+  const whole = (value, max) => (Number.isInteger(value) && value >= 0 && value <= max ? value : 0);
+  return posted.map(row => {
+    const question = questions.find(item => item.id === row?.id);
+    const ids = row?.result?.ids ?? [];
+    const valid =
+      question &&
+      STATUSES.has(row.result?.status) &&
+      Array.isArray(ids) &&
+      ids.length <= MAX_PICKS &&
+      ids.every(id => typeof id === 'string' && PICK_ID.test(id));
+    if (!valid) throw new Error('a result is malformed');
+    const result = {
+      status: row.result.status,
+      ids: [...ids],
+      invalid: whole(row.result.invalid, 10),
+    };
+    return { question, result, ms: whole(row.ms, 3_600_000), ...score(question, result) };
+  });
+}
+
+/**
  * Print one line per question and the totals, and say whether the model named a page that is not on the site.
  * @param {{ question: { id: string, none?: boolean }, result: { ids?: string[], status: string, invalid?: number }, ms: number, top1: boolean, anywhere: boolean }[]} rows
  * @returns {0 | 1} the exit code: 1 if any page id was not on the site
@@ -122,7 +179,7 @@ function summarize(rows) {
   for (const row of rows) {
     const mark = row.anywhere ? (row.top1 ? 'top' : 'in ') : 'MISS';
     console.log(
-      `${mark}  ${String(row.ms).padStart(5)} ms  ${row.question.id.padEnd(34)} -> ${(row.result.ids ?? [row.result.status]).join(', ') || '(none)'}`
+      `${mark}  ${String(row.ms).padStart(5)} ms  ${printable(row.question.id).padEnd(34)} -> ${printable((row.result.ids ?? [row.result.status]).join(', ')) || '(none)'}`
     );
   }
   const invalid = rows.reduce((sum, row) => sum + (row.result.invalid ?? 0), 0);
@@ -191,7 +248,7 @@ const EVAL_PAGE = `<!doctype html>
   run.onclick = async () => {
     run.disabled = true;
     const [questions, projects, posts] = await Promise.all([
-      fetch('/__eval/questions.json').then(r => r.json()),
+      fetch('questions.json').then(r => r.json()),
       fetch('/projects-data.json').then(r => r.json()),
       fetch('/posts-data.json').then(r => r.json()),
     ]);
@@ -209,7 +266,7 @@ const EVAL_PAGE = `<!doctype html>
       rows.push({ id: question.id, result, ms });
       out.textContent += question.id.padEnd(34) + ' -> ' + ((result.ids ?? [result.status]).join(', ') || '(none)') + '  (' + ms + ' ms)\\n';
     }
-    await fetch('/__eval/result', { method: 'POST', body: JSON.stringify(rows) });
+    await fetch('result', { method: 'POST', body: JSON.stringify(rows) });
     status.textContent = 'Done. The results are in the terminal; you can close this tab.';
   };
 </script>
@@ -225,30 +282,36 @@ async function serveMode() {
     JSON.parse(readFileSync(join(ROOT, 'posts-data.json'), 'utf8'))
   );
   const finished = Promise.withResolvers();
+  // Only the page this script printed the address of knows the token, so another tab cannot post results
+  const base = `/__eval/${randomUUID()}/`;
+  let posted = false;
   const server = await serve((request, response, path) => {
-    if (path === '/__eval/' || path === '/__eval') {
+    if (!path.startsWith(base)) return false;
+    const route = path.slice(base.length);
+    if (route === '') {
       response.writeHead(200, { 'Content-Type': 'text/html' }).end(EVAL_PAGE);
       return true;
     }
-    if (path === '/__eval/questions.json') {
+    if (route === 'questions.json') {
       response
         .writeHead(200, { 'Content-Type': 'application/json' })
         .end(JSON.stringify(questions));
       return true;
     }
-    if (path === '/__eval/result' && request.method === 'POST') {
+    if (route === 'result' && request.method === 'POST' && !posted) {
+      posted = true;
       let body = '';
-      request.on('data', chunk => (body += chunk));
+      request.on('data', chunk => {
+        if (body.length > MAX_BODY_BYTES) return;
+        body += chunk;
+      });
       request.on('end', () => {
         response.writeHead(204).end();
         try {
-          const rows = JSON.parse(body).map(row => {
-            const question = questions.find(item => item.id === row.id);
-            return { question, result: row.result, ms: row.ms, ...score(question, row.result) };
-          });
-          process.exitCode = summarize(rows);
+          if (body.length > MAX_BODY_BYTES) throw new Error('the results are too large');
+          process.exitCode = summarize(readResults(body, questions));
         } catch (error) {
-          console.error(`eval-ask: could not read the results (${error.message})`);
+          console.error(`eval-ask: could not use the results (${printable(error.message)})`);
           process.exitCode = 2;
         }
         finished.resolve();
@@ -258,7 +321,7 @@ async function serveMode() {
     return false;
   });
   console.log(
-    `Open this in Google Chrome and click Run (Ctrl-C to give up):\n\n  http://localhost:${server.address().port}/__eval/\n`
+    `Open this in Google Chrome and click Run (Ctrl-C to give up):\n\n  http://localhost:${server.address().port}${base}\n`
   );
   await finished.promise;
   server.close();
