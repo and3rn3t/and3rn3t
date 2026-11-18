@@ -17,6 +17,7 @@ import { loadJSON } from './utils/data.js';
 import { projectView } from './utils/projects.js';
 import { escapeHtml, trustedHtml } from './utils/html.js';
 import { icon } from './utils/icon.js';
+import { lab } from './capabilities.js';
 
 const optionId = index => `palette-option-${index}`;
 
@@ -37,6 +38,11 @@ class CommandPalette {
         this.filtered = [];
         this.activeIndex = 0;
         this.activeCategory = 'all';
+        // Ask (lab experiment `ask`, modules/ask.js): attached once the browser can run it; what a
+        // question picked, and the note about it
+        this.ask = null;
+        this.pinned = null;
+        this.note = null;
     }
 
     get isOpen() {
@@ -50,6 +56,7 @@ class CommandPalette {
         }
 
         this.buildItems();
+        this.initAsk();
 
         // Global open shortcut.
         document.addEventListener('keydown', e => {
@@ -79,7 +86,10 @@ class CommandPalette {
             trigger.dataset.shortcut = shortcut; // shown by CSS (see .site-nav__search::after)
         }
 
-        this.input.addEventListener('input', () => this.render());
+        this.input.addEventListener('input', () => {
+            this.clearAsk();
+            this.render();
+        });
         this.input.addEventListener('keydown', e => this.onInputKeydown(e));
 
         this.closeBtn?.addEventListener('click', () => this.close());
@@ -186,6 +196,7 @@ class CommandPalette {
 
         // Posts: the rows in the Writing section are the posts there are
         const posts = Array.from(document.querySelectorAll('#blog-posts [data-slug]')).map(row => ({
+            id: `post:${row.dataset.slug}`,
             type: 'post',
             category: 'content',
             icon: 'file-alt',
@@ -222,6 +233,7 @@ class CommandPalette {
                 return;
             }
             const projects = (data.projects || []).map(p => ({
+                id: `project:${p.name}`,
                 type: 'project',
                 category: 'projects',
                 icon: 'code',
@@ -274,6 +286,7 @@ class CommandPalette {
         }
         this.modal.showModal();
         this.input.value = '';
+        this.clearAsk();
         this.activeIndex = 0;
         this.render();
         this.input.focus();
@@ -325,6 +338,10 @@ class CommandPalette {
         if (!item) {
             return;
         }
+        if (item.type === 'ask') {
+            this.ask.run(this.input.value); // stays open: the answer is shown here
+            return;
+        }
         const keepOpen = item.type === 'action' && /toggle theme/i.test(item.title);
         // Close first: it hands focus back to where the visitor was, and an item that
         // navigates then moves it on to its target instead of having it stolen back.
@@ -368,12 +385,16 @@ class CommandPalette {
             it => this.activeCategory === 'all' || it.category === this.activeCategory
         );
 
-        this.filtered = pool
-            .map(it => ({ it, s: this.score(query, it) }))
-            .filter(x => x.s >= 0)
-            .sort((a, b) => b.s - a.s)
-            .map(x => x.it)
-            .slice(0, 30);
+        this.filtered = this.pinned
+            ? this.pinned
+            : pool
+                  .map(it => ({ it, s: this.score(query, it) }))
+                  .filter(x => x.s >= 0)
+                  .sort((a, b) => b.s - a.s)
+                  .map(x => x.it)
+                  .slice(0, 30);
+
+        this.ask?.decorate(query); // the Ask option above the plain results, and the note
 
         this.activeIndex = 0;
 
@@ -385,7 +406,7 @@ class CommandPalette {
         // Say how many results there are, but only once the visitor has asked for something:
         // announcing a full unfiltered list every time the palette opens is just noise.
         const searching = query.trim() !== '' || this.activeCategory !== 'all';
-        if (this.statusEl) {
+        if (this.statusEl && !this.note) {
             const count = this.filtered.length;
             this.statusEl.textContent = searching
                 ? count === 0
@@ -399,7 +420,9 @@ class CommandPalette {
         if (this.filtered.length === 0) {
             this.input.removeAttribute('aria-activedescendant');
             this.resultsContent.innerHTML = trustedHtml(
-                query.trim() === '' ? '' : '<div class="palette-no-results">No matches found</div>'
+                query.trim() === '' || this.note
+                    ? ''
+                    : '<div class="palette-no-results">No matches found</div>'
             );
             return;
         }
@@ -431,6 +454,26 @@ class CommandPalette {
                 this.highlightActive();
             });
         }
+    }
+
+    // ── Ask (lab experiment `ask`): modules/ask.js does it all; this only offers it ──────────────
+
+    /** Fetch and attach the module only when the switch is on and the browser has the Prompt API. */
+    async initAsk() {
+        if (!lab('ask') || !('LanguageModel' in globalThis)) return;
+        try {
+            this.ask = await (await import('./ask.js')).attachAsk(this);
+            if (this.ask && this.isOpen) this.render();
+        } catch (err) {
+            debug.warn('[Palette] Ask skipped:', err);
+        }
+    }
+
+    /** Forget a question's answer and its note: the visitor is typing something else. */
+    clearAsk() {
+        this.ask?.clear();
+        this.pinned = null;
+        this.note = null;
     }
 
     highlightActive() {

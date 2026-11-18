@@ -53,6 +53,15 @@
       "needs": "the Summarizer or Translator API",
       "measure": "Not yet judged. Only desktop Chrome and Edge have these APIs, and they need a lot of disk and a capable GPU, so most visitors will see nothing. Kept only if the key points of the posts are accurate; a post too long for the model is not summarised rather than cut short.",
       "try": "/posts/making-a-portfolio-agent-ready/?lab=post-tools"
+    },
+    {
+      "flag": "ask",
+      "title": "Ask the portfolio, on your device",
+      "status": "spike",
+      "summary": "In the search palette (Ctrl or Cmd K), type a question in plain words and choose \"Ask\": the browser's built-in model picks the projects and posts that best answer it, from the site's own list, and the palette shows those pages. The model only chooses; everything you read is the site's own copy. Nothing leaves your device, the first use downloads a large model, and the choice can be wrong, which the palette says.",
+      "needs": "the Prompt API",
+      "measure": "Not yet judged. Kept only if its picks are right on a set of questions with known answers and it never names a page that is not on the site. Only desktop Chrome has the Prompt API, and it needs a lot of disk and a capable GPU, so most visitors will not see the option.",
+      "try": "/?lab=ask"
     }
   ]
 }
