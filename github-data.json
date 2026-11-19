@@ -30,7 +30,7 @@
       "stargazers_count": 0,
       "forks_count": 2,
       "open_issues_count": 1,
-      "pushed_at": "2026-11-18T23:07:50Z",
+      "pushed_at": "2026-11-18T23:19:21Z",
       "updated_at": "2026-11-15T17:42:31Z",
       "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
@@ -1283,6 +1283,131 @@
   ],
   "events": [
     {
+      "id": "27582267563",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "44a871f6c7080341aef89d6adfa7badc42f42bba",
+            "message": "Merge branch 'main' into ci/data-refresh-token"
+          }
+        ],
+        "ref": "refs/heads/ci/data-refresh-token"
+      },
+      "created_at": "2026-11-18T23:02:54Z"
+    },
+    {
+      "id": "27582034306",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "ci/data-refresh-token",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T23:00:18Z"
+    },
+    {
+      "id": "27578692174",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "ci/data-refresh-token-v2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T23:05:41Z"
+    },
+    {
+      "id": "27578518628",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "ci/data-refresh-token-v2",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T23:03:56Z"
+    },
+    {
+      "id": "27578252760",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "refactor/frontend-dead-code",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T22:23:20Z"
+    },
+    {
+      "id": "20581119747",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/ask-fits-and-eval-serve"
+          }
+        }
+      },
+      "created_at": "2026-11-18T20:19:17Z"
+    },
+    {
+      "id": "27573455384",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "refactor/frontend-dead-code",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T22:15:36Z"
+    },
+    {
+      "id": "20578603353",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-18",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:19:20Z"
+    },
+    {
+      "id": "20578374983",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-18",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-18T23:16:32Z"
+    },
+    {
       "id": "20577456798",
       "type": "PullRequestEvent",
       "repo": {
@@ -2520,124 +2645,6 @@
         "ref_type": "branch"
       },
       "created_at": "2026-11-15T00:42:24Z"
-    },
-    {
-      "id": "27403725678",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "098d6f92d6274e64b7132072054baa25ff7adb9f",
-            "message": "Merge pull request #344 from and3rn3t/feat/hero-hdr\n\nfeat(lab): HDR glow for the GPU hero (Phase 15.7)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-15T18:46:37Z"
-    },
-    {
-      "id": "27401072305",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "ci/og-skip-rounded-contributions",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T18:10:17Z"
-    },
-    {
-      "id": "27400490856",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "ci/worker-build-and-deploy-tag",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T18:03:39Z"
-    },
-    {
-      "id": "27389980558",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/brand-mark",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T17:15:05Z"
-    },
-    {
-      "id": "27331711232",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/phase-14-1-snapshots",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T01:52:57Z"
-    },
-    {
-      "id": "27330781437",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "98acca688bafef5c197e0b17ee55617f55b9d7e9",
-            "message": "Merge pull request #321 from and3rn3t/docs/phase-14-plan\n\ndocs(roadmap): plan Phase 14 from the 2026-11-15 re-audit"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-15T01:40:33Z"
-    },
-    {
-      "id": "27329555180",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/phase-14-6-webgpu-hero",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T03:01:42Z"
-    },
-    {
-      "id": "27329413773",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/show-project-description",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T01:20:48Z"
-    },
-    {
-      "id": "27329253499",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "docs/roadmap-phase-13-close",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T01:18:29Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2651,7 +2658,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 5008,
+    "total": 5010,
     "weeks": [
       {
         "days": [
@@ -4700,8 +4707,13 @@
           },
           {
             "date": "2026-11-18",
-            "count": 40,
+            "count": 42,
             "level": 1
+          },
+          {
+            "date": "2026-11-19",
+            "count": 0,
+            "level": 0
           }
         ]
       }
@@ -4709,13 +4721,13 @@
   },
   "languageBytes": {
     "TypeScript": 10083994,
-    "HTML": 9483834,
+    "HTML": 9484016,
     "Swift": 4473277,
     "Python": 3373966,
-    "JavaScript": 3280031,
+    "JavaScript": 3296395,
     "Shell": 1021526,
     "R": 618546,
-    "CSS": 423214,
+    "CSS": 423035,
     "Kotlin": 301050,
     "C++": 202428,
     "PowerShell": 78381,
@@ -4730,6 +4742,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-18T23:11:41Z",
+  "lastUpdated": "2026-11-19T03:07:42Z",
   "totalRepos": 54
 }
