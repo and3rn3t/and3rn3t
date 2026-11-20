@@ -9,30 +9,89 @@
   },
   "repositories": [
     {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Portfolio site for andernet.dev: static, agent-readable (MCP, llms.txt), served from Cloudflare. Also my GitHub profile repo.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://andernet.dev",
-      "language": "JavaScript",
+      "id": 1166214014,
+      "name": "apple-music-dj",
+      "full_name": "and3rn3t/apple-music-dj",
+      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
+      "html_url": "https://github.com/and3rn3t/apple-music-dj",
+      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
+      "language": "Python",
       "topics": [
-        "cloudflare-workers",
-        "config",
-        "github-config",
-        "github-pages",
-        "llms-txt",
-        "mcp",
-        "portfolio",
-        "pwa",
-        "vanilla-js"
+        "agent-skill",
+        "agent-skills",
+        "ai-dj",
+        "apple-music",
+        "claude-code",
+        "claude-skill",
+        "clawhub",
+        "cli",
+        "featured",
+        "music",
+        "music-discovery",
+        "music-recommendation",
+        "musickit",
+        "openclaw",
+        "playlist",
+        "playlist-generator",
+        "python",
+        "spotify-to-apple-music"
       ],
-      "stargazers_count": 0,
-      "forks_count": 2,
-      "open_issues_count": 1,
-      "pushed_at": "2026-11-18T23:19:21Z",
-      "updated_at": "2026-11-15T17:42:31Z",
-      "created_at": "2021-07-29T15:36:40Z",
+      "stargazers_count": 1,
+      "forks_count": 5,
+      "open_issues_count": 25,
+      "pushed_at": "2026-11-19T18:29:16Z",
+      "updated_at": "2026-11-07T21:40:05Z",
+      "created_at": "2026-02-25T01:47:38Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-19T16:29:52Z",
+      "updated_at": "2026-11-07T21:34:27Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
+      "language": "TypeScript",
+      "topics": [
+        "agent-skills",
+        "apple-shortcuts",
+        "cli",
+        "ios",
+        "macos",
+        "nodejs",
+        "privacy",
+        "security",
+        "shortcuts",
+        "static-analysis",
+        "typescript"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 27,
+      "pushed_at": "2026-11-19T14:43:34Z",
+      "updated_at": "2026-11-07T21:40:09Z",
+      "created_at": "2026-10-18T15:34:10Z",
       "fork": false,
       "archived": false
     },
@@ -62,9 +121,72 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 7,
-      "pushed_at": "2026-11-18T21:21:09Z",
+      "pushed_at": "2026-11-19T13:09:32Z",
       "updated_at": "2026-11-07T21:40:35Z",
       "created_at": "2025-11-22T17:31:12Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047182978,
+      "name": "homehub",
+      "full_name": "and3rn3t/homehub",
+      "description": "iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.",
+      "html_url": "https://github.com/and3rn3t/homehub",
+      "homepage": "https://homehub.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "arlo",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "dashboard",
+        "featured",
+        "home-automation",
+        "iot",
+        "mqtt",
+        "philips-hue",
+        "pwa",
+        "react",
+        "react19",
+        "smart-home",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 2,
+      "forks_count": 1,
+      "open_issues_count": 50,
+      "pushed_at": "2026-11-19T12:40:54Z",
+      "updated_at": "2026-11-10T23:01:51Z",
+      "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Portfolio site for andernet.dev: static, agent-readable (MCP, llms.txt), served from Cloudflare. Also my GitHub profile repo.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://andernet.dev",
+      "language": "JavaScript",
+      "topics": [
+        "cloudflare-workers",
+        "config",
+        "github-config",
+        "github-pages",
+        "llms-txt",
+        "mcp",
+        "portfolio",
+        "pwa",
+        "vanilla-js"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 2,
+      "open_issues_count": 1,
+      "pushed_at": "2026-11-19T05:05:59Z",
+      "updated_at": "2026-11-15T17:42:31Z",
+      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -138,78 +260,6 @@
       "archived": false
     },
     {
-      "id": 1047182978,
-      "name": "homehub",
-      "full_name": "and3rn3t/homehub",
-      "description": "iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.",
-      "html_url": "https://github.com/and3rn3t/homehub",
-      "homepage": "https://homehub.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "arlo",
-        "cloudflare-pages",
-        "cloudflare-workers",
-        "dashboard",
-        "featured",
-        "home-automation",
-        "iot",
-        "mqtt",
-        "philips-hue",
-        "pwa",
-        "react",
-        "react19",
-        "smart-home",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 1,
-      "open_issues_count": 48,
-      "pushed_at": "2026-11-18T14:46:00Z",
-      "updated_at": "2026-11-10T23:01:51Z",
-      "created_at": "2025-08-29T22:05:27Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1166214014,
-      "name": "apple-music-dj",
-      "full_name": "and3rn3t/apple-music-dj",
-      "description": "AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.",
-      "html_url": "https://github.com/and3rn3t/apple-music-dj",
-      "homepage": "https://clawhub.ai/and3rn3t/skills/apple-music-dj",
-      "language": "Python",
-      "topics": [
-        "agent-skill",
-        "agent-skills",
-        "ai-dj",
-        "apple-music",
-        "claude-code",
-        "claude-skill",
-        "clawhub",
-        "cli",
-        "featured",
-        "music",
-        "music-discovery",
-        "music-recommendation",
-        "musickit",
-        "openclaw",
-        "playlist",
-        "playlist-generator",
-        "python",
-        "spotify-to-apple-music"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 5,
-      "open_issues_count": 24,
-      "pushed_at": "2026-11-18T14:43:59Z",
-      "updated_at": "2026-11-07T21:40:05Z",
-      "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1156702820,
       "name": "jonah",
       "full_name": "and3rn3t/jonah",
@@ -231,56 +281,6 @@
       "pushed_at": "2026-11-18T14:43:50Z",
       "updated_at": "2026-11-09T06:17:04Z",
       "created_at": "2026-02-13T00:28:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
-      "language": "TypeScript",
-      "topics": [
-        "agent-skills",
-        "apple-shortcuts",
-        "cli",
-        "ios",
-        "macos",
-        "nodejs",
-        "privacy",
-        "security",
-        "shortcuts",
-        "static-analysis",
-        "typescript"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 27,
-      "pushed_at": "2026-11-18T12:11:57Z",
-      "updated_at": "2026-11-07T21:40:09Z",
-      "created_at": "2026-10-18T15:34:10Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-18T06:07:10Z",
-      "updated_at": "2026-11-07T21:34:27Z",
-      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -1282,6 +1282,319 @@
     }
   ],
   "events": [
+    {
+      "id": "27679299406",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "8c8499526169d7f1518073f778b1c04c160ef63b",
+            "message": "chore(deps): update and3rn3t/.github digest to bee3d0a (#382)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T14:44:15Z"
+    },
+    {
+      "id": "27679249863",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "ff0fcd8733819b4bec0931b6f1ac55449c807cbf",
+            "message": "chore(deps): update dependency lucide-react to v1.75.0 (#385)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T14:43:52Z"
+    },
+    {
+      "id": "27679243223",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "1dc3c97817e2e5803b51c902db96f85b1d103be0",
+            "message": "Merge pull request #316 from and3rn3t/renovate/node-24.x\n\nchore(deps): update node.js to v24.22.3"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T14:43:50Z"
+    },
+    {
+      "id": "27677400846",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/guess"
+      },
+      "payload": {
+        "ref": "renovate/and3rn3t-.github-digest",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:44:42Z"
+    },
+    {
+      "id": "27677352965",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "9e8834191e4be8b8652ba4ac7cd205a984ef3c5c",
+            "message": "Merge pull request #312 from and3rn3t/renovate/brace-expansion-=2.0.0-2.1.7-2.x\n\nchore(deps): update dependency brace-expansion@>=2.0.0 <2.1.7 to v2.1.8"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T14:44:21Z"
+    },
+    {
+      "id": "27675236868",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "5bfbde6e0e69edc2b2ecb7720cc779e9b4fe164d",
+            "message": "Merge pull request #369 from and3rn3t/ci/data-refresh-token-v2\n\nci: open the data-refresh PR with a token whose checks can run"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T23:05:40Z"
+    },
+    {
+      "id": "27666527294",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "ref": "renovate/brace-expansion-=4.0.0-5.0.12-5.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:44:00Z"
+    },
+    {
+      "id": "27666526165",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/react-resizable-panels-4.x-lockfile",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:43:59Z"
+    },
+    {
+      "id": "27665539637",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "ba66640851064f8d8afb16fa948e9aba591a3f69",
+            "message": "Merge pull request #140 from and3rn3t/renovate/ruff\n\nfix(deps): update ruff to v0.17.5"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T14:43:58Z"
+    },
+    {
+      "id": "27660767776",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "061dc59619eb6257990532da0f1d961bb19c3d04",
+            "message": "chore(deps): update dependency react-resizable-panels to v4.24.0 (#384)\n\nCo-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-18T14:43:58Z"
+    },
+    {
+      "id": "20693215594",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/ask-fits-and-eval-serve"
+          }
+        }
+      },
+      "created_at": "2026-11-18T20:19:20Z"
+    },
+    {
+      "id": "20693210567",
+      "type": "PullRequestReviewCommentEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": null,
+          "head": {
+            "ref": "feat/ask-fits-and-eval-serve"
+          }
+        }
+      },
+      "created_at": "2026-11-18T20:19:19Z"
+    },
+    {
+      "id": "27657458329",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "feat/hero-seed",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T20:27:43Z"
+    },
+    {
+      "id": "27656223622",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "68c64fba31bc0fde18fc9ab3e75c7d5e31756e10",
+            "message": "fix(eval): print no posted value at all (CodeQL js/log-injection, second pass)\n\nValidating and cleaning the posted results was not enough for\nCodeQL, which still traced the posted numbers into the report (the\nper-row time and the totals). Nothing posted is printed now: a number\nonly picks an entry of a fixed table, a posted id is replaced by the\nsite's own id string, a status by a constant, and the count of\nquestions with an id off the site is a count of rows. The reader takes\nthe site's ids and rejects anything not on the list; tests check the\nreport is plain printable text whatever numbers were posted.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+          }
+        ],
+        "ref": "refs/heads/feat/ask-fits-and-eval-serve"
+      },
+      "created_at": "2026-11-18T20:17:28Z"
+    },
+    {
+      "id": "27612071539",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "ref": "renovate/brace-expansion-=2.0.0-2.1.7-2.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:44:23Z"
+    },
+    {
+      "id": "27612038669",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/homehub"
+      },
+      "payload": {
+        "ref": "renovate/cloudflare",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:44:08Z"
+    },
+    {
+      "id": "27612015198",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/apple-music-dj"
+      },
+      "payload": {
+        "ref": "renovate/ruff",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:44:00Z"
+    },
+    {
+      "id": "27611992786",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/health"
+      },
+      "payload": {
+        "ref": "renovate/node-24.x",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-18T14:43:52Z"
+    },
+    {
+      "id": "27610222057",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "748e0fb68baf42c2e04532bd0b2de6b9ceacf1f1",
+            "message": "Merge pull request #351 from and3rn3t/renovate/pnpm-11.x\n\nchore(deps): update pnpm to v11.28.12"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-17T16:46:39Z"
+    },
+    {
+      "id": "20595996572",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-19",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-19T03:10:48Z"
+    },
+    {
+      "id": "20595796570",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-19",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-19T03:07:53Z"
+    },
     {
       "id": "27582267563",
       "type": "PushEvent",
@@ -2324,327 +2637,6 @@
         }
       },
       "created_at": "2026-11-17T17:57:10Z"
-    },
-    {
-      "id": "20422833060",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore(bfcache): a check and a guard (Phase 15.12)",
-          "head": {
-            "ref": "feat/bfcache"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:57:10Z"
-    },
-    {
-      "id": "20421217596",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(css): scroll timeline for the nav hairline, starting-style for the terminal (Phase 15.11)",
-          "head": {
-            "ref": "feat/css-over-js"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:41:40Z"
-    },
-    {
-      "id": "20420891574",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(css): scroll timeline for the nav hairline, starting-style for the terminal (Phase 15.11)",
-          "head": {
-            "ref": "feat/css-over-js"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:36:02Z"
-    },
-    {
-      "id": "20420614385",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(css): scroll timeline for the nav hairline, starting-style for the terminal (Phase 15.11)",
-          "head": {
-            "ref": "feat/css-over-js"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:36:02Z"
-    },
-    {
-      "id": "20419580605",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(csp): register the service worker through the Trusted Types policy",
-          "head": {
-            "ref": "fix/trusted-types-sw"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:26:13Z"
-    },
-    {
-      "id": "20419304413",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(csp): register the service worker through the Trusted Types policy",
-          "head": {
-            "ref": "fix/trusted-types-sw"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:23:15Z"
-    },
-    {
-      "id": "20419254975",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "fix(csp): register the service worker through the Trusted Types policy",
-          "head": {
-            "ref": "fix/trusted-types-sw"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:23:15Z"
-    },
-    {
-      "id": "20417888537",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(csp): Trusted Types in the report-only policy (Phase 15.10)",
-          "head": {
-            "ref": "feat/trusted-types"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:10:53Z"
-    },
-    {
-      "id": "20417466367",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(csp): Trusted Types in the report-only policy (Phase 15.10)",
-          "head": {
-            "ref": "feat/trusted-types"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:07:01Z"
-    },
-    {
-      "id": "20417429068",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(csp): Trusted Types in the report-only policy (Phase 15.10)",
-          "head": {
-            "ref": "feat/trusted-types"
-          }
-        }
-      },
-      "created_at": "2026-11-17T17:07:01Z"
-    },
-    {
-      "id": "20416426007",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(lab): on-device post tools (Phase 15.13)",
-          "head": {
-            "ref": "feat/post-tools"
-          }
-        }
-      },
-      "created_at": "2026-11-17T16:58:16Z"
-    },
-    {
-      "id": "20415785567",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(lab): on-device post tools (Phase 15.13)",
-          "head": {
-            "ref": "feat/post-tools"
-          }
-        }
-      },
-      "created_at": "2026-11-17T16:52:24Z"
-    },
-    {
-      "id": "20415754350",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(lab): on-device post tools (Phase 15.13)",
-          "head": {
-            "ref": "feat/post-tools"
-          }
-        }
-      },
-      "created_at": "2026-11-17T16:52:24Z"
-    },
-    {
-      "id": "20415213713",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(nav): the mobile menu is a popover (Phase 15.9, menu only)",
-          "head": {
-            "ref": "feat/declarative-dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-17T16:47:38Z"
-    },
-    {
-      "id": "20415169456",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(nav): the mobile menu is a popover (Phase 15.9, menu only)",
-          "head": {
-            "ref": "feat/declarative-dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-17T16:44:15Z"
-    },
-    {
-      "id": "20414811380",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(nav): the mobile menu is a popover (Phase 15.9, menu only)",
-          "head": {
-            "ref": "feat/declarative-dialogs"
-          }
-        }
-      },
-      "created_at": "2026-11-17T16:44:15Z"
-    },
-    {
-      "id": "27431050880",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/apple-music-dj"
-      },
-      "payload": {
-        "ref": "fix/weekly-mix-quality-and-double-logging",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-16T02:12:56Z"
-    },
-    {
-      "id": "27413602283",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "7cd1139fe464c2b1128ebe39e06cab9aeca156f8",
-            "message": "fix(hero): fall back when a WebGPU adapter cannot present to a canvas\n\nChromium's software adapter (a CI runner's) gives every canvas an invalid\ntexture, so the field mounted and drew nothing. Probe on a throwaway canvas.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/phase-14-6-webgpu-hero"
-      },
-      "created_at": "2026-11-15T03:10:51Z"
-    },
-    {
-      "id": "27411397637",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/mcp-server-version",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T02:30:55Z"
-    },
-    {
-      "id": "27409342071",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "feat/phase-14-1-snapshots",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T01:55:18Z"
-    },
-    {
-      "id": "27405403354",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "spike/mcp-apps",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-15T00:42:24Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2658,7 +2650,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 5010,
+    "total": 5012,
     "weeks": [
       {
         "days": [
@@ -4707,11 +4699,16 @@
           },
           {
             "date": "2026-11-18",
-            "count": 42,
+            "count": 44,
             "level": 1
           },
           {
             "date": "2026-11-19",
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": "2026-11-20",
             "count": 0,
             "level": 0
           }
@@ -4742,6 +4739,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-19T03:07:42Z",
+  "lastUpdated": "2026-11-20T03:07:34Z",
   "totalRepos": 54
 }
