@@ -43,13 +43,6 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
-
-> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
->
-> **Tech:** Python, agent-skill, agent-skills
-> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
-
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
@@ -62,12 +55,25 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 >
 > **Tech:** Python, arm64, docker
 
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** HTML, cloudflare-workers, networking
+
 ### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
 > iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
 >
 > **Tech:** TypeScript, arlo, cloudflare-pages
 > 🔗 [Live](https://homehub.andernet.dev)
+
+### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
+
+> AI Apple Music curator: playlists from your real listening history. Agent Skill for Claude Code and OpenClaw. Try the demo with no account.
+>
+> **Tech:** Python, agent-skill, agent-skills
+> 🔗 [Live](https://clawhub.ai/and3rn3t/skills/apple-music-dj)
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -82,12 +88,6 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 >
 > **Tech:** TypeScript, akinator, bayesian
 > 🔗 [Live](https://andernator.com)
-
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** HTML, cloudflare-workers, networking
 
 <!-- FEATURED-PROJECTS:END -->
 
