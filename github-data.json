@@ -9,26 +9,6 @@
   },
   "repositories": [
     {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
-      "language": "TypeScript",
-      "topics": [
-        "featured"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-22T02:37:18Z",
-      "updated_at": "2026-11-07T21:34:27Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1047182978,
       "name": "homehub",
       "full_name": "and3rn3t/homehub",
@@ -57,9 +37,175 @@
       "stargazers_count": 2,
       "forks_count": 1,
       "open_issues_count": 51,
-      "pushed_at": "2026-11-22T02:20:26Z",
+      "pushed_at": "2026-11-23T02:10:16Z",
       "updated_at": "2026-11-10T23:01:51Z",
       "created_at": "2025-08-29T22:05:27Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "HTML",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "networking",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-11-22T23:02:25Z",
+      "updated_at": "2026-11-07T21:40:41Z",
+      "created_at": "2025-11-25T17:59:56Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-22T22:55:59Z",
+      "updated_at": "2026-11-07T21:34:27Z",
+      "created_at": "2026-08-12T18:59:03Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1193029111,
+      "name": "ai-template-repo",
+      "full_name": "and3rn3t/ai-template-repo",
+      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
+      "html_url": "https://github.com/and3rn3t/ai-template-repo",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "ai-assisted-development",
+        "claude",
+        "template"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-11-22T21:02:15Z",
+      "updated_at": "2026-11-07T21:39:34Z",
+      "created_at": "2026-03-26T19:58:01Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1212957728,
+      "name": "guess",
+      "full_name": "and3rn3t/guess",
+      "description": "Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.",
+      "html_url": "https://github.com/and3rn3t/guess",
+      "homepage": "https://andernator.com",
+      "language": "TypeScript",
+      "topics": [
+        "akinator",
+        "bayesian",
+        "cloudflare-d1",
+        "cloudflare-pages",
+        "cloudflare-workers",
+        "expo",
+        "featured",
+        "game",
+        "guessing-game",
+        "openai",
+        "pnpm-monorepo",
+        "pwa",
+        "react",
+        "react-native",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-11-22T14:13:09Z",
+      "updated_at": "2026-11-10T23:01:52Z",
+      "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1047636691,
+      "name": "health",
+      "full_name": "and3rn3t/health",
+      "description": "VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).",
+      "html_url": "https://github.com/and3rn3t/health",
+      "homepage": "https://health.andernet.dev",
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "caregiver",
+        "cloudflare-workers",
+        "fall-detection",
+        "featured",
+        "gait-analysis",
+        "health",
+        "healthkit",
+        "lidar",
+        "react",
+        "swift",
+        "swiftui",
+        "typescript",
+        "wellness"
+      ],
+      "stargazers_count": 5,
+      "forks_count": 1,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-22T08:55:49Z",
+      "updated_at": "2026-11-10T23:01:35Z",
+      "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 390771666,
+      "name": "and3rn3t",
+      "full_name": "and3rn3t/and3rn3t",
+      "description": "Portfolio site for andernet.dev: static, agent-readable (MCP, llms.txt), served from Cloudflare. Also my GitHub profile repo.",
+      "html_url": "https://github.com/and3rn3t/and3rn3t",
+      "homepage": "https://andernet.dev",
+      "language": "JavaScript",
+      "topics": [
+        "cloudflare-workers",
+        "config",
+        "github-config",
+        "github-pages",
+        "llms-txt",
+        "mcp",
+        "portfolio",
+        "pwa",
+        "vanilla-js"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 2,
+      "open_issues_count": 2,
+      "pushed_at": "2026-11-22T05:05:46Z",
+      "updated_at": "2026-11-15T17:42:31Z",
+      "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
@@ -94,42 +240,6 @@
       "archived": false
     },
     {
-      "id": 1212957728,
-      "name": "guess",
-      "full_name": "and3rn3t/guess",
-      "description": "Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.",
-      "html_url": "https://github.com/and3rn3t/guess",
-      "homepage": "https://andernator.com",
-      "language": "TypeScript",
-      "topics": [
-        "akinator",
-        "bayesian",
-        "cloudflare-d1",
-        "cloudflare-pages",
-        "cloudflare-workers",
-        "expo",
-        "featured",
-        "game",
-        "guessing-game",
-        "openai",
-        "pnpm-monorepo",
-        "pwa",
-        "react",
-        "react-native",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-11-22T00:33:56Z",
-      "updated_at": "2026-11-10T23:01:52Z",
-      "created_at": "2026-04-16T22:47:09Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1093825727,
       "name": "silas",
       "full_name": "and3rn3t/silas",
@@ -149,56 +259,6 @@
       "pushed_at": "2026-11-21T06:15:46Z",
       "updated_at": "2026-11-07T21:40:52Z",
       "created_at": "2025-11-10T22:25:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 390771666,
-      "name": "and3rn3t",
-      "full_name": "and3rn3t/and3rn3t",
-      "description": "Portfolio site for andernet.dev: static, agent-readable (MCP, llms.txt), served from Cloudflare. Also my GitHub profile repo.",
-      "html_url": "https://github.com/and3rn3t/and3rn3t",
-      "homepage": "https://andernet.dev",
-      "language": "JavaScript",
-      "topics": [
-        "cloudflare-workers",
-        "config",
-        "github-config",
-        "github-pages",
-        "llms-txt",
-        "mcp",
-        "portfolio",
-        "pwa",
-        "vanilla-js"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 2,
-      "open_issues_count": 2,
-      "pushed_at": "2026-11-21T05:05:37Z",
-      "updated_at": "2026-11-15T17:42:31Z",
-      "created_at": "2021-07-29T15:36:40Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1193029111,
-      "name": "ai-template-repo",
-      "full_name": "and3rn3t/ai-template-repo",
-      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
-      "html_url": "https://github.com/and3rn3t/ai-template-repo",
-      "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "ai-assisted-development",
-        "claude",
-        "template"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-11-21T02:28:34Z",
-      "updated_at": "2026-11-07T21:39:34Z",
-      "created_at": "2026-03-26T19:58:01Z",
       "fork": false,
       "archived": false
     },
@@ -258,33 +318,6 @@
       "archived": false
     },
     {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "HTML",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-11-20T15:39:11Z",
-      "updated_at": "2026-11-07T21:40:41Z",
-      "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
       "id": 1166214014,
       "name": "apple-music-dj",
       "full_name": "and3rn3t/apple-music-dj",
@@ -318,39 +351,6 @@
       "pushed_at": "2026-11-19T18:29:16Z",
       "updated_at": "2026-11-21T15:55:51Z",
       "created_at": "2026-02-25T01:47:38Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1047636691,
-      "name": "health",
-      "full_name": "and3rn3t/health",
-      "description": "VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).",
-      "html_url": "https://github.com/and3rn3t/health",
-      "homepage": "https://health.andernet.dev",
-      "language": "TypeScript",
-      "topics": [
-        "ai",
-        "caregiver",
-        "cloudflare-workers",
-        "fall-detection",
-        "featured",
-        "gait-analysis",
-        "health",
-        "healthkit",
-        "lidar",
-        "react",
-        "swift",
-        "swiftui",
-        "typescript",
-        "wellness"
-      ],
-      "stargazers_count": 5,
-      "forks_count": 1,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-18T20:59:01Z",
-      "updated_at": "2026-11-10T23:01:35Z",
-      "created_at": "2025-08-30T21:38:34Z",
       "fork": false,
       "archived": false
     },
@@ -1282,6 +1282,62 @@
     }
   ],
   "events": [
+    {
+      "id": "27919361456",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "automation/update-github-data",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-20T03:10:38Z"
+    },
+    {
+      "id": "27904847669",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "automation/update-github-data",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-20T03:07:37Z"
+    },
+    {
+      "id": "20897259039",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-22",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-22T03:10:52Z"
+    },
+    {
+      "id": "20897152204",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-22",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-22T03:08:10Z"
+    },
     {
       "id": "27796786714",
       "type": "DeleteEvent",
@@ -2551,66 +2607,6 @@
         }
       },
       "created_at": "2026-11-18T20:24:07Z"
-    },
-    {
-      "id": "20562341377",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(roadmap): archive Phases 11 to 14, bring Phase 15 up to date, list what is open",
-          "head": {
-            "ref": "docs/roadmap-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-11-18T20:21:29Z"
-    },
-    {
-      "id": "20562083955",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(roadmap): archive Phases 11 to 14, bring Phase 15 up to date, list what is open",
-          "head": {
-            "ref": "docs/roadmap-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-11-18T20:21:29Z"
-    },
-    {
-      "id": "20561993430",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "feat(lab): the on-device ask declines what the site cannot answer, with the first real-model measure (Phase 15.14)",
-          "head": {
-            "ref": "feat/ask-fits-and-eval-serve"
-          }
-        }
-      },
-      "created_at": "2026-11-18T20:20:33Z"
-    },
-    {
-      "id": "27561631289",
-      "type": "DeleteEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/eval-ask-headless",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-18T19:50:41Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2624,7 +2620,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 5016,
+    "total": 4788,
     "weeks": [
       {
         "days": [
@@ -4649,8 +4645,8 @@
           },
           {
             "date": "2026-11-21",
-            "count": 0,
-            "level": 0
+            "count": 2,
+            "level": 1
           }
         ]
       },
@@ -4658,6 +4654,11 @@
         "days": [
           {
             "date": "2026-11-22",
+            "count": 0,
+            "level": 0
+          },
+          {
+            "date": "2026-11-23",
             "count": 0,
             "level": 0
           }
@@ -4688,6 +4689,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-22T03:07:39Z",
+  "lastUpdated": "2026-11-23T03:08:59Z",
   "totalRepos": 54
 }
