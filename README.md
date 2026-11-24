@@ -50,18 +50,6 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** TypeScript, arlo, cloudflare-pages
 > 🔗 [Live](https://homehub.andernet.dev)
 
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** HTML, cloudflare-workers, networking
-
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
-
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
->
-> **Tech:** TypeScript
-
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
 > Andernator: an Akinator-style guessing game that shows its Bayesian reasoning. React + Cloudflare Pages/D1, 53K+ characters, Expo mobile app.
@@ -69,12 +57,24 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** TypeScript, akinator, bayesian
 > 🔗 [Live](https://andernator.com)
 
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+>
+> **Tech:** TypeScript
+
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
 > VitalSense — Apple Health insights, fall risk detection, emergency alerts, and caregiver dashboards. React + Cloudflare Workers + native iOS (HealthKit).
 >
 > **Tech:** TypeScript, ai, caregiver
 > 🔗 [Live](https://health.andernet.dev)
+
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** HTML, cloudflare-workers, networking
 
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 

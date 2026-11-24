@@ -37,78 +37,39 @@
       "stargazers_count": 2,
       "forks_count": 1,
       "open_issues_count": 51,
-      "pushed_at": "2026-11-23T02:10:16Z",
+      "pushed_at": "2026-11-24T00:03:53Z",
       "updated_at": "2026-11-10T23:01:51Z",
       "created_at": "2025-08-29T22:05:27Z",
       "fork": false,
       "archived": false
     },
     {
-      "id": 1104071420,
-      "name": "net-traffic",
-      "full_name": "and3rn3t/net-traffic",
-      "description": "Unifying network information on a RPi 5",
-      "html_url": "https://github.com/and3rn3t/net-traffic",
-      "homepage": "",
-      "language": "HTML",
-      "topics": [
-        "cloudflare-workers",
-        "featured",
-        "networking",
-        "raspberry-pi",
-        "react",
-        "tailwindcss",
-        "typescript",
-        "vite"
-      ],
-      "stargazers_count": 1,
-      "forks_count": 0,
-      "open_issues_count": 6,
-      "pushed_at": "2026-11-22T23:02:25Z",
-      "updated_at": "2026-11-07T21:40:41Z",
-      "created_at": "2025-11-25T17:59:56Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1332356750,
-      "name": "fastlane",
-      "full_name": "and3rn3t/fastlane",
-      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
-      "html_url": "https://github.com/and3rn3t/fastlane",
-      "homepage": null,
+      "id": 1424525098,
+      "name": "apple-shortcuts-doctor",
+      "full_name": "and3rn3t/apple-shortcuts-doctor",
+      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
+      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
+      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
       "language": "TypeScript",
       "topics": [
-        "featured"
+        "agent-skills",
+        "apple-shortcuts",
+        "cli",
+        "ios",
+        "macos",
+        "nodejs",
+        "privacy",
+        "security",
+        "shortcuts",
+        "static-analysis",
+        "typescript"
       ],
       "stargazers_count": 1,
       "forks_count": 0,
-      "open_issues_count": 7,
-      "pushed_at": "2026-11-22T22:55:59Z",
-      "updated_at": "2026-11-07T21:34:27Z",
-      "created_at": "2026-08-12T18:59:03Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1193029111,
-      "name": "ai-template-repo",
-      "full_name": "and3rn3t/ai-template-repo",
-      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
-      "html_url": "https://github.com/and3rn3t/ai-template-repo",
-      "homepage": null,
-      "language": "Makefile",
-      "topics": [
-        "ai-assisted-development",
-        "claude",
-        "template"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 4,
-      "pushed_at": "2026-11-22T21:02:15Z",
-      "updated_at": "2026-11-07T21:39:34Z",
-      "created_at": "2026-03-26T19:58:01Z",
+      "open_issues_count": 27,
+      "pushed_at": "2026-11-23T23:56:38Z",
+      "updated_at": "2026-11-07T21:40:09Z",
+      "created_at": "2026-10-18T15:34:10Z",
       "fork": false,
       "archived": false
     },
@@ -142,9 +103,29 @@
       "stargazers_count": 1,
       "forks_count": 0,
       "open_issues_count": 6,
-      "pushed_at": "2026-11-22T14:13:09Z",
+      "pushed_at": "2026-11-23T23:13:05Z",
       "updated_at": "2026-11-10T23:01:52Z",
       "created_at": "2026-04-16T22:47:09Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1332356750,
+      "name": "fastlane",
+      "full_name": "and3rn3t/fastlane",
+      "description": "A recreation of the 90s SIERRA game \"Jones in the Fast Lane\" - modernized.",
+      "html_url": "https://github.com/and3rn3t/fastlane",
+      "homepage": null,
+      "language": "TypeScript",
+      "topics": [
+        "featured"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 7,
+      "pushed_at": "2026-11-23T21:39:02Z",
+      "updated_at": "2026-11-07T21:34:27Z",
+      "created_at": "2026-08-12T18:59:03Z",
       "fork": false,
       "archived": false
     },
@@ -175,9 +156,59 @@
       "stargazers_count": 5,
       "forks_count": 1,
       "open_issues_count": 7,
-      "pushed_at": "2026-11-22T08:55:49Z",
+      "pushed_at": "2026-11-23T20:41:25Z",
       "updated_at": "2026-11-10T23:01:35Z",
       "created_at": "2025-08-30T21:38:34Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1288624692,
+      "name": "eslint-config",
+      "full_name": "and3rn3t/eslint-config",
+      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
+      "html_url": "https://github.com/and3rn3t/eslint-config",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [
+        "eslint",
+        "react",
+        "shared-config",
+        "typescript"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 5,
+      "pushed_at": "2026-11-23T20:39:08Z",
+      "updated_at": "2026-11-07T21:40:19Z",
+      "created_at": "2026-07-03T19:42:39Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1104071420,
+      "name": "net-traffic",
+      "full_name": "and3rn3t/net-traffic",
+      "description": "Unifying network information on a RPi 5",
+      "html_url": "https://github.com/and3rn3t/net-traffic",
+      "homepage": "",
+      "language": "HTML",
+      "topics": [
+        "cloudflare-workers",
+        "featured",
+        "networking",
+        "raspberry-pi",
+        "react",
+        "tailwindcss",
+        "typescript",
+        "vite"
+      ],
+      "stargazers_count": 1,
+      "forks_count": 0,
+      "open_issues_count": 6,
+      "pushed_at": "2026-11-23T20:13:04Z",
+      "updated_at": "2026-11-07T21:40:41Z",
+      "created_at": "2025-11-25T17:59:56Z",
       "fork": false,
       "archived": false
     },
@@ -202,40 +233,67 @@
       ],
       "stargazers_count": 0,
       "forks_count": 2,
-      "open_issues_count": 2,
-      "pushed_at": "2026-11-22T05:05:46Z",
+      "open_issues_count": 5,
+      "pushed_at": "2026-11-23T18:07:06Z",
       "updated_at": "2026-11-15T17:42:31Z",
       "created_at": "2021-07-29T15:36:40Z",
       "fork": false,
       "archived": false
     },
     {
-      "id": 1424525098,
-      "name": "apple-shortcuts-doctor",
-      "full_name": "and3rn3t/apple-shortcuts-doctor",
-      "description": "Static inspector for Apple Shortcuts exports: what a Shortcut does, what data it could expose, and what might break, without running it.",
-      "html_url": "https://github.com/and3rn3t/apple-shortcuts-doctor",
-      "homepage": "https://www.npmjs.com/package/shortcuts-doctor",
-      "language": "TypeScript",
+      "id": 1150200899,
+      "name": "weather-app",
+      "full_name": "and3rn3t/weather-app",
+      "description": "Feature-rich SwiftUI weather app for iOS 26 (Liquid Glass) with an Android companion. Open-Meteo forecasts, NWS alerts, RainViewer radar, widgets, SwiftData favorites.",
+      "html_url": "https://github.com/and3rn3t/weather-app",
+      "homepage": null,
+      "language": "Swift",
       "topics": [
-        "agent-skills",
-        "apple-shortcuts",
-        "cli",
+        "android",
+        "fastlane",
         "ios",
-        "macos",
-        "nodejs",
-        "privacy",
-        "security",
-        "shortcuts",
-        "static-analysis",
-        "typescript"
+        "ios26",
+        "jetpack-compose",
+        "kotlin",
+        "liquid-glass",
+        "open-meteo",
+        "swift",
+        "swift-charts",
+        "swiftdata",
+        "swiftui",
+        "weather",
+        "weather-app",
+        "widgetkit",
+        "xcode"
       ],
-      "stargazers_count": 1,
+      "stargazers_count": 2,
       "forks_count": 0,
-      "open_issues_count": 27,
-      "pushed_at": "2026-11-22T01:27:02Z",
-      "updated_at": "2026-11-07T21:40:09Z",
-      "created_at": "2026-10-18T15:34:10Z",
+      "open_issues_count": 41,
+      "pushed_at": "2026-11-23T09:18:03Z",
+      "updated_at": "2026-11-08T20:33:19Z",
+      "created_at": "2026-02-05T02:05:57Z",
+      "fork": false,
+      "archived": false
+    },
+    {
+      "id": 1193029111,
+      "name": "ai-template-repo",
+      "full_name": "and3rn3t/ai-template-repo",
+      "description": "Canonical AI-assisted dev template (CLAUDE.md, AGENTS.md, Copilot/Cursor configs) — baseline for new repos.",
+      "html_url": "https://github.com/and3rn3t/ai-template-repo",
+      "homepage": null,
+      "language": "Makefile",
+      "topics": [
+        "ai-assisted-development",
+        "claude",
+        "template"
+      ],
+      "stargazers_count": 0,
+      "forks_count": 0,
+      "open_issues_count": 4,
+      "pushed_at": "2026-11-22T21:02:15Z",
+      "updated_at": "2026-11-07T21:39:34Z",
+      "created_at": "2026-03-26T19:58:01Z",
       "fork": false,
       "archived": false
     },
@@ -255,33 +313,10 @@
       ],
       "stargazers_count": 0,
       "forks_count": 0,
-      "open_issues_count": 8,
+      "open_issues_count": 7,
       "pushed_at": "2026-11-21T06:15:46Z",
       "updated_at": "2026-11-07T21:40:52Z",
       "created_at": "2025-11-10T22:25:39Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1288624692,
-      "name": "eslint-config",
-      "full_name": "and3rn3t/eslint-config",
-      "description": "Shared ESLint 9 flat config for and3rn3t React + TypeScript repos (ESLint 10 pending upstream plugin support).",
-      "html_url": "https://github.com/and3rn3t/eslint-config",
-      "homepage": null,
-      "language": "JavaScript",
-      "topics": [
-        "eslint",
-        "react",
-        "shared-config",
-        "typescript"
-      ],
-      "stargazers_count": 0,
-      "forks_count": 0,
-      "open_issues_count": 5,
-      "pushed_at": "2026-11-20T22:59:08Z",
-      "updated_at": "2026-11-07T21:40:19Z",
-      "created_at": "2026-07-03T19:42:39Z",
       "fork": false,
       "archived": false
     },
@@ -376,41 +411,6 @@
       "pushed_at": "2026-11-18T14:43:50Z",
       "updated_at": "2026-11-09T06:17:04Z",
       "created_at": "2026-02-13T00:28:34Z",
-      "fork": false,
-      "archived": false
-    },
-    {
-      "id": 1150200899,
-      "name": "weather-app",
-      "full_name": "and3rn3t/weather-app",
-      "description": "Feature-rich SwiftUI weather app for iOS 26 (Liquid Glass) with an Android companion. Open-Meteo forecasts, NWS alerts, RainViewer radar, widgets, SwiftData favorites.",
-      "html_url": "https://github.com/and3rn3t/weather-app",
-      "homepage": null,
-      "language": "Swift",
-      "topics": [
-        "android",
-        "fastlane",
-        "ios",
-        "ios26",
-        "jetpack-compose",
-        "kotlin",
-        "liquid-glass",
-        "open-meteo",
-        "swift",
-        "swift-charts",
-        "swiftdata",
-        "swiftui",
-        "weather",
-        "weather-app",
-        "widgetkit",
-        "xcode"
-      ],
-      "stargazers_count": 2,
-      "forks_count": 0,
-      "open_issues_count": 38,
-      "pushed_at": "2026-11-16T09:17:20Z",
-      "updated_at": "2026-11-08T20:33:19Z",
-      "created_at": "2026-02-05T02:05:57Z",
       "fork": false,
       "archived": false
     },
@@ -1282,6 +1282,108 @@
     }
   ],
   "events": [
+    {
+      "id": "28027476941",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "52b3cd3ee77da02d2193f3b89a5b639025fd5303",
+            "message": "Merge pull request #374 from and3rn3t/automation/update-github-data\n\nchore: update GitHub data - 2026-11-21"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-21T03:10:38Z"
+    },
+    {
+      "id": "28016889726",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "automation/update-github-data",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-22T03:10:54Z"
+    },
+    {
+      "id": "28016711212",
+      "type": "CreateEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "automation/update-github-data",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-22T03:08:08Z"
+    },
+    {
+      "id": "28001324044",
+      "type": "DeleteEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "ref": "automation/update-github-data",
+        "ref_type": "branch"
+      },
+      "created_at": "2026-11-23T03:12:30Z"
+    },
+    {
+      "id": "28001323306",
+      "type": "PushEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "commits": [
+          {
+            "sha": "64dd2247854468540ca057f25e7c8ce977947806",
+            "message": "Merge pull request #376 from and3rn3t/automation/update-github-data\n\nchore: update GitHub data - 2026-11-23"
+          }
+        ],
+        "ref": "refs/heads/main"
+      },
+      "created_at": "2026-11-23T03:12:29Z"
+    },
+    {
+      "id": "20964316638",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-23",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-23T03:12:28Z"
+    },
+    {
+      "id": "20964156586",
+      "type": "PullRequestEvent",
+      "repo": {
+        "name": "and3rn3t/and3rn3t"
+      },
+      "payload": {
+        "pull_request": {
+          "title": "chore: update GitHub data - 2026-11-23",
+          "head": {
+            "ref": "automation/update-github-data"
+          }
+        }
+      },
+      "created_at": "2026-11-23T03:09:38Z"
+    },
     {
       "id": "27919361456",
       "type": "DeleteEvent",
@@ -2496,117 +2598,6 @@
         }
       },
       "created_at": "2026-11-18T22:15:44Z"
-    },
-    {
-      "id": "20573154123",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "chore: update GitHub data - 2026-11-18",
-          "head": {
-            "ref": "automation/update-github-data"
-          }
-        }
-      },
-      "created_at": "2026-11-18T20:46:11Z"
-    },
-    {
-      "id": "20573092803",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "refactor: remove dead front-end code and preload what main.js needs",
-          "head": {
-            "ref": "refactor/frontend-dead-code"
-          }
-        }
-      },
-      "created_at": "2026-11-18T22:15:44Z"
-    },
-    {
-      "id": "27564740089",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "9aa8834f77f2ce2bb58a4d7aa93e6cc148f4e256",
-            "message": "Merge pull request #355 from and3rn3t/fix/trusted-types-sw\n\nfix(csp): register the service worker through the Trusted Types policy"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-17T17:26:14Z"
-    },
-    {
-      "id": "27564495106",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "b097a6973bce23a5b564aefc31872f4384462032",
-            "message": "fix(eval): check what the page posts back before printing it (CodeQL js/log-injection)\n\nIn --serve mode the results posted to the local server went straight\ninto console.log, and anything that can reach localhost can post\nthere, so crafted newlines or terminal escape codes could forge report\nlines. Results are now validated (a known question, a known status,\nat most three project:/post: ids, numbers in range) and everything\nprinted passes through printable(); a failure says only that a result\nis malformed and never echoes it (a JSON parse error quoted the\ninput). The address also carries a per-run token, the body is capped\nand only one result is accepted.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
-          }
-        ],
-        "ref": "refs/heads/feat/ask-fits-and-eval-serve"
-      },
-      "created_at": "2026-11-18T20:14:18Z"
-    },
-    {
-      "id": "27564294941",
-      "type": "CreateEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "ref": "fix/trusted-types-sw",
-        "ref_type": "branch"
-      },
-      "created_at": "2026-11-17T17:23:06Z"
-    },
-    {
-      "id": "27562652029",
-      "type": "PushEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "commits": [
-          {
-            "sha": "f66f88940b89ed12ee492de1e7b6e987c40d981b",
-            "message": "Merge pull request #354 from and3rn3t/feat/trusted-types\n\nfeat(csp): Trusted Types in the report-only policy (Phase 15.10)"
-          }
-        ],
-        "ref": "refs/heads/main"
-      },
-      "created_at": "2026-11-17T17:10:55Z"
-    },
-    {
-      "id": "20562349587",
-      "type": "PullRequestEvent",
-      "repo": {
-        "name": "and3rn3t/and3rn3t"
-      },
-      "payload": {
-        "pull_request": {
-          "title": "docs(roadmap): archive Phases 11 to 14, bring Phase 15 up to date, list what is open",
-          "head": {
-            "ref": "docs/roadmap-cleanup"
-          }
-        }
-      },
-      "created_at": "2026-11-18T20:24:07Z"
     }
   ],
   "selfStarredRepoNames": [
@@ -2620,7 +2611,7 @@
     "homehub"
   ],
   "contributions": {
-    "total": 4788,
+    "total": 4790,
     "weeks": [
       {
         "days": [
@@ -4654,11 +4645,16 @@
         "days": [
           {
             "date": "2026-11-22",
+            "count": 2,
+            "level": 1
+          },
+          {
+            "date": "2026-11-23",
             "count": 0,
             "level": 0
           },
           {
-            "date": "2026-11-23",
+            "date": "2026-11-24",
             "count": 0,
             "level": 0
           }
@@ -4689,6 +4685,6 @@
     "C": 155,
     "Procfile": 95
   },
-  "lastUpdated": "2026-11-23T03:08:59Z",
+  "lastUpdated": "2026-11-24T03:07:40Z",
   "totalRepos": 54
 }
