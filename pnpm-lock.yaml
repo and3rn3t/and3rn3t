@@ -20,8 +20,8 @@ importers:
         specifier: 2.4.0
         version: 2.4.0
       agents:
-        specifier: 0.33.0
-        version: 0.33.0(@babel/core@8.1.0)(@babel/runtime@7.29.13)(@modelcontextprotocol/client@2.4.0)(@modelcontextprotocol/server@2.4.0)(rolldown@1.2.18)(vite@8.3.8(@types/node@26.1.2)(esbuild@0.28.2)(jiti@2.6.1)(yaml@2.9.1))(zod@4.6.7)
+        specifier: 0.34.0
+        version: 0.34.0(@babel/core@8.1.0)(@babel/runtime@7.29.13)(@modelcontextprotocol/client@2.4.0)(@modelcontextprotocol/server@2.4.0)(rolldown@1.2.18)(vite@8.3.8(@types/node@26.1.2)(esbuild@0.28.2)(jiti@2.6.1)(yaml@2.9.1))(zod@4.6.7)
       zod:
         specifier: ^4.6.7
         version: 4.6.7
@@ -1258,17 +1258,17 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  agents@0.33.0:
-    resolution: {integrity: sha512-P6z56NXpYRXHuC1qkMakZBGpZo5btD5478X2AiEplPsTb4DPkYnkMfPt6H3Pv6vRR5mVKIgbvFzpdu24x9wiAA==}
+  agents@0.34.0:
+    resolution: {integrity: sha512-h7lm9gfdsj8oq+CheccDC0zcWf2K2D+U13B0+zrWyBFnigjNXQ2ZAHtZsg5fO7AMcQq4c9jPlKc169FB1RzRGg==}
     hasBin: true
     peerDependencies:
       '@ai-sdk/provider': ^4.0.0
       '@ai-sdk/react': ^3.0.0 || ^4.0.0
       '@cloudflare/codemode': '>=0.5.0'
-      '@earendil-works/chord': ~1.5.0
-      '@earendil-works/pi-ai': ~1.5.0
-      '@earendil-works/pi-durable': ~1.5.0
-      '@earendil-works/pi-schema': ~1.5.0
+      '@earendil-works/chord': ~1.6.0
+      '@earendil-works/pi-ai': ~1.6.0
+      '@earendil-works/pi-durable': ~1.6.0
+      '@earendil-works/pi-schema': ~1.6.0
       '@modelcontextprotocol/client': 2.4.0
       '@modelcontextprotocol/sdk': 1.32.2
       '@modelcontextprotocol/server': 2.4.0
@@ -3480,7 +3480,7 @@ snapshots:
 
   acorn@8.18.0: {}
 
-  agents@0.33.0(@babel/core@8.1.0)(@babel/runtime@7.29.13)(@modelcontextprotocol/client@2.4.0)(@modelcontextprotocol/server@2.4.0)(rolldown@1.2.18)(vite@8.3.8(@types/node@26.1.2)(esbuild@0.28.2)(jiti@2.6.1)(yaml@2.9.1))(zod@4.6.7):
+  agents@0.34.0(@babel/core@8.1.0)(@babel/runtime@7.29.13)(@modelcontextprotocol/client@2.4.0)(@modelcontextprotocol/server@2.4.0)(rolldown@1.2.18)(vite@8.3.8(@types/node@26.1.2)(esbuild@0.28.2)(jiti@2.6.1)(yaml@2.9.1))(zod@4.6.7):
     dependencies:
       '@babel/plugin-proposal-decorators': 8.0.2(@babel/core@8.1.0)
       '@cfworker/json-schema': 4.1.6
