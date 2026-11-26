@@ -43,12 +43,11 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 
 <!-- FEATURED-PROJECTS:START -->
 
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
-> iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
+> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
 >
-> **Tech:** TypeScript, arlo, cloudflare-pages
-> 🔗 [Live](https://homehub.andernet.dev)
+> **Tech:** TypeScript
 
 ### 🌐 [guess](https://github.com/and3rn3t/guess)
 
@@ -57,11 +56,12 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** TypeScript, akinator, bayesian
 > 🔗 [Live](https://andernator.com)
 
-### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
 
-> A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
+> iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
 >
-> **Tech:** TypeScript
+> **Tech:** TypeScript, arlo, cloudflare-pages
+> 🔗 [Live](https://homehub.andernet.dev)
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
@@ -70,17 +70,17 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 > **Tech:** TypeScript, ai, caregiver
 > 🔗 [Live](https://health.andernet.dev)
 
-### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
-
-> Unifying network information on a RPi 5
->
-> **Tech:** HTML, cloudflare-workers, networking
-
 ### 🐍 [minecraft](https://github.com/and3rn3t/minecraft)
 
 > Self-hosted Minecraft server manager for Raspberry Pi 5 (ARM64) — Docker deployment, automated backups, plugin/mod management, multi-world support, RCON, a Flask REST API, and a React admin panel.
 >
 > **Tech:** Python, arm64, docker
+
+### 🖥️ [net-traffic](https://github.com/and3rn3t/net-traffic)
+
+> Unifying network information on a RPi 5
+>
+> **Tech:** HTML, cloudflare-workers, networking
 
 ### 🐍 [apple-music-dj](https://github.com/and3rn3t/apple-music-dj)
 
