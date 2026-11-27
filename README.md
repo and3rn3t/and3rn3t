@@ -43,6 +43,13 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 
 <!-- FEATURED-PROJECTS:START -->
 
+### 🌐 [homehub](https://github.com/and3rn3t/homehub)
+
+> iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
+>
+> **Tech:** TypeScript, arlo, cloudflare-pages
+> 🔗 [Live](https://homehub.andernet.dev)
+
 ### 🌐 [fastlane](https://github.com/and3rn3t/fastlane)
 
 > A recreation of the 90s SIERRA game "Jones in the Fast Lane" - modernized.
@@ -55,13 +62,6 @@ A workflow refreshes this list from my repos every day. The full write-ups are o
 >
 > **Tech:** TypeScript, akinator, bayesian
 > 🔗 [Live](https://andernator.com)
-
-### 🌐 [homehub](https://github.com/and3rn3t/homehub)
-
-> iOS-inspired smart home dashboard — device control, scenes, automations, live Arlo camera streaming. React 19 PWA on Cloudflare Pages + Workers.
->
-> **Tech:** TypeScript, arlo, cloudflare-pages
-> 🔗 [Live](https://homehub.andernet.dev)
 
 ### 🌐 [health](https://github.com/and3rn3t/health)
 
